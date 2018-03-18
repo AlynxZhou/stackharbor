@@ -1,22 +1,3 @@
-"use strict";
-(function ($) {
-  $(document).ready(function () {
-    var DELAY_STEP = 300;
-    var animationOptions = {
-      "opacity": 1,
-      "top": 0
-    };
-    function animateMain() {
-      var dfd = $.Deferred();
-      var els = $(".animate");
-      var length = els.length;
-
-      els.each(function (index, el) {
-        $(el).delay(index * DELAY_STEP).animate(animationOptions);
-        (length - 1 === index) && dfd.resolve();
-      });
-      return dfd.promise();
-    }
-    animateMain();
-  });
-})(jQuery);
+// build time:Sun Mar 18 2018 23:24:22 GMT+0800 (CST)
+"use strict";(function(e){e(document).ready(function(){var r=300;var a={opacity:1,top:0};function n(){var n=e.Deferred();var t=e(".animate");var i=t.length;t.each(function(t,o){e(o).delay(t*r).animate(a);i-1===t&&n.resolve()});return n.promise()}n()})})(jQuery);
+//rebuild by neat 
