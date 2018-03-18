@@ -5,15 +5,15 @@
   transition: 0.2s ease-in-out;
 }
 .sidebar .sidebar-toggle {
-  height: $sidebar-toggle-height;
+  height: 40px;
   display: block;
   text-align: center;
   font-size: 2em;
-  background: $blue;
-  color: $color-light-link;
+  background: #006bfe;
+  color: #ccc;
 }
 .sidebar .sidebar-toggle:hover {
-  color: $color-light-link-hover;
+  color: #fff;
 }
 .sidebar .sidebar-toggle:active {
   top: 2px;

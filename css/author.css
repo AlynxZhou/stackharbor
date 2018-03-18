@@ -5,11 +5,11 @@
   max-width: 70%;
 }
 .author .author-name {
-  color: $color-author-name;
+  color: #16171b;
   font-size: 1.5em;
 }
 .author .author-description {
-  color: $color-author-description;
+  color: #444;
   font-size: 1.2em;
 }
 .social-links {
@@ -24,15 +24,15 @@
   display: inline-block;
   width: 40%;
   text-decoration: none;
-  color: $color-link;
+  color: #666;
   transition: 0.2s ease-in-out;
   padding: 5px;
   margin: 0 5px;
 }
 .social-links a:hover {
   border-radius: 4px;
-  color: $color-light-link-hover;
-  background: $color-light-link-hover-background;
+  color: #fff;
+  background: #444;
 }
 .social-links a:active {
   top: 2px;

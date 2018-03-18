@@ -11,7 +11,7 @@
   display: block;
   position: relative;
   text-decoration: none;
-  color: $color-font;
+  color: #16171b;
 }
 .post .post-meta {
   text-align: center;

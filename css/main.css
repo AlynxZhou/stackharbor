@@ -1,12 +1,12 @@
 .main {
-  margin-top: -$sidebar-toggle-height;
+  margin-top: -40px;
 }
 .main .main-body {
-  background: $color-main-background;
+  background: #eaeaea;
   box-sizing: border-box;
   box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
-  border-bottom-left-radius: $corner-radius;
-  border-bottom-right-radius: $corner-radius;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -29,15 +29,15 @@
   display: inline-block;
   padding: 5px 20px;
   font-size: 1em;
-  color: $color-link;
+  color: #666;
   border: 2px solid #555;
   text-decoration: none;
-  border-radius: $corner-radius;
+  border-radius: 3px;
   transition: 0.2s ease-in-out;
 }
 .main .main-body .content .index-post .readmore:hover {
-  color: $color-light-link-hover;
-  background: $color-light-link-hover-background;
+  color: #fff;
+  background: #444;
 }
 .main .main-body .content .index-post .post-header {
   padding: 5px 5px;
@@ -46,7 +46,7 @@
   display: inline-block;
   position: relative;
   text-decoration: none;
-  color: $color-font;
+  color: #16171b;
 }
 .main .main-body .content .index-post .post-header .post-title-link::after {
   content: " ";
@@ -55,7 +55,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background: $color-font;
+  background: #16171b;
   visibility: hidden;
   transform: scaleX(0);
   transition: 0.2s ease-in-out;

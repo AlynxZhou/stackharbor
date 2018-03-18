@@ -1,23 +1,23 @@
 .footer {
   margin-top: 30px;
   padding-bottom: 20px;
-  background: $color-footer-background;
-  color: $color-lighter-font;
+  background: #222;
+  color: #eaeaea;
 }
 .footer::selection {
   color: $color-lighter-selection-font;
   background: $color-lighter-selection;
 }
 .footer a {
-  color: $color-light-link;
+  color: #ccc;
 }
 .footer a:hover {
-  color: $color-light-link-hover;
+  color: #fff;
 }
 .footer .back-to-top a {
   text-align: center;
-  background: $color-background;
-  color: $color-link;
+  background: #ccc;
+  color: #666;
   overflow: hidden;
   width: 60px;
   height: 30px;
@@ -27,5 +27,5 @@
   box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 .footer .back-to-top a:hover {
-  color: $color-link-hover;
+  color: #006bfe;
 }
