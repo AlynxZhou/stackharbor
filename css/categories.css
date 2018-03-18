@@ -1,0 +1,17 @@
+.categories {
+  background: #fff;
+  padding: 20px;
+}
+.categories .categories-counter {
+  text-align: center;
+  position: relative;
+  padding-left: 20px;
+  font-size: 30px;
+}
+.categories .category-list-link {
+  font-size: 1.2em;
+}
+.categories .category-list-count {
+  font-size: 1.2em;
+  margin-left: 1em;
+}

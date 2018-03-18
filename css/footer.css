@@ -1,0 +1,31 @@
+.footer {
+  margin-top: 30px;
+  padding-bottom: 20px;
+  background: $color-footer-background;
+  color: $color-lighter-font;
+}
+.footer::selection {
+  color: $color-lighter-selection-font;
+  background: $color-lighter-selection;
+}
+.footer a {
+  color: $color-light-link;
+}
+.footer a:hover {
+  color: $color-light-link-hover;
+}
+.footer .back-to-top a {
+  text-align: center;
+  background: $color-background;
+  color: $color-link;
+  overflow: hidden;
+  width: 60px;
+  height: 30px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+.footer .back-to-top a:hover {
+  color: $color-link-hover;
+}

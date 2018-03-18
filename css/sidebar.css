@@ -1,0 +1,57 @@
+.sidebar {
+  flex-grow: 1;
+  flex-basis: 20%;
+  padding: 0;
+  transition: 0.2s ease-in-out;
+}
+.sidebar .sidebar-toggle {
+  height: $sidebar-toggle-height;
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  background: $blue;
+  color: $color-light-link;
+}
+.sidebar .sidebar-toggle:hover {
+  color: $color-light-link-hover;
+}
+.sidebar .sidebar-toggle:active {
+  top: 2px;
+}
+.sidebar .sidebar-content {
+  display: block;
+  padding: 15px;
+}
+.sidebar.fold {
+  flex-basis: 1%;
+  transition: 0.2s ease-in-out;
+}
+.sidebar.fold .sidebar-content {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+}
+.sidebar.unfold {
+  flex-basis: 20%;
+  transition: 0.2s ease-in-out;
+}
+.sidebar.unfold .sidebar-content {
+  opacity: 1;
+  width: auto;
+  height: auto;
+  padding: 15px;
+}
+.sidebar hr {
+  margin: 40px 0;
+  height: 3px;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  position: relative;
+  display: block;
+  box-sizing: content-box;
+  background-color: #ddd;
+  background-image: repeating-linear-gradient(-45deg, #fff, #fff 4px, transparent 4px, transparent 8px);
+}

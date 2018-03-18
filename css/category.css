@@ -1,0 +1,79 @@
+.category {
+  background: #fff;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+}
+.category .category-title {
+  position: relative;
+  padding-left: 20px;
+  font-size: 30px;
+}
+.category .category-title::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-left: -6px;
+  margin-top: -6px;
+  width: 12px;
+  height: 12px;
+  background: $grey;
+  border-radius: 50%;
+  z-index: 1;
+}
+.category .category-title::after {
+  content: " ";
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  margin-left: -2px;
+  width: 4px;
+  height: 100%;
+  background: $grey-light;
+}
+.category .category-post {
+  position: relative;
+  padding-left: 20px;
+  font-size: 20px;
+}
+.category .category-post::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-left: -4px;
+  margin-top: -4px;
+  width: 8px;
+  height: 8px;
+  background: $grey;
+  border-radius: 50%;
+  z-index: 1;
+}
+.category .category-post::after {
+  content: " ";
+  position: absolute;
+  top: -50%;
+  left: 0px;
+  margin-left: -2px;
+  width: 4px;
+  height: 200%;
+  background: $grey-light;
+}
+.category .category-post .post-date {
+  font-size: 0.8em;
+  color: $color-link;
+}
+.category .category-post .post-title-link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: $color-link;
+  border-bottom: 1px dashed $grey;
+  transition: 0.2s ease-in-out;
+}
+.category .category-post .post-title-link:hover {
+  color: $color-link-hover;
+  border-bottom: 1px solid $color-link-hover;
+}

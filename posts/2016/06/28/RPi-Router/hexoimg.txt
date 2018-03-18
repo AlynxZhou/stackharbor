@@ -1,0 +1,106 @@
+Entering directory ./ …
+Now it is going to work in 
+=====================================================
+/home/shax/USBHDD/shax/sxshax.xyz/source/_posts/RPi-Router
+=====================================================
+Please check weither it is the exact directory you want!
+Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
+Continue?[y/N] y
+Wating 5 seconds to regret…
+5 4 3 2 1…Start!
+
+Found files:['26.png', '16.png', '13.png', '9.png', '23.jpg', '11.jpg', '22.png', '21.png', '15.png', '1.png', '17.png', '12.png', '10.png', '14.png', '2.jpg', '20.png', '28.png', '8.jpg', '29.png', '18.png', '6.png', '3.png', '7.png', '5.png', '4.png', '25.png', '27.png', '24.png', '30.png', '19.png'].
+
+Renamed 26.png to RPi-Router_26.png.
+Renamed 16.png to RPi-Router_16.png.
+Renamed 13.png to RPi-Router_13.png.
+Renamed 9.png to RPi-Router_9.png.
+Renamed 23.jpg to RPi-Router_23.jpg.
+Renamed 11.jpg to RPi-Router_11.jpg.
+Renamed 22.png to RPi-Router_22.png.
+Renamed 21.png to RPi-Router_21.png.
+Renamed 15.png to RPi-Router_15.png.
+Renamed 1.png to RPi-Router_1.png.
+Renamed 17.png to RPi-Router_17.png.
+Renamed 12.png to RPi-Router_12.png.
+Renamed 10.png to RPi-Router_10.png.
+Renamed 14.png to RPi-Router_14.png.
+Renamed 2.jpg to RPi-Router_2.jpg.
+Renamed 20.png to RPi-Router_20.png.
+Renamed 28.png to RPi-Router_28.png.
+Renamed 8.jpg to RPi-Router_8.jpg.
+Renamed 29.png to RPi-Router_29.png.
+Renamed 18.png to RPi-Router_18.png.
+Renamed 6.png to RPi-Router_6.png.
+Renamed 3.png to RPi-Router_3.png.
+Renamed 7.png to RPi-Router_7.png.
+Renamed 5.png to RPi-Router_5.png.
+Renamed 4.png to RPi-Router_4.png.
+Renamed 25.png to RPi-Router_25.png.
+Renamed 27.png to RPi-Router_27.png.
+Renamed 24.png to RPi-Router_24.png.
+Renamed 30.png to RPi-Router_30.png.
+Renamed 19.png to RPi-Router_19.png.
+
+Now you can copy the follow hexo tags to your markdown post.
+
+{% asset_img RPi-Router_16.png RPi-Router_16.png %}
+
+{% asset_img RPi-Router_15.png RPi-Router_15.png %}
+
+{% asset_img RPi-Router_3.png RPi-Router_3.png %}
+
+{% asset_img RPi-Router_8.jpg RPi-Router_8.jpg %}
+
+{% asset_img RPi-Router_18.png RPi-Router_18.png %}
+
+{% asset_img RPi-Router_19.png RPi-Router_19.png %}
+
+{% asset_img RPi-Router_17.png RPi-Router_17.png %}
+
+{% asset_img RPi-Router_10.png RPi-Router_10.png %}
+
+{% asset_img RPi-Router_5.png RPi-Router_5.png %}
+
+{% asset_img RPi-Router_27.png RPi-Router_27.png %}
+
+{% asset_img RPi-Router_13.png RPi-Router_13.png %}
+
+{% asset_img RPi-Router_9.png RPi-Router_9.png %}
+
+{% asset_img RPi-Router_26.png RPi-Router_26.png %}
+
+{% asset_img RPi-Router_12.png RPi-Router_12.png %}
+
+{% asset_img RPi-Router_2.jpg RPi-Router_2.jpg %}
+
+{% asset_img RPi-Router_24.png RPi-Router_24.png %}
+
+{% asset_img RPi-Router_4.png RPi-Router_4.png %}
+
+{% asset_img RPi-Router_25.png RPi-Router_25.png %}
+
+{% asset_img RPi-Router_11.jpg RPi-Router_11.jpg %}
+
+{% asset_img RPi-Router_1.png RPi-Router_1.png %}
+
+{% asset_img RPi-Router_6.png RPi-Router_6.png %}
+
+{% asset_img RPi-Router_21.png RPi-Router_21.png %}
+
+{% asset_img RPi-Router_22.png RPi-Router_22.png %}
+
+{% asset_img RPi-Router_30.png RPi-Router_30.png %}
+
+{% asset_img RPi-Router_29.png RPi-Router_29.png %}
+
+{% asset_img RPi-Router_14.png RPi-Router_14.png %}
+
+{% asset_img RPi-Router_23.jpg RPi-Router_23.jpg %}
+
+{% asset_img RPi-Router_7.png RPi-Router_7.png %}
+
+{% asset_img RPi-Router_28.png RPi-Router_28.png %}
+
+{% asset_img RPi-Router_20.png RPi-Router_20.png %}
+

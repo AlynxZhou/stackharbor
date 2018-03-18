@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/animate.js"></script>
+    <title>Encrypted for the Update. | 喵's StackHarbor</title>
+  </head>
+  <body>
+    
+<header id="header" class="header">
+  <div class="container">
+    <div class="header-box">
+      <div class="logo">
+        <img src="/images/ARIA_logo.png" alt="logo">
+      </div>
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+    </div>
+    
+<nav id="nav" class="nav">
+  <a id="nav-toggle" class="nav-toggle"><i class="fas fa-bars"></i></a>
+  <ul id="menu">
+    
+    <li class="menu-item"><a href="/" >Index</a></li>
+    
+    <li class="menu-item"><a href="/archives/" >Archives</a></li>
+    
+    <li class="menu-item"><a href="/categories/" >Categories</a></li>
+    
+    <li class="menu-item"><a href="/tags/" >Tags</a></li>
+    
+    <li class="menu-item"><a href="/about/" >About</a></li>
+    
+  </ul>
+</nav>
+
+
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-body">
+          <div class="content">
+            
+<section id="post-content" class="post-content">
+  
+  <article class="post animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="AlynxZhou">
+       <meta itemprop="description" content="Whisper to the World">
+       <meta itemprop="image" content="/images/Future_Gazer.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h3 class="post-title" itemprop="name headline">
+       <span class="">Encrypted for the Update.</span>
+      </h3>
+      <div class="post-meta">
+       
+       <span class="post-date">
+        <i class="far fa-calendar-plus"></i> <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-05-30T16:46:02+08:00">2017-05-30</time>
+       </span>
+       
+       
+       <span class="post-meta-divider"> | </span>
+       <span class="post-categories">
+        <i class="far fa-folder-open"></i>
+        
+          <span itemprop="about" itemscope itemtype="http://schema.org/Thing"> <a href="/categories/随记/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span>
+        
+          <span itemprop="about" itemscope itemtype="http://schema.org/Thing"> <a href="/categories/随记/无题/" itemprop="url" rel="index"><span itemprop="name">无题</span></a></span>
+        
+       </span>
+       
+       
+      </div>
+    </header>
+    <main class="post-body" itemprop="articleBody">
+      <script src=/js/crypto-js.js></script><script>
+function doDecrypt(pwd, onError) {
+	console.log("in doDecrypt");
+	var txt = document.getElementById("enc_content").innerHTML;
+	var plantext;
+	try {
+	  	var bytes = CryptoJS.AES.decrypt(txt, pwd);
+		plaintext = bytes.toString(CryptoJS.enc.Utf8);
+	} catch(err) {
+		if(onError) {onError(err);}
+		return;
+	}
+	document.getElementById("enc_content").innerHTML = plaintext;
+	document.getElementById("enc_content").style.display = "block";
+   document.getElementById("enc_passwd").style.display = "none";
+}
+</script>
+<div id="enc_content" style="display:none">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</div><div id="enc_passwd"> <input id="enc_pwd_input" type="text" style="border-radius: 5px;border-style: groove;height: 30px;width: 50%;cursor: auto;font-size: 102%;color: currentColor;outline: none;text-overflow: initial;padding-left: 5px;" onkeydown="if (event.keyCode == 13) { decrypt(); return false;}"> <input type="submit" value="解&nbsp;密" onclick="decrypt()" style="width: 58px;height: 34px;border-radius: 5px;background-color: white;border-style: solid;color: currentColor;"><div id="enc_error" style="display: inline-block;color: #d84527;margin-left: 10px"></div>
+<script>
+var onError = function(error) {
+	document.getElementById("enc_error").innerHTML = "password error!"
+};
+function decrypt() {
+var passwd = document.getElementById("enc_pwd_input").value;
+console.log(passwd);
+doDecrypt(passwd, onError);
+}
+</script>
+</div>
+    </main>
+    <footer class="post-footer">
+      
+      
+      <div class="post-tags">
+       
+       <a href="/tags/随记/" rel="tag"># 随记</a>
+       
+       <a href="/tags/无题/" rel="tag"># 无题</a>
+       
+      </div>
+      
+    </footer>
+  </article>
+  
+  <div class="post-nav animate">
+    
+    <div class="post-nav-next post-nav-item">
+      <a href="/posts/2017/05/30/An-Update/" rel="next" title="突然更新"><i class="fas fa-angle-left"></i> 突然更新</a>
+    </div>
+    
+    <span class="post-nav-divider"></span>
+    
+    <div class="post-nav-prev post-nav-item">
+      <a href="/posts/2017/06/15/Your-Name/" rel="prev" title="你的名字。">你的名字。 <i class="fas fa-angle-right"></i></a>
+    </div>
+    
+  </div>
+  
+</section>
+
+          </div>
+          
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-angle-double-up"></i></a>
+  <div class="sidebar-content unfold">
+    
+<div class="author" id="author">
+  
+  <img class="author-avatar" src="/images/Future_Gazer.jpg" alt="AlynxZhou">
+  
+  <p class="author-name">AlynxZhou</p>
+  <p class="author-description"> Whisper to the World</p>
+</div>
+
+<div class="social-links">
+  
+  <a href="mailto:alynx.zhou@gmail.com">
+    
+    <i class="far fa-envelope""></i>
+    
+    E-Mail
+  </a>
+  
+  <a href="https://github.com/AlynxZhou/">
+    
+    <i class="fab fa-github"></i>
+    
+    GitHub
+  </a>
+  
+  <a href="">
+    
+    <i class="fab fa-telegram-plane"></i>
+    
+    Telegram
+  </a>
+  
+  <a href="https://weibo.com/u/5287501461">
+    
+    <i class="fab fa-weibo"></i>
+    
+    Weibo
+  </a>
+  
+</div>
+
+
+
+    
+
+<hr>
+<div class="blogroll">
+  <p><i class="fas fa-link"></i> Blog Roll</p>
+  <ul>
+    
+    <li><a href="http://lgiki.pw/" target="_blank">LGiki's Blog</a></li>
+    
+    <li><a href="http://hackghost.com/" target="_blank">Hack Ghost's Blog</a></li>
+    
+    <li><a href="https://jm33.me/" target="_blank">Jm33_m0's Blog</a></li>
+    
+    <li><a href="http://saigut.com/" target="_blank">Tony Saigut's Blog</a></li>
+    
+    <li><a href="https://blog.blink.moe/" target="_blank">Blink's Blog</a></li>
+    
+    <li><a href="http://imchenxy.tk/" target="_blank">Art-Chen's Blog</a></li>
+    
+    <li><a href="http://blog.voleking.me/" target="_blank">Sugarole</a></li>
+    
+  </ul>
+</div>
+
+
+
+    
+    
+
+
+
+
+    
+  </div>
+</aside>
+
+
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+        <a id="back-to-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <div class="copyright">
+      <p><span class="author">AlynxZhou</span> <i class="far fa-copyright"></i> <span class="year">2018 - 2016</span></p>
+      <p>由 <a href="https://hexo.io/">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/">ARIA</a></p>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>

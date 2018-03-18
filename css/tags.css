@@ -1,0 +1,9 @@
+.tags {
+  background: #fff;
+  padding: 20px;
+}
+.tags .tags-counter {
+  text-align: center;
+  position: relative;
+  font-size: 30px;
+}
