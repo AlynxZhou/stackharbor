@@ -1,3 +1,3 @@
-// build time:Mon Mar 19 2018 18:07:25 GMT+0800 (CST)
+// build time:Mon Mar 19 2018 19:41:01 GMT+0800 (CST)
 "use strict";(function(e){e(document).ready(function(){e("#back-to-top").on("click",function(){e("body, html").animate({scrollTop:0},600)});e("#sidebar-toggle").click(function(){if(e("#sidebar").hasClass("fold")){e("#sidebar").removeClass("fold");e("#sidebar-container").slideDown("fast",function(){e("#sidebar").animate({"flex-basis":"20%"},"fast")});e("#sidebar-toggle").empty().append('<i class="fas fa-angle-double-up"></i>')}else{e("#sidebar").addClass("fold");e("#sidebar").animate({"flex-basis":"1%"},"fast",function(){e("#sidebar-container").slideUp("fast")});e("#sidebar-toggle").empty().append('<i class="fas fa-angle-double-down"></i>')}});e("#nav-toggle").on("click",function(){e("#menu").slideToggle()});function i(){if(e(window).width()>768){e("#menu").show()}else{e("#menu").slideUp()}}i();e(window).resize(function(){i()})})})(jQuery);
 //rebuild by neat 
