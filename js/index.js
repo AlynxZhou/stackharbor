@@ -1,3 +1,3 @@
-// build time:Mon Mar 19 2018 11:00:19 GMT+0800 (CST)
+// build time:Mon Mar 19 2018 12:55:55 GMT+0800 (CST)
 "use strict";(function(e){e(document).ready(function(){e("#back-to-top").on("click",function(){e("body, html").animate({scrollTop:0},600)});e("#nav-toggle").on("click",function(){e("#menu").slideToggle()});e("#sidebar-toggle").click(function(){if(e("#sidebar").hasClass("fold")){e("#sidebar").removeClass("fold");e("#sidebar").addClass("unfold");e("#sidebar-toggle").empty().append('<i class="fas fa-angle-double-up"></i>')}else{e("#sidebar").removeClass("unfold");e("#sidebar").addClass("fold");e("#sidebar-toggle").empty().append('<i class="fas fa-angle-double-down"></i>')}})})})(jQuery);
 //rebuild by neat 
