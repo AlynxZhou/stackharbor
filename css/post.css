@@ -51,7 +51,8 @@
   flex-wrap: nowrap;
 }
 .post-nav .post-nav-divider {
-  width: 10%;
+  width: 30%;
+  flex-grow: 0;
   display: block;
   text-align: center;
 }
@@ -61,9 +62,13 @@
 }
 .post-nav .post-nav-item a {
   position: relative;
-  display: block;
+  display: inline-block;
   line-height: 25px;
   text-decoration: none;
+  border-bottom: none;
+}
+.post-nav .post-nav-item a:hover {
+  border-bottom: none;
 }
 .post-nav .post-nav-item a:active {
   top: 2px;
