@@ -14,9 +14,16 @@
 }
 .footer a {
   color: #ccc;
+  text-decoration: none;
+  border-bottom: 1px dotted #ccc;
+  transition: 0.2s ease-in-out;
 }
 .footer a:hover {
   color: #fff;
+  border-bottom: 1px solid #fff;
+}
+.footer a:active {
+  top: 2px;
 }
 .footer .back-to-top {
   display: block;

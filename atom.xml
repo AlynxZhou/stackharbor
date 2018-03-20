@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>喵&#39;s StackHarbor</title>
+  
+  <subtitle>Whisper to the World</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://sh.alynx.xyz/"/>
+  <updated>2018-03-19T04:50:05.633Z</updated>
+  <id>https://sh.alynx.xyz/</id>
+  
+  <author>
+    <name>AlynxZhou</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kalafina, My Music Life</title>
+    <link href="https://sh.alynx.xyz/posts/2018/03/13/Kalafina/"/>
+    <id>https://sh.alynx.xyz/posts/2018/03/13/Kalafina/</id>
+    <published>2018-03-13T13:21:52.000Z</published>
+    <updated>2018-03-19T04:50:05.633Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;美好的东西总是在结束的时候才更显珍贵。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="Kalafina" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/Kalafina/"/>
+    
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="Kalafina" scheme="https://sh.alynx.xyz/tags/Kalafina/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>コラージュ（卫宫家今天的饭 ED）曲谱</title>
+    <link href="https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/"/>
+    <id>https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/</id>
+    <published>2018-02-04T04:18:45.000Z</published>
+    <updated>2018-03-19T04:50:05.597Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 AlynxZhou&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="五线谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E4%BA%94%E7%BA%BF%E8%B0%B1/"/>
+    
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="口琴" scheme="https://sh.alynx.xyz/tags/%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="卫宫家今天的饭" scheme="https://sh.alynx.xyz/tags/%E5%8D%AB%E5%AE%AB%E5%AE%B6%E4%BB%8A%E5%A4%A9%E7%9A%84%E9%A5%AD/"/>
+    
+      <category term="Fate" scheme="https://sh.alynx.xyz/tags/Fate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CoffeeScript 的静态方法和静态变量（类方法和类变量）</title>
+    <link href="https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/"/>
+    <id>https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/</id>
+    <published>2018-01-26T11:04:33.000Z</published>
+    <updated>2018-03-19T04:50:05.597Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，&lt;a href=&quot;http://coffeescript.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;coffeescript.org&lt;/a&gt; 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 &lt;a href=&quot;https://github.com/AlynxZhou/coffee-telegram-bot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;coffee-telegram-bot&lt;/a&gt; 时尝试出的办法记录下来。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="CoffeeScript" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/CoffeeScript/"/>
+    
+    
+      <category term="Code Life" scheme="https://sh.alynx.xyz/tags/Code-Life/"/>
+    
+      <category term="CoffeeScript" scheme="https://sh.alynx.xyz/tags/CoffeeScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>StackHarbor的2017尾记</title>
+    <link href="https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/"/>
+    <id>https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/</id>
+    <published>2017-12-31T14:18:57.000Z</published>
+    <updated>2018-03-20T07:35:03.055Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/posts/2017/12/31/2017-Tail/NJU.jpg&quot; title=&quot;NJU.jpg&quot;&gt;
+&lt;p&gt;回到住处，掀出电脑，拉开在超市买的一听可口可乐的拉环，还有一个半小时，现在该写2017年的年终总结了。时间刚刚好。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="生活" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>忧从中来，不可断绝</title>
+    <link href="https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/"/>
+    <id>https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/</id>
+    <published>2017-11-11T13:18:51.000Z</published>
+    <updated>2018-03-19T04:50:05.634Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/posts/2017/11/11/Song-And-Sadness/Sadness.jpg&quot; title=&quot;Sadness.jpg&quot;&gt;
+&lt;p&gt;那个弹吉他的人在我的隔壁。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/"/>
+    
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>冬天来了</title>
+    <link href="https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/"/>
+    <id>https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/</id>
+    <published>2017-10-29T13:54:41.000Z</published>
+    <updated>2018-03-19T04:50:05.635Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;生活好像脱缰的野马，你我都不是熟练的骑师。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我生气了！！！</title>
+    <link href="https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/"/>
+    <id>https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/</id>
+    <published>2017-10-08T14:14:00.000Z</published>
+    <updated>2018-03-19T04:50:05.633Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/posts/2017/10/08/I-Am-Angry/Angry.jpg&quot; title=&quot;Angry.jpg&quot;&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;I AM ANGRY!!!&lt;/blockquote&gt;
+
+&lt;p&gt;这里多了一只发怒的猹喵。愤怒能抑制懒惰。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/"/>
+    
+    
+      <category term="愤怒" scheme="https://sh.alynx.xyz/tags/%E6%84%A4%E6%80%92/"/>
+    
+      <category term="否定" scheme="https://sh.alynx.xyz/tags/%E5%90%A6%E5%AE%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Be Brave</title>
+    <link href="https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/"/>
+    <id>https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/</id>
+    <published>2017-07-30T14:50:40.000Z</published>
+    <updated>2018-03-19T04:50:05.596Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;It’s really hard for me to type something in this post, all I want but can’t express is fearness.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/"/>
+    
+    
+      <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/"/>
+    
+      <category term="未说出口的话" scheme="https://sh.alynx.xyz/tags/%E6%9C%AA%E8%AF%B4%E5%87%BA%E5%8F%A3%E7%9A%84%E8%AF%9D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dirty Words</title>
+    <link href="https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/"/>
+    <id>https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/</id>
+    <published>2017-07-01T10:42:09.000Z</published>
+    <updated>2018-03-19T04:50:05.597Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;I’m so honor that I can speak another language when they ask me to shut up with their language.&lt;/blockquote&gt;
+
+&lt;p&gt;There are some ways to fight against with them, but only when you have enough power, sadly.&lt;/p&gt;
+&lt;p&gt;I feel so lucky, though I cannot speak English so good, but if you are with me, I believe you can feel what I wanna say.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Dirty words" scheme="https://sh.alynx.xyz/categories/Dirty-words/"/>
+    
+    
+      <category term="Dirty words" scheme="https://sh.alynx.xyz/tags/Dirty-words/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你的名字。</title>
+    <link href="https://sh.alynx.xyz/posts/2017/06/15/Your-Name/"/>
+    <id>https://sh.alynx.xyz/posts/2017/06/15/Your-Name/</id>
+    <published>2017-06-14T16:22:19.000Z</published>
+    <updated>2018-03-19T04:50:05.022Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;老实说我也许是个对电影没什么品味的人，但是在看了这个之后总觉得要写点什么。&lt;/p&gt;
+&lt;p&gt;不过参考现在的时间&lt;del&gt;和我黑暗中可怜的盲打能力&lt;/del&gt;（最后想起来我的LED灯），这篇文章不会很长。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="电影" scheme="https://sh.alynx.xyz/categories/%E7%94%B5%E5%BD%B1/"/>
+    
+      <category term="动漫" scheme="https://sh.alynx.xyz/categories/%E7%94%B5%E5%BD%B1/%E5%8A%A8%E6%BC%AB/"/>
+    
+    
+      <category term="电影" scheme="https://sh.alynx.xyz/tags/%E7%94%B5%E5%BD%B1/"/>
+    
+      <category term="动漫" scheme="https://sh.alynx.xyz/tags/%E5%8A%A8%E6%BC%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Encrypted for the Update.</title>
+    <link href="https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/"/>
+    <id>https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/</id>
+    <published>2017-05-30T08:46:02.000Z</published>
+    <updated>2018-03-19T04:50:05.597Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Encrypted.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/"/>
+    
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="无题" scheme="https://sh.alynx.xyz/tags/%E6%97%A0%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>突然更新</title>
+    <link href="https://sh.alynx.xyz/posts/2017/05/30/An-Update/"/>
+    <id>https://sh.alynx.xyz/posts/2017/05/30/An-Update/</id>
+    <published>2017-05-30T07:14:51.000Z</published>
+    <updated>2018-03-19T04:50:05.596Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;谨以这篇没营养的更新表明我现在闲着。&lt;/blockquote&gt;
+
+&lt;p&gt;嘛，好久不见，我还是那只猹喵&lt;em&gt;Alynx&lt;/em&gt;，本着我一向诚实的原则，丑话说在前头，这篇间隔许久的更新注定是没营养的，如果你珍惜你的流量的话——&lt;/p&gt;
+&lt;p&gt;Windows用户/大部分Linux用户请按右上角X，macOS用户/Ubuntu用户/自己偏要把关闭按钮挪到左面的用户请按左上角X，Android/iOS用户请按home键并把您的浏览器从多任务界面除去。Windows Phone用户（如果有的话）请把手机摔掉，并感谢我（而不是微软爸爸）给了你一个冠冕堂皇换Android/iOS设备的理由。&lt;/p&gt;
+&lt;p&gt;如果您还没有坚定您的决心，实验七写完了吗？实验七50页的坑爹说明都看懂啦？没看懂还不赶紧把你打印出来的实验七说明撕了，回去高中找你的语文老师承认没好好学习语文的错误！&lt;/p&gt;
+&lt;p&gt;顺便补充一句把这种垃圾实验说明打印出来本身就是对树木的不尊重了，你看我知道我写的东西很垃圾，所以我从来不打印纸质版，都是放在网站上做电子版。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/"/>
+    
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="无题" scheme="https://sh.alynx.xyz/tags/%E6%97%A0%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>灰色情人节</title>
+    <link href="https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/"/>
+    <id>https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/</id>
+    <published>2017-03-18T14:48:49.000Z</published>
+    <updated>2018-03-19T04:50:05.597Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;感冒 + 鼻炎 = 浪费纸张，另外也许大脑缺氧会导致胡思乱想，很疲惫又无法入睡。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/"/>
+    
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用GDB进行简单的C语言程序调试</title>
+    <link href="https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/"/>
+    <id>https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/</id>
+    <published>2017-03-15T11:24:33.000Z</published>
+    <updated>2018-03-19T04:50:05.635Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="C语言" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="C语言" scheme="https://sh.alynx.xyz/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="GDB" scheme="https://sh.alynx.xyz/tags/GDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>口琴曲谱：sister&#39;s noise</title>
+    <link href="https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/"/>
+    <id>https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/</id>
+    <published>2017-02-23T03:53:38.000Z</published>
+    <updated>2018-03-19T04:50:05.634Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;半音阶口琴，&lt;strong&gt;sister’s noise&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Sister-s-Noise/sister-s-noise.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/"/>
+    
+    
+      <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>口琴曲谱：LEVEL5 -judgelight-</title>
+    <link href="https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/"/>
+    <id>https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/</id>
+    <published>2017-02-23T03:46:46.000Z</published>
+    <updated>2018-03-19T04:50:05.633Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;半音阶口琴，&lt;strong&gt;LEVEL5 -judgelight-&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/LEVEL5-judgelight/LEVEL5-judgelight.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/"/>
+    
+    
+      <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>口琴曲谱：only my railgun</title>
+    <link href="https://sh.alynx.xyz/posts/2017/02/23/Only-My-Railgun/"/>
+    <id>https://sh.alynx.xyz/posts/2017/02/23/Only-My-Railgun/</id>
+    <published>2017-02-23T03:28:47.000Z</published>
+    <updated>2018-03-19T04:50:05.633Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;半音阶口琴，&lt;strong&gt;only my railgun&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.pdf&quot;&gt;pdf下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/"/>
+    
+    
+      <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>喵的曲谱说明以及目录</title>
+    <link href="https://sh.alynx.xyz/posts/2017/02/23/Music-Score/"/>
+    <id>https://sh.alynx.xyz/posts/2017/02/23/Music-Score/</id>
+    <published>2017-02-23T03:22:50.000Z</published>
+    <updated>2018-03-19T04:50:05.634Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;以十六孔琴、标准音高为准，非口琴常用音高，十二孔请自行移调！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;大部分乐谱经本人手动整理，如有不符合说明的情况请自行处理或者等待更新！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;乐谱为逐句调整，无省略。&lt;/p&gt;
+&lt;p&gt;(低音)    中音    [高音]    {倍高音}&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/"/>
+    
+    
+      <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
+    
+      <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux下使Steam调用Bumblebee使用独显</title>
+    <link href="https://sh.alynx.xyz/posts/2017/02/16/Steam-with-Bumblebee/"/>
+    <id>https://sh.alynx.xyz/posts/2017/02/16/Steam-with-Bumblebee/</id>
+    <published>2017-02-16T04:50:22.000Z</published>
+    <updated>2018-03-19T09:34:23.121Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;买了个罗技G502，想想这鼠标狙击键要在fps游戏里才能发挥作用于是入了l4d2的坑，Steam购买，没想到P530核显实在是吃不动这货，FPS上30都很困难，于是研究了一下怎么样调用Bumblebee来使用独显。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="Linux" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/"/>
+    
+      <category term="Steam" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Steam/"/>
+    
+    
+      <category term="Linux" scheme="https://sh.alynx.xyz/tags/Linux/"/>
+    
+      <category term="双显卡" scheme="https://sh.alynx.xyz/tags/%E5%8F%8C%E6%98%BE%E5%8D%A1/"/>
+    
+      <category term="Bumblebee" scheme="https://sh.alynx.xyz/tags/Bumblebee/"/>
+    
+      <category term="Steam" scheme="https://sh.alynx.xyz/tags/Steam/"/>
+    
+      <category term="大量标签测试0" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%950/"/>
+    
+      <category term="大量标签测试1" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%951/"/>
+    
+      <category term="大量标签测试2" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%952/"/>
+    
+      <category term="大量标签测试3" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%953/"/>
+    
+      <category term="大量标签测试4" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%954/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>碎碎念</title>
+    <link href="https://sh.alynx.xyz/posts/2017/02/01/Some-Words/"/>
+    <id>https://sh.alynx.xyz/posts/2017/02/01/Some-Words/</id>
+    <published>2017-02-01T13:47:07.000Z</published>
+    <updated>2018-03-19T04:50:05.634Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;我还是会回头、注视，街上每一个像曾经的她的人，但即使我活在过去，心里也很清楚，她的打扮早已不是那时候原来的样子了。&lt;/blockquote&gt;
+
+&lt;p&gt;没有什么好说的，无非是些碎碎念，本猹发现自己似乎有了不用 HHKB 就没法安心写代码写网站的毛病。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="生活" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="折腾" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/%E6%8A%98%E8%85%BE/"/>
+    
+    
+      <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/"/>
+    
+      <category term="折腾" scheme="https://sh.alynx.xyz/tags/%E6%8A%98%E8%85%BE/"/>
+    
+      <category term="本命番" scheme="https://sh.alynx.xyz/tags/%E6%9C%AC%E5%91%BD%E7%95%AA/"/>
+    
+  </entry>
+  
+</feed>

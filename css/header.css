@@ -24,9 +24,11 @@
 .header .header-box .header-title a {
   color: #eaeaea;
   text-decoration: none;
+  border-bottom: none;
 }
 .header .header-box .header-title a:hover {
   color: #eaeaea;
+  border-bottom: none;
 }
 .header .header-box .header-title .title {
   font-size: $font-size-title;
