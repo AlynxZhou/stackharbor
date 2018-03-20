@@ -13,9 +13,9 @@
   background: $color-lighter-selection;
 }
 .footer a {
-  color: #ccc;
+  color: #ddd;
   text-decoration: none;
-  border-bottom: 1px dotted #ccc;
+  border-bottom: 1px dotted #ddd;
   transition: 0.2s ease-in-out;
 }
 .footer a:hover {

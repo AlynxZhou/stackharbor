@@ -17,7 +17,7 @@
   margin-left: -2px;
   width: 4px;
   height: 100%;
-  background: #ccc;
+  background: #ddd;
 }
 .category-container .category-title::after {
   content: " ";
@@ -50,7 +50,7 @@
   margin-left: -2px;
   width: 4px;
   height: 200%;
-  background: #ccc;
+  background: #ddd;
 }
 .category-container .category-post::after {
   content: " ";

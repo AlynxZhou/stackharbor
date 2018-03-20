@@ -68,7 +68,7 @@
   display: inline-block;
 }
 .nav ul li a {
-  color: #ccc;
+  color: #ddd;
   text-decoration: none;
   text-shadow: 0 1px rgba(0,0,0,0.2);
   display: block;
@@ -89,7 +89,7 @@
   font-size: 2em;
   position: relative;
   cursor: pointer;
-  color: #ccc;
+  color: #ddd;
   display: none;
   width: 100%;
   text-align: center;
@@ -221,7 +221,7 @@
   }
 }
 .sidebar {
-  background: #ccc;
+  background: #ddd;
   flex-grow: 0;
   flex-shrink: 0;
   width: 25%;
@@ -344,9 +344,9 @@
   background: $color-lighter-selection;
 }
 .footer a {
-  color: #ccc;
+  color: #ddd;
   text-decoration: none;
-  border-bottom: 1px dotted #ccc;
+  border-bottom: 1px dotted #ddd;
   transition: 0.2s ease-in-out;
 }
 .footer a:hover {
@@ -393,7 +393,7 @@
   margin-left: -2px;
   width: 4px;
   height: 100%;
-  background: #ccc;
+  background: #ddd;
 }
 .archive-container .archive-counter::after {
   content: " ";
@@ -420,7 +420,7 @@
   margin-left: -2px;
   width: 4px;
   height: 200%;
-  background: #ccc;
+  background: #ddd;
 }
 .archive-container .archive-year::after {
   content: " ";
@@ -453,7 +453,7 @@
   margin-left: -2px;
   width: 4px;
   height: 200%;
-  background: #ccc;
+  background: #ddd;
 }
 .archive-container .archive-post::after {
   content: " ";
@@ -503,7 +503,7 @@
   margin-left: -2px;
   width: 4px;
   height: 100%;
-  background: #ccc;
+  background: #ddd;
 }
 .category-container .category-title::after {
   content: " ";
@@ -536,7 +536,7 @@
   margin-left: -2px;
   width: 4px;
   height: 200%;
-  background: #ccc;
+  background: #ddd;
 }
 .category-container .category-post::after {
   content: " ";
@@ -608,7 +608,7 @@
   margin-left: -2px;
   width: 4px;
   height: 100%;
-  background: #ccc;
+  background: #ddd;
 }
 .tag-container .tag-title::after {
   content: " ";
@@ -641,7 +641,7 @@
   margin-left: -2px;
   width: 4px;
   height: 200%;
-  background: #ccc;
+  background: #ddd;
 }
 .tag-container .tag-post::after {
   content: " ";
@@ -953,12 +953,12 @@ figure {
 .blockquote-center::before {
   top: -20px;
   background-image: url("../images/quote-l.svg");
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #ddd;
 }
 .blockquote-center::after {
   bottom: -20px;
   background-image: url("../images/quote-r.svg");
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
   background-position: 100% 8px;
 }
 .blockquote-center p,

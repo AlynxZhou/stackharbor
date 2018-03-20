@@ -20,7 +20,7 @@
   display: inline-block;
 }
 .nav ul li a {
-  color: #ccc;
+  color: #ddd;
   text-decoration: none;
   text-shadow: 0 1px rgba(0,0,0,0.2);
   display: block;
@@ -41,7 +41,7 @@
   font-size: 2em;
   position: relative;
   cursor: pointer;
-  color: #ccc;
+  color: #ddd;
   display: none;
   width: 100%;
   text-align: center;
