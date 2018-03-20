@@ -1,3 +1,24 @@
-// build time:Mon Mar 19 2018 21:25:24 GMT+0800 (CST)
-"use strict";(function(e){e(document).ready(function(){var a=300;var r={opacity:1,top:0};function t(){var r=e.Deferred();var t=e(".animate");var n=t.length;t.each(function(t,c){e(c).delay(t*a).addClass("active");n-1===t&&r.resolve()});return r.promise()}t()})})(jQuery);
-//rebuild by neat 
+"use strict";
+(function ($) {
+  $(document).ready(function () {
+    var DELAY_STEP = 300;
+    var animationOptions = {
+      "opacity": 1,
+      "top": 0
+    };
+    function animateMain() {
+      var dfd = $.Deferred();
+      var els = $(".animate");
+      var length = els.length;
+
+      els.each(function (index, el) {
+        $(el).delay(index * DELAY_STEP).addClass("active");
+        // $(el).delay(index * DELAY_STEP).animate(animationOptions);
+        // $(el).delay(index * DELAY_STEP).css("transform", "rotateX(360deg)");
+        (length - 1 === index) && dfd.resolve();
+      });
+      return dfd.promise();
+    }
+    animateMain();
+  });
+})(jQuery);

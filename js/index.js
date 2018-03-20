@@ -1,3 +1,78 @@
-// build time:Mon Mar 19 2018 21:25:24 GMT+0800 (CST)
-"use strict";(function(e){e(document).ready(function(){e("#back-to-top").on("click",function(){e("body, html").animate({scrollTop:0},600)});e("#sidebar-toggle").click(function(){if(e("#sidebar").hasClass("fold")){e("#sidebar").removeClass("fold");e("#sidebar").animate({"flex-basis":"20%"},"fast",function(){e("#sidebar-container").show("fast")});e("#sidebar-toggle").empty().append('<i class="fas fa-angle-double-up"></i>')}else{e("#sidebar").addClass("fold");e("#sidebar-container").hide("fast",function(){e("#sidebar").animate({"flex-basis":"1%"},"fast")});e("#sidebar-toggle").empty().append('<i class="fas fa-angle-double-down"></i>')}});e("#nav-toggle").on("click",function(){e("#menu").slideToggle()});function i(){if(e(window).width()>768){e("#menu").show()}else{e("#menu").slideUp()}}i();e(window).resize(function(){i()})})})(jQuery);
-//rebuild by neat 
+"use strict";
+(function ($) {
+  $(document).ready(function () {
+    // To top button
+    $("#back-to-top").on("click", function () {
+      $("body, html").animate({ scrollTop: 0 }, 600);
+    });
+
+
+    // Sidebar expend
+    $("#sidebar-toggle").click(function () {
+      if ($("#sidebar").hasClass("fold")) {
+        $("#sidebar").removeClass("fold");
+        $("#sidebar").animate({ "flex-basis": "20%" }, "fast", function () {
+          $("#sidebar-container").show("fast");
+        });
+        $("#sidebar-toggle").empty().append("<i class=\"fas fa-angle-double-up\"></i>")
+      } else {
+        $("#sidebar").addClass("fold");
+        $("#sidebar-container").hide("fast", function () {
+          $("#sidebar").animate({ "flex-basis": "1%" }, "fast");
+        });
+        $("#sidebar-toggle").empty().append("<i class=\"fas fa-angle-double-down\"></i>")
+      }
+    });
+
+    // Nav bar toggle
+    $("#nav-toggle").on("click", function () {
+      $("#menu").slideToggle();
+    });
+
+    // Auto hide main nav menus
+    function autoHideMenus() {
+        if ($(window).width() > 768) {
+          $("#menu").show();
+        } else {
+          $("#menu").slideUp();
+        }
+    }
+    autoHideMenus();
+    $(window).resize(function () {
+      autoHideMenus();
+    });
+
+    // // Caption
+    // $(".article-entry").each(function(i) {
+    //   $(this).find("img").each(function() {
+    //     if (this.alt && !(!!$.prototype.justifiedGallery && $(this).parent(".justified-gallery").length)) {
+    //       $(this).after("<span class="caption">" + this.alt + "</span>");
+    //     }
+  	//
+    //     // 对于已经包含在链接内的图片不适用lightGallery
+    //     if ($(this).parent().prop("tagName") !== "A") {
+    //       $(this).wrap("<a href="" + this.src + "" title="" + this.alt + "" class="gallery-item"></a>");
+    //     }
+    //   });
+  	//
+    // });
+    // if (typeof lightGallery != "undefined") {
+    //   var options = {
+    //     selector: ".gallery-item",
+    //   };
+    //   $(".article-entry").each(function(i, entry) {
+    //     lightGallery(entry, options);
+    //   });
+    //   lightGallery($(".article-gallery")[0], options);
+    // }
+    // if (!!$.prototype.justifiedGallery) {  // if justifiedGallery method is defined
+    //   var options = {
+    //     rowHeight: 140,
+    //     margins: 4,
+    //     lastRow: "justify"
+    //   };
+    //   $(".justified-gallery").justifiedGallery(options);
+    // }
+
+  });
+})(jQuery);
