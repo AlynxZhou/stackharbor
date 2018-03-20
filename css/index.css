@@ -1,11 +1,11 @@
 .header {
   padding-bottom: 40px;
   margin-bottom: 0;
-  background: #16171b;
+  background: #26272b;
   position: relative;
 }
 .header::selection {
-  color: #16171b;
+  color: #26272b;
   background: #eaeaea;
 }
 .header .header-box {
@@ -48,7 +48,7 @@
   margin: 0;
   position: relative;
   padding: 0 10px;
-  background: #353535;
+  background: #33363b;
   box-shadow: 0px 3px 20px 0.5px rgba(255,255,255,0.19);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -135,6 +135,9 @@
 }
 .main .main-body .content .index-post img {
   max-width: 100%;
+  border: 3px solid #bbb;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
 }
 .main .main-body .content .index-post .readmore {
   display: inline-block;
@@ -181,7 +184,7 @@
   display: inline-block;
   position: relative;
   text-decoration: none;
-  color: #16171b;
+  color: #26272b;
 }
 .main .main-body .content .index-post .post-header .post-title-link::after {
   content: " ";
@@ -190,7 +193,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background: #16171b;
+  background: #26272b;
   visibility: hidden;
   transform: scaleX(0);
   transition: 0.2s ease-in-out;
@@ -215,7 +218,7 @@
   height: 37px;
   display: block;
   text-align: center;
-  background: #006bfe;
+  background: #006bde;
   color: #fff;
   padding-top: 3px;
 }
@@ -224,7 +227,7 @@
   height: 1.5em;
   border: 2px solid transparent;
   border-bottom: 2px solid #fff;
-  background: #006bfe;
+  background: #006bde;
   color: #fff;
 }
 .sidebar .search input:focus {
@@ -273,7 +276,7 @@
   max-width: 70%;
   display: block;
   margin: 0 auto;
-  border: 2px solid #006bfe;
+  border: 2px solid #006bde;
   border-radius: 50%;
   box-shadow: inset 0 -1px 0 #333;
   transition: 1s ease-in-out;
@@ -282,7 +285,7 @@
   transform: rotateY(720deg);
 }
 .author .author-name {
-  color: #16171b;
+  color: #26272b;
   font-size: 1.5em;
 }
 .author .author-description {
@@ -291,7 +294,7 @@
 }
 .footer {
   margin-top: 30px;
-  background: #222;
+  background: #26272b;
   color: #eaeaea;
 }
 .footer .footer-container {
@@ -325,7 +328,7 @@
   font-size: 2em;
 }
 .footer .back-to-top a:hover {
-  color: #006bfe;
+  color: #006bde;
 }
 .archive-container {
   padding-top: 20px;
@@ -434,8 +437,8 @@
   transition: 0.2s ease-in-out;
 }
 .archive-container .archive-post .post-title-link:hover {
-  color: #006bfe;
-  border-bottom: 1px solid #006bfe;
+  color: #006bde;
+  border-bottom: 1px solid #006bde;
 }
 .category-container {
   padding-top: 20px;
@@ -516,8 +519,8 @@
   transition: 0.2s ease-in-out;
 }
 .category-container .category-post .post-title-link:hover {
-  color: #006bfe;
-  border-bottom: 1px solid #006bfe;
+  color: #006bde;
+  border-bottom: 1px solid #006bde;
 }
 .categories {
   background: #fff;
@@ -621,8 +624,8 @@
   transition: 0.2s ease-in-out;
 }
 .tag-container .tag-post .post-title-link:hover {
-  color: #006bfe;
-  border-bottom: 1px solid #006bfe;
+  color: #006bde;
+  border-bottom: 1px solid #006bde;
 }
 .tags {
   background: #fff;
@@ -645,6 +648,9 @@
 }
 .page-container img {
   max-width: 100%;
+  border: 3px solid #bbb;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
 }
 .post {
   padding: 20px;
@@ -655,13 +661,16 @@
 }
 .post img {
   max-width: 100%;
+  border: 3px solid #bbb;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
 }
 .post .post-title {
   text-align: center;
   display: block;
   position: relative;
   text-decoration: none;
-  color: #16171b;
+  color: #26272b;
 }
 .post .post-meta {
   text-align: center;
@@ -719,6 +728,44 @@
 .post-nav .post-nav-prev {
   text-align: right;
 }
+.reward {
+  padding: 10px 0;
+  margin: 20px auto;
+  width: 90%;
+  text-align: center;
+}
+.reward .qr {
+  text-align: center;
+}
+.reward .qr div {
+  padding: 10px;
+  display: inline-block;
+}
+.reward .qr div img {
+  width: 200px;
+  display: inline-block;
+}
+.reward .qr div span {
+  display: block;
+}
+.reward button {
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  letter-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  background: #ff2a2a;
+  color: #fff;
+  border-radius: 3px;
+  line-height: 2em;
+}
+.reward button span {
+  padding: 10px 10px;
+}
 html,
 body,
 .container {
@@ -726,10 +773,10 @@ body,
 }
 ::selection {
   color: #eaeaea;
-  background: #353535;
+  background: #33363b;
 }
 body {
-  color: #16171b;
+  color: #26272b;
   background: #bbb;
   font: 1em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -738,7 +785,7 @@ a {
   color: #666;
 }
 a:hover {
-  color: #006bfe;
+  color: #006bde;
 }
 a:active {
   top: 2px;
@@ -783,6 +830,11 @@ figure {
   direction: rtl;
   font-family: UKIJ Ekran;
 }
+.caption {
+  color: #999;
+  display: block;
+  text-align: center;
+}
 .container {
   position: relative;
   padding: 0;
@@ -790,6 +842,40 @@ figure {
   min-width: $container-min-width;
   width: 100%;
   margin: 0 auto;
+}
+.blockquote-center {
+  position: relative;
+  margin: 40px 0;
+  padding: 0;
+  border-left: none;
+  text-align: center;
+}
+.blockquote-center::before,
+.blockquote-center::after {
+  position: absolute;
+  content: ' ';
+  display: block;
+  width: 100%;
+  height: 24px;
+  opacity: 0.2;
+  background-repeat: no-repeat;
+  background-position: 0 -6px;
+  background-size: 22px 22px;
+}
+.blockquote-center::before {
+  top: -20px;
+  background-image: url("../images/quote-l.svg");
+  border-top: 1px solid #ccc;
+}
+.blockquote-center::after {
+  bottom: -20px;
+  background-image: url("../images/quote-r.svg");
+  border-bottom: 1px solid #ccc;
+  background-position: 100% 8px;
+}
+.blockquote-center p,
+.blockquote-center div {
+  text-align: center;
 }
 .pagination {
   padding: 20px;
@@ -810,12 +896,12 @@ figure {
 }
 .pagination .page-number:hover,
 .pagination .extend:hover {
-  border-bottom: 3px solid #006bfe;
+  border-bottom: 3px solid #006bde;
 }
 .pagination .page-number.current,
 .pagination .extend.current {
-  border-bottom: 3px solid #006bfe;
-  border-top: 1px solid #006bfe;
+  border-bottom: 3px solid #006bde;
+  border-top: 1px solid #006bde;
 }
 .pagination .space {
   font-size: 20px;

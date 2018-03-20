@@ -80,6 +80,6 @@
   transition: 0.2s ease-in-out;
 }
 .tag-container .tag-post .post-title-link:hover {
-  color: #006bfe;
-  border-bottom: 1px solid #006bfe;
+  color: #006bde;
+  border-bottom: 1px solid #006bde;
 }

@@ -1,0 +1,38 @@
+.reward {
+  padding: 10px 0;
+  margin: 20px auto;
+  width: 90%;
+  text-align: center;
+}
+.reward .qr {
+  text-align: center;
+}
+.reward .qr div {
+  padding: 10px;
+  display: inline-block;
+}
+.reward .qr div img {
+  width: 200px;
+  display: inline-block;
+}
+.reward .qr div span {
+  display: block;
+}
+.reward button {
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  letter-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  background: #ff2a2a;
+  color: #fff;
+  border-radius: 3px;
+  line-height: 2em;
+}
+.reward button span {
+  padding: 10px 10px;
+}

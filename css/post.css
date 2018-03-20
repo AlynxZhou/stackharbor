@@ -7,13 +7,16 @@
 }
 .post img {
   max-width: 100%;
+  border: 3px solid #bbb;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
 }
 .post .post-title {
   text-align: center;
   display: block;
   position: relative;
   text-decoration: none;
-  color: #16171b;
+  color: #26272b;
 }
 .post .post-meta {
   text-align: center;

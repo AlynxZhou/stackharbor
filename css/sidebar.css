@@ -9,7 +9,7 @@
   height: 37px;
   display: block;
   text-align: center;
-  background: #006bfe;
+  background: #006bde;
   color: #fff;
   padding-top: 3px;
 }
@@ -18,7 +18,7 @@
   height: 1.5em;
   border: 2px solid transparent;
   border-bottom: 2px solid #fff;
-  background: #006bfe;
+  background: #006bde;
   color: #fff;
 }
 .sidebar .search input:focus {

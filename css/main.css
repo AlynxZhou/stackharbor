@@ -27,6 +27,9 @@
 }
 .main .main-body .content .index-post img {
   max-width: 100%;
+  border: 3px solid #bbb;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
 }
 .main .main-body .content .index-post .readmore {
   display: inline-block;
@@ -73,7 +76,7 @@
   display: inline-block;
   position: relative;
   text-decoration: none;
-  color: #16171b;
+  color: #26272b;
 }
 .main .main-body .content .index-post .post-header .post-title-link::after {
   content: " ";
@@ -82,7 +85,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background: #16171b;
+  background: #26272b;
   visibility: hidden;
   transform: scaleX(0);
   transition: 0.2s ease-in-out;

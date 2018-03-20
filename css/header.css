@@ -1,11 +1,11 @@
 .header {
   padding-bottom: 40px;
   margin-bottom: 0;
-  background: #16171b;
+  background: #26272b;
   position: relative;
 }
 .header::selection {
-  color: #16171b;
+  color: #26272b;
   background: #eaeaea;
 }
 .header .header-box {

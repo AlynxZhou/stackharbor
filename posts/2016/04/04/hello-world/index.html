@@ -9,8 +9,16 @@
     <link rel="stylesheet" type="text/css" href="/css/index.css">
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script async type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script async type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script async type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script async type="text/javascript" src="/js/lg-share.min.js"></script>
+    <script async type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script async type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script async type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
     
     <script async src="/js/busuanzi.pure.mini.js"></script>
     
@@ -123,6 +131,31 @@
       
     </footer>
   </article>
+  
+  
+<div class="reward" id="reward">
+  <p>一只学生喵建立了这个网站，他还没有固定的收入来源来维持租用域名等等的支出。所以如果你看了某篇文章觉得好，同时又有经济能力。那么不妨通过下面的打赏功能进行一些资金支持。不需要很多，只要能够帮助他把这个网站维持的更久一点。</p>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('qr'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="qr" class="qr" style="display: none;">
+    
+    <div id="wechat">
+      <img id="wechat_qr" src="/images/WeChatPay.png" alt="微信支付"/>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay_qr" src="/images/AliPay.png" alt="支付宝"/>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
   
   <div class="post-nav animate">
     

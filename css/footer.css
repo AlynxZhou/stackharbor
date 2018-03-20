@@ -1,6 +1,6 @@
 .footer {
   margin-top: 30px;
-  background: #222;
+  background: #26272b;
   color: #eaeaea;
 }
 .footer .footer-container {
@@ -34,5 +34,5 @@
   font-size: 2em;
 }
 .footer .back-to-top a:hover {
-  color: #006bfe;
+  color: #006bde;
 }
