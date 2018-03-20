@@ -1,6 +1,7 @@
 .sidebar {
   background: #ccc;
   flex-grow: 0;
+  flex-shrink: 0;
   width: 25%;
   flex-basis: 25%;
   padding: 0;
