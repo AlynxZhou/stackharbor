@@ -337,6 +337,7 @@
   box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
 }
 .author .rss:hover {
+  border-bottom: none;
   transform: rotateX(360deg);
 }
 .author .rss:active {
@@ -890,6 +891,21 @@ a:hover {
   border-bottom: 1px solid #006bde;
 }
 a:active {
+  top: 2px;
+}
+a.button {
+  text-decoration: none;
+  border-radius: 3px;
+  transform-origin: 50%;
+  border-bottom: none;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
+}
+a.button:hover {
+  transform: rotateX(360deg);
+  border-bottom: none;
+}
+a.button:active {
   top: 2px;
 }
 a.gallery-item {

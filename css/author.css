@@ -37,6 +37,7 @@
   box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
 }
 .author .rss:hover {
+  border-bottom: none;
   transform: rotateX(360deg);
 }
 .author .rss:active {
