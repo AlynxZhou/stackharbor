@@ -39,6 +39,8 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
     <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script async type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script async type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
@@ -64,7 +66,7 @@
     
     <title>如果时光停滞三年 | 喵's StackHarbor</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN"  data-spy="scroll" data-target=".list-group">
     
 <header id="header" class="header">
   <div class="container">
@@ -215,17 +217,18 @@
     
     <div id="wechat">
       <img id="wechat_qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
     </div>
     
     
     <div id="alipay">
       <img id="alipay_qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
     </div>
     
     
   </div>
 </div>
-
 
 
   
@@ -324,13 +327,6 @@
 
 
   
-  
-
-
-
-
-  
-  
 
 <hr>
 <div class="blogroll sidebar-item">
@@ -358,6 +354,14 @@
 
 
 
+  
+  
+  
+
+
+
+
+  
 </aside>
 
 

@@ -39,6 +39,8 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
     <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script async type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script async type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
@@ -64,7 +66,7 @@
     
     <title>CoffeeScript 的静态方法和静态变量（类方法和类变量） | 喵's StackHarbor</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN"  data-spy="scroll" data-target=".list-group">
     
 <header id="header" class="header">
   <div class="container">
@@ -221,17 +223,18 @@
     
     <div id="wechat">
       <img id="wechat_qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
     </div>
     
     
     <div id="alipay">
       <img id="alipay_qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
     </div>
     
     
   </div>
 </div>
-
 
 
   
@@ -330,19 +333,6 @@
 
 
   
-  
-
-
-<hr>
-<div class="post-toc sidebar-item">
-  <p><i class="fas fa-list-ol"></i> 文章目录</p>
-  <div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#静态变量"><span class="toc-text">静态变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#静态方法"><span class="toc-text">静态方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#碎碎念"><span class="toc-text">碎碎念</span></a></li></ol></div>
-</div>
-
-
-
-  
-  
 
 <hr>
 <div class="blogroll sidebar-item">
@@ -370,6 +360,20 @@
 
 
 
+  
+  
+  
+
+
+<hr>
+<div class="post-toc sidebar-item" id="post-toc">
+  <p><i class="fas fa-list-ol"></i> 文章目录</p>
+  <div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#静态变量"><span class="toc-text">静态变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#静态方法"><span class="toc-text">静态方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#碎碎念"><span class="toc-text">碎碎念</span></a></li></ol></div>
+</div>
+
+
+
+  
 </aside>
 
 

@@ -830,6 +830,14 @@
 .reward button span {
   padding: 10px 10px;
 }
+.post-toc {
+  position: sticky;
+  top: 2em;
+}
+.post-toc .toc-link.active {
+  color: #006bde;
+  border-bottom: 1px solid #006bde;
+}
 html,
 body,
 .container {
