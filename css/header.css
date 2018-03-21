@@ -1,5 +1,5 @@
 .header {
-  padding-bottom: 40px;
+  padding-bottom: 2.5em;
   margin-bottom: 0;
   background: #26272b;
   position: relative;
@@ -19,7 +19,7 @@
 .header .header-box .header-title {
   flex-grow: 2;
   color: #eaeaea;
-  padding: 10px 10px;
+  padding: 0.5em;
 }
 .header .header-box .header-title a {
   color: #eaeaea;
@@ -35,14 +35,14 @@
 }
 .header .header-box .header-title .subtitle {
   font-style: italic;
-  text-shadow: 0 1px rgba(0,0,0,0.2);
+  text-shadow: 0 0.05em rgba(0,0,0,0.2);
 }
 .header .header-box .logo {
   flex-grow: 1;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 1em;
 }
 .header .header-box .logo img {
-  max-width: 400px;
+  max-width: 20em;
   width: 100%;
 }

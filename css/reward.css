@@ -1,6 +1,6 @@
 .reward {
-  padding: 10px 0;
-  margin: 20px auto;
+  padding: 0.5em 0;
+  margin: 1em auto;
   width: 90%;
   text-align: center;
 }
@@ -8,11 +8,11 @@
   text-align: center;
 }
 .reward .qr div {
-  padding: 10px;
+  padding: 0.5em;
   display: inline-block;
 }
 .reward .qr div img {
-  width: 200px;
+  width: 10em;
   display: inline-block;
 }
 .reward .qr div span {
@@ -30,9 +30,9 @@
   text-shadow: none;
   background: #ff2a2a;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 0.15em;
   line-height: 2em;
 }
 .reward button span {
-  padding: 10px 10px;
+  padding: 0.5em 0.5em;
 }

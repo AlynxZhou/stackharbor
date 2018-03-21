@@ -1,12 +1,12 @@
 .footer {
-  margin-top: 30px;
+  margin-top: 1.5em;
   background: #26272b;
   color: #eaeaea;
 }
 .footer .footer-container {
-  padding-right: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
 }
 .footer::selection {
   color: $color-lighter-selection-font;
@@ -15,15 +15,15 @@
 .footer a {
   color: #ddd;
   text-decoration: none;
-  border-bottom: 1px dotted #ddd;
-  transition: 0.2s ease-in-out;
+  border-bottom: 0.05em dotted #ddd;
+  transition: 0.3s ease-in-out;
 }
 .footer a:hover {
   color: #fff;
-  border-bottom: 1px solid #fff;
+  border-bottom: 0.05em solid #fff;
 }
 .footer a:active {
-  top: 2px;
+  top: 0.1em;
 }
 .footer .back-to-top {
   display: block;
@@ -36,8 +36,8 @@
   display: inline-block;
   margin: 0 auto;
   padding: 0 1em;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 0.15em;
+  border-bottom-right-radius: 0.15em;
   font-size: 2em;
 }
 .footer .back-to-top a:hover {

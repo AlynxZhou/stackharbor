@@ -1,21 +1,21 @@
 .category-container {
-  padding-top: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-  padding-left: 50px;
+  padding-top: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
 }
 .category-container .category-title {
   position: relative;
-  padding-left: 20px;
+  padding-left: 1em;
   font-size: 2em;
 }
 .category-container .category-title::before {
   content: " ";
   position: absolute;
-  top: 20px;
-  left: 0px;
-  margin-left: -2px;
-  width: 4px;
+  top: 50%;
+  left: 0;
+  margin-left: -0.125em;
+  width: 0.25em;
   height: 100%;
   background: #ddd;
 }
@@ -24,31 +24,31 @@
   position: absolute;
   left: 0;
   top: 50%;
-  margin-left: -6px;
-  margin-top: -6px;
-  width: 12px;
-  height: 12px;
+  margin-left: -0.25em;
+  margin-top: -0.25em;
+  width: 0.5em;
+  height: 0.5em;
   background: #bbb;
   border-radius: 50%;
 }
 .category-container .category-post {
   background: #fff;
   position: relative;
-  padding-left: 20px;
+  padding-left: 1em;
   font-size: 1.5em;
   box-sizing: border-box;
-  box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
+  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
 }
 .category-container .category-post .post-title {
-  padding: 5px 0;
+  padding: 0.25em 0;
 }
 .category-container .category-post::before {
   content: " ";
   position: absolute;
   top: -50%;
-  left: 0px;
-  margin-left: -2px;
-  width: 4px;
+  left: 0;
+  margin-left: -0.125em;
+  width: 0.25em;
   height: 200%;
   background: #ddd;
 }
@@ -57,10 +57,10 @@
   position: absolute;
   left: 0;
   top: 50%;
-  margin-left: -4px;
-  margin-top: -4px;
-  width: 8px;
-  height: 8px;
+  margin-left: -0.25em;
+  margin-top: -0.25em;
+  width: 0.5em;
+  height: 0.5em;
   background: #bbb;
   border-radius: 50%;
 }
@@ -73,10 +73,10 @@
   position: relative;
   text-decoration: none;
   color: #666;
-  border-bottom: 1px dashed #bbb;
-  transition: 0.2s ease-in-out;
+  border-bottom: 0.05em dashed #bbb;
+  transition: 0.3s ease-in-out;
 }
 .category-container .category-post .post-title-link:hover {
   color: #006bde;
-  border-bottom: 1px solid #006bde;
+  border-bottom: 0.05em solid #006bde;
 }
