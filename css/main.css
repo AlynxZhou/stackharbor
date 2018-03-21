@@ -22,6 +22,7 @@
   flex-shrink: 1;
 }
 .main .main-body .content .index-post {
+  display: block;
   background: #fff;
   padding: 20px;
   margin: 10px;

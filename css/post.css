@@ -75,8 +75,10 @@
   top: 2px;
 }
 .post-nav .post-nav-next {
+  max-width: 50%;
   text-align: left;
 }
 .post-nav .post-nav-prev {
+  max-width: 50%;
   text-align: right;
 }
