@@ -17,6 +17,7 @@
 }
 .nav ul li {
   position: relative;
+  text-align: center;
   display: inline-block;
 }
 .nav ul li a {
@@ -27,12 +28,15 @@
   padding: 15px 15px;
   font-size: 20px;
   transition: 0.2s ease-in;
+  border-bottom: none;
 }
 .nav ul li a:hover {
+  border-bottom: none;
   color: #fff;
   background: #252525;
 }
 .nav ul li a.current {
+  border-bottom: none;
   color: #fff;
   background: #222;
 }
@@ -45,18 +49,27 @@
   display: none;
   width: 100%;
   text-align: center;
+  border-bottom: none;
 }
 .nav .nav-toggle:hover {
+  border-bottom: none;
   color: #fff;
 }
 @media (max-width: 768px) {
   .nav .nav-toggle {
     display: block;
   }
-  .nav .menu-item {
-    display: block;
-  }
   .nav ul {
     display: none;
+  }
+  .nav ul li {
+    display: block;
+    text-align: center;
+  }
+  .nav ul li a {
+    border-bottom: none;
+  }
+  .nav ul li a:hover {
+    border-bottom: none;
   }
 }

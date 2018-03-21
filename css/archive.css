@@ -61,7 +61,8 @@
 .archive-container .archive-post {
   background: #fff;
   position: relative;
-  padding-left: 20px;
+  padding-left: 1em;
+  padding-right: 0.5em;
   font-size: 1.5em;
   box-sizing: border-box;
   box-shadow: 0px 3px 20px 0.5px rgba(0,0,0,0.19);
