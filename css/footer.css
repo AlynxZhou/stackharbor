@@ -30,6 +30,7 @@
   text-align: center;
 }
 .footer .back-to-top a {
+  border-bottom: none;
   background: #bbb;
   color: #666;
   overflow: hidden;
@@ -42,4 +43,8 @@
 }
 .footer .back-to-top a:hover {
   color: #006bde;
+  border-bottom: none;
+}
+.footer .back-to-top a:active {
+  border-bottom: none;
 }

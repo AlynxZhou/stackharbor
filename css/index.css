@@ -88,6 +88,9 @@
   color: #fff;
   background: #222;
 }
+.nav ul li a:active {
+  top: 0.1em;
+}
 .nav .nav-toggle {
   text-align: center;
   font-size: 2em;
@@ -381,6 +384,7 @@
   text-align: center;
 }
 .footer .back-to-top a {
+  border-bottom: none;
   background: #bbb;
   color: #666;
   overflow: hidden;
@@ -393,6 +397,10 @@
 }
 .footer .back-to-top a:hover {
   color: #006bde;
+  border-bottom: none;
+}
+.footer .back-to-top a:active {
+  border-bottom: none;
 }
 .archive-container {
   padding-top: 1em;
@@ -895,7 +903,7 @@ a:hover {
   border-bottom: 0.05em solid #006bde;
 }
 a:active {
-  top: 0.01em;
+  top: 0.1em;
 }
 a.button {
   text-decoration: none;
@@ -910,7 +918,7 @@ a.button:hover {
   border-bottom: none;
 }
 a.button:active {
-  top: 0.01em;
+  top: 0.1em;
 }
 a.gallery-item {
   text-decoration: none;

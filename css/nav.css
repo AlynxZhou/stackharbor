@@ -40,6 +40,9 @@
   color: #fff;
   background: #222;
 }
+.nav ul li a:active {
+  top: 0.1em;
+}
 .nav .nav-toggle {
   text-align: center;
   font-size: 2em;
