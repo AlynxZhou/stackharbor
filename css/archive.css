@@ -108,3 +108,6 @@
   color: #006bde;
   border-bottom: 0.03em solid #006bde;
 }
+.archive-container .archive-post .post-title-link:active {
+  top: 0.1em;
+}

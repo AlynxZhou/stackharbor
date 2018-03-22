@@ -80,3 +80,6 @@
   color: #006bde;
   border-bottom: 0.05em solid #006bde;
 }
+.tag-container .tag-post .post-title-link:active {
+  top: 0.1em;
+}
