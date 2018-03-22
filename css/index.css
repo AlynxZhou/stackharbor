@@ -1061,6 +1061,7 @@ figure .code {
 }
 .pagination .page-number.current,
 .pagination .extend.current {
+  color: #006bde;
   border-bottom: 0.15em solid #006bde;
   border-top: 0.05em solid #006bde;
 }
