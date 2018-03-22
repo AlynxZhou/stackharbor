@@ -9,16 +9,6 @@
   padding-left: 1em;
   font-size: 2em;
 }
-.category-container .category-title::before {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 100%;
-  background: #ddd;
-}
 .category-container .category-title::after {
   content: " ";
   position: absolute;
@@ -41,16 +31,6 @@
 }
 .category-container .category-post .post-title {
   padding: 0.25em 0;
-}
-.category-container .category-post::before {
-  content: " ";
-  position: absolute;
-  top: -50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 200%;
-  background: #ddd;
 }
 .category-container .category-post::after {
   content: " ";

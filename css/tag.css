@@ -9,16 +9,6 @@
   padding-left: 1em;
   font-size: 2em;
 }
-.tag-container .tag-title::before {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 100%;
-  background: #ddd;
-}
 .tag-container .tag-title::after {
   content: " ";
   position: absolute;
@@ -41,16 +31,6 @@
 }
 .tag-container .tag-post .post-title {
   padding: 0.25em 0;
-}
-.tag-container .tag-post::before {
-  content: " ";
-  position: absolute;
-  top: -50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 200%;
-  background: #ddd;
 }
 .tag-container .tag-post::after {
   content: " ";

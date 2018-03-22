@@ -410,16 +410,6 @@
   padding-left: 1em;
   font-size: 2em;
 }
-.archive-container .archive-counter::before {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 100%;
-  background: #ddd;
-}
 .archive-container .archive-counter::after {
   content: " ";
   position: absolute;
@@ -436,16 +426,6 @@
   position: relative;
   padding-left: 1em;
   font-size: 1.8em;
-}
-.archive-container .archive-year::before {
-  content: " ";
-  position: absolute;
-  top: -50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 200%;
-  background: #ddd;
 }
 .archive-container .archive-year::after {
   content: " ";
@@ -470,16 +450,6 @@
 }
 .archive-container .archive-post .post-title {
   padding: 0.25em 0;
-}
-.archive-container .archive-post::before {
-  content: " ";
-  position: absolute;
-  top: -50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 200%;
-  background: #ddd;
 }
 .archive-container .archive-post::after {
   content: " ";
@@ -523,16 +493,6 @@
   padding-left: 1em;
   font-size: 2em;
 }
-.category-container .category-title::before {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 100%;
-  background: #ddd;
-}
 .category-container .category-title::after {
   content: " ";
   position: absolute;
@@ -555,16 +515,6 @@
 }
 .category-container .category-post .post-title {
   padding: 0.25em 0;
-}
-.category-container .category-post::before {
-  content: " ";
-  position: absolute;
-  top: -50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 200%;
-  background: #ddd;
 }
 .category-container .category-post::after {
   content: " ";
@@ -631,16 +581,6 @@
   padding-left: 1em;
   font-size: 2em;
 }
-.tag-container .tag-title::before {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 100%;
-  background: #ddd;
-}
 .tag-container .tag-title::after {
   content: " ";
   position: absolute;
@@ -663,16 +603,6 @@
 }
 .tag-container .tag-post .post-title {
   padding: 0.25em 0;
-}
-.tag-container .tag-post::before {
-  content: " ";
-  position: absolute;
-  top: -50%;
-  left: 0;
-  margin-left: -0.125em;
-  width: 0.25em;
-  height: 200%;
-  background: #ddd;
 }
 .tag-container .tag-post::after {
   content: " ";
