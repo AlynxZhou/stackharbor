@@ -1,8 +1,16 @@
 .sidebar {
   background: #ddd;
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
   flex-grow: 0;
+  -webkit-flex-shrink: 0;
   flex-shrink: 0;
   width: 25%;
+  -webkit-flex-basis: 25%;
   flex-basis: 25%;
   padding: 0;
 }
@@ -21,6 +29,10 @@
   border-bottom: 0.1em dashed #fff;
   background: #006bde;
   color: #fff;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 .sidebar .search input:focus {
@@ -31,12 +43,21 @@
   color: #fff;
   padding-left: 0.5em;
   opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
 }
 .sidebar .search-result-box {
   background: #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
   box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
   word-warp: break-word;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 .sidebar .search-result-box .search-result-list {
@@ -55,8 +76,14 @@
   width: auto;
   position: relative;
   display: block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
   background-color: #ddd;
+  background-image: -webkit-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
+  background-image: -moz-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
+  background-image: -o-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
+  background-image: -ms-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
   background-image: repeating-linear-gradient(-45deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
 }
 @media (max-width: 768px) {

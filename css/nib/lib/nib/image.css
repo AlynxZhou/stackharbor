@@ -1,0 +1,7 @@
+/*
+ * Define background-image as `path` with optional width and height, adding an
+ * @2x variant.
+ *
+ * affected by github.com/LearnBoost/stylus/issues/1050 and
+ * github.com/LearnBoost/stylus/issues/1038 ... refactor when those are closed
+ */

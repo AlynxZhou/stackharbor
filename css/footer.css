@@ -7,6 +7,64 @@
   padding-right: 1em;
   padding-bottom: 1em;
   padding-left: 1em;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -webkit-box-lines: single;
+  -moz-box-lines: single;
+  -o-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+.footer .footer-container .footer-left {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-basis: 50%;
+  flex-basis: 50%;
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  text-align: left;
+}
+.footer .footer-container .footer-right {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-basis: 50%;
+  flex-basis: 50%;
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  text-align: right;
 }
 .footer::selection {
   color: $color-lighter-selection-font;
@@ -16,6 +74,10 @@
   color: #ddd;
   text-decoration: none;
   border-bottom: 0.05em dotted #ddd;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 .footer a:hover {
@@ -47,4 +109,20 @@
 }
 .footer .back-to-top a:active {
   border-bottom: none;
+}
+@media (max-width: 768px) {
+  .footer .footer-container {
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -o-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .footer .footer-container .footer-left {
+    text-align: left;
+  }
+  .footer .footer-container .footer-right {
+    text-align: left;
+  }
 }

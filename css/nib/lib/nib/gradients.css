@@ -1,0 +1,32 @@
+/*
+ * Implicit color stop position.
+ */
+/*
+ * Normalize color stops:
+ *
+ *   - (color pos) -> (pos color)
+ *   - (color) -> (implied-pos color)
+ *
+ */
+/*
+ * Join color stops with the given translation function.
+ */
+/*
+ * Standard color stop.
+ */
+/*
+ * Create a linear gradient with the given start position
+ * and variable number of color stops.
+ *
+ * Examples:
+ *
+ *    background: linear-gradient(top, red, green, blue)
+ *    background: linear-gradient(bottom, red, green 50%, blue)
+ *    background: linear-gradient(bottom, red, 50% green, blue)
+ *    background: linear-gradient(bottom, red, 50% green, 90% white, blue)
+ *
+ */
+/*
+ * Create a linear gradient image with the given start position
+ * and variable number of color stops.
+ */

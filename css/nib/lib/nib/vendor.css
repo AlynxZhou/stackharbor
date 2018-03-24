@@ -1,0 +1,197 @@
+/*
+ * Alias "nowrap" as "no-wrap".
+ */
+/*
+ * Helper to find out if a given value is a width
+ */
+/*
+ * Vendor support for the given prop / arguments, optionally specifying the
+ * only prefixes to utilize, or those which should be ignored.
+ */
+/*
+ * Vendorize the given value.
+ */
+/*
+ * Vendor "box-shadow" support.
+ */
+/*
+ * Vendor "user-select" support.
+ */
+/*
+ * Vendor "column-count" support.
+ */
+/*
+ * Vendor "column-gap" support.
+ */
+/*
+ * Vendor "column-rule" support.
+ */
+/*
+ * Vendor "column-rule-color" support.
+ */
+/*
+ * Vendor "column-rule-width" support.
+ */
+/*
+ * Vendor "column-rule-style" support.
+ */
+/*
+ * Vendor "column-width" support.
+ */
+/*
+ * Vendor "column-span" support.
+ */
+/*
+ * Vendor "column-fill" support.
+ */
+/*
+ * Legacy syntax support for background-clip and background-origin
+ */
+/*
+ * Vendor "background-clip" support.
+ */
+/*
+ * Vendor "background-origin" support.
+ */
+/*
+ * Vendor "background-size" support.
+ */
+/*
+ * Vendor "transform" support.
+ */
+/*
+ * Vendor "transform-origin" support.
+ */
+/*
+ * Vendor "transform-style" support.
+ */
+/*
+ * Vendor "border-image" support.
+ */
+/*
+ * Vendor "transition" support.
+ */
+/*
+ * Vendor "transition-property" support.
+ */
+/*
+ * Vendor "transition-duration" support.
+ */
+/*
+ * Vendor "transition-timing-function" support.
+ */
+/*
+ * Vendor "transition-delay" support.
+ */
+/*
+ * Vendor "backface-visibility" support.
+ */
+/*
+ * Vendor "perspective" support.
+ */
+/*
+ * Vendor "perspective-origin" support.
+ */
+/*
+ * Opacity with conditional IE support.
+ */
+/*
+ * Vendor "text-size-adjust"
+ */
+/*
+ * Alias the "white-space" property.
+ */
+/*
+ * Vendor "box-sizing" support.
+ */
+/*
+ * Vendor "box-orient" support.
+ */
+/*
+ * Vendor "box-flex-group" support.
+ */
+/*
+ * Vendor "box-ordinal-group" support.
+ */
+/*
+ * Vendor "box-align" support.
+ */
+/*
+ * Vendor "box-pack" support.
+ */
+/*
+ * Vendor "box-direction" support.
+ */
+/*
+ * Vendor "animation" support.
+ */
+/*
+ * Vendor "animation-name" support.
+ */
+/*
+ * Vendor "animation-duration" support.
+ */
+/*
+ * Vendor "animation-delay" support.
+ */
+/*
+ * Vendor "animation-direction" support.
+ */
+/*
+ * Vendor "animation-iteration-count" support.
+ */
+/*
+ * Vendor "animation-timing-function" support.
+ */
+/*
+ * Vendor "animation-play-state" support.
+ */
+/*
+ * Vendor "animation-fill-mode" support.
+ */
+/*
+ * Vendor "hyphens" support.
+ */
+/*
+ * Vendor "appearance" support.
+ */
+/*
+ * Vendor "tab-size" support.
+ */
+/*
+ * Vendor "overflow-scrolling" support.
+ */
+/*
+ * Vendor "text-overflow" support, , -o- for opera 9.* - 10.*
+ */
+/*
+ * Vendor "text-size-adjust" support.
+ */
+/*
+ * Vendor "font-smoothing" support, webkit only.
+ */
+/**
+ * Vendor input-placeholder/placeholder support.
+ *
+ * Examples:
+ *    // Default syntax
+ *    body
+ *      placeholder(color #333, font-weight normal)
+ *
+ *    // The comma is important
+ *    .placeholder-red
+ *      placeholder(color red,)
+ *
+ *    // We can pass a function
+ *    green-placeholder()
+ *      color green
+ *    .placeholder-green
+ *      placeholder(green-placeholder)
+ *
+ *    // We can pass a hash
+ *    textarea
+ *      placeholder((font-style italic) (font-weight bold) (padding '4px 10px'))
+ */
+/*
+ * Vendor background support (gradients).
+ */

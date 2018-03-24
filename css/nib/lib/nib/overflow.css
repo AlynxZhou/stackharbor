@@ -1,0 +1,14 @@
+/*
+ * Overflow utility. Maps to regular overflow, and adds an ellipsis value.
+ *
+ * Synopsis:
+ *
+ *   overflow: <type>
+ *
+ * Examples:
+ *
+ *     overflow: auto
+ *     overflow: hidden
+ *     overflow: ellipsis
+ *
+ */

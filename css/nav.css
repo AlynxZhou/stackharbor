@@ -3,6 +3,7 @@
   position: relative;
   padding: 0 0.5em;
   background: #33363b;
+  -webkit-box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
   box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
   border-top-left-radius: 0.15em;
   border-top-right-radius: 0.15em;
@@ -27,6 +28,10 @@
   display: block;
   padding: 0.75em;
   font-size: 1.5em;
+  -webkit-transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  -ms-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
   border-bottom: none;
 }
