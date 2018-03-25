@@ -42,26 +42,27 @@
     <script defer type="text/javascript" src="/js/util.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
     <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
-    <script async type="text/javascript" src="/js/lightgallery.min.js"></script>
-    <script async type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
-    <script async type="text/javascript" src="/js/lg-zoom.min.js"></script>
-    <script async type="text/javascript" src="/js/lg-share.min.js"></script>
-    <script async type="text/javascript" src="/js/lg-pager.min.js"></script>
-    <script async type="text/javascript" src="/js/lg-hash.min.js"></script>
-    <script async type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
     
-    <script async src="/js/busuanzi.pure.mini.js"></script>
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
     
     <script defer type="text/javascript" src="/js/index.js"></script>
     
-    <script type="text/javascript" src="/js/search.js"></script>
+    <script defer type="text/javascript" src="/js/search.js"></script>
     <script type="text/javascript">
-    var searchPath = "search.xml";
-    if (searchPath.length == 0) {
-	    searchPath = "search.xml";
-    }
-    var path = "/" + searchPath;
-    searchFunc(path, "search-input", "search-result");
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length == 0) {
+  	    searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
     </script>
     
     
