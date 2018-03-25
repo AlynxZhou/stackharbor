@@ -305,7 +305,7 @@
   transform: scaleX(1);
 }
 @media (max-width: 768px) {
-  .main .main-body {
+  .main .main-container {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
     -o-box-orient: vertical;
@@ -313,7 +313,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
   }
-  .main .main-body .content {
+  .main .main-container .content {
     width: 100%;
   }
 }
