@@ -39,13 +39,10 @@
   border-radius: 50%;
 }
 .archive-container .archive-post {
-  background: #fff;
   position: relative;
   padding-left: 1em;
   padding-right: 0.5em;
   font-size: 1.5em;
-  box-sizing: border-box;
-  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
 }
 .archive-container .archive-post .post-title {
   padding: 0.25em 0;

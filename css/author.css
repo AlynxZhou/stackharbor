@@ -7,7 +7,7 @@
   margin: 0 auto;
   border: 0.3em solid #fff;
   border-radius: 50%;
-  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
+  box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
   transition: 1s ease-in-out;
 }
 .author .author-avatar:hover {
@@ -24,22 +24,8 @@
 .author .rss {
   display: block;
   font-size: 1.5em;
-  text-decoration: none;
-  border-bottom: none;
   color: #fff;
   background: #fc6423;
-  transition: 1s ease-in-out;
-  transform-origin: 50%;
-  border-radius: 0.15em;
   margin: 0.25em;
   padding: 0.15em;
-  box-sizing: border-box;
-  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
-}
-.author .rss:hover {
-  border-bottom: none;
-  transform: rotateX(360deg);
-}
-.author .rss:active {
-  top: 0.1em;
 }

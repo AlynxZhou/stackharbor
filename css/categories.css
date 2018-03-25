@@ -1,23 +1,20 @@
-.categories {
-  background: #fff;
+.categories-container {
   padding: 1em;
   margin: 0.5em;
-  box-sizing: border-box;
-  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
 }
-.categories .categories-counter {
+.categories-container .categories-counter {
   text-align: center;
   position: relative;
   padding-left: 1em;
   font-size: 1.5em;
 }
-.categories .category-list-link {
+.categories-container .category-list-link {
   font-size: 1.2em;
 }
-.categories .category-list-link:active {
+.categories-container .category-list-link:active {
   top: 0.1em;
 }
-.categories .category-list-count {
+.categories-container .category-list-count {
   font-size: 1.2em;
   margin-left: 1em;
 }

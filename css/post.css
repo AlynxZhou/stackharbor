@@ -1,67 +1,29 @@
-.post {
+.post-container {
   padding: 1em;
-  background: #fff;
   margin: 0.5em;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
-  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
 }
-.post img {
+.post-container img {
   width: 100%;
   text-align: center;
-  border: 0.15em solid #bbb;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
-  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
 }
-.post .post-title {
+.post-container .post-title {
   text-align: center;
   display: block;
   position: relative;
   text-decoration: none;
   color: #26272b;
 }
-.post .post-meta {
+.post-container .post-meta {
   text-align: center;
   display: block;
   position: relative;
 }
-.post .post-tag {
+.post-container .post-tags .post-tag {
+  margin: 0.5em;
   display: inline-block;
   text-decoration: none;
   color: #fff;
-  -webkit-transition: 1s ease-in-out;
-  -moz-transition: 1s ease-in-out;
-  -o-transition: 1s ease-in-out;
-  -ms-transition: 1s ease-in-out;
-  transition: 1s ease-in-out;
-  -webkit-transform-origin: 50%;
-  -moz-transform-origin: 50%;
-  -o-transform-origin: 50%;
-  -ms-transform-origin: 50%;
-  transform-origin: 50%;
-  border-radius: 0.15em;
-  margin: 0.25em;
   padding: 0.15em;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
-  box-shadow: 0 0.075em 1em 0.25em rgba(0,0,0,0.19);
-}
-.post .post-tag:hover {
-  -webkit-transform: rotateX(360deg);
-  -moz-transform: rotateX(360deg);
-  -o-transform: rotateX(360deg);
-  -ms-transform: rotateX(360deg);
-  transform: rotateX(360deg);
-}
-.post .post-tag:active {
-  top: 0.1em;
 }
 .post-nav {
   margin: 0.5em;

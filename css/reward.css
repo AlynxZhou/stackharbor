@@ -32,7 +32,20 @@
   color: #fff;
   border-radius: 0.15em;
   line-height: 2em;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  border-radius: 0.15em;
+  transform-origin: 50%;
+  border-bottom: none;
+  box-sizing: border-box;
+  box-shadow: 0 0.075em 1em 0.2em rgba(0,0,0,0.19);
 }
 .reward button span {
   padding: 0.5em 0.5em;
+}
+.reward button:hover {
+  box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
+}
+.reward button:active {
+  top: 0.1em;
 }

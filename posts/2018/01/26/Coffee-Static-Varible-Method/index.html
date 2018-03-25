@@ -71,13 +71,13 @@
     
 <header id="header" class="header">
   <div class="container">
-    <div class="header-box">
-      <div class="logo">
-        <img src="/images/ARIA_logo.png" alt="logo">
-      </div>
+    <div class="header-container">
       <div class="header-title">
         <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
         <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      <div class="logo">
+        <img src="/images/ARIA_logo.png" alt="logo">
       </div>
     </div>
     
@@ -105,12 +105,12 @@
 
     <main id="main" class="main">
       <div class="container">
-        <div class="main-body">
+        <div class="main-container">
           <div class="content">
             
-<section id="post-content" class="post-content">
+<section id="post" class="post">
   
-  <article class="post animate" itemscope itemtype="http://schema.org/Article">
+  <article class="post-container card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -159,7 +159,7 @@
       <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
 <a id="more"></a>
 <h1 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h1><p>很遗憾这里没有 <code>static</code> 这么简单的关键字，即使是在 EMCAScript 里 <code>static</code> 这个关键字也只是用来修饰静态方法，用 <code>static</code> 修饰变量仍然是个提案。首先还是来说如何在常规的 JavaScript 里使用静态变量（只考虑 ES6 之后的情况，因为多亏了 CoffeeScript，我也没有写过 ES5），它是如此的简单而又奇怪，简单是因为即使是我这样又笨又懒的人看过一遍也能在 Node 里完整地默写出来不报错，但是这是有原因的——因为它实在是太古怪了以至于你看一眼就忘不了它：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>() &#123;</span><br><span class="line">		++Test.counter;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Test.counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> t = <span class="keyword">new</span> Test();</span><br><span class="line"><span class="built_in">console</span>.log(Test.counter);</span><br><span class="line"><span class="comment">// 输出 1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    ++Test.counter;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Test.counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> t = <span class="keyword">new</span> Test();</span><br><span class="line"><span class="built_in">console</span>.log(Test.counter);</span><br><span class="line"><span class="comment">// 输出 1</span></span><br></pre></td></tr></table></figure>
 <p>没错这段代码是如此的直观，以至于我都不需要写注释来解释每一句干了什么，我敢肯定你有任何一点面向对象的基础都能明白，如果你对任何一个部分表示不理解，我建议你仔细去学习一个面向对象的程序语言—— Java 是个好选择因为它很成熟，同时是个严格的面向对象的程序语言。</p>
 <p>当然，JavaScript 并不是那么纯粹的语言或者说它几乎什么都能做一点并且这个趋势越来越大，所以你并不需要深入的面向对象知识也能看懂上面那一段代码。在 ES6 中实现一个类变量或者叫静态变量就是这个简单地两步：第一在类定义的方法内直接使用类的名字来访问静态成员——你没看错，这里没有 <code>this</code> ——毕竟这里的 <code>this</code> 在上下文中大多数指的还是实例而不是类本身。第二在类定义的外部给你想要的变量进行一个初始化（赋初值）。</p>
 <p>我敢肯定对于 JavaScript 这样一门号称“一切能够用 JavaScript 实现的最终都会用 JavaScript 实现”的语言而言肯定不只这么一种实现类变量的方法，但是最起码对我而言这是最直观的一种，我相信对于一切有一点 JavaScript 基础的人而言这也都是最直观的一种，如果你想问为什么没有更直观的在类定义内部实现的像 Java 或者什么一样的写法，很抱歉，暂时没有，或许你可以等到 ES7 的时代再来学习 JavaScript，当然到那个时候你又会被这门语言其他的问题纠结到 ES8，这很现实，这是一个不完美但同时不断高速进化的语言，它越来越广泛的应用逼着它去填由于愚蠢的商业手段导致的停滞不前带来的坑，当然最起码——JavaScript 虽然出生仓促，但基础并不很糟，或者说它有着各种奇特的实现不断让人燃烧自己的脑细胞。</p>
@@ -178,17 +178,11 @@
 <p>编译成 JavaScript 之后是这样的，<code>static</code> 关键字终于出来刷存在感了：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Generated by CoffeeScript 2.1.1</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Test, t;</span><br><span class="line">  Test = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">      <span class="keyword">static</span> printCounter() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(Test.counter);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        ++<span class="keyword">this</span>.constructor.counter;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    Test.counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> Test;</span><br><span class="line">  &#125;).call(<span class="keyword">this</span>);</span><br><span class="line">  t = <span class="keyword">new</span> Test();</span><br><span class="line">  Test.printCounter();</span><br><span class="line">  <span class="comment">// 输出 1</span></span><br><span class="line">&#125;).call(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>事实上到上面已经靠几个例子说明了正确的用法，但是由于还有交叉处理的部分，简单总结一下。</p>
-<ol>
-<li><p>把变量写在类定义里面属性的层次并且在变量名前面加上 <code>@</code> 会在 CoffeeScript 里产生一个静态变量。</p>
-</li>
-<li><p>在方法名前面加 <code>@</code> 会在 CoffeeScript 里产生一个静态方法。</p>
-</li>
-<li><p>在静态方法中操作静态变量只需要像在实例方法中操作实例变量一样使用 <code>this</code>，这个作用域就是类定义的上下文，CoffeeScript 自动把 <code>@</code> 替换成类的名字以便符合 ES6 语法。</p>
-</li>
-<li><p>在实例方法中操作静态变量需要使用 <code>@constructor</code>，原因是这个时候的 <code>this</code> 是实例本身而不是类，类在 CoffeeScript 里绑定到了 <code>this.constructor</code>，编译时自动替换成类的名字（因为 ES6 只能这样访问类变量而不是用一个引用）。</p>
-</li>
-</ol>
-<p><del>5. 在静态方法中操作实例变量……<strong>根本没有这样的用法好吧！！！</strong></del></p>
+<p>1.把变量写在类定义里面属性的层次并且在变量名前面加上 <code>@</code> 会在 CoffeeScript 里产生一个静态变量。</p>
+<p>2.在方法名前面加 <code>@</code> 会在 CoffeeScript 里产生一个静态方法。</p>
+<p>3.在静态方法中操作静态变量只需要像在实例方法中操作实例变量一样使用 <code>this</code>，这个作用域就是类定义的上下文，CoffeeScript 自动把 <code>@</code> 替换成类的名字以便符合 ES6 语法。</p>
+<p>4.在实例方法中操作静态变量需要使用 <code>@constructor</code>，原因是这个时候的 <code>this</code> 是实例本身而不是类，类在 CoffeeScript 里绑定到了 <code>this.constructor</code>，编译时自动替换成类的名字（因为 ES6 只能这样访问类变量而不是用一个引用）。</p>
+<p><del>5.在静态方法中操作实例变量……<strong>根本没有这样的用法好吧！！！</strong></del></p>
 <h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><p>明明是凑数的文章却偏偏写了这么多，反正大概是没有人看的，毕竟 CoffeeScript 是要凉了，就像那些激进分子希望的一样，光是喜欢又有什么用呢？他们是不会管你喜欢不喜欢的，他们不喜欢就得了。短期内倒是希望 Atom 能搞点什么大新闻，可以不要让 VSCode 激进分子在我这边黑 Atom，我就是喜欢用 Atom 不喜欢用 VSCode，就算你觉得 Atom 有很多缺点可是我觉得它足够合适乃至我可以接受它的缺点，在我这边吵除了生气以外还能有什么作用不成？所以我讨厌辩论，光是说，却没什么实际作用。或者这大概是软粉和微软受害者的冲突而已？最近没得东西写出来，还是去推一推 Fate/Stay Night 或者打一打 CSGO 好了。</p>
 <p><strong>AlynxZhou</strong></p>
 <p><em>A Coder &amp; Dreamer</em></p>
@@ -202,11 +196,13 @@
         
         
         
-        <a class="post-tag button" href="/tags/Code-Life/" style="background: #aaa" rel="tag"># Code Life</a>
+        
+        
+        <a class="post-tag button" href="/tags/Code-Life/" style="background: #fc6423" rel="tag"># Code Life</a>
         
         
         
-        <a class="post-tag button" href="/tags/CoffeeScript/" style="background: #fc6423" rel="tag"># CoffeeScript</a>
+        <a class="post-tag button" href="/tags/CoffeeScript/" style="background: #a3bb54" rel="tag"># CoffeeScript</a>
         
         
       </div>
@@ -240,7 +236,7 @@
 
   
   
-  <div class="post-nav animate">
+  <div class="post-nav">
     
     <div class="post-nav-next post-nav-item">
       <a href="/posts/2017/12/31/2017-Tail/" rel="next" title="StackHarbor的2017尾记"><i class="fas fa-angle-left"></i> StackHarbor的2017尾记</a>
@@ -256,7 +252,7 @@
   
   
   
-<div class="comments animate" id="comments">
+<div class="comments" id="comments">
   
   
   <div id="hypercomments_widget"></div>
@@ -391,10 +387,10 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <p><span class="author">AlynxZhou</span> <i class="far fa-copyright"></i> <span class="year">2016 - 2018</span> <i class="fab fa-creative-commons"></i> <span class="creative-commons"><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">BY-NC-SA 4.0</a></span></p>
-          </div>
-          
-          
+          <span class="author">AlynxZhou</span> <i class="far fa-copyright"></i> <span class="year">2016 - 2018</span> <i class="fab fa-creative-commons"></i> <span class="creative-commons"><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">BY-NC-SA 4.0</a></span>
+        </div>
+        
+        
 <div class="busuanzi">
   <span id="busuanzi_container_site_pv"><i class="fas fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
   <span id="busuanzi_container_site_uv"><i class="fas fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
@@ -402,13 +398,17 @@
 </div>
 
 
-          
+        
       </div>
       <div class="footer-right">
-        
-        <p>托管于 <i class="fab fa-github-alt"></i> <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
-        
-        <p>由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a></p>
+        <div class="custom-info">
+          
+          托管于 <i class="fab fa-github-alt"></i> <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
       </div>
     </div>
   </div>
