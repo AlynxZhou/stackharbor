@@ -25,7 +25,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;恰如字面意思，这是一篇写给新人的 Linux 指南，当然，不要指望从我这里得到什么详细的配置教程，最起码我没有打算在这篇文章里把你能遇到的 Linux 配置情况全部说清楚。我想在这篇文章里讲述的是一种理解方法或者说是一种 Linux 思维，换个更简单的说法是——它能在 Linux 向你吐出一堆牢骚的时候明白它在说什么，以及一个有经验的 Linux 用户这个时候会做什么，有经验的 Linux 用户是如何学习他们没有接触过的 Linux 知识的。&lt;/p&gt;&lt;p&gt;准备好了，就继续吧。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;恰如字面意思，这是一篇写给新人的 Linux 指南，当然，不要指望从我这里得到什么详细的配置教程，最起码我没有打算在这篇文章里把你能遇到的 Linux 配置情况全部说清楚。我想在这篇文章里讲述的是一种理解方法或者说是一种 Linux 思维，换个更简单的说法是——它能在 Linux 向你吐出一堆牢骚的时候明白它在说什么，以及一个有经验的 Linux 用户这个时候会做什么，有经验的 Linux 用户是如何学习他们没有接触过的 Linux 知识的。&lt;/p&gt;&lt;p&gt;准备好了，就继续吧。&lt;/p&gt;
     
     </summary>
     
@@ -49,7 +49,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;美好的东西总是在结束的时候才更显珍贵。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;美好的东西总是在结束的时候才更显珍贵。&lt;/p&gt;
     
     </summary>
     
@@ -73,7 +73,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 AlynxZhou&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;p&gt;コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 AlynxZhou&lt;/p&gt;
     
     </summary>
     
@@ -103,7 +103,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，&lt;a href=&quot;http://coffeescript.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;coffeescript.org&lt;/a&gt; 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 &lt;a href=&quot;https://github.com/AlynxZhou/coffee-telegram-bot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;coffee-telegram-bot&lt;/a&gt; 时尝试出的办法记录下来。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;p&gt;CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，&lt;a href=&quot;http://coffeescript.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;coffeescript.org&lt;/a&gt; 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 &lt;a href=&quot;https://github.com/AlynxZhou/coffee-telegram-bot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;coffee-telegram-bot&lt;/a&gt; 时尝试出的办法记录下来。&lt;/p&gt;
     
     </summary>
     
@@ -129,7 +129,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;img src=&quot;/posts/2017/12/31/2017-Tail/NJU.jpg&quot; title=&quot;NJU.jpg&quot;&gt;&lt;p&gt;回到住处，掀出电脑，拉开在超市买的一听可口可乐的拉环，还有一个半小时，现在该写2017年的年终总结了。时间刚刚好。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;img src=&quot;/posts/2017/12/31/2017-Tail/NJU.jpg&quot; title=&quot;NJU.jpg&quot;&gt;&lt;p&gt;回到住处，掀出电脑，拉开在超市买的一听可口可乐的拉环，还有一个半小时，现在该写2017年的年终总结了。时间刚刚好。&lt;/p&gt;
     
     </summary>
     
@@ -151,7 +151,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;img src=&quot;/posts/2017/11/11/Song-And-Sadness/Sadness.jpg&quot; title=&quot;Sadness.jpg&quot;&gt;&lt;p&gt;那个弹吉他的人在我的隔壁。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;img src=&quot;/posts/2017/11/11/Song-And-Sadness/Sadness.jpg&quot; title=&quot;Sadness.jpg&quot;&gt;&lt;p&gt;那个弹吉他的人在我的隔壁。&lt;/p&gt;
     
     </summary>
     
@@ -175,7 +175,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;生活好像脱缰的野马，你我都不是熟练的骑师。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;生活好像脱缰的野马，你我都不是熟练的骑师。&lt;/p&gt;
     
     </summary>
     
@@ -191,7 +191,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;img src=&quot;/posts/2017/10/08/I-Am-Angry/Angry.jpg&quot; title=&quot;Angry.jpg&quot;&gt;&lt;blockquote class=&quot;centerquote&quot;&gt;I AM ANGRY!!!&lt;/blockquote&gt;&lt;p&gt;这里多了一只发怒的猹喵。愤怒能抑制懒惰。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;img src=&quot;/posts/2017/10/08/I-Am-Angry/Angry.jpg&quot; title=&quot;Angry.jpg&quot;&gt;&lt;blockquote class=&quot;centerquote&quot;&gt;I AM ANGRY!!!&lt;/blockquote&gt;&lt;p&gt;这里多了一只发怒的猹喵。愤怒能抑制懒惰。&lt;/p&gt;
     
     </summary>
     
@@ -215,7 +215,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;It’s really hard for me to type something in this post, all I want but can’t express is fearness.&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;p&gt;It’s really hard for me to type something in this post, all I want but can’t express is fearness.&lt;/p&gt;
     
     </summary>
     
@@ -239,7 +239,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;blockquote class=&quot;centerquote&quot;&gt;I’m so honor that I can speak another language when they ask me to shut up with their language.&lt;/blockquote&gt;&lt;p&gt;There are some ways to fight against with them, but only when you have enough power, sadly.&lt;/p&gt;&lt;p&gt;I feel so lucky, though I cannot speak English so good, but if you are with me, I believe you can feel what I wanna say.&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;blockquote class=&quot;centerquote&quot;&gt;I’m so honor that I can speak another language when they ask me to shut up with their language.&lt;/blockquote&gt;&lt;p&gt;There are some ways to fight against with them, but only when you have enough power, sadly.&lt;/p&gt;&lt;p&gt;I feel so lucky, though I cannot speak English so good, but if you are with me, I believe you can feel what I wanna say.&lt;/p&gt;
     
     </summary>
     
@@ -259,7 +259,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;老实说我也许是个对电影没什么品味的人，但是在看了这个之后总觉得要写点什么。&lt;/p&gt;&lt;p&gt;不过参考现在的时间&lt;del&gt;和我黑暗中可怜的盲打能力&lt;/del&gt;（最后想起来我的LED灯），这篇文章不会很长。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;老实说我也许是个对电影没什么品味的人，但是在看了这个之后总觉得要写点什么。&lt;/p&gt;&lt;p&gt;不过参考现在的时间&lt;del&gt;和我黑暗中可怜的盲打能力&lt;/del&gt;（最后想起来我的LED灯），这篇文章不会很长。&lt;/p&gt;
     
     </summary>
     
@@ -283,7 +283,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;Encrypted.&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;p&gt;Encrypted.&lt;/p&gt;
     
     </summary>
     
@@ -307,7 +307,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;blockquote class=&quot;centerquote&quot;&gt;谨以这篇没营养的更新表明我现在闲着。&lt;/blockquote&gt;&lt;p&gt;嘛，好久不见，我还是那只猹喵&lt;em&gt;Alynx&lt;/em&gt;，本着我一向诚实的原则，丑话说在前头，这篇间隔许久的更新注定是没营养的，如果你珍惜你的流量的话——&lt;/p&gt;&lt;p&gt;Windows用户/大部分Linux用户请按右上角X，macOS用户/Ubuntu用户/自己偏要把关闭按钮挪到左面的用户请按左上角X，Android/iOS用户请按home键并把您的浏览器从多任务界面除去。Windows Phone用户（如果有的话）请把手机摔掉，并感谢我（而不是微软爸爸）给了你一个冠冕堂皇换Android/iOS设备的理由。&lt;/p&gt;&lt;p&gt;如果您还没有坚定您的决心，实验七写完了吗？实验七50页的坑爹说明都看懂啦？没看懂还不赶紧把你打印出来的实验七说明撕了，回去高中找你的语文老师承认没好好学习语文的错误！&lt;/p&gt;&lt;p&gt;顺便补充一句把这种垃圾实验说明打印出来本身就是对树木的不尊重了，你看我知道我写的东西很垃圾，所以我从来不打印纸质版，都是放在网站上做电子版。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;blockquote class=&quot;centerquote&quot;&gt;谨以这篇没营养的更新表明我现在闲着。&lt;/blockquote&gt;&lt;p&gt;嘛，好久不见，我还是那只猹喵&lt;em&gt;Alynx&lt;/em&gt;，本着我一向诚实的原则，丑话说在前头，这篇间隔许久的更新注定是没营养的，如果你珍惜你的流量的话——&lt;/p&gt;&lt;p&gt;Windows用户/大部分Linux用户请按右上角X，macOS用户/Ubuntu用户/自己偏要把关闭按钮挪到左面的用户请按左上角X，Android/iOS用户请按home键并把您的浏览器从多任务界面除去。Windows Phone用户（如果有的话）请把手机摔掉，并感谢我（而不是微软爸爸）给了你一个冠冕堂皇换Android/iOS设备的理由。&lt;/p&gt;&lt;p&gt;如果您还没有坚定您的决心，实验七写完了吗？实验七50页的坑爹说明都看懂啦？没看懂还不赶紧把你打印出来的实验七说明撕了，回去高中找你的语文老师承认没好好学习语文的错误！&lt;/p&gt;&lt;p&gt;顺便补充一句把这种垃圾实验说明打印出来本身就是对树木的不尊重了，你看我知道我写的东西很垃圾，所以我从来不打印纸质版，都是放在网站上做电子版。&lt;/p&gt;
     
     </summary>
     
@@ -331,7 +331,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;感冒 + 鼻炎 = 浪费纸张，另外也许大脑缺氧会导致胡思乱想，很疲惫又无法入睡。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:22 GMT+0800 (CST) --&gt;&lt;p&gt;感冒 + 鼻炎 = 浪费纸张，另外也许大脑缺氧会导致胡思乱想，很疲惫又无法入睡。&lt;/p&gt;
     
     </summary>
     
@@ -353,7 +353,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。&lt;/p&gt;
     
     </summary>
     
@@ -379,7 +379,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;半音阶口琴，&lt;strong&gt;sister’s noise&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Sister-s-Noise/sister-s-noise.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;半音阶口琴，&lt;strong&gt;sister’s noise&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Sister-s-Noise/sister-s-noise.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -405,7 +405,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;半音阶口琴，&lt;strong&gt;LEVEL5 -judgelight-&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/LEVEL5-judgelight/LEVEL5-judgelight.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;半音阶口琴，&lt;strong&gt;LEVEL5 -judgelight-&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/LEVEL5-judgelight/LEVEL5-judgelight.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;。&lt;/p&gt;
     
     </summary>
     
@@ -431,7 +431,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;半音阶口琴，&lt;strong&gt;only my railgun&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.pdf&quot;&gt;pdf下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;半音阶口琴，&lt;strong&gt;only my railgun&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.pdf&quot;&gt;pdf下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -457,7 +457,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;&lt;strong&gt;以十六孔琴、标准音高为准，非口琴常用音高，十二孔请自行移调！&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;大部分乐谱经本人手动整理，如有不符合说明的情况请自行处理或者等待更新！&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;乐谱为逐句调整，无省略。&lt;/p&gt;&lt;p&gt;(低音) 中音 [高音] {倍高音}&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;&lt;strong&gt;以十六孔琴、标准音高为准，非口琴常用音高，十二孔请自行移调！&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;大部分乐谱经本人手动整理，如有不符合说明的情况请自行处理或者等待更新！&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;乐谱为逐句调整，无省略。&lt;/p&gt;&lt;p&gt;(低音) 中音 [高音] {倍高音}&lt;/p&gt;
     
     </summary>
     
@@ -483,7 +483,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Sun Apr 08 2018 13:48:08 GMT+0800 (CST) --&gt;&lt;p&gt;买了个罗技G502，想想这鼠标狙击键要在fps游戏里才能发挥作用于是入了l4d2的坑，Steam购买，没想到P530核显实在是吃不动这货，FPS上30都很困难，于是研究了一下怎么样调用Bumblebee来使用独显。&lt;/p&gt;
+      &lt;!-- build time:Sun Apr 08 2018 14:53:23 GMT+0800 (CST) --&gt;&lt;p&gt;买了个罗技G502，想想这鼠标狙击键要在fps游戏里才能发挥作用于是入了l4d2的坑，Steam购买，没想到P530核显实在是吃不动这货，FPS上30都很困难，于是研究了一下怎么样调用Bumblebee来使用独显。&lt;/p&gt;
     
     </summary>
     
