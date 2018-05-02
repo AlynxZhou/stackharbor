@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sh.alynx.xyz/"/>
-  <updated>2018-04-30T02:54:44.145Z</updated>
+  <updated>2018-05-02T13:09:48.977Z</updated>
   <id>https://sh.alynx.xyz/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</title>
+    <link href="https://sh.alynx.xyz/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/"/>
+    <id>https://sh.alynx.xyz/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
+    <published>2018-05-02T12:30:48.000Z</published>
+    <updated>2018-05-02T13:09:48.977Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在 GitHub Pages 支持自定义域名开启 HTTPS 之前，我是使用 CloudFlare 的 CDN 中转来启用 HTTPS 的，缺点也很明显，就是面对国内访问的时候 CloudFlare 的 CDN 简直是逆加速，还不如直连 GitHub 的速度呢。&lt;/p&gt;
+&lt;p&gt;GitHub 在 2016 年开启了 &lt;code&gt;*.github.io&lt;/code&gt; 域名的 HTTPS 访问，在今年的 5 月 1 日，终于开启了对自定义域名的 HTTPS 支持。这篇文章将会介绍一下开启的办法和中间容易踩的坑。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="网站" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/"/>
+    
+      <category term="加密" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/%E5%8A%A0%E5%AF%86/"/>
+    
+      <category term="GitHub Pages" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/%E5%8A%A0%E5%AF%86/GitHub-Pages/"/>
+    
+    
+      <category term="网站" scheme="https://sh.alynx.xyz/tags/%E7%BD%91%E7%AB%99/"/>
+    
+      <category term="加密" scheme="https://sh.alynx.xyz/tags/%E5%8A%A0%E5%AF%86/"/>
+    
+      <category term="GitHub Pages" scheme="https://sh.alynx.xyz/tags/GitHub-Pages/"/>
+    
+  </entry>
+  
+  <entry>
     <title>写给新手的 Linux 手册 1</title>
     <link href="https://sh.alynx.xyz/posts/2018/03/25/Linux-Manual-for-Newbies-1/"/>
     <id>https://sh.alynx.xyz/posts/2018/03/25/Linux-Manual-for-Newbies-1/</id>
     <published>2018-03-25T12:24:45.000Z</published>
-    <updated>2018-04-30T02:54:44.145Z</updated>
+    <updated>2018-05-02T12:29:41.175Z</updated>
     
     <summary type="html">
     
@@ -489,46 +518,6 @@
       <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
     
       <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux下使Steam调用Bumblebee使用独显</title>
-    <link href="https://sh.alynx.xyz/posts/2017/02/16/Steam-with-Bumblebee/"/>
-    <id>https://sh.alynx.xyz/posts/2017/02/16/Steam-with-Bumblebee/</id>
-    <published>2017-02-16T04:50:22.000Z</published>
-    <updated>2018-03-19T09:34:23.121Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;买了个罗技G502，想想这鼠标狙击键要在fps游戏里才能发挥作用于是入了l4d2的坑，Steam购买，没想到P530核显实在是吃不动这货，FPS上30都很困难，于是研究了一下怎么样调用Bumblebee来使用独显。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="Linux" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/"/>
-    
-      <category term="Steam" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Steam/"/>
-    
-    
-      <category term="Linux" scheme="https://sh.alynx.xyz/tags/Linux/"/>
-    
-      <category term="双显卡" scheme="https://sh.alynx.xyz/tags/%E5%8F%8C%E6%98%BE%E5%8D%A1/"/>
-    
-      <category term="Bumblebee" scheme="https://sh.alynx.xyz/tags/Bumblebee/"/>
-    
-      <category term="Steam" scheme="https://sh.alynx.xyz/tags/Steam/"/>
-    
-      <category term="大量标签测试0" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%950/"/>
-    
-      <category term="大量标签测试1" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%951/"/>
-    
-      <category term="大量标签测试2" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%952/"/>
-    
-      <category term="大量标签测试3" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%953/"/>
-    
-      <category term="大量标签测试4" scheme="https://sh.alynx.xyz/tags/%E5%A4%A7%E9%87%8F%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%954/"/>
     
   </entry>
   

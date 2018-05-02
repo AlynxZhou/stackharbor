@@ -75,6 +75,27 @@
     </script>
     
     
+    
+    <script defer type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    });
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += " has-jax";
+      }
+    });
+    </script>
+    
+    
     <script defer type="text/javascript" src="/js/index.js"></script>
     
     <script defer type="text/javascript" src="/js/custom.js"></script>
@@ -344,6 +365,8 @@
     </div>
     <div class="post-nav-prev post-nav-item">
       
+      <a href="/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/" rel="prev" title="GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）"><span class="nav-title">GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</span><i class="fas fa-angle-right"></i></a>
+      
     </div>
   </div>
   
@@ -407,7 +430,7 @@
     
     <div class="archives-count">
       <p>归档</p>
-      <p><a href="/archives/">40</a></p>
+      <p><a href="/archives/">41</a></p>
     </div>
     
     
@@ -416,7 +439,7 @@
     
     <div class="categories-count">
       <p>分类</p>
-      <p><a href="/categories/">30</a></p>
+      <p><a href="/categories/">33</a></p>
     </div>
     
     
@@ -425,7 +448,7 @@
     
     <div class="tags-count">
       <p>标签</p>
-      <p><a href="/tags/">56</a></p>
+      <p><a href="/tags/">59</a></p>
     </div>
     
   </div>
