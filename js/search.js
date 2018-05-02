@@ -1,3 +1,234 @@
-// build time:Mon Apr 30 2018 11:51:17 GMT+0800 (CST)
-"use strict";var SUBSTRING_OFFSET=15;var MAX_KEYWORDS=30;var MAX_DISPLAY_SLICES=5;function findKeywords(e,t){for(var n=0;n<e.length;++n){var r=t["dataContent"].toLowerCase().indexOf(e[n].toLowerCase());while(r>=0){t["matchedContentKeywords"].push({keyword:t["dataContent"].substring(r,r+e[n].length),index:r});r=t["dataContent"].toLowerCase().indexOf(e[n].toLowerCase(),r+e[n].length)}var a=t["dataTitle"].toLowerCase().indexOf(e[n].toLowerCase());while(a>=0){t["matchedTitleKeywords"].push({keyword:t["dataTitle"].substring(a,a+e[n].length),index:a});a=t["dataTitle"].toLowerCase().indexOf(e[n].toLowerCase(),a+e[n].length)}}}function buildSortedMatchedDataProps(e,t){var n=[];for(var r=0;r<e.length;++r){var a={matchedContentKeywords:[],matchedTitleKeywords:[],dataTitle:e[r]["title"].trim(),dataContent:e[r]["content"].trim().replace(/<[^>]+>/g,""),dataURL:e[r]["url"]};if(a["dataTitle"].length+a["dataContent"].length>0){findKeywords(t,a)}if(a["matchedContentKeywords"].length+a["matchedTitleKeywords"].length>0){n.push(a)}}n.sort(function(e,t){return-(e["matchedContentKeywords"].length+e["matchedTitleKeywords"].length-(t["matchedContentKeywords"].length+t["matchedTitleKeywords"].length))});return n}function buildSortedSliceArray(e){var t=[];e["matchedContentKeywords"].sort(function(e,t){return e["index"]-t["index"]});for(var n=0;n<e["matchedContentKeywords"].length&&n<MAX_DISPLAY_SLICES;++n){var r=e["matchedContentKeywords"][n]["index"]-SUBSTRING_OFFSET;var a=e["matchedContentKeywords"][n]["index"]+e["matchedContentKeywords"][n]["keyword"].length+SUBSTRING_OFFSET;if(r<0){r=0}if(r===0){a=SUBSTRING_OFFSET+e["matchedContentKeywords"][n]["keyword"].length+SUBSTRING_OFFSET}if(a>e["dataContent"].length){a=e["dataContent"].length}t.push({start:r,end:a})}return t}function mergeSliceArray(e){var t=[];if(e.length===0){return t}t.push(e[0]);for(var n=1;n<e.length;++n){if(t[t.length-1]["end"]>=e[n]["start"]){if(e[n]["end"]>t[t.length-1]["end"]){t[t.length-1]["end"]=e[n]["end"]}}else{t.push(e[n])}}return t}function buildHighlightedTitle(e){var t=e["dataTitle"];var n=[];for(var r=0;r<e["matchedTitleKeywords"].length;++r){if(e["matchedTitleKeywords"][r]["keyword"].length>0){n.push(e["matchedTitleKeywords"][r]["keyword"])}}var a=new RegExp(n.join("|"),"gi");t=t.replace(a,'<strong class="search-keyword">$&</strong>');return t}function buildHighlightedContent(e,t){var n=[];for(var r=0;r<t.length;++r){n.push(e["dataContent"].substring(t[r]["start"],t[r]["end"]))}var a=[];for(var r=0;r<e["matchedContentKeywords"].length;++r){if(e["matchedContentKeywords"][r]["keyword"].length>0){a.push(e["matchedContentKeywords"][r]["keyword"])}}var o=new RegExp(a.join("|"),"gi");for(var r=0;r<n.length;r++){n[r]=n[r].replace(o,'<strong class="search-keyword">$&</strong>')}return n.join("...")}function onInput(e,t,n){t.innerHTML="";if(e.value.trim().length<=0){return}var r=e.value.trim().split(/[\s-\+]+/);var a=[];if(r.length>MAX_KEYWORDS){r=r.slice(0,MAX_KEYWORDS)}var o=buildSortedMatchedDataProps(n,r);if(o.length===0){return}a.push('<ul class="search-result-list">');for(var d=0;d<o.length;++d){a.push('<li><a href="');a.push(o[d]["dataURL"]);a.push('" class="search-result-title">&gt; ');a.push(buildHighlightedTitle(o[d]));a.push("</a>");a.push('<p class="search-result-content">...');var s=buildSortedSliceArray(o[d]);var i=mergeSliceArray(s);a.push(buildHighlightedContent(o[d],i));a.push("...</p>")}a.push("</ul>");t.innerHTML=a.join("")}function ajax(e,t){var n=null;if(window.XMLHttpRequest){n=new XMLHttpRequest}else if(window.ActiveXObject){n=new ActiveXObject("Microsoft.XMLHTTP")}if(n==null){alert("Your broswer does not support XMLHttpRequest!");return}n.onreadystatechange=function(){if(n.readyState!==4){return}if(n.status!==200){alert("XMLHttpRequest failed!");return}t(n)};n.open("GET",e,true);n.send(null)}var searchFunc=function(e,t,n){ajax(e,function(e){var r=[];if(e.responseXML){var a=e.responseXML;var o=a.getElementsByTagName("entry");for(var d=0;d<o.length;d++){r.push({title:o[d].getElementsByTagName("title")[0].innerHTML||"",content:o[d].getElementsByTagName("content")[0].innerHTML||"",url:o[d].getElementsByTagName("url")[0].innerHTML||""})}}else{var s=JSON.parse(e.response);for(var d=0;d<s.length;d++){r.push({title:s[d]["title"]||"",content:s[d]["content"]||"",url:s[d]["url"]||""})}}var i=document.getElementById(t);var l=document.getElementById(n);i.addEventListener("input",function(){onInput(i,l,r)})})};
-//rebuild by neat 
+/*
+ * A local search script with the help of [hexo-generator-search](https://github.com/PaicHyperionDev/hexo-generator-search)
+ * Copyright (C) 2015
+ * Joseph Pan <http://github.com/wzpan>
+ * Shuhao Mao <http://github.com/maoshuhao>
+ * Edited by MOxFIVE <http://github.com/MOxFIVE>
+ * Rewrited by AlynxZhou <https://alynx.xyz/>
+ *   Cleaned: Use native JavaScript instead of jQuert. Split functions.
+ *   Fixed: Mark all keywords found in content and title.
+ *   Optimized: Sort result by the number of keyword found.
+ */
+
+"use strict";
+
+var SUBSTRING_OFFSET = 15;
+var MAX_KEYWORDS = 30;
+var MAX_DISPLAY_SLICES = 5;
+
+// Calculate how many keywords a page contains.
+function findKeywords(keywords, prop) {
+  for (var i = 0; i < keywords.length; ++i) {
+    var indexContent = prop["dataContent"].toLowerCase().indexOf(keywords[i].toLowerCase());
+    // Find all keyword indices.
+    while (indexContent >= 0) {
+      prop["matchedContentKeywords"].push({
+        "keyword": prop["dataContent"].substring(indexContent, indexContent + keywords[i].length),
+        "index": indexContent
+      });
+      indexContent = prop["dataContent"].toLowerCase().indexOf(keywords[i].toLowerCase(), indexContent + keywords[i].length);
+    }
+    var indexTitle = prop["dataTitle"].toLowerCase().indexOf(keywords[i].toLowerCase());
+    while (indexTitle >= 0) {
+      prop["matchedTitleKeywords"].push({
+        "keyword": prop["dataTitle"].substring(indexTitle, indexTitle + keywords[i].length),
+        "index": indexTitle
+      });
+      indexTitle = prop["dataTitle"].toLowerCase().indexOf(keywords[i].toLowerCase(), indexTitle + keywords[i].length);
+    }
+  }
+}
+
+function buildSortedMatchedDataProps(datas, keywords) {
+  var matchedDataProps = [];
+  for (var i = 0; i < datas.length; ++i) {
+    var prop = {
+      "matchedContentKeywords": [],
+      "matchedTitleKeywords": [],
+      "dataTitle": datas[i]["title"].trim(),
+      "dataContent": datas[i]["content"].trim().replace(/<[^>]+>/g, ""),
+      "dataURL": datas[i]["url"]
+    };
+    // Only match articles with valid titles and contents.
+    if (prop["dataTitle"].length + prop["dataContent"].length > 0) {
+      findKeywords(keywords, prop);
+    }
+    if (prop["matchedContentKeywords"].length + prop["matchedTitleKeywords"].length > 0) {
+      matchedDataProps.push(prop);
+    }
+  }
+  // The more keywords a page contains, the higher this page ranks.
+  matchedDataProps.sort(function (a, b) {
+    return -((a["matchedContentKeywords"].length + a["matchedTitleKeywords"].length) - (b["matchedContentKeywords"].length + b["matchedTitleKeywords"].length));
+  });
+  return matchedDataProps;
+}
+
+function buildSortedSliceArray(prop) {
+  var sliceArray = [];
+  // Sorting slice array is hard so sort index array instead.
+  prop["matchedContentKeywords"].sort(function (a, b) {
+    return a["index"] - b["index"]
+  });
+  // Get content slice position.
+  for (var i = 0; i < prop["matchedContentKeywords"].length && i < MAX_DISPLAY_SLICES; ++i) {
+    var start = prop["matchedContentKeywords"][i]["index"] - SUBSTRING_OFFSET;
+    var end = prop["matchedContentKeywords"][i]["index"] + prop["matchedContentKeywords"][i]["keyword"].length + SUBSTRING_OFFSET;
+    if (start < 0) {
+      start = 0;
+    }
+    if (start === 0) {
+      end = SUBSTRING_OFFSET + prop["matchedContentKeywords"][i]["keyword"].length + SUBSTRING_OFFSET;
+    }
+    if (end > prop["dataContent"].length) {
+      end = prop["dataContent"].length;
+    }
+    sliceArray.push({ "start": start, "end": end });
+  }
+  return sliceArray;
+}
+
+function mergeSliceArray(sliceArray) {
+  var mergedSliceArray = [];
+  if (sliceArray.length === 0) {
+    return mergedSliceArray;
+  }
+  mergedSliceArray.push(sliceArray[0])
+  for (var i = 1; i < sliceArray.length; ++i) {
+    // If two slice have common part, merge them.
+    if (mergedSliceArray[mergedSliceArray.length - 1]["end"] >= sliceArray[i]["start"]) {
+      if (sliceArray[i]["end"] > mergedSliceArray[mergedSliceArray.length - 1]["end"]) {
+        mergedSliceArray[mergedSliceArray.length - 1]["end"] = sliceArray[i]["end"];
+      }
+    } else {
+      mergedSliceArray.push(sliceArray[i]);
+    }
+  }
+  return mergedSliceArray;
+}
+
+function buildHighlightedTitle(prop) {
+  var matchedTitle = prop["dataTitle"];
+  var reArray = [];
+  for (var i = 0; i < prop["matchedTitleKeywords"].length; ++i) {
+    if (prop["matchedTitleKeywords"][i]["keyword"].length > 0) {
+      reArray.push(prop["matchedTitleKeywords"][i]["keyword"])
+    }
+  }
+  // Replace all in one time to prevent it from matching <strong> tag.
+  var re = new RegExp(reArray.join("|"), "gi");
+  // `$&` is the matched part of RegExp.
+  matchedTitle = matchedTitle.replace(re, "<strong class=\"search-keyword\">$&</strong>");
+  return matchedTitle;
+}
+
+function buildHighlightedContent(prop, mergedSliceArray) {
+  var matchedContentArray = [];
+  for (var i = 0; i < mergedSliceArray.length; ++i) {
+    matchedContentArray.push(prop["dataContent"].substring(mergedSliceArray[i]["start"], mergedSliceArray[i]["end"]));
+  }
+  var reArray = [];
+  for (var i = 0; i < prop["matchedContentKeywords"].length; ++i) {
+    if (prop["matchedContentKeywords"][i]["keyword"].length > 0) {
+      reArray.push(prop["matchedContentKeywords"][i]["keyword"]);
+    }
+  }
+  var re = new RegExp(reArray.join("|"), "gi");
+  for (var i = 0; i < matchedContentArray.length; i++) {
+    matchedContentArray[i] = matchedContentArray[i].replace(re, "<strong class=\"search-keyword\">$&</strong>");
+  }
+  return matchedContentArray.join("...");
+}
+
+function onInput(input, resultContent, datas) {
+  resultContent.innerHTML = "";
+  if (input.value.trim().length <= 0) {
+    return;
+  }
+  var keywords = input.value.trim().split(/[\s-\+]+/);
+  var li = [];
+  if (keywords.length > MAX_KEYWORDS) {
+    keywords = keywords.slice(0, MAX_KEYWORDS);
+    // li.push("<span>Keywords more than ");
+    // li.push(MAX_KEYWORDS);
+    // li.push(" are sliced.</span>");
+  }
+  var matchedDataProps = buildSortedMatchedDataProps(datas, keywords);
+  if (matchedDataProps.length === 0) {
+    return;
+  }
+  li.push("<ul class=\"search-result-list\">");
+  for (var i = 0; i < matchedDataProps.length; ++i) {
+    // Show search results
+    li.push("<li><a href=\"")
+    li.push(matchedDataProps[i]["dataURL"]);
+    li.push("\" class=\"search-result-title\">&gt; ");
+    li.push(buildHighlightedTitle(matchedDataProps[i]));
+    li.push("</a>");
+    li.push("<p class=\"search-result-content\">...");
+    var sliceArray = buildSortedSliceArray(matchedDataProps[i])
+    var mergedSliceArray = mergeSliceArray(sliceArray);
+    // Highlight keyword.
+    li.push(buildHighlightedContent(matchedDataProps[i], mergedSliceArray));
+    li.push("...</p>");
+  }
+  li.push("</ul>");
+  resultContent.innerHTML = li.join("");
+}
+
+function ajax(url, callback) {
+  var xhr = null;
+  if (window.XMLHttpRequest) {
+    xhr = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  if (xhr == null) {
+    alert("Your broswer does not support XMLHttpRequest!");
+    return;
+  }
+  xhr.onreadystatechange = function () {
+    // 4 is ready.
+    if (xhr.readyState !== 4) {
+      return;
+    }
+    if (xhr.status !== 200) {
+      alert("XMLHttpRequest failed!");
+      return;
+    }
+    callback(xhr);
+  };
+  xhr.open("GET", url, true);
+  xhr.send(null);
+}
+
+var searchFunc = function (path, searchID, contentID) {
+  ajax(path, function (xhr) {
+    var datas = [];
+    if (xhr.responseXML) {
+      var xmlDoc = xhr.responseXML;
+      var entries = xmlDoc.getElementsByTagName("entry");
+      for (var i = 0; i < entries.length; i++) {
+        datas.push({
+          "title": entries[i].getElementsByTagName("title")[0].innerHTML || "",
+          "content": entries[i].getElementsByTagName("content")[0].innerHTML || "",
+          "url": entries[i].getElementsByTagName("url")[0].innerHTML || ""
+        });
+      }
+    } else {
+      var xhrJSON = JSON.parse(xhr.response);
+      for (var i = 0; i < xhrJSON.length; i++) {
+        datas.push({
+          "title": xhrJSON[i]["title"] || "",
+          "content": xhrJSON[i]["content"] || "", // Hexo Generator Search does not fill a key when a page is blank.
+          "url": xhrJSON[i]["url"] || ""
+        });
+      }
+    }
+    var input = document.getElementById(searchID);
+    var resultContent = document.getElementById(contentID);
+    input.addEventListener("input", function () {
+      onInput(input, resultContent, datas);
+    });
+  });
+}

@@ -1,3 +1,82 @@
-// build time:Mon Apr 30 2018 11:51:17 GMT+0800 (CST)
-"use strict";(function(i){i(document).ready(function(){i("#back-to-top").on("click",function(){i("body, html").animate({scrollTop:0},600)});i("#reward-button").on("click",function(){i("#qr").slideToggle()});i("#nav-toggle").on("click",function(){i("#menu").slideToggle()});i(".toc").addClass("list-group");i(".toc-link").addClass("list-group-item");var t=Math.round((40-.4)*16);if(i(window).width()<t){i("#menu").hide()}var n=i(window).width();i(window).resize(function(){if(i(window).width()>t){i("#menu").show()}else{if(i(window).width()!==n){i("#menu").hide();n=i(window).width()}}});i(".content").each(function(t){i(this).find("img").each(function(){if(this.title){i(this).after('<span class="caption">'+this.title+"</span>")}if(i(this).parent().prop("tagName")!=="A"){i(this).wrap('<a href="'+this.src+'" title="'+this.alt+'" class="gallery-item"></a>')}else{i(this).parent().addClass("img-link")}})});if(typeof lightGallery!="undefined"){var e={selector:".gallery-item"};i(".content").each(function(i,t){lightGallery(t,e)})}i(".highlight").each(function(t){i(this).addClass("hljs")})})})(jQuery);
-//rebuild by neat 
+"use strict";
+(function ($) {
+  $(document).ready(function () {
+    // To top button.
+    $("#back-to-top").on("click", function () {
+      $("body, html").animate({ "scrollTop": 0 }, 600);
+    });
+
+    $("#reward-button").on("click", function () {
+      $("#qr").slideToggle();
+    });
+
+    $("#nav-toggle").on("click", function () {
+      $("#menu").slideToggle();
+    });
+
+    // Bootstrap toc scrollspy needs such classes.
+    $(".toc").addClass("list-group");
+    $(".toc-link").addClass("list-group-item");
+
+    // (40em - 0.6em) * 16px
+    // 40 is total size and 0.4 is scroll bar size.
+    // jQuery won't calculate scroll bar size. But CSS will.
+    var minWidth = Math.round((40 - 0.4) * 16);
+    // Auto hide main nav menus in small screen.
+    if ($(window).width() < minWidth) {
+      $("#menu").hide();
+    }
+    var windowWidth = $(window).width();
+    // Show menu again when window becomes bigger.
+    $(window).resize(function () {
+      if ($(window).width() > minWidth) {
+        $("#menu").show();
+      } else {
+        // Android chrome fires resize when scroll down.
+        // Because it hides address bar to enlarge window height.
+        // To avoid it, check width.
+        if ($(window).width() !== windowWidth) {
+          $("#menu").hide();
+          windowWidth = $(window).width();
+        }
+      }
+    });
+
+    $(".content").each(function (i) {
+      $(this).find("img").each(function () {
+        // if (this.alt && !(!!$.prototype.justifiedGallery && $(this).parent(".justified-gallery").length)) {
+        if (this.title) {
+          $(this).after("<span class=\"caption\">" + this.title + "</span>");
+        }
+        // If img is already a link, ignore it.
+        if ($(this).parent().prop("tagName") !== "A") {
+          $(this).wrap("<a href=\"" + this.src + "\" title=\"" + this.alt + "\" class=\"gallery-item\"></a>");
+        } else {
+          $(this).parent().addClass("img-link");
+        }
+      });
+    });
+    if (typeof lightGallery != "undefined") {
+      var options = {
+        selector: ".gallery-item",
+      };
+      $(".content").each(function (i, entry) {
+        lightGallery(entry, options);
+      });
+      // lightGallery($(".article-gallery")[0], options);
+    }
+    // if (!!$.prototype.justifiedGallery) {  // if justifiedGallery method is defined
+    //   var options = {
+    //     rowHeight: 140,
+    //     margins: 4,
+    //     lastRow: "justify"
+    //   };
+    //   $(".justified-gallery").justifiedGallery(options);
+    // }
+
+    // Hexo-util generates <figure> tag with `highlight` class, but hljs uses `hljs` class.
+    $(".highlight").each(function (i) {
+      $(this).addClass("hljs");
+    });
+  });
+})(jQuery);

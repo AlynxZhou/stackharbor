@@ -1,3 +1,430 @@
-// build time:Mon Apr 30 2018 11:51:17 GMT+0800 (CST)
-"use strict";var type,username,repo,client_id,client_secret,no_comment,go_to_comment,btn_class,comments_target,recent_comments_target,loading_target;var github_addr="https://github.com/";var github_api_addr="https://api.github.com/repos/";var oschina_addr="http://git.oschina.net/";var oschina_api_addr="http://git.oschina.net/api/v5/repos/";var spinOpts={lines:13,length:10,width:6,radius:12,corners:1,rotate:0,direction:1,color:"#5882FA",speed:1,trail:60,shadow:false,hwaccel:false,className:"spinner",zIndex:2e9,top:"auto",left:"50%"};var _getComment=function e(t,n){var a=void 0,i=void 0,s=void 0;a=t.comments;i=t.comments_url;s=t.page;$.ajax({url:i+"?page="+s,dataType:"json",cache:false,crossDomain:true,data:client_id&&client_secret?"client_id="+client_id+"&client_secret="+client_secret:"",success:function r(i){if(!i||i.length<=0){n&&typeof n==="function"&&n(a);n=null;return}i.forEach(function(e){a.push(e)});s+=1;t.comments=a;t.page=s;e(t,n)},error:function o(e){n&&typeof n==="function"&&n(a);n=null}})};var _getCommentsUrl=function t(e,n){var a=void 0,i=void 0;var s=false;a=e.issue_title;i=e.page;var r=type=="github"?github_api_addr:oschina_api_addr;$.ajax({url:r+username+"/"+repo+"/issues?page="+i,dataType:"json",cache:false,crossDomain:true,data:client_id&&client_secret?"client_id="+client_id+"&client_secret="+client_secret:"",success:function o(r){if(!r||r.length<=0){n&&typeof n==="function"&&n("","");n=null;return}r.forEach(function(e){if(e.title&&e.title==a){n&&typeof n==="function"&&n(e.comments_url,e);s=true;n=null}});if(!s){i+=1;e.page=i;t(e,n)}return},error:function c(){n&&typeof n==="function"&&n("","");n=null}})};var _getIssue=function n(e,t){var n=type=="github"?github_api_addr:oschina_api_addr;var a=n+username+"/"+repo+"/issues/"+e;_getIssueByUrl(a,function(e){t&&typeof t==="function"&&t(e);t=null})};var _getIssueByUrl=function a(e,t){$.ajax({url:e,dataType:"json",cache:false,crossDomain:true,data:client_id&&client_secret?"client_id="+client_id+"&client_secret="+client_secret:"",success:function n(e){if(!e||e.length<=0){t&&typeof t==="function"&&t();t=null;return}var n=e;t&&typeof t==="function"&&t(n);t=null},error:function a(){t&&typeof t==="function"&&t();t=null}})};var _renderComment=function i(e){var t=timeago();var n=e.user;var a=marked(e.body);var i=t.format(e.created_at);var s=n.login==username?"current-user":"";var r=type=="github"?github_addr:oschina_addr;var o=n.login==username?'\n        <span class="timeline-comment-label text-bold tooltipped tooltipped-multiline tooltipped-s" aria-label="'+username+' is the author of this blog.">\n        Owner\n    </span>\n        ':"";return'\n        <div class="timeline-comment-wrapper js-comment-container">\n        <div class="avatar-parent-child timeline-comment-avatar">\n        <a href="'+r+n.login+'">\n        <img alt="@'+n.login+'" class="avatar rounded-1" height="44" src="'+n.avatar_url+'&amp;s=88" width="44">\n        </a>\n        </div>\n        <div id="issuecomment-310820108" class="comment previewable-edit js-comment js-task-list-container  timeline-comment js-reorderable-task-lists reorderable-task-lists '+s+'" data-body-version="0ff4a390ed2be378bf5044aa6dc1510b">\n\n        <div class="timeline-comment-header">\n        '+o+'\n        <h3 class="timeline-comment-header-text f5 text-normal">\n\n        <strong>\n        <a href="'+r+n.login+'" class="author">'+n.login+'</a>\n        \n    </strong>\n\n    commented  \n\n        <a href="#issuecomment-'+e.id+'" class="timestamp"><relative-time datetime="'+e.created_at+'" title="'+e.created_at+'">'+i+'</relative-time></a>\n\n    </h3>\n        </div>\n        \n        <table class="d-block">\n        <tbody class="d-block">\n        <tr class="d-block">\n        <td class="d-block comment-body markdown-body js-comment-body">\n        '+a+"\n    </td>\n        </tr>\n        </tbody>\n        </table>\n        </div>\n        </div>\n        "};var _renderRecentComment=function s(e,t,n,a,i,r){var o=type=="github"?github_addr:oschina_addr;var c='\n        <div class="comment-item">\n          <div class="row comment-widget-head">\n            <div class="xl-col-3 comment-widget-avatar">\n              <a href="'+o+e.login+'">\n                <img alt="@'+e.login+'" class="avatar rounded-1" height="44" src="'+e.avatar_url+'&amp;s=88" width="44">\n              </a>\n            </div>\n            <div class="comment-widget-body">\n              <span><a class="comment-widget-user" href="'+o+e.login+'" target="_blank">'+e.login+'</a> </span>\n              <div class="comment-widget-content">'+n+'</div>\n            </div>\n          </div>\n          <br/>\n          <div class="comment-widget-meta">\n            <span class="comment-widget-title">'+t+'</span> | <span class="comment-widget-date">'+a+"</span>\n          </div>\n        </div>\n        ";r&&typeof r==="function"&&r(c);r=null};var _getRecentCommentList=function r(e,t,n,a,i,s){if(n>=a||t>=i.length){s&&typeof s==="function"&&s(e);s=null;return}var o=i[t];if(!o)return;var c=marked(o.body);var d=o.title;var l=o.user;var m=timeago();var u=m.format(o.created_at);var _=o.html_url;if(!c||c==""){t++;r(e,t,n,a,i,s);s=null;return}if(!d){_getIssueByUrl(o.issue_url,function(o){_renderRecentComment(l,o.title,c,u,_,function(o){e+=o;t++;n++;r(e,t,n,a,i,s)})})}else{_renderRecentComment(l,d,c,u,_,function(o){e+=o;t++;n++;r(e,t,n,a,i,s)})}};var _renderRecentCommentList=function o(e,t){var n=0;var a=0;var i="";_getRecentCommentList(i,n,a,t,e,function(e){$(recent_comments_target).append(e)})};var _renderHTML=function c(e){var t=void 0,n=void 0,a=void 0,i=void 0;t=e.issue;n=e.comments;a=e.comments_url;i=e.issue_title;var s=type=="github"?github_addr:oschina_addr;var r=type=="github"?github_api_addr:oschina_api_addr;var o=type=="oschina"?'<a href="http://oschina.net" class="discussion-item-entity" target="_blank">OSChina issue</a>':'<a href="http://github.com" class="discussion-item-entity" target="_blank">Github issue</a>';var c='\n        <div class="discussion-item discussion-item-labeled">\n        <h3 class="discussion-item-header f5 text-normal" id="event-1157063333">\n\n        <span class="discussion-item-icon">\n        <svg aria-hidden="true" class="octicon octicon-tag" height="16" version="1.1" viewBox="0 0 16 16" width="14"><path fill-rule="evenodd" d="M15 1H6c-.55 0-1 .45-1 1v2H1c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h1v3l3-3h4c.55 0 1-.45 1-1V9h1l3 3V9h1c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zM9 11H4.5L3 12.5V11H1V5h4v3c0 .55.45 1 1 1h3v2zm6-3h-2v1.5L11.5 8H6V2h9v6z"></path></svg>\n        </span>\n        The above comments are provided by \n        <a href="http://github.com/wzpan/comment.js" class="discussion-item-entity" target="_blank">comment.js</a> with the help of '+o+".\n        </h3>\n        </div>\n        ";if((!t||!t.body||t.body=="")&&(!n||n.length<=0)){var d="\n            <div class='js-discussion no-comment'>\n            <span>"+no_comment+"</span>\n            </div>\n            ";$(comments_target).append(d)}else{var l='\n            <div class="discussion-timeline js-quote-selection-container">\n            <div class="js-discussion js-socket-channel">\n            ';if(t&&t.body&&t.body!=""){l+=_renderComment(t)}n.forEach(function(e){l+=_renderComment(e)});l+=c;l+="</div></div>";$(comments_target).append(l)}var m=void 0;if(!a){m=s+"/"+username+"/"+repo+"/issues/new?title="+i+"#issue_body"}else{m=a.replace(r,s).replace("comments","")+"#new_comment_field"}var u='\n        <p class="goto-comment">\n        <a href="'+m+'" class="'+btn_class+'" target="_blank">'+go_to_comment+"</a>\n        </p>\n        ";$(comments_target).append(u)};var CompareDate=function d(e,t){var n=e["created_at"].replace("T"," ").replace("Z","").replace(/-/g,"/");var a=t["created_at"].replace("T"," ").replace("Z","").replace(/-/g,"/");return new Date(n)>new Date(a)};var _getRecentIssues=function l(e,t){var n=void 0;n=e.count;var a=type=="github"?github_api_addr:oschina_api_addr;$.ajax({url:a+username+"/"+repo+"/issues?per_page=100&sort=created&direction=desc",dataType:"json",cache:false,crossDomain:true,data:client_id&&client_secret?"client_id="+client_id+"&client_secret="+client_secret:"",success:function i(e){if(e.length>n){if(navigator.userAgent.indexOf("MSIE")!=-1||navigator.userAgent.indexOf("Edge")!=-1||!!document.documentMode==true){e=e.sort(CompareDate).slice(0,5)}else{e=e.sort(CompareDate).reverse().slice(0,5)}}t&&typeof t==="function"&&t(e);t=null},error:function s(e){t&&typeof t==="function"&&t();t=null}})};var _getRecentComments=function m(e,t){var n=void 0;n=e.count;var a=type=="github"?github_api_addr:oschina_api_addr;$.ajax({url:a+username+"/"+repo+"/issues/comments?per_page=100&sort=created&direction=desc",dataType:"json",cache:false,crossDomain:true,data:client_id&&client_secret?"client_id="+client_id+"&client_secret="+client_secret:"",success:function i(e){if(e.length>n){if(navigator.userAgent.indexOf("MSIE")!=-1||navigator.userAgent.indexOf("Edge")!=-1||!!document.documentMode==true){e=e.sort(CompareDate).slice(0,5)}else{e=e.sort(CompareDate).reverse().slice(0,5)}}t&&typeof t==="function"&&t(e);t=null},error:function s(e){t&&typeof t==="function"&&t();t=null}})};var getRecentCommentsList=function u(e){var t=void 0,n=void 0;type=e.type;n=e.user;repo=e.repo;client_id=e.client_id;client_secret=e.client_secret;t=e.count;recent_comments_target=e.recent_comments_target;username=n;recent_comments_target=recent_comments_target?recent_comments_target:"#recent-comments";var a=new Array;_getRecentIssues(e,function(n){a=a.concat(n);_getRecentComments(e,function(e){a=a.concat(e);if(navigator.userAgent.indexOf("MSIE")!=-1||navigator.userAgent.indexOf("Edge")!=-1||!!document.documentMode==true){a=a.sort(CompareDate)}else{a=a.sort(CompareDate).reverse()}_renderRecentCommentList(a,t)})})};var getComments=function _(e){var t=void 0,n=void 0,a=void 0;type=e.type;a=e.user;repo=e.repo;client_id=e.client_id;client_secret=e.client_secret;no_comment=e.no_comment;go_to_comment=e.go_to_comment;t=e.issue_title;n=e.issue_id;btn_class=e.btn_class;comments_target=e.comments_target;loading_target=e.loading_target;comments_target=comments_target?comments_target:"#comment-thread";username=a;if(loading_target)var i=new Spinner(spinOpts);var s=timeago();var r;var o=new Array;type=type?type:"github";btn_class=btn_class?btn_class:"btn";loading_target&&i.spin($("div"+loading_target).get(0));if(!n||n=="undefined"||typeof n=="undefined"){_getCommentsUrl({issue_title:t,page:1},function(e,n){if(e!=""&&e!=undefined){_getComment({comments:o,comments_url:e,page:1},function(a){loading_target&&i.spin();_renderHTML({issue:n,comments:a,comments_url:e,issue_title:t});return})}else{loading_target&&i.spin();_renderHTML({issue:n,comments:o,comments_url:e,issue_title:t});return}})}else{var c=type=="github"?github_api_addr:oschina_api_addr;var d=c+username+"/"+repo+"/issues/"+n+"/comments";_getIssue(n,function(e){_getComment({comments:o,comments_url:d,page:1},function(n){loading_target&&i.spin();_renderHTML({issue:e,comments:n,comments_url:d,issue_title:t});loading_target&&i.spin();return})})}};
-//rebuild by neat 
+// github issue comment
+// Copyright (C) 2017
+// Joseph Pan <http://github.com/wzpan>
+// This library is free software; you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation; either version 2.1 of the
+// License, or (at your option) any later version.
+// 
+// This library is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA
+// 
+
+'use strict';
+
+var type, username, repo, client_id, client_secret, no_comment, go_to_comment, btn_class, comments_target, recent_comments_target, loading_target;
+var github_addr = "https://github.com/";
+var github_api_addr = "https://api.github.com/repos/";
+var oschina_addr = "http://git.oschina.net/";
+var oschina_api_addr = "http://git.oschina.net/api/v5/repos/";
+var spinOpts = {
+    lines: 13,
+    length: 10,
+    width: 6,
+    radius: 12,
+    corners: 1,
+    rotate: 0,
+    direction: 1,
+    color: '#5882FA',
+    speed: 1,
+    trail: 60,
+    shadow: false,
+    hwaccel: false,
+    className: 'spinner',
+    zIndex: 2e9,
+    top: 'auto',
+    left: '50%'
+};
+
+var _getComment = function _getComment(params, callback) {
+    var comments = void 0,
+        comments_url = void 0,
+        page = void 0;
+
+    // Get comments
+    comments = params.comments;
+    comments_url = params.comments_url;
+    page = params.page;
+    $.ajax({
+        url: comments_url + '?page=' + page,
+        dataType: 'json',
+        cache: false,
+        crossDomain: true,
+        data: client_id && client_secret ? "client_id=" + client_id + "&client_secret=" + client_secret : '',
+        success: function success(page_comments) {
+            if (!page_comments || page_comments.length <= 0) {
+                callback && typeof callback === "function" && callback(comments);
+                callback = null;
+                return;
+            }
+            page_comments.forEach(function (comment) {
+                comments.push(comment);
+            });
+            page += 1;
+            params.comments = comments;
+            params.page = page;
+            _getComment(params, callback);
+        },
+        error: function error(err) {
+            callback && typeof callback === "function" && callback(comments);
+            callback = null;
+        }
+    });
+};
+
+var _getCommentsUrl = function _getCommentsUrl(params, callback) {
+    var issue_title = void 0,
+        page = void 0;
+    var found = false;
+    issue_title = params.issue_title;
+    page = params.page;
+
+    var api_addr = type == 'github' ? github_api_addr : oschina_api_addr;
+    $.ajax({
+        url: api_addr + username + '/' + repo + '/issues?page=' + page,
+        dataType: 'json',
+        cache: false,
+        crossDomain: true,
+        data: client_id && client_secret ? "client_id=" + client_id + "&client_secret=" + client_secret : '',
+        success: function success(issues) {
+            if (!issues || issues.length <= 0) {
+                callback && typeof callback === "function" && callback("", "");
+                callback = null;
+                return;
+            }
+            issues.forEach(function (issue) {
+                // match title
+                if (issue.title && issue.title == issue_title) {
+                    callback && typeof callback === "function" && callback(issue.comments_url, issue);
+                    found = true;
+                    callback = null;
+                }
+            });
+            if (!found) {
+                page += 1;
+                params.page = page;
+                _getCommentsUrl(params, callback);
+            }
+            return;
+        },
+        error: function error() {
+            callback && typeof callback === "function" && callback("", "");
+            callback = null;
+        }
+    });
+};
+
+var _getIssue = function _getIssue(issue_id, callback) {
+    var api_addr = type == 'github' ? github_api_addr : oschina_api_addr;
+    var issue_url = api_addr + username + '/' + repo + '/issues/' + issue_id;
+    _getIssueByUrl(issue_url, function (issue) {
+        callback && typeof callback === "function" && callback(issue);
+        callback = null;
+    });
+};
+
+var _getIssueByUrl = function _getIssueByUrl(issue_url, callback) {
+    $.ajax({
+        url: issue_url,
+        dataType: 'json',
+        cache: false,
+        crossDomain: true,
+        data: client_id && client_secret ? "client_id=" + client_id + "&client_secret=" + client_secret : '',
+        success: function success(issues) {
+            if (!issues || issues.length <= 0) {
+                callback && typeof callback === "function" && callback();
+                callback = null;
+                return;
+            }
+            var issue = issues;
+            callback && typeof callback === "function" && callback(issue);
+            callback = null;
+        },
+        error: function error() {
+            callback && typeof callback === "function" && callback();
+            callback = null;
+        }
+    });
+};
+
+var _renderComment = function _renderComment(comment) {
+    var timeagoInstance = timeago();
+    var user = comment.user;
+    var content = marked(comment.body);
+    var ago = timeagoInstance.format(comment.created_at);
+    var current_user = user.login == username ? "current-user" : "";
+    var addr = type == 'github' ? github_addr : oschina_addr;
+    var owner = user.login == username ? "\n        <span class=\"timeline-comment-label text-bold tooltipped tooltipped-multiline tooltipped-s\" aria-label=\"" + username + " is the author of this blog.\">\n        Owner\n    </span>\n        " : '';
+    return "\n        <div class=\"timeline-comment-wrapper js-comment-container\">\n        <div class=\"avatar-parent-child timeline-comment-avatar\">\n        <a href=\"" + addr + user.login + "\">\n        <img alt=\"@" + user.login + "\" class=\"avatar rounded-1\" height=\"44\" src=\"" + user.avatar_url + "&amp;s=88\" width=\"44\">\n        </a>\n        </div>\n        <div id=\"issuecomment-310820108\" class=\"comment previewable-edit js-comment js-task-list-container  timeline-comment js-reorderable-task-lists reorderable-task-lists " + current_user + "\" data-body-version=\"0ff4a390ed2be378bf5044aa6dc1510b\">\n\n        <div class=\"timeline-comment-header\">\n        " + owner + "\n        <h3 class=\"timeline-comment-header-text f5 text-normal\">\n\n        <strong>\n        <a href=\"" + addr + user.login + "\" class=\"author\">" + user.login + "</a>\n        \n    </strong>\n\n    commented  \n\n        <a href=\"#issuecomment-" + comment.id + "\" class=\"timestamp\"><relative-time datetime=\"" + comment.created_at + "\" title=\"" + comment.created_at + "\">" + ago + "</relative-time></a>\n\n    </h3>\n        </div>\n        \n        <table class=\"d-block\">\n        <tbody class=\"d-block\">\n        <tr class=\"d-block\">\n        <td class=\"d-block comment-body markdown-body js-comment-body\">\n        " + content + "\n    </td>\n        </tr>\n        </tbody>\n        </table>\n        </div>\n        </div>\n        ";
+};
+
+var _renderRecentComment = function _renderRecentComment(user, title, content, time, url, callback) {
+    var addr = type == 'github' ? github_addr : oschina_addr;
+    var res = "\n        <div class=\"comment-item\">\n          <div class=\"row comment-widget-head\">\n            <div class=\"xl-col-3 comment-widget-avatar\">\n              <a href=\"" + addr + user.login + "\">\n                <img alt=\"@" + user.login + "\" class=\"avatar rounded-1\" height=\"44\" src=\"" + user.avatar_url + "&amp;s=88\" width=\"44\">\n              </a>\n            </div>\n            <div class=\"comment-widget-body\">\n              <span><a class=\"comment-widget-user\" href=\"" + addr + user.login + "\" target=\"_blank\">" + user.login + "</a> </span>\n              <div class=\"comment-widget-content\">" + content + "</div>\n            </div>\n          </div>\n          <br/>\n          <div class=\"comment-widget-meta\">\n            <span class=\"comment-widget-title\">" + title + "</span> | <span class=\"comment-widget-date\">" + time + "</span>\n          </div>\n        </div>\n        ";
+    callback && typeof callback === "function" && callback(res);
+    callback = null;
+};
+
+var _getRecentCommentList = function _getRecentCommentList(comment_list, i, render_count, total_count, comments, callback) {
+    if (render_count >= total_count || i >= comments.length) {
+        callback && typeof callback === "function" && callback(comment_list);
+        callback = null;
+        return;
+    }
+    var comment = comments[i];
+    if (!comment) return;
+    var content = marked(comment.body);
+    var title = comment.title;
+    var user = comment.user;
+    var timeagoInstance = timeago();
+    var time = timeagoInstance.format(comment.created_at);
+    var url = comment.html_url;
+    if (!content || content == '') {
+        i++;
+        _getRecentCommentList(comment_list, i, render_count, total_count, comments, callback);
+        callback = null;
+        return;
+    }
+    if (!title) {
+        // Get title of issue
+        _getIssueByUrl(comment.issue_url, function (issue) {
+            _renderRecentComment(user, issue.title, content, time, url, function (item) {
+                comment_list += item;
+                i++;
+                render_count++;
+                _getRecentCommentList(comment_list, i, render_count, total_count, comments, callback);
+            });
+        });
+    } else {
+        _renderRecentComment(user, title, content, time, url, function (item) {
+            comment_list += item;
+            i++;
+            render_count++;
+            _getRecentCommentList(comment_list, i, render_count, total_count, comments, callback);
+        });
+    }
+};
+
+var _renderRecentCommentList = function _renderRecentCommentList(comments, count) {
+    var i = 0;
+    var render_count = 0;
+    var comment_list = '';
+    _getRecentCommentList(comment_list, i, render_count, count, comments, function (comment_list) {
+        $(recent_comments_target).append(comment_list);
+    });
+};
+
+var _renderHTML = function _renderHTML(params) {
+    var issue = void 0,
+        comments = void 0,
+        comments_url = void 0,
+        issue_title = void 0;
+    issue = params.issue;
+    comments = params.comments;
+    comments_url = params.comments_url;
+    issue_title = params.issue_title;
+
+    var addr = type == 'github' ? github_addr : oschina_addr;
+    var api_addr = type == 'github' ? github_api_addr : oschina_api_addr;
+    var site = type == 'oschina' ? '<a href="http://oschina.net" class="discussion-item-entity" target="_blank">OSChina issue</a>' : '<a href="http://github.com" class="discussion-item-entity" target="_blank">Github issue</a>';
+    var footer = "\n        <div class=\"discussion-item discussion-item-labeled\">\n        <h3 class=\"discussion-item-header f5 text-normal\" id=\"event-1157063333\">\n\n        <span class=\"discussion-item-icon\">\n        <svg aria-hidden=\"true\" class=\"octicon octicon-tag\" height=\"16\" version=\"1.1\" viewBox=\"0 0 16 16\" width=\"14\"><path fill-rule=\"evenodd\" d=\"M15 1H6c-.55 0-1 .45-1 1v2H1c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h1v3l3-3h4c.55 0 1-.45 1-1V9h1l3 3V9h1c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zM9 11H4.5L3 12.5V11H1V5h4v3c0 .55.45 1 1 1h3v2zm6-3h-2v1.5L11.5 8H6V2h9v6z\"></path></svg>\n        </span>\n        The above comments are provided by \n        <a href=\"http://github.com/wzpan/comment.js\" class=\"discussion-item-entity\" target=\"_blank\">comment.js</a> with the help of " + site + ".\n        </h3>\n        </div>\n        ";
+    if ((!issue || !issue.body || issue.body == "") && (!comments || comments.length <= 0)) {
+        var _res = "\n            <div class='js-discussion no-comment'>\n            <span>" + no_comment + "</span>\n            </div>\n            ";
+        $(comments_target).append(_res);
+    } else {
+        var _res2 = "\n            <div class=\"discussion-timeline js-quote-selection-container\">\n            <div class=\"js-discussion js-socket-channel\">\n            ";
+        if (issue && issue.body && issue.body != '') {
+            _res2 += _renderComment(issue);
+        }
+        comments.forEach(function (comment) {
+            _res2 += _renderComment(comment);
+        });
+        _res2 += footer;
+        _res2 += '</div></div>';
+        $(comments_target).append(_res2);
+    }
+    var issue_url = void 0;
+    if (!comments_url) {
+        issue_url = addr + "/" + username + "/" + repo + "/issues/new?title=" + issue_title + "#issue_body";
+    } else {
+        issue_url = comments_url.replace(api_addr, addr).replace('comments', '') + '#new_comment_field';
+    }
+    var res = "\n        <p class=\"goto-comment\">\n        <a href=\"" + issue_url + "\" class=\"" + btn_class + "\" target=\"_blank\">" + go_to_comment + "</a>\n        </p>\n        ";
+    $(comments_target).append(res);
+};
+
+var CompareDate = function CompareDate(a, b) {
+    var d1 = a['created_at'].replace('T', ' ').replace('Z', '').replace(/-/g, "\/");
+    var d2 = b['created_at'].replace('T', ' ').replace('Z', '').replace(/-/g, "\/");
+    return new Date(d1) > new Date(d2);
+};
+
+var _getRecentIssues = function _getRecentIssues(params, callback) {
+    var count = void 0;
+    count = params.count;
+
+    var api_addr = type == 'github' ? github_api_addr : oschina_api_addr;
+    $.ajax({
+        url: api_addr + username + '/' + repo + '/issues?per_page=100&sort=created&direction=desc',
+        dataType: 'json',
+        cache: false,
+        crossDomain: true,
+        data: client_id && client_secret ? "client_id=" + client_id + "&client_secret=" + client_secret : '',
+        success: function success(issues) {
+            if (issues.length > count) {
+                if (navigator.userAgent.indexOf("MSIE") != -1 || navigator.userAgent.indexOf("Edge") != -1 || !!document.documentMode == true) {
+                    issues = issues.sort(CompareDate).slice(0, 5);
+                } else {
+                    issues = issues.sort(CompareDate).reverse().slice(0, 5);
+                }
+            }
+            callback && typeof callback === "function" && callback(issues);
+            callback = null;
+        },
+        error: function error(err) {
+            callback && typeof callback === "function" && callback();
+            callback = null;
+        }
+    });
+};
+
+var _getRecentComments = function _getRecentComments(params, callback) {
+    var count = void 0;
+    count = params.count;
+
+    var api_addr = type == 'github' ? github_api_addr : oschina_api_addr;
+    $.ajax({
+        url: api_addr + username + '/' + repo + '/issues/comments?per_page=100&sort=created&direction=desc',
+        dataType: 'json',
+        cache: false,
+        crossDomain: true,
+        data: client_id && client_secret ? "client_id=" + client_id + "&client_secret=" + client_secret : '',
+        success: function success(comments) {
+            if (comments.length > count) {
+                if (navigator.userAgent.indexOf("MSIE") != -1 || navigator.userAgent.indexOf("Edge") != -1 || !!document.documentMode == true) {
+                    comments = comments.sort(CompareDate).slice(0, 5);
+                } else {
+                    comments = comments.sort(CompareDate).reverse().slice(0, 5);
+                }
+            }
+
+            callback && typeof callback === "function" && callback(comments);
+            callback = null;
+        },
+        error: function error(err) {
+            callback && typeof callback === "function" && callback();
+            callback = null;
+        }
+    });
+};
+
+var getRecentCommentsList = function getRecentCommentsList(params) {
+    var count = void 0,
+        user = void 0;
+    type = params.type;
+    user = params.user;
+    repo = params.repo;
+    client_id = params.client_id;
+    client_secret = params.client_secret;
+    count = params.count;
+    recent_comments_target = params.recent_comments_target;
+
+    username = user;
+    recent_comments_target = recent_comments_target ? recent_comments_target : '#recent-comments';
+    var recentList = new Array();
+    // Get recent issues and comments and filter out 10 newest comments
+    _getRecentIssues(params, function (issues) {
+        recentList = recentList.concat(issues);
+        _getRecentComments(params, function (comments) {
+            recentList = recentList.concat(comments);
+            if (navigator.userAgent.indexOf("MSIE") != -1 || navigator.userAgent.indexOf("Edge") != -1 || !!document.documentMode == true) {
+                recentList = recentList.sort(CompareDate);
+            } else {
+                recentList = recentList.sort(CompareDate).reverse();
+            }
+            _renderRecentCommentList(recentList, count);
+        });
+    });
+};
+
+var getComments = function getComments(params) {
+    var issue_title = void 0,
+        issue_id = void 0,
+        user = void 0;
+    type = params.type;
+    user = params.user;
+    repo = params.repo;
+    client_id = params.client_id;
+    client_secret = params.client_secret;
+    no_comment = params.no_comment;
+    go_to_comment = params.go_to_comment;
+    issue_title = params.issue_title;
+    issue_id = params.issue_id;
+    btn_class = params.btn_class;
+    comments_target = params.comments_target;
+    loading_target = params.loading_target;
+
+    comments_target = comments_target ? comments_target : '#comment-thread';
+    username = user;
+    if (loading_target) var spinner = new Spinner(spinOpts);
+    var timeagoInstance = timeago();
+    var comments_url;
+    var comments = new Array();
+    type = type ? type : 'github';
+    btn_class = btn_class ? btn_class : 'btn';
+
+    loading_target && spinner.spin($("div" + loading_target).get(0));
+    if (!issue_id || issue_id == 'undefined' || typeof issue_id == 'undefined') {
+        _getCommentsUrl({ issue_title: issue_title,
+            page: 1 }, function (comments_url, issue) {
+            if (comments_url != '' && comments_url != undefined) {
+                _getComment({ comments: comments,
+                    comments_url: comments_url,
+                    page: 1 }, function (comments) {
+                    loading_target && spinner.spin();
+                    _renderHTML({
+                        issue: issue,
+                        comments: comments,
+                        comments_url: comments_url,
+                        issue_title: issue_title
+                    });
+                    return;
+                });
+            } else {
+                loading_target && spinner.spin();
+                _renderHTML({
+                    issue: issue,
+                    comments: comments,
+                    comments_url: comments_url,
+                    issue_title: issue_title
+                });
+                return;
+            }
+        });
+    } else {
+        var api_addr = type == 'github' ? github_api_addr : oschina_api_addr;
+        var _comments_url = api_addr + username + '/' + repo + '/issues/' + issue_id + '/comments';
+        _getIssue(issue_id, function (issue) {
+            _getComment({ comments: comments,
+                comments_url: _comments_url,
+                page: 1 }, function (comments) {
+                loading_target && spinner.spin();
+                _renderHTML({
+                    issue: issue,
+                    comments: comments,
+                    comments_url: _comments_url,
+                    issue_title: issue_title
+                });
+                loading_target && spinner.spin();
+                return;
+            });
+        });
+    }
+};
