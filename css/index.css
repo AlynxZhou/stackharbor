@@ -263,17 +263,6 @@
   padding: 1em;
   margin: 0.5em;
 }
-.main .main-container .content .index-post .post-readmore {
-  margin: 0.5em;
-}
-.main .main-container .content .index-post .post-readmore .readmore {
-  display: inline-block;
-  padding: 0.25em 1em;
-  font-size: 1em;
-  color: #fff;
-  background: #999;
-  line-height: 1.5em;
-}
 .main .main-container .content .index-post .post-tags .post-tag {
   margin: 0.5em;
   display: inline-block;
