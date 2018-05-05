@@ -2,16 +2,296 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sh.alynx.xyz/about/index.html</loc>
+    
+    <lastmod>2018-05-05T17:16:13.888Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sh.alynx.xyz/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/</loc>
     
-    <lastmod>2018-05-02T14:27:40.993Z</lastmod>
+    <lastmod>2018-05-05T17:02:32.536Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://sh.alynx.xyz/posts/2018/03/25/Linux-Manual-for-Newbies-1/</loc>
     
-    <lastmod>2018-05-02T12:29:41.175Z</lastmod>
+    <lastmod>2018-05-05T17:02:32.106Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2018/05/05/Endless-ARIA/</loc>
+    
+    <lastmod>2018-05-05T17:02:32.100Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/10/Words-Say-1/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/06/28/RPi-Router/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/06/15/Your-Name/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/02/23/Only-My-Railgun/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/12/Three-Trees/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/01/05/Some-Thoughts/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/02/01/Some-Words/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/02/16/Steam-with-Bumblebee/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/08/14/RPi-QZone-Bot/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/10/Title-Nil-1/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.173Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/05/03/Hrit/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.166Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/10/08/BJTU-Life/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/10/CHarmonica-Talk-1/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/10/CHarmonica-Talk-2/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/10/CHarmonica-Talk-3/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/12/31/2016-Tail/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/06/12/Dynamic-or-Static/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/05/30/An-Update/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/07/Arch-Install/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/11/21/First-Snow/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/04/Hello-World/</loc>
+    
+    <lastmod>2018-05-05T17:02:16.150Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/07/01/Three-Years/</loc>
+    
+    <lastmod>2018-05-05T17:02:15.740Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/02/23/Music-Score/</loc>
+    
+    <lastmod>2018-05-05T17:02:15.740Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/</loc>
+    
+    <lastmod>2018-05-05T17:02:15.740Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2016/04/12/Corner-Tree/</loc>
+    
+    <lastmod>2018-05-05T17:02:15.740Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sh.alynx.xyz/posts/2018/03/13/Kalafina/</loc>
+    
+    <lastmod>2018-05-05T17:01:58.063Z</lastmod>
     
   </url>
   
@@ -30,282 +310,9 @@
   </url>
   
   <url>
-    <loc>https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/</loc>
-    
-    <lastmod>2018-04-10T11:24:44.437Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/</loc>
-    
-    <lastmod>2018-04-08T04:18:04.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/about/index.html</loc>
-    
-    <lastmod>2018-04-06T16:19:57.536Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/</loc>
-    
-    <lastmod>2018-04-06T15:17:47.650Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/06/15/Your-Name/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.779Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2018/03/13/Kalafina/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.777Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/02/01/Some-Words/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.777Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/02/23/Music-Score/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.777Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.776Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.776Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/05/30/An-Update/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.775Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/12/31/2016-Tail/</loc>
-    
-    <lastmod>2018-03-27T01:25:33.775Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/06/12/Dynamic-or-Static/</loc>
-    
-    <lastmod>2018-03-24T08:39:12.320Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/</loc>
-    
-    <lastmod>2018-03-20T07:35:03.055Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/02/16/Steam-with-Bumblebee/</loc>
-    
-    <lastmod>2018-03-19T09:34:23.121Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/06/28/RPi-Router/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.636Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/10/Title-Nil-1/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.635Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.635Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/05/03/Hrit/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.635Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.635Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.634Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/01/05/Some-Thoughts/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.634Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/08/14/RPi-QZone-Bot/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.634Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/12/Three-Trees/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.634Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/07/01/Three-Years/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.634Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/02/23/Only-My-Railgun/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.633Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.633Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.597Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/11/21/First-Snow/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.597Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.597Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/12/Corner-Tree/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.597Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/10/08/BJTU-Life/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.596Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.596Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/10/CHarmonica-Talk-3/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.596Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/10/CHarmonica-Talk-1/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.596Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/10/CHarmonica-Talk-2/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.596Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/10/Words-Say-1/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.020Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://sh.alynx.xyz/posts/2016/04/04/hello-world/</loc>
     
     <lastmod>2018-03-19T04:50:05.017Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/04/Hello-World/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.015Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sh.alynx.xyz/posts/2016/04/07/Arch-Install/</loc>
-    
-    <lastmod>2018-03-19T04:50:05.013Z</lastmod>
     
   </url>
   

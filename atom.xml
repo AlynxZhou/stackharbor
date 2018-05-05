@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sh.alynx.xyz/"/>
-  <updated>2018-05-02T14:27:40.993Z</updated>
+  <updated>2018-05-05T17:02:32.100Z</updated>
   <id>https://sh.alynx.xyz/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</title>
+    <link href="https://sh.alynx.xyz/posts/2018/05/05/Endless-ARIA/"/>
+    <id>https://sh.alynx.xyz/posts/2018/05/05/Endless-ARIA/</id>
+    <published>2018-05-05T15:49:53.000Z</published>
+    <updated>2018-05-05T17:02:32.100Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;大约从我写好 ARIA （指把我自己的网站换成它做主题）到现在为止已经有一个月了，这一个月里它有了 &lt;a href=&quot;https://github.com/AlynxZhou/hexo-theme-aria/stargazers&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;20 个 Star&lt;/a&gt;、&lt;a href=&quot;https://github.com/AlynxZhou/hexo-theme-aria/issues?q=is%3Aissue+is%3Aclosed&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;4 个 Issue&lt;/a&gt; 和 &lt;a href=&quot;https://github.com/AlynxZhou/hexo-theme-aria/commits/master&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;128 个 Commit&lt;/a&gt;（都是我自己，残念啊）。大概算是我现在最得意的项目，当然不排除以后也是。&lt;/p&gt;
+&lt;p&gt;虽然这么说有点敷衍，但是我是和一些无聊的人进行了一点无谓的争执 —— 我讨厌辩论，所以尽可能把这种冲动压制在一点 —— 所以我现在来写这篇文章，聊聊那些代码里面没有告诉你的事情。写点经过脑子的思考总是有用处的，不仅是对自己而言。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="网络" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="网站" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/"/>
+    
+      <category term="Hexo" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/Hexo/"/>
+    
+      <category term="ARIA" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/Hexo/ARIA/"/>
+    
+    
+      <category term="Hexo" scheme="https://sh.alynx.xyz/tags/Hexo/"/>
+    
+      <category term="ARIA" scheme="https://sh.alynx.xyz/tags/ARIA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</title>
     <link href="https://sh.alynx.xyz/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/"/>
     <id>https://sh.alynx.xyz/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
     <published>2018-05-02T12:30:48.000Z</published>
-    <updated>2018-05-02T14:27:40.993Z</updated>
+    <updated>2018-05-05T17:02:32.536Z</updated>
     
     <summary type="html">
     
@@ -50,7 +81,7 @@
     <link href="https://sh.alynx.xyz/posts/2018/03/25/Linux-Manual-for-Newbies-1/"/>
     <id>https://sh.alynx.xyz/posts/2018/03/25/Linux-Manual-for-Newbies-1/</id>
     <published>2018-03-25T12:24:45.000Z</published>
-    <updated>2018-05-02T12:29:41.175Z</updated>
+    <updated>2018-05-05T17:02:32.106Z</updated>
     
     <summary type="html">
     
@@ -75,7 +106,7 @@
     <link href="https://sh.alynx.xyz/posts/2018/03/13/Kalafina/"/>
     <id>https://sh.alynx.xyz/posts/2018/03/13/Kalafina/</id>
     <published>2018-03-13T13:21:52.000Z</published>
-    <updated>2018-03-27T01:25:33.777Z</updated>
+    <updated>2018-05-05T17:01:58.063Z</updated>
     
     <summary type="html">
     
@@ -99,7 +130,7 @@
     <link href="https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/"/>
     <id>https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/</id>
     <published>2018-02-04T04:18:45.000Z</published>
-    <updated>2018-03-19T04:50:05.597Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -129,7 +160,7 @@
     <link href="https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/"/>
     <id>https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/</id>
     <published>2018-01-26T11:04:33.000Z</published>
-    <updated>2018-04-06T15:17:47.650Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -155,7 +186,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/"/>
     <id>https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/</id>
     <published>2017-12-31T14:18:57.000Z</published>
-    <updated>2018-03-20T07:35:03.055Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -178,7 +209,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/"/>
     <id>https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/</id>
     <published>2017-11-11T13:18:51.000Z</published>
-    <updated>2018-04-08T04:18:04.661Z</updated>
+    <updated>2018-05-05T17:02:16.173Z</updated>
     
     <summary type="html">
     
@@ -203,7 +234,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/"/>
     <id>https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/</id>
     <published>2017-10-29T13:54:41.000Z</published>
-    <updated>2018-03-19T04:50:05.635Z</updated>
+    <updated>2018-05-05T17:02:16.173Z</updated>
     
     <summary type="html">
     
@@ -219,7 +250,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/"/>
     <id>https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/</id>
     <published>2017-10-08T14:14:00.000Z</published>
-    <updated>2018-03-27T01:25:33.776Z</updated>
+    <updated>2018-05-05T17:02:15.740Z</updated>
     
     <summary type="html">
     
@@ -246,7 +277,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/"/>
     <id>https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/</id>
     <published>2017-07-30T14:50:40.000Z</published>
-    <updated>2018-03-19T04:50:05.596Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -270,7 +301,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/"/>
     <id>https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/</id>
     <published>2017-07-01T10:42:09.000Z</published>
-    <updated>2018-03-27T01:25:33.776Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -293,7 +324,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/06/15/Your-Name/"/>
     <id>https://sh.alynx.xyz/posts/2017/06/15/Your-Name/</id>
     <published>2017-06-14T16:22:19.000Z</published>
-    <updated>2018-03-27T01:25:33.779Z</updated>
+    <updated>2018-05-05T17:02:16.176Z</updated>
     
     <summary type="html">
     
@@ -318,7 +349,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/"/>
     <id>https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/</id>
     <published>2017-05-30T08:46:02.000Z</published>
-    <updated>2018-04-10T11:24:44.437Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -342,7 +373,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/05/30/An-Update/"/>
     <id>https://sh.alynx.xyz/posts/2017/05/30/An-Update/</id>
     <published>2017-05-30T07:14:51.000Z</published>
-    <updated>2018-03-27T01:25:33.775Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -371,7 +402,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/"/>
     <id>https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/</id>
     <published>2017-03-18T14:48:49.000Z</published>
-    <updated>2018-03-19T04:50:05.597Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -393,7 +424,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/"/>
     <id>https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/</id>
     <published>2017-03-15T11:24:33.000Z</published>
-    <updated>2018-03-19T04:50:05.635Z</updated>
+    <updated>2018-05-05T17:02:16.173Z</updated>
     
     <summary type="html">
     
@@ -419,7 +450,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/"/>
     <id>https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/</id>
     <published>2017-02-23T03:53:38.000Z</published>
-    <updated>2018-03-19T04:50:05.634Z</updated>
+    <updated>2018-05-05T17:02:16.173Z</updated>
     
     <summary type="html">
     
@@ -445,7 +476,7 @@
     <link href="https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/"/>
     <id>https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/</id>
     <published>2017-02-23T03:46:46.000Z</published>
-    <updated>2018-03-19T04:50:05.633Z</updated>
+    <updated>2018-05-05T17:02:16.150Z</updated>
     
     <summary type="html">
     
@@ -471,40 +502,11 @@
     <link href="https://sh.alynx.xyz/posts/2017/02/23/Only-My-Railgun/"/>
     <id>https://sh.alynx.xyz/posts/2017/02/23/Only-My-Railgun/</id>
     <published>2017-02-23T03:28:47.000Z</published>
-    <updated>2018-03-19T04:50:05.633Z</updated>
+    <updated>2018-05-05T17:02:16.173Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;半音阶口琴，&lt;strong&gt;only my railgun&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.pdf&quot;&gt;pdf下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Only-My-Railgun/only_my_railgun.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
-    
-      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
-    
-      <category term="曲谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/"/>
-    
-    
-      <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
-    
-      <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>喵的曲谱说明以及目录</title>
-    <link href="https://sh.alynx.xyz/posts/2017/02/23/Music-Score/"/>
-    <id>https://sh.alynx.xyz/posts/2017/02/23/Music-Score/</id>
-    <published>2017-02-23T03:22:50.000Z</published>
-    <updated>2018-03-27T01:25:33.777Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;以十六孔琴、标准音高为准，非口琴常用音高，十二孔请自行移调！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;大部分乐谱经本人手动整理，如有不符合说明的情况请自行处理或者等待更新！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;乐谱为逐句调整，无省略。&lt;/p&gt;
-&lt;p&gt;(低音)    中音    [高音]    {倍高音}&lt;/p&gt;
     
     </summary>
     
