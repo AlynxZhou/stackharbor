@@ -8,7 +8,7 @@
 }
 .tags-container a {
   text-decoration: none;
-  border-bottom: 0.05em dotted #666;
+  border-bottom: 0.05em dashed #666;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;

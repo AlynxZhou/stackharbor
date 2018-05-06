@@ -111,7 +111,7 @@
   -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
-@media (max-width: 48em) {
+@media (max-width: 60em) {
   .main .main-container {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;

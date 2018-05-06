@@ -312,7 +312,7 @@
   -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
-@media (max-width: 48em) {
+@media (max-width: 60em) {
   .main .main-container {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
@@ -413,7 +413,7 @@
 .footer a {
   color: #ddd;
   text-decoration: none;
-  border-bottom: 0.05em dotted #ddd;
+  border-bottom: 0.05em dashed #ddd;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
@@ -594,7 +594,7 @@ blockquote {
   margin: 1em;
   word-wrap: break-word;
   padding: 0 1em;
-  border-left: 0.25em solid #ddd;
+  border-left: 0.25em solid #ccc;
 }
 blockquote p {
   color: #666;
@@ -628,12 +628,12 @@ blockquote p {
 .centerquote::before {
   top: -1em;
   margin: 0;
-  border-top: 0.2em solid #ddd;
+  border-top: 0.2em solid #ccc;
 }
 .centerquote::after {
   bottom: -1em;
   margin: 0;
-  border-bottom: 0.2em solid #ddd;
+  border-bottom: 0.2em solid #ccc;
 }
 .centerquote p,
 .centerquote div {
@@ -648,7 +648,7 @@ blockquote p {
 a {
   color: #666;
   text-decoration: none;
-  border-bottom: 0.05em dotted #666;
+  border-bottom: 0.05em dashed #666;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
@@ -662,6 +662,7 @@ a:hover {
 a:active {
   top: 0.1em;
 }
+a.gallery-item,
 a.img-link {
   text-decoration: none;
   border-bottom: none;
@@ -669,6 +670,7 @@ a.img-link {
   padding: 1em;
   text-align: center;
 }
+a.gallery-item img,
 a.img-link img {
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
@@ -677,32 +679,12 @@ a.img-link img {
   transition: 0.3s ease-in-out;
   border: 0.15em solid #ccc;
 }
+a.gallery-item:hover,
 a.img-link:hover {
   border-bottom: none;
 }
+a.gallery-item:hover img,
 a.img-link:hover img {
-  -webkit-box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
-}
-a.gallery-item {
-  text-decoration: none;
-  border-bottom: none;
-  display: block;
-  padding: 1em;
-  text-align: center;
-}
-a.gallery-item img {
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-  border: 0.15em solid #ccc;
-}
-a.gallery-item:hover {
-  border-bottom: none;
-}
-a.gallery-item:hover img {
   -webkit-box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
 }
@@ -752,7 +734,7 @@ hr {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  background-color: #ddd;
+  background-color: #ccc;
   background-image: -webkit-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
   background-image: -moz-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
   background-image: -o-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
@@ -768,7 +750,7 @@ code {
   font-size: 1em;
   border-radius: 0.15em;
   font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
-  background-color: #f8f8f8;
+  background: #f8f8f8;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
   -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
   -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
@@ -835,14 +817,14 @@ figure .code pre {
   font-family: UKIJ Ekran;
 }
 .caption {
-  color: #999;
+  color: #666;
   display: block;
   text-align: center;
 }
 .container {
   position: relative;
   padding: 0;
-  max-width: 70em;
+  max-width: 80em;
   width: 100%;
   margin: 0 auto;
 }
@@ -850,6 +832,7 @@ figure .code pre {
   padding: 1.5em;
   display: block;
   text-align: center;
+  color: #666;
 }
 .pagination .page-number,
 .pagination .extend {
@@ -860,7 +843,7 @@ figure .code pre {
   display: inline;
   margin: 0 0.5em;
   text-decoration: none;
-  border-bottom: 0.15em solid #ccc;
+  border-bottom: 0.15em solid #666;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
@@ -880,5 +863,5 @@ figure .code pre {
 .pagination .space {
   font-size: 1em;
   margin: 0 0.5em;
-  color: #ccc;
+  color: #666;
 }
