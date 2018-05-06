@@ -98,7 +98,7 @@
 }
 .sidebar {
   font-size: 16px;
-  background: url("/images/sidebar_background.png");
+  background: #ddd;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;

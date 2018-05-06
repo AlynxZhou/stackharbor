@@ -87,10 +87,10 @@
   box-flex: 1;
   -webkit-flex-grow: 1;
   flex-grow: 1;
-  text-align: center;
   padding-top: 1em;
 }
 .header .header-container .logo img {
+  display: inline-block;
   max-width: 20em;
   width: 100%;
 }
