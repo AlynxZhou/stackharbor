@@ -541,17 +541,17 @@ body,
   background: 0 0;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #999;
+  background: #999;
   border-radius: 0.25em;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #666;
+  background: #666;
 }
 ::-webkit-scrollbar-corner {
-  background-color: #535353;
+  background: #535353;
 }
 ::-webkit-scrollbar-resizer {
-  background-color: #ff6e00;
+  background: #ff6e00;
 }
 body {
   color: #26272b;
@@ -718,8 +718,8 @@ button.button:active {
   top: 0.1em;
 }
 img {
-  max-width: 90%;
-  max-height: 90%;
+  width: 90%;
+  height: 90%;
   text-align: center;
 }
 hr {
