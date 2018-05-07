@@ -3,19 +3,13 @@
   padding: 1em;
   margin: 0.5em;
 }
-.post-container .post-title {
+.post-container .post-header {
   text-align: center;
-  display: block;
-  position: relative;
-  text-decoration: none;
-  color: #26272b;
 }
-.post-container .post-meta {
+.post-container .post-footer {
   text-align: center;
-  display: block;
-  position: relative;
 }
-.post-container .post-tags .post-tag {
+.post-container .post-footer .post-tags .post-tag {
   margin: 0.5em;
   display: inline-block;
   text-decoration: none;
