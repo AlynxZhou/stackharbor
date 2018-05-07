@@ -71,10 +71,10 @@
   border-bottom: none;
 }
 .header .header-container .header-title .title {
-  font-size: $font-size-title;
+  font: bold 2em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 .header .header-container .header-title .subtitle {
-  font-style: italic;
+  font: italic 1.5em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   text-shadow: 0 0.05em rgba(0,0,0,0.2);
 }
 .header .header-container .logo {
@@ -200,7 +200,7 @@
   }
 }
 .main {
-  font-size: 16px;
+  font: 1em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   margin-top: -3em;
 }
 .main .main-container {
@@ -408,7 +408,7 @@
 }
 .footer .footer-container .footer-right .custom-info {
   width: 100%;
-  word-warp: break-word;
+  word-wrap: break-word;
 }
 .footer a {
   color: #ddd;
@@ -746,16 +746,40 @@ code {
   color: #fc6423;
   padding: 0.125em 0.25em;
   overflow: auto;
-  word-warp: break-word;
-  font-size: 1em;
+  word-wrap: break-word;
   border-radius: 0.15em;
-  font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
+  font: 1em "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
   background: #f8f8f8;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
   -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
   -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
   -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
   font-feature-settings: "liga" 0; /* No variation */
+}
+figure {
+  overflow: auto;
+  border-radius: 0.15em;
+  padding: 0.5em;
+  margin: 1em;
+  -webkit-font-feature-settings: "liga" 0; /* No variation */
+  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
+  font-feature-settings: "liga" 0; /* No variation */
+}
+figure pre {
+  font: 1em "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
+  line-height: 1.5em;
+  padding: 0;
+  margin: 0;
+}
+figure .gutter {
+  text-align: right;
+  padding-right: 0.5em;
+  border-right: 0.1em dashed #ccc;
+}
+figure .text {
+  padding-left: 0.5em;
 }
 .card {
   display: block;
@@ -772,35 +796,6 @@ code {
 .card:hover {
   -webkit-box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
-}
-figure {
-  overflow: auto;
-  font-size: 1em;
-  border-radius: 0.15em;
-  line-height: 1.2em;
-  padding: 0.5em;
-  margin: 1em;
-  -webkit-font-feature-settings: "liga" 0; /* No variation */
-  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
-  font-feature-settings: "liga" 0; /* No variation */
-}
-figure .gutter {
-  text-align: right;
-  padding-right: 0.5em;
-  border-right: 0.1em dashed #ccc;
-}
-figure .gutter pre {
-  padding: 0;
-  margin: 0;
-}
-figure .code {
-  padding-left: 0.5em;
-}
-figure .code pre {
-  padding: 0;
-  margin: 0;
 }
 .rtl p,
 .rtl a,

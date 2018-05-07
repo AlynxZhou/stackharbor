@@ -147,7 +147,7 @@
 }
 .sidebar .search-result-box {
   background: #fff;
-  word-warp: break-word;
+  word-wrap: break-word;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;

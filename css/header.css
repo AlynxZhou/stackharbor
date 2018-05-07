@@ -71,10 +71,10 @@
   border-bottom: none;
 }
 .header .header-container .header-title .title {
-  font-size: $font-size-title;
+  font: bold 2em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 .header .header-container .header-title .subtitle {
-  font-style: italic;
+  font: italic 1.5em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   text-shadow: 0 0.05em rgba(0,0,0,0.2);
 }
 .header .header-container .logo {

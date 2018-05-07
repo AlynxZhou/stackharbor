@@ -81,7 +81,7 @@
 }
 .footer .footer-container .footer-right .custom-info {
   width: 100%;
-  word-warp: break-word;
+  word-wrap: break-word;
 }
 .footer a {
   color: #ddd;
