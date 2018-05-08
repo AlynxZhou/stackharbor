@@ -86,7 +86,7 @@
 .footer a {
   color: #ddd;
   text-decoration: none;
-  border-bottom: 0.05em dashed #ddd;
+  border-bottom: 0.05em dotted #ddd;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;

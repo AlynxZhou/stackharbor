@@ -67,7 +67,7 @@
   position: relative;
   text-decoration: none;
   color: #666;
-  border-bottom: 0.05em dashed #666;
+  border-bottom: 0.05em dotted #666;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
@@ -76,7 +76,7 @@
 }
 .archive-container .archive-post .post-title-link:hover {
   color: #006bde;
-  border-bottom: 0.03em solid #006bde;
+  border-bottom: 0.05em solid #006bde;
 }
 .archive-container .archive-post .post-title-link:active {
   top: 0.1em;

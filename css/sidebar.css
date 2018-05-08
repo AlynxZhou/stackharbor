@@ -131,7 +131,7 @@
   width: 60%;
   height: 1.5em;
   border: 0.1em solid transparent;
-  border-bottom: 0.1em dashed #fff;
+  border-bottom: 0.1em dotted #fff;
   background: #006bde;
   color: #fff;
   -webkit-transition: 0.3s ease-in-out;
