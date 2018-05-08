@@ -116,8 +116,8 @@
   margin: 0 auto;
   padding: 0 1em;
   cursor: pointer;
-  border-bottom-left-radius: 0.15em;
-  border-bottom-right-radius: 0.15em;
+  border-bottom-left-radius: 0.2em;
+  border-bottom-right-radius: 0.2em;
   font-size: 2em;
 }
 .footer .back-to-top a:hover {

@@ -128,8 +128,8 @@
   background: #33363b;
   -webkit-box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
-  border-top-left-radius: 0.15em;
-  border-top-right-radius: 0.15em;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
   display: block;
 }
 .nav ul {
@@ -216,8 +216,8 @@
   box-sizing: border-box;
   -webkit-box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
-  border-bottom-left-radius: 0.15em;
-  border-bottom-right-radius: 0.15em;
+  border-bottom-left-radius: 0.2em;
+  border-bottom-right-radius: 0.2em;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -452,8 +452,8 @@
   margin: 0 auto;
   padding: 0 1em;
   cursor: pointer;
-  border-bottom-left-radius: 0.15em;
-  border-bottom-right-radius: 0.15em;
+  border-bottom-left-radius: 0.2em;
+  border-bottom-right-radius: 0.2em;
   font-size: 2em;
 }
 .footer .back-to-top a:hover {
@@ -523,7 +523,7 @@
   text-shadow: none;
   background: #ff2a2a;
   color: #fff;
-  border-radius: 0.15em;
+  border-radius: 0.2em;
   line-height: 2em;
 }
 .comments {
@@ -705,7 +705,7 @@ button.button {
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   text-decoration: none;
-  border-radius: 0.15em;
+  border-radius: 0.2em;
   -webkit-transform-origin: 50%;
   -moz-transform-origin: 50%;
   -o-transform-origin: 50%;
@@ -755,7 +755,7 @@ code {
   padding: 0.125em 0.25em;
   overflow: auto;
   word-wrap: break-word;
-  border-radius: 0.15em;
+  border-radius: 0.2em;
   font: 1em "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
   background: #f8f8f8;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
@@ -766,7 +766,7 @@ code {
 }
 figure {
   overflow: auto;
-  border-radius: 0.15em;
+  border-radius: 0.2em;
   padding: 0.5em;
   margin: 1em;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
