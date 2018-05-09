@@ -8,8 +8,8 @@
   margin: 0 auto;
   border: 0.3em solid #fff;
   border-radius: 50%;
-  -webkit-box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
   -o-transition: 1s ease-in-out;
@@ -164,8 +164,8 @@
   padding: 1em 2em;
 }
 .sidebar .search-result-box:hover {
-  -webkit-box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0.075em 1em 0.5em rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
 .sidebar .sidebar-item {
   padding: 1em 2em;

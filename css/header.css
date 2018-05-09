@@ -4,15 +4,6 @@
   margin-bottom: 0;
   background: #33363b;
   color: #eee;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
-  -webkit-box-flex: 0;
-  -moz-box-flex: 0;
-  -o-box-flex: 0;
-  -ms-box-flex: 0;
-  box-flex: 0;
-  -webkit-flex-grow: 0;
-  flex-grow: 0;
 }
 .header .header-container {
   display: -webkit-box;
