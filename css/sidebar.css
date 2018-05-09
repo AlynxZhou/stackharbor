@@ -164,8 +164,8 @@
   padding: 1em 2em;
 }
 .sidebar .search-result-box:hover {
-  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
 }
 .sidebar .sidebar-item {
   padding: 1em 2em;
