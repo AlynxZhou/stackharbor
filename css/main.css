@@ -1,5 +1,5 @@
 .main {
-  font: 1em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
+  font: 16px "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   margin-top: -3em;
 }
 .main .main-container {
@@ -59,7 +59,6 @@
   flex-shrink: 0;
 }
 .main .main-container .content .index-post .post-header {
-  padding: 0.25em 0.25em;
   text-align: center;
 }
 .main .main-container .content .index-post .post-header .post-title-link {

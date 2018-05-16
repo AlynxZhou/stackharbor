@@ -1,5 +1,4 @@
 .info {
-  font-size: 16px;
   text-align: center;
 }
 .info .author-avatar {
@@ -91,9 +90,6 @@
   padding: 0.2em;
   line-height: 1.25em;
 }
-.post-toc {
-  font-size: 16px;
-}
 .post-toc div {
   margin: 0.5em;
 }
@@ -102,7 +98,6 @@
   border-bottom: 0.05em solid #006bde;
 }
 .sidebar {
-  font-size: 16px;
   background: #ddd;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;

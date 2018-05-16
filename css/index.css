@@ -1,5 +1,4 @@
 .header {
-  font-size: 16px;
   padding-bottom: 3em;
   margin-bottom: 0;
   background: #33363b;
@@ -36,7 +35,6 @@
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  width: auto;
   padding: 1em;
 }
 .header .header-container .header-title {
@@ -69,7 +67,6 @@
 }
 .header .header-container .header-title .subtitle {
   font: italic 1.5em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
-  text-shadow: 0 0.05em rgba(0,0,0,0.2);
   margin: 0.5em 0 0 0;
 }
 .header .header-container .logo {
@@ -112,9 +109,8 @@
   }
 }
 .nav {
-  font-size: 16px;
-  margin: 0;
   position: relative;
+  margin: 0;
   padding: 0 0.5em;
   background: #33363b;
   -webkit-box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
@@ -128,7 +124,6 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  height: 100%;
 }
 .nav ul li {
   line-height: 2em;
@@ -138,12 +133,12 @@
   margin: 0 0.1em;
 }
 .nav ul li a {
+  display: block;
   font-size: 1.5em;
   padding: 0.75em;
   color: #ddd;
   text-decoration: none;
   text-shadow: 0 0.05em rgba(0,0,0,0.2);
-  display: block;
   -webkit-transition: 0.2s ease-in;
   -moz-transition: 0.2s ease-in;
   -o-transition: 0.2s ease-in;
@@ -196,7 +191,7 @@
   }
 }
 .main {
-  font: 1em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
+  font: 16px "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   margin-top: -3em;
 }
 .main .main-container {
@@ -256,7 +251,6 @@
   flex-shrink: 0;
 }
 .main .main-container .content .index-post .post-header {
-  padding: 0.25em 0.25em;
   text-align: center;
 }
 .main .main-container .content .index-post .post-header .post-title-link {
@@ -322,7 +316,6 @@
   }
 }
 .footer {
-  font-size: 16px;
   background: #33363b;
   color: #eee;
   margin-top: 1.5em;
@@ -469,7 +462,6 @@
   }
 }
 .reward {
-  font-size: 16px;
   padding: 0.5em 0;
   margin: 1em auto;
   width: 90%;
@@ -495,17 +487,10 @@
   outline: 0;
   padding: 0em 0.5em;
   margin: 0;
-  letter-spacing: normal;
-  text-transform: none;
-  text-indent: 0;
-  text-shadow: none;
   background: #ff2a2a;
   color: #fff;
   border-radius: 0.2em;
   line-height: 2em;
-}
-.comments {
-  font-size: 16px;
 }
 html,
 body,
@@ -757,7 +742,7 @@ code {
   word-wrap: break-word;
   border-radius: 0.2em;
   font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
-  font-size: 1em;
+  font-size: 16px;
   background: #f8f8f8;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
   -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
@@ -769,7 +754,7 @@ figure {
   overflow: auto;
   border-radius: 0.2em;
   padding: 0.5em;
-  margin: 1em;
+  margin: 0.5em;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
   -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
   -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
@@ -778,7 +763,7 @@ figure {
 }
 figure pre {
   font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
-  font-size: 1em;
+  font-size: 16px;
   line-height: 1.5em;
   padding: 0;
   margin: 0;
@@ -809,19 +794,6 @@ figure .text {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
-.rtl p,
-.rtl a,
-.rtl h1,
-.rtl h2,
-.rtl h3,
-.rtl h4,
-.rtl h5,
-.rtl h6,
-.rtl li,
-.rtl ul,
-.rtl ol {
-  direction: rtl;
-}
 .caption {
   color: #666;
   display: block;
@@ -846,7 +818,6 @@ figure .text {
   overflow: hidden;
   font-size: 1.2em;
   padding: 0.5em;
-  display: inline;
   margin: 0 0.5em;
   text-decoration: none;
   border-bottom: 0.15em solid #666;

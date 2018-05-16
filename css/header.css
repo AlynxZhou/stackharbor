@@ -1,5 +1,4 @@
 .header {
-  font-size: 16px;
   padding-bottom: 3em;
   margin-bottom: 0;
   background: #33363b;
@@ -36,7 +35,6 @@
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  width: auto;
   padding: 1em;
 }
 .header .header-container .header-title {
@@ -69,7 +67,6 @@
 }
 .header .header-container .header-title .subtitle {
   font: italic 1.5em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
-  text-shadow: 0 0.05em rgba(0,0,0,0.2);
   margin: 0.5em 0 0 0;
 }
 .header .header-container .logo {
