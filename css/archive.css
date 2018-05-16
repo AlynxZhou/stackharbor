@@ -1,8 +1,5 @@
 .archive-container {
   font-size: 16px;
-  padding-top: 1em;
-  padding-right: 1em;
-  padding-bottom: 1em;
   padding-left: 2em;
 }
 .archive-container .archive-counter {
@@ -41,10 +38,12 @@
 .archive-container .archive-post {
   position: relative;
   padding-left: 1em;
-  padding-right: 0.5em;
+  margin-left: 0;
 }
 .archive-container .archive-post .post-title {
-  padding: 0.25em 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
 }
 .archive-container .archive-post::after {
   content: " ";
@@ -57,27 +56,4 @@
   height: 0.5em;
   background: #ccc;
   border-radius: 50%;
-}
-.archive-container .archive-post .post-date {
-  font-size: 0.8em;
-  color: #666;
-}
-.archive-container .archive-post .post-title-link {
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  color: #666;
-  border-bottom: 0.05em dotted #666;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
-.archive-container .archive-post .post-title-link:hover {
-  color: #006bde;
-  border-bottom: 0.05em solid #006bde;
-}
-.archive-container .archive-post .post-title-link:active {
-  top: 0.1em;
 }

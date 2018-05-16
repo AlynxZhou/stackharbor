@@ -1,8 +1,5 @@
 .tag-container {
   font-size: 16px;
-  padding-top: 1em;
-  padding-right: 1em;
-  padding-bottom: 1em;
   padding-left: 2em;
 }
 .tag-container .tag-title {
@@ -23,12 +20,14 @@
   border-radius: 50%;
 }
 .tag-container .tag-post {
-  background: #fff;
   position: relative;
   padding-left: 1em;
+  margin-left: 0;
 }
 .tag-container .tag-post .post-title {
-  padding: 0.25em 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
 }
 .tag-container .tag-post::after {
   content: " ";
@@ -41,27 +40,4 @@
   height: 0.5em;
   background: #ccc;
   border-radius: 50%;
-}
-.tag-container .tag-post .post-date {
-  font-size: 0.8em;
-  color: #666;
-}
-.tag-container .tag-post .post-title-link {
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  color: #666;
-  border-bottom: 0.05em dotted #666;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
-.tag-container .tag-post .post-title-link:hover {
-  color: #006bde;
-  border-bottom: 0.05em solid #006bde;
-}
-.tag-container .tag-post .post-title-link:active {
-  top: 0.1em;
 }
