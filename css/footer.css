@@ -74,6 +74,7 @@
   word-wrap: break-word;
 }
 .footer a {
+  position: relative;
   color: #ddd;
   text-decoration: none;
   border-bottom: 0.05em dotted #ddd;
@@ -98,6 +99,7 @@
   margin: 0;
 }
 .footer .back-to-top a {
+  position: relative;
   border-bottom: none;
   background: #ccc;
   color: #666;
@@ -112,10 +114,9 @@
 }
 .footer .back-to-top a:hover {
   color: #006bde;
-  border-bottom: none;
 }
 .footer .back-to-top a:active {
-  border-bottom: none;
+  top: 0;
 }
 @media (max-width: 40em) {
   .footer .footer-container {

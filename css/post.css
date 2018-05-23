@@ -5,12 +5,16 @@
   text-align: center;
 }
 .post-container .post-footer .post-tags .post-tag {
+  position: relative;
   margin: 0.5em;
   display: inline-block;
   text-decoration: none;
   color: $color-link-index-button;
   padding: 0.15em;
   line-height: 1.2em;
+}
+.post-container .post-footer .post-tags .post-tag:active {
+  top: 0.1em;
 }
 .post-nav {
   margin: 0.5em;
@@ -84,9 +88,6 @@
   align-items: center;
   line-height: 1.25em;
   text-decoration: none;
-  border-bottom: none;
-}
-.post-nav .post-nav-item a:hover {
   border-bottom: none;
 }
 .post-nav .post-nav-item a:active {

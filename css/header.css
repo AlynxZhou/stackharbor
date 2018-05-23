@@ -61,6 +61,9 @@
   color: #eee;
   border-bottom: none;
 }
+.header .header-container .header-title a:active {
+  top: 0;
+}
 .header .header-container .header-title .title {
   font: bold 2em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   margin: 0 0 0.5em 0;

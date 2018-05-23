@@ -61,6 +61,9 @@
   color: #eee;
   border-bottom: none;
 }
+.header .header-container .header-title a:active {
+  top: 0;
+}
 .header .header-container .header-title .title {
   font: bold 2em "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
   margin: 0 0 0.5em 0;
@@ -133,6 +136,7 @@
   margin: 0 0.1em;
 }
 .nav ul li a {
+  position: relative;
   display: block;
   font-size: 1.5em;
   padding: 0.75em;
@@ -147,12 +151,13 @@
   border-bottom: none;
 }
 .nav ul li a:hover {
-  border-bottom: none;
   color: #fff;
   background: #252525;
 }
+.nav ul li a:active {
+  top: 0;
+}
 .nav ul li a.current {
-  border-bottom: none;
   color: #fff;
   background: #222;
 }
@@ -184,10 +189,12 @@
     margin: 0.1em 0;
   }
   .nav ul li a {
+    position: relative;
     border-bottom: none;
   }
   .nav ul li a:hover {
-    border-bottom: none;
+    color: #fff;
+    background: #252525;
   }
 }
 .main {
@@ -280,9 +287,6 @@
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.main .main-container .content .index-post .post-header .post-title-link:hover {
-  border-bottom: none;
-}
 .main .main-container .content .index-post .post-header .post-title-link:hover::after {
   visibility: visible;
   -webkit-transform: scaleX(1);
@@ -291,16 +295,23 @@
   -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
+.main .main-container .content .index-post .post-header .post-title-link:active {
+  top: 0.1em;
+}
 .main .main-container .content .index-post .post-footer {
   text-align: center;
 }
 .main .main-container .content .index-post .post-footer .post-tags .post-tag {
+  position: relative;
   margin: 0.5em;
   display: inline-block;
   text-decoration: none;
   color: $color-link-index-button;
   padding: 0.15em;
   line-height: 1.2em;
+}
+.main .main-container .content .index-post .post-footer .post-tags .post-tag:active {
+  top: 0.1em;
 }
 @media (max-width: 60em) {
   .main .main-container {
@@ -391,6 +402,7 @@
   word-wrap: break-word;
 }
 .footer a {
+  position: relative;
   color: #ddd;
   text-decoration: none;
   border-bottom: 0.05em dotted #ddd;
@@ -415,6 +427,7 @@
   margin: 0;
 }
 .footer .back-to-top a {
+  position: relative;
   border-bottom: none;
   background: #ccc;
   color: #666;
@@ -429,10 +442,9 @@
 }
 .footer .back-to-top a:hover {
   color: #006bde;
-  border-bottom: none;
 }
 .footer .back-to-top a:active {
-  border-bottom: none;
+  top: 0;
 }
 @media (max-width: 40em) {
   .footer .footer-container {
@@ -640,6 +652,7 @@ blockquote p {
   margin: 0 0.1em;
 }
 a {
+  position: relative;
   color: #666;
   text-decoration: none;
   border-bottom: 0.05em dotted #666;
@@ -684,6 +697,7 @@ a.img-link:hover img {
 }
 a.button,
 button.button {
+  position: relative;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
