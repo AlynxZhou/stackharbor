@@ -48,15 +48,11 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   width: 75%;
-  -webkit-flex-basis: 75%;
-  flex-basis: 75%;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
 }
 .main .main-container .content .index-post .post-header {
   text-align: center;

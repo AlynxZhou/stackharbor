@@ -54,10 +54,10 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   font-size: 1.2em;
 }
 .post-nav .post-nav-item a {

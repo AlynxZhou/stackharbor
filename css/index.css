@@ -44,12 +44,10 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   color: #eee;
 }
 .header .header-container .header-title a {
@@ -78,12 +76,10 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
 }
 .header .header-container .logo img {
   display: inline-block;
@@ -247,15 +243,11 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   width: 75%;
-  -webkit-flex-basis: 75%;
-  flex-basis: 75%;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
 }
 .main .main-container .content .index-post .post-header {
   text-align: center;
@@ -371,14 +363,10 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   text-align: left;
   max-width: 50%;
 }
@@ -386,14 +374,10 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   text-align: right;
   max-width: 50%;
 }
@@ -541,7 +525,7 @@ body {
   color: #26272b;
   background: #ccc;
   font: 16px "Roboto", "Noto Sans", Helvetica, Arial, sans-serif;
-  -webkit-text-size-adjust: 100%;
+  word-wrap: break-word;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -555,40 +539,17 @@ body {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  word-wrap: break-word;
 }
-header {
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
-  -webkit-box-flex: 0;
-  -moz-box-flex: 0;
-  -o-box-flex: 0;
-  -ms-box-flex: 0;
-  box-flex: 0;
-  -webkit-flex-grow: 0;
-  flex-grow: 0;
-}
-main {
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
+header,
+main,
+footer {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-}
-footer {
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
-  -webkit-box-flex: 0;
-  -moz-box-flex: 0;
-  -o-box-flex: 0;
-  -ms-box-flex: 0;
-  box-flex: 0;
-  -webkit-flex-grow: 0;
-  flex-grow: 0;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
 }
 ol,
 ul {
@@ -734,8 +695,6 @@ hr {
   height: 0.3em;
   border: none;
   margin: 2em 0;
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
   position: relative;
   display: block;
@@ -855,4 +814,113 @@ figure .text {
   font-size: 1em;
   margin: 0 0.5em;
   color: #666;
+}
+.animate {
+  -webkit-animation: 0.3s flip forwards;
+  -moz-animation: 0.3s flip forwards;
+  -o-animation: 0.3s flip forwards;
+  -ms-animation: 0.3s flip forwards;
+  animation: 0.3s flip forwards;
+  position: relative;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transform-origin: 50%;
+  -moz-transform-origin: 50%;
+  -o-transform-origin: 50%;
+  -ms-transform-origin: 50%;
+  transform-origin: 50%;
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+  -o-transform: rotateX(180deg);
+  -ms-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+@-moz-keyframes flip {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    -o-transform: rotateX(180deg);
+    -ms-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+  }
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    -o-transform: rotateX(0);
+    -ms-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+}
+@-webkit-keyframes flip {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    -o-transform: rotateX(180deg);
+    -ms-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+  }
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    -o-transform: rotateX(0);
+    -ms-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+}
+@-o-keyframes flip {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    -o-transform: rotateX(180deg);
+    -ms-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+  }
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    -o-transform: rotateX(0);
+    -ms-transform: rotateX(0);
+    transform: rotateX(0);
+  }
+}
+@keyframes flip {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    -o-transform: rotateX(180deg);
+    -ms-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+  }
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    -o-transform: rotateX(0);
+    -ms-transform: rotateX(0);
+    transform: rotateX(0);
+  }
 }

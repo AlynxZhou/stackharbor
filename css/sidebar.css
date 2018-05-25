@@ -102,14 +102,10 @@
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
-  -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
-  -webkit-flex-basis: 25%;
-  flex-basis: 25%;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
   width: 25%;
   padding: 0;
   word-wrap: break-word;
@@ -173,7 +169,7 @@
 .sidebar hr {
   height: 0.3em;
   border: none;
-  margin: 0 auto;
+  margin: 0;
   width: 100%;
   position: relative;
   display: block;
