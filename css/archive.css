@@ -1,58 +1,13 @@
-.archive-container {
-  padding-left: 2em;
-}
 .archive-container .archive-counter {
-  position: relative;
-  padding-left: 1em;
-  font-size: 2em;
-}
-.archive-container .archive-counter::after {
-  content: " ";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin-left: -0.25em;
-  margin-top: -0.25em;
-  width: 0.5em;
-  height: 0.5em;
-  background: #ccc;
-  border-radius: 50%;
+  text-align: center;
 }
 .archive-container .archive-title {
-  position: relative;
-  padding-left: 1em;
-}
-.archive-container .archive-title::after {
-  content: " ";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin-left: -0.25em;
-  margin-top: -0.25em;
-  width: 0.5em;
-  height: 0.5em;
-  background: #ccc;
-  border-radius: 50%;
+  text-align: center;
 }
 .archive-container .archive-post {
-  position: relative;
-  padding-left: 1em;
-  margin-left: 0;
+  text-align: center;
 }
 .archive-container .archive-post .post-title {
   padding: 0;
   margin: 0;
-  display: inline-block;
-}
-.archive-container .archive-post::after {
-  content: " ";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin-left: -0.4em;
-  margin-top: -0.4em;
-  width: 0.8em;
-  height: 0.8em;
-  background: #ccc;
-  border-radius: 50%;
 }
