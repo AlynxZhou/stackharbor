@@ -760,7 +760,7 @@ figure .text {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 0.5em;
+  padding: 0.5em 2em;
   margin: 0.5em;
 }
 .card:hover {

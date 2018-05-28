@@ -170,7 +170,7 @@
         
       </div>
     </header>
-    <main class="post-body" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
 <a id="more"></a>
 <h1 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h1><p>很遗憾这里没有 <code>static</code> 这么简单的关键字，即使是在 EMCAScript 里 <code>static</code> 这个关键字也只是用来修饰静态方法，用 <code>static</code> 修饰变量仍然是个提案。首先还是来说如何在常规的 JavaScript 里使用静态变量（只考虑 ES6 之后的情况，因为多亏了 CoffeeScript，我也没有写过 ES5），它是如此的简单而又奇怪，简单是因为即使是我这样又笨又懒的人看过一遍也能在 Node 里完整地默写出来不报错，但是这是有原因的——因为它实在是太古怪了以至于你看一眼就忘不了它：</p>
