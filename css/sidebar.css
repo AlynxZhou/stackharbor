@@ -70,7 +70,23 @@
   text-align: center;
   font-size: 1em;
 }
+.info .site-count div {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
 .info .site-count .site-count-divider {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
   line-height: 1.5em;
   font-size: 2em;
 }
@@ -103,9 +119,9 @@
   -moz-box-flex: 1;
   -o-box-flex: 1;
   box-flex: 1;
-  -webkit-flex: auto;
-  -ms-flex: auto;
-  flex: auto;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
   width: 25%;
   padding: 0;
   word-wrap: break-word;
