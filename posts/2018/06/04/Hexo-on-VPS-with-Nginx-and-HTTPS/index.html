@@ -226,7 +226,7 @@
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"># openssl dhparam -out <span class="hljs-regexp">/etc/</span>ssl<span class="hljs-regexp">/certs/</span>dhparam.pem <span class="hljs-number">2048</span><br></code></pre></td></tr></table></figure>
 <p>然后创建软连接使配置生效，并重启 Nginx：</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs undefined"># ln -s <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-available/</span>example.com <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-enabled/</span><br># systemctl restart nginx<br></code></pre></td></tr></table></figure>
-<p>如果你还有其他的页面，放在另一个目录里，然后再创建一份配置文件，当然这次只要有后面那个 server 字段就好了，修改路径，然后连接重启。</p>
+<p>如果你还有其他的页面，放在另一个目录里，然后再创建一份配置文件，当然这次只要有第二个 server 字段就好了，修改路径，然后连接重启。</p>
 <h1 id="自动更新证书"><a href="#自动更新证书" class="headerlink" title="自动更新证书"></a>自动更新证书</h1><p>安全起见，Let’s Encrypt 签发的证书只有 90 天有效期，官方推荐使用自动定期刷新的方式更新证书，只需要建立一个定时任务运行 <code>/PATH/TO/certbot-auto renew --pre-hook &quot;systemctl stop nginx&quot; --post-hook &quot;systemctl start nginx&quot;</code>（如果你用的不是 systemd 管理 Nginx 记得换成其它的停止和启动 Nginx 的命令）。很大可能你知道怎么用 crontab 做这件事情，但我使用 systemd-timer 做。</p>
 <p>首先建立 <code>/lib/systemd/system/certbot-renew.service</code> 这个文件，内容如下：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=Updates cert file via certbot<br><span class="hljs-section"><br>[Service]</span><br><span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot<br><span class="hljs-attr">ExecStart</span>=/home/alynx/certbot-auto renew --pre-hook <span class="hljs-string">"systemctl stop nginx"</span> --post-hook <span class="hljs-string">"systemctl start nginx"</span><br></code></pre></td></tr></table></figure>
@@ -235,7 +235,8 @@
 <p>这个 timer 会在启动 1 分钟之后运行 certbot-renew.service，同时每周运行一次来确保你的证书会被刷新。</p>
 <p>启动它：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> certbot-renew.timer --now</span><br></code></pre></td></tr></table></figure>
-<p>然后更新你的 DNS 的 A 记录和 AAAA 记录，有备无患咯！</p>
+<p>然后更新你的 DNS 的 A 记录和 AAAA 记录，生效就可以了。</p>
+<p>有备无患咯！</p>
 <p><em>AlynxZhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
