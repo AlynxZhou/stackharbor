@@ -1,0 +1,19 @@
+.comments .commentjs {
+  padding: 2em;
+}
+.comments .commentjs img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.comments .commentjs .comment-body {
+  width: 95%;
+}
+.comments .commentjs .comment-body pre {
+  background: #f6f8fa;
+  padding: 1em;
+  border-radius: 0.2em;
+}
+.comments .commentjs .button {
+  padding: 0.3em 1em;
+  background: #ff2a2a;
+}
