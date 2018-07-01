@@ -491,7 +491,7 @@
 .comments .commentjs {
   padding: 2em;
 }
-.comments .commentjs img {
+.comments .commentjs .avatar {
   width: 3em;
   height: 3em;
 }
