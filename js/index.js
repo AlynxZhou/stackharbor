@@ -38,16 +38,6 @@
       }
     });
 
-    $(".content").each(function (i) {
-      $(this).find("img").each(function () {
-        // If img is already a link, ignore it.
-        // if ($(this).parent().prop("tagName") !== "A") {
-        //   $(this).wrap("<a href=\"" + this.src + "\" title=\"" + this.alt + "\" class=\"gallery-item\"></a>");
-        // } else {
-          $(this)/*.parent()*/.addClass(/*"img-link"*/"gallery-item");
-        // }
-      });
-    });
     if (typeof lightGallery != "undefined") {
       var options = {
         selector: ".gallery-item",
