@@ -188,7 +188,7 @@
 </ul>
 <p>mesa是开源的OpenGL标准实现，另外的则是I卡的驱动（官方开源）和N卡的闭源驱动（性能较好），N卡的设置，以及它们对应的32位库。</p>
 <p>接下来将你的用户加入bumblebee组，启动bumblebeed：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> gpasswd -a user bumblebee</span><br><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> bumblebeed --now</span><br></code></pre></td></tr></table></figure>
+<figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> gpasswd -a user bumblebee</span><br><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> bumblebeed --now</span><br></code></pre></td></tr></table></figure>
 <p>然后测试：</p>
 <ul>
 <li><p>64位<code>$ optirun glxspheres64</code></p>

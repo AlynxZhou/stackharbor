@@ -208,11 +208,11 @@
 <h1 id="下载并刷入镜像"><a href="#下载并刷入镜像" class="headerlink" title="下载并刷入镜像"></a>下载并刷入镜像</h1><p>首先，我们要去<a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/brcm2708/" target="_blank" rel="noopener">OpenWrt的官网</a>获取官方编译好的img镜像。下面有两个子目录，pi1对应的是<code>bcm2708</code>，pi2对应的是<code>bcm2709</code>，点击进入之后点击 <code>openwrt-15.05.1-brcm2708-bcm2708-sdcard-vfat-ext4.img</code> 即可开始下载，pi2对应的只是把2708全部换成了2709。</p>
 <p>PS 请务必选择带有<code>sdcard-vfat-ext4</code>的镜像。</p>
 <p>PPS 由于国内网络的特殊性，可能导致下载奇慢，可以复制下载地址之后利用百度云的离线下载。</p>
-<img src="/posts/2016/06/28/RPi-Router/RPi-Router_1.png" title="RPi-Router_1.png">
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_1.png" title="RPi-Router_1.png"><span class="caption">RPi-Router_1.png</span>
 <p>下载到本地之后呢，我们要用读卡器把MicroSD卡连接上电脑，用 <code>lsblk -f</code> 查看一下SD卡的设备名，一般是/dev/sdb，如果你的系统自动挂载了SD卡，请务必用umount卸载。</p>
 <img src="/posts/2016/06/28/RPi-Router/RPi-Router_2.jpg" title="RPi-Router_2.jpg">
 <p>随后我们要用dd命令把img文件烧录进SD卡！命令如下：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"># dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/你的/img</span>文件<span class="hljs-regexp">/存放的/</span>路径<span class="hljs-regexp">/openwrt-15.05-brcm2708-bcm2708-sdcard-vfat-ext4.img of=/</span>dev<span class="hljs-regexp">/sd你的设备路径 conv=fsync</span><br></code></pre></td></tr></table></figure>
+<figure class="hljs highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"># dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/你的/img</span>文件<span class="hljs-regexp">/存放的/</span>路径<span class="hljs-regexp">/openwrt-15.05-brcm2708-bcm2708-sdcard-vfat-ext4.img of=/</span>dev<span class="hljs-regexp">/sd你的设备路径 conv=fsync</span><br></code></pre></td></tr></table></figure>
 <p>记住要用root用户或者sudo来执行才能具有权限！<strong>Pi2用户记得把2708换成2709！</strong></p>
 <p>PS 不要在意下图中有一个bs=2M的参数，那个是可选的！</p>
 <p>PPS 好久之前B+用OpenWrt不能启动的bug在15.05里已经修复啦！如果你还遇到接电源后红绿灯都长亮不灭不能启动的话，可以试试重新刷写一次镜像，一般都会有效。</p>

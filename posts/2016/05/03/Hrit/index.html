@@ -167,7 +167,7 @@
       <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>记得以前读过一篇文章，大意说是懒人推动了社会进步，觉得言之有理。你想，要不是因为原始人懒得天天找吃的，怎么会出现培养出的农作物？要不是人们懒得自己搬庄稼走路，怎么会驯化马？要不是人们懒得自己养马，怎么会出现汽车？</p>
 <a id="more"></a>
 <p>好了还是不要瞎扯了，总而言之对于我这么一个懒+强迫症晚期+半吊子程序员（？），当然在写网站的时候得把网站组织的有条理，所以肯定不能把所有的文章里的图片都堆到images/目录里就得了，幸好hexo提供了所谓的资源文件夹的方式，在新建Markdown文件的时候会自动建立同名的资源文件夹，只需编辑站点配置文件<code>_config.yml</code>开启如下项即可。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span>    <span class="hljs-comment">#开启资源文件夹</span><br></code></pre></td></tr></table></figure>
+<figure class="hljs highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span>    <span class="hljs-comment">#开启资源文件夹</span><br></code></pre></td></tr></table></figure>
 <p>OK!这时候我天真的觉得只要把图片按数字命名为1.jpg、2.png之类的丢到对应资源文件夹里即可！然而生活远没有这么美好……首先在资源文件夹里的图片如果想在文章和首页的摘要里都显示的话就不能简单的用Markdown引用图片的语法，必须要用hexo的<code>asset_img</code>标签。</p>
 <figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">asset_img</span> 图片名称 图片标题 %&#125;</span><span class="xml"></span><br></code></pre></td></tr></table></figure>
 <p>我开始方了，难道要我自己一个个手动打成这个标签……</p>

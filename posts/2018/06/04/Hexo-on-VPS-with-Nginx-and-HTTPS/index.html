@@ -169,7 +169,7 @@
 <p>要说我受害的经历能说好几篇博客，最常见的比如说昨天答辩 PPT 轮到我时候就崩溃了（我可以确定不是我 PPT 的问题，因为关掉所有的 PowerPoint 再打开就没问题了）（“再碰这辣鸡玩意我就是狗！”）。再比如说那个出了名不靠谱的自动更新，你见过更新更新失败回滚回滚失败的嘛？合着我一小时只能对着电脑发呆看你自爆？（当然软粉肯定不承认：“我们更新都成功了！”，这玩意还心诚则灵？反正我被坑了）。倒不是说它收购 GitHub 罪大恶极了，只不过是我自己觉得不舒服就是了，至于普罗大众该干什么干什么，不要管我。</p>
 <p>然后我就把我还算有价值的东西——我的网站，搬到了 VPS 上面，搬迁过程相对简单，用 git 做这个同步肯定是不现实的，因为你想像 GitHub 一样可以直接用 <code>hexo-deployer-git</code> push 的话，你需要建立的是裸仓库，也就是正常的 <code>.git</code> 目录里面的东西，很显然这不是网站内容。看了一圈其他的同步方式，rsync 看起来是最合适的一个了，然后就尝试了一下。</p>
 <h1 id="用-Rsync-上传-Hexo-生成的网页"><a href="#用-Rsync-上传-Hexo-生成的网页" class="headerlink" title="用 Rsync 上传 Hexo 生成的网页"></a>用 Rsync 上传 Hexo 生成的网页</h1><p>首先需要安装 <code>hexo-deployer-rsync</code>，另外也要在自己的电脑和 VPS 上面安装 <code>rsync</code>，首先进入你的 Hexo 站点目录，然后：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">$</span><span class="bash"> npm i -s hexo-deployer-rsync</span><br></code></pre></td></tr></table></figure>
+<figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">$</span><span class="bash"> npm i -s hexo-deployer-rsync</span><br></code></pre></td></tr></table></figure>
 <p>根据发行版不同使用不同的命令安装 <code>rsync</code>：</p>
 <p>Archlinux / Manjaro / Antergos：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> pacman -S rsync</span><br></code></pre></td></tr></table></figure>
