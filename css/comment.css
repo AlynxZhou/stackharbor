@@ -6,12 +6,13 @@
   height: 3em;
 }
 .comments .commentjs .comment-body {
-  width: 95%;
+  width: 85%;
 }
 .comments .commentjs .comment-body pre {
   background: #f6f8fa;
   padding: 1em;
   border-radius: 0.2em;
+  overflow: auto;
 }
 .comments .commentjs .button {
   padding: 0.3em 1em;
