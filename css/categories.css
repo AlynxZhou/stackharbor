@@ -1,15 +1,15 @@
-.categories-container .categories-counter {
+.categories .page-main .categories-counter {
   text-align: center;
   position: relative;
   font-size: 1.5em;
 }
-.categories-container .category-list-link {
+.categories .page-main .category-list-link {
   font-size: 1.2em;
 }
-.categories-container .category-list-link:active {
+.categories .page-main .category-list-link:active {
   top: 0.1em;
 }
-.categories-container .category-list-count {
+.categories .page-main .category-list-count {
   font-size: 1.2em;
   margin-left: 1em;
 }

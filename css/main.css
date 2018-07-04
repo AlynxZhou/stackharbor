@@ -54,17 +54,17 @@
   flex: 1 0 auto;
   width: 75%;
 }
-.main .main-container .content .index-post .post-header {
+.main .main-container .content .index-article .post-header {
   text-align: center;
 }
-.main .main-container .content .index-post .post-header .post-title-link {
+.main .main-container .content .index-article .post-header .post-title-link {
   display: inline-block;
   position: relative;
   text-decoration: none;
   border-bottom: none;
   color: #26272b;
 }
-.main .main-container .content .index-post .post-header .post-title-link::after {
+.main .main-container .content .index-article .post-header .post-title-link::after {
   content: " ";
   position: absolute;
   width: 100%;
@@ -84,7 +84,7 @@
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.main .main-container .content .index-post .post-header .post-title-link:hover::after {
+.main .main-container .content .index-article .post-header .post-title-link:hover::after {
   visibility: visible;
   -webkit-transform: scaleX(1);
   -moz-transform: scaleX(1);
@@ -92,13 +92,13 @@
   -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
-.main .main-container .content .index-post .post-header .post-title-link:active {
+.main .main-container .content .index-article .post-header .post-title-link:active {
   top: 0.1em;
 }
-.main .main-container .content .index-post .post-footer {
+.main .main-container .content .index-article .post-footer {
   text-align: center;
 }
-.main .main-container .content .index-post .post-footer .post-tags .post-tag {
+.main .main-container .content .index-article .post-footer .post-tags .post-tag {
   position: relative;
   margin: 0.5em;
   display: inline-block;
@@ -107,7 +107,7 @@
   padding: 0.15em;
   line-height: 1.2em;
 }
-.main .main-container .content .index-post .post-footer .post-tags .post-tag:active {
+.main .main-container .content .index-article .post-footer .post-tags .post-tag:active {
   top: 0.1em;
 }
 @media (max-width: 60em) {

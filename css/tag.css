@@ -1,10 +1,10 @@
-.tag-container .tag-title {
+.tag .tag-title {
   text-align: center;
 }
-.tag-container .tag-post {
+.tag .tag-article {
   text-align: center;
 }
-.tag-container .tag-post .post-title {
+.tag .tag-article .post-title {
   padding: 0;
   margin: 0;
 }

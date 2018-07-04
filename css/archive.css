@@ -1,13 +1,13 @@
-.archive-container .archive-counter {
+.archive .archive-counter {
   text-align: center;
 }
-.archive-container .archive-title {
+.archive .archive-title {
   text-align: center;
 }
-.archive-container .archive-post {
+.archive .archive-article {
   text-align: center;
 }
-.archive-container .archive-post .post-title {
+.archive .archive-article .post-title {
   padding: 0;
   margin: 0;
 }
