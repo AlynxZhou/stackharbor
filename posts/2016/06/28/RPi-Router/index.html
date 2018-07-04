@@ -208,9 +208,9 @@
 <h1 id="下载并刷入镜像"><a href="#下载并刷入镜像" class="headerlink" title="下载并刷入镜像"></a>下载并刷入镜像</h1><p>首先，我们要去<a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/brcm2708/" target="_blank" rel="noopener">OpenWrt的官网</a>获取官方编译好的img镜像。下面有两个子目录，pi1对应的是<code>bcm2708</code>，pi2对应的是<code>bcm2709</code>，点击进入之后点击 <code>openwrt-15.05.1-brcm2708-bcm2708-sdcard-vfat-ext4.img</code> 即可开始下载，pi2对应的只是把2708全部换成了2709。</p>
 <p>PS 请务必选择带有<code>sdcard-vfat-ext4</code>的镜像。</p>
 <p>PPS 由于国内网络的特殊性，可能导致下载奇慢，可以复制下载地址之后利用百度云的离线下载。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_1.png" title="RPi-Router_1.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_1.png" title="RPi-Router_1.png"></a><span class="caption">RPi-Router_1.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_1.png" title="RPi-Router_1.png">
 <p>下载到本地之后呢，我们要用读卡器把MicroSD卡连接上电脑，用 <code>lsblk -f</code> 查看一下SD卡的设备名，一般是/dev/sdb，如果你的系统自动挂载了SD卡，请务必用umount卸载。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_2.jpg" title="RPi-Router_2.jpg"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_2.jpg" title="RPi-Router_2.jpg"></a><span class="caption">RPi-Router_2.jpg</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_2.jpg" title="RPi-Router_2.jpg">
 <p>随后我们要用dd命令把img文件烧录进SD卡！命令如下：</p>
 <figure class="hljs highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"># dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/你的/img</span>文件<span class="hljs-regexp">/存放的/</span>路径<span class="hljs-regexp">/openwrt-15.05-brcm2708-bcm2708-sdcard-vfat-ext4.img of=/</span>dev<span class="hljs-regexp">/sd你的设备路径 conv=fsync</span><br></code></pre></td></tr></table></figure>
 <p>记住要用root用户或者sudo来执行才能具有权限！<strong>Pi2用户记得把2708换成2709！</strong></p>
@@ -243,7 +243,7 @@
 <p>最后再按n，一路回车默认即可。</p>
 <p>之后按a，选择1，将boot分区的可启动标志打开。</p>
 <p>按w退出并写入更改。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_6.png" title="RPi-Router_6.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_6.png" title="RPi-Router_6.png"></a><span class="caption">RPi-Router_6.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_6.png" title="RPi-Router_6.png">
 <p>接下来我们用mkfs格式化分区～这里boot分区必须是vfat格式，root分区必须是ext4格式，第三个分区可以随意，但我也格式化成ext4。</p>
 <figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> mkfs.vfat /dev/sdb1</span><br><span class="hljs-meta">#</span><span class="bash"> mkfs.ext4 /dev/sdb2</span><br><span class="hljs-meta">#</span><span class="bash"> mkfs.ext4 /dev/sdb3</span><br></code></pre></td></tr></table></figure>
 <p>接下来自然是把备份的文件放回去：</p>
@@ -280,17 +280,17 @@
 <h2 id="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"><a href="#编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄" class="headerlink" title="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"></a>编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄</h2><p>为什么要编译呢？因为pi是小众路由器，openwrt-dist没提供预编译版……</p>
 <p>首先我们要下载openwrt的sdk，就在你下载img的那个目录里，点击 <code>OpenWrt-SDK-15.05.1-brcm2708-bcm2708_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2</code> 下载这个压缩好的SDK，回来之后用 <code>tar -xpvjf</code> 解压之，进入解压后的目录。</p>
 <p>PS 老规矩，Pi2用户是bcm2709。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_17.png" title="RPi-Router_17.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_17.png" title="RPi-Router_17.png"></a><span class="caption">RPi-Router_17.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_17.png" title="RPi-Router_17.png">
 <p>有关编译工具链的问题，我在Gentoo Linux下直接就能编译，所以我也不知道需要哪些依赖，据我所知包括但不限于gcc，git，ulibc。</p>
 <p>下面我们来获取所需软件包的源码，这一步用到git：</p>
 <figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev</span><br><span class="hljs-meta">#</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/aa65535/openwrt-chinadns.git package/chinadns</span><br><span class="hljs-meta">#</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci</span><br></code></pre></td></tr></table></figure>
 {% asset_img RPi-Router_18.png RPi-Router_18.png %}
 <p>之后我们用menuconfig选择需要编译的软件包，熟悉Linux内核编译的人都会这个：</p>
 <figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> make menuconfig</span><br></code></pre></td></tr></table></figure>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_19.png" title="RPi-Router_19.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_19.png" title="RPi-Router_19.png"></a><span class="caption">RPi-Router_19.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_19.png" title="RPi-Router_19.png">
 <p>首先进入LuCI——Network里选择上带有ChinaDNS和shadowsocks的行（按空格使前面出现M），之后左右方向键切换下面到Exit，按空格以退回到首页，再切换到下面为Select，再进入Network，选中 <code>ChinaDNS</code> 和 <code>shadowsocks-libev-spec</code> 到M，之后切换下面到Save，保存之后退出。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_20.png" title="RPi-Router_20.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_20.png" title="RPi-Router_20.png"></a><span class="caption">RPi-Router_20.png</span>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_21.png" title="RPi-Router_21.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_21.png" title="RPi-Router_21.png"></a><span class="caption">RPi-Router_21.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_20.png" title="RPi-Router_20.png">
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_21.png" title="RPi-Router_21.png">
 <p>退出之后就可以用</p>
 <figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> make V=99</span><br></code></pre></td></tr></table></figure>
 <p>这条命令来编译啦，编译好的文件在bin/brcm2708/package/base/里，我们要想办法把它传到pi上，最简单的方法就是把pi关掉，卡接到电脑上，把文件随便拷到卡里的一个目录，之后再开机即可安装。</p>
@@ -303,12 +303,12 @@
 <p>下面浏览器进入LuCI，在服务里你就能看见Shadowsocks和ChinaDNS啦！</p>
 <p>首先进入Shadowsocks，把全局服务器选为<code>127.0.0.1#1080</code>，再把下面的UDP服务器设置为与全局服务器相同。</p>
 <p>之后下面的服务器配置添上<strong>你的ss服务器的配置</strong>，UDP转发<strong>勾选启用</strong>，被忽略IP列表选择<strong>ChinaDNS路由表</strong>。保存应用。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_23.jpg" title="RPi-Router_23.jpg"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_23.jpg" title="RPi-Router_23.jpg"></a><span class="caption">RPi-Router_23.jpg</span>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_24.png" title="RPi-Router_24.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_24.png" title="RPi-Router_24.png"></a><span class="caption">RPi-Router_24.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_23.jpg" title="RPi-Router_23.jpg">
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_24.png" title="RPi-Router_24.png">
 <p>接下来切换到ChinaDNS，勾选启用和启用双向配置。上游服务器改为 114.114.114.114,127.0.0.1#5300`。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_25.png" title="RPi-Router_25.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_25.png" title="RPi-Router_25.png"></a><span class="caption">RPi-Router_25.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_25.png" title="RPi-Router_25.png">
 <p>再切换到网络——DHCP/DNS，基本设置里的DNS转发填写<code>127.0.0.1#5353</code>，HOSTS和解析文件里<strong>勾选忽略解析文件</strong>。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_26.png" title="RPi-Router_26.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_26.png" title="RPi-Router_26.png"></a><span class="caption">RPi-Router_26.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_26.png" title="RPi-Router_26.png">
 <p>现在ss部署完成！</p>
 <h1 id="建立AP并调节WiFi"><a href="#建立AP并调节WiFi" class="headerlink" title="建立AP并调节WiFi"></a>建立AP并调节WiFi</h1><p>安装完成之后我们来开启wifi！首先这个必须要ssh连接上去了，电脑就是</p>
 <figure class="hljs highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-symbol">$</span> ssh root@你的<span class="hljs-built-in">pi</span>的ip地址<br></code></pre></td></tr></table></figure>
@@ -320,14 +320,14 @@
 <p>需要用vi编辑这个文件，不然wifi默认是关闭的（不会用vi/vim的同学悲剧了。。。很简单进去之后按i才可以开始编辑，编辑完按[Esc]再输入:wq即可保存，另外反正我是Emacser～别打我！）。</p>
 <figure class="hljs highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-meta">#</span><span class="bash"> vi /etc/config/wireless</span><br></code></pre></td></tr></table></figure>
 <p>注释掉<code>option disabled 1</code>的那一行（注释的意思就是在那一行开头输入个‘#’！你要会用vim直接把光标定位到那里，按dd把那行删了也行！）。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_27.png" title="RPi-Router_27.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_27.png" title="RPi-Router_27.png"></a><span class="caption">RPi-Router_27.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_27.png" title="RPi-Router_27.png">
 <p>现在系统——重启——执行重启，之后LuCI的网络里应该能看到无线了。点击<code>修改</code>来编辑一下。</p>
 <p>首先要注意wifi信道不能设置为auto，这是个bug。</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_28.png" title="RPi-Router_28.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_28.png" title="RPi-Router_28.png"></a><span class="caption">RPi-Router_28.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_28.png" title="RPi-Router_28.png">
 <p>下面的ESSID就是你的WiFi显示的名字，自己设定好。之后去无线安全，加密选择<code>WPA-PSK/WPA2-PSK Mixed Mode</code>，密码自然是你的密码咯～</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_29.png" title="RPi-Router_29.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_29.png" title="RPi-Router_29.png"></a><span class="caption">RPi-Router_29.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_29.png" title="RPi-Router_29.png">
 <p>接着就能搜索并连接到wifi了～</p>
-<a class="gallery-item" href="/posts/2016/06/28/RPi-Router/RPi-Router_30.png" title="RPi-Router_30.png"><img src="/posts/2016/06/28/RPi-Router/RPi-Router_30.png" title="RPi-Router_30.png"></a><span class="caption">RPi-Router_30.png</span>
+<img src="/posts/2016/06/28/RPi-Router/RPi-Router_30.png" title="RPi-Router_30.png">
 <h1 id="分离WAN口和LAN口。"><a href="#分离WAN口和LAN口。" class="headerlink" title="分离WAN口和LAN口。"></a>分离WAN口和LAN口。</h1><p>现在Wi-Fi和有线网卡都在LAN这个网段下，要做便携路由器自然要有个WAN口，首先你要通过Wi-Fi连接，再登陆LuCI，先去到网络——接口，点击添加新接口，接口名称输入<code>wan</code>，协议选择<code>pppoe</code>，之后再去修改LAN，把IP和WAN错开，比如我设置为<code>192.168.234.234</code>，再<strong>把网关和DNS都清空</strong>（因为接下来pi就是网关了喵～）之后在物理设置里<strong>取消勾选eth0</strong>，再把桥接也取消，保存！</p>
 <h1 id="连接ADSL开始工作"><a href="#连接ADSL开始工作" class="headerlink" title="连接ADSL开始工作"></a>连接ADSL开始工作</h1><p>把Pi和ADSL Modem连接，开机，即可作为无线路由器使用！</p>
 <h1 id="已知问题和注意事项"><a href="#已知问题和注意事项" class="headerlink" title="已知问题和注意事项"></a>已知问题和注意事项</h1><ul>
