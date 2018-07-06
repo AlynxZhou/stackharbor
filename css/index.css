@@ -491,7 +491,28 @@
 .comments .commentjs {
   padding: 2em;
 }
-.comments .commentjs .avatar {
+.comments .commentjs .avatar-parent-child a {
+  text-decoration: none;
+  border-bottom: none;
+  display: block;
+  text-align: center;
+}
+.comments .commentjs .avatar-parent-child a img {
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  border: 0.15em solid #ccc;
+}
+.comments .commentjs .avatar-parent-child a:hover {
+  border-bottom: none;
+}
+.comments .commentjs .avatar-parent-child a:hover img {
+  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+}
+.comments .commentjs .avatar-parent-child .avatar {
   width: 3em;
   height: 3em;
 }
