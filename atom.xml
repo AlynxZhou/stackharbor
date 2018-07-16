@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sh.alynx.xyz/"/>
-  <updated>2018-07-06T01:20:42.091Z</updated>
+  <updated>2018-07-16T11:29:52.343Z</updated>
   <id>https://sh.alynx.xyz/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Automata: A Story of Love and Loves</title>
+    <link href="https://sh.alynx.xyz/posts/2018/07/16/Automata/"/>
+    <id>https://sh.alynx.xyz/posts/2018/07/16/Automata/</id>
+    <published>2018-07-16T09:39:01.000Z</published>
+    <updated>2018-07-16T11:29:52.343Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/posts/2018/07/16/Automata/Automata.jpg&quot; title=&quot;Automata.jpg&quot;&gt;
+&lt;blockquote class=&quot;centerquote&quot;&gt;我没有办法评价这款游戏&lt;br&gt;因为我觉得我被结结实实地折腾了一回&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="游戏" scheme="https://sh.alynx.xyz/categories/%E6%B8%B8%E6%88%8F/"/>
+    
+    
+      <category term="游戏" scheme="https://sh.alynx.xyz/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+      <category term="尼尔：机械纪元" scheme="https://sh.alynx.xyz/tags/%E5%B0%BC%E5%B0%94%EF%BC%9A%E6%9C%BA%E6%A2%B0%E7%BA%AA%E5%85%83/"/>
+    
+      <category term="NieR: Automata" scheme="https://sh.alynx.xyz/tags/NieR-Automata/"/>
+    
+  </entry>
   
   <entry>
     <title>在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</title>
@@ -483,32 +508,6 @@
     <summary type="html">
     
       &lt;p&gt;半音阶口琴，&lt;strong&gt;sister’s noise&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Sister-s-Noise/sister-s-noise.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
-    
-      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
-    
-      <category term="曲谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/"/>
-    
-    
-      <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
-    
-      <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>口琴曲谱：LEVEL5 -judgelight-</title>
-    <link href="https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/"/>
-    <id>https://sh.alynx.xyz/posts/2017/02/23/LEVEL5-judgelight/</id>
-    <published>2017-02-23T03:46:46.000Z</published>
-    <updated>2018-05-05T17:02:16.150Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;半音阶口琴，&lt;strong&gt;LEVEL5 -judgelight-&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/LEVEL5-judgelight/LEVEL5-judgelight.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;。&lt;/p&gt;
     
     </summary>
     
