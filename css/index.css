@@ -298,7 +298,7 @@
   margin: 0.5em;
   display: inline-block;
   text-decoration: none;
-  color: $color-link-index-button;
+  color: #fff;
   padding: 0.15em;
   line-height: 1.2em;
 }
@@ -489,7 +489,7 @@
   line-height: 2em;
 }
 .comments .commentjs {
-  padding: 2em;
+  padding: 1em 2em;
 }
 .comments .commentjs .avatar-parent-child a {
   text-decoration: none;
@@ -705,59 +705,6 @@ hr {
   background: -ms-repeating-linear-gradient(135deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
   background: repeating-linear-gradient(-45deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
 }
-code {
-  margin: 0.05em 0.05em;
-  color: #fc6423;
-  padding: 0.125em 0.25em;
-  overflow: auto;
-  word-wrap: break-word;
-  border-radius: 0.2em;
-  font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
-  font-size: 16px;
-  background: #f8f8f8;
-  -webkit-font-feature-settings: "liga" 0; /* No variation */
-  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
-  font-feature-settings: "liga" 0; /* No variation */
-}
-figure {
-  overflow: auto;
-  border-radius: 0.2em;
-  padding: 0.5em;
-  margin: 0.5em;
-  -webkit-font-feature-settings: "liga" 0; /* No variation */
-  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
-  font-feature-settings: "liga" 0; /* No variation */
-}
-figure pre {
-  font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
-  font-size: 16px;
-  line-height: 1.5em;
-  padding: 0;
-  margin: 0;
-}
-figure .gutter {
-  text-align: right;
-  padding-right: 0.5em;
-  border-right: 0.1em dotted #ccc;
-}
-figure .text {
-  padding-left: 0.5em;
-}
-blockquote {
-  display: block;
-  position: relative;
-  margin: 1em;
-  word-wrap: break-word;
-  padding: 0 1em;
-  border-left: 0.25em solid #ccc;
-}
-blockquote p {
-  color: #666;
-}
 article table {
   display: block;
   width: 100%;
@@ -790,6 +737,68 @@ article table tbody tr:nth-child(2n) td {
 }
 article table tbody tr:nth-child(2n) td:nth-child(2n) {
   background: #eee;
+}
+code {
+  margin: 0.05em 0.05em;
+  color: #fc6423;
+  padding: 0.125em 0.25em;
+  overflow: auto;
+  word-wrap: break-word;
+  border-radius: 0.2em;
+  font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
+  font-size: 16px;
+  background: #f8f8f8;
+  -webkit-font-feature-settings: "liga" 0; /* No variation */
+  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
+  font-feature-settings: "liga" 0; /* No variation */
+}
+figure {
+  overflow: auto;
+  border-radius: 0.2em;
+  padding: 0.5em;
+  margin: 0.5em;
+  -webkit-font-feature-settings: "liga" 0; /* No variation */
+  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
+  font-feature-settings: "liga" 0; /* No variation */
+}
+figure table tbody tr {
+  background: transparent;
+}
+figure table tbody tr td {
+  border: none;
+}
+figure table tbody tr td:nth-child(2n) {
+  background: transparent;
+}
+figure table tbody tr td.gutter {
+  text-align: right;
+  padding-right: 0.5em;
+  border-right: 0.1em dotted #ccc;
+}
+figure table tbody tr td pre {
+  font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
+  font-size: 16px;
+  line-height: 1.5em;
+  padding: 0;
+  margin: 0;
+}
+figure table tbody tr td pre code.text {
+  padding-left: 0.5em;
+}
+blockquote {
+  display: block;
+  position: relative;
+  margin: 1em;
+  word-wrap: break-word;
+  padding: 0 1em;
+  border-left: 0.25em solid #ccc;
+}
+blockquote p {
+  color: #666;
 }
 .centerquote {
   position: relative;

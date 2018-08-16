@@ -9,7 +9,7 @@
   margin: 0.5em;
   display: inline-block;
   text-decoration: none;
-  color: $color-link-index-button;
+  color: #fff;
   padding: 0.15em;
   line-height: 1.2em;
 }
