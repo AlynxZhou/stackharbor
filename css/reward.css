@@ -20,7 +20,7 @@
 }
 .reward button {
   cursor: pointer;
-  border: 0;
+  border: none;
   outline: 0;
   padding: 0em 0.5em;
   margin: 0;

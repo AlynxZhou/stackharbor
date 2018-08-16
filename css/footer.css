@@ -90,9 +90,10 @@
 .footer .back-to-top .svg-inline--fa {
   margin: 0;
 }
-.footer .back-to-top a {
+.footer .back-to-top button {
   position: relative;
-  border-bottom: none;
+  border: none;
+  outline: 0;
   background: #ccc;
   color: #666;
   overflow: hidden;
@@ -104,10 +105,10 @@
   border-bottom-right-radius: 0.2em;
   font-size: 2em;
 }
-.footer .back-to-top a:hover {
+.footer .back-to-top button:hover {
   color: #006bde;
 }
-.footer .back-to-top a:active {
+.footer .back-to-top button:active {
   top: 0;
 }
 @media (max-width: 40em) {
