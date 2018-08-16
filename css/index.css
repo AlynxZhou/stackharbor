@@ -758,6 +758,39 @@ blockquote {
 blockquote p {
   color: #666;
 }
+article table {
+  display: block;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+article table thead tr {
+  background: #fff;
+}
+article table thead tr th {
+  padding: 0.4em 0.7em;
+  border: 0.1em solid #999;
+}
+article table tbody tr {
+  background: #eee;
+}
+article table tbody tr td {
+  padding: 0.4em 0.7em;
+  border: 0.1em solid #ddd;
+}
+article table tbody tr td:nth-child(2n) {
+  background: #fff;
+}
+article table tbody tr:nth-child(2n) {
+  background: #fff;
+}
+article table tbody tr:nth-child(2n) td {
+  padding: 0.4em 0.7em;
+  border: 0.1em solid #ddd;
+}
+article table tbody tr:nth-child(2n) td:nth-child(2n) {
+  background: #eee;
+}
 .centerquote {
   position: relative;
   margin: 2em;
@@ -836,7 +869,7 @@ blockquote p {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 0.5em 2em;
+  padding: 0.5em 1em;
   margin: 0.5em;
 }
 .card:hover {
