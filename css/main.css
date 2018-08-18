@@ -110,6 +110,42 @@
 .main .main-container .content .index-article .post-footer .post-tags .post-tag:active {
   top: 0.1em;
 }
+.main .main-container .content .pagination {
+  margin: 1em 0;
+  padding: 1em 0;
+  display: block;
+  text-align: center;
+  color: #666;
+}
+.main .main-container .content .pagination .page-number,
+.main .main-container .content .pagination .extend {
+  overflow: hidden;
+  font-size: 1.2em;
+  padding: 0.5em;
+  margin: 0 0.5em;
+  text-decoration: none;
+  border-bottom: 0.15em solid #666;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.main .main-container .content .pagination .page-number:hover,
+.main .main-container .content .pagination .extend:hover {
+  border-bottom: 0.15em solid #006bde;
+}
+.main .main-container .content .pagination .page-number.current,
+.main .main-container .content .pagination .extend.current {
+  color: #006bde;
+  border-bottom: 0.15em solid #006bde;
+  border-top: 0.07em solid #006bde;
+}
+.main .main-container .content .pagination .space {
+  font-size: 1em;
+  margin: 0 0.5em;
+  color: #666;
+}
 @media (max-width: 60em) {
   .main .main-container {
     -webkit-box-orient: vertical;

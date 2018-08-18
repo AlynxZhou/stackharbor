@@ -1,5 +1,4 @@
 .reward {
-  padding: 0.5em 0;
   margin: 1em auto;
   width: 90%;
   text-align: center;
@@ -23,7 +22,7 @@
   border: none;
   outline: 0;
   padding: 0em 0.5em;
-  margin: 0;
+  margin: 0.5em 0;
   background: #ff2a2a;
   color: #fff;
   border-radius: 0.2em;
