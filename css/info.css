@@ -2,7 +2,7 @@
   text-align: center;
 }
 .info .author-avatar {
-  max-width: 90%;
+  width: 90%;
   display: block;
   margin: 1em auto;
   border: 0.3em solid #fff;

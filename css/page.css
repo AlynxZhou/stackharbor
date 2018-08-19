@@ -168,7 +168,7 @@
   top: 0.1em;
 }
 .page .page-nav .page-nav-next {
-  max-width: 45%;
+  width: 45%;
   text-align: left;
 }
 .page .page-nav .page-nav-next a {
@@ -180,7 +180,7 @@
   justify-content: flex-start;
 }
 .page .page-nav .page-nav-prev {
-  max-width: 45%;
+  width: 45%;
   text-align: right;
 }
 .page .page-nav .page-nav-prev a {
