@@ -91,7 +91,6 @@
   margin: 0;
 }
 .footer .back-to-top button {
-  position: relative;
   border: none;
   outline: 0;
   background: #ccc;
@@ -107,9 +106,6 @@
 }
 .footer .back-to-top button:hover {
   color: #006bde;
-}
-.footer .back-to-top button:active {
-  top: 0;
 }
 @media (max-width: 40em) {
   .footer .footer-container {

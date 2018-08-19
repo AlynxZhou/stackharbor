@@ -355,7 +355,6 @@
   margin: 0;
 }
 .footer .back-to-top button {
-  position: relative;
   border: none;
   outline: 0;
   background: #ccc;
@@ -371,9 +370,6 @@
 }
 .footer .back-to-top button:hover {
   color: #006bde;
-}
-.footer .back-to-top button:active {
-  top: 0;
 }
 @media (max-width: 40em) {
   .footer .footer-container {
@@ -729,6 +725,7 @@ blockquote p {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  border-radius: 0.2em;
   padding: 0.5em 1em;
   margin: 0.5em;
 }
