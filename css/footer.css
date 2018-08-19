@@ -48,7 +48,7 @@
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   text-align: left;
-  max-width: 50%;
+  width: 50%;
 }
 .footer .footer-container .footer-right {
   -webkit-box-flex: 1;
@@ -59,7 +59,7 @@
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   text-align: right;
-  max-width: 50%;
+  width: 50%;
 }
 .footer .footer-container .footer-right .custom-info {
   width: 100%;
