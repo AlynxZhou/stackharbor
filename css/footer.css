@@ -87,9 +87,6 @@
   display: block;
   text-align: center;
 }
-.footer .back-to-top .svg-inline--fa {
-  margin: 0;
-}
 .footer .back-to-top button {
   border: none;
   outline: 0;
@@ -98,7 +95,7 @@
   overflow: hidden;
   display: inline-block;
   margin: 0 auto;
-  padding: 0 1em;
+  padding: 0 0.7em;
   cursor: pointer;
   border-bottom-left-radius: 0.2em;
   border-bottom-right-radius: 0.2em;
@@ -127,10 +124,10 @@
   }
   .footer .footer-container .footer-left {
     text-align: center;
-    max-width: 100%;
+    width: auto;
   }
   .footer .footer-container .footer-right {
     text-align: center;
-    max-width: 100%;
+    width: auto;
   }
 }
