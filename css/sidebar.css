@@ -103,7 +103,8 @@
   text-align: center;
   font-size: 1.5em;
   color: #fff;
-  background: #fc6423;
+  background: #ff2a2a;
+  border: 0.1em solid #f5c6cb;
   padding: 0.2em;
   line-height: 1.25em;
 }
@@ -124,7 +125,7 @@
   height: 2.5em;
   display: block;
   text-align: center;
-  background: #006bde;
+  background: #36e;
   color: #fff;
   padding-top: 0.5em;
 }
@@ -133,7 +134,7 @@
   height: 1.8em;
   border: none;
   border-bottom: 0.1em dotted #fff;
-  background: #006bde;
+  background: #36e;
   color: #fff;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
@@ -178,8 +179,8 @@
   padding-bottom: 1em;
 }
 .sidebar .post-toc .toc-link.active {
-  color: #006bde;
-  border-bottom: 0.05em solid #006bde;
+  color: #36e;
+  border-bottom: 0.05em solid #36e;
 }
 .sidebar hr {
   background: -webkit-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);

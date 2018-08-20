@@ -18,14 +18,13 @@
 .reward .qr div span {
   display: block;
 }
-.reward button {
+.reward .button {
   cursor: pointer;
   border: none;
   outline: 0;
   padding: 0em 0.5em;
   margin: 0.5em 0;
   background: #ff2a2a;
-  color: #fff;
-  border-radius: 0.2em;
+  border: 0.1em solid #f5c6cb;
   line-height: 2em;
 }

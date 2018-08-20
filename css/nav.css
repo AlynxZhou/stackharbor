@@ -5,8 +5,8 @@
   background: #33363b;
   -webkit-box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
-  border-top-left-radius: 0.2em;
-  border-top-right-radius: 0.2em;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
   display: block;
 }
 .nav ul {

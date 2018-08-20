@@ -114,8 +114,8 @@
   background: #33363b;
   -webkit-box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
-  border-top-left-radius: 0.2em;
-  border-top-right-radius: 0.2em;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
   display: block;
 }
 .nav ul {
@@ -205,8 +205,8 @@
   box-sizing: border-box;
   -webkit-box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
-  border-bottom-left-radius: 0.2em;
-  border-bottom-right-radius: 0.2em;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -361,12 +361,12 @@
   margin: 0 auto;
   padding: 0 0.7em;
   cursor: pointer;
-  border-bottom-left-radius: 0.2em;
-  border-bottom-right-radius: 0.2em;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
   font-size: 2em;
 }
 .footer .back-to-top button:hover {
-  color: #006bde;
+  color: #36e;
 }
 @media (max-width: 40em) {
   .footer .footer-container {
@@ -488,15 +488,14 @@ a {
   transition: 0.3s ease-in-out;
 }
 a:hover {
-  color: #006bde;
-  border-bottom: 0.05em solid #006bde;
+  color: #36e;
+  border-bottom: 0.05em solid #36e;
 }
 a:active {
   top: 0.1em;
 }
 a.gallery-item,
 a.img-link {
-  text-decoration: none;
   border-bottom: none;
   display: block;
   margin: 1em 0 0 0;
@@ -520,6 +519,12 @@ a.img-link:hover img {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
+.caption {
+  color: #666;
+  display: block;
+  text-align: center;
+  margin: 0 0 1em 0;
+}
 a.button,
 button.button {
   position: relative;
@@ -529,7 +534,7 @@ button.button {
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   text-decoration: none;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
   -webkit-transform-origin: 50%;
   -moz-transform-origin: 50%;
   -o-transform-origin: 50%;
@@ -540,6 +545,8 @@ button.button {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   color: #fff;
+  background: #999;
+  border: 0.1em solid #ddd;
 }
 a.button:hover,
 button.button:hover {
@@ -606,7 +613,7 @@ code {
   padding: 0.125em 0.25em;
   overflow: auto;
   word-wrap: break-word;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
   font-family: "Monaco for Powerline", Monaco, Menlo, Consolas, monospace;
   font-size: 16px;
   background: #f8f8f8;
@@ -618,7 +625,7 @@ code {
 }
 figure {
   overflow: auto;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
   padding: 0.5em;
   margin: 1em 0;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
@@ -680,35 +687,28 @@ blockquote p {
 .centerquote div {
   text-align: center;
 }
-.alert-red {
-  text-align: center;
-  margin: 1em 0;
-  padding: 0.5em;
-  border: 0.1em solid transparent;
-  border-radius: 0.2em;
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-}
-.alert-green {
-  text-align: center;
-  margin: 1em 0;
-  padding: 0.5em;
-  border: 0.1em solid transparent;
-  border-radius: 0.2em;
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-}
+.alert-red,
+.alert-green,
 .alert-blue {
   text-align: center;
   margin: 1em 0;
   padding: 0.5em;
-  border: 0.1em solid transparent;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
+}
+.alert-red {
+  color: #721c24;
+  border: 0.1em solid #f5c6cb;
+  background-color: #f8d7da;
+}
+.alert-green {
+  color: #155724;
+  border: 0.1em solid #c3e6cb;
+  background-color: #d4edda;
+}
+.alert-blue {
   color: #004085;
+  border: 0.1em solid #b8daff;
   background-color: #cce5ff;
-  border-color: #b8daff;
 }
 .card {
   display: block;
@@ -721,7 +721,7 @@ blockquote p {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
   padding: 0.5em 1em;
   margin: 0.5em;
 }

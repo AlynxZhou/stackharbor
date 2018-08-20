@@ -32,12 +32,13 @@
 .comments .commentjs .comment-body pre {
   background: #f6f8fa;
   padding: 1em;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
   overflow: auto;
 }
 .comments .commentjs .button {
   padding: 0.3em 1em;
   background: #ff2a2a;
+  border: 0.1em solid #f5c6cb;
 }
 .page .page-title {
   text-align: center;
@@ -75,13 +76,13 @@
 }
 .page .pagination .page-number:hover,
 .page .pagination .extend:hover {
-  border-bottom: 0.15em solid #006bde;
+  border-bottom: 0.15em solid #36e;
 }
 .page .pagination .page-number.current,
 .page .pagination .extend.current {
-  color: #006bde;
-  border-bottom: 0.15em solid #006bde;
-  border-top: 0.07em solid #006bde;
+  color: #36e;
+  border-bottom: 0.15em solid #36e;
+  border-top: 0.07em solid #36e;
 }
 .page .pagination .space {
   font-size: 1em;
