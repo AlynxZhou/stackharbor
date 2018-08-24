@@ -614,7 +614,7 @@ code {
   overflow: auto;
   word-wrap: break-word;
   border-radius: 0.3em;
-  font-family: Monaco, Menlo, Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+  font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   font-size: 16px;
   background: #f8f8f8;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
@@ -652,7 +652,7 @@ figure table tbody tr td.gutter {
   border-right: 0.1em dotted #ccc;
 }
 figure table tbody tr td pre {
-  font-family: Monaco, Menlo, Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+  font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   font-size: 16px;
   line-height: 1.5em;
   padding: 0;
