@@ -130,6 +130,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 int main(int argc, char *argv[])
 {
 	glfwInit();
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	unsigned int width = 800;
 	unsigned int height = 600;
 	GLFWwindow *window = glfwCreateWindow(width, height, "learn-gles", NULL, NULL);
@@ -162,9 +163,9 @@ int main(int argc, char *argv[])
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
 	glUseProgram(0);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -175,8 +176,8 @@ int main(int argc, char *argv[])
 		glUseProgram(program);
 		glBindVertexArray(vertex_array);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glBindVertexArray(0);
 		glUseProgram(0);
+		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
 	}
@@ -185,6 +186,7 @@ int main(int argc, char *argv[])
 	glDeleteVertexArrays(1, &vertex_array);
 	glDeleteProgram(program);
 
+	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
 }
