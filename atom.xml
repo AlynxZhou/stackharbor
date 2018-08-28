@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sh.alynx.xyz/"/>
-  <updated>2018-07-30T13:55:50.881Z</updated>
+  <updated>2018-08-28T03:36:03.665Z</updated>
   <id>https://sh.alynx.xyz/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习 OpenGL 1</title>
+    <link href="https://sh.alynx.xyz/posts/2018/08/28/Learn-OpenGL-1/"/>
+    <id>https://sh.alynx.xyz/posts/2018/08/28/Learn-OpenGL-1/</id>
+    <published>2018-08-28T00:21:50.000Z</published>
+    <updated>2018-08-28T03:36:03.665Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我花了好久来阅读和实践 &lt;a href=&quot;https://learnopengl-cn.github.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Learn OpenGL CN&lt;/a&gt; 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="OpenGL" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/OpenGL/"/>
+    
+    
+      <category term="OpenGL" scheme="https://sh.alynx.xyz/tags/OpenGL/"/>
+    
+      <category term="C" scheme="https://sh.alynx.xyz/tags/C/"/>
+    
+      <category term="编程" scheme="https://sh.alynx.xyz/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Automata: A Story of Love and Lives</title>
@@ -495,32 +523,6 @@
       <category term="C语言" scheme="https://sh.alynx.xyz/tags/C%E8%AF%AD%E8%A8%80/"/>
     
       <category term="GDB" scheme="https://sh.alynx.xyz/tags/GDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>口琴曲谱：sister&#39;s noise</title>
-    <link href="https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/"/>
-    <id>https://sh.alynx.xyz/posts/2017/02/23/Sister-s-Noise/</id>
-    <published>2017-02-23T03:53:38.000Z</published>
-    <updated>2018-05-05T17:02:16.173Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;半音阶口琴，&lt;strong&gt;sister’s noise&lt;/strong&gt; 数字谱，喵自整理版，&lt;a href=&quot;/posts/2017/02/23/Sister-s-Noise/sister-s-noise.txt&quot;&gt;txt下载点击这里&lt;/a&gt;，&lt;a href=&quot;/posts/2017/02/23/Music-Score/&quot;&gt;读谱方式点击这里&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/"/>
-    
-      <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/"/>
-    
-      <category term="曲谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/"/>
-    
-    
-      <category term="半音阶口琴" scheme="https://sh.alynx.xyz/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/"/>
-    
-      <category term="曲谱" scheme="https://sh.alynx.xyz/tags/%E6%9B%B2%E8%B0%B1/"/>
     
   </entry>
   
