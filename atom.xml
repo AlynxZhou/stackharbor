@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sh.alynx.xyz/"/>
-  <updated>2018-08-28T04:15:00.499Z</updated>
+  <updated>2018-08-29T04:55:51.361Z</updated>
   <id>https://sh.alynx.xyz/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>学习 OpenGL 1</title>
-    <link href="https://sh.alynx.xyz/posts/2018/08/28/Learn-OpenGL-1/"/>
-    <id>https://sh.alynx.xyz/posts/2018/08/28/Learn-OpenGL-1/</id>
+    <link href="https://sh.alynx.xyz/posts/Learn-OpenGL-1/"/>
+    <id>https://sh.alynx.xyz/posts/Learn-OpenGL-1/</id>
     <published>2018-08-28T00:21:50.000Z</published>
-    <updated>2018-08-28T04:15:00.499Z</updated>
+    <updated>2018-08-29T04:55:51.361Z</updated>
     
     <summary type="html">
     
@@ -46,14 +46,14 @@
   
   <entry>
     <title>Automata: A Story of Love and Lives</title>
-    <link href="https://sh.alynx.xyz/posts/2018/07/16/Automata/"/>
-    <id>https://sh.alynx.xyz/posts/2018/07/16/Automata/</id>
+    <link href="https://sh.alynx.xyz/posts/Automata/"/>
+    <id>https://sh.alynx.xyz/posts/Automata/</id>
     <published>2018-07-16T09:39:01.000Z</published>
-    <updated>2018-07-30T13:55:50.881Z</updated>
+    <updated>2018-08-29T05:01:29.795Z</updated>
     
     <summary type="html">
     
-      &lt;img src=&quot;/posts/2018/07/16/Automata/Automata.jpg&quot; title=&quot;Automata.jpg&quot;&gt;
+      &lt;p&gt;&lt;img src=&quot;/posts/Automata/Automata.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;blockquote class=&quot;centerquote&quot;&gt;我没有办法评价这款游戏&lt;br&gt;因为我觉得我被结结实实地折腾了一回&lt;/blockquote&gt;
     
     </summary>
@@ -71,8 +71,8 @@
   
   <entry>
     <title>在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</title>
-    <link href="https://sh.alynx.xyz/posts/2018/06/04/Hexo-on-VPS-with-Nginx-and-HTTPS/"/>
-    <id>https://sh.alynx.xyz/posts/2018/06/04/Hexo-on-VPS-with-Nginx-and-HTTPS/</id>
+    <link href="https://sh.alynx.xyz/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/"/>
+    <id>https://sh.alynx.xyz/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/</id>
     <published>2018-06-04T08:21:17.000Z</published>
     <updated>2018-08-19T13:47:08.199Z</updated>
     
@@ -99,8 +99,8 @@
   
   <entry>
     <title>无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</title>
-    <link href="https://sh.alynx.xyz/posts/2018/05/05/Endless-ARIA/"/>
-    <id>https://sh.alynx.xyz/posts/2018/05/05/Endless-ARIA/</id>
+    <link href="https://sh.alynx.xyz/posts/Endless-ARIA/"/>
+    <id>https://sh.alynx.xyz/posts/Endless-ARIA/</id>
     <published>2018-05-05T15:49:53.000Z</published>
     <updated>2018-07-04T15:57:46.718Z</updated>
     
@@ -130,8 +130,8 @@
   
   <entry>
     <title>GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</title>
-    <link href="https://sh.alynx.xyz/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/"/>
-    <id>https://sh.alynx.xyz/posts/2018/05/02/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
+    <link href="https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/"/>
+    <id>https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
     <published>2018-05-02T12:30:48.000Z</published>
     <updated>2018-05-05T17:02:32.536Z</updated>
     
@@ -159,8 +159,8 @@
   
   <entry>
     <title>写给新手的 Linux 手册 1</title>
-    <link href="https://sh.alynx.xyz/posts/2018/03/25/Linux-Manual-for-Newbies-1/"/>
-    <id>https://sh.alynx.xyz/posts/2018/03/25/Linux-Manual-for-Newbies-1/</id>
+    <link href="https://sh.alynx.xyz/posts/Linux-Manual-for-Newbies-1/"/>
+    <id>https://sh.alynx.xyz/posts/Linux-Manual-for-Newbies-1/</id>
     <published>2018-03-25T12:24:45.000Z</published>
     <updated>2018-05-05T17:02:32.106Z</updated>
     
@@ -184,8 +184,8 @@
   
   <entry>
     <title>Kalafina, My Music Life</title>
-    <link href="https://sh.alynx.xyz/posts/2018/03/13/Kalafina-My-Music-Life/"/>
-    <id>https://sh.alynx.xyz/posts/2018/03/13/Kalafina-My-Music-Life/</id>
+    <link href="https://sh.alynx.xyz/posts/Kalafina-My-Music-Life/"/>
+    <id>https://sh.alynx.xyz/posts/Kalafina-My-Music-Life/</id>
     <published>2018-03-13T13:21:52.000Z</published>
     <updated>2018-05-07T08:46:37.334Z</updated>
     
@@ -208,10 +208,10 @@
   
   <entry>
     <title>コラージュ（卫宫家今天的饭 ED）曲谱</title>
-    <link href="https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/"/>
-    <id>https://sh.alynx.xyz/posts/2018/02/04/Emiya-Menu-ED/</id>
+    <link href="https://sh.alynx.xyz/posts/Emiya-Menu-ED/"/>
+    <id>https://sh.alynx.xyz/posts/Emiya-Menu-ED/</id>
     <published>2018-02-04T04:18:45.000Z</published>
-    <updated>2018-05-05T17:02:16.150Z</updated>
+    <updated>2018-08-29T04:55:51.361Z</updated>
     
     <summary type="html">
     
@@ -238,8 +238,8 @@
   
   <entry>
     <title>CoffeeScript 的静态方法和静态变量（类方法和类变量）</title>
-    <link href="https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/"/>
-    <id>https://sh.alynx.xyz/posts/2018/01/26/Coffee-Static-Varible-Method/</id>
+    <link href="https://sh.alynx.xyz/posts/Coffee-Static-Varible-Method/"/>
+    <id>https://sh.alynx.xyz/posts/Coffee-Static-Varible-Method/</id>
     <published>2018-01-26T11:04:33.000Z</published>
     <updated>2018-05-05T17:02:16.150Z</updated>
     
@@ -264,14 +264,14 @@
   
   <entry>
     <title>StackHarbor的2017尾记</title>
-    <link href="https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/"/>
-    <id>https://sh.alynx.xyz/posts/2017/12/31/2017-Tail/</id>
+    <link href="https://sh.alynx.xyz/posts/2017-Tail/"/>
+    <id>https://sh.alynx.xyz/posts/2017-Tail/</id>
     <published>2017-12-31T14:18:57.000Z</published>
-    <updated>2018-05-05T17:02:16.150Z</updated>
+    <updated>2018-08-29T04:55:51.361Z</updated>
     
     <summary type="html">
     
-      &lt;img src=&quot;/posts/2017/12/31/2017-Tail/NJU.jpg&quot; title=&quot;NJU.jpg&quot;&gt;
+      &lt;p&gt;&lt;img src=&quot;/posts/2017-Tail/NJU.jpg&quot; alt=&quot;NJU.jpg&quot;&gt;&lt;/p&gt;
 &lt;p&gt;回到住处，掀出电脑，拉开在超市买的一听可口可乐的拉环，还有一个半小时，现在该写2017年的年终总结了。时间刚刚好。&lt;/p&gt;
     
     </summary>
@@ -287,15 +287,14 @@
   
   <entry>
     <title>忧从中来，不可断绝</title>
-    <link href="https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/"/>
-    <id>https://sh.alynx.xyz/posts/2017/11/11/Song-And-Sadness/</id>
+    <link href="https://sh.alynx.xyz/posts/Song-And-Sadness/"/>
+    <id>https://sh.alynx.xyz/posts/Song-And-Sadness/</id>
     <published>2017-11-11T13:18:51.000Z</published>
-    <updated>2018-05-05T17:02:16.173Z</updated>
+    <updated>2018-08-29T04:55:51.361Z</updated>
     
     <summary type="html">
     
-      &lt;img src=&quot;/posts/2017/11/11/Song-And-Sadness/Sadness.jpg&quot; title=&quot;Sadness.jpg&quot;&gt;
-&lt;p&gt;那个弹吉他的人在我的隔壁。&lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;/posts/Song-And-Sadness/Sadness.jpg&quot; alt=&quot;Sadness.jpg&quot;&gt;&lt;br&gt;那个弹吉他的人在我的隔壁。&lt;/p&gt;
     
     </summary>
     
@@ -312,8 +311,8 @@
   
   <entry>
     <title>冬天来了</title>
-    <link href="https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/"/>
-    <id>https://sh.alynx.xyz/posts/2017/10/29/Winter-is-Coming/</id>
+    <link href="https://sh.alynx.xyz/posts/Winter-is-Coming/"/>
+    <id>https://sh.alynx.xyz/posts/Winter-is-Coming/</id>
     <published>2017-10-29T13:54:41.000Z</published>
     <updated>2018-05-05T17:02:16.173Z</updated>
     
@@ -328,14 +327,14 @@
   
   <entry>
     <title>我生气了！！！</title>
-    <link href="https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/"/>
-    <id>https://sh.alynx.xyz/posts/2017/10/08/I-Am-Angry/</id>
+    <link href="https://sh.alynx.xyz/posts/I-Am-Angry/"/>
+    <id>https://sh.alynx.xyz/posts/I-Am-Angry/</id>
     <published>2017-10-08T14:14:00.000Z</published>
-    <updated>2018-05-05T17:02:15.740Z</updated>
+    <updated>2018-08-29T04:55:51.361Z</updated>
     
     <summary type="html">
     
-      &lt;img src=&quot;/posts/2017/10/08/I-Am-Angry/Angry.jpg&quot; title=&quot;Angry.jpg&quot;&gt;
+      &lt;p&gt;&lt;img src=&quot;/posts/I-Am-Angry/Angry.jpg&quot; alt=&quot;Angry.jpg&quot;&gt;&lt;/p&gt;
 &lt;blockquote class=&quot;centerquote&quot;&gt;I AM ANGRY!!!&lt;/blockquote&gt;
 
 &lt;p&gt;这里多了一只发怒的猹喵。愤怒能抑制懒惰。&lt;/p&gt;
@@ -355,10 +354,10 @@
   
   <entry>
     <title>Be Brave</title>
-    <link href="https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/"/>
-    <id>https://sh.alynx.xyz/posts/2017/07/30/Be-Brave/</id>
+    <link href="https://sh.alynx.xyz/posts/Be-Brave/"/>
+    <id>https://sh.alynx.xyz/posts/Be-Brave/</id>
     <published>2017-07-30T14:50:40.000Z</published>
-    <updated>2018-05-05T17:02:16.150Z</updated>
+    <updated>2018-08-29T04:55:51.361Z</updated>
     
     <summary type="html">
     
@@ -379,8 +378,8 @@
   
   <entry>
     <title>Dirty Words</title>
-    <link href="https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/"/>
-    <id>https://sh.alynx.xyz/posts/2017/07/01/Dirty-Words/</id>
+    <link href="https://sh.alynx.xyz/posts/Dirty-Words/"/>
+    <id>https://sh.alynx.xyz/posts/Dirty-Words/</id>
     <published>2017-07-01T10:42:09.000Z</published>
     <updated>2018-05-05T17:02:16.150Z</updated>
     
@@ -402,8 +401,8 @@
   
   <entry>
     <title>你的名字。</title>
-    <link href="https://sh.alynx.xyz/posts/2017/06/15/Your-Name/"/>
-    <id>https://sh.alynx.xyz/posts/2017/06/15/Your-Name/</id>
+    <link href="https://sh.alynx.xyz/posts/Your-Name/"/>
+    <id>https://sh.alynx.xyz/posts/Your-Name/</id>
     <published>2017-06-14T16:22:19.000Z</published>
     <updated>2018-05-05T17:02:16.176Z</updated>
     
@@ -427,8 +426,8 @@
   
   <entry>
     <title>Encrypted for the Update.</title>
-    <link href="https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/"/>
-    <id>https://sh.alynx.xyz/posts/2017/05/30/Encrypt-for-the-Update/</id>
+    <link href="https://sh.alynx.xyz/posts/Encrypt-for-the-Update/"/>
+    <id>https://sh.alynx.xyz/posts/Encrypt-for-the-Update/</id>
     <published>2017-05-30T08:46:02.000Z</published>
     <updated>2018-05-05T17:02:16.150Z</updated>
     
@@ -451,8 +450,8 @@
   
   <entry>
     <title>突然更新</title>
-    <link href="https://sh.alynx.xyz/posts/2017/05/30/An-Update/"/>
-    <id>https://sh.alynx.xyz/posts/2017/05/30/An-Update/</id>
+    <link href="https://sh.alynx.xyz/posts/An-Update/"/>
+    <id>https://sh.alynx.xyz/posts/An-Update/</id>
     <published>2017-05-30T07:14:51.000Z</published>
     <updated>2018-05-05T17:02:16.150Z</updated>
     
@@ -480,8 +479,8 @@
   
   <entry>
     <title>灰色情人节</title>
-    <link href="https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/"/>
-    <id>https://sh.alynx.xyz/posts/2017/03/18/Grey-Valentine-s-Day/</id>
+    <link href="https://sh.alynx.xyz/posts/Grey-Valentine-s-Day/"/>
+    <id>https://sh.alynx.xyz/posts/Grey-Valentine-s-Day/</id>
     <published>2017-03-18T14:48:49.000Z</published>
     <updated>2018-05-05T17:02:16.150Z</updated>
     
@@ -502,8 +501,8 @@
   
   <entry>
     <title>使用GDB进行简单的C语言程序调试</title>
-    <link href="https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/"/>
-    <id>https://sh.alynx.xyz/posts/2017/03/15/Using-Gdb/</id>
+    <link href="https://sh.alynx.xyz/posts/Using-Gdb/"/>
+    <id>https://sh.alynx.xyz/posts/Using-Gdb/</id>
     <published>2017-03-15T11:24:33.000Z</published>
     <updated>2018-05-05T17:02:16.173Z</updated>
     
