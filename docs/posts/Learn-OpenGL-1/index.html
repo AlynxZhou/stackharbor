@@ -160,28 +160,28 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>
+      <p>&#x6211;&#x82B1;&#x4E86;&#x597D;&#x4E45;&#x6765;&#x9605;&#x8BFB;&#x548C;&#x5B9E;&#x8DF5; <a href="https://learnopengl-cn.github.io/" target="_blank">Learn OpenGL CN</a> &#x4E0A;&#x9762;&#x7684; OpenGL &#x6559;&#x7A0B;&#xFF0C;&#x5C3D;&#x7BA1;&#x5B83;&#x662F;&#x5927;&#x5BB6;&#x63A8;&#x8350;&#x7684;&#x6700;&#x5BB9;&#x6613;&#x61C2;&#x4E5F;&#x6BD4;&#x8F83;&#x65B0;&#x7684;&#x6559;&#x7A0B;&#xFF0C;&#x91CC;&#x9762;&#x4E00;&#x4E9B;&#x4E1C;&#x897F;&#x8FD8;&#x662F;&#x4F1A;&#x8BA9;&#x4EBA;&#x89C9;&#x5F97;&#x4E00;&#x5934;&#x96FE;&#x6C34;&#x3002;&#x6211;&#x7528;&#x4E86;&#x5F88;&#x957F;&#x7684;&#x65F6;&#x95F4;&#x6765;&#x5C1D;&#x8BD5;&#x90A3;&#x4E9B;&#x6559;&#x7A0B;&#x6CA1;&#x6709;&#x5199;&#x6210;&#x6587;&#x5B57;&#x7684;&#x90E8;&#x5206;&#x5E76;&#x786E;&#x5B9A;&#x5B83;&#x4EEC;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#x3002;&#x4E5F;&#x8BB8;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x6709;&#x8DB3;&#x591F;&#x7ECF;&#x9A8C;&#x7684;&#x4EBA;&#x6765;&#x8BF4;&#x8FD9;&#x4E9B;&#x770B;&#x8D77;&#x6765;&#x5E76;&#x4E0D;&#x662F;&#x4EC0;&#x4E48;&#x5927;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x6211;&#x89C9;&#x5F97;&#x65B0;&#x4EBA;&#x77E5;&#x9053;&#x8FD9;&#x4E9B;&#x4EE5;&#x540E;&#x53EF;&#x4EE5;&#x66F4;&#x5FEB;&#x7684;&#x7EE7;&#x7EED;&#x5B66;&#x4E60;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x82B1;&#x8D39;&#x65F6;&#x95F4;&#x5728;&#x8BF8;&#x5982;&#x201C;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5E72;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;&#x201D;&#x201C;&#x4E3A;&#x4EC0;&#x4E48;&#x6211;&#x7684;&#x9ED1;&#x5C4F;&#x4E86;&#xFF1F;&#x201D;&#x201C;&#x5982;&#x679C;&#x6211;&#x60F3;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x66F4;&#x590D;&#x6742;&#x7684;&#x56FE;&#x5F62;&#x7A0B;&#x5E8F;&#xFF0C;&#x8BE5;&#x600E;&#x4E48;&#x628A;&#x8FD9;&#x4E9B;&#x590D;&#x5236;&#x8FC7;&#x6765;&#x7684;&#x4EE3;&#x7801;&#x62C6;&#x5F00;&#xFF1F;&#x201D;&#x7684;&#x95EE;&#x9898;&#x4E0A;&#x3002;</p>
 <!--more-->
 
-<p>话先说在前面，虽然标题我写了 OpenGL，但是我实际上使用的是 OpenGL ES —— 你可以把它当作是 OpenGL 的一个子集，只包含基于可编程管线的部分 API，去掉了那些过时的旧模式。虽然 OpenGL ES 主要为移动设备设计，但是在电脑上也能正常使用。Wayland 和 Weston —— Linux 的下一代桌面协议以及它的简单实现 —— 为了去掉 Xorg 的依赖就使用了 OpenGL ES（Linux 下的 libGL 总会引入 X）。</p>
-<p>我使用的是 OpenGL ES 3，最新版本，而且我觉得这里的 OpenGL ES 程序只要做一点简单的改动就可以变成 OpenGL 的程序 —— 毕竟 OpenGL ES 使用的函数就是 OpenGL 的一部分。</p>
-<h1 id="OpenGL 是什么？"><a class="headerlink" href="#OpenGL 是什么？" title="OpenGL 是什么？"></a>OpenGL 是什么？</h1><p>简单来说，OpenGL 是一套 API（废话），它把你传输的三维坐标交给显卡运算并映射到显示器的二维平面上。实际上它仅仅做了这些 —— 和你的显卡交流。使用 OpenGL ES 3 的好处是它没有早期版本中 OpenGL 的立即渲染模式，通常来说这个模式很容易使用（就像 Canvas 绘图）但是效率低下。一些人不会使用核心模式（可编程管线）而是使用旧的模式也导致了所谓的 OpenGL 性能差，但实际上 OpenGL 只是一个规范，具体的性能很容易受到不同厂家实现不同编写人员的影响（给猴子一把磨得很快的斧头的直接后果很可能是猴子砍了自己的脚）。如果打开一份教程上面出现 <code>glBegin()</code>、<code>glEnd()</code> 我建议你立即关掉。</p>
-<h1 id="创建窗口"><a class="headerlink" href="#创建窗口" title="创建窗口"></a>创建窗口</h1><p>首先既然我们要绘图，需要先有窗口。窗口创建之后才可以创建一个 OpenGL 的 Context。对于这个需求不同的平台有不同的方案，比如 Windows 的 WGL，Xorg 的 GLX，以及为了独立于各个平台使用的 EGL（Wayland 为了摆脱 Xorg 使用的就是 EGL），但我们在这里使用一个简单高效的封装库 GLFW。</p>
-<p>首先需要你自己安装 GLFW 库到你的系统中，Linux 用户可以使用包管理解决这个问题，Windows 用户就需要自己下载并放置到你工具指定的位置了（注意头文件的位置并修改 IDE 的搜寻路径 —— 异常麻烦的事情）。</p>
-<p>对于 OpenGL 本身而言，如果你安装了 Mesa（Linux），你应该有一个开源的实现了。Windows 用户可能需要一些处理以保证自己用的是最新版本（据说微软为了推广 D3D 打压 OGL Windows 系统只包含旧的 OpenGL 库，不知道是不是真的），我没有在 Windows 下面编写过，不能给你建议。</p>
-<p>对于 OpenGL 大部分函数地址是运行时确定的（各个驱动的实现不一样），所以需要类似于 GLEW 或者 GLAD 之类的库来在代码中搜寻保存函数指针，但我这里使用 OpenGL ES 似乎是可以直接链接的，所以我没有使用（有错误请告诉我，我好改正）。</p>
-<p>然后我们打开一个 C 文件 —— OpenGL 库是用 C 编写再封装到其它语言的。</p>
+<p>&#x8BDD;&#x5148;&#x8BF4;&#x5728;&#x524D;&#x9762;&#xFF0C;&#x867D;&#x7136;&#x6807;&#x9898;&#x6211;&#x5199;&#x4E86; OpenGL&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x5B9E;&#x9645;&#x4E0A;&#x4F7F;&#x7528;&#x7684;&#x662F; OpenGL ES &#x2014;&#x2014; &#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x5F53;&#x4F5C;&#x662F; OpenGL &#x7684;&#x4E00;&#x4E2A;&#x5B50;&#x96C6;&#xFF0C;&#x53EA;&#x5305;&#x542B;&#x57FA;&#x4E8E;&#x53EF;&#x7F16;&#x7A0B;&#x7BA1;&#x7EBF;&#x7684;&#x90E8;&#x5206; API&#xFF0C;&#x53BB;&#x6389;&#x4E86;&#x90A3;&#x4E9B;&#x8FC7;&#x65F6;&#x7684;&#x65E7;&#x6A21;&#x5F0F;&#x3002;&#x867D;&#x7136; OpenGL ES &#x4E3B;&#x8981;&#x4E3A;&#x79FB;&#x52A8;&#x8BBE;&#x5907;&#x8BBE;&#x8BA1;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x7535;&#x8111;&#x4E0A;&#x4E5F;&#x80FD;&#x6B63;&#x5E38;&#x4F7F;&#x7528;&#x3002;Wayland &#x548C; Weston &#x2014;&#x2014; Linux &#x7684;&#x4E0B;&#x4E00;&#x4EE3;&#x684C;&#x9762;&#x534F;&#x8BAE;&#x4EE5;&#x53CA;&#x5B83;&#x7684;&#x7B80;&#x5355;&#x5B9E;&#x73B0; &#x2014;&#x2014; &#x4E3A;&#x4E86;&#x53BB;&#x6389; Xorg &#x7684;&#x4F9D;&#x8D56;&#x5C31;&#x4F7F;&#x7528;&#x4E86; OpenGL ES&#xFF08;Linux &#x4E0B;&#x7684; libGL &#x603B;&#x4F1A;&#x5F15;&#x5165; X&#xFF09;&#x3002;</p>
+<p>&#x6211;&#x4F7F;&#x7528;&#x7684;&#x662F; OpenGL ES 3&#xFF0C;&#x6700;&#x65B0;&#x7248;&#x672C;&#xFF0C;&#x800C;&#x4E14;&#x6211;&#x89C9;&#x5F97;&#x8FD9;&#x91CC;&#x7684; OpenGL ES &#x7A0B;&#x5E8F;&#x53EA;&#x8981;&#x505A;&#x4E00;&#x70B9;&#x7B80;&#x5355;&#x7684;&#x6539;&#x52A8;&#x5C31;&#x53EF;&#x4EE5;&#x53D8;&#x6210; OpenGL &#x7684;&#x7A0B;&#x5E8F; &#x2014;&#x2014; &#x6BD5;&#x7ADF; OpenGL ES &#x4F7F;&#x7528;&#x7684;&#x51FD;&#x6570;&#x5C31;&#x662F; OpenGL &#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;</p>
+<h1 id="OpenGL &#x662F;&#x4EC0;&#x4E48;&#xFF1F;"><a class="headerlink" href="#OpenGL &#x662F;&#x4EC0;&#x4E48;&#xFF1F;" title="OpenGL &#x662F;&#x4EC0;&#x4E48;&#xFF1F;"></a>OpenGL &#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h1><p>&#x7B80;&#x5355;&#x6765;&#x8BF4;&#xFF0C;OpenGL &#x662F;&#x4E00;&#x5957; API&#xFF08;&#x5E9F;&#x8BDD;&#xFF09;&#xFF0C;&#x5B83;&#x628A;&#x4F60;&#x4F20;&#x8F93;&#x7684;&#x4E09;&#x7EF4;&#x5750;&#x6807;&#x4EA4;&#x7ED9;&#x663E;&#x5361;&#x8FD0;&#x7B97;&#x5E76;&#x6620;&#x5C04;&#x5230;&#x663E;&#x793A;&#x5668;&#x7684;&#x4E8C;&#x7EF4;&#x5E73;&#x9762;&#x4E0A;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x5B83;&#x4EC5;&#x4EC5;&#x505A;&#x4E86;&#x8FD9;&#x4E9B; &#x2014;&#x2014; &#x548C;&#x4F60;&#x7684;&#x663E;&#x5361;&#x4EA4;&#x6D41;&#x3002;&#x4F7F;&#x7528; OpenGL ES 3 &#x7684;&#x597D;&#x5904;&#x662F;&#x5B83;&#x6CA1;&#x6709;&#x65E9;&#x671F;&#x7248;&#x672C;&#x4E2D; OpenGL &#x7684;&#x7ACB;&#x5373;&#x6E32;&#x67D3;&#x6A21;&#x5F0F;&#xFF0C;&#x901A;&#x5E38;&#x6765;&#x8BF4;&#x8FD9;&#x4E2A;&#x6A21;&#x5F0F;&#x5F88;&#x5BB9;&#x6613;&#x4F7F;&#x7528;&#xFF08;&#x5C31;&#x50CF; Canvas &#x7ED8;&#x56FE;&#xFF09;&#x4F46;&#x662F;&#x6548;&#x7387;&#x4F4E;&#x4E0B;&#x3002;&#x4E00;&#x4E9B;&#x4EBA;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#x6838;&#x5FC3;&#x6A21;&#x5F0F;&#xFF08;&#x53EF;&#x7F16;&#x7A0B;&#x7BA1;&#x7EBF;&#xFF09;&#x800C;&#x662F;&#x4F7F;&#x7528;&#x65E7;&#x7684;&#x6A21;&#x5F0F;&#x4E5F;&#x5BFC;&#x81F4;&#x4E86;&#x6240;&#x8C13;&#x7684; OpenGL &#x6027;&#x80FD;&#x5DEE;&#xFF0C;&#x4F46;&#x5B9E;&#x9645;&#x4E0A; OpenGL &#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x89C4;&#x8303;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x6027;&#x80FD;&#x5F88;&#x5BB9;&#x6613;&#x53D7;&#x5230;&#x4E0D;&#x540C;&#x5382;&#x5BB6;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x7F16;&#x5199;&#x4EBA;&#x5458;&#x7684;&#x5F71;&#x54CD;&#xFF08;&#x7ED9;&#x7334;&#x5B50;&#x4E00;&#x628A;&#x78E8;&#x5F97;&#x5F88;&#x5FEB;&#x7684;&#x65A7;&#x5934;&#x7684;&#x76F4;&#x63A5;&#x540E;&#x679C;&#x5F88;&#x53EF;&#x80FD;&#x662F;&#x7334;&#x5B50;&#x780D;&#x4E86;&#x81EA;&#x5DF1;&#x7684;&#x811A;&#xFF09;&#x3002;&#x5982;&#x679C;&#x6253;&#x5F00;&#x4E00;&#x4EFD;&#x6559;&#x7A0B;&#x4E0A;&#x9762;&#x51FA;&#x73B0; <code>glBegin()</code>&#x3001;<code>glEnd()</code> &#x6211;&#x5EFA;&#x8BAE;&#x4F60;&#x7ACB;&#x5373;&#x5173;&#x6389;&#x3002;</p>
+<h1 id="&#x521B;&#x5EFA;&#x7A97;&#x53E3;"><a class="headerlink" href="#&#x521B;&#x5EFA;&#x7A97;&#x53E3;" title="&#x521B;&#x5EFA;&#x7A97;&#x53E3;"></a>&#x521B;&#x5EFA;&#x7A97;&#x53E3;</h1><p>&#x9996;&#x5148;&#x65E2;&#x7136;&#x6211;&#x4EEC;&#x8981;&#x7ED8;&#x56FE;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x6709;&#x7A97;&#x53E3;&#x3002;&#x7A97;&#x53E3;&#x521B;&#x5EFA;&#x4E4B;&#x540E;&#x624D;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; OpenGL &#x7684; Context&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#x4E0D;&#x540C;&#x7684;&#x5E73;&#x53F0;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x65B9;&#x6848;&#xFF0C;&#x6BD4;&#x5982; Windows &#x7684; WGL&#xFF0C;Xorg &#x7684; GLX&#xFF0C;&#x4EE5;&#x53CA;&#x4E3A;&#x4E86;&#x72EC;&#x7ACB;&#x4E8E;&#x5404;&#x4E2A;&#x5E73;&#x53F0;&#x4F7F;&#x7528;&#x7684; EGL&#xFF08;Wayland &#x4E3A;&#x4E86;&#x6446;&#x8131; Xorg &#x4F7F;&#x7528;&#x7684;&#x5C31;&#x662F; EGL&#xFF09;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x9AD8;&#x6548;&#x7684;&#x5C01;&#x88C5;&#x5E93; GLFW&#x3002;</p>
+<p>&#x9996;&#x5148;&#x9700;&#x8981;&#x4F60;&#x81EA;&#x5DF1;&#x5B89;&#x88C5; GLFW &#x5E93;&#x5230;&#x4F60;&#x7684;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;Linux &#x7528;&#x6237;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5305;&#x7BA1;&#x7406;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;Windows &#x7528;&#x6237;&#x5C31;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x4E0B;&#x8F7D;&#x5E76;&#x653E;&#x7F6E;&#x5230;&#x4F60;&#x5DE5;&#x5177;&#x6307;&#x5B9A;&#x7684;&#x4F4D;&#x7F6E;&#x4E86;&#xFF08;&#x6CE8;&#x610F;&#x5934;&#x6587;&#x4EF6;&#x7684;&#x4F4D;&#x7F6E;&#x5E76;&#x4FEE;&#x6539; IDE &#x7684;&#x641C;&#x5BFB;&#x8DEF;&#x5F84; &#x2014;&#x2014; &#x5F02;&#x5E38;&#x9EBB;&#x70E6;&#x7684;&#x4E8B;&#x60C5;&#xFF09;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E; OpenGL &#x672C;&#x8EAB;&#x800C;&#x8A00;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5B89;&#x88C5;&#x4E86; Mesa&#xFF08;Linux&#xFF09;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x6709;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x7684;&#x5B9E;&#x73B0;&#x4E86;&#x3002;Windows &#x7528;&#x6237;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x4E00;&#x4E9B;&#x5904;&#x7406;&#x4EE5;&#x4FDD;&#x8BC1;&#x81EA;&#x5DF1;&#x7528;&#x7684;&#x662F;&#x6700;&#x65B0;&#x7248;&#x672C;&#xFF08;&#x636E;&#x8BF4;&#x5FAE;&#x8F6F;&#x4E3A;&#x4E86;&#x63A8;&#x5E7F; D3D &#x6253;&#x538B; OGL Windows &#x7CFB;&#x7EDF;&#x53EA;&#x5305;&#x542B;&#x65E7;&#x7684; OpenGL &#x5E93;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x662F;&#x4E0D;&#x662F;&#x771F;&#x7684;&#xFF09;&#xFF0C;&#x6211;&#x6CA1;&#x6709;&#x5728; Windows &#x4E0B;&#x9762;&#x7F16;&#x5199;&#x8FC7;&#xFF0C;&#x4E0D;&#x80FD;&#x7ED9;&#x4F60;&#x5EFA;&#x8BAE;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E; OpenGL &#x5927;&#x90E8;&#x5206;&#x51FD;&#x6570;&#x5730;&#x5740;&#x662F;&#x8FD0;&#x884C;&#x65F6;&#x786E;&#x5B9A;&#x7684;&#xFF08;&#x5404;&#x4E2A;&#x9A71;&#x52A8;&#x7684;&#x5B9E;&#x73B0;&#x4E0D;&#x4E00;&#x6837;&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x7C7B;&#x4F3C;&#x4E8E; GLEW &#x6216;&#x8005; GLAD &#x4E4B;&#x7C7B;&#x7684;&#x5E93;&#x6765;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x641C;&#x5BFB;&#x4FDD;&#x5B58;&#x51FD;&#x6570;&#x6307;&#x9488;&#xFF0C;&#x4F46;&#x6211;&#x8FD9;&#x91CC;&#x4F7F;&#x7528; OpenGL ES &#x4F3C;&#x4E4E;&#x662F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x94FE;&#x63A5;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#xFF08;&#x6709;&#x9519;&#x8BEF;&#x8BF7;&#x544A;&#x8BC9;&#x6211;&#xFF0C;&#x6211;&#x597D;&#x6539;&#x6B63;&#xFF09;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x6253;&#x5F00;&#x4E00;&#x4E2A; C &#x6587;&#x4EF6; &#x2014;&#x2014; OpenGL &#x5E93;&#x662F;&#x7528; C &#x7F16;&#x5199;&#x518D;&#x5C01;&#x88C5;&#x5230;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x7684;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
-</pre></td><td class="code"><pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdio.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stddef.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdbool.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><GLFW/glfw3.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><GLES3/gl3.h></span></span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>这里很明显了。OpenGL 只是一个绘图 API，GLFW 同时帮你封装了有关键盘鼠标输入的部分，但是你需要给它实现一个回调函数。</p>
+</pre></td><td class="code"><pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stddef.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;GLFW/glfw3.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;GLES3/gl3.h&gt;</span></span></code></pre></td></tr></tbody></table></figure></code></pre>
+<p>&#x8FD9;&#x91CC;&#x5F88;&#x660E;&#x663E;&#x4E86;&#x3002;OpenGL &#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x7ED8;&#x56FE; API&#xFF0C;GLFW &#x540C;&#x65F6;&#x5E2E;&#x4F60;&#x5C01;&#x88C5;&#x4E86;&#x6709;&#x5173;&#x952E;&#x76D8;&#x9F20;&#x6807;&#x8F93;&#x5165;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x9700;&#x8981;&#x7ED9;&#x5B83;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -189,10 +189,10 @@
 <span class="line">5</span>
 </pre></td><td class="code"><pre><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">key_callback</span><span class="hljs-params">(GLFWwindow *window, <span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span> scancode, <span class="hljs-keyword">int</span> action, <span class="hljs-keyword">int</span> mode)</span>
 </span>{
-    <span class="hljs-keyword">if</span> (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    <span class="hljs-keyword">if</span> (key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, <span class="hljs-literal">true</span>);
 }</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>只是简单实现了按 Esc 之后发送关闭窗口事件。然后我们编写 main 函数。</p>
+<p>&#x53EA;&#x662F;&#x7B80;&#x5355;&#x5B9E;&#x73B0;&#x4E86;&#x6309; Esc &#x4E4B;&#x540E;&#x53D1;&#x9001;&#x5173;&#x95ED;&#x7A97;&#x53E3;&#x4E8B;&#x4EF6;&#x3002;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x7F16;&#x5199; main &#x51FD;&#x6570;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -213,7 +213,7 @@
     glfwInit();
     <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> width = <span class="hljs-number">800</span>;
     <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> height = <span class="hljs-number">600</span>;
-    GLFWwindow *window = glfwCreateWindow(width, height, <span class="hljs-string">"learn-gles"</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);
+    GLFWwindow *window = glfwCreateWindow(width, height, <span class="hljs-string">&quot;learn-gles&quot;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
 
@@ -223,16 +223,16 @@
     glfwTerminate();
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>先别急着编译它，因为你还没有正确链接。如果你编译好了，这个程序运行之后窗口一闪而过就会消失，但你已经完成了窗口创建。</p>
-<p>如果是 macOS 请在 <code>glfwInit()</code> 之后添加 <code>glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);</code>，并咒骂苹果为什么去掉了 OpenGL 支持。</p>
-<p>接下来我们进行 OpenGL 代码的编写。</p>
-<h1 id="绘制三角形"><a class="headerlink" href="#绘制三角形" title="绘制三角形"></a>绘制三角形</h1><p>三角形是计算机图形学里基本的图元，更复杂的模型通常都是用三角形拼合的，这也是为什么人们会用 <em>每秒渲染多少个三角形</em> 来表示显卡性能。</p>
-<h2 id="创建视口（Viewport）"><a class="headerlink" href="#创建视口（Viewport）" title="创建视口（Viewport）"></a>创建视口（Viewport）</h2><p>首先我们创建 OpenGL 的 Viewport，事实上不管你的窗口分辨率是多少，OpenGL 都会把这个平面映射到 <code>-1.0f</code> 到 <code>+1.0f</code>，你使用时候的坐标都是在这个范围内，而不是屏幕上的像素点数目。</p>
-<p>下面的代码需要插入到上面 <code>/* Code Here */</code> 的上面。</p>
+<p>&#x5148;&#x522B;&#x6025;&#x7740;&#x7F16;&#x8BD1;&#x5B83;&#xFF0C;&#x56E0;&#x4E3A;&#x4F60;&#x8FD8;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x94FE;&#x63A5;&#x3002;&#x5982;&#x679C;&#x4F60;&#x7F16;&#x8BD1;&#x597D;&#x4E86;&#xFF0C;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x4E4B;&#x540E;&#x7A97;&#x53E3;&#x4E00;&#x95EA;&#x800C;&#x8FC7;&#x5C31;&#x4F1A;&#x6D88;&#x5931;&#xFF0C;&#x4F46;&#x4F60;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x7A97;&#x53E3;&#x521B;&#x5EFA;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x662F; macOS &#x8BF7;&#x5728; <code>glfwInit()</code> &#x4E4B;&#x540E;&#x6DFB;&#x52A0; <code>glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);</code>&#xFF0C;&#x5E76;&#x5492;&#x9A82;&#x82F9;&#x679C;&#x4E3A;&#x4EC0;&#x4E48;&#x53BB;&#x6389;&#x4E86; OpenGL &#x652F;&#x6301;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x8FDB;&#x884C; OpenGL &#x4EE3;&#x7801;&#x7684;&#x7F16;&#x5199;&#x3002;</p>
+<h1 id="&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;"><a class="headerlink" href="#&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;" title="&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;"></a>&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;</h1><p>&#x4E09;&#x89D2;&#x5F62;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x56FE;&#x5F62;&#x5B66;&#x91CC;&#x57FA;&#x672C;&#x7684;&#x56FE;&#x5143;&#xFF0C;&#x66F4;&#x590D;&#x6742;&#x7684;&#x6A21;&#x578B;&#x901A;&#x5E38;&#x90FD;&#x662F;&#x7528;&#x4E09;&#x89D2;&#x5F62;&#x62FC;&#x5408;&#x7684;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x4EBA;&#x4EEC;&#x4F1A;&#x7528; <em>&#x6BCF;&#x79D2;&#x6E32;&#x67D3;&#x591A;&#x5C11;&#x4E2A;&#x4E09;&#x89D2;&#x5F62;</em> &#x6765;&#x8868;&#x793A;&#x663E;&#x5361;&#x6027;&#x80FD;&#x3002;</p>
+<h2 id="&#x521B;&#x5EFA;&#x89C6;&#x53E3;&#xFF08;Viewport&#xFF09;"><a class="headerlink" href="#&#x521B;&#x5EFA;&#x89C6;&#x53E3;&#xFF08;Viewport&#xFF09;" title="&#x521B;&#x5EFA;&#x89C6;&#x53E3;&#xFF08;Viewport&#xFF09;"></a>&#x521B;&#x5EFA;&#x89C6;&#x53E3;&#xFF08;Viewport&#xFF09;</h2><p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x521B;&#x5EFA; OpenGL &#x7684; Viewport&#xFF0C;&#x4E8B;&#x5B9E;&#x4E0A;&#x4E0D;&#x7BA1;&#x4F60;&#x7684;&#x7A97;&#x53E3;&#x5206;&#x8FA8;&#x7387;&#x662F;&#x591A;&#x5C11;&#xFF0C;OpenGL &#x90FD;&#x4F1A;&#x628A;&#x8FD9;&#x4E2A;&#x5E73;&#x9762;&#x6620;&#x5C04;&#x5230; <code>-1.0f</code> &#x5230; <code>+1.0f</code>&#xFF0C;&#x4F60;&#x4F7F;&#x7528;&#x65F6;&#x5019;&#x7684;&#x5750;&#x6807;&#x90FD;&#x662F;&#x5728;&#x8FD9;&#x4E2A;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5C4F;&#x5E55;&#x4E0A;&#x7684;&#x50CF;&#x7D20;&#x70B9;&#x6570;&#x76EE;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x9700;&#x8981;&#x63D2;&#x5165;&#x5230;&#x4E0A;&#x9762; <code>/* Code Here */</code> &#x7684;&#x4E0A;&#x9762;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>    glViewport(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, width, height);</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>因为我们的程序太过简单，就不需要开启其它特性了，否则在这里你可以开启一些 OpenGL 的特性比如背面剔除（如果你玩 CS，你会发现死亡画面你的摄像机经常会穿进敌人体内，这时候敌人的后背变成了透明的，这就是背面剔除，可以减少绘制的图形的数量。</p>
-<h2 id="大循环"><a class="headerlink" href="#大循环" title="大循环"></a>大循环</h2><p>如果你对游戏引擎有所了解，应该知道整个流程就是一个大循环：引擎不断地绘制图案并把它更新到屏幕上，每一帧我们更新一些数据，就会形成动画。我们这里也是这样进行，在 <code>glViewport()</code> 和 <code>glfwTerminate()</code> 之间插入这个。</p>
+<p>&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x7684;&#x7A0B;&#x5E8F;&#x592A;&#x8FC7;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x5F00;&#x542F;&#x5176;&#x5B83;&#x7279;&#x6027;&#x4E86;&#xFF0C;&#x5426;&#x5219;&#x5728;&#x8FD9;&#x91CC;&#x4F60;&#x53EF;&#x4EE5;&#x5F00;&#x542F;&#x4E00;&#x4E9B; OpenGL &#x7684;&#x7279;&#x6027;&#x6BD4;&#x5982;&#x80CC;&#x9762;&#x5254;&#x9664;&#xFF08;&#x5982;&#x679C;&#x4F60;&#x73A9; CS&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x6B7B;&#x4EA1;&#x753B;&#x9762;&#x4F60;&#x7684;&#x6444;&#x50CF;&#x673A;&#x7ECF;&#x5E38;&#x4F1A;&#x7A7F;&#x8FDB;&#x654C;&#x4EBA;&#x4F53;&#x5185;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x654C;&#x4EBA;&#x7684;&#x540E;&#x80CC;&#x53D8;&#x6210;&#x4E86;&#x900F;&#x660E;&#x7684;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x80CC;&#x9762;&#x5254;&#x9664;&#xFF0C;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x7ED8;&#x5236;&#x7684;&#x56FE;&#x5F62;&#x7684;&#x6570;&#x91CF;&#x3002;</p>
+<h2 id="&#x5927;&#x5FAA;&#x73AF;"><a class="headerlink" href="#&#x5927;&#x5FAA;&#x73AF;" title="&#x5927;&#x5FAA;&#x73AF;"></a>&#x5927;&#x5FAA;&#x73AF;</h2><p>&#x5982;&#x679C;&#x4F60;&#x5BF9;&#x6E38;&#x620F;&#x5F15;&#x64CE;&#x6709;&#x6240;&#x4E86;&#x89E3;&#xFF0C;&#x5E94;&#x8BE5;&#x77E5;&#x9053;&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5927;&#x5FAA;&#x73AF;&#xFF1A;&#x5F15;&#x64CE;&#x4E0D;&#x65AD;&#x5730;&#x7ED8;&#x5236;&#x56FE;&#x6848;&#x5E76;&#x628A;&#x5B83;&#x66F4;&#x65B0;&#x5230;&#x5C4F;&#x5E55;&#x4E0A;&#xFF0C;&#x6BCF;&#x4E00;&#x5E27;&#x6211;&#x4EEC;&#x66F4;&#x65B0;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x5C31;&#x4F1A;&#x5F62;&#x6210;&#x52A8;&#x753B;&#x3002;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x4E5F;&#x662F;&#x8FD9;&#x6837;&#x8FDB;&#x884C;&#xFF0C;&#x5728; <code>glViewport()</code> &#x548C; <code>glfwTerminate()</code> &#x4E4B;&#x95F4;&#x63D2;&#x5165;&#x8FD9;&#x4E2A;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -253,13 +253,13 @@
 
         glfwSwapBuffers(window);
     }</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>现在我们有一个大循环了，这个循环里首先拉取 GLFW 的事件以便响应（目前只有 Esc 退出），然后用黑色清除整个 Viewport（四个参数分别是 rgba，<code>0.0f</code> 是无色，<code>1.0f</code> 是满色），最后 GLFW 把绘制好的缓冲区交换到窗口上。</p>
-<p>现在你可以使用下面的命令编译并运行它了。会出现一个全黑的窗口。</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6709;&#x4E00;&#x4E2A;&#x5927;&#x5FAA;&#x73AF;&#x4E86;&#xFF0C;&#x8FD9;&#x4E2A;&#x5FAA;&#x73AF;&#x91CC;&#x9996;&#x5148;&#x62C9;&#x53D6; GLFW &#x7684;&#x4E8B;&#x4EF6;&#x4EE5;&#x4FBF;&#x54CD;&#x5E94;&#xFF08;&#x76EE;&#x524D;&#x53EA;&#x6709; Esc &#x9000;&#x51FA;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x7528;&#x9ED1;&#x8272;&#x6E05;&#x9664;&#x6574;&#x4E2A; Viewport&#xFF08;&#x56DB;&#x4E2A;&#x53C2;&#x6570;&#x5206;&#x522B;&#x662F; rgba&#xFF0C;<code>0.0f</code> &#x662F;&#x65E0;&#x8272;&#xFF0C;<code>1.0f</code> &#x662F;&#x6EE1;&#x8272;&#xFF09;&#xFF0C;&#x6700;&#x540E; GLFW &#x628A;&#x7ED8;&#x5236;&#x597D;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x4EA4;&#x6362;&#x5230;&#x7A97;&#x53E3;&#x4E0A;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x7F16;&#x8BD1;&#x5E76;&#x8FD0;&#x884C;&#x5B83;&#x4E86;&#x3002;&#x4F1A;&#x51FA;&#x73B0;&#x4E00;&#x4E2A;&#x5168;&#x9ED1;&#x7684;&#x7A97;&#x53E3;&#x3002;</p>
 <pre><code><figure class="highlight hljs stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
-</pre></td><td class="code"><pre><code>$ cc -std=c11 -lglfw -lGLESv2 yourcode<span class="hljs-selector-class">.c</span> && ./<span class="hljs-selector-tag">a</span>.out</code></pre></td></tr></tbody></table></figure></code></pre><p><img src="/posts/Learn-OpenGL-1/black.png" alt="black.png"></p>
-<p>Mesa 把 GLES 3 当作 GLES 2 的扩展，所以这里链接的是 <code>libGLESv2</code>。</p>
-<h2 id="着色器（Shader）"><a class="headerlink" href="#着色器（Shader）" title="着色器（Shader）"></a>着色器（Shader）</h2><p>什么是 Shader？Shader 是一种运行在显卡上的小程序。首先你知道 CPU 一般是多核的，每个核心可以单独运行不同的程序。然而你的屏幕是由多个像素组成的，在运行游戏的时候每个像素的数据都需要单独计算，即使每个都是简单的乘法，CPU 也很难在短期内全部处理完毕（几十万个像素是很难由八个核心在 16ms 之内解决掉的），所以 GPU 为了解决这个问题，带有许多互相独立的小核心，每个核心的性能是远远不如 CPU 的，但它们处理的问题也没有 CPU 复杂，所以可以很快的处理掉屏幕上全部的像素。</p>
-<p>一般你的数据只会包含几个顶点的位置，这时候你可以编写小程序去处理这些顶点的数据，比如位移或者从数据中获取颜色，这一步的程序叫做 Vertex Shader（顶点着色器），然后 OpenGL 会把首先把这些顶点连接起来，再计算出中间的范围，对中间的部分进行插值，然后把它们映射到一个一个的像素点上，这个过程叫做 <strong>光栅化</strong>，然后接下来 GPU 中的每个小核心就开始单独处理一部分像素了，为了增加效率和创造更好地效果（光照效果之类的影响最终颜色的），你可以编写小程序交给这些小核心运行，这一步的程序叫做 Fragment Shader（片段着色器）（在 Direct3D 里面叫 Pixel Shader 像素着色器）。OpenGL 使用一种叫 GLSL 的语言编写着色器，在这一步你需要建立两个文件，首先是 <code>triangle.v.glsl</code>（名字可以随意）的顶点着色器。</p>
+</pre></td><td class="code"><pre><code>$ cc -std=c11 -lglfw -lGLESv2 yourcode<span class="hljs-selector-class">.c</span> &amp;&amp; ./<span class="hljs-selector-tag">a</span>.out</code></pre></td></tr></tbody></table></figure></code></pre><p><img src="/posts/Learn-OpenGL-1/black.png" alt="black.png"></p>
+<p>Mesa &#x628A; GLES 3 &#x5F53;&#x4F5C; GLES 2 &#x7684;&#x6269;&#x5C55;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x94FE;&#x63A5;&#x7684;&#x662F; <code>libGLESv2</code>&#x3002;</p>
+<h2 id="&#x7740;&#x8272;&#x5668;&#xFF08;Shader&#xFF09;"><a class="headerlink" href="#&#x7740;&#x8272;&#x5668;&#xFF08;Shader&#xFF09;" title="&#x7740;&#x8272;&#x5668;&#xFF08;Shader&#xFF09;"></a>&#x7740;&#x8272;&#x5668;&#xFF08;Shader&#xFF09;</h2><p>&#x4EC0;&#x4E48;&#x662F; Shader&#xFF1F;Shader &#x662F;&#x4E00;&#x79CD;&#x8FD0;&#x884C;&#x5728;&#x663E;&#x5361;&#x4E0A;&#x7684;&#x5C0F;&#x7A0B;&#x5E8F;&#x3002;&#x9996;&#x5148;&#x4F60;&#x77E5;&#x9053; CPU &#x4E00;&#x822C;&#x662F;&#x591A;&#x6838;&#x7684;&#xFF0C;&#x6BCF;&#x4E2A;&#x6838;&#x5FC3;&#x53EF;&#x4EE5;&#x5355;&#x72EC;&#x8FD0;&#x884C;&#x4E0D;&#x540C;&#x7684;&#x7A0B;&#x5E8F;&#x3002;&#x7136;&#x800C;&#x4F60;&#x7684;&#x5C4F;&#x5E55;&#x662F;&#x7531;&#x591A;&#x4E2A;&#x50CF;&#x7D20;&#x7EC4;&#x6210;&#x7684;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x6E38;&#x620F;&#x7684;&#x65F6;&#x5019;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x7684;&#x6570;&#x636E;&#x90FD;&#x9700;&#x8981;&#x5355;&#x72EC;&#x8BA1;&#x7B97;&#xFF0C;&#x5373;&#x4F7F;&#x6BCF;&#x4E2A;&#x90FD;&#x662F;&#x7B80;&#x5355;&#x7684;&#x4E58;&#x6CD5;&#xFF0C;CPU &#x4E5F;&#x5F88;&#x96BE;&#x5728;&#x77ED;&#x671F;&#x5185;&#x5168;&#x90E8;&#x5904;&#x7406;&#x5B8C;&#x6BD5;&#xFF08;&#x51E0;&#x5341;&#x4E07;&#x4E2A;&#x50CF;&#x7D20;&#x662F;&#x5F88;&#x96BE;&#x7531;&#x516B;&#x4E2A;&#x6838;&#x5FC3;&#x5728; 16ms &#x4E4B;&#x5185;&#x89E3;&#x51B3;&#x6389;&#x7684;&#xFF09;&#xFF0C;&#x6240;&#x4EE5; GPU &#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x5E26;&#x6709;&#x8BB8;&#x591A;&#x4E92;&#x76F8;&#x72EC;&#x7ACB;&#x7684;&#x5C0F;&#x6838;&#x5FC3;&#xFF0C;&#x6BCF;&#x4E2A;&#x6838;&#x5FC3;&#x7684;&#x6027;&#x80FD;&#x662F;&#x8FDC;&#x8FDC;&#x4E0D;&#x5982; CPU &#x7684;&#xFF0C;&#x4F46;&#x5B83;&#x4EEC;&#x5904;&#x7406;&#x7684;&#x95EE;&#x9898;&#x4E5F;&#x6CA1;&#x6709; CPU &#x590D;&#x6742;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5F88;&#x5FEB;&#x7684;&#x5904;&#x7406;&#x6389;&#x5C4F;&#x5E55;&#x4E0A;&#x5168;&#x90E8;&#x7684;&#x50CF;&#x7D20;&#x3002;</p>
+<p>&#x4E00;&#x822C;&#x4F60;&#x7684;&#x6570;&#x636E;&#x53EA;&#x4F1A;&#x5305;&#x542B;&#x51E0;&#x4E2A;&#x9876;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x4F60;&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x5C0F;&#x7A0B;&#x5E8F;&#x53BB;&#x5904;&#x7406;&#x8FD9;&#x4E9B;&#x9876;&#x70B9;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x6BD4;&#x5982;&#x4F4D;&#x79FB;&#x6216;&#x8005;&#x4ECE;&#x6570;&#x636E;&#x4E2D;&#x83B7;&#x53D6;&#x989C;&#x8272;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x7684;&#x7A0B;&#x5E8F;&#x53EB;&#x505A; Vertex Shader&#xFF08;&#x9876;&#x70B9;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF0C;&#x7136;&#x540E; OpenGL &#x4F1A;&#x628A;&#x9996;&#x5148;&#x628A;&#x8FD9;&#x4E9B;&#x9876;&#x70B9;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x518D;&#x8BA1;&#x7B97;&#x51FA;&#x4E2D;&#x95F4;&#x7684;&#x8303;&#x56F4;&#xFF0C;&#x5BF9;&#x4E2D;&#x95F4;&#x7684;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x63D2;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x5B83;&#x4EEC;&#x6620;&#x5C04;&#x5230;&#x4E00;&#x4E2A;&#x4E00;&#x4E2A;&#x7684;&#x50CF;&#x7D20;&#x70B9;&#x4E0A;&#xFF0C;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x53EB;&#x505A; <strong>&#x5149;&#x6805;&#x5316;</strong>&#xFF0C;&#x7136;&#x540E;&#x63A5;&#x4E0B;&#x6765; GPU &#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5C0F;&#x6838;&#x5FC3;&#x5C31;&#x5F00;&#x59CB;&#x5355;&#x72EC;&#x5904;&#x7406;&#x4E00;&#x90E8;&#x5206;&#x50CF;&#x7D20;&#x4E86;&#xFF0C;&#x4E3A;&#x4E86;&#x589E;&#x52A0;&#x6548;&#x7387;&#x548C;&#x521B;&#x9020;&#x66F4;&#x597D;&#x5730;&#x6548;&#x679C;&#xFF08;&#x5149;&#x7167;&#x6548;&#x679C;&#x4E4B;&#x7C7B;&#x7684;&#x5F71;&#x54CD;&#x6700;&#x7EC8;&#x989C;&#x8272;&#x7684;&#xFF09;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x5C0F;&#x7A0B;&#x5E8F;&#x4EA4;&#x7ED9;&#x8FD9;&#x4E9B;&#x5C0F;&#x6838;&#x5FC3;&#x8FD0;&#x884C;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x7684;&#x7A0B;&#x5E8F;&#x53EB;&#x505A; Fragment Shader&#xFF08;&#x7247;&#x6BB5;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF08;&#x5728; Direct3D &#x91CC;&#x9762;&#x53EB; Pixel Shader &#x50CF;&#x7D20;&#x7740;&#x8272;&#x5668;&#xFF09;&#x3002;OpenGL &#x4F7F;&#x7528;&#x4E00;&#x79CD;&#x53EB; GLSL &#x7684;&#x8BED;&#x8A00;&#x7F16;&#x5199;&#x7740;&#x8272;&#x5668;&#xFF0C;&#x5728;&#x8FD9;&#x4E00;&#x6B65;&#x4F60;&#x9700;&#x8981;&#x5EFA;&#x7ACB;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x9996;&#x5148;&#x662F; <code>triangle.v.glsl</code>&#xFF08;&#x540D;&#x5B57;&#x53EF;&#x4EE5;&#x968F;&#x610F;&#xFF09;&#x7684;&#x9876;&#x70B9;&#x7740;&#x8272;&#x5668;&#x3002;</p>
 <pre><code class="glsl"><figure class="highlight hljs glsl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -278,9 +278,9 @@
     <span class="hljs-built_in">gl_Position</span> = <span class="hljs-type">vec4</span>(pos, <span class="hljs-number">1.0</span>f);
     pass_color = color;
 }</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>第一行的预处理指令表明了我们使用的是 3.00 版本的 OpenGL ES，如果是 OpenGL 可以使用 <code>#version 330 core</code>，然后二三行声明了输入变量，前面的 <code>layout (location = 0)</code> 指定了它们的位置，也可以省略，但是就需要在程序里手动查找位置了。后面的 <code>in</code> 表明是输入变量，<code>vec3</code> 表明是由三个数字组成的向量，后面是变量名，我们用到了位置和颜色。然后下面 <code>out</code> 表明是输出变量，很明显 Vertex Shader 是不能控制颜色的，Fragment Shader 才控制颜色，所以我们在这里把传进来的颜色再输出，下一步传给 Fragment Shader。</p>
-<p>然后程序从 main 开始执行，这里 <strong>不需要返回值</strong>，<code>gl_Position</code> 是内置的变量，你需要把顶点的最终变换完的位置赋给它，这里我们没有变化，直接把三元坐标转换成四元的齐次坐标。然后把输入进来的颜色传出去。总之，如果你保证 Vertex Shader 输出的变量和 Fragment Shader 输入的变量名字一样，OpenGL 就会把它们连接起来。</p>
-<p>接下来我们建立 <code>triangle.v.glsl</code>，如下。</p>
+<p>&#x7B2C;&#x4E00;&#x884C;&#x7684;&#x9884;&#x5904;&#x7406;&#x6307;&#x4EE4;&#x8868;&#x660E;&#x4E86;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x662F; 3.00 &#x7248;&#x672C;&#x7684; OpenGL ES&#xFF0C;&#x5982;&#x679C;&#x662F; OpenGL &#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>#version 330 core</code>&#xFF0C;&#x7136;&#x540E;&#x4E8C;&#x4E09;&#x884C;&#x58F0;&#x660E;&#x4E86;&#x8F93;&#x5165;&#x53D8;&#x91CF;&#xFF0C;&#x524D;&#x9762;&#x7684; <code>layout (location = 0)</code> &#x6307;&#x5B9A;&#x4E86;&#x5B83;&#x4EEC;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#xFF0C;&#x4F46;&#x662F;&#x5C31;&#x9700;&#x8981;&#x5728;&#x7A0B;&#x5E8F;&#x91CC;&#x624B;&#x52A8;&#x67E5;&#x627E;&#x4F4D;&#x7F6E;&#x4E86;&#x3002;&#x540E;&#x9762;&#x7684; <code>in</code> &#x8868;&#x660E;&#x662F;&#x8F93;&#x5165;&#x53D8;&#x91CF;&#xFF0C;<code>vec3</code> &#x8868;&#x660E;&#x662F;&#x7531;&#x4E09;&#x4E2A;&#x6570;&#x5B57;&#x7EC4;&#x6210;&#x7684;&#x5411;&#x91CF;&#xFF0C;&#x540E;&#x9762;&#x662F;&#x53D8;&#x91CF;&#x540D;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x5230;&#x4E86;&#x4F4D;&#x7F6E;&#x548C;&#x989C;&#x8272;&#x3002;&#x7136;&#x540E;&#x4E0B;&#x9762; <code>out</code> &#x8868;&#x660E;&#x662F;&#x8F93;&#x51FA;&#x53D8;&#x91CF;&#xFF0C;&#x5F88;&#x660E;&#x663E; Vertex Shader &#x662F;&#x4E0D;&#x80FD;&#x63A7;&#x5236;&#x989C;&#x8272;&#x7684;&#xFF0C;Fragment Shader &#x624D;&#x63A7;&#x5236;&#x989C;&#x8272;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x91CC;&#x628A;&#x4F20;&#x8FDB;&#x6765;&#x7684;&#x989C;&#x8272;&#x518D;&#x8F93;&#x51FA;&#xFF0C;&#x4E0B;&#x4E00;&#x6B65;&#x4F20;&#x7ED9; Fragment Shader&#x3002;</p>
+<p>&#x7136;&#x540E;&#x7A0B;&#x5E8F;&#x4ECE; main &#x5F00;&#x59CB;&#x6267;&#x884C;&#xFF0C;&#x8FD9;&#x91CC; <strong>&#x4E0D;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x503C;</strong>&#xFF0C;<code>gl_Position</code> &#x662F;&#x5185;&#x7F6E;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x628A;&#x9876;&#x70B9;&#x7684;&#x6700;&#x7EC8;&#x53D8;&#x6362;&#x5B8C;&#x7684;&#x4F4D;&#x7F6E;&#x8D4B;&#x7ED9;&#x5B83;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#xFF0C;&#x76F4;&#x63A5;&#x628A;&#x4E09;&#x5143;&#x5750;&#x6807;&#x8F6C;&#x6362;&#x6210;&#x56DB;&#x5143;&#x7684;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x3002;&#x7136;&#x540E;&#x628A;&#x8F93;&#x5165;&#x8FDB;&#x6765;&#x7684;&#x989C;&#x8272;&#x4F20;&#x51FA;&#x53BB;&#x3002;&#x603B;&#x4E4B;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4FDD;&#x8BC1; Vertex Shader &#x8F93;&#x51FA;&#x7684;&#x53D8;&#x91CF;&#x548C; Fragment Shader &#x8F93;&#x5165;&#x7684;&#x53D8;&#x91CF;&#x540D;&#x5B57;&#x4E00;&#x6837;&#xFF0C;OpenGL &#x5C31;&#x4F1A;&#x628A;&#x5B83;&#x4EEC;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5EFA;&#x7ACB; <code>triangle.v.glsl</code>&#xFF0C;&#x5982;&#x4E0B;&#x3002;</p>
 <pre><code class="glsl"><figure class="highlight hljs glsl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -297,8 +297,8 @@
 {
     frag_color = <span class="hljs-type">vec4</span>(pass_color, <span class="hljs-number">1.0</span>f);
 }</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>第二行表明的是设置精度为 <code>float</code>，OpenGL ES 要求 Fragment Shader 必须有这一条，标准 OpenGL 可以去掉，与 <code>gl_Position</code> 不同，为了满足多样化的需求，Fragment Shader 的输出变量需要自己声明，然后我们给输入的颜色加上 <code>1.0f</code> 的 Alpha 值输出。</p>
-<p>接下来类似于我们编译 C 程序的过程，不同的是我们要编写 C 代码读取文件，分别编译并链接为一个程序。我在这里直接给出我封装好的过程来简化代码量，具体说明参见注释。你可以把它们添加到 main 函数外面（上面）。</p>
+<p>&#x7B2C;&#x4E8C;&#x884C;&#x8868;&#x660E;&#x7684;&#x662F;&#x8BBE;&#x7F6E;&#x7CBE;&#x5EA6;&#x4E3A; <code>float</code>&#xFF0C;OpenGL ES &#x8981;&#x6C42; Fragment Shader &#x5FC5;&#x987B;&#x6709;&#x8FD9;&#x4E00;&#x6761;&#xFF0C;&#x6807;&#x51C6; OpenGL &#x53EF;&#x4EE5;&#x53BB;&#x6389;&#xFF0C;&#x4E0E; <code>gl_Position</code> &#x4E0D;&#x540C;&#xFF0C;&#x4E3A;&#x4E86;&#x6EE1;&#x8DB3;&#x591A;&#x6837;&#x5316;&#x7684;&#x9700;&#x6C42;&#xFF0C;Fragment Shader &#x7684;&#x8F93;&#x51FA;&#x53D8;&#x91CF;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x58F0;&#x660E;&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x7ED9;&#x8F93;&#x5165;&#x7684;&#x989C;&#x8272;&#x52A0;&#x4E0A; <code>1.0f</code> &#x7684; Alpha &#x503C;&#x8F93;&#x51FA;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x7C7B;&#x4F3C;&#x4E8E;&#x6211;&#x4EEC;&#x7F16;&#x8BD1; C &#x7A0B;&#x5E8F;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;&#x6211;&#x4EEC;&#x8981;&#x7F16;&#x5199; C &#x4EE3;&#x7801;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#xFF0C;&#x5206;&#x522B;&#x7F16;&#x8BD1;&#x5E76;&#x94FE;&#x63A5;&#x4E3A;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x3002;&#x6211;&#x5728;&#x8FD9;&#x91CC;&#x76F4;&#x63A5;&#x7ED9;&#x51FA;&#x6211;&#x5C01;&#x88C5;&#x597D;&#x7684;&#x8FC7;&#x7A0B;&#x6765;&#x7B80;&#x5316;&#x4EE3;&#x7801;&#x91CF;&#xFF0C;&#x5177;&#x4F53;&#x8BF4;&#x660E;&#x53C2;&#x89C1;&#x6CE8;&#x91CA;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x4EEC;&#x6DFB;&#x52A0;&#x5230; main &#x51FD;&#x6570;&#x5916;&#x9762;&#xFF08;&#x4E0A;&#x9762;&#xFF09;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -415,38 +415,38 @@
 <span class="line">114</span>
 <span class="line">115</span>
 <span class="line">116</span>
-</pre></td><td class="code"><pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdlib.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><string.h></span></span>
+</pre></td><td class="code"><pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LINE_LENGTH 512</span>
 
 <span class="hljs-function">GLuint <span class="hljs-title">make_shader</span><span class="hljs-params">(GLenum type, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> shader_src)</span>
 </span>{
     GLuint shader = <span class="hljs-number">0</span>;
     GLint compiled = <span class="hljs-number">0</span>;
-    <span class="hljs-comment">// 创建 shader。</span>
+    <span class="hljs-comment">// &#x521B;&#x5EFA; shader&#x3002;</span>
     <span class="hljs-keyword">if</span> (!(shader = glCreateShader(type))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Shader Create Error.\n"</span>);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Shader Create Error.\n&quot;</span>);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
-    <span class="hljs-comment">// 加载 shader 内容。</span>
-    glShaderSource(shader, <span class="hljs-number">1</span>, &shader_src, <span class="hljs-literal">NULL</span>);
-    <span class="hljs-comment">// 开始编译。</span>
+    <span class="hljs-comment">// &#x52A0;&#x8F7D; shader &#x5185;&#x5BB9;&#x3002;</span>
+    glShaderSource(shader, <span class="hljs-number">1</span>, &amp;shader_src, <span class="hljs-literal">NULL</span>);
+    <span class="hljs-comment">// &#x5F00;&#x59CB;&#x7F16;&#x8BD1;&#x3002;</span>
     glCompileShader(shader);
-    <span class="hljs-comment">// 检查编译结果。</span>
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
-    <span class="hljs-comment">// 编译失败的话读取错误输出。</span>
+    <span class="hljs-comment">// &#x68C0;&#x67E5;&#x7F16;&#x8BD1;&#x7ED3;&#x679C;&#x3002;</span>
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;compiled);
+    <span class="hljs-comment">// &#x7F16;&#x8BD1;&#x5931;&#x8D25;&#x7684;&#x8BDD;&#x8BFB;&#x53D6;&#x9519;&#x8BEF;&#x8F93;&#x51FA;&#x3002;</span>
     <span class="hljs-keyword">if</span> (!compiled) {
         GLint info_len = <span class="hljs-number">0</span>;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &info_len);
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &amp;info_len);
         <span class="hljs-keyword">if</span> (info_len) {
         <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
         <span class="hljs-keyword">if</span> (!info) {
-            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
+            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Malloc Error.\n&quot;</span>);
             glDeleteShader(shader);
             <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         }
         glGetShaderInfoLog(shader, info_len, <span class="hljs-literal">NULL</span>, info);
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Compile Error: %s\n"</span>, info);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Compile Error: %s\n&quot;</span>, info);
         <span class="hljs-built_in">free</span>(info);
         }
         glDeleteShader(shader);
@@ -462,20 +462,20 @@
     <span class="hljs-keyword">size_t</span> file_length = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">char</span> *file_content = <span class="hljs-literal">NULL</span>;
     <span class="hljs-keyword">char</span> temp_line[LINE_LENGTH];
-    <span class="hljs-comment">// 读取文件不用解释了吧……</span>
-    <span class="hljs-keyword">if</span> (!(fp = fopen(shader_path, <span class="hljs-string">"r"</span>))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Open file %s failed.\n"</span>, shader_path);
+    <span class="hljs-comment">// &#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x4E0D;&#x7528;&#x89E3;&#x91CA;&#x4E86;&#x5427;&#x2026;&#x2026;</span>
+    <span class="hljs-keyword">if</span> (!(fp = fopen(shader_path, <span class="hljs-string">&quot;r&quot;</span>))) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Open file %s failed.\n&quot;</span>, shader_path);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
     fseek(fp, <span class="hljs-number">0l</span>, SEEK_END);
     file_length = ftell(fp);
     rewind(fp);
     <span class="hljs-keyword">if</span> (!(file_content = <span class="hljs-built_in">malloc</span>(file_length))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Malloc Error.\n&quot;</span>);
         fclose(fp);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
-    file_content[<span class="hljs-number">0</span>] = <span class="hljs-string">'\0'</span>;
+    file_content[<span class="hljs-number">0</span>] = <span class="hljs-string">&apos;\0&apos;</span>;
     <span class="hljs-keyword">while</span> (fgets(temp_line, LINE_LENGTH, fp))
         <span class="hljs-built_in">strncat</span>(file_content, temp_line, LINE_LENGTH);
     fclose(fp);
@@ -490,40 +490,40 @@
     GLuint vshader = <span class="hljs-number">0</span>;
     GLuint fshader = <span class="hljs-number">0</span>;
     GLuint program = <span class="hljs-number">0</span>;
-    <span class="hljs-comment">// 加载类型为 GL_VERTEX_SHADER。</span>
+    <span class="hljs-comment">// &#x52A0;&#x8F7D;&#x7C7B;&#x578B;&#x4E3A; GL_VERTEX_SHADER&#x3002;</span>
     vshader = load_shader(GL_VERTEX_SHADER, vshader_path);
-    <span class="hljs-comment">// 加载类型为 GL_FRAGMENT_SHADER。</span>
+    <span class="hljs-comment">// &#x52A0;&#x8F7D;&#x7C7B;&#x578B;&#x4E3A; GL_FRAGMENT_SHADER&#x3002;</span>
     fshader = load_shader(GL_FRAGMENT_SHADER, fshader_path);
     <span class="hljs-keyword">if</span> (!vshader || !fshader)
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-    <span class="hljs-comment">// 创建 Shader Program。</span>
+    <span class="hljs-comment">// &#x521B;&#x5EFA; Shader Program&#x3002;</span>
     <span class="hljs-keyword">if</span> (!(program = glCreateProgram())) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Program Create Error.\n"</span>);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Program Create Error.\n&quot;</span>);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
-    <span class="hljs-comment">// 给 Program 添加 Shader。</span>
+    <span class="hljs-comment">// &#x7ED9; Program &#x6DFB;&#x52A0; Shader&#x3002;</span>
     glAttachShader(program, vshader);
     glAttachShader(program, fshader);
-    <span class="hljs-comment">// 将两个 Shader 链接成 Program。</span>
+    <span class="hljs-comment">// &#x5C06;&#x4E24;&#x4E2A; Shader &#x94FE;&#x63A5;&#x6210; Program&#x3002;</span>
     glLinkProgram(program);
-    <span class="hljs-comment">// 链接完成可以删除 Shader 了。</span>
+    <span class="hljs-comment">// &#x94FE;&#x63A5;&#x5B8C;&#x6210;&#x53EF;&#x4EE5;&#x5220;&#x9664; Shader &#x4E86;&#x3002;</span>
     glDeleteShader(vshader);
     glDeleteShader(fshader);
-    <span class="hljs-comment">// 检查链接状态。</span>
-    glGetProgramiv(program, GL_LINK_STATUS, &linked);
-    <span class="hljs-comment">// 链接失败读取错误输出。</span>
+    <span class="hljs-comment">// &#x68C0;&#x67E5;&#x94FE;&#x63A5;&#x72B6;&#x6001;&#x3002;</span>
+    glGetProgramiv(program, GL_LINK_STATUS, &amp;linked);
+    <span class="hljs-comment">// &#x94FE;&#x63A5;&#x5931;&#x8D25;&#x8BFB;&#x53D6;&#x9519;&#x8BEF;&#x8F93;&#x51FA;&#x3002;</span>
     <span class="hljs-keyword">if</span> (!linked) {
         GLint info_len = <span class="hljs-number">0</span>;
-        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &info_len);
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &amp;info_len);
         <span class="hljs-keyword">if</span> (info_len) {
             <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
             <span class="hljs-keyword">if</span> (!info) {
-                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
+                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Malloc Error.\n&quot;</span>);
                 glDeleteProgram(program);
                 <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
             }
             glGetProgramInfoLog(program, info_len, <span class="hljs-literal">NULL</span>, info);
-            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Link Error: %s\n"</span>, info);
+            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Link Error: %s\n&quot;</span>, info);
             <span class="hljs-built_in">free</span>(info);
         }
         glDeleteProgram(program);
@@ -531,10 +531,10 @@
     }
     <span class="hljs-keyword">return</span> program;
 }</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>有了这个之后只需要在 <code>glViewport()</code> 和 <code>/* Code Here */</code> 之间调用 <code>load_program()</code> 生成 Shader Program。</p>
+<p>&#x6709;&#x4E86;&#x8FD9;&#x4E2A;&#x4E4B;&#x540E;&#x53EA;&#x9700;&#x8981;&#x5728; <code>glViewport()</code> &#x548C; <code>/* Code Here */</code> &#x4E4B;&#x95F4;&#x8C03;&#x7528; <code>load_program()</code> &#x751F;&#x6210; Shader Program&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
-</pre></td><td class="code"><pre><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> program = load_program(<span class="hljs-string">"triangle.v.glsl"</span>, <span class="hljs-string">"triangle.f.glsl"</span>);</code></pre></td></tr></tbody></table></figure></code></pre>
-<h2 id="顶点数据"><a class="headerlink" href="#顶点数据" title="顶点数据"></a>顶点数据</h2><p>接下来我们需要准备绘制的数据了，对于一个三角形来说，需要三个顶点来确定它的位置，每个顶点需要三个坐标，同时我们还要给它们创建不同的颜色，让我们的三角形变的多彩一点，所以需要像下面一样组织数据。把这段插入到之前 <code>/* Code Here */</code> 和 <code>glViewport(0, 0, width, height);</code> 之间。对于 3D 程序来说 float 的精度足够了，double需要更多的运算时间。</p>
+</pre></td><td class="code"><pre><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> program = load_program(<span class="hljs-string">&quot;triangle.v.glsl&quot;</span>, <span class="hljs-string">&quot;triangle.f.glsl&quot;</span>);</code></pre></td></tr></tbody></table></figure></code></pre>
+<h2 id="&#x9876;&#x70B9;&#x6570;&#x636E;"><a class="headerlink" href="#&#x9876;&#x70B9;&#x6570;&#x636E;" title="&#x9876;&#x70B9;&#x6570;&#x636E;"></a>&#x9876;&#x70B9;&#x6570;&#x636E;</h2><p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x51C6;&#x5907;&#x7ED8;&#x5236;&#x7684;&#x6570;&#x636E;&#x4E86;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x4E09;&#x89D2;&#x5F62;&#x6765;&#x8BF4;&#xFF0C;&#x9700;&#x8981;&#x4E09;&#x4E2A;&#x9876;&#x70B9;&#x6765;&#x786E;&#x5B9A;&#x5B83;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x6BCF;&#x4E2A;&#x9876;&#x70B9;&#x9700;&#x8981;&#x4E09;&#x4E2A;&#x5750;&#x6807;&#xFF0C;&#x540C;&#x65F6;&#x6211;&#x4EEC;&#x8FD8;&#x8981;&#x7ED9;&#x5B83;&#x4EEC;&#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7684;&#x989C;&#x8272;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x7684;&#x4E09;&#x89D2;&#x5F62;&#x53D8;&#x7684;&#x591A;&#x5F69;&#x4E00;&#x70B9;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x50CF;&#x4E0B;&#x9762;&#x4E00;&#x6837;&#x7EC4;&#x7EC7;&#x6570;&#x636E;&#x3002;&#x628A;&#x8FD9;&#x6BB5;&#x63D2;&#x5165;&#x5230;&#x4E4B;&#x524D; <code>/* Code Here */</code> &#x548C; <code>glViewport(0, 0, width, height);</code> &#x4E4B;&#x95F4;&#x3002;&#x5BF9;&#x4E8E; 3D &#x7A0B;&#x5E8F;&#x6765;&#x8BF4; float &#x7684;&#x7CBE;&#x5EA6;&#x8DB3;&#x591F;&#x4E86;&#xFF0C;double&#x9700;&#x8981;&#x66F4;&#x591A;&#x7684;&#x8FD0;&#x7B97;&#x65F6;&#x95F4;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -542,33 +542,33 @@
 <span class="line">5</span>
 <span class="line">6</span>
 </pre></td><td class="code"><pre><code>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">float</span> vertices[] = {
-        <span class="hljs-comment">// 坐标           颜色</span>
+        <span class="hljs-comment">// &#x5750;&#x6807;           &#x989C;&#x8272;</span>
         <span class="hljs-number">-0.5f</span>, <span class="hljs-number">-0.5f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>,
         <span class="hljs-number">0.5f</span>, <span class="hljs-number">-0.5f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>,
         <span class="hljs-number">0.0f</span>,  <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>
     };</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>OpenGL 的坐标是这样安排的：</p>
+<p>OpenGL &#x7684;&#x5750;&#x6807;&#x662F;&#x8FD9;&#x6837;&#x5B89;&#x6392;&#x7684;&#xFF1A;</p>
 <ul>
-<li>从左到右对应 X 坐标 <code>-1.0f</code> 到 <code>1.0f</code>。</li>
-<li>从下到上对应 Y 坐标 <code>-1.0f</code> 到 <code>1.0f</code>。</li>
-<li>从外到里对应 Z 坐标从负到正，需要注意这个可能会被以后的数学变换改变。</li>
+<li>&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#x5BF9;&#x5E94; X &#x5750;&#x6807; <code>-1.0f</code> &#x5230; <code>1.0f</code>&#x3002;</li>
+<li>&#x4ECE;&#x4E0B;&#x5230;&#x4E0A;&#x5BF9;&#x5E94; Y &#x5750;&#x6807; <code>-1.0f</code> &#x5230; <code>1.0f</code>&#x3002;</li>
+<li>&#x4ECE;&#x5916;&#x5230;&#x91CC;&#x5BF9;&#x5E94; Z &#x5750;&#x6807;&#x4ECE;&#x8D1F;&#x5230;&#x6B63;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x53EF;&#x80FD;&#x4F1A;&#x88AB;&#x4EE5;&#x540E;&#x7684;&#x6570;&#x5B66;&#x53D8;&#x6362;&#x6539;&#x53D8;&#x3002;</li>
 </ul>
-<p>我们这里是平面的所以 Z 坐标都是一样的。</p>
-<p>现在我们把数据存储到了内存里面，但是很显然我们需要把数据传给显卡。这时候我们需要创建一个 OpenGL 的 Buffer 对象，并把数据写进去。也有人管这个叫 VBO，但是我觉得这个缩写还没有 Buffer 来的直观。</p>
+<p>&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x662F;&#x5E73;&#x9762;&#x7684;&#x6240;&#x4EE5; Z &#x5750;&#x6807;&#x90FD;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x628A;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5230;&#x4E86;&#x5185;&#x5B58;&#x91CC;&#x9762;&#xFF0C;&#x4F46;&#x662F;&#x5F88;&#x663E;&#x7136;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x628A;&#x6570;&#x636E;&#x4F20;&#x7ED9;&#x663E;&#x5361;&#x3002;&#x8FD9;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; OpenGL &#x7684; Buffer &#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x628A;&#x6570;&#x636E;&#x5199;&#x8FDB;&#x53BB;&#x3002;&#x4E5F;&#x6709;&#x4EBA;&#x7BA1;&#x8FD9;&#x4E2A;&#x53EB; VBO&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x89C9;&#x5F97;&#x8FD9;&#x4E2A;&#x7F29;&#x5199;&#x8FD8;&#x6CA1;&#x6709; Buffer &#x6765;&#x7684;&#x76F4;&#x89C2;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 </pre></td><td class="code"><pre><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> buffer;
-    glGenBuffers(<span class="hljs-number">1</span>, &buffer);
+    glGenBuffers(<span class="hljs-number">1</span>, &amp;buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, <span class="hljs-keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, <span class="hljs-number">0</span>);</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>这里的 <code>buffer</code> 只是一个符号，真正的空间分配我们是不能干预的。<code>glGenBuffers()</code>可以生成多个 Buffer，这里我们只生成一个，所以第一个参数设置为 1，第二个则是一个指针，我们这里只有一个所以没有使用数组，而是直接取了地址。</p>
-<p>接下来我们把这个 <code>buffer</code> 用 <code>glBindBuffer()</code> 绑定到 <code>GL_ARRAY_BUFFER</code> 表示这里是放置顶点的数组。<code>glBufferData()</code> 则会把数据写入到刚才绑定好的 <code>buffer</code>，所以要先进行绑定，这里第一个参数表示写入的目标，就是刚才的 <code>GL_ARRAY_BUFFER</code>，第二个则是写入数据的大小，第三个是写入数据的指针，第四个 <code>GL_STATIC_DRAW</code> 表示写入的数据是用来绘图的，不会经常改变。做完这一切我们取消绑定，把 <code>GL_ARRAY_BUFFER</code> 绑定到默认的 <code>0</code>。</p>
-<p>题外话：经常有人吐槽 OpenGL 这个状态机的设定，觉得绑来绑去很麻烦，但是你可以封装一下让它变的好用点。关键要记得处理完就解绑，避免状态混乱。至于 D3D 是什么样子的，我不知道，我也并不关心，就算 D3D 再好，不能让我在 Linux 下使用就是致命的，OpenGL 也许不完美，但它能用，我觉得也挺好。</p>
-<p>接下来还有个关键问题：显卡不知道我们传进去的数据是什么，怎么解释它。它不知道前三列是坐标后三列是颜色，甚至不知道这些数据是整数还是浮点数。所以我们需要使用 VertexArray 来解释 Buffer 中数据的含义，继续插入下面这部份。</p>
+<p>&#x8FD9;&#x91CC;&#x7684; <code>buffer</code> &#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x7B26;&#x53F7;&#xFF0C;&#x771F;&#x6B63;&#x7684;&#x7A7A;&#x95F4;&#x5206;&#x914D;&#x6211;&#x4EEC;&#x662F;&#x4E0D;&#x80FD;&#x5E72;&#x9884;&#x7684;&#x3002;<code>glGenBuffers()</code>&#x53EF;&#x4EE5;&#x751F;&#x6210;&#x591A;&#x4E2A; Buffer&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EA;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#xFF0C;&#x6240;&#x4EE5;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x4E3A; 1&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x5219;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x6240;&#x4EE5;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x6570;&#x7EC4;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x53D6;&#x4E86;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x628A;&#x8FD9;&#x4E2A; <code>buffer</code> &#x7528; <code>glBindBuffer()</code> &#x7ED1;&#x5B9A;&#x5230; <code>GL_ARRAY_BUFFER</code> &#x8868;&#x793A;&#x8FD9;&#x91CC;&#x662F;&#x653E;&#x7F6E;&#x9876;&#x70B9;&#x7684;&#x6570;&#x7EC4;&#x3002;<code>glBufferData()</code> &#x5219;&#x4F1A;&#x628A;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230;&#x521A;&#x624D;&#x7ED1;&#x5B9A;&#x597D;&#x7684; <code>buffer</code>&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x5148;&#x8FDB;&#x884C;&#x7ED1;&#x5B9A;&#xFF0C;&#x8FD9;&#x91CC;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x5199;&#x5165;&#x7684;&#x76EE;&#x6807;&#xFF0C;&#x5C31;&#x662F;&#x521A;&#x624D;&#x7684; <code>GL_ARRAY_BUFFER</code>&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x5219;&#x662F;&#x5199;&#x5165;&#x6570;&#x636E;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x662F;&#x5199;&#x5165;&#x6570;&#x636E;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x7B2C;&#x56DB;&#x4E2A; <code>GL_STATIC_DRAW</code> &#x8868;&#x793A;&#x5199;&#x5165;&#x7684;&#x6570;&#x636E;&#x662F;&#x7528;&#x6765;&#x7ED8;&#x56FE;&#x7684;&#xFF0C;&#x4E0D;&#x4F1A;&#x7ECF;&#x5E38;&#x6539;&#x53D8;&#x3002;&#x505A;&#x5B8C;&#x8FD9;&#x4E00;&#x5207;&#x6211;&#x4EEC;&#x53D6;&#x6D88;&#x7ED1;&#x5B9A;&#xFF0C;&#x628A; <code>GL_ARRAY_BUFFER</code> &#x7ED1;&#x5B9A;&#x5230;&#x9ED8;&#x8BA4;&#x7684; <code>0</code>&#x3002;</p>
+<p>&#x9898;&#x5916;&#x8BDD;&#xFF1A;&#x7ECF;&#x5E38;&#x6709;&#x4EBA;&#x5410;&#x69FD; OpenGL &#x8FD9;&#x4E2A;&#x72B6;&#x6001;&#x673A;&#x7684;&#x8BBE;&#x5B9A;&#xFF0C;&#x89C9;&#x5F97;&#x7ED1;&#x6765;&#x7ED1;&#x53BB;&#x5F88;&#x9EBB;&#x70E6;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x53EF;&#x4EE5;&#x5C01;&#x88C5;&#x4E00;&#x4E0B;&#x8BA9;&#x5B83;&#x53D8;&#x7684;&#x597D;&#x7528;&#x70B9;&#x3002;&#x5173;&#x952E;&#x8981;&#x8BB0;&#x5F97;&#x5904;&#x7406;&#x5B8C;&#x5C31;&#x89E3;&#x7ED1;&#xFF0C;&#x907F;&#x514D;&#x72B6;&#x6001;&#x6DF7;&#x4E71;&#x3002;&#x81F3;&#x4E8E; D3D &#x662F;&#x4EC0;&#x4E48;&#x6837;&#x5B50;&#x7684;&#xFF0C;&#x6211;&#x4E0D;&#x77E5;&#x9053;&#xFF0C;&#x6211;&#x4E5F;&#x5E76;&#x4E0D;&#x5173;&#x5FC3;&#xFF0C;&#x5C31;&#x7B97; D3D &#x518D;&#x597D;&#xFF0C;&#x4E0D;&#x80FD;&#x8BA9;&#x6211;&#x5728; Linux &#x4E0B;&#x4F7F;&#x7528;&#x5C31;&#x662F;&#x81F4;&#x547D;&#x7684;&#xFF0C;OpenGL &#x4E5F;&#x8BB8;&#x4E0D;&#x5B8C;&#x7F8E;&#xFF0C;&#x4F46;&#x5B83;&#x80FD;&#x7528;&#xFF0C;&#x6211;&#x89C9;&#x5F97;&#x4E5F;&#x633A;&#x597D;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x8FD8;&#x6709;&#x4E2A;&#x5173;&#x952E;&#x95EE;&#x9898;&#xFF1A;&#x663E;&#x5361;&#x4E0D;&#x77E5;&#x9053;&#x6211;&#x4EEC;&#x4F20;&#x8FDB;&#x53BB;&#x7684;&#x6570;&#x636E;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x600E;&#x4E48;&#x89E3;&#x91CA;&#x5B83;&#x3002;&#x5B83;&#x4E0D;&#x77E5;&#x9053;&#x524D;&#x4E09;&#x5217;&#x662F;&#x5750;&#x6807;&#x540E;&#x4E09;&#x5217;&#x662F;&#x989C;&#x8272;&#xFF0C;&#x751A;&#x81F3;&#x4E0D;&#x77E5;&#x9053;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x662F;&#x6574;&#x6570;&#x8FD8;&#x662F;&#x6D6E;&#x70B9;&#x6570;&#x3002;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4F7F;&#x7528; VertexArray &#x6765;&#x89E3;&#x91CA; Buffer &#x4E2D;&#x6570;&#x636E;&#x7684;&#x542B;&#x4E49;&#xFF0C;&#x7EE7;&#x7EED;&#x63D2;&#x5165;&#x4E0B;&#x9762;&#x8FD9;&#x90E8;&#x4EFD;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -582,7 +582,7 @@
 <span class="line">11</span>
 <span class="line">12</span>
 </pre></td><td class="code"><pre><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> vertex_array;
-    glGenVertexArrays(<span class="hljs-number">1</span>, &vertex_array);
+    glGenVertexArrays(<span class="hljs-number">1</span>, &amp;vertex_array);
     glUseProgram(program);
     glBindVertexArray(vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
@@ -593,11 +593,11 @@
     glUseProgram(<span class="hljs-number">0</span>);
     glBindVertexArray(<span class="hljs-number">0</span>);
     glBindBuffer(GL_ARRAY_BUFFER, <span class="hljs-number">0</span>);</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>首先我们还是创建一个标记符。然后使用 <code>glGenVertexArrays()</code> 生成，因为这里的数据要输入给 Program，在对 Program 操作之前先要绑定当前 Program，所以调用 <code>glUseProgram(program);</code>，接下来把 <code>vertex_array</code> 绑定到当前状态，然后我们要告诉 OpenGL 这个 VertexArray 对应的是哪个 Buffer，所以也要把刚才的 <code>buffer</code> 绑定到当前状态让它们关联。</p>
-<p>然后调用 <code>glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);</code> 传递坐标的信息，第一个参数表明这里的数据会被传递到 Vertex Shader 里面 <code>location = 0</code> 的地方，第二个参数表示一次传递三个数据（对应 <code>vec3</code>），第三个表示传进去的是 <code>float</code> 类型，第四个表示是否进行标准化（缩放到 0 和 1 之间），很显然我们不需要，第五个是步长，表示传递完一组数据之后 <strong>从这一组数据开头跳过多长会到下一组数据的开头</strong>，我们这里是三个坐标三个颜色，所以是六个 <code>float</code>，最后一个是偏移量 Offset，因为我们坐标是从第一个开始，所以是 <code>(void *)0</code>。最后用 <code>glEnableVertexAttribArray(0);</code> 启用位置 0。</p>
-<p>接下来用 <code>glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));</code> 传递颜色的信息，这次是位置 1，区别在于第一个颜色是在第四个数据开始的，所以偏移量设置为 <code>(void *)(3 * sizeof(float)))</code>。最后用 <code>glEnableVertexAttribArray(1);</code> 启用位置 1。</p>
-<p>最后不要忘记解绑。</p>
-<h2 id="绘制三角形-1"><a class="headerlink" href="#绘制三角形-1" title="绘制三角形"></a>绘制三角形</h2><p>一切准备就绪，终于可以开始和绘制三角形了，下面我们进入循环，在 <code>/* Draw Here */</code> 那里插入如下代码。</p>
+<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6807;&#x8BB0;&#x7B26;&#x3002;&#x7136;&#x540E;&#x4F7F;&#x7528; <code>glGenVertexArrays()</code> &#x751F;&#x6210;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x91CC;&#x7684;&#x6570;&#x636E;&#x8981;&#x8F93;&#x5165;&#x7ED9; Program&#xFF0C;&#x5728;&#x5BF9; Program &#x64CD;&#x4F5C;&#x4E4B;&#x524D;&#x5148;&#x8981;&#x7ED1;&#x5B9A;&#x5F53;&#x524D; Program&#xFF0C;&#x6240;&#x4EE5;&#x8C03;&#x7528; <code>glUseProgram(program);</code>&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x628A; <code>vertex_array</code> &#x7ED1;&#x5B9A;&#x5230;&#x5F53;&#x524D;&#x72B6;&#x6001;&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x8981;&#x544A;&#x8BC9; OpenGL &#x8FD9;&#x4E2A; VertexArray &#x5BF9;&#x5E94;&#x7684;&#x662F;&#x54EA;&#x4E2A; Buffer&#xFF0C;&#x6240;&#x4EE5;&#x4E5F;&#x8981;&#x628A;&#x521A;&#x624D;&#x7684; <code>buffer</code> &#x7ED1;&#x5B9A;&#x5230;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x8BA9;&#x5B83;&#x4EEC;&#x5173;&#x8054;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x8C03;&#x7528; <code>glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);</code> &#x4F20;&#x9012;&#x5750;&#x6807;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x660E;&#x8FD9;&#x91CC;&#x7684;&#x6570;&#x636E;&#x4F1A;&#x88AB;&#x4F20;&#x9012;&#x5230; Vertex Shader &#x91CC;&#x9762; <code>location = 0</code> &#x7684;&#x5730;&#x65B9;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x4E00;&#x6B21;&#x4F20;&#x9012;&#x4E09;&#x4E2A;&#x6570;&#x636E;&#xFF08;&#x5BF9;&#x5E94; <code>vec3</code>&#xFF09;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x8868;&#x793A;&#x4F20;&#x8FDB;&#x53BB;&#x7684;&#x662F; <code>float</code> &#x7C7B;&#x578B;&#xFF0C;&#x7B2C;&#x56DB;&#x4E2A;&#x8868;&#x793A;&#x662F;&#x5426;&#x8FDB;&#x884C;&#x6807;&#x51C6;&#x5316;&#xFF08;&#x7F29;&#x653E;&#x5230; 0 &#x548C; 1 &#x4E4B;&#x95F4;&#xFF09;&#xFF0C;&#x5F88;&#x663E;&#x7136;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#xFF0C;&#x7B2C;&#x4E94;&#x4E2A;&#x662F;&#x6B65;&#x957F;&#xFF0C;&#x8868;&#x793A;&#x4F20;&#x9012;&#x5B8C;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x4E4B;&#x540E; <strong>&#x4ECE;&#x8FD9;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x5F00;&#x5934;&#x8DF3;&#x8FC7;&#x591A;&#x957F;&#x4F1A;&#x5230;&#x4E0B;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x7684;&#x5F00;&#x5934;</strong>&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x662F;&#x4E09;&#x4E2A;&#x5750;&#x6807;&#x4E09;&#x4E2A;&#x989C;&#x8272;&#xFF0C;&#x6240;&#x4EE5;&#x662F;&#x516D;&#x4E2A; <code>float</code>&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x662F;&#x504F;&#x79FB;&#x91CF; Offset&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5750;&#x6807;&#x662F;&#x4ECE;&#x7B2C;&#x4E00;&#x4E2A;&#x5F00;&#x59CB;&#xFF0C;&#x6240;&#x4EE5;&#x662F; <code>(void *)0</code>&#x3002;&#x6700;&#x540E;&#x7528; <code>glEnableVertexAttribArray(0);</code> &#x542F;&#x7528;&#x4F4D;&#x7F6E; 0&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x7528; <code>glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));</code> &#x4F20;&#x9012;&#x989C;&#x8272;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x8FD9;&#x6B21;&#x662F;&#x4F4D;&#x7F6E; 1&#xFF0C;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x7B2C;&#x4E00;&#x4E2A;&#x989C;&#x8272;&#x662F;&#x5728;&#x7B2C;&#x56DB;&#x4E2A;&#x6570;&#x636E;&#x5F00;&#x59CB;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x504F;&#x79FB;&#x91CF;&#x8BBE;&#x7F6E;&#x4E3A; <code>(void *)(3 * sizeof(float)))</code>&#x3002;&#x6700;&#x540E;&#x7528; <code>glEnableVertexAttribArray(1);</code> &#x542F;&#x7528;&#x4F4D;&#x7F6E; 1&#x3002;</p>
+<p>&#x6700;&#x540E;&#x4E0D;&#x8981;&#x5FD8;&#x8BB0;&#x89E3;&#x7ED1;&#x3002;</p>
+<h2 id="&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;-1"><a class="headerlink" href="#&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;-1" title="&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;"></a>&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;</h2><p>&#x4E00;&#x5207;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x7EC8;&#x4E8E;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x548C;&#x7ED8;&#x5236;&#x4E09;&#x89D2;&#x5F62;&#x4E86;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x8FDB;&#x5165;&#x5FAA;&#x73AF;&#xFF0C;&#x5728; <code>/* Draw Here */</code> &#x90A3;&#x91CC;&#x63D2;&#x5165;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -608,25 +608,25 @@
     glDrawArrays(GL_TRIANGLES, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
     glUseProgram(<span class="hljs-number">0</span>);
     glBindVertexArray(<span class="hljs-number">0</span>);</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>简单多了对不对！因为我们已经准备好了一切，所以这里只要加载你的 Shader Program，然后绑定你的 VertexArray，用 <code>glDrawArrays(GL_TRIANGLES, 0, 3);</code> 告诉 OpenGL 绘制当前 Array 即可，第一个参数 <code>GL_TRIANGLES</code> 表示我们要画三角形（还记得吗，大部分复杂图形都可以用三角形近似拼出来，所以这里有复数），第二个表示从第几个顶点开始，第三个则表示画几个顶点。然后 OpenGL就会按你的要求去画图。最后不要忘记解绑。</p>
-<h1 id="清理"><a class="headerlink" href="#清理" title="清理"></a>清理</h1><p>在退出程序之前最好清理掉你分配的空间，所以在循环后面和 <code>glfwDestroyWindow(window);</code> 之间插入如下部分。</p>
+<p>&#x7B80;&#x5355;&#x591A;&#x4E86;&#x5BF9;&#x4E0D;&#x5BF9;&#xFF01;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x51C6;&#x5907;&#x597D;&#x4E86;&#x4E00;&#x5207;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x53EA;&#x8981;&#x52A0;&#x8F7D;&#x4F60;&#x7684; Shader Program&#xFF0C;&#x7136;&#x540E;&#x7ED1;&#x5B9A;&#x4F60;&#x7684; VertexArray&#xFF0C;&#x7528; <code>glDrawArrays(GL_TRIANGLES, 0, 3);</code> &#x544A;&#x8BC9; OpenGL &#x7ED8;&#x5236;&#x5F53;&#x524D; Array &#x5373;&#x53EF;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570; <code>GL_TRIANGLES</code> &#x8868;&#x793A;&#x6211;&#x4EEC;&#x8981;&#x753B;&#x4E09;&#x89D2;&#x5F62;&#xFF08;&#x8FD8;&#x8BB0;&#x5F97;&#x5417;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x590D;&#x6742;&#x56FE;&#x5F62;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x4E09;&#x89D2;&#x5F62;&#x8FD1;&#x4F3C;&#x62FC;&#x51FA;&#x6765;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x6709;&#x590D;&#x6570;&#xFF09;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x8868;&#x793A;&#x4ECE;&#x7B2C;&#x51E0;&#x4E2A;&#x9876;&#x70B9;&#x5F00;&#x59CB;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x5219;&#x8868;&#x793A;&#x753B;&#x51E0;&#x4E2A;&#x9876;&#x70B9;&#x3002;&#x7136;&#x540E; OpenGL&#x5C31;&#x4F1A;&#x6309;&#x4F60;&#x7684;&#x8981;&#x6C42;&#x53BB;&#x753B;&#x56FE;&#x3002;&#x6700;&#x540E;&#x4E0D;&#x8981;&#x5FD8;&#x8BB0;&#x89E3;&#x7ED1;&#x3002;</p>
+<h1 id="&#x6E05;&#x7406;"><a class="headerlink" href="#&#x6E05;&#x7406;" title="&#x6E05;&#x7406;"></a>&#x6E05;&#x7406;</h1><p>&#x5728;&#x9000;&#x51FA;&#x7A0B;&#x5E8F;&#x4E4B;&#x524D;&#x6700;&#x597D;&#x6E05;&#x7406;&#x6389;&#x4F60;&#x5206;&#x914D;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x5FAA;&#x73AF;&#x540E;&#x9762;&#x548C; <code>glfwDestroyWindow(window);</code> &#x4E4B;&#x95F4;&#x63D2;&#x5165;&#x5982;&#x4E0B;&#x90E8;&#x5206;&#x3002;</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre></td><td class="code"><pre><code>    glDeleteBuffers(<span class="hljs-number">1</span>, &buffer);
-    glDeleteVertexArrays(<span class="hljs-number">1</span>, &vertex_array);
+</pre></td><td class="code"><pre><code>    glDeleteBuffers(<span class="hljs-number">1</span>, &amp;buffer);
+    glDeleteVertexArrays(<span class="hljs-number">1</span>, &amp;vertex_array);
     glDeleteProgram(program);</code></pre></td></tr></tbody></table></figure></code></pre>
 <p><img src="/posts/Learn-OpenGL-1/triangle.png" alt="triangle.png"></p>
-<h1 id="还有一件事……"><a class="headerlink" href="#还有一件事……" title="还有一件事……"></a>还有一件事……</h1><p>你可能会问“我还是不知道这些代码怎么拆分成各个部分！”，实际上我文章里的代码片段基本都是互相独立的部分，也就是说它们可以按照顺序放在程序的不同位置，而不必完全紧邻。产生 Buffer，产生 VertexArray 和 Shader Program 不是需要放在大循环里面的，你大可以把这些数据封装起来。</p>
-<p>虽然你成功画出了三角形，但是你可能还是不知道怎样画更复杂的图形，实际上你不需要修改你的顶点数据和 Shader 来改变图形位置。大部分复杂的模型由相应的建模软件导出顶点数据和贴图坐标，你也不需要手动安排这些模型在 OpenGL 坐标系中的位置，后面我会给出使用矩阵和向量运算处理坐标系统的样例。</p>
-<p>如果你觉得这样看代码只是管中窥豹，下面我给出完整的程序链接。</p>
+<h1 id="&#x8FD8;&#x6709;&#x4E00;&#x4EF6;&#x4E8B;&#x2026;&#x2026;"><a class="headerlink" href="#&#x8FD8;&#x6709;&#x4E00;&#x4EF6;&#x4E8B;&#x2026;&#x2026;" title="&#x8FD8;&#x6709;&#x4E00;&#x4EF6;&#x4E8B;&#x2026;&#x2026;"></a>&#x8FD8;&#x6709;&#x4E00;&#x4EF6;&#x4E8B;&#x2026;&#x2026;</h1><p>&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x95EE;&#x201C;&#x6211;&#x8FD8;&#x662F;&#x4E0D;&#x77E5;&#x9053;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#x600E;&#x4E48;&#x62C6;&#x5206;&#x6210;&#x5404;&#x4E2A;&#x90E8;&#x5206;&#xFF01;&#x201D;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x6211;&#x6587;&#x7AE0;&#x91CC;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x57FA;&#x672C;&#x90FD;&#x662F;&#x4E92;&#x76F8;&#x72EC;&#x7ACB;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x987A;&#x5E8F;&#x653E;&#x5728;&#x7A0B;&#x5E8F;&#x7684;&#x4E0D;&#x540C;&#x4F4D;&#x7F6E;&#xFF0C;&#x800C;&#x4E0D;&#x5FC5;&#x5B8C;&#x5168;&#x7D27;&#x90BB;&#x3002;&#x4EA7;&#x751F; Buffer&#xFF0C;&#x4EA7;&#x751F; VertexArray &#x548C; Shader Program &#x4E0D;&#x662F;&#x9700;&#x8981;&#x653E;&#x5728;&#x5927;&#x5FAA;&#x73AF;&#x91CC;&#x9762;&#x7684;&#xFF0C;&#x4F60;&#x5927;&#x53EF;&#x4EE5;&#x628A;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x5C01;&#x88C5;&#x8D77;&#x6765;&#x3002;</p>
+<p>&#x867D;&#x7136;&#x4F60;&#x6210;&#x529F;&#x753B;&#x51FA;&#x4E86;&#x4E09;&#x89D2;&#x5F62;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x53EF;&#x80FD;&#x8FD8;&#x662F;&#x4E0D;&#x77E5;&#x9053;&#x600E;&#x6837;&#x753B;&#x66F4;&#x590D;&#x6742;&#x7684;&#x56FE;&#x5F62;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x4F60;&#x7684;&#x9876;&#x70B9;&#x6570;&#x636E;&#x548C; Shader &#x6765;&#x6539;&#x53D8;&#x56FE;&#x5F62;&#x4F4D;&#x7F6E;&#x3002;&#x5927;&#x90E8;&#x5206;&#x590D;&#x6742;&#x7684;&#x6A21;&#x578B;&#x7531;&#x76F8;&#x5E94;&#x7684;&#x5EFA;&#x6A21;&#x8F6F;&#x4EF6;&#x5BFC;&#x51FA;&#x9876;&#x70B9;&#x6570;&#x636E;&#x548C;&#x8D34;&#x56FE;&#x5750;&#x6807;&#xFF0C;&#x4F60;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x624B;&#x52A8;&#x5B89;&#x6392;&#x8FD9;&#x4E9B;&#x6A21;&#x578B;&#x5728; OpenGL &#x5750;&#x6807;&#x7CFB;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x540E;&#x9762;&#x6211;&#x4F1A;&#x7ED9;&#x51FA;&#x4F7F;&#x7528;&#x77E9;&#x9635;&#x548C;&#x5411;&#x91CF;&#x8FD0;&#x7B97;&#x5904;&#x7406;&#x5750;&#x6807;&#x7CFB;&#x7EDF;&#x7684;&#x6837;&#x4F8B;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x8FD9;&#x6837;&#x770B;&#x4EE3;&#x7801;&#x53EA;&#x662F;&#x7BA1;&#x4E2D;&#x7AA5;&#x8C79;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x7ED9;&#x51FA;&#x5B8C;&#x6574;&#x7684;&#x7A0B;&#x5E8F;&#x94FE;&#x63A5;&#x3002;</p>
 <ul>
 <li><a href="/posts/Learn-OpenGL-1/main.c">main.c</a></li>
 <li><a href="/posts/Learn-OpenGL-1/triangle.v.glsl">triangle.v.glsl</a></li>
 <li><a href="/posts/Learn-OpenGL-1/triangle.f.glsl">triangle.f.glsl</a></li>
 </ul>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">

@@ -160,92 +160,92 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>一入Arch深似海，不挂全需人品高～家里添了台联想昭阳E49,奔腾2020M,2G内存。早就想写一篇安装手札来做LOFTER的开篇了～我没那么多脑洞……代码还是有的……</p>
-<p>Arch的安装出了名的难，没安过三次不要说你会Arch，但安装完你会对Linux有更好理解，如同打通任督二脉～我这次是第四次成功了～感谢好朋友Maxfan的帮助～另外LOFTER真的很不错～   </p>
+      <p>&#x4E00;&#x5165;Arch&#x6DF1;&#x4F3C;&#x6D77;&#xFF0C;&#x4E0D;&#x6302;&#x5168;&#x9700;&#x4EBA;&#x54C1;&#x9AD8;&#xFF5E;&#x5BB6;&#x91CC;&#x6DFB;&#x4E86;&#x53F0;&#x8054;&#x60F3;&#x662D;&#x9633;E49,&#x5954;&#x817E;2020M,2G&#x5185;&#x5B58;&#x3002;&#x65E9;&#x5C31;&#x60F3;&#x5199;&#x4E00;&#x7BC7;&#x5B89;&#x88C5;&#x624B;&#x672D;&#x6765;&#x505A;LOFTER&#x7684;&#x5F00;&#x7BC7;&#x4E86;&#xFF5E;&#x6211;&#x6CA1;&#x90A3;&#x4E48;&#x591A;&#x8111;&#x6D1E;&#x2026;&#x2026;&#x4EE3;&#x7801;&#x8FD8;&#x662F;&#x6709;&#x7684;&#x2026;&#x2026;</p>
+<p>Arch&#x7684;&#x5B89;&#x88C5;&#x51FA;&#x4E86;&#x540D;&#x7684;&#x96BE;&#xFF0C;&#x6CA1;&#x5B89;&#x8FC7;&#x4E09;&#x6B21;&#x4E0D;&#x8981;&#x8BF4;&#x4F60;&#x4F1A;Arch&#xFF0C;&#x4F46;&#x5B89;&#x88C5;&#x5B8C;&#x4F60;&#x4F1A;&#x5BF9;Linux&#x6709;&#x66F4;&#x597D;&#x7406;&#x89E3;&#xFF0C;&#x5982;&#x540C;&#x6253;&#x901A;&#x4EFB;&#x7763;&#x4E8C;&#x8109;&#xFF5E;&#x6211;&#x8FD9;&#x6B21;&#x662F;&#x7B2C;&#x56DB;&#x6B21;&#x6210;&#x529F;&#x4E86;&#xFF5E;&#x611F;&#x8C22;&#x597D;&#x670B;&#x53CB;Maxfan&#x7684;&#x5E2E;&#x52A9;&#xFF5E;&#x53E6;&#x5916;LOFTER&#x771F;&#x7684;&#x5F88;&#x4E0D;&#x9519;&#xFF5E;   </p>
 <!--more-->
 
-<p>下面正文开始～   </p>
-<p>到<a href="https://www.archlinux.org/download/" target="_blank">Arch的下载页面</a>下载最新的镜像，Windows下用Win32diskmanager写入U盘，Linux下用   </p>
+<p>&#x4E0B;&#x9762;&#x6B63;&#x6587;&#x5F00;&#x59CB;&#xFF5E;   </p>
+<p>&#x5230;<a href="https://www.archlinux.org/download/" target="_blank">Arch&#x7684;&#x4E0B;&#x8F7D;&#x9875;&#x9762;</a>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7684;&#x955C;&#x50CF;&#xFF0C;Windows&#x4E0B;&#x7528;Win32diskmanager&#x5199;&#x5165;U&#x76D8;&#xFF0C;Linux&#x4E0B;&#x7528;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># dd if=~/archlinux-2014.07.03.iso of=/dev/sdb</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>写入U盘。   </p>
-<p>开机按<f12>选择U盘引导， <em>Boot Arch Linux(x86_64)</em> ，root自动登录。可以手机看[Arch Wiki新手指南](<a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)%E3%80%82~/%E6%9C%89%E4%B8%80%E4%BB%BD%E8%8B%B1%E6%96%87%E7%9A%84install.txt%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8tty2%E6%89%93%E5%BC%80%E7%9C%8B%E3%80%82" target="_blank">https://wiki.archlinux.org/index.php/Beginners%27_Guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)。~/有一份英文的install.txt，可以在tty2打开看。</a>   </f12></p>
-<p>首先   </p>
+<p>&#x5199;&#x5165;U&#x76D8;&#x3002;   </p>
+<p>&#x5F00;&#x673A;&#x6309;<f12>&#x9009;&#x62E9;U&#x76D8;&#x5F15;&#x5BFC;&#xFF0C; <em>Boot Arch Linux(x86_64)</em> &#xFF0C;root&#x81EA;&#x52A8;&#x767B;&#x5F55;&#x3002;&#x53EF;&#x4EE5;&#x624B;&#x673A;&#x770B;[Arch Wiki&#x65B0;&#x624B;&#x6307;&#x5357;](<a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)%E3%80%82~/%E6%9C%89%E4%B8%80%E4%BB%BD%E8%8B%B1%E6%96%87%E7%9A%84install.txt%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8tty2%E6%89%93%E5%BC%80%E7%9C%8B%E3%80%82" target="_blank">https://wiki.archlinux.org/index.php/Beginners%27_Guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#x3002;~/&#x6709;&#x4E00;&#x4EFD;&#x82F1;&#x6587;&#x7684;install.txt&#xFF0C;&#x53EF;&#x4EE5;&#x5728;tty2&#x6253;&#x5F00;&#x770B;&#x3002;</a>   </f12></p>
+<p>&#x9996;&#x5148;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># iw dev</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>记下无线接口名。本例为 <em>wlp2s0</em>    </p>
+<p>&#x8BB0;&#x4E0B;&#x65E0;&#x7EBF;&#x63A5;&#x53E3;&#x540D;&#x3002;&#x672C;&#x4F8B;&#x4E3A; <em>wlp2s0</em>    </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># wifi-menu wlp2s0</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>选择无线网，两次ok，键入密码连接。   </p>
+<p>&#x9009;&#x62E9;&#x65E0;&#x7EBF;&#x7F51;&#xFF0C;&#x4E24;&#x6B21;ok&#xFF0C;&#x952E;&#x5165;&#x5BC6;&#x7801;&#x8FDE;&#x63A5;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># ping -c 3 www.baidu.com</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>确定是否已联网。   </p>
+<p>&#x786E;&#x5B9A;&#x662F;&#x5426;&#x5DF2;&#x8054;&#x7F51;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># cfdisk</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>听说高手都用fdisk分区，我习惯cfdisk，反正不从头分，在末尾的空闲分区划分70G/dev/sda3作为/，3G/dev/sda4swap，都是主分区。由于Arch用pacstrap安装基本系统，所以单/分区也能保留/home重装～只要删掉其他目录即可。千万不要乱按Bootable！给我惹了好大麻烦……   </p>
+<p>&#x542C;&#x8BF4;&#x9AD8;&#x624B;&#x90FD;&#x7528;fdisk&#x5206;&#x533A;&#xFF0C;&#x6211;&#x4E60;&#x60EF;cfdisk&#xFF0C;&#x53CD;&#x6B63;&#x4E0D;&#x4ECE;&#x5934;&#x5206;&#xFF0C;&#x5728;&#x672B;&#x5C3E;&#x7684;&#x7A7A;&#x95F2;&#x5206;&#x533A;&#x5212;&#x5206;70G/dev/sda3&#x4F5C;&#x4E3A;/&#xFF0C;3G/dev/sda4swap&#xFF0C;&#x90FD;&#x662F;&#x4E3B;&#x5206;&#x533A;&#x3002;&#x7531;&#x4E8E;Arch&#x7528;pacstrap&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x7CFB;&#x7EDF;&#xFF0C;&#x6240;&#x4EE5;&#x5355;/&#x5206;&#x533A;&#x4E5F;&#x80FD;&#x4FDD;&#x7559;/home&#x91CD;&#x88C5;&#xFF5E;&#x53EA;&#x8981;&#x5220;&#x6389;&#x5176;&#x4ED6;&#x76EE;&#x5F55;&#x5373;&#x53EF;&#x3002;&#x5343;&#x4E07;&#x4E0D;&#x8981;&#x4E71;&#x6309;Bootable&#xFF01;&#x7ED9;&#x6211;&#x60F9;&#x4E86;&#x597D;&#x5927;&#x9EBB;&#x70E6;&#x2026;&#x2026;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># partprobe</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>让内核重新读取分区表。   </p>
+<p>&#x8BA9;&#x5185;&#x6838;&#x91CD;&#x65B0;&#x8BFB;&#x53D6;&#x5206;&#x533A;&#x8868;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># mkfs.brtfs /dev/sda3</span>
 <span class="hljs-comment"># mkswap /dev/sda4</span>
 <span class="hljs-comment"># swapon /dev/sda4</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>根目录用btrfs，由于btrfs不能用交换文件，所以分交换分区并启用。   </p>
+<p>&#x6839;&#x76EE;&#x5F55;&#x7528;btrfs&#xFF0C;&#x7531;&#x4E8E;btrfs&#x4E0D;&#x80FD;&#x7528;&#x4EA4;&#x6362;&#x6587;&#x4EF6;&#xFF0C;&#x6240;&#x4EE5;&#x5206;&#x4EA4;&#x6362;&#x5206;&#x533A;&#x5E76;&#x542F;&#x7528;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># mount /dev/sda3 /mnt</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>挂载到/mnt。   </p>
+<p>&#x6302;&#x8F7D;&#x5230;/mnt&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># nano /etc/pacman.d/mirrorlist</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>安装前需要编辑 <em>/etc/pacman.d/mirrorlist</em> , mirrorlist文件也会被pacstrap复制到新系统。到<a href="https://www.archlinux.org/mirrorlist/" target="_blank">镜像列表生成器</a>生成中国源列表添加到前面。   </p>
+<p>&#x5B89;&#x88C5;&#x524D;&#x9700;&#x8981;&#x7F16;&#x8F91; <em>/etc/pacman.d/mirrorlist</em> , mirrorlist&#x6587;&#x4EF6;&#x4E5F;&#x4F1A;&#x88AB;pacstrap&#x590D;&#x5236;&#x5230;&#x65B0;&#x7CFB;&#x7EDF;&#x3002;&#x5230;<a href="https://www.archlinux.org/mirrorlist/" target="_blank">&#x955C;&#x50CF;&#x5217;&#x8868;&#x751F;&#x6210;&#x5668;</a>&#x751F;&#x6210;&#x4E2D;&#x56FD;&#x6E90;&#x5217;&#x8868;&#x6DFB;&#x52A0;&#x5230;&#x524D;&#x9762;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># pacman -Syy</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>更新pacman数据。   </p>
+<p>&#x66F4;&#x65B0;pacman&#x6570;&#x636E;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># pacstrap -i /mnt base base-devel</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>安装基本系统到/mnt，sudo什么的都在base-devel里。   </p>
+<p>&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x7CFB;&#x7EDF;&#x5230;/mnt&#xFF0C;sudo&#x4EC0;&#x4E48;&#x7684;&#x90FD;&#x5728;base-devel&#x91CC;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
-</pre></td><td class="code"><pre><code><span class="hljs-comment"># genfstab -p -U /mnt >> /mnt/etc/fstab</span>
+</pre></td><td class="code"><pre><code><span class="hljs-comment"># genfstab -p -U /mnt &gt;&gt; /mnt/etc/fstab</span>
 <span class="hljs-comment"># nano /mnt/etc/fstab</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>生成fstab并检查一下。   </p>
+<p>&#x751F;&#x6210;fstab&#x5E76;&#x68C0;&#x67E5;&#x4E00;&#x4E0B;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># arch-chroot /mnt /bin/bash</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>chroot到新系统的bash shell，初步认为arch-chroot的特点是可以运行systemd。   </p>
+<p>chroot&#x5230;&#x65B0;&#x7CFB;&#x7EDF;&#x7684;bash shell&#xFF0C;&#x521D;&#x6B65;&#x8BA4;&#x4E3A;arch-chroot&#x7684;&#x7279;&#x70B9;&#x662F;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;systemd&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># nano /etc/locale.gen</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>编辑本地化标准，去掉en_US.UTF-8和zh_CN.UTF-8前的#。执行   </p>
+<p>&#x7F16;&#x8F91;&#x672C;&#x5730;&#x5316;&#x6807;&#x51C6;&#xFF0C;&#x53BB;&#x6389;en_US.UTF-8&#x548C;zh_CN.UTF-8&#x524D;&#x7684;#&#x3002;&#x6267;&#x884C;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># locale-gen</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>应用更改。   </p>
+<p>&#x5E94;&#x7528;&#x66F4;&#x6539;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
-</pre></td><td class="code"><pre><code><span class="hljs-comment"># echo LANG=en_US.UTF-8 > /etc/locale.conf</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>设置LANG变量，在此设置中文会使tty乱码。   </p>
+</pre></td><td class="code"><pre><code><span class="hljs-comment"># echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</span></code></pre></td></tr></tbody></table></figure></code></pre>
+<p>&#x8BBE;&#x7F6E;LANG&#x53D8;&#x91CF;&#xFF0C;&#x5728;&#x6B64;&#x8BBE;&#x7F6E;&#x4E2D;&#x6587;&#x4F1A;&#x4F7F;tty&#x4E71;&#x7801;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>设置时区，这里设为中国上海(UTC+8:00)。   </p>
+<p>&#x8BBE;&#x7F6E;&#x65F6;&#x533A;&#xFF0C;&#x8FD9;&#x91CC;&#x8BBE;&#x4E3A;&#x4E2D;&#x56FD;&#x4E0A;&#x6D77;(UTC+8:00)&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># hwclock --systohc --utc</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>设置硬件时间为UTC，稍后再把Windows改为UTC。   </p>
+<p>&#x8BBE;&#x7F6E;&#x786C;&#x4EF6;&#x65F6;&#x95F4;&#x4E3A;UTC&#xFF0C;&#x7A0D;&#x540E;&#x518D;&#x628A;Windows&#x6539;&#x4E3A;UTC&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
-</pre></td><td class="code"><pre><code><span class="hljs-comment"># echo ShaX-Laptop > /etc/hostname</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>设置主机名为ShaX-Laptop。   </p>
+</pre></td><td class="code"><pre><code><span class="hljs-comment"># echo ShaX-Laptop &gt; /etc/hostname</span></code></pre></td></tr></tbody></table></figure></code></pre>
+<p>&#x8BBE;&#x7F6E;&#x4E3B;&#x673A;&#x540D;&#x4E3A;ShaX-Laptop&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># nano /etc/hosts</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>127.0.0.1一行最后按<tab>键入ShaX-Laptop。   </tab></p>
+<p>127.0.0.1&#x4E00;&#x884C;&#x6700;&#x540E;&#x6309;<tab>&#x952E;&#x5165;ShaX-Laptop&#x3002;   </tab></p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># pacman -S iw wpa_supplicant dialog</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>为新系统安装联网所需组件，第一次虚拟机安装时忘了配置网络，结果一pacman -S就满屏错误……   </p>
+<p>&#x4E3A;&#x65B0;&#x7CFB;&#x7EDF;&#x5B89;&#x88C5;&#x8054;&#x7F51;&#x6240;&#x9700;&#x7EC4;&#x4EF6;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x865A;&#x62DF;&#x673A;&#x5B89;&#x88C5;&#x65F6;&#x5FD8;&#x4E86;&#x914D;&#x7F6E;&#x7F51;&#x7EDC;&#xFF0C;&#x7ED3;&#x679C;&#x4E00;pacman -S&#x5C31;&#x6EE1;&#x5C4F;&#x9519;&#x8BEF;&#x2026;&#x2026;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># pacman -S ntfs-3g vim zsh</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>安装必需软件，ntfs-3g可以让Linux读取NTFS。   </p>
+<p>&#x5B89;&#x88C5;&#x5FC5;&#x9700;&#x8F6F;&#x4EF6;&#xFF0C;ntfs-3g&#x53EF;&#x4EE5;&#x8BA9;Linux&#x8BFB;&#x53D6;NTFS&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># passwd</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>设置root密码。   </p>
+<p>&#x8BBE;&#x7F6E;root&#x5BC6;&#x7801;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># pacman -S grub</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>安装GRUB。为了能用Windows引导GRUB，选择安装到PBR。   </p>
+<p>&#x5B89;&#x88C5;GRUB&#x3002;&#x4E3A;&#x4E86;&#x80FD;&#x7528;Windows&#x5F15;&#x5BFC;GRUB&#xFF0C;&#x9009;&#x62E9;&#x5B89;&#x88C5;&#x5230;PBR&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -254,70 +254,70 @@
 <span class="hljs-comment"># grub-install --target=i386-pc --recheck --debug --force /dev/sda3</span>
 <span class="hljs-comment"># chattr +i /boot/grub/i386-pc/core.img</span>
 <span class="hljs-comment"># grub-mkconfig -o /boot/grub/grub.cfg</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>为了防止由于硬盘文件移动导致找不到GRUB核心文件，给它添加i(不可动)标记。建立GRUB配置文件。   </p>
+<p>&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x7531;&#x4E8E;&#x786C;&#x76D8;&#x6587;&#x4EF6;&#x79FB;&#x52A8;&#x5BFC;&#x81F4;&#x627E;&#x4E0D;&#x5230;GRUB&#x6838;&#x5FC3;&#x6587;&#x4EF6;&#xFF0C;&#x7ED9;&#x5B83;&#x6DFB;&#x52A0;i(&#x4E0D;&#x53EF;&#x52A8;)&#x6807;&#x8BB0;&#x3002;&#x5EFA;&#x7ACB;GRUB&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># mount /dev/sda1 /mnt</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>挂载C盘到/mnt。   </p>
+<p>&#x6302;&#x8F7D;C&#x76D8;&#x5230;/mnt&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># mkdir /mnt/NST</span>
 <span class="hljs-comment"># dd if=/dev/sda3 of=/mnt/NST/Linux.mbr bs=446 count=1</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>将前446字节的loader写到C:\NST\Linux.mbr。   </p>
+<p>&#x5C06;&#x524D;446&#x5B57;&#x8282;&#x7684;loader&#x5199;&#x5230;C:\NST\Linux.mbr&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># umount /mnt</span>
 <span class="hljs-comment"># exit</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>退出chroot。   </p>
+<p>&#x9000;&#x51FA;chroot&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># umount /mnt</span>
 <span class="hljs-comment"># reboot</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>不要忘了拔出U盘，进入Windows。   </p>
-<p>打开regedit，定位到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\，新建DWORD值RealTimeIsUniversal，键值设为1。以应用UTC。   </p>
-<p>下载安装EasyBCD软件，添加启动项→GNU/Linux→选GRUB2，名称添Arch Linux，添加。然后去C:\NST\把生成的另一个文件名复制，删掉，把Linux.mbr重命名为那个，因为EasyBCD默认有bug不能正确识别，所以我们手动替换即可。   </p>
-<p>重启按<f1>进入BIOS，硬件时钟倒设8小时为UTC。   </f1></p>
-<p>选择Arch Linux进入GRUB引导。   </p>
-<p>先用root登录，wifi-menu连接网络，创建用户shax并添加密码。   </p>
+<p>&#x4E0D;&#x8981;&#x5FD8;&#x4E86;&#x62D4;&#x51FA;U&#x76D8;&#xFF0C;&#x8FDB;&#x5165;Windows&#x3002;   </p>
+<p>&#x6253;&#x5F00;regedit&#xFF0C;&#x5B9A;&#x4F4D;&#x5230;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\&#xFF0C;&#x65B0;&#x5EFA;DWORD&#x503C;RealTimeIsUniversal&#xFF0C;&#x952E;&#x503C;&#x8BBE;&#x4E3A;1&#x3002;&#x4EE5;&#x5E94;&#x7528;UTC&#x3002;   </p>
+<p>&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;EasyBCD&#x8F6F;&#x4EF6;&#xFF0C;&#x6DFB;&#x52A0;&#x542F;&#x52A8;&#x9879;&#x2192;GNU/Linux&#x2192;&#x9009;GRUB2&#xFF0C;&#x540D;&#x79F0;&#x6DFB;Arch Linux&#xFF0C;&#x6DFB;&#x52A0;&#x3002;&#x7136;&#x540E;&#x53BB;C:\NST\&#x628A;&#x751F;&#x6210;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x590D;&#x5236;&#xFF0C;&#x5220;&#x6389;&#xFF0C;&#x628A;Linux.mbr&#x91CD;&#x547D;&#x540D;&#x4E3A;&#x90A3;&#x4E2A;&#xFF0C;&#x56E0;&#x4E3A;EasyBCD&#x9ED8;&#x8BA4;&#x6709;bug&#x4E0D;&#x80FD;&#x6B63;&#x786E;&#x8BC6;&#x522B;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x624B;&#x52A8;&#x66FF;&#x6362;&#x5373;&#x53EF;&#x3002;   </p>
+<p>&#x91CD;&#x542F;&#x6309;<f1>&#x8FDB;&#x5165;BIOS&#xFF0C;&#x786C;&#x4EF6;&#x65F6;&#x949F;&#x5012;&#x8BBE;8&#x5C0F;&#x65F6;&#x4E3A;UTC&#x3002;   </f1></p>
+<p>&#x9009;&#x62E9;Arch Linux&#x8FDB;&#x5165;GRUB&#x5F15;&#x5BFC;&#x3002;   </p>
+<p>&#x5148;&#x7528;root&#x767B;&#x5F55;&#xFF0C;wifi-menu&#x8FDE;&#x63A5;&#x7F51;&#x7EDC;&#xFF0C;&#x521B;&#x5EFA;&#x7528;&#x6237;shax&#x5E76;&#x6DFB;&#x52A0;&#x5BC6;&#x7801;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># useradd -m shax</span>
 <span class="hljs-comment"># passwd shax</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>参数-m的作用是自动在/home下建立以用户名为名的主文件夹。<br>然后   </p>
+<p>&#x53C2;&#x6570;-m&#x7684;&#x4F5C;&#x7528;&#x662F;&#x81EA;&#x52A8;&#x5728;/home&#x4E0B;&#x5EFA;&#x7ACB;&#x4EE5;&#x7528;&#x6237;&#x540D;&#x4E3A;&#x540D;&#x7684;&#x4E3B;&#x6587;&#x4EF6;&#x5939;&#x3002;<br>&#x7136;&#x540E;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># visudo</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>修改可以提权的用户，光标定位到root ALL=(ALL) ALL一行，按i键进入编辑模式，将该行修改为root ALL=(ALL) NOPASSWD: ALL，以关闭密码保护，在这一行下面添加shax ALL=(ALL) NOPASSWD: ALL，给shax开放权限。按<esc>键退出编辑模式，输入:wq回车以保存并退出。   </esc></p>
+<p>&#x4FEE;&#x6539;&#x53EF;&#x4EE5;&#x63D0;&#x6743;&#x7684;&#x7528;&#x6237;&#xFF0C;&#x5149;&#x6807;&#x5B9A;&#x4F4D;&#x5230;root ALL=(ALL) ALL&#x4E00;&#x884C;&#xFF0C;&#x6309;i&#x952E;&#x8FDB;&#x5165;&#x7F16;&#x8F91;&#x6A21;&#x5F0F;&#xFF0C;&#x5C06;&#x8BE5;&#x884C;&#x4FEE;&#x6539;&#x4E3A;root ALL=(ALL) NOPASSWD: ALL&#xFF0C;&#x4EE5;&#x5173;&#x95ED;&#x5BC6;&#x7801;&#x4FDD;&#x62A4;&#xFF0C;&#x5728;&#x8FD9;&#x4E00;&#x884C;&#x4E0B;&#x9762;&#x6DFB;&#x52A0;shax ALL=(ALL) NOPASSWD: ALL&#xFF0C;&#x7ED9;shax&#x5F00;&#x653E;&#x6743;&#x9650;&#x3002;&#x6309;<esc>&#x952E;&#x9000;&#x51FA;&#x7F16;&#x8F91;&#x6A21;&#x5F0F;&#xFF0C;&#x8F93;&#x5165;:wq&#x56DE;&#x8F66;&#x4EE5;&#x4FDD;&#x5B58;&#x5E76;&#x9000;&#x51FA;&#x3002;   </esc></p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code><span class="hljs-comment"># logout</span></code></pre></td></tr></tbody></table></figure></code></pre>
-<p>以shax登录。执行   </p>
+<p>&#x4EE5;shax&#x767B;&#x5F55;&#x3002;&#x6267;&#x884C;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ sudo pacman -S xf86-video-intel xorg-server xorg-server-utils xorg-utils xorg-xinit alsa-utils xf86-input-synaptics</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>安装显声卡触摸板驱动和X接口。   </p>
+<p>&#x5B89;&#x88C5;&#x663E;&#x58F0;&#x5361;&#x89E6;&#x6478;&#x677F;&#x9A71;&#x52A8;&#x548C;X&#x63A5;&#x53E3;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ sudo pacman -S acpi</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>安装高级电源管理支持(?)。   </p>
+<p>&#x5B89;&#x88C5;&#x9AD8;&#x7EA7;&#x7535;&#x6E90;&#x7BA1;&#x7406;&#x652F;&#x6301;(?)&#x3002;   </p>
 <pre><code><figure class="highlight hljs shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
-</pre></td><td class="code"><pre><code><span class="hljs-meta">$</span><span class="bash"> sudo pacman -S gnome gdm wqy-microhei</span></code></pre></td></tr></tbody></table></figure></code></pre><p>安装GNOME3桌面环境和它对应的登录管理器GDM以及好看的中文字体文泉驿微米黑。   </p>
+</pre></td><td class="code"><pre><code><span class="hljs-meta">$</span><span class="bash"> sudo pacman -S gnome gdm wqy-microhei</span></code></pre></td></tr></tbody></table></figure></code></pre><p>&#x5B89;&#x88C5;GNOME3&#x684C;&#x9762;&#x73AF;&#x5883;&#x548C;&#x5B83;&#x5BF9;&#x5E94;&#x7684;&#x767B;&#x5F55;&#x7BA1;&#x7406;&#x5668;GDM&#x4EE5;&#x53CA;&#x597D;&#x770B;&#x7684;&#x4E2D;&#x6587;&#x5B57;&#x4F53;&#x6587;&#x6CC9;&#x9A7F;&#x5FAE;&#x7C73;&#x9ED1;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ cp /etc/skel/.xinitrc ~/</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>复制一份X样板文件到主目录，不要加sudo，否则所有者会变成root。   </p>
+<p>&#x590D;&#x5236;&#x4E00;&#x4EFD;X&#x6837;&#x677F;&#x6587;&#x4EF6;&#x5230;&#x4E3B;&#x76EE;&#x5F55;&#xFF0C;&#x4E0D;&#x8981;&#x52A0;sudo&#xFF0C;&#x5426;&#x5219;&#x6240;&#x6709;&#x8005;&#x4F1A;&#x53D8;&#x6210;root&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ nano ~/.xinitrc</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>去掉exec gnome-session前的#。   </p>
+<p>&#x53BB;&#x6389;exec gnome-session&#x524D;&#x7684;#&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ sudo systemctl <span class="hljs-built_in">enable</span> gdm</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>开机自动启动登录管理器。   </p>
+<p>&#x5F00;&#x673A;&#x81EA;&#x52A8;&#x542F;&#x52A8;&#x767B;&#x5F55;&#x7BA1;&#x7406;&#x5668;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ startx</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>启动X会话。   </p>
-<p>在Settings→Language&Location里全部修改为汉语&中国。包括右上角的Login。   </p>
-<p>右上角点击用户名选logout重新登录。   </p>
-<p>登录后打开终端，输入   </p>
+<p>&#x542F;&#x52A8;X&#x4F1A;&#x8BDD;&#x3002;   </p>
+<p>&#x5728;Settings&#x2192;Language&amp;Location&#x91CC;&#x5168;&#x90E8;&#x4FEE;&#x6539;&#x4E3A;&#x6C49;&#x8BED;&amp;&#x4E2D;&#x56FD;&#x3002;&#x5305;&#x62EC;&#x53F3;&#x4E0A;&#x89D2;&#x7684;Login&#x3002;   </p>
+<p>&#x53F3;&#x4E0A;&#x89D2;&#x70B9;&#x51FB;&#x7528;&#x6237;&#x540D;&#x9009;logout&#x91CD;&#x65B0;&#x767B;&#x5F55;&#x3002;   </p>
+<p>&#x767B;&#x5F55;&#x540E;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#xFF0C;&#x8F93;&#x5165;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ sudo pacman -S ibus-libpinyin</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>安装ibus-libpinyin中文输入法，之后去设置里添加即可。   </p>
+<p>&#x5B89;&#x88C5;ibus-libpinyin&#x4E2D;&#x6587;&#x8F93;&#x5165;&#x6CD5;&#xFF0C;&#x4E4B;&#x540E;&#x53BB;&#x8BBE;&#x7F6E;&#x91CC;&#x6DFB;&#x52A0;&#x5373;&#x53EF;&#x3002;   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ sudo nano /etc/pacman.conf</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>添加如下以安装yaourt。   </p>
+<p>&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4EE5;&#x5B89;&#x88C5;yaourt&#x3002;   </p>
 <pre><code><figure class="highlight hljs ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -327,15 +327,15 @@
 <span class="hljs-attr">SigLevel</span> = Optional TrustAll
 <span class="hljs-attr">Server</span> = http://repo.archlinuxcn.org/<span class="hljs-variable">$arch</span></code></pre></td></tr></tbody></table></figure></code></pre><pre><code class="bash"><figure class="highlight hljs bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 </pre></td><td class="code"><pre><code>$ sudo pacman -Syu yaourt</code></pre></td></tr></tbody></table></figure></code></pre>
-<p>可以自动安装AUR工具yaourt。   </p>
-<p>再次感谢好友Maxfan。   </p>
-<p>欢迎关注<a href="https://www.archlinux.org/" target="_blank">Arch Linux官网</a>   </p>
-<p><a href="http://www.archlinuxcn.org/" target="_blank">中文官网</a>   </p>
-<p><a href="https://wiki.archlinux.org/index.php/Main_Page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank">中文wiki</a>   </p>
+<p>&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x5B89;&#x88C5;AUR&#x5DE5;&#x5177;yaourt&#x3002;   </p>
+<p>&#x518D;&#x6B21;&#x611F;&#x8C22;&#x597D;&#x53CB;Maxfan&#x3002;   </p>
+<p>&#x6B22;&#x8FCE;&#x5173;&#x6CE8;<a href="https://www.archlinux.org/" target="_blank">Arch Linux&#x5B98;&#x7F51;</a>   </p>
+<p><a href="http://www.archlinuxcn.org/" target="_blank">&#x4E2D;&#x6587;&#x5B98;&#x7F51;</a>   </p>
+<p><a href="https://wiki.archlinux.org/index.php/Main_Page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank">&#x4E2D;&#x6587;wiki</a>   </p>
 <p>2014-07-28 17:00   </p>
 <p><em>AlynxZhou</em>   </p>
-<p><strong>A Coder & Dreamer</strong>   </p>
-<p><em>搬运于我的LOFTER</em>   </p>
+<p><strong>A Coder &amp; Dreamer</strong>   </p>
+<p><em>&#x642C;&#x8FD0;&#x4E8E;&#x6211;&#x7684;LOFTER</em>   </p>
 
     </main>
     <footer class="post-footer">

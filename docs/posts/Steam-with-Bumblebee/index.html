@@ -160,53 +160,53 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>买了个罗技G502，想想这鼠标狙击键要在fps游戏里才能发挥作用于是入了l4d2的坑，Steam购买，没想到P530核显实在是吃不动这货，FPS上30都很困难，于是研究了一下怎么样调用Bumblebee来使用独显。</p>
+      <p>&#x4E70;&#x4E86;&#x4E2A;&#x7F57;&#x6280;G502&#xFF0C;&#x60F3;&#x60F3;&#x8FD9;&#x9F20;&#x6807;&#x72D9;&#x51FB;&#x952E;&#x8981;&#x5728;fps&#x6E38;&#x620F;&#x91CC;&#x624D;&#x80FD;&#x53D1;&#x6325;&#x4F5C;&#x7528;&#x4E8E;&#x662F;&#x5165;&#x4E86;l4d2&#x7684;&#x5751;&#xFF0C;Steam&#x8D2D;&#x4E70;&#xFF0C;&#x6CA1;&#x60F3;&#x5230;P530&#x6838;&#x663E;&#x5B9E;&#x5728;&#x662F;&#x5403;&#x4E0D;&#x52A8;&#x8FD9;&#x8D27;&#xFF0C;FPS&#x4E0A;30&#x90FD;&#x5F88;&#x56F0;&#x96BE;&#xFF0C;&#x4E8E;&#x662F;&#x7814;&#x7A76;&#x4E86;&#x4E00;&#x4E0B;&#x600E;&#x4E48;&#x6837;&#x8C03;&#x7528;Bumblebee&#x6765;&#x4F7F;&#x7528;&#x72EC;&#x663E;&#x3002;</p>
 <!--more-->
 
-<p>要使用独显首先你得保证你有个独显（这不是废话吗），我的独显是Nvidia Quadro M1000M，虽然是工作站显卡，但是玩游戏应该能达到GTX960左右的性能吧（这卡渲染视频才可怕，但是我不搞多媒体~话说现在新款Precision 5520直接用台式工作站显卡了更可怕），然后你得安装Bumblebee（我只弄过N卡的，A卡不清楚），但是不是简单的安装Bumblebee这个包，按照<a href="https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank">ArchWiki</a>，需要安装的包有<code>bumblebee bbswitch primus virtualgl lib32-primus lib32-virtualgl mesa xf86-video-intel nvidia nvidia-settings lib32-nvidia-utils lib32-mesa</code>，各个包的作用在下面：</p>
+<p>&#x8981;&#x4F7F;&#x7528;&#x72EC;&#x663E;&#x9996;&#x5148;&#x4F60;&#x5F97;&#x4FDD;&#x8BC1;&#x4F60;&#x6709;&#x4E2A;&#x72EC;&#x663E;&#xFF08;&#x8FD9;&#x4E0D;&#x662F;&#x5E9F;&#x8BDD;&#x5417;&#xFF09;&#xFF0C;&#x6211;&#x7684;&#x72EC;&#x663E;&#x662F;Nvidia Quadro M1000M&#xFF0C;&#x867D;&#x7136;&#x662F;&#x5DE5;&#x4F5C;&#x7AD9;&#x663E;&#x5361;&#xFF0C;&#x4F46;&#x662F;&#x73A9;&#x6E38;&#x620F;&#x5E94;&#x8BE5;&#x80FD;&#x8FBE;&#x5230;GTX960&#x5DE6;&#x53F3;&#x7684;&#x6027;&#x80FD;&#x5427;&#xFF08;&#x8FD9;&#x5361;&#x6E32;&#x67D3;&#x89C6;&#x9891;&#x624D;&#x53EF;&#x6015;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4E0D;&#x641E;&#x591A;&#x5A92;&#x4F53;~&#x8BDD;&#x8BF4;&#x73B0;&#x5728;&#x65B0;&#x6B3E;Precision 5520&#x76F4;&#x63A5;&#x7528;&#x53F0;&#x5F0F;&#x5DE5;&#x4F5C;&#x7AD9;&#x663E;&#x5361;&#x4E86;&#x66F4;&#x53EF;&#x6015;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x4F60;&#x5F97;&#x5B89;&#x88C5;Bumblebee&#xFF08;&#x6211;&#x53EA;&#x5F04;&#x8FC7;N&#x5361;&#x7684;&#xFF0C;A&#x5361;&#x4E0D;&#x6E05;&#x695A;&#xFF09;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x662F;&#x7B80;&#x5355;&#x7684;&#x5B89;&#x88C5;Bumblebee&#x8FD9;&#x4E2A;&#x5305;&#xFF0C;&#x6309;&#x7167;<a href="https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank">ArchWiki</a>&#xFF0C;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x7684;&#x5305;&#x6709;<code>bumblebee bbswitch primus virtualgl lib32-primus lib32-virtualgl mesa xf86-video-intel nvidia nvidia-settings lib32-nvidia-utils lib32-mesa</code>&#xFF0C;&#x5404;&#x4E2A;&#x5305;&#x7684;&#x4F5C;&#x7528;&#x5728;&#x4E0B;&#x9762;&#xFF1A;</p>
 <ul>
 <li>bumblebee</li>
 </ul>
-<p>主要的程序啦，用来建立一个独立的X服务器做渲染。</p>
+<p>&#x4E3B;&#x8981;&#x7684;&#x7A0B;&#x5E8F;&#x5566;&#xFF0C;&#x7528;&#x6765;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;X&#x670D;&#x52A1;&#x5668;&#x505A;&#x6E32;&#x67D3;&#x3002;</p>
 <ul>
 <li>bbswitch</li>
 </ul>
-<p>用来切换nvidia卡的开关状态，有了它才能保证不用的时候关闭nvidia卡省电。</p>
+<p>&#x7528;&#x6765;&#x5207;&#x6362;nvidia&#x5361;&#x7684;&#x5F00;&#x5173;&#x72B6;&#x6001;&#xFF0C;&#x6709;&#x4E86;&#x5B83;&#x624D;&#x80FD;&#x4FDD;&#x8BC1;&#x4E0D;&#x7528;&#x7684;&#x65F6;&#x5019;&#x5173;&#x95ED;nvidia&#x5361;&#x7701;&#x7535;&#x3002;</p>
 <ul>
 <li>primus virtualgl</li>
 </ul>
-<p>这两个分别是不同的桥接器，可以二选一，也可以都用，ArchWiki介绍的是virtualgl的optirun，但是primus是未来的默认选项，性能更好，Steam也推荐用primus。</p>
+<p>&#x8FD9;&#x4E24;&#x4E2A;&#x5206;&#x522B;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x6865;&#x63A5;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x4E8C;&#x9009;&#x4E00;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x90FD;&#x7528;&#xFF0C;ArchWiki&#x4ECB;&#x7ECD;&#x7684;&#x662F;virtualgl&#x7684;optirun&#xFF0C;&#x4F46;&#x662F;primus&#x662F;&#x672A;&#x6765;&#x7684;&#x9ED8;&#x8BA4;&#x9009;&#x9879;&#xFF0C;&#x6027;&#x80FD;&#x66F4;&#x597D;&#xFF0C;Steam&#x4E5F;&#x63A8;&#x8350;&#x7528;primus&#x3002;</p>
 <ul>
 <li>lib32-primus lib32-virtualgl</li>
 </ul>
-<p>这两个是32位库，因为Steam和大部分上面的游戏都是32位的。</p>
+<p>&#x8FD9;&#x4E24;&#x4E2A;&#x662F;32&#x4F4D;&#x5E93;&#xFF0C;&#x56E0;&#x4E3A;Steam&#x548C;&#x5927;&#x90E8;&#x5206;&#x4E0A;&#x9762;&#x7684;&#x6E38;&#x620F;&#x90FD;&#x662F;32&#x4F4D;&#x7684;&#x3002;</p>
 <ul>
 <li>mesa xf86-video-intel nvidia nvidia-settings lib32-nvidia-utils lib32-mesa</li>
 </ul>
-<p>mesa是开源的OpenGL标准实现，另外的则是I卡的驱动（官方开源）和N卡的闭源驱动（性能较好），N卡的设置，以及它们对应的32位库。</p>
-<p>接下来将你的用户加入bumblebee组，启动bumblebeed：</p>
+<p>mesa&#x662F;&#x5F00;&#x6E90;&#x7684;OpenGL&#x6807;&#x51C6;&#x5B9E;&#x73B0;&#xFF0C;&#x53E6;&#x5916;&#x7684;&#x5219;&#x662F;I&#x5361;&#x7684;&#x9A71;&#x52A8;&#xFF08;&#x5B98;&#x65B9;&#x5F00;&#x6E90;&#xFF09;&#x548C;N&#x5361;&#x7684;&#x95ED;&#x6E90;&#x9A71;&#x52A8;&#xFF08;&#x6027;&#x80FD;&#x8F83;&#x597D;&#xFF09;&#xFF0C;N&#x5361;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x4EE5;&#x53CA;&#x5B83;&#x4EEC;&#x5BF9;&#x5E94;&#x7684;32&#x4F4D;&#x5E93;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x5C06;&#x4F60;&#x7684;&#x7528;&#x6237;&#x52A0;&#x5165;bumblebee&#x7EC4;&#xFF0C;&#x542F;&#x52A8;bumblebeed&#xFF1A;</p>
 <pre><code><figure class="highlight hljs shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
 <span class="line">2</span>
 </pre></td><td class="code"><pre><code><span class="hljs-meta">#</span><span class="bash"> gpasswd -a user bumblebee</span>
-<span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> bumblebeed --now</span></code></pre></td></tr></tbody></table></figure></code></pre><p>然后测试：</p>
+<span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> bumblebeed --now</span></code></pre></td></tr></tbody></table></figure></code></pre><p>&#x7136;&#x540E;&#x6D4B;&#x8BD5;&#xFF1A;</p>
 <ul>
-<li><p>64位<code>$ optirun glxspheres64</code></p>
+<li><p>64&#x4F4D;<code>$ optirun glxspheres64</code></p>
 </li>
-<li><p>32位<code>$ optirun glxspheres32</code></p>
+<li><p>32&#x4F4D;<code>$ optirun glxspheres32</code></p>
 </li>
 </ul>
-<p>需要独显运行的程序直接用<code>$ optirun %command%</code>就好啦，当然把optirun换成primusrun就是用primus啦。</p>
-<p>对于Steam单独的游戏设置，只要在游戏上右键点<em>Properties</em>，打开的窗口选择<code>SET LAUNCH OPTIONS</code>，输入<code>primusrun %command%</code>，运行游戏的时候就是用primusrun运行了。我这里l4d2可以稳定60FPS。</p>
-<p>但是还有一些需要启动器启动的，比如Minecraft，采用Hello Minecraft Launcher，用<code>$ optirun java -jar HMCL.jar</code>启动了启动器，但是启动器却不会用optirun去运行游戏本体，解决办法也很简单：</p>
-<p>首先<code>$ optirun bash</code>，在这个bash里面用<code>$ optirun java -jar HMCL.jar</code>启动启动器，再打开游戏就是独显啦！</p>
-<p><del>本来<code>$ optirun status</code>是应该能查看N卡状态的，但是Arch似乎没法运行这个命令，可以用<code>$ cat /proc/acpi/bbswitch</code>查看ON/OFF。</del>这里是我记错了，应该是用<code>$ optirun --status</code>查看N卡状态。</p>
-<p>对于一些版本比较老的bumblebee，optirun开启了独显后没法自动关掉它，是一个bug，手动关闭需要：</p>
+<p>&#x9700;&#x8981;&#x72EC;&#x663E;&#x8FD0;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#x76F4;&#x63A5;&#x7528;<code>$ optirun %command%</code>&#x5C31;&#x597D;&#x5566;&#xFF0C;&#x5F53;&#x7136;&#x628A;optirun&#x6362;&#x6210;primusrun&#x5C31;&#x662F;&#x7528;primus&#x5566;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;Steam&#x5355;&#x72EC;&#x7684;&#x6E38;&#x620F;&#x8BBE;&#x7F6E;&#xFF0C;&#x53EA;&#x8981;&#x5728;&#x6E38;&#x620F;&#x4E0A;&#x53F3;&#x952E;&#x70B9;<em>Properties</em>&#xFF0C;&#x6253;&#x5F00;&#x7684;&#x7A97;&#x53E3;&#x9009;&#x62E9;<code>SET LAUNCH OPTIONS</code>&#xFF0C;&#x8F93;&#x5165;<code>primusrun %command%</code>&#xFF0C;&#x8FD0;&#x884C;&#x6E38;&#x620F;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x662F;&#x7528;primusrun&#x8FD0;&#x884C;&#x4E86;&#x3002;&#x6211;&#x8FD9;&#x91CC;l4d2&#x53EF;&#x4EE5;&#x7A33;&#x5B9A;60FPS&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x9700;&#x8981;&#x542F;&#x52A8;&#x5668;&#x542F;&#x52A8;&#x7684;&#xFF0C;&#x6BD4;&#x5982;Minecraft&#xFF0C;&#x91C7;&#x7528;Hello Minecraft Launcher&#xFF0C;&#x7528;<code>$ optirun java -jar HMCL.jar</code>&#x542F;&#x52A8;&#x4E86;&#x542F;&#x52A8;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x542F;&#x52A8;&#x5668;&#x5374;&#x4E0D;&#x4F1A;&#x7528;optirun&#x53BB;&#x8FD0;&#x884C;&#x6E38;&#x620F;&#x672C;&#x4F53;&#xFF0C;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF1A;</p>
+<p>&#x9996;&#x5148;<code>$ optirun bash</code>&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;bash&#x91CC;&#x9762;&#x7528;<code>$ optirun java -jar HMCL.jar</code>&#x542F;&#x52A8;&#x542F;&#x52A8;&#x5668;&#xFF0C;&#x518D;&#x6253;&#x5F00;&#x6E38;&#x620F;&#x5C31;&#x662F;&#x72EC;&#x663E;&#x5566;&#xFF01;</p>
+<p><del>&#x672C;&#x6765;<code>$ optirun status</code>&#x662F;&#x5E94;&#x8BE5;&#x80FD;&#x67E5;&#x770B;N&#x5361;&#x72B6;&#x6001;&#x7684;&#xFF0C;&#x4F46;&#x662F;Arch&#x4F3C;&#x4E4E;&#x6CA1;&#x6CD5;&#x8FD0;&#x884C;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;<code>$ cat /proc/acpi/bbswitch</code>&#x67E5;&#x770B;ON/OFF&#x3002;</del>&#x8FD9;&#x91CC;&#x662F;&#x6211;&#x8BB0;&#x9519;&#x4E86;&#xFF0C;&#x5E94;&#x8BE5;&#x662F;&#x7528;<code>$ optirun --status</code>&#x67E5;&#x770B;N&#x5361;&#x72B6;&#x6001;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x7248;&#x672C;&#x6BD4;&#x8F83;&#x8001;&#x7684;bumblebee&#xFF0C;optirun&#x5F00;&#x542F;&#x4E86;&#x72EC;&#x663E;&#x540E;&#x6CA1;&#x6CD5;&#x81EA;&#x52A8;&#x5173;&#x6389;&#x5B83;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;bug&#xFF0C;&#x624B;&#x52A8;&#x5173;&#x95ED;&#x9700;&#x8981;&#xFF1A;</p>
 <pre><code><figure class="highlight hljs armasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span>
-</pre></td><td class="code"><pre><code># rmmod nvidia_modeset nvidia && sudo tee /<span class="hljs-meta">proc</span>/acpi/<span class="hljs-keyword">bbswitch </span><<<OFF</code></pre></td></tr></tbody></table></figure></code></pre><p>但是新版已经解决了这个bug。</p>
-<p>如果你想开启N卡的设置，不能简单地运行nvidia-settings，因为这时候N卡并没有开启，也没有连接到当前的桌面上，使用<code>$ optirun nvidia-settings -c :8</code>就可以开启了。</p>
-<p>参考了<a href="https://support.steampowered.com/kb_article.php?ref=6316-GJKC-7437" target="_blank">Steam的说明</a>，现在剩余的问题就是玩游戏太热了。</p>
+</pre></td><td class="code"><pre><code># rmmod nvidia_modeset nvidia &amp;&amp; sudo tee /<span class="hljs-meta">proc</span>/acpi/<span class="hljs-keyword">bbswitch </span>&lt;&lt;&lt;OFF</code></pre></td></tr></tbody></table></figure></code></pre><p>&#x4F46;&#x662F;&#x65B0;&#x7248;&#x5DF2;&#x7ECF;&#x89E3;&#x51B3;&#x4E86;&#x8FD9;&#x4E2A;bug&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x5F00;&#x542F;N&#x5361;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x4E0D;&#x80FD;&#x7B80;&#x5355;&#x5730;&#x8FD0;&#x884C;nvidia-settings&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x65F6;&#x5019;N&#x5361;&#x5E76;&#x6CA1;&#x6709;&#x5F00;&#x542F;&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x8FDE;&#x63A5;&#x5230;&#x5F53;&#x524D;&#x7684;&#x684C;&#x9762;&#x4E0A;&#xFF0C;&#x4F7F;&#x7528;<code>$ optirun nvidia-settings -c :8</code>&#x5C31;&#x53EF;&#x4EE5;&#x5F00;&#x542F;&#x4E86;&#x3002;</p>
+<p>&#x53C2;&#x8003;&#x4E86;<a href="https://support.steampowered.com/kb_article.php?ref=6316-GJKC-7437" target="_blank">Steam&#x7684;&#x8BF4;&#x660E;</a>&#xFF0C;&#x73B0;&#x5728;&#x5269;&#x4F59;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x662F;&#x73A9;&#x6E38;&#x620F;&#x592A;&#x70ED;&#x4E86;&#x3002;</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
