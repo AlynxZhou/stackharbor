@@ -1,3 +1,3 @@
 [submodule "themes/aria"]
 	path = themes/aria
-	url = git@github.com:AlynxZhou/hikaru-theme-aria.git
+	url = https://github.com/AlynxZhou/hikaru-theme-aria.git
