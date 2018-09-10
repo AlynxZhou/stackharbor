@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>喵's StackHarbor</title>
+  <icon>https://sh.alynx.xyz/images/Future_Gazer_small.png</icon>
+  <subtitle>Whisper to the World</subtitle>
+  <link href="https://sh.alynx.xyz/atom.xml" rel="self" />
+  
+  <link href="https://sh.alynx.xyz/" />
+  <updated>2018-08-28T08:21:50+08:00</updated>
+  <id>https://sh.alynx.xyz/</id>
+  
+  <author>
+    <name>AlynxZhou</name>
+    <email>alynx.zhou@gmail.com</email>
+  </author>
+  
+  <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>学习 OpenGL 1</title>
+    <link href="https://sh.alynx.xyz/posts/Learn-OpenGL-1/" />
+    <id>https://sh.alynx.xyz/posts/Learn-OpenGL-1/</id>
+    <published>2018-08-28T08:21:50+08:00</published>
+    <updated>2018-08-28T08:21:50+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="OpenGL" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/OpenGL/" />
+    
+    
+    <category term="OpenGL" scheme="https://sh.alynx.xyz/tags/OpenGL/" />
+    
+    <category term="C" scheme="https://sh.alynx.xyz/tags/C/" />
+    
+    <category term="编程" scheme="https://sh.alynx.xyz/tags/%E7%BC%96%E7%A8%8B/" />
+    
+  </entry>
+  
+  <entry>
+    <title>Automata: A Story of Love and Lives</title>
+    <link href="https://sh.alynx.xyz/posts/Automata/" />
+    <id>https://sh.alynx.xyz/posts/Automata/</id>
+    <published>2018-07-16T17:39:01+08:00</published>
+    <updated>2018-07-16T17:39:01+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p><img src="/posts/Automata/Automata.jpg" alt=""></p><blockquote class="centerquote">我没有办法评价这款游戏<br>因为我觉得我被结结实实地折腾了一回</blockquote>]]>
+    
+    </summary>
+    
+    <category term="游戏" scheme="https://sh.alynx.xyz/categories/%E6%B8%B8%E6%88%8F/" />
+    
+    
+    <category term="游戏" scheme="https://sh.alynx.xyz/tags/%E6%B8%B8%E6%88%8F/" />
+    
+    <category term="尼尔：机械纪元" scheme="https://sh.alynx.xyz/tags/%E5%B0%BC%E5%B0%94%EF%BC%9A%E6%9C%BA%E6%A2%B0%E7%BA%AA%E5%85%83/" />
+    
+    <category term="NieR: Automata" scheme="https://sh.alynx.xyz/tags/NieR:%20Automata/" />
+    
+  </entry>
+  
+  <entry>
+    <title>在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</title>
+    <link href="https://sh.alynx.xyz/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/" />
+    <id>https://sh.alynx.xyz/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/</id>
+    <published>2018-06-04T16:21:17+08:00</published>
+    <updated>2018-06-04T16:21:17+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>昨天听说微软要收购 GitHub 了，对于我一个专业微软受害者，虽然它洗白了，但还是有着本能的不信任。同时软粉认软做父的样子我是断然接受不了的（“我微软爸爸天下第一！”“你怎么能不喜欢我微软爸爸呢！”“我微软爸爸什么时候坑过你！”），你自己喜欢就喜欢，我讨厌是我的事情，希望各位嘴下留情，不要给我喷成筛子。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="网络" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
+    
+    <category term="网站" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="Hexo" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/Hexo/" />
+    
+    
+    <category term="Hexo" scheme="https://sh.alynx.xyz/tags/Hexo/" />
+    
+    <category term="Nginx" scheme="https://sh.alynx.xyz/tags/Nginx/" />
+    
+  </entry>
+  
+  <entry>
+    <title>无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</title>
+    <link href="https://sh.alynx.xyz/posts/Endless-ARIA/" />
+    <id>https://sh.alynx.xyz/posts/Endless-ARIA/</id>
+    <published>2018-05-05T23:49:53+08:00</published>
+    <updated>2018-05-05T23:49:53+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>大约从我写好 ARIA （指把我自己的网站换成它做主题）到现在为止已经有一个月了，这一个月里它有了 <a href="https://github.com/AlynxZhou/hexo-theme-aria/stargazers" target="_blank">20 个 Star</a>、<a href="https://github.com/AlynxZhou/hexo-theme-aria/issues?q=is%3Aissue+is%3Aclosed" target="_blank">4 个 Issue</a> 和 <a href="https://github.com/AlynxZhou/hexo-theme-aria/commits/master" target="_blank">128 个 Commit</a>（都是我自己，残念啊）。大概算是我现在最得意的项目，当然不排除以后也是。</p><p>虽然这么说有点敷衍，但是我是和一些无聊的人进行了一点无谓的争执 —— 我讨厌辩论，所以尽可能把这种冲动压制在一点 —— 所以我现在来写这篇文章，聊聊那些代码里面没有告诉你的事情。写点经过脑子的思考总是有用处的，不仅是对自己而言。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="网络" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
+    
+    <category term="网站" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="Hexo" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/Hexo/" />
+    
+    <category term="ARIA" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/Hexo/ARIA/" />
+    
+    
+    <category term="Hexo" scheme="https://sh.alynx.xyz/tags/Hexo/" />
+    
+    <category term="ARIA" scheme="https://sh.alynx.xyz/tags/ARIA/" />
+    
+  </entry>
+  
+  <entry>
+    <title>GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</title>
+    <link href="https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" />
+    <id>https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
+    <published>2018-05-02T20:30:48+08:00</published>
+    <updated>2018-05-02T20:30:48+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>在 GitHub Pages 支持自定义域名开启 HTTPS 之前，我是使用 CloudFlare 的 CDN 中转来启用 HTTPS 的，缺点也很明显，就是面对国内访问的时候 CloudFlare 的 CDN 简直是逆加速，还不如直连 GitHub 的速度呢。</p><p>GitHub 在 2016 年开启了 <code>*.github.io</code> 域名的 HTTPS 访问，在今年的 5 月 1 日，终于开启了对自定义域名的 HTTPS 支持。这篇文章将会介绍一下开启的办法和中间容易踩的坑。</p>]]>
+    
+    </summary>
+    
+    <category term="网站" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="加密" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/%E5%8A%A0%E5%AF%86/" />
+    
+    <category term="GitHub Pages" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/%E5%8A%A0%E5%AF%86/GitHub%20Pages/" />
+    
+    
+    <category term="网站" scheme="https://sh.alynx.xyz/tags/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="加密" scheme="https://sh.alynx.xyz/tags/%E5%8A%A0%E5%AF%86/" />
+    
+    <category term="GitHub Pages" scheme="https://sh.alynx.xyz/tags/GitHub%20Pages/" />
+    
+  </entry>
+  
+  <entry>
+    <title>写给新手的 Linux 手册 1</title>
+    <link href="https://sh.alynx.xyz/posts/Linux-Manual-for-Newbies-1/" />
+    <id>https://sh.alynx.xyz/posts/Linux-Manual-for-Newbies-1/</id>
+    <published>2018-03-25T20:24:45+08:00</published>
+    <updated>2018-03-25T20:24:45+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>恰如字面意思，这是一篇写给新人的 Linux 指南，当然，不要指望从我这里得到什么详细的配置教程，最起码我没有打算在这篇文章里把你能遇到的 Linux 配置情况全部说清楚。我想在这篇文章里讲述的是一种理解方法或者说是一种 Linux 思维，换个更简单的说法是——它能在 Linux 向你吐出一堆牢骚的时候明白它在说什么，以及一个有经验的 Linux 用户这个时候会做什么，有经验的 Linux 用户是如何学习他们没有接触过的 Linux 知识的。</p><p>准备好了，就继续吧。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Linux" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Linux" scheme="https://sh.alynx.xyz/tags/Linux/" />
+    
+  </entry>
+  
+  <entry>
+    <title>Kalafina, My Music Life</title>
+    <link href="https://sh.alynx.xyz/posts/Kalafina-My-Music-Life/" />
+    <id>https://sh.alynx.xyz/posts/Kalafina-My-Music-Life/</id>
+    <published>2018-03-13T21:21:52+08:00</published>
+    <updated>2018-03-13T21:21:52+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>美好的东西总是在结束的时候才更显珍贵。</p>]]>
+    
+    </summary>
+    
+    <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/" />
+    
+    <category term="Kalafina" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/Kalafina/" />
+    
+    
+    <category term="音乐" scheme="https://sh.alynx.xyz/tags/%E9%9F%B3%E4%B9%90/" />
+    
+    <category term="Kalafina" scheme="https://sh.alynx.xyz/tags/Kalafina/" />
+    
+  </entry>
+  
+  <entry>
+    <title>コラージュ（卫宫家今天的饭 ED）曲谱</title>
+    <link href="https://sh.alynx.xyz/posts/Emiya-Menu-ED/" />
+    <id>https://sh.alynx.xyz/posts/Emiya-Menu-ED/</id>
+    <published>2018-02-04T12:18:45+08:00</published>
+    <updated>2018-02-04T12:18:45+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 AlynxZhou</p>]]>
+    
+    </summary>
+    
+    <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/" />
+    
+    <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/" />
+    
+    <category term="五线谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E4%BA%94%E7%BA%BF%E8%B0%B1/" />
+    
+    
+    <category term="音乐" scheme="https://sh.alynx.xyz/tags/%E9%9F%B3%E4%B9%90/" />
+    
+    <category term="口琴" scheme="https://sh.alynx.xyz/tags/%E5%8F%A3%E7%90%B4/" />
+    
+    <category term="卫宫家今天的饭" scheme="https://sh.alynx.xyz/tags/%E5%8D%AB%E5%AE%AB%E5%AE%B6%E4%BB%8A%E5%A4%A9%E7%9A%84%E9%A5%AD/" />
+    
+    <category term="Fate" scheme="https://sh.alynx.xyz/tags/Fate/" />
+    
+  </entry>
+  
+  <entry>
+    <title>CoffeeScript 的静态方法和静态变量（类方法和类变量）</title>
+    <link href="https://sh.alynx.xyz/posts/Coffee-Static-Varible-Method/" />
+    <id>https://sh.alynx.xyz/posts/Coffee-Static-Varible-Method/</id>
+    <published>2018-01-26T19:04:33+08:00</published>
+    <updated>2018-01-26T19:04:33+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="CoffeeScript" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/CoffeeScript/" />
+    
+    
+    <category term="Code Life" scheme="https://sh.alynx.xyz/tags/Code%20Life/" />
+    
+    <category term="CoffeeScript" scheme="https://sh.alynx.xyz/tags/CoffeeScript/" />
+    
+  </entry>
+  
+  <entry>
+    <title>StackHarbor的2017尾记</title>
+    <link href="https://sh.alynx.xyz/posts/2017-Tail/" />
+    <id>https://sh.alynx.xyz/posts/2017-Tail/</id>
+    <published>2017-12-31T22:18:57+08:00</published>
+    <updated>2017-12-31T22:18:57+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p><img src="/posts/2017-Tail/NJU.jpg" alt="NJU.jpg"></p><p>回到住处，掀出电脑，拉开在超市买的一听可口可乐的拉环，还有一个半小时，现在该写2017年的年终总结了。时间刚刚好。</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="生活" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+  </entry>
+  
+  <entry>
+    <title>忧从中来，不可断绝</title>
+    <link href="https://sh.alynx.xyz/posts/Song-And-Sadness/" />
+    <id>https://sh.alynx.xyz/posts/Song-And-Sadness/</id>
+    <published>2017-11-11T21:18:51+08:00</published>
+    <updated>2017-11-11T21:18:51+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p><img src="/posts/Song-And-Sadness/Sadness.jpg" alt="Sadness.jpg">那个弹吉他的人在我的隔壁。</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
+    
+  </entry>
+  
+  <entry>
+    <title>冬天来了</title>
+    <link href="https://sh.alynx.xyz/posts/Winter-is-Coming/" />
+    <id>https://sh.alynx.xyz/posts/Winter-is-Coming/</id>
+    <published>2017-10-29T21:54:41+08:00</published>
+    <updated>2017-10-29T21:54:41+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>生活好像脱缰的野马，你我都不是熟练的骑师。</p>]]>
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我生气了！！！</title>
+    <link href="https://sh.alynx.xyz/posts/I-Am-Angry/" />
+    <id>https://sh.alynx.xyz/posts/I-Am-Angry/</id>
+    <published>2017-10-08T22:14:00+08:00</published>
+    <updated>2017-10-08T22:14:00+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p><img src="/posts/I-Am-Angry/Angry.jpg" alt="Angry.jpg"></p><blockquote class="centerquote">I AM ANGRY!!!</blockquote><p>这里多了一只发怒的猹喵。愤怒能抑制懒惰。</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
+    
+    
+    <category term="愤怒" scheme="https://sh.alynx.xyz/tags/%E6%84%A4%E6%80%92/" />
+    
+    <category term="否定" scheme="https://sh.alynx.xyz/tags/%E5%90%A6%E5%AE%9A/" />
+    
+  </entry>
+  
+  <entry>
+    <title>Be Brave</title>
+    <link href="https://sh.alynx.xyz/posts/Be-Brave/" />
+    <id>https://sh.alynx.xyz/posts/Be-Brave/</id>
+    <published>2017-07-30T22:50:40+08:00</published>
+    <updated>2017-07-30T22:50:40+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>It's really hard for me to type something in this post, all I want but can't express is fearness.</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
+    
+    
+    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
+    
+    <category term="未说出口的话" scheme="https://sh.alynx.xyz/tags/%E6%9C%AA%E8%AF%B4%E5%87%BA%E5%8F%A3%E7%9A%84%E8%AF%9D/" />
+    
+  </entry>
+  
+  <entry>
+    <title>Dirty Words</title>
+    <link href="https://sh.alynx.xyz/posts/Dirty-Words/" />
+    <id>https://sh.alynx.xyz/posts/Dirty-Words/</id>
+    <published>2017-07-01T18:42:09+08:00</published>
+    <updated>2017-07-01T18:42:09+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<blockquote class="centerquote">I'm so honor that I can speak another language when they ask me to shut up with their language.</blockquote><p>There are some ways to fight against with them, but only when you have enough power, sadly.</p><p>I feel so lucky, though I cannot speak English so good, but if you are with me, I believe you can feel what I wanna say.</p>]]>
+    
+    </summary>
+    
+    <category term="Dirty words" scheme="https://sh.alynx.xyz/categories/Dirty%20words/" />
+    
+    
+    <category term="Dirty words" scheme="https://sh.alynx.xyz/tags/Dirty%20words/" />
+    
+  </entry>
+  
+  <entry>
+    <title>你的名字。</title>
+    <link href="https://sh.alynx.xyz/posts/Your-Name/" />
+    <id>https://sh.alynx.xyz/posts/Your-Name/</id>
+    <published>2017-06-15T00:22:19+08:00</published>
+    <updated>2017-06-15T00:22:19+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>老实说我也许是个对电影没什么品味的人，但是在看了这个之后总觉得要写点什么。</p><p>不过参考现在的时间<del>和我黑暗中可怜的盲打能力</del>（最后想起来我的LED灯），这篇文章不会很长。</p>]]>
+    
+    </summary>
+    
+    <category term="电影" scheme="https://sh.alynx.xyz/categories/%E7%94%B5%E5%BD%B1/" />
+    
+    <category term="动漫" scheme="https://sh.alynx.xyz/categories/%E7%94%B5%E5%BD%B1/%E5%8A%A8%E6%BC%AB/" />
+    
+    
+    <category term="电影" scheme="https://sh.alynx.xyz/tags/%E7%94%B5%E5%BD%B1/" />
+    
+    <category term="动漫" scheme="https://sh.alynx.xyz/tags/%E5%8A%A8%E6%BC%AB/" />
+    
+  </entry>
+  
+  <entry>
+    <title>Encrypted for the Update.</title>
+    <link href="https://sh.alynx.xyz/posts/Encrypt-for-the-Update/" />
+    <id>https://sh.alynx.xyz/posts/Encrypt-for-the-Update/</id>
+    <published>2017-05-30T16:46:02+08:00</published>
+    <updated>2017-05-30T16:46:02+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>Encrypted.</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/tags/%E6%97%A0%E9%A2%98/" />
+    
+  </entry>
+  
+  <entry>
+    <title>突然更新</title>
+    <link href="https://sh.alynx.xyz/posts/An-Update/" />
+    <id>https://sh.alynx.xyz/posts/An-Update/</id>
+    <published>2017-05-30T15:14:51+08:00</published>
+    <updated>2017-05-30T15:14:51+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<blockquote class="centerquote">谨以这篇没营养的更新表明我现在闲着。</blockquote><p>嘛，好久不见，我还是那只猹喵<em>Alynx</em>，本着我一向诚实的原则，丑话说在前头，这篇间隔许久的更新注定是没营养的，如果你珍惜你的流量的话——</p><p>Windows用户/大部分Linux用户请按右上角X，macOS用户/Ubuntu用户/自己偏要把关闭按钮挪到左面的用户请按左上角X，Android/iOS用户请按home键并把您的浏览器从多任务界面除去。Windows Phone用户（如果有的话）请把手机摔掉，并感谢我（而不是微软爸爸）给了你一个冠冕堂皇换Android/iOS设备的理由。</p><p>如果您还没有坚定您的决心，实验七写完了吗？实验七50页的坑爹说明都看懂啦？没看懂还不赶紧把你打印出来的实验七说明撕了，回去高中找你的语文老师承认没好好学习语文的错误！</p><p>顺便补充一句把这种垃圾实验说明打印出来本身就是对树木的不尊重了，你看我知道我写的东西很垃圾，所以我从来不打印纸质版，都是放在网站上做电子版。</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/tags/%E6%97%A0%E9%A2%98/" />
+    
+  </entry>
+  
+  <entry>
+    <title>灰色情人节</title>
+    <link href="https://sh.alynx.xyz/posts/Grey-Valentine-s-Day/" />
+    <id>https://sh.alynx.xyz/posts/Grey-Valentine-s-Day/</id>
+    <published>2017-03-18T22:48:49+08:00</published>
+    <updated>2017-03-18T22:48:49+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>感冒 + 鼻炎 = 浪费纸张，另外也许大脑缺氧会导致胡思乱想，很疲惫又无法入睡。</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+  </entry>
+  
+  <entry>
+    <title>使用GDB进行简单的C语言程序调试</title>
+    <link href="https://sh.alynx.xyz/posts/Using-Gdb/" />
+    <id>https://sh.alynx.xyz/posts/Using-Gdb/</id>
+    <published>2017-03-15T19:24:33+08:00</published>
+    <updated>2017-03-15T19:24:33+08:00</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="C语言" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/C%E8%AF%AD%E8%A8%80/" />
+    
+    
+    <category term="C语言" scheme="https://sh.alynx.xyz/tags/C%E8%AF%AD%E8%A8%80/" />
+    
+    <category term="GDB" scheme="https://sh.alynx.xyz/tags/GDB/" />
+    
+  </entry>
+  
+</feed>

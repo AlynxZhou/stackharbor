@@ -1,0 +1,39 @@
+title: 喵's StackHarbor
+subtitle: Whisper to the World
+description: Everything that lives is designed to end.
+author: AlynxZhou
+email: alynx.zhou@gmail.com
+language: zh_CN
+
+baseUrl: https://sh.alynx.xyz
+rootDir: /
+srcDir: srcs
+docDir: docs
+themeDir: aria
+categoryDir: categories
+tagDir: tags
+
+perPage: 10
+
+skipRender:
+  - README.md
+
+marked:
+  gutter: true
+  hljs: true
+
+search:
+  enable: true
+  path: search.json
+
+feed:
+  enable: true
+  path: atom.xml
+  limit: 20
+  hub:
+  content: false
+  contentLimit: 140
+
+sitemap:
+  enable: true
+  path: sitemap.xml
