@@ -627,7 +627,32 @@ pre code {
   margin: 0;
   padding: 0;
 }
-figure {
+figure.highlight {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-warp: nowarp;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -o-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
   overflow: auto;
   border-radius: 0.3em;
   padding: 0.5em;
@@ -638,33 +663,37 @@ figure {
   -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
   font-feature-settings: "liga" 0; /* No variation */
 }
-figure table {
-  margin: 0;
-}
-figure table tbody tr {
-  background: transparent;
-}
-figure table tbody tr td {
-  border: none;
-}
-figure table tbody tr td:nth-child(2n) {
-  background: transparent;
-}
-figure table tbody tr td.gutter {
-  text-align: right;
-  padding-right: 0.5em;
-  border-right: 0.1em dotted #ccc;
-}
-figure table tbody tr td pre {
+figure.highlight pre {
   font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   font-size: 16px;
   line-height: 1.5em;
-  padding: 0;
   margin: 0;
 }
-figure table tbody tr td pre code {
-  margin: 0;
-  padding: 0;
+figure.highlight pre.gutter {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  text-align: right;
+  padding-right: 0.5em;
+  border-right: 0.05em dotted #ccc;
+}
+figure.highlight pre.code {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  padding-left: 0.5em;
+  border-left: 0.05em dotted #ccc;
+}
+figure.highlight pre code {
   color: inherit;
   background: transparent;
 }
