@@ -5,8 +5,6 @@ comment: false
 ---
 # Hello Hikaru
 
-# Fuck
-
 ![logo](/images/logo.png)
 
 ```
