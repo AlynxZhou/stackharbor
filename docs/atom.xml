@@ -6,7 +6,7 @@
   <link href="https://sh.alynx.xyz/atom.xml" rel="self" />
   
   <link href="https://sh.alynx.xyz/" />
-  <updated>2018-08-28T08:21:50+08:00</updated>
+  <updated>2018-08-28 08:21:50</updated>
   <id>https://sh.alynx.xyz/</id>
   
   <author>
@@ -20,8 +20,8 @@
     <title>学习 OpenGL 1</title>
     <link href="https://sh.alynx.xyz/posts/Learn-OpenGL-1/" />
     <id>https://sh.alynx.xyz/posts/Learn-OpenGL-1/</id>
-    <published>2018-08-28T08:21:50+08:00</published>
-    <updated>2018-08-28T08:21:50+08:00</updated>
+    <published>2018-08-28 08:21:50</published>
+    <updated>2018-08-28 08:21:50</updated>
     
     <summary type="html">
     
@@ -48,8 +48,8 @@
     <title>Automata: A Story of Love and Lives</title>
     <link href="https://sh.alynx.xyz/posts/Automata/" />
     <id>https://sh.alynx.xyz/posts/Automata/</id>
-    <published>2018-07-16T17:39:01+08:00</published>
-    <updated>2018-07-16T17:39:01+08:00</updated>
+    <published>2018-07-16 17:39:01</published>
+    <updated>2018-07-16 17:39:01</updated>
     
     <summary type="html">
     
@@ -72,8 +72,8 @@
     <title>在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</title>
     <link href="https://sh.alynx.xyz/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/" />
     <id>https://sh.alynx.xyz/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/</id>
-    <published>2018-06-04T16:21:17+08:00</published>
-    <updated>2018-06-04T16:21:17+08:00</updated>
+    <published>2018-06-04 16:21:17</published>
+    <updated>2018-06-04 16:21:17</updated>
     
     <summary type="html">
     
@@ -100,8 +100,8 @@
     <title>无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</title>
     <link href="https://sh.alynx.xyz/posts/Endless-ARIA/" />
     <id>https://sh.alynx.xyz/posts/Endless-ARIA/</id>
-    <published>2018-05-05T23:49:53+08:00</published>
-    <updated>2018-05-05T23:49:53+08:00</updated>
+    <published>2018-05-05 23:49:53</published>
+    <updated>2018-05-05 23:49:53</updated>
     
     <summary type="html">
     
@@ -130,8 +130,8 @@
     <title>GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</title>
     <link href="https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" />
     <id>https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
-    <published>2018-05-02T20:30:48+08:00</published>
-    <updated>2018-05-02T20:30:48+08:00</updated>
+    <published>2018-05-02 20:30:48</published>
+    <updated>2018-05-02 20:30:48</updated>
     
     <summary type="html">
     
@@ -158,8 +158,8 @@
     <title>写给新手的 Linux 手册 1</title>
     <link href="https://sh.alynx.xyz/posts/Linux-Manual-for-Newbies-1/" />
     <id>https://sh.alynx.xyz/posts/Linux-Manual-for-Newbies-1/</id>
-    <published>2018-03-25T20:24:45+08:00</published>
-    <updated>2018-03-25T20:24:45+08:00</updated>
+    <published>2018-03-25 20:24:45</published>
+    <updated>2018-03-25 20:24:45</updated>
     
     <summary type="html">
     
@@ -182,8 +182,8 @@
     <title>Kalafina, My Music Life</title>
     <link href="https://sh.alynx.xyz/posts/Kalafina-My-Music-Life/" />
     <id>https://sh.alynx.xyz/posts/Kalafina-My-Music-Life/</id>
-    <published>2018-03-13T21:21:52+08:00</published>
-    <updated>2018-03-13T21:21:52+08:00</updated>
+    <published>2018-03-13 21:21:52</published>
+    <updated>2018-03-13 21:21:52</updated>
     
     <summary type="html">
     
@@ -206,8 +206,8 @@
     <title>コラージュ（卫宫家今天的饭 ED）曲谱</title>
     <link href="https://sh.alynx.xyz/posts/Emiya-Menu-ED/" />
     <id>https://sh.alynx.xyz/posts/Emiya-Menu-ED/</id>
-    <published>2018-02-04T12:18:45+08:00</published>
-    <updated>2018-02-04T12:18:45+08:00</updated>
+    <published>2018-02-04 12:18:45</published>
+    <updated>2018-02-04 12:18:45</updated>
     
     <summary type="html">
     
@@ -236,8 +236,8 @@
     <title>CoffeeScript 的静态方法和静态变量（类方法和类变量）</title>
     <link href="https://sh.alynx.xyz/posts/Coffee-Static-Varible-Method/" />
     <id>https://sh.alynx.xyz/posts/Coffee-Static-Varible-Method/</id>
-    <published>2018-01-26T19:04:33+08:00</published>
-    <updated>2018-01-26T19:04:33+08:00</updated>
+    <published>2018-01-26 19:04:33</published>
+    <updated>2018-01-26 19:04:33</updated>
     
     <summary type="html">
     
@@ -262,8 +262,8 @@
     <title>StackHarbor的2017尾记</title>
     <link href="https://sh.alynx.xyz/posts/2017-Tail/" />
     <id>https://sh.alynx.xyz/posts/2017-Tail/</id>
-    <published>2017-12-31T22:18:57+08:00</published>
-    <updated>2017-12-31T22:18:57+08:00</updated>
+    <published>2017-12-31 22:18:57</published>
+    <updated>2017-12-31 22:18:57</updated>
     
     <summary type="html">
     
@@ -284,8 +284,8 @@
     <title>忧从中来，不可断绝</title>
     <link href="https://sh.alynx.xyz/posts/Song-And-Sadness/" />
     <id>https://sh.alynx.xyz/posts/Song-And-Sadness/</id>
-    <published>2017-11-11T21:18:51+08:00</published>
-    <updated>2017-11-11T21:18:51+08:00</updated>
+    <published>2017-11-11 21:18:51</published>
+    <updated>2017-11-11 21:18:51</updated>
     
     <summary type="html">
     
@@ -308,8 +308,8 @@
     <title>冬天来了</title>
     <link href="https://sh.alynx.xyz/posts/Winter-is-Coming/" />
     <id>https://sh.alynx.xyz/posts/Winter-is-Coming/</id>
-    <published>2017-10-29T21:54:41+08:00</published>
-    <updated>2017-10-29T21:54:41+08:00</updated>
+    <published>2017-10-29 21:54:41</published>
+    <updated>2017-10-29 21:54:41</updated>
     
     <summary type="html">
     
@@ -324,8 +324,8 @@
     <title>我生气了！！！</title>
     <link href="https://sh.alynx.xyz/posts/I-Am-Angry/" />
     <id>https://sh.alynx.xyz/posts/I-Am-Angry/</id>
-    <published>2017-10-08T22:14:00+08:00</published>
-    <updated>2017-10-08T22:14:00+08:00</updated>
+    <published>2017-10-08 22:14:00</published>
+    <updated>2017-10-08 22:14:00</updated>
     
     <summary type="html">
     
@@ -348,8 +348,8 @@
     <title>Be Brave</title>
     <link href="https://sh.alynx.xyz/posts/Be-Brave/" />
     <id>https://sh.alynx.xyz/posts/Be-Brave/</id>
-    <published>2017-07-30T22:50:40+08:00</published>
-    <updated>2017-07-30T22:50:40+08:00</updated>
+    <published>2017-07-30 22:50:40</published>
+    <updated>2017-07-30 22:50:40</updated>
     
     <summary type="html">
     
@@ -372,8 +372,8 @@
     <title>Dirty Words</title>
     <link href="https://sh.alynx.xyz/posts/Dirty-Words/" />
     <id>https://sh.alynx.xyz/posts/Dirty-Words/</id>
-    <published>2017-07-01T18:42:09+08:00</published>
-    <updated>2017-07-01T18:42:09+08:00</updated>
+    <published>2017-07-01 18:42:09</published>
+    <updated>2017-07-01 18:42:09</updated>
     
     <summary type="html">
     
@@ -392,8 +392,8 @@
     <title>你的名字。</title>
     <link href="https://sh.alynx.xyz/posts/Your-Name/" />
     <id>https://sh.alynx.xyz/posts/Your-Name/</id>
-    <published>2017-06-15T00:22:19+08:00</published>
-    <updated>2017-06-15T00:22:19+08:00</updated>
+    <published>2017-06-15 00:22:19</published>
+    <updated>2017-06-15 00:22:19</updated>
     
     <summary type="html">
     
@@ -416,8 +416,8 @@
     <title>Encrypted for the Update.</title>
     <link href="https://sh.alynx.xyz/posts/Encrypt-for-the-Update/" />
     <id>https://sh.alynx.xyz/posts/Encrypt-for-the-Update/</id>
-    <published>2017-05-30T16:46:02+08:00</published>
-    <updated>2017-05-30T16:46:02+08:00</updated>
+    <published>2017-05-30 16:46:02</published>
+    <updated>2017-05-30 16:46:02</updated>
     
     <summary type="html">
     
@@ -440,8 +440,8 @@
     <title>突然更新</title>
     <link href="https://sh.alynx.xyz/posts/An-Update/" />
     <id>https://sh.alynx.xyz/posts/An-Update/</id>
-    <published>2017-05-30T15:14:51+08:00</published>
-    <updated>2017-05-30T15:14:51+08:00</updated>
+    <published>2017-05-30 15:14:51</published>
+    <updated>2017-05-30 15:14:51</updated>
     
     <summary type="html">
     
@@ -464,8 +464,8 @@
     <title>灰色情人节</title>
     <link href="https://sh.alynx.xyz/posts/Grey-Valentine-s-Day/" />
     <id>https://sh.alynx.xyz/posts/Grey-Valentine-s-Day/</id>
-    <published>2017-03-18T22:48:49+08:00</published>
-    <updated>2017-03-18T22:48:49+08:00</updated>
+    <published>2017-03-18 22:48:49</published>
+    <updated>2017-03-18 22:48:49</updated>
     
     <summary type="html">
     
@@ -486,8 +486,8 @@
     <title>使用GDB进行简单的C语言程序调试</title>
     <link href="https://sh.alynx.xyz/posts/Using-Gdb/" />
     <id>https://sh.alynx.xyz/posts/Using-Gdb/</id>
-    <published>2017-03-15T19:24:33+08:00</published>
-    <updated>2017-03-15T19:24:33+08:00</updated>
+    <published>2017-03-15 19:24:33</published>
+    <updated>2017-03-15 19:24:33</updated>
     
     <summary type="html">
     
