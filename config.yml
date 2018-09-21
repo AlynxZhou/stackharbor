@@ -5,7 +5,7 @@ author: AlynxZhou
 email: alynx.zhou@gmail.com
 language: zh_CN
 
-baseUrl: https://sh.alynx.xyz
+baseURL: https://sh.alynx.xyz
 rootDir: /
 srcDir: srcs
 docDir: docs
