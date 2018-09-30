@@ -6,7 +6,7 @@
   <link href="https://sh.alynx.xyz/atom.xml" rel="self" />
   
   <link href="https://sh.alynx.xyz/" />
-  <updated>2018-08-28T00:21:50.000Z</updated>
+  <updated>2018-09-30T12:31:33.000Z</updated>
   <id>https://sh.alynx.xyz/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>我们如何哭泣</title>
+    <link href="https://sh.alynx.xyz/posts/Too-Busy-for-Tears/" />
+    <id>https://sh.alynx.xyz/posts/Too-Busy-for-Tears/</id>
+    <published>2018-09-30T12:31:33.000Z</published>
+    <updated>2018-09-30T12:31:33.000Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p><img src="/posts/Too-Busy-for-Tears/1.jpg" alt=""></p><p>&#x4E5D;&#x6708;&#x7684;&#x6700;&#x540E;&#x4E00;&#x5929;&#xFF0C;&#x6211;&#x7684;&#x7F51;&#x7AD9;&#x7A81;&#x7834;&#x4E86;&#x516B;&#x4E07;&#x8BBF;&#x95EE;&#x91CF;&#x3002;</p><p>&#x672C;&#x6765;&#x6709;&#x597D;&#x591A;&#x53EF;&#x4EE5;&#x968F;&#x4FBF;&#x5199;&#x4E00;&#x70B9;&#x6765;&#x63A9;&#x76D6;&#x81EA;&#x5DF1;&#x201C;&#x4E5D;&#x6708;&#x5C31;&#x8981;&#x8FC7;&#x53BB;&#x4E86;&#x6211;&#x4EC0;&#x4E48;&#x4E5F;&#x6CA1;&#x5199;&#x201D;&#x7684;&#x6050;&#x614C;&#x611F;&#xFF0C;&#x6BD4;&#x5982;&#x63A5;&#x7740;&#x5199;&#x4E00;&#x7BC7;&#x6709;&#x5173;&#x600E;&#x4E48;&#x753B;&#x7ACB;&#x65B9;&#x4F53;&#x7684; OpenGL &#x6559;&#x7A0B;&#xFF0C;&#x6BD4;&#x5982;&#x8FD8;&#x6CA1;&#x6709;&#x6587;&#x6863;&#x7684; Hikaru &#x4EE3;&#x7801;&#x91CC;&#x6709;&#x54EA;&#x4E9B;&#x5947;&#x602A;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x548C;&#x5947;&#x602A;&#x7684;&#x8BBE;&#x5B9A;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x6700;&#x8FD1;&#x53C8;&#x5199;&#x4E86;&#x4EC0;&#x4E48;&#x4E71;&#x4E03;&#x516B;&#x7CDF;&#x7684;&#x4EE3;&#x7801;&#xFF08;&#x6CA1;&#x6709;&#xFF09;&#x3002;</p><p>&#x4F46;&#x4E0E;&#x5176;&#x968F;&#x4FBF;&#x8BF4;&#x8BF4;&#x5916;&#x754C;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x4E0D;&#x5982;&#x628A;&#x81EA;&#x5DF1;&#x968F;&#x4FBF;&#x60F3;&#x7684;&#x4E1C;&#x897F;&#x5199;&#x51FA;&#x6765;&#x66F4;&#x52A0;&#x4E25;&#x8083;&#x3002;</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/tags/%E6%97%A0%E9%A2%98/" />
+    
+  </entry>
   
   <entry>
     <title>学习 OpenGL 1</title>
@@ -479,32 +503,6 @@
     
     
     <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
-    
-  </entry>
-  
-  <entry>
-    <title>使用GDB进行简单的C语言程序调试</title>
-    <link href="https://sh.alynx.xyz/posts/Using-Gdb/" />
-    <id>https://sh.alynx.xyz/posts/Using-Gdb/</id>
-    <published>2017-03-15T11:24:33.000Z</published>
-    <updated>2017-03-15T11:24:33.000Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>&#x4E8B;&#x5B9E;&#x8BC1;&#x660E;&#x6709;&#x65F6;&#x5019;&#x65E0;&#x804A;&#x7684;&#x4E1C;&#x897F;&#x53CD;&#x800C;&#x53D8;&#x6210;&#x4E86;&#x4E00;&#x7BC7;&#x535A;&#x6587;&#xFF0C;&#x8C01;&#x53EB;&#x6076;&#x8DA3;&#x5473;&#x7684;C&#x8BED;&#x8A00;&#x4F5C;&#x4E1A;&#x975E;&#x8981;&#x6C42;&#x7528;word&#x5199;&#x5B9E;&#x9A8C;&#x62A5;&#x544A;&#xFF0C;&#x672C;&#x7339;&#x5B81;&#x53EF;&#x5148;&#x5199;&#x6210;Markdown&#x518D;&#x590D;&#x5236;&#x7C98;&#x8D34;&#x8FC7;&#x53BB;&#x3002;</p>]]>
-    
-    </summary>
-    
-    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
-    
-    <category term="C语言" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/C%E8%AF%AD%E8%A8%80/" />
-    
-    
-    <category term="C语言" scheme="https://sh.alynx.xyz/tags/C%E8%AF%AD%E8%A8%80/" />
-    
-    <category term="GDB" scheme="https://sh.alynx.xyz/tags/GDB/" />
     
   </entry>
   
