@@ -123,6 +123,8 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow: auto;
+  white-space: nowrap;
 }
 .nav ul li {
   line-height: 2em;
@@ -139,11 +141,11 @@
   color: #ddd;
   text-decoration: none;
   text-shadow: 0 0.05em rgba(0,0,0,0.2);
-  -webkit-transition: 0.2s ease-in;
-  -moz-transition: 0.2s ease-in;
-  -o-transition: 0.2s ease-in;
-  -ms-transition: 0.2s ease-in;
-  transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  -ms-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
   border-bottom: none;
 }
 .nav ul li a:hover {
@@ -178,6 +180,7 @@
   }
   .nav ul {
     display: none;
+    white-space: normal;
   }
   .nav ul li {
     display: block;
