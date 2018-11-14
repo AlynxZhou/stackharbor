@@ -708,7 +708,7 @@ blockquote {
   color: #666;
 }
 blockquote p {
-  white-space: pre;
+  white-space: pre-wrap;
   color: #666;
   padding: 0;
   margin: 0;
