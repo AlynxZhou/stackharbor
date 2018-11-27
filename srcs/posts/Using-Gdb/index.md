@@ -6,7 +6,7 @@ date: 2017-03-15 19:24:33
 categories:
   - 计算机
   - 编程
-  - C语言
+  - C 语言
 tags:
   - C语言
   - GDB
