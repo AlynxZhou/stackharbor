@@ -88,22 +88,30 @@
   content: "#";
   margin-right: 0.3em;
 }
-.post .post-footer {
-  text-align: center;
-}
-.post .post-footer .post-tags .post-tag {
-  margin: 0.5em;
+.post .post-tag {
   display: inline-block;
   background: #ff2a2a;
   border: 0.1em solid #f5c6cb;
   padding: 0.15em;
   line-height: 1.2em;
 }
-.post .post-footer .post-tags .post-tag:nth-child(2n) {
+.post .post-tag:nth-child(2n) {
   background: #37cf38;
   border: 0.1em solid #c3e6cb;
 }
-.post .post-footer .post-tags .post-tag:nth-child(3n) {
+.post .post-tag:nth-child(3n) {
   background: #33aaef;
   border: 0.1em solid #b8daff;
+}
+.post .post-footer {
+  text-align: center;
+}
+.post .post-footer .post-tags .post-tag {
+  margin: 0.5em;
+}
+.post .tags-cloud {
+  text-align: center;
+}
+.post .tags-cloud .post-tag {
+  margin: 0.1em 0.5em;
 }
