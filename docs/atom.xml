@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>喵's StackHarbor</title>
+  <title>喵&#39;s StackHarbor</title>
   <icon>https://sh.alynx.xyz/images/Future_Gazer_small.png</icon>
   <subtitle>Whisper to the World</subtitle>
   <link href="https://sh.alynx.xyz/atom.xml" rel="self" />
