@@ -1,7 +1,6 @@
 ---
-title: StackHarbor的2017尾记
+title: StackHarbor 的 2017 尾记
 layout: post
-encrypt: false
 comment: true
 date: 2017-12-31 22:18:57
 categories:
@@ -9,7 +8,6 @@ categories:
   - 生活
 tags:
   - 随记
-enc_pwd:
 ---
 ![NJU.jpg](NJU.jpg)
 
