@@ -2,7 +2,7 @@
 title: 使用GDB进行简单的C语言程序调试
 layout: post
 comment: true
-date: 2017-03-15 19:24:33
+createdTime: 2017-03-15 19:24:33
 categories:
   - 计算机
   - 编程

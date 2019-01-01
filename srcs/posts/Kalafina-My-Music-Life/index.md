@@ -3,7 +3,7 @@ title: Kalafina, My Music Life
 layout: post
 encrypt: false
 comment: true
-date: 2018-03-13 21:21:52
+createdTime: 2018-03-13 21:21:52
 categories:
   - 音乐
   - Kalafina

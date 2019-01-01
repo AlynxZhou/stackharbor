@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "/search.json";
+      if ("search.json".length === 0) {
+        searchPath = "/search.json";
+      }
+      searchFunc(searchPath, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>使用 Moment 处理 JavaScript 与 YAML 的时区转换 | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN"  data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/JavaScript-YAML-Timezone-Moment/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="AlynxZhou">
+        <meta itemprop="description" content="Everything that lives is designed to end.">
+        <meta itemprop="image" content="/images/Future_Gazer_small.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">使用 Moment 处理 JavaScript 与 YAML 的时区转换</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-01T12:00:00.000Z">2019-01-01 周二 21:00:00 JST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>&#x5F00;&#x59CB;&#x4E4B;&#x524D;&#x5148;&#x6765;&#x4E00;&#x6BB5;&#x60CA;&#x559C;&#xFF1A;&#x6211;&#x662F;&#x5728;&#x4E2D;&#x56FD;&#x6807;&#x51C6;&#x65F6;&#x95F4; 21 &#x70B9;&#x5199;&#x7684;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x4F46;&#x6211;&#x5728; front matter &#x5199;&#x7684;&#x662F; 21:00:00 &#x5E76;&#x89E3;&#x6790;&#x4E3A;&#x4E1C;&#x4EAC;&#x65F6;&#x95F4;&#x3002;</p>
+<a id="more"></a>
+
+<p>&#x4ECA;&#x5929;&#x60F3;&#x7ED9; Hikaru &#x6DFB;&#x52A0;&#x6587;&#x7AE0;&#x65F6;&#x95F4;&#x663E;&#x793A;&#x65F6;&#x533A;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x672C;&#x6765;&#x4EE5;&#x4E3A;&#x53EA;&#x8981;&#x65E0;&#x8111;&#x8C03;&#x7528; Moment.js &#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x4F46;&#x53D1;&#x73B0;&#x5176;&#x4E2D;&#x5751;&#x6709;&#x5F88;&#x591A;&#xFF0C;&#x672C;&#x6765;&#x6211;&#x5C31;&#x5F88;&#x4E0D;&#x64C5;&#x957F;&#x8BA1;&#x7B97;&#x65F6;&#x533A;&#x8F6C;&#x6362;&#xFF0C;&#x96BE;&#x5EA6;&#x53D8;&#x5F97;&#x5F88;&#x5927;&#xFF0C;&#x597D;&#x5728;&#x540E;&#x6765;&#x5904;&#x7406;&#x5B8C;&#x4E86;&#xFF0C;&#x8BB0;&#x5F55;&#x4E00;&#x4E0B;&#x9047;&#x5230;&#x7684;&#x5751;&#x3002;</p>
+<p>&#x9996;&#x5148; Moment &#x662F;&#x4E0D;&#x652F;&#x6301;&#x5730;&#x533A;&#x89E3;&#x6790;&#x548C;&#x65F6;&#x533A;&#x663E;&#x793A;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x5B89;&#x88C5; <code>moment-timezone</code> &#x8FD9;&#x4E2A;&#x6269;&#x5C55;&#x5305;&#x624D;&#x53EF;&#x4EE5;&#x5904;&#x7406;&#xFF0C;&#x6587;&#x6863;&#x5728;<a href="https://momentjs.com/timezone/docs/" target="_blank">&#x8FD9;&#x91CC;</a>&#x3002;</p>
+<p>&#x7136;&#x540E;&#x5C31;&#x662F; js-yaml &#x5F00;&#x53D1;&#x8005;&#x8BA4;&#x4E3A;&#x662F;&#x6807;&#x51C6;&#x4F46;&#x6211;&#x89C9;&#x5F97;&#x662F; Bug &#x7684;<a href="https://github.com/nodeca/js-yaml/issues/91" target="_blank">&#x95EE;&#x9898;</a>&#x3002;&#x6211;&#x5728; front matter &#x91CC;&#x5199;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x4E0D;&#x5305;&#x542B;&#x65F6;&#x533A;&#x7684;&#xFF0C;&#x6BD4;&#x5982; <code>2018-12-31 16:00:00</code>&#xFF0C;&#x6309;&#x7167;&#x6B63;&#x5E38;&#x7684;&#x89E3;&#x6790;&#x65B9;&#x5F0F;&#xFF08;&#x5C31;&#x662F;&#x76F4;&#x63A5; <code>new Date(&quot;2018-12-31 16:00:00&quot;)</code>&#xFF09;&#xFF0C;&#x5E94;&#x5F53;&#x628A;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x5F53;&#x4F5C; localtime &#x6765;&#x770B;&#x5F85;&#xFF0C;&#x4E5F;&#x5C31;&#x662F; UTC+8h &#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x4F46;&#x504F;&#x504F; js-yaml &#x7684;&#x5F00;&#x53D1;&#x8005;&#x8BA4;&#x4E3A;&#x6309;&#x7167; YAML &#x6807;&#x51C6;&#x5E94;&#x5F53;&#x628A;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x5F53;&#x4F5C; UTC &#x6765;&#x5904;&#x7406;&#xFF08;&#x95EE;&#x9898;&#x662F;&#x4ED6; <strong>&#x6839;&#x672C;&#x89E3;&#x6790;&#x4E0D;&#x4E86;&#x9644;&#x52A0;&#x65F6;&#x533A;&#x7684;&#x8868;&#x793A;&#x65B9;&#x5F0F;&#x554A;&#xFF01;</strong>&#xFF09;&#x7136;&#x540E;&#x65F6;&#x95F4;&#x5C31;&#x9519;&#x4E71;&#x4E86;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FD8;&#x597D;&#xFF0C;JS Date() &#x5BF9;&#x8C61;&#x5185;&#x7F6E;&#x7684; <code>getTimezoneOffset()</code> &#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5230; UTC &#x4E0E; localtime &#x7684;&#x5206;&#x949F;&#x5DEE;&#xFF08;&#x548C;&#x6807;&#x6CE8;&#x7684; UTC+8h &#x6B63;&#x597D;&#x76F8;&#x53CD;&#xFF0C;&#x8FD9;&#x4E2A;&#x662F; -8h&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x6B63;&#x597D;&#x628A;&#x8FD9;&#x4E2A;&#x9519;&#x8BEF;&#x7684; UTC &#x6362;&#x7B97;&#x56DE;&#x6B63;&#x786E;&#x7684; UTC&#xFF09;&#x3002;&#x5177;&#x4F53;&#x7684;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#x3002;</p>
+<pre><code class="javascript"><figure class="highlight hljs javascript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+</pre><pre class="code"><code><span class="hljs-keyword">const</span> yaml = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;js-yaml&quot;</span>)
+<span class="hljs-keyword">const</span> d = yaml.safeLoad(<span class="hljs-string">&quot;2018-12-31 16:00:00&quot;</span>)  <span class="hljs-comment">// -&gt; 2018-12-31T16:00:00.000Z</span>
+<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">&quot;2018-12-31 16:00:00&quot;</span>) <span class="hljs-comment">// -&gt; 2018-12-31T08:00:00.000Z</span>
+d.getTimezoneOffset() <span class="hljs-comment">// -&gt; -480</span>
+<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.getTime() + d.getTimezoneOffset() * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>) <span class="hljs-comment">// -&gt; 2018-12-31T08:00:00.000Z</span></code></pre></figure></code></pre>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x9047;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;Nunjucks &#x4F3C;&#x4E4E;&#x5BF9;&#x4F20;&#x9012;&#x53C2;&#x6570;&#x6709;&#x5F88;&#x5927;&#x9650;&#x5236;&#xFF0C;&#x6BD4;&#x5982; <code>moment</code> &#x65E2;&#x662F;&#x51FD;&#x6570;&#x4E5F;&#x6709;&#x6210;&#x5458;&#xFF0C;&#x6211;&#x6CA1;&#x529E;&#x6CD5;&#x5728; Nunjucks &#x91CC;&#x9762;&#x8C03;&#x7528;&#x5B83;&#x7684; <code>moment.tz.guess()</code> &#x6210;&#x5458;&#xFF0C;&#x6240;&#x4EE5;&#x53EA;&#x80FD;&#x628A;&#x8BBE;&#x7F6E;&#x5730;&#x533A;&#x5355;&#x72EC;&#x505A;&#x6210;&#x6587;&#x7AE0;&#x53C2;&#x6570;&#x4F20;&#x8FDB;&#x53BB;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x53D1;&#x73B0;&#x8FD9;&#x6837;&#x6709;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x5728;&#x65E5;&#x672C;&#x5199;&#x6587;&#x7AE0;&#x7684;&#x65F6;&#x95F4;&#x662F; 21 &#x70B9;&#xFF0C;&#x56DE;&#x5230;&#x4E2D;&#x56FD;&#x53D1;&#x5E03;&#xFF0C;&#x5B83;&#x89E3;&#x6790;&#x65F6;&#x4F1A;&#x5F53;&#x6210;&#x4E1C; 8 &#x533A;&#x7684; 21 &#x70B9;&#x6765;&#x89E3;&#x6790;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528; <code>moment(&quot;2019-01-01 21:00&quot;).tz(&quot;Asia/Tokyo&quot;).format()</code> &#x65F6;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#xFF0C;&#x5C06;&#x4E1C; 8 &#x533A;&#xFF08;&#x4E2D;&#x56FD;&#xFF09;&#x7684; 21 &#x70B9;&#x8F6C;&#x6362;&#x6210;&#x4E1C; 9 &#x533A;&#xFF08;&#x65E5;&#x672C;&#xFF09;&#x7684; 22 &#x70B9;&#x3002;&#x7136;&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#x6211;&#x89C9;&#x5F97;&#x66F4;&#x5E38;&#x89C1;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x4EBA;&#x5728;&#x56FD;&#x5916;&#x5199;&#x4E86;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x81EA;&#x7136;&#x6807;&#x6CE8;&#x7684;&#x662F;&#x56FD;&#x5916;&#x65F6;&#x95F4;&#xFF08;&#x8C01;&#x53EB; js-yaml &#x4E0D;&#x652F;&#x6301;&#x65F6;&#x533A;&#x8BB0;&#x53F7;&#x5462;&#xFF01;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x7528;&#x53E6;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x6CE8;&#x660E;&#x81EA;&#x5DF1;&#x73B0;&#x5728;&#x7684;&#x5730;&#x533A;&#xFF0C;&#x8FD9;&#x6837;&#x56DE;&#x5230;&#x81EA;&#x5DF1;&#x7684;&#x56FD;&#x5BB6;&#x4E4B;&#x540E;&#xFF0C;&#x53D1;&#x5E03;&#x65F6;&#x4ECD;&#x7136;&#x4EE5;&#x5916;&#x56FD;&#x65F6;&#x533A;&#x89E3;&#x6790;&#x65F6;&#x95F4;&#x3002;</p>
+<p>&#x5F88;&#x663E;&#x7136;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x8981;&#x6539;&#x53D8;&#x89E3;&#x6790;&#x65F6;&#x95F4;&#x7684;&#x65F6;&#x533A;&#xFF0C;&#x4F46;&#x4F3C;&#x4E4E; JavaScript &#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x597D;&#x7684;&#x4FEE;&#x6539;&#x65F6;&#x533A;&#x7684;&#x529E;&#x6CD5;&#xFF0C;&#x4F7F;&#x7528; <code>moment.tz(&#x65F6;&#x95F4;&#xFF0C;&#x5730;&#x533A;)</code> &#x4F3C;&#x4E4E;&#x53EF;&#x4EE5;&#x9650;&#x5B9A;&#x89E3;&#x6790;&#x7684;&#x65F6;&#x533A;&#xFF0C;&#x4F46;&#x662F;&#x76F4;&#x63A5;&#x50CF;&#x4E0B;&#x9762;&#x8FD9;&#x6837;&#x505A;&#x5B8C;&#x5168;&#x6CA1;&#x7528;&#x3002;</p>
+<pre><code class="javascript"><figure class="highlight hljs javascript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+</pre><pre class="code"><code><span class="hljs-keyword">const</span> yaml = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;js-yaml&quot;</span>)
+<span class="hljs-keyword">const</span> moment = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;moment-timezone&quot;</span>)
+<span class="hljs-keyword">const</span> d = yaml.safeLoad(<span class="hljs-string">&quot;2019-01-01 21:00:00&quot;</span>)  <span class="hljs-comment">// -&gt; 2019-01-01T21:00:00.000Z</span>
+<span class="hljs-keyword">const</span> newd = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.getTime() + d.getTimezoneOffset() * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>) <span class="hljs-comment">// -&gt; 2019-01-01T13:00:00.000Z</span>
+moment.tz(newd, <span class="hljs-string">&quot;Asia/Tokyo&quot;</span>).toISOString() <span class="hljs-comment">// -&gt; 2019-01-01T13:00:00.000Z</span>
+moment.tz(newd, <span class="hljs-string">&quot;Asia/Tokyo&quot;</span>).format(<span class="hljs-string">&quot;YYYY-MM-DD HH:mm:ss z&quot;</span>)  <span class="hljs-comment">// -&gt; 2019-01-01 22:00:00 JST</span></code></pre></figure></code></pre>
+<p>&#x5B83;&#x4ECD;&#x7136;&#x662F;&#x5C06; 21 &#x70B9;&#x5F53;&#x4F5C;&#x4E1C; 8 &#x533A;&#x8F6C;&#x6362;&#x4E3A;&#x4E1C; 9 &#x533A;&#x7684; 22 &#x70B9;&#x4E86;&#xFF0C;&#x65F6;&#x533A;&#x5B8C;&#x5168;&#x6CA1;&#x53D8;&#xFF0C;&#x4E0D;&#x7136;&#x5E94;&#x8BE5;&#x662F;&#x6709;&#x4E00;&#x5C0F;&#x65F6;&#x7684;&#x53D8;&#x5316;&#xFF08;&#x4ECE;&#x4E1C; 8 &#x5230; &#x4E1C; 9&#xFF09;&#xFF0C;&#x539F;&#x56E0;&#x662F;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x5DF2;&#x7ECF;&#x6807;&#x6CE8;&#x4E86;&#x65F6;&#x533A;&#xFF08;&#x5404;&#x79CD;&#x5408;&#x6CD5;&#x7684;&#x683C;&#x5F0F;&#xFF0C;&#x6BD4;&#x5982; <code>JST</code>&#x3001;<code>CST</code>&#x3001;<code>+0800</code> &#x7B49;&#xFF0C;&#x5355;&#x72EC;&#x7684; <code>Z</code> &#x5728; ISO &#x6807;&#x51C6;&#x91CC;&#x5C31;&#x8868;&#x793A; UTC&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x7B97;&#x6807;&#x5B9A;&#xFF09;&#xFF0C;Moment &#x5C31;&#x4E0D;&#x4F1A;&#x7528;&#x7A0B;&#x5E8F;&#x5458;&#x7ED9;&#x5B9A;&#x7684;&#x5730;&#x533A;&#x505A;&#x89E3;&#x6790;&#xFF0C;&#x800C;&#x662F;&#x7528;&#x4F5C;&#x8F93;&#x51FA;&#x65F6;&#x7684;&#x8F6C;&#x6362;&#xFF08;&#x7B49;&#x4EF7;&#x4E8E; <code>moment(&#x65F6;&#x95F4;).tz(&#x5730;&#x533A;)</code>&#xFF09;&#xFF08;&#x8FD9;&#x4E48;&#x8BBE;&#x8BA1; API &#x7684;&#x4EBA;&#x4F60;&#x51FA;&#x6765;&#x6211;&#x4FDD;&#x8BC1;&#x4E0D;&#x6253;&#x6B7B;&#x4F60;&#xFF09;&#xFF08;&#x6211;&#x89C9;&#x5F97;&#x6211;&#x5E94;&#x8BE5;&#x53BB;&#x770B;&#x4E00;&#x773C;&#x90A3;&#x4E2A;&#x53EB; <code>You-Dont-Need-Momentjs</code>&#xFF09;&#x7684;&#x9879;&#x76EE;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x4F3C;&#x4E4E;&#x6CA1;&#x4EC0;&#x4E48;&#x7279;&#x522B;&#x4F18;&#x96C5;&#x7684;&#xFF0C;&#x65E2;&#x7136;&#x4F60;&#x4E0D;&#x80AF;&#x53BB;&#x6389;&#xFF0C;&#x90A3;&#x6211;&#x81EA;&#x5DF1;&#x9020;&#x4E00;&#x4E2A;&#x6CA1;&#x65F6;&#x533A;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x7136;&#x540E;&#x518D;&#x89E3;&#x6790;&#x4E00;&#x6B21;&#x5457;&#x3002;</p>
+<pre><code class="javascript"><figure class="highlight hljs javascript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+</pre><pre class="code"><code><span class="hljs-keyword">const</span> yaml = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;js-yaml&quot;</span>)
+<span class="hljs-keyword">const</span> moment = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;moment-timezone&quot;</span>)
+<span class="hljs-keyword">const</span> d = yaml.safeLoad(<span class="hljs-string">&quot;2019-01-01 21:00:00&quot;</span>)  <span class="hljs-comment">// -&gt; 2019-01-01T21:00:00.000Z</span>
+<span class="hljs-keyword">const</span> newd = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.getTime() + d.getTimezoneOffset() * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>) <span class="hljs-comment">// -&gt; 2019-01-01T13:00:00.000Z</span>
+moment.tz(moment(newd).format(<span class="hljs-string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>), <span class="hljs-string">&quot;Asia/Tokyo&quot;</span>).toISOString() <span class="hljs-comment">// -&gt; 2019-01-01T12:00:00.000Z</span>
+moment.tz(moment(newd).format(<span class="hljs-string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>), <span class="hljs-string">&quot;Asia/Tokyo&quot;</span>).format(<span class="hljs-string">&quot;YYYY-MM-DD HH:mm:ss z&quot;</span>) <span class="hljs-comment">// -&gt; 2019-01-01 21:00:00 JST</span></code></pre></figure></code></pre>
+<p>&#x8FD9;&#x6837;&#x7ED3;&#x679C;&#x5C31;&#x5BF9;&#x4E86;&#x3002;&#x81F3;&#x4E8E;&#x63A5;&#x4E0B;&#x6765;&#x4F60;&#x60F3;&#x7528;&#x4EC0;&#x4E48;&#x5730;&#x533A;&#x7684;&#x65F6;&#x95F4;&#x8F93;&#x51FA;&#x65E0;&#x6240;&#x8C13;&#xFF0C;&#x53CD;&#x6B63;&#x5185;&#x90E8;&#x7684;&#x65F6;&#x95F4;&#x5DF2;&#x7ECF;&#x6539;&#x53D8;&#x4E86;&#xFF0C;&#x4E0D;&#x518D;&#x662F;&#x4F60;&#x672C;&#x673A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<p>&#x65B0;&#x5E74;&#x65B0; Bug&#xFF1A;&#x5F53;&#x6211;&#x5728;&#x7814;&#x7A76;&#x4E3A;&#x4EC0;&#x4E48;&#x6211;&#x7684;&#x751F;&#x6210;&#x5668;&#x6CA1;&#x6709;&#x5728;&#x9996;&#x9875;&#x751F;&#x6210;&#x8FD9;&#x7BC7;&#x65B0;&#x6587;&#x7AE0;&#x534A;&#x5C0F;&#x65F6;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x53D1;&#x73B0;&#x95EE;&#x9898;&#x7684;&#x6E90;&#x5934;&#x662F;&#x6211;&#x628A; <code>2019-01-01</code> &#x5199;&#x6210;&#x4E86; <code>2018-01-01</code>&#x3002;</p>
+<p><em>AlynxZhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="fas fa-tag"></i>计算机</a><a class="post-tag button" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fas fa-tag"></i>编程</a><a class="post-tag button" href="/tags/JavaScript/" rel="tag"><i class="fas fa-tag"></i>JavaScript</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/2018-Tail/" rel="prev" title="StackHarbor 的 2018 尾记"><span class="nav-title">StackHarbor 的 2018 尾记</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechat">
+      <img id="wechat_qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay_qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor.alynx.xyz",
+      "clientID": "",
+      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "使用 Moment 处理 JavaScript 与 YAML 的时区转换",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/Future_Gazer_small.png" alt="AlynxZhou">
+  
+  <h1 class="author-name">AlynxZhou</h1>
+  <h2 class="author-description">Everything that lives is designed to end.</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">49</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">38</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">61</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank">Telegram</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank">Hack Ghost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jm33.me/" target="_blank">Jm33_m0's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sh.yorushika.live/" target="_blank">月十</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>AlynxZhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">BY-NC-SA 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.13.0 at 2019-01-01 周二 22:30:07 JST. -->

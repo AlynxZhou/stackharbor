@@ -2,7 +2,7 @@
 title: 动态？静态？
 layout: post
 comment: true
-date: 2016-06-12 16:55:14
+createdTime: 2016-06-12 16:55:14
 categories:
     - 计算机
     - 网络

@@ -2,7 +2,7 @@
 title: 批量改名——Hrit.py
 layout: post
 comment: true
-date: 2016-05-03 06:20:40
+createdTime: 2016-05-03 06:20:40
 categories:
     - 计算机
     - 编程

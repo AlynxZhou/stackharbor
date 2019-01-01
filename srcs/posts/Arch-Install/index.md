@@ -1,7 +1,7 @@
 ---
 title: Arch Linux安装手札
 layout: post
-date: 2016-04-07 06:26:23
+createdTime: 2016-04-07 06:26:23
 comment: true
 categories:
   - 计算机
