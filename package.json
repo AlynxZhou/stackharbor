@@ -1,7 +1,6 @@
 {
   "name": "stackharbor.alynx.xyz",
   "dependencies": {
-    "hikaru-coffee": "file:../Projects/hikaru",
     "hikaru-generator-feed": "^1.0.1",
     "hikaru-generator-search": "^1.0.0",
     "hikaru-generator-sitemap": "^1.0.1"
