@@ -6,11 +6,11 @@ comment: true
 ---
 # 关于我
 
-<div class="alert-green">此部分上次更新时间 2019-01-20 21:59:00。</div>
+<div class="alert-green">此部分上次更新时间 2019-01-24 16:13:00。</div>
 
 <div class="alert-red">对于一些人，在对着这个页面按 `Control + c` 之前，麻烦先看一下第 17 条。</div>
 
-1. Alynx 可以接受的称呼包括 AlynxZhou，Alynx，AZ。
+1. Alynx 可以接受的称呼包括 Alynx Zhou，Alynx，AZ。
 
 2. Alynx 这个词的来历、读音是 *Alynx* is just **a lynx**。
 
@@ -22,7 +22,7 @@ comment: true
 
 6. Alynx 喜欢 Arch Linux，Atom，C，Coffee Script，Vala，GNOME，你也许喜欢与这些对立的软件，但是 **每个人选择自己喜欢的东西一定有她的理由**，所以 **请不要强行向 Alynx 安利你喜欢的东西**。
 
-7. Alynx 喜欢音乐，目前最喜欢的乐器是 半音阶口琴，有不到 4 年的琴龄，北京交通大学口琴联盟的创始人兼第一任社长，（此处应该有努力练琴的 Flag）。学过 4 年二胡并通过了业余水平十级（虽然现在几乎忘光了），选了扬琴选修课所以大概了解一点点，其他了解一点的乐器还有长号，选到课的小提琴。
+7. Alynx 喜欢音乐，目前最喜欢的乐器是半音阶口琴，有不到 4 年的琴龄，北京交通大学口琴联盟的创始人兼第一任社长，（此处应该有努力练琴的 Flag）。学过 4 年二胡并通过了业余水平十级（虽然现在几乎忘光了），选了扬琴选修课所以大概了解一点点，其他了解一点的乐器还有长号，选到课的小提琴。
 
 8. Alynx 坚持用 Steam 并拒绝 Origin/Epic/Battle.net 等不打算支持 Linux 的平台（既然你忽略 Alynx 的需求，Alynx 也忽略你），*Counter-Strike: Global Offensive* 是目前为止唯一一个玩了超过 600 小时的游戏，唯一能够玩进去的 RPG 大概是 *NieR: Automata*，感谢室友特地带 PS4 到学校还和高中同学借了光盘让 Alynx 能和另一个室友一起以 60FPS 和高清画质通关主线（这话说的有点乱套）。另外表示室友四个人一起玩 *Overcooked!* 非常开心，所以预购了 *Overcooked!2*。
 
@@ -30,7 +30,7 @@ comment: true
 
 10. Alynx 喜欢 Minecraft（Java版），**不接受 Win10 版**，PE/Java 版正版玩家（非网易版）。
 
-11. Alynx 已经玩不动崩坏3rd了，即使有小姐姐 + 数一数二的渲染技术。Alynx 也肝不动 Fate/Grand Order（非的肝不过欧的）（明明是碧蓝航线！）了，还没抽到蓝呆毛是 Alynx 没有卸载游戏的一个重要理由，他已经快绝望了。
+11. Alynx 已经玩不动崩坏3rd了，即使有小姐姐 + 数一数二的渲染技术。Alynx 也肝不动 Fate/Grand Order（非的肝不过欧的）（明明是碧蓝航线！）了，还没抽到蓝呆毛是 Alynx 没有卸载游戏的一个重要理由，她已经快绝望了。
 
 12. Alynx 想研究有关游戏渲染的东西，略微懂一点 OpenGL ES 和相关的矩阵运算。
 
