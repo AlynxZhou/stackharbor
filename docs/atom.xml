@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-01-01T13:09:51.376Z</updated>
+  <updated>2019-01-27T03:29:26.423Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -17,6 +17,30 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>WireGuard 配置与使用</title>
+    <link href="https://sh.alynx.xyz/posts/WireGuard-Usage/" />
+    <id>https://sh.alynx.xyz/posts/WireGuard-Usage/</id>
+    <published>2019-01-27T02:29:30.000Z</published>
+    <updated>2019-01-27T03:29:26.423Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<h1 id="&#x9700;&#x6C42;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="&#x9700;&#x6C42;"></a>&#x9700;&#x6C42;</h1><p>&#x672C;&#x6765;&#x60F3;&#x7ED9;&#x5185;&#x7F51;&#x7684;&#x6811;&#x8393;&#x6D3E;&#x505A; frp &#x4E00;&#x7C7B;&#x7684;&#x516C;&#x7F51;&#x6620;&#x5C04;&#x4EE5;&#x4FBF;&#x80FD;&#x591F;&#x5728;&#x5916;&#x9762;&#x8BBF;&#x95EE; Samba &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x6765;&#x60F3;&#x60F3;&#x4F3C;&#x4E4E;&#x628A;&#x8BBE;&#x5907;&#x66B4;&#x9732;&#x5728;&#x516C;&#x7F51;&#x4E0D;&#x592A;&#x5B89;&#x5168;&#x3002;&#x6362;&#x4E2A;&#x89D2;&#x5EA6;&#x60F3;&#xFF0C;&#x5176;&#x5B9E;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x628A;&#x6811;&#x8393;&#x6D3E;&#x6620;&#x5C04;&#x51FA;&#x53BB;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x591F;&#x8FDE;&#x63A5;&#x8FDB;&#x6765;&#x5C31;&#x597D;&#x4E86;&#x3002;&#x6240;&#x4EE5;&#x9009;&#x7528; VPN &#x5EFA;&#x865A;&#x62DF;&#x4E13;&#x7528;&#x7F51;&#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x7684; WireGuard &#x5C06;&#x6211;&#x7684;&#x5404;&#x4E2A;&#x8BBE;&#x5907;&#x8FDE;&#x5230;&#x4E00;&#x4E2A;&#x5B50;&#x7F51;&#x5185;&#x90E8;&#x3002;</p>]]>
+    
+    </summary>
+    
+    <category term="网络" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%BB%9C/" />
+    
+    
+    <category term="网络" scheme="https://sh.alynx.xyz/tags/%E7%BD%91%E7%BB%9C/" />
+    
+    <category term="VPN" scheme="https://sh.alynx.xyz/tags/VPN/" />
+    
+    <category term="WireGuard" scheme="https://sh.alynx.xyz/tags/WireGuard/" />
+    
+  </entry>
   
   <entry>
     <title>使用 Moment 处理 JavaScript 与 YAML 的时区转换</title>
@@ -485,30 +509,6 @@
     
     
     <category term="Dirty words" scheme="https://sh.alynx.xyz/tags/Dirty%20words/" />
-    
-  </entry>
-  
-  <entry>
-    <title>你的名字。</title>
-    <link href="https://sh.alynx.xyz/posts/Your-Name/" />
-    <id>https://sh.alynx.xyz/posts/Your-Name/</id>
-    <published>2017-06-14T16:22:19.000Z</published>
-    <updated>2019-01-01T08:51:41.486Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>&#x8001;&#x5B9E;&#x8BF4;&#x6211;&#x4E5F;&#x8BB8;&#x662F;&#x4E2A;&#x5BF9;&#x7535;&#x5F71;&#x6CA1;&#x4EC0;&#x4E48;&#x54C1;&#x5473;&#x7684;&#x4EBA;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x770B;&#x4E86;&#x8FD9;&#x4E2A;&#x4E4B;&#x540E;&#x603B;&#x89C9;&#x5F97;&#x8981;&#x5199;&#x70B9;&#x4EC0;&#x4E48;&#x3002;</p><p>&#x4E0D;&#x8FC7;&#x53C2;&#x8003;&#x73B0;&#x5728;&#x7684;&#x65F6;&#x95F4;<del>&#x548C;&#x6211;&#x9ED1;&#x6697;&#x4E2D;&#x53EF;&#x601C;&#x7684;&#x76F2;&#x6253;&#x80FD;&#x529B;</del>&#xFF08;&#x6700;&#x540E;&#x60F3;&#x8D77;&#x6765;&#x6211;&#x7684;LED&#x706F;&#xFF09;&#xFF0C;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E0D;&#x4F1A;&#x5F88;&#x957F;&#x3002;</p>]]>
-    
-    </summary>
-    
-    <category term="电影" scheme="https://sh.alynx.xyz/categories/%E7%94%B5%E5%BD%B1/" />
-    
-    <category term="动漫" scheme="https://sh.alynx.xyz/categories/%E7%94%B5%E5%BD%B1/%E5%8A%A8%E6%BC%AB/" />
-    
-    
-    <category term="电影" scheme="https://sh.alynx.xyz/tags/%E7%94%B5%E5%BD%B1/" />
-    
-    <category term="动漫" scheme="https://sh.alynx.xyz/tags/%E5%8A%A8%E6%BC%AB/" />
     
   </entry>
   

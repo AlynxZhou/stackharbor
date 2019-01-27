@@ -8,7 +8,7 @@ comment: true
 
 <div class="alert-green">此部分上次更新时间 2019-01-24 16:13:00。</div>
 
-<div class="alert-red">对于一些人，在对着这个页面按 `Control + c` 之前，麻烦先看一下第 17 条。</div>
+<div class="alert-red">对于一些人，在对着这个页面按 <code>Control + c</code> 之前，麻烦先看一下第 17 条。</div>
 
 1. Alynx 可以接受的称呼包括 Alynx Zhou，Alynx，AZ。
 

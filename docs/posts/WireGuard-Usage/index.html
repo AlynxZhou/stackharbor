@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "/search.json";
+      if ("search.json".length === 0) {
+        searchPath = "/search.json";
+      }
+      searchFunc(searchPath, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>WireGuard 配置与使用 | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN"  data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/WireGuard-Usage/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="Everything that lives is designed to end.">
+        <meta itemprop="image" content="/images/Future_Gazer_small.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">WireGuard 配置与使用</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-27T02:29:30.000Z">2019-01-27 周日 10:29:30 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h1 id="&#x9700;&#x6C42;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="&#x9700;&#x6C42;"></a>&#x9700;&#x6C42;</h1>
+<p>&#x672C;&#x6765;&#x60F3;&#x7ED9;&#x5185;&#x7F51;&#x7684;&#x6811;&#x8393;&#x6D3E;&#x505A; frp &#x4E00;&#x7C7B;&#x7684;&#x516C;&#x7F51;&#x6620;&#x5C04;&#x4EE5;&#x4FBF;&#x80FD;&#x591F;&#x5728;&#x5916;&#x9762;&#x8BBF;&#x95EE; Samba &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x6765;&#x60F3;&#x60F3;&#x4F3C;&#x4E4E;&#x628A;&#x8BBE;&#x5907;&#x66B4;&#x9732;&#x5728;&#x516C;&#x7F51;&#x4E0D;&#x592A;&#x5B89;&#x5168;&#x3002;&#x6362;&#x4E2A;&#x89D2;&#x5EA6;&#x60F3;&#xFF0C;&#x5176;&#x5B9E;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x628A;&#x6811;&#x8393;&#x6D3E;&#x6620;&#x5C04;&#x51FA;&#x53BB;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x591F;&#x8FDE;&#x63A5;&#x8FDB;&#x6765;&#x5C31;&#x597D;&#x4E86;&#x3002;&#x6240;&#x4EE5;&#x9009;&#x7528; VPN &#x5EFA;&#x865A;&#x62DF;&#x4E13;&#x7528;&#x7F51;&#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x7684; WireGuard &#x5C06;&#x6211;&#x7684;&#x5404;&#x4E2A;&#x8BBE;&#x5907;&#x8FDE;&#x5230;&#x4E00;&#x4E2A;&#x5B50;&#x7F51;&#x5185;&#x90E8;&#x3002;</p>
+<a id="more"></a>
+
+<p>WireGuard &#x7684;&#x539F;&#x7406;&#x662F;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x516C;&#x7F51;&#x670D;&#x52A1;&#x5668;&#x505A; Endpoint&#xFF0C;&#x5185;&#x7F51;&#x7684;&#x6570;&#x636E;&#x901A;&#x8FC7;&#x8BE5;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;&#xFF0C;&#x56E0;&#x6B64;&#x5B50;&#x7F51;&#x7684;&#x5404;&#x4E2A;&#x8BBE;&#x5907;&#x53EF;&#x4EE5;&#x6CA1;&#x6709;&#x56FA;&#x5B9A;&#x7684; IP&#xFF0C;&#x53EA;&#x8981;&#x90FD;&#x80FD;&#x8FDE;&#x63A5;&#x516C;&#x7F51;&#x670D;&#x52A1;&#x5668;&#x5C31;&#x597D;&#x4E86;&#x3002;</p>
+<h1 id="&#x5B89;&#x88C5;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%89%E8%A3%85" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h1>
+<p>&#x7531;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x7CFB;&#x7EDF;&#x5B89;&#x88C5;&#x65B9;&#x6CD5;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x5EFA;&#x8BAE;&#x53C2;&#x7167; <a href="https://www.wireguard.com/install/" target="_blank">WireGuard &#x5B98;&#x7F51;&#x7684;&#x5B89;&#x88C5;&#x8BF4;&#x660E;</a> &#x548C;&#x5404;&#x4E2A;&#x7CFB;&#x7EDF;&#x7684; Wiki&#xFF0C;Android &#x624B;&#x673A;&#x53EF;&#x4EE5;&#x641C;&#x7D22;&#x4E0B;&#x8F7D; WireGuard &#x7684; APK &#x8FDB;&#x884C;&#x5B89;&#x88C5;&#x3002;</p>
+<h1 id="&#x914D;&#x7F6E;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%85%8D%E7%BD%AE" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</h1>
+<div class="alert-blue">&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x53C2;&#x8003;&#x81EA; <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank">WireGuard - ArchWiki</a>&#x3002;</div>
+
+<p>&#x9996;&#x5148;&#x9700;&#x8981;&#x751F;&#x6210;&#x516C;&#x94A5;&#x548C;&#x79C1;&#x94A5;&#xFF0C;&#x5EFA;&#x8BAE;&#x5C06;&#x5176;&#x8BBE;&#x7F6E;&#x4E3A;&#x53EA;&#x6709;&#x62E5;&#x6709;&#x8005;&#x624D;&#x80FD;&#x64CD;&#x4F5C;&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x653E;&#x5728; <code>/etc/wireguard</code> &#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x91CC;&#x9762;&#xFF0C;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x5E94;&#x8BE5;&#x662F;&#x53EA;&#x6709; root &#x624D;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x7684;&#x3002;<strong>&#x670D;&#x52A1;&#x5668;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x90FD;&#x9700;&#x8981;&#x5206;&#x522B;&#x8FDB;&#x884C;&#x8FD9;&#x4E00;&#x6B65;</strong>&#x3002;</p>
+<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> /etc/wireguard</span>
+<span class="hljs-meta">#</span><span class="bash"> wgwg genkey | tee privatekey | wg pubkey &gt; publickey</span></code></pre></figure></code></pre><h2 id="&#x670D;&#x52A1;&#x7AEF;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E6%9C%8D%E5%8A%A1%E7%AB%AF" title="&#x670D;&#x52A1;&#x7AEF;"></a>&#x670D;&#x52A1;&#x7AEF;</h2>
+<p>&#x7136;&#x540E;&#x9700;&#x8981;&#x624B;&#x5199;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x5BF9;&#x4E8E;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x5148;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x914D;&#x7F6E;&#x3002;</p>
+<p>&#x9996;&#x5148;&#x5728; <code>/etc/wireguard</code> &#x76EE;&#x5F55;&#x4E0B;&#x9762;&#x5EFA;&#x7ACB; <code>wg0.conf</code>&#xFF08;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x4E86;&#x5C31; <code>wg1</code>&#xFF0C;&#x4F9D;&#x6B64;&#x7C7B;&#x63A8;&#xFF09;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x8FD9;&#x4E2A;&#x6837;&#x5B50;&#xFF1A;</p>
+<pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+</pre><pre class="code"><code>[Interface]<span class="hljs-built_in">
+Address </span>= 10.0.0.1
+ListenPort = 7456
+PrivateKey = [&#x670D;&#x52A1;&#x5668;&#x7684;&#x79C1;&#x94A5;]
+PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t<span class="hljs-built_in"> nat </span>-A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t<span class="hljs-built_in"> nat </span>-D POSTROUTING -o eth0 -j MASQUERADE<span class="hljs-built_in">
+DNS </span>= 8.8.8.8
+
+[peer]
+PublicKey = [&#x5BA2;&#x6237;&#x7AEF; 1 &#x7684;&#x516C;&#x94A5;]
+AllowedIPs = 10.0.0.2/32
+
+[peer]
+PublicKey = [&#x5BA2;&#x6237;&#x7AEF; 2 &#x7684;&#x516C;&#x94A5;]
+AllowedIPs = 10.0.0.3/32
+
+[peer]
+PublicKey = [&#x5BA2;&#x6237;&#x7AEF; 3 &#x7684;&#x516C;&#x94A5;]
+AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x4F9D;&#x6B21;&#x5206;&#x6790;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x9996;&#x5148;&#x662F; Interface&#xFF0C;&#x8FD9;&#x4E2A;&#x90E8;&#x5206;&#x6307;&#x7684;&#x662F; WireGuard &#x5728;&#x672C;&#x673A;&#x4E0A;&#x9762;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x5B83;&#x662F;&#x4EE5;&#x5185;&#x6838;&#x6A21;&#x5757;&#x7684;&#x5F62;&#x5F0F;&#x5DE5;&#x4F5C;&#x7684;&#xFF0C;<code>Address</code> &#x6307;&#x672C;&#x673A;&#x5728;&#x5B50;&#x7F51;&#x5185;&#x7684;&#x79C1;&#x6709; IP &#x5730;&#x5740;&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x5206;&#x914D;&#x4E86;&#x4FDD;&#x7559;&#x6BB5; <code>10.0.0.0/24</code> &#x4F5C;&#x4E3A;&#x5B50;&#x7F51;&#x7F51;&#x6BB5;&#xFF08;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x81EA;&#x5DF1;&#x53BB;&#x590D;&#x4E60;&#x8BA1;&#x7F51;&#xFF09;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x7528; <code>10.0.0.0/8</code> &#x8FD9;&#x4E2A;&#x7F51;&#x6BB5;&#x518D;&#x8FDB;&#x884C;&#x5212;&#x5206;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E3B;&#x673A;&#x5730;&#x5740;&#x662F;&#x4F60;&#x81EA;&#x5DF1;&#x968F;&#x610F;&#x5206;&#x914D;&#x7684;&#xFF0C;&#x53EA;&#x8981;&#x4E0D;&#x51B2;&#x7A81;&#x5C31;&#x884C;&#x3002;<code>ListenPort</code> &#x662F;&#x76D1;&#x542C;&#x7684;&#x670D;&#x52A1;&#x5668; UDP &#x7AEF;&#x53E3;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E5F;&#x662F;&#x81EA;&#x5DF1;&#x8BBE;&#x7F6E;&#xFF0C;&#x53EA;&#x8981;&#x4E0D;&#x51B2;&#x7A81;&#x5C31;&#x884C;&#x3002;<code>PrivateKey</code> &#x5219;&#x662F;&#x521A;&#x521A; <strong>&#x670D;&#x52A1;&#x7AEF;</strong> &#x751F;&#x6210;&#x7684; <code>privatekey</code> &#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;<code>PostUp</code> &#x548C; <code>PostDown</code> &#x662F;&#x914D;&#x7F6E; iptables &#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x5EFA;&#x8BAE;&#x76F4;&#x63A5;&#x590D;&#x5236;&#x5373;&#x53EF;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x670D;&#x52A1;&#x5668;&#x7684;&#x516C;&#x7F51;&#x7F51;&#x5361;&#x4E0D;&#x662F; <code>eth0</code> &#x5219;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x4FEE;&#x6539;&#x3002;<code>DNS</code> &#x5219;&#x662F;&#x89E3;&#x6790;&#x57DF;&#x540D;&#x7528;&#x7684; DNS&#xFF0C;&#x8FD9;&#x91CC;&#x76F4;&#x63A5;&#x4F7F;&#x7528; <code>8.8.8.8</code>&#x3002;</p>
+<p>&#x7136;&#x540E;&#x6BCF;&#x4E00;&#x4E2A; Peer &#x5B57;&#x6BB5;&#x5BF9;&#x5E94;&#x4E86;&#x4E00;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#xFF08;&#x6216;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x7AEF;&#xFF0C;WireGuard &#x5B9E;&#x9645;&#x4E0A;&#x662F; P2P &#x7684;&#xFF09;&#xFF0C;&#x9700;&#x8981;&#x5206;&#x522B;&#x5C06;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x7684; <code>publickey</code> &#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x8D34;&#x5230; <code>PublicKey</code>&#xFF0C;&#x4EE5;&#x53CA;&#x9700;&#x8981;&#x8F6C;&#x53D1;&#x5230;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x6D41;&#x91CF;&#x7684; IP &#x5730;&#x5740;&#x8303;&#x56F4;&#x8D34;&#x5230; <code>AllowedIPs</code>&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x76F4;&#x63A5;&#x7ED9;&#x6BCF;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;&#x7684; IP&#xFF0C;&#x56E0;&#x6B64;&#x5C31;&#x5199;&#x4E86; <code>10.0.0.2/32</code>&#xFF08;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x81EA;&#x5DF1;&#x53BB;&#x590D;&#x4E60;&#x8BA1;&#x7F51;&#xFF09;&#xFF0C;&#x610F;&#x601D;&#x662F;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x5BF9;&#x5E94;&#x7684; IP &#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#xFF0C;&#x6240;&#x6709;&#x5411;&#x8FD9;&#x4E2A; IP &#x53D1;&#x9001;&#x7684;&#x6D41;&#x91CF;&#x90FD;&#x4F1A;&#x88AB;&#x8F6C;&#x53D1;&#x5230;&#x8FD9;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x3002;</p>
+<p><strong>&#x6BCF;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5C31;&#x8981;&#x5728;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x91CC;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A; Peer &#x5B57;&#x6BB5;</strong>&#xFF0C;&#x7136;&#x540E;&#x8BBE;&#x7F6E; <code>PublicKey</code> &#x548C; <code>AllowedIPs</code>&#x3002;</p>
+<p>&#x7136;&#x540E;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7684; <code>/etc/sysctl.conf</code> &#x6700;&#x540E;&#x52A0;&#x4E0A;&#x4E00;&#x53E5; <code>net.ipv4.ip_forward=1</code>&#xFF0C;&#x5F00;&#x542F; IPv4 &#x6D41;&#x91CF;&#x8F6C;&#x53D1;&#xFF0C;&#x7136;&#x540E;&#x8FD0;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x52A0;&#x8F7D;&#x65B0;&#x8BBE;&#x7F6E;&#xFF1A;</p>
+<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="&#x5BA2;&#x6237;&#x7AEF;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%A2%E6%88%B7%E7%AB%AF" title="&#x5BA2;&#x6237;&#x7AEF;"></a>&#x5BA2;&#x6237;&#x7AEF;</h2>
+<p>&#x5BA2;&#x6237;&#x7AEF;&#x4E5F;&#x9700;&#x8981;&#x5728; <code>/etc/wireguard</code> &#x76EE;&#x5F55;&#x4E0B;&#x9762;&#x5EFA;&#x7ACB; <code>wg0.conf</code>&#xFF08;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x4E86;&#x5C31; <code>wg1</code>&#xFF0C;&#x4F9D;&#x6B64;&#x7C7B;&#x63A8;&#xFF09;&#xFF0C;&#x5185;&#x5BB9;&#x770B;&#x8D77;&#x6765;&#x662F;&#x8FD9;&#x6837;&#xFF1A;</p>
+<pre><code><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+</pre><pre class="code"><code><span class="hljs-section">[Interface]</span>
+<span class="hljs-attr">Address</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.4</span>
+<span class="hljs-attr">PrivateKey</span> = [&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x79C1;&#x94A5;]
+<span class="hljs-section">
+[Peer]</span>
+<span class="hljs-attr">PublicKey</span> = [&#x670D;&#x52A1;&#x7AEF; <span class="hljs-number">1</span> &#x7684;&#x516C;&#x94A5;]
+<span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">24</span>
+<span class="hljs-attr">Endpoint</span> = [&#x670D;&#x52A1;&#x7AEF; <span class="hljs-number">1</span> &#x7684;&#x516C;&#x7F51; IP]:[&#x670D;&#x52A1;&#x7AEF; <span class="hljs-number">1</span> &#x7684;&#x7AEF;&#x53E3;]
+<span class="hljs-attr">PersistentKeepalive</span> = <span class="hljs-number">25</span></code></pre></figure></code></pre><p>Interface &#x5B57;&#x6BB5;&#x81EA;&#x7136;&#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x672C;&#x673A;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;<code>Address</code> &#x8FD8;&#x662F;&#x7ED9;&#x672C;&#x673A;&#x5206;&#x914D;&#x7684; IP&#xFF0C;&#x8FD9;&#x91CC;&#x8981;&#x548C;&#x670D;&#x52A1;&#x5668;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x5B50;&#x7F51;&#xFF0C;&#x5E76;&#x4E14;&#x8981;&#x548C;&#x670D;&#x52A1;&#x5668;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#x5141;&#x8BB8;&#x7684; IP &#x6BB5;&#x5BF9;&#x4E0A;&#x3002;<code>PrivateKey</code> &#x5219;&#x662F;&#x521A;&#x521A; <strong>&#x5BA2;&#x6237;&#x7AEF;</strong> &#x751F;&#x6210;&#x7684; <code>privatekey</code> &#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x901A;&#x8FC7;&#x6DFB;&#x52A0; Peer &#x5B57;&#x6BB5;&#x6765;&#x6DFB;&#x52A0;&#x670D;&#x52A1;&#x7AEF;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x7F51;&#x7EDC;&#x7684;&#x51FA;&#x53E3;&#x548C;&#x8F6C;&#x53D1;&#x70B9;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x586B;&#x5199;&#x5BF9;&#x5E94;&#x7684; <strong>&#x670D;&#x52A1;&#x7AEF;</strong> &#x7684;&#x516C;&#x94A5;&#xFF0C;&#x7136;&#x540E;&#x8FD9;&#x91CC;&#x7684; <code>AllowedIPs</code> &#x8BBE;&#x7F6E;&#x7684;&#x662F; <strong>&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x54EA;&#x4E9B; IP &#x6BB5;&#x7684;&#x6D41;&#x91CF;&#x8981;&#x901A;&#x8FC7;&#x8BE5;&#x670D;&#x52A1;&#x7AEF;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;</strong>&#xFF0C;&#x7531;&#x4E8E;&#x6211;&#x53EA;&#x5E0C;&#x671B;&#x5185;&#x7F51;&#x7684;&#x6D41;&#x91CF;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;&#xFF0C;&#x81EA;&#x7136;&#x8BBE;&#x7F6E;&#x7684;&#x662F;&#x5185;&#x7F51;&#x7684; IP &#x6BB5; <code>10.0.0.0/24</code>&#xFF08;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x4F60;&#x8BA1;&#x7F51;&#x6302;&#x79D1;&#x4E86;&#xFF01;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x9700;&#x8981;&#x8BBE;&#x7F6E; <code>Endpoint</code> &#x4EE5;&#x4FBF;&#x80FD;&#x6B63;&#x786E;&#x7684;&#x5728;&#x516C;&#x7F51;&#x4E0A;&#x627E;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF08;&#x865A;&#x62DF;&#x4E13;&#x7528;&#x7F51;&#xFF0C;&#x8FDE;&#x4E0D;&#x4E0A;&#x7F51;&#x8FD8;&#x54EA;&#x6765;&#x7684;&#x865A;&#x62DF;&#x7F51;&#x554A;&#xFF1F;&#xFF09;&#xFF0C;&#x683C;&#x5F0F;&#x5C31;&#x662F; <code>&#x670D;&#x52A1;&#x5668;&#x516C;&#x7F51; IP:&#x4F60;&#x8BBE;&#x7F6E;&#x7684;&#x76D1;&#x542C;&#x7AEF;&#x53E3;</code>&#x3002;<code>PersistentKeepalive</code> &#x5219;&#x662F;&#x7528;&#x6765;&#x4FDD;&#x6301;&#x8FDE;&#x63A5;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x76F4;&#x63A5;&#x590D;&#x5236;&#x5373;&#x53EF;&#x3002;</p>
+<p><strong>&#x5982;&#x679C;&#x4F60;&#x6709;&#x591A;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5C31;&#x5728;&#x8FD9;&#x91CC;&#x6DFB;&#x52A0;&#x591A;&#x4E2A; Peer</strong>&#xFF0C;&#x5206;&#x522B;&#x8BBE;&#x7F6E;&#x4E0D;&#x540C;&#x7684; <code>AllowedIPs</code> &#x8BA9;&#x4ED6;&#x4EEC;&#x8F6C;&#x53D1;&#xFF0C;&#x4F46; <strong>&#x4E0D;&#x9700;&#x8981;&#x8BA9;&#x5BA2;&#x6237;&#x7AEF;&#x4E4B;&#x95F4;&#x4E92;&#x76F8;&#x6DFB;&#x52A0; Peer</strong>&#xFF0C;&#x672C;&#x6765;&#x6211;&#x4EEC;&#x8981;&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x4E4B;&#x95F4;&#x4E0D;&#x80FD;&#x4E92;&#x76F8;&#x8FDE;&#x63A5;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x6D41;&#x91CF;&#x662F;&#x7ECF;&#x7531;&#x516C;&#x7F51;&#x7684;&#x670D;&#x52A1;&#x7AEF;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;&#x624D;&#x53EF;&#x4EE5;&#x5230;&#x8FBE;&#xFF0C;&#x516C;&#x7F51;&#x7684;&#x670D;&#x52A1;&#x5668;&#x662F;&#x5404;&#x4E2A;&#x4E0D;&#x56FA;&#x5B9A;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x63A5;&#x5934;&#x5730;&#x70B9;&#x3002;&#x6240;&#x4EE5;&#x53EA;&#x9700;&#x8981;&#x4FDD;&#x8BC1;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x6240;&#x6709;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x8BA4;&#x8BC6;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
+<h1 id="&#x542F;&#x52A8;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%AF%E5%8A%A8" title="&#x542F;&#x52A8;"></a>&#x542F;&#x52A8;</h1>
+<p>&#x5728;&#x5206;&#x522B;&#x914D;&#x7F6E;&#x597D;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x4E4B;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x542F;&#x52A8;&#x4E86;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x4E24;&#x8FB9;&#x90FD;&#x4E00;&#x6837;&#x3002;&#x6CE8;&#x610F;&#x628A; <code>wg0</code> &#x6362;&#x6210;&#x4F60;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;&#x3002;</p>
+<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick up wg0</span></code></pre></figure></code></pre><p>&#x7136;&#x540E;&#x4F7F;&#x7528; <code>wg</code> &#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x72B6;&#x6001;&#xFF0C;&#x7531;&#x4E8E;&#x8FD9;&#x4E9B;&#x6D89;&#x53CA;&#x5230;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#xFF0C;&#x90FD;&#x9700;&#x8981; root &#x6743;&#x9650;&#x3002;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x662F;&#x6211;&#x7684;&#x7B14;&#x8BB0;&#x672C;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x3002;</p>
+<pre><code><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+</pre><pre class="code"><code><span class="hljs-comment"># wg</span>
+<span class="hljs-attr">interface:</span> <span class="hljs-string">wg0</span>
+  <span class="hljs-string">public</span> <span class="hljs-attr">key:</span> <span class="hljs-string">[&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]</span>
+  <span class="hljs-string">private</span> <span class="hljs-attr">key:</span> <span class="hljs-string">(hidden)</span>
+  <span class="hljs-string">listening</span> <span class="hljs-attr">port:</span> <span class="hljs-number">51676</span>
+
+<span class="hljs-attr">peer:</span> <span class="hljs-string">[&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]</span>
+<span class="hljs-attr">  endpoint:</span> <span class="hljs-string">[&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]</span>
+  <span class="hljs-string">allowed</span> <span class="hljs-attr">ips:</span> <span class="hljs-number">10.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/24</span>
+  <span class="hljs-string">latest</span> <span class="hljs-attr">handshake:</span> <span class="hljs-number">1</span> <span class="hljs-string">minute,</span> <span class="hljs-number">41</span> <span class="hljs-string">seconds</span> <span class="hljs-string">ago</span>
+<span class="hljs-attr">  transfer:</span> <span class="hljs-number">38.36</span> <span class="hljs-string">KiB</span> <span class="hljs-string">received,</span> <span class="hljs-number">141.71</span> <span class="hljs-string">KiB</span> <span class="hljs-string">sent</span>
+  <span class="hljs-string">persistent</span> <span class="hljs-attr">keepalive:</span> <span class="hljs-string">every</span> <span class="hljs-number">25</span> <span class="hljs-string">seconds</span></code></pre></figure></code></pre><p>&#x5EFA;&#x7ACB;&#x6210;&#x529F;&#x7684;&#x8BDD;&#xFF0C;&#x5B50;&#x7F51;&#x4E4B;&#x95F4;&#x662F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5185;&#x7F51;&#x5730;&#x5740;&#x4E92;&#x76F8; ping &#x7684;&#xFF1A;</p>
+<pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+</pre><pre class="code"><code>$<span class="hljs-built_in"> ping </span>10.0.0.11<span class="hljs-built_in">
+PING </span>10.0.0.11 (10.0.0.11) 56(84) bytes of data.
+64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=1 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.1 ms
+64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=2 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.4 ms
+64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=3 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.5 ms
+64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=4 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.4 ms
+64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=5 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.5 ms
+^C
+--- 10.0.0.11<span class="hljs-built_in"> ping </span>statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 11ms
+rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code></pre><p>&#x5982;&#x679C;&#x4F60;&#x786E;&#x5B9A;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; Systemd &#x7BA1;&#x7406;&#x8FDE;&#x63A5;&#xFF0C;&#x9996;&#x5148;&#x5173;&#x95ED;&#x521A;&#x624D;&#x7684;&#x8FDE;&#x63A5;&#xFF1A;</p>
+<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick down wg0</span></code></pre></figure></code></pre><p>&#x7136;&#x540E;&#x542F;&#x52A8;&#x73B0;&#x6210;&#x7684; Unit&#xFF1A;</p>
+<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> wg-quick@wg0 --now</span></code></pre></figure></code></pre><h1 id="&#x540E;&#x8BB0;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%8E%E8%AE%B0" title="&#x540E;&#x8BB0;"></a>&#x540E;&#x8BB0;</h1>
+<p>&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x5728;&#x5185;&#x7F51;&#x4E4B;&#x95F4;&#x4F20;&#x9012;&#x6570;&#x636E;&#xFF0C;&#x5EFA;&#x8BAE;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x8BBF;&#x95EE;&#x8F83;&#x5FEB;&#x7684;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x56E0;&#x4E3A;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x8981;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
+<p>&#x4F46;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4F7F;&#x7528; WireGuard &#x8BBF;&#x95EE;&#x4E00;&#x4E9B;&#x88AB;&#x6CB3;&#x87F9;&#x7684;&#x5185;&#x5BB9;&#x4E5F;&#x53EF;&#x4EE5;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5728;&#x6D77;&#x5916;&#x7684;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x7136;&#x540E;&#x8BBE;&#x7F6E;&#x5BA2;&#x6237;&#x7AEF;&#x8BE5;&#x670D;&#x52A1;&#x5668;&#x7684; <code>AllowedIPs</code> &#x4E3A; <code>0.0.0.0/0</code>&#xFF08;&#x610F;&#x601D;&#x5C31;&#x662F;&#x6240;&#x6709; IP &#x90FD;&#x7ECF;&#x8FC7;&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x8F6C;&#x53D1;&#x5566;&#xFF01;&#x6216;&#x8005;&#x4F60;&#x77E5;&#x9053;&#x8BE5;&#x8BBE;&#x7F6E;&#x67D0;&#x4E9B;&#x7F51;&#x6BB5;&#x4E5F;&#x884C;&#xFF01;&#x6216;&#x8005;&#x907F;&#x5F00;&#x5185;&#x7F51;&#x548C;&#x672C;&#x5730;&#x5730;&#x5740;&#xFF01;&#x6211;&#x4E0D;&#x5EFA;&#x8BAE;&#x7528;&#x8FD9;&#x4E2A;&#x756A;&#x8304;&#xFF01;&#x6240;&#x4EE5;&#x5C31;&#x5199;&#x4E2A;&#x6700;&#x8822;&#x7684;&#xFF01;&#xFF09;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF01;&#x8BB0;&#x5F97;&#x4E0D;&#x7528;&#x65F6;&#x5019;&#x5173;&#x6389;&#xFF0C;&#x4E0D;&#x7136;&#x4E00;&#x4E9B;&#x56FD;&#x5185; App &#x4E5F;&#x4F1A;&#x8D70;&#x6D77;&#x5916;&#x7684;&#xFF01;</p>
+<p><em>AlynxZhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fas fa-tag"></i>网络</a><a class="post-tag button" href="/tags/VPN/" rel="tag"><i class="fas fa-tag"></i>VPN</a><a class="post-tag button" href="/tags/WireGuard/" rel="tag"><i class="fas fa-tag"></i>WireGuard</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/JavaScript-YAML-Timezone-Moment/" rel="prev" title="使用 Moment 处理 JavaScript 与 YAML 的时区转换"><span class="nav-title">使用 Moment 处理 JavaScript 与 YAML 的时区转换</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechat">
+      <img id="wechat_qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay_qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor.alynx.xyz",
+      "clientID": "",
+      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "WireGuard 配置与使用",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/Future_Gazer_small.png" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">Everything that lives is designed to end.</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">50</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">39</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">64</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content">
+        
+        
+        <ol class="list-group toc">
+        
+          <li>
+            <a class="list-group-item toc-link" href="#需求">需求</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#安装">安装</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#配置">配置</a>
+            
+            
+        <ol >
+        
+          <li>
+            <a class="list-group-item toc-link" href="#服务端">服务端</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#客户端">客户端</a>
+            
+          </li>
+        
+        </ol>
+        
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#启动">启动</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#后记">后记</a>
+            
+          </li>
+        
+        </ol>
+        
+      </div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank">Bilibili</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank">Hack Ghost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jm33.me/" target="_blank">Jm33_m0's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sh.yorushika.live/" target="_blank">月十</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank">sqyon</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.13.1 at 2019-01-27 周日 11:29:43 CST. -->

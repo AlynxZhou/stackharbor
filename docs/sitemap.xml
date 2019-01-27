@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sh.alynx.xyz/posts/WireGuard-Usage/</loc>
+    
+    <lastmod>2019-01-27T03:29:26.423Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sh.alynx.xyz/posts/JavaScript-YAML-Timezone-Moment/</loc>
     
     <lastmod>2019-01-01T13:09:51.376Z</lastmod>
