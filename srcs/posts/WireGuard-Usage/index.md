@@ -30,7 +30,7 @@ WireGuard 的原理是使用一个公网服务器做 Endpoint，内网的数据�
 
 ```
 # cd /etc/wireguard
-# wgwg genkey | tee privatekey | wg pubkey > publickey
+# wg genkey | tee privatekey | wg pubkey > publickey
 ```
 
 ## 服务端
