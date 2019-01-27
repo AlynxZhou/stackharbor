@@ -8,7 +8,7 @@ categories:
   - 生活
   - 折腾
 tags:
-  - Code_Life
+  - Code Life
   - 折腾
 ---
 话是怎么说的来着，生命在于折腾。骑磨烤柿也不能阻止折腾党的决心。

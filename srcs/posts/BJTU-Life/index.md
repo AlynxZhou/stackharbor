@@ -7,10 +7,8 @@ categories:
   - 生活
   - 大学
 tags:
-  - Code_Life
-  - 大学生活
+  - Code Life
   - BJTU
-  - 北京交通大学
 createdTime: 2016-10-08 21:31:56
 ---
 # 闲扯

@@ -94,6 +94,7 @@
   border: 0.1em solid #f5c6cb;
   padding: 0.15em;
   line-height: 1.2em;
+  font-size: 1em;
 }
 .post .post-tag:nth-child(2n) {
   background: #37cf38;
