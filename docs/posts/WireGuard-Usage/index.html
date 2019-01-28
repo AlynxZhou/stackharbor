@@ -245,7 +245,7 @@ AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>&#x7136;&#x540E;&#
 <p>&#x5728;&#x5206;&#x522B;&#x914D;&#x7F6E;&#x597D;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x4E4B;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x542F;&#x52A8;&#x4E86;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x4E24;&#x8FB9;&#x90FD;&#x4E00;&#x6837;&#x3002;&#x6CE8;&#x610F;&#x628A; <code>wg0</code> &#x6362;&#x6210;&#x4F60;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;&#x3002;</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick up wg0</span></code></pre></figure></code></pre><p>&#x7136;&#x540E;&#x4F7F;&#x7528; <code>wg</code> &#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x72B6;&#x6001;&#xFF0C;&#x7531;&#x4E8E;&#x8FD9;&#x4E9B;&#x6D89;&#x53CA;&#x5230;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#xFF0C;&#x90FD;&#x9700;&#x8981; root &#x6743;&#x9650;&#x3002;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x662F;&#x6211;&#x7684;&#x7B14;&#x8BB0;&#x672C;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x3002;</p>
-<pre><code><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<pre><code class="plain"><figure class="highlight hljs plain"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
@@ -257,18 +257,19 @@ AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>&#x7136;&#x540E;&#
 <span class="line">10</span>
 <span class="line">11</span>
 <span class="line">12</span>
-</pre><pre class="code"><code><span class="hljs-comment"># wg</span>
-<span class="hljs-attr">interface:</span> <span class="hljs-string">wg0</span>
-  <span class="hljs-string">public</span> <span class="hljs-attr">key:</span> <span class="hljs-string">[&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]</span>
-  <span class="hljs-string">private</span> <span class="hljs-attr">key:</span> <span class="hljs-string">(hidden)</span>
-  <span class="hljs-string">listening</span> <span class="hljs-attr">port:</span> <span class="hljs-number">51676</span>
+</pre><pre class="code"><code># wg
+interface: wg0
+  public key: [&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]
+  private key: (hidden)
+  listening port: 51676
 
-<span class="hljs-attr">peer:</span> <span class="hljs-string">[&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]</span>
-<span class="hljs-attr">  endpoint:</span> <span class="hljs-string">[&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]</span>
-  <span class="hljs-string">allowed</span> <span class="hljs-attr">ips:</span> <span class="hljs-number">10.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/24</span>
-  <span class="hljs-string">latest</span> <span class="hljs-attr">handshake:</span> <span class="hljs-number">1</span> <span class="hljs-string">minute,</span> <span class="hljs-number">41</span> <span class="hljs-string">seconds</span> <span class="hljs-string">ago</span>
-<span class="hljs-attr">  transfer:</span> <span class="hljs-number">38.36</span> <span class="hljs-string">KiB</span> <span class="hljs-string">received,</span> <span class="hljs-number">141.71</span> <span class="hljs-string">KiB</span> <span class="hljs-string">sent</span>
-  <span class="hljs-string">persistent</span> <span class="hljs-attr">keepalive:</span> <span class="hljs-string">every</span> <span class="hljs-number">25</span> <span class="hljs-string">seconds</span></code></pre></figure></code></pre><p>&#x5EFA;&#x7ACB;&#x6210;&#x529F;&#x7684;&#x8BDD;&#xFF0C;&#x5B50;&#x7F51;&#x4E4B;&#x95F4;&#x662F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5185;&#x7F51;&#x5730;&#x5740;&#x4E92;&#x76F8; ping &#x7684;&#xFF1A;</p>
+peer: [&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]
+  endpoint: [&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]
+  allowed ips: 10.0.0.0/24
+  latest handshake: 1 minute, 41 seconds ago
+  transfer: 38.36 KiB received, 141.71 KiB sent
+  persistent keepalive: every 25 seconds</code></pre></figure></code></pre>
+<p>&#x5EFA;&#x7ACB;&#x6210;&#x529F;&#x7684;&#x8BDD;&#xFF0C;&#x5B50;&#x7F51;&#x4E4B;&#x95F4;&#x662F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5185;&#x7F51;&#x5730;&#x5740;&#x4E92;&#x76F8; ping &#x7684;&#xFF1A;</p>
 <pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -601,4 +602,4 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.1 at 2019-01-27 周日 14:50:21 CST. -->
+<!-- Page built by Hikaru v1.13.1 at 2019-01-28 周一 18:25:38 CST. -->
