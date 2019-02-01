@@ -234,7 +234,7 @@
 </pre><pre class="code"><code><span class="hljs-variable">$ </span>rsync -azv --delete SOURCE USERNAME<span class="hljs-variable">@IPADDRESS</span><span class="hljs-symbol">:DESTINATION</span></code></pre></figure></code></pre><!-- Marked bug: cannot handle `\)` in URL, use `%29` instead. Waiting hexo-renderer-marked update its dependents version. -->
 <p>&#x4E0A;&#x4F20;&#x5230;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x5982;&#x679C;&#x6709; git &#x4ED3;&#x5E93;&#x6700;&#x597D;&#x7528; <code>--exclude=.git</code> &#x6392;&#x9664;&#x6389;&#xFF0C;&#x987A;&#x4FBF; SOURCE &#x76EE;&#x5F55;&#x4E00;&#x822C;&#x4E0D;&#x8981;&#x7528; <code>/</code> &#x7ED3;&#x5C3E;&#xFF0C;&#x539F;&#x56E0;&#x53C2;&#x89C1; [&#x8FD9;&#x91CC;](<a href="https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92)%E3%80%82" target="_blank">https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92)&#x3002;</a></p>
 <p>&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x8FD8;&#x6CA1;&#x6709;&#x628A; DNS &#x4ECE; GitHub Pages &#x8F6C;&#x5230;&#x6211;&#x7684;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x7ED3;&#x679C;&#x751F;&#x7C73;&#x716E;&#x6210;&#x4E86;&#x719F;&#x996D;&#xFF0C;&#x53EA;&#x80FD;&#x5F80;&#x4E0B;&#x7EE7;&#x7EED;&#x4E86;&#x3002;</p>
-<h1 id="&#x7528;LetsEncrypt&#x751F;&#x6210;SSL&#x8BC1;&#x4E66;"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8LetsEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="&#x7528;LetsEncrypt&#x751F;&#x6210;SSL&#x8BC1;&#x4E66;"></a>&#x7528; Let&apos;s Encrypt &#x751F;&#x6210; SSL &#x8BC1;&#x4E66;</h1>
+<h1 id="&#x7528;Let039;sEncrypt&#x751F;&#x6210;SSL&#x8BC1;&#x4E66;"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Let039;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="&#x7528;Let039;sEncrypt&#x751F;&#x6210;SSL&#x8BC1;&#x4E66;"></a>&#x7528; Let&apos;s Encrypt &#x751F;&#x6210; SSL &#x8BC1;&#x4E66;</h1>
 <p>HTTPS &#x9700;&#x8981;&#x6709;&#x53EF;&#x4FE1;&#x673A;&#x6784;&#x7B7E;&#x53D1;&#x7684;&#x8BC1;&#x4E66;&#xFF0C;<a href="https://letsencrypt.org/" target="_blank">Let&apos;s Encrypt</a> &#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x514D;&#x8D39;&#x63D0;&#x4F9B;&#x8FD9;&#x79CD;&#x670D;&#x52A1;&#x7684;&#x7F51;&#x7AD9;&#xFF0C;&#x4E0D;&#x8FC7;&#x5B98;&#x65B9;&#x63A8;&#x8350;&#x7684;&#x6B65;&#x9AA4;&#x53EA;&#x80FD;&#x5BF9;&#x6BCF;&#x4E2A;&#x57DF;&#x540D;&#x5355;&#x72EC;&#x751F;&#x6210;&#x8BC1;&#x4E66;&#xFF0C;&#x6BD4;&#x5982; <code>alynx.xyz</code> &#x548C; <code>sh.alynx.xyz</code> &#x9700;&#x8981;&#x4E24;&#x4E2A;&#x8BC1;&#x4E66;&#xFF0C;&#x8FD9;&#x91CC;&#x4ECB;&#x7ECD;&#x751F;&#x6210;&#x901A;&#x914D;&#x7B26;&#x8BC1;&#x4E66;&#x7684;&#x529E;&#x6CD5;&#xFF0C;&#x6BD4;&#x5982;&#x5BF9; <code>*.alynx.xyz</code> &#x751F;&#x6210;&#x4E00;&#x4E2A;&#x8BC1;&#x4E66;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x5728;&#x6240;&#x6709;&#x4E09;&#x7EA7;&#x5B50;&#x57DF;&#x540D;&#xFF1A;</p>
 <h2 id="&#x4E0B;&#x8F7D;certbot-auto"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E4%B8%8B%E8%BD%BDcertbot-auto" title="&#x4E0B;&#x8F7D;certbot-auto"></a>&#x4E0B;&#x8F7D; certbot-auto</h2>
 <p><code>certbot-auto</code> &#x662F;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x7684;&#x4EA4;&#x4E92;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#xFF0C;&#x4F3C;&#x4E4E;&#x4E00;&#x822C;&#x8F6F;&#x4EF6;&#x6E90;&#x91CC;&#x7684;&#x7248;&#x672C;&#x90FD;&#x4E0D;&#x591F;&#x9AD8;&#xFF0C;&#x4E0D;&#x80FD;&#x751F;&#x6210;&#x901A;&#x914D;&#x7B26;&#x8BC1;&#x4E66;&#xFF0C;&#x8FD9;&#x91CC;&#x624B;&#x52A8;&#x4E0B;&#x8F7D;&#x65B0;&#x7248;&#xFF1A;</p>
@@ -742,7 +742,7 @@ server {
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#用LetsEncrypt生成SSL证书">用 Let's Encrypt 生成 SSL 证书</a>
+            <a class="list-group-item toc-link" href="#用Let039;sEncrypt生成SSL证书">用 Let's Encrypt 生成 SSL 证书</a>
             
             
         <ol >
@@ -884,4 +884,4 @@ server {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2019-01-30 周三 11:34:47 CST. -->
+<!-- Page built by Hikaru v1.13.3 at 2019-02-01 周五 12:58:57 CST. -->
