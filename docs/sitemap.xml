@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sh.alynx.xyz/posts/Proxy-Settings/</loc>
+    
+    <lastmod>2019-02-10T01:51:44.638Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sh.alynx.xyz/posts/WireGuard-Usage/</loc>
     
-    <lastmod>2019-01-28T10:24:21.048Z</lastmod>
+    <lastmod>2019-02-10T01:31:05.762Z</lastmod>
     
   </url>
   
