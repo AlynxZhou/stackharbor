@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-02-10T01:51:44.638Z</updated>
+  <updated>2019-02-10T14:58:41.502Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -17,6 +17,28 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>GNOME 的修改开发与测试（先备忘，明天完善）</title>
+    <link href="https://sh.alynx.xyz/posts/GNOME-Develop/" />
+    <id>https://sh.alynx.xyz/posts/GNOME-Develop/</id>
+    <published>2019-02-10T14:58:00.000Z</published>
+    <updated>2019-02-10T14:58:41.502Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[jhbuild 用法，说明。代理很慢，经常不好用。colord 的 manpage 依赖 docbook-xsl-ns 但装了也不好用所以要去掉 manpage。webkitgtk 不负众望是最慢的，ibus 需要加 `--with-ucd-dir=/usr/sh]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="GNOME" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" />
+    
+    
+    <category term="GNOME" scheme="https://sh.alynx.xyz/tags/GNOME/" />
+    
+  </entry>
   
   <entry>
     <title>Linux 下面常见的代理设置</title>
@@ -489,30 +511,6 @@
     <category term="愤怒" scheme="https://sh.alynx.xyz/tags/%E6%84%A4%E6%80%92/" />
     
     <category term="否定" scheme="https://sh.alynx.xyz/tags/%E5%90%A6%E5%AE%9A/" />
-    
-  </entry>
-  
-  <entry>
-    <title>Be Brave</title>
-    <link href="https://sh.alynx.xyz/posts/Be-Brave/" />
-    <id>https://sh.alynx.xyz/posts/Be-Brave/</id>
-    <published>2017-07-30T14:50:40.000Z</published>
-    <updated>2019-01-01T08:51:41.450Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>It&apos;s really hard for me to type something in this post, all I want but can&apos;t express is fearness.</p>]]>
-    
-    </summary>
-    
-    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
-    
-    
-    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
-    
-    <category term="未说出口的话" scheme="https://sh.alynx.xyz/tags/%E6%9C%AA%E8%AF%B4%E5%87%BA%E5%8F%A3%E7%9A%84%E8%AF%9D/" />
     
   </entry>
   

@@ -131,6 +131,62 @@
   
   <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/GNOME-Develop/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="Everything that lives is designed to end.">
+        <meta itemprop="image" content="/images/Future_Gazer_small.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/GNOME-Develop/" itemprop="url">GNOME 的修改开发与测试（先备忘，明天完善）</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T14:58:00.000Z">2019-02-10 周日 22:58:00 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>jhbuild &#x7528;&#x6CD5;&#xFF0C;&#x8BF4;&#x660E;&#x3002;</p>
+<p>&#x4EE3;&#x7406;&#x5F88;&#x6162;&#xFF0C;&#x7ECF;&#x5E38;&#x4E0D;&#x597D;&#x7528;&#x3002;</p>
+<p>colord &#x7684; manpage &#x4F9D;&#x8D56; docbook-xsl-ns &#x4F46;&#x88C5;&#x4E86;&#x4E5F;&#x4E0D;&#x597D;&#x7528;&#x6240;&#x4EE5;&#x8981;&#x53BB;&#x6389; manpage&#x3002;</p>
+<p>webkitgtk &#x4E0D;&#x8D1F;&#x4F17;&#x671B;&#x662F;&#x6700;&#x6162;&#x7684;&#xFF0C;</p>
+<p>ibus &#x9700;&#x8981;&#x52A0; <code>--with-ucd-dir=/usr/share/unicode/</code> &#x4E0D;&#x7136;&#x5B83;&#x9ED8;&#x8BA4;&#x53BB; <code>/usr/share/unicode/ucd/</code> &#x627E;&#x6587;&#x4EF6;&#x4F46; Arch &#x4E0D;&#x662F;&#x8FD9;&#x4E48;&#x6253;&#x5305;&#x7684;&#x3002;</p>
+<p>libgdata &#x4E0D;&#x652F;&#x6301; automake-1.16&#xFF0C;&#x9700;&#x8981;&#x964D;&#x7EA7; 1.15 &#x6765; configure&#xFF0C;&#x4F46;&#x662F;&#x751F;&#x6210;&#x7684; Makefile &#x6709;&#x4E00;&#x53E5;&#x6CA1;&#x5C55;&#x5F00;&#x7684;&#x5B8F;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x91CA;&#x6389;&#x3002;</p>
+<p>uhttpmock &#x7684;&#x6765;&#x6E90; URL &#x662F;&#x88AB;&#x5E9F;&#x5F03;&#x7684;&#x4ED3;&#x5E93;&#xFF0C;&#x65B0;&#x4ED3;&#x5E93;&#x5728; gitlab.com &#x4E0A;&#xFF0C;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x3002;</p>
+<p>&#x7528; wayland &#x4F1A;&#x8BDD;&#x4F3C;&#x4E4E;&#x65E2;&#x4E0D;&#x80FD; gnome-shell --replace &#x4E5F;&#x4E0D;&#x80FD; gnome-shell --nested &#xFF08;&#x50CF; weston &#x5C0F;&#x7A97;&#x53E3;&#x4E00;&#x6837;&#xFF0C;&#x4F46; gnome-shell &#x6709; lock&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x7528; x11 &#x6D4B;&#x8BD5;&#x3002;&#x6D4B;&#x8BD5;&#x65F6;&#x5019;&#x4E0D;&#x8981;&#x9501;&#x5C4F;&#x4E0D;&#x8981;&#x770B; lookingGlass&#xFF0C;&#x6D4B;&#x8BD5;&#x5B8C;&#x6700;&#x597D;&#x91CD;&#x542F;&#x3002;</p>
+<p>&#x6CA1;&#x641E;&#x6E05;&#x695A;&#x600E;&#x4E48;&#x4FEE;&#x6539; jhbuild &#x7684;&#x4ED3;&#x5E93;&#x6765;&#x6E90;&#xFF0C;&#x6211;&#x90FD;&#x662F;&#x6765;&#x56DE;&#x590D;&#x5236;&#x6587;&#x4EF6;&#x2026;&#x2026;</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="fas fa-tag"></i>GNOME</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/Proxy-Settings/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -568,55 +624,6 @@
     </footer>
   </article>
   
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/Endless-ARIA/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="Everything that lives is designed to end.">
-        <meta itemprop="image" content="/images/Future_Gazer_small.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Endless-ARIA/" itemprop="url">无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date meta-block">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-05-05T15:49:53.000Z">2018-05-05 周六 23:49:53 CST</time></span>
-        </span>
-        
-        
-        <span class="post-categories meta-block">
-          
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/Hexo/ARIA/" itemprop="url" rel="index"><span itemprop="name">ARIA</span></a></span>
-        </span>
-        
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <p>&#x5927;&#x7EA6;&#x4ECE;&#x6211;&#x5199;&#x597D; ARIA &#xFF08;&#x6307;&#x628A;&#x6211;&#x81EA;&#x5DF1;&#x7684;&#x7F51;&#x7AD9;&#x6362;&#x6210;&#x5B83;&#x505A;&#x4E3B;&#x9898;&#xFF09;&#x5230;&#x73B0;&#x5728;&#x4E3A;&#x6B62;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x6708;&#x4E86;&#xFF0C;&#x8FD9;&#x4E00;&#x4E2A;&#x6708;&#x91CC;&#x5B83;&#x6709;&#x4E86; <a href="https://github.com/AlynxZhou/hexo-theme-aria/stargazers" target="_blank">20 &#x4E2A; Star</a>&#x3001;<a href="https://github.com/AlynxZhou/hexo-theme-aria/issues?q=is%3Aissue+is%3Aclosed" target="_blank">4 &#x4E2A; Issue</a> &#x548C; <a href="https://github.com/AlynxZhou/hexo-theme-aria/commits/master" target="_blank">128 &#x4E2A; Commit</a>&#xFF08;&#x90FD;&#x662F;&#x6211;&#x81EA;&#x5DF1;&#xFF0C;&#x6B8B;&#x5FF5;&#x554A;&#xFF09;&#x3002;&#x5927;&#x6982;&#x7B97;&#x662F;&#x6211;&#x73B0;&#x5728;&#x6700;&#x5F97;&#x610F;&#x7684;&#x9879;&#x76EE;&#xFF0C;&#x5F53;&#x7136;&#x4E0D;&#x6392;&#x9664;&#x4EE5;&#x540E;&#x4E5F;&#x662F;&#x3002;</p>
-<p>&#x867D;&#x7136;&#x8FD9;&#x4E48;&#x8BF4;&#x6709;&#x70B9;&#x6577;&#x884D;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x662F;&#x548C;&#x4E00;&#x4E9B;&#x65E0;&#x804A;&#x7684;&#x4EBA;&#x8FDB;&#x884C;&#x4E86;&#x4E00;&#x70B9;&#x65E0;&#x8C13;&#x7684;&#x4E89;&#x6267; &#x2014;&#x2014; &#x6211;&#x8BA8;&#x538C;&#x8FA9;&#x8BBA;&#xFF0C;&#x6240;&#x4EE5;&#x5C3D;&#x53EF;&#x80FD;&#x628A;&#x8FD9;&#x79CD;&#x51B2;&#x52A8;&#x538B;&#x5236;&#x5728;&#x4E00;&#x70B9; &#x2014;&#x2014; &#x6240;&#x4EE5;&#x6211;&#x73B0;&#x5728;&#x6765;&#x5199;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x804A;&#x804A;&#x90A3;&#x4E9B;&#x4EE3;&#x7801;&#x91CC;&#x9762;&#x6CA1;&#x6709;&#x544A;&#x8BC9;&#x4F60;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x5199;&#x70B9;&#x7ECF;&#x8FC7;&#x8111;&#x5B50;&#x7684;&#x601D;&#x8003;&#x603B;&#x662F;&#x6709;&#x7528;&#x5904;&#x7684;&#xFF0C;&#x4E0D;&#x4EC5;&#x662F;&#x5BF9;&#x81EA;&#x5DF1;&#x800C;&#x8A00;&#x3002;</p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/Hexo/" rel="tag"><i class="fas fa-tag"></i>Hexo</a><a class="post-tag button" href="/tags/ARIA/" rel="tag"><i class="fas fa-tag"></i>ARIA</a>
-      </div>
-      
-    </footer>
-  </article>
-  
   
   <nav class="pagination">
     
@@ -669,21 +676,21 @@
     
     <div class="archives-count count-block">
       <div class="site-count-title">归档</div>
-      <div><a href="/archives/">51</a></div>
+      <div><a href="/archives/">52</a></div>
     </div>
     
     
     
     <div class="categories-count count-block">
       <div class="site-count-title">分类</div>
-      <div><a href="/categories/">38</a></div>
+      <div><a href="/categories/">39</a></div>
     </div>
     
     
     
     <div class="tags-count count-block">
       <div class="site-count-title">标签</div>
-      <div><a href="/tags/">60</a></div>
+      <div><a href="/tags/">61</a></div>
     </div>
     
     
@@ -749,6 +756,8 @@
         
         <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank">sqyon</a></li>
         
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank">约伊兹的萌狼乡手札</a></li>
+        
       </ul>
     </div>
     
@@ -794,4 +803,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.3 at 2019-02-10 周日 09:51:54 CST. -->
+<!-- Page built by Hikaru v1.13.3 at 2019-02-10 周日 23:01:01 CST. -->
