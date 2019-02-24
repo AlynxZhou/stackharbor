@@ -3,6 +3,7 @@ title: about
 createdTime: 2016-04-04 14:36:20
 layout: page
 comment: true
+reward: false
 ---
 # 关于我
 
