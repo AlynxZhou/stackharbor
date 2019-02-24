@@ -686,6 +686,7 @@ figure.highlight pre.gutter {
   border-right: 0.05em dotted #ccc;
 }
 figure.highlight pre.code {
+  position: relative;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -696,6 +697,26 @@ figure.highlight pre.code {
   text-align: left;
   padding: 0 0.5em;
   border-left: 0.05em dotted #ccc;
+}
+figure.highlight pre.code button.copy {
+  position: absolute;
+  top: 0.1em;
+  right: 0.1em;
+  visibility: hidden;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  -ms-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+figure.highlight pre.code:hover button.copy {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  visibility: visible;
 }
 figure.highlight pre code {
   color: inherit;

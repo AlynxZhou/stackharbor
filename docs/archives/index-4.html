@@ -56,6 +56,7 @@
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
     <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
@@ -81,6 +82,26 @@
     
     
     <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre.code code").each(function (i, e) {
+        $(e).before("<button class=\"copy button\">复制</button>")
+      });
+      var cb = new ClipboardJS("button.copy", {
+        "target": function (trigger) {
+            return trigger.nextElementSibling;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        trigger.innerHTML = "已复制";
+        setTimeout(function () {
+          trigger.innerHTML = "复制";
+        }, 1500);
+      });
+    });
+    </script>
     
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <title>归档 | 喵's StackHarbor - Whisper to the World</title>
@@ -475,4 +496,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.7 at 2019-02-24 周日 19:48:10 CST. -->
+<!-- Page built by Hikaru v1.13.7 at 2019-02-24 周日 21:13:55 CST. -->
