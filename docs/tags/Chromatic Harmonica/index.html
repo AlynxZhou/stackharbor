@@ -84,20 +84,26 @@
     <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
-      $(".post pre.code code").each(function (i, e) {
+      $(".post pre code figure.highlight").each(function (i, e) {
         $(e).before("<button class=\"copy button\">复制</button>")
       });
       var cb = new ClipboardJS("button.copy", {
         "target": function (trigger) {
-            return trigger.nextElementSibling;
+            // Get target element by DOM API.
+            // nextElementSibling is figure,highlight, lastChild is pre.code.
+            return trigger.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
+        // Change button text as a user tip.
         trigger.innerHTML = "已复制";
+        $(trigger).addClass("copied");
+        // Change button text back;
         setTimeout(function () {
           trigger.innerHTML = "复制";
+          $(trigger).removeClass("copied");
         }, 1500);
       });
     });
@@ -373,4 +379,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.7 at 2019-02-24 周日 13:13:55 UTC. -->
+<!-- Page built by Hikaru v1.13.7 at 2019-02-25 周一 08:00:08 UTC. -->
