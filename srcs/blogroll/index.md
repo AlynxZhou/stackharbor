@@ -21,7 +21,7 @@ reward: false
 
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
-| <img src="https://lrscy.github.io/img/avatar.jpg" style="width: 5em;"> | [Meow](https://lrscy.github.io/) |  | 刚入学的时候认识的学长，似乎也是一只猫，现在大概在美国呼吸自由的空气（大雾）。 |
+| <img src="https://lrscy.github.io/img/avatar.jpg" style="width: 5em;"> | [Meow](https://lrscy.github.io/) | “一只有吱的喵~” | 刚入学的时候认识的学长，似乎也是一只猫，现在大概在美国呼吸自由的空气（大雾）。 |
 | <img src="https://tvax4.sinaimg.cn/crop.0.0.480.480.180/005ttpDdly8fwz8wsaiw5j30dc0dcwfu.jpg" style="width: 5em;"> | [sqyon](https://sqyon.com/) | “试图让机器帮我学习的假 ACMer” | 优秀的学弟，一定是优秀的学弟。 |
 | <img src="https://avatars0.githubusercontent.com/u/11513730?s=460&v=4" style="width: 5em;"> | [滑稽仓库](http://huaji.store/) |  | 董老师（咕老师）的奇怪网站。希望下次打 CSGO 前董老师能找到带麦克风的耳机。 |
 
