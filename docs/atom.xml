@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-02-11T11:26:10.623Z</updated>
+  <updated>2019-03-18T07:24:59.785Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -17,6 +17,28 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>在中国 Android 下传个 APK 有多难</title>
+    <link href="https://sh.alynx.xyz/posts/Hard-to-Transfer-APK-with-Chinese-Android/" />
+    <id>https://sh.alynx.xyz/posts/Hard-to-Transfer-APK-with-Chinese-Android/</id>
+    <published>2019-03-18T06:47:00.000Z</published>
+    <updated>2019-03-18T07:24:59.785Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>&#x4E8B;&#x60C5;&#x7684;&#x8D77;&#x56E0;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF0C;&#x6211;&#x5199;&#x4E86; <a href="https://livewallpaper.alynx.xyz" target="_blank">&#x4E00;&#x4E2A; Android App</a>&#xFF0C;&#x6253;&#x7B97;&#x628A;&#x5B83;&#x53D1;&#x7ED9;&#x66F4;&#x591A;&#x7684;&#x4EBA;&#x8BD5;&#x7528;&#xFF0C;&#x53D1;&#x7ED9;&#x540C;&#x5B66;&#x4EC0;&#x4E48;&#x7684;&#x90FD;&#x597D;&#x8BF4;&#xFF0C;&#x4F46;&#x6211;&#x60F3;&#x53D1;&#x7ED9;&#x6211;&#x5988;&#x7528;&#x7684;&#x65F6;&#x5019;&#x9047;&#x5230;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x95EE;&#x9898;&#x3002;&#x6211;&#x89C9;&#x5F97;&#x6070;&#x597D;&#x53EF;&#x4EE5;&#x8BF4;&#x4E00;&#x4E0B;&#x5728;&#x56FD;&#x5185;&#x7528; Android &#x73AF;&#x5883;&#x662F;&#x591A;&#x4E48;&#x75DB;&#x82E6;&#x3002;</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    
+    <category term="Android" scheme="https://sh.alynx.xyz/tags/Android/" />
+    
+    <category term="愤怒" scheme="https://sh.alynx.xyz/tags/%E6%84%A4%E6%80%92/" />
+    
+  </entry>
   
   <entry>
     <title>GNOME 的修改开发与测试</title>
@@ -483,30 +505,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>我生气了！！！</title>
-    <link href="https://sh.alynx.xyz/posts/I-Am-Angry/" />
-    <id>https://sh.alynx.xyz/posts/I-Am-Angry/</id>
-    <published>2017-10-08T14:14:00.000Z</published>
-    <updated>2019-01-01T08:51:41.470Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p><img src="/posts/I-Am-Angry/Angry.jpg" alt="Angry.jpg"></p><blockquote class="centerquote">I AM ANGRY!!!</blockquote><p>&#x8FD9;&#x91CC;&#x591A;&#x4E86;&#x4E00;&#x53EA;&#x53D1;&#x6012;&#x7684;&#x7339;&#x55B5;&#x3002;&#x6124;&#x6012;&#x80FD;&#x6291;&#x5236;&#x61D2;&#x60F0;&#x3002;</p>]]>
-    
-    </summary>
-    
-    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
-    
-    
-    <category term="愤怒" scheme="https://sh.alynx.xyz/tags/%E6%84%A4%E6%80%92/" />
-    
-    <category term="否定" scheme="https://sh.alynx.xyz/tags/%E5%90%A6%E5%AE%9A/" />
     
   </entry>
   
