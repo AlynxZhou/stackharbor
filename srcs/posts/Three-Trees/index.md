@@ -1,5 +1,5 @@
 ---
-title: Three_Trees
+title: Three Trees
 layout: post
 comment: true
 createdTime: 2016-04-12 22:18:56
@@ -8,7 +8,6 @@ categories:
   - 树
 tags:
   - 树
-  - Moto X Style
 ---
 ![Three-Trees_1.jpg](Three-Trees_1.jpg)
 

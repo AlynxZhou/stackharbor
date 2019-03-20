@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-03-18T07:27:15.892Z</updated>
+  <updated>2019-03-20T11:14:36.085Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -23,7 +23,7 @@
     <link href="https://sh.alynx.xyz/posts/Hard-to-Transfer-APK-with-Chinese-Android/" />
     <id>https://sh.alynx.xyz/posts/Hard-to-Transfer-APK-with-Chinese-Android/</id>
     <published>2019-03-18T06:47:00.000Z</published>
-    <updated>2019-03-18T07:27:15.892Z</updated>
+    <updated>2019-03-20T11:14:36.085Z</updated>
     
     <summary type="html">
     
@@ -31,7 +31,7 @@
     
     </summary>
     
-    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    <category term="Dirty words" scheme="https://sh.alynx.xyz/categories/Dirty%20words/" />
     
     
     <category term="Android" scheme="https://sh.alynx.xyz/tags/Android/" />
@@ -319,7 +319,7 @@
     <link href="https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" />
     <id>https://sh.alynx.xyz/posts/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
     <published>2018-05-02T12:30:48.000Z</published>
-    <updated>2019-01-01T08:51:41.450Z</updated>
+    <updated>2019-03-20T11:14:10.714Z</updated>
     
     <summary type="html">
     
@@ -327,11 +327,11 @@
     
     </summary>
     
-    <category term="网站" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/" />
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     
-    <category term="加密" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/%E5%8A%A0%E5%AF%86/" />
+    <category term="网络" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
     
-    <category term="GitHub Pages" scheme="https://sh.alynx.xyz/categories/%E7%BD%91%E7%AB%99/%E5%8A%A0%E5%AF%86/GitHub%20Pages/" />
+    <category term="网站" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
     
     
     <category term="网站" scheme="https://sh.alynx.xyz/tags/%E7%BD%91%E7%AB%99/" />

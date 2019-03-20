@@ -1,5 +1,5 @@
 ---
-title: 使用GDB进行简单的C语言程序调试
+title: 使用 GDB 进行简单的 C 语言程序调试
 layout: post
 comment: true
 createdTime: 2017-03-15 19:24:33
@@ -8,8 +8,7 @@ categories:
   - 编程
   - C 语言
 tags:
-  - C语言
-  - GDB
+  - C 语言
 ---
 事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。
 

@@ -4,7 +4,7 @@ layout: post
 #comment: true
 createdTime: 2019-03-18 14:47:00
 categories:
-  - 随记
+  - Dirty words
 tags:
   - Android
   - 愤怒

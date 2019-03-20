@@ -4,9 +4,9 @@ layout: post
 comment: true
 createdTime: 2018-05-02 20:30:48
 categories:
+  - 计算机
+  - 网络
   - 网站
-  - 加密
-  - GitHub Pages
 tags:
   - 网站
   - 加密
