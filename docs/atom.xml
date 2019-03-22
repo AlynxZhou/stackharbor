@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-03-20T11:14:36.085Z</updated>
+  <updated>2019-03-22T12:11:10.816Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -17,6 +17,34 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>如何编写 Android 视频壁纸</title>
+    <link href="https://sh.alynx.xyz/posts/Android-Video-Wallpaper-Implementation/" />
+    <id>https://sh.alynx.xyz/posts/Android-Video-Wallpaper-Implementation/</id>
+    <published>2019-03-22T08:18:00.000Z</published>
+    <updated>2019-03-22T12:11:10.816Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>&#x6700;&#x8FD1;&#x6211;&#x7F16;&#x5199;&#x4E86;&#x4E00;&#x4E2A; Android &#x7684;&#x89C6;&#x9891;&#x58C1;&#x7EB8;&#x5E94;&#x7528;&#xFF08;<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank">GitHub Repo</a>&#xFF09;&#xFF0C;&#x4E00;&#x5F00;&#x59CB;&#x89C9;&#x5F97;&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x96BE;&#x5199;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5E94;&#x8BE5;&#x5F88;&#x5FEB;&#x5C31;&#x53EF;&#x4EE5;&#x5199;&#x51FA;&#x6765;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x6765;&#x53D1;&#x73B0;&#x6211;&#x60F3;&#x7684;&#x592A;&#x7B80;&#x5355;&#x4E86;&#x3002;&#x6216;&#x8BB8;&#x4F60;&#x4E5F;&#x770B;&#x8FC7;&#x8BB8;&#x591A;&#x5199;&#x89C6;&#x9891;&#x58C1;&#x7EB8;&#x7684;&#x6559;&#x7A0B;&#xFF0C;&#x4F46;&#x6211;&#x53D1;&#x73B0;&#x4ED6;&#x4EEC;&#x90FD;&#x6709;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x5199;&#x51FA;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x57FA;&#x672C;&#x4E0D;&#x80FD;&#x7528;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x6253;&#x7B97;&#x5728;&#x8FD9;&#x91CC;&#x5199;&#x4E00;&#x4E0B;&#x5982;&#x4F55;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x53D1;&#x5E03;&#x7684; Android &#x89C6;&#x9891;&#x58C1;&#x7EB8;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A; demo&#x3002;</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="Android" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/" />
+    
+    
+    <category term="Android" scheme="https://sh.alynx.xyz/tags/Android/" />
+    
+    <category term="Java" scheme="https://sh.alynx.xyz/tags/Java/" />
+    
+    <category term="OpenGL" scheme="https://sh.alynx.xyz/tags/OpenGL/" />
+    
+  </entry>
   
   <entry>
     <title>在中国 Android 环境下传个 APK 有多难</title>
@@ -489,22 +517,6 @@
     <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
     
     <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
-    
-  </entry>
-  
-  <entry>
-    <title>冬天来了</title>
-    <link href="https://sh.alynx.xyz/posts/Winter-is-Coming/" />
-    <id>https://sh.alynx.xyz/posts/Winter-is-Coming/</id>
-    <published>2017-10-29T13:54:41.000Z</published>
-    <updated>2019-01-01T08:51:41.486Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>&#x751F;&#x6D3B;&#x597D;&#x50CF;&#x8131;&#x7F30;&#x7684;&#x91CE;&#x9A6C;&#xFF0C;&#x4F60;&#x6211;&#x90FD;&#x4E0D;&#x662F;&#x719F;&#x7EC3;&#x7684;&#x9A91;&#x5E08;&#x3002;</p>]]>
-    
-    </summary>
-    
     
   </entry>
   
