@@ -22,10 +22,13 @@ tags:
 
 在开始写逻辑代码之前，我们还得先让系统知道你写的这是个壁纸，这需要一些起声明作用的代码。先把你 Android Studio 左侧侧栏调成文件树模式（忘了什么诡异的分类模式吧，不然你连文件在哪都找不到，试图隐藏细节只会让事情变的更复杂）。
 
-应该有一个自动生成的 `AndroidManifest.xml` 文件，我觉得你应该比我更了解这玩意是干嘛的，因为实际上我没系统地研究过 Android，我只是会一点点 Java 而已——然后靠不停的查看手册来自学。加上这一行：
+应该有一个自动生成的 `AndroidManifest.xml` 文件，我觉得你应该比我更了解这玩意是干嘛的，因为实际上我没系统地研究过 Android，我只是会一点点 Java 而已——然后靠不停的查看手册来自学。加上这两行：
 
 ```xml
 <uses-permission android:name="android.permission.SET_WALLPAPER" />
+<uses-feature
+  android:name="android.software.live_wallpaper"
+  android:required="true" />
 ```
 
 你要是能把这一行加到 `<manifest>` 标签外面，我觉得你也没必要写代码了……但这个要放在 `<application>` 标签的外面，具体放在哪直接翻我仓库里的文件好了，比我用文字描述清晰的多。
@@ -176,6 +179,16 @@ public class GLWallpaperEngine extends Engine {
 至于你问 `Context` 从哪来？`Service` 就是个 `Context`，所以你改写一下 `Engine` 的构造函数把 `Service` 传进去，然后创建 `GLWallpaperSurfaceView` 时传给它就行了，基本操作基本操作。
 
 然后我们就可以实现 `GLSurfaceView.Renderer` 了，这是个已经包装好的 OpenGL Renderer，我们只要负责在里面画就行了。至于 GLES 的版本，如果你想省事，只用 v2 就好了，除非像我一样对 v3 很熟悉，当然我 v2 v3 都写了 Renderer，能支持 v3 的先调用 v3（除了模拟器不支持，手机基本都支持了）。我这里用 v3 做例子，你应该自己也会写 v2 吧？如果你只会写固定管线，请你不要说自己会 OpenGL。
+
+当然最好在 `AndroidManifest.xml` 声明一下你这个应用需要的 GLES 版本：
+
+```xml
+<uses-feature
+  android:glEsVersion="0x00020000"
+  android:required="true" />
+```
+
+如果你只支持 v3，就把 2 改成 3。
 
 （已经进入这个阶段了，打算拿这个当“我的第一个 Android App”的同学就自己退出吧。）
 
