@@ -76,7 +76,6 @@ tags:
 所以你需要建立一个随便你爱叫什么的 java 文件（我不会用 Kotlin，但你愿意的话也可以用）来存放你自己的 `Service`……或者用 Android Studio 的向导也不错。比如我的就叫 `GLWallpaperService`，里面的代码看起来大概像这样：
 
 ```java
-
 package xyz.alynx.livewallpaper;
 
 import android.service.wallpaper.WallpaperService;
