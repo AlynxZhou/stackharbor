@@ -97,31 +97,31 @@ public class GLWallpaperService extends WallpaperService {
 然后你需要在你的 `Engine`（我的是 `GLWallpaperEngine`）里面实现一些系统要求的方法，我们先说最基础的几个：
 
 ```java
-@Override
-public void onSurfaceCreated(SurfaceHolder surfaceHolder) {
-    super.onSurfaceCreated(surfaceHolder);
-}
+        @Override
+        public void onSurfaceCreated(SurfaceHolder surfaceHolder) {
+            super.onSurfaceCreated(surfaceHolder);
+        }
 
-@Override
-public void onVisibilityChanged(boolean visible) {
-    super.onVisibilityChanged(visible);
-}
+        @Override
+        public void onVisibilityChanged(boolean visible) {
+            super.onVisibilityChanged(visible);
+        }
 
-@Override
-public void onSurfaceDestroyed(SurfaceHolder holder) {
-   super.onSurfaceDestroyed(holder);
-}
-@Override
-public void onOffsetsChanged(
-    float xOffset, float yOffset,
-    float xOffsetStep, float yOffsetStep,
-    int xPixelOffset, int yPixelOffset
-) {
-    super.onOffsetsChanged(
-        xOffset, yOffset, xOffsetStep,
-        yOffsetStep, xPixelOffset, yPixelOffset
-    );
-}
+        @Override
+        public void onSurfaceDestroyed(SurfaceHolder holder) {
+           super.onSurfaceDestroyed(holder);
+        }
+        @Override
+        public void onOffsetsChanged(
+            float xOffset, float yOffset,
+            float xOffsetStep, float yOffsetStep,
+            int xPixelOffset, int yPixelOffset
+        ) {
+            super.onOffsetsChanged(
+                xOffset, yOffset, xOffsetStep,
+                yOffsetStep, xPixelOffset, yPixelOffset
+            );
+        }
 ```
 
 Android 的动态壁纸实际上是一个 `Surface`（Android 的 `Surface` 你可以理解为画布……大概吧），系统调用你的 `Engine`，然后给你一个可以绘制的 `SurfaceHolder`，你只要往这个 `SurfaceHolder` 里面的 `Surface` 画东西就行了。`onSurfaceCreated()` 表示画布准备好了，`onVisibilityChanged()` 则表示画布看不见了或者又出来了，`onSurfaceDestroyed()` 表示画布没了（我不是你英语老师！），`onOffsetsChanged()` 则是桌面通知壁纸偏移量，通常是实现壁纸随桌面滚动的效果。
@@ -151,24 +151,22 @@ Android 的动态壁纸实际上是一个 `Surface`（Android 的 `Surface` 你�
 显然系统不给你现成的 `GLSurfaceView`，而只是一个 `SurfaceHolder`，所以正常的思路是自己弄 `GLThread` 白手起家……并不，我们在 `Engine` 里插入下面的代码：
 
 ```java
-public class GLWallpaperEngine extends Engine {
-    private class GLWallpaperSurfaceView extends GLSurfaceView {
-        private static final String TAG = "GLWallpaperSurface";
+        private class GLWallpaperSurfaceView extends GLSurfaceView {
+            private static final String TAG = "GLWallpaperSurface";
 
-        public GLWallpaperSurfaceView(Context context) {
-            super(context);
-        }
+            public GLWallpaperSurfaceView(Context context) {
+                super(context);
+            }
 
-        @Override
-        public SurfaceHolder getHolder() {
-            return getSurfaceHolder();
-        }
+            @Override
+            public SurfaceHolder getHolder() {
+                return getSurfaceHolder();
+            }
 
-        public void onDestroy() {
-            super.onDetachedFromWindow();
+            public void onDestroy() {
+                super.onDetachedFromWindow();
+            }
         }
-    }
-}
 ```
 
 看到那个 `getHolder()` 了吗？没错！`GLSurfaceView` 似乎内部自己有个 `SurfaceHolder`，我们 hack 一下它，扩展出一个 `GLWallpaperSurfaceView`，因为它是个内部类，当它要往自己的 `SurfaceHolder` 上渲染时，我们偷梁换柱，返回它 `Engine.getSurfaceHolder()`，可怜的家伙还蒙在鼓里，自己内部的 `SurfaceHolder` 已经没用了，现在它画的实际上是桌面壁纸的 `Surface`。
@@ -196,6 +194,7 @@ public class GLWallpaperEngine extends Engine {
 我先把 Shader 代码贴上来，我是把它们放在 `res/raw` 下面的，Android 会自动生成 `R.raw.` 的 ID。
 
 - vertex shader
+
 ```glsl
 #version 300 es
 
@@ -217,6 +216,7 @@ void main() {
 应该在你画三角形的时候就学会这玩意了吧？注意有些手机的实现要求第一行不能是注释，否则会报错。
 
 - fragment shader
+
 ```glsl
 #version 300 es
 #ifdef GL_OES_EGL_image_external_essl3
@@ -645,6 +645,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         }
         // This is a 2D center crop, so we only need model matrix, no view and projection.
     }
+}
 ```
 
 最后是计算矩阵，这里也很简单，只要注意计算时候，要分别以视频和屏幕最长的一条边作为单位一，然后分别缩放两者的另一侧，只是数学计算而已。然后为什么会有旋转呢？如果你不写旋转而又使用手机拍摄的竖屏视频做壁纸，就会发现方向是旋转了 90 度的，所以宽和高也都错了。原因是一些设备录像时候不会旋转帧内容，而是以传感器原生的方向存放像素，然后在视频 Metadata 里面记录一下旋转角度，由播放器做旋转。`MediaPlayer` 自己直接输出是会旋转的，但由于我们这里用它做解码器，所以它传过来的帧是原样的。
@@ -652,36 +653,36 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 解决方法是在 `Engine` 加载视频的时候先读取一下元数据，从元数据里获取视频的尺寸旋转量设置给 `Renderer`：
 
 ```java
-private void getVideoMetadata() throws IOException {
-    final MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-    switch (wallpaperCard.getType()) {
-    case INTERNAL:
-        final AssetFileDescriptor afd = getAssets().openFd(wallpaperCard.getPath());
-        mmr.setDataSource(
-            afd.getFileDescriptor(),
-            afd.getStartOffset(),
-            afd.getDeclaredLength()
-        );
-        afd.close();
-        break;
-    case EXTERNAL:
-        mmr.setDataSource(context, wallpaperCard.getUri());
-        break;
-    }
-    final String rotation = mmr.extractMetadata(
-        MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION
-    );
-    final String width = mmr.extractMetadata(
-        MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH
-    );
-    final String height = mmr.extractMetadata(
-        MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT
-    );
-    mmr.release();
-    videoRotation = Integer.parseInt(rotation);
-    videoWidth = Integer.parseInt(width);
-    videoHeight = Integer.parseInt(height);
-}
+        private void getVideoMetadata() throws IOException {
+            final MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            switch (wallpaperCard.getType()) {
+            case INTERNAL:
+                final AssetFileDescriptor afd = getAssets().openFd(wallpaperCard.getPath());
+                mmr.setDataSource(
+                    afd.getFileDescriptor(),
+                    afd.getStartOffset(),
+                    afd.getDeclaredLength()
+                );
+                afd.close();
+                break;
+            case EXTERNAL:
+                mmr.setDataSource(context, wallpaperCard.getUri());
+                break;
+            }
+            final String rotation = mmr.extractMetadata(
+                MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION
+            );
+            final String width = mmr.extractMetadata(
+                MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH
+            );
+            final String height = mmr.extractMetadata(
+                MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT
+            );
+            mmr.release();
+            videoRotation = Integer.parseInt(rotation);
+            videoWidth = Integer.parseInt(width);
+            videoHeight = Integer.parseInt(height);
+        }
 ```
 
 当然 `WallpaperCard` 是我自己封装的类，关系不大。总之是使用 `MediaMetadataRetriever` 就可以了。至于你说视频元数据和实际内容不符怎么办？那是用户问题，用户自己处理不好视频为什么要我来解决？随便让他拿电脑上修改一下好了。
@@ -703,18 +704,18 @@ private void getVideoMetadata() throws IOException {
 我这里给出一段用于关闭音轨的代码，网上不太好找：
 
 ```java
-trackSelector = new DefaultTrackSelector();
-exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
-exoPlayer.setVolume(0.0f);
-// Disable audio decoder.
-final int count = exoPlayer.getRendererCount();
-for (int i = 0; i < count; ++i) {
-    if (exoPlayer.getRendererType(i) == C.TRACK_TYPE_AUDIO) {
-        trackSelector.setParameters(
-            trackSelector.buildUponParameters().setRendererDisabled(i, true)
-        );
-    }
-}
+            trackSelector = new DefaultTrackSelector();
+            exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
+            exoPlayer.setVolume(0.0f);
+            // Disable audio decoder.
+            final int count = exoPlayer.getRendererCount();
+            for (int i = 0; i < count; ++i) {
+                if (exoPlayer.getRendererType(i) == C.TRACK_TYPE_AUDIO) {
+                    trackSelector.setParameters(
+                        trackSelector.buildUponParameters().setRendererDisabled(i, true)
+                    );
+                }
+            }
 ```
 
 主要是创建 Player 时候单独给它一个 DefaultTrackSelector。然后关掉音轨。
