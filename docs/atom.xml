@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-03-23T04:09:39.585Z</updated>
+  <updated>2019-04-01T13:36:36.198Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -17,6 +17,26 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>Magnolia</title>
+    <link href="https://sh.alynx.xyz/posts/Magnolia/" />
+    <id>https://sh.alynx.xyz/posts/Magnolia/</id>
+    <published>2019-04-01T12:52:00.000Z</published>
+    <updated>2019-04-01T13:36:36.198Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>&#x6211;&#x4E0D;&#x662F;&#x5F88;&#x80FD;&#x6B23;&#x8D4F;&#x82B1;&#x3002;</p><p>&#x6211;&#x7684;&#x9F3B;&#x5B50;&#x5E76;&#x4E0D;&#x61C2;&#x5F97;&#x82B1;&#x7684;&#x82AC;&#x82B3;&#xFF0C;&#x6211;&#x7684;&#x773C;&#x775B;&#x4E5F;&#x4E0D;&#x662F;&#x5F88;&#x4E86;&#x89E3;&#x82B1;&#x7684;&#x9C9C;&#x8273;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x8FDE;&#x5206;&#x8FA8;&#x82B1;&#x79CD;&#x7C7B;&#x7684;&#x5174;&#x8DA3;&#x90FD;&#x6CA1;&#x6709;&#x3002;&#x4F46;&#x6211;&#x4ECA;&#x5929;&#x8FD8;&#x662F;&#x8BA4;&#x51FA;&#x4E86;&#x4E00;&#x682A;&#x7389;&#x5170;&#x6811;&#xFF0C;&#x5C31;&#x50CF;&#x6211;&#x9AD8;&#x4E2D;&#x697C;&#x95E8;&#x53E3;&#x4E24;&#x4FA7;&#x7684;&#x7389;&#x5170;&#x6811;&#x4E00;&#x6837;&#xFF0C;&#x5F00;&#x7740;&#x767D;&#x8272;&#x82B1;&#x74E3;&#x3002;</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+  </entry>
   
   <entry>
     <title>如何编写 Android 视频壁纸</title>
@@ -493,30 +513,6 @@
     
     
     <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
-    
-  </entry>
-  
-  <entry>
-    <title>忧从中来，不可断绝</title>
-    <link href="https://sh.alynx.xyz/posts/Song-And-Sadness/" />
-    <id>https://sh.alynx.xyz/posts/Song-And-Sadness/</id>
-    <published>2017-11-11T13:18:51.000Z</published>
-    <updated>2019-01-01T08:51:41.473Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p><img src="/posts/Song-And-Sadness/Sadness.jpg" alt="Sadness.jpg">&#x90A3;&#x4E2A;&#x5F39;&#x5409;&#x4ED6;&#x7684;&#x4EBA;&#x5728;&#x6211;&#x7684;&#x9694;&#x58C1;&#x3002;</p>]]>
-    
-    </summary>
-    
-    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
-    
-    
-    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="时间的恶作剧" scheme="https://sh.alynx.xyz/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" />
     
   </entry>
   
