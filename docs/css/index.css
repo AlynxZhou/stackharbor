@@ -561,7 +561,7 @@ button.button:active {
   top: 0.1em;
 }
 img {
-  width: 90%;
+  max-width: 90%;
   text-align: center;
 }
 hr {
