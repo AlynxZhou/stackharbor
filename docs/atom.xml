@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-04-01T13:36:36.198Z</updated>
+  <updated>2019-05-04T11:42:41.315Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -17,6 +17,30 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>不要拿愚蠢的广告来污染我的邮箱</title>
+    <link href="https://sh.alynx.xyz/posts/Do-Not-Fill-My-Email-with-Silly-Ads/" />
+    <id>https://sh.alynx.xyz/posts/Do-Not-Fill-My-Email-with-Silly-Ads/</id>
+    <published>2019-05-04T10:27:00.000Z</published>
+    <updated>2019-05-04T11:42:41.315Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>&#x4E00;&#x4E2A;&#x591A;&#x6708;&#x6CA1;&#x66F4;&#x65B0;&#x4E86;&#xFF0C;&#x8FD9;&#x6B21;&#x8981;&#x5199;&#x7684;&#x4E0D;&#x662F;&#x4EC0;&#x4E48;&#x6280;&#x672F;&#x95EE;&#x9898;&#xFF0C;&#x800C;&#x662F;&#x6280;&#x672F;&#x7684;&#x9644;&#x5C5E;&#x95EE;&#x9898;&#x3002;</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="无题" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
+    
+    
+    <category term="愤怒" scheme="https://sh.alynx.xyz/tags/%E6%84%A4%E6%80%92/" />
+    
+    <category term="吐槽" scheme="https://sh.alynx.xyz/tags/%E5%90%90%E6%A7%BD/" />
+    
+  </entry>
   
   <entry>
     <title>Magnolia</title>
@@ -491,28 +515,6 @@
     <category term="Code Life" scheme="https://sh.alynx.xyz/tags/Code%20Life/" />
     
     <category term="CoffeeScript" scheme="https://sh.alynx.xyz/tags/CoffeeScript/" />
-    
-  </entry>
-  
-  <entry>
-    <title>StackHarbor 的 2017 尾记</title>
-    <link href="https://sh.alynx.xyz/posts/2017-Tail/" />
-    <id>https://sh.alynx.xyz/posts/2017-Tail/</id>
-    <published>2017-12-31T14:18:57.000Z</published>
-    <updated>2019-01-01T08:51:41.256Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p><img src="/posts/2017-Tail/NJU.jpg" alt="NJU.jpg"></p><p>&#x56DE;&#x5230;&#x4F4F;&#x5904;&#xFF0C;&#x6380;&#x51FA;&#x7535;&#x8111;&#xFF0C;&#x62C9;&#x5F00;&#x5728;&#x8D85;&#x5E02;&#x4E70;&#x7684;&#x4E00;&#x542C;&#x53EF;&#x53E3;&#x53EF;&#x4E50;&#x7684;&#x62C9;&#x73AF;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x534A;&#x5C0F;&#x65F6;&#xFF0C;&#x73B0;&#x5728;&#x8BE5;&#x5199;2017&#x5E74;&#x7684;&#x5E74;&#x7EC8;&#x603B;&#x7ED3;&#x4E86;&#x3002;&#x65F6;&#x95F4;&#x521A;&#x521A;&#x597D;&#x3002;</p>]]>
-    
-    </summary>
-    
-    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="生活" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" />
-    
-    
-    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
     
   </entry>
   
