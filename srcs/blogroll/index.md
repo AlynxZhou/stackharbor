@@ -39,3 +39,4 @@ reward: false
 | :------------: | :------------: | :------------: | :------------: |
 | <img src="https://avatars1.githubusercontent.com/u/21106371?s=460&v=4" style="width: 5em;"> | [鸡腿工坊](https://jitui.moe/) |  | ~~新鲜~~ 可爱的鸡腿！ |
 | <img src="https://avatars1.githubusercontent.com/u/25676311?s=460&v=4" style="width: 5em;"> | [Yorushika Shi](https://sh.yorushika.live/) |  | 评论框里认识的朋友，看来保留评论框还是有必要的。 |
+|  | [Stack Pub](https://www.opfanswyx.top/) |  | 评论框认识的朋友。 |
