@@ -160,6 +160,54 @@
   
   <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/Coffee-Static-Varible-Method/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="望むものなら残さず<br>輝ける自分らしさで">
+        <meta itemprop="image" content="/images/Future_Gazer_small.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Coffee-Static-Varible-Method/" itemprop="url">CoffeeScript 的静态方法和静态变量（类方法和类变量）</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-01-26T11:04:33.000Z">2018-01-26 周五 19:04:33 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/CoffeeScript/" itemprop="url" rel="index"><span itemprop="name">CoffeeScript</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>CoffeeScript &#x7684;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x548C;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x5176;&#x5B9E;&#x5C31;&#x662F; ES6 &#x91CC;&#x9762;&#x7684;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x548C;&#x9759;&#x6001;&#x53D8;&#x91CF;&#xFF0C;&#x4F46;&#x662F;&#x672C;&#x8EAB; ES6 &#x5E94;&#x8BE5;&#x53EA;&#x5B9E;&#x73B0;&#x4E86;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x7684;&#x5B9A;&#x4E49;&#x65B9;&#x6CD5;&#x5E76;&#x4E0D;&#x76F4;&#x89C2;&#xFF0C;&#x540C;&#x65F6;&#x52A0;&#x4E0A; CoffeeScript &#x7684;&#x8BED;&#x6CD5;&#x5C31;&#x66F4;&#x4E0D;&#x597D;&#x5F97;&#x77E5;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#xFF0C;<a href="http://coffeescript.org/" target="_blank">coffeescript.org</a> &#x4F3C;&#x4E4E;&#x4E5F;&#x6CA1;&#x6709;&#x5BF9;&#x8FD9;&#x65B9;&#x9762;&#x8FDB;&#x884C;&#x8FC7;&#x591A;&#x4ECB;&#x7ECD;&#x3002;&#x7F51;&#x4E0A;&#x641C;&#x7D22;&#x5230;&#x7684;&#x529E;&#x6CD5;&#x5927;&#x90E8;&#x5206;&#x53EA;&#x4ECB;&#x7ECD;&#x4E86;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x548C;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x4E5F;&#x5C31;&#x5230;&#x6B64;&#x4E3A;&#x6B62;&#x4E86;&#xFF0C;&#x5BF9;&#x4E8E;&#x5176;&#x5E94;&#x7528;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x6BD4;&#x5982;&#x5982;&#x4F55;&#x5728;&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#x91CC;&#x64CD;&#x4F5C;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x548C;&#x5982;&#x4F55;&#x5728;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x91CC;&#x64CD;&#x4F5C;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x7684;&#x533A;&#x522B;&#x5E76;&#x6CA1;&#x6709;&#x8BE6;&#x7EC6;&#x8BF4;&#x660E;&#x3002;&#x8FD9;&#x6B21;&#x6253;&#x7B97;&#x628A;&#x81EA;&#x5DF1;&#x5199; <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank">coffee-telegram-bot</a> &#x65F6;&#x5C1D;&#x8BD5;&#x51FA;&#x7684;&#x529E;&#x6CD5;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#x3002;</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Code%20Life/" rel="tag"><i class="fas fa-tag"></i>Code Life</a><a class="post-tag button" href="/tags/CoffeeScript/" rel="tag"><i class="fas fa-tag"></i>CoffeeScript</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/2017-Tail/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -595,54 +643,6 @@
     </footer>
   </article>
   
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.xyz/posts/Grey-Valentine-s-Day/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="望むものなら残さず<br>輝ける自分らしさで">
-        <meta itemprop="image" content="/images/Future_Gazer_small.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Grey-Valentine-s-Day/" itemprop="url">灰色情人节</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date meta-block">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-03-18T14:48:49.000Z">2017-03-18 周六 22:48:49 CST</time></span>
-        </span>
-        
-        
-        <span class="post-categories meta-block">
-          
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">无题</span></a></span>
-        </span>
-        
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <p>&#x611F;&#x5192; + &#x9F3B;&#x708E; = &#x6D6A;&#x8D39;&#x7EB8;&#x5F20;&#xFF0C;&#x53E6;&#x5916;&#x4E5F;&#x8BB8;&#x5927;&#x8111;&#x7F3A;&#x6C27;&#x4F1A;&#x5BFC;&#x81F4;&#x80E1;&#x601D;&#x4E71;&#x60F3;&#xFF0C;&#x5F88;&#x75B2;&#x60EB;&#x53C8;&#x65E0;&#x6CD5;&#x5165;&#x7761;&#x3002;</p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"><i class="fas fa-tag"></i>随记</a>
-      </div>
-      
-    </footer>
-  </article>
-  
   
   <nav class="pagination">
     
@@ -708,21 +708,21 @@
     
     <div class="archives-count count-block">
       <div class="site-count-title">归档</div>
-      <div><a href="/archives/">56</a></div>
+      <div><a href="/archives/">57</a></div>
     </div>
     
     
     
     <div class="categories-count count-block">
       <div class="site-count-title">分类</div>
-      <div><a href="/categories/">37</a></div>
+      <div><a href="/categories/">38</a></div>
     </div>
     
     
     
     <div class="tags-count count-block">
       <div class="site-count-title">标签</div>
-      <div><a href="/tags/">59</a></div>
+      <div><a href="/tags/">60</a></div>
     </div>
     
     
@@ -837,4 +837,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.2 at 2019-05-09 周四 18:29:10 CST. -->
+<!-- Page built by Hikaru v1.14.2 at 2019-05-10 周五 22:13:20 CST. -->
