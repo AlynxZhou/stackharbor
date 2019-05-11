@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-05-10T14:13:04.114Z</updated>
+  <updated>2019-05-11T02:25:22.673Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -23,7 +23,7 @@
     <link href="https://sh.alynx.xyz/posts/Archlinux-UnityHub/" />
     <id>https://sh.alynx.xyz/posts/Archlinux-UnityHub/</id>
     <published>2019-05-10T14:09:00.000Z</published>
-    <updated>2019-05-10T14:13:04.114Z</updated>
+    <updated>2019-05-11T02:25:22.673Z</updated>
     
     <summary type="html">
     
@@ -33,7 +33,9 @@
     
     <category term="计算机" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     
-    <category term="Arch Linux" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Arch%20Linux/" />
+    <category term="Linux" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    
+    <category term="Arch Linux" scheme="https://sh.alynx.xyz/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Arch%20Linux/" />
     
     
     <category term="UnityHub" scheme="https://sh.alynx.xyz/tags/UnityHub/" />
