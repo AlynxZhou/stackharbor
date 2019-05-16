@@ -189,23 +189,23 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <h1 id="&#x9700;&#x6C42;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="&#x9700;&#x6C42;"></a>&#x9700;&#x6C42;</h1>
-<p>&#x672C;&#x6765;&#x60F3;&#x7ED9;&#x5185;&#x7F51;&#x7684;&#x6811;&#x8393;&#x6D3E;&#x505A; frp &#x4E00;&#x7C7B;&#x7684;&#x516C;&#x7F51;&#x6620;&#x5C04;&#x4EE5;&#x4FBF;&#x80FD;&#x591F;&#x5728;&#x5916;&#x9762;&#x8BBF;&#x95EE; Samba &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x6765;&#x60F3;&#x60F3;&#x4F3C;&#x4E4E;&#x628A;&#x8BBE;&#x5907;&#x66B4;&#x9732;&#x5728;&#x516C;&#x7F51;&#x4E0D;&#x592A;&#x5B89;&#x5168;&#x3002;&#x6362;&#x4E2A;&#x89D2;&#x5EA6;&#x60F3;&#xFF0C;&#x5176;&#x5B9E;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x628A;&#x6811;&#x8393;&#x6D3E;&#x6620;&#x5C04;&#x51FA;&#x53BB;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x591F;&#x8FDE;&#x63A5;&#x8FDB;&#x6765;&#x5C31;&#x597D;&#x4E86;&#x3002;&#x6240;&#x4EE5;&#x9009;&#x7528; VPN &#x5EFA;&#x865A;&#x62DF;&#x4E13;&#x7528;&#x7F51;&#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x7684; WireGuard &#x5C06;&#x6211;&#x7684;&#x5404;&#x4E2A;&#x8BBE;&#x5907;&#x8FDE;&#x5230;&#x4E00;&#x4E2A;&#x5B50;&#x7F51;&#x5185;&#x90E8;&#x3002;</p>
+      <h1 id="需求"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1>
+<p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p>
 <a id="more"></a>
 
-<p>WireGuard &#x7684;&#x539F;&#x7406;&#x662F;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x516C;&#x7F51;&#x670D;&#x52A1;&#x5668;&#x505A; Endpoint&#xFF0C;&#x5185;&#x7F51;&#x7684;&#x6570;&#x636E;&#x901A;&#x8FC7;&#x8BE5;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;&#xFF0C;&#x56E0;&#x6B64;&#x5B50;&#x7F51;&#x7684;&#x5404;&#x4E2A;&#x8BBE;&#x5907;&#x53EF;&#x4EE5;&#x6CA1;&#x6709;&#x56FA;&#x5B9A;&#x7684; IP&#xFF0C;&#x53EA;&#x8981;&#x90FD;&#x80FD;&#x8FDE;&#x63A5;&#x516C;&#x7F51;&#x670D;&#x52A1;&#x5668;&#x5C31;&#x597D;&#x4E86;&#x3002;</p>
-<h1 id="&#x5B89;&#x88C5;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%89%E8%A3%85" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h1>
-<p>&#x7531;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x7CFB;&#x7EDF;&#x5B89;&#x88C5;&#x65B9;&#x6CD5;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x5EFA;&#x8BAE;&#x53C2;&#x7167; <a href="https://www.wireguard.com/install/" target="_blank">WireGuard &#x5B98;&#x7F51;&#x7684;&#x5B89;&#x88C5;&#x8BF4;&#x660E;</a> &#x548C;&#x5404;&#x4E2A;&#x7CFB;&#x7EDF;&#x7684; Wiki&#xFF0C;Android &#x624B;&#x673A;&#x53EF;&#x4EE5;&#x641C;&#x7D22;&#x4E0B;&#x8F7D; WireGuard &#x7684; APK &#x8FDB;&#x884C;&#x5B89;&#x88C5;&#x3002;</p>
-<h1 id="&#x914D;&#x7F6E;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%85%8D%E7%BD%AE" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</h1>
-<div class="alert-blue">&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x53C2;&#x8003;&#x81EA; <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank">WireGuard - ArchWiki</a>&#x3002;</div>
+<p>WireGuard 的原理是使用一个公网服务器做 Endpoint，内网的数据通过该服务器进行转发，因此子网的各个设备可以没有固定的 IP，只要都能连接公网服务器就好了。</p>
+<h1 id="安装"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%89%E8%A3%85" title="安装"></a>安装</h1>
+<p>由于不同的系统安装方法不一样，建议参照 <a href="https://www.wireguard.com/install/" target="_blank">WireGuard 官网的安装说明</a> 和各个系统的 Wiki，Android 手机可以搜索下载 WireGuard 的 APK 进行安装。</p>
+<h1 id="配置"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%85%8D%E7%BD%AE" title="配置"></a>配置</h1>
+<div class="alert-blue">以下部分内容参考自 <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank">WireGuard - ArchWiki</a>。</div>
 
-<p>&#x9996;&#x5148;&#x9700;&#x8981;&#x751F;&#x6210;&#x516C;&#x94A5;&#x548C;&#x79C1;&#x94A5;&#xFF0C;&#x5EFA;&#x8BAE;&#x5C06;&#x5176;&#x8BBE;&#x7F6E;&#x4E3A;&#x53EA;&#x6709;&#x62E5;&#x6709;&#x8005;&#x624D;&#x80FD;&#x64CD;&#x4F5C;&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x653E;&#x5728; <code>/etc/wireguard</code> &#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x91CC;&#x9762;&#xFF0C;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x5E94;&#x8BE5;&#x662F;&#x53EA;&#x6709; root &#x624D;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x7684;&#x3002;<strong>&#x670D;&#x52A1;&#x5668;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x90FD;&#x9700;&#x8981;&#x5206;&#x522B;&#x8FDB;&#x884C;&#x8FD9;&#x4E00;&#x6B65;</strong>&#x3002;</p>
+<p>首先需要生成公钥和私钥，建议将其设置为只有拥有者才能操作，我这里放在 <code>/etc/wireguard</code> 这个目录里面，这个目录应该是只有 root 才可以访问的。<strong>服务器和客户端都需要分别进行这一步</strong>。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> /etc/wireguard</span>
-<span class="hljs-meta">#</span><span class="bash"> wg genkey | tee privatekey | wg pubkey &gt; publickey</span></code></pre></figure></code></pre><h2 id="&#x670D;&#x52A1;&#x7AEF;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E6%9C%8D%E5%8A%A1%E7%AB%AF" title="&#x670D;&#x52A1;&#x7AEF;"></a>&#x670D;&#x52A1;&#x7AEF;</h2>
-<p>&#x7136;&#x540E;&#x9700;&#x8981;&#x624B;&#x5199;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x5BF9;&#x4E8E;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x5148;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x914D;&#x7F6E;&#x3002;</p>
-<p>&#x9996;&#x5148;&#x5728; <code>/etc/wireguard</code> &#x76EE;&#x5F55;&#x4E0B;&#x9762;&#x5EFA;&#x7ACB; <code>wg0.conf</code>&#xFF08;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x4E86;&#x5C31; <code>wg1</code>&#xFF0C;&#x4F9D;&#x6B64;&#x7C7B;&#x63A8;&#xFF09;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x8FD9;&#x4E2A;&#x6837;&#x5B50;&#xFF1A;</p>
+<span class="hljs-meta">#</span><span class="bash"> wg genkey | tee privatekey | wg pubkey > publickey</span></code></pre></figure></code></pre><h2 id="服务端"><a class="headerlink" href="/posts/WireGuard-Usage/#%E6%9C%8D%E5%8A%A1%E7%AB%AF" title="服务端"></a>服务端</h2>
+<p>然后需要手写配置文件，这一步对于服务端和客户端不一样，先进行服务端的配置。</p>
+<p>首先在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），服务端的配置文件内容看起来像这个样子：</p>
 <pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -228,28 +228,28 @@
 </pre><pre class="code"><code>[Interface]<span class="hljs-built_in">
 Address </span>= 10.0.0.1
 ListenPort = 7456
-PrivateKey = [&#x670D;&#x52A1;&#x5668;&#x7684;&#x79C1;&#x94A5;]
+PrivateKey = [服务器的私钥]
 PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t<span class="hljs-built_in"> nat </span>-A POSTROUTING -o eth0 -j MASQUERADE
 PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t<span class="hljs-built_in"> nat </span>-D POSTROUTING -o eth0 -j MASQUERADE<span class="hljs-built_in">
 DNS </span>= 8.8.8.8
 
 [peer]
-PublicKey = [&#x5BA2;&#x6237;&#x7AEF; 1 &#x7684;&#x516C;&#x94A5;]
+PublicKey = [客户端 1 的公钥]
 AllowedIPs = 10.0.0.2/32
 
 [peer]
-PublicKey = [&#x5BA2;&#x6237;&#x7AEF; 2 &#x7684;&#x516C;&#x94A5;]
+PublicKey = [客户端 2 的公钥]
 AllowedIPs = 10.0.0.3/32
 
 [peer]
-PublicKey = [&#x5BA2;&#x6237;&#x7AEF; 3 &#x7684;&#x516C;&#x94A5;]
-AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x4F9D;&#x6B21;&#x5206;&#x6790;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x9996;&#x5148;&#x662F; Interface&#xFF0C;&#x8FD9;&#x4E2A;&#x90E8;&#x5206;&#x6307;&#x7684;&#x662F; WireGuard &#x5728;&#x672C;&#x673A;&#x4E0A;&#x9762;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x5B83;&#x662F;&#x4EE5;&#x5185;&#x6838;&#x6A21;&#x5757;&#x7684;&#x5F62;&#x5F0F;&#x5DE5;&#x4F5C;&#x7684;&#xFF0C;<code>Address</code> &#x6307;&#x672C;&#x673A;&#x5728;&#x5B50;&#x7F51;&#x5185;&#x7684;&#x79C1;&#x6709; IP &#x5730;&#x5740;&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x5206;&#x914D;&#x4E86;&#x4FDD;&#x7559;&#x6BB5; <code>10.0.0.0/24</code> &#x4F5C;&#x4E3A;&#x5B50;&#x7F51;&#x7F51;&#x6BB5;&#xFF08;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x81EA;&#x5DF1;&#x53BB;&#x590D;&#x4E60;&#x8BA1;&#x7F51;&#xFF09;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x7528; <code>10.0.0.0/8</code> &#x8FD9;&#x4E2A;&#x7F51;&#x6BB5;&#x518D;&#x8FDB;&#x884C;&#x5212;&#x5206;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E3B;&#x673A;&#x5730;&#x5740;&#x662F;&#x4F60;&#x81EA;&#x5DF1;&#x968F;&#x610F;&#x5206;&#x914D;&#x7684;&#xFF0C;&#x53EA;&#x8981;&#x4E0D;&#x51B2;&#x7A81;&#x5C31;&#x884C;&#x3002;<code>ListenPort</code> &#x662F;&#x76D1;&#x542C;&#x7684;&#x670D;&#x52A1;&#x5668; UDP &#x7AEF;&#x53E3;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E5F;&#x662F;&#x81EA;&#x5DF1;&#x8BBE;&#x7F6E;&#xFF0C;&#x53EA;&#x8981;&#x4E0D;&#x51B2;&#x7A81;&#x5C31;&#x884C;&#x3002;<code>PrivateKey</code> &#x5219;&#x662F;&#x521A;&#x521A; <strong>&#x670D;&#x52A1;&#x7AEF;</strong> &#x751F;&#x6210;&#x7684; <code>privatekey</code> &#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;<code>PostUp</code> &#x548C; <code>PostDown</code> &#x662F;&#x914D;&#x7F6E; iptables &#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x5EFA;&#x8BAE;&#x76F4;&#x63A5;&#x590D;&#x5236;&#x5373;&#x53EF;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x670D;&#x52A1;&#x5668;&#x7684;&#x516C;&#x7F51;&#x7F51;&#x5361;&#x4E0D;&#x662F; <code>eth0</code> &#x5219;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x4FEE;&#x6539;&#x3002;<code>DNS</code> &#x5219;&#x662F;&#x89E3;&#x6790;&#x57DF;&#x540D;&#x7528;&#x7684; DNS&#xFF0C;&#x8FD9;&#x91CC;&#x76F4;&#x63A5;&#x4F7F;&#x7528; <code>8.8.8.8</code>&#x3002;</p>
-<p>&#x7136;&#x540E;&#x6BCF;&#x4E00;&#x4E2A; Peer &#x5B57;&#x6BB5;&#x5BF9;&#x5E94;&#x4E86;&#x4E00;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#xFF08;&#x6216;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x7AEF;&#xFF0C;WireGuard &#x5B9E;&#x9645;&#x4E0A;&#x662F; P2P &#x7684;&#xFF09;&#xFF0C;&#x9700;&#x8981;&#x5206;&#x522B;&#x5C06;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x7684; <code>publickey</code> &#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x8D34;&#x5230; <code>PublicKey</code>&#xFF0C;&#x4EE5;&#x53CA;&#x9700;&#x8981;&#x8F6C;&#x53D1;&#x5230;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x6D41;&#x91CF;&#x7684; IP &#x5730;&#x5740;&#x8303;&#x56F4;&#x8D34;&#x5230; <code>AllowedIPs</code>&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x76F4;&#x63A5;&#x7ED9;&#x6BCF;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;&#x7684; IP&#xFF0C;&#x56E0;&#x6B64;&#x5C31;&#x5199;&#x4E86; <code>10.0.0.2/32</code>&#xFF08;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x81EA;&#x5DF1;&#x53BB;&#x590D;&#x4E60;&#x8BA1;&#x7F51;&#xFF09;&#xFF0C;&#x610F;&#x601D;&#x662F;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x5BF9;&#x5E94;&#x7684; IP &#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#xFF0C;&#x6240;&#x6709;&#x5411;&#x8FD9;&#x4E2A; IP &#x53D1;&#x9001;&#x7684;&#x6D41;&#x91CF;&#x90FD;&#x4F1A;&#x88AB;&#x8F6C;&#x53D1;&#x5230;&#x8FD9;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x3002;</p>
-<p><strong>&#x6BCF;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5C31;&#x8981;&#x5728;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x91CC;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A; Peer &#x5B57;&#x6BB5;</strong>&#xFF0C;&#x7136;&#x540E;&#x8BBE;&#x7F6E; <code>PublicKey</code> &#x548C; <code>AllowedIPs</code>&#x3002;</p>
-<p>&#x7136;&#x540E;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7684; <code>/etc/sysctl.conf</code> &#x6700;&#x540E;&#x52A0;&#x4E0A;&#x4E00;&#x53E5; <code>net.ipv4.ip_forward=1</code>&#xFF0C;&#x5F00;&#x542F; IPv4 &#x6D41;&#x91CF;&#x8F6C;&#x53D1;&#xFF0C;&#x7136;&#x540E;&#x8FD0;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x52A0;&#x8F7D;&#x65B0;&#x8BBE;&#x7F6E;&#xFF1A;</p>
+PublicKey = [客户端 3 的公钥]
+AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>然后我们依次分析每个字段的内容，首先是 Interface，这个部分指的是 WireGuard 在本机上面的接口，它是以内核模块的形式工作的，<code>Address</code> 指本机在子网内的私有 IP 地址，我这里分配了保留段 <code>10.0.0.0/24</code> 作为子网网段（看不懂的自己去复习计网），你也可以用 <code>10.0.0.0/8</code> 这个网段再进行划分，这个主机地址是你自己随意分配的，只要不冲突就行。<code>ListenPort</code> 是监听的服务器 UDP 端口，这个也是自己设置，只要不冲突就行。<code>PrivateKey</code> 则是刚刚 <strong>服务端</strong> 生成的 <code>privatekey</code> 这个文件的内容。<code>PostUp</code> 和 <code>PostDown</code> 是配置 iptables 的命令，建议直接复制即可，如果你服务器的公网网卡不是 <code>eth0</code> 则需要自己修改。<code>DNS</code> 则是解析域名用的 DNS，这里直接使用 <code>8.8.8.8</code>。</p>
+<p>然后每一个 Peer 字段对应了一个客户端（或其他服务端，WireGuard 实际上是 P2P 的），需要分别将该客户端的 <code>publickey</code> 文件的内容贴到 <code>PublicKey</code>，以及需要转发到该客户端的流量的 IP 地址范围贴到 <code>AllowedIPs</code>，我这里直接给每个客户端设置固定的 IP，因此就写了 <code>10.0.0.2/32</code>（看不懂的自己去复习计网），意思是该客户端对应的 IP 就是这个，所有向这个 IP 发送的流量都会被转发到这个客户端。</p>
+<p><strong>每添加一个新的客户端，就要在这个文件里添加一个 Peer 字段</strong>，然后设置 <code>PublicKey</code> 和 <code>AllowedIPs</code>。</p>
+<p>然后在服务器的 <code>/etc/sysctl.conf</code> 最后加上一句 <code>net.ipv4.ip_forward=1</code>，开启 IPv4 流量转发，然后运行下面的命令加载新设置：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="&#x5BA2;&#x6237;&#x7AEF;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%A2%E6%88%B7%E7%AB%AF" title="&#x5BA2;&#x6237;&#x7AEF;"></a>&#x5BA2;&#x6237;&#x7AEF;</h2>
-<p>&#x5BA2;&#x6237;&#x7AEF;&#x4E5F;&#x9700;&#x8981;&#x5728; <code>/etc/wireguard</code> &#x76EE;&#x5F55;&#x4E0B;&#x9762;&#x5EFA;&#x7ACB; <code>wg0.conf</code>&#xFF08;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x4E86;&#x5C31; <code>wg1</code>&#xFF0C;&#x4F9D;&#x6B64;&#x7C7B;&#x63A8;&#xFF09;&#xFF0C;&#x5185;&#x5BB9;&#x770B;&#x8D77;&#x6765;&#x662F;&#x8FD9;&#x6837;&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="客户端"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%A2%E6%88%B7%E7%AB%AF" title="客户端"></a>客户端</h2>
+<p>客户端也需要在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），内容看起来是这样：</p>
 <pre><code><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -261,19 +261,19 @@ AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>&#x7136;&#x540E;&#
 <span class="line">9</span>
 </pre><pre class="code"><code><span class="hljs-section">[Interface]</span>
 <span class="hljs-attr">Address</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.4</span>
-<span class="hljs-attr">PrivateKey</span> = [&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x79C1;&#x94A5;]
+<span class="hljs-attr">PrivateKey</span> = [客户端的私钥]
 <span class="hljs-section">
 [Peer]</span>
-<span class="hljs-attr">PublicKey</span> = [&#x670D;&#x52A1;&#x7AEF; <span class="hljs-number">1</span> &#x7684;&#x516C;&#x94A5;]
+<span class="hljs-attr">PublicKey</span> = [服务端 <span class="hljs-number">1</span> 的公钥]
 <span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">24</span>
-<span class="hljs-attr">Endpoint</span> = [&#x670D;&#x52A1;&#x7AEF; <span class="hljs-number">1</span> &#x7684;&#x516C;&#x7F51; IP]:[&#x670D;&#x52A1;&#x7AEF; <span class="hljs-number">1</span> &#x7684;&#x7AEF;&#x53E3;]
-<span class="hljs-attr">PersistentKeepalive</span> = <span class="hljs-number">25</span></code></pre></figure></code></pre><p>Interface &#x5B57;&#x6BB5;&#x81EA;&#x7136;&#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x672C;&#x673A;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;<code>Address</code> &#x8FD8;&#x662F;&#x7ED9;&#x672C;&#x673A;&#x5206;&#x914D;&#x7684; IP&#xFF0C;&#x8FD9;&#x91CC;&#x8981;&#x548C;&#x670D;&#x52A1;&#x5668;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x5B50;&#x7F51;&#xFF0C;&#x5E76;&#x4E14;&#x8981;&#x548C;&#x670D;&#x52A1;&#x5668;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#x5141;&#x8BB8;&#x7684; IP &#x6BB5;&#x5BF9;&#x4E0A;&#x3002;<code>PrivateKey</code> &#x5219;&#x662F;&#x521A;&#x521A; <strong>&#x5BA2;&#x6237;&#x7AEF;</strong> &#x751F;&#x6210;&#x7684; <code>privatekey</code> &#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x901A;&#x8FC7;&#x6DFB;&#x52A0; Peer &#x5B57;&#x6BB5;&#x6765;&#x6DFB;&#x52A0;&#x670D;&#x52A1;&#x7AEF;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x7F51;&#x7EDC;&#x7684;&#x51FA;&#x53E3;&#x548C;&#x8F6C;&#x53D1;&#x70B9;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x586B;&#x5199;&#x5BF9;&#x5E94;&#x7684; <strong>&#x670D;&#x52A1;&#x7AEF;</strong> &#x7684;&#x516C;&#x94A5;&#xFF0C;&#x7136;&#x540E;&#x8FD9;&#x91CC;&#x7684; <code>AllowedIPs</code> &#x8BBE;&#x7F6E;&#x7684;&#x662F; <strong>&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x54EA;&#x4E9B; IP &#x6BB5;&#x7684;&#x6D41;&#x91CF;&#x8981;&#x901A;&#x8FC7;&#x8BE5;&#x670D;&#x52A1;&#x7AEF;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;</strong>&#xFF0C;&#x7531;&#x4E8E;&#x6211;&#x53EA;&#x5E0C;&#x671B;&#x5185;&#x7F51;&#x7684;&#x6D41;&#x91CF;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;&#xFF0C;&#x81EA;&#x7136;&#x8BBE;&#x7F6E;&#x7684;&#x662F;&#x5185;&#x7F51;&#x7684; IP &#x6BB5; <code>10.0.0.0/24</code>&#xFF08;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x4F60;&#x8BA1;&#x7F51;&#x6302;&#x79D1;&#x4E86;&#xFF01;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x9700;&#x8981;&#x8BBE;&#x7F6E; <code>Endpoint</code> &#x4EE5;&#x4FBF;&#x80FD;&#x6B63;&#x786E;&#x7684;&#x5728;&#x516C;&#x7F51;&#x4E0A;&#x627E;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF08;&#x865A;&#x62DF;&#x4E13;&#x7528;&#x7F51;&#xFF0C;&#x8FDE;&#x4E0D;&#x4E0A;&#x7F51;&#x8FD8;&#x54EA;&#x6765;&#x7684;&#x865A;&#x62DF;&#x7F51;&#x554A;&#xFF1F;&#xFF09;&#xFF0C;&#x683C;&#x5F0F;&#x5C31;&#x662F; <code>&#x670D;&#x52A1;&#x5668;&#x516C;&#x7F51; IP:&#x4F60;&#x8BBE;&#x7F6E;&#x7684;&#x76D1;&#x542C;&#x7AEF;&#x53E3;</code>&#x3002;<code>PersistentKeepalive</code> &#x5219;&#x662F;&#x7528;&#x6765;&#x4FDD;&#x6301;&#x8FDE;&#x63A5;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x76F4;&#x63A5;&#x590D;&#x5236;&#x5373;&#x53EF;&#x3002;</p>
-<p><strong>&#x5982;&#x679C;&#x4F60;&#x6709;&#x591A;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5C31;&#x5728;&#x8FD9;&#x91CC;&#x6DFB;&#x52A0;&#x591A;&#x4E2A; Peer</strong>&#xFF0C;&#x5206;&#x522B;&#x8BBE;&#x7F6E;&#x4E0D;&#x540C;&#x7684; <code>AllowedIPs</code> &#x8BA9;&#x4ED6;&#x4EEC;&#x8F6C;&#x53D1;&#xFF0C;&#x4F46; <strong>&#x4E0D;&#x9700;&#x8981;&#x8BA9;&#x5BA2;&#x6237;&#x7AEF;&#x4E4B;&#x95F4;&#x4E92;&#x76F8;&#x6DFB;&#x52A0; Peer</strong>&#xFF0C;&#x672C;&#x6765;&#x6211;&#x4EEC;&#x8981;&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x4E4B;&#x95F4;&#x4E0D;&#x80FD;&#x4E92;&#x76F8;&#x8FDE;&#x63A5;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x6D41;&#x91CF;&#x662F;&#x7ECF;&#x7531;&#x516C;&#x7F51;&#x7684;&#x670D;&#x52A1;&#x7AEF;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;&#x624D;&#x53EF;&#x4EE5;&#x5230;&#x8FBE;&#xFF0C;&#x516C;&#x7F51;&#x7684;&#x670D;&#x52A1;&#x5668;&#x662F;&#x5404;&#x4E2A;&#x4E0D;&#x56FA;&#x5B9A;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x63A5;&#x5934;&#x5730;&#x70B9;&#x3002;&#x6240;&#x4EE5;&#x53EA;&#x9700;&#x8981;&#x4FDD;&#x8BC1;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x6240;&#x6709;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x8BA4;&#x8BC6;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
-<h1 id="&#x542F;&#x52A8;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%AF%E5%8A%A8" title="&#x542F;&#x52A8;"></a>&#x542F;&#x52A8;</h1>
-<p>&#x5728;&#x5206;&#x522B;&#x914D;&#x7F6E;&#x597D;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x4E4B;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x542F;&#x52A8;&#x4E86;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x4E24;&#x8FB9;&#x90FD;&#x4E00;&#x6837;&#x3002;&#x6CE8;&#x610F;&#x628A; <code>wg0</code> &#x6362;&#x6210;&#x4F60;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;&#x3002;</p>
+<span class="hljs-attr">Endpoint</span> = [服务端 <span class="hljs-number">1</span> 的公网 IP]:[服务端 <span class="hljs-number">1</span> 的端口]
+<span class="hljs-attr">PersistentKeepalive</span> = <span class="hljs-number">25</span></code></pre></figure></code></pre><p>Interface 字段自然是客户端本机的设置，<code>Address</code> 还是给本机分配的 IP，这里要和服务器在同一个子网，并且要和服务器配置文件里允许的 IP 段对上。<code>PrivateKey</code> 则是刚刚 <strong>客户端</strong> 生成的 <code>privatekey</code> 这个文件的内容。</p>
+<p>然后通过添加 Peer 字段来添加服务端，服务端作为这个网络的出口和转发点，首先需要填写对应的 <strong>服务端</strong> 的公钥，然后这里的 <code>AllowedIPs</code> 设置的是 <strong>该客户端有哪些 IP 段的流量要通过该服务端进行转发</strong>，由于我只希望内网的流量进行转发，自然设置的是内网的 IP 段 <code>10.0.0.0/24</code>（看不懂的你计网挂科了！），然后需要设置 <code>Endpoint</code> 以便能正确的在公网上找到服务器（虚拟专用网，连不上网还哪来的虚拟网啊？），格式就是 <code>服务器公网 IP:你设置的监听端口</code>。<code>PersistentKeepalive</code> 则是用来保持连接的参数，直接复制即可。</p>
+<p><strong>如果你有多个服务器，就在这里添加多个 Peer</strong>，分别设置不同的 <code>AllowedIPs</code> 让他们转发，但 <strong>不需要让客户端之间互相添加 Peer</strong>，本来我们要解决的问题就是客户端之间不能互相连接，所有的流量是经由公网的服务端进行转发才可以到达，公网的服务器是各个不固定的客户端的接头地点。所以只需要保证服务端和所有的客户端认识就可以了。</p>
+<h1 id="启动"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%AF%E5%8A%A8" title="启动"></a>启动</h1>
+<p>在分别配置好客户端和服务端之后就可以启动了，这一步两边都一样。注意把 <code>wg0</code> 换成你配置文件的名字。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick up wg0</span></code></pre></figure></code></pre><p>&#x7136;&#x540E;&#x4F7F;&#x7528; <code>wg</code> &#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x72B6;&#x6001;&#xFF0C;&#x7531;&#x4E8E;&#x8FD9;&#x4E9B;&#x6D89;&#x53CA;&#x5230;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#xFF0C;&#x90FD;&#x9700;&#x8981; root &#x6743;&#x9650;&#x3002;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x662F;&#x6211;&#x7684;&#x7B14;&#x8BB0;&#x672C;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick up wg0</span></code></pre></figure></code></pre><p>然后使用 <code>wg</code> 命令可以查看状态，由于这些涉及到网络配置，都需要 root 权限。服务端和客户端输出的结果是不一样的，下面这个是我的笔记本输出的结果。</p>
 <pre><code class="plain"><figure class="highlight hljs plain"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -288,17 +288,17 @@ AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>&#x7136;&#x540E;&#
 <span class="line">12</span>
 </pre><pre class="code"><code># wg
 interface: wg0
-  public key: [&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]
+  public key: [不给你看]
   private key: (hidden)
   listening port: 51676
 
-peer: [&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]
-  endpoint: [&#x4E0D;&#x7ED9;&#x4F60;&#x770B;]
+peer: [不给你看]
+  endpoint: [不给你看]
   allowed ips: 10.0.0.0/24
   latest handshake: 1 minute, 41 seconds ago
   transfer: 38.36 KiB received, 141.71 KiB sent
   persistent keepalive: every 25 seconds</code></pre></figure></code></pre>
-<p>&#x5EFA;&#x7ACB;&#x6210;&#x529F;&#x7684;&#x8BDD;&#xFF0C;&#x5B50;&#x7F51;&#x4E4B;&#x95F4;&#x662F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5185;&#x7F51;&#x5730;&#x5740;&#x4E92;&#x76F8; ping &#x7684;&#xFF1A;</p>
+<p>建立成功的话，子网之间是可以使用内网地址互相 ping 的：</p>
 <pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -320,15 +320,15 @@ PING </span>10.0.0.11 (10.0.0.11) 56(84) bytes of data.
 ^C
 --- 10.0.0.11<span class="hljs-built_in"> ping </span>statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 11ms
-rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code></pre><p>&#x5982;&#x679C;&#x4F60;&#x786E;&#x5B9A;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; Systemd &#x7BA1;&#x7406;&#x8FDE;&#x63A5;&#xFF0C;&#x9996;&#x5148;&#x5173;&#x95ED;&#x521A;&#x624D;&#x7684;&#x8FDE;&#x63A5;&#xFF1A;</p>
+rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code></pre><p>如果你确定没有问题，就可以使用 Systemd 管理连接，首先关闭刚才的连接：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick down wg0</span></code></pre></figure></code></pre><p>&#x7136;&#x540E;&#x542F;&#x52A8;&#x73B0;&#x6210;&#x7684; Unit&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick down wg0</span></code></pre></figure></code></pre><p>然后启动现成的 Unit：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> wg-quick@wg0 --now</span></code></pre></figure></code></pre><h1 id="&#x540E;&#x8BB0;"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%8E%E8%AE%B0" title="&#x540E;&#x8BB0;"></a>&#x540E;&#x8BB0;</h1>
-<p>&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x5728;&#x5185;&#x7F51;&#x4E4B;&#x95F4;&#x4F20;&#x9012;&#x6570;&#x636E;&#xFF0C;&#x5EFA;&#x8BAE;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x8BBF;&#x95EE;&#x8F83;&#x5FEB;&#x7684;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x56E0;&#x4E3A;&#x6570;&#x636E;&#x8F6C;&#x53D1;&#x8981;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
-<p>&#x4F46;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4F7F;&#x7528; WireGuard &#x8BBF;&#x95EE;&#x4E00;&#x4E9B;&#x88AB;&#x6CB3;&#x87F9;&#x7684;&#x5185;&#x5BB9;&#x4E5F;&#x53EF;&#x4EE5;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5728;&#x6D77;&#x5916;&#x7684;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x7136;&#x540E;&#x8BBE;&#x7F6E;&#x5BA2;&#x6237;&#x7AEF;&#x8BE5;&#x670D;&#x52A1;&#x5668;&#x7684; <code>AllowedIPs</code> &#x4E3A; <code>0.0.0.0/0</code>&#xFF08;&#x610F;&#x601D;&#x5C31;&#x662F;&#x6240;&#x6709; IP &#x90FD;&#x7ECF;&#x8FC7;&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x8F6C;&#x53D1;&#x5566;&#xFF01;&#x6216;&#x8005;&#x4F60;&#x77E5;&#x9053;&#x8BE5;&#x8BBE;&#x7F6E;&#x67D0;&#x4E9B;&#x7F51;&#x6BB5;&#x4E5F;&#x884C;&#xFF01;&#x6216;&#x8005;&#x907F;&#x5F00;&#x5185;&#x7F51;&#x548C;&#x672C;&#x5730;&#x5730;&#x5740;&#xFF01;&#x6211;&#x4E0D;&#x5EFA;&#x8BAE;&#x7528;&#x8FD9;&#x4E2A;&#x756A;&#x8304;&#xFF01;&#x6240;&#x4EE5;&#x5C31;&#x5199;&#x4E2A;&#x6700;&#x8822;&#x7684;&#xFF01;&#xFF09;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF01;&#x8BB0;&#x5F97;&#x4E0D;&#x7528;&#x65F6;&#x5019;&#x5173;&#x6389;&#xFF0C;&#x4E0D;&#x7136;&#x4E00;&#x4E9B;&#x56FD;&#x5185; App &#x4E5F;&#x4F1A;&#x8D70;&#x6D77;&#x5916;&#x7684;&#xFF01;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> wg-quick@wg0 --now</span></code></pre></figure></code></pre><h1 id="后记"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%8E%E8%AE%B0" title="后记"></a>后记</h1>
+<p>如果你需要在内网之间传递数据，建议选择一个访问较快的服务器，因为数据转发要通过这个服务器。</p>
+<p>但如果你想使用 WireGuard 访问一些被河蟹的内容也可以，首先需要一个在海外的服务器，然后设置客户端该服务器的 <code>AllowedIPs</code> 为 <code>0.0.0.0/0</code>（意思就是所有 IP 都经过这个服务器转发啦！或者你知道该设置某些网段也行！或者避开内网和本地地址！我不建议用这个番茄！所以就写个最蠢的！），就可以了！记得不用时候关掉，不然一些国内 App 也会走海外的！</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
+<p><strong>A Coder & Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -639,4 +639,4 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.2 at 2019-05-11 周六 10:36:46 CST. -->
+<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->

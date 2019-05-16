@@ -189,157 +189,157 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>&#x8FD9;&#x4E2A;&#x662F;&#x7ED9; 2018 &#x7EA7; C &#x8BED;&#x8A00;&#x8F85;&#x5BFC;&#x51C6;&#x5907;&#x7684;&#x6587;&#x6863;&#xFF0C;&#x5199;&#x6765;&#x5199;&#x53BB;&#x5199;&#x4E86;&#x597D;&#x591A;&#xFF0C;&#x7D22;&#x6027;&#x5728;&#x7F51;&#x7AD9;&#x4E5F;&#x53D1;&#x4E00;&#x4EFD;&#x3002;&#x6709;&#x5F88;&#x591A;&#x662F;&#x6211;&#x89C9;&#x5F97;&#x8001;&#x5E08;&#x4E0D;&#x4F1A;&#x8BB2;&#xFF0C;&#x4F46;&#x4E00;&#x5F00;&#x59CB;&#x5F88;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x4E0D;&#x7406;&#x89E3;&#x53C8;&#x542C;&#x4E0D;&#x61C2;&#x7684;&#xFF0C;&#x6709;&#x5B66; C &#x7684;&#x53EF;&#x4EE5;&#x770B;&#x4E00;&#x770B;&#x3002;</p>
+      <p>这个是给 2018 级 C 语言辅导准备的文档，写来写去写了好多，索性在网站也发一份。有很多是我觉得老师不会讲，但一开始很难理解，不理解又听不懂的，有学 C 的可以看一看。</p>
 <a id="more"></a>
 
-<h1 id="&#x57FA;&#x7840;&#x4E2D;&#x7684;&#x57FA;&#x7840;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%9F%BA%E7%A1%80%E4%B8%AD%E7%9A%84%E5%9F%BA%E7%A1%80" title="&#x57FA;&#x7840;&#x4E2D;&#x7684;&#x57FA;&#x7840;"></a>&#x57FA;&#x7840;&#x4E2D;&#x7684;&#x57FA;&#x7840;</h1>
-<p>&#x8BA1;&#x7B97;&#x673A;&#x53EA;&#x80FD;&#x8BC6;&#x522B;&#x673A;&#x5668;&#x7801;&#xFF0C;&#x673A;&#x5668;&#x7801;&#x5BF9;&#x7A0B;&#x5E8F;&#x5458;&#x4E0D;&#x53CB;&#x597D;&#xFF0C;&#x80AF;&#xB7;&#x6C64;&#x666E;&#x68EE;&#x548C;&#x4E39;&#x5C3C;&#x65AF;&#xB7;&#x91CC;&#x5947;&#x4E3A;&#x4E86;&#x80FD;&#x66F4;&#x5BB9;&#x6613;&#x7F16;&#x5199; UNIX&#xFF0C;&#x8BBE;&#x8BA1;&#x548C;&#x5B9E;&#x73B0;&#x4E86; C &#x8BED;&#x8A00;&#x3002;</p>
-<h2 id="&#x4ECE;&#x4EE3;&#x7801;&#x5230;&#x7A0B;&#x5E8F;"><a class="headerlink" href="/posts/Learning-C-1/#%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E7%A8%8B%E5%BA%8F" title="&#x4ECE;&#x4EE3;&#x7801;&#x5230;&#x7A0B;&#x5E8F;"></a>&#x4ECE;&#x4EE3;&#x7801;&#x5230;&#x7A0B;&#x5E8F;</h2>
-<p>C &#x8BED;&#x8A00;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x7EAF;&#x6587;&#x672C;&#xFF08;&#x5C31;&#x662F;&#x6240;&#x8C13;&#x7684; txt &#x6587;&#x672C;&#x6587;&#x4EF6;&#xFF09;&#xFF0C;&#x4F7F;&#x7528;&#x6269;&#x5C55;&#x540D; <code>.c</code> &#x548C; <code>.h</code> &#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x80FD;&#x591F;&#x8BA9;&#x4EBA;&#x4ECE;&#x540D;&#x5B57;&#x4E0A;&#x8BC6;&#x522B;&#x8FD9;&#x662F; C &#x6E90;&#x7801;&#x6216;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;&#x80FD;&#x591F;&#x7F16;&#x8F91;&#x6587;&#x672C;&#x7684;&#x7A0B;&#x5E8F;&#x7F16;&#x8F91; C &#x8BED;&#x8A00;&#x3002;</p>
-<p>&#x7F16;&#x5199; C &#x7A0B;&#x5E8F;&#x4E3B;&#x8981;&#x6709;&#x4E0B;&#x9762;&#x51E0;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<h1 id="基础中的基础"><a class="headerlink" href="/posts/Learning-C-1/#%E5%9F%BA%E7%A1%80%E4%B8%AD%E7%9A%84%E5%9F%BA%E7%A1%80" title="基础中的基础"></a>基础中的基础</h1>
+<p>计算机只能识别机器码，机器码对程序员不友好，肯·汤普森和丹尼斯·里奇为了能更容易编写 UNIX，设计和实现了 C 语言。</p>
+<h2 id="从代码到程序"><a class="headerlink" href="/posts/Learning-C-1/#%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E7%A8%8B%E5%BA%8F" title="从代码到程序"></a>从代码到程序</h2>
+<p>C 语言本质上是纯文本（就是所谓的 txt 文本文件），使用扩展名 <code>.c</code> 和 <code>.h</code> 主要是为了能够让人从名字上识别这是 C 源码或头文件，你可以使用任何能够编辑文本的程序编辑 C 语言。</p>
+<p>编写 C 程序主要有下面几个步骤：</p>
 <ol>
-<li>&#x7528;&#x4EFB;&#x4F55;&#x4F60;&#x559C;&#x6B22;&#x7684;&#x6587;&#x672C; <strong>&#x7F16;&#x8F91;&#x5668;</strong> &#x7F16;&#x5199;&#x4EE3;&#x7801;&#xFF08;&#x8BB0;&#x4E8B;&#x672C;&#x4E5F;&#x884C;&#xFF0C;&#x4F46;&#x5F88;&#x96BE;&#x7528;&#xFF09;&#x3002;</li>
-<li>&#x8C03;&#x7528; <strong>&#x7F16;&#x8BD1;&#x5668;</strong> &#x5C06;&#x7A0B;&#x5E8F;&#x5458;&#x80FD;&#x770B;&#x61C2;&#x7684;&#x4EE3;&#x7801;&#x7FFB;&#x8BD1;&#x6210;&#x673A;&#x5668;&#x7801;&#x7EC4;&#x6210;&#x7684;&#x7A0B;&#x5E8F;&#x3002;</li>
-<li>&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x5F97;&#x5230;&#x7ED3;&#x679C;&#x3002;</li>
+<li>用任何你喜欢的文本 <strong>编辑器</strong> 编写代码（记事本也行，但很难用）。</li>
+<li>调用 <strong>编译器</strong> 将程序员能看懂的代码翻译成机器码组成的程序。</li>
+<li>运行程序，得到结果。</li>
 </ol>
-<h2 id="&#x540D;&#x8BCD;&#x89E3;&#x91CA;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A" title="&#x540D;&#x8BCD;&#x89E3;&#x91CA;"></a>&#x540D;&#x8BCD;&#x89E3;&#x91CA;</h2>
+<h2 id="名词解释"><a class="headerlink" href="/posts/Learning-C-1/#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A" title="名词解释"></a>名词解释</h2>
 <ul>
-<li>&#x7F16;&#x8F91;&#x5668;&#xFF1A;&#x7528;&#x6765;&#x7F16;&#x5199;&#x4EE3;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x4F55;&#x80FD;&#x7F16;&#x5199;&#x7EAF;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x7684;&#x7A0B;&#x5E8F;&#xFF08;Word &#x8FD9;&#x7C7B;&#x7A0B;&#x5E8F;&#x751F;&#x6210;&#x7684;&#x5E76;&#x4E0D;&#x662F;&#x7EAF;&#x6587;&#x672C;&#xFF09;&#x3002;</li>
-<li>&#x7F16;&#x8BD1;&#x5668;&#xFF1A;&#x7528;&#x6765;&#x7FFB;&#x8BD1;&#x4EE3;&#x7801;&#x5230;&#x673A;&#x5668;&#x7801;&#xFF0C;&#x5C5E;&#x4E8E;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x901A;&#x7528;&#x7684;&#x6709;&#x5FAE;&#x8F6F;&#x7684; MSVC&#xFF0C;GNU &#x7684; GCC &#x6216;&#x8005; LLVM &#x914D;&#x5957;&#x7684; clang&#x3002;</li>
-<li>&#x96C6;&#x6210;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF08;IDE&#xFF09;&#xFF1A;&#x4E00;&#x79CD;&#x96C6;&#x5408;&#x4E86;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x548C;&#x7F16;&#x8BD1;&#x4EE3;&#x7801;&#x529F;&#x80FD;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x901A;&#x5E38;&#x8FD8;&#x4F1A;&#x96C6;&#x5408;&#x4E00;&#x4E9B;&#x9644;&#x52A0;&#x7684;&#x529F;&#x80FD;&#x6BD4;&#x5982;&#x8C03;&#x8BD5;&#x7B49;&#x3002;&#x5176;&#x4E2D;&#x7F16;&#x8BD1;&#x4EE3;&#x7801;&#x7684;&#x529F;&#x80FD;&#x901A;&#x5E38;&#x662F;&#x8C03;&#x7528;&#x4E0A;&#x9762;&#x63D0;&#x5230;&#x7684;&#x90A3;&#x51E0;&#x79CD;&#x7F16;&#x8BD1;&#x5668;&#x8FDB;&#x884C;&#x3002;</li>
+<li>编辑器：用来编写代码，可以是任何能编写纯文本文件的程序（Word 这类程序生成的并不是纯文本）。</li>
+<li>编译器：用来翻译代码到机器码，属于比较复杂的程序，通用的有微软的 MSVC，GNU 的 GCC 或者 LLVM 配套的 clang。</li>
+<li>集成开发环境（IDE）：一种集合了文本编辑和编译代码功能的程序，通常还会集合一些附加的功能比如调试等。其中编译代码的功能通常是调用上面提到的那几种编译器进行。</li>
 </ul>
-<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;IDE &#x5E76;&#x4E0D;&#x662F;&#x7F16;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x5FC5;&#x9700;&#x54C1;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x7F16;&#x5199;&#x6587;&#x672C;&#x53C8;&#x80FD;&#x8C03;&#x7528;&#x7F16;&#x8BD1;&#x5668;&#x5C31;&#x53EF;&#x4EE5;&#x5199;&#x7A0B;&#x5E8F;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x8981;&#x95EE;&#x8BF8;&#x5982;&#x201C;&#x8981;&#x7528; VS &#x5199; C &#x8BED;&#x8A00;&#xFF0C;&#x90A3; VS &#x662F;&#x7528;&#x4EC0;&#x4E48;&#x5199;&#x7684;&#xFF1F;&#x5199; VS &#x7684;&#x516C;&#x53F8;&#x662F;&#x795E;&#x5417;&#xFF1F;&#x201D;&#x8FD9;&#x79CD; <strong>&#x5F31;&#x667A;</strong> &#x95EE;&#x9898;&#x3002;&#x6CA1;&#x6709; C &#x6216;&#x8005; C++ &#x5F88;&#x53EF;&#x80FD;&#x5C31;&#x4E0D;&#x4F1A;&#x6709; VS&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x6709; VS &#x4F9D;&#x7136;&#x53EF;&#x4EE5;&#x5199;&#x7A0B;&#x5E8F;&#x3002;</p>
-<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;&#x4E0D;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; VC++ 6.0 &#x7F16;&#x5199; C &#x7A0B;&#x5E8F;&#xFF0C;<strong>&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x7684;&#x5E74;&#x9F84;&#x6BD4;&#x5728;&#x5EA7;&#x5404;&#x4F4D;&#x90FD;&#x5927;</strong>&#xFF0C;&#x5F53;&#x65F6; C &#x8BED;&#x8A00;&#x8FD8;&#x6CA1;&#x6709;&#x5B8C;&#x6574;&#x7684;&#x6807;&#x51C6;&#xFF0C;&#x548C;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x7684; C &#x76F8;&#x5DEE;&#x5F88;&#x591A;&#x3002;&#x5E76;&#x4E14;&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x662F;&#x4E2A; C++ &#x7684; IDE&#xFF0C;&#x800C; C &#x548C; C++ <strong>&#x5E76;&#x4E0D;&#x5B8C;&#x5168;&#x4E00;&#x6837;</strong>&#xFF0C;&#x5E94;&#x8BE5;&#x89C6;&#x4E3A;&#x4E24;&#x79CD;&#x8BED;&#x8A00;&#x3002;</p>
-<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528; VS &#x6216;&#x8005; Code::Blocks &#x7F16;&#x5199; C &#x7A0B;&#x5E8F;&#xFF0C;&#x82F9;&#x679C; macOS &#x7528;&#x6237;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; Xcode&#xFF0C;&#x8FD9;&#x4E9B;&#x7A0B;&#x5E8F;&#x5BF9;&#x4E8E;&#x6700;&#x65B0;&#x7684; C &#x6807;&#x51C6;&#x6709;&#x7740;&#x975E;&#x5E38;&#x597D;&#x7684;&#x652F;&#x6301;&#x3002;</p>
-<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;&#x5BF9;&#x4E8E; VS &#x7528;&#x6237;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x9ED8;&#x8BA4; VS &#x4F1A;&#x8981;&#x6C42;&#x4F60;&#x4F7F;&#x7528;&#x5B83;&#x79C1;&#x6709;&#x7684;&#x4E00;&#x4E9B;&#x51FD;&#x6570;&#x800C;&#x4E0D;&#x662F;&#x6807;&#x51C6;&#x7684; C &#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x4E2A;&#x9700;&#x8981;&#x5728;&#x4EE3;&#x7801;&#x5F00;&#x59CB;&#x6DFB;&#x52A0;&#x4E00;&#x884C; <code>#define _CRT_SECURE_NO_WARNINGS</code> &#x6765;&#x5173;&#x95ED;&#x3002;&#x5BF9;&#x4E8E; Code::Blocks &#x7528;&#x6237;&#x8BF7;&#x4E0B;&#x8F7D;&#x96C6;&#x6210;&#x4E86;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x5B89;&#x88C5;&#x5305;&#xFF08;&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF0C;&#x4F53;&#x79EF;&#x6700;&#x5927;&#x7684;&#xFF09;&#xFF0C;&#x5426;&#x5219;&#x4F60;&#x4E0B;&#x8F7D;&#x4E0B;&#x6765;&#x4EE5;&#x540E;&#x4F1A;&#x53D1;&#x73B0;&#x81EA;&#x5DF1;&#x5E76;&#x6CA1;&#x6709;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x6CA1;&#x6CD5;&#x7F16;&#x8BD1;&#x4EE3;&#x7801;&#x3002;</p>
-<h2 id="&#x5B66;&#x4E60;C&#x8BED;&#x8A00;&#x7684;&#x6B63;&#x786E;&#x65B9;&#x6CD5;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%AD%A6%E4%B9%A0C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95" title="&#x5B66;&#x4E60;C&#x8BED;&#x8A00;&#x7684;&#x6B63;&#x786E;&#x65B9;&#x6CD5;"></a>&#x5B66;&#x4E60; C &#x8BED;&#x8A00;&#x7684;&#x6B63;&#x786E;&#x65B9;&#x6CD5;</h2>
-<p>&#x591A;&#x5199;&#xFF0C;&#x591A;&#x7EC3;&#xFF0C;&#x5149;&#x52A8;&#x8111;&#x4E0D;&#x52A8;&#x624B;&#x4EC0;&#x4E48;&#x8BED;&#x8A00;&#x90FD;&#x5B66;&#x4E0D;&#x4F1A;&#xFF0C;&#x53EF;&#x4EE5;&#x4ECE;&#x6A21;&#x4EFF;&#x522B;&#x4EBA;&#x7684;&#x4EE3;&#x7801;&#x5F00;&#x59CB;&#xFF1A;</p>
+<p><strong>注意</strong>：IDE 并不是编写代码的必需品，只要能编写文本又能调用编译器就可以写程序，因此不要问诸如“要用 VS 写 C 语言，那 VS 是用什么写的？写 VS 的公司是神吗？”这种 <strong>弱智</strong> 问题。没有 C 或者 C++ 很可能就不会有 VS，但是没有 VS 依然可以写程序。</p>
+<p><strong>注意</strong>：不建议使用 VC++ 6.0 编写 C 程序，<strong>这个程序的年龄比在座各位都大</strong>，当时 C 语言还没有完整的标准，和我们现在的 C 相差很多。并且实际上这是个 C++ 的 IDE，而 C 和 C++ <strong>并不完全一样</strong>，应该视为两种语言。</p>
+<p>可以使用 VS 或者 Code::Blocks 编写 C 程序，苹果 macOS 用户可以使用 Xcode，这些程序对于最新的 C 标准有着非常好的支持。</p>
+<p><strong>注意</strong>：对于 VS 用户需要注意默认 VS 会要求你使用它私有的一些函数而不是标准的 C 函数，这个需要在代码开始添加一行 <code>#define _CRT_SECURE_NO_WARNINGS</code> 来关闭。对于 Code::Blocks 用户请下载集成了编译器的安装包（简而言之，体积最大的），否则你下载下来以后会发现自己并没有编译器，没法编译代码。</p>
+<h2 id="学习C语言的正确方法"><a class="headerlink" href="/posts/Learning-C-1/#%E5%AD%A6%E4%B9%A0C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95" title="学习C语言的正确方法"></a>学习 C 语言的正确方法</h2>
+<p>多写，多练，光动脑不动手什么语言都学不会，可以从模仿别人的代码开始：</p>
 <ol>
-<li>&#x9996;&#x5148;&#x5BF9;&#x7167;&#x522B;&#x4EBA;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x81EA;&#x5DF1;&#x5B8C;&#x6574;&#x7684;&#x8F93;&#x5165;&#x4E00;&#x904D;&#x7A0B;&#x5E8F;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x662F;&#x8981;&#x4F60;&#x590D;&#x5236;&#x7C98;&#x8D34;&#xFF0C;&#x5F53;&#x4F60;&#x80FD;&#x6B63;&#x786E;&#x7684;&#x8F93;&#x5165;&#x7A0B;&#x5E8F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BF4;&#x660E;&#x4F60;&#x5DF2;&#x7ECF;&#x8BB0;&#x4F4F;&#x4E86; C &#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x4E0D;&#x4F1A;&#x6F0F;&#x6389;&#x5206;&#x53F7;&#x6216;&#x8005;&#x62EC;&#x53F7;&#x7B49;&#x3002;</li>
-<li>&#x7136;&#x540E;&#x9605;&#x8BFB;&#x4EE3;&#x7801;&#xFF0C;&#x5E76;&#x63A8;&#x6D4B;&#x8FD9;&#x6BB5;&#x7A0B;&#x5E8F;&#x4F1A;&#x5F97;&#x5230;&#x4EC0;&#x4E48;&#x7ED3;&#x679C;&#x3002;&#x7136;&#x540E;&#x8FD0;&#x884C;&#x4EE3;&#x7801;</li>
-<li>&#x5982;&#x679C;&#x548C;&#x4F60;&#x9884;&#x6D4B;&#x7684;&#x7ED3;&#x679C;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x7814;&#x7A76;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x4E00;&#x6837;&#x3002;</li>
-<li>&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x67D0;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x7136;&#x540E;&#x91CD;&#x65B0;&#x8FDB;&#x884C; 2 3 4 &#x6B65;&#xFF0C;&#x76F4;&#x5230;&#x4F60;&#x5DF2;&#x7ECF;&#x5B8C;&#x5168;&#x638C;&#x63E1;&#x4E86;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x7684;&#x529F;&#x80FD;&#x3002;</li>
-<li>&#x63A5;&#x4E0B;&#x6765;&#x4F60;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x81EA;&#x5DF1;&#x4ECE;&#x5934;&#x5199;&#x4E00;&#x4EFD;&#x4EE3;&#x7801;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x4E86;&#x3002;</li>
+<li>首先对照别人的代码，自己完整的输入一遍程序，这里不是要你复制粘贴，当你能正确的输入程序的时候，说明你已经记住了 C 的结构，不会漏掉分号或者括号等。</li>
+<li>然后阅读代码，并推测这段程序会得到什么结果。然后运行代码</li>
+<li>如果和你预测的结果不一样，研究为什么不一样。</li>
+<li>修改代码中的某一部分，然后重新进行 2 3 4 步，直到你已经完全掌握了这个程序的功能。</li>
+<li>接下来你可以尝试自己从头写一份代码解决问题了。</li>
 </ol>
-<h1 id="&#x8BED;&#x6CD5;&#x57FA;&#x7840;"><a class="headerlink" href="/posts/Learning-C-1/#%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80" title="&#x8BED;&#x6CD5;&#x57FA;&#x7840;"></a>&#x8BED;&#x6CD5;&#x57FA;&#x7840;</h1>
-<p>&#x5BF9;&#x4E8E;&#x8BA1;&#x7B97;&#x673A;&#x6700;&#x57FA;&#x7840;&#x7684;&#x529F;&#x80FD;&#x81EA;&#x7136;&#x662F;&#x505A;&#x8BA1;&#x7B97;&#xFF0C;&#x6240;&#x4EE5; C &#x8BED;&#x8A00;&#x9700;&#x8981;&#x6709; <strong>&#x6570;&#x5B57;</strong> &#x548C; <strong>&#x7B26;&#x53F7;</strong>&#xFF08;&#x5FC5;&#x987B;&#x662F;&#x82F1;&#x6587;&#x7B26;&#x53F7;&#xFF09;&#x4E24;&#x79CD;&#x7EC4;&#x6210;&#x6210;&#x5206;&#x3002;</p>
-<h2 id="&#x6570;&#x5B57;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%95%B0%E5%AD%97" title="&#x6570;&#x5B57;"></a>&#x6570;&#x5B57;</h2>
-<p>&#x6CA1;&#x4EC0;&#x4E48;&#x597D;&#x8BF4;&#x7684;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5199;&#x5341;&#x8FDB;&#x5236;&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x5199;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x53EA;&#x8981;&#x4EE5; <code>0x</code> &#x6216; <code>0X</code> &#x5F00;&#x5934;&#x5C31;&#x884C;&#xFF0C;&#x6BD4;&#x5982; <code>0x1F</code> &#x5C31;&#x662F; 31&#xFF0C;&#x516B;&#x8FDB;&#x5236;&#x5219;&#x662F;&#x4EE5; 0 &#x5F00;&#x5934;&#xFF0C;&#x6BD4;&#x5982; <code>076</code> &#x5C31;&#x662F; 62&#x3002;</p>
-<h2 id="&#x8FD0;&#x7B97;&#x7B26;"><a class="headerlink" href="/posts/Learning-C-1/#%E8%BF%90%E7%AE%97%E7%AC%A6" title="&#x8FD0;&#x7B97;&#x7B26;"></a>&#x8FD0;&#x7B97;&#x7B26;</h2>
-<p>&#x6700;&#x57FA;&#x7840;&#x7684;&#x8FD0;&#x7B97;&#x7B26;&#x81EA;&#x7136;&#x662F;&#x52A0;&#x51CF;&#x4E58;&#x9664;&#xFF0C;&#x5373; <code>+</code>&#x3001;<code>-</code>&#x3001;<code>*</code>&#x3001;<code>/</code>&#x3002;&#xFF08;&#x9664;&#x53F7;&#x8FD9;&#x4E2A;&#x65B9;&#x5411;&#x53EB;&#x659C;&#x6760;&#xFF0C;<code>\</code> &#x8FD9;&#x4E2A;&#x53EB;&#x53CD;&#x659C;&#x6760;&#x3002;&#xFF09;</p>
-<p>&#x6C42;&#x4F59;&#x6570;&#x53C8;&#x53EB;&#x505A;&#x53D6;&#x6A21;&#xFF0C;&#x7B26;&#x53F7;&#x662F; <code>%</code>&#xFF0C;&#x6BD4;&#x5982; <code>5 % 2</code> &#x7ED3;&#x679C;&#x662F; 1&#x3002;</p>
-<p>&#x8FD8;&#x6709;&#x4F4D;&#x8FD0;&#x7B97; &#x6309;&#x4F4D;&#x4E0E; <code>&amp;</code>&#xFF0C;&#x6309;&#x4F4D;&#x6216; <code>|</code>&#xFF0C;&#x6309;&#x4F4D;&#x5F02;&#x6216; <code>^</code>&#xFF0C;&#x5DE6;&#x79FB; <code>&lt;&lt;</code>&#xFF0C;&#x53F3;&#x79FB; <code>&gt;&gt;</code>&#xFF0C;&#x5B83;&#x4EEC;&#x5904;&#x7406;&#x7684;&#x662F;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x662F;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26; <code>=</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x7B26;&#x53F7; <strong>&#x5C06;&#x53F3;&#x8FB9;&#x7684;&#x503C;&#x8D4B;&#x7ED9;&#x5DE6;&#x8FB9;</strong>&#xFF0C;&#x56E0;&#x6B64;&#x5DE6;&#x8FB9;&#x5FC5;&#x987B;&#x662F;&#x53D8;&#x91CF;&#xFF0C;&#x53F3;&#x8FB9;&#x5FC5;&#x987B;&#x662F;&#x6709;&#x503C;&#x7684;&#x8868;&#x8FBE;&#x5F0F;&#xFF08;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x6982;&#x5FF5;&#x5F80;&#x540E;&#x770B;&#xFF09;&#xFF0C;&#x6BD4;&#x5982; <code>2 = 1 + 1;</code> &#x5F88;&#x663E;&#x7136;&#x4E0D;&#x884C;&#xFF0C;2 &#x4E0D;&#x662F;&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x91CC;&#x4E5F;&#x4E0D;&#x662F;&#x6BD4;&#x8F83;&#x76F8;&#x7B49;&#x3002;</p>
-<p>&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x6574;&#x5408;&#x7684;&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x6BD4;&#x5982; <code>+=</code>&#x3001;<code>-=</code>&#x3001;<code>*=</code>&#x3001;<code>/=</code>&#xFF0C;<code>x += 1</code> &#x5C31;&#x7B49;&#x4EF7;&#x4E8E; <code>x = x + 1</code>&#x3002;&#x53D6;&#x6A21;&#x548C;&#x4F4D;&#x8FD0;&#x7B97;&#x4E5F;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x548C;&#x8D4B;&#x503C;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x662F;&#x4E00;&#x4E9B;&#x7528;&#x6765;&#x6BD4;&#x8F83;&#x5173;&#x7CFB;&#x7684;&#x7B26;&#x53F7;&#xFF0C;&#x6BD4;&#x5982; &#x5927;&#x4E8E; <code>&gt;</code>&#xFF0C;&#x5C0F;&#x4E8E; <code>&lt;</code>&#xFF0C;&#x7B49;&#x4E8E; <code>==</code>&#xFF08;&#x5224;&#x65AD;&#x76F8;&#x7B49;&#x7528;&#x4E24;&#x4E2A;&#x7B49;&#x53F7;&#xFF09;&#xFF0C;&#x4E0D;&#x7B49;&#x4E8E; <code>!=</code>&#xFF0C;&#x5927;&#x4E8E;&#x7B49;&#x4E8E; <code>&gt;=</code>&#xFF0C;&#x5C0F;&#x4E8E;&#x7B49;&#x4E8E; <code>&lt;=</code>&#x3002;&#x8FD8;&#x6709;&#x903B;&#x8F91;&#x8FD0;&#x7B97;&#x7B26;&#x53F7; &#x4E0E; <code>&amp;&amp;</code>&#xFF08;&#x540C;&#x771F;&#x5219;&#x771F;&#xFF09;&#xFF0C;&#x6216; <code>||</code>&#xFF08;&#x540C;&#x5047;&#x5219;&#x5047;&#xFF09;&#xFF0C;&#x975E; <code>!</code>&#xFF08;&#x53CD;&#x8F6C;&#xFF09;&#x3002;</p>
-<p>&#x5728;&#x8BF4;&#x660E;&#x4E4B;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x4E86;&#x89E3;&#x5728; C &#x8BED;&#x8A00;&#x91CC;&#x4EC0;&#x4E48;&#x662F;&#x771F;&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x5047;&#xFF0C;&#x7B80;&#x5355;&#x6765;&#x8BF4;&#xFF0C;0 &#x548C;&#x6240;&#x6709;&#x7B49;&#x4E8E; 0 &#x7684;&#x503C;&#x90FD;&#x662F;&#x5047;&#xFF0C;&#x5176;&#x4ED6;&#x6240;&#x6709;&#x503C;&#x90FD;&#x662F;&#x771F;&#x3002;&#x5BF9;&#x4E8E;&#x5173;&#x7CFB;&#x8FD0;&#x7B97;&#xFF0C;&#x771F;&#x8FD4;&#x56DE; 1&#xFF0C;&#x5047;&#x8FD4;&#x56DE; 0&#x3002;</p>
-<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x6BD4;&#x5982;&#x6570;&#x5B66;&#x4E0A;&#x7684; <code>1 &lt; x &lt; 2</code>&#xFF0C;&#x5728; C &#x8BED;&#x8A00;&#x4E2D;&#x662F;&#x4E0D;&#x6210;&#x7ACB;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x6309;&#x7167; C &#x7684;&#x5904;&#x7406;&#x987A;&#x5E8F;&#xFF0C;&#x4F1A;&#x5148;&#x5904;&#x7406; <code>1 &lt; x</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x5F0F;&#x5B50;&#x53EA;&#x53EF;&#x80FD;&#x662F; 0 &#x6216;&#x8005; 1&#xFF0C;&#x6700;&#x540E;&#x5C31;&#x53D8;&#x6210; <code>1 &lt; 2</code> &#x6216;&#x8005; <code>0 &lt; 2</code>&#xFF0C;&#x6C38;&#x8FDC;&#x662F;&#x771F;&#x7684;&#x4E86;&#x3002;&#x6B63;&#x786E;&#x5199;&#x6CD5;&#x662F; <code>x &gt; 1 &amp;&amp; x &lt; 2</code>&#xFF0C;&#x4F7F;&#x7528;&#x903B;&#x8F91;&#x8FD0;&#x7B97;&#x3002;</p>
-<p><code>a != b</code> &#x5C31;&#x7B49;&#x4EF7;&#x4E8E; <code>!(a == b)</code>&#x3002;</p>
-<p><code>,</code> &#x9017;&#x53F7;&#x8FD0;&#x7B97;&#x7B26;&#x8868;&#x793A;&#x6309;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#x7684;&#x5B50;&#x8868;&#x8FBE;&#x5F0F;&#x3002;</p>
-<p><code>()</code> &#x5C0F;&#x62EC;&#x53F7;&#x5C31;&#x5982;&#x540C;&#x6570;&#x5B66;&#x4E2D;&#x7684;&#x62EC;&#x53F7;&#x4E00;&#x822C;&#x6539;&#x53D8;&#x8FD0;&#x7B97;&#x987A;&#x5E8F;&#x3002;</p>
-<p><code>[]</code> &#x4E2D;&#x62EC;&#x53F7;&#x7528;&#x4E8E;&#x53D6;&#x6570;&#x7EC4;&#x5143;&#x7D20;&#xFF0C;&#x6BD4;&#x5982;&#x53D6; &#x6570;&#x7EC4; <code>arr</code> &#x7684;&#x7B2C;&#x4E94;&#x4E2A;&#x5143;&#x7D20;&#xFF08;&#x5982;&#x679C;&#x6709;&#xFF09;&#x5C31;&#x662F; <code>arr[5]</code>&#x3002;</p>
-<p><code>&amp;</code> &#x7528;&#x4E8E;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x800C; <code>*</code> &#x7528;&#x4E8E;&#x901A;&#x8FC7;&#x5730;&#x5740;&#x83B7;&#x53D6;&#x8BE5;&#x4F4D;&#x7F6E;&#x7684;&#x503C;&#x3002;</p>
-<p><code>.</code> &#x7528;&#x4E8E;&#x901A;&#x8FC7;&#x7ED3;&#x6784;&#x4F53;&#x53D8;&#x91CF;&#x540D;&#x5B57;&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x5185;&#x5BB9;&#xFF0C;&#x6BD4;&#x5982;&#x5BF9;&#x4E8E; <code>struct point</code> &#x53D8;&#x91CF; <code>point</code> &#x53D6; <code>point.position_x</code>&#x3002;&#x800C; <code>*</code> &#x7528;&#x4E8E;&#x901A;&#x8FC7;&#x7ED3;&#x6784;&#x4F53;&#x6307;&#x9488;&#x53D6;&#x7ED3;&#x6784;&#x4F53;&#x5185;&#x5BB9;&#xFF0C;&#x6BD4;&#x5982;&#x6709;&#x6307;&#x5411; <code>struct point</code> &#x53D8;&#x91CF; <code>point</code> &#x7684;&#x6307;&#x9488; <code>ptr</code>&#xFF0C;&#x53EF;&#x4EE5; <code>ptr-&gt;position_x</code>&#x3002;</p>
-<p><code>++</code> &#x548C; <code>--</code> &#x5206;&#x522B;&#x662F;&#x8BA9;&#x53D8;&#x91CF;&#x81EA;&#x589E; 1 &#x548C;&#x81EA;&#x51CF; 1&#x3002;</p>
-<p><code>sizeof</code> &#x8FD9;&#x4E2A;&#x8FD0;&#x7B97;&#x7B26;&#x4F1A;&#x7ED9;&#x51FA;&#x540E;&#x9762;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x6216;&#x7C7B;&#x578B;&#x672C;&#x8EAB;&#x7684;&#x5B57;&#x8282;&#x6570;&#xFF0C;&#x6BD4;&#x5982; <code>sizeof char</code> &#x6216;&#x8005; <code>sizeof(char)</code> &#x503C;&#x4E3A; 1&#x3002;</p>
-<p><code>?:</code> &#x662F;&#x552F;&#x4E00;&#x4E00;&#x4E2A;&#x4E09;&#x5143;&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;&#x4E8E; <code>&#x6761;&#x4EF6; ? &#x8868;&#x8FBE;&#x5F0F;1 : &#x8868;&#x8FBE;&#x5F0F;2</code>&#xFF0C;&#x5982;&#x679C;&#x6761;&#x4EF6;&#x4E3A;&#x771F;&#xFF0C;&#x8FD0;&#x884C;&#x8868;&#x8FBE;&#x5F0F;1&#xFF0C;&#x5426;&#x5219;&#x8FD0;&#x884C;&#x8868;&#x8FBE;&#x5F0F;2&#x3002;</p>
-<p>&#x8FD0;&#x7B97;&#x7B26;&#x6709;&#x975E;&#x5E38;&#x590D;&#x6742;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x987A;&#x5E8F;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x5217;&#x51FA;&#x8868;&#x683C;&#xFF0C;&#x5EFA;&#x8BAE;&#x7ECF;&#x5E38;&#x67E5;&#x9605;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5728;&#x5199;&#x7A0B;&#x5E8F;&#x7684;&#x65F6;&#x5019;&#x9047;&#x5230;&#x4E0D;&#x786E;&#x5B9A;&#x7684;&#x5730;&#x65B9;&#xFF0C;<strong>&#x7ED9;&#x4F60;&#x60F3;&#x5148;&#x7B97;&#x7684;&#x5F0F;&#x5B50;&#x52A0;&#x4E0A;&#x5C0F;&#x62EC;&#x53F7;&#x603B;&#x6CA1;&#x9519;</strong>&#x3002;</p>
+<h1 id="语法基础"><a class="headerlink" href="/posts/Learning-C-1/#%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80" title="语法基础"></a>语法基础</h1>
+<p>对于计算机最基础的功能自然是做计算，所以 C 语言需要有 <strong>数字</strong> 和 <strong>符号</strong>（必须是英文符号）两种组成成分。</p>
+<h2 id="数字"><a class="headerlink" href="/posts/Learning-C-1/#%E6%95%B0%E5%AD%97" title="数字"></a>数字</h2>
+<p>没什么好说的，你可以直接写十进制的数字，但是如果你想写十六进制的数字，只要以 <code>0x</code> 或 <code>0X</code> 开头就行，比如 <code>0x1F</code> 就是 31，八进制则是以 0 开头，比如 <code>076</code> 就是 62。</p>
+<h2 id="运算符"><a class="headerlink" href="/posts/Learning-C-1/#%E8%BF%90%E7%AE%97%E7%AC%A6" title="运算符"></a>运算符</h2>
+<p>最基础的运算符自然是加减乘除，即 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>。（除号这个方向叫斜杠，<code>\</code> 这个叫反斜杠。）</p>
+<p>求余数又叫做取模，符号是 <code>%</code>，比如 <code>5 % 2</code> 结果是 1。</p>
+<p>还有位运算 按位与 <code>&</code>，按位或 <code>|</code>，按位异或 <code>^</code>，左移 <code><<</code>，右移 <code>>></code>，它们处理的是内存中的二进制。</p>
+<p>然后是赋值运算符 <code>=</code>，这个符号 <strong>将右边的值赋给左边</strong>，因此左边必须是变量，右边必须是有值的表达式（表达式的概念往后看），比如 <code>2 = 1 + 1;</code> 很显然不行，2 不是变量，这里也不是比较相等。</p>
+<p>还有一些整合的运算符，比如 <code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>，<code>x += 1</code> 就等价于 <code>x = x + 1</code>。取模和位运算也可以这样和赋值结合起来。</p>
+<p>然后是一些用来比较关系的符号，比如 大于 <code>></code>，小于 <code><</code>，等于 <code>==</code>（判断相等用两个等号），不等于 <code>!=</code>，大于等于 <code>>=</code>，小于等于 <code><=</code>。还有逻辑运算符号 与 <code>&&</code>（同真则真），或 <code>||</code>（同假则假），非 <code>!</code>（反转）。</p>
+<p>在说明之前，需要先了解在 C 语言里什么是真，什么是假，简单来说，0 和所有等于 0 的值都是假，其他所有值都是真。对于关系运算，真返回 1，假返回 0。</p>
+<p>需要注意比如数学上的 <code>1 < x < 2</code>，在 C 语言中是不成立的，因为按照 C 的处理顺序，会先处理 <code>1 < x</code>，这个式子只可能是 0 或者 1，最后就变成 <code>1 < 2</code> 或者 <code>0 < 2</code>，永远是真的了。正确写法是 <code>x > 1 && x < 2</code>，使用逻辑运算。</p>
+<p><code>a != b</code> 就等价于 <code>!(a == b)</code>。</p>
+<p><code>,</code> 逗号运算符表示按顺序进行用逗号分隔的子表达式。</p>
+<p><code>()</code> 小括号就如同数学中的括号一般改变运算顺序。</p>
+<p><code>[]</code> 中括号用于取数组元素，比如取 数组 <code>arr</code> 的第五个元素（如果有）就是 <code>arr[5]</code>。</p>
+<p><code>&</code> 用于获取一个变量在内存中的地址，而 <code>*</code> 用于通过地址获取该位置的值。</p>
+<p><code>.</code> 用于通过结构体变量名字访问结构体内容，比如对于 <code>struct point</code> 变量 <code>point</code> 取 <code>point.position_x</code>。而 <code>*</code> 用于通过结构体指针取结构体内容，比如有指向 <code>struct point</code> 变量 <code>point</code> 的指针 <code>ptr</code>，可以 <code>ptr->position_x</code>。</p>
+<p><code>++</code> 和 <code>--</code> 分别是让变量自增 1 和自减 1。</p>
+<p><code>sizeof</code> 这个运算符会给出后面变量的类型或类型本身的字节数，比如 <code>sizeof char</code> 或者 <code>sizeof(char)</code> 值为 1。</p>
+<p><code>?:</code> 是唯一一个三元运算符，使用类似于 <code>条件 ? 表达式1 : 表达式2</code>，如果条件为真，运行表达式1，否则运行表达式2。</p>
+<p>运算符有非常复杂的优先级顺序，在这里列出表格，建议经常查阅，如果你在写程序的时候遇到不确定的地方，<strong>给你想先算的式子加上小括号总没错</strong>。</p>
 <table>
 <thead>
 <tr>
-<th align="left">&#x7C7B;&#x522B;</th>
-<th align="left">&#x8FD0;&#x7B97;&#x7B26;</th>
-<th align="left">&#x7ED3;&#x5408;&#x987A;&#x5E8F;</th>
+<th align="left">类别</th>
+<th align="left">运算符</th>
+<th align="left">结合顺序</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">&#x540E;&#x7F00;</td>
-<td align="left"><code>() [] -&gt; . ++ --</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">后缀</td>
+<td align="left"><code>() [] -> . ++ --</code></td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x4E00;&#x5143;</td>
-<td align="left"><code>+ - ! ~ ++ -- (type) * &amp; sizeof</code></td>
-<td align="left">&#x4ECE;&#x53F3;&#x5230;&#x5DE6;</td>
+<td align="left">一元</td>
+<td align="left"><code>+ - ! ~ ++ -- (type) * & sizeof</code></td>
+<td align="left">从右到左</td>
 </tr>
 <tr>
-<td align="left">&#x4E58;&#x9664;</td>
+<td align="left">乘除</td>
 <td align="left"><code>* / %</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x52A0;&#x51CF;</td>
+<td align="left">加减</td>
 <td align="left"><code>+ -</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x79FB;&#x4F4D;</td>
-<td align="left"><code>&lt;&lt; &gt;&gt;</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">移位</td>
+<td align="left"><code><< >></code></td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x5173;&#x7CFB;</td>
-<td align="left"><code>&lt; &lt;= &gt; &gt;=</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">关系</td>
+<td align="left"><code>< <= > >=</code></td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x76F8;&#x7B49;</td>
+<td align="left">相等</td>
 <td align="left"><code>== !=</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x4F4D;&#x4E0E;</td>
-<td align="left"><code>&amp;</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">位与</td>
+<td align="left"><code>&</code></td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x4F4D;&#x5F02;&#x6216;</td>
+<td align="left">位异或</td>
 <td align="left"><code>^</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x4F4D;&#x6216;</td>
+<td align="left">位或</td>
 <td align="left"><code>|</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x903B;&#x8F91;&#x4E0E;</td>
-<td align="left"><code>&amp;&amp;</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">逻辑与</td>
+<td align="left"><code>&&</code></td>
+<td align="left">从左到右</td>
 </tr>
 <tr>
-<td align="left">&#x903B;&#x8F91;&#x6216;</td>
+<td align="left">逻辑或</td>
 <td align="left">`</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">&#x6761;&#x4EF6;</td>
+<td align="left">条件</td>
 <td align="left"><code>?:</code></td>
-<td align="left">&#x4ECE;&#x53F3;&#x5230;&#x5DE6;</td>
+<td align="left">从右到左</td>
 </tr>
 <tr>
-<td align="left">&#x8D4B;&#x503C;</td>
-<td align="left"><code>= += -= *= /= %=&gt;&gt;= &lt;&lt;= &amp;= ^= |=</code></td>
-<td align="left">&#x4ECE;&#x53F3;&#x5230;&#x5DE6;</td>
+<td align="left">赋值</td>
+<td align="left"><code>= += -= *= /= %=>>= <<= &= ^= |=</code></td>
+<td align="left">从右到左</td>
 </tr>
 <tr>
-<td align="left">&#x9017;&#x53F7;</td>
+<td align="left">逗号</td>
 <td align="left"><code>,</code></td>
-<td align="left">&#x4ECE;&#x5DE6;&#x5230;&#x53F3;</td>
+<td align="left">从左到右</td>
 </tr>
 </tbody></table>
-<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;C &#x5E76;&#x6CA1;&#x6709;&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x7C7B;&#x4F3C;&#x4E8E; x<sup>y</sup> &#x8FD9;&#x79CD;&#x4E58;&#x65B9;&#x7684;&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x800C;&#x662F;&#x9700;&#x8981;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x8BA1;&#x7B97;&#xFF0C;&#x8FD9;&#x91CC;&#x6CA1;&#x6709; <code>**</code>&#xFF0C;<code>^</code> &#x4E5F;&#x4E0D;&#x662F;&#x7528;&#x6765;&#x7B97;&#x8FD9;&#x4E2A;&#x7684;&#x3002;</p>
-<h2 id="&#x6807;&#x8BC6;&#x7B26;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%A0%87%E8%AF%86%E7%AC%A6" title="&#x6807;&#x8BC6;&#x7B26;"></a>&#x6807;&#x8BC6;&#x7B26;</h2>
-<p>&#x9664;&#x6570;&#x5B57;&#x548C;&#x7B26;&#x53F7;&#x4E4B;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x66F4;&#x591A;&#x7684;&#x8BCD;&#x8BED;&#x6765;&#x7ED9; C &#x4E2D;&#x7684;&#x4E1C;&#x897F;&#x8D77;&#x540D;&#x5B57;&#xFF0C;&#x8FD9;&#x4E9B;&#x8BCD;&#x8BED;&#x88AB;&#x79F0;&#x4E3A;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x5408;&#x6CD5;&#xFF08;&#x8BF4;&#x4EBA;&#x8BDD;&#x5C31;&#x662F;&#x6709;&#x6548;&#xFF09;&#x7684;&#x6807;&#x8BC6;&#x7B26;&#x9700;&#x8981;&#x6EE1;&#x8DB3;&#x4EE5;&#x4E0B;&#x4E24;&#x6761;&#x8981;&#x6C42;&#xFF1A;</p>
+<p><strong>注意</strong>：C 并没有用于计算类似于 x<sup>y</sup> 这种乘方的运算符，而是需要调用函数计算，这里没有 <code>**</code>，<code>^</code> 也不是用来算这个的。</p>
+<h2 id="标识符"><a class="headerlink" href="/posts/Learning-C-1/#%E6%A0%87%E8%AF%86%E7%AC%A6" title="标识符"></a>标识符</h2>
+<p>除数字和符号之外，我们还需要更多的词语来给 C 中的东西起名字，这些词语被称为标识符，合法（说人话就是有效）的标识符需要满足以下两条要求：</p>
 <ul>
-<li>&#x7EC4;&#x6210;&#x6210;&#x5206;&#x662F; <strong>&#x5B57;&#x6BCD;</strong> <code>A-Za-z</code>&#xFF08;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#xFF09;&#xFF0C;<strong>&#x6570;&#x5B57;</strong> <code>0-9</code>&#xFF0C;&#x4E0B;&#x5212;&#x7EBF; <code>_</code>&#xFF08;&#x4E0B;&#x5212;&#x7EBF;&#x4E0D;&#x662F;&#x8FDE;&#x5B57;&#x7B26; <code>-</code>&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;&#x662F;&#x52A0;&#x51CF;&#x4E58;&#x9664;&#x7684;&#x51CF;&#xFF09;&#x3002;</li>
-<li>&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x5FC5;&#x987B;&#x662F;&#x5B57;&#x6BCD;&#x6216;&#x8005;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x4E0D;&#x80FD;&#x662F;&#x6570;&#x5B57;&#xFF08;&#x5982;&#x679C;&#x4EE5;&#x6570;&#x5B57;&#x5F00;&#x5934;&#xFF0C;&#x5224;&#x65AD;&#x8FD9;&#x4E2A;&#x8BCD;&#x5230;&#x5E95;&#x662F;&#x6570;&#x5B57;&#x8FD8;&#x662F;&#x6807;&#x8BC6;&#x7B26;&#x5C31;&#x4F1A;&#x53D8;&#x5F97;&#x5F88;&#x9EBB;&#x70E6;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x652F;&#x6301;&#xFF09;&#x3002;</li>
+<li>组成成分是 <strong>字母</strong> <code>A-Za-z</code>（区分大小写），<strong>数字</strong> <code>0-9</code>，下划线 <code>_</code>（下划线不是连字符 <code>-</code>，因为这个是加减乘除的减）。</li>
+<li>第一个字符必须是字母或者下划线，不能是数字（如果以数字开头，判断这个词到底是数字还是标识符就会变得很麻烦，所以不支持）。</li>
 </ul>
-<p>&#x6BD4;&#x5982; <code>if</code>&#xFF0C;<code>areYouOK</code>&#xFF0C;<code>Areyouok</code>&#xFF0C;<code>Dota2_357</code> &#x751A;&#x81F3;&#x662F; <code>_</code>&#xFF08;&#x5355;&#x4E2A;&#x4E0B;&#x5212;&#x7EBF;&#xFF09;&#x90FD;&#x662F;&#x5408;&#x6CD5;&#x4E14; <strong>&#x4E0D;&#x540C;</strong> &#x7684;&#x6807;&#x8BC6;&#x7B26;&#x3002;</p>
-<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;&#x5C3D;&#x91CF;&#x4E0D;&#x8981;&#x5728;&#x7A0B;&#x5E8F;&#x91CC;&#x4F7F;&#x7528;&#x4E2D;&#x6587;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5B9E;&#x5728;&#x4E0D;&#x77E5;&#x9053;&#x67D0;&#x4E2A;&#x8BCD;&#x600E;&#x4E48;&#x7FFB;&#x8BD1;&#x6210;&#x82F1;&#x8BED;&#xFF0C;&#x7528;&#x62FC;&#x97F3;&#x4E5F;&#x53EF;&#x4EE5;&#x52C9;&#x5F3A;&#x63A5;&#x53D7;&#x3002;<strong>&#x5343;&#x4E07;&#x4E0D;&#x8981;&#x5728;&#x7A0B;&#x5E8F;&#x91CC;&#x4F7F;&#x7528;&#x4E2D;&#x6587;&#x6807;&#x70B9;&#x7B26;&#x53F7;&#xFF0C;&#x5B83;&#x4EEC;&#x548C;&#x82F1;&#x6587;&#x7684;&#x6807;&#x70B9;&#x7B26;&#x53F7;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x8BA4;&#x8BC6;&#x5B83;&#x4EEC;</strong>&#x3002;&#x5982;&#x679C;&#x4F60;&#x7ECF;&#x5E38;&#x5206;&#x4E0D;&#x6E05;&#x4E2D;&#x6587;&#x548C;&#x82F1;&#x6587;&#x6807;&#x70B9;&#x7B26;&#x53F7;&#xFF0C;&#x8003;&#x8651;&#x66F4;&#x6362;&#x4F60;&#x7F16;&#x8F91;&#x5668;&#x7684;&#x5B57;&#x4F53;&#x3002;</p>
-<p>&#x5728;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4EE3;&#x7801;&#x4E2D;&#x8FDE;&#x7EED;&#x7684;&#x7A7A;&#x767D;&#x7B26;&#xFF08;&#x5236;&#x8868;&#x7B26; tab&#xFF0C;&#x6362;&#x884C;&#x7B26; newline &#x548C;&#x7A7A;&#x683C; space&#xFF09;&#x4F1A;&#x88AB;&#x5F53;&#x4F5C;&#x4E00;&#x4E2A;&#x7A7A;&#x767D;&#x5904;&#x7406;&#xFF0C;&#x56E0;&#x6B64;&#x5199;&#x51E0;&#x4E2A;&#x7A7A;&#x683C;&#x90FD;&#x662F;&#x65E0;&#x5173;&#x7D27;&#x8981;&#x7684;&#x3002;</p>
-<h2 id="&#x5173;&#x952E;&#x5B57;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%85%B3%E9%94%AE%E5%AD%97" title="&#x5173;&#x952E;&#x5B57;"></a>&#x5173;&#x952E;&#x5B57;</h2>
-<p>&#x5728;&#x5408;&#x6CD5;&#x7684;&#x6807;&#x8BC6;&#x7B26;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;C &#x8BED;&#x8A00;&#x89C4;&#x5B9A;&#x5982;&#x4E0B;&#x7684;&#x6807;&#x8BC6;&#x7B26;&#x662F;&#x5B83;&#x81EA;&#x5DF1; <strong>&#x672C;&#x8EAB;</strong> &#x7528;&#x5230;&#x7684;&#x8BCD;&#xFF0C;&#x8FD9;&#x4E9B;&#x8BCD; <strong>&#x4E0D;&#x80FD;&#x88AB;&#x7528;&#x6237;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x7684;&#x5E93;&#x7528;&#x4F5C;&#x540D;&#x5B57;</strong>&#x3002;&#x6700;&#x5F00;&#x59CB;&#x7684; C &#x8BED;&#x8A00;&#x53EA;&#x6709;&#x5982;&#x4E0B; 32 &#x4E2A;&#x5173;&#x952E;&#x5B57;&#xFF1A;</p>
+<p>比如 <code>if</code>，<code>areYouOK</code>，<code>Areyouok</code>，<code>Dota2_357</code> 甚至是 <code>_</code>（单个下划线）都是合法且 <strong>不同</strong> 的标识符。</p>
+<p><strong>注意</strong>：尽量不要在程序里使用中文，如果你实在不知道某个词怎么翻译成英语，用拼音也可以勉强接受。<strong>千万不要在程序里使用中文标点符号，它们和英文的标点符号是不同的字符，编译器不认识它们</strong>。如果你经常分不清中文和英文标点符号，考虑更换你编辑器的字体。</p>
+<p>在大部分情况下，代码中连续的空白符（制表符 tab，换行符 newline 和空格 space）会被当作一个空白处理，因此写几个空格都是无关紧要的。</p>
+<h2 id="关键字"><a class="headerlink" href="/posts/Learning-C-1/#%E5%85%B3%E9%94%AE%E5%AD%97" title="关键字"></a>关键字</h2>
+<p>在合法的标识符的基础上，C 语言规定如下的标识符是它自己 <strong>本身</strong> 用到的词，这些词 <strong>不能被用户或者其他的库用作名字</strong>。最开始的 C 语言只有如下 32 个关键字：</p>
 <pre><code><figure class="highlight hljs arduino"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -355,35 +355,35 @@
 <span class="hljs-keyword">register</span>    <span class="hljs-keyword">static</span>      <span class="hljs-keyword">extern</span>     <span class="hljs-built_in">break</span>
 <span class="hljs-built_in">case</span>        <span class="hljs-built_in">continue</span>    <span class="hljs-built_in">default</span>    <span class="hljs-built_in">do</span>
 <span class="hljs-built_in">else</span>        <span class="hljs-built_in">for</span>         <span class="hljs-built_in">goto</span>       <span class="hljs-built_in">if</span>
-<span class="hljs-built_in">return</span>      <span class="hljs-built_in">switch</span>      <span class="hljs-built_in">while</span>      <span class="hljs-keyword">sizeof</span></code></pre></figure></code></pre><p>C99 &#x6807;&#x51C6;&#xFF08;&#x5C31;&#x662F; 1999 &#x5E74;&#x51FA;&#x6765;&#x7684;&#x6807;&#x51C6;&#xFF09;&#x6DFB;&#x52A0;&#x4E86;&#x8FD9;&#x51E0;&#x4E2A;&#xFF1A;</p>
+<span class="hljs-built_in">return</span>      <span class="hljs-built_in">switch</span>      <span class="hljs-built_in">while</span>      <span class="hljs-keyword">sizeof</span></code></pre></figure></code></pre><p>C99 标准（就是 1999 年出来的标准）添加了这几个：</p>
 <pre><code><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-keyword">_Bool</span>        <span class="hljs-keyword">_Complex</span>        <span class="hljs-keyword">_Imaginary</span>        <span class="hljs-keyword">inline</span>        <span class="hljs-keyword">restrict</span></code></pre></figure></code></pre><p>C11 &#x6807;&#x51C6;&#xFF08;&#x5C31;&#x662F; 2011 &#x5E74;&#x51FA;&#x6765;&#x7684;&#x6807;&#x51C6;&#xFF09;&#x6DFB;&#x52A0;&#x4E86;&#x8FD9;&#x51E0;&#x4E2A;&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-keyword">_Bool</span>        <span class="hljs-keyword">_Complex</span>        <span class="hljs-keyword">_Imaginary</span>        <span class="hljs-keyword">inline</span>        <span class="hljs-keyword">restrict</span></code></pre></figure></code></pre><p>C11 标准（就是 2011 年出来的标准）添加了这几个：</p>
 <pre><code><figure class="highlight hljs sqf"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 </pre><pre class="code"><code><span class="hljs-variable">_Alignas</span>        <span class="hljs-variable">_Alignof</span>        <span class="hljs-variable">_Atomic</span>        <span class="hljs-variable">_Generic</span>        <span class="hljs-variable">_Noreturn</span>
-<span class="hljs-variable">_Static_assert</span>  <span class="hljs-variable">_Thread_local</span></code></pre></figure></code></pre><p>&#x9664;&#x53BB;&#x8FD9;&#x4E9B;&#xFF0C;&#x5176;&#x4ED6;&#x90FD;&#x662F;&#x7528;&#x6237;&#x53EF;&#x7528;&#x7684;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7ED9;&#x4F60;&#x7684;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x51FD;&#x6570;&#x8D77;&#x4EFB;&#x610F;&#x6EE1;&#x8DB3;&#x6807;&#x8BC6;&#x7B26;&#x8981;&#x6C42;&#x5E76;&#x4E14;&#x4E0D;&#x662F;&#x5173;&#x952E;&#x5B57;&#x7684;&#x540D;&#x5B57;&#x3002;</p>
-<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;&#x8003;&#x8BD5;&#x7684;&#x65F6;&#x5019;&#x770B;&#x6E05;&#x695A;&#x9898;&#x5E72;&#x8981;&#x6C42;&#xFF0C;&#x5982;&#x679C;&#x95EE;&#x7684;&#x662F; <strong>&#x6807;&#x8BC6;&#x7B26;</strong>&#xFF0C;&#x90A3;&#x4E48;&#x5173;&#x952E;&#x5B57;&#x4E5F;&#x662F;&#x6B63;&#x786E;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x95EE;&#x7684;&#x662F; <strong>&#x7528;&#x6237;&#x6807;&#x8BC6;&#x7B26;&#x3001;&#x51FD;&#x6570;&#x540D;&#x6216;&#x8005;&#x53D8;&#x91CF;&#x540D;</strong>&#xFF0C;&#x90A3;&#x5C31;&#x4E0D;&#x80FD;&#x662F;&#x5173;&#x952E;&#x5B57;&#x3002;</p>
-<h2 id="&#x5173;&#x952E;&#x5B57;&#x8BF4;&#x660E;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%B4%E6%98%8E" title="&#x5173;&#x952E;&#x5B57;&#x8BF4;&#x660E;"></a>&#x5173;&#x952E;&#x5B57;&#x8BF4;&#x660E;</h2>
-<p>&#x8FD9;&#x6B21;&#x53EA;&#x8BF4;&#x660E;&#x4E00;&#x4E9B;&#x57FA;&#x7840;&#x7684;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x5BF9;&#x4E8E;&#x5B58;&#x50A8;&#x7C7B;&#x522B;&#x5173;&#x952E;&#x5B57;&#x6682;&#x65F6;&#x4E0D;&#x505A;&#x8BF4;&#x660E;&#x3002;</p>
-<h3 id="&#x6570;&#x636E;&#x7C7B;&#x578B;&#x5173;&#x952E;&#x5B57;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%85%B3%E9%94%AE%E5%AD%97" title="&#x6570;&#x636E;&#x7C7B;&#x578B;&#x5173;&#x952E;&#x5B57;"></a>&#x6570;&#x636E;&#x7C7B;&#x578B;&#x5173;&#x952E;&#x5B57;</h3>
-<p>&#x9664;&#x4E86; <code>void</code> &#x8FD9;&#x4E2A;&#x7279;&#x522B;&#x7684;&#x8BCD;&#x7528;&#x6765;&#x8868;&#x793A;&#x201C;&#x6CA1;&#x6709;&#x7C7B;&#x578B;&#x201D;&#xFF0C;&#x5176;&#x5B83;&#x7684;&#x7C7B;&#x578B;&#x5173;&#x952E;&#x5B57;&#x90FD;&#x6709;&#x5177;&#x4F53;&#x7684;&#x6307;&#x4EE3;&#x3002;&#x8FD9;&#x4E9B;&#x5173;&#x952E;&#x5B57;&#x7528;&#x6765;&#x6807;&#x8BB0;&#x5185;&#x5B58;&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x57FA;&#x7840;&#x7684;&#x7C7B;&#x578B;&#x6709;&#x4E0B;&#x9762;&#x51E0;&#x4E2A;:</p>
+<span class="hljs-variable">_Static_assert</span>  <span class="hljs-variable">_Thread_local</span></code></pre></figure></code></pre><p>除去这些，其他都是用户可用的标识符，你可以给你的变量或者函数起任意满足标识符要求并且不是关键字的名字。</p>
+<p><strong>注意</strong>：考试的时候看清楚题干要求，如果问的是 <strong>标识符</strong>，那么关键字也是正确的，如果问的是 <strong>用户标识符、函数名或者变量名</strong>，那就不能是关键字。</p>
+<h2 id="关键字说明"><a class="headerlink" href="/posts/Learning-C-1/#%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%B4%E6%98%8E" title="关键字说明"></a>关键字说明</h2>
+<p>这次只说明一些基础的关键字，对于存储类别关键字暂时不做说明。</p>
+<h3 id="数据类型关键字"><a class="headerlink" href="/posts/Learning-C-1/#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%85%B3%E9%94%AE%E5%AD%97" title="数据类型关键字"></a>数据类型关键字</h3>
+<p>除了 <code>void</code> 这个特别的词用来表示“没有类型”，其它的类型关键字都有具体的指代。这些关键字用来标记内存中存储的数据类型是什么，基础的类型有下面几个:</p>
 <ul>
-<li><code>char</code>&#xFF1A;&#x957F;&#x5EA6;&#x4E3A; 1 &#x5B57;&#x8282;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x5B57;&#x7B26;&#x3002;</li>
-<li><code>short</code>&#xFF1A;&#x957F;&#x5EA6;&#x4E3A; 2 &#x5B57;&#x8282;&#xFF0C;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x77ED;&#x6574;&#x6570;&#x3002;</li>
-<li><code>int</code>&#xFF1A;&#x957F;&#x5EA6;&#x4E0D;&#x786E;&#x5B9A;&#xFF0C;&#x8003;&#x8BD5;&#x65F6;&#x5019;&#x901A;&#x5E38;&#x8BA4;&#x4E3A;&#x662F; 4 &#x5B57;&#x8282;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x6574;&#x6570;&#x3002;</li>
-<li><code>long</code>&#xFF1A;&#x957F;&#x5EA6;&#x4E0D;&#x786E;&#x5B9A;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x957F;&#x6574;&#x6570;&#xFF08;&#x5927;&#x90E8;&#x5206;&#x73B0;&#x4EE3;&#x673A;&#x5668;&#x4E0A;&#xFF0C;<code>int</code> &#x548C; <code>long</code> &#x4E00;&#x6837;&#x957F;&#xFF09;&#x3002;</li>
-<li><code>long long</code>&#xFF1A;&#x957F;&#x5EA6;&#x4E3A; 8 &#x5B57;&#x8282;&#xFF0C;&#x662F; C &#x91CC;&#x6700;&#x957F;&#x7684;&#x6574;&#x6570;&#x7C7B;&#x578B;&#x3002;</li>
-<li><code>float</code>&#xFF1A;&#x957F;&#x5EA6;&#x4E3A; 4 &#x5B57;&#x8282;&#xFF0C;&#x5B58;&#x50A8;&#x5355;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x6570;&#xFF0C;&#x901A;&#x5E38;&#x7CBE;&#x786E;&#x5EA6;&#x8F83;&#x4F4E;&#x3002;</li>
-<li><code>double</code>&#xFF1A;&#x957F;&#x5EA6;&#x4E3A; 8 &#x5B57;&#x8282;&#xFF0C;&#x5B58;&#x50A8;&#x53CC;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x6570;&#xFF0C;&#x7CBE;&#x786E;&#x5EA6;&#x8F83;&#x9AD8;&#xFF0C;&#x5F00;&#x9500;&#x7565;&#x5927;&#x3002;</li>
+<li><code>char</code>：长度为 1 字节，通常用来存储字符。</li>
+<li><code>short</code>：长度为 2 字节，用来存储短整数。</li>
+<li><code>int</code>：长度不确定，考试时候通常认为是 4 字节，通常用来存储整数。</li>
+<li><code>long</code>：长度不确定，通常用来存储长整数（大部分现代机器上，<code>int</code> 和 <code>long</code> 一样长）。</li>
+<li><code>long long</code>：长度为 8 字节，是 C 里最长的整数类型。</li>
+<li><code>float</code>：长度为 4 字节，存储单精度浮点数，通常精确度较低。</li>
+<li><code>double</code>：长度为 8 字节，存储双精度浮点数，精确度较高，开销略大。</li>
 </ul>
-<p>&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x4FEE;&#x9970;&#x8FD9;&#x4E9B;&#x7C7B;&#x578B;&#x7528;&#x7684;&#x5173;&#x952E;&#x5B57;&#xFF1A;</p>
+<p>还有一些修饰这些类型用的关键字：</p>
 <ul>
-<li><code>signed</code>&#xFF1A;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x5E26;&#x7B26;&#x53F7;&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x901A;&#x5E38;&#x7B2C;&#x4E00;&#x4F4D;&#x7528;&#x4F5C;&#x7B26;&#x53F7;&#x4F4D;&#xFF0C;&#x603B;&#x7684;&#x6570;&#x636E;&#x8303;&#x56F4;&#x4E00;&#x534A;&#x6B63;&#x6570;&#x4E00;&#x534A;&#x8D1F;&#x6570;&#xFF08;&#x5927;&#x90E8;&#x5206;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x9ED8;&#x8BA4;&#x5C31;&#x662F;&#x5E26;&#x7B26;&#x53F7;&#x7684;&#xFF09;&#x3002;</li>
-<li><code>unsigned</code>&#xFF1A;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x8868;&#x793A;&#x7684;&#x662F;&#x4E0D;&#x5E26;&#x7B26;&#x53F7;&#x4F4D;&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x5373;&#x53EA;&#x6709; 0 &#x548C;&#x6B63;&#x6570;&#xFF0C;&#x6CA1;&#x6709;&#x8D1F;&#x6570;&#x3002;&#x4F8B;&#x5982; <code>unsigned int</code>&#x3002;</li>
+<li><code>signed</code>：这个数据可以表示带符号的数字，通常第一位用作符号位，总的数据范围一半正数一半负数（大部分数据类型默认就是带符号的）。</li>
+<li><code>unsigned</code>：这个数据表示的是不带符号位的数字，即只有 0 和正数，没有负数。例如 <code>unsigned int</code>。</li>
 </ul>
-<p>&#x58F0;&#x660E;&#x53D8;&#x91CF;&#x53C2;&#x7167;&#x4E0B;&#x9762;&#x7684; &#x7ED3;&#x6784; &#x90E8;&#x5206;&#x3002;</p>
-<p>&#x6709;&#x5173;&#x6570;&#x636E;&#x8303;&#x56F4;&#xFF0C;&#x5BF9;&#x4E8E;&#x6574;&#x6570;&#xFF0C;&#x5148;&#x628A;&#x957F;&#x5EA6;&#x8F6C;&#x6210; bit &#x6570;&#xFF0C;&#x7136;&#x540E;&#x6709;&#x591A;&#x5C11; bit &#x8303;&#x56F4;&#x5C31;&#x662F; 2 &#x7684;&#x591A;&#x5C11;&#x6B21;&#x65B9;&#xFF0C;&#x6709;&#x7B26;&#x53F7;&#x6570;&#x6B63;&#x8D1F;&#x5206;&#x522B;&#x4E00;&#x534A;&#x4E00;&#x534A;&#xFF0C;&#x8D1F;&#x6570;&#x6BD4;&#x6B63;&#x6570;&#x591A;&#x4E00;&#x4E2A;&#x6570;&#xFF0C;&#x65E0;&#x7B26;&#x53F7;&#x6570;&#x5219;&#x5C31;&#x662F; 0 &#x5230;&#x8FD9;&#x4E2A;&#x6570;&#x3002;</p>
-<p>&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x5B9A;&#x4E49;&#x7ED3;&#x6784;&#x7C7B;&#x578B;&#x7684;&#x5173;&#x952E;&#x5B57; <code>struct</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x5173;&#x952E;&#x5B57;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x53EF;&#x4EE5;&#x628A;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x6253;&#x5305;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x6784;&#x6210;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x6BD4;&#x5982;</p>
+<p>声明变量参照下面的 结构 部分。</p>
+<p>有关数据范围，对于整数，先把长度转成 bit 数，然后有多少 bit 范围就是 2 的多少次方，有符号数正负分别一半一半，负数比正数多一个数，无符号数则就是 0 到这个数。</p>
+<p>还有一个定义结构类型的关键字 <code>struct</code>，这个关键字用来定义结构体，结构体可以把一些数据打包在一起，构成一个独立的类型，比如</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -392,45 +392,45 @@
         <span class="hljs-keyword">int</span> position_x;
         <span class="hljs-keyword">int</span> position_y;
 };</code></pre></figure></code></pre>
-<p>&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x4EE5;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>struct point</code> &#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;&#x8BBF;&#x95EE;&#x7ED3;&#x6784;&#x4F53;&#x4F7F;&#x7528; <code>.</code> &#x548C; <code>-&gt;</code>&#x3002;</p>
-<p>&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x522B;&#x540D;&#x5173;&#x952E;&#x5B57; <code>typedef</code>&#xFF0C;&#x5B83;&#x7528;&#x6765;&#x7ED9;&#x4E00;&#x4E2A;&#x73B0;&#x6709;&#x7684;&#x6570;&#x636E;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x522B;&#x540D;&#xFF0C;&#x4F8B;&#x5982; <code>typedef float scalar;</code>&#xFF0C;&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x7528; <code>scalar</code> &#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#x548C; <code>float</code> &#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
-<p>&#x6709;&#x5173;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x8FD8;&#x8981;&#x6CE8;&#x610F;&#x4E00;&#x70B9;&#xFF0C;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x8FD0;&#x7B97;&#xFF0C;&#x5F97;&#x5230;&#x7684;&#x7C7B;&#x578B;&#x8FD8;&#x662F;&#x539F;&#x6765;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F1A;&#x5411;&#x8868;&#x793A;&#x8303;&#x56F4;&#x66F4;&#x5927;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x8F6C;&#x53D8;&#x3002;&#x6BD4;&#x5982;&#x6574;&#x6570;&#x548C;&#x77ED;&#x6574;&#x6570;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x5F97;&#x5230;&#x6574;&#x6570;&#xFF0C;&#x6574;&#x6570;&#x548C;&#x6D6E;&#x70B9;&#x6570;&#x8FD0;&#x7B97;&#x5F97;&#x5230;&#x6D6E;&#x70B9;&#x6570;&#xFF0C;&#x53CC;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x6570;&#x548C;&#x5355;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x6570;&#x8FD0;&#x7B97;&#x5F97;&#x5230;&#x53CC;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x6570;&#x3002;</p>
-<p>&#x5728;&#x5C06;&#x4E00;&#x4E2A;&#x503C;&#x8D4B;&#x7ED9;&#x53E6;&#x4E00;&#x4E2A;&#x503C;&#x7684;&#x65F6;&#x5019;&#x7C7B;&#x578B;&#x4F1A;&#x88AB;&#x8F6C;&#x6362;&#x6210;&#x88AB;&#x8D4B;&#x503C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x6BD4;&#x5982; <code>int a = 3.0;</code> &#x5B9E;&#x9645;&#x4E0A; a &#x7684;&#x503C;&#x4E3A; 3&#x3002;&#x4F46;&#x4E0A;&#x8FF0;&#x7684;&#x8FD0;&#x7B97;&#x89C4;&#x5219;&#x53D1;&#x751F;&#x5728;&#x8D4B;&#x503C;&#x4E4B;&#x524D;&#xFF0C;&#x56E0;&#x6B64;&#x5C31;&#x7B97;&#x4F60;&#x5199; <code>float b = 5 / 2;</code>&#xFF0C;b &#x7684;&#x503C;&#x4E5F;&#x662F; <code>2.0f</code> &#x800C;&#x4E0D;&#x662F; 2.5&#xFF0C;&#x56E0;&#x4E3A;&#x9996;&#x5148; <code>5 / 2</code> &#x662F;&#x6574;&#x6570;&#x9664;&#x6574;&#x6570;&#xFF0C;&#x5F97;&#x5230;&#x7684;&#x5C31;&#x662F;&#x6574;&#x6570; 2&#xFF0C;2 &#x8F6C;&#x6362;&#x6210;&#x6D6E;&#x70B9;&#x6570;&#x4E5F;&#x662F; <code>2.0f</code>&#xFF0C;&#x56E0;&#x6B64;&#x6B63;&#x786E;&#x7684;&#x5199;&#x6CD5;&#x662F;&#x628A; 5 &#x6216;&#x8005; 2 &#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x6539;&#x6210;&#x5C0F;&#x6570;&#x6BD4;&#x5982; <code>float b = 5.0 / 2;</code>&#xFF0C;&#x6B64;&#x65F6;&#x662F;&#x6D6E;&#x70B9;&#x6570;&#x4E0E;&#x6574;&#x6570;&#x8FD0;&#x7B97;&#xFF0C;&#x9996;&#x5148;&#x5C06;&#x6574;&#x6570; 2 &#x53D8;&#x6210;&#x6D6E;&#x70B9;&#x6570; 2.0&#xFF0C;&#x7136;&#x540E;&#x5F97;&#x5230; 2.5&#x3002;</p>
-<h3 id="&#x6D41;&#x7A0B;&#x63A7;&#x5236;&#x5173;&#x952E;&#x5B57;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%85%B3%E9%94%AE%E5%AD%97" title="&#x6D41;&#x7A0B;&#x63A7;&#x5236;&#x5173;&#x952E;&#x5B57;"></a>&#x6D41;&#x7A0B;&#x63A7;&#x5236;&#x5173;&#x952E;&#x5B57;</h3>
-<h4 id="&#x6761;&#x4EF6;&#x8BED;&#x53E5;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5" title="&#x6761;&#x4EF6;&#x8BED;&#x53E5;"></a>&#x6761;&#x4EF6;&#x8BED;&#x53E5;</h4>
-<p><code>if</code> <code>else</code> &#x7684;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x6761;&#x4EF6;&#x4E3A;&#x771F;&#xFF0C;&#x6267;&#x884C;&#x8BED;&#x53E5;1&#xFF0C;&#x5426;&#x5219;&#x6267;&#x884C;&#x8BED;&#x53E5;2&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5199; else &#x548C;&#x8BED;&#x53E5;2&#x3002;</p>
+<p>定义了一个结构体，以后就可以使用 <code>struct point</code> 作为一个新的数据类型。访问结构体使用 <code>.</code> 和 <code>-></code>。</p>
+<p>还有一个类型别名关键字 <code>typedef</code>，它用来给一个现有的数据定义一个别名，例如 <code>typedef float scalar;</code>，然后就可以用 <code>scalar</code> 作为一个类型，这个类型和 <code>float</code> 是一样的。</p>
+<p>有关数据类型还要注意一点，相同的数据类型进行运算，得到的类型还是原来的类型，如果是不同的数据，会向表示范围更大的数据类型转变。比如整数和短整数进行计算得到整数，整数和浮点数运算得到浮点数，双精度浮点数和单精度浮点数运算得到双精度浮点数。</p>
+<p>在将一个值赋给另一个值的时候类型会被转换成被赋值的数据类型，比如 <code>int a = 3.0;</code> 实际上 a 的值为 3。但上述的运算规则发生在赋值之前，因此就算你写 <code>float b = 5 / 2;</code>，b 的值也是 <code>2.0f</code> 而不是 2.5，因为首先 <code>5 / 2</code> 是整数除整数，得到的就是整数 2，2 转换成浮点数也是 <code>2.0f</code>，因此正确的写法是把 5 或者 2 中的一个改成小数比如 <code>float b = 5.0 / 2;</code>，此时是浮点数与整数运算，首先将整数 2 变成浮点数 2.0，然后得到 2.5。</p>
+<h3 id="流程控制关键字"><a class="headerlink" href="/posts/Learning-C-1/#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%85%B3%E9%94%AE%E5%AD%97" title="流程控制关键字"></a>流程控制关键字</h3>
+<h4 id="条件语句"><a class="headerlink" href="/posts/Learning-C-1/#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5" title="条件语句"></a>条件语句</h4>
+<p><code>if</code> <code>else</code> 的格式如下，如果条件为真，执行语句1，否则执行语句2，也可以不写 else 和语句2。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
-</pre><pre class="code"><code><span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;)
-        &#x8BED;&#x53E5;<span class="hljs-number">1</span>;
+</pre><pre class="code"><code><span class="hljs-keyword">if</span> (条件)
+        语句<span class="hljs-number">1</span>;
 <span class="hljs-keyword">else</span>
-        &#x8BED;&#x53E5;<span class="hljs-number">2</span>;</code></pre></figure></code></pre>
-<p>&#x5D4C;&#x5957;&#x7684; <code>else</code> &#x4F1A;&#x548C;&#x6700;&#x8FD1;&#x7684; <code>if</code> &#x5339;&#x914D;&#xFF0C;&#x9664;&#x975E;&#x4F7F;&#x7528;&#x5927;&#x62EC;&#x53F7;&#x663E;&#x5F0F;&#x9650;&#x5236;&#x8303;&#x56F4;&#x3002;</p>
+        语句<span class="hljs-number">2</span>;</code></pre></figure></code></pre>
+<p>嵌套的 <code>else</code> 会和最近的 <code>if</code> 匹配，除非使用大括号显式限制范围。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
-</pre><pre class="code"><code><span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;)
-        <span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;)
-                &#x8BED;&#x53E5;<span class="hljs-number">1</span>;
+</pre><pre class="code"><code><span class="hljs-keyword">if</span> (条件)
+        <span class="hljs-keyword">if</span> (条件)
+                语句<span class="hljs-number">1</span>;
 <span class="hljs-keyword">else</span>
-        &#x8BED;&#x53E5;<span class="hljs-number">2</span>;</code></pre></figure></code></pre>
-<p>&#x4E0A;&#x9762;&#x8FD9;&#x4E2A; <code>else</code> &#x4F1A;&#x548C;&#x7B2C;&#x4E8C;&#x4E2A; <code>if</code> &#x5339;&#x914D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x3002;</p>
+        语句<span class="hljs-number">2</span>;</code></pre></figure></code></pre>
+<p>上面这个 <code>else</code> 会和第二个 <code>if</code> 匹配，而不是第一个。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
-</pre><pre class="code"><code><span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;) {
-        <span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;)
-                &#x8BED;&#x53E5;<span class="hljs-number">1</span>;
+</pre><pre class="code"><code><span class="hljs-keyword">if</span> (条件) {
+        <span class="hljs-keyword">if</span> (条件)
+                语句<span class="hljs-number">1</span>;
 } <span class="hljs-keyword">else</span>
-        &#x8BED;&#x53E5;<span class="hljs-number">2</span>;</code></pre></figure></code></pre>
-<p>&#x8FD9;&#x4E2A;&#x5C31;&#x548C;&#x7B2C;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x4E86;&#x3002;</p>
-<p><code>switch</code> <code>case</code> &#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x4F5C;&#x6761;&#x4EF6;&#x5224;&#x65AD;&#xFF0C;<code>switch</code> &#x540E;&#x9762;&#x5FC5;&#x987B;&#x63A5;&#x4E00;&#x4E2A;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x800C;&#x4E0D;&#x662F;&#x6761;&#x4EF6;&#x8BED;&#x53E5;&#xFF08;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x5FC5;&#x987B;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7528; <code>==</code> &#x5224;&#x65AD;&#x76F8;&#x7B49;&#xFF0C;&#x5F88;&#x62B1;&#x6B49;&#x5B57;&#x7B26;&#x4E32;&#x4E0D;&#x53EF;&#x4EE5;&#x54C8;&#x54C8;&#x54C8;&#xFF09;&#x3002;&#x5F62;&#x5F0F;&#x5982;&#x4E0B;&#x3002;</p>
+        语句<span class="hljs-number">2</span>;</code></pre></figure></code></pre>
+<p>这个就和第一个匹配了。</p>
+<p><code>switch</code> <code>case</code> 也可以用作条件判断，<code>switch</code> 后面必须接一个条件变量而不是条件语句（这个变量的值必须可以直接用 <code>==</code> 判断相等，很抱歉字符串不可以哈哈哈）。形式如下。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -442,93 +442,93 @@
 <span class="line">9</span>
 <span class="line">10</span>
 <span class="line">11</span>
-</pre><pre class="code"><code><span class="hljs-keyword">switch</span> (&#x6761;&#x4EF6;&#x53D8;&#x91CF;) {
-<span class="hljs-keyword">case</span> &#x503C;<span class="hljs-number">1</span>:
-        &#x8BED;&#x53E5;<span class="hljs-number">1</span>;
-<span class="hljs-keyword">case</span> &#x503C;<span class="hljs-number">2</span>:
-<span class="hljs-keyword">case</span> &#x503C;<span class="hljs-number">3</span>:
-        &#x8BED;&#x53E5;<span class="hljs-number">2</span>;
+</pre><pre class="code"><code><span class="hljs-keyword">switch</span> (条件变量) {
+<span class="hljs-keyword">case</span> 值<span class="hljs-number">1</span>:
+        语句<span class="hljs-number">1</span>;
+<span class="hljs-keyword">case</span> 值<span class="hljs-number">2</span>:
+<span class="hljs-keyword">case</span> 值<span class="hljs-number">3</span>:
+        语句<span class="hljs-number">2</span>;
         <span class="hljs-keyword">break</span>;
 <span class="hljs-keyword">default</span>:
-        &#x8BED;&#x53E5;<span class="hljs-number">3</span>;
+        语句<span class="hljs-number">3</span>;
         <span class="hljs-keyword">break</span>;
 }</code></pre></figure></code></pre>
-<p>&#x6839;&#x636E;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x503C;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x4F1A;&#x8DF3;&#x5230;&#x4E0D;&#x540C;&#x7684; <code>case</code> <strong>&#x5411;&#x4E0B;&#x6267;&#x884C;</strong>&#xFF0C;&#x91CD;&#x70B9;&#x662F;&#x5411;&#x4E0B;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5982;&#x679C;&#x5339;&#x914D;&#x4E86;&#x503C;1&#xFF0C;&#x8FD0;&#x884C;&#x8BED;&#x53E5;1&#x540E;&#x4F1A;&#x5411;&#x4E0B;&#x8FD0;&#x884C;&#x8BED;&#x53E5;2&#xFF0C;&#x53EA;&#x6709;&#x5728;&#x9047;&#x5230; <code>break</code> &#x7684;&#x65F6;&#x5019;&#x624D;&#x4F1A;&#x8DF3;&#x51FA; <code>switch</code> &#x8BED;&#x53E5;&#xFF0C;&#x540C;&#x6837;&#x4E0D;&#x7BA1;&#x5339;&#x914D;&#x7684;&#x662F;&#x503C;2&#x8FD8;&#x662F;&#x503C;3&#xFF0C;&#x90FD;&#x4F1A;&#x8FD0;&#x884C;&#x8BED;&#x53E5;2&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5339;&#x914D;&#xFF0C;&#x4F1A;&#x8FD0;&#x884C; <code>default</code> &#x6807;&#x7B7E;&#x4E0B;&#x9762;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5199; <code>default</code>&#x3002;</p>
-<h4 id="&#x5FAA;&#x73AF;&#x8BED;&#x53E5;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5" title="&#x5FAA;&#x73AF;&#x8BED;&#x53E5;"></a>&#x5FAA;&#x73AF;&#x8BED;&#x53E5;</h4>
-<p>&#x6709;&#x4E09;&#x79CD;&#x5FAA;&#x73AF;&#x8BED;&#x53E5;&#xFF0C;&#x9996;&#x5148;&#x662F; <code>while</code> &#x8BED;&#x53E5;&#xFF0C;&#x8BED;&#x6CD5;&#x5982;&#x4E0B;&#x3002;</p>
+<p>根据条件变量值的不同，会跳到不同的 <code>case</code> <strong>向下执行</strong>，重点是向下，也就是说如果匹配了值1，运行语句1后会向下运行语句2，只有在遇到 <code>break</code> 的时候才会跳出 <code>switch</code> 语句，同样不管匹配的是值2还是值3，都会运行语句2，如果没有匹配，会运行 <code>default</code> 标签下面的内容，当然也可以不写 <code>default</code>。</p>
+<h4 id="循环语句"><a class="headerlink" href="/posts/Learning-C-1/#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5" title="循环语句"></a>循环语句</h4>
+<p>有三种循环语句，首先是 <code>while</code> 语句，语法如下。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-keyword">while</span> (&#x6761;&#x4EF6;)
-        &#x8BED;&#x53E5;;</code></pre></figure></code></pre>
-<p>&#x8BE5;&#x5FAA;&#x73AF;&#x4F1A;&#x5728;&#x6761;&#x4EF6;&#x4E3A;&#x771F;&#x65F6;&#x6267;&#x884C;&#x8BED;&#x53E5;&#xFF0C;&#x6761;&#x4EF6;&#x4E3A;&#x5047;&#x5219;&#x9000;&#x51FA;&#x5FAA;&#x73AF;&#xFF0C;&#x6BCF;&#x6B21;&#x5FAA;&#x73AF;&#x90FD;&#x4F1A;&#x5148;&#x5224;&#x65AD;&#x4E00;&#x6B21;&#x6761;&#x4EF6;&#x518D;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x5FAA;&#x73AF;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x662F; <code>for</code> &#x8BED;&#x53E5;&#xFF0C;&#x8BED;&#x6CD5;&#x5982;&#x4E0B;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-keyword">while</span> (条件)
+        语句;</code></pre></figure></code></pre>
+<p>该循环会在条件为真时执行语句，条件为假则退出循环，每次循环都会先判断一次条件再决定是否循环。</p>
+<p>然后是 <code>for</code> 语句，语法如下。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-keyword">for</span> (&#x5FAA;&#x73AF;&#x5F00;&#x59CB;&#x524D;&#x505A;&#x4E00;&#x6B21;; &#x6761;&#x4EF6;; &#x6BCF;&#x6B21;&#x5FAA;&#x73AF;&#x7ED3;&#x675F;&#x90FD;&#x505A;)
-        &#x8BED;&#x53E5;;</code></pre></figure></code></pre>
-<p>&#x8BE5;&#x8BED;&#x53E5;&#x5728;&#x5FAA;&#x73AF;&#x5F00;&#x59CB;&#x524D;&#x6267;&#x884C;&#x7B2C;&#x4E00;&#x4E2A;&#x5206;&#x53F7;&#x524D;&#x7684;&#x5185;&#x5BB9; <strong>&#x4E00;&#x6B21;</strong>&#xFF0C;&#x7136;&#x540E;&#x5224;&#x65AD;&#x6761;&#x4EF6;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x8FDB;&#x5165;&#x5FAA;&#x73AF;&#xFF0C;&#x5728;&#x6BCF;&#x6B21;&#x5FAA;&#x73AF;&#x4E2D;&#x7684;&#x8BED;&#x53E5;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x90FD;&#x4F1A;&#x505A;&#x7B2C;&#x4E8C;&#x4E2A;&#x5206;&#x53F7;&#x4E4B;&#x540E;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x505A;&#x67D0;&#x4E00;&#x4E2A;&#x90E8;&#x5206;&#xFF0C;&#x76F4;&#x63A5;&#x7A7A;&#x7740;&#x5C31;&#x53EF;&#x4EE5;&#xFF0C;&#x4F46;&#x8981;&#x4FDD;&#x7559;&#x5206;&#x53F7;&#x3002;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684; <code>for</code> &#x5FAA;&#x73AF;&#x5C31;&#x548C; <code>while</code> &#x5FAA;&#x73AF;&#x7B49;&#x4EF7;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-keyword">for</span> (循环开始前做一次; 条件; 每次循环结束都做)
+        语句;</code></pre></figure></code></pre>
+<p>该语句在循环开始前执行第一个分号前的内容 <strong>一次</strong>，然后判断条件决定是否进入循环，在每次循环中的语句结束后，都会做第二个分号之后的内容。如果不想做某一个部分，直接空着就可以，但要保留分号。比如下面的 <code>for</code> 循环就和 <code>while</code> 循环等价。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-keyword">for</span> (; &#x6761;&#x4EF6;;)
-        &#x8BED;&#x53E5;;</code></pre></figure></code></pre>
-<p>&#x6700;&#x540E;&#x662F; <code>do</code> <code>while</code> &#x5FAA;&#x73AF;&#xFF0C;&#x7528;&#x4E8E;&#x9700;&#x8981;&#x5148;&#x505A;&#x4E00;&#x6B21;&#x5FAA;&#x73AF;&#x5185;&#x5BB9;&#x518D;&#x505A;&#x5224;&#x65AD;&#x7684;&#x60C5;&#x51B5;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-keyword">for</span> (; 条件;)
+        语句;</code></pre></figure></code></pre>
+<p>最后是 <code>do</code> <code>while</code> 循环，用于需要先做一次循环内容再做判断的情况。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 </pre><pre class="code"><code><span class="hljs-keyword">do</span>
-        &#x8BED;&#x53E5;;
-<span class="hljs-keyword">while</span> (&#x6761;&#x4EF6;);</code></pre></figure></code></pre>
+        语句;
+<span class="hljs-keyword">while</span> (条件);</code></pre></figure></code></pre>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 </pre><pre class="code"><code><span class="hljs-keyword">do</span> {
-        &#x8BED;&#x53E5;<span class="hljs-number">1</span>;
-        &#x8BED;&#x53E5;<span class="hljs-number">2</span>;
-        &#x8BED;&#x53E5;<span class="hljs-number">3</span>;
-} <span class="hljs-keyword">while</span> (&#x6761;&#x4EF6;);</code></pre></figure></code></pre>
-<h4 id="&#x8DF3;&#x8F6C;&#x8BED;&#x53E5;"><a class="headerlink" href="/posts/Learning-C-1/#%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5" title="&#x8DF3;&#x8F6C;&#x8BED;&#x53E5;"></a>&#x8DF3;&#x8F6C;&#x8BED;&#x53E5;</h4>
-<p>&#x6709;&#x56DB;&#x79CD;&#x8DF3;&#x8F6C;&#x3002;</p>
-<p><code>goto</code> &#x662F;&#x65E0;&#x6761;&#x4EF6;&#x7684;&#x57FA;&#x4E8E;&#x6807;&#x7B7E;&#x7684;&#x8DF3;&#x8F6C;&#x3002;&#x6807;&#x7B7E;&#x5C31;&#x662F;&#x5728;&#x67D0;&#x4E00;&#x53E5;&#x524D;&#x5199;&#x4E00;&#x4E2A;&#x6807;&#x8BC6;&#x7B26;&#x7136;&#x540E;&#x52A0;&#x5192;&#x53F7;&#x3002;</p>
+        语句<span class="hljs-number">1</span>;
+        语句<span class="hljs-number">2</span>;
+        语句<span class="hljs-number">3</span>;
+} <span class="hljs-keyword">while</span> (条件);</code></pre></figure></code></pre>
+<h4 id="跳转语句"><a class="headerlink" href="/posts/Learning-C-1/#%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5" title="跳转语句"></a>跳转语句</h4>
+<p>有四种跳转。</p>
+<p><code>goto</code> 是无条件的基于标签的跳转。标签就是在某一句前写一个标识符然后加冒号。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code>&#x6807;&#x7B7E;: &#x8BED;&#x53E5;&#xFF1B;
-<span class="hljs-keyword">goto</span> &#x6807;&#x7B7E;;</code></pre></figure></code></pre>
-<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x4F1A;&#x9020;&#x6210;&#x4E00;&#x4E2A;&#x6B7B;&#x5FAA;&#x73AF;&#xFF0C;&#x7528;&#x4E8E;&#x5728;&#x8FD9;&#x4E24;&#x53E5;&#x4E4B;&#x95F4;&#x8DF3;&#x6765;&#x8DF3;&#x53BB;&#x3002;<strong>&#x4E0D;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; goto &#x8BED;&#x53E5;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x7A0B;&#x5E8F;&#x91CC;&#x8DF3;&#x6765;&#x8DF3;&#x53BB;&#x5F88;&#x5BB9;&#x6613;&#x8BA9;&#x4EBA;&#x903B;&#x8F91;&#x6DF7;&#x4E71;&#xFF0C;&#x4ECE;&#x800C;&#x65E0;&#x6CD5;&#x8C03;&#x8BD5;</strong>&#x3002;</p>
-<p><code>return</code> &#x8BED;&#x53E5;&#x901A;&#x5E38;&#x7528;&#x4E8E;&#x5728;&#x51FD;&#x6570;&#x4E2D;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x6BD4;&#x5982; <code>return 0;</code> &#x8FD4;&#x56DE;&#x6574;&#x6570; 0&#xFF0C;&#x5F53;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E4B;&#x540E;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x5C31;&#x7ED3;&#x675F;&#x4E86;&#xFF0C;&#x5373;&#x4F7F;&#x540E;&#x9762;&#x8FD8;&#x6709;&#x8BED;&#x53E5;&#x4E5F;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x76F4;&#x63A5; <code>return;</code>&#x3002;</p>
-<p>&#x5269;&#x4F59;&#x4E24;&#x79CD;&#x90FD;&#x662F;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x5FAA;&#x73AF;&#x4E2D;&#x7684;&#x8BED;&#x53E5;&#x3002;</p>
-<p><code>break</code> &#x7528;&#x4E8E;&#x6253;&#x65AD;&#x4E00;&#x4E2A;&#x5FAA;&#x73AF;&#xFF0C;&#x4ECE;&#x5FAA;&#x73AF;&#x4E2D;&#x8DF3;&#x51FA;&#x6765;&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x5FAA;&#x73AF;&#x3002;</p>
+</pre><pre class="code"><code>标签: 语句；
+<span class="hljs-keyword">goto</span> 标签;</code></pre></figure></code></pre>
+<p>这段代码会造成一个死循环，用于在这两句之间跳来跳去。<strong>不建议使用 goto 语句，因为在程序里跳来跳去很容易让人逻辑混乱，从而无法调试</strong>。</p>
+<p><code>return</code> 语句通常用于在函数中返回一个值，比如 <code>return 0;</code> 返回整数 0，当函数返回之后，该函数就结束了，即使后面还有语句也会被忽略，如果不想返回值，直接 <code>return;</code>。</p>
+<p>剩余两种都是主要用于循环中的语句。</p>
+<p><code>break</code> 用于打断一个循环，从循环中跳出来，比如下面的循环。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-keyword">for</span> (; <span class="hljs-number">1</span>; &#x8BED;&#x53E5;)
+</pre><pre class="code"><code><span class="hljs-keyword">for</span> (; <span class="hljs-number">1</span>; 语句)
         <span class="hljs-keyword">break</span>;</code></pre></figure></code></pre>
-<p>&#x5982;&#x679C;&#x6CA1;&#x6709; <code>break</code> &#x8FD9;&#x4E2A;&#x8BED;&#x53E5;&#x662F;&#x4E00;&#x4E2A;&#x6B7B;&#x5FAA;&#x73AF;&#x5E76;&#x4E14;&#x6BCF;&#x6B21;&#x90FD;&#x8FD0;&#x884C;&#x8BED;&#x53E5;&#xFF0C;&#x4F46;&#x662F;&#x6709; <code>break</code>&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x8FDB;&#x5165;&#x5FAA;&#x73AF;&#x4E4B;&#x540E;&#x5C31;&#x8DF3;&#x4E86;&#x51FA;&#x6765;&#xFF0C;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x8BED;&#x53E5;&#x3002;</p>
-<p><code>continue</code> &#x7528;&#x4E8E;&#x8DF3;&#x8FC7;&#x672C;&#x6B21;&#x5FAA;&#x73AF;&#x4E2D;&#x7684;&#x5269;&#x4F59;&#x90E8;&#x5206;&#xFF0C;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x4E0B;&#x6B21;&#x5FAA;&#x73AF;&#x3002;</p>
+<p>如果没有 <code>break</code> 这个语句是一个死循环并且每次都运行语句，但是有 <code>break</code>，第一次进入循环之后就跳了出来，不会执行语句。</p>
+<p><code>continue</code> 用于跳过本次循环中的剩余部分，直接进行下次循环。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
-</pre><pre class="code"><code><span class="hljs-keyword">for</span> (&#x5F00;&#x59CB;; <span class="hljs-number">1</span>; &#x8BED;&#x53E5;<span class="hljs-number">1</span>) {
-        &#x8BED;&#x53E5;<span class="hljs-number">2</span>;
+</pre><pre class="code"><code><span class="hljs-keyword">for</span> (开始; <span class="hljs-number">1</span>; 语句<span class="hljs-number">1</span>) {
+        语句<span class="hljs-number">2</span>;
         <span class="hljs-keyword">continue</span>;
-        &#x8BED;&#x53E5;<span class="hljs-number">3</span>;
+        语句<span class="hljs-number">3</span>;
 }</code></pre></figure></code></pre>
-<p>&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x5728;&#x6267;&#x884C;&#x5B8C;&#x5F00;&#x59CB;&#x4E4B;&#x540E;&#xFF0C;&#x6BCF;&#x6B21;&#x5FAA;&#x73AF;&#x90FD;&#x6267;&#x884C;&#x8BED;&#x53E5;1&#xFF0C;&#x7136;&#x540E; <code>continue</code> &#x76F4;&#x63A5;&#x7ED3;&#x675F;&#x8FD9;&#x6B21;&#x5FAA;&#x73AF;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x6B21;&#xFF0C;&#x56E0;&#x6B64;&#x8BED;&#x53E5;3&#x5C31;&#x4E0D;&#x4F1A;&#x88AB;&#x6267;&#x884C;&#xFF0C;&#x4F46;&#x5BF9;&#x4E8E; <code>for</code> &#x5FAA;&#x73AF;&#x8BED;&#x53E5;1&#x4F1A;&#x88AB;&#x6267;&#x884C;&#x3002;</p>
-<p>&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>break</code> &#x548C; <code>continue</code> &#x90FD;&#x548C; <code>if</code> &#x642D;&#x914D;&#x4F7F;&#x7528;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x800C;&#x4E0D;&#x9700;&#x8981; <code>goto</code>&#x3002;</p>
-<h2 id="&#x7ED3;&#x6784;"><a class="headerlink" href="/posts/Learning-C-1/#%E7%BB%93%E6%9E%84" title="&#x7ED3;&#x6784;"></a>&#x7ED3;&#x6784;</h2>
-<p>C &#x7A0B;&#x5E8F;&#x4E3B;&#x8981;&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#xFF1A;</p>
+<p>这个程序在执行完开始之后，每次循环都执行语句1，然后 <code>continue</code> 直接结束这次循环进入下一次，因此语句3就不会被执行，但对于 <code>for</code> 循环语句1会被执行。</p>
+<p>通常情况下，<code>break</code> 和 <code>continue</code> 都和 <code>if</code> 搭配使用，它们可以解决大部分情况而不需要 <code>goto</code>。</p>
+<h2 id="结构"><a class="headerlink" href="/posts/Learning-C-1/#%E7%BB%93%E6%9E%84" title="结构"></a>结构</h2>
+<p>C 程序主要包含以下部分：</p>
 <ul>
-<li>&#x9884;&#x5904;&#x7406;&#x5668;&#x6307;&#x4EE4;</li>
-<li>&#x51FD;&#x6570;</li>
-<li>&#x53D8;&#x91CF;</li>
-<li>&#x8BED;&#x53E5;&#x548C;&#x8868;&#x8FBE;&#x5F0F;</li>
-<li>&#x6CE8;&#x91CA;</li>
+<li>预处理器指令</li>
+<li>函数</li>
+<li>变量</li>
+<li>语句和表达式</li>
+<li>注释</li>
 </ul>
-<h3 id="&#x6CE8;&#x91CA;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%B3%A8%E9%87%8A" title="&#x6CE8;&#x91CA;"></a>&#x6CE8;&#x91CA;</h3>
-<p>&#x6CE8;&#x91CA;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x201C;&#x8FD9;&#x90E8;&#x4EFD;&#x662F;&#x7ED9;&#x6211;&#x81EA;&#x5DF1;&#x770B;&#x7684;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x8FD9;&#x90E8;&#x4EFD;&#x201D;&#xFF0C;&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x7528;&#x5B83;&#x5199;&#x4E00;&#x4E9B;&#x63D0;&#x793A;&#x81EA;&#x5DF1;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x5FFD;&#x7565;&#x5B83;&#x4EEC;&#x3002;&#x5199;&#x6CE8;&#x91CA;&#x662F;&#x4E2A;&#x597D;&#x4E60;&#x60EF;&#x3002;</p>
-<p>&#x7B2C;&#x4E00;&#x79CD;&#x6CE8;&#x91CA;&#x4F7F;&#x7528; <code>/*</code> &#x548C; <code>*/</code>&#xFF0C;&#x51E1;&#x662F;&#x5728;&#x8FD9;&#x4E24;&#x4E2A;&#x7B26;&#x53F7;&#x4E4B;&#x95F4;&#x7684;&#x90FD;&#x662F;&#x6CE8;&#x91CA;&#xFF0C;&#x8FD9;&#x79CD;&#x6CE8;&#x91CA;&#x53EF;&#x4EE5;&#x8DE8;&#x8D8A;&#x591A;&#x884C;&#x3002;</p>
+<h3 id="注释"><a class="headerlink" href="/posts/Learning-C-1/#%E6%B3%A8%E9%87%8A" title="注释"></a>注释</h3>
+<p>注释用于表示“这部份是给我自己看的，编译器并不需要这部份”，通常我们用它写一些提示自己的语句，编译器会忽略它们。写注释是个好习惯。</p>
+<p>第一种注释使用 <code>/*</code> 和 <code>*/</code>，凡是在这两个符号之间的都是注释，这种注释可以跨越多行。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -536,35 +536,35 @@
 <span class="line">5</span>
 <span class="line">6</span>
 </pre><pre class="code"><code><span class="hljs-comment">/*
-&#x6211;&#x662F;&#x6CE8;&#x91CA;
-&#x6211;&#x662F;&#x6CE8;&#x91CA;
-&#x6211;&#x662F;&#x6CE8;&#x91CA;
+我是注释
+我是注释
+我是注释
 */</span>
-<span class="hljs-comment">/*&#x6211;&#x662F;&#x6CE8;&#x91CA;*/</span></code></pre></figure></code></pre>
-<p>&#x7B2C;&#x4E8C;&#x79CD;&#x6CE8;&#x91CA;&#x4F7F;&#x7528; <code>//</code>&#xFF0C;&#x5B83;&#x7684;&#x8303;&#x56F4;&#x662F;&#x4ECE; <code>//</code> &#x5230;&#x8FD9;&#x4E00;&#x884C;&#x7684;&#x7ED3;&#x5C3E;&#xFF08;&#x6362;&#x884C;&#x7B26;&#xFF09;&#x3002;</p>
+<span class="hljs-comment">/*我是注释*/</span></code></pre></figure></code></pre>
+<p>第二种注释使用 <code>//</code>，它的范围是从 <code>//</code> 到这一行的结尾（换行符）。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-comment">// &#x6211;&#x662F;&#x6CE8;&#x91CA;</span>
-&#x6211;&#x4E0D;&#x662F;&#x6CE8;&#x91CA;</code></pre></figure></code></pre>
-<p>&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x53EF;&#x4EE5;&#x4E34;&#x65F6;&#x6CE8;&#x91CA;&#x6389;&#x4E00;&#x90E8;&#x5206;&#x95EE;&#x9898;&#x4EE3;&#x7801;&#xFF0C;&#x76F8;&#x6BD4;&#x5220;&#x9664;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x6062;&#x590D;&#x5B83;&#x4EEC;&#x3002;</p>
-<h3 id="&#x8BED;&#x53E5;&#x548C;&#x8868;&#x8FBE;&#x5F0F;"><a class="headerlink" href="/posts/Learning-C-1/#%E8%AF%AD%E5%8F%A5%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F" title="&#x8BED;&#x53E5;&#x548C;&#x8868;&#x8FBE;&#x5F0F;"></a>&#x8BED;&#x53E5;&#x548C;&#x8868;&#x8FBE;&#x5F0F;</h3>
-<p>&#x8868;&#x8FBE;&#x5F0F;&#x901A;&#x5E38;&#x505A;&#x4E00;&#x4E2A;&#x52A8;&#x4F5C;&#x5E76;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x503C;&#xFF08;&#x6CE8;&#x610F;&#x6CA1;&#x6709;&#x503C;&#x4E5F;&#x7B97;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x503C;&#xFF09;&#xFF0C;&#x6BD4;&#x5982; <code>1 + 1</code> &#x662F;&#x4E00;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x8FD9;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x503C;&#x4E3A; 2&#xFF0C;&#x8868;&#x8FBE;&#x5F0F;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x7EC4;&#x5408;&#xFF0C;&#x6BD4;&#x5982; <code>(1 + 1) * 2</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x7ED3;&#x679C;&#x4E3A; 4&#x3002;</p>
-<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4E00;&#x4E9B;&#x7279;&#x522B;&#x7684;&#x8FD0;&#x7B97;&#x7B26;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x503C;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x4EE4; <code>int i = 1;</code>&#x3002;&#x4E0D;&#x7BA1;&#x662F; <code>i++</code> &#x8FD8;&#x662F; <code>++i</code>&#xFF0C;&#x6267;&#x884C;&#x7ED3;&#x675F;&#x540E; i &#x90FD;&#x4F1A;&#x53D8;&#x6210; 2&#xFF0C;&#x4F46;&#x662F;&#x4ECE;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x503C;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x8BF4;&#xFF0C;<code>i++</code> &#x8FD9;&#x4E2A;&#x5F0F;&#x5B50;&#x7684;&#x503C;&#x662F; 1&#xFF0C;&#x800C; <code>++i</code> &#x503C;&#x662F; 2&#xFF0C;<code>--</code> &#x540C;&#x7406;&#x3002;</p>
-<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C; <code>i++ == 1</code> &#x662F; <strong>&#x771F;&#x7684;</strong>&#xFF0C;<code>++i == 1</code> &#x662F; <strong>&#x5047;&#x7684;</strong>&#xFF0C;<code>++</code> &#x5728;&#x524D;&#x5C31;&#x5148;&#x52A0;&#x540E;&#x503C;&#xFF0C;<code>++</code> &#x5728;&#x540E;&#x5C31;&#x5148;&#x503C;&#x540E;&#x52A0;&#x3002;</p>
-<p>&#x4E0D;&#x8981;&#x81EA;&#x4F5C;&#x806A;&#x660E;&#xFF0C;&#x5BF9;&#x4E8E; C &#x8BED;&#x8A00;&#x6807;&#x51C6;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x89C4;&#x5B9A;&#x8BF8;&#x5982; <code>y=i+++++i</code>&#xFF08;&#x5176;&#x5B9E;&#x5C31;&#x662F; <code>y = i++ + ++i</code>&#xFF09;&#x7684;&#x8FD0;&#x7B97;&#x8FC7;&#x7A0B;&#x3002;&#x7F16;&#x8BD1;&#x5668;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x8FD9;&#x4E24;&#x4E2A;&#x5F0F;&#x5B50;&#x91CC;&#x7684; i &#x90FD;&#x662F; 1&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x4E00;&#x4E2A;&#x662F; 1 &#x4E00;&#x4E2A;&#x662F; 2&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x90FD;&#x662F; 2&#xFF0C;&#x90A3; y &#x5C31;&#x53EF;&#x80FD;&#x662F; 2 3 4 &#x751A;&#x81F3;&#x662F;&#x5947;&#x5947;&#x602A;&#x602A;&#x7684;&#x4E0D;&#x53EF;&#x9884;&#x6D4B;&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;&#x8003;&#x8BD5;&#x51FA;&#x73B0;&#x8FD9;&#x79CD;&#x95EE;&#x9898;&#xFF0C;&#x5EFA;&#x8BAE;&#x76F4;&#x63A5;&#x544A;&#x8BC9;&#x8001;&#x5E08;&#x9898;&#x6709;&#x95EE;&#x9898;&#x3002;</p>
-<p>C &#x8BED;&#x8A00;&#x89C4;&#x5B9A;&#x8BED;&#x53E5;&#x4EE5;&#x5206;&#x53F7; <code>;</code> &#x7ED3;&#x675F;&#x800C;&#x4E0D;&#x662F;&#x4EE5;&#x6362;&#x884C;&#x7B26;&#x7ED3;&#x675F;&#xFF0C;&#x56E0;&#x6B64;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x884C;&#x91CC;&#x5199;&#x591A;&#x6761;&#x8BED;&#x53E5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x591A;&#x884C;&#x91CC;&#x5199;&#x4E00;&#x6761;&#x8BED;&#x53E5;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x9605;&#x8BFB;&#x5176;&#x4E2D;&#x7684;&#x5206;&#x53F7;&#x3002;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x5206;&#x53F7;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#x2014;&#x2014;&#x5B83;&#x4EC0;&#x4E48;&#x4E5F;&#x4E0D;&#x505A;&#xFF0C;&#x6211;&#x4EEC;&#x53EB;&#x5B83;&#x7A7A;&#x8BED;&#x53E5;&#x3002;</p>
-<p>&#x6BD4;&#x5982;</p>
+</pre><pre class="code"><code><span class="hljs-comment">// 我是注释</span>
+我不是注释</code></pre></figure></code></pre>
+<p>调试程序的时候也可以临时注释掉一部分问题代码，相比删除，这样可以随时恢复它们。</p>
+<h3 id="语句和表达式"><a class="headerlink" href="/posts/Learning-C-1/#%E8%AF%AD%E5%8F%A5%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F" title="语句和表达式"></a>语句和表达式</h3>
+<p>表达式通常做一个动作并得到一个值（注意没有值也算是一种特殊的值），比如 <code>1 + 1</code> 是一个表达式，这个表达式的值为 2，表达式可以互相组合，比如 <code>(1 + 1) * 2</code>，这个表达式的结果为 4。</p>
+<p>需要注意一些特别的运算符表达式的值，比如我们令 <code>int i = 1;</code>。不管是 <code>i++</code> 还是 <code>++i</code>，执行结束后 i 都会变成 2，但是从表达式的值的角度来说，<code>i++</code> 这个式子的值是 1，而 <code>++i</code> 值是 2，<code>--</code> 同理。</p>
+<p>也就是说， <code>i++ == 1</code> 是 <strong>真的</strong>，<code>++i == 1</code> 是 <strong>假的</strong>，<code>++</code> 在前就先加后值，<code>++</code> 在后就先值后加。</p>
+<p>不要自作聪明，对于 C 语言标准，并没有规定诸如 <code>y=i+++++i</code>（其实就是 <code>y = i++ + ++i</code>）的运算过程。编译器可以认为这两个式子里的 i 都是 1，也可以认为一个是 1 一个是 2，还可以认为都是 2，那 y 就可能是 2 3 4 甚至是奇奇怪怪的不可预测的值。如果考试出现这种问题，建议直接告诉老师题有问题。</p>
+<p>C 语言规定语句以分号 <code>;</code> 结束而不是以换行符结束，因此你可以在一行里写多条语句，也可以在多行里写一条语句，编译器会阅读其中的分号。一个单独的分号也是一个语句——它什么也不做，我们叫它空语句。</p>
+<p>比如</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-number">1</span> + <span class="hljs-number">1</span>; <span class="hljs-number">2</span> + <span class="hljs-number">2</span>;</code></pre></figure></code></pre>
-<p>&#x662F;&#x4E24;&#x6761;&#x8BED;&#x53E5;&#x3002;&#x4F46;&#x662F;</p>
+<p>是两条语句。但是</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 </pre><pre class="code"><code>(
         <span class="hljs-number">1</span> + <span class="hljs-number">1</span>
 ) * <span class="hljs-number">2</span>;</code></pre></figure></code></pre>
-<p>&#x662F;&#x4E00;&#x6761;&#x8BED;&#x53E5;&#x3002;</p>
-<p>&#x5BF9;&#x4E8E; C &#x5173;&#x952E;&#x5B57;&#x4E2D;&#x7684;&#x6D41;&#x7A0B;&#x63A7;&#x5236;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x901A;&#x5E38;&#x5B83;&#x4EEC;&#x7684;&#x4F5C;&#x7528; <strong>&#x53EA;&#x80FD;&#x63A7;&#x5236;&#x5B83;&#x4EEC;&#x4E0B;&#x9762;&#x7684;&#x4E00;&#x6761;&#x8BED;&#x53E5;</strong>&#xFF0C;&#x5927;&#x62EC;&#x53F7; <code>{}</code> &#x53EF;&#x4EE5;&#x5728;&#x6587;&#x6CD5;&#x4E0A;&#x5C06;&#x51E0;&#x4E2A;&#x8BED;&#x53E5;&#x7ED3;&#x5408;&#x6210;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#xFF08;&#x8BF4;&#x4EBA;&#x8BDD;&#x5C31;&#x662F;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x5728;&#x8FD9;&#x4E9B;&#x5173;&#x952E;&#x5B57;&#x540E;&#x9762;&#x63A5;&#x4E24;&#x6761;&#x6216;&#x4EE5;&#x4E0A;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x5C31;&#x8981;&#x52A0;&#x5927;&#x62EC;&#x53F7;&#xFF09;&#xFF0C;&#x4F8B;&#x5982;</p>
+<p>是一条语句。</p>
+<p>对于 C 关键字中的流程控制关键字，通常它们的作用 <strong>只能控制它们下面的一条语句</strong>，大括号 <code>{}</code> 可以在文法上将几个语句结合成一个语句（说人话就是如果你想在这些关键字后面接两条或以上的语句，就要加大括号），例如</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -573,23 +573,23 @@
         do_one();
         do_another();
 }</code></pre></figure></code></pre>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x4E00;&#x4E2A;&#x7A7A;&#x7684;&#x5927;&#x62EC;&#x53F7; <code>{}</code> &#x4E5F;&#x662F;&#x7A7A;&#x8BED;&#x53E5;&#x3002;</p>
-<h3 id="&#x51FD;&#x6570;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%87%BD%E6%95%B0" title="&#x51FD;&#x6570;"></a>&#x51FD;&#x6570;</h3>
-<p>&#x51FD;&#x6570;&#x662F; C &#x8BED;&#x8A00;&#x4E2D;&#x6700;&#x4E3B;&#x8981;&#x7684;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#xFF0C;C &#x8BED;&#x8A00;&#x7A0B;&#x5E8F;&#x4E3B;&#x8981;&#x5C31;&#x662F;&#x7531;&#x5404;&#x4E2A;&#x51FD;&#x6570;&#x7EC4;&#x6210;&#x3002;&#x51FD;&#x6570;&#x7C7B;&#x4F3C;&#x4E8E;&#x6570;&#x5B66;&#x4E2D;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4EEC;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x505A;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#xFF0C;&#x6700;&#x540E;&#x8FD4;&#x56DE; <strong>&#x4E00;&#x4E2A;</strong> &#x503C;&#xFF08;C &#x9650;&#x5B9A;&#x51FD;&#x6570;&#x53EA;&#x80FD;&#x8FD4;&#x56DE;&#x5355;&#x4E2A;&#x7ED3;&#x679C;&#x6216;&#x8005;&#x4E0D;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF09;&#x3002;</p>
-<p>&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x7ED3;&#x6784;&#x901A;&#x5E38;&#x662F;&#x50CF;&#x4E0B;&#x9762;&#x8FD9;&#x6837;</p>
+<p>当然，一个空的大括号 <code>{}</code> 也是空语句。</p>
+<h3 id="函数"><a class="headerlink" href="/posts/Learning-C-1/#%E5%87%BD%E6%95%B0" title="函数"></a>函数</h3>
+<p>函数是 C 语言中最主要的组成部分，C 语言程序主要就是由各个函数组成。函数类似于数学中的函数，它们接受一些参数，然后做一些操作，最后返回 <strong>一个</strong> 值（C 限定函数只能返回单个结果或者不返回结果）。</p>
+<p>一个函数的结构通常是像下面这样</p>
 <pre><code><figure class="highlight hljs dust"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
-</pre><pre class="code"><code><span class="xml">&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B; &#x51FD;&#x6570;&#x540D;(&#x53C2;&#x6570;&#x7C7B;&#x578B; &#x53C2;&#x6570;&#x53D8;&#x91CF;&#x540D;, &#x53C2;&#x6570;&#x7C7B;&#x578B; &#x53C2;&#x6570;&#x53D8;&#x91CF;&#x540D;)
+</pre><pre class="code"><code><span class="xml">返回值的类型 函数名(参数类型 参数变量名, 参数类型 参数变量名)
 </span><span class="hljs-template-variable">{
-        &#x51FD;&#x6570;&#x7684;&#x5185;&#x5BB9;
-}</span><span class="xml"></span></code></pre></figure></code></pre><p>&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B;&#x9650;&#x5236;&#x4E86;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;&#x7684;&#x7C7B;&#x578B;&#xFF08;&#x8BF4;&#x4EBA;&#x8BDD;&#x5C31;&#x662F;&#x4F60;&#x524D;&#x9762;&#x5199;&#x5565;&#x7C7B;&#x578B;&#x540E;&#x9762;&#x5C31;&#x5F97;&#x8FD4;&#x56DE;&#x5565;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8FD9;&#x91CC;&#x4F7F;&#x7528; <code>void</code>&#x3002;</p>
-<p>&#x51FD;&#x6570;&#x540D;&#x5219;&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x5C0F;&#x62EC;&#x53F7; <code>()</code> &#x91CC;&#x653E;&#x63A5;&#x53D7;&#x7684;&#x53C2;&#x6570;&#x5217;&#x8868;&#xFF0C;&#x6309;&#x7167; <code>&#x53C2;&#x6570;&#x7C7B;&#x578B; &#x53C2;&#x6570;&#x53D8;&#x91CF;&#x540D;</code> &#x7684;&#x683C;&#x5F0F;&#xFF0C;&#x4E2D;&#x95F4;&#x7528;&#x9017;&#x53F7;&#x8FDE;&#x63A5;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x91CC;&#x4F7F;&#x7528; <code>void</code>&#x3002;</p>
-<p>&#x4E0A;&#x9762;&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x901A;&#x5E38;&#x53EB;&#x505A; <strong>&#x51FD;&#x6570;&#x5934;</strong>&#x3002;</p>
-<p>&#x51FD;&#x6570;&#x7684;&#x5185;&#x5BB9;&#x653E;&#x5728;&#x5927;&#x62EC;&#x53F7;&#x91CC;&#x9762;&#xFF0C;&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x4E5F;&#x901A;&#x5E38;&#x53EB; <strong>&#x51FD;&#x6570;&#x4F53;</strong>&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x4F60;&#x53EF;&#x4EE5;&#x5199; C &#x8BED;&#x53E5;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x4F60;&#x6307;&#x5B9A;&#x4E86;&#x51FD;&#x6570;&#x7C7B;&#x578B;&#xFF0C;&#x51FD;&#x6570;&#x5185;&#x5BB9;&#x91CC;&#x5FC5;&#x987B;&#x7528; <code>return</code> &#x8868;&#x8FBE;&#x5F0F;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5BF9;&#x5E94;&#x7C7B;&#x578B;&#x7684;&#x503C;&#xFF0C;&#x5426;&#x5219;&#x4F60;&#x4F1A;&#x5F97;&#x5230;&#x4E00;&#x4E2A; Error&#x3002;</p>
-<p>&#x6BD4;&#x5982;&#x6709;&#x4E00;&#x4E2A;&#x9650;&#x5236;&#x4E3A;&#x5904;&#x7406;&#x6574;&#x6570;&#x7684;&#x6570;&#x5B66;&#x51FD;&#x6570; <code>f(x) = x * 2</code>&#xFF0C;&#x5199;&#x6210; C &#x7684;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x4E0B;&#x9762;&#x8FD9;&#x6837;&#x3002;</p>
+        函数的内容
+}</span><span class="xml"></span></code></pre></figure></code></pre><p>返回值的类型限制了函数返回的数据的类型（说人话就是你前面写啥类型后面就得返回啥），如果没有返回值，这里使用 <code>void</code>。</p>
+<p>函数名则是一个用户标识符，然后在小括号 <code>()</code> 里放接受的参数列表，按照 <code>参数类型 参数变量名</code> 的格式，中间用逗号连接，如果不接受参数，这里使用 <code>void</code>。</p>
+<p>上面这一部分通常叫做 <strong>函数头</strong>。</p>
+<p>函数的内容放在大括号里面，这一部分也通常叫 <strong>函数体</strong>，在这里你可以写 C 语句。</p>
+<p>如果你指定了函数类型，函数内容里必须用 <code>return</code> 表达式返回一个对应类型的值，否则你会得到一个 Error。</p>
+<p>比如有一个限制为处理整数的数学函数 <code>f(x) = x * 2</code>，写成 C 的函数就是下面这样。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -598,16 +598,16 @@
 </span>{
         <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;
 }</code></pre></figure></code></pre>
-<h3 id="&#x53D8;&#x91CF;"><a class="headerlink" href="/posts/Learning-C-1/#%E5%8F%98%E9%87%8F" title="&#x53D8;&#x91CF;"></a>&#x53D8;&#x91CF;</h3>
-<p>&#x53D8;&#x91CF;&#x5BF9;&#x5E94;&#x7740;&#x5185;&#x5B58;&#x91CC;&#x7684;&#x4E00;&#x5757;&#x7A7A;&#x95F4;&#xFF0C;&#x91CC;&#x9762;&#x5B58;&#x50A8;&#x7740;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x5FC5;&#x987B; <strong>&#x5148;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x624D;&#x80FD;&#x4F7F;&#x7528;</strong>&#xFF0C;&#x58F0;&#x660E;&#x6307;&#x5B9A;&#x4E86;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x548C;&#x540D;&#x5B57;&#x3002;</p>
-<p>&#x58F0;&#x660E;&#x53D8;&#x91CF;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;&#x8FD9;&#x6837;&#x7684;&#x683C;&#x5F0F;&#x3002;</p>
+<h3 id="变量"><a class="headerlink" href="/posts/Learning-C-1/#%E5%8F%98%E9%87%8F" title="变量"></a>变量</h3>
+<p>变量对应着内存里的一块空间，里面存储着一些数据，必须 <strong>先声明一个变量才能使用</strong>，声明指定了变量的类型和名字。</p>
+<p>声明变量的时候使用类似这样的格式。</p>
 <pre><code><figure class="highlight hljs fix"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-attr">&#x53D8;&#x91CF;&#x7C7B;&#x578B; &#x53D8;&#x91CF;&#x540D; </span>=<span class="hljs-string"> &#x521D;&#x59CB;&#x503C;, &#x53D8;&#x91CF;&#x540D; = &#x521D;&#x59CB;&#x503C;;</span></code></pre></figure></code></pre><p>&#x9996;&#x5148;&#x662F;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x7136;&#x540E;&#x8DDF;&#x7740;&#x53D8;&#x91CF;&#x540D;&#x7EC4;&#x6210;&#x7684;&#x5217;&#x8868;&#xFF0C;&#x5217;&#x8868;&#x4E4B;&#x95F4;&#x7528;&#x9017;&#x53F7;&#x5206;&#x5272;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x63D0;&#x4F9B;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>=</code> &#x8D4B;&#x503C;&#xFF0C;&#x53EF;&#x4EE5;&#x7701;&#x7565; <code>=</code> &#x548C;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x8FD9;&#x65F6;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x662F; <strong>&#x4E0D;&#x786E;&#x5B9A;&#x7684;</strong>&#x3002;</p>
-<p>&#x4F8B;&#x5982; <code>int a, b, c = 2;</code>&#x3002;</p>
-<p>&#x9898;&#x5916;&#x8BDD;&#xFF1A;&#x5EFA;&#x8BAE;&#x7ED9;&#x53D8;&#x91CF;&#x8D77;&#x4E2A;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#x5B83;&#x662F;&#x4EC0;&#x4E48;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x5806;&#x4E71;&#x4E03;&#x516B;&#x7CDF;&#x7684;&#x5B57;&#x6BCD;&#xFF0C;&#x6BD4;&#x5982; <code>my_age</code> &#x5C31;&#x6BD4; <code>x3</code> &#x66F4;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#x3002;&#x5728;&#x53D8;&#x91CF;&#x540D;&#x91CC;&#x5199;&#x4E0A;&#x53D8;&#x91CF;&#x7C7B;&#x578B;&#x5012;&#x4E0D;&#x662F;&#x4E2A;&#x597D;&#x4E3B;&#x610F;&#xFF0C;&#x56E0;&#x4E3A;&#x7A0D;&#x5FAE;&#x9AD8;&#x7EA7;&#x70B9;&#x7684;&#x7F16;&#x8F91;&#x5668;&#x90FD;&#x80FD;&#x63A8;&#x5BFC;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x6837;&#x5199;&#x7EAF;&#x7CB9;&#x662F;&#x6D6A;&#x8D39;&#x7A7A;&#x95F4;&#x3002;</p>
-<p>&#x53D8;&#x91CF;&#x662F;&#x6709;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#xFF0C;&#x4F60;&#x4E0D;&#x80FD;&#x5728;&#x4F5C;&#x7528;&#x57DF;&#x5916;&#x9762;&#x8C03;&#x7528;&#x4F5C;&#x7528;&#x57DF;&#x91CC;&#x9762;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x4F46;&#x53CD;&#x8FC7;&#x6765;&#x662F;&#x53EF;&#x4EE5;&#x7684;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4F5C;&#x7528;&#x57DF;&#x6EE1;&#x8DB3;&#x5D4C;&#x5957;&#x5173;&#x7CFB;&#x3002;</p>
-<p>&#x540C;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x91CC;&#x53D8;&#x91CF;&#x4E0D;&#x53EF;&#x4EE5;&#x91CD;&#x590D;&#x58F0;&#x660E;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x5F97;&#x5230;&#x4E00;&#x4E2A; Error&#x3002;&#x4F46;&#x5982;&#x679C;&#x5185;&#x5C42;&#x4F5C;&#x7528;&#x57DF;&#x58F0;&#x660E;&#x4E86;&#x4E00;&#x4E2A;&#x548C;&#x5916;&#x5C42;&#x91CD;&#x540D;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5185;&#x5C42;&#x7684;&#x4F1A;&#x6682;&#x65F6;&#x8986;&#x76D6;&#x5916;&#x5C42;&#x7684;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4F60;&#x6682;&#x65F6;&#x6CA1;&#x529E;&#x6CD5;&#x8BBF;&#x95EE;&#x5916;&#x5C42;&#x7684;&#x90A3;&#x4E2A;&#x3002;</p>
-<p>&#x901A;&#x5E38;&#x6765;&#x8BF4;&#xFF0C;&#x51FD;&#x6570;&#x662F;&#x4E00;&#x5C42;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x7136;&#x540E;&#x5219;&#x662F;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x5224;&#x65AD;&#x6216;&#x5FAA;&#x73AF;&#x8BED;&#x53E5;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x6761;&#x4EF6;&#x548C;&#x5B83;&#x4EEC;&#x63A7;&#x5236;&#x7684;&#x4EE3;&#x7801;&#x5757;&#xFF08;&#x5C31;&#x662F;&#x5927;&#x62EC;&#x53F7;&#x91CC;&#x9762;&#xFF09;&#x6709;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4F60;&#x5728;&#x5FAA;&#x73AF;&#x4F53;&#x91CC;&#x9762;&#x58F0;&#x660E;&#x7684;&#x53D8;&#x91CF;&#x5728;&#x5916;&#x9762;&#x662F;&#x4E0D;&#x80FD;&#x8BBF;&#x95EE;&#x7684;&#x3002;&#x6BD4;&#x5982;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-attr">变量类型 变量名 </span>=<span class="hljs-string"> 初始值, 变量名 = 初始值;</span></code></pre></figure></code></pre><p>首先是变量的类型，然后跟着变量名组成的列表，列表之间用逗号分割，也可以同时提供初始值，只需要使用 <code>=</code> 赋值，可以省略 <code>=</code> 和初始值，这时这个变量的值是 <strong>不确定的</strong>。</p>
+<p>例如 <code>int a, b, c = 2;</code>。</p>
+<p>题外话：建议给变量起个容易理解它是什么的名字，而不是一堆乱七八糟的字母，比如 <code>my_age</code> 就比 <code>x3</code> 更容易理解。在变量名里写上变量类型倒不是个好主意，因为稍微高级点的编辑器都能推导类型，这样写纯粹是浪费空间。</p>
+<p>变量是有作用域的，你不能在作用域外面调用作用域里面的变量，但反过来是可以的，也就是说作用域满足嵌套关系。</p>
+<p>同一个作用域里变量不可以重复声明，否则会得到一个 Error。但如果内层作用域声明了一个和外层重名的变量，内层的会暂时覆盖外层的，也就是说你暂时没办法访问外层的那个。</p>
+<p>通常来说，函数是一层作用域，然后则是对于每个判断或循环语句，它们的条件和它们控制的代码块（就是大括号里面）有一个单独的作用域。也就是说你在循环体里面声明的变量在外面是不能访问的。比如这段代码。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -617,22 +617,22 @@
 <span class="line">7</span>
 <span class="line">8</span>
 <span class="line">9</span>
-</pre><pre class="code"><code><span class="hljs-comment">// &#x4F60;&#x5E94;&#x8BE5;&#x80FD;&#x770B;&#x61C2;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x4E5F;&#x6CA1;&#x6709;&#x53C2;&#x6570;&#x3002;</span>
+</pre><pre class="code"><code><span class="hljs-comment">// 你应该能看懂这个函数没有返回值也没有参数。</span>
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
 </span>{
-        <span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>; <span class="hljs-comment">// &#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;&#x3002;</span>
+        <span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>; <span class="hljs-comment">// 函数作用域。</span>
         <span class="hljs-keyword">int</span> y = <span class="hljs-number">2</span>;
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span>; x &lt; <span class="hljs-number">10</span>; ++x)
-                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>, x, y);        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4F1A;&#x8F93;&#x51FA; 2 2 &#x5230; 9 2 &#x5171;&#x516B;&#x884C;&#x6570;&#x3002;</span>
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, x);        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x7684; x &#x8FD8;&#x662F; 1&#xFF01;</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span>; x < <span class="hljs-number">10</span>; ++x)
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>, x, y);        <span class="hljs-comment">// 这里会输出 2 2 到 9 2 共八行数。</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, x);        <span class="hljs-comment">// 这里的 x 还是 1！</span>
 }</code></pre></figure></code></pre>
-<p>&#x5982;&#x4F60;&#x6240;&#x89C1;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x6211;&#x4EEC;&#x58F0;&#x660E;&#x7684;&#x53D8;&#x91CF; x &#x548C; y &#x5C5E;&#x4E8E;&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x968F;&#x540E; <code>for</code> &#x8BED;&#x53E5;&#x4E2D;&#x58F0;&#x660E;&#x7684; x &#x5C31;&#x662F;&#x5FAA;&#x73AF;&#x4EE3;&#x7801;&#x5757;&#x4F5C;&#x7528;&#x57DF;&#x4E86;&#xFF0C;&#x8FD9;&#x4E2A; x &#x6682;&#x65F6;&#x63A9;&#x76D6;&#x4E86;&#x5916;&#x9762;&#x7684; x&#xFF0C;&#x5F53;&#x79BB;&#x5F00;&#x5FAA;&#x73AF;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x53C8;&#x8BBF;&#x95EE;&#x5230;&#x4E86;&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;&#x7684; x&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x4E00;&#x6B21;&#x6279;&#x91CF;&#x5206;&#x914D;&#x591A;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x88AB;&#x79F0;&#x4E3A;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x7684;&#x58F0;&#x660E;&#x65B9;&#x5F0F;&#x901A;&#x5E38;&#x662F;&#x4E0B;&#x9762;&#x8FD9;&#x6837;&#xFF1A;</p>
+<p>如你所见，第一次我们声明的变量 x 和 y 属于函数作用域，随后 <code>for</code> 语句中声明的 x 就是循环代码块作用域了，这个 x 暂时掩盖了外面的 x，当离开循环之后，我们又访问到了函数作用域的 x。</p>
+<p>我们还可以一次批量分配多个元素，这种方式被称为数组，数组的声明方式通常是下面这样：</p>
 <pre><code><figure class="highlight hljs accesslog"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>&#x6570;&#x636E;&#x7C7B;&#x578B; &#x53D8;&#x91CF;&#x540D;<span class="hljs-string">[&#x6570;&#x7EC4;&#x957F;&#x5EA6;]</span> = {&#x5143;&#x7D20;, &#x5143;&#x7D20;, &#x5143;&#x7D20;};</code></pre></figure></code></pre><p><code>=</code> &#x548C;&#x540E;&#x9762;&#x7684;&#x90E8;&#x5206;&#x662F;&#x4E3A;&#x4E86;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5F53;&#x7136;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
-<p>&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x662F;&#x8FDE;&#x7EED;&#x7684;&#xFF0C;&#x5F53;&#x4F60;&#x60F3;&#x8BBF;&#x95EE;&#x5176;&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>&#x6570;&#x7EC4;&#x540D;[&#x5143;&#x7D20;&#x5E8F;&#x53F7;]</code>&#x3002;<strong>&#x8FD9;&#x91CC;&#x7684;&#x5E8F;&#x53F7;&#x662F;&#x4ECE; 0 &#x5F00;&#x59CB;&#x7684;</strong>&#xFF01;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x957F;&#x5EA6;&#x4E3A; 5 &#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x5143;&#x7D20;&#x5E8F;&#x53F7;&#x5206;&#x522B;&#x662F; 0&#x3001;1&#x3001;2&#x3001;3&#x3001;4&#x3002;</p>
-<p>&#x4F60;&#x53EF;&#x4EE5;&#x5199;&#x8D85;&#x51FA;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x7684;&#x5E8F;&#x53F7;&#xFF0C;C &#x5E76;&#x4E0D;&#x4F1A;&#x963B;&#x6B62;&#x4F60;&#x8FD9;&#x6837;&#x505A;&#xFF0C;&#x4F46;&#x901A;&#x5E38;&#x8FD9;&#x6837;&#x4F1A;&#x89E6;&#x53D1;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#xFF0C;&#x56E0;&#x4E3A;&#x90A3;&#x4E2A;&#x4F4D;&#x7F6E;&#x7684;&#x5185;&#x5B58;&#x5E76;&#x4E0D;&#x4E00;&#x5B9A;&#x8BA9;&#x4F60;&#x8BBF;&#x95EE;&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;C &#x8BED;&#x8A00;&#x76F8;&#x4FE1;&#x4F60;&#x4F1A;&#x9650;&#x5236;&#x8BBF;&#x95EE;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4E0D;&#x8FDB;&#x884C;&#x9650;&#x5236;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x4F60;&#x5728;&#x58F0;&#x660E;&#x7684;&#x65F6;&#x5019;&#x6CA1;&#x6709;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x90A3;&#x4F60;&#x4EE5;&#x540E;&#x5C31;&#x4E0D;&#x80FD;&#x518D;&#x50CF;&#x521D;&#x59CB;&#x5316;&#x5143;&#x7D20;&#x4E00;&#x6837;&#x7ED9;&#x6574;&#x4E2A;&#x6570;&#x7EC4;&#x76F4;&#x63A5;&#x7528; <code>=</code> &#x8D4B;&#x503C;&#x4E86;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x539F;&#x56E0;&#x9700;&#x8981;&#x7B49;&#x8BB2;&#x8FC7;&#x6307;&#x9488;&#x4E4B;&#x540E;&#x518D;&#x8FDB;&#x884C;&#x8BF4;&#x660E;&#x3002;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x4F60;&#x53EF;&#x4EE5;&#x7ED9; <code>&#x6570;&#x7EC4;&#x540D;[&#x5143;&#x7D20;&#x5E8F;&#x53F7;]</code> &#x8FDB;&#x884C;&#x5355;&#x4E2A;&#x7684;&#x8D4B;&#x503C;&#x3002;&#x6BD4;&#x5982;&#x628A; <code>arr</code> &#x7684;&#x4E09;&#x4E2A;&#x5143;&#x7D20;&#x90FD;&#x8BBE;&#x7F6E;&#x6210; 0&#x3002;</p>
+</pre><pre class="code"><code>数据类型 变量名<span class="hljs-string">[数组长度]</span> = {元素, 元素, 元素};</code></pre></figure></code></pre><p><code>=</code> 和后面的部分是为了进行初始化，当然你也可以不进行初始化。</p>
+<p>数组中的元素在内存中是连续的，当你想访问其中的某个元素，只需要使用 <code>数组名[元素序号]</code>。<strong>这里的序号是从 0 开始的</strong>！也就是说长度为 5 的数组，元素序号分别是 0、1、2、3、4。</p>
+<p>你可以写超出数组长度的序号，C 并不会阻止你这样做，但通常这样会触发一个错误，因为那个位置的内存并不一定让你访问。换句话说，C 语言相信你会限制访问的长度，所以它不进行限制。</p>
+<p>如果你在声明的时候没有进行初始化，那你以后就不能再像初始化元素一样给整个数组直接用 <code>=</code> 赋值了，具体的原因需要等讲过指针之后再进行说明。这个时候你可以给 <code>数组名[元素序号]</code> 进行单个的赋值。比如把 <code>arr</code> 的三个元素都设置成 0。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -641,51 +641,51 @@
 arr[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
 arr[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;
 arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</code></pre></figure></code></pre>
-<p>&#x76F8;&#x6BD4;&#x4E8E;&#x5728;&#x4EE3;&#x7801;&#x91CC;&#x4E66;&#x5199;&#x591A;&#x4E2A;&#x53D8;&#x91CF;&#x5982; <code>int a1, a2, a3;</code> &#x4F7F;&#x7528;&#x7C7B;&#x4F3C; <code>int arr[3];</code> &#x8BA9;&#x6211;&#x4EEC;&#x6709;&#x4E86;&#x5728;&#x5FAA;&#x73AF;&#x4E2D;&#x5904;&#x7406;&#x5B83;&#x4EEC;&#x7684;&#x529E;&#x6CD5;&#xFF0C;&#x4F60;&#x4E0D;&#x80FD;&#x5728;&#x5FAA;&#x73AF;&#x4E2D;&#x5904;&#x7406;&#x53D8;&#x91CF;&#x7684;&#x540D;&#x5B57;&#xFF08;&#x8FD9;&#x53EF;&#x4E0D;&#x662F;&#x7B80;&#x5355;&#x5730;&#x62FC;&#x5B57;&#xFF09;&#xFF0C;&#x4F46;&#x4F60;&#x5374;&#x53EF;&#x4EE5;&#x5FAA;&#x73AF;&#x5904;&#x7406;&#x6570;&#x7EC4;&#x7684;&#x4E0B;&#x6807;&#x3002;&#x6BD4;&#x5982;&#x628A; <code>arr</code> &#x7684;&#x4E09;&#x4E2A;&#x5143;&#x7D20;&#x90FD;&#x8BBE;&#x7F6E;&#x6210; 0 &#x8FD8;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x505A;&#x3002;</p>
+<p>相比于在代码里书写多个变量如 <code>int a1, a2, a3;</code> 使用类似 <code>int arr[3];</code> 让我们有了在循环中处理它们的办法，你不能在循环中处理变量的名字（这可不是简单地拼字），但你却可以循环处理数组的下标。比如把 <code>arr</code> 的三个元素都设置成 0 还可以这样做。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 </pre><pre class="code"><code><span class="hljs-keyword">int</span> arr[<span class="hljs-number">3</span>];
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; ++i)
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">3</span>; ++i)
         arr[i] = <span class="hljs-number">0</span>;</code></pre></figure></code></pre>
-<h3 id="&#x9884;&#x5904;&#x7406;&#x5668;&#x6307;&#x4EE4;"><a class="headerlink" href="/posts/Learning-C-1/#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E6%8C%87%E4%BB%A4" title="&#x9884;&#x5904;&#x7406;&#x5668;&#x6307;&#x4EE4;"></a>&#x9884;&#x5904;&#x7406;&#x5668;&#x6307;&#x4EE4;</h3>
-<p>&#x4E25;&#x683C;&#x6765;&#x8BF4;&#xFF0C;&#x9884;&#x5904;&#x7406;&#x5668;&#x6307;&#x4EE4;&#x5E76;&#x4E0D;&#x662F; C &#x8BED;&#x8A00;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x5B83;&#x4EEC;&#x5728;&#x7F16;&#x8BD1;&#x5668;&#x6700;&#x5F00;&#x59CB;&#x5904;&#x7406;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#x8FDB;&#x884C;&#x5DE5;&#x4F5C;&#xFF0C;&#x7136;&#x540E;&#x5F53;&#x7F16;&#x8BD1;&#x5668;&#x5F00;&#x59CB;&#x5C06;&#x4EE3;&#x7801;&#x7FFB;&#x8BD1;&#x6210;&#x673A;&#x5668;&#x7801;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9884;&#x5904;&#x7406;&#x5668;&#x5DF2;&#x7ECF;&#x5DE5;&#x4F5C;&#x5B8C;&#x6BD5;&#x4E86;&#x3002;</p>
-<p>&#x9884;&#x5904;&#x7406;&#x6307;&#x4EE4;&#x4EE5; <code>#</code> &#x5F00;&#x5934;&#xFF0C;&#x6BCF;&#x4E00;&#x884C;&#x4E3A;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x9884;&#x5904;&#x7406;&#x6307;&#x4EE4;&#x90FD;&#x662F;&#x4E0E;&#x6587;&#x672C;&#x66FF;&#x6362;&#x6709;&#x5173;&#x3002;</p>
-<p>&#x8FD9;&#x91CC;&#x4ECB;&#x7ECD;&#x51E0;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x590D;&#x6742;&#x7684;&#x540E;&#x9762;&#x4F1A;&#x5355;&#x72EC;&#x8BF4;&#x660E;&#x3002;</p>
-<p><code>#include &lt;&#x6587;&#x4EF6;&#x540D;&gt;</code> &#x8868;&#x793A;&#x5C06;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x63D2;&#x5165;&#x5230;&#x8FD9;&#x4E00;&#x884C;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x6765;&#x5F15;&#x7528;&#x5934;&#x6587;&#x4EF6;&#xFF0C;<code>&lt;</code> <code>&gt;</code> &#x62EC;&#x8D77;&#x6765;&#x7684;&#x662F;&#x7CFB;&#x7EDF;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x5982;&#x679C;&#x5F15;&#x7528;&#x7684;&#x662F;&#x81EA;&#x5DF1;&#x9879;&#x76EE;&#x91CC;&#x7684;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x7528; <code>#include &quot;&#x6587;&#x4EF6;&#x540D;&quot;</code>&#x3002;</p>
-<p><code>#define &#x6807;&#x8BC6;&#x7B26;1 &#x6807;&#x8BC6;&#x7B26;2</code> &#x8868;&#x793A;&#x5728;&#x6587;&#x4EF6;&#x91CC;&#x6240;&#x6709;&#x51FA;&#x73B0;&#x7684;&#x6807;&#x8BC6;&#x7B26;2&#x90FD;&#x4F1A;&#x88AB;&#x66FF;&#x6362;&#x6210;&#x6807;&#x8BC6;&#x7B26;1&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<h3 id="预处理器指令"><a class="headerlink" href="/posts/Learning-C-1/#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E6%8C%87%E4%BB%A4" title="预处理器指令"></a>预处理器指令</h3>
+<p>严格来说，预处理器指令并不是 C 语言的一部分，它们在编译器最开始处理代码的时候进行工作，然后当编译器开始将代码翻译成机器码的时候，预处理器已经工作完毕了。</p>
+<p>预处理指令以 <code>#</code> 开头，每一行为一个语句，大部分预处理指令都是与文本替换有关。</p>
+<p>这里介绍几个简单的例子，复杂的后面会单独说明。</p>
+<p><code>#include <文件名></code> 表示将这个文件的内容插入到这一行的位置，一般用来引用头文件，<code><</code> <code>></code> 括起来的是系统的头文件名，如果引用的是自己项目里的头文件，则需要用 <code>#include "文件名"</code>。</p>
+<p><code>#define 标识符1 标识符2</code> 表示在文件里所有出现的标识符2都会被替换成标识符1，比如下面的代码。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 </pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PI 3.14</span>
 <span class="hljs-keyword">int</span> c = <span class="hljs-number">2</span> * PI * <span class="hljs-number">5</span>;
 <span class="hljs-keyword">int</span> s = PI * <span class="hljs-number">5</span> * <span class="hljs-number">5</span>;</code></pre></figure></code></pre>
-<p>&#x5728;&#x7F16;&#x8BD1;&#x5668;&#x7FFB;&#x8BD1;&#x4EE3;&#x7801;&#x5230;&#x673A;&#x5668;&#x7801;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x770B;&#x5230;&#x7684;&#x4EE3;&#x7801;&#x5176;&#x5B9E;&#x662F;</p>
+<p>在编译器翻译代码到机器码的时候，它看到的代码其实是</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 </pre><pre class="code"><code><span class="hljs-keyword">int</span> c = <span class="hljs-number">2</span> * <span class="hljs-number">3.14</span> * <span class="hljs-number">5</span>;
 <span class="hljs-keyword">int</span> s = <span class="hljs-number">3.14</span> * <span class="hljs-number">5</span> * <span class="hljs-number">5</span>;</code></pre></figure></code></pre>
-<h1 id="&#x793A;&#x8303;"><a class="headerlink" href="/posts/Learning-C-1/#%E7%A4%BA%E8%8C%83" title="&#x793A;&#x8303;"></a>&#x793A;&#x8303;</h1>
+<h1 id="示范"><a class="headerlink" href="/posts/Learning-C-1/#%E7%A4%BA%E8%8C%83" title="示范"></a>示范</h1>
 <h2 id="Helloworld"><a class="headerlink" href="/posts/Learning-C-1/#Helloworld" title="Helloworld"></a>Hello world!</h2>
-<p>&#x597D;&#x4E86;&#xFF0C;&#x5728;&#x4ECB;&#x7ECD;&#x5B8C;&#x8FD9;&#x4E9B;&#x590D;&#x6742;&#x7684;&#x4E1C;&#x897F;&#x4E4B;&#x540E;&#xFF0C;&#x7EC8;&#x4E8E;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x7A0B;&#x5E8F;&#x793A;&#x8303;&#x4E86;&#xFF0C;&#x73B0;&#x5728;&#x4E66;&#x5199;&#x4E00;&#x4E2A; hello world &#x5C31;&#x4E0D;&#x4F1A;&#x9047;&#x5230;&#x6709;&#x54EA;&#x91CC;&#x8BF4;&#x4E0D;&#x660E;&#x767D;&#x7684;&#x60C5;&#x51B5;&#x3002;</p>
+<p>好了，在介绍完这些复杂的东西之后，终于可以进行一个简单的程序示范了，现在书写一个 hello world 就不会遇到有哪里说不明白的情况。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 <span class="line">6</span>
-</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdio.h></span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
 </span>{
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }</code></pre></figure></code></pre>
-<p>&#x9996;&#x5148;&#x7B2C;&#x4E00;&#x884C;&#x7684; <code>#include &lt;stdio.h&gt;</code> &#x8868;&#x793A;&#x6211;&#x4EEC;&#x628A; <code>stdio.h</code> &#x8FD9;&#x4E2A;&#x5934;&#x6587;&#x4EF6;&#x91CC;&#x7684;&#x5185;&#x5BB9;&#x5168;&#x90E8;&#x63D2;&#x5165;&#x8FDB;&#x6765;&#xFF0C;<code>stdio</code> &#x8868;&#x793A; standard input output &#x5373;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#xFF08;&#x8FD9;&#x91CC;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x662F;&#x4ECE;&#x7A0B;&#x5E8F;&#x7684;&#x89D2;&#x5EA6;&#xFF09;&#x3002;C &#x8BED;&#x8A00;&#x81EA;&#x8EAB;&#x6807;&#x51C6;&#x89C4;&#x5B9A;&#x4E86;&#x8BB8;&#x591A;&#x6709;&#x7528;&#x7684;&#x5185;&#x7F6E;&#x51FD;&#x6570;&#x7ED9;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x8981;&#x5728;&#x4EE3;&#x7801;&#x91CC;&#x58F0;&#x660E;&#x5B83;&#x4EEC;&#xFF0C;&#x8FD9;&#x4E2A;&#x5934;&#x6587;&#x4EF6;&#x5C31;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E9B;&#x51FD;&#x6570;&#x7684;&#x58F0;&#x660E;&#xFF0C;&#x540E;&#x7EED;&#x4F1A;&#x7EE7;&#x7EED;&#x8BF4;&#x660E;&#x5934;&#x6587;&#x4EF6;&#x7684;&#x4F5C;&#x7528;&#x4E0E;&#x5185;&#x5BB9;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x540D;&#x79F0;&#x4E3A; <code>main</code>&#xFF0C;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x4E3A; <code>int</code>&#xFF0C;&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x662F; C &#x8BED;&#x8A00;&#x89C4;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x5165;&#x53E3;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x8FD0;&#x884C;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4ECE;&#x8C03;&#x7528; <code>main()</code> &#x5F00;&#x59CB;&#x7684;&#xFF0C;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5728; C &#x8BED;&#x8A00;&#x6807;&#x51C6;&#x4E2D;&#xFF0C;<code>main()</code> &#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5FC5;&#x987B;&#x4E3A; <code>int</code>&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x89C1;&#x5230;&#x8FC7; <code>void main()</code> &#x6216;&#x8005;&#x5E72;&#x8106;&#x8FDE; <code>void</code> &#x8FD9;&#x79CD;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x90FD;&#x4E0D;&#x5199;&#x7684;&#xFF0C;&#x8FD9;&#x4E9B;&#x90FD;&#x662F;&#x9519;&#x8BEF;&#x5199;&#x6CD5;&#xFF0C;&#x67D0;&#x4E9B;&#x4E0D;&#x6807;&#x51C6;&#x7684;&#x7F16;&#x8BD1;&#x5668;&#x53EF;&#x80FD;&#x652F;&#x6301;&#xFF0C;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#x6807;&#x51C6;&#x91CC;&#x6CA1;&#x6709;&#x5B83;&#x4EEC;&#xFF0C;&#x4F60;&#x5728;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x80FD;&#x8FD9;&#x4E48;&#x5199;&#x3002;</p>
-<p>&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x5185;&#x5BB9;&#x53EA;&#x6709;&#x4E24;&#x53E5;&#xFF0C;&#x7B2C;&#x4E00;&#x53E5; <code>printf(&quot;Hello world!\n&quot;);</code> &#x4F1A;&#x5728;&#x4F60;&#x7684;&#x7EC8;&#x7AEF;&#x754C;&#x9762;&#x8F93;&#x51FA;&#x4E00;&#x53E5; <code>Hello world!</code> &#x5E76;&#x6362;&#x884C;&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#x6211;&#x4EEC;&#x8C03;&#x7528;&#x4E86;&#x8FD9;&#x4E2A;&#x53EB;&#x505A; <code>printf()</code> &#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x662F; C &#x6807;&#x51C6;&#x5E93;&#x89C4;&#x5B9A;&#x7684;&#x683C;&#x5F0F;&#x5316;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#xFF08;f &#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x6210; format&#xFF09;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x8FD9;&#x6B21;&#x53EA;&#x662F;&#x7528;&#x5B83;&#x8F93;&#x51FA;&#x4E00;&#x6761;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;<code>\n</code> &#x662F;&#x4E00;&#x4E2A;&#x8F6C;&#x4E49;&#x5B57;&#x7B26;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x5B83;&#x8868;&#x793A;&#x201C;&#x56DE;&#x8F66;&#x201D;&#x8FD9;&#x4E2A;&#x65E0;&#x6CD5;&#x5728;&#x4EE3;&#x7801;&#x91CC;&#x6253;&#x51FA;&#x6765;&#x7684;&#x7B26;&#x53F7;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x53BB;&#x6389;&#x5B83;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8F93;&#x51FA;&#x70B9;&#x4EC0;&#x4E48;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x8FD9;&#x4E24;&#x6B21;&#x7684;&#x8F93;&#x51FA;&#x4F1A;&#x51FA;&#x73B0;&#x5728;&#x540C;&#x4E00;&#x884C;&#x91CC;&#x9762;&#x2014;&#x2014;C &#x4E0D;&#x4F1A;&#x4E71;&#x505A;&#x4EFB;&#x4F55;&#x4F60;&#x6CA1;&#x8BA9;&#x5B83;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x6709;&#x5173; <code>printf()</code> &#x548C;&#x8F6C;&#x4E49;&#x5B57;&#x7B26;&#x7684;&#x66F4;&#x591A;&#x5185;&#x5BB9;&#xFF0C;&#x4E0B;&#x6B21;&#x4F1A;&#x8FDB;&#x884C;&#x4ECB;&#x7ECD;&#x3002;</p>
-<p>&#x5BF9;&#x4E8E;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7684;&#x7406;&#x89E3;&#x4E3A;&#x5C0F;&#x8BF4;&#x6216;&#x5267;&#x672C;&#x91CC;&#x9762;&#x4EBA;&#x7269;&#x8BF4;&#x7684;&#x8BDD;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x7528;&#x53CC;&#x5F15;&#x53F7;&#xFF0C;&#x5267;&#x672C;&#x91CC;&#x7684;&#x6587;&#x5B57;&#x5C31;&#x662F;&#x53D9;&#x8FF0;&#x6027;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x88AB;&#x89C2;&#x4F17;&#x5F97;&#x77E5;&#xFF0C;&#x7A0B;&#x5E8F;&#x4E5F;&#x662F;&#x4E00;&#x6837;&#xFF0C;&#x4E0D;&#x52A0;&#x53CC;&#x5F15;&#x53F7;&#x7684;&#x5747;&#x662F;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#xFF0C;&#x5F53;&#x4F60;&#x60F3;&#x8DDF;&#x7528;&#x6237;&#x4EA4;&#x6D41;&#xFF0C;&#x4F7F;&#x7528;&#x5B57;&#x7B26;&#x4E32;&#x5427;&#x3002;&#x6709;&#x5173;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;&#xFF0C;&#x4E5F;&#x4F1A;&#x5728;&#x540E;&#x7EED;&#x8BB2;&#x89E3;&#x3002;</p>
-<p>&#x6700;&#x540E;&#xFF0C;<code>main()</code> &#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x6574;&#x6570; 0&#xFF0C;&#x8FD9;&#x4E2A;&#x8FD4;&#x56DE;&#x503C;&#x4F1A;&#x88AB;&#x5B83;&#x4E0A;&#x5C42;&#x7684;&#x7A0B;&#x5E8F;&#x6355;&#x83B7;&#xFF08;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7406;&#x89E3;&#x4E3A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF09;&#xFF0C;0 &#x5728;&#x8FD9;&#x91CC;&#x7EA6;&#x5B9A;&#x662F;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x6210;&#x529F;&#x7684;&#x610F;&#x601D;&#xFF0C;&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x7684;&#x7A0B;&#x5E8F;&#x53EF;&#x80FD;&#x6709;&#x591A;&#x79CD;&#x591A;&#x6837;&#x7684;&#x5931;&#x8D25;&#x539F;&#x56E0;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x65E0;&#x6570;&#x7684;&#x975E;&#x96F6;&#x503C;&#x4EE3;&#x8868;&#x5404;&#x79CD;&#x9519;&#x8BEF;&#x3002;</p>
-<p>&#x8FD8;&#x8BB0;&#x5F97;&#x4E4B;&#x524D;&#x5173;&#x4E8E; <code>return</code> &#x7684;&#x8BF4;&#x660E;&#x5417;&#xFF1F;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x628A; <code>main()</code> &#x6539;&#x5199;&#x6210;&#x4E0B;&#x9762;&#x8FD9;&#x6837;&#x3002;</p>
+<p>首先第一行的 <code>#include <stdio.h></code> 表示我们把 <code>stdio.h</code> 这个头文件里的内容全部插入进来，<code>stdio</code> 表示 standard input output 即标准输入输出（这里的输入输出是从程序的角度）。C 语言自身标准规定了许多有用的内置函数给我们使用，但我们首先要在代码里声明它们，这个头文件就包含了一些函数的声明，后续会继续说明头文件的作用与内容。</p>
+<p>然后我们声明一个名称为 <code>main</code>，返回类型为 <code>int</code>，不接受参数的函数，这个函数是 C 语言规定的程序入口，也就是说操作系统运行你的程序，实际上是从调用 <code>main()</code> 开始的，这里需要注意的是在 C 语言标准中，<code>main()</code> 的返回值必须为 <code>int</code>，你可能见到过 <code>void main()</code> 或者干脆连 <code>void</code> 这种返回类型都不写的，这些都是错误写法，某些不标准的编译器可能支持，但实际上标准里没有它们，你在写代码的时候不能这么写。</p>
+<p>这个函数的内容只有两句，第一句 <code>printf("Hello world!\n");</code> 会在你的终端界面输出一句 <code>Hello world!</code> 并换行，在这个过程中我们调用了这个叫做 <code>printf()</code> 的函数，它是 C 标准库规定的格式化输出函数（f 可以理解成 format），但我们这次只是用它输出一条字符串，<code>\n</code> 是一个转义字符，我们用它表示“回车”这个无法在代码里打出来的符号，如果你去掉它，然后再输出点什么，你会发现这两次的输出会出现在同一行里面——C 不会乱做任何你没让它做的事情。有关 <code>printf()</code> 和转义字符的更多内容，下次会进行介绍。</p>
+<p>对于字符串，你可以简单的理解为小说或剧本里面人物说的话，如果不用双引号，剧本里的文字就是叙述性的语句，并不会被观众得知，程序也是一样，不加双引号的均是程序代码，当你想跟用户交流，使用字符串吧。有关字符串的存储方式，也会在后续讲解。</p>
+<p>最后，<code>main()</code> 函数返回整数 0，这个返回值会被它上层的程序捕获（可以简单理解为操作系统），0 在这里约定是程序运行成功的意思，一个复杂的程序可能有多种多样的失败原因，这个时候我们可以用无数的非零值代表各种错误。</p>
+<p>还记得之前关于 <code>return</code> 的说明吗？如果我们把 <code>main()</code> 改写成下面这样。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -694,18 +694,18 @@ arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</c
 <span class="line">6</span>
 </pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
 </span>{
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&#x8001;&#x5E08;&#x6C38;&#x8FDC;&#x4E5F;&#x4E0D;&#x4F1A;&#x770B;&#x89C1;&#x8FD9;&#x53E5;&#x8BDD;&#x3002;&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师永远也不会看见这句话。"</span>);
 }</code></pre></figure></code></pre>
-<p>&#x4F60;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x5F97;&#x5230;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x8B66;&#x544A;&#xFF0C;&#x4F46;&#x5B83;&#x53EA;&#x662F;&#x63D0;&#x9192;&#x4F60;&#x6700;&#x540E;&#x8FD9;&#x53E5; <code>printf()</code> &#x4E0D;&#x4F1A;&#x88AB;&#x6267;&#x884C;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684;&#x8001;&#x5E08;&#x4E0D;&#x770B;&#x6E90;&#x7801;&#xFF0C;&#x4ED6;/&#x5979;&#x6C38;&#x8FDC;&#x4E5F;&#x4E0D;&#x77E5;&#x9053;&#x8FD9;&#x53E5;&#x8BDD;&#x3002;&#xFF08;&#x53E6;&#x5916;&#x8FD9;&#x53E5;&#x8BDD;&#x8F93;&#x51FA;&#x4E4B;&#x540E;&#x5E76;&#x4E0D;&#x4F1A;&#x6362;&#x884C;&#x3002;&#xFF09;</p>
-<h2 id="&#x6709;&#x5173;&#x7F29;&#x8FDB;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%9C%89%E5%85%B3%E7%BC%A9%E8%BF%9B" title="&#x6709;&#x5173;&#x7F29;&#x8FDB;"></a>&#x6709;&#x5173;&#x7F29;&#x8FDB;</h2>
-<p>&#x7F29;&#x8FDB;&#x8FD9;&#x4E2A;&#x8BCD;&#x6709;&#x70B9;&#x964C;&#x751F;&#xFF0C;&#x7A0B;&#x5E8F;&#x5458;&#x7528;&#x5B83;&#x6307;&#x4EE3;&#x4EE3;&#x7801;&#x7684;&#x6392;&#x7248;&#x683C;&#x5F0F;&#xFF0C;&#x5C3D;&#x7BA1; C &#x7ED9;&#x4E86;&#x4F60;&#x628A;&#x6240;&#x6709;&#x7A0B;&#x5E8F;&#x5199;&#x5728;&#x540C;&#x4E00;&#x884C;&#x91CC;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x4F46;&#x6211;&#x4F30;&#x8BA1;&#x770B;&#x8FC7;&#x8FD9;&#x79CD;&#x4EE3;&#x7801;&#x7684;&#x4EBA;&#x90FD;&#x60F3;&#x628A;&#x4F5C;&#x8005;&#x6253;&#x4E00;&#x904D;&#x51FA;&#x6C14;&#x3002;</p>
+<p>你有可能会得到编译器的警告，但它只是提醒你最后这句 <code>printf()</code> 不会被执行，如果你的老师不看源码，他/她永远也不知道这句话。（另外这句话输出之后并不会换行。）</p>
+<h2 id="有关缩进"><a class="headerlink" href="/posts/Learning-C-1/#%E6%9C%89%E5%85%B3%E7%BC%A9%E8%BF%9B" title="有关缩进"></a>有关缩进</h2>
+<p>缩进这个词有点陌生，程序员用它指代代码的排版格式，尽管 C 给了你把所有程序写在同一行里的能力，但我估计看过这种代码的人都想把作者打一遍出气。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world!\n&quot;</span>);<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;}</code></pre></figure></code></pre>
-<p>&#x5F53;&#x4F60;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x4E00;&#x70B9;&#x7684;&#x7A0B;&#x5E8F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6709;&#x5FC5;&#x8981;&#x4FEE;&#x7406;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x683C;&#x5F0F;&#xFF0C;&#x8BA9;&#x5B83;&#x53D8;&#x7684;&#x66F4;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x524D;&#x9762;&#x8BF4;&#x8FC7;&#x4E00;&#x4E2A;&#x5206;&#x5C42;&#x6B21;&#x7684;&#x4E1C;&#x897F;&#x53EB;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x521A;&#x597D;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x5B83;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x5185;&#x90E8;&#x8BED;&#x53E5;&#x7684;&#x884C;&#x9996;&#x589E;&#x52A0;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x7A7A;&#x767D;&#xFF0C;&#x6765;&#x7A81;&#x51FA;&#x5C42;&#x6B21;&#x611F;&#x3002;&#x6BD4;&#x5982;&#x5728;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x91CC;&#x6307;&#x51FA;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdio.h></span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;}</code></pre></figure></code></pre>
+<p>当你写了一个复杂一点的程序的时候，有必要修理一下程序格式，让它变的更容易理解，我们在前面说过一个分层次的东西叫作用域，刚好可以利用它。我们可以在每一个作用域的内部语句的行首增加一定数量的空白，来突出层次感。比如在这段代码里指出一个错误</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -727,64 +727,64 @@ arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</c
 <span class="line">19</span>
 </pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
 </span>{
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; ++i) {
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; ++j) {
-                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">10</span>; ++k) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">10</span>; ++i) {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j < <span class="hljs-number">10</span>; ++j) {
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k < <span class="hljs-number">10</span>; ++k) {
                                 <span class="hljs-keyword">if</span> (<span class="hljs-number">0</span> = k % <span class="hljs-number">2</span>) {
-                                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&#x8001;&#x5E08;&#x4F1A;&#x770B;&#x89C1;&#x5F88;&#x591A;&#x6B21;&#x8FD9;&#x53E5;&#x8BDD;&#x3002;&quot;</span>);
+                                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);
                                 }
                         }
-                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">10</span>; ++k) {
-                                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">10</span>; ++l) {
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k < <span class="hljs-number">10</span>; ++k) {
+                                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>; l < <span class="hljs-number">10</span>; ++l) {
                                         <span class="hljs-keyword">if</span> (l % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) {
-                                                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&#x8001;&#x5E08;&#x4F1A;&#x770B;&#x89C1;&#x5F88;&#x591A;&#x6B21;&#x8FD9;&#x53E5;&#x8BDD;&#x3002;&quot;</span>);
+                                                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);
                                         }
                                 }
                         }
                 }
         }
 }</code></pre></figure></code></pre>
-<p>&#x5C31;&#x6BD4;&#x5728;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x91CC;</p>
+<p>就比在这段代码里</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">10</span>; ++i){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;<span class="hljs-number">10</span>; ++j){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k&lt;<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">if</span>(<span class="hljs-number">0</span>=k%<span class="hljs-number">2</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&#x8001;&#x5E08;&#x4F1A;&#x770B;&#x89C1;&#x5F88;&#x591A;&#x6B21;&#x8FD9;&#x53E5;&#x8BDD;&#x3002;&quot;</span>);}}<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k&lt;<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l=<span class="hljs-number">0</span>; l&lt;<span class="hljs-number">10</span>; ++l){<span class="hljs-keyword">if</span>(l%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&#x8001;&#x5E08;&#x4F1A;&#x770B;&#x89C1;&#x5F88;&#x591A;&#x6B21;&#x8FD9;&#x53E5;&#x8BDD;&#x3002;&quot;</span>);}}}}}}</code></pre></figure></code></pre>
-<p>&#x8981;&#x5BB9;&#x6613;&#x7684;&#x4E0D;&#x6B62;&#x4E00;&#x70B9;&#x534A;&#x70B9;&#x3002;</p>
-<p>&#x901A;&#x5E38;&#x8FD9;&#x4E2A;&#x7A7A;&#x767D;&#x662F;&#x4E00;&#x4E2A; Tab &#x6309;&#x952E;&#xFF0C;&#x6216;&#x8005;&#x516B;&#x4E2A;&#x7A7A;&#x683C;&#xFF0C;&#x6216;&#x8005;&#x56DB;&#x4E2A;&#x7A7A;&#x683C;&#xFF0C;&#x53EA;&#x8981;&#x4F60;&#x7684;&#x4E00;&#x4EFD;&#x4EE3;&#x7801;&#x91CC;&#x9009;&#x62E9;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x4E0D;&#x8981;&#x641E;&#x5F97;&#x53C2;&#x5DEE;&#x4E0D;&#x9F50;&#x5C31;&#x884C;&#x3002;</p>
-<p>&#x901A;&#x5E38;&#x8FD8;&#x5EFA;&#x8BAE;&#x4F60;&#x53EA;&#x5728;&#x4E00;&#x884C;&#x91CC;&#x4E66;&#x5199;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#xFF0C;&#x56E0;&#x4E3A;&#x4F60;&#x6240;&#x770B;&#x89C1;&#x7684;&#x4EE3;&#x7801;&#x53EF;&#x80FD;&#x6709;&#x8BEF;&#x5BFC;&#x6027;&#xFF0C;&#x6BD4;&#x5982;</p>
+</pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i<<span class="hljs-number">10</span>; ++i){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j<<span class="hljs-number">10</span>; ++j){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k<<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">if</span>(<span class="hljs-number">0</span>=k%<span class="hljs-number">2</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);}}<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k<<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l=<span class="hljs-number">0</span>; l<<span class="hljs-number">10</span>; ++l){<span class="hljs-keyword">if</span>(l%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);}}}}}}</code></pre></figure></code></pre>
+<p>要容易的不止一点半点。</p>
+<p>通常这个空白是一个 Tab 按键，或者八个空格，或者四个空格，只要你的一份代码里选择其中一个就可以了，不要搞得参差不齐就行。</p>
+<p>通常还建议你只在一行里书写一个语句，因为你所看见的代码可能有误导性，比如</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;) do_one();
+</pre><pre class="code"><code><span class="hljs-keyword">if</span> (条件) do_one();
         do_another();</code></pre></figure></code></pre>
-<p>&#x7A76;&#x7ADF;&#x54EA;&#x4E2A;&#x51FD;&#x6570;&#x53D7;&#x5230;&#x6761;&#x4EF6;&#x63A7;&#x5236;&#x5462;&#xFF1F;&#x73B0;&#x5728;&#x4E5F;&#x8BB8;&#x4F60;&#x5206;&#x5F97;&#x6E05;&#xFF0C;&#x5F53;&#x4F60;&#x5199;&#x4E86;&#x51E0;&#x767E;&#x884C;&#x4EE3;&#x7801;&#x540E;&#xFF0C;&#x53EF;&#x80FD;&#x4F60;&#x5C31;&#x611F;&#x89C9;&#x5B83;&#x5F00;&#x59CB;&#x8FA3;&#x773C;&#x775B;&#x4E86;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F60;&#x5199;&#x6210;&#x4E0B;&#x9762;&#x8FD9;&#x6837;&#xFF1A;</p>
+<p>究竟哪个函数受到条件控制呢？现在也许你分得清，当你写了几百行代码后，可能你就感觉它开始辣眼睛了，建议你写成下面这样：</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;)
+</pre><pre class="code"><code><span class="hljs-keyword">if</span> (条件)
         do_one();
 do_another();</code></pre></figure></code></pre>
-<p>&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x5EFA;&#x8BAE;&#x662F;&#xFF0C;&#x867D;&#x7136;&#x4EBA;&#x4EEC;&#x5728;&#x5DE6;&#x5927;&#x62EC;&#x53F7;&#x653E;&#x5728;&#x4E0A;&#x4E00;&#x884C;&#x884C;&#x5C3E;&#x8FD8;&#x662F;&#x5355;&#x8D77;&#x4E00;&#x884C;&#x7684;&#x884C;&#x9996;&#x4E89;&#x8BBA;&#x4E0D;&#x6E05;&#xFF0C;&#x4F46;&#x53F3;&#x5927;&#x62EC;&#x53F7;&#x5355;&#x72EC;&#x653E;&#x4E00;&#x884C;&#x603B;&#x662F;&#x6CA1;&#x9519;&#x7684;&#x3002;&#x5DE6;&#x5927;&#x62EC;&#x53F7;&#x7684;&#x4E24;&#x79CD;&#x98CE;&#x683C;&#x90FD;&#x662F;&#x597D;&#x7684;&#xFF0C;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x575A;&#x6301;&#x67D0;&#x4E00;&#x4E2A;&#x98CE;&#x683C;&#x5C31;&#x597D;&#x4E86;&#x3002;</p>
+<p>还有一个建议是，虽然人们在左大括号放在上一行行尾还是单起一行的行首争论不清，但右大括号单独放一行总是没错的。左大括号的两种风格都是好的，你只需要坚持某一个风格就好了。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;) {
+</pre><pre class="code"><code><span class="hljs-keyword">if</span> (条件) {
         do_one(); }
         do_another();</code></pre></figure></code></pre>
-<p>&#x5C31;&#x4E0D;&#x5982;</p>
+<p>就不如</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
-</pre><pre class="code"><code><span class="hljs-keyword">if</span> (&#x6761;&#x4EF6;) {
+</pre><pre class="code"><code><span class="hljs-keyword">if</span> (条件) {
         do_one();
 }
 do_another();</code></pre></figure></code></pre>
-<p>&#x4E8C;&#x5143;&#x8FD0;&#x7B97;&#x7B26;&#x4E24;&#x4FA7;&#x5EFA;&#x8BAE;&#x52A0;&#x7A7A;&#x683C;&#xFF0C;&#x6BD4;&#x5982; <code>int a = 1 + 1 * 3;</code> &#x5C31;&#x6BD4; <code>int a=1+1*3;</code> &#x6E05;&#x6670;&#x3002;</p>
-<p>&#x8FD9;&#x4E9B;&#x90FD;&#x53EA;&#x662F;&#x5EFA;&#x8BAE;&#xFF0C;&#x4F46;&#x5F53;&#x4F60;&#x5199;&#x4E86;&#x4E00;&#x5B9A;&#x6570;&#x76EE;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5B83;&#x4EEC;&#x80FD;&#x5E2E;&#x52A9;&#x4F60;&#x5C11;&#x72AF;&#x4E71;&#x4E03;&#x516B;&#x7CDF;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x522B;&#x4EBA;&#x8BFB;&#x4F60;&#x7684;&#x4EE3;&#x7801;&#x4E5F;&#x4F1A;&#x66F4;&#x5BB9;&#x6613;&#x3002;</p>
-<h2 id="&#x63D0;&#x95EE;&#x7684;&#x827A;&#x672F;"><a class="headerlink" href="/posts/Learning-C-1/#%E6%8F%90%E9%97%AE%E7%9A%84%E8%89%BA%E6%9C%AF" title="&#x63D0;&#x95EE;&#x7684;&#x827A;&#x672F;"></a>&#x63D0;&#x95EE;&#x7684;&#x827A;&#x672F;</h2>
-<p>&#x6709;&#x65F6;&#x5019;&#x4F60;&#x81EA;&#x5DF1;&#x5B9E;&#x5728;&#x641E;&#x4E0D;&#x6E05;&#x695A;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x95EE;&#x522B;&#x4EBA;&#x3002;&#x4E14;&#x6162;&#xFF01;&#x522B;&#x4EBA;&#x53EF;&#x80FD;&#x5F88;&#x5FD9;&#xFF0C;&#x65F6;&#x95F4;&#x5B9D;&#x8D35;&#xFF0C;&#x5728;&#x4E00;&#x5927;&#x7247;&#x4EE3;&#x7801;&#x91CC;&#x627E;&#x51FA;&#x9519;&#x7684;&#x4F4D;&#x7F6E;&#x5C31;&#x50CF;&#x5927;&#x6D77;&#x635E;&#x9488;&#x4E00;&#x6837;&#x611A;&#x8822;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x8BB8;&#x591A;&#x65F6;&#x5019;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x544A;&#x8BC9;&#x4F60;&#x4EE3;&#x7801;&#x54EA;&#x91CC;&#x9519;&#x4E86;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x3002;</p>
-<p>&#x5728; Google &#x4E0A;&#x641C;&#x7D22;&#x201C;&#x63D0;&#x95EE;&#x7684;&#x827A;&#x672F;&#x201D;&#x80FD;&#x627E;&#x5230;&#x597D;&#x591A;&#x6709;&#x7528;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x8FD9;&#x91CC;&#x53EA;&#x8BF4;&#x4E00;&#x6761;&#x6700;&#x91CD;&#x8981;&#x7684;&#xFF1A;<strong>&#x5F53;&#x4F60;&#x63D0;&#x95EE;&#x65F6;&#xFF0C;&#x8BF7;&#x8D34;&#x4E0A;&#x4F60;&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;&#x3001;&#x7F16;&#x8BD1;&#x5668;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#x8F93;&#x51FA;&#x7684;&#x8B66;&#x544A;&#x548C;&#x9519;&#x8BEF;&#xFF08;&#x901A;&#x5E38;&#x5728; IDE &#x4E0B;&#x9762;&#x7684;&#x5C0F;&#x7A97;&#x53E3;&#x91CC;&#xFF09;&#x4EE5;&#x53CA;&#x4F60;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x65F6;&#x7684;&#x8F93;&#x51FA;&#x622A;&#x56FE;&#xFF08;&#x5982;&#x679C;&#x7A0B;&#x5E8F;&#x901A;&#x8FC7;&#x4E86;&#x7F16;&#x8BD1;&#x4F46;&#x8FD0;&#x884C;&#x51FA;&#x9519;&#x4E86;&#xFF09;</strong>&#x3002;</p>
-<p>&#x6700;&#x611A;&#x8822;&#x7684;&#x662F;&#x53EA;&#x8BF4;&#x4E00;&#x53E5;&#x6CA1;&#x5934;&#x6CA1;&#x8111;&#x7684;&#x201C;&#x6211;&#x4EE3;&#x7801;&#x9519;&#x4E86;&#xFF01;&#x600E;&#x4E48;&#x529E;&#xFF01;&#x201D;&#xFF0C;&#x4F60;&#x5C31;&#x662F;&#x8BF4;&#x4E00;&#x5343;&#x904D;&#xFF0C;&#x5B83;&#x8FD8;&#x662F;&#x9519;&#x7684;&#x3002;&#x7B2C;&#x4E8C;&#x611A;&#x8822;&#x7684;&#x662F;&#x8BF4;&#x4E00;&#x53E5;&#x201C;&#x6211;&#x4EE3;&#x7801;&#x9519;&#x4E86;&#xFF01;&#x6211;&#x5148;&#x5E72;&#x4E86;&#x4EC0;&#x4E48;&#x4EC0;&#x4E48;&#x540E;&#x5E72;&#x4E86;&#x4EC0;&#x4E48;&#x4EC0;&#x4E48;&#x53C8;&#x600E;&#x4E48;&#x600E;&#x4E48;&#x6837;&#xFF01;&#x201D;&#xFF0C;&#x4F60;&#x662F;&#x8981;&#x81EA;&#x5DF1;&#x91CD;&#x65B0;&#x63CF;&#x8FF0;&#x4E00;&#x904D;&#xFF1F;&#x8FD8;&#x662F;&#x6253;&#x7B97;&#x81EA;&#x5DF1;&#x4ECE;&#x5634;&#x91CC;&#x91CD;&#x65B0;&#x53D1;&#x660E;&#x4E2A; C &#x8BED;&#x8A00;&#xFF1F;&#x4E07;&#x4E00;&#x4F60;&#x72AF;&#x7684;&#x9519;&#x8BEF;&#x662F;&#x6F0F;&#x4E86;&#x4E2A;&#x5206;&#x53F7;&#x6216;&#x8005;&#x62EC;&#x53F7;&#xFF0C;&#x6211;&#x4E0D;&#x4FE1;&#x4F60;&#x80FD;&#x7528;&#x5634;&#x63CF;&#x8FF0;&#x4E00;&#x904D;&#x4F60;&#x4EE3;&#x7801;&#x91CC;&#x7684;&#x6240;&#x6709;&#x5206;&#x53F7;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
-<p>&#x8D34;&#x4E0A;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x4FDD;&#x8BC1;&#x522B;&#x4EBA;&#x5E2E;&#x4F60;&#x9664;&#x9519;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x9700;&#x8981;&#x56DE;&#x5934;&#x95EE;&#x4F60;&#x7136;&#x540E;&#x7B49;&#x5F85;&#x56DE;&#x590D;&#xFF0C;&#x8D34;&#x4E0A;&#x7F16;&#x8BD1;&#x5668;&#x8F93;&#x51FA;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x770B;&#x5230;&#x5B83;&#x63D0;&#x793A;&#x7684;&#x53EF;&#x80FD;&#x9519;&#x8BEF;&#x7684;&#x4F4D;&#x7F6E;&#xFF08;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x53E5;&#x4E00;&#x53E5;&#x53BB;&#x8BFB;&#x53BB;&#x60F3;&#xFF09;&#xFF0C;&#x8F93;&#x51FA;&#x622A;&#x56FE;&#x4E5F;&#x662F;&#x540C;&#x6837;&#x7684;&#x9053;&#x7406;&#x3002;</p>
-<p>&#x522B;&#x4EBA;&#x5E2E;&#x4F60;&#x662F;&#x81EA;&#x613F;&#x82B1;&#x8D39;&#x4ED6;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x505A;&#x5230;&#x4EE5;&#x4E0A;&#x8FD9;&#x4E00;&#x70B9;&#x81F3;&#x5C11;&#x80FD;&#x8BA9;&#x522B;&#x4EBA;&#x5E2E;&#x4F60;&#x627E;&#x9519;&#x8BEF;&#x66F4;&#x5BB9;&#x6613;&#x3002;</p>
+<p>二元运算符两侧建议加空格，比如 <code>int a = 1 + 1 * 3;</code> 就比 <code>int a=1+1*3;</code> 清晰。</p>
+<p>这些都只是建议，但当你写了一定数目的代码，它们能帮助你少犯乱七八糟的错误，别人读你的代码也会更容易。</p>
+<h2 id="提问的艺术"><a class="headerlink" href="/posts/Learning-C-1/#%E6%8F%90%E9%97%AE%E7%9A%84%E8%89%BA%E6%9C%AF" title="提问的艺术"></a>提问的艺术</h2>
+<p>有时候你自己实在搞不清楚一个问题了，需要问别人。且慢！别人可能很忙，时间宝贵，在一大片代码里找出错的位置就像大海捞针一样愚蠢，特别是许多时候，编译器已经可以告诉你代码哪里错了的情况下。</p>
+<p>在 Google 上搜索“提问的艺术”能找到好多有用的东西，这里只说一条最重要的：<strong>当你提问时，请贴上你完整的代码、编译器编译过程中输出的警告和错误（通常在 IDE 下面的小窗口里）以及你代码运行时的输出截图（如果程序通过了编译但运行出错了）</strong>。</p>
+<p>最愚蠢的是只说一句没头没脑的“我代码错了！怎么办！”，你就是说一千遍，它还是错的。第二愚蠢的是说一句“我代码错了！我先干了什么什么后干了什么什么又怎么怎么样！”，你是要自己重新描述一遍？还是打算自己从嘴里重新发明个 C 语言？万一你犯的错误是漏了个分号或者括号，我不信你能用嘴描述一遍你代码里的所有分号的位置。</p>
+<p>贴上完整代码保证别人帮你除错的时候不需要回头问你然后等待回复，贴上编译器输出可以直接看到它提示的可能错误的位置（而不是一句一句去读去想），输出截图也是同样的道理。</p>
+<p>别人帮你是自愿花费他的时间，做到以上这一点至少能让别人帮你找错误更容易。</p>
 
     </main>
     <footer class="post-footer">
@@ -1215,4 +1215,4 @@ do_another();</code></pre></figure></code></pre>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.2 at 2019-05-11 周六 10:36:46 CST. -->
+<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->

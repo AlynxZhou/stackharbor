@@ -12,8 +12,6 @@ tags:
 ---
 如果你直接使用 AUR 里 UnityHub 的 PKGBUILD 安装会出一些问题。解决方案也很简单。
 
-<!--more-->
-
 首先似乎 PKGBUILD 下载的版本很奇怪，不管你在 Unity 论坛里哪个链接下载的版本其实都是一个，并且和 PKGBUILD 里面的不一样，解决方法就是自己计算一下 md5 然后替换掉 PKGBUILD 里面的 md5sums。
 
 第二个就是 PKGBUILD 里面最后有这几句：

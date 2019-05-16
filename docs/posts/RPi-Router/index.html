@@ -189,216 +189,216 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>&#x5450;&#xFF0C;&#x773C;&#x770B;&#x5C31;&#x8981;&#x8FC7;&#x5E74;&#xFF0C;&#x672C;&#x55B5;&#x51B3;&#x5B9A;&#x5C06;&#x53BB;&#x5E74;&#x5931;&#x8D25;&#x7684;&#x6811;&#x8393;&#x6D3E;&#x8DEF;&#x7531;&#x5668;&#x8BA1;&#x5212;&#x91CD;&#x65B0;&#x63D0;&#x4E0A;&#x65E5;&#x7A0B;&#xFF0C;&#x56E0;&#x4E3A;&#x672C;&#x55B5;&#x8FC7;&#x5B8C;&#x5E74;&#x4E4B;&#x540E;&#x603B;&#x8981;&#x53BB;&#x59E5;&#x7237;&#x5BB6;&#x91CC;&#x4F4F;&#x51E0;&#x5929;&#xFF0C;&#x4ED6;&#x5BB6;&#x91CC;&#x6709;&#x7F51;&#x7EDC;&#xFF0C;&#x4F46;&#x662F;&#x5374;&#x6CA1;&#x6709;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x800C;&#x6BCF;&#x5929;&#x5F00;&#x7740;&#x7535;&#x8111;&#x63D2;&#x7740;&#x968F;&#x8EAB;WiFi&#x5B9E;&#x5728;&#x592A;&#x4E0D;&#x73AF;&#x4FDD;&#x3002;&#x53BB;&#x5E74;&#x53D7;&#x5230;&#x5783;&#x573E;&#x7F51;&#x5361;&#x5751;&#x5BB3;&#x6CA1;&#x6709;&#x6210;&#x529F;&#xFF0C;&#x5E78;&#x597D;&#x672C;&#x55B5;&#x670B;&#x53CB;&#x4ECA;&#x5E74;&#x63A8;&#x8350;&#x4E86;&#x4E00;&#x4E2A;pi&#x4E0A;&#x4F7F;&#x7528;&#x8D85;&#x7A33;&#x5B9A;&#x7684;&#x7F51;&#x5361;&#xFF0C;&#x51B3;&#x5B9A;&#x4E00;&#x4E0D;&#x505A;&#x4E8C;&#x4E0D;&#x4F11;&#xFF0C;&#x5E72;&#x8106;&#x7528;OpenWrt&#x548C;&#x4E00;&#x76F4;&#x5728;&#x5403;&#x7070;&#x7684;&#x4E00;&#x4EE3;Pi B+&#xFF0C;&#x7EC4;&#x6210;&#x4E00;&#x4E2A;&#x6613;&#x4E8E;&#x914D;&#x7F6E;&#x548C;&#x4F7F;&#x7528;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x3002;&#x6765;&#x5427;&#xFF0C;&#x5E26;&#x7740;&#x4F60;&#x806A;&#x660E;&#x7684;&#x5934;&#x8111;&#x548C;&#x7075;&#x5DE7;&#x7684;&#x53CC;&#x624B;&#xFF0C;&#x8FD8;&#x6709;&#x4F60;&#x7684;&#x6811;&#x8393;&#x6D3E;&#xFF0C;&#x6211;&#x4EEC;&#x6765;Happy Wi-Fi&#xFF01;</p>
+      <p>呐，眼看就要过年，本喵决定将去年失败的树莓派路由器计划重新提上日程，因为本喵过完年之后总要去姥爷家里住几天，他家里有网络，但是却没有路由器，而每天开着电脑插着随身WiFi实在太不环保。去年受到垃圾网卡坑害没有成功，幸好本喵朋友今年推荐了一个pi上使用超稳定的网卡，决定一不做二不休，干脆用OpenWrt和一直在吃灰的一代Pi B+，组成一个易于配置和使用的路由器。来吧，带着你聪明的头脑和灵巧的双手，还有你的树莓派，我们来Happy Wi-Fi！</p>
 <a id="more"></a>
 
-<p>&#x4ECB;&#x7ECD;&#x4E0B;OpenWrt&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x9488;&#x5BF9;&#x8DEF;&#x7531;&#x5668;&#x7684;Linux&#x53D1;&#x884C;&#x7248;&#xFF0C;&#x5177;&#x6709;&#x529F;&#x80FD;&#x7075;&#x6D3B;&#x5F3A;&#x5927;&#xFF0C;&#x7F8E;&#x89C2;&#x6613;&#x4E8E;&#x914D;&#x7F6E;&#x7B49;&#x7279;&#x70B9;&#xFF0C;&#x8BB8;&#x591A;&#x667A;&#x80FD;&#x8DEF;&#x7531;&#x7684;&#x56FA;&#x4EF6;&#x4E5F;&#x662F;&#x57FA;&#x4E8E;OpenWrt&#x4FEE;&#x6539;&#xFF0C;&#x6BD4;&#x5982;&#x5C0F;&#x7C73;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x6781;&#x8DEF;&#x7531;&#x3002;</p>
-<p>&#x5DE5;&#x6B32;&#x5584;&#x5176;&#x4E8B;&#xFF0C;&#x5FC5;&#x5148;&#x5229;&#x5176;&#x5668;&#xFF0C;&#x9996;&#x5148;&#x6211;&#x4EEC;&#x6765;&#x51C6;&#x5907;&#x4E0B;&#x5FC5;&#x8981;&#x8BBE;&#x5907;&#xFF1A;</p>
+<p>介绍下OpenWrt，它是一个针对路由器的Linux发行版，具有功能灵活强大，美观易于配置等特点，许多智能路由的固件也是基于OpenWrt修改，比如小米路由器，极路由。</p>
+<p>工欲善其事，必先利其器，首先我们来准备下必要设备：</p>
 <ul>
-<li><p>Raspberry Pi&#x4E00;&#x4E2A;&#xFF08;&#x7406;&#x8BBA;&#x5404;&#x7248;&#x672C;&#x5747;&#x53EF;&#xFF0C;&#x4F46;&#x8003;&#x8651;&#x5230;USB&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#xFF0C;Pi Zero&#x53EF;&#x80FD;&#x6709;&#x4E9B;&#x4E0D;&#x65B9;&#x4FBF;&#xFF0C;&#x53E6;&#x5916;&#x6211;&#x793A;&#x8303;&#x4E2D;&#x7528;&#x7684;Pi B+&#xFF0C;2B&#x6B65;&#x9AA4;&#x76F8;&#x540C;&#xFF0C;&#x4E0D;&#x8FC7;&#x7531;&#x4E8E;&#x67B6;&#x6784;&#x4E0D;&#x540C;&#xFF0C;&#x4E0B;&#x8F7D;&#x7684;&#x6587;&#x4EF6;&#x6709;&#x533A;&#x522B;&#x3002;&#xFF09;&#x3002;</p>
+<li><p>Raspberry Pi一个（理论各版本均可，但考虑到USB无线网卡，Pi Zero可能有些不方便，另外我示范中用的Pi B+，2B步骤相同，不过由于架构不同，下载的文件有区别。）。</p>
 </li>
-<li><p>&#x88C5;&#x6709;Linux&#x7684;&#x7535;&#x8111;&#x4E00;&#x53F0;&#xFF0C;&#x5F53;&#x7136;&#x4F60;&#x4E5F;&#x8981;&#x80FD;&#x719F;&#x7EC3;&#x8FD0;&#x7528;Linux&#xFF08;<strong>&#x522B;&#x4ED6;&#x55B5;&#x7684;&#x8BF4;&#x4F60;&#x4ED6;&#x55B5;&#x73A9;Pi&#x73A9;&#x7684;&#x662F;&#x4ED6;&#x55B5;&#x7684;Win10 IOT&#xFF0C;&#x4ED6;&#x55B5;&#x7684;&#x4F60;&#x770B;&#x6211;&#x4ED6;&#x55B5;&#x6253;&#x8FD9;&#x4E48;&#x591A;&#x4ED6;&#x55B5;&#x5C31;&#x77E5;&#x9053;&#x90A3;&#x8D27;&#x4ED6;&#x55B5;&#x7684;&#x662F;&#x5FAE;&#x8F6F;&#x4ED6;&#x55B5;&#x7684;&#x7CCA;&#x5F04;&#x4EBA;&#x7684;&#x4E1C;&#x897F;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&#xFF01;</strong>&#xFF09;&#x3002;</p>
+<li><p>装有Linux的电脑一台，当然你也要能熟练运用Linux（<strong>别他喵的说你他喵玩Pi玩的是他喵的Win10 IOT，他喵的你看我他喵打这么多他喵就知道那货他喵的是微软他喵的糊弄人的东西！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！</strong>）。</p>
 </li>
-<li><p>MicroSD&#x5361;&#x4E00;&#x5F20;&#xFF08;&#x7528;&#x505A;OpenWrt&#x7684;TF&#x5361;&#x4E0D;&#x9700;&#x8981;&#x592A;&#x5927;&#x5BB9;&#x91CF;&#xFF0C;&#x6BD5;&#x7ADF;img&#x672C;&#x8EAB;&#x53EA;&#x6709;76M&#xFF0C;&#x4F46;&#x662F;&#x73A9;Pi&#x7684;&#x90FD;&#x77E5;&#x9053;&#x8981;&#x9009;&#x62E9;&#x4E00;&#x5F20;&#x5927;&#x54C1;&#x724C;&#x9AD8;&#x901F;&#x7684;&#x5361;&#x4FDD;&#x8BC1;&#x517C;&#x5BB9;&#x6027;&#x548C;&#x6027;&#x80FD;&#xFF0C;&#x6211;&#x4E00;&#x76F4;&#x7528;&#x4E09;&#x661F;&#x7684;&#x5361;&#x89C9;&#x5F97;&#x5F88;&#x597D;&#xFF0C;&#x6839;&#x636E;&#x5927;&#x5BB6;&#x8BC4;&#x4EF7;&#x95EA;&#x8FEA;&#x7684;&#x6BD4;&#x8F83;&#x5E38;&#x7528;&#x3002;&#xFF09;&#x3002;</p>
+<li><p>MicroSD卡一张（用做OpenWrt的TF卡不需要太大容量，毕竟img本身只有76M，但是玩Pi的都知道要选择一张大品牌高速的卡保证兼容性和性能，我一直用三星的卡觉得很好，根据大家评价闪迪的比较常用。）。</p>
 </li>
-<li><p>&#x4E00;&#x53F0;&#x5DF2;&#x7ECF;&#x80FD;&#x6B63;&#x5E38;&#x4F7F;&#x7528;&#x7684;&#x5BB6;&#x7528;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x7528;&#x4E8E;Pi&#x7684;&#x7F51;&#x7EBF;&#x548C;&#x7535;&#x6E90;&#xFF08;&#x7535;&#x6E90;&#x5C3D;&#x91CF;&#x9009;&#x62E9;5V 2A&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x7535;&#x6D41;&#x8DB3;&#x591F;&#xFF09;&#x3002;</p>
+<li><p>一台已经能正常使用的家用路由器，用于Pi的网线和电源（电源尽量选择5V 2A的，这样可以保证电流足够）。</p>
 </li>
-<li><p>&#x4E00;&#x5F20;&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#xFF08;<strong>&#x4ED6;&#x55B5;&#x7684;&#x4E0D;&#x8981;&#x4E0A;&#x4E86;&#x4E00;&#x4E9B;&#x5546;&#x5BB6;&#x7684;&#x5F53;&#x4E70;&#x90A3;&#x4E2A;&#x4ED6;&#x55B5;&#x7684;EDUP&#x7684;&#x6811;&#x8393;&#x6D3E;&#x4E13;&#x7528;&#x7F51;&#x5361;&#xFF01;</strong> &#x6839;&#x672C;&#x5C31;&#x662F;&#x5671;&#x5934;&#xFF01;&#x8FD9;&#x8D27; <strong>&#x6839;&#x672C;&#x4E0D;&#x662F;&#x6811;&#x8393;&#x6D3E;&#x4E13;&#x7528;&#xFF0C;&#x53EA;&#x662F;&#x80FD;&#x591F;&#x88AB;Linux&#x76F4;&#x63A5;&#x9A71;&#x52A8;&#x8D77;&#x6765;&#x7684;&#x4E00;&#x4E2A;&#xFF0C;&#x4E00;&#x4E9B;&#x5546;&#x5BB6;&#x5C31;&#x9A97;&#x65B0;&#x624B;&#x8BF4;&#x662F;&#x6811;&#x8393;&#x6D3E;&#x4E13;&#x7528;&#x3002;&#x5982;&#x679C;&#x4F60;&#x7528;&#x8FD9;&#x8D27;&#x5F00;AP&#x5C31;&#x7B49;&#x7740;5&#x79D2;&#x949F;&#x5FC5;&#x6302;&#x5427;&#xFF01;</strong> &#x5C3D;&#x91CF;&#x5148;&#x8BD5;&#x9A8C;&#x4F60;&#x624B;&#x5934;&#x7684;&#x6240;&#x6709;&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#xFF0C;&#x786E;&#x5B9A;&#x90FD;&#x4E0D;&#x53EF;&#x4EE5;&#x4E4B;&#x540E;&#x518D;&#x8D2D;&#x4E70;&#xFF01;Pi&#x7684;&#x914D;&#x4EF6;&#x4E5F;&#x90FD;&#x662F;&#x73A9;&#x5BB6;&#x4EEC;&#x81EA;&#x5DF1;&#x8BD5;&#x51FA;&#x6765;&#x7684;&#x3002;&#x6211;&#x7528;&#x7684;&#x662F;&#x670B;&#x53CB;&#x63A8;&#x8350;&#x7684;&#x7F51;&#x4EF6;Netgear WNA1100&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#xFF0C;&#x4E0D;&#x4F46;&#x7A33;&#x5B9A;&#x8FD8;&#x6BD4;EDUP&#x4FBF;&#x5B9C;&#x3002;&#x6709;&#x9700;&#x8981;&#x7684;&#x670B;&#x53CB;&#x53EF;&#x4EE5;&#x79C1;&#x4FE1;&#x6216;&#x8BC4;&#x8BBA;&#x8981;&#x8D2D;&#x4E70;&#x5730;&#x5740;&#x3002;&#xFF09;</p>
+<li><p>一张无线网卡（<strong>他喵的不要上了一些商家的当买那个他喵的EDUP的树莓派专用网卡！</strong> 根本就是噱头！这货 <strong>根本不是树莓派专用，只是能够被Linux直接驱动起来的一个，一些商家就骗新手说是树莓派专用。如果你用这货开AP就等着5秒钟必挂吧！</strong> 尽量先试验你手头的所有无线网卡，确定都不可以之后再购买！Pi的配件也都是玩家们自己试出来的。我用的是朋友推荐的网件Netgear WNA1100无线网卡，不但稳定还比EDUP便宜。有需要的朋友可以私信或评论要购买地址。）</p>
 </li>
 </ul>
-<p>&#x597D;&#x5566;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x4ECB;&#x7ECD;&#x4E0B;&#x6B63;&#x5F0F;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<p>好啦，接下来介绍下正式过程：</p>
 <ol>
-<li><p>&#x4E0B;&#x8F7D;&#x5E76;&#x5237;&#x5165;&#x955C;&#x50CF;&#xFF1B;</p>
+<li><p>下载并刷入镜像；</p>
 <ul>
-<li>Optional&#xFF1A;&#x8C03;&#x6574;&#x5206;&#x533A;&#x5927;&#x5C0F;&#xFF1B;</li>
+<li>Optional：调整分区大小；</li>
 </ul>
 </li>
-<li><p>&#x8FDE;&#x63A5;&#x7535;&#x8111;&#x8FDB;&#x884C;&#x521D;&#x6B21;&#x5FC5;&#x8981;&#x8C03;&#x8BD5;&#xFF1B;</p>
+<li><p>连接电脑进行初次必要调试；</p>
 </li>
-<li><p>&#x8FDE;&#x63A5;&#x8DEF;&#x7531;&#x5668;&#x8FDB;&#x884C;&#x4E3B;&#x8981;&#x8C03;&#x8BD5;&#xFF1B;</p>
+<li><p>连接路由器进行主要调试；</p>
 <ul>
-<li>Optional&#xFF1A;&#x81EA;&#x5DF1;&#x7F16;&#x8BD1;&#x5E76;&#x5B89;&#x88C5;Shadow&#xFF08;&#x6CB3;&#x87F9;&#xFF09;Socks&#xFF0C;China&#xFF08;&#x6CB3;&#x87F9;&#xFF09;DNS&#xFF1B;</li>
+<li>Optional：自己编译并安装Shadow（河蟹）Socks，China（河蟹）DNS；</li>
 </ul>
 </li>
-<li><p>&#x5EFA;&#x7ACB;AP&#x5E76;&#x8C03;&#x8282;WiFi&#xFF1B;</p>
+<li><p>建立AP并调节WiFi；</p>
 </li>
-<li><p>&#x5206;&#x79BB;&#x5E7F;&#x57DF;&#x7F51;WAN&#x63A5;&#x53E3;&#x548C;&#x5C40;&#x57DF;&#x7F51;LAN&#xFF1B;</p>
+<li><p>分离广域网WAN接口和局域网LAN；</p>
 </li>
-<li><p>&#x8FDE;&#x63A5;ADSL&#x5F00;&#x59CB;&#x5DE5;&#x4F5C;&#xFF01;</p>
+<li><p>连接ADSL开始工作！</p>
 </li>
-<li><p>&#x5DF2;&#x77E5;&#x5C0F;&#x95EE;&#x9898;&#x53CA;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x3002;</p>
+<li><p>已知小问题及解决办法。</p>
 </li>
 </ol>
 <hr>
-<p>&#x4E0B;&#x9762;&#x6B63;&#x5F0F;&#x5F00;&#x59CB;&#xFF1A;</p>
-<h1 id="&#x4E0B;&#x8F7D;&#x5E76;&#x5237;&#x5165;&#x955C;&#x50CF;"><a class="headerlink" href="/posts/RPi-Router/#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F" title="&#x4E0B;&#x8F7D;&#x5E76;&#x5237;&#x5165;&#x955C;&#x50CF;"></a>&#x4E0B;&#x8F7D;&#x5E76;&#x5237;&#x5165;&#x955C;&#x50CF;</h1>
-<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x53BB;<a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/brcm2708/" target="_blank">OpenWrt&#x7684;&#x5B98;&#x7F51;</a>&#x83B7;&#x53D6;&#x5B98;&#x65B9;&#x7F16;&#x8BD1;&#x597D;&#x7684;img&#x955C;&#x50CF;&#x3002;&#x4E0B;&#x9762;&#x6709;&#x4E24;&#x4E2A;&#x5B50;&#x76EE;&#x5F55;&#xFF0C;pi1&#x5BF9;&#x5E94;&#x7684;&#x662F;<code>bcm2708</code>&#xFF0C;pi2&#x5BF9;&#x5E94;&#x7684;&#x662F;<code>bcm2709</code>&#xFF0C;&#x70B9;&#x51FB;&#x8FDB;&#x5165;&#x4E4B;&#x540E;&#x70B9;&#x51FB; <code>openwrt-15.05.1-brcm2708-bcm2708-sdcard-vfat-ext4.img</code> &#x5373;&#x53EF;&#x5F00;&#x59CB;&#x4E0B;&#x8F7D;&#xFF0C;pi2&#x5BF9;&#x5E94;&#x7684;&#x53EA;&#x662F;&#x628A;2708&#x5168;&#x90E8;&#x6362;&#x6210;&#x4E86;2709&#x3002;</p>
-<p>PS &#x8BF7;&#x52A1;&#x5FC5;&#x9009;&#x62E9;&#x5E26;&#x6709;<code>sdcard-vfat-ext4</code>&#x7684;&#x955C;&#x50CF;&#x3002;</p>
-<p>PPS &#x7531;&#x4E8E;&#x56FD;&#x5185;&#x7F51;&#x7EDC;&#x7684;&#x7279;&#x6B8A;&#x6027;&#xFF0C;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x4E0B;&#x8F7D;&#x5947;&#x6162;&#xFF0C;&#x53EF;&#x4EE5;&#x590D;&#x5236;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#x4E4B;&#x540E;&#x5229;&#x7528;&#x767E;&#x5EA6;&#x4E91;&#x7684;&#x79BB;&#x7EBF;&#x4E0B;&#x8F7D;&#x3002;</p>
+<p>下面正式开始：</p>
+<h1 id="下载并刷入镜像"><a class="headerlink" href="/posts/RPi-Router/#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F" title="下载并刷入镜像"></a>下载并刷入镜像</h1>
+<p>首先，我们要去<a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/brcm2708/" target="_blank">OpenWrt的官网</a>获取官方编译好的img镜像。下面有两个子目录，pi1对应的是<code>bcm2708</code>，pi2对应的是<code>bcm2709</code>，点击进入之后点击 <code>openwrt-15.05.1-brcm2708-bcm2708-sdcard-vfat-ext4.img</code> 即可开始下载，pi2对应的只是把2708全部换成了2709。</p>
+<p>PS 请务必选择带有<code>sdcard-vfat-ext4</code>的镜像。</p>
+<p>PPS 由于国内网络的特殊性，可能导致下载奇慢，可以复制下载地址之后利用百度云的离线下载。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_1.png" alt="RPi-Router_1.png"></p>
-<p>&#x4E0B;&#x8F7D;&#x5230;&#x672C;&#x5730;&#x4E4B;&#x540E;&#x5462;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x7528;&#x8BFB;&#x5361;&#x5668;&#x628A;MicroSD&#x5361;&#x8FDE;&#x63A5;&#x4E0A;&#x7535;&#x8111;&#xFF0C;&#x7528; <code>lsblk -f</code> &#x67E5;&#x770B;&#x4E00;&#x4E0B;SD&#x5361;&#x7684;&#x8BBE;&#x5907;&#x540D;&#xFF0C;&#x4E00;&#x822C;&#x662F;/dev/sdb&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684;&#x7CFB;&#x7EDF;&#x81EA;&#x52A8;&#x6302;&#x8F7D;&#x4E86;SD&#x5361;&#xFF0C;&#x8BF7;&#x52A1;&#x5FC5;&#x7528;umount&#x5378;&#x8F7D;&#x3002;</p>
+<p>下载到本地之后呢，我们要用读卡器把MicroSD卡连接上电脑，用 <code>lsblk -f</code> 查看一下SD卡的设备名，一般是/dev/sdb，如果你的系统自动挂载了SD卡，请务必用umount卸载。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_2.jpg" alt="RPi-Router_2.jpg"></p>
-<p>&#x968F;&#x540E;&#x6211;&#x4EEC;&#x8981;&#x7528;dd&#x547D;&#x4EE4;&#x628A;img&#x6587;&#x4EF6;&#x70E7;&#x5F55;&#x8FDB;SD&#x5361;&#xFF01;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>随后我们要用dd命令把img文件烧录进SD卡！命令如下：</p>
 <pre><code><figure class="highlight hljs gradle"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code># dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/&#x4F60;&#x7684;/img</span>&#x6587;&#x4EF6;<span class="hljs-regexp">/&#x5B58;&#x653E;&#x7684;/</span>&#x8DEF;&#x5F84;<span class="hljs-regexp">/openwrt-15.05-brcm2708-bcm2708-sdcard-vfat-ext4.img of=/</span>dev<span class="hljs-regexp">/sd&#x4F60;&#x7684;&#x8BBE;&#x5907;&#x8DEF;&#x5F84; conv=fsync</span></code></pre></figure></code></pre><p>&#x8BB0;&#x4F4F;&#x8981;&#x7528;root&#x7528;&#x6237;&#x6216;&#x8005;sudo&#x6765;&#x6267;&#x884C;&#x624D;&#x80FD;&#x5177;&#x6709;&#x6743;&#x9650;&#xFF01;<strong>Pi2&#x7528;&#x6237;&#x8BB0;&#x5F97;&#x628A;2708&#x6362;&#x6210;2709&#xFF01;</strong></p>
-<p>PS &#x4E0D;&#x8981;&#x5728;&#x610F;&#x4E0B;&#x56FE;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;bs=2M&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x90A3;&#x4E2A;&#x662F;&#x53EF;&#x9009;&#x7684;&#xFF01;</p>
-<p>PPS &#x597D;&#x4E45;&#x4E4B;&#x524D;B+&#x7528;OpenWrt&#x4E0D;&#x80FD;&#x542F;&#x52A8;&#x7684;bug&#x5728;15.05&#x91CC;&#x5DF2;&#x7ECF;&#x4FEE;&#x590D;&#x5566;&#xFF01;&#x5982;&#x679C;&#x4F60;&#x8FD8;&#x9047;&#x5230;&#x63A5;&#x7535;&#x6E90;&#x540E;&#x7EA2;&#x7EFF;&#x706F;&#x90FD;&#x957F;&#x4EAE;&#x4E0D;&#x706D;&#x4E0D;&#x80FD;&#x542F;&#x52A8;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x8BD5;&#x8BD5;&#x91CD;&#x65B0;&#x5237;&#x5199;&#x4E00;&#x6B21;&#x955C;&#x50CF;&#xFF0C;&#x4E00;&#x822C;&#x90FD;&#x4F1A;&#x6709;&#x6548;&#x3002;</p>
+</pre><pre class="code"><code># dd <span class="hljs-keyword">if</span>=<span class="hljs-regexp">/你的/img</span>文件<span class="hljs-regexp">/存放的/</span>路径<span class="hljs-regexp">/openwrt-15.05-brcm2708-bcm2708-sdcard-vfat-ext4.img of=/</span>dev<span class="hljs-regexp">/sd你的设备路径 conv=fsync</span></code></pre></figure></code></pre><p>记住要用root用户或者sudo来执行才能具有权限！<strong>Pi2用户记得把2708换成2709！</strong></p>
+<p>PS 不要在意下图中有一个bs=2M的参数，那个是可选的！</p>
+<p>PPS 好久之前B+用OpenWrt不能启动的bug在15.05里已经修复啦！如果你还遇到接电源后红绿灯都长亮不灭不能启动的话，可以试试重新刷写一次镜像，一般都会有效。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_3.png" alt="RPi-Router_3.png"></p>
-<p>&#x5B8C;&#x4E8B;&#x4EE5;&#x540E;&#x591A;&#x6267;&#x884C;&#x51E0;&#x6B21;sync&#x662F;&#x4E2A;&#x597D;&#x4E60;&#x60EF;&#xFF1A;</p>
+<p>完事以后多执行几次sync是个好习惯：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sync</span></code></pre></figure></code></pre><p>&#x4E0B;&#x9762;&#x53EF;&#x4EE5;&#x628A;&#x5361;&#x62D4;&#x4E0B;&#x6765;&#x63D2;&#x5230;Pi&#x91CC;&#x9762;&#x5566;&#xFF01;&#x5F53;&#x7136;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8C03;&#x6574;&#x5206;&#x533A;&#xFF08;&#x53EF;&#x9009;&#xFF09;&#x8BF7;&#x5F80;&#x4E0B;&#x770B;&#x2014;&#x2014;</p>
-<h2 id="&#x8C03;&#x8282;&#x5206;&#x533A;"><a class="headerlink" href="/posts/RPi-Router/#%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA" title="&#x8C03;&#x8282;&#x5206;&#x533A;"></a>&#x8C03;&#x8282;&#x5206;&#x533A;</h2>
-<p>&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8C03;&#x8282;&#x5206;&#x533A;&#x5462;&#xFF1F;&#x76F8;&#x4FE1;&#x6211;&#xFF0C;&#x7528;&#x4E00;&#x4E0B;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sync</span></code></pre></figure></code></pre><p>下面可以把卡拔下来插到Pi里面啦！当然如果你想调整分区（可选）请往下看——</p>
+<h2 id="调节分区"><a class="headerlink" href="/posts/RPi-Router/#%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA" title="调节分区"></a>调节分区</h2>
+<p>为什么要调节分区呢？相信我，用一下</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> fdisk -l /dev/sdb</span></code></pre></figure></code></pre><p>&#x4F60;&#x5C31;&#x660E;&#x767D;&#x4E86;&#x3002;&#x3002;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> fdisk -l /dev/sdb</span></code></pre></figure></code></pre><p>你就明白了。。。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_4.png" alt="RPi-Router_4.png"></p>
-<p>&#x1F602;&#x8FD9;&#x78D4;&#x78D4;&#x78D4;&#x78D4;&#x8FD9;&#x8FD9;&#x3002;&#x3002;&#x3002;<em>&#x8FD9;&#x5F00;&#x53D1;&#x8005;&#x662F;&#x559D;&#x7740;&#x51B0;&#x5564;&#x9152;&#x5403;&#x7740;&#x706B;&#x9505;&#x5531;&#x7740;&#x6B4C;&#x505A;&#x7684;img&#x5417;&#xFF1F;</em>&#xFF08;&#x522B;&#x770B;&#x6211;&#xFF01;&#x6211;&#x5199;&#x4E1C;&#x897F;&#x65F6;&#x5019;&#x4ECE;&#x6765;&#x4E0D;&#x5403;&#x4E1C;&#x897F;&#x4E0D;&#x5531;&#x6B4C;&#xFF01;&#xFF01;&#xFF01;&#x522B;&#x770B;&#x6211;&#xFF01;&#xFF01;&#xFF01;&#x771F;&#x7684;&#x6CA1;&#x6709;&#x2026;&#x2026;&#xFF09;&#x8FD9;&#x8FD9;&#x8FD9;&#x5206;&#x533A;&#x4F4D;&#x7F6E;&#x90FD;&#x662F;&#x4EC0;&#x4E48;&#x9B3C;&#xFF01;&#xFF01;&#xFF01;&#x6839;&#x672C;&#x90FD;&#x4E0D;&#x6574;&#x9F50;&#x5F3A;&#x8FEB;&#x75C7;&#x4E0D;&#x80FD;&#x5FCD;&#xFF01;&#xFF01;&#xFF01;&#x8FD8;&#x6709;&#x8FD9;&#x4E48;&#x5927;&#x70B9;&#x7684;&#x6839;&#x5206;&#x533A;&#x867D;&#x7136;&#x7EDD;&#x5BF9;&#x591F;&#x7528;&#x4E86;&#x4F46;&#x662F;&#x600E;&#x4E48;&#x80FD;&#x4F53;&#x73B0;&#x672C;&#x55B5;&#x662F;&#x7528;2GB&#x5B58;&#x50A8;&#x5361;&#x7684;&#x6709;&#x94B1;&#x4EBA;&#xFF08;<em>&#x624B;&#x52A8;&#x659C;&#x773C;&#x6ED1;&#x7A3D;</em>&#xFF09;&#x5462;&#xFF1F;</p>
-<p>&#x597D;&#x4E86;&#x626F;&#x6DE1;&#x7ED3;&#x675F;&#xFF0C;&#x8C03;&#x8282;&#x5206;&#x533A;&#x5927;&#x5C0F;&#x7684;&#x65B9;&#x6CD5;&#x5F88;&#x591A;&#x79CD;&#xFF0C;&#x6700;&#x7B80;&#x5355;&#x7684;&#x662F;&#x7528;gparted&#x56FE;&#x5F62;&#x5316;&#x754C;&#x9762;&#x8C03;&#x6574;&#x3002;&#x4F46;&#x662F;&#x6211;&#x5728;&#x8FD9;&#x91CC;&#x7528;&#x4E86;&#x7B28;&#x65B9;&#x6CD5;&#xFF0C;&#x5373;fdisk+tar&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x4F1A;&#x8FD9;&#x4E2A;&#x7684;&#x4EBA;&#x4E00;&#x5B9A;&#x4E5F;&#x4F1A;&#x7528;gparted&#xFF08;&#x201C;&#x80E1;&#x626F;&#xFF0C;&#x4F60;&#x5C31;&#x6CA1;&#x7528;&#x8FC7;&#xFF01;&#x201D;&#x201C;&#x5618;&#x2026;&#x2026;&#x6211;&#x7528;Gentoo&#x4E0D;&#x60F3;&#x7F16;&#x8BD1;&#x3002;&#x201D;&#xFF09;&#x3002;</p>
-<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x8981;&#x628A;&#x8BFB;&#x5361;&#x5668;&#x63A5;&#x4E0A;&#x7535;&#x8111;&#xFF0C;&#x4E4B;&#x540E;&#x628A;&#x5176;&#x4E2D;&#x7684;&#x6587;&#x4EF6;&#x5907;&#x4EFD;&#x51FA;&#x6765;&#xFF0C;&#x8C03;&#x6574;&#x597D;&#x5206;&#x533A;&#x5927;&#x5C0F;&#x540E;&#x5728;&#x653E;&#x56DE;&#x53BB;&#x3002;</p>
-<p>&#x9996;&#x5148;&#x6302;&#x8F7D;boot&#x5206;&#x533A;&#x5E76;&#x8FDB;&#x5165;&#xFF5E;</p>
+<p>😂这磔磔磔磔这这。。。<em>这开发者是喝着冰啤酒吃着火锅唱着歌做的img吗？</em>（别看我！我写东西时候从来不吃东西不唱歌！！！别看我！！！真的没有……）这这这分区位置都是什么鬼！！！根本都不整齐强迫症不能忍！！！还有这么大点的根分区虽然绝对够用了但是怎么能体现本喵是用2GB存储卡的有钱人（<em>手动斜眼滑稽</em>）呢？</p>
+<p>好了扯淡结束，调节分区大小的方法很多种，最简单的是用gparted图形化界面调整。但是我在这里用了笨方法，即fdisk+tar。实际上会这个的人一定也会用gparted（“胡扯，你就没用过！”“嘘……我用Gentoo不想编译。”）。</p>
+<p>首先我们要把读卡器接上电脑，之后把其中的文件备份出来，调整好分区大小后在放回去。</p>
+<p>首先挂载boot分区并进入～</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>&#x5F00;&#x59CB;&#x7528;tar&#x5907;&#x4EFD;&#xFF5E;&#x6CE8;&#x610F;&#x540E;&#x9762;&#x7684;&#x51E0;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x7684;&#x5C5E;&#x6027;&#x4E0D;&#x53D8;&#x4E4B;&#x7C7B;&#x7684;&#xFF0C;&#x6211;&#x4F1A;&#x544A;&#x8BC9;&#x4F60;&#x6211;&#x670B;&#x53CB;&#x628A;&#x7CFB;&#x7EDF;&#x4ECE;hdd&#x642C;&#x5230;ssd&#x4E5F;&#x7528;&#x7684;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#xFF1F;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt && <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>开始用tar备份～注意后面的几个参数，它们可以保证所有文件的属性不变之类的，我会告诉你我朋友把系统从hdd搬到ssd也用的这个命令？</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/opboot.tar.gz ./</span></code></pre></figure></code></pre><p>&#x4E4B;&#x540E;&#x56DE;&#x5230;&#x5BB6;&#x76EE;&#x5F55;&#x5E76;&#x5378;&#x8F7D;&#x8FD9;&#x4E2A;&#x5206;&#x533A;&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/opboot.tar.gz ./</span></code></pre></figure></code></pre><p>之后回到家目录并卸载这个分区：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span></code></pre></figure></code></pre><p>&#x63A5;&#x7740;root&#x5206;&#x533A;&#x4E5F;&#x662F;&#x4E00;&#x6837;&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span></code></pre></figure></code></pre><p>接着root分区也是一样：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt && <span class="hljs-built_in">cd</span> /mnt</span>
 <span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/oproot.tar.gz ./</span>
-<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_5.png" alt="RPi-Router_5.png"></p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x53EF;&#x4EE5;&#x7528;fdisk&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x7ED9;boot&#x5206;&#x533A;&#x5206;100M&#xFF0C;root&#x5206;&#x533A;&#x5206;768M&#xFF08;openwrt&#x7684;&#x8F6F;&#x4EF6;&#x90FD;&#x5F88;&#x5C0F;&#x7684;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x5206;&#x533A;&#x5927;&#x5C0F;&#x5C31;&#x591F;&#x7528;&#x4E86;&#x3002;&#xFF09;&#xFF0C;&#x5269;&#x4E0B;1G&#x5355;&#x72EC;&#x5212;&#x5206;&#x4E00;&#x4E2A;&#x5206;&#x533A;&#x7559;&#x7740;&#x5907;&#x7528;&#x3002;</p>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_5.png" alt="RPi-Router_5.png"></p>
+<p>接下来就可以用fdisk了，这里我给boot分区分100M，root分区分768M（openwrt的软件都很小的，默认的分区大小就够用了。），剩下1G单独划分一个分区留着备用。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> fdisk /dev/sdb</span></code></pre></figure></code></pre><p>&#x9996;&#x5148;&#x6309;o&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x5206;&#x533A;&#x8868;&#xFF0C;&#x4E4B;&#x540E;&#x6309;n&#x65B0;&#x5EFA;&#x5206;&#x533A;&#xFF0C;&#x5206;&#x533A;&#x7C7B;&#x578B;p&#xFF0C;&#x5206;&#x533A;&#x53F7;1&#xFF0C;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;&#x9ED8;&#x8BA4;&#xFF0C;&#x7ED3;&#x675F;&#x4F4D;&#x7F6E;&#x8F93;&#x5165;+100M&#x56DE;&#x8F66;&#xFF0C;&#x4E4B;&#x540E;&#x6309;t&#xFF0C;c&#xFF0C;&#x5C06;&#x5206;&#x533A;&#x7C7B;&#x578B;&#x4FEE;&#x6539;&#x4E3A;FAT&#x3002;</p>
-<p>&#x518D;&#x6309;n&#x65B0;&#x5EFA;&#x5206;&#x533A;&#xFF0C;&#x5206;&#x533A;&#x7C7B;&#x578B;p&#xFF0C;&#x5206;&#x533A;&#x53F7;2&#xFF0C;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;&#x9ED8;&#x8BA4;&#xFF0C;&#x7ED3;&#x675F;&#x4F4D;&#x7F6E;&#x8F93;&#x5165;+768M&#x56DE;&#x8F66;.</p>
-<p>&#x6700;&#x540E;&#x518D;&#x6309;n&#xFF0C;&#x4E00;&#x8DEF;&#x56DE;&#x8F66;&#x9ED8;&#x8BA4;&#x5373;&#x53EF;&#x3002;</p>
-<p>&#x4E4B;&#x540E;&#x6309;a&#xFF0C;&#x9009;&#x62E9;1&#xFF0C;&#x5C06;boot&#x5206;&#x533A;&#x7684;&#x53EF;&#x542F;&#x52A8;&#x6807;&#x5FD7;&#x6253;&#x5F00;&#x3002;</p>
-<p>&#x6309;w&#x9000;&#x51FA;&#x5E76;&#x5199;&#x5165;&#x66F4;&#x6539;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> fdisk /dev/sdb</span></code></pre></figure></code></pre><p>首先按o新建一个分区表，之后按n新建分区，分区类型p，分区号1，起始位置默认，结束位置输入+100M回车，之后按t，c，将分区类型修改为FAT。</p>
+<p>再按n新建分区，分区类型p，分区号2，起始位置默认，结束位置输入+768M回车.</p>
+<p>最后再按n，一路回车默认即可。</p>
+<p>之后按a，选择1，将boot分区的可启动标志打开。</p>
+<p>按w退出并写入更改。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_6.png" alt="RPi-Router_6.png"></p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x7528;mkfs&#x683C;&#x5F0F;&#x5316;&#x5206;&#x533A;&#xFF5E;&#x8FD9;&#x91CC;boot&#x5206;&#x533A;&#x5FC5;&#x987B;&#x662F;vfat&#x683C;&#x5F0F;&#xFF0C;root&#x5206;&#x533A;&#x5FC5;&#x987B;&#x662F;ext4&#x683C;&#x5F0F;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x5206;&#x533A;&#x53EF;&#x4EE5;&#x968F;&#x610F;&#xFF0C;&#x4F46;&#x6211;&#x4E5F;&#x683C;&#x5F0F;&#x5316;&#x6210;ext4&#x3002;</p>
+<p>接下来我们用mkfs格式化分区～这里boot分区必须是vfat格式，root分区必须是ext4格式，第三个分区可以随意，但我也格式化成ext4。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mkfs.vfat /dev/sdb1</span>
 <span class="hljs-meta">#</span><span class="bash"> mkfs.ext4 /dev/sdb2</span>
-<span class="hljs-meta">#</span><span class="bash"> mkfs.ext4 /dev/sdb3</span></code></pre></figure></code></pre><p>&#x63A5;&#x4E0B;&#x6765;&#x81EA;&#x7136;&#x662F;&#x628A;&#x5907;&#x4EFD;&#x7684;&#x6587;&#x4EF6;&#x653E;&#x56DE;&#x53BB;&#xFF1A;</p>
+<span class="hljs-meta">#</span><span class="bash"> mkfs.ext4 /dev/sdb3</span></code></pre></figure></code></pre><p>接下来自然是把备份的文件放回去：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>&#x8FD9;&#x6B21;&#x7528;<code>tar -x</code>&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt && <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>这次用<code>tar -x</code>：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> tar -xpvzf ~/opboot.tar.gz ./</span>
-<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span>
-<span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span>
+<span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt && <span class="hljs-built_in">cd</span> /mnt</span>
 <span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/oproot.tar.gz ./</span>
-<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_7.png" alt="RPi-Router_7.png"></p>
-<h1 id="&#x8FDE;&#x63A5;&#x7535;&#x8111;&#x8FDB;&#x884C;&#x521D;&#x6B21;&#x5FC5;&#x8981;&#x8C03;&#x8BD5;"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95" title="&#x8FDE;&#x63A5;&#x7535;&#x8111;&#x8FDB;&#x884C;&#x521D;&#x6B21;&#x5FC5;&#x8981;&#x8C03;&#x8BD5;"></a>&#x8FDE;&#x63A5;&#x7535;&#x8111;&#x8FDB;&#x884C;&#x521D;&#x6B21;&#x5FC5;&#x8981;&#x8C03;&#x8BD5;</h1>
-<p>&#x5148;&#x522B;&#x6025;&#x7740;&#x628A;&#x4F60;&#x7684;pi&#x63D2;&#x5230;&#x8DEF;&#x7531;&#x5668;&#x4E0A;&#xFF0C;op&#x9ED8;&#x8BA4;pi&#x7684;ip&#x662F;192.168.1.1&#xFF0C;&#x8981;&#x77E5;&#x9053;&#x5927;&#x90E8;&#x5206;&#x5BB6;&#x91CC;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x7684;ip&#x4E5F;&#x662F;&#x8FD9;&#x4E2A;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5148;&#x628A;&#x5B83;&#x7528;&#x7F51;&#x7EBF;&#x63A5;&#x5230;&#x7535;&#x8111;&#x4E0A;&#xFF0C;&#x5F00;&#x673A;&#x540E;&#x4FEE;&#x6539;&#x4E0B;ip&#x3002;</p>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_7.png" alt="RPi-Router_7.png"></p>
+<h1 id="连接电脑进行初次必要调试"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95" title="连接电脑进行初次必要调试"></a>连接电脑进行初次必要调试</h1>
+<p>先别急着把你的pi插到路由器上，op默认pi的ip是192.168.1.1，要知道大部分家里的路由器的ip也是这个，所以我们先把它用网线接到电脑上，开机后修改下ip。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_8.jpg" alt="RPi-Router_8.jpg"></p>
-<p>&#x5173;&#x6389;&#x4F60;&#x7684;&#x65E0;&#x7EBF;&#x8FDE;&#x63A5;&#xFF0C;&#x7ED9;pi&#x8FDE;&#x4E0A;&#x7535;&#x6E90;&#xFF0C;&#x6253;&#x5F00;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;192.168.1.1&#x56DE;&#x8F66;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;luci&#x767B;&#x9646;&#x754C;&#x9762;&#xFF0C;&#x70B9;&#x51FB;Login&#x767B;&#x5165;&#x3002;</p>
-<p>&#x63A5;&#x7740;&#x6309;&#x7167;&#x5C4F;&#x5E55;&#x4E0A;&#x6307;&#x793A;&#xFF0C;&#x6211;&#x4EEC;&#x53BB;&#x8BBE;&#x7F6E;&#x8DEF;&#x7531;&#x5668;&#x767B;&#x9646;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x70B9;&#x51FB;<code>Go to password configuration</code></p>
+<p>关掉你的无线连接，给pi连上电源，打开浏览器输入192.168.1.1回车，你会看到luci登陆界面，点击Login登入。</p>
+<p>接着按照屏幕上指示，我们去设置路由器登陆的密码，点击<code>Go to password configuration</code></p>
 <p><img src="/posts/RPi-Router/RPi-Router_9.png" alt="RPi-Router_9.png"></p>
-<p>&#x8FDB;&#x5165;&#x5BC6;&#x7801;&#x8BBE;&#x7F6E;&#x9875;&#x9762;&#xFF0C;&#x5728;password&#x91CC;&#x8F93;&#x5165;&#x4E24;&#x6B21;&#x5BC6;&#x7801;&#xFF0C;&#x6EDA;&#x52A8;&#x5230;&#x6700;&#x4E0B;&#x7AEF;&#x70B9;&#x51FB;<code>Save and apply</code>&#x3002;</p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x53BB;&#x8C03;&#x8282;&#x63A5;&#x53E3;&#x7684;ip&#xFF0C;&#x56E0;&#x4E3A;&#x4E00;&#x4F1A;&#x8981;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E0A;&#x7F51;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x8981;&#x8BBE;&#x7F6E;&#x4E0B;DNS&#x548C;&#x7F51;&#x5173;&#x3002;&#x5728;&#x9876;&#x680F;&#x70B9;&#x51FB;Network&#x2014;&#x2014;Interface&#xFF0C;&#x70B9;&#x51FB;&#x9875;&#x9762;&#x4E2D;LAN&#x540E;&#x9762;&#x7684;Edit&#x3002;</p>
-<p>&#x5728;&#x8FDB;&#x5165;&#x7684;&#x9875;&#x9762;&#x4E2D;&#x8BBE;&#x7F6E;IP&#xFF0C;&#x8BBE;&#x4E3A;&#x4F60;&#x8DEF;&#x7531;&#x5668;&#x7F51;&#x6BB5;&#x4E0B;&#x7684;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x88AB;&#x5360;&#x7528;&#x7684;ip&#x5373;&#x53EF;&#xFF0C;&#x6211;&#x8BBE;&#x7F6E;&#x4E3A; <code>192.168.1.234</code> &#xFF0C;&#x4E4B;&#x540E;&#x4E0B;&#x9762;&#x7684;netmask&#x9009;&#x62E9; <code>255.255.255.0</code> &#xFF0C;gateway&#x8F93;&#x5165;&#x8DEF;&#x7531;&#x5668;&#x5730;&#x5740; <code>192.168.1.1</code> &#xFF0C;DNS&#x4E5F;&#x8F93;&#x5165; <code>192.168.1.1</code> &#x3002;</p>
+<p>进入密码设置页面，在password里输入两次密码，滚动到最下端点击<code>Save and apply</code>。</p>
+<p>接下来去调节接口的ip，因为一会要通过这个接口上网，同时也要设置下DNS和网关。在顶栏点击Network——Interface，点击页面中LAN后面的Edit。</p>
+<p>在进入的页面中设置IP，设为你路由器网段下的一个没有被占用的ip即可，我设置为 <code>192.168.1.234</code> ，之后下面的netmask选择 <code>255.255.255.0</code> ，gateway输入路由器地址 <code>192.168.1.1</code> ，DNS也输入 <code>192.168.1.1</code> 。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_10.png" alt="RPi-Router_10.png"></p>
-<p>&#x597D;&#x5566;&#xFF0C;&#x73B0;&#x5728;&#x6811;&#x8393;&#x6D3E;&#x57FA;&#x672C;&#x7684;&#x8BBE;&#x7F6E;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x53EF;&#x4EE5;&#x5173;&#x673A;&#x63A5;&#x5230;&#x8DEF;&#x7531;&#x5668;&#x4E0A;&#x4E86;&#x3002;&#x4EC0;&#x4E48;&#xFF1F;&#x4F60;&#x8BF4;OpenWrt&#x6CA1;&#x6709;&#x5173;&#x673A;&#xFF1F;&#x597D;&#x5427;&#x6CA1;&#x529E;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4E5F;&#x4E0D;&#x77E5;&#x9053;&#x600E;&#x4E48;&#x529E;&#xFF0C;&#x6211;&#x7528;OpenWrt&#x4E00;&#x76F4;&#x90FD;&#x662F;&#x62D4;&#x7535;&#x6E90;&#xFF0C;&#x6CA1;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#x3002;</p>
-<h1 id="&#x8FDE;&#x63A5;&#x8DEF;&#x7531;&#x5668;&#x8FDB;&#x884C;&#x4E3B;&#x8981;&#x8C03;&#x8BD5;"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95" title="&#x8FDE;&#x63A5;&#x8DEF;&#x7531;&#x5668;&#x8FDB;&#x884C;&#x4E3B;&#x8981;&#x8C03;&#x8BD5;"></a>&#x8FDE;&#x63A5;&#x8DEF;&#x7531;&#x5668;&#x8FDB;&#x884C;&#x4E3B;&#x8981;&#x8C03;&#x8BD5;</h1>
-<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x628A;pi&#x62FF;&#x51FA;&#x6765;&#xFF5E;<em>&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#x63D2;&#x5230;pi&#x4E0A;&#xFF0C;pi&#x63D2;&#x5230;&#x7F51;&#x7EBF;&#x4E0A;&#xFF0C;&#x7F51;&#x7EBF;&#x63D2;&#x5230;&#x8DEF;&#x7531;&#x5668;&#x4E0A;&#xFF0C;&#x7535;&#x6E90;&#x7EBF;&#x63D2;&#x5230;pi&#x4E0A;&#xFF0C;&#x5F00;&#x673A;&#xFF01;</em></p>
+<p>好啦，现在树莓派基本的设置已经完成了，接下来可以关机接到路由器上了。什么？你说OpenWrt没有关机？好吧没办法，因为我也不知道怎么办，我用OpenWrt一直都是拔电源，没什么问题。</p>
+<h1 id="连接路由器进行主要调试"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95" title="连接路由器进行主要调试"></a>连接路由器进行主要调试</h1>
+<p>现在我们把pi拿出来～<em>无线网卡插到pi上，pi插到网线上，网线插到路由器上，电源线插到pi上，开机！</em></p>
 <p><img src="/posts/RPi-Router/RPi-Router_11.jpg" alt="RPi-Router_11.jpg"></p>
-<p>&#x7A0D;&#x7B49;&#x4E00;&#x4F1A;&#x7EFF;&#x706F;&#x7184;&#x706D;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x901A;&#x8FC7;&#x5BB6;&#x5EAD;&#x5C40;&#x57DF;&#x7F51;&#x5E94;&#x8BE5;&#x80FD;&#x8FDE;&#x63A5;&#x4E0A;Pi&#x4E86;&#xFF0C;&#x540C;&#x6837;&#xFF0C;&#x6253;&#x5F00;&#x6D4F;&#x89C8;&#x5668; <code>192.168.1.234</code> &#xFF08;&#x6309;&#x7167;&#x4F60;&#x521A;&#x624D;&#x8BBE;&#x7F6E;&#x7684;ip&#x6765;&#xFF09;&#xFF0C;&#x8F93;&#x5165;&#x5BC6;&#x7801;&#x70B9;&#x51FB;Login&#x3002;</p>
-<p>&#x662F;&#x4E0D;&#x662F;&#x89C9;&#x5F97;&#x6EE1;&#x5C4F;&#x82F1;&#x6587;&#x5F88;&#x4E0D;&#x723D;&#x5462;&#xFF1F;&#x6CA1;&#x5173;&#x7CFB;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x5B89;&#x88C5;&#x4E2D;&#x6587;&#x8BED;&#x8A00;&#x3002;&#x5207;&#x6362;&#x5230;System&#x2014;&#x2014;Softwave&#xFF0C;&#x70B9;&#x51FB;&#x8BE5;&#x9875;&#x9762;&#x7684; <code>Update list</code> &#xFF0C;&#x5F53;&#x7136;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5; <code>ssh root@192.168.1.234</code> &#xFF0C;&#x767B;&#x5165;&#x4E4B;&#x540E;&#x6267;&#x884C; <code>opkg update</code> &#xFF0C;&#x6548;&#x679C;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x5C31;&#x7B49;&#x4EF7;&#x4E8E;Linux&#x91CC;&#x7684; <code>apt-get update</code> &#xFF0C; <code>pacman -Syy</code> &#xFF0C; <code>emerge --sync</code> &#xFF0C;opkg&#x5C31;&#x662F;openwrt&#x7684;&#x5305;&#x7BA1;&#x7406;&#x3002;&#x5F53;&#x7136;&#x6211;&#x6BD4;&#x8F83;&#x504F;&#x597D;ssh&#xFF0C;&#x56E0;&#x4E3A;&#x53EF;&#x4EE5;&#x5373;&#x65F6;&#x770B;&#x5230;&#x547D;&#x4EE4;&#x53CD;&#x9988;&#xFF0C;&#x800C;<strong>luci&#x57FA;&#x4E8E;&#x7F51;&#x9875;&#xFF0C;&#x547D;&#x4EE4;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4F1A;&#x8868;&#x73B0;&#x4E3A;&#x5237;&#x65B0;&#xFF0C;&#x4F1A;&#x50CF;&#x5361;&#x4F4F;&#x4E00;&#x6837;&#x3002;</strong></p>
+<p>稍等一会绿灯熄灭，这时候通过家庭局域网应该能连接上Pi了，同样，打开浏览器 <code>192.168.1.234</code> （按照你刚才设置的ip来），输入密码点击Login。</p>
+<p>是不是觉得满屏英文很不爽呢？没关系，我们先来安装中文语言。切换到System——Softwave，点击该页面的 <code>Update list</code> ，当然你也可以 <code>ssh root@192.168.1.234</code> ，登入之后执行 <code>opkg update</code> ，效果是一样的，这个命令就等价于Linux里的 <code>apt-get update</code> ， <code>pacman -Syy</code> ， <code>emerge --sync</code> ，opkg就是openwrt的包管理。当然我比较偏好ssh，因为可以即时看到命令反馈，而<strong>luci基于网页，命令执行过程会表现为刷新，会像卡住一样。</strong></p>
 <p><img src="/posts/RPi-Router/RPi-Router_12.png" alt="RPi-Router_12.png"></p>
-<p>&#x6267;&#x884C;&#x5B8C;&#x4E86;&#x4E4B;&#x540E;&#x4F1A;&#x8F93;&#x51FA;&#x4FE1;&#x606F; &#x3002;</p>
+<p>执行完了之后会输出信息 。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_13.png" alt="RPi-Router_13.png"></p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x5728;Filter&#x91CC;&#x9762;&#x8F93;&#x5165;chinese&#xFF0C;&#x70B9;&#x51FB;Find package&#xFF0C;&#x7A0D;&#x7B49;&#x4E00;&#x4F1A;&#x70B9;&#x51FB;&#x4E0B;&#x9762;&#x7684;Available packages&#xFF0C;&#x5C31;&#x80FD;&#x770B;&#x5230;&#x6240;&#x6709;&#x5305;&#x540D;&#x542B;&#x6709;chinese&#x7684;&#x5305;&#x5566;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x5B89;&#x88C5;&#x7684;&#x662F; <code>luci-i18n-base-zh-cn</code> &#x548C; <code>luci-i18n-firewall-zh-cn</code> &#xFF0C;&#x70B9;&#x51FB;&#x540D;&#x5B57;&#x5DE6;&#x4FA7;Install&#xFF0C;&#x5F39;&#x51FA;&#x6846;&#x91CC;&#x70B9;&#x786E;&#x5B9A;&#x7A0D;&#x7B49;&#x5373;&#x53EF;&#x3002;</p>
+<p>接下来在Filter里面输入chinese，点击Find package，稍等一会点击下面的Available packages，就能看到所有包名含有chinese的包啦，我们要安装的是 <code>luci-i18n-base-zh-cn</code> 和 <code>luci-i18n-firewall-zh-cn</code> ，点击名字左侧Install，弹出框里点确定稍等即可。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_14.png" alt="RPi-Router_14.png"></p>
 <p><img src="/posts/RPi-Router/RPi-Router_15.png" alt="RPi-Router_15.png"></p>
-<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5207;&#x6362;&#x5230;System&#x2014;&#x2014;System&#x91CC;&#xFF0C;&#x70B9;&#x51FB;Language and style&#x9009;&#x9879;&#x5361;&#x91CC;&#x9762;&#x7684;Language&#xFF0C;&#x770B;&#x770B;&#x91CC;&#x9762;&#x662F;&#x4E0D;&#x662F;&#x6709;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x8BDD;&#x7684;&#x9009;&#x9879;&#x4E86;&#xFF1F;&#x9009;&#x4E2D;&#x4E4B;&#x540E;&#x70B9;&#x51FB;Save and apply&#xFF0C;&#x8FD8;&#x6CA1;&#x6709;&#x53D8;&#x6210;&#x4E2D;&#x6587;&#x5C31;Logout&#x4E00;&#x4E0B;&#x770B;&#x770B;&#xFF01;</p>
-<p>&#x7B49;&#x8FDB;&#x53BB;&#x4EE5;&#x540E;&#x6211;&#x4EEC;&#x518D;&#x8FDB;&#x5165;&#x7CFB;&#x7EDF;&#x2014;&#x2014;&#x7CFB;&#x7EDF;&#x91CC;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x9009;&#x9879;&#x5361;&#x57FA;&#x672C;&#x8BBE;&#x7F6E;&#xFF0C;&#x628A;&#x91CC;&#x9762;&#x7684;&#x65F6;&#x533A;&#x6539;&#x4E3A;Asia/Shanghai&#xFF0C;&#x518D;&#x70B9;&#x51FB;&#x4E0A;&#x9762;&#x7684;&#x540C;&#x6B65;&#x6D4F;&#x89C8;&#x5668;&#x65F6;&#x95F4;&#xFF0C;&#x6700;&#x540E;&#x5728;&#x4E3B;&#x673A;&#x540D;&#x91CC;&#x7ED9;&#x4F60;&#x7684;pi&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x72EC;&#x7279;&#x7684;&#x540D;&#x5B57;&#xFF01;</p>
+<p>现在我们切换到System——System里，点击Language and style选项卡里面的Language，看看里面是不是有一个普通话的选项了？选中之后点击Save and apply，还没有变成中文就Logout一下看看！</p>
+<p>等进去以后我们再进入系统——系统里，第一个选项卡基本设置，把里面的时区改为Asia/Shanghai，再点击上面的同步浏览器时间，最后在主机名里给你的pi设置一个独特的名字！</p>
 <p><img src="/posts/RPi-Router/RPi-Router_16.png" alt="RPi-Router_16.png"></p>
-<p>&#x4E0B;&#x9762;&#x5F00;&#x59CB;&#x5B89;&#x88C5;&#x4E00;&#x4E9B;&#x5FC5;&#x8981;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#xFF01;&#x636E;&#x6211;&#x7EDF;&#x8BA1;&#x6709; <code>kmod-usb2</code> &#x3001; <code>kmod-usb-ohci</code> &#x3001; <code>kmod-usb-ohci</code> &#x3001; <code>kmod-ath9k-common</code> &#x3001; <code>kmod-ath9k-htc</code> &#xFF08;ath9k&#x8FD9;&#x4E24;&#x4E2A;&#x5305;&#x662F;&#x6211;&#x7684;&#x7F51;&#x5361;&#x5BF9;&#x5E94;&#x7684;&#x9A71;&#x52A8;&#xFF0C;<strong>&#x4F60;&#x7684;&#x7F51;&#x5361;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x9A71;&#x52A8;&#x8981;&#x6839;&#x636E;&#x4F60;&#x7684;&#x82AF;&#x7247;&#x6765;&#x5B9A;&#xFF01;&#x6211;&#x771F;&#x7684;&#x4E0D;&#x77E5;&#x9053;&#x4F60;&#x7528;&#x7684;&#x4EC0;&#x4E48;&#x7F51;&#x5361;&#xFF01;</strong>&#xFF09;&#x3001; <code>hostapd</code> &#x3002;&#x4EC0;&#x4E48;&#xFF1F;&#x4F60;&#x95EE;&#x6211;&#x600E;&#x4E48;&#x5B89;&#xFF1F;&#x8FC7;&#x6EE4;&#x5668;&#x5728;&#x90A3;&#xFF01;&#x90FD;&#x662F;&#x4E2D;&#x6587;&#x96BE;&#x9053;&#x8FD8;&#x770B;&#x4E0D;&#x61C2;&#x5417;&#xFF1F;&#x81EA;&#x5DF1;&#x641C;&#x7D22;&#x4E00;&#x4E0B;&#xFF01;</p>
-<p>&#x5F53;&#x7136;&#x6211;&#x66F4;&#x559C;&#x6B22;ssh&#x4E00;&#x6761;&#x547D;&#x4EE4;&#x89E3;&#x51B3;&#xFF1A;</p>
+<p>下面开始安装一些必要的软件包！据我统计有 <code>kmod-usb2</code> 、 <code>kmod-usb-ohci</code> 、 <code>kmod-usb-ohci</code> 、 <code>kmod-ath9k-common</code> 、 <code>kmod-ath9k-htc</code> （ath9k这两个包是我的网卡对应的驱动，<strong>你的网卡需要什么驱动要根据你的芯片来定！我真的不知道你用的什么网卡！</strong>）、 <code>hostapd</code> 。什么？你问我怎么安？过滤器在那！都是中文难道还看不懂吗？自己搜索一下！</p>
+<p>当然我更喜欢ssh一条命令解决：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd</span></code></pre></figure></code></pre><h2 id="&#x7F16;&#x8BD1;&#x5B89;&#x88C5;Shadow&#xFF08;&#x6CB3;&#x87F9;&#xFF09;Socks&#xFF0C;China&#xFF08;&#x6CB3;&#x87F9;&#xFF09;DNS&#x4EE5;&#x4FBF;&#x6109;&#x5FEB;&#x7684;&#x756A;&#x8304;"><a class="headerlink" href="/posts/RPi-Router/#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Shadow%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89Socks%EF%BC%8CChina%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89DNS%E4%BB%A5%E4%BE%BF%E6%84%89%E5%BF%AB%E7%9A%84%E7%95%AA%E8%8C%84" title="&#x7F16;&#x8BD1;&#x5B89;&#x88C5;Shadow&#xFF08;&#x6CB3;&#x87F9;&#xFF09;Socks&#xFF0C;China&#xFF08;&#x6CB3;&#x87F9;&#xFF09;DNS&#x4EE5;&#x4FBF;&#x6109;&#x5FEB;&#x7684;&#x756A;&#x8304;"></a>&#x7F16;&#x8BD1;&#x5B89;&#x88C5;Shadow&#xFF08;&#x6CB3;&#x87F9;&#xFF09;Socks&#xFF0C;China&#xFF08;&#x6CB3;&#x87F9;&#xFF09;DNS&#x4EE5;&#x4FBF;&#x6109;&#x5FEB;&#x7684;&#x756A;&#x8304;</h2>
-<p>&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x7F16;&#x8BD1;&#x5462;&#xFF1F;&#x56E0;&#x4E3A;pi&#x662F;&#x5C0F;&#x4F17;&#x8DEF;&#x7531;&#x5668;&#xFF0C;openwrt-dist&#x6CA1;&#x63D0;&#x4F9B;&#x9884;&#x7F16;&#x8BD1;&#x7248;&#x2026;&#x2026;</p>
-<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x8981;&#x4E0B;&#x8F7D;openwrt&#x7684;sdk&#xFF0C;&#x5C31;&#x5728;&#x4F60;&#x4E0B;&#x8F7D;img&#x7684;&#x90A3;&#x4E2A;&#x76EE;&#x5F55;&#x91CC;&#xFF0C;&#x70B9;&#x51FB; <code>OpenWrt-SDK-15.05.1-brcm2708-bcm2708_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2</code> &#x4E0B;&#x8F7D;&#x8FD9;&#x4E2A;&#x538B;&#x7F29;&#x597D;&#x7684;SDK&#xFF0C;&#x56DE;&#x6765;&#x4E4B;&#x540E;&#x7528; <code>tar -xpvjf</code> &#x89E3;&#x538B;&#x4E4B;&#xFF0C;&#x8FDB;&#x5165;&#x89E3;&#x538B;&#x540E;&#x7684;&#x76EE;&#x5F55;&#x3002;</p>
-<p>PS &#x8001;&#x89C4;&#x77E9;&#xFF0C;Pi2&#x7528;&#x6237;&#x662F;bcm2709&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd</span></code></pre></figure></code></pre><h2 id="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"><a class="headerlink" href="/posts/RPi-Router/#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Shadow%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89Socks%EF%BC%8CChina%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89DNS%E4%BB%A5%E4%BE%BF%E6%84%89%E5%BF%AB%E7%9A%84%E7%95%AA%E8%8C%84" title="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"></a>编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄</h2>
+<p>为什么要编译呢？因为pi是小众路由器，openwrt-dist没提供预编译版……</p>
+<p>首先我们要下载openwrt的sdk，就在你下载img的那个目录里，点击 <code>OpenWrt-SDK-15.05.1-brcm2708-bcm2708_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2</code> 下载这个压缩好的SDK，回来之后用 <code>tar -xpvjf</code> 解压之，进入解压后的目录。</p>
+<p>PS 老规矩，Pi2用户是bcm2709。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_17.png" alt="RPi-Router_17.png"></p>
-<p>&#x6709;&#x5173;&#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x94FE;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x5728;Gentoo Linux&#x4E0B;&#x76F4;&#x63A5;&#x5C31;&#x80FD;&#x7F16;&#x8BD1;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4E5F;&#x4E0D;&#x77E5;&#x9053;&#x9700;&#x8981;&#x54EA;&#x4E9B;&#x4F9D;&#x8D56;&#xFF0C;&#x636E;&#x6211;&#x6240;&#x77E5;&#x5305;&#x62EC;&#x4F46;&#x4E0D;&#x9650;&#x4E8E;gcc&#xFF0C;git&#xFF0C;ulibc&#x3002;</p>
-<p>&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x83B7;&#x53D6;&#x6240;&#x9700;&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x6E90;&#x7801;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x7528;&#x5230;git&#xFF1A;</p>
+<p>有关编译工具链的问题，我在Gentoo Linux下直接就能编译，所以我也不知道需要哪些依赖，据我所知包括但不限于gcc，git，ulibc。</p>
+<p>下面我们来获取所需软件包的源码，这一步用到git：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev</span>
 <span class="hljs-meta">#</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/aa65535/openwrt-chinadns.git package/chinadns</span>
 <span class="hljs-meta">#</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_18.png" alt="RPi-Router_18.png"></p>
-<p>&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x7528;menuconfig&#x9009;&#x62E9;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x719F;&#x6089;Linux&#x5185;&#x6838;&#x7F16;&#x8BD1;&#x7684;&#x4EBA;&#x90FD;&#x4F1A;&#x8FD9;&#x4E2A;&#xFF1A;</p>
+<p>之后我们用menuconfig选择需要编译的软件包，熟悉Linux内核编译的人都会这个：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> make menuconfig</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_19.png" alt="RPi-Router_19.png"></p>
-<p>&#x9996;&#x5148;&#x8FDB;&#x5165;LuCI&#x2014;&#x2014;Network&#x91CC;&#x9009;&#x62E9;&#x4E0A;&#x5E26;&#x6709;ChinaDNS&#x548C;shadowsocks&#x7684;&#x884C;&#xFF08;&#x6309;&#x7A7A;&#x683C;&#x4F7F;&#x524D;&#x9762;&#x51FA;&#x73B0;M&#xFF09;&#xFF0C;&#x4E4B;&#x540E;&#x5DE6;&#x53F3;&#x65B9;&#x5411;&#x952E;&#x5207;&#x6362;&#x4E0B;&#x9762;&#x5230;Exit&#xFF0C;&#x6309;&#x7A7A;&#x683C;&#x4EE5;&#x9000;&#x56DE;&#x5230;&#x9996;&#x9875;&#xFF0C;&#x518D;&#x5207;&#x6362;&#x5230;&#x4E0B;&#x9762;&#x4E3A;Select&#xFF0C;&#x518D;&#x8FDB;&#x5165;Network&#xFF0C;&#x9009;&#x4E2D; <code>ChinaDNS</code> &#x548C; <code>shadowsocks-libev-spec</code> &#x5230;M&#xFF0C;&#x4E4B;&#x540E;&#x5207;&#x6362;&#x4E0B;&#x9762;&#x5230;Save&#xFF0C;&#x4FDD;&#x5B58;&#x4E4B;&#x540E;&#x9000;&#x51FA;&#x3002;</p>
+<p>首先进入LuCI——Network里选择上带有ChinaDNS和shadowsocks的行（按空格使前面出现M），之后左右方向键切换下面到Exit，按空格以退回到首页，再切换到下面为Select，再进入Network，选中 <code>ChinaDNS</code> 和 <code>shadowsocks-libev-spec</code> 到M，之后切换下面到Save，保存之后退出。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_20.png" alt="RPi-Router_20.png"></p>
 <p><img src="/posts/RPi-Router/RPi-Router_21.png" alt="RPi-Router_21.png"></p>
-<p>&#x9000;&#x51FA;&#x4E4B;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x7528;</p>
+<p>退出之后就可以用</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> make V=99</span></code></pre></figure></code></pre><p>&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x6765;&#x7F16;&#x8BD1;&#x5566;&#xFF0C;&#x7F16;&#x8BD1;&#x597D;&#x7684;&#x6587;&#x4EF6;&#x5728;bin/brcm2708/package/base/&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x60F3;&#x529E;&#x6CD5;&#x628A;&#x5B83;&#x4F20;&#x5230;pi&#x4E0A;&#xFF0C;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x628A;pi&#x5173;&#x6389;&#xFF0C;&#x5361;&#x63A5;&#x5230;&#x7535;&#x8111;&#x4E0A;&#xFF0C;&#x628A;&#x6587;&#x4EF6;&#x968F;&#x4FBF;&#x62F7;&#x5230;&#x5361;&#x91CC;&#x7684;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x4E4B;&#x540E;&#x518D;&#x5F00;&#x673A;&#x5373;&#x53EF;&#x5B89;&#x88C5;&#x3002;</p>
-<p>PS Pi2&#x7528;&#x6237;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x7531;&#x4E8E;Openwrt&#x628A;Pi1&#x548C;Pi2&#x7684;&#x67B6;&#x6784;&#x7EDF;&#x79F0;&#x4E3A;brcm2708&#xFF0C;&#x6240;&#x4EE5;<strong>&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x663E;&#x793A;&#x6709;brcm2708&#x662F;&#x6B63;&#x786E;&#x7684;</strong>&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> make V=99</span></code></pre></figure></code></pre><p>这条命令来编译啦，编译好的文件在bin/brcm2708/package/base/里，我们要想办法把它传到pi上，最简单的方法就是把pi关掉，卡接到电脑上，把文件随便拷到卡里的一个目录，之后再开机即可安装。</p>
+<p>PS Pi2用户请注意，由于Openwrt把Pi1和Pi2的架构统称为brcm2708，所以<strong>编译出来的软件包显示有brcm2708是正确的</strong>。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_22.png" alt="RPi-Router_22.png"></p>
-<p>&#x4E0B;&#x9762;&#x8FD8;&#x662F;&#x8981;ssh&#x5230;&#x4F60;&#x7684;pi&#x4E0A;&#xFF0C;&#x8FDB;&#x5165;&#x4F60;ipk&#x6587;&#x4EF6;&#x5B58;&#x653E;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5148;opkg update&#x4E00;&#x4E0B;&#xFF0C;&#x56E0;&#x4E3A;&#x4E00;&#x4F1A;&#x9700;&#x8981;&#x8FDE;&#x7F51;&#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x3002;&#xFF08;&#x6BCF;&#x6B21;&#x8DEF;&#x7531;&#x5668;&#x5F00;&#x673A;&#x90FD;&#x9700;&#x8981;&#x6267;&#x884C;&#x4E00;&#x6B21;update&#x3002;&#xFF09;</p>
-<p>&#x4E4B;&#x540E;&#x7528;</p>
+<p>下面还是要ssh到你的pi上，进入你ipk文件存放的地方，先opkg update一下，因为一会需要连网安装依赖。（每次路由器开机都需要执行一次update。）</p>
+<p>之后用</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> opkg install &#x4F60;&#x62F7;&#x8D1D;&#x7684;ipk</span></code></pre></figure></code></pre><p>&#x628A;&#x56DB;&#x4E2A;ipk&#x90FD;&#x5B89;&#x88C5;&#x4E0A;&#x3002;</p>
-<p>&#x4E0B;&#x9762;&#x6D4F;&#x89C8;&#x5668;&#x8FDB;&#x5165;LuCI&#xFF0C;&#x5728;&#x670D;&#x52A1;&#x91CC;&#x4F60;&#x5C31;&#x80FD;&#x770B;&#x89C1;Shadowsocks&#x548C;ChinaDNS&#x5566;&#xFF01;</p>
-<p>&#x9996;&#x5148;&#x8FDB;&#x5165;Shadowsocks&#xFF0C;&#x628A;&#x5168;&#x5C40;&#x670D;&#x52A1;&#x5668;&#x9009;&#x4E3A;<code>127.0.0.1#1080</code>&#xFF0C;&#x518D;&#x628A;&#x4E0B;&#x9762;&#x7684;UDP&#x670D;&#x52A1;&#x5668;&#x8BBE;&#x7F6E;&#x4E3A;&#x4E0E;&#x5168;&#x5C40;&#x670D;&#x52A1;&#x5668;&#x76F8;&#x540C;&#x3002;</p>
-<p>&#x4E4B;&#x540E;&#x4E0B;&#x9762;&#x7684;&#x670D;&#x52A1;&#x5668;&#x914D;&#x7F6E;&#x6DFB;&#x4E0A;<strong>&#x4F60;&#x7684;ss&#x670D;&#x52A1;&#x5668;&#x7684;&#x914D;&#x7F6E;</strong>&#xFF0C;UDP&#x8F6C;&#x53D1;<strong>&#x52FE;&#x9009;&#x542F;&#x7528;</strong>&#xFF0C;&#x88AB;&#x5FFD;&#x7565;IP&#x5217;&#x8868;&#x9009;&#x62E9;<strong>ChinaDNS&#x8DEF;&#x7531;&#x8868;</strong>&#x3002;&#x4FDD;&#x5B58;&#x5E94;&#x7528;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> opkg install 你拷贝的ipk</span></code></pre></figure></code></pre><p>把四个ipk都安装上。</p>
+<p>下面浏览器进入LuCI，在服务里你就能看见Shadowsocks和ChinaDNS啦！</p>
+<p>首先进入Shadowsocks，把全局服务器选为<code>127.0.0.1#1080</code>，再把下面的UDP服务器设置为与全局服务器相同。</p>
+<p>之后下面的服务器配置添上<strong>你的ss服务器的配置</strong>，UDP转发<strong>勾选启用</strong>，被忽略IP列表选择<strong>ChinaDNS路由表</strong>。保存应用。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_23.jpg" alt="RPi-Router_23.jpg"></p>
 <p><img src="/posts/RPi-Router/RPi-Router_24.png" alt="RPi-Router_24.png"></p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x5207;&#x6362;&#x5230;ChinaDNS&#xFF0C;&#x52FE;&#x9009;&#x542F;&#x7528;&#x548C;&#x542F;&#x7528;&#x53CC;&#x5411;&#x914D;&#x7F6E;&#x3002;&#x4E0A;&#x6E38;&#x670D;&#x52A1;&#x5668;&#x6539;&#x4E3A; 114.114.114.114,127.0.0.1#5300`&#x3002;</p>
+<p>接下来切换到ChinaDNS，勾选启用和启用双向配置。上游服务器改为 114.114.114.114,127.0.0.1#5300`。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_25.png" alt="RPi-Router_25.png"></p>
-<p>&#x518D;&#x5207;&#x6362;&#x5230;&#x7F51;&#x7EDC;&#x2014;&#x2014;DHCP/DNS&#xFF0C;&#x57FA;&#x672C;&#x8BBE;&#x7F6E;&#x91CC;&#x7684;DNS&#x8F6C;&#x53D1;&#x586B;&#x5199;<code>127.0.0.1#5353</code>&#xFF0C;HOSTS&#x548C;&#x89E3;&#x6790;&#x6587;&#x4EF6;&#x91CC;<strong>&#x52FE;&#x9009;&#x5FFD;&#x7565;&#x89E3;&#x6790;&#x6587;&#x4EF6;</strong>&#x3002;</p>
+<p>再切换到网络——DHCP/DNS，基本设置里的DNS转发填写<code>127.0.0.1#5353</code>，HOSTS和解析文件里<strong>勾选忽略解析文件</strong>。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_26.png" alt="RPi-Router_26.png"></p>
-<p>&#x73B0;&#x5728;ss&#x90E8;&#x7F72;&#x5B8C;&#x6210;&#xFF01;</p>
-<h1 id="&#x5EFA;&#x7ACB;AP&#x5E76;&#x8C03;&#x8282;WiFi"><a class="headerlink" href="/posts/RPi-Router/#%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi" title="&#x5EFA;&#x7ACB;AP&#x5E76;&#x8C03;&#x8282;WiFi"></a>&#x5EFA;&#x7ACB;AP&#x5E76;&#x8C03;&#x8282;WiFi</h1>
-<p>&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x6765;&#x5F00;&#x542F;wifi&#xFF01;&#x9996;&#x5148;&#x8FD9;&#x4E2A;&#x5FC5;&#x987B;&#x8981;ssh&#x8FDE;&#x63A5;&#x4E0A;&#x53BB;&#x4E86;&#xFF0C;&#x7535;&#x8111;&#x5C31;&#x662F;</p>
+<p>现在ss部署完成！</p>
+<h1 id="建立AP并调节WiFi"><a class="headerlink" href="/posts/RPi-Router/#%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi" title="建立AP并调节WiFi"></a>建立AP并调节WiFi</h1>
+<p>安装完成之后我们来开启wifi！首先这个必须要ssh连接上去了，电脑就是</p>
 <pre><code><figure class="highlight hljs gams"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-symbol">$</span> ssh root@&#x4F60;&#x7684;<span class="hljs-built-in">pi</span>&#x7684;ip&#x5730;&#x5740;</code></pre></figure></code></pre><p>&#x624B;&#x673A;&#x53EF;&#x4EE5;&#x7528;juicessh&#xFF0C;&#x826F;&#x5FC3;&#x8F6F;&#x4EF6;&#x3002;</p>
-<p>&#x767B;&#x9646;&#x8FDB;&#x4F60;&#x7684;pi&#x540E;&#x6267;&#x884C;</p>
+</pre><pre class="code"><code><span class="hljs-symbol">$</span> ssh root@你的<span class="hljs-built-in">pi</span>的ip地址</code></pre></figure></code></pre><p>手机可以用juicessh，良心软件。</p>
+<p>登陆进你的pi后执行</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wifi detect &gt; /etc/config/wireless</span></code></pre></figure></code></pre><p>&#x5EFA;&#x7ACB;wifi&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;</p>
-<p>&#x63A5;&#x7740;&#x8FD8;&#x6CA1;&#x5B8C; &#xFF0C;</p>
-<p>&#x9700;&#x8981;&#x7528;vi&#x7F16;&#x8F91;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x7136;wifi&#x9ED8;&#x8BA4;&#x662F;&#x5173;&#x95ED;&#x7684;&#xFF08;&#x4E0D;&#x4F1A;&#x7528;vi/vim&#x7684;&#x540C;&#x5B66;&#x60B2;&#x5267;&#x4E86;&#x3002;&#x3002;&#x3002;&#x5F88;&#x7B80;&#x5355;&#x8FDB;&#x53BB;&#x4E4B;&#x540E;&#x6309;i&#x624D;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x7F16;&#x8F91;&#xFF0C;&#x7F16;&#x8F91;&#x5B8C;&#x6309;[Esc]&#x518D;&#x8F93;&#x5165;:wq&#x5373;&#x53EF;&#x4FDD;&#x5B58;&#xFF0C;&#x53E6;&#x5916;&#x53CD;&#x6B63;&#x6211;&#x662F;Emacser&#xFF5E;&#x522B;&#x6253;&#x6211;&#xFF01;&#xFF09;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wifi detect > /etc/config/wireless</span></code></pre></figure></code></pre><p>建立wifi配置文件。</p>
+<p>接着还没完 ，</p>
+<p>需要用vi编辑这个文件，不然wifi默认是关闭的（不会用vi/vim的同学悲剧了。。。很简单进去之后按i才可以开始编辑，编辑完按[Esc]再输入:wq即可保存，另外反正我是Emacser～别打我！）。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> vi /etc/config/wireless</span></code></pre></figure></code></pre><p>&#x6CE8;&#x91CA;&#x6389;<code>option disabled 1</code>&#x7684;&#x90A3;&#x4E00;&#x884C;&#xFF08;&#x6CE8;&#x91CA;&#x7684;&#x610F;&#x601D;&#x5C31;&#x662F;&#x5728;&#x90A3;&#x4E00;&#x884C;&#x5F00;&#x5934;&#x8F93;&#x5165;&#x4E2A;&#x2018;#&#x2019;&#xFF01;&#x4F60;&#x8981;&#x4F1A;&#x7528;vim&#x76F4;&#x63A5;&#x628A;&#x5149;&#x6807;&#x5B9A;&#x4F4D;&#x5230;&#x90A3;&#x91CC;&#xFF0C;&#x6309;dd&#x628A;&#x90A3;&#x884C;&#x5220;&#x4E86;&#x4E5F;&#x884C;&#xFF01;&#xFF09;&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> vi /etc/config/wireless</span></code></pre></figure></code></pre><p>注释掉<code>option disabled 1</code>的那一行（注释的意思就是在那一行开头输入个‘#’！你要会用vim直接把光标定位到那里，按dd把那行删了也行！）。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_27.png" alt="RPi-Router_27.png"></p>
-<p>&#x73B0;&#x5728;&#x7CFB;&#x7EDF;&#x2014;&#x2014;&#x91CD;&#x542F;&#x2014;&#x2014;&#x6267;&#x884C;&#x91CD;&#x542F;&#xFF0C;&#x4E4B;&#x540E;LuCI&#x7684;&#x7F51;&#x7EDC;&#x91CC;&#x5E94;&#x8BE5;&#x80FD;&#x770B;&#x5230;&#x65E0;&#x7EBF;&#x4E86;&#x3002;&#x70B9;&#x51FB;<code>&#x4FEE;&#x6539;</code>&#x6765;&#x7F16;&#x8F91;&#x4E00;&#x4E0B;&#x3002;</p>
-<p>&#x9996;&#x5148;&#x8981;&#x6CE8;&#x610F;wifi&#x4FE1;&#x9053;&#x4E0D;&#x80FD;&#x8BBE;&#x7F6E;&#x4E3A;auto&#xFF0C;&#x8FD9;&#x662F;&#x4E2A;bug&#x3002;</p>
+<p>现在系统——重启——执行重启，之后LuCI的网络里应该能看到无线了。点击<code>修改</code>来编辑一下。</p>
+<p>首先要注意wifi信道不能设置为auto，这是个bug。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_28.png" alt="RPi-Router_28.png"></p>
-<p>&#x4E0B;&#x9762;&#x7684;ESSID&#x5C31;&#x662F;&#x4F60;&#x7684;WiFi&#x663E;&#x793A;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x81EA;&#x5DF1;&#x8BBE;&#x5B9A;&#x597D;&#x3002;&#x4E4B;&#x540E;&#x53BB;&#x65E0;&#x7EBF;&#x5B89;&#x5168;&#xFF0C;&#x52A0;&#x5BC6;&#x9009;&#x62E9;<code>WPA-PSK/WPA2-PSK Mixed Mode</code>&#xFF0C;&#x5BC6;&#x7801;&#x81EA;&#x7136;&#x662F;&#x4F60;&#x7684;&#x5BC6;&#x7801;&#x54AF;&#xFF5E;</p>
+<p>下面的ESSID就是你的WiFi显示的名字，自己设定好。之后去无线安全，加密选择<code>WPA-PSK/WPA2-PSK Mixed Mode</code>，密码自然是你的密码咯～</p>
 <p><img src="/posts/RPi-Router/RPi-Router_29.png" alt="RPi-Router_29.png"></p>
-<p>&#x63A5;&#x7740;&#x5C31;&#x80FD;&#x641C;&#x7D22;&#x5E76;&#x8FDE;&#x63A5;&#x5230;wifi&#x4E86;&#xFF5E;</p>
+<p>接着就能搜索并连接到wifi了～</p>
 <p><img src="/posts/RPi-Router/RPi-Router_30.png" alt="RPi-Router_30.png"></p>
-<h1 id="&#x5206;&#x79BB;WAN&#x53E3;&#x548C;LAN&#x53E3;&#x3002;"><a class="headerlink" href="/posts/RPi-Router/#%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82" title="&#x5206;&#x79BB;WAN&#x53E3;&#x548C;LAN&#x53E3;&#x3002;"></a>&#x5206;&#x79BB;WAN&#x53E3;&#x548C;LAN&#x53E3;&#x3002;</h1>
-<p>&#x73B0;&#x5728;Wi-Fi&#x548C;&#x6709;&#x7EBF;&#x7F51;&#x5361;&#x90FD;&#x5728;LAN&#x8FD9;&#x4E2A;&#x7F51;&#x6BB5;&#x4E0B;&#xFF0C;&#x8981;&#x505A;&#x4FBF;&#x643A;&#x8DEF;&#x7531;&#x5668;&#x81EA;&#x7136;&#x8981;&#x6709;&#x4E2A;WAN&#x53E3;&#xFF0C;&#x9996;&#x5148;&#x4F60;&#x8981;&#x901A;&#x8FC7;Wi-Fi&#x8FDE;&#x63A5;&#xFF0C;&#x518D;&#x767B;&#x9646;LuCI&#xFF0C;&#x5148;&#x53BB;&#x5230;&#x7F51;&#x7EDC;&#x2014;&#x2014;&#x63A5;&#x53E3;&#xFF0C;&#x70B9;&#x51FB;&#x6DFB;&#x52A0;&#x65B0;&#x63A5;&#x53E3;&#xFF0C;&#x63A5;&#x53E3;&#x540D;&#x79F0;&#x8F93;&#x5165;<code>wan</code>&#xFF0C;&#x534F;&#x8BAE;&#x9009;&#x62E9;<code>pppoe</code>&#xFF0C;&#x4E4B;&#x540E;&#x518D;&#x53BB;&#x4FEE;&#x6539;LAN&#xFF0C;&#x628A;IP&#x548C;WAN&#x9519;&#x5F00;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x8BBE;&#x7F6E;&#x4E3A;<code>192.168.234.234</code>&#xFF0C;&#x518D;<strong>&#x628A;&#x7F51;&#x5173;&#x548C;DNS&#x90FD;&#x6E05;&#x7A7A;</strong>&#xFF08;&#x56E0;&#x4E3A;&#x63A5;&#x4E0B;&#x6765;pi&#x5C31;&#x662F;&#x7F51;&#x5173;&#x4E86;&#x55B5;&#xFF5E;&#xFF09;&#x4E4B;&#x540E;&#x5728;&#x7269;&#x7406;&#x8BBE;&#x7F6E;&#x91CC;<strong>&#x53D6;&#x6D88;&#x52FE;&#x9009;eth0</strong>&#xFF0C;&#x518D;&#x628A;&#x6865;&#x63A5;&#x4E5F;&#x53D6;&#x6D88;&#xFF0C;&#x4FDD;&#x5B58;&#xFF01;</p>
-<h1 id="&#x8FDE;&#x63A5;ADSL&#x5F00;&#x59CB;&#x5DE5;&#x4F5C;"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C" title="&#x8FDE;&#x63A5;ADSL&#x5F00;&#x59CB;&#x5DE5;&#x4F5C;"></a>&#x8FDE;&#x63A5;ADSL&#x5F00;&#x59CB;&#x5DE5;&#x4F5C;</h1>
-<p>&#x628A;Pi&#x548C;ADSL Modem&#x8FDE;&#x63A5;&#xFF0C;&#x5F00;&#x673A;&#xFF0C;&#x5373;&#x53EF;&#x4F5C;&#x4E3A;&#x65E0;&#x7EBF;&#x8DEF;&#x7531;&#x5668;&#x4F7F;&#x7528;&#xFF01;</p>
-<h1 id="&#x5DF2;&#x77E5;&#x95EE;&#x9898;&#x548C;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"><a class="headerlink" href="/posts/RPi-Router/#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" title="&#x5DF2;&#x77E5;&#x95EE;&#x9898;&#x548C;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"></a>&#x5DF2;&#x77E5;&#x95EE;&#x9898;&#x548C;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h1>
+<h1 id="分离WAN口和LAN口。"><a class="headerlink" href="/posts/RPi-Router/#%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82" title="分离WAN口和LAN口。"></a>分离WAN口和LAN口。</h1>
+<p>现在Wi-Fi和有线网卡都在LAN这个网段下，要做便携路由器自然要有个WAN口，首先你要通过Wi-Fi连接，再登陆LuCI，先去到网络——接口，点击添加新接口，接口名称输入<code>wan</code>，协议选择<code>pppoe</code>，之后再去修改LAN，把IP和WAN错开，比如我设置为<code>192.168.234.234</code>，再<strong>把网关和DNS都清空</strong>（因为接下来pi就是网关了喵～）之后在物理设置里<strong>取消勾选eth0</strong>，再把桥接也取消，保存！</p>
+<h1 id="连接ADSL开始工作"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C" title="连接ADSL开始工作"></a>连接ADSL开始工作</h1>
+<p>把Pi和ADSL Modem连接，开机，即可作为无线路由器使用！</p>
+<h1 id="已知问题和注意事项"><a class="headerlink" href="/posts/RPi-Router/#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" title="已知问题和注意事项"></a>已知问题和注意事项</h1>
 <ul>
-<li><p>&#x8C03;&#x8282;&#x5B8C;&#x6210;&#x540E;dropbear&#xFF08;&#x8F7B;&#x91CF;&#x7684;ssh&#x670D;&#x52A1;&#x5668;&#x7AEF;&#xFF09;&#x4E0D;&#x80FD;&#x5F00;&#x673A;&#x81EA;&#x542F;&#x52A8;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x7CFB;&#x7EDF;&#x2014;&#x2014;&#x7BA1;&#x7406;&#x6743;&#x91CC;&#x4FDD;&#x5B58;&#x5E94;&#x7528;&#x4E00;&#x4E0B;&#x3002;</p>
+<li><p>调节完成后dropbear（轻量的ssh服务器端）不能开机自启动，需要在系统——管理权里保存应用一下。</p>
 </li>
-<li><p>wifi&#x4FE1;&#x9053;&#x4E0D;&#x80FD;&#x8BBE;&#x7F6E;&#x4E3A;auto&#x3002;</p>
+<li><p>wifi信道不能设置为auto。</p>
 </li>
-<li><p>WAN&#x53E3;ip&#x548C;LAN&#x53E3;ip&#x6700;&#x597D;&#x4E0D;&#x8981;&#x5728;&#x4E00;&#x4E2A;&#x7F51;&#x6BB5;&#x4E0B;&#x3002;</p>
+<li><p>WAN口ip和LAN口ip最好不要在一个网段下。</p>
 </li>
-<li><p>2016-02-08:&#x65B0;bug&#xFF01;WiFi&#x5730;&#x533A;&#x4EE3;&#x7801;&#x5982;&#x679C;&#x4E0D;&#x662F;&#x9ED8;&#x8BA4;&#x7684;00--World&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#x6302;&#x6389;&#xFF01;&#x6211;&#x6539;&#x6210;CN&#x4E4B;&#x540E;&#x6302;&#x4E86;2333&#xFF5E;&#x53E6;dropbear&#x7684;bug&#x4F3C;&#x4E4E;&#x4E00;&#x4EE3;&#x4E8C;&#x4EE3;&#x90FD;&#x6709;&#x3002;</p>
+<li><p>2016-02-08:新bug！WiFi地区代码如果不是默认的00--World的话，可能导致无线网卡挂掉！我改成CN之后挂了2333～另dropbear的bug似乎一代二代都有。</p>
 </li>
 </ul>
-<p>&#x642C;&#x8FD0;&#x81EA;&#x6211;&#x7684;Lofter&#xFF0C;&#x8F6C;&#x8F7D;&#x8BF7;&#x6CE8;&#x660E;&#x51FA;&#x5904;&#x3002;</p>
-<p>&#x539F;&#x6587;&#x5199;&#x4E8E;2016-02-06_21:10:25</p>
+<p>搬运自我的Lofter，转载请注明出处。</p>
+<p>原文写于2016-02-06_21:10:25</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
+<p><strong>A Coder & Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -725,4 +725,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.2 at 2019-05-11 周六 10:36:46 CST. -->
+<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->

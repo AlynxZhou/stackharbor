@@ -189,23 +189,23 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>&#x6700;&#x8FD1;&#x6211;&#x7F16;&#x5199;&#x4E86;&#x4E00;&#x4E2A; Android &#x7684;&#x89C6;&#x9891;&#x58C1;&#x7EB8;&#x5E94;&#x7528;&#xFF08;<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank">GitHub Repo</a>&#xFF09;&#xFF0C;&#x4E00;&#x5F00;&#x59CB;&#x89C9;&#x5F97;&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x96BE;&#x5199;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5E94;&#x8BE5;&#x5F88;&#x5FEB;&#x5C31;&#x53EF;&#x4EE5;&#x5199;&#x51FA;&#x6765;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x6765;&#x53D1;&#x73B0;&#x6211;&#x60F3;&#x7684;&#x592A;&#x7B80;&#x5355;&#x4E86;&#x3002;&#x6216;&#x8BB8;&#x4F60;&#x4E5F;&#x770B;&#x8FC7;&#x8BB8;&#x591A;&#x5199;&#x89C6;&#x9891;&#x58C1;&#x7EB8;&#x7684;&#x6559;&#x7A0B;&#xFF0C;&#x4F46;&#x6211;&#x53D1;&#x73B0;&#x4ED6;&#x4EEC;&#x90FD;&#x6709;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x5199;&#x51FA;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x57FA;&#x672C;&#x4E0D;&#x80FD;&#x7528;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x6253;&#x7B97;&#x5728;&#x8FD9;&#x91CC;&#x5199;&#x4E00;&#x4E0B;&#x5982;&#x4F55;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x53D1;&#x5E03;&#x7684; Android &#x89C6;&#x9891;&#x58C1;&#x7EB8;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A; demo&#x3002;</p>
+      <p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>
 <a id="more"></a>
 
-<p>&#x9996;&#x5148;&#x4F60;&#x9700;&#x8981;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#xFF0C;&#x901A;&#x5E38;&#x5E94;&#x8BE5;&#x90FD;&#x662F;&#x4F7F;&#x7528; Android Studio&#xFF0C;&#x6211;&#x5C31;&#x5FFD;&#x7565;&#x4F60;&#x5982;&#x4F55;&#x4E0E;&#x7F51;&#x7EDC;&#x640F;&#x6597;&#x8BA9; Android Studio &#x53EF;&#x7528;&#x4E86;&#x3002;&#x4EC0;&#x4E48;&#x7A0B;&#x5E8F;&#x6A21;&#x677F;&#x53EF;&#x4EE5;&#x968F;&#x4FBF;&#x9009;&#xFF0C;&#x53CD;&#x6B63;&#x4F60;&#x8FD8;&#x662F;&#x8981;&#x81EA;&#x5DF1;&#x65B0;&#x5EFA; class&#x3002;&#x6700;&#x4F4E; API &#x7248;&#x672C;&#x4E0D;&#x8981;&#x592A;&#x4F4E;&#x5C31;&#x884C;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x53EA;&#x662F;&#x5199;&#x4E00;&#x4E2A;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#xFF0C;&#x5E94;&#x8BE5;&#x4E0D;&#x9700;&#x8981;&#x5F88;&#x9AD8;&#x7684; API&#xFF0C;&#x56E0;&#x4E3A; Android &#x5F88;&#x65E9;&#x5C31;&#x652F;&#x6301;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x4E86;&#xFF08;&#x4F46;&#x4E3A;&#x4E86;&#x8BA9;&#x5F00;&#x53D1;&#x65B9;&#x4FBF;&#x4E00;&#x70B9;&#xFF0C;&#x5EFA;&#x8BAE;&#x53EA;&#x8003;&#x8651; 5.0 &#x4EE5;&#x4E0A;&#x7684;&#x5C31;&#x884C;&#x4E86;&#xFF0C;&#x53CD;&#x6B63;&#x73B0;&#x5728;&#x5373;&#x4F7F;&#x6709; 5.0 &#x4EE5;&#x4E0B;&#x7684;&#x673A;&#x5668;&#x591A;&#x534A;&#x4E5F;&#x6210;&#x5783;&#x573E;&#x4E86;&#xFF09;&#x3002;</p>
-<h1 id="&#x9996;&#x5148;&#x8BA9;&#x7CFB;&#x7EDF;&#x77E5;&#x9053;&#x4F60;&#x662F;&#x4E2A;&#x58C1;&#x7EB8;&#x2026;&#x2026;"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E9%A6%96%E5%85%88%E8%AE%A9%E7%B3%BB%E7%BB%9F%E7%9F%A5%E9%81%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E5%A3%81%E7%BA%B8%E2%80%A6%E2%80%A6" title="&#x9996;&#x5148;&#x8BA9;&#x7CFB;&#x7EDF;&#x77E5;&#x9053;&#x4F60;&#x662F;&#x4E2A;&#x58C1;&#x7EB8;&#x2026;&#x2026;"></a>&#x9996;&#x5148;&#x8BA9;&#x7CFB;&#x7EDF;&#x77E5;&#x9053;&#x4F60;&#x662F;&#x4E2A;&#x58C1;&#x7EB8;&#x2026;&#x2026;</h1>
-<p>&#x5728;&#x5F00;&#x59CB;&#x5199;&#x903B;&#x8F91;&#x4EE3;&#x7801;&#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x5F97;&#x5148;&#x8BA9;&#x7CFB;&#x7EDF;&#x77E5;&#x9053;&#x4F60;&#x5199;&#x7684;&#x8FD9;&#x662F;&#x4E2A;&#x58C1;&#x7EB8;&#xFF0C;&#x8FD9;&#x9700;&#x8981;&#x4E00;&#x4E9B;&#x8D77;&#x58F0;&#x660E;&#x4F5C;&#x7528;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x5148;&#x628A;&#x4F60; Android Studio &#x5DE6;&#x4FA7;&#x4FA7;&#x680F;&#x8C03;&#x6210;&#x6587;&#x4EF6;&#x6811;&#x6A21;&#x5F0F;&#xFF08;&#x5FD8;&#x4E86;&#x4EC0;&#x4E48;&#x8BE1;&#x5F02;&#x7684;&#x5206;&#x7C7B;&#x6A21;&#x5F0F;&#x5427;&#xFF0C;&#x4E0D;&#x7136;&#x4F60;&#x8FDE;&#x6587;&#x4EF6;&#x5728;&#x54EA;&#x90FD;&#x627E;&#x4E0D;&#x5230;&#xFF0C;&#x8BD5;&#x56FE;&#x9690;&#x85CF;&#x7EC6;&#x8282;&#x53EA;&#x4F1A;&#x8BA9;&#x4E8B;&#x60C5;&#x53D8;&#x7684;&#x66F4;&#x590D;&#x6742;&#xFF09;&#x3002;</p>
-<p>&#x5E94;&#x8BE5;&#x6709;&#x4E00;&#x4E2A;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684; <code>AndroidManifest.xml</code> &#x6587;&#x4EF6;&#xFF0C;&#x6211;&#x89C9;&#x5F97;&#x4F60;&#x5E94;&#x8BE5;&#x6BD4;&#x6211;&#x66F4;&#x4E86;&#x89E3;&#x8FD9;&#x73A9;&#x610F;&#x662F;&#x5E72;&#x561B;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5B9E;&#x9645;&#x4E0A;&#x6211;&#x6CA1;&#x7CFB;&#x7EDF;&#x5730;&#x7814;&#x7A76;&#x8FC7; Android&#xFF0C;&#x6211;&#x53EA;&#x662F;&#x4F1A;&#x4E00;&#x70B9;&#x70B9; Java &#x800C;&#x5DF2;&#x2014;&#x2014;&#x7136;&#x540E;&#x9760;&#x4E0D;&#x505C;&#x7684;&#x67E5;&#x770B;&#x624B;&#x518C;&#x6765;&#x81EA;&#x5B66;&#x3002;&#x52A0;&#x4E0A;&#x8FD9;&#x4E24;&#x884C;&#xFF1A;</p>
+<p>首先你需要新建一个项目，通常应该都是使用 Android Studio，我就忽略你如何与网络搏斗让 Android Studio 可用了。什么程序模板可以随便选，反正你还是要自己新建 class。最低 API 版本不要太低就行，如果你只是写一个动态壁纸，应该不需要很高的 API，因为 Android 很早就支持动态壁纸了（但为了让开发方便一点，建议只考虑 5.0 以上的就行了，反正现在即使有 5.0 以下的机器多半也成垃圾了）。</p>
+<h1 id="首先让系统知道你是个壁纸……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E9%A6%96%E5%85%88%E8%AE%A9%E7%B3%BB%E7%BB%9F%E7%9F%A5%E9%81%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E5%A3%81%E7%BA%B8%E2%80%A6%E2%80%A6" title="首先让系统知道你是个壁纸……"></a>首先让系统知道你是个壁纸……</h1>
+<p>在开始写逻辑代码之前，我们还得先让系统知道你写的这是个壁纸，这需要一些起声明作用的代码。先把你 Android Studio 左侧侧栏调成文件树模式（忘了什么诡异的分类模式吧，不然你连文件在哪都找不到，试图隐藏细节只会让事情变的更复杂）。</p>
+<p>应该有一个自动生成的 <code>AndroidManifest.xml</code> 文件，我觉得你应该比我更了解这玩意是干嘛的，因为实际上我没系统地研究过 Android，我只是会一点点 Java 而已——然后靠不停的查看手册来自学。加上这两行：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
-</pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.permission.SET_WALLPAPER&quot;</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
-  <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.software.live_wallpaper&quot;</span>
-  <span class="hljs-attr">android:required</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span></code></pre></figure></code></pre>
-<p>&#x4F60;&#x8981;&#x662F;&#x80FD;&#x628A;&#x8FD9;&#x4E00;&#x884C;&#x52A0;&#x5230; <code>&lt;manifest&gt;</code> &#x6807;&#x7B7E;&#x5916;&#x9762;&#xFF0C;&#x6211;&#x89C9;&#x5F97;&#x4F60;&#x4E5F;&#x6CA1;&#x5FC5;&#x8981;&#x5199;&#x4EE3;&#x7801;&#x4E86;&#x2026;&#x2026;&#x4F46;&#x8FD9;&#x4E2A;&#x8981;&#x653E;&#x5728; <code>&lt;application&gt;</code> &#x6807;&#x7B7E;&#x7684;&#x5916;&#x9762;&#xFF0C;&#x5177;&#x4F53;&#x653E;&#x5728;&#x54EA;&#x76F4;&#x63A5;&#x7FFB;&#x6211;&#x4ED3;&#x5E93;&#x91CC;&#x7684;&#x6587;&#x4EF6;&#x597D;&#x4E86;&#xFF0C;&#x6BD4;&#x6211;&#x7528;&#x6587;&#x5B57;&#x63CF;&#x8FF0;&#x6E05;&#x6670;&#x7684;&#x591A;&#x3002;</p>
-<p>&#x4F46;&#x662F;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x8981;&#x52A0;&#x5230; <code>&lt;application&gt;</code> &#x6807;&#x7B7E;&#x7684;&#x91CC;&#x9762;&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-tag"><<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.SET_WALLPAPER"</span> /></span>
+<span class="hljs-tag"><<span class="hljs-name">uses-feature</span>
+  <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.software.live_wallpaper"</span>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /></span></code></pre></figure></code></pre>
+<p>你要是能把这一行加到 <code><manifest></code> 标签外面，我觉得你也没必要写代码了……但这个要放在 <code><application></code> 标签的外面，具体放在哪直接翻我仓库里的文件好了，比我用文字描述清晰的多。</p>
+<p>但是下面这个要加到 <code><application></code> 标签的里面：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -216,37 +216,37 @@
 <span class="line">8</span>
 <span class="line">9</span>
 <span class="line">10</span>
-</pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">service</span>
-  <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.GLWallpaperService&quot;</span>
-  <span class="hljs-attr">android:permission</span>=<span class="hljs-string">&quot;android.permission.BIND_WALLPAPER&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.service.wallpaper.WallpaperService&quot;</span> /&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span>
-    <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.service.wallpaper&quot;</span>
-    <span class="hljs-attr">android:resource</span>=<span class="hljs-string">&quot;@xml/wallpaper&quot;</span> /&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">service</span>&gt;</span></code></pre></figure></code></pre>
-<p>&#x770B;&#x5230;&#x90A3;&#x4E2A;&#x53EB; <code>android:name</code> &#x7684;&#x5C5E;&#x6027;&#x4E86;&#x5417;&#xFF0C;<code>.</code> &#x4E0D;&#x80FD;&#x5C11;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x540D;&#x5B57;&#x5219;&#x662F;&#x4E00;&#x4F1A;&#x4F60;&#x7684; class &#x53EB;&#x4EC0;&#x4E48;&#x540D;&#x5B57;&#x8FD9;&#x91CC;&#x5C31;&#x4EC0;&#x4E48;&#x540D;&#x5B57;&#x3002;&#x7136;&#x540E;&#x522B;&#x7684;&#x90FD;&#x662F;&#x5957;&#x8DEF;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x7BA1;&#xFF0C;&#x9664;&#x4E86;&#x90A3;&#x4E2A; <code>@xml/wallpaper</code>&#xFF0C;&#x8FD9;&#x73A9;&#x610F;&#x8981;&#x81EA;&#x5DF1;&#x5199;&#x3002;</p>
-<p>&#x5728;&#x4F60;&#x4FA7;&#x680F;&#x627E;&#x5230; <code>res</code> &#x76EE;&#x5F55;&#xFF0C;&#x5982;&#x679C;&#x5E95;&#x4E0B;&#x6CA1;&#x6709;&#x53EB; <code>xml</code> &#x7684;&#x76EE;&#x5F55;&#x7684;&#x8BDD;&#xFF0C;&#x4F60;&#x5C31;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x3002;&#x7136;&#x540E;&#x4F60;&#x521A;&#x624D;&#x90A3;&#x91CC;&#x659C;&#x6760;&#x540E;&#x9762;&#x662F;&#x4EC0;&#x4E48;&#x4F60;&#x5C31;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x53EB;&#x4EC0;&#x4E48;&#x7684; xml &#x6587;&#x4EF6;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x5199;&#x4E86; <code>@xml/wallpaper</code>&#xFF0C;&#x90A3;&#x5C31;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A; <code>wallpaper.xml</code> &#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+</pre><pre class="code"><code><span class="hljs-tag"><<span class="hljs-name">service</span>
+  <span class="hljs-attr">android:name</span>=<span class="hljs-string">".GLWallpaperService"</span>
+  <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"android.permission.BIND_WALLPAPER"</span>></span>
+  <span class="hljs-tag"><<span class="hljs-name">intent-filter</span>></span>
+    <span class="hljs-tag"><<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.service.wallpaper.WallpaperService"</span> /></span>
+  <span class="hljs-tag"></<span class="hljs-name">intent-filter</span>></span>
+  <span class="hljs-tag"><<span class="hljs-name">meta-data</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.service.wallpaper"</span>
+    <span class="hljs-attr">android:resource</span>=<span class="hljs-string">"@xml/wallpaper"</span> /></span>
+<span class="hljs-tag"></<span class="hljs-name">service</span>></span></code></pre></figure></code></pre>
+<p>看到那个叫 <code>android:name</code> 的属性了吗，<code>.</code> 不能少，后面的名字则是一会你的 class 叫什么名字这里就什么名字。然后别的都是套路，可以不管，除了那个 <code>@xml/wallpaper</code>，这玩意要自己写。</p>
+<p>在你侧栏找到 <code>res</code> 目录，如果底下没有叫 <code>xml</code> 的目录的话，你就新建一个。然后你刚才那里斜杠后面是什么你就建立一个叫什么的 xml 文件，比如我写了 <code>@xml/wallpaper</code>，那就建立一个 <code>wallpaper.xml</code> 的文件，内容如下：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 <span class="line">6</span>
-</pre><pre class="code"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
-<span class="hljs-tag">&lt;<span class="hljs-name">wallpaper</span>
-  <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemas.android.com/apk/res/android&quot;</span>
-  <span class="hljs-attr">android:thumbnail</span>=<span class="hljs-string">&quot;@drawable/ic_icon&quot;</span>
-  <span class="hljs-attr">android:description</span>=<span class="hljs-string">&quot;@string/wallpaper_description&quot;</span>
-  <span class="hljs-attr">android:settingsActivity</span>=<span class="hljs-string">&quot;xyz.alynx.livewallpaper.MainActivity&quot;</span> /&gt;</span></code></pre></figure></code></pre>
-<p>&#x8FD9;&#x91CC;&#x9762;&#x4E5F;&#x6709;&#x4E9B;&#x5730;&#x65B9;&#x9700;&#x8981;&#x6539;&#xFF0C;&#x9996;&#x5148;&#x90A3;&#x4E2A; <code>@drawable/ic_icon</code> &#x662F;&#x4F60;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x5728;&#x7CFB;&#x7EDF;&#x7684;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x5217;&#x8868;&#x91CC;&#x9762;&#x7684;&#x56FE;&#x6807;&#xFF08;&#x7136;&#x800C;&#x5927;&#x90E8;&#x5206;&#x5B9A;&#x5236;&#x7684;&#x7CFB;&#x7EDF;&#x90FD;&#x5FFD;&#x7565;&#x4E86;&#x8FD9;&#x73A9;&#x610F;&#xFF09;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528; Android Studio &#x5728; <code>res/drawable</code> &#x76EE;&#x5F55;&#x4E0B;&#x9762;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#xFF0C;&#x8FD9;&#x4E2A;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x53BB;&#x67E5;&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF0C;<code>ic_icon</code> &#x8981;&#x6362;&#x6210;&#x4F60;&#x751F;&#x6210;&#x7684;&#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;&#x3002;<code>@string/wallpaper_description</code> &#x5219;&#x662F;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#x5728;&#x5217;&#x8868;&#x91CC;&#x7684;&#x540D;&#x5B57;&#x6216;&#x4ECB;&#x7ECD;&#xFF0C;&#x8FD9;&#x4E2A;&#x683C;&#x5F0F;&#x7684;&#x610F;&#x601D;&#x662F;&#x53BB; <code>res/values/strings.xml</code> &#x6216;&#x8005;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x7684; <code>strings.xml</code> &#x91CC;&#x9762;&#x627E;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#x5199;&#x8FC7;&#x70B9;&#x590D;&#x6742;&#x7A0B;&#x5E8F;&#x7684;&#x4EBA;&#x5E94;&#x8BE5;&#x90FD;&#x61C2;&#x5427;&#xFF01;&#x4E0D;&#x61C2;&#x81EA;&#x5B66;&#x53BB;&#xFF01;&#x6211;&#x8FD9;&#x4E0D;&#x662F;&#x6559;&#x4F60;&#x600E;&#x4E48;&#x5199;&#x4EE3;&#x7801;&#xFF01;&#xFF09;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528; Android Studio &#x7684;&#x5B57;&#x7B26;&#x4E32;&#x7F16;&#x8F91;&#x5668;&#x6DFB;&#x52A0;&#x4E00;&#x6761;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x8FD9;&#x91CC;&#x7684;&#x952E;&#x6539;&#x6210;&#x4F60;&#x6DFB;&#x52A0;&#x7684;&#x3002;&#x6700;&#x540E;&#x4E00;&#x4E2A; <code>settingsActivity</code> &#x662F;&#x5E72;&#x561B;&#x7684;&#x5462;&#xFF1F;&#x5728;&#x9884;&#x89C8;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x7684;&#x9875;&#x9762;&#x4F1A;&#x6709;&#x4E2A;&#x8BBE;&#x7F6E;&#x6309;&#x94AE;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#xFF0C;&#x70B9;&#x51FB;&#x90A3;&#x4E2A;&#x6309;&#x94AE;&#x4F1A;&#x8DF3;&#x8FDB;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x8BBE;&#x7F6E;&#x9875;&#x9762;&#xFF0C;&#x8BBE;&#x7F6E;&#x9875;&#x9762;&#x5C31;&#x662F;&#x5728;&#x8FD9;&#x91CC;&#x6307;&#x5B9A;&#x7684;&#x7C7B;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x8BBE;&#x7F6E;&#x9879;&#x4E0D;&#x591A;&#x76F4;&#x63A5;&#x653E;&#x83DC;&#x5355;&#x91CC;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x5199;&#x7684;&#x662F;&#x76F4;&#x63A5;&#x8DF3;&#x8FDB; <code>MainActivity</code>&#xFF0C;&#x4F60;&#x5199;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#xFF0C;&#x4F46;&#x8BB0;&#x5F97;&#x6362;&#x6210;&#x4F60;&#x7684;&#x5305;&#x540D;&#xFF08;&#x4E0D;&#x6362;&#x7684;&#x4EBA;&#x6211;&#x6000;&#x7591;&#x4F60;&#x6CA1;&#x5199;&#x8FC7; Java&#xFF0C;&#x90A3;&#x4F60;&#x5B66;&#x4E2A;&#x6BDB; Android App &#x5F00;&#x53D1;&#xFF1F;&#xFF09;&#x3002;</p>
-<p>&#x5E9F;&#x8BDD;&#x7EC8;&#x4E8E;&#x8BF4;&#x5B8C;&#x4E86;&#x53EF;&#x4EE5;&#x5199;&#x4EE3;&#x7801;&#x4E86;&#x597D;&#x5F00;&#x5FC3;&#x554A;&#x2026;&#x2026;</p>
-<h1 id="&#x7136;&#x540E;&#x4F60;&#x770B;&#x89C1;&#x7F51;&#x4E0A;&#x4E00;&#x5806;&#x80F6;&#x6C34;&#x4EE3;&#x7801;&#x2026;&#x2026;"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6" title="&#x7136;&#x540E;&#x4F60;&#x770B;&#x89C1;&#x7F51;&#x4E0A;&#x4E00;&#x5806;&#x80F6;&#x6C34;&#x4EE3;&#x7801;&#x2026;&#x2026;"></a>&#x7136;&#x540E;&#x4F60;&#x770B;&#x89C1;&#x7F51;&#x4E0A;&#x4E00;&#x5806;&#x80F6;&#x6C34;&#x4EE3;&#x7801;&#x2026;&#x2026;</h1>
-<p>&#x5982;&#x679C;&#x4F60;&#x627E;&#x8FC7;&#x7F51;&#x4E0A;&#x7684;&#x6559;&#x7A0B;&#xFF0C;&#x4F60;&#x4F1A;&#x89C9;&#x5F97;&#x89C6;&#x9891;&#x58C1;&#x7EB8;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x4ED6;&#x4EEC;&#x90FD;&#x544A;&#x8BC9;&#x4F60;&#x64AD;&#x653E;&#x89C6;&#x9891;&#x6709;&#x73B0;&#x6210;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x4F60;&#x53EA;&#x8981;&#x5199;&#x51E0;&#x884C;&#x80F6;&#x6C34;&#x4EE3;&#x7801;&#x628A;&#x5B83;&#x548C;&#x58C1;&#x7EB8;&#x8FDE;&#x8D77;&#x6765;&#x5C31;&#x884C;&#x4E86;&#x2026;&#x2026;</p>
-<p>&#x884C;&#x4E2A;&#x5934;&#xFF01;&#x8981;&#x662F;&#x90A3;&#x4E48;&#x7B80;&#x5355;&#x6211;&#x5C31;&#x4E0D;&#x7528;&#x5199;&#x8FD9;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x4E86;&#x597D;&#x5417;&#xFF1F;</p>
-<p>&#x6211;&#x4EEC;&#x5148;&#x4ECE;&#x6700;&#x57FA;&#x7840;&#x7684;&#x77E5;&#x8BC6;&#x5F00;&#x59CB;&#xFF0C;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4E00;&#x4E2A; <code>Service</code>&#xFF0C;&#x4F60;&#x53BB;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A; <code>Service</code>&#xFF0C;&#x7136;&#x540E;&#x7CFB;&#x7EDF;&#x6765;&#x8C03;&#x7528;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x7EE7;&#x627F;&#x4E00;&#x4E2A;&#x53EB;&#x505A; <code>WallpaperService</code> &#x7684;&#x7C7B;&#xFF0C;&#x5B9E;&#x73B0;&#x91CC;&#x9762;&#x7684;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x3002;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x4E2A;&#x7C7B;&#x53EA;&#x662F;&#x4E2A;&#x5305;&#x88C5;&#xFF0C;&#x771F;&#x6B63;&#x7684;&#x5DE5;&#x4F5C;&#x4EE3;&#x7801;&#x662F;&#x91CC;&#x9762;&#x4E00;&#x4E2A;&#x53EB; <code>Engine</code> &#x7684;&#x7C7B;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x5B9E;&#x73B0;&#x90FD;&#x662F;&#x5728;&#x5B83;&#x91CC;&#x9762;&#x3002;</p>
-<p>&#x6240;&#x4EE5;&#x4F60;&#x9700;&#x8981;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x968F;&#x4FBF;&#x4F60;&#x7231;&#x53EB;&#x4EC0;&#x4E48;&#x7684; java &#x6587;&#x4EF6;&#xFF08;&#x6211;&#x4E0D;&#x4F1A;&#x7528; Kotlin&#xFF0C;&#x4F46;&#x4F60;&#x613F;&#x610F;&#x7684;&#x8BDD;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#xFF09;&#x6765;&#x5B58;&#x653E;&#x4F60;&#x81EA;&#x5DF1;&#x7684; <code>Service</code>&#x2026;&#x2026;&#x6216;&#x8005;&#x7528; Android Studio &#x7684;&#x5411;&#x5BFC;&#x4E5F;&#x4E0D;&#x9519;&#x3002;&#x6BD4;&#x5982;&#x6211;&#x7684;&#x5C31;&#x53EB; <code>GLWallpaperService</code>&#xFF0C;&#x91CC;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x770B;&#x8D77;&#x6765;&#x5927;&#x6982;&#x50CF;&#x8FD9;&#x6837;&#xFF1A;</p>
+</pre><pre class="code"><code><span class="php"><span class="hljs-meta"><?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?></span></span>
+<span class="hljs-tag"><<span class="hljs-name">wallpaper</span>
+  <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>
+  <span class="hljs-attr">android:thumbnail</span>=<span class="hljs-string">"@drawable/ic_icon"</span>
+  <span class="hljs-attr">android:description</span>=<span class="hljs-string">"@string/wallpaper_description"</span>
+  <span class="hljs-attr">android:settingsActivity</span>=<span class="hljs-string">"xyz.alynx.livewallpaper.MainActivity"</span> /></span></code></pre></figure></code></pre>
+<p>这里面也有些地方需要改，首先那个 <code>@drawable/ic_icon</code> 是你这个程序在系统的动态壁纸列表里面的图标（然而大部分定制的系统都忽略了这玩意），你可以用 Android Studio 在 <code>res/drawable</code> 目录下面生成一个，这个可以自己去查官方文档，<code>ic_icon</code> 要换成你生成的文件的名字。<code>@string/wallpaper_description</code> 则是你的程序在列表里的名字或介绍，这个格式的意思是去 <code>res/values/strings.xml</code> 或者其他语言的 <code>strings.xml</code> 里面找字符串（写过点复杂程序的人应该都懂吧！不懂自学去！我这不是教你怎么写代码！），你可以用 Android Studio 的字符串编辑器添加一条，然后把这里的键改成你添加的。最后一个 <code>settingsActivity</code> 是干嘛的呢？在预览动态壁纸的页面会有个设置按钮，如果你的动态壁纸可以设置参数，点击那个按钮会跳进动态壁纸设置页面，设置页面就是在这里指定的类，因为我设置项不多直接放菜单里了，所以我写的是直接跳进 <code>MainActivity</code>，你写的时候也可以这样，但记得换成你的包名（不换的人我怀疑你没写过 Java，那你学个毛 Android App 开发？）。</p>
+<p>废话终于说完了可以写代码了好开心啊……</p>
+<h1 id="然后你看见网上一堆胶水代码……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6" title="然后你看见网上一堆胶水代码……"></a>然后你看见网上一堆胶水代码……</h1>
+<p>如果你找过网上的教程，你会觉得视频壁纸是很简单的，他们都告诉你播放视频有现成的组件，你只要写几行胶水代码把它和壁纸连起来就行了……</p>
+<p>行个头！要是那么简单我就不用写这一篇文章了好吗？</p>
+<p>我们先从最基础的知识开始，动态壁纸实际上是一个 <code>Service</code>，你去实现一个 <code>Service</code>，然后系统来调用，你需要继承一个叫做 <code>WallpaperService</code> 的类，实现里面的一些方法。但实际上这个类只是个包装，真正的工作代码是里面一个叫 <code>Engine</code> 的类，具体的动态壁纸实现都是在它里面。</p>
+<p>所以你需要建立一个随便你爱叫什么的 java 文件（我不会用 Kotlin，但你愿意的话也可以用）来存放你自己的 <code>Service</code>……或者用 Android Studio 的向导也不错。比如我的就叫 <code>GLWallpaperService</code>，里面的代码看起来大概像这样：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -275,8 +275,8 @@
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GLWallpaperEngine();
     }
 }</code></pre></figure></code></pre>
-<p>&#x6240;&#x4EE5;&#x4F60;&#x770B;&#xFF0C;&#x4F60;&#x53EA;&#x9700;&#x8981;&#x5B9E;&#x73B0; <code>WallpaperService</code> &#x7684;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x7CFB;&#x7EDF;&#x9700;&#x8981; <code>Engine</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD4;&#x56DE;&#x4F60;&#x81EA;&#x5DF1;&#x7684; <code>Engine</code> &#x5B9E;&#x4F8B;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x4F60;&#x9700;&#x8981;&#x5728;&#x4F60;&#x7684; <code>Engine</code>&#xFF08;&#x6211;&#x7684;&#x662F; <code>GLWallpaperEngine</code>&#xFF09;&#x91CC;&#x9762;&#x5B9E;&#x73B0;&#x4E00;&#x4E9B;&#x7CFB;&#x7EDF;&#x8981;&#x6C42;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x8BF4;&#x6700;&#x57FA;&#x7840;&#x7684;&#x51E0;&#x4E2A;&#xFF1A;</p>
+<p>所以你看，你只需要实现 <code>WallpaperService</code> 的一个方法，就是在系统需要 <code>Engine</code> 的时候，返回你自己的 <code>Engine</code> 实例。</p>
+<p>然后你需要在你的 <code>Engine</code>（我的是 <code>GLWallpaperEngine</code>）里面实现一些系统要求的方法，我们先说最基础的几个：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -327,19 +327,19 @@
                 yOffsetStep, xPixelOffset, yPixelOffset
             );
         }</code></pre></figure></code></pre>
-<p>Android &#x7684;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4E00;&#x4E2A; <code>Surface</code>&#xFF08;Android &#x7684; <code>Surface</code> &#x4F60;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x753B;&#x5E03;&#x2026;&#x2026;&#x5927;&#x6982;&#x5427;&#xFF09;&#xFF0C;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x4F60;&#x7684; <code>Engine</code>&#xFF0C;&#x7136;&#x540E;&#x7ED9;&#x4F60;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x7ED8;&#x5236;&#x7684; <code>SurfaceHolder</code>&#xFF0C;&#x4F60;&#x53EA;&#x8981;&#x5F80;&#x8FD9;&#x4E2A; <code>SurfaceHolder</code> &#x91CC;&#x9762;&#x7684; <code>Surface</code> &#x753B;&#x4E1C;&#x897F;&#x5C31;&#x884C;&#x4E86;&#x3002;<code>onSurfaceCreated()</code> &#x8868;&#x793A;&#x753B;&#x5E03;&#x51C6;&#x5907;&#x597D;&#x4E86;&#xFF0C;<code>onVisibilityChanged()</code> &#x5219;&#x8868;&#x793A;&#x753B;&#x5E03;&#x770B;&#x4E0D;&#x89C1;&#x4E86;&#x6216;&#x8005;&#x53C8;&#x51FA;&#x6765;&#x4E86;&#xFF0C;<code>onSurfaceDestroyed()</code> &#x8868;&#x793A;&#x753B;&#x5E03;&#x6CA1;&#x4E86;&#xFF08;&#x6211;&#x4E0D;&#x662F;&#x4F60;&#x82F1;&#x8BED;&#x8001;&#x5E08;&#xFF01;&#xFF09;&#xFF0C;<code>onOffsetsChanged()</code> &#x5219;&#x662F;&#x684C;&#x9762;&#x901A;&#x77E5;&#x58C1;&#x7EB8;&#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x901A;&#x5E38;&#x662F;&#x5B9E;&#x73B0;&#x58C1;&#x7EB8;&#x968F;&#x684C;&#x9762;&#x6EDA;&#x52A8;&#x7684;&#x6548;&#x679C;&#x3002;</p>
-<p>&#x4E0D;&#x8981;&#x628A;&#x4ED6;&#x4EEC;&#x548C; <code>onCreate()</code> &#x548C; <code>onDestoryed()</code> &#x641E;&#x6DF7;&#x4E86;&#xFF0C;&#x90A3;&#x4FE9;&#x8BF4;&#x7684;&#x662F; <code>Engine</code>&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x505A;&#x7ED8;&#x5236;&#x5DE5;&#x4F5C;&#x65F6;&#x5019;&#x64CD;&#x5FC3;&#x7684;&#x662F;&#x753B;&#x5E03;&#x3002;</p>
-<p>&#x4E3A;&#x4EC0;&#x4E48;&#x8BF4;&#x662F;&#x4E2A;&#x80F6;&#x6C34;&#x4EE3;&#x7801;&#x5462;&#x2026;&#x2026;&#x56E0;&#x4E3A; Android &#x5185;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x64AD;&#x653E;&#x5668;&#x53EB; <code>MediaPlayer</code>&#xFF0C;&#x5B83;&#x6709;&#x4E2A;&#x65B9;&#x6CD5;&#x53EB; <code>setSurface()</code>&#xFF0C;&#x53EF;&#x4EE5;&#x628A;&#x89C6;&#x9891;&#x6E32;&#x67D3;&#x5230;&#x753B;&#x5E03;&#x4E0A;&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C31;&#x7F8E;&#x6ECB;&#x6ECB;&#x5730;&#x770B;&#x2026;&#x2026;&#x5230; bug&#x3002;</p>
-<p>&#x600E;&#x4E48;&#x8BBE;&#x7F6E; <code>MediaPlayer</code> &#x6211;&#x5C31;&#x4E0D;&#x8BB2;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x7F51;&#x4E0A;&#x6709;&#x5F88;&#x591A;&#x73B0;&#x6210;&#x7684;&#xFF0C;&#x603B;&#x4E4B;&#x5C31;&#x662F;&#x5B9E;&#x4F8B;&#x5316;&#x8BBE;&#x7F6E;&#x9759;&#x97F3;&#x8BBE;&#x7F6E;&#x6765;&#x6E90;&#x518D; <code>setSurface(getSurfaceHolder().getSurface())</code>&#xFF08;<code>getSurfaceHolder()</code> &#x662F; <code>Engine</code> &#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7684; <code>SurfaceHolder</code>&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x64AD;&#x653E;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x5728; <code>onSurfaceCreated()</code> &#x7684;&#x65F6;&#x5019;&#x5F04;&#x51FA;&#x4E2A;&#x64AD;&#x653E;&#x5668;&#xFF0C;<code>onSurfaceDestroyed()</code> &#x7684;&#x65F6;&#x5019; <code>release()</code> &#x6389;&#x64AD;&#x653E;&#x5668;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x7531;&#x53EF;&#x89C1;&#x53D8;&#x6210;&#x4E0D;&#x53EF;&#x89C1;&#x7684;&#x65F6;&#x5019;&#x4FDD;&#x5B58;&#x8FDB;&#x5EA6;&#x5220;&#x6389;&#x64AD;&#x653E;&#x5668;&#xFF08;&#x5176;&#x5B9E;&#x6682;&#x505C;&#x4E5F;&#x884C;&#xFF0C;&#x4F46;&#x662F;&#x6682;&#x505C;&#x4ECD;&#x7136;&#x5360;&#x636E;&#x7740;&#x8D44;&#x6E90;&#xFF09;&#xFF0C;&#x5728;&#x53EF;&#x89C1;&#x65F6;&#x5019;&#x5EFA;&#x7ACB;&#x64AD;&#x653E;&#x5668;&#x5E76;&#x56DE;&#x590D;&#x5230;&#x4E4B;&#x524D;&#x7684;&#x8FDB;&#x5EA6;&#xFF08;&#x5982;&#x679C;&#x770B;&#x4E0D;&#x89C1;&#x4E86;&#x8FD8;&#x4E00;&#x76F4;&#x64AD;&#xFF0C;&#x4F60;&#x624B;&#x673A;&#x7684;&#x7535;&#x6C60;&#x4F30;&#x8BA1;&#x575A;&#x6301;&#x4E0D;&#x4E86;&#x51E0;&#x5C0F;&#x65F6;&#xFF09;&#x3002;&#x53CD;&#x6B63;&#x4EE3;&#x7801;&#x7F51;&#x4E0A;&#x4E00;&#x5927;&#x5806;&#xFF0C;&#x6211;&#x5C31;&#x4E0D;&#x8D34;&#x4E86;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x5566;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7528;&#x7684;&#x6A21;&#x62DF;&#x5668;&#xFF0C;&#x4F60;&#x5C31;&#x7F8E;&#x6ECB;&#x6ECB;&#x7684;&#x53D1;&#x73B0;&#xFF0C;&#x4F60;&#x7684;&#x89C6;&#x9891;&#x88AB;&#x786C;&#x751F;&#x751F;&#x538B;&#x7F29;&#x6216;&#x62C9;&#x4F38;&#x6210;&#x4E86;&#x684C;&#x9762;&#x6BD4;&#x4F8B;&#xFF0C;&#x89C6;&#x9891;&#x6BD4;&#x4F8B;&#x6CA1;&#x4E86;&#x3002;&#x5927;&#x90E8;&#x5206;&#x89C6;&#x9891;&#x5E94;&#x8BE5;&#x90FD;&#x662F;&#x6A2A;&#x5411;&#x66F4;&#x957F;&#x4E00;&#x70B9;&#xFF0C;&#x800C;&#x624B;&#x673A;&#x7AD6;&#x5411;&#x957F;&#xFF0C;&#x6240;&#x4EE5;&#x2026;&#x2026;</p>
-<p>&#x5982;&#x679C;&#x4F60;&#x5F00;&#x59CB;&#x7FFB;&#x6587;&#x6863;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x4E00;&#x4E2A; <code>setVideoScalingMode()</code> &#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E3A; <code>FIT_WITH_CROPPING</code>&#xFF0C;&#x4F60;&#x60F3;&#x7740;&#x8FD9;&#x4E0D;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x8981;&#x7684;&#x6548;&#x679C;&#x561B;&#xFF1A;&#x628A;&#x89C6;&#x9891;&#x653E;&#x5C4F;&#x5E55;&#x4E2D;&#x95F4;&#xFF0C;&#x7136;&#x540E;&#x88C1;&#x51FA;&#x6B63;&#x4E2D;&#x95F4;&#x6700;&#x5927;&#x7684;&#x4E00;&#x5757;&#x2026;&#x2026;&#x5F53;&#x7136;&#x4E0D;&#x884C;&#x5566;&#xFF01;&#x4E0D;&#x7136;&#x6211;&#x5199;&#x4EC0;&#x4E48;&#xFF01;</p>
-<p>&#x5F88;&#x9AD8;&#x5174;&#x544A;&#x8BC9;&#x4F60;&#x8FD9;&#x4E2A;&#x5176;&#x5B9E;&#x662F;&#x5305;&#x88C5;&#x4E86;&#x7CFB;&#x7EDF;&#x7684; <code>MediaCodec</code> &#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x53CA;&#x5176;&#x4E0D;&#x9760;&#x8C31;&#xFF0C;&#x6BD4;&#x5982;&#x5728;&#x6A21;&#x62DF;&#x5668;&#x4E0A;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x6839;&#x672C;&#x5C31;&#x6CA1;&#x5B9E;&#x73B0;&#xFF01;&#x5728;&#x6211;&#x7684; Galaxy S9+ &#x4E0A;&#x867D;&#x7136;&#x5B9E;&#x73B0;&#x4E86;&#xFF0C;&#x4F46;&#x5728;&#x5207;&#x6362;&#x754C;&#x9762;&#x7684;&#x65F6;&#x5019;&#xFF08;&#x6BD4;&#x5982;&#x9501;&#x5C4F;&#x5566;&#xFF0C;&#x6253;&#x5F00;&#x5E94;&#x7528;&#x754C;&#x9762;&#x5566;&#xFF09;&#xFF0C;&#x4F1A;&#x7A81;&#x7136;&#x53D8;&#x6210;&#x6CA1;&#x6709;&#x526A;&#x88C1;&#x7684;&#xFF0C;&#x603B;&#x4E4B;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x4E00;&#x4E2A;&#x5947;&#x602A;&#x7684;&#x5207;&#x6362;&#xFF08;&#x8FD9;&#x54EA;&#x4E2A;&#x7A0B;&#x5E8F;&#x5458;&#x5199;&#x7684;&#x51FA;&#x6765;&#x796D;&#x5929;&#xFF09;&#x3002;</p>
-<p>&#x6240;&#x4EE5;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x6B63;&#x786E;&#x526A;&#x88C1;&#x89C6;&#x9891;&#x7684;&#x8BDD;&#x2026;&#x2026;&#x5F53;&#x7136;&#x8981;&#x81EA;&#x5DF1;&#x52A8;&#x624B;&#xFF01;Android &#x7684; <code>View</code> &#x662F;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5C3A;&#x5BF8;&#x7F29;&#x653E;&#x6CA1;&#x9519;&#xFF0C;&#x4F46;&#x662F;&#x522B;&#x5FD8;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x53EA;&#x6709; <code>Surface</code>&#xFF0C;&#x6CA1;&#x6709; <code>View</code>&#xFF0C;&#x6240;&#x4EE5;&#x6CA1;&#x620F;&#x3002;&#x7528; CPU &#x526A;&#x88C1;&#x89C6;&#x9891;&#x7684;&#x8BDD;&#xFF08;&#x526A;&#x88C1;&#x4E0D;&#x662F;&#x526A;&#x8F91;&#xFF01;&#xFF09;&#x6015;&#x662F;&#x4F60;&#x4E00;&#x5E27;&#x526A;&#x5B8C;&#x90A3;&#x8FB9; 30 &#x5E27;&#x90FD;&#x64AD;&#x5B8C;&#x4E86;&#xFF0C;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5C31;&#x662F;&#x7528; OpenGL ES &#x6765;&#x8FDB;&#x884C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x3002;</p>
-<h1 id="&#x660E;&#x660E;&#x662F;&#x6740;&#x9E21;&#xFF0C;&#x8FD8;&#x662F;&#x5F97;&#x638F;&#x725B;&#x5200;&#xFF01;"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E6%98%8E%E6%98%8E%E6%98%AF%E6%9D%80%E9%B8%A1%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BE%97%E6%8E%8F%E7%89%9B%E5%88%80%EF%BC%81" title="&#x660E;&#x660E;&#x662F;&#x6740;&#x9E21;&#xFF0C;&#x8FD8;&#x662F;&#x5F97;&#x638F;&#x725B;&#x5200;&#xFF01;"></a>&#x660E;&#x660E;&#x662F;&#x6740;&#x9E21;&#xFF0C;&#x8FD8;&#x662F;&#x5F97;&#x638F;&#x725B;&#x5200;&#xFF01;</h1>
-<p>&#x5982;&#x679C;&#x4F60;&#x6BD4;&#x8F83;&#x719F;&#x6089; OpenGL &#x7684;&#x8BDD;&#xFF0C;&#x5176;&#x5B9E;&#x8FD9;&#x4E2A;&#x526A;&#x88C1;&#x672C;&#x8EAB;&#x7684;&#x96BE;&#x5EA6;&#x6BD4;&#x6784;&#x5EFA;&#x4E00;&#x4E2A; OpenGL &#x73AF;&#x5883;&#x7684;&#x96BE;&#x5EA6;&#x4F4E;&#x7684;&#x591A;&#x2026;&#x2026;&#x53EA;&#x8981;&#x7B97;&#x4E00;&#x4E0B;&#x6BD4;&#x4F8B;&#x505A;&#x4E2A;&#x7F29;&#x653E;&#x77E9;&#x9635;&#x5C31;&#x884C;&#x4E86;&#xFF0C;&#x89C6;&#x9891;&#x662F;&#x77E9;&#x5F62;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5C31;&#x5148;&#x5F04;&#x4E2A;&#x6B63;&#x65B9;&#x5F62;&#x51FA;&#x6765;&#x7136;&#x540E;&#x628A;&#x6BCF;&#x4E00;&#x5E27;&#x89E3;&#x7801;&#x7684;&#x753B;&#x9762;&#x5F53;&#x6210;&#x7EB9;&#x7406;&#x8D34;&#x4E0A;&#x53BB;&#x3002;</p>
-<p>&#x89E3;&#x7801;&#x7684;&#x5DE5;&#x4F5C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4EA4;&#x7ED9; <code>MediaPlayer</code>&#xFF0C;&#x7136;&#x540E;&#x56E0;&#x4E3A;&#x6027;&#x80FD;&#x9700;&#x8981;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x80FD;&#x6BCF;&#x4E00;&#x5E27;&#x90FD;&#x4FDD;&#x5B58;&#x4E3A;&#x56FE;&#x7247;&#x7136;&#x540E;&#x518D;&#x8F6C;&#x8BFB;&#x4E3A; OpenGL &#x7684;&#x7EB9;&#x7406;&#xFF0C;Android &#x6709;&#x4E00;&#x4E2A; OpenGL &#x7684;&#x6269;&#x5C55;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;&#x89C6;&#x9891;&#x89E3;&#x7801;&#x5230;&#x7684; <code>Surface</code> &#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x7EB9;&#x7406;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x673A;&#x578B;&#x90FD;&#x652F;&#x6301;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x673A;&#x578B;&#x5176;&#x5B9E;&#x4E5F;&#x53EF;&#x4EE5;&#x544A;&#x522B;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x4E86;&#xFF0C;&#x5565;&#x90FD;&#x4E0D;&#x652F;&#x6301;&#xFF0C;&#x4F60;&#x8FD8;&#x4E0D;&#x7ED9;&#x6211;&#x94B1;&#xFF0C;&#x6211;&#x4E3A;&#x5565;&#x8981;&#x7ED9;&#x4F60;&#x5199;&#x4EE3;&#x7801;&#xFF1F;</p>
-<p>&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x9700;&#x8981;&#x4E00;&#x4E9B; hack&#x3002;</p>
-<p>&#x663E;&#x7136;&#x7CFB;&#x7EDF;&#x4E0D;&#x7ED9;&#x4F60;&#x73B0;&#x6210;&#x7684; <code>GLSurfaceView</code>&#xFF0C;&#x800C;&#x53EA;&#x662F;&#x4E00;&#x4E2A; <code>SurfaceHolder</code>&#xFF0C;&#x6240;&#x4EE5;&#x6B63;&#x5E38;&#x7684;&#x601D;&#x8DEF;&#x662F;&#x81EA;&#x5DF1;&#x5F04; <code>GLThread</code> &#x767D;&#x624B;&#x8D77;&#x5BB6;&#x2026;&#x2026;&#x5E76;&#x4E0D;&#xFF0C;&#x6211;&#x4EEC;&#x5728; <code>Engine</code> &#x91CC;&#x63D2;&#x5165;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<p>Android 的动态壁纸实际上是一个 <code>Surface</code>（Android 的 <code>Surface</code> 你可以理解为画布……大概吧），系统调用你的 <code>Engine</code>，然后给你一个可以绘制的 <code>SurfaceHolder</code>，你只要往这个 <code>SurfaceHolder</code> 里面的 <code>Surface</code> 画东西就行了。<code>onSurfaceCreated()</code> 表示画布准备好了，<code>onVisibilityChanged()</code> 则表示画布看不见了或者又出来了，<code>onSurfaceDestroyed()</code> 表示画布没了（我不是你英语老师！），<code>onOffsetsChanged()</code> 则是桌面通知壁纸偏移量，通常是实现壁纸随桌面滚动的效果。</p>
+<p>不要把他们和 <code>onCreate()</code> 和 <code>onDestoryed()</code> 搞混了，那俩说的是 <code>Engine</code>，但我们做绘制工作时候操心的是画布。</p>
+<p>为什么说是个胶水代码呢……因为 Android 内建了一个播放器叫 <code>MediaPlayer</code>，它有个方法叫 <code>setSurface()</code>，可以把视频渲染到画布上，然后我们就美滋滋地看……到 bug。</p>
+<p>怎么设置 <code>MediaPlayer</code> 我就不讲了，因为网上有很多现成的，总之就是实例化设置静音设置来源再 <code>setSurface(getSurfaceHolder().getSurface())</code>（<code>getSurfaceHolder()</code> 是 <code>Engine</code> 的，可以获取当前的 <code>SurfaceHolder</code>），然后开始播放，你需要在 <code>onSurfaceCreated()</code> 的时候弄出个播放器，<code>onSurfaceDestroyed()</code> 的时候 <code>release()</code> 掉播放器，然后在由可见变成不可见的时候保存进度删掉播放器（其实暂停也行，但是暂停仍然占据着资源），在可见时候建立播放器并回复到之前的进度（如果看不见了还一直播，你手机的电池估计坚持不了几小时）。反正代码网上一大堆，我就不贴了。</p>
+<p>然后你就可以运行这个程序啦，如果你用的模拟器，你就美滋滋的发现，你的视频被硬生生压缩或拉伸成了桌面比例，视频比例没了。大部分视频应该都是横向更长一点，而手机竖向长，所以……</p>
+<p>如果你开始翻文档，你会发现一个 <code>setVideoScalingMode()</code> 的方法，可以设置为 <code>FIT_WITH_CROPPING</code>，你想着这不就是我们要的效果嘛：把视频放屏幕中间，然后裁出正中间最大的一块……当然不行啦！不然我写什么！</p>
+<p>很高兴告诉你这个其实是包装了系统的 <code>MediaCodec</code> 的参数，但这个实现及其不靠谱，比如在模拟器上这个功能根本就没实现！在我的 Galaxy S9+ 上虽然实现了，但在切换界面的时候（比如锁屏啦，打开应用界面啦），会突然变成没有剪裁的，总之你会看到一个奇怪的切换（这哪个程序员写的出来祭天）。</p>
+<p>所以如果你想正确剪裁视频的话……当然要自己动手！Android 的 <code>View</code> 是可以设置尺寸缩放没错，但是别忘了，这里只有 <code>Surface</code>，没有 <code>View</code>，所以没戏。用 CPU 剪裁视频的话（剪裁不是剪辑！）怕是你一帧剪完那边 30 帧都播完了，解决方案就是用 OpenGL ES 来进行这个操作。</p>
+<h1 id="明明是杀鸡，还是得掏牛刀！"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E6%98%8E%E6%98%8E%E6%98%AF%E6%9D%80%E9%B8%A1%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BE%97%E6%8E%8F%E7%89%9B%E5%88%80%EF%BC%81" title="明明是杀鸡，还是得掏牛刀！"></a>明明是杀鸡，还是得掏牛刀！</h1>
+<p>如果你比较熟悉 OpenGL 的话，其实这个剪裁本身的难度比构建一个 OpenGL 环境的难度低的多……只要算一下比例做个缩放矩阵就行了，视频是矩形所以我们就先弄个正方形出来然后把每一帧解码的画面当成纹理贴上去。</p>
+<p>解码的工作我们可以交给 <code>MediaPlayer</code>，然后因为性能需要，我们不能每一帧都保存为图片然后再转读为 OpenGL 的纹理，Android 有一个 OpenGL 的扩展，可以把视频解码到的 <code>Surface</code> 作为一个纹理，大部分机型都支持，不支持的机型其实也可以告别动态壁纸了，啥都不支持，你还不给我钱，我为啥要给你写代码？</p>
+<p>但是这个过程需要一些 hack。</p>
+<p>显然系统不给你现成的 <code>GLSurfaceView</code>，而只是一个 <code>SurfaceHolder</code>，所以正常的思路是自己弄 <code>GLThread</code> 白手起家……并不，我们在 <code>Engine</code> 里插入下面的代码：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -357,7 +357,7 @@
 <span class="line">15</span>
 <span class="line">16</span>
 </pre><pre class="code"><code>        <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperSurfaceView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">GLSurfaceView</span> </span>{
-            <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = <span class="hljs-string">&quot;GLWallpaperSurface&quot;</span>;
+            <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = <span class="hljs-string">"GLWallpaperSurface"</span>;
 
             <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GLWallpaperSurfaceView</span><span class="hljs-params">(Context context)</span> </span>{
                 <span class="hljs-keyword">super</span>(context);
@@ -372,21 +372,21 @@
                 <span class="hljs-keyword">super</span>.onDetachedFromWindow();
             }
         }</code></pre></figure></code></pre>
-<p>&#x770B;&#x5230;&#x90A3;&#x4E2A; <code>getHolder()</code> &#x4E86;&#x5417;&#xFF1F;&#x6CA1;&#x9519;&#xFF01;<code>GLSurfaceView</code> &#x4F3C;&#x4E4E;&#x5185;&#x90E8;&#x81EA;&#x5DF1;&#x6709;&#x4E2A; <code>SurfaceHolder</code>&#xFF0C;&#x6211;&#x4EEC; hack &#x4E00;&#x4E0B;&#x5B83;&#xFF0C;&#x6269;&#x5C55;&#x51FA;&#x4E00;&#x4E2A; <code>GLWallpaperSurfaceView</code>&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x662F;&#x4E2A;&#x5185;&#x90E8;&#x7C7B;&#xFF0C;&#x5F53;&#x5B83;&#x8981;&#x5F80;&#x81EA;&#x5DF1;&#x7684; <code>SurfaceHolder</code> &#x4E0A;&#x6E32;&#x67D3;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5077;&#x6881;&#x6362;&#x67F1;&#xFF0C;&#x8FD4;&#x56DE;&#x5B83; <code>Engine.getSurfaceHolder()</code>&#xFF0C;&#x53EF;&#x601C;&#x7684;&#x5BB6;&#x4F19;&#x8FD8;&#x8499;&#x5728;&#x9F13;&#x91CC;&#xFF0C;&#x81EA;&#x5DF1;&#x5185;&#x90E8;&#x7684; <code>SurfaceHolder</code> &#x5DF2;&#x7ECF;&#x6CA1;&#x7528;&#x4E86;&#xFF0C;&#x73B0;&#x5728;&#x5B83;&#x753B;&#x7684;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x684C;&#x9762;&#x58C1;&#x7EB8;&#x7684; <code>Surface</code>&#x3002;</p>
-<p>&#x6211;&#x4E5F;&#x4E0D;&#x77E5;&#x9053;&#x8C01;&#x5148;&#x60F3;&#x51FA;&#x7684;&#x8FD9;&#x4E2A;&#x5957;&#x8DEF;&#xFF0C;&#x4F46;&#x7B2C;&#x4E00;&#x4E2A;&#x60F3;&#x51FA;&#x8FD9;&#x4E2A;&#x529E;&#x6CD5;&#x7684;&#x8001;&#x54E5;&#x53EF;&#x771F;&#x662F;&#x4E2A;&#x5929;&#x624D;&#x3002;</p>
-<p>&#x81F3;&#x4E8E;&#x4F60;&#x95EE; <code>Context</code> &#x4ECE;&#x54EA;&#x6765;&#xFF1F;<code>Service</code> &#x5C31;&#x662F;&#x4E2A; <code>Context</code>&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x6539;&#x5199;&#x4E00;&#x4E0B; <code>Engine</code> &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x628A; <code>Service</code> &#x4F20;&#x8FDB;&#x53BB;&#xFF0C;&#x7136;&#x540E;&#x521B;&#x5EFA; <code>GLWallpaperSurfaceView</code> &#x65F6;&#x4F20;&#x7ED9;&#x5B83;&#x5C31;&#x884C;&#x4E86;&#xFF0C;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0; <code>GLSurfaceView.Renderer</code> &#x4E86;&#xFF0C;&#x8FD9;&#x662F;&#x4E2A;&#x5DF2;&#x7ECF;&#x5305;&#x88C5;&#x597D;&#x7684; OpenGL Renderer&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x8981;&#x8D1F;&#x8D23;&#x5728;&#x91CC;&#x9762;&#x753B;&#x5C31;&#x884C;&#x4E86;&#x3002;&#x81F3;&#x4E8E; GLES &#x7684;&#x7248;&#x672C;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x7701;&#x4E8B;&#xFF0C;&#x53EA;&#x7528; v2 &#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x9664;&#x975E;&#x50CF;&#x6211;&#x4E00;&#x6837;&#x5BF9; v3 &#x5F88;&#x719F;&#x6089;&#xFF0C;&#x5F53;&#x7136;&#x6211; v2 v3 &#x90FD;&#x5199;&#x4E86; Renderer&#xFF0C;&#x80FD;&#x652F;&#x6301; v3 &#x7684;&#x5148;&#x8C03;&#x7528; v3&#xFF08;&#x9664;&#x4E86;&#x6A21;&#x62DF;&#x5668;&#x4E0D;&#x652F;&#x6301;&#xFF0C;&#x624B;&#x673A;&#x57FA;&#x672C;&#x90FD;&#x652F;&#x6301;&#x4E86;&#xFF09;&#x3002;&#x6211;&#x8FD9;&#x91CC;&#x7528; v3 &#x505A;&#x4F8B;&#x5B50;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x81EA;&#x5DF1;&#x4E5F;&#x4F1A;&#x5199; v2 &#x5427;&#xFF1F;&#x5982;&#x679C;&#x4F60;&#x53EA;&#x4F1A;&#x5199;&#x56FA;&#x5B9A;&#x7BA1;&#x7EBF;&#xFF0C;&#x8BF7;&#x4F60;&#x4E0D;&#x8981;&#x8BF4;&#x81EA;&#x5DF1;&#x4F1A; OpenGL&#x3002;</p>
-<p>&#x5F53;&#x7136;&#x6700;&#x597D;&#x5728; <code>AndroidManifest.xml</code> &#x58F0;&#x660E;&#x4E00;&#x4E0B;&#x4F60;&#x8FD9;&#x4E2A;&#x5E94;&#x7528;&#x9700;&#x8981;&#x7684; GLES &#x7248;&#x672C;&#xFF1A;</p>
+<p>看到那个 <code>getHolder()</code> 了吗？没错！<code>GLSurfaceView</code> 似乎内部自己有个 <code>SurfaceHolder</code>，我们 hack 一下它，扩展出一个 <code>GLWallpaperSurfaceView</code>，因为它是个内部类，当它要往自己的 <code>SurfaceHolder</code> 上渲染时，我们偷梁换柱，返回它 <code>Engine.getSurfaceHolder()</code>，可怜的家伙还蒙在鼓里，自己内部的 <code>SurfaceHolder</code> 已经没用了，现在它画的实际上是桌面壁纸的 <code>Surface</code>。</p>
+<p>我也不知道谁先想出的这个套路，但第一个想出这个办法的老哥可真是个天才。</p>
+<p>至于你问 <code>Context</code> 从哪来？<code>Service</code> 就是个 <code>Context</code>，所以你改写一下 <code>Engine</code> 的构造函数把 <code>Service</code> 传进去，然后创建 <code>GLWallpaperSurfaceView</code> 时传给它就行了，基本操作基本操作。</p>
+<p>然后我们就可以实现 <code>GLSurfaceView.Renderer</code> 了，这是个已经包装好的 OpenGL Renderer，我们只要负责在里面画就行了。至于 GLES 的版本，如果你想省事，只用 v2 就好了，除非像我一样对 v3 很熟悉，当然我 v2 v3 都写了 Renderer，能支持 v3 的先调用 v3（除了模拟器不支持，手机基本都支持了）。我这里用 v3 做例子，你应该自己也会写 v2 吧？如果你只会写固定管线，请你不要说自己会 OpenGL。</p>
+<p>当然最好在 <code>AndroidManifest.xml</code> 声明一下你这个应用需要的 GLES 版本：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
-  <span class="hljs-attr">android:glEsVersion</span>=<span class="hljs-string">&quot;0x00020000&quot;</span>
-  <span class="hljs-attr">android:required</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span></code></pre></figure></code></pre>
-<p>&#x5982;&#x679C;&#x4F60;&#x53EA;&#x652F;&#x6301; v3&#xFF0C;&#x5C31;&#x628A; 2 &#x6539;&#x6210; 3&#x3002;</p>
-<p>&#xFF08;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x8FD9;&#x4E2A;&#x9636;&#x6BB5;&#x4E86;&#xFF0C;&#x6253;&#x7B97;&#x62FF;&#x8FD9;&#x4E2A;&#x5F53;&#x201C;&#x6211;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; Android App&#x201D;&#x7684;&#x540C;&#x5B66;&#x5C31;&#x81EA;&#x5DF1;&#x9000;&#x51FA;&#x5427;&#x3002;&#xFF09;</p>
-<p>&#x6211;&#x76F4;&#x63A5;&#x5E16;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x89E3;&#x91CA;&#x597D;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x5B9E;&#x5728;&#x662F;&#x4E0D;&#x597D;&#x4E00;&#x70B9;&#x70B9;&#x8BB2;&#x4E86;&#xFF0C;&#x53CD;&#x6B63;&#x4F1A;&#x5199; OpenGL &#x7684;&#x4EBA;&#x5E94;&#x8BE5;&#x4E5F;&#x80FD;&#x7406;&#x89E3;&#x8FD9;&#x79CD;&#x7A0B;&#x5EA6;&#x7684;&#x4EE3;&#x7801;&#x4E86;&#x3002;</p>
-<p>&#x6211;&#x5148;&#x628A; Shader &#x4EE3;&#x7801;&#x8D34;&#x4E0A;&#x6765;&#xFF0C;&#x6211;&#x662F;&#x628A;&#x5B83;&#x4EEC;&#x653E;&#x5728; <code>res/raw</code> &#x4E0B;&#x9762;&#x7684;&#xFF0C;Android &#x4F1A;&#x81EA;&#x52A8;&#x751F;&#x6210; <code>R.raw.</code> &#x7684; ID&#x3002;</p>
+</pre><pre class="code"><code><span class="hljs-tag"><<span class="hljs-name">uses-feature</span>
+  <span class="hljs-attr">android:glEsVersion</span>=<span class="hljs-string">"0x00020000"</span>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /></span></code></pre></figure></code></pre>
+<p>如果你只支持 v3，就把 2 改成 3。</p>
+<p>（已经进入这个阶段了，打算拿这个当“我的第一个 Android App”的同学就自己退出吧。）</p>
+<p>我直接帖完整代码解释好了，因为实在是不好一点点讲了，反正会写 OpenGL 的人应该也能理解这种程度的代码了。</p>
+<p>我先把 Shader 代码贴上来，我是把它们放在 <code>res/raw</code> 下面的，Android 会自动生成 <code>R.raw.</code> 的 ID。</p>
 <ul>
 <li>vertex shader</li>
 </ul>
@@ -420,7 +420,7 @@
     <span class="hljs-built_in">gl_Position</span> = mvp * <span class="hljs-type">vec4</span>(in_position, <span class="hljs-number">1.0</span>f, <span class="hljs-number">1.0</span>f);
     tex_coord = in_tex_coord;
 }</code></pre></figure></code></pre>
-<p>&#x5E94;&#x8BE5;&#x5728;&#x4F60;&#x753B;&#x4E09;&#x89D2;&#x5F62;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x5B66;&#x4F1A;&#x8FD9;&#x73A9;&#x610F;&#x4E86;&#x5427;&#xFF1F;&#x6CE8;&#x610F;&#x6709;&#x4E9B;&#x624B;&#x673A;&#x7684;&#x5B9E;&#x73B0;&#x8981;&#x6C42;&#x7B2C;&#x4E00;&#x884C;&#x4E0D;&#x80FD;&#x662F;&#x6CE8;&#x91CA;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x62A5;&#x9519;&#x3002;</p>
+<p>应该在你画三角形的时候就学会这玩意了吧？注意有些手机的实现要求第一行不能是注释，否则会报错。</p>
 <ul>
 <li>fragment shader</li>
 </ul>
@@ -462,9 +462,9 @@
 <span class="hljs-type">void</span> main() {
     frag_color = <span class="hljs-built_in">texture</span>(frame, tex_coord);
 }</code></pre></figure></code></pre>
-<p>&#x6CE8;&#x610F;&#x5F00;&#x5934;&#x7684;&#x5224;&#x65AD;&#xFF01;&#x672C;&#x6765;&#x5728; GLESv3 &#x91CC;&#x9762;&#xFF0C;&#x5BF9;&#x8FD9;&#x79CD; Android &#x76F4;&#x63A5;&#x62FF; <code>Surface</code> &#x5F53;&#x7EB9;&#x7406;&#x7684; flag &#x662F; <code>GL_OES_EGL_image_external_essl3</code>&#xFF0C;<code>GL_OES_EGL_image_external</code> &#x5DF2;&#x7ECF;&#x88AB;&#x5E9F;&#x5F03;&#x4E86;&#xFF0C;&#x4F46;&#x6709;&#x4E9B;&#x652F;&#x6301; GLESv3 &#x7684;&#x624B;&#x673A;&#x53EA;&#x652F;&#x6301;&#x65E7;&#x7684;&#x8868;&#x8FBE;&#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5224;&#x65AD;&#x4E00;&#x4E0B;&#x5C31;&#x597D;&#x3002;GLESv2 &#x5219;&#x76F4;&#x63A5;&#x7528;&#x540E;&#x9762;&#x90A3;&#x4E2A;&#xFF0C;&#x4E0D;&#x8981;&#x7528;&#x524D;&#x9762;&#x7684;&#x3002;</p>
-<p>&#x540C;&#x6837;&#xFF0C;&#x7EB9;&#x7406;&#x7C7B;&#x578B;&#x4E5F;&#x8981;&#x6362;&#x6210; <code>samplerExternalOES</code>&#xFF0C;&#x522B;&#x7684;&#x90FD;&#x6CA1;&#x5173;&#x7CFB;&#x4E86;&#x3002;</p>
-<p>&#x7F16;&#x8BD1;&#x548C;&#x94FE;&#x63A5;&#x7684;&#x8FC7;&#x7A0B;&#x6211;&#x76F4;&#x63A5;&#x5199;&#x6210;&#x5DE5;&#x5177;&#x51FD;&#x6570;&#x4E86;&#xFF0C;&#x8FDE;&#x540C;&#x52A0;&#x8F7D; <code>res/raw</code> &#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x6211;&#x8D34;&#x4E0A;&#x6765;&#xFF1A;</p>
+<p>注意开头的判断！本来在 GLESv3 里面，对这种 Android 直接拿 <code>Surface</code> 当纹理的 flag 是 <code>GL_OES_EGL_image_external_essl3</code>，<code>GL_OES_EGL_image_external</code> 已经被废弃了，但有些支持 GLESv3 的手机只支持旧的表达方法，所以我们判断一下就好。GLESv2 则直接用后面那个，不要用前面的。</p>
+<p>同样，纹理类型也要换成 <code>samplerExternalOES</code>，别的都没关系了。</p>
+<p>编译和链接的过程我直接写成工具函数了，连同加载 <code>res/raw</code> 的代码，我贴上来：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -532,7 +532,7 @@
     <span class="hljs-keyword">try</span> {
         <span class="hljs-keyword">while</span> ((line = bufferedReader.readLine()) != <span class="hljs-keyword">null</span>) {
             stringBuilder.append(line);
-            stringBuilder.append(<span class="hljs-string">&apos;\n&apos;</span>);
+            stringBuilder.append(<span class="hljs-string">'\n'</span>);
         }
     } <span class="hljs-keyword">catch</span> (IOException e) {
         e.printStackTrace();
@@ -541,7 +541,7 @@
     <span class="hljs-keyword">final</span> String shaderSource = stringBuilder.toString();
     <span class="hljs-keyword">int</span> shader = GLES30.glCreateShader(shaderType);
     <span class="hljs-keyword">if</span> (shader == <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Failed to create shader&quot;</span>);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Failed to create shader"</span>);
     }
     GLES30.glShaderSource(shader, shaderSource);
     GLES30.glCompileShader(shader);
@@ -561,7 +561,7 @@
 )</span> <span class="hljs-keyword">throws</span> RuntimeException </span>{
     <span class="hljs-keyword">int</span> program = GLES30.glCreateProgram();
     <span class="hljs-keyword">if</span> (program == <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Failed to create program&quot;</span>);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Failed to create program"</span>);
     }
     GLES30.glAttachShader(program, vertShader);
     GLES30.glAttachShader(program, fragShader);
@@ -575,8 +575,8 @@
     }
     <span class="hljs-keyword">return</span> program;
 }</code></pre></figure></code></pre>
-<p>&#x5F53;&#x7136;&#x8FD8;&#x662F;&#x90A3;&#x4E2A;&#x4EE4;&#x4EBA;&#x5934;&#x75BC;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x4F20;&#x4E2A; <code>Context</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x4E0D;&#x5927;&#xFF0C;<code>Engine</code> &#x521B;&#x5EFA; <code>Renderer</code> &#x7684;&#x65F6;&#x5019;&#x4F20;&#x7ED9;&#x5B83;&#x5C31;&#x597D;&#x4E86;&#x3002;</p>
-<p><code>Renderer</code> &#x5219;&#x662F;&#x6309;&#x4E0B;&#x9762;&#x7684;&#x5199;&#xFF1A;</p>
+<p>当然还是那个令人头疼的问题，你需要传个 <code>Context</code>，这个问题不大，<code>Engine</code> 创建 <code>Renderer</code> 的时候传给它就好了。</p>
+<p><code>Renderer</code> 则是按下面的写：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -631,7 +631,7 @@
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> yOffset = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> updatedFrame = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> renderedFrame = <span class="hljs-number">0</span>;</code></pre></figure></code></pre>
-<p>&#x4E0A;&#x9762;&#x8FD9;&#x90E8;&#x4EFD;&#x7684;&#x53D8;&#x91CF;&#x90FD;&#x662F;&#x4E00;&#x4F1A;&#x8981;&#x7528;&#x5230;&#x7684;&#xFF0C;&#x4E00;&#x4F1A;&#x518D;&#x8BF4;&#x3002;</p>
+<p>上面这部份的变量都是一会要用到的，一会再说。</p>
 <pre><code><figure class="highlight hljs lsl"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -749,8 +749,8 @@
     @NonNull
     public Context getContext() {
         return context;
-    }</code></pre></figure></code></pre><p>&#x8FD9;&#x90E8;&#x4EFD;&#x5F88;&#x597D;&#x61C2;&#x5427;&#xFF1F;&#x5148;&#x5904;&#x7406; <code>Context</code>&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x51C6;&#x5907; OpenGL &#x9700;&#x8981;&#x7684;&#x5750;&#x6807;&#xFF0C;&#x6B63;&#x65B9;&#x5F62;&#x7684;&#x6A21;&#x578B;&#x5750;&#x6807;&#xFF0C;&#x7EB9;&#x7406;&#x5750;&#x6807;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x7D22;&#x5F15; buffer&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;&#x5728; Android &#x91CC;&#x9762;&#x4E0D;&#x7528;&#x5199; <code>glGenBuffers</code>&#x3001;<code>glBindBuffer</code> &#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x7528; java &#x7684; nio &#x51C6;&#x5907;&#x6570;&#x7EC4;&#xFF0C;&#x7136;&#x540E; Android &#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x52A0;&#x8F7D;&#x8FD9;&#x91CC;&#x9762;&#x7684; buffer&#x3002;&#xFF08;&#x4F46;&#x662F; mvp &#x77E9;&#x9635;&#x4ECD;&#x7136;&#x662F;&#x6570;&#x7EC4;&#x3002;&#xFF09;</p>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;&#x6CA1;&#x6709; OpenGL &#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x4E0D;&#x80FD;&#x5904;&#x7406; OpenGL &#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x4E0B;&#x9762;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#xFF1A;</p>
+    }</code></pre></figure></code></pre><p>这部份很好懂吧？先处理 <code>Context</code>，然后我们准备 OpenGL 需要的坐标，正方形的模型坐标，纹理坐标，以及一个索引 buffer，不同的是在 Android 里面不用写 <code>glGenBuffers</code>、<code>glBindBuffer</code> 了，我们用 java 的 nio 准备数组，然后 Android 可以直接加载这里面的 buffer。（但是 mvp 矩阵仍然是数组。）</p>
+<p>当然，这里是没有 OpenGL 的上下文的，所以我们现在不能处理 OpenGL 的设置，需要实现下面这些方法：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -871,7 +871,7 @@
                 context, GLES30.GL_FRAGMENT_SHADER, R.raw.fragment_30
             )
         );
-        mvpLocation = GLES30.glGetUniformLocation(program, <span class="hljs-string">&quot;mvp&quot;</span>);
+        mvpLocation = GLES30.glGetUniformLocation(program, <span class="hljs-string">"mvp"</span>);
         <span class="hljs-comment">// Position is set in shader sources.</span>
         GLES30.glVertexAttribPointer(
             <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, GLES30.GL_FLOAT,
@@ -897,11 +897,11 @@
             <span class="hljs-keyword">return</span>;
         }
 
-        <span class="hljs-keyword">if</span> (renderedFrame &lt; updatedFrame) {
+        <span class="hljs-keyword">if</span> (renderedFrame < updatedFrame) {
             surfaceTexture.updateTexImage();
             ++renderedFrame;
             <span class="hljs-comment">// Utils.debug(</span>
-            <span class="hljs-comment">//     TAG, &quot;renderedFrame: &quot; + renderedFrame + &quot; updatedFrame: &quot; + updatedFrame</span>
+            <span class="hljs-comment">//     TAG, "renderedFrame: " + renderedFrame + " updatedFrame: " + updatedFrame</span>
             <span class="hljs-comment">// );</span>
         }
 
@@ -911,9 +911,9 @@
         GLES30.glUniformMatrix4fv(mvpLocation, <span class="hljs-number">1</span>, <span class="hljs-keyword">false</span>, mvp, <span class="hljs-number">0</span>);
         GLES30.glDrawElements(GLES30.GL_TRIANGLES, <span class="hljs-number">6</span>, GLES30.GL_UNSIGNED_INT, indices);
     }</code></pre></figure></code></pre>
-<p>&#x8FD9;&#x90E8;&#x4EFD;&#x65B9;&#x6CD5;&#x770B;&#x540D;&#x5B57;&#x5C31;&#x80FD;&#x770B;&#x51FA;&#x6765;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x90A3;&#x4E2A; <code>gl10</code> &#x662F; GLESv1 &#x7684;&#x7528;&#x6CD5;&#xFF0C;&#x81F3;&#x4E8E; v2 &#x548C; v3 &#x90FD;&#x6539;&#x6210;&#x9759;&#x6001;&#x7C7B;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x7528;&#x4E0D;&#x5230;&#x5B83;&#x3002;&#x65E2;&#x7136;&#x662F; 2D &#x8D34;&#x56FE;&#xFF0C;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x6DF1;&#x5EA6;&#x6D4B;&#x8BD5;&#x548C;&#x80CC;&#x9762;&#x5254;&#x9664;&#x4E86;&#x3002;&#x7136;&#x540E;&#x8BBE;&#x7F6E;&#x7EB9;&#x7406;&#x53C2;&#x6570;&#x65F6;&#x9700;&#x8981;&#x7528; <code>GLES11Ext.GL_TEXTURE_EXTERNAL_OES</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x548C; shader &#x91CC;&#x9762;&#x662F;&#x5173;&#x8054;&#x7684;&#x3002;&#xFF08;&#x54EA;&#x4E2A;&#x5BB6;&#x4F19;&#x628A; GLESv2 &#x548C; v3 &#x90FD;&#x652F;&#x6301;&#x7684;&#x53D8;&#x91CF;&#x5F52;&#x5C5E;&#x5230; <code>GLES11Ext</code> &#x7684;&#xFF0C;&#x51FA;&#x6765;&#x6328;&#x6253;&#xFF01;&#xFF09;&#xFF0C;&#x522B;&#x7684;&#x5730;&#x65B9;&#x4F1A; OpenGL &#x7684;&#x4EBA;&#x90FD;&#x80FD;&#x770B;&#x61C2;&#x5427;&#xFF1F;&#x6700;&#x540E;&#xFF0C;&#x53EA;&#x6709;&#x8FD9;&#x4E09;&#x4E2A;&#x51FD;&#x6570;&#x6709; OpenGL &#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x5176;&#x5B83;&#x7684;&#x91CC;&#x9762;&#x4E0D;&#x80FD;&#x6267;&#x884C; OpenGL &#x64CD;&#x4F5C;&#x3002;</p>
-<p>&#x7ED8;&#x56FE;&#x65F6;&#x5019; <strong>&#x8BBE;&#x7F6E; mvp &#x77E9;&#x9635;&#x4E0D;&#x8981;&#x7528; nio &#x7684; ByteBuffer</strong>&#xFF0C;&#x867D;&#x7136;&#x6709;&#x4E00;&#x4E2A;&#x591A;&#x6001;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x7528;&#xFF0C;&#x4F46;&#x4F3C;&#x4E4E;&#x90A3;&#x4E2A;&#x51FD;&#x6570;&#x4E0D;&#x80FD;&#x5DE5;&#x4F5C;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4E86; float &#x6570;&#x7EC4;&#x3002;</p>
-<p>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E9B;&#x9488;&#x5BF9;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x7528;&#x5230;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>这部份方法看名字就能看出来，需要注意的是那个 <code>gl10</code> 是 GLESv1 的用法，至于 v2 和 v3 都改成静态类了，所以我们用不到它。既然是 2D 贴图，就不需要深度测试和背面剔除了。然后设置纹理参数时需要用 <code>GLES11Ext.GL_TEXTURE_EXTERNAL_OES</code>，这个和 shader 里面是关联的。（哪个家伙把 GLESv2 和 v3 都支持的变量归属到 <code>GLES11Ext</code> 的，出来挨打！），别的地方会 OpenGL 的人都能看懂吧？最后，只有这三个函数有 OpenGL 上下文，其它的里面不能执行 OpenGL 操作。</p>
+<p>绘图时候 <strong>设置 mvp 矩阵不要用 nio 的 ByteBuffer</strong>，虽然有一个多态函数可以用，但似乎那个函数不能工作，所以我直接使用了 float 数组。</p>
+<p>下面是一些针对这个程序用到的方法。</p>
 <pre><code><figure class="highlight hljs less"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -927,9 +927,9 @@
         <span class="hljs-comment">// Because maybe a new video is loaded.</span>
         <span class="hljs-selector-tag">createSurfaceTexture</span>();
         <span class="hljs-selector-tag">exoPlayer</span><span class="hljs-selector-class">.setVideoSurface</span>(new Surface(surfaceTexture));
-    }</code></pre></figure></code></pre><p>&#x8FD9;&#x91CC;&#x662F;&#x8BA9;&#x64AD;&#x653E;&#x5668;&#x628A;&#x89E3;&#x7801;&#x7684;&#x76EE;&#x6807;&#x4F4D;&#x7F6E;&#x8BBE;&#x7F6E;&#x6210; <code>Renderer</code> &#x91CC;&#x9762;&#x548C; OpenGL &#x7EB9;&#x7406;&#x7ED1;&#x5B9A;&#x7684; <code>SurfaceTexture</code> &#x4E0A;&#xFF0C;&#x8FD9;&#x4E2A;&#x7C7B;&#x662F; Android &#x4E13;&#x95E8;&#x8BBE;&#x7F6E;&#x7528;&#x6765;&#x5E72;&#x8FD9;&#x4E2A;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x9605;&#x8BFB;&#x624B;&#x518C;&#x3002;</p>
-<p>&#x4E3A;&#x4EC0;&#x4E48;&#x662F;&#x628A;&#x64AD;&#x653E;&#x5668;&#x7ED9; <code>Renderer</code> &#x8BA9; <code>Renderer</code> &#x8BBE;&#x7F6E;&#x5462;&#xFF1F;&#x56E0;&#x4E3A; <code>Engine</code> &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x91CC;&#x53EA;&#x7528;&#x4E86;&#x4E00;&#x4E2A; <code>Renderer</code> &#x4F46;&#x4F1A;&#x7ECF;&#x5E38;&#x91CA;&#x653E;&#x91CD;&#x5EFA; <code>Player</code>&#xFF0C;&#x6BCF;&#x6B21;&#x90FD;&#x8981;&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x5BF9;&#x5E94;&#x89C6;&#x9891;&#x5927;&#x5C0F;&#x7684; <code>SurfaceTexture</code>&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x80FD;&#x8BA9; <code>Renderer</code> &#x66B4;&#x9732; <code>SurfaceTexture</code> &#x51FA;&#x53BB;&#x3002;</p>
-<p>&#x6211;&#x8FD9;&#x91CC;&#x6CA1;&#x6709;&#x7528; <code>MediaPlayer</code>&#xFF0C;&#x800C;&#x662F;&#x7528;&#x4E86; Google &#x7684; <code>ExoPlayer</code> &#x8FD9;&#x4E2A;&#x9879;&#x76EE;&#xFF0C;&#x5177;&#x4F53;&#x539F;&#x56E0;&#x4E00;&#x4F1A;&#x518D;&#x8BF4;&#x3002;</p>
+    }</code></pre></figure></code></pre><p>这里是让播放器把解码的目标位置设置成 <code>Renderer</code> 里面和 OpenGL 纹理绑定的 <code>SurfaceTexture</code> 上，这个类是 Android 专门设置用来干这个的，可以阅读手册。</p>
+<p>为什么是把播放器给 <code>Renderer</code> 让 <code>Renderer</code> 设置呢？因为 <code>Engine</code> 的生命周期里只用了一个 <code>Renderer</code> 但会经常释放重建 <code>Player</code>，每次都要重新建立对应视频大小的 <code>SurfaceTexture</code>，所以不能让 <code>Renderer</code> 暴露 <code>SurfaceTexture</code> 出去。</p>
+<p>我这里没有用 <code>MediaPlayer</code>，而是用了 Google 的 <code>ExoPlayer</code> 这个项目，具体原因一会再说。</p>
 <pre><code><figure class="highlight hljs processing"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -970,7 +970,7 @@
             screenWidth = <span class="hljs-built_in">width</span>;
             screenHeight = <span class="hljs-built_in">height</span>;
             Utils.debug(TAG, <span class="hljs-keyword">String</span>.format(
-                Locale.US, <span class="hljs-string">&quot;Set screen size to %dx%d&quot;</span>, screenWidth, screenHeight
+                Locale.US, <span class="hljs-string">"Set screen size to %dx%d"</span>, screenWidth, screenHeight
             ));
             updateMatrix();
         }
@@ -978,7 +978,7 @@
 
     @Override
     <span class="hljs-keyword">void</span> setVideoSizeAndRotation(<span class="hljs-built_in">int</span> <span class="hljs-built_in">width</span>, <span class="hljs-built_in">int</span> <span class="hljs-built_in">height</span>, <span class="hljs-built_in">int</span> rotation) {
-        <span class="hljs-comment">// MediaMetadataRetriever always give us raw width and height and won&apos;t rotate them.</span>
+        <span class="hljs-comment">// MediaMetadataRetriever always give us raw width and height and won't rotate them.</span>
         <span class="hljs-comment">// So we rotate them by ourselves.</span>
         <span class="hljs-keyword">if</span> (rotation % <span class="hljs-number">180</span> != <span class="hljs-number">0</span>) {
             <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> swap = <span class="hljs-built_in">width</span>;
@@ -990,14 +990,14 @@
             videoHeight = <span class="hljs-built_in">height</span>;
             videoRotation = rotation;
             Utils.debug(TAG, <span class="hljs-keyword">String</span>.format(
-                Locale.US, <span class="hljs-string">&quot;Set video size to %dx%d&quot;</span>, videoWidth, videoHeight
+                Locale.US, <span class="hljs-string">"Set video size to %dx%d"</span>, videoWidth, videoHeight
             ));
             Utils.debug(TAG, <span class="hljs-keyword">String</span>.format(
-                Locale.US, <span class="hljs-string">&quot;Set video rotation to %d&quot;</span>, videoRotation
+                Locale.US, <span class="hljs-string">"Set video rotation to %d"</span>, videoRotation
             ));
             updateMatrix();
         }
-    }</code></pre></figure></code></pre><p>&#x56E0;&#x4E3A;&#x8981;&#x8BA1;&#x7B97;&#x7F29;&#x653E;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x8FD9;&#x91CC;&#x8BBE;&#x7F6E;&#x4E86;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5206;&#x522B;&#x83B7;&#x53D6;&#x5C4F;&#x5E55;&#x5C3A;&#x5BF8;&#x548C;&#x89C6;&#x9891;&#x5C3A;&#x5BF8;&#x3002;&#x7136;&#x540E;&#x53EA;&#x8981;&#x5728;&#x6BCF;&#x6B21;&#x5C3A;&#x5BF8;&#x53D8;&#x5316;&#x65F6;&#x5019;&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#x77E9;&#x9635;&#x5C31;&#x884C;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x662F;&#x7ECF;&#x5E38;&#x53D8;&#x5316;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x4E0D;&#x7528;&#x6BCF;&#x6B21;&#x7ED8;&#x5236;&#x90FD;&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#x3002;</p>
+    }</code></pre></figure></code></pre><p>因为要计算缩放，所以我这里设置了两个方法，分别获取屏幕尺寸和视频尺寸。然后只要在每次尺寸变化时候重新计算矩阵就行了，因为不是经常变化，所以就不用每次绘制都重新计算。</p>
 <pre><code><figure class="highlight hljs groovy"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -1035,27 +1035,27 @@
         <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> maxYOffset = (<span class="hljs-number">1.0</span>f - (
             (<span class="hljs-keyword">float</span>)screenHeight <span class="hljs-regexp">/ screenWidth) /</span> ((<span class="hljs-keyword">float</span>)videoHeight / videoWidth)
         ) / <span class="hljs-number">2</span>;
-        <span class="hljs-keyword">if</span> (xOffset &gt; maxXOffset) {
+        <span class="hljs-keyword">if</span> (xOffset > maxXOffset) {
             xOffset = maxXOffset;
         }
-        <span class="hljs-keyword">if</span> (xOffset &lt; -maxXOffset) {
+        <span class="hljs-keyword">if</span> (xOffset < -maxXOffset) {
             xOffset = -maxXOffset;
         }
-        <span class="hljs-keyword">if</span> (yOffset &gt; maxYOffset) {
+        <span class="hljs-keyword">if</span> (yOffset > maxYOffset) {
             yOffset = maxYOffset;
         }
-        <span class="hljs-keyword">if</span> (yOffset &lt; -maxXOffset) {
+        <span class="hljs-keyword">if</span> (yOffset < -maxXOffset) {
             yOffset = -maxYOffset;
         }
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.xOffset != xOffset || <span class="hljs-keyword">this</span>.yOffset != yOffset) {
             <span class="hljs-keyword">this</span>.xOffset = xOffset;
             <span class="hljs-keyword">this</span>.yOffset = yOffset;
             Utils.debug(TAG, String.format(
-                Locale.US, <span class="hljs-string">&quot;Set offset to %fx%f&quot;</span>, <span class="hljs-keyword">this</span>.xOffset, <span class="hljs-keyword">this</span>.yOffset
+                Locale.US, <span class="hljs-string">"Set offset to %fx%f"</span>, <span class="hljs-keyword">this</span>.xOffset, <span class="hljs-keyword">this</span>.yOffset
             ));
             updateMatrix();
         }
-    }</code></pre></figure></code></pre><p>&#x684C;&#x9762;&#x5728;&#x6ED1;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8C03;&#x7528; <code>Engine</code> &#x7684;&#x65B9;&#x6CD5;&#x544A;&#x8BC9;&#x5B83;&#x6ED1;&#x52A8;&#x7684;&#x503C;&#xFF0C;&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x89C6;&#x9891;&#x968F;&#x684C;&#x9762;&#x5E73;&#x79FB;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728; <code>Engine</code> &#x91CC;&#x628A;&#x503C;&#x4F20;&#x7ED9; <code>Renderer</code>&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x8981;&#x9650;&#x5236;&#x4E00;&#x4E0B;&#xFF0C;&#x504F;&#x79FB;&#x7684;&#x4F4D;&#x7F6E;&#x4E0D;&#x80FD;&#x8D85;&#x51FA;&#x89C6;&#x9891;&#x5C3A;&#x5BF8;&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x51FA;&#x9ED1;&#x8FB9;&#x4E86;&#x3002;</p>
+    }</code></pre></figure></code></pre><p>桌面在滑动的时候会调用 <code>Engine</code> 的方法告诉它滑动的值，为了实现视频随桌面平移的效果，我们可以在 <code>Engine</code> 里把值传给 <code>Renderer</code>，但我们要限制一下，偏移的位置不能超出视频尺寸，否则就出黑边了。</p>
 <pre><code><figure class="highlight hljs aspectj"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -1087,7 +1087,7 @@
                 ++updatedFrame;
             }
         });
-    }</code></pre></figure></code></pre><p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x91CC;&#x9762;&#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x5728;&#x8FD9;&#x91CC;&#x6267;&#x884C; <code>SurfaceTexture.updateTexImage()</code> &#x5462;&#xFF1F;&#x56E0;&#x4E3A;&#x540E;&#x8005;&#x8981;&#x6C42;&#x5FC5;&#x987B;&#x6709; OpenGL &#x4E0A;&#x4E0B;&#x6587;&#x2026;&#x2026;&#x6709;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x53EA;&#x6709;&#x4E4B;&#x524D;&#x7684;&#x51E0;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x5B83;&#x662F;&#x6CA1;&#x6709;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x91CC;&#x7528;&#x4E86;&#x4E24;&#x4E2A;&#x8BA1;&#x6570;&#x5668;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A; bool &#x53D8;&#x91CF;&#x5462;&#xFF08;&#x8BF7;&#x81EA;&#x5DF1;&#x56DE;&#x770B; <code>onDrawFrame()</code> &#x51FD;&#x6570;&#xFF09;&#xFF1F;&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A; <code>SurfaceTexture</code> &#x5185;&#x90E8;&#x4F3C;&#x4E4E;&#x6709;&#x6392;&#x961F;&#x673A;&#x5236;&#xFF0C;&#x7136;&#x540E;&#x5982;&#x679C;&#x961F;&#x5217;&#x91CC;&#x6709;&#x5185;&#x5BB9;&#x7684;&#x8BDD;&#x662F;&#x4E0D;&#x4F1A;&#x8C03;&#x56DE;&#x8C03;&#x7684;&#x2026;&#x2026;&#x5047;&#x5982;&#x67D0;&#x4E00;&#x6B21;&#x4F20;&#x6765;&#x4E86;&#x591A;&#x4E8E;&#x4E00;&#x5E27;&#xFF0C;&#x7528; bool &#x53D8;&#x91CF;&#x7FFB;&#x8F6C;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x53EA;&#x80FD;&#x89E3;&#x51B3;&#x7B2C;&#x4E00;&#x5E27;&#xFF0C;&#x540E;&#x7EED;&#x89C6;&#x9891;&#x5C31;&#x4F1A;&#x5361;&#x4F4F;&#xFF08;&#x8FD9;&#x90FD;&#x662F;&#x4EC0;&#x4E48;&#x795E;&#x4ED9;&#x5199;&#x7684; bug &#x554A;&#x5582;&#xFF01;&#xFF09;&#x3002;</p>
+    }</code></pre></figure></code></pre><p>需要注意这个函数里面的回调，为什么要设置一个计数器，而不是直接在这里执行 <code>SurfaceTexture.updateTexImage()</code> 呢？因为后者要求必须有 OpenGL 上下文……有上下文的只有之前的几个方法，其它是没有的。所以为什么这里用了两个计数器而不是一个 bool 变量呢（请自己回看 <code>onDrawFrame()</code> 函数）？因为这个 <code>SurfaceTexture</code> 内部似乎有排队机制，然后如果队列里有内容的话是不会调回调的……假如某一次传来了多于一帧，用 bool 变量翻转的时候就只能解决第一帧，后续视频就会卡住（这都是什么神仙写的 bug 啊喂！）。</p>
 <pre><code><figure class="highlight hljs lsl"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -1132,15 +1132,15 @@
 </pre><pre class="code"><code>    private void updateMatrix() {
         <span class="hljs-comment">// Players are buggy and unclear, so we do crop by ourselves.</span>
         <span class="hljs-comment">// Start with an identify matrix.</span>
-        for (int i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">16</span>; ++i) {
+        for (int i = <span class="hljs-number">0</span>; i < <span class="hljs-number">16</span>; ++i) {
             mvp[i] = <span class="hljs-number">0.0</span>f;
         }
         mvp[<span class="hljs-number">0</span>] = mvp[<span class="hljs-number">5</span>] = mvp[<span class="hljs-number">10</span>] = mvp[<span class="hljs-number">15</span>] = <span class="hljs-number">1.0</span>f;
         <span class="hljs-comment">// OpenGL model matrix: scaling, rotating, translating.</span>
         final <span class="hljs-type">float</span> videoRatio = (<span class="hljs-type">float</span>)videoWidth / videoHeight;
         final <span class="hljs-type">float</span> screenRatio = (<span class="hljs-type">float</span>)screenWidth / screenHeight;
-        if (videoRatio &gt;= screenRatio) {
-            Utils.debug(TAG, <span class="hljs-string">&quot;X-cropping&quot;</span>);
+        if (videoRatio >= screenRatio) {
+            Utils.debug(TAG, <span class="hljs-string">"X-cropping"</span>);
             <span class="hljs-comment">// Treat video and screen width as 1, and compare width to scale.</span>
             Matrix.scaleM(
                 mvp, <span class="hljs-number">0</span>,
@@ -1154,7 +1154,7 @@
             }
             Matrix.translateM(mvp, <span class="hljs-number">0</span>, xOffset, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
         } else {
-            Utils.debug(TAG, <span class="hljs-string">&quot;Y-cropping&quot;</span>);
+            Utils.debug(TAG, <span class="hljs-string">"Y-cropping"</span>);
             <span class="hljs-comment">// Treat video and screen height as 1, and compare height to scale.</span>
             Matrix.scaleM(
                 mvp, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>,
@@ -1169,8 +1169,8 @@
         }
         <span class="hljs-comment">// This is a 2D center crop, so we only need model matrix, no view and projection.</span>
     }
-}</code></pre></figure></code></pre><p>&#x6700;&#x540E;&#x662F;&#x8BA1;&#x7B97;&#x77E9;&#x9635;&#xFF0C;&#x8FD9;&#x91CC;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x8981;&#x6CE8;&#x610F;&#x8BA1;&#x7B97;&#x65F6;&#x5019;&#xFF0C;&#x8981;&#x5206;&#x522B;&#x4EE5;&#x89C6;&#x9891;&#x548C;&#x5C4F;&#x5E55;&#x6700;&#x957F;&#x7684;&#x4E00;&#x6761;&#x8FB9;&#x4F5C;&#x4E3A;&#x5355;&#x4F4D;&#x4E00;&#xFF0C;&#x7136;&#x540E;&#x5206;&#x522B;&#x7F29;&#x653E;&#x4E24;&#x8005;&#x7684;&#x53E6;&#x4E00;&#x4FA7;&#xFF0C;&#x53EA;&#x662F;&#x6570;&#x5B66;&#x8BA1;&#x7B97;&#x800C;&#x5DF2;&#x3002;&#x7136;&#x540E;&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x6709;&#x65CB;&#x8F6C;&#x5462;&#xFF1F;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x5199;&#x65CB;&#x8F6C;&#x800C;&#x53C8;&#x4F7F;&#x7528;&#x624B;&#x673A;&#x62CD;&#x6444;&#x7684;&#x7AD6;&#x5C4F;&#x89C6;&#x9891;&#x505A;&#x58C1;&#x7EB8;&#xFF0C;&#x5C31;&#x4F1A;&#x53D1;&#x73B0;&#x65B9;&#x5411;&#x662F;&#x65CB;&#x8F6C;&#x4E86; 90 &#x5EA6;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5BBD;&#x548C;&#x9AD8;&#x4E5F;&#x90FD;&#x9519;&#x4E86;&#x3002;&#x539F;&#x56E0;&#x662F;&#x4E00;&#x4E9B;&#x8BBE;&#x5907;&#x5F55;&#x50CF;&#x65F6;&#x5019;&#x4E0D;&#x4F1A;&#x65CB;&#x8F6C;&#x5E27;&#x5185;&#x5BB9;&#xFF0C;&#x800C;&#x662F;&#x4EE5;&#x4F20;&#x611F;&#x5668;&#x539F;&#x751F;&#x7684;&#x65B9;&#x5411;&#x5B58;&#x653E;&#x50CF;&#x7D20;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x89C6;&#x9891; Metadata &#x91CC;&#x9762;&#x8BB0;&#x5F55;&#x4E00;&#x4E0B;&#x65CB;&#x8F6C;&#x89D2;&#x5EA6;&#xFF0C;&#x7531;&#x64AD;&#x653E;&#x5668;&#x505A;&#x65CB;&#x8F6C;&#x3002;<code>MediaPlayer</code> &#x81EA;&#x5DF1;&#x76F4;&#x63A5;&#x8F93;&#x51FA;&#x662F;&#x4F1A;&#x65CB;&#x8F6C;&#x7684;&#xFF0C;&#x4F46;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x7528;&#x5B83;&#x505A;&#x89E3;&#x7801;&#x5668;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4F20;&#x8FC7;&#x6765;&#x7684;&#x5E27;&#x662F;&#x539F;&#x6837;&#x7684;&#x3002;</p>
-<p>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#x662F;&#x5728; <code>Engine</code> &#x52A0;&#x8F7D;&#x89C6;&#x9891;&#x7684;&#x65F6;&#x5019;&#x5148;&#x8BFB;&#x53D6;&#x4E00;&#x4E0B;&#x5143;&#x6570;&#x636E;&#xFF0C;&#x4ECE;&#x5143;&#x6570;&#x636E;&#x91CC;&#x83B7;&#x53D6;&#x89C6;&#x9891;&#x7684;&#x5C3A;&#x5BF8;&#x65CB;&#x8F6C;&#x91CF;&#x8BBE;&#x7F6E;&#x7ED9; <code>Renderer</code>&#xFF1A;</p>
+}</code></pre></figure></code></pre><p>最后是计算矩阵，这里也很简单，只要注意计算时候，要分别以视频和屏幕最长的一条边作为单位一，然后分别缩放两者的另一侧，只是数学计算而已。然后为什么会有旋转呢？如果你不写旋转而又使用手机拍摄的竖屏视频做壁纸，就会发现方向是旋转了 90 度的，所以宽和高也都错了。原因是一些设备录像时候不会旋转帧内容，而是以传感器原生的方向存放像素，然后在视频 Metadata 里面记录一下旋转角度，由播放器做旋转。<code>MediaPlayer</code> 自己直接输出是会旋转的，但由于我们这里用它做解码器，所以它传过来的帧是原样的。</p>
+<p>解决方法是在 <code>Engine</code> 加载视频的时候先读取一下元数据，从元数据里获取视频的尺寸旋转量设置给 <code>Renderer</code>：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -1231,15 +1231,15 @@
             videoWidth = Integer.parseInt(width);
             videoHeight = Integer.parseInt(height);
         }</code></pre></figure></code></pre>
-<p>&#x5F53;&#x7136; <code>WallpaperCard</code> &#x662F;&#x6211;&#x81EA;&#x5DF1;&#x5C01;&#x88C5;&#x7684;&#x7C7B;&#xFF0C;&#x5173;&#x7CFB;&#x4E0D;&#x5927;&#x3002;&#x603B;&#x4E4B;&#x662F;&#x4F7F;&#x7528; <code>MediaMetadataRetriever</code> &#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;&#x81F3;&#x4E8E;&#x4F60;&#x8BF4;&#x89C6;&#x9891;&#x5143;&#x6570;&#x636E;&#x548C;&#x5B9E;&#x9645;&#x5185;&#x5BB9;&#x4E0D;&#x7B26;&#x600E;&#x4E48;&#x529E;&#xFF1F;&#x90A3;&#x662F;&#x7528;&#x6237;&#x95EE;&#x9898;&#xFF0C;&#x7528;&#x6237;&#x81EA;&#x5DF1;&#x5904;&#x7406;&#x4E0D;&#x597D;&#x89C6;&#x9891;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x6211;&#x6765;&#x89E3;&#x51B3;&#xFF1F;&#x968F;&#x4FBF;&#x8BA9;&#x4ED6;&#x62FF;&#x7535;&#x8111;&#x4E0A;&#x4FEE;&#x6539;&#x4E00;&#x4E0B;&#x597D;&#x4E86;&#x3002;</p>
-<p>&#x8FD9;&#x4E9B;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x8FD9;&#x4E2A;&#x5E94;&#x7528;&#x7684;&#x6838;&#x5FC3;&#x5185;&#x5BB9;&#xFF0C;&#x5176;&#x5B83;&#x7684;&#x64AD;&#x653E;&#x4E4B;&#x7C7B;&#x7684;&#x90FD;&#x5927;&#x540C;&#x5C0F;&#x5F02;&#xFF0C;&#x603B;&#x4E4B;&#x5982;&#x679C;&#x4F60;&#x5B9E;&#x73B0;&#x4E86; OpenGL &#x7684;&#x526A;&#x88C1;&#x529F;&#x80FD;&#xFF0C;&#x5E94;&#x8BE5;&#x5C31;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x64AD;&#x653E;&#x58C1;&#x7EB8;&#x4E86;&#x3002;&#x5176;&#x5B83;&#x90E8;&#x5206;&#x76F4;&#x63A5;&#x53C2;&#x8003;&#x6211;&#x7684;&#x4EE3;&#x7801;&#x6216;&#x8005;&#x7F51;&#x4E0A;&#x7684;&#x6837;&#x4F8B;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
-<p>&#x987A;&#x4FBF;&#x8BF4;&#x4E00;&#x4E0B;&#xFF0C;<code>SurfaceTexture</code> &#x4F3C;&#x4E4E;&#x4F1A;&#x7ED9;&#x4E00;&#x4E2A;&#x7EB9;&#x7406;&#x77E9;&#x9635;&#xFF0C;&#x4F46;&#x6211;&#x8BD5;&#x7740;&#x7528;&#x4E86;&#x4E00;&#x4E0B;&#x53D1;&#x73B0;&#x5E76;&#x4E0D;&#x662F;&#x9700;&#x8981;&#x7684;&#x6548;&#x679C;&#x2026;&#x2026;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x81EA;&#x5DF1;&#x5904;&#x7406;&#x5427;&#x3002;</p>
-<h1 id="&#x7136;&#x540E;&#x58F0;&#x97F3;&#x53C8;&#x4E0D;&#x5BF9;&#x52B2;&#x4E86;&#x2026;&#x2026;"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E5%A3%B0%E9%9F%B3%E5%8F%88%E4%B8%8D%E5%AF%B9%E5%8A%B2%E4%BA%86%E2%80%A6%E2%80%A6" title="&#x7136;&#x540E;&#x58F0;&#x97F3;&#x53C8;&#x4E0D;&#x5BF9;&#x52B2;&#x4E86;&#x2026;&#x2026;"></a>&#x7136;&#x540E;&#x58F0;&#x97F3;&#x53C8;&#x4E0D;&#x5BF9;&#x52B2;&#x4E86;&#x2026;&#x2026;</h1>
-<p>&#x5C31;&#x7B97;&#x4F60;&#x7ED9; <code>MediaPlayer</code> &#x8BBE;&#x7F6E;&#x4E86;&#x9759;&#x97F3;&#xFF0C;&#x8FD8;&#x662F;&#x4E0D;&#x592A;&#x5BF9;&#x52B2;&#xFF01;&#x6B63;&#x5E38;&#x6765;&#x8BF4;&#x5728;&#x684C;&#x9762;&#x6309;&#x97F3;&#x91CF;&#x952E;&#x8BBE;&#x7F6E;&#x7684;&#x662F;&#x94C3;&#x58F0;&#x97F3;&#x91CF;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x53D8;&#x6210;&#x4E86;&#x5A92;&#x4F53;&#x97F3;&#x91CF;&#xFF01;</p>
-<p>&#x8FD9;&#x5F53;&#x7136;&#x662F;&#x56E0;&#x4E3A;&#x867D;&#x7136; <code>MediaPlayer</code> &#x867D;&#x7136;&#x9759;&#x97F3;&#x4E86;&#xFF0C;&#x4F46;&#x8FD8;&#x662F;&#x5360;&#x636E;&#x7740;&#x97F3;&#x9891;&#x901A;&#x9053;&#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x77E5;&#x9053; Android &#x5206;&#x4E3A;&#x5A92;&#x4F53;&#x3001;&#x94C3;&#x58F0;&#x3001;&#x7CFB;&#x7EDF;&#x7B49;&#x97F3;&#x91CF;&#x901A;&#x9053;&#xFF0C;&#x5982;&#x679C; <code>MediaPlayer</code> &#x4E00;&#x76F4;&#x5360;&#x7740;&#x5A92;&#x4F53;&#x901A;&#x9053;&#xFF0C;&#x5176;&#x5B83;&#x7684;&#x5A92;&#x4F53; App &#x6BD4;&#x5982;&#x97F3;&#x4E50;&#x64AD;&#x653E;&#x5668;&#x4E00;&#x7C7B;&#x7684;&#x5C31;&#x6CA1;&#x6709;&#x529E;&#x6CD5;&#x64AD;&#x653E;&#x3002;</p>
-<p>&#x4F7F;&#x7528; <code>MediaPlayer</code> &#x662F;&#x6CA1;&#x6709;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x6CA1;&#x63D0;&#x4F9B;&#x5173;&#x95ED;&#x97F3;&#x8F68;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4E00;&#x5F00;&#x59CB;&#x6211;&#x5DEE;&#x70B9;&#x57FA;&#x4E8E; <code>MediaCodec</code> &#x81EA;&#x5DF1;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x89C6;&#x9891;&#x64AD;&#x653E;&#x5668;&#xFF0C;&#x4F46;&#x59CB;&#x7EC8;&#x6CA1;&#x529E;&#x6CD5;&#x628A;&#x89E3;&#x7801;&#x5668;&#x4ECE;&#x4E3B;&#x7EBF;&#x7A0B;&#x8F6C;&#x79FB;&#x5F00;&#xFF0C;&#x800C;&#x4E14; CPU &#x5360;&#x7528;&#x7387;&#x5F88;&#x9AD8;&#x3002;&#x540E;&#x6765;&#x53D1;&#x73B0; <code>ExoPlayer</code> &#x6709;&#x529E;&#x6CD5;&#x5173;&#x95ED;&#x97F3;&#x8F68;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x6362;&#x6210;&#x4E86; <code>ExoPlayer</code>&#x3002;</p>
-<p>&#x5177;&#x4F53;&#x600E;&#x4E48;&#x5F15;&#x5165; <code>ExoPlayer</code> &#x8BF7;&#x53C2;&#x7167;&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF0C;&#x53EA;&#x8981;&#x5F15;&#x5165; <code>core</code> &#x90E8;&#x5206;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
-<p>&#x6211;&#x8FD9;&#x91CC;&#x7ED9;&#x51FA;&#x4E00;&#x6BB5;&#x7528;&#x4E8E;&#x5173;&#x95ED;&#x97F3;&#x8F68;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x7F51;&#x4E0A;&#x4E0D;&#x592A;&#x597D;&#x627E;&#xFF1A;</p>
+<p>当然 <code>WallpaperCard</code> 是我自己封装的类，关系不大。总之是使用 <code>MediaMetadataRetriever</code> 就可以了。至于你说视频元数据和实际内容不符怎么办？那是用户问题，用户自己处理不好视频为什么要我来解决？随便让他拿电脑上修改一下好了。</p>
+<p>这些实际上是这个应用的核心内容，其它的播放之类的都大同小异，总之如果你实现了 OpenGL 的剪裁功能，应该就可以正常播放壁纸了。其它部分直接参考我的代码或者网上的样例就可以了。</p>
+<p>顺便说一下，<code>SurfaceTexture</code> 似乎会给一个纹理矩阵，但我试着用了一下发现并不是需要的效果……所以还是自己处理吧。</p>
+<h1 id="然后声音又不对劲了……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E5%A3%B0%E9%9F%B3%E5%8F%88%E4%B8%8D%E5%AF%B9%E5%8A%B2%E4%BA%86%E2%80%A6%E2%80%A6" title="然后声音又不对劲了……"></a>然后声音又不对劲了……</h1>
+<p>就算你给 <code>MediaPlayer</code> 设置了静音，还是不太对劲！正常来说在桌面按音量键设置的是铃声音量，为什么变成了媒体音量！</p>
+<p>这当然是因为虽然 <code>MediaPlayer</code> 虽然静音了，但还是占据着音频通道，我们都知道 Android 分为媒体、铃声、系统等音量通道，如果 <code>MediaPlayer</code> 一直占着媒体通道，其它的媒体 App 比如音乐播放器一类的就没有办法播放。</p>
+<p>使用 <code>MediaPlayer</code> 是没有解决办法的，因为它没提供关闭音轨的接口，一开始我差点基于 <code>MediaCodec</code> 自己编写一个视频播放器，但始终没办法把解码器从主线程转移开，而且 CPU 占用率很高。后来发现 <code>ExoPlayer</code> 有办法关闭音轨，所以我换成了 <code>ExoPlayer</code>。</p>
+<p>具体怎么引入 <code>ExoPlayer</code> 请参照官方文档，只要引入 <code>core</code> 部分就可以了。</p>
+<p>我这里给出一段用于关闭音轨的代码，网上不太好找：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -1257,31 +1257,31 @@
             exoPlayer.setVolume(<span class="hljs-number">0.0f</span>);
             <span class="hljs-comment">// Disable audio decoder.</span>
             <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> count = exoPlayer.getRendererCount();
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i < count; ++i) {
                 <span class="hljs-keyword">if</span> (exoPlayer.getRendererType(i) == C.TRACK_TYPE_AUDIO) {
                     trackSelector.setParameters(
                         trackSelector.buildUponParameters().setRendererDisabled(i, <span class="hljs-keyword">true</span>)
                     );
                 }
             }</code></pre></figure></code></pre>
-<p>&#x4E3B;&#x8981;&#x662F;&#x521B;&#x5EFA; Player &#x65F6;&#x5019;&#x5355;&#x72EC;&#x7ED9;&#x5B83;&#x4E00;&#x4E2A; DefaultTrackSelector&#x3002;&#x7136;&#x540E;&#x5173;&#x6389;&#x97F3;&#x8F68;&#x3002;</p>
-<p>&#x8FD9;&#x6837;&#x5927;&#x6982;&#x5C31;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x4E86;&#xFF0C;&#x5269;&#x4E0B;&#x7684;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#x90FD;&#x548C;&#x89C6;&#x9891;&#x6E32;&#x67D3;&#x65E0;&#x5173;&#x3002;</p>
-<h1 id="&#x5199;UI&#x4E5F;&#x5F88;&#x9EBB;&#x70E6;&#xFF01;"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81" title="&#x5199;UI&#x4E5F;&#x5F88;&#x9EBB;&#x70E6;&#xFF01;"></a>&#x5199; UI &#x4E5F;&#x5F88;&#x9EBB;&#x70E6;&#xFF01;</h1>
-<p>&#x867D;&#x7136;&#x6211;&#x77E5;&#x9053;&#x4F60;&#x80AF;&#x5B9A;&#x4E0D;&#x6EE1;&#x8DB3;&#x53EA;&#x4F7F;&#x7528;&#x5185;&#x5D4C;&#x89C6;&#x9891;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x4F60;&#x50CF;&#x6211;&#x4E00;&#x6837;&#x5199;&#x4E86;&#x4E2A;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5176;&#x5B83;&#x89C6;&#x9891;&#x7684; UI&#xFF0C;&#x5C31;&#x4F1A;&#x9047;&#x5230;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x95EE;&#x9898;&#x3002;&#x5199; UI &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F60;&#x4E0D;&#x662F;&#x5728;&#x7F16;&#x5199;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7684;&#x8DEF;&#x4E0A;&#x3002;</p>
-<p>&#x6700;&#x4EE4;&#x4EBA;&#x6076;&#x5FC3;&#x7684;&#x662F; <code>Context</code> &#x7BA1;&#x7406;&#xFF0C;&#x5F88;&#x591A;&#x5730;&#x65B9;&#x90FD;&#x9700;&#x8981; <code>Context</code>&#xFF0C;&#x4F46;&#x5F88;&#x591A;&#x5730;&#x65B9;&#x90FD;&#x6CA1;&#x6CD5;&#x4F20; <code>Context</code>&#xFF0C;&#x6BD4;&#x5982; Android &#x63A8;&#x8350;&#x4F60;&#x7528; <code>Uri</code> &#x800C;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x7528;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF0C;&#x4F46;&#x6240;&#x6709;&#x4F7F;&#x7528; <code>Uri</code> &#x7684;&#x5730;&#x65B9;&#x90FD;&#x8981;&#x6C42;&#x4F60;&#x4F20; <code>Context</code> &#x6765;&#x89E3;&#x6790; <code>Uri</code>&#xFF01;&#x6BD4;&#x5982;&#x6211;&#x6DFB;&#x52A0;&#x89C6;&#x9891;&#xFF0C;&#x9700;&#x8981;&#x89E3;&#x6790; <code>Uri</code> &#x5E76;&#x751F;&#x6210;&#x7F29;&#x7565;&#x56FE;&#xFF0C;&#x4E3A;&#x4E86;&#x4E0D;&#x963B;&#x585E;&#x7EBF;&#x7A0B;&#xFF0C;&#x5FC5;&#x987B;&#x5F00;&#x542F;&#x4E00;&#x4E2A; <code>AsyncTask</code>&#xFF0C;&#x4F46;&#x662F;&#xFF0C;<code>AsyncTask</code> &#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x62FF;&#x8D70; <code>MainActivity</code> &#x4F5C;&#x4E3A;&#x81EA;&#x5DF1;&#x7684; <code>Context</code>&#xFF01;&#x5FC5;&#x987B;&#x8981;&#x4F20;&#x5F31;&#x5F15;&#x7528;&#xFF0C;&#x603B;&#x4E4B;&#x6CA1;&#x6709;&#x4E00;&#x4E2A;&#x4F18;&#x96C5;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;</p>
-<p>&#x518D;&#x6BD4;&#x5982;&#x4F60;&#x9700;&#x8981;&#x4E00;&#x4E9B;&#x5728;&#x5404;&#x4E2A;&#x4F4D;&#x7F6E;&#x90FD;&#x80FD;&#x8BBF;&#x95EE;&#x5230;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5199;&#x4E00;&#x4E2A; <code>Application</code> &#x7C7B;&#x5E76;&#x7ED9;&#x5B83;&#x9759;&#x6001;&#x53D8;&#x91CF;&#xFF0C;&#x4F46;&#x662F;&#x9759;&#x6001;&#x548C;&#x52A8;&#x6001;&#x4E0D;&#x80FD;&#x4E92;&#x76F8;&#x4EA4;&#x53C9;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4F60;&#x4E0D;&#x80FD;&#x5C01;&#x88C5;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x7684;&#x540C;&#x65F6;&#x9700;&#x8981;&#x8BBF;&#x95EE; <code>Context</code> &#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x5F88;&#x591A;&#x5730;&#x65B9;&#x5C31;&#x53EA;&#x80FD;&#x62C6;&#x5F00;&#x5199;&#xFF0C;&#x6CA1;&#x529E;&#x6CD5;&#x5C01;&#x88C5;&#x3002;</p>
-<p>&#x4EE5;&#x53CA;&#x5217;&#x8868;&#x548C;&#x6570;&#x636E;&#x7684;&#x7ED1;&#x5B9A;&#x5199;&#x8D77;&#x6765;&#x771F;&#x7684;&#x5F88;&#x9EBB;&#x70E6;&#xFF0C;&#x8BF4;&#x5B9E;&#x5728;&#x7684;&#xFF0C;HTML &#x548C; JavaScript &#x5199; UI &#x771F;&#x7684;&#x6BD4; Android &#x548C; Java &#x8212;&#x670D;&#x7684;&#x591A;&#x2026;&#x2026;</p>
-<p>&#x987A;&#x4FBF;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x60F3;&#x5728; UI &#x91CC;&#x8C03;&#x7528;&#x7CFB;&#x7EDF;&#x7684;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x9884;&#x89C8;&#xFF0C;&#x7136;&#x540E;&#x6839;&#x636E;&#x5B83;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x6765;&#x8BBE;&#x7F6E;&#x9009;&#x4E2D;&#x7684;&#x89C6;&#x9891;&#xFF0C;&#x4F46;&#x8FD9;&#x4E2A;&#x771F;&#x7684;&#x5F88;&#x4E0D;&#x9760;&#x8C31;&#xFF0C;&#x6BD4;&#x5982;&#x67D0;&#x4E9B;&#x7248;&#x672C;&#x7684; MIUI &#x4FEE;&#x6539;&#x7684;&#x9884;&#x89C8;&#x5668;&#x5373;&#x4F7F;&#x4F60;&#x70B9;&#x51FB;&#x4E86;&#x5E94;&#x7528;&#xFF0C;&#x5B83;&#x4ECD;&#x7136;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x53D6;&#x6D88;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x660E;&#x660E;&#x662F; MIUI &#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5374;&#x9700;&#x8981;&#x6211;&#x6765;&#x89E3;&#x51B3;&#xFF0C;&#x6211;&#x5927;&#x6982;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x4EC0;&#x4E48; sway &#x7684;&#x5F00;&#x53D1;&#x8005;&#x5927;&#x9A82; NVIDIA &#x7528;&#x6237;&#x4E86;&#x3002;&#x4F60;&#x4EEC;&#x7ED9;&#x4E86;&#x5C0F;&#x7C73;&#x94B1;&#x4E70;&#x5B83;&#x7684;&#x624B;&#x673A;&#x548C;&#x7CFB;&#x7EDF;&#xFF0C;&#x7136;&#x540E;&#x5C0F;&#x7C73;&#x9020;&#x6210;&#x7684;&#x95EE;&#x9898;&#x8981;&#x6211;&#x6765;&#x89E3;&#x51B3;&#xFF0C;&#x6211;&#x4E00;&#x5206;&#x94B1;&#x90FD;&#x6CA1;&#x6709;&#x62FF;&#x5230;&#xFF0C;&#x54EA;&#x91CC;&#x6765;&#x7684;&#x4E49;&#x52A1;&#x548C;&#x8D23;&#x4EFB;&#x89E3;&#x51B3;&#xFF1F;&#xFF1F;&#xFF1F;</p>
-<p>&#x5F53;&#x7136;&#x6211;&#x6700;&#x540E;&#x8FD8;&#x662F;&#x60F3;&#x529E;&#x6CD5;&#x7ED5;&#x5F00;&#x4E86;&#xFF0C;&#x6DFB;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x5E94;&#x7528;&#x6309;&#x94AE;&#xFF0C;&#x7528;&#x6237;&#x70B9;&#x51FB;&#x8FD9;&#x4E2A;&#x6309;&#x94AE;&#x5C31;&#x662F;&#x5FFD;&#x7565;&#x9884;&#x89C8;&#xFF0C;&#x76F4;&#x63A5;&#x8BBE;&#x7F6E;&#x4E3A;&#x58C1;&#x7EB8;&#x3002;</p>
-<p>&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x9884;&#x89C8;&#x5668;&#x8C03;&#x7528;&#x4F60;&#x7684;&#x58C1;&#x7EB8;&#x670D;&#x52A1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F60;&#x7684; <code>Engine</code> &#x91CC; <code>isPreview()</code> &#x65B9;&#x6CD5;&#x4F1A;&#x8FD4;&#x56DE; <code>true</code>&#xFF0C;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x8FD9;&#x4E2A;&#x5224;&#x65AD;&#x662F;&#x4E0D;&#x662F;&#x5728;&#x9884;&#x89C8;&#x72B6;&#x6001;&#x3002;&#x56E0;&#x4E3A;&#x6211;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x58C1;&#x7EB8;&#x670D;&#x52A1;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x505A;&#x4E86;&#x4E00;&#x4E9B;&#x5224;&#x65AD;&#xFF0C;&#x5BF9;&#x9884;&#x89C8;&#x548C;&#x684C;&#x9762;&#x5206;&#x522B;&#x505A;&#x4E86;&#x4E00;&#x4E9B;&#x4E0D;&#x540C;&#x4E86;&#x903B;&#x8F91;&#xFF0C;&#x4EE5;&#x4FBF;&#x9632;&#x6B62;&#x9884;&#x89C8;&#x7684;&#x7ED3;&#x679C;&#x5F71;&#x54CD;&#x5230;&#x672C;&#x6765;&#x684C;&#x9762;&#x4E0A;&#x7684;&#x58C1;&#x7EB8;&#x6548;&#x679C;&#x3002;</p>
-<p>&#x6700;&#x540E;&#x8981;&#x6CE8;&#x610F;&#xFF1A;&#x4F60;&#x53EF;&#x4EE5;&#x5728; <code>Service</code> &#x91CC;&#x9762;&#x8BBF;&#x95EE; <code>Application</code> &#x7684;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x4F3C;&#x4E4E;&#x4F60;&#x4E0D;&#x80FD;&#x4E00;&#x76F4;&#x4F9D;&#x9760;&#x8FD9;&#x4E2A;&#x3002;&#x6BD4;&#x5982;&#x5F53;&#x4F60;&#x8BBE;&#x7F6E;&#x58C1;&#x7EB8;&#x4EE5;&#x540E;&#x91CD;&#x542F;&#x4E86;&#xFF0C;<code>Service</code> &#x4F1A;&#x88AB;&#x542F;&#x52A8;&#xFF0C;&#x4F46;&#x8FD9;&#x65F6;&#x4F3C;&#x4E4E;&#x6CA1;&#x529E;&#x6CD5;&#x8BBF;&#x95EE;&#x5230; <code>Application</code> &#x91CC;&#x7684;&#x53D8;&#x91CF;&#x3002;&#x6211;&#x89E3;&#x51B3;&#x7684;&#x529E;&#x6CD5;&#x662F;&#x5C06;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230; <code>SharedPreference</code>&#xFF0C;&#x5982;&#x679C;&#x4ECE; <code>Application</code> &#x52A0;&#x8F7D;&#x5931;&#x8D25;&#x5C31;&#x53BB;&#x8BFB;&#x53D6; <code>SharedPreference</code>&#xFF0C;&#x4F46;&#x603B;&#x4E4B;&#x6211;&#x6CA1;&#x627E;&#x5230;&#x6709;&#x5173; <code>Service</code> &#x548C; <code>Application</code> &#x4F1A;&#x4E0D;&#x4F1A;&#x4E00;&#x8D77;&#x521B;&#x5EFA;&#x7684;&#x8BF4;&#x660E;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x90E8;&#x4EFD;&#x7684;&#x4EE3;&#x7801;&#x5199;&#x7684;&#x5F88;&#x6DF7;&#x4E71;&#xFF08;&#x4E5F;&#x5305;&#x542B;&#x4E0A;&#x9762;&#x8BF4;&#x7684;&#x4E0D;&#x80FD;&#x5C01;&#x88C5;&#x7684;&#x539F;&#x56E0;&#xFF09;&#x3002;</p>
-<h1 id="&#x4E00;&#x676F;&#x5496;&#x5561;&#x90FD;&#x6CA1;&#x6709;&#x2026;&#x2026;"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6" title="&#x4E00;&#x676F;&#x5496;&#x5561;&#x90FD;&#x6CA1;&#x6709;&#x2026;&#x2026;"></a>&#x4E00;&#x676F;&#x5496;&#x5561;&#x90FD;&#x6CA1;&#x6709;&#x2026;&#x2026;</h1>
-<p>&#x5982;&#x679C;&#x4F60;&#x53EA;&#x662F;&#x89C9;&#x5F97;&#x5E02;&#x9762;&#x4E0A;&#x6240;&#x6709;&#x7684;&#x89C6;&#x9891;&#x52A8;&#x6001;&#x58C1;&#x7EB8;&#x7A0B;&#x5E8F;&#x90FD;&#x592A;&#x81C3;&#x80BF;&#x592A;&#x4E0D;&#x53EF;&#x9760;&#xFF08;&#x5305;&#x62EC;&#x6296;&#x97F3;&#x548C;&#x706B;&#x8424;&#xFF09;&#x800C;&#x60F3;&#x81EA;&#x5DF1;&#x5199;&#x4E00;&#x4E2A;&#xFF0C;&#x6211;&#x5EFA;&#x8BAE;&#x4F60;&#x8FD8;&#x662F;&#x653E;&#x5F03;&#xFF0C;&#x56E0;&#x4E3A;&#x9047;&#x5230;&#x7684;&#x5751;&#x6BD4;&#x4F60;&#x60F3;&#x8C61;&#x7684;&#x591A;&#xFF0C;&#x89E3;&#x51B3;&#x8D77;&#x6765;&#x4E5F;&#x5F88;&#x9EBB;&#x70E6;&#x3002;&#x800C;&#x4E14;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x4F60;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6211;&#x5199;&#x597D;&#x7684;&#x7A0B;&#x5E8F;&#x3002;</p>
-<p>&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x53EA;&#x6709; 3.06M&#xFF0C;&#x652F;&#x6301;&#x52A0;&#x8F7D;&#x672C;&#x5730;&#x58C1;&#x7EB8;&#xFF0C;&#x652F;&#x6301;&#x5E73;&#x677F;&#x7535;&#x8111;&#xFF0C;&#x652F;&#x6301;&#x58C1;&#x7EB8;&#x6ED1;&#x52A8;&#xFF0C;&#x4E0D;&#x663E;&#x793A;&#x65F6;&#x81EA;&#x52A8;&#x6682;&#x505C;&#x64AD;&#x653E;&#x8282;&#x7EA6;&#x7535;&#x91CF;&#xFF0C;&#x4E25;&#x683C;&#x9075;&#x5FAA; Android &#x89C4;&#x8303;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x654F;&#x611F;&#x6743;&#x9650;&#xFF08;&#x6BD4;&#x5982;&#x8054;&#x7F51;&#x548C;&#x64CD;&#x4F5C;&#x5916;&#x7F6E;&#x5B58;&#x50A8;&#xFF09;&#xFF0C;&#x4E0D;&#x8BF7;&#x6C42;&#x6587;&#x4EF6;&#x771F;&#x5B9E;&#x8DEF;&#x5F84;&#xFF0C;&#x6D4B;&#x8BD5;&#x4E0B;&#x6765;&#x529F;&#x80FD;&#x57FA;&#x672C;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x3002;&#x5982;&#x679C;&#x4F60;&#x8FD8;&#x4E0D;&#x653E;&#x5FC3;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x4EE3;&#x7801;&#x90FD;&#x5728; GitHub &#x4E0A;&#xFF0C;&#x6211;&#x4E0D;&#x6015;&#x4F60;&#x8BF4;&#x6211;&#x4EE3;&#x7801;&#x5199;&#x7684;&#x4E0D;&#x597D;&#xFF0C;&#x4F60;&#x5927;&#x53EF;&#x4EE5;&#x770B;&#x4E00;&#x904D;&#x6709;&#x6CA1;&#x6709;&#x540E;&#x95E8;&#x3002;</p>
-<p>&#x4F60;&#x53EF;&#x4EE5;&#x5206;&#x522B;&#x4ECE; <a href="https://github.com/AlynxZhou/AlynxLiveWallpaper/releases/latest" target="_blank">GitHub Release</a>&#xFF0C;<a href="https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper" target="_blank">Google Play</a> &#x548C; <a href="https://www.coolapk.com/apk/xyz.alynx.livewallpaper" target="_blank">&#x9177;&#x5B89;&#x7F51;</a> &#x4E0B;&#x8F7D;&#x8FD9;&#x4E2A;&#x5E94;&#x7528;&#x3002;</p>
-<p>&#x4E3A;&#x4E86;&#x4E0A;&#x67B6; Google Play &#x6211;&#x652F;&#x4ED8;&#x4E86; 25 &#x7F8E;&#x5143;&#x7533;&#x8BF7;&#x4E86;&#x5F00;&#x53D1;&#x8005;&#x8D26;&#x6237;&#xFF0C;&#x5E94;&#x7528;&#x662F;&#x514D;&#x8D39;&#x7684;&#xFF0C;&#x4F46;&#x6211;&#x653E;&#x7F6E;&#x4E86;&#x6350;&#x8D60;&#x9875;&#x9762;&#x3002;&#x4E0D;&#x8FC7;&#x5DF2;&#x7ECF;&#x6709;&#x51E0;&#x767E;&#x4E2A;&#x4E0B;&#x8F7D;&#x91CF;&#xFF08;&#x5927;&#x90E8;&#x5206;&#x662F;&#x9177;&#x5B89;&#xFF09;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x8FD8;&#x6CA1;&#x6709;&#x4ECE;&#x8FD9;&#x4E2A;&#x5E94;&#x7528;&#x91CC;&#x5F97;&#x5230;&#x4E00;&#x70B9;&#x56DE;&#x62A5;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x5E94;&#x7528;&#x4E0D;&#x9519;&#x5E76;&#x4E14;&#x624B;&#x5934;&#x5BBD;&#x88D5;&#xFF0C;&#x53EF;&#x4EE5;&#x6253;&#x5F00; App &#x8D5E;&#x52A9;&#x6211;&#x4E00;&#x676F;&#x5496;&#x5561;&#x3002;&#x6BD5;&#x7ADF;&#x89E3;&#x51B3;&#x4E0A;&#x9762;&#x63D0;&#x5230;&#x7684;&#x6240;&#x6709;&#x7684;&#x5751;&#x5E76;&#x4E0D;&#x5BB9;&#x6613;&#x3002;</p>
+<p>主要是创建 Player 时候单独给它一个 DefaultTrackSelector。然后关掉音轨。</p>
+<p>这样大概就可以运行了，剩下的一些问题都和视频渲染无关。</p>
+<h1 id="写UI也很麻烦！"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81" title="写UI也很麻烦！"></a>写 UI 也很麻烦！</h1>
+<p>虽然我知道你肯定不满足只使用内嵌视频，但如果你像我一样写了个可以设置其它视频的 UI，就会遇到各种各样的问题。写 UI 的时候，你不是在编写回调函数，就是在调用回调函数的路上。</p>
+<p>最令人恶心的是 <code>Context</code> 管理，很多地方都需要 <code>Context</code>，但很多地方都没法传 <code>Context</code>，比如 Android 推荐你用 <code>Uri</code> 而不是直接用文件路径，但所有使用 <code>Uri</code> 的地方都要求你传 <code>Context</code> 来解析 <code>Uri</code>！比如我添加视频，需要解析 <code>Uri</code> 并生成缩略图，为了不阻塞线程，必须开启一个 <code>AsyncTask</code>，但是，<code>AsyncTask</code> 不能直接拿走 <code>MainActivity</code> 作为自己的 <code>Context</code>！必须要传弱引用，总之没有一个优雅的解决方案。</p>
+<p>再比如你需要一些在各个位置都能访问到的数据，你可以自己写一个 <code>Application</code> 类并给它静态变量，但是静态和动态不能互相交叉，也就是说你不能封装一个操作数据的同时需要访问 <code>Context</code> 的方法，所以很多地方就只能拆开写，没办法封装。</p>
+<p>以及列表和数据的绑定写起来真的很麻烦，说实在的，HTML 和 JavaScript 写 UI 真的比 Android 和 Java 舒服的多……</p>
+<p>顺便，你可能会想在 UI 里调用系统的动态壁纸预览，然后根据它返回的结果来设置选中的视频，但这个真的很不靠谱，比如某些版本的 MIUI 修改的预览器即使你点击了应用，它仍然会返回一个取消的结果。明明是 MIUI 的问题，却需要我来解决，我大概可以理解为什么 sway 的开发者大骂 NVIDIA 用户了。你们给了小米钱买它的手机和系统，然后小米造成的问题要我来解决，我一分钱都没有拿到，哪里来的义务和责任解决？？？</p>
+<p>当然我最后还是想办法绕开了，添加了一个单独的应用按钮，用户点击这个按钮就是忽略预览，直接设置为壁纸。</p>
+<p>动态壁纸预览器调用你的壁纸服务的时候，你的 <code>Engine</code> 里 <code>isPreview()</code> 方法会返回 <code>true</code>，可以根据这个判断是不是在预览状态。因为我只有一个壁纸服务，所以我做了一些判断，对预览和桌面分别做了一些不同了逻辑，以便防止预览的结果影响到本来桌面上的壁纸效果。</p>
+<p>最后要注意：你可以在 <code>Service</code> 里面访问 <code>Application</code> 的静态方法，但似乎你不能一直依靠这个。比如当你设置壁纸以后重启了，<code>Service</code> 会被启动，但这时似乎没办法访问到 <code>Application</code> 里的变量。我解决的办法是将数据写入到 <code>SharedPreference</code>，如果从 <code>Application</code> 加载失败就去读取 <code>SharedPreference</code>，但总之我没找到有关 <code>Service</code> 和 <code>Application</code> 会不会一起创建的说明，所以这部份的代码写的很混乱（也包含上面说的不能封装的原因）。</p>
+<h1 id="一杯咖啡都没有……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6" title="一杯咖啡都没有……"></a>一杯咖啡都没有……</h1>
+<p>如果你只是觉得市面上所有的视频动态壁纸程序都太臃肿太不可靠（包括抖音和火萤）而想自己写一个，我建议你还是放弃，因为遇到的坑比你想象的多，解决起来也很麻烦。而且实际上，你完全可以使用我写好的程序。</p>
+<p>这个程序只有 3.06M，支持加载本地壁纸，支持平板电脑，支持壁纸滑动，不显示时自动暂停播放节约电量，严格遵循 Android 规范，没有任何敏感权限（比如联网和操作外置存储），不请求文件真实路径，测试下来功能基本没有问题。如果你还不放心，所有的代码都在 GitHub 上，我不怕你说我代码写的不好，你大可以看一遍有没有后门。</p>
+<p>你可以分别从 <a href="https://github.com/AlynxZhou/AlynxLiveWallpaper/releases/latest" target="_blank">GitHub Release</a>，<a href="https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper" target="_blank">Google Play</a> 和 <a href="https://www.coolapk.com/apk/xyz.alynx.livewallpaper" target="_blank">酷安网</a> 下载这个应用。</p>
+<p>为了上架 Google Play 我支付了 25 美元申请了开发者账户，应用是免费的，但我放置了捐赠页面。不过已经有几百个下载量（大部分是酷安）之后，我还没有从这个应用里得到一点回报，如果你觉得应用不错并且手头宽裕，可以打开 App 赞助我一杯咖啡。毕竟解决上面提到的所有的坑并不容易。</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
+<p><strong>A Coder & Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -1581,4 +1581,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.2 at 2019-05-11 周六 10:36:46 CST. -->
+<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
