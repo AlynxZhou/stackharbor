@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -189,7 +206,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>So， <em>喵's StackHarbor</em> 就算是正式开站了，当然在部署过程中有很多有趣的事情值得我专门写一篇日志来记录一下，不过在Coder的世界里面"Every thing is based on Hello World"，所以还是以后再说那个。   </p>
+      <p>So， <em>喵&#39;s StackHarbor</em> 就算是正式开站了，当然在部署过程中有很多有趣的事情值得我专门写一篇日志来记录一下，不过在Coder的世界里面&quot;Every thing is based on Hello World&quot;，所以还是以后再说那个。   </p>
 <a id="more"></a>
 
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
@@ -197,7 +214,7 @@
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
-</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdio.h></span></span>
+</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello World!\n"</span>);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
@@ -212,11 +229,11 @@
 
 print(<span class="hljs-string">"Hello World!"</span>)</code></pre></figure></code></pre>
 <p>但是就算你读到这里，朋友，你一定还是一直有一个疑问：“这个网站究竟是用来做什么的呢？”   </p>
-<p>简而言之，<strong>这是一个名叫 <em>AlynxZhou</em> 的人利用 <em>alynx.xyz</em> 这个域名及hexo和GitHub Page还有Spacemacs、Gentoo GNU/Linux建立的一个名叫 <em>喵's StackHarbor</em> 的网站，他在这里用他还很生疏的Markdown，记录下他生活中每天的迷茫与感慨、愉悦与忧伤。</strong>   </p>
+<p>简而言之，<strong>这是一个名叫 <em>AlynxZhou</em> 的人利用 <em>alynx.xyz</em> 这个域名及hexo和GitHub Page还有Spacemacs、Gentoo GNU/Linux建立的一个名叫 <em>喵&#39;s StackHarbor</em> 的网站，他在这里用他还很生疏的Markdown，记录下他生活中每天的迷茫与感慨、愉悦与忧伤。</strong>   </p>
 <p>我知道你要问：“为什么要叫做这么一个拗口的名字呢？”   </p>
 <p>如果非要深究，大约有三点原因：  </p>
 <ul>
-<li><p>我在网易云音乐上的口琴电台叫做 <em>喵's Harmonica</em> 。</p>
+<li><p>我在网易云音乐上的口琴电台叫做 <em>喵&#39;s Harmonica</em> 。</p>
 </li>
 <li><p>Stack意为堆栈，计算机术语。</p>
 </li>
@@ -225,9 +242,9 @@ print(<span class="hljs-string">"Hello World!"</span>)</code></pre></figure></co
 </ul>
 <p>总是有人说有了社交圈就够了，没有必要自己建一个Blog用来写东西，但对我来说。QQ贴吧微博或多或少都是说给别人看的，但网站是属于自己的，我可以记录我自己的想法，喜不喜欢则是你的自由。   </p>
 <p>所以说，这个名字的寓意，无非是即使一个行走在漫漫星海边缘的小人物，也可以在互联网上拥有属于自己的一片避风港。   </p>
-<p>So my friend, where's your harbor?   </p>
+<p>So my friend, where&#39;s your harbor?   </p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -484,4 +501,4 @@ print(<span class="hljs-string">"Hello World!"</span>)</code></pre></figure></co
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

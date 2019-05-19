@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -207,11 +224,11 @@
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
-</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdio.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stddef.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdbool.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><GLFW/glfw3.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><GLES3/gl3.h></span></span></code></pre></figure></code></pre>
+</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stddef.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;GLFW/glfw3.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;GLES3/gl3.h&gt;</span></span></code></pre></figure></code></pre>
 <p>这里很明显了。OpenGL 只是一个绘图 API，GLFW 同时帮你封装了有关键盘鼠标输入的部分，但是你需要给它实现一个回调函数。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -220,7 +237,7 @@
 <span class="line">5</span>
 </pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">key_callback</span><span class="hljs-params">(GLFWwindow *window, <span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span> scancode, <span class="hljs-keyword">int</span> action, <span class="hljs-keyword">int</span> mode)</span>
 </span>{
-    <span class="hljs-keyword">if</span> (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    <span class="hljs-keyword">if</span> (key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, <span class="hljs-literal">true</span>);
 }</code></pre></figure></code></pre>
 <p>只是简单实现了按 Esc 之后发送关闭窗口事件。然后我们编写 main 函数。</p>
@@ -290,7 +307,7 @@
 <p>现在我们有一个大循环了，这个循环里首先拉取 GLFW 的事件以便响应（目前只有 Esc 退出），然后用黑色清除整个 Viewport（四个参数分别是 rgba，<code>0.0f</code> 是无色，<code>1.0f</code> 是满色），最后 GLFW 把绘制好的缓冲区交换到窗口上。</p>
 <p>现在你可以使用下面的命令编译并运行它了。会出现一个全黑的窗口。</p>
 <pre><code><figure class="highlight hljs stylus"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ cc -std=c11 -lglfw -lGLESv2 yourcode<span class="hljs-selector-class">.c</span> && ./<span class="hljs-selector-tag">a</span>.out</code></pre></figure></code></pre><p><img src="/posts/Learn-OpenGL-1/black.png" alt="black.png"></p>
+</pre><pre class="code"><code>$ cc -std=c11 -lglfw -lGLESv2 yourcode<span class="hljs-selector-class">.c</span> &amp;&amp; ./<span class="hljs-selector-tag">a</span>.out</code></pre></figure></code></pre><p><img src="/posts/Learn-OpenGL-1/black.png" alt="black.png"></p>
 <p>Mesa 把 GLES 3 当作 GLES 2 的扩展，所以这里链接的是 <code>libGLESv2</code>。</p>
 <h2 id="着色器（Shader）"><a class="headerlink" href="/posts/Learn-OpenGL-1/#%E7%9D%80%E8%89%B2%E5%99%A8%EF%BC%88Shader%EF%BC%89" title="着色器（Shader）"></a>着色器（Shader）</h2>
 <p>什么是 Shader？Shader 是一种运行在显卡上的小程序。首先你知道 CPU 一般是多核的，每个核心可以单独运行不同的程序。然而你的屏幕是由多个像素组成的，在运行游戏的时候每个像素的数据都需要单独计算，即使每个都是简单的乘法，CPU 也很难在短期内全部处理完毕（几十万个像素是很难由八个核心在 16ms 之内解决掉的），所以 GPU 为了解决这个问题，带有许多互相独立的小核心，每个核心的性能是远远不如 CPU 的，但它们处理的问题也没有 CPU 复杂，所以可以很快的处理掉屏幕上全部的像素。</p>
@@ -450,8 +467,8 @@
 <span class="line">114</span>
 <span class="line">115</span>
 <span class="line">116</span>
-</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdlib.h></span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><string.h></span></span>
+</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LINE_LENGTH 512</span>
 
 <span class="hljs-function">GLuint <span class="hljs-title">make_shader</span><span class="hljs-params">(GLenum type, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> shader_src)</span>
@@ -464,15 +481,15 @@
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
     <span class="hljs-comment">// 加载 shader 内容。</span>
-    glShaderSource(shader, <span class="hljs-number">1</span>, &shader_src, <span class="hljs-literal">NULL</span>);
+    glShaderSource(shader, <span class="hljs-number">1</span>, &amp;shader_src, <span class="hljs-literal">NULL</span>);
     <span class="hljs-comment">// 开始编译。</span>
     glCompileShader(shader);
     <span class="hljs-comment">// 检查编译结果。</span>
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;compiled);
     <span class="hljs-comment">// 编译失败的话读取错误输出。</span>
     <span class="hljs-keyword">if</span> (!compiled) {
         GLint info_len = <span class="hljs-number">0</span>;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &info_len);
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &amp;info_len);
         <span class="hljs-keyword">if</span> (info_len) {
         <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
         <span class="hljs-keyword">if</span> (!info) {
@@ -545,11 +562,11 @@
     glDeleteShader(vshader);
     glDeleteShader(fshader);
     <span class="hljs-comment">// 检查链接状态。</span>
-    glGetProgramiv(program, GL_LINK_STATUS, &linked);
+    glGetProgramiv(program, GL_LINK_STATUS, &amp;linked);
     <span class="hljs-comment">// 链接失败读取错误输出。</span>
     <span class="hljs-keyword">if</span> (!linked) {
         GLint info_len = <span class="hljs-number">0</span>;
-        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &info_len);
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &amp;info_len);
         <span class="hljs-keyword">if</span> (info_len) {
             <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
             <span class="hljs-keyword">if</span> (!info) {
@@ -597,7 +614,7 @@
 <span class="line">4</span>
 <span class="line">5</span>
 </pre><pre class="code"><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> buffer;
-    glGenBuffers(<span class="hljs-number">1</span>, &buffer);
+    glGenBuffers(<span class="hljs-number">1</span>, &amp;buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, <span class="hljs-keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, <span class="hljs-number">0</span>);</code></pre></figure></code></pre>
@@ -618,7 +635,7 @@
 <span class="line">11</span>
 <span class="line">12</span>
 </pre><pre class="code"><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> vertex_array;
-    glGenVertexArrays(<span class="hljs-number">1</span>, &vertex_array);
+    glGenVertexArrays(<span class="hljs-number">1</span>, &amp;vertex_array);
     glUseProgram(program);
     glBindVertexArray(vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
@@ -651,8 +668,8 @@
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre><pre class="code"><code>    glDeleteBuffers(<span class="hljs-number">1</span>, &buffer);
-    glDeleteVertexArrays(<span class="hljs-number">1</span>, &vertex_array);
+</pre><pre class="code"><code>    glDeleteBuffers(<span class="hljs-number">1</span>, &amp;buffer);
+    glDeleteVertexArrays(<span class="hljs-number">1</span>, &amp;vertex_array);
     glDeleteProgram(program);</code></pre></figure></code></pre>
 <p><img src="/posts/Learn-OpenGL-1/triangle.png" alt="triangle.png"></p>
 <h1 id="还有一件事……"><a class="headerlink" href="/posts/Learn-OpenGL-1/#%E8%BF%98%E6%9C%89%E4%B8%80%E4%BB%B6%E4%BA%8B%E2%80%A6%E2%80%A6" title="还有一件事……"></a>还有一件事……</h1>
@@ -665,7 +682,7 @@
 <li><a href="/posts/Learn-OpenGL-1/triangle.f.glsl">triangle.f.glsl</a></li>
 </ul>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -991,4 +1008,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

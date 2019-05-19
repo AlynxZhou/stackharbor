@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -192,8 +209,8 @@
       <p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>
 <a id="more"></a>
 
-<p><code>gitlab.gnome.org</code> 这个网站国内访问很慢，而且 jhbuild 使用 git clone 有时候不会遵循 git 的代理设置（指 <code>git config --global http.proxy 'socks5://127.0.0.1:1080' && git config --global https.proxy 'socks5://127.0.0.1:1080'</code>），经常不好用，我家里的网又不太好。我改 GNOME Shell 代码只用了一小时，但下载和编译环境来测试用了两天一夜。</p>
-<p>我调试的是 GNOME Shell，首先按照 <a href="https://wiki.gnome.org/action/show/Projects/Jhbuild/Introduction?action=show&redirect=Newcomers%2FBuildSystemComponent%2FJhbuild" target="_blank">说明页面</a> 安装 JHBuild，将安装到的 <code>~/.local/bin</code> 加入 PATH，然后建立 <code>~/jhbuild</code> 目录，运行 <code>jhbuild build gnome-shell</code> 会自动下载编译所有需要的依赖（大概 80 个）。</p>
+<p><code>gitlab.gnome.org</code> 这个网站国内访问很慢，而且 jhbuild 使用 git clone 有时候不会遵循 git 的代理设置（指 <code>git config --global http.proxy &#39;socks5://127.0.0.1:1080&#39; &amp;&amp; git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;</code>），经常不好用，我家里的网又不太好。我改 GNOME Shell 代码只用了一小时，但下载和编译环境来测试用了两天一夜。</p>
+<p>我调试的是 GNOME Shell，首先按照 <a href="https://wiki.gnome.org/action/show/Projects/Jhbuild/Introduction?action=show&amp;redirect=Newcomers%2FBuildSystemComponent%2FJhbuild" target="_blank">说明页面</a> 安装 JHBuild，将安装到的 <code>~/.local/bin</code> 加入 PATH，然后建立 <code>~/jhbuild</code> 目录，运行 <code>jhbuild build gnome-shell</code> 会自动下载编译所有需要的依赖（大概 80 个）。</p>
 <p>JHBuild 编译下载一些包的时候经常会出问题，一般编译一个包有四个阶段：</p>
 <ul>
 <li><code>checkout</code>：clone 仓库，设置 origin，然后 fetch。</li>
@@ -208,14 +225,14 @@
 <p><code>webkitgtk</code> 不负众望是编译起来最慢的，几年前用 Gentoo 的时候轻松两小时（我当时 Skylake 移动版 Xeon E3-1505M 可是最强的笔记本 CPU），最近有改善了，但还是要半个小时多。</p>
 <p><code>ibus</code> 配置的时候需要加 <code>--with-ucd-dir=/usr/share/unicode/</code> 不然它默认去 <code>/usr/share/unicode/ucd/</code> 找文件但 Arch 打包的路径不是这个。</p>
 <p><code>libgdata</code> 不支持 <code>automake-1.16</code>，需要降级到 1.15 来 configure，但是生成的 Makefile 有一句没展开的宏（我这里是 4141 行的 <code>@CODE_COVERAGE_RULES@</code>）（开发者出来修 bug ！），需要注释掉，然后 <code>make</code> 就可以过了，似乎没啥不利影响。</p>
-<p><code>uhttpmock</code> 的来源 URL 搞错了，现在指向的旧的是被废弃的仓库，新仓库是 <a href="https://gitlab.com/uhttpmock/uhttpmock/" target="_blank">这个</a>，需要修改 <code>~/.config/jhbuildrc</code> 添加 <code>branches['uhttpmock'] = ('https://gitlab.com/uhttpmock/uhttpmock.git', 'master')</code>。</p>
+<p><code>uhttpmock</code> 的来源 URL 搞错了，现在指向的旧的是被废弃的仓库，新仓库是 <a href="https://gitlab.com/uhttpmock/uhttpmock/" target="_blank">这个</a>，需要修改 <code>~/.config/jhbuildrc</code> 添加 <code>branches[&#39;uhttpmock&#39;] = (&#39;https://gitlab.com/uhttpmock/uhttpmock.git&#39;, &#39;master&#39;)</code>。</p>
 <p>都编译完就可以用 <code>jhbuild run gnome-shell --replace</code> 启动你编译的版本了，其他的 GNOME 程序编译的也可以 run 比如 <code>jhbuild run dconf-editor</code>。但是用 wayland 会话似乎既不能直接运行 <code>gnome-shell --replace</code> 也不能 <code>gnome-shell --nested</code> （像 weston 小窗口一样，但 gnome-shell 有 lock），所以我用的 x11 测试。测试时候不要锁屏不要看 lookingGlass，锁屏了回去就会没法输密码解锁，看了 lookingGlass 之后我卡住了……测试完最好重启，不然似乎没啥简单办法回到你系统的程序里。</p>
 <p>没搞清楚怎么修改 jhbuild 的仓库来源，也就是说它只会去 GNOME/gnome-shell clone 但没法改成你 fork 的仓库，我只能把改过的文件复制到 <code>~/jhbuild/checkout</code> 目录下面对应的仓库里，然后 <code>jhbuild buildone -n gnome-shell</code>，<code>buildone</code> 的意思是不管其他依赖，只重新编译后面的（用 <code>build</code> 会依次检查依赖，很慢的！），<code>-n</code> 是就算仓库被改了也不要重新 <code>checkout</code>，不然你的文件就被覆盖回去了……</p>
 <p>哦对了，GNOME Shell 有个单独的 <code>gnome-shell-sass</code> 的仓库存放样式表（CSS/SASS），但看说明这是个只读仓库，是从 <code>gnome-shell</code> 里分离出来给别的扩展用的，所以直接修改 <code>gnome-shell</code> 里面的就好了。还有一般跟顶栏有关的 GSettings 选项都在 <code>org.gnome.desktop.interface</code> 下面，但是这些 schema 对应的 XML 文件都在一个叫 <code>gsettings-desktop-schemas</code> 的仓库里，所以需要去那边改。</p>
 <p>最后狠狠地吐槽一下砍掉 GNOME Shell 顶栏透明的老哥，为了一点点边缘情况（有人说高对比度颜色壁纸下看不清顶栏文字，但大部分人都看得清并且实在不行换壁纸呗！）就砍掉这个好评如潮的功能。我提了个添加一个 GSettings 选项，让顶栏根据选项决定是透明还是纯黑（壁纸看不清就设成纯黑呗），结果被这个老哥拒绝了，还说添加个选项只会阻止其他人修 bug……大部分人都不觉得这是个 bug 好吗？我不觉得程序识别壁纸颜色改变顶栏会比用户自己调更准确，Android 的变色顶栏过了这么久，在许多壁纸上也不能正确识别颜色，添加一个让用户自己选择的功能才会更方便。但我又不想因为一个奇葩老哥就放弃我这么久的 GNOME 使用习惯，看来还是等等看能折腾出什么名堂吧！</p>
 <p>等到 GNOME 3.32 释出稳定版之后我尽量生成一个透明顶栏的 patch 就好了，反正主要的代码都是前人做的，大概 Arch Linux CN 的源愿意接受一个新包。不要和那个奇葩老哥一样说为啥不写扩展，就算是程序员家里养的猫也该知道 GNOME Shell 扩展 API 经常变还经常把整个桌面搞崩，真亏他们好意思提出来！</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -472,4 +489,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

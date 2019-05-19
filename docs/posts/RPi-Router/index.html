@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -257,17 +274,17 @@
 <p>首先我们要把读卡器接上电脑，之后把其中的文件备份出来，调整好分区大小后在放回去。</p>
 <p>首先挂载boot分区并进入～</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt && <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>开始用tar备份～注意后面的几个参数，它们可以保证所有文件的属性不变之类的，我会告诉你我朋友把系统从hdd搬到ssd也用的这个命令？</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>开始用tar备份～注意后面的几个参数，它们可以保证所有文件的属性不变之类的，我会告诉你我朋友把系统从hdd搬到ssd也用的这个命令？</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/opboot.tar.gz ./</span></code></pre></figure></code></pre><p>之后回到家目录并卸载这个分区：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span></code></pre></figure></code></pre><p>接着root分区也是一样：</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span></code></pre></figure></code></pre><p>接着root分区也是一样：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt && <span class="hljs-built_in">cd</span> /mnt</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span>
 <span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/oproot.tar.gz ./</span>
-<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_5.png" alt="RPi-Router_5.png"></p>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_5.png" alt="RPi-Router_5.png"></p>
 <p>接下来就可以用fdisk了，这里我给boot分区分100M，root分区分768M（openwrt的软件都很小的，默认的分区大小就够用了。），剩下1G单独划分一个分区留着备用。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> fdisk /dev/sdb</span></code></pre></figure></code></pre><p>首先按o新建一个分区表，之后按n新建分区，分区类型p，分区号1，起始位置默认，结束位置输入+100M回车，之后按t，c，将分区类型修改为FAT。</p>
@@ -284,17 +301,17 @@
 <span class="hljs-meta">#</span><span class="bash"> mkfs.ext4 /dev/sdb2</span>
 <span class="hljs-meta">#</span><span class="bash"> mkfs.ext4 /dev/sdb3</span></code></pre></figure></code></pre><p>接下来自然是把备份的文件放回去：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt && <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>这次用<code>tar -x</code>：</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb1 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span></code></pre></figure></code></pre><p>这次用<code>tar -x</code>：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> tar -xpvzf ~/opboot.tar.gz ./</span>
-<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span>
-<span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt && <span class="hljs-built_in">cd</span> /mnt</span>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span>
+<span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span>
 <span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/oproot.tar.gz ./</span>
-<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ && umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_7.png" alt="RPi-Router_7.png"></p>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_7.png" alt="RPi-Router_7.png"></p>
 <h1 id="连接电脑进行初次必要调试"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95" title="连接电脑进行初次必要调试"></a>连接电脑进行初次必要调试</h1>
 <p>先别急着把你的pi插到路由器上，op默认pi的ip是192.168.1.1，要知道大部分家里的路由器的ip也是这个，所以我们先把它用网线接到电脑上，开机后修改下ip。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_8.jpg" alt="RPi-Router_8.jpg"></p>
@@ -367,7 +384,7 @@
 </pre><pre class="code"><code><span class="hljs-symbol">$</span> ssh root@你的<span class="hljs-built-in">pi</span>的ip地址</code></pre></figure></code></pre><p>手机可以用juicessh，良心软件。</p>
 <p>登陆进你的pi后执行</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wifi detect > /etc/config/wireless</span></code></pre></figure></code></pre><p>建立wifi配置文件。</p>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wifi detect &gt; /etc/config/wireless</span></code></pre></figure></code></pre><p>建立wifi配置文件。</p>
 <p>接着还没完 ，</p>
 <p>需要用vi编辑这个文件，不然wifi默认是关闭的（不会用vi/vim的同学悲剧了。。。很简单进去之后按i才可以开始编辑，编辑完按[Esc]再输入:wq即可保存，另外反正我是Emacser～别打我！）。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
@@ -398,7 +415,7 @@
 <p>搬运自我的Lofter，转载请注明出处。</p>
 <p>原文写于2016-02-06_21:10:25</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -725,4 +742,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

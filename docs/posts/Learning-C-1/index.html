@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -228,18 +245,18 @@
 <h2 id="运算符"><a class="headerlink" href="/posts/Learning-C-1/#%E8%BF%90%E7%AE%97%E7%AC%A6" title="运算符"></a>运算符</h2>
 <p>最基础的运算符自然是加减乘除，即 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>。（除号这个方向叫斜杠，<code>\</code> 这个叫反斜杠。）</p>
 <p>求余数又叫做取模，符号是 <code>%</code>，比如 <code>5 % 2</code> 结果是 1。</p>
-<p>还有位运算 按位与 <code>&</code>，按位或 <code>|</code>，按位异或 <code>^</code>，左移 <code><<</code>，右移 <code>>></code>，它们处理的是内存中的二进制。</p>
+<p>还有位运算 按位与 <code>&amp;</code>，按位或 <code>|</code>，按位异或 <code>^</code>，左移 <code>&lt;&lt;</code>，右移 <code>&gt;&gt;</code>，它们处理的是内存中的二进制。</p>
 <p>然后是赋值运算符 <code>=</code>，这个符号 <strong>将右边的值赋给左边</strong>，因此左边必须是变量，右边必须是有值的表达式（表达式的概念往后看），比如 <code>2 = 1 + 1;</code> 很显然不行，2 不是变量，这里也不是比较相等。</p>
 <p>还有一些整合的运算符，比如 <code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>，<code>x += 1</code> 就等价于 <code>x = x + 1</code>。取模和位运算也可以这样和赋值结合起来。</p>
-<p>然后是一些用来比较关系的符号，比如 大于 <code>></code>，小于 <code><</code>，等于 <code>==</code>（判断相等用两个等号），不等于 <code>!=</code>，大于等于 <code>>=</code>，小于等于 <code><=</code>。还有逻辑运算符号 与 <code>&&</code>（同真则真），或 <code>||</code>（同假则假），非 <code>!</code>（反转）。</p>
+<p>然后是一些用来比较关系的符号，比如 大于 <code>&gt;</code>，小于 <code>&lt;</code>，等于 <code>==</code>（判断相等用两个等号），不等于 <code>!=</code>，大于等于 <code>&gt;=</code>，小于等于 <code>&lt;=</code>。还有逻辑运算符号 与 <code>&amp;&amp;</code>（同真则真），或 <code>||</code>（同假则假），非 <code>!</code>（反转）。</p>
 <p>在说明之前，需要先了解在 C 语言里什么是真，什么是假，简单来说，0 和所有等于 0 的值都是假，其他所有值都是真。对于关系运算，真返回 1，假返回 0。</p>
-<p>需要注意比如数学上的 <code>1 < x < 2</code>，在 C 语言中是不成立的，因为按照 C 的处理顺序，会先处理 <code>1 < x</code>，这个式子只可能是 0 或者 1，最后就变成 <code>1 < 2</code> 或者 <code>0 < 2</code>，永远是真的了。正确写法是 <code>x > 1 && x < 2</code>，使用逻辑运算。</p>
+<p>需要注意比如数学上的 <code>1 &lt; x &lt; 2</code>，在 C 语言中是不成立的，因为按照 C 的处理顺序，会先处理 <code>1 &lt; x</code>，这个式子只可能是 0 或者 1，最后就变成 <code>1 &lt; 2</code> 或者 <code>0 &lt; 2</code>，永远是真的了。正确写法是 <code>x &gt; 1 &amp;&amp; x &lt; 2</code>，使用逻辑运算。</p>
 <p><code>a != b</code> 就等价于 <code>!(a == b)</code>。</p>
 <p><code>,</code> 逗号运算符表示按顺序进行用逗号分隔的子表达式。</p>
 <p><code>()</code> 小括号就如同数学中的括号一般改变运算顺序。</p>
 <p><code>[]</code> 中括号用于取数组元素，比如取 数组 <code>arr</code> 的第五个元素（如果有）就是 <code>arr[5]</code>。</p>
-<p><code>&</code> 用于获取一个变量在内存中的地址，而 <code>*</code> 用于通过地址获取该位置的值。</p>
-<p><code>.</code> 用于通过结构体变量名字访问结构体内容，比如对于 <code>struct point</code> 变量 <code>point</code> 取 <code>point.position_x</code>。而 <code>*</code> 用于通过结构体指针取结构体内容，比如有指向 <code>struct point</code> 变量 <code>point</code> 的指针 <code>ptr</code>，可以 <code>ptr->position_x</code>。</p>
+<p><code>&amp;</code> 用于获取一个变量在内存中的地址，而 <code>*</code> 用于通过地址获取该位置的值。</p>
+<p><code>.</code> 用于通过结构体变量名字访问结构体内容，比如对于 <code>struct point</code> 变量 <code>point</code> 取 <code>point.position_x</code>。而 <code>*</code> 用于通过结构体指针取结构体内容，比如有指向 <code>struct point</code> 变量 <code>point</code> 的指针 <code>ptr</code>，可以 <code>ptr-&gt;position_x</code>。</p>
 <p><code>++</code> 和 <code>--</code> 分别是让变量自增 1 和自减 1。</p>
 <p><code>sizeof</code> 这个运算符会给出后面变量的类型或类型本身的字节数，比如 <code>sizeof char</code> 或者 <code>sizeof(char)</code> 值为 1。</p>
 <p><code>?:</code> 是唯一一个三元运算符，使用类似于 <code>条件 ? 表达式1 : 表达式2</code>，如果条件为真，运行表达式1，否则运行表达式2。</p>
@@ -254,12 +271,12 @@
 </thead>
 <tbody><tr>
 <td align="left">后缀</td>
-<td align="left"><code>() [] -> . ++ --</code></td>
+<td align="left"><code>() [] -&gt; . ++ --</code></td>
 <td align="left">从左到右</td>
 </tr>
 <tr>
 <td align="left">一元</td>
-<td align="left"><code>+ - ! ~ ++ -- (type) * & sizeof</code></td>
+<td align="left"><code>+ - ! ~ ++ -- (type) * &amp; sizeof</code></td>
 <td align="left">从右到左</td>
 </tr>
 <tr>
@@ -274,12 +291,12 @@
 </tr>
 <tr>
 <td align="left">移位</td>
-<td align="left"><code><< >></code></td>
+<td align="left"><code>&lt;&lt; &gt;&gt;</code></td>
 <td align="left">从左到右</td>
 </tr>
 <tr>
 <td align="left">关系</td>
-<td align="left"><code>< <= > >=</code></td>
+<td align="left"><code>&lt; &lt;= &gt; &gt;=</code></td>
 <td align="left">从左到右</td>
 </tr>
 <tr>
@@ -289,7 +306,7 @@
 </tr>
 <tr>
 <td align="left">位与</td>
-<td align="left"><code>&</code></td>
+<td align="left"><code>&amp;</code></td>
 <td align="left">从左到右</td>
 </tr>
 <tr>
@@ -304,7 +321,7 @@
 </tr>
 <tr>
 <td align="left">逻辑与</td>
-<td align="left"><code>&&</code></td>
+<td align="left"><code>&amp;&amp;</code></td>
 <td align="left">从左到右</td>
 </tr>
 <tr>
@@ -319,7 +336,7 @@
 </tr>
 <tr>
 <td align="left">赋值</td>
-<td align="left"><code>= += -= *= /= %=>>= <<= &= ^= |=</code></td>
+<td align="left"><code>= += -= *= /= %=&gt;&gt;= &lt;&lt;= &amp;= ^= |=</code></td>
 <td align="left">从右到左</td>
 </tr>
 <tr>
@@ -392,7 +409,7 @@
         <span class="hljs-keyword">int</span> position_x;
         <span class="hljs-keyword">int</span> position_y;
 };</code></pre></figure></code></pre>
-<p>定义了一个结构体，以后就可以使用 <code>struct point</code> 作为一个新的数据类型。访问结构体使用 <code>.</code> 和 <code>-></code>。</p>
+<p>定义了一个结构体，以后就可以使用 <code>struct point</code> 作为一个新的数据类型。访问结构体使用 <code>.</code> 和 <code>-&gt;</code>。</p>
 <p>还有一个类型别名关键字 <code>typedef</code>，它用来给一个现有的数据定义一个别名，例如 <code>typedef float scalar;</code>，然后就可以用 <code>scalar</code> 作为一个类型，这个类型和 <code>float</code> 是一样的。</p>
 <p>有关数据类型还要注意一点，相同的数据类型进行运算，得到的类型还是原来的类型，如果是不同的数据，会向表示范围更大的数据类型转变。比如整数和短整数进行计算得到整数，整数和浮点数运算得到浮点数，双精度浮点数和单精度浮点数运算得到双精度浮点数。</p>
 <p>在将一个值赋给另一个值的时候类型会被转换成被赋值的数据类型，比如 <code>int a = 3.0;</code> 实际上 a 的值为 3。但上述的运算规则发生在赋值之前，因此就算你写 <code>float b = 5 / 2;</code>，b 的值也是 <code>2.0f</code> 而不是 2.5，因为首先 <code>5 / 2</code> 是整数除整数，得到的就是整数 2，2 转换成浮点数也是 <code>2.0f</code>，因此正确的写法是把 5 或者 2 中的一个改成小数比如 <code>float b = 5.0 / 2;</code>，此时是浮点数与整数运算，首先将整数 2 变成浮点数 2.0，然后得到 2.5。</p>
@@ -622,7 +639,7 @@
 </span>{
         <span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>; <span class="hljs-comment">// 函数作用域。</span>
         <span class="hljs-keyword">int</span> y = <span class="hljs-number">2</span>;
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span>; x < <span class="hljs-number">10</span>; ++x)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span>; x &lt; <span class="hljs-number">10</span>; ++x)
                 <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>, x, y);        <span class="hljs-comment">// 这里会输出 2 2 到 9 2 共八行数。</span>
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, x);        <span class="hljs-comment">// 这里的 x 还是 1！</span>
 }</code></pre></figure></code></pre>
@@ -646,13 +663,13 @@ arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</c
 <span class="line">2</span>
 <span class="line">3</span>
 </pre><pre class="code"><code><span class="hljs-keyword">int</span> arr[<span class="hljs-number">3</span>];
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">3</span>; ++i)
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; ++i)
         arr[i] = <span class="hljs-number">0</span>;</code></pre></figure></code></pre>
 <h3 id="预处理器指令"><a class="headerlink" href="/posts/Learning-C-1/#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E6%8C%87%E4%BB%A4" title="预处理器指令"></a>预处理器指令</h3>
 <p>严格来说，预处理器指令并不是 C 语言的一部分，它们在编译器最开始处理代码的时候进行工作，然后当编译器开始将代码翻译成机器码的时候，预处理器已经工作完毕了。</p>
 <p>预处理指令以 <code>#</code> 开头，每一行为一个语句，大部分预处理指令都是与文本替换有关。</p>
 <p>这里介绍几个简单的例子，复杂的后面会单独说明。</p>
-<p><code>#include <文件名></code> 表示将这个文件的内容插入到这一行的位置，一般用来引用头文件，<code><</code> <code>></code> 括起来的是系统的头文件名，如果引用的是自己项目里的头文件，则需要用 <code>#include "文件名"</code>。</p>
+<p><code>#include &lt;文件名&gt;</code> 表示将这个文件的内容插入到这一行的位置，一般用来引用头文件，<code>&lt;</code> <code>&gt;</code> 括起来的是系统的头文件名，如果引用的是自己项目里的头文件，则需要用 <code>#include &quot;文件名&quot;</code>。</p>
 <p><code>#define 标识符1 标识符2</code> 表示在文件里所有出现的标识符2都会被替换成标识符1，比如下面的代码。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -674,15 +691,15 @@ arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</c
 <span class="line">4</span>
 <span class="line">5</span>
 <span class="line">6</span>
-</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdio.h></span></span>
+</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
 </span>{
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }</code></pre></figure></code></pre>
-<p>首先第一行的 <code>#include <stdio.h></code> 表示我们把 <code>stdio.h</code> 这个头文件里的内容全部插入进来，<code>stdio</code> 表示 standard input output 即标准输入输出（这里的输入输出是从程序的角度）。C 语言自身标准规定了许多有用的内置函数给我们使用，但我们首先要在代码里声明它们，这个头文件就包含了一些函数的声明，后续会继续说明头文件的作用与内容。</p>
+<p>首先第一行的 <code>#include &lt;stdio.h&gt;</code> 表示我们把 <code>stdio.h</code> 这个头文件里的内容全部插入进来，<code>stdio</code> 表示 standard input output 即标准输入输出（这里的输入输出是从程序的角度）。C 语言自身标准规定了许多有用的内置函数给我们使用，但我们首先要在代码里声明它们，这个头文件就包含了一些函数的声明，后续会继续说明头文件的作用与内容。</p>
 <p>然后我们声明一个名称为 <code>main</code>，返回类型为 <code>int</code>，不接受参数的函数，这个函数是 C 语言规定的程序入口，也就是说操作系统运行你的程序，实际上是从调用 <code>main()</code> 开始的，这里需要注意的是在 C 语言标准中，<code>main()</code> 的返回值必须为 <code>int</code>，你可能见到过 <code>void main()</code> 或者干脆连 <code>void</code> 这种返回类型都不写的，这些都是错误写法，某些不标准的编译器可能支持，但实际上标准里没有它们，你在写代码的时候不能这么写。</p>
-<p>这个函数的内容只有两句，第一句 <code>printf("Hello world!\n");</code> 会在你的终端界面输出一句 <code>Hello world!</code> 并换行，在这个过程中我们调用了这个叫做 <code>printf()</code> 的函数，它是 C 标准库规定的格式化输出函数（f 可以理解成 format），但我们这次只是用它输出一条字符串，<code>\n</code> 是一个转义字符，我们用它表示“回车”这个无法在代码里打出来的符号，如果你去掉它，然后再输出点什么，你会发现这两次的输出会出现在同一行里面——C 不会乱做任何你没让它做的事情。有关 <code>printf()</code> 和转义字符的更多内容，下次会进行介绍。</p>
+<p>这个函数的内容只有两句，第一句 <code>printf(&quot;Hello world!\n&quot;);</code> 会在你的终端界面输出一句 <code>Hello world!</code> 并换行，在这个过程中我们调用了这个叫做 <code>printf()</code> 的函数，它是 C 标准库规定的格式化输出函数（f 可以理解成 format），但我们这次只是用它输出一条字符串，<code>\n</code> 是一个转义字符，我们用它表示“回车”这个无法在代码里打出来的符号，如果你去掉它，然后再输出点什么，你会发现这两次的输出会出现在同一行里面——C 不会乱做任何你没让它做的事情。有关 <code>printf()</code> 和转义字符的更多内容，下次会进行介绍。</p>
 <p>对于字符串，你可以简单的理解为小说或剧本里面人物说的话，如果不用双引号，剧本里的文字就是叙述性的语句，并不会被观众得知，程序也是一样，不加双引号的均是程序代码，当你想跟用户交流，使用字符串吧。有关字符串的存储方式，也会在后续讲解。</p>
 <p>最后，<code>main()</code> 函数返回整数 0，这个返回值会被它上层的程序捕获（可以简单理解为操作系统），0 在这里约定是程序运行成功的意思，一个复杂的程序可能有多种多样的失败原因，这个时候我们可以用无数的非零值代表各种错误。</p>
 <p>还记得之前关于 <code>return</code> 的说明吗？如果我们把 <code>main()</code> 改写成下面这样。</p>
@@ -703,7 +720,7 @@ arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</c
 <p>缩进这个词有点陌生，程序员用它指代代码的排版格式，尽管 C 给了你把所有程序写在同一行里的能力，但我估计看过这种代码的人都想把作者打一遍出气。</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string"><stdio.h></span></span>
+</pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;}</code></pre></figure></code></pre>
 <p>当你写了一个复杂一点的程序的时候，有必要修理一下程序格式，让它变的更容易理解，我们在前面说过一个分层次的东西叫作用域，刚好可以利用它。我们可以在每一个作用域的内部语句的行首增加一定数量的空白，来突出层次感。比如在这段代码里指出一个错误</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
@@ -727,15 +744,15 @@ arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</c
 <span class="line">19</span>
 </pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
 </span>{
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">10</span>; ++i) {
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j < <span class="hljs-number">10</span>; ++j) {
-                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k < <span class="hljs-number">10</span>; ++k) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; ++i) {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; ++j) {
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">10</span>; ++k) {
                                 <span class="hljs-keyword">if</span> (<span class="hljs-number">0</span> = k % <span class="hljs-number">2</span>) {
                                         <span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);
                                 }
                         }
-                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k < <span class="hljs-number">10</span>; ++k) {
-                                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>; l < <span class="hljs-number">10</span>; ++l) {
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">10</span>; ++k) {
+                                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">10</span>; ++l) {
                                         <span class="hljs-keyword">if</span> (l % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) {
                                                 <span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);
                                         }
@@ -746,7 +763,7 @@ arr[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</c
 }</code></pre></figure></code></pre>
 <p>就比在这段代码里</p>
 <pre><code class="c"><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i<<span class="hljs-number">10</span>; ++i){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j<<span class="hljs-number">10</span>; ++j){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k<<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">if</span>(<span class="hljs-number">0</span>=k%<span class="hljs-number">2</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);}}<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k<<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l=<span class="hljs-number">0</span>; l<<span class="hljs-number">10</span>; ++l){<span class="hljs-keyword">if</span>(l%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);}}}}}}</code></pre></figure></code></pre>
+</pre><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">10</span>; ++i){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;<span class="hljs-number">10</span>; ++j){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k&lt;<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">if</span>(<span class="hljs-number">0</span>=k%<span class="hljs-number">2</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);}}<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k&lt;<span class="hljs-number">10</span>; ++k){<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l=<span class="hljs-number">0</span>; l&lt;<span class="hljs-number">10</span>; ++l){<span class="hljs-keyword">if</span>(l%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>){<span class="hljs-built_in">printf</span>(<span class="hljs-string">"老师会看见很多次这句话。"</span>);}}}}}}</code></pre></figure></code></pre>
 <p>要容易的不止一点半点。</p>
 <p>通常这个空白是一个 Tab 按键，或者八个空格，或者四个空格，只要你的一份代码里选择其中一个就可以了，不要搞得参差不齐就行。</p>
 <p>通常还建议你只在一行里书写一个语句，因为你所看见的代码可能有误导性，比如</p>
@@ -1215,4 +1232,4 @@ do_another();</code></pre></figure></code></pre>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -194,7 +211,7 @@ Say to me.</p>
 <p>Why are you so tired?</p>
 <p>Why are you so lonely?</p>
 <p>No,No.</p>
-<p>There's no need to say.</p>
+<p>There&#39;s no need to say.</p>
 <a id="more"></a>
 
 <p>What I need to konw is that you are really tired,really longly,really.</p>
@@ -205,16 +222,16 @@ Say to me.</p>
 <p>I see,you mean you understand.</p>
 <p>You mean you believe.</p>
 <p>You mean you konw no one would love a silly man.</p>
-<p>You mean it's true that no one loves a person who lives by computer,phone,harmonica.</p>
-<p>You mean it's true that no one konws what you need.</p>
+<p>You mean it&#39;s true that no one loves a person who lives by computer,phone,harmonica.</p>
+<p>You mean it&#39;s true that no one konws what you need.</p>
 <p>They have already got and sent what you want from or to other one.</p>
 <p>You consider them as everyting while they consider you as nothing.</p>
 <p>The world is so hard,it makes you hard to find it.</p>
-<p>It was hidden under the dirt,was hidden on the cloud,was hidden behind one's back,was hidden in one's heart.</p>
+<p>It was hidden under the dirt,was hidden on the cloud,was hidden behind one&#39;s back,was hidden in one&#39;s heart.</p>
 <p>You can feel the deeply bad of the world.</p>
-<p>Though your heart believe the future,your body say it can't wait.</p>
-<p>Your body can wait while your heart can't.</p>
-<p>Human being is strange,you can't look through them via scanf,#define.</p>
+<p>Though your heart believe the future,your body say it can&#39;t wait.</p>
+<p>Your body can wait while your heart can&#39;t.</p>
+<p>Human being is strange,you can&#39;t look through them via scanf,#define.</p>
 <p>So many stories,some times they are pleasant,but most not.</p>
 <p>Stories start,stories stop.</p>
 <p>Endless stories.</p>
@@ -230,15 +247,15 @@ Say to me.</p>
 <p>To the whole world,you maybe one person.</p>
 <p>But to whom,you are the whole world?</p>
 <p>You said you want it simple,for human beings are so complex.</p>
-<p>But you can't.</p>
-<p>Don't cry.</p>
+<p>But you can&#39;t.</p>
+<p>Don&#39;t cry.</p>
 <p>To you,to me.</p>
 <p>To yourself,to myself.</p>
-<p>You are myself,I'm yourself.</p>
+<p>You are myself,I&#39;m yourself.</p>
 <p>You can get it one day,maybe.</p>
 <p>2016-01-10</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 <p><em>转载自我的LOFTER</em></p>
 
     </main>
@@ -496,4 +513,4 @@ Say to me.</p>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

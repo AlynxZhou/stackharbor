@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -261,10 +278,10 @@
 <p>这样就行了，运行 <code>hexo deploy</code> 应该就能看到 rsync 的同步状态了。如果你有其他的不使用 Hexo 的网页，可以用命令：</p>
 <pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-variable">$ </span>rsync -azv --delete SOURCE USERNAME<span class="hljs-variable">@IPADDRESS</span><span class="hljs-symbol">:DESTINATION</span></code></pre></figure></code></pre><!-- Marked bug: cannot handle `\)` in URL, use `%29` instead. Waiting hexo-renderer-marked update its dependents version. -->
-<p>上传到服务器上，如果有 git 仓库最好用 <code>--exclude=.git</code> 排除掉，顺便 SOURCE 目录一般不要用 <code>/</code> 结尾，原因参见 [这里](<a href="https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92)%E3%80%82" target="_blank">https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92)。</a></p>
+<p>上传到服务器上，如果有 git 仓库最好用 <code>--exclude=.git</code> 排除掉，顺便 SOURCE 目录一般不要用 <code>/</code> 结尾，原因参见 <a href="https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92" target="_blank">这里</a>。</p>
 <p>这个时候我还没有把 DNS 从 GitHub Pages 转到我的服务器上，结果生米煮成了熟饭，只能往下继续了。</p>
-<h1 id="用Let039;sEncrypt生成SSL证书"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Let039;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="用Let039;sEncrypt生成SSL证书"></a>用 Let's Encrypt 生成 SSL 证书</h1>
-<p>HTTPS 需要有可信机构签发的证书，<a href="https://letsencrypt.org/" target="_blank">Let's Encrypt</a> 就是一个免费提供这种服务的网站，不过官方推荐的步骤只能对每个域名单独生成证书，比如 <code>alynx.xyz</code> 和 <code>sh.alynx.xyz</code> 需要两个证书，这里介绍生成通配符证书的办法，比如对 <code>*.alynx.xyz</code> 生成一个证书，可以用在所有三级子域名：</p>
+<h1 id="用Letamp;39;sEncrypt生成SSL证书"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Letamp;39;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="用Letamp;39;sEncrypt生成SSL证书"></a>用 Let&#39;s Encrypt 生成 SSL 证书</h1>
+<p>HTTPS 需要有可信机构签发的证书，<a href="https://letsencrypt.org/" target="_blank">Let&#39;s Encrypt</a> 就是一个免费提供这种服务的网站，不过官方推荐的步骤只能对每个域名单独生成证书，比如 <code>alynx.xyz</code> 和 <code>sh.alynx.xyz</code> 需要两个证书，这里介绍生成通配符证书的办法，比如对 <code>*.alynx.xyz</code> 生成一个证书，可以用在所有三级子域名：</p>
 <h2 id="下载certbot-auto"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E4%B8%8B%E8%BD%BDcertbot-auto" title="下载certbot-auto"></a>下载 certbot-auto</h2>
 <p><code>certbot-auto</code> 是用来验证生成证书的交互命令行工具，似乎一般软件源里的版本都不够高，不能生成通配符证书，这里手动下载新版：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
@@ -555,7 +572,7 @@ server {
 </pre><pre class="code"><code># ln -s <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-available/</span>example.com <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-enabled/</span>
 # systemctl restart nginx</code></pre></figure></code></pre><p>如果你还有其他的页面，放在另一个目录里，然后再创建一份配置文件，当然这次只要有第二个 server 字段就好了，修改路径，然后连接重启。</p>
 <h1 id="自动更新证书"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%AF%81%E4%B9%A6" title="自动更新证书"></a>自动更新证书</h1>
-<p>安全起见，Let's Encrypt 签发的证书只有 90 天有效期，官方推荐使用自动定期刷新的方式更新证书，只需要建立一个定时任务运行 <code>/PATH/TO/certbot-auto renew --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"</code>（如果你用的不是 systemd 管理 Nginx 记得换成其它的停止和启动 Nginx 的命令）。很大可能你知道怎么用 crontab 做这件事情，但我使用 systemd-timer 做。</p>
+<p>安全起见，Let&#39;s Encrypt 签发的证书只有 90 天有效期，官方推荐使用自动定期刷新的方式更新证书，只需要建立一个定时任务运行 <code>/PATH/TO/certbot-auto renew --pre-hook &quot;systemctl stop nginx&quot; --post-hook &quot;systemctl start nginx&quot;</code>（如果你用的不是 systemd 管理 Nginx 记得换成其它的停止和启动 Nginx 的命令）。很大可能你知道怎么用 crontab 做这件事情，但我使用 systemd-timer 做。</p>
 <p>首先建立 <code>/lib/systemd/system/certbot-renew.service</code> 这个文件，内容如下：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -597,7 +614,7 @@ server {
 <p>有备无患咯！</p>
 <p>更新：我的 VPS 被墙了，算了，噗。</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -775,7 +792,7 @@ server {
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#用Let039;sEncrypt生成SSL证书">用 Let's Encrypt 生成 SSL 证书</a>
+            <a class="list-group-item toc-link" href="#用Letamp;39;sEncrypt生成SSL证书">用 Let&#39;s Encrypt 生成 SSL 证书</a>
             
             
         <ol >
@@ -919,4 +936,4 @@ server {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

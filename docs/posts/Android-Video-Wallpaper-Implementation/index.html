@@ -85,24 +85,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
       $(".post pre code figure.highlight").each(function (i, e) {
-        $(e).before("<button class=\"copy button\">复制</button>");
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
       });
-      var cb = new ClipboardJS("button.copy", {
+      var cb = new ClipboardJS("a.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
-            // nextElementSibling is figure,highlight, lastChild is pre.code.
-            return trigger.nextElementSibling.lastChild;
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
         }
       });
       cb.on("success", function (e) {
         e.clearSelection();
         var trigger = e.trigger;
         // Change button text as a user tip.
-        trigger.innerHTML = "已复制";
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
         $(trigger).addClass("copied");
         // Change button text back;
         setTimeout(function () {
-          trigger.innerHTML = "复制";
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
           $(trigger).removeClass("copied");
         }, 1500);
       });
@@ -200,12 +217,12 @@
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
-</pre><pre class="code"><code><span class="hljs-tag"><<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.SET_WALLPAPER"</span> /></span>
-<span class="hljs-tag"><<span class="hljs-name">uses-feature</span>
+</pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.SET_WALLPAPER"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
   <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.software.live_wallpaper"</span>
-  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /></span></code></pre></figure></code></pre>
-<p>你要是能把这一行加到 <code><manifest></code> 标签外面，我觉得你也没必要写代码了……但这个要放在 <code><application></code> 标签的外面，具体放在哪直接翻我仓库里的文件好了，比我用文字描述清晰的多。</p>
-<p>但是下面这个要加到 <code><application></code> 标签的里面：</p>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /&gt;</span></code></pre></figure></code></pre>
+<p>你要是能把这一行加到 <code>&lt;manifest&gt;</code> 标签外面，我觉得你也没必要写代码了……但这个要放在 <code>&lt;application&gt;</code> 标签的外面，具体放在哪直接翻我仓库里的文件好了，比我用文字描述清晰的多。</p>
+<p>但是下面这个要加到 <code>&lt;application&gt;</code> 标签的里面：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -216,16 +233,16 @@
 <span class="line">8</span>
 <span class="line">9</span>
 <span class="line">10</span>
-</pre><pre class="code"><code><span class="hljs-tag"><<span class="hljs-name">service</span>
+</pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">service</span>
   <span class="hljs-attr">android:name</span>=<span class="hljs-string">".GLWallpaperService"</span>
-  <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"android.permission.BIND_WALLPAPER"</span>></span>
-  <span class="hljs-tag"><<span class="hljs-name">intent-filter</span>></span>
-    <span class="hljs-tag"><<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.service.wallpaper.WallpaperService"</span> /></span>
-  <span class="hljs-tag"></<span class="hljs-name">intent-filter</span>></span>
-  <span class="hljs-tag"><<span class="hljs-name">meta-data</span>
+  <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"android.permission.BIND_WALLPAPER"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.service.wallpaper.WallpaperService"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span>
     <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.service.wallpaper"</span>
-    <span class="hljs-attr">android:resource</span>=<span class="hljs-string">"@xml/wallpaper"</span> /></span>
-<span class="hljs-tag"></<span class="hljs-name">service</span>></span></code></pre></figure></code></pre>
+    <span class="hljs-attr">android:resource</span>=<span class="hljs-string">"@xml/wallpaper"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">service</span>&gt;</span></code></pre></figure></code></pre>
 <p>看到那个叫 <code>android:name</code> 的属性了吗，<code>.</code> 不能少，后面的名字则是一会你的 class 叫什么名字这里就什么名字。然后别的都是套路，可以不管，除了那个 <code>@xml/wallpaper</code>，这玩意要自己写。</p>
 <p>在你侧栏找到 <code>res</code> 目录，如果底下没有叫 <code>xml</code> 的目录的话，你就新建一个。然后你刚才那里斜杠后面是什么你就建立一个叫什么的 xml 文件，比如我写了 <code>@xml/wallpaper</code>，那就建立一个 <code>wallpaper.xml</code> 的文件，内容如下：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
@@ -234,12 +251,12 @@
 <span class="line">4</span>
 <span class="line">5</span>
 <span class="line">6</span>
-</pre><pre class="code"><code><span class="php"><span class="hljs-meta"><?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?></span></span>
-<span class="hljs-tag"><<span class="hljs-name">wallpaper</span>
+</pre><pre class="code"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">wallpaper</span>
   <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>
   <span class="hljs-attr">android:thumbnail</span>=<span class="hljs-string">"@drawable/ic_icon"</span>
   <span class="hljs-attr">android:description</span>=<span class="hljs-string">"@string/wallpaper_description"</span>
-  <span class="hljs-attr">android:settingsActivity</span>=<span class="hljs-string">"xyz.alynx.livewallpaper.MainActivity"</span> /></span></code></pre></figure></code></pre>
+  <span class="hljs-attr">android:settingsActivity</span>=<span class="hljs-string">"xyz.alynx.livewallpaper.MainActivity"</span> /&gt;</span></code></pre></figure></code></pre>
 <p>这里面也有些地方需要改，首先那个 <code>@drawable/ic_icon</code> 是你这个程序在系统的动态壁纸列表里面的图标（然而大部分定制的系统都忽略了这玩意），你可以用 Android Studio 在 <code>res/drawable</code> 目录下面生成一个，这个可以自己去查官方文档，<code>ic_icon</code> 要换成你生成的文件的名字。<code>@string/wallpaper_description</code> 则是你的程序在列表里的名字或介绍，这个格式的意思是去 <code>res/values/strings.xml</code> 或者其他语言的 <code>strings.xml</code> 里面找字符串（写过点复杂程序的人应该都懂吧！不懂自学去！我这不是教你怎么写代码！），你可以用 Android Studio 的字符串编辑器添加一条，然后把这里的键改成你添加的。最后一个 <code>settingsActivity</code> 是干嘛的呢？在预览动态壁纸的页面会有个设置按钮，如果你的动态壁纸可以设置参数，点击那个按钮会跳进动态壁纸设置页面，设置页面就是在这里指定的类，因为我设置项不多直接放菜单里了，所以我写的是直接跳进 <code>MainActivity</code>，你写的时候也可以这样，但记得换成你的包名（不换的人我怀疑你没写过 Java，那你学个毛 Android App 开发？）。</p>
 <p>废话终于说完了可以写代码了好开心啊……</p>
 <h1 id="然后你看见网上一堆胶水代码……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6" title="然后你看见网上一堆胶水代码……"></a>然后你看见网上一堆胶水代码……</h1>
@@ -380,9 +397,9 @@
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-tag"><<span class="hljs-name">uses-feature</span>
+</pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
   <span class="hljs-attr">android:glEsVersion</span>=<span class="hljs-string">"0x00020000"</span>
-  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /></span></code></pre></figure></code></pre>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /&gt;</span></code></pre></figure></code></pre>
 <p>如果你只支持 v3，就把 2 改成 3。</p>
 <p>（已经进入这个阶段了，打算拿这个当“我的第一个 Android App”的同学就自己退出吧。）</p>
 <p>我直接帖完整代码解释好了，因为实在是不好一点点讲了，反正会写 OpenGL 的人应该也能理解这种程度的代码了。</p>
@@ -897,7 +914,7 @@
             <span class="hljs-keyword">return</span>;
         }
 
-        <span class="hljs-keyword">if</span> (renderedFrame < updatedFrame) {
+        <span class="hljs-keyword">if</span> (renderedFrame &lt; updatedFrame) {
             surfaceTexture.updateTexImage();
             ++renderedFrame;
             <span class="hljs-comment">// Utils.debug(</span>
@@ -1035,16 +1052,16 @@
         <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> maxYOffset = (<span class="hljs-number">1.0</span>f - (
             (<span class="hljs-keyword">float</span>)screenHeight <span class="hljs-regexp">/ screenWidth) /</span> ((<span class="hljs-keyword">float</span>)videoHeight / videoWidth)
         ) / <span class="hljs-number">2</span>;
-        <span class="hljs-keyword">if</span> (xOffset > maxXOffset) {
+        <span class="hljs-keyword">if</span> (xOffset &gt; maxXOffset) {
             xOffset = maxXOffset;
         }
-        <span class="hljs-keyword">if</span> (xOffset < -maxXOffset) {
+        <span class="hljs-keyword">if</span> (xOffset &lt; -maxXOffset) {
             xOffset = -maxXOffset;
         }
-        <span class="hljs-keyword">if</span> (yOffset > maxYOffset) {
+        <span class="hljs-keyword">if</span> (yOffset &gt; maxYOffset) {
             yOffset = maxYOffset;
         }
-        <span class="hljs-keyword">if</span> (yOffset < -maxXOffset) {
+        <span class="hljs-keyword">if</span> (yOffset &lt; -maxXOffset) {
             yOffset = -maxYOffset;
         }
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.xOffset != xOffset || <span class="hljs-keyword">this</span>.yOffset != yOffset) {
@@ -1132,14 +1149,14 @@
 </pre><pre class="code"><code>    private void updateMatrix() {
         <span class="hljs-comment">// Players are buggy and unclear, so we do crop by ourselves.</span>
         <span class="hljs-comment">// Start with an identify matrix.</span>
-        for (int i = <span class="hljs-number">0</span>; i < <span class="hljs-number">16</span>; ++i) {
+        for (int i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">16</span>; ++i) {
             mvp[i] = <span class="hljs-number">0.0</span>f;
         }
         mvp[<span class="hljs-number">0</span>] = mvp[<span class="hljs-number">5</span>] = mvp[<span class="hljs-number">10</span>] = mvp[<span class="hljs-number">15</span>] = <span class="hljs-number">1.0</span>f;
         <span class="hljs-comment">// OpenGL model matrix: scaling, rotating, translating.</span>
         final <span class="hljs-type">float</span> videoRatio = (<span class="hljs-type">float</span>)videoWidth / videoHeight;
         final <span class="hljs-type">float</span> screenRatio = (<span class="hljs-type">float</span>)screenWidth / screenHeight;
-        if (videoRatio >= screenRatio) {
+        if (videoRatio &gt;= screenRatio) {
             Utils.debug(TAG, <span class="hljs-string">"X-cropping"</span>);
             <span class="hljs-comment">// Treat video and screen width as 1, and compare width to scale.</span>
             Matrix.scaleM(
@@ -1257,7 +1274,7 @@
             exoPlayer.setVolume(<span class="hljs-number">0.0f</span>);
             <span class="hljs-comment">// Disable audio decoder.</span>
             <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> count = exoPlayer.getRendererCount();
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i < count; ++i) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
                 <span class="hljs-keyword">if</span> (exoPlayer.getRendererType(i) == C.TRACK_TYPE_AUDIO) {
                     trackSelector.setParameters(
                         trackSelector.buildUponParameters().setRendererDisabled(i, <span class="hljs-keyword">true</span>)
@@ -1281,7 +1298,7 @@
 <p>你可以分别从 <a href="https://github.com/AlynxZhou/AlynxLiveWallpaper/releases/latest" target="_blank">GitHub Release</a>，<a href="https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper" target="_blank">Google Play</a> 和 <a href="https://www.coolapk.com/apk/xyz.alynx.livewallpaper" target="_blank">酷安网</a> 下载这个应用。</p>
 <p>为了上架 Google Play 我支付了 25 美元申请了开发者账户，应用是免费的，但我放置了捐赠页面。不过已经有几百个下载量（大部分是酷安）之后，我还没有从这个应用里得到一点回报，如果你觉得应用不错并且手头宽裕，可以打开 App 赞助我一杯咖啡。毕竟解决上面提到的所有的坑并不容易。</p>
 <p><em>AlynxZhou</em></p>
-<p><strong>A Coder & Dreamer</strong></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -1581,4 +1598,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2019-05-16 周四 11:47:28 CST. -->
+<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 15:21:33 CST. -->

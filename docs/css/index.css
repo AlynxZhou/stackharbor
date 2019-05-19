@@ -631,16 +631,104 @@ pre code {
   margin: 0;
   padding: 0;
 }
-pre code button.copy {
+.code-titlebar {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-warp: nowarp;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
+  color: #fff;
+  background: #3d444c;
+  padding: 0.25em 0.5em;
+}
+.code-titlebar .titlebar-left {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  text-align: left;
+  padding: 0 0.25em;
+}
+.code-titlebar .titlebar-center {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  text-align: center;
+  padding: 0 0.25em;
+}
+.code-titlebar .titlebar-right {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  text-align: right;
+  padding: 0 0.25em;
+}
+.code-titlebar a.copy {
+  color: #ddd;
+  border-bottom: none;
   -webkit-transition: 0.2s ease-in-out;
   -moz-transition: 0.2s ease-in-out;
   -o-transition: 0.2s ease-in-out;
   -ms-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
 }
-pre code button.copy.copied {
+.code-titlebar a.copy:hover {
+  color: #fff;
+  border-bottom: none;
+}
+.code-titlebar a.copy.copied {
+  color: #fff;
+}
+.code-titlebar button.button-dot {
+  text-decoration: none;
+  border: none;
+  padding: 0;
+  margin: 0.25em;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+}
+.code-titlebar .dot-close {
   background: #ff2a2a;
-  border: 0.1em solid #f5c6cb;
+}
+.code-titlebar .dot-maximize {
+  background: #37cf38;
+}
+.code-titlebar .dot-minimize {
+  background: #fdbc40;
 }
 figure.highlight {
   display: -webkit-box;
@@ -669,9 +757,10 @@ figure.highlight {
   -webkit-align-items: flex-start;
   align-items: flex-start;
   overflow: auto;
-  border-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
   padding: 0.5em;
-  margin: 0.5em 0;
+  margin: 0 0 0.5em 0;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
   -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
   -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
