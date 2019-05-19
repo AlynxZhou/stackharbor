@@ -412,8 +412,9 @@ body,
   background: #cbeafb;
 }
 ::-webkit-scrollbar {
-  width: 0.4em;
-  height: 0.4em;
+  width: 0.5em;
+  height: 0.5em;
+  background: #ccc;
 }
 ::-webkit-scrollbar-track {
   background: 0 0;
@@ -426,10 +427,10 @@ body,
   background: #666;
 }
 ::-webkit-scrollbar-corner {
-  background: #535353;
+  background: #666;
 }
 ::-webkit-scrollbar-resizer {
-  background: #ff6e00;
+  background: #eee;
 }
 body {
   color: #26272b;
@@ -660,7 +661,7 @@ pre code {
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
   color: #fff;
-  background: #3d444c;
+  background: #33363b;
   padding: 0.25em 0.5em;
 }
 .code-titlebar .titlebar-left {
@@ -757,6 +758,9 @@ figure.highlight {
   -webkit-align-items: flex-start;
   align-items: flex-start;
   overflow: auto;
+  border-left: 0.1em solid #33363b;
+  border-bottom: 0.1em solid #33363b;
+  border-right: 0.1em solid #33363b;
   padding: 0.5em;
   margin: 0 0 0.5em 0;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
