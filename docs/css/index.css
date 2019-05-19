@@ -757,8 +757,6 @@ figure.highlight {
   -webkit-align-items: flex-start;
   align-items: flex-start;
   overflow: auto;
-  border-bottom-left-radius: 0.3em;
-  border-bottom-right-radius: 0.3em;
   padding: 0.5em;
   margin: 0 0 0.5em 0;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
