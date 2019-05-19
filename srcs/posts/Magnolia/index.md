@@ -50,6 +50,6 @@ tags:
 
 四月只是春天的谎言吧，这样寒冷的日子，春天真的来了吗？还是说开放的 Magnolia，只是春天的假象而已呢？
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

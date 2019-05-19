@@ -162,6 +162,6 @@ Kalafina 和梶浦由纪是他**未来**最爱的 Musician。
 
 璀璨的天空，静寂中。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 *A Musician*

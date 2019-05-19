@@ -35,6 +35,6 @@ createdTime: 2016-10-08 21:31:56
 
 所以少年我们一起去明湖边讨论C语言吧！（此处应该有个梗）
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

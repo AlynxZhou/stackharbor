@@ -69,6 +69,6 @@ tags:
 
 我爱你，因为你就是世界。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

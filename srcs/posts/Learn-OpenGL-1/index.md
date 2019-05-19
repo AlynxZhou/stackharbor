@@ -389,6 +389,6 @@ OpenGL 的坐标是这样安排的：
 - [triangle.v.glsl](./triangle.v.glsl)
 - [triangle.f.glsl](./triangle.f.glsl)
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

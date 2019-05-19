@@ -134,6 +134,6 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
 
 好了本猹要去补作业了。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

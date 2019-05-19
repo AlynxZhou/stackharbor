@@ -368,6 +368,6 @@ WantedBy=multi-user.target
 
 更新：我的 VPS 被墙了，算了，噗。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

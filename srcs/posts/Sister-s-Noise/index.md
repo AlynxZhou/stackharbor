@@ -85,6 +85,6 @@ tags:
 [#3#7#6#5#6#7 #6#7]{#25 544}
 ````
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

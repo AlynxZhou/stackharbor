@@ -53,6 +53,6 @@ Fate 系列其他的作品就没看过了，我觉得也没有看的必要，FGO
 
 已经是月亮升起的时候了，何等愚蠢而幸福的人啊！
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

@@ -344,7 +344,7 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> wg-quick@wg0 --now</span></code></pre></figure></code></pre><h1 id="后记"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%8E%E8%AE%B0" title="后记"></a>后记</h1>
 <p>如果你需要在内网之间传递数据，建议选择一个访问较快的服务器，因为数据转发要通过这个服务器。</p>
 <p>但如果你想使用 WireGuard 访问一些被河蟹的内容也可以，首先需要一个在海外的服务器，然后设置客户端该服务器的 <code>AllowedIPs</code> 为 <code>0.0.0.0/0</code>（意思就是所有 IP 都经过这个服务器转发啦！或者你知道该设置某些网段也行！或者避开内网和本地地址！我不建议用这个番茄！所以就写个最蠢的！），就可以了！记得不用时候关掉，不然一些国内 App 也会走海外的！</p>
-<p><em>AlynxZhou</em></p>
+<p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
@@ -656,4 +656,4 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 16:24:31 CST. -->
+<!-- Page built by Hikaru v1.14.5 at 2019-05-19 周日 21:01:32 CST. -->

@@ -321,7 +321,7 @@ $ sudo pacman -Syu yaourt
 
 2014-07-28 17:00   
 
-*AlynxZhou*   
+*Alynx Zhou*   
 
 **A Coder & Dreamer**   
 

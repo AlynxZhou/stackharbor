@@ -239,7 +239,7 @@
 # iptables -t nat -A PREROUTING -p udp --dport <span class="hljs-string">[端口号]</span> -j DNAT --to-destination <span class="hljs-string">[代理服务器地址]</span>
 # iptables -t nat -A POSTROUTING -p tcp -d <span class="hljs-string">[代理服务器地址]</span> --dport <span class="hljs-string">[端口号]</span> -j SNAT --to-source <span class="hljs-string">[国内服务器地址]</span>
 # iptables -t nat -A POSTROUTING -p tcp -d <span class="hljs-string">[代理服务器地址]</span> --dport <span class="hljs-string">[端口号]</span> -j SNAT --to-source <span class="hljs-string">[国内服务器地址]</span></code></pre></figure></code></pre><p>然后修改你本地的 socks5 配置，IP 改为国内的服务器的 IP。如果国内服务器默认有防火墙（安全组），添加规则放行该端口（TCP + UDP）。</p>
-<p><em>AlynxZhou</em></p>
+<p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
@@ -556,4 +556,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.4 at 2019-05-19 周日 16:24:31 CST. -->
+<!-- Page built by Hikaru v1.14.5 at 2019-05-19 周日 21:01:32 CST. -->

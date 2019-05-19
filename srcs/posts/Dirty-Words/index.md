@@ -76,6 +76,6 @@ If not, what should we do for the people in the correct direction?
 
 Don't disturb me with these silly things you made. Do what you should do.
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

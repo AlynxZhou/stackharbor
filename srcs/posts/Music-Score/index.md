@@ -36,6 +36,6 @@ tags:
 
 -------
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

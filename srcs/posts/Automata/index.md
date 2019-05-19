@@ -161,6 +161,6 @@ tags:
 
 <iframe src="//player.bilibili.com/player.html?aid=10344669&cid=17095298&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640" height="480"></iframe>
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

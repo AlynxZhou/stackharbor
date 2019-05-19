@@ -23,6 +23,6 @@ tags:
 
 灰色的情人节，把黑色的爱给白色的你。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

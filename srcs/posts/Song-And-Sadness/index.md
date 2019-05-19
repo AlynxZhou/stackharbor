@@ -31,6 +31,6 @@ enc_pwd:
 
 不如永远不见。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

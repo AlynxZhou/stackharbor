@@ -74,6 +74,6 @@ mesa是开源的OpenGL标准实现，另外的则是I卡的驱动（官方开源
 
 参考了[Steam的说明](https://support.steampowered.com/kb_article.php?ref=6316-GJKC-7437)，现在剩余的问题就是玩游戏太热了。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

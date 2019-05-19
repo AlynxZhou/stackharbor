@@ -15,7 +15,7 @@ tags:
   - Fate
 enc_pwd:
 ---
-コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 AlynxZhou
+コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 Alynx Zhou
 
 <!--more-->
 
@@ -45,6 +45,6 @@ enc_pwd:
 23#45#43#1 #1236[#12] 23#4522#12 23#4522#12
 ```
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

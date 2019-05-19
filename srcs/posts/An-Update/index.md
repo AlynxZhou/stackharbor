@@ -72,6 +72,6 @@ Windows用户/大部分Linux用户请按右上角X，macOS用户/Ubuntu用户/�
 
 那么今天这个没营养的更新就这样结束了，饥饿的猹喵要去觅食并准备今晚的直播了。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

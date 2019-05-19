@@ -32,6 +32,6 @@ enc_pwd:
 
 Welcome to *the StackHarbor*, sir/madam, a unreal harbor which belongs to the void sea, here's your hot milk, hope the wave sound and cold rain won't distrub your dream, good night.
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

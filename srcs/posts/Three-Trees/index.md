@@ -21,6 +21,6 @@ tags:
 
 ![Three-Trees_3.jpg](Three-Trees_3.jpg)
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

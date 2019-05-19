@@ -33,7 +33,7 @@ print("Hello World!")
 
 但是就算你读到这里，朋友，你一定还是一直有一个疑问：“这个网站究竟是用来做什么的呢？”   
 
-简而言之，**这是一个名叫 *AlynxZhou* 的人利用 *alynx.xyz* 这个域名及hexo和GitHub Page还有Spacemacs、Gentoo GNU/Linux建立的一个名叫 *喵's StackHarbor* 的网站，他在这里用他还很生疏的Markdown，记录下他生活中每天的迷茫与感慨、愉悦与忧伤。**   
+简而言之，**这是一个名叫 *Alynx Zhou* 的人利用 *alynx.xyz* 这个域名及hexo和GitHub Page还有Spacemacs、Gentoo GNU/Linux建立的一个名叫 *喵's StackHarbor* 的网站，他在这里用他还很生疏的Markdown，记录下他生活中每天的迷茫与感慨、愉悦与忧伤。**   
 
 我知道你要问：“为什么要叫做这么一个拗口的名字呢？”   
 
@@ -51,6 +51,6 @@ print("Hello World!")
 
 So my friend, where's your harbor?   
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

@@ -750,6 +750,6 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 
 为了上架 Google Play 我支付了 25 美元申请了开发者账户，应用是免费的，但我放置了捐赠页面。不过已经有几百个下载量（大部分是酷安）之后，我还没有从这个应用里得到一点回报，如果你觉得应用不错并且手头宽裕，可以打开 App 赞助我一杯咖啡。毕竟解决上面提到的所有的坑并不容易。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

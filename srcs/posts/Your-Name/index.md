@@ -60,6 +60,6 @@ tags:
 
 晚安。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

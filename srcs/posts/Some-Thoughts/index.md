@@ -29,6 +29,6 @@ tags:
 
 [![Atom](./Atom.png)](https://atom.io/)
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

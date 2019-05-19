@@ -44,6 +44,6 @@ Encrypted.
 
 但愿一切都能安好，顺你心意，也顺我心意，我最好的朋友。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

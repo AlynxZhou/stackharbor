@@ -28,6 +28,6 @@ chmod +x "${pkgdir}/opt/${pkgname}/resources" \
 
 但解压出来实际上没这些文件，然后就会报错，注释掉就好了。
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**

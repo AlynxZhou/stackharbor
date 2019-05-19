@@ -382,6 +382,6 @@ $ ssh root@你的pi的ip地址
 
 原文写于2016-02-06\_21:10:25
 
-*AlynxZhou*
+*Alynx Zhou*
 
 **A Coder & Dreamer**
