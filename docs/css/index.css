@@ -480,6 +480,13 @@ ol,
 ul {
   padding-left: 2em;
 }
+object,
+embed {
+  outline: none;
+}
+input::-moz-focus-inner {
+  border: none;
+}
 a {
   position: relative;
   color: #666;
@@ -490,13 +497,19 @@ a {
   -o-transition: 0.3s ease-in-out;
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
+  outline: none;
 }
 a:hover {
   color: #36e;
   border-bottom: 0.05em solid #36e;
+  outline: none;
 }
 a:active {
   top: 0.1em;
+  outline: none;
+}
+a:focus {
+  outline: none;
 }
 a.gallery-item,
 a.img-link {
