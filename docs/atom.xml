@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.xyz/" />
   
-  <updated>2019-05-19T12:30:47.993Z</updated>
+  <updated>2019-06-27T08:57:44.988Z</updated>
   
   <id>https://sh.alynx.xyz/</id>
   
@@ -17,6 +17,30 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>六月，如梦一般的日子</title>
+    <link href="https://sh.alynx.xyz/posts/June-or-Dream/" />
+    <id>https://sh.alynx.xyz/posts/June-or-Dream/</id>
+    <published>2019-06-27T08:18:00.000Z</published>
+    <updated>2019-06-27T08:57:44.988Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<blockquote><p>One day I wake up,finding that I am on one of the most crazy trips in my life.It has been into my dream for many times,but now it comes into reality,which becomes the best birthday present.</p></blockquote>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="生活" scheme="https://sh.alynx.xyz/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.xyz/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+    <category term="生活" scheme="https://sh.alynx.xyz/tags/%E7%94%9F%E6%B4%BB/" />
+    
+  </entry>
   
   <entry>
     <title>Arch Linux 安装 UnityHub 的临时方案</title>
@@ -483,36 +507,6 @@
     <category term="音乐" scheme="https://sh.alynx.xyz/tags/%E9%9F%B3%E4%B9%90/" />
     
     <category term="Kalafina" scheme="https://sh.alynx.xyz/tags/Kalafina/" />
-    
-  </entry>
-  
-  <entry>
-    <title>コラージュ（卫宫家今天的饭 ED）曲谱</title>
-    <link href="https://sh.alynx.xyz/posts/Emiya-Menu-ED/" />
-    <id>https://sh.alynx.xyz/posts/Emiya-Menu-ED/</id>
-    <published>2018-02-04T04:18:45.000Z</published>
-    <updated>2019-05-19T12:30:48.013Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 Alynx Zhou</p>]]>
-    
-    </summary>
-    
-    <category term="音乐" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/" />
-    
-    <category term="口琴" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/" />
-    
-    <category term="五线谱" scheme="https://sh.alynx.xyz/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E4%BA%94%E7%BA%BF%E8%B0%B1/" />
-    
-    
-    <category term="音乐" scheme="https://sh.alynx.xyz/tags/%E9%9F%B3%E4%B9%90/" />
-    
-    <category term="口琴" scheme="https://sh.alynx.xyz/tags/%E5%8F%A3%E7%90%B4/" />
-    
-    <category term="卫宫家今天的饭" scheme="https://sh.alynx.xyz/tags/%E5%8D%AB%E5%AE%AB%E5%AE%B6%E4%BB%8A%E5%A4%A9%E7%9A%84%E9%A5%AD/" />
-    
-    <category term="Fate" scheme="https://sh.alynx.xyz/tags/Fate/" />
     
   </entry>
   
