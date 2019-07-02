@@ -207,30 +207,30 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>通常情况下在 Linux 下面配置好的是 socks5 代理（你懂的），但是这个代理并不能让所有程序自动走它，需要手动的做一些转换。</p>
-<a id="more"></a>
+<!--more-->
 
-<h1 id="proxychains"><a class="headerlink" href="/posts/Proxy-Settings/#proxychains" title="proxychains"></a>proxychains</h1>
+<h1 id="proxychains">proxychains</h1>
 <p>proxychains 通过 hook libc 里面网络访问的函数实现劫持流量经过代理，配置时首先编辑 <code>/etc/proxychains.conf</code> 添加一行有关自己的代理的配置比如</p>
 <pre><code><figure class="highlight hljs accesslog"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code>socks5 <span class="hljs-string">[IP 地址]</span> <span class="hljs-string">[端口号]</span></code></pre></figure></code></pre><p>然后就可以将你需要走代理的程序跟在 <code>proxychains</code> 后面比如</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">$</span><span class="bash"> proxychains wget google.com</span></code></pre></figure></code></pre><h1 id="环境变量"><a class="headerlink" href="/posts/Proxy-Settings/#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F" title="环境变量"></a>环境变量</h1>
+</pre><pre class="code"><code><span class="hljs-meta">$</span><span class="bash"> proxychains wget google.com</span></code></pre></figure></code></pre><h1 id="环境变量">环境变量</h1>
 <p>有些奇葩的语言设计时完全静态链接，不会调用 libc 的运行时库（说的就是那个叫 go 的），因此没办法使用 proxychains 进行 hook。但对于命令行程序，通常有个约定，如果用户设置了 <code>http_proxy</code> 和 <code>https_proxy</code>，程序就会使用这个作为代理。可以在这两个里设置 socks5 代理，比如 <code>export http_proxy=socks5://127.0.0.1:1080</code>，但问题不是所有程序都支持 socks5 代理，所以需要一些方案将 socks5 转换成 http 代理。当然如果你遇到一个 go 程序不读取这两个变量怎么办？当然是在心里问候一下开发者先人。</p>
-<h1 id="privoxy"><a class="headerlink" href="/posts/Proxy-Settings/#privoxy" title="privoxy"></a>privoxy</h1>
+<h1 id="privoxy">privoxy</h1>
 <p>我个人比较习惯使用 privoxy 做代理转换，当然能实现这个功能的程序非常多，privoxy 是其中一个，安装好之后修改配置文件，添加一行</p>
 <pre><code><figure class="highlight hljs prolog"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code>forward-socks5   /               [<span class="hljs-symbol">IP</span> 地址]:[端口号] .</code></pre></figure></code></pre><p>然后使用 <code>systemctl start privoxy</code> 启动即可。</p>
-<h1 id="桌面环境"><a class="headerlink" href="/posts/Proxy-Settings/#%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83" title="桌面环境"></a>桌面环境</h1>
+<h1 id="桌面环境">桌面环境</h1>
 <p>诸如 GNOME 和 KDE Plasma 等都在网络设置里提供了代理选项，按表格填写即可，对于一些内建代理支持的也可以同理比如 Telegram Desktop，本地的 socks5 代理是不需要填写用户名和密码的。对于另外一些同学想要使用 Automatic 的选项的，你需要生成一个 pac 文件，这个文件里记录了哪些网站需要走代理，可以搜索 <code>你用的 socks5 代理协议的名字</code> + <code>pac</code> 得到更多相关内容，然后在这个选项里填写以 <code>file://</code> 开头的 URL，支持的程序就会使用这个 pac。</p>
-<h1 id="浏览器"><a class="headerlink" href="/posts/Proxy-Settings/#%E6%B5%8F%E8%A7%88%E5%99%A8" title="浏览器"></a>浏览器</h1>
+<h1 id="浏览器">浏览器</h1>
 <p>通常大家使用插件来调用代理，但如果你上一步设置了桌面环境的代理比如 pac，可以直接走系统代理。</p>
-<h1 id="端口转发"><a class="headerlink" href="/posts/Proxy-Settings/#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91" title="端口转发"></a>端口转发</h1>
+<h1 id="端口转发">端口转发</h1>
 <p>有时候你的网络很奇葩，连接所有代理服务器都很慢，可以通过一个国内服务器做端口转发，需要在国内服务器执行下列命令。</p>
-<h2 id="开启流量转发"><a class="headerlink" href="/posts/Proxy-Settings/#%E5%BC%80%E5%90%AF%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91" title="开启流量转发"></a>开启流量转发</h2>
+<h2 id="开启流量转发">开启流量转发</h2>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">echo</span> <span class="hljs-string">"net.ipv4.ip_forward=1"</span> &gt;&gt; /etc/sysctl.conf</span>
-<span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="配置转发规则"><a class="headerlink" href="/posts/Proxy-Settings/#%E9%85%8D%E7%BD%AE%E8%BD%AC%E5%8F%91%E8%A7%84%E5%88%99" title="配置转发规则"></a>配置转发规则</h2>
+<span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="配置转发规则">配置转发规则</h2>
 <pre><code><figure class="highlight hljs accesslog"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -404,65 +404,6 @@
   <div class="sidebar-sticky">
     
     
-    <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
-      <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#proxychains">proxychains</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#环境变量">环境变量</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#privoxy">privoxy</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#桌面环境">桌面环境</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#浏览器">浏览器</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#端口转发">端口转发</a>
-            
-            
-        <ol >
-        
-          <li>
-            <a class="list-group-item toc-link" href="#开启流量转发">开启流量转发</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#配置转发规则">配置转发规则</a>
-            
-          </li>
-        
-        </ol>
-        
-            
-          </li>
-        
-        </ol>
-        
-      </div>
-    </div>
-    
     
     
     <hr>
@@ -556,4 +497,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.9 at 2019-06-29 周六 18:36:19 CST. -->
+<!-- Page built by Hikaru v2.0.0 at 2019-07-02 周二 14:06:16 CST. -->

@@ -1,8 +1,8 @@
 {
   "name": "stackharbor",
   "dependencies": {
-    "hikaru-generator-feed": "^1.0.4",
-    "hikaru-generator-search": "^1.0.1",
-    "hikaru-generator-sitemap": "^1.0.2"
+    "hikaru-generator-feed": "file:../Projects/hikaru-generator-feed",
+    "hikaru-generator-search": "file:../Projects/hikaru-generator-search",
+    "hikaru-generator-sitemap": "file:../Projects/hikaru-generator-sitemap"
   }
 }

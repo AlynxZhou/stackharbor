@@ -206,21 +206,21 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <h1 id="需求"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1>
+      <h1 id="需求">需求</h1>
 <p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p>
-<a id="more"></a>
+<!--more-->
 
 <p>WireGuard 的原理是使用一个公网服务器做 Endpoint，内网的数据通过该服务器进行转发，因此子网的各个设备可以没有固定的 IP，只要都能连接公网服务器就好了。</p>
-<h1 id="安装"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%89%E8%A3%85" title="安装"></a>安装</h1>
-<p>由于不同的系统安装方法不一样，建议参照 <a href="https://www.wireguard.com/install/" target="_blank">WireGuard 官网的安装说明</a> 和各个系统的 Wiki，Android 手机可以搜索下载 WireGuard 的 APK 进行安装。</p>
-<h1 id="配置"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%85%8D%E7%BD%AE" title="配置"></a>配置</h1>
-<div class="alert-blue">以下部分内容参考自 <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank">WireGuard - ArchWiki</a>。</div>
+<h1 id="安装">安装</h1>
+<p>由于不同的系统安装方法不一样，建议参照 <a href="https://www.wireguard.com/install/">WireGuard 官网的安装说明</a> 和各个系统的 Wiki，Android 手机可以搜索下载 WireGuard 的 APK 进行安装。</p>
+<h1 id="配置">配置</h1>
+<div class="alert-blue">以下部分内容参考自 <a href="https://wiki.archlinux.org/index.php/WireGuard">WireGuard - ArchWiki</a>。</div>
 
 <p>首先需要生成公钥和私钥，建议将其设置为只有拥有者才能操作，我这里放在 <code>/etc/wireguard</code> 这个目录里面，这个目录应该是只有 root 才可以访问的。<strong>服务器和客户端都需要分别进行这一步</strong>。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> /etc/wireguard</span>
-<span class="hljs-meta">#</span><span class="bash"> wg genkey | tee privatekey | wg pubkey &gt; publickey</span></code></pre></figure></code></pre><h2 id="服务端"><a class="headerlink" href="/posts/WireGuard-Usage/#%E6%9C%8D%E5%8A%A1%E7%AB%AF" title="服务端"></a>服务端</h2>
+<span class="hljs-meta">#</span><span class="bash"> wg genkey | tee privatekey | wg pubkey &gt; publickey</span></code></pre></figure></code></pre><h2 id="服务端">服务端</h2>
 <p>然后需要手写配置文件，这一步对于服务端和客户端不一样，先进行服务端的配置。</p>
 <p>首先在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），服务端的配置文件内容看起来像这个样子：</p>
 <pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span>
@@ -265,7 +265,7 @@ AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>然后我们依次
 <p><strong>每添加一个新的客户端，就要在这个文件里添加一个 Peer 字段</strong>，然后设置 <code>PublicKey</code> 和 <code>AllowedIPs</code>。</p>
 <p>然后在服务器的 <code>/etc/sysctl.conf</code> 最后加上一句 <code>net.ipv4.ip_forward=1</code>，开启 IPv4 流量转发，然后运行下面的命令加载新设置：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="客户端"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%A2%E6%88%B7%E7%AB%AF" title="客户端"></a>客户端</h2>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="客户端">客户端</h2>
 <p>客户端也需要在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），内容看起来是这样：</p>
 <pre><code><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -287,7 +287,7 @@ AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>然后我们依次
 <span class="hljs-attr">PersistentKeepalive</span> = <span class="hljs-number">25</span></code></pre></figure></code></pre><p>Interface 字段自然是客户端本机的设置，<code>Address</code> 还是给本机分配的 IP，这里要和服务器在同一个子网，并且要和服务器配置文件里允许的 IP 段对上。<code>PrivateKey</code> 则是刚刚 <strong>客户端</strong> 生成的 <code>privatekey</code> 这个文件的内容。</p>
 <p>然后通过添加 Peer 字段来添加服务端，服务端作为这个网络的出口和转发点，首先需要填写对应的 <strong>服务端</strong> 的公钥，然后这里的 <code>AllowedIPs</code> 设置的是 <strong>该客户端有哪些 IP 段的流量要通过该服务端进行转发</strong>，由于我只希望内网的流量进行转发，自然设置的是内网的 IP 段 <code>10.0.0.0/24</code>（看不懂的你计网挂科了！），然后需要设置 <code>Endpoint</code> 以便能正确的在公网上找到服务器（虚拟专用网，连不上网还哪来的虚拟网啊？），格式就是 <code>服务器公网 IP:你设置的监听端口</code>。<code>PersistentKeepalive</code> 则是用来保持连接的参数，直接复制即可。</p>
 <p><strong>如果你有多个服务器，就在这里添加多个 Peer</strong>，分别设置不同的 <code>AllowedIPs</code> 让他们转发，但 <strong>不需要让客户端之间互相添加 Peer</strong>，本来我们要解决的问题就是客户端之间不能互相连接，所有的流量是经由公网的服务端进行转发才可以到达，公网的服务器是各个不固定的客户端的接头地点。所以只需要保证服务端和所有的客户端认识就可以了。</p>
-<h1 id="启动"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%AF%E5%8A%A8" title="启动"></a>启动</h1>
+<h1 id="启动">启动</h1>
 <p>在分别配置好客户端和服务端之后就可以启动了，这一步两边都一样。注意把 <code>wg0</code> 换成你配置文件的名字。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick up wg0</span></code></pre></figure></code></pre><p>然后使用 <code>wg</code> 命令可以查看状态，由于这些涉及到网络配置，都需要 root 权限。服务端和客户端输出的结果是不一样的，下面这个是我的笔记本输出的结果。</p>
@@ -341,7 +341,7 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> wg-quick down wg0</span></code></pre></figure></code></pre><p>然后启动现成的 Unit：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> wg-quick@wg0 --now</span></code></pre></figure></code></pre><h1 id="后记"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%90%8E%E8%AE%B0" title="后记"></a>后记</h1>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> wg-quick@wg0 --now</span></code></pre></figure></code></pre><h1 id="后记">后记</h1>
 <p>如果你需要在内网之间传递数据，建议选择一个访问较快的服务器，因为数据转发要通过这个服务器。</p>
 <p>但如果你想使用 WireGuard 访问一些被河蟹的内容也可以，首先需要一个在海外的服务器，然后设置客户端该服务器的 <code>AllowedIPs</code> 为 <code>0.0.0.0/0</code>（意思就是所有 IP 都经过这个服务器转发啦！或者你知道该设置某些网段也行！或者避开内网和本地地址！我不建议用这个番茄！所以就写个最蠢的！），就可以了！记得不用时候关掉，不然一些国内 App 也会走海外的！</p>
 <p><em>Alynx Zhou</em></p>
@@ -509,60 +509,6 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
   <div class="sidebar-sticky">
     
     
-    <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
-      <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#需求">需求</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#安装">安装</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#配置">配置</a>
-            
-            
-        <ol >
-        
-          <li>
-            <a class="list-group-item toc-link" href="#服务端">服务端</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#客户端">客户端</a>
-            
-          </li>
-        
-        </ol>
-        
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#启动">启动</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#后记">后记</a>
-            
-          </li>
-        
-        </ol>
-        
-      </div>
-    </div>
-    
     
     
     <hr>
@@ -656,4 +602,4 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.9 at 2019-06-29 周六 18:36:19 CST. -->
+<!-- Page built by Hikaru v2.0.0 at 2019-07-02 周二 14:06:16 CST. -->

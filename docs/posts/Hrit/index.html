@@ -206,9 +206,9 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <h3 id="起因"><a class="headerlink" href="/posts/Hrit/#%E8%B5%B7%E5%9B%A0" title="起因"></a>起因</h3>
+      <h3 id="起因">起因</h3>
 <p>记得以前读过一篇文章，大意说是懒人推动了社会进步，觉得言之有理。你想，要不是因为原始人懒得天天找吃的，怎么会出现培养出的农作物？要不是人们懒得自己搬庄稼走路，怎么会驯化马？要不是人们懒得自己养马，怎么会出现汽车？</p>
-<a id="more"></a>
+<!--more-->
 
 <p>好了还是不要瞎扯了，总而言之对于我这么一个懒+强迫症晚期+半吊子程序员（？），当然在写网站的时候得把网站组织的有条理，所以肯定不能把所有的文章里的图片都堆到images/目录里就得了，幸好hexo提供了所谓的资源文件夹的方式，在新建Markdown文件的时候会自动建立同名的资源文件夹，只需编辑站点配置文件<code>_config.yml</code>开启如下项即可。</p>
 <pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
@@ -218,9 +218,9 @@
 </pre><pre class="code"><code>![<span class="hljs-string">图片名称</span>](<span class="hljs-link">图片名称</span>)</code></pre></figure></code></pre><p>我开始方了，难道要我自己一个个手动打成这个标签……</p>
 <p>还没完，如果你的访客想下载一些图片，如果恰好你不同资源文件夹里都有一个1.jpg，他下载这两个的时候就会都保存为1.jpg……那不就乱套了么……</p>
 <p>所以我想要是能一次性给某个文件夹下的文件改名为 <em>文件夹名_数字.扩展名</em> 并且还能自动输出成hexo标签该多好啊……本着Linux用户没有轮子自己造的精神我决定写个程序解决这个问题（Windows用户应该习惯于找别的东西解决吧……没有就自认倒霉一个一个手动改？想想就麻烦……）</p>
-<h3 id="行动"><a class="headerlink" href="/posts/Hrit/#%E8%A1%8C%E5%8A%A8" title="行动"></a>行动</h3>
+<h3 id="行动">行动</h3>
 <p>于是乎高三党为了珍惜劳动节唯一一天假期（<strong>喵的一天也叫假期！！！</strong>）果断决定写代码，开始想想这个简单工作适合shell script但是我不会写shell脚本也不会正则表达式……（观众：你说你一个不用Win只用Linux的人不会shell脚本和正则？！我：我真不会……别打我……）那似乎我会的剩下就是C和Python了……你叫我这么一个C语言水平已经退化到HelloWorld的家伙拿C写个程序处理字符串和文件？好吧刚才的观众们你们麻烦往死里打……所以只剩下Python比较熟练了。最后也是这么做的。</p>
-<h3 id="成果"><a class="headerlink" href="/posts/Hrit/#%E6%88%90%E6%9E%9C" title="成果"></a>成果</h3>
+<h3 id="成果">成果</h3>
 <p>那这样就轮到今天的主角登场了——hrit！</p>
 <p>为什么叫这个名字呢？因为它是Hexo Rename Images Tool！当然使用了os、time和argprase的它其实能给所有文件命名……（hrit：人家只是个不到100行代码的小脚本……我：嘘……观众：他在那！！！）</p>
 <p>所以先贴代码：</p>
@@ -747,34 +747,6 @@ Now you can copy the follow hexo tags to your markdown post.
   <div class="sidebar-sticky">
     
     
-    <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
-      <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#起因">起因</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#行动">行动</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#成果">成果</a>
-            
-          </li>
-        
-        </ol>
-        
-      </div>
-    </div>
-    
     
     
     <hr>
@@ -868,4 +840,4 @@ Now you can copy the follow hexo tags to your markdown post.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.9 at 2019-06-29 周六 18:36:20 CST. -->
+<!-- Page built by Hikaru v2.0.0 at 2019-07-02 周二 14:06:17 CST. -->
