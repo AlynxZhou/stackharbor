@@ -734,6 +734,16 @@ pre code {
   border-radius: 50%;
   width: 1em;
   height: 1em;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.code-titlebar button.button-dot:hover {
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
 }
 .code-titlebar .dot-close {
   background: #ff2a2a;
