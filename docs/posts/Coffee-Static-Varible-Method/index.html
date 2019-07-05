@@ -206,10 +206,10 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
-<!--more-->
+      <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
+<a id="more"></a>
 
-<h1 id="静态变量">静态变量</h1>
+<h1 id="静态变量"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F" title="静态变量"></a>静态变量</h1>
 <p>很遗憾这里没有 <code>static</code> 这么简单的关键字，即使是在 EMCAScript 里 <code>static</code> 这个关键字也只是用来修饰静态方法，用 <code>static</code> 修饰变量仍然是个提案。首先还是来说如何在常规的 JavaScript 里使用静态变量（只考虑 ES6 之后的情况，因为多亏了 CoffeeScript，我也没有写过 ES5），它是如此的简单而又奇怪，简单是因为即使是我这样又笨又懒的人看过一遍也能在 Node 里完整地默写出来不报错，但是这是有原因的——因为它实在是太古怪了以至于你看一眼就忘不了它：</p>
 <pre><code class="JavaScript"><figure class="highlight hljs javascript"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -298,7 +298,7 @@ t = <span class="hljs-keyword">new</span> Test()
 <span class="hljs-built_in">console</span>.log(Test::counter)
 <span class="hljs-comment"># 输出 0</span></code></pre></figure></code></pre>
 <p>不推荐这个写法并不是因为它用了一个 C++ 常见的符号 <code>::</code>，而是因为它只能让你访问到一个原型上的变量，最后仍然会被实例化，也没有直观的语法糖让你在方法里修改它（大概直接写 <code>Test::</code> 可行？）。</p>
-<h1 id="静态方法">静态方法</h1>
+<h1 id="静态方法"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95" title="静态方法"></a>静态方法</h1>
 <p>有了前面的基础静态方法无论是在原生 JavaScript 里面还是 CoffeeScript 都变得相当直观——大概只需要一个例子：</p>
 <p>在 CoffeeScript 中和处理静态变量很类似，都是简单地在前面加上 <code>@</code>，当然如果你要在静态方法里操作静态变量不需要写 <code>@constructor</code> 而是直接写 <code>@</code>，因为这个时候上下文的 <code>this</code> 就是这个类本身——严格来说这也是不对的，能够绑定到这个上下文的原因是 CoffeeScript 编译的时候增加的函数作用域——这是个好东西，咖啡味。换句话说 ES6 这里根本就没有和 <code>this</code> 扯上关系，它只能傻乎乎的用类本名，CoffeeScript 在这里自己多搞了一点，用这个来变通，翻译成 JavaScript 的时候再替换掉文本。</p>
 <pre><code class="CoffeeScript"><figure class="highlight hljs coffeescript"><pre class="gutter"><span class="line">1</span>
@@ -358,14 +358,14 @@ Test.printCounter()
   Test.printCounter();
   <span class="hljs-comment">// 输出 1</span>
 }).call(<span class="hljs-keyword">this</span>);</code></pre></figure></code></pre>
-<h1 id="总结">总结</h1>
+<h1 id="总结"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E6%80%BB%E7%BB%93" title="总结"></a>总结</h1>
 <p>事实上到上面已经靠几个例子说明了正确的用法，但是由于还有交叉处理的部分，简单总结一下。</p>
 <p>1.把变量写在类定义里面属性的层次并且在变量名前面加上 <code>@</code> 会在 CoffeeScript 里产生一个静态变量。</p>
 <p>2.在方法名前面加 <code>@</code> 会在 CoffeeScript 里产生一个静态方法。</p>
 <p>3.在静态方法中操作静态变量只需要像在实例方法中操作实例变量一样使用 <code>this</code>，这个作用域就是类定义的上下文，CoffeeScript 自动把 <code>@</code> 替换成类的名字以便符合 ES6 语法。</p>
 <p>4.在实例方法中操作静态变量需要使用 <code>@constructor</code>，原因是这个时候的 <code>this</code> 是实例本身而不是类，类在 CoffeeScript 里绑定到了 <code>this.constructor</code>，编译时自动替换成类的名字（因为 ES6 只能这样访问类变量而不是用一个引用）。</p>
 <p><del>5.在静态方法中操作实例变量……<strong>根本没有这样的用法好吧！！！</strong></del></p>
-<h1 id="碎碎念">碎碎念</h1>
+<h1 id="碎碎念"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E7%A2%8E%E7%A2%8E%E5%BF%B5" title="碎碎念"></a>碎碎念</h1>
 <p>明明是凑数的文章却偏偏写了这么多，反正大概是没有人看的，毕竟 CoffeeScript 是要凉了，就像那些激进分子希望的一样，光是喜欢又有什么用呢？他们是不会管你喜欢不喜欢的，他们不喜欢就得了。短期内倒是希望 Atom 能搞点什么大新闻，可以不要让 VSCode 激进分子在我这边黑 Atom，我就是喜欢用 Atom 不喜欢用 VSCode，就算你觉得 Atom 有很多缺点可是我觉得它足够合适乃至我可以接受它的缺点，在我这边吵除了生气以外还能有什么作用不成？所以我讨厌辩论，光是说，却没什么实际作用。或者这大概是软粉和微软受害者的冲突而已？最近没得东西写出来，还是去推一推 Fate/Stay Night 或者打一打 CSGO 好了。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -532,6 +532,39 @@ Test.printCounter()
   <div class="sidebar-sticky">
     
     
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content">
+        
+        
+        <ol class="list-group toc">
+        
+          <li>
+            <a class="list-group-item toc-link" href="#静态变量">静态变量</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#静态方法">静态方法</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#总结">总结</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#碎碎念">碎碎念</a>
+            
+          </li>
+        
+        </ol>
+        
+      </div>
+    </div>
+    
     
     
     <hr>
@@ -625,4 +658,4 @@ Test.printCounter()
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.0.1 at 2019-07-03 周三 17:34:09 CST. -->
+<!-- Page built by Hikaru v2.0.2 at 2019-07-05 周五 10:27:52 CST. -->

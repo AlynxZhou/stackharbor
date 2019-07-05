@@ -208,10 +208,10 @@
     <main class="post-main" itemprop="articleBody">
       <p>在 GitHub Pages 支持自定义域名开启 HTTPS 之前，我是使用 CloudFlare 的 CDN 中转来启用 HTTPS 的，缺点也很明显，就是面对国内访问的时候 CloudFlare 的 CDN 简直是逆加速，还不如直连 GitHub 的速度呢。</p>
 <p>GitHub 在 2016 年开启了 <code>*.github.io</code> 域名的 HTTPS 访问，在今年的 5 月 1 日，终于开启了对自定义域名的 HTTPS 支持。这篇文章将会介绍一下开启的办法和中间容易踩的坑。</p>
-<!--more-->
+<a id="more"></a>
 
 <p>有关为什么要启用 HTTPS 就不多说了，HTTPS 会对传输的内容进行加密，最常见的就是防止无良运营商拦截你的流量添加广告了，也能防止用户接触被劫持的页面而上当受骗，同时不会对浏览造成什么太大的代价。</p>
-<p>按照 <a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/">GitHub 给出的说明</a>，似乎我什么都不做就能开启 HTTPS 了，仔细尝试了却发现不是这样。</p>
+<p>按照 <a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/" target="_blank">GitHub 给出的说明</a>，似乎我什么都不做就能开启 HTTPS 了，仔细尝试了却发现不是这样。</p>
 <p>首先如果你开启了 CloudFlare 的 CDN 和 HTTPS，建议把它们关闭。CloudFlare 的 HTTPS 加密在 <em>Crypto</em> 面板里，找到第一项 <em>SSL</em>，设置成 <code>Off</code>，然后如果你在 <em>Page Rules</em> 里面添加了 <code>Always HTTPS</code> 之类的选项，可以删除，因为我们可以用 GitHub 提供的 <code>Enforce HTTPS</code> 选项进行跳转。然后去到 <em>DNS</em> 面板，看到那几朵红色的云朵了吗？它们代表访问时候会首先使用 CloudFlare 的 CDN，考虑到受众，这里可以点击让它变成灰色的 <code>DNS Only</code>，从而加快访问速度……</p>
 <p>然后如果你是设置 A 记录来跳转到 GitHub Pages 的话，需要修改成新的 IP 地址，GitHub 提供了下面四个 IP，不过我是比较喜欢设置 CNAME 啦：</p>
 <ul>
@@ -486,4 +486,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.0.1 at 2019-07-03 周三 17:34:09 CST. -->
+<!-- Page built by Hikaru v2.0.2 at 2019-07-05 周五 10:27:52 CST. -->

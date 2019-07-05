@@ -207,9 +207,9 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>买了个罗技G502，想想这鼠标狙击键要在fps游戏里才能发挥作用于是入了l4d2的坑，Steam购买，没想到P530核显实在是吃不动这货，FPS上30都很困难，于是研究了一下怎么样调用Bumblebee来使用独显。</p>
-<!--more-->
+<a id="more"></a>
 
-<p>要使用独显首先你得保证你有个独显（这不是废话吗），我的独显是Nvidia Quadro M1000M，虽然是工作站显卡，但是玩游戏应该能达到GTX960左右的性能吧（这卡渲染视频才可怕，但是我不搞多媒体~话说现在新款Precision 5520直接用台式工作站显卡了更可怕），然后你得安装Bumblebee（我只弄过N卡的，A卡不清楚），但是不是简单的安装Bumblebee这个包，按照<a href="https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">ArchWiki</a>，需要安装的包有<code>bumblebee bbswitch primus virtualgl lib32-primus lib32-virtualgl mesa xf86-video-intel nvidia nvidia-settings lib32-nvidia-utils lib32-mesa</code>，各个包的作用在下面：</p>
+<p>要使用独显首先你得保证你有个独显（这不是废话吗），我的独显是Nvidia Quadro M1000M，虽然是工作站显卡，但是玩游戏应该能达到GTX960左右的性能吧（这卡渲染视频才可怕，但是我不搞多媒体~话说现在新款Precision 5520直接用台式工作站显卡了更可怕），然后你得安装Bumblebee（我只弄过N卡的，A卡不清楚），但是不是简单的安装Bumblebee这个包，按照<a href="https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank">ArchWiki</a>，需要安装的包有<code>bumblebee bbswitch primus virtualgl lib32-primus lib32-virtualgl mesa xf86-video-intel nvidia nvidia-settings lib32-nvidia-utils lib32-mesa</code>，各个包的作用在下面：</p>
 <ul>
 <li>bumblebee</li>
 </ul>
@@ -250,7 +250,7 @@
 <pre><code><figure class="highlight hljs armasm"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code># rmmod nvidia_modeset nvidia &amp;&amp; sudo tee /<span class="hljs-meta">proc</span>/acpi/<span class="hljs-keyword">bbswitch </span>&lt;&lt;&lt;OFF</code></pre></figure></code></pre><p>但是新版已经解决了这个bug。</p>
 <p>如果你想开启N卡的设置，不能简单地运行nvidia-settings，因为这时候N卡并没有开启，也没有连接到当前的桌面上，使用<code>$ optirun nvidia-settings -c :8</code>就可以开启了。</p>
-<p>参考了<a href="https://support.steampowered.com/kb_article.php?ref=6316-GJKC-7437">Steam的说明</a>，现在剩余的问题就是玩游戏太热了。</p>
+<p>参考了<a href="https://support.steampowered.com/kb_article.php?ref=6316-GJKC-7437" target="_blank">Steam的说明</a>，现在剩余的问题就是玩游戏太热了。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
@@ -509,4 +509,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.0.1 at 2019-07-03 周三 17:34:09 CST. -->
+<!-- Page built by Hikaru v2.0.2 at 2019-07-05 周五 10:27:52 CST. -->
