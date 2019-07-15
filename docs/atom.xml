@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-06-27T08:57:44.988Z</updated>
+  <updated>2019-07-15T01:04:18.368Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,32 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>曲谱：雲雀</title>
+    <link href="https://sh.alynx.moe/posts/Hibari-Sheet/" />
+    <id>https://sh.alynx.moe/posts/Hibari-Sheet/</id>
+    <published>2019-07-15T01:02:00.000Z</published>
+    <updated>2019-07-15T01:04:18.368Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>ロード・エルメロイⅡ世の事件簿 -魔眼蒐集列車 Grace note- ED</p>]]>
+    
+    </summary>
+    
+    <category term="音乐" scheme="https://sh.alynx.moe/categories/%E9%9F%B3%E4%B9%90/" />
+    
+    <category term="曲谱" scheme="https://sh.alynx.moe/categories/%E9%9F%B3%E4%B9%90/%E6%9B%B2%E8%B0%B1/" />
+    
+    
+    <category term="音乐" scheme="https://sh.alynx.moe/tags/%E9%9F%B3%E4%B9%90/" />
+    
+    <category term="曲谱" scheme="https://sh.alynx.moe/tags/%E6%9B%B2%E8%B0%B1/" />
+    
+    <category term="梶浦由紀" scheme="https://sh.alynx.moe/tags/%E6%A2%B6%E6%B5%A6%E7%94%B1%E7%B4%80/" />
+    
+  </entry>
   
   <entry>
     <title>六月，如梦一般的日子</title>
@@ -483,30 +509,6 @@
     <category term="计算机" scheme="https://sh.alynx.moe/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     
     <category term="Linux" scheme="https://sh.alynx.moe/tags/Linux/" />
-    
-  </entry>
-  
-  <entry>
-    <title>Kalafina, My Music Life</title>
-    <link href="https://sh.alynx.moe/posts/Kalafina-My-Music-Life/" />
-    <id>https://sh.alynx.moe/posts/Kalafina-My-Music-Life/</id>
-    <published>2018-03-13T13:21:52.000Z</published>
-    <updated>2019-05-19T12:30:48.017Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>美好的东西总是在结束的时候才更显珍贵。</p>]]>
-    
-    </summary>
-    
-    <category term="音乐" scheme="https://sh.alynx.moe/categories/%E9%9F%B3%E4%B9%90/" />
-    
-    <category term="Kalafina" scheme="https://sh.alynx.moe/categories/%E9%9F%B3%E4%B9%90/Kalafina/" />
-    
-    
-    <category term="音乐" scheme="https://sh.alynx.moe/tags/%E9%9F%B3%E4%B9%90/" />
-    
-    <category term="Kalafina" scheme="https://sh.alynx.moe/tags/Kalafina/" />
     
   </entry>
   
