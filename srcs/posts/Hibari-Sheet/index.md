@@ -13,6 +13,10 @@ tags:
 ---
 ロード・エルメロイⅡ世の事件簿 -魔眼蒐集列車 Grace note- ED
 
+五线谱（带歌词）点击链接下载：[PDF 格式](./hibari.pdf)、[MSCZ 格式](./hibari.mscz)（需使用 MuseScore3 打开）。
+
+歌词参考自微博用户 [@小蟲子的覺魂](https://weibo.com/u/5699383914)。曲谱由我自己听写。
+
 <!--more-->
 
 ```
