@@ -1,4 +1,4 @@
-# hexo robots.txt
+# robots.txt
 User-agent: *
 Allow: /
 Allow: /posts/
