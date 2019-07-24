@@ -127,7 +127,7 @@
     </script>
     
     <script defer type="text/javascript" src="/js/custom.js"></script>
-    <title>分类: 计算机 | 喵's StackHarbor - Whisper to the World</title>
+    <title>在 Pixel C 上安装 Lineage OS | 喵's StackHarbor - Whisper to the World</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
     
@@ -152,7 +152,7 @@
         
         <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
         
-        <li role="menuitem"><a href="/categories/" class="current"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
         
         <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
         
@@ -173,229 +173,150 @@
         <div class="main-container">
           <div class="content">
             
-<div id="category" class="category page">
-  <h1 class="page-title">计算机</h1>
-  
+<div id="post" class="page">
   <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Lineage-Pixel-C/" itemprop="url">在 Pixel C 上安装 Lineage OS</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">07-24</time>
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Lineage-Pixel-C/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="哀しみを知って<br>喜びを知った<br>弱さは君を変えて">
+        <meta itemprop="image" content="/images/FutureGazerSmall.png">
       </span>
-      
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">在 Pixel C 上安装 Lineage OS</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">2019-07-24 周三 17:24:00 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
     </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>Pixel C 刚出来的时候我就很喜欢，但无奈价格太贵，同时 Android M 不能说是很好的利用平板电脑硬件。由于咕鸽战略失误，现在 Pixel C 已经变成热门洋垃圾了，所以在咸鱼捡了一台玩玩。</p>
+<p>官方系统升级只支持到 8.1（真的好意思起名叫 Pixel），Lineage OS 支持也是到 8.1（LOS 版本号就是 15.1，没有 Bug），所有的 9.0 都是 Unofficial 的，不过反正我就拿来看看文档，所以直接刷 LOS 15.1 Official 了（为什么不刷官方？因为我手机不想刷第三方，就拿平板过过瘾）。</p>
+<a id="more"></a>
+
+<p>由于刷机时候没拍照片我就不上图了，到手时候已经解锁了，不过既然是亲儿子想必也不会像一些国内厂商一样恶心你。按照 Lineage OS 的说法就是打开开发者选项里 <code>允许 OEM 解锁</code> 和 <code>允许 USB 调试</code>，按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后连接电脑，<code>fastboot devices</code>，如果检测到了就 <code>fastboot oem unlock</code>，然后结束之后重启。（会清除所有数据，并且解锁之后每次开机会在 bootloader 停止 30 秒）。</p>
+<p>首先是去 <a href="https://download.lineageos.org/dragon/" target="_blank">Lineage OS 官网</a> 下载给 Pixel C（代号 dragon）的 nightly build ZIP。</p>
+<p>然后去 <a href="https://drive.google.com/open?id=1wbd0fpyt-6_m8fiaFPSJfGMSej3HQA7Z" target="_blank">这个 Google Drive</a> 下载开发者提供的 <code>vendor.img</code>。（<strong>务必要下载这个，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。</strong>）</p>
+<p>然后去 <a href="https://dl.twrp.me/dragon/" target="_blank">TWRP 官网</a> 下载给 Pixel C 用的 Recovery。</p>
+<p>需要 Google Apps 就去 <a href="https://opengapps.org" target="_blank">Open GApps</a> 下一个 ZIP，我用的是 <code>ARM64</code> -&gt; <code>8.1</code> -&gt; <code>stock</code>。</p>
+<p>如果你需要 Magisk 就自己去下载一个。</p>
+<p>把这些都放好，在自己电脑上安装 <code>adb</code> 和 <code>fastboot</code>，然后打开 <code>允许 USB 调试</code>。按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后 <code>fastboot flash recovery TWRP-IMG-FILE</code> 刷入 TWRP，然后再按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，选择 Recovery Mode 确认 TWRP 已经刷进去了。</p>
+<p>接下来在 TWRP 里面全部 wipe（syste, data, cache, sdcard），然后接上电脑用 <code>adb push FILE /sdcard/</code> 把下好的 ROM ZIP、<code>verdor.img</code> 和 OpenGApps ZIP 都 push 到 sdcard 里面。</p>
+<p>然后选择 Install 刷入 Lineage 的 ZIP。<strong>接下来选择右侧 Install IMG，刷入下好的 <code>vendor.img</code></strong>，然后刷入 OpenGApps 和 Magisk，重启。如果刷入 Magisk 的话会自动重启两次再进入向导。</p>
+<p>接下来就是熟悉的开机向导了。</p>
+<p>大致来说作为洋垃圾这个平板还很划算，除了屏幕下端因为接键盘的磁铁的缘故会发黄（通病）、太多磕碰容易花屏（设计缺陷，购买要买少磕碰的），屏幕素质很好尺寸也很大，看文档看 PPT 看五线谱都是绝配（我期末就是用这个看 PPT 复习的超级爽）。但是毕竟是 3 年前的产品，3 GB RAM 不是很够多任务，同时 CPU 性能也不是特别高，甚至窗口特效都会卡（老黄的芯片优化好烂），但是这台机器是 NVIDIA 的芯片，GPU 性能强劲，打开开发者选项里 <code>禁用 HW 叠加层</code>，使用 GPU 进行窗口混成特效就不卡了。</p>
+<p>游戏性能很弱，大部分游戏都没有对这台机器 GPU 优化，CPU 和内存以及 IO 性能也不高（毕竟三年前），但是玩 FGO 意外的不卡，而且还让我用 <strong>维护送的石头</strong> <strong>单抽</strong> <strong>连续</strong> 出了 <strong>老福</strong> 和 <strong>心心念念的蓝呆</strong>！！！要知道就算把买平板的钱都氪进去也才不到两单，要靠这些石头来双黄蛋简直是白日做梦啊！</p>
+<p>除了垃圾 B 站 APP 不支持横屏以外，大部分对我影响都不是很大，所谓生态烂其实对我这种资深 Android 用户也没什么大影响，毕竟我对它分工很明确。日常用起来 Lineage OS 也没什么问题，升级只要傻瓜化点击就 OK 了。</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="fas fa-tag"></i>计算机</a><a class="post-tag button" href="/tags/Android/" rel="tag"><i class="fas fa-tag"></i>Android</a>
+      </div>
+      
+    </footer>
   </article>
   
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Archlinux-UnityHub/" itemprop="url">Arch Linux 安装 UnityHub 的临时方案</a>
-      </h1>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
       
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-10T14:09:00.000Z">05-10</time>
-      </span>
+    </div>
+    <div class="page-nav-prev page-nav-item">
       
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Android-Video-Wallpaper-Implementation/" itemprop="url">如何编写 Android 视频壁纸</a>
-      </h1>
+      <a href="/posts/Hibari/" rel="prev" title="雲雀"><span class="nav-title">雲雀</span><i class="fas fa-angle-right"></i></a>
       
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-03-22T08:18:00.000Z">03-22</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/GNOME-Develop/" itemprop="url">GNOME 的修改开发与测试</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T14:58:00.000Z">02-10</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Proxy-Settings/" itemprop="url">Linux 下面常见的代理设置</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">02-10</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/WireGuard-Usage/" itemprop="url">WireGuard 配置与使用</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-27T02:29:30.000Z">01-27</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/JavaScript-YAML-Timezone-Moment/" itemprop="url">使用 Moment 处理 JavaScript 与 YAML 的时区转换</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-01T12:00:00.000Z">01-01</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Learning-C-1/" itemprop="url">C 语言学习 1</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-11-27T12:42:00.000Z">11-27</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Learn-OpenGL-1/" itemprop="url">学习 OpenGL 1</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-08-28T00:21:50.000Z">08-28</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/" itemprop="url">在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-06-04T08:21:17.000Z">06-04</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Endless-ARIA/" itemprop="url">无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-05-05T15:49:53.000Z">05-05</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" itemprop="url">GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-05-02T12:30:48.000Z">05-02</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Linux-Manual-for-Newbies-1/" itemprop="url">写给新手的 Linux 手册 1</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-03-25T12:24:45.000Z">03-25</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Coffee-Static-Varible-Method/" itemprop="url">CoffeeScript 的静态方法和静态变量（类方法和类变量）</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-01-26T11:04:33.000Z">01-26</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <header id="post-header" class="post-header">
-      <h1 class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Using-Gdb/" itemprop="url">使用 GDB 进行简单的 C 语言程序调试</a>
-      </h1>
-      
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-03-15T11:24:33.000Z">03-15</time>
-      </span>
-      
-    </header>
-  </article>
-  
-  
-  <nav class="pagination">
-    
-    
-    
-    
-    <a class="page-number current" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">1</a>
-    
-    
-    <a class="page-number" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/index-2.html">2</a>
-    
-    
-    
-    <a class="extend next" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/index-2.html"><i class="fas fa-angle-right" aria-label="下一页"></i></a>
-    
+    </div>
   </nav>
   
   
   
 
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
 
 
+
   
   
   
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "在 Pixel C 上安装 Lineage OS",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
 
 
 
@@ -463,6 +384,8 @@
 
 
   <div class="sidebar-sticky">
+    
+    
     
     
     <hr>
@@ -558,4 +481,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.0.4 at 2019-07-24 周三 10:06:19 UTC. -->
+<!-- Page built by Hikaru v2.0.4 at 2019-07-24 周三 18:06:18 CST. -->

@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-07-18T08:13:55.858Z</updated>
+  <updated>2019-07-24T10:05:59.272Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,32 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>在 Pixel C 上安装 Lineage OS</title>
+    <link href="https://sh.alynx.moe/posts/Lineage-Pixel-C/" />
+    <id>https://sh.alynx.moe/posts/Lineage-Pixel-C/</id>
+    <published>2019-07-24T09:24:00.000Z</published>
+    <updated>2019-07-24T10:05:59.272Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>Pixel C 刚出来的时候我就很喜欢，但无奈价格太贵，同时 Android M 不能说是很好的利用平板电脑硬件。由于咕鸽战略失误，现在 Pixel C 已经变成热门洋垃圾了，所以在咸鱼捡了一台玩玩。</p><p>官方系统升级只支持到 8.1（真的好意思起名叫 Pixel），Lineage OS 支持也是到 8.1（LOS 版本号就是 15.1，没有 Bug），所有的 9.0 都是 Unofficial 的，不过反正我就拿来看看文档，所以直接刷 LOS 15.1 Official 了（为什么不刷官方？因为我手机不想刷第三方，就拿平板过过瘾）。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="Android" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/" />
+    
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Android" scheme="https://sh.alynx.moe/tags/Android/" />
+    
+  </entry>
   
   <entry>
     <title>雲雀</title>
@@ -485,30 +511,6 @@
     <category term="加密" scheme="https://sh.alynx.moe/tags/%E5%8A%A0%E5%AF%86/" />
     
     <category term="GitHub Pages" scheme="https://sh.alynx.moe/tags/GitHub%20Pages/" />
-    
-  </entry>
-  
-  <entry>
-    <title>写给新手的 Linux 手册 1</title>
-    <link href="https://sh.alynx.moe/posts/Linux-Manual-for-Newbies-1/" />
-    <id>https://sh.alynx.moe/posts/Linux-Manual-for-Newbies-1/</id>
-    <published>2018-03-25T12:24:45.000Z</published>
-    <updated>2019-05-19T12:30:48.030Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>恰如字面意思，这是一篇写给新人的 Linux 指南，当然，不要指望从我这里得到什么详细的配置教程，最起码我没有打算在这篇文章里把你能遇到的 Linux 配置情况全部说清楚。我想在这篇文章里讲述的是一种理解方法或者说是一种 Linux 思维，换个更简单的说法是——它能在 Linux 向你吐出一堆牢骚的时候明白它在说什么，以及一个有经验的 Linux 用户这个时候会做什么，有经验的 Linux 用户是如何学习他们没有接触过的 Linux 知识的。</p><p>准备好了，就继续吧。</p>]]>
-    
-    </summary>
-    
-    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="Linux" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
-    
-    
-    <category term="计算机" scheme="https://sh.alynx.moe/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="Linux" scheme="https://sh.alynx.moe/tags/Linux/" />
     
   </entry>
   
