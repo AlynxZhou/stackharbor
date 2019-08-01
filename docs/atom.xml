@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-07-24T10:05:59.272Z</updated>
+  <updated>2019-08-01T04:01:14.402Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,26 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>翻译：我很幸运，但你不是。</title>
+    <link href="https://sh.alynx.moe/posts/I-Am-Lucky-You-Are-Not-CN/" />
+    <id>https://sh.alynx.moe/posts/I-Am-Lucky-You-Are-Not-CN/</id>
+    <published>2019-07-31T07:24:00.000Z</published>
+    <updated>2019-08-01T04:01:14.402Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>这是一篇 <a href="https://dev.to/jeromegamez" target="_blank">Jérôme Gamez</a> 的文章 <a href="https://dev.to/jeromegamez/i-am-lucky-you-are-not-2eco" target="_blank">I am lucky, you are not.</a> 的简体中文翻译。</p>]]>
+    
+    </summary>
+    
+    <category term="随记" scheme="https://sh.alynx.moe/categories/%E9%9A%8F%E8%AE%B0/" />
+    
+    
+    <category term="随记" scheme="https://sh.alynx.moe/tags/%E9%9A%8F%E8%AE%B0/" />
+    
+  </entry>
   
   <entry>
     <title>在 Pixel C 上安装 Lineage OS</title>
@@ -483,34 +503,6 @@
     
     
     <category term="ARIA" scheme="https://sh.alynx.moe/tags/ARIA/" />
-    
-  </entry>
-  
-  <entry>
-    <title>GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</title>
-    <link href="https://sh.alynx.moe/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" />
-    <id>https://sh.alynx.moe/posts/Custom-GitHub-Pages-Domain-with-HTTPS/</id>
-    <published>2018-05-02T12:30:48.000Z</published>
-    <updated>2019-05-19T12:30:47.993Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>在 GitHub Pages 支持自定义域名开启 HTTPS 之前，我是使用 CloudFlare 的 CDN 中转来启用 HTTPS 的，缺点也很明显，就是面对国内访问的时候 CloudFlare 的 CDN 简直是逆加速，还不如直连 GitHub 的速度呢。</p><p>GitHub 在 2016 年开启了 <code>*.github.io</code> 域名的 HTTPS 访问，在今年的 5 月 1 日，终于开启了对自定义域名的 HTTPS 支持。这篇文章将会介绍一下开启的办法和中间容易踩的坑。</p>]]>
-    
-    </summary>
-    
-    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="网络" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
-    
-    <category term="网站" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
-    
-    
-    <category term="网站" scheme="https://sh.alynx.moe/tags/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="加密" scheme="https://sh.alynx.moe/tags/%E5%8A%A0%E5%AF%86/" />
-    
-    <category term="GitHub Pages" scheme="https://sh.alynx.moe/tags/GitHub%20Pages/" />
     
   </entry>
   

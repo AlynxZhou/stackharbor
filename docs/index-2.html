@@ -177,6 +177,54 @@
   
   <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Proxy-Settings/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="哀しみを知って<br>喜びを知った<br>弱さは君を変えて">
+        <meta itemprop="image" content="/images/FutureGazerSmall.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Proxy-Settings/" itemprop="url">Linux 下面常见的代理设置</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">2019-02-10 周日 09:28:00 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>通常情况下在 Linux 下面配置好的是 socks5 代理（你懂的），但是这个代理并不能让所有程序自动走它，需要手动的做一些转换。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fas fa-tag"></i>网络</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/WireGuard-Usage/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -615,55 +663,6 @@
     </footer>
   </article>
   
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Custom-GitHub-Pages-Domain-with-HTTPS/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="哀しみを知って<br>喜びを知った<br>弱さは君を変えて">
-        <meta itemprop="image" content="/images/FutureGazerSmall.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" itemprop="url">GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date meta-block">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-05-02T12:30:48.000Z">2018-05-02 周三 20:30:48 CST</time></span>
-        </span>
-        
-        
-        <span class="post-categories meta-block">
-          
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span>
-        </span>
-        
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <p>在 GitHub Pages 支持自定义域名开启 HTTPS 之前，我是使用 CloudFlare 的 CDN 中转来启用 HTTPS 的，缺点也很明显，就是面对国内访问的时候 CloudFlare 的 CDN 简直是逆加速，还不如直连 GitHub 的速度呢。</p>
-<p>GitHub 在 2016 年开启了 <code>*.github.io</code> 域名的 HTTPS 访问，在今年的 5 月 1 日，终于开启了对自定义域名的 HTTPS 支持。这篇文章将会介绍一下开启的办法和中间容易踩的坑。</p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E7%BD%91%E7%AB%99/" rel="tag"><i class="fas fa-tag"></i>网站</a><a class="post-tag button" href="/tags/%E5%8A%A0%E5%AF%86/" rel="tag"><i class="fas fa-tag"></i>加密</a><a class="post-tag button" href="/tags/GitHub%20Pages/" rel="tag"><i class="fas fa-tag"></i>GitHub Pages</a>
-      </div>
-      
-    </footer>
-  </article>
-  
   
   <nav class="pagination">
     
@@ -678,7 +677,7 @@
     
     <a class="page-number" href="/index-3.html">3</a>
     <span class="space">…</span>
-    <a class="page-number" href="/index-6.html">6</a>
+    <a class="page-number" href="/index-7.html">7</a>
     
     
     <a class="extend next" href="/index-3.html"><i class="fas fa-angle-right" aria-label="下一页"></i></a>
@@ -727,7 +726,7 @@
     
     <div class="archives-count count-block">
       <div class="site-count-title">归档</div>
-      <div><a href="/archives/">60</a></div>
+      <div><a href="/archives/">61</a></div>
     </div>
     
     
@@ -856,4 +855,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.0.4 at 2019-07-24 周三 10:07:53 UTC. -->
+<!-- Page built by Hikaru v2.0.4 at 2019-08-01 周四 04:01:32 UTC. -->
