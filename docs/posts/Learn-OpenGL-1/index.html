@@ -332,7 +332,7 @@
 }</code></pre></figure></code></pre>
 <p>第一行的预处理指令表明了我们使用的是 3.00 版本的 OpenGL ES，如果是 OpenGL 可以使用 <code>#version 330 core</code>，然后二三行声明了输入变量，前面的 <code>layout (location = 0)</code> 指定了它们的位置，也可以省略，但是就需要在程序里手动查找位置了。后面的 <code>in</code> 表明是输入变量，<code>vec3</code> 表明是由三个数字组成的向量，后面是变量名，我们用到了位置和颜色。然后下面 <code>out</code> 表明是输出变量，很明显 Vertex Shader 是不能控制颜色的，Fragment Shader 才控制颜色，所以我们在这里把传进来的颜色再输出，下一步传给 Fragment Shader。</p>
 <p>然后程序从 main 开始执行，这里 <strong>不需要返回值</strong>，<code>gl_Position</code> 是内置的变量，你需要把顶点的最终变换完的位置赋给它，这里我们没有变化，直接把三元坐标转换成四元的齐次坐标。然后把输入进来的颜色传出去。总之，如果你保证 Vertex Shader 输出的变量和 Fragment Shader 输入的变量名字一样，OpenGL 就会把它们连接起来。</p>
-<p>接下来我们建立 <code>triangle.v.glsl</code>，如下。</p>
+<p>接下来我们建立 <code>triangle.f.glsl</code>，如下。</p>
 <pre><code class="glsl"><figure class="highlight hljs glsl"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -1010,4 +1010,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.0.4 at 2019-08-01 周四 12:53:59 CST. -->
+<!-- Page built by Hikaru v2.0.4 at 2019-08-06 周二 15:56:39 CST. -->

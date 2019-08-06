@@ -147,7 +147,7 @@ void main()
 
 然后程序从 main 开始执行，这里 **不需要返回值**，`gl_Position` 是内置的变量，你需要把顶点的最终变换完的位置赋给它，这里我们没有变化，直接把三元坐标转换成四元的齐次坐标。然后把输入进来的颜色传出去。总之，如果你保证 Vertex Shader 输出的变量和 Fragment Shader 输入的变量名字一样，OpenGL 就会把它们连接起来。
 
-接下来我们建立 `triangle.v.glsl`，如下。
+接下来我们建立 `triangle.f.glsl`，如下。
 
 ```glsl
 #version 300 es
