@@ -1,0 +1,231 @@
+# If a option has many sub-options, and it's optional, then give it a `enable` sub-option. If not optional, don't use `enable`.
+
+# If you want to transpose all time of your posts to this timezone, you can uncomment it.
+# Else just comment it, and each posts' zone will be used independently.
+# zone: Asia/Shanghai
+
+menu:
+  - name: home
+    link: /
+    icon: <i class="fas fa-home"></i>
+  - name: archives
+    link: archives/
+    icon: <i class="fas fa-archive"></i>
+  - name: categories
+    link: categories/
+    icon: <i class="fas fa-th-list"></i>
+  - name: tags
+    link: tags/
+    icon: <i class="fas fa-tags"></i>
+  - name: Undefined Shell Works!
+    link: Undefined-Shell-Works/
+    icon: <i class="fas fa-terminal"></i>
+  - name: blogroll
+    link: blogroll/
+    icon: <i class="fas fa-link"></i>
+  - name: about
+    link: about/
+    icon: <i class="fas fa-user-edit"></i>
+
+# Transform your image to those favicons in https://realfavicongenerator.net/.
+favicon:
+  appleTouchIcon: favicons/apple-touch-icon.png
+  androidChromeLarge: favicons/android-chrome-192x192.png
+  medium: favicons/favicon-32x32.png
+  small: favicons/favicon-16x16.png
+  safariPinnedTab: favicons/safari-pinned-tab.svg
+  androidManifest: favicons/site.webmanifest
+  msBrowserConfig: favicons/browserconfig.xml
+  fallback: favicons/favicon.ico
+
+# Must be an array.
+keywords:
+  - Code
+  - Music
+  - Life
+  - Linux
+  - Arch Linux
+  - Gentoo
+  - JavaScript
+  - ARIA
+  - Hikaru
+
+# https://creativecommons.org/licenses/
+# by | by-sa | by-nd | by-nc | by-nc-sa | by-nc-nd
+creativeCommons: by-nc-nd
+
+# Available: atom-one-dark | atom-one-light | solarized-dark | solarized-light
+highlight: atom-one-dark
+
+# Custom info in footer.
+customInfo: 托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+
+# Select all your webfont in a CDN like Google Fonts, and then copy `href` property in the `<link>` tag, like `link: //fonts.googleapis.com/css?family=Lato|Roboto+Condensed|Skranji|Ubuntu|Ubuntu+Mono`.
+# Then set different fonts to different parts here.
+customFont:
+  enable: false
+  link: //fonts.googleapis.com/css?family=Lato|Roboto+Condensed|Skranji|Ubuntu|Ubuntu+Mono
+  all: Ubuntu
+  title: Roboto Condensed
+  subtitle: Roboto Condensed
+  main: Ubuntu
+  code: Ubuntu Mono
+
+avatar: images/FutureGazerSmall.png
+#avatar: images/MisakaMikotoSmall.png
+
+logo: images/logo.png
+
+# Theme color.
+# Need quote to prevent `#` from comment.
+color: "#33363b"
+
+googleVerification: VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk
+
+since: 2016
+
+search: true
+
+# `left`, `right`, `false`
+sidebar: right
+
+animate: true
+
+busuanzi: true
+
+# If you want ARIA generate excerpt, set it to the length you want. If you don't, leave it blank.
+# Recomend to place `<!--more-->` to where you want to stop excerpt in content instead of use this option.
+# Example: `autoExcerpt: 200`, use first 200 chars in post content as excerpt.
+autoExcerpt: 150
+
+# If you want to use MathJax, first fill a CDN link like `cdn: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML`, then set `enable: true`.
+# And set front-matter `mathjax: true` to the page you want to use it.
+# You can also set `global: true` here to load MathJax in all pages.
+# But it's not recommended because MathJax sources are too large, that's why ARIA doesn't contain them and ask for CDN.
+mathjax:
+  enable: false
+  global:
+  cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML
+
+# Note: `fontawesome` is fontawesome-all. `scrollspy` and `util` are from bootstrap. `busuanzi` is `busuanzi.pure.mini.js`.
+# If you don't know what you are doing, don't change it.
+libCDN:
+  enable: false
+  jQuery:  //cdn.bootcss.com/jquery/3.3.1/jquery.min.js
+  fontAwesome: //use.fontawesome.com/releases/v5.0.8/js/all.js
+  scrollSpy:
+  util:
+  lightGallery:
+    js:
+    css: //cdn.jsdelivr.net/npm/lightgallery.js@1.0.2/dist/css/lightgallery.min.css
+  lgFullscreen: //cdn.jsdelivr.net/npm/lg-fullscreen.js@1.0.0/dist/lg-fullscreen.min.js
+  lgHash: //cdn.jsdelivr.net/npm/lg-hash.js@1.0.0/dist/lg-hash.min.js
+  lgPager: //cdn.jsdelivr.net/npm/lg-pager.js@1.0.0/dist/lg-pager.min.js
+  lgThumbnail: //cdn.jsdelivr.net/npm/lg-thumbnail.js@1.0.0/dist/lg-thumbnail.min.js
+  lgZoom: //cdn.jsdelivr.net/npm/lg-zoom.js@1.0.1/dist/lg-zoom.min.js
+  busuanzi: //dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js
+  atom-one-dark:
+  atom-one-light:
+  solarized-dark:
+  solarized-light:
+  normalize:
+  search:
+  marked:
+  timeAgo: //cdn.bootcss.com/normalize/8.0.0/normalize.min.css
+  commentjs:
+    js:
+    css:
+  avMin: //cdn1.lncld.net/static/js/3.0.4/av-min.js
+  valine: //unpkg.com/valine/dist/Valine.min.js
+  clipboard:
+
+social:
+  enable: true
+  links:
+    - name: E-Mail
+      link: mailto:alynx.zhou@gmail.com
+      icon: <i class="fas fa-envelope"></i>
+    - name: GitHub
+      link: https://github.com/AlynxZhou/
+      icon: <i class="fab fa-github"></i>
+    - name: Telegram
+      link: https://t.me/AlynxZhou/
+      icon: <i class="fab fa-telegram-plane"></i>
+    - name: Bilibili
+      link: https://space.bilibili.com/10034969/
+      icon: <i class="fas fa-video"></i>
+    - name: Steam
+      link: https://steamcommunity.com/id/AlynxZhou/
+      icon: <i class="fab fa-steam"></i>
+    - name: Weibo
+      link: https://weibo.com/u/5287501461
+      icon: <i class="fab fa-weibo"></i>
+
+blogroll:
+  enable: true
+  links:
+    - name: Meow's Blog
+      link: https://lrscy.github.io/
+      icon: <i class="fas fa-link"></i>
+    - name: LGiki's Blog
+      link: https://lgiki.cc/
+      icon: <i class="fas fa-link"></i>
+    - name: HackGhost's Blog
+      link: http://hackghost.com/
+      icon: <i class="fas fa-link"></i>
+    - name: Art_Chen's Blog
+      link: http://chenxy.moe/
+      icon: <i class="fas fa-link"></i>
+    - name: Jm33_m0's Blog
+      link: https://jm33.me/
+      icon: <i class="fas fa-link"></i>
+    - name: Farseerfc 的小窝
+      link: https://farseerfc.me/
+      icon: <i class="fas fa-link"></i>
+    - name: 滑稽仓库
+      link: http://huaji.store/
+      icon: <i class="fas fa-link"></i>
+    - name: 鸡腿工坊
+      link: https://jitui.moe/
+      icon: <i class="fas fa-link"></i>
+    - name: Yorushika Shi's Blog
+      link: https://sh.yorushika.co/
+      icon: <i class="fas fa-link"></i>
+    - name: Sqyon's Blog
+      link: https://sqyon.com/
+      icon: <i class="fas fa-link"></i>
+    - name: 约伊兹的萌狼乡手札
+      link: https://blog.yoitsu.moe/
+      icon: <i class="fas fa-link"></i>
+
+# `comment.commentjs.type`: Choose between `github` and `oschina`.
+comment:
+  enable: true
+  # disqusShortName: stackharboralynxxyz
+  commentjs:
+    enable: true
+    type: github
+    user: AlynxZhou
+    repo: stackharbor
+    clientId: fdfb4f0d020ee7b8d5cb
+    clientSecret: 6db7dd16477eadc1e96160a23c6ba4cf687dcecf
+  valine:
+    enable: false
+    appID:
+    appKey:
+    verify: false
+    notify: false
+    avatar: mm
+    meta: "[\"nick\", \"mail\", \"link\"]"
+    pageSize: 10
+    lang: zh-cn
+    visitor: false
+    highlight: true
+    avatarForce: false
+
+reward:
+  enable: true
+  message: 既然看了喵写的文章，不打算投喂一下再走吗？哼！
+  weChatPayQRCode: images/WeChatPay.png
+  aliPayQRCode: images/AliPay.png
+  # bitCoinQRCode: images/BitCoin.png
