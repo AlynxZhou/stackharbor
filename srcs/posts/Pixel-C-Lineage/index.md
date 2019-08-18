@@ -20,9 +20,9 @@ Pixel C 刚出来的时候我就很喜欢，但无奈价格太贵，同时 Andro
 
 由于刷机时候没拍照片我就不上图了，到手时候已经解锁了，不过既然是亲儿子想必也不会像一些国内厂商一样恶心你。按照 Lineage OS 的说法就是打开开发者选项里 `允许 OEM 解锁` 和 `允许 USB 调试`，按住 `音量下` + `电源` 直到重启进入 bootloader，然后连接电脑，`fastboot devices`，如果检测到了就 `fastboot oem unlock`，然后结束之后重启。（会清除所有数据，并且解锁之后每次开机会在 bootloader 停止 30 秒）。
 
-首先是去 [Lineage OS 官网](https://download.lineageos.org/dragon/) 下载给 Pixel C（代号 dragon）的 nightly build ZIP。
+首先是去 [Lineage OS 官网](https://download.lineageos.org/dragon) 下载给 Pixel C（代号 dragon）的 nightly build ZIP。
 
-然后去 [这个 Google Drive](https://drive.google.com/open?id=1wbd0fpyt-6_m8fiaFPSJfGMSej3HQA7Z) 下载开发者提供的 `vendor.img`。（**务必要下载这个，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。**）
+然后去 [这个 Google Drive](https://drive.google.com/drive/folders/0By6p5AdQfavBUTZmNWJoaU1iazg) 下载开发者提供的 `vendor.img`。（**务必要下载这个，如果有不止一个就选择最新的，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。**）
 
 然后去 [TWRP 官网](https://dl.twrp.me/dragon/) 下载给 Pixel C 用的 Recovery。
 
@@ -35,6 +35,8 @@ Pixel C 刚出来的时候我就很喜欢，但无奈价格太贵，同时 Andro
 接下来在 TWRP 里面全部 wipe（syste, data, cache, sdcard），然后接上电脑用 `adb push FILE /sdcard/` 把下好的 ROM ZIP、`verdor.img` 和 OpenGApps ZIP 都 push 到 sdcard 里面。
 
 然后选择 Install 刷入 Lineage 的 ZIP。**接下来选择右侧 Install IMG，刷入下好的 `vendor.img`**，然后刷入 OpenGApps 和 Magisk，重启。如果刷入 Magisk 的话会自动重启两次再进入向导。
+
+如果你日后某次更新提示 vendor 不匹配，那就去上面的咕鸽硬盘看看有没有新的刷进去就行了。
 
 接下来就是熟悉的开机向导了。
 

@@ -211,14 +211,15 @@
 <a id="more"></a>
 
 <p>由于刷机时候没拍照片我就不上图了，到手时候已经解锁了，不过既然是亲儿子想必也不会像一些国内厂商一样恶心你。按照 Lineage OS 的说法就是打开开发者选项里 <code>允许 OEM 解锁</code> 和 <code>允许 USB 调试</code>，按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后连接电脑，<code>fastboot devices</code>，如果检测到了就 <code>fastboot oem unlock</code>，然后结束之后重启。（会清除所有数据，并且解锁之后每次开机会在 bootloader 停止 30 秒）。</p>
-<p>首先是去 <a href="https://download.lineageos.org/dragon/" target="_blank">Lineage OS 官网</a> 下载给 Pixel C（代号 dragon）的 nightly build ZIP。</p>
-<p>然后去 <a href="https://drive.google.com/open?id=1wbd0fpyt-6_m8fiaFPSJfGMSej3HQA7Z" target="_blank">这个 Google Drive</a> 下载开发者提供的 <code>vendor.img</code>。（<strong>务必要下载这个，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。</strong>）</p>
+<p>首先是去 <a href="https://download.lineageos.org/dragon" target="_blank">Lineage OS 官网</a> 下载给 Pixel C（代号 dragon）的 nightly build ZIP。</p>
+<p>然后去 <a href="https://drive.google.com/drive/folders/0By6p5AdQfavBUTZmNWJoaU1iazg" target="_blank">这个 Google Drive</a> 下载开发者提供的 <code>vendor.img</code>。（<strong>务必要下载这个，如果有不止一个就选择最新的，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。</strong>）</p>
 <p>然后去 <a href="https://dl.twrp.me/dragon/" target="_blank">TWRP 官网</a> 下载给 Pixel C 用的 Recovery。</p>
 <p>需要 Google Apps 就去 <a href="https://opengapps.org" target="_blank">Open GApps</a> 下一个 ZIP，我用的是 <code>ARM64</code> -&gt; <code>8.1</code> -&gt; <code>stock</code>。</p>
 <p>如果你需要 Magisk 就自己去下载一个。</p>
 <p>把这些都放好，在自己电脑上安装 <code>adb</code> 和 <code>fastboot</code>，然后打开 <code>允许 USB 调试</code>。按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后 <code>fastboot flash recovery TWRP-IMG-FILE</code> 刷入 TWRP，然后再按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，选择 Recovery Mode 确认 TWRP 已经刷进去了。</p>
 <p>接下来在 TWRP 里面全部 wipe（syste, data, cache, sdcard），然后接上电脑用 <code>adb push FILE /sdcard/</code> 把下好的 ROM ZIP、<code>verdor.img</code> 和 OpenGApps ZIP 都 push 到 sdcard 里面。</p>
 <p>然后选择 Install 刷入 Lineage 的 ZIP。<strong>接下来选择右侧 Install IMG，刷入下好的 <code>vendor.img</code></strong>，然后刷入 OpenGApps 和 Magisk，重启。如果刷入 Magisk 的话会自动重启两次再进入向导。</p>
+<p>如果你日后某次更新提示 vendor 不匹配，那就去上面的咕鸽硬盘看看有没有新的刷进去就行了。</p>
 <p>接下来就是熟悉的开机向导了。</p>
 <p>大致来说作为洋垃圾这个平板还很划算，除了屏幕下端因为接键盘的磁铁的缘故会发黄（通病）、太多磕碰容易花屏（设计缺陷，购买要买少磕碰的），屏幕素质很好尺寸也很大，看文档看 PPT 看五线谱都是绝配（我期末就是用这个看 PPT 复习的超级爽）。但是毕竟是 3 年前的产品，3 GB RAM 不是很够多任务，同时 CPU 性能也不是特别高，甚至窗口特效都会卡（老黄的芯片优化好烂），但是这台机器是 NVIDIA 的芯片，GPU 性能强劲，打开开发者选项里 <code>禁用 HW 叠加层</code>，使用 GPU 进行窗口混成特效就不卡了。</p>
 <p>游戏性能很弱，大部分游戏都没有对这台机器 GPU 优化，CPU 和内存以及 IO 性能也不高（毕竟三年前），但是玩 FGO 意外的不卡，而且还让我用 <strong>维护送的石头</strong> <strong>单抽</strong> <strong>连续</strong> 出了 <strong>老福</strong> 和 <strong>心心念念的蓝呆</strong>！！！要知道就算把买平板的钱都氪进去也才不到两单，要靠这些石头来双黄蛋简直是白日做梦啊！</p>
@@ -483,4 +484,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.0 at 2019-08-15 周四 14:33:20 CST. -->
+<!-- Page built by Hikaru v2.1.0 at 2019-08-18 周日 17:08:55 CST. -->
