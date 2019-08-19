@@ -22,7 +22,7 @@ patch:
       Control_R: "noop"
   switcher:
     # 改掉原来的繁体字标题。
-    caption: "[设置菜单]"
+    caption: "【设置菜单】"
     # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
     option_list_separator: "/"
     # 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。
