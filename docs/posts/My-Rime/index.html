@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "/search.json";
+      if ("search.json".length === 0) {
+        searchPath = "/search.json";
+      }
+      searchFunc(searchPath, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\"></button>",
+              "<button class=\"button-dot dot-maximize\"></button>",
+              "<button class=\"button-dot dot-close\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">clipboard.copy</button>");
+      });
+      var cb = new ClipboardJS("a.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>可能只适合我自己的 RIME 配置 | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/My-Rime/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">可能只适合我自己的 RIME 配置</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-08-19T07:16:00.000Z">2019-08-19 周一 15:16:00 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">输入法</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/RIME/" itemprop="url" rel="index"><span itemprop="name">RIME</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。</p>
+<a id="more"></a>
+
+<p>首先说明我是 Linux 用户，使用 ibus-rime 做输入引擎，所以使用什么小狼毫鼠须管或者 fcitx-rime 的如果发现不好用最好别烦我，那些我都没用过。（不好意思因为配置这玩意有点暴躁。）</p>
+<p>然后我要吐槽一下 RIME 的文档，完全没有一致的类似 API 手册的东西，而且全繁体加上佛振独特的说话风格读起来真的很累，然后这个项目习惯又是起一大堆奇奇怪怪的名字（虽然我有时候也这样）。假如你想修改一点配置，读了文档里的示例“我懂了，巴拉巴拉”，打开配置一看一堆乱七八糟的就懵了。</p>
+<p>然后就是网上“致第一次用 RIME 的你”、“也致第一次用 RIME 的你”，我都看过了，首先他们不用 ibus-rime，其次文章内容毕竟有限，每个人需求不一样，有些我需要的地方他们一笔带过了。</p>
+<p>RIME 的拼音功能确实很好用（虽然有时候它和我对于词组的想法不太一样），我的需求其实只有几项：</p>
+<ul>
+<li>对于一些 RIME 默认的中国人几乎都用不到的中文标点直接改成英文标点，这个在书写 Markdown 的时候简直折磨死我了，有几个人会输入全角井号？？？打个标题真的很麻烦。</li>
+<li>有些符号键在其他输入法里约定俗成的就直接输出特定的中文符号，RIME 的默认操作是弹出选择菜单，完全没这个必要，弹出菜单还需要二次选择而且打断了我的按键操作，需要英文标点时候直接切为英文就好了。</li>
+<li>关掉 RIME 的中英混输功能，在候选框输入英文字母真的很打断思路，我要输入英文要么就是打代码要么就是打单词，反正都不需要输入法，RIME 来就是给我找麻烦。</li>
+<li>还有一些奇奇怪怪的 RIME 的键位设置，偏偏要和其他输入法不一样，我已经习惯了那些操作，RIME 的键位只会降低输入速度。</li>
+</ul>
+<p>下面介绍一下我的配置，只需要一个文件就可以，我没有对朙月拼音的配置做修改，只是修改了默认配置，朙月拼音自己的配置优先级低于默认配置。</p>
+<p>首先建立一个干净的 RIME 配置环境，直接移走 <code>~/.config/ibus/rime</code> 然后执行 <code>ibus-daemon -rdx</code> 重新生成（就是它文档里扯的部署部署部署）一套配置，由于我用的都是内置输入法所以也不需要什么乱七八糟的东风破RIME Kit地球拼音之类的。</p>
+<p>然后你进去 <code>~/.config/ibus/rime</code> 新版大概有以下几个东西：</p>
+<ul>
+<li>目录 <code>build</code>：里面放了各种 RIME 的默认配置，我们不需要动这个。</li>
+<li>目录 <code>luna_pinyin.userdb</code>：看起来像是朙月拼音的词库，当然也不用修改。</li>
+<li>文件 <code>installation.yaml</code>：我猜不用管。</li>
+<li>文件 <code>user.yaml</code>：我猜也不用管。</li>
+</ul>
+<p>按照 RIME 打 patch 的配置方式我们需要在这个目录下创建一个叫 <code>default.custom.yaml</code> 的文件，当然你得先会写 YAML。第一行首先写个叫 <code>patch:</code> 的 key，RIME 要求这样，所有的自定义配置都是在 <code>patch</code> 字段下面。</p>
+<p>怎么确定要修改的 key 名字呢？我这里的都是在 <code>build/default.yaml</code> 下面找到的，你也可以试试其他的 YAML 文件。</p>
+<p>RIME 的文档说什么要用 <code>/</code> 把不同层次的 key 折叠成一个比如 <code>ascii_composer/switch_key</code>，亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。</p>
+<p>然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+</pre><pre class="code"><code><span class="hljs-attr">patch:</span>
+<span class="hljs-attr">  schema_list:</span>
+<span class="hljs-attr">    - schema:</span> <span class="hljs-string">"luna_pinyin_simp"</span></code></pre></figure></code></pre>
+<p>然后就是改掉那个自作聪明的英文输入模式：</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+</pre><pre class="code"><code><span class="hljs-attr">  ascii_composer:</span>
+    <span class="hljs-comment"># 按 CapsLock 输出大写英文字母。</span>
+<span class="hljs-attr">    good_old_caps_lock:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-comment"># `inline_ascii` 在输入框内插入英文。</span>
+    <span class="hljs-comment"># `commit_text` 候选文字上屏并切换至英文。</span>
+    <span class="hljs-comment"># `commit_code` 输入拼音上屏并切换至英文。</span>
+    <span class="hljs-comment"># `clear` 清除拼音并切换至英文。</span>
+    <span class="hljs-comment"># `noop` 屏蔽此按键。</span>
+<span class="hljs-attr">    switch_key:</span>
+      <span class="hljs-comment"># 如果你设置 `Caps_Lock` 为 `noop`，</span>
+      <span class="hljs-comment"># 一个奇怪的问题是退格键不能用了，除非取消大写锁定。</span>
+      <span class="hljs-comment"># 所以我直接设置文字上屏了。</span>
+<span class="hljs-attr">      Caps_Lock:</span> <span class="hljs-string">"commit_text"</span>
+<span class="hljs-attr">      Shift_L:</span> <span class="hljs-string">"commit_code"</span>
+<span class="hljs-attr">      Shift_R:</span> <span class="hljs-string">"commit_code"</span>
+<span class="hljs-attr">      Control_L:</span> <span class="hljs-string">"noop"</span>
+<span class="hljs-attr">      Control_R:</span> <span class="hljs-string">"noop"</span></code></pre></figure></code></pre>
+<p>大部分坑我都写在注释里了可以自己看。</p>
+<p>然后我看那个设置选单也不是很爽，我习惯简体字，这个也可以自己改：</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+</pre><pre class="code"><code><span class="hljs-attr">  switcher:</span>
+    <span class="hljs-comment"># 改掉原来的繁体字标题。</span>
+<span class="hljs-attr">    caption:</span> <span class="hljs-string">"[设置菜单]"</span>
+    <span class="hljs-comment"># 用半角斜线而不是奇丑无比的全角斜线做分隔符。</span>
+<span class="hljs-attr">    option_list_separator:</span> <span class="hljs-string">"/"</span>
+    <span class="hljs-comment"># 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。</span>
+<span class="hljs-attr">    hotkeys:</span>
+      <span class="hljs-comment"># - "Control+s"</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"Control+grave"</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"F4"</span></code></pre></figure></code></pre>
+<p>然后就是改掉它奇怪的键位，Emacs 键位挺好的，但是有几个不知道为什么用不了，再者就是为什么按向左是跳一个字拼音向右是跳一个字母？</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+<span class="line">20</span>
+<span class="line">21</span>
+<span class="line">22</span>
+<span class="line">23</span>
+<span class="line">24</span>
+<span class="line">25</span>
+<span class="line">26</span>
+<span class="line">27</span>
+<span class="line">28</span>
+<span class="line">29</span>
+<span class="line">30</span>
+<span class="line">31</span>
+<span class="line">32</span>
+<span class="line">33</span>
+<span class="line">34</span>
+<span class="line">35</span>
+<span class="line">36</span>
+<span class="line">37</span>
+<span class="line">38</span>
+<span class="line">39</span>
+<span class="line">40</span>
+<span class="line">41</span>
+<span class="line">42</span>
+<span class="line">43</span>
+<span class="line">44</span>
+<span class="line">45</span>
+<span class="line">46</span>
+<span class="line">47</span>
+<span class="line">48</span>
+<span class="line">49</span>
+<span class="line">50</span>
+<span class="line">51</span>
+<span class="line">52</span>
+<span class="line">53</span>
+</pre><pre class="code"><code><span class="hljs-attr">  key_binder:</span>
+<span class="hljs-attr">    bindings:</span>
+      <span class="hljs-comment"># Emacs 键位，我喜欢。</span>
+      <span class="hljs-comment"># 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+p"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+n"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+b"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Left"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+f"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Right"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+b"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Shift+Left"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+f"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Shift+Right"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+a"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Home"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+e"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"End"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+d"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Delete"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+      <span class="hljs-comment"># 这个用不了，不过估计也用不到。</span>
+      <span class="hljs-comment"># - accept: "Control+k"</span>
+      <span class="hljs-comment">#   send: "Shift+Delete"</span>
+      <span class="hljs-comment">#   when: "composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+h"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"BackSpace"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+h"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Shift+BackSpace"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+g"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Escape"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+bracketleft"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Escape"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+v"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+v"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span></code></pre></figure></code></pre>
+<p>还没完，我觉得正常人不会用 Tab 在拼音之间切换，除非你一次输入一句话（那你不觉得候选框太小了看着累吗？？？），设置 Tab 为跳候选词更自然一点，但我也不知道为什么 Shift-Tab 用不了：</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+<span class="line">20</span>
+</pre><pre class="code"><code>      <span class="hljs-comment"># 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。</span>
+      <span class="hljs-comment"># - accept: "ISO_Left_Tab"</span>
+      <span class="hljs-comment">#   send: "Shift+Left"</span>
+      <span class="hljs-comment">#   when: "composing"</span>
+      <span class="hljs-comment"># - accept: "Shift+Tab"</span>
+      <span class="hljs-comment">#   send: "Shift+Left"</span>
+      <span class="hljs-comment">#   when: "composing"</span>
+      <span class="hljs-comment"># - accept: "Tab"</span>
+      <span class="hljs-comment">#   send: "Shift+Right"</span>
+      <span class="hljs-comment">#   when: "composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Tab"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"ISO_Left_Tab"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+      <span class="hljs-comment"># 鬼知道为什么这个也用不了！</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Shift+Tab"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span></code></pre></figure></code></pre>
+<p>以及我觉得正常人不用逗号和句号翻页，毕竟下面的默认设置是逗号句号直接上屏，你设置了翻页也没啥卵用，反正我用减号等号或者上下，不过方括号也不错就是了：</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+</pre><pre class="code"><code><span class="hljs-attr">      - accept:</span> <span class="hljs-string">"minus"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"equal"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"bracketleft"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"bracketright"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+      <span class="hljs-comment"># 我觉得正常人不应该用逗号和句号翻页。</span>
+      <span class="hljs-comment"># - accept: "comma"</span>
+      <span class="hljs-comment">#   send: "Page_Up"</span>
+      <span class="hljs-comment">#   when: "paging"</span>
+      <span class="hljs-comment"># - accept: "period"</span>
+      <span class="hljs-comment">#   send: "Page_Down"</span>
+      <span class="hljs-comment">#   when: "has_menu"</span></code></pre></figure></code></pre>
+<p>最后就是那一堆乱七八糟的快捷键了，鬼才记得住，有那时间直接翻菜单就行了，那个 Shift+Space 就是我动不动就变成全角的罪魁祸首，全部不要：</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+<span class="line">20</span>
+<span class="line">21</span>
+<span class="line">22</span>
+<span class="line">23</span>
+<span class="line">24</span>
+<span class="line">25</span>
+<span class="line">26</span>
+<span class="line">27</span>
+<span class="line">28</span>
+<span class="line">29</span>
+<span class="line">30</span>
+<span class="line">31</span>
+<span class="line">32</span>
+<span class="line">33</span>
+<span class="line">34</span>
+<span class="line">35</span>
+<span class="line">36</span>
+<span class="line">37</span>
+<span class="line">38</span>
+</pre><pre class="code"><code>      <span class="hljs-comment"># 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+1"</span>
+      <span class="hljs-comment">#   select: ".next"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+2"</span>
+      <span class="hljs-comment">#   toggle: "ascii_mode"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+3"</span>
+      <span class="hljs-comment">#   toggle: "full_shape"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+4"</span>
+      <span class="hljs-comment">#   toggle: simplification</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+5"</span>
+      <span class="hljs-comment">#   toggle: "extended_charset"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+exclam"</span>
+      <span class="hljs-comment">#   select: "".next"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+at"</span>
+      <span class="hljs-comment">#   toggle: "ascii_mode"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+numbersign"</span>
+      <span class="hljs-comment">#   toggle: "full_shape"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+dollar"</span>
+      <span class="hljs-comment">#   toggle: "simplification"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+Shift+percent"</span>
+      <span class="hljs-comment">#   toggle: "extended_charset"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># 你就是那个经常害我变成全角的罪魁祸首！</span>
+      <span class="hljs-comment"># - accept: "Shift+space"</span>
+      <span class="hljs-comment">#   toggle: "full_shape"</span>
+      <span class="hljs-comment">#   when: "always"</span>
+      <span class="hljs-comment"># - accept: "Control+period"</span>
+      <span class="hljs-comment">#   toggle: "ascii_punct"</span>
+      <span class="hljs-comment">#   when: "always"</span></code></pre></figure></code></pre>
+<p>我自己是不习惯写 inline 的字典和列表，都写的展开的。</p>
+<p>然后是符号设置了，因为我们上面取消了逗号句号翻页，所以这里也就不用显示写 commit 直接上屏了。然后我去掉了一大堆菜单，我输入井号星号波浪线百分号就是想要英文标点，你给我弹个菜单我还得多确认好麻烦的！中文方括号大括号对于程序员来说一年也用不了几次。以及我觉得真的没人用那个巨长的全角斜杠，输入斜杠就是为了斜杠，什么通过朙月拼音命令输入假名有意义吗？我为什么不直接切日语输入法呢？另一些标点在中文语境下直接输出中文标点就好了，需要英文标点时候我敲一下 Shift 比看菜单选容易多了！比如书名号，竖线输出人名中间的点，反斜杠输出顿号之类的。</p>
+<p>由于我不是金融行业的，我就把一些英文标点常见但对应中文标点也可能会用到的都丢到了 <code>$</code> 的菜单里面：</p>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+<span class="line">20</span>
+<span class="line">21</span>
+<span class="line">22</span>
+<span class="line">23</span>
+<span class="line">24</span>
+<span class="line">25</span>
+<span class="line">26</span>
+<span class="line">27</span>
+<span class="line">28</span>
+<span class="line">29</span>
+<span class="line">30</span>
+<span class="line">31</span>
+<span class="line">32</span>
+<span class="line">33</span>
+<span class="line">34</span>
+<span class="line">35</span>
+<span class="line">36</span>
+<span class="line">37</span>
+<span class="line">38</span>
+<span class="line">39</span>
+<span class="line">40</span>
+<span class="line">41</span>
+<span class="line">42</span>
+<span class="line">43</span>
+<span class="line">44</span>
+<span class="line">45</span>
+<span class="line">46</span>
+<span class="line">47</span>
+<span class="line">48</span>
+<span class="line">49</span>
+<span class="line">50</span>
+<span class="line">51</span>
+<span class="line">52</span>
+<span class="line">53</span>
+<span class="line">54</span>
+<span class="line">55</span>
+<span class="line">56</span>
+<span class="line">57</span>
+<span class="line">58</span>
+<span class="line">59</span>
+<span class="line">60</span>
+</pre><pre class="code"><code>  <span class="hljs-comment"># 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。</span>
+  <span class="hljs-comment"># 另一些直接默认输出中文符号，需要英文符号可以切换英文输入。</span>
+  <span class="hljs-comment"># 有关 `"!": {commit: "！"}` 的写法含义是你设置这个键为翻页按键了，</span>
+  <span class="hljs-comment"># 但是你又想在输入拼音出现选单之后输入这个按键直接上屏（常见的逗号句号问号叹号），</span>
+  <span class="hljs-comment"># 我觉得这是多此一举，为什么你非要拿这几个符号翻页？反正我不用。</span>
+  <span class="hljs-comment"># 乱七八糟的符号都塞给 `$` 就好了反正我不是会计不用天天输入 `￥`。</span>
+<span class="hljs-attr">  punctuator:</span>
+    <span class="hljs-comment"># 我不会使用全角标点的，所以只改半角。</span>
+<span class="hljs-attr">    half_shape:</span>
+      <span class="hljs-string">"!"</span><span class="hljs-string">:</span> <span class="hljs-string">"！"</span>
+      <span class="hljs-string">"\""</span><span class="hljs-string">:</span>
+<span class="hljs-attr">        pair:</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"“"</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"”"</span>
+      <span class="hljs-string">"#"</span><span class="hljs-string">:</span> <span class="hljs-string">"#"</span>
+      <span class="hljs-string">"$"</span><span class="hljs-string">:</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"￥"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"$"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"€"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"～"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"×"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"÷"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"°"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"℃"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"‰"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"‱"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"℉"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"©"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"®"</span>
+      <span class="hljs-string">"%"</span><span class="hljs-string">:</span> <span class="hljs-string">"%"</span>
+      <span class="hljs-string">"&amp;"</span><span class="hljs-string">:</span> <span class="hljs-string">"&amp;"</span>
+      <span class="hljs-string">"'"</span><span class="hljs-string">:</span>
+<span class="hljs-attr">        pair:</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"‘"</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"’"</span>
+      <span class="hljs-string">"*"</span><span class="hljs-string">:</span> <span class="hljs-string">"*"</span>
+      <span class="hljs-string">"+"</span><span class="hljs-string">:</span> <span class="hljs-string">"+"</span>
+      <span class="hljs-string">","</span><span class="hljs-string">:</span> <span class="hljs-string">"，"</span>
+      <span class="hljs-string">"-"</span><span class="hljs-string">:</span> <span class="hljs-string">"-"</span>
+      <span class="hljs-string">"."</span><span class="hljs-string">:</span> <span class="hljs-string">"。"</span>
+      <span class="hljs-string">"/"</span><span class="hljs-string">:</span> <span class="hljs-string">"/"</span>
+      <span class="hljs-string">"\\"</span><span class="hljs-string">:</span> <span class="hljs-string">"、"</span>
+      <span class="hljs-string">":"</span><span class="hljs-string">:</span> <span class="hljs-string">"："</span>
+      <span class="hljs-string">";"</span><span class="hljs-string">:</span> <span class="hljs-string">"；"</span>
+      <span class="hljs-string">"="</span><span class="hljs-string">:</span> <span class="hljs-string">"="</span>
+      <span class="hljs-string">"?"</span><span class="hljs-string">:</span> <span class="hljs-string">"？"</span>
+      <span class="hljs-string">"@"</span><span class="hljs-string">:</span> <span class="hljs-string">"@"</span>
+      <span class="hljs-string">"("</span><span class="hljs-string">:</span> <span class="hljs-string">"（"</span>
+      <span class="hljs-string">")"</span><span class="hljs-string">:</span> <span class="hljs-string">"）"</span>
+      <span class="hljs-string">"["</span><span class="hljs-string">:</span> <span class="hljs-string">"【"</span>
+      <span class="hljs-string">"]"</span><span class="hljs-string">:</span> <span class="hljs-string">"】"</span>
+      <span class="hljs-string">"{"</span><span class="hljs-string">:</span> <span class="hljs-string">"「"</span>
+      <span class="hljs-string">"}"</span><span class="hljs-string">:</span> <span class="hljs-string">"」"</span>
+      <span class="hljs-string">"&lt;"</span><span class="hljs-string">:</span> <span class="hljs-string">"《"</span>
+      <span class="hljs-string">"&gt;"</span><span class="hljs-string">:</span> <span class="hljs-string">"》"</span>
+      <span class="hljs-string">"^"</span><span class="hljs-string">:</span> <span class="hljs-string">"……"</span>
+<span class="hljs-attr">      "_":</span> <span class="hljs-string">"——"</span>
+      <span class="hljs-string">"`"</span><span class="hljs-string">:</span> <span class="hljs-string">"`"</span>
+      <span class="hljs-string">"|"</span><span class="hljs-string">:</span> <span class="hljs-string">"·"</span>
+      <span class="hljs-string">"~"</span><span class="hljs-string">:</span> <span class="hljs-string">"~"</span></code></pre></figure></code></pre>
+<p>总之写完这些配置再执行 <code>ibus-daemon -rdx</code> 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。</p>
+<p>最后如果你想试一试，点击 <a href="/posts/My-Rime/default.custom.yaml">这里</a> 下载。</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" rel="tag"><i class="fas fa-tag"></i>输入法</a><a class="post-tag button" href="/tags/RIME/" rel="tag"><i class="fas fa-tag"></i>RIME</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/I-Am-Lucky-You-Are-Not/" rel="prev" title="翻译：我很幸运，但你不是。"><span class="nav-title">翻译：我很幸运，但你不是。</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "可能只适合我自己的 RIME 配置",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.png" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">62</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">40</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">64</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jm33.me/" target="_blank">Jm33_m0's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sh.yorushika.co/" target="_blank">Yorushika Shi's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank">约伊兹的萌狼乡手札</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.1.0 at 2019-08-19 周一 16:14:29 CST. -->

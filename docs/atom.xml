@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-08-01T04:01:14.402Z</updated>
+  <updated>2019-08-19T08:14:04.223Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,32 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>可能只适合我自己的 RIME 配置</title>
+    <link href="https://sh.alynx.moe/posts/My-Rime/" />
+    <id>https://sh.alynx.moe/posts/My-Rime/</id>
+    <published>2019-08-19T07:16:00.000Z</published>
+    <updated>2019-08-19T08:14:04.223Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="输入法" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/" />
+    
+    <category term="RIME" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/RIME/" />
+    
+    
+    <category term="输入法" scheme="https://sh.alynx.moe/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" />
+    
+    <category term="RIME" scheme="https://sh.alynx.moe/tags/RIME/" />
+    
+  </entry>
   
   <entry>
     <title>翻译：我很幸运，但你不是。</title>
@@ -477,32 +503,6 @@
     <category term="Hexo" scheme="https://sh.alynx.moe/tags/Hexo/" />
     
     <category term="Nginx" scheme="https://sh.alynx.moe/tags/Nginx/" />
-    
-  </entry>
-  
-  <entry>
-    <title>无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</title>
-    <link href="https://sh.alynx.moe/posts/Endless-ARIA/" />
-    <id>https://sh.alynx.moe/posts/Endless-ARIA/</id>
-    <published>2018-05-05T15:49:53.000Z</published>
-    <updated>2019-05-19T12:30:48.013Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>大约从我写好 ARIA （指把我自己的网站换成它做主题）到现在为止已经有一个月了，这一个月里它有了 <a href="https://github.com/AlynxZhou/hexo-theme-aria/stargazers" target="_blank">20 个 Star</a>、<a href="https://github.com/AlynxZhou/hexo-theme-aria/issues?q=is%3Aissue+is%3Aclosed" target="_blank">4 个 Issue</a> 和 <a href="https://github.com/AlynxZhou/hexo-theme-aria/commits/master" target="_blank">128 个 Commit</a>（都是我自己，残念啊）。大概算是我现在最得意的项目，当然不排除以后也是。</p><p>虽然这么说有点敷衍，但是我是和一些无聊的人进行了一点无谓的争执 —— 我讨厌辩论，所以尽可能把这种冲动压制在一点 —— 所以我现在来写这篇文章，聊聊那些代码里面没有告诉你的事情。写点经过脑子的思考总是有用处的，不仅是对自己而言。</p>]]>
-    
-    </summary>
-    
-    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="网络" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
-    
-    <category term="网站" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="ARIA" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/ARIA/" />
-    
-    
-    <category term="ARIA" scheme="https://sh.alynx.moe/tags/ARIA/" />
     
   </entry>
   
