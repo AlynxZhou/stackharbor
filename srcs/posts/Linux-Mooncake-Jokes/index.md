@@ -40,7 +40,7 @@ tags:
 - Docker 用户发现自己的月饼比别家重很多，但没什么东西，而且吃月饼需要 root。（outvi）
 - Nintendo Switch 用户购买了月饼卡带然后由于太苦无法下咽。（AlynxZhou）
 - Java 用户发现自己需要先安装一个月饼食用环境来食用月饼。（AlynxZhou）特别是还不知道装哪个版本。（outvi）更要命的是还区分 OpenMooncake 和 OracleMooncake。（Rocket1184）
-- Steam 用户发现自己的月饼上多了绿色的 -40% 标签。
+- Steam 用户发现自己的月饼上多了绿色的 -40% 标签。（AlynxZhou）
 - Epic：月饼独占一年！（KRyuJo）
 - Go 用户把所有月饼当作一种月饼（`interface {}`）。（Sherlock\_Holo）
 - Rust 用户表示月饼的保质期很短（离开视线就被 drop 了）。（Sherlock\_Holo）Rust 家的月饼可以多人一起看着，但是吃的时候不仅只能有一个人吃，而且别人不能看。有人不信邪，使用 unsafe 魔法看到了正在吃月饼的人，然后整个世界崩塌了。（lilydjwg）
