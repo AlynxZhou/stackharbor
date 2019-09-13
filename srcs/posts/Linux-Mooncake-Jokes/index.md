@@ -32,7 +32,7 @@ tags:
 随后话题变得奇怪了起来，不再仅限于常见的 Linux 发行版。
 
 - Windows 10 用户您好！感谢您选购本公司最新发行的月饼，不过要敬告您的是，您的月饼马上就要过期了。（lilydjwg）
-- Windows 用户的冰箱被锁死了，因为“windows正在等待月饼”。（AlynxZhou）
+- Windows 用户的冰箱被锁死了，因为“Windows 正在等待月饼”。（AlynxZhou）
 - iOS 用户只能购买苹果自家的月饼，买别家月饼苹果抽成 30%。（outvi）
 - Google 表示对于月饼生产商收取 25 美元的生产费。（AlynxZhou）除非你只吃没有馅料的 YOSP。（oldherl）
 - Python 用户用 `pip` 安装了一个月饼，然后发现自己安装的月饼明年就过期了。（AlynxZhou）
