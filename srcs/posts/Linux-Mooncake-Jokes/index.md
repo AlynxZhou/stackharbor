@@ -14,10 +14,10 @@ tags:
 
 <!--more-->
 
-- Gentoo 用户需要自己编译月饼，并且可以设置不同的 USE 编译不同口味。（farseefc，outvi 和 AlynxZhou）
+- Gentoo 用户需要自己编译月饼，并且可以设置不同的 USE 编译不同口味。（farseerfc，outvi 和 AlynxZhou）
 - Debian 用户习惯将月饼拆成月饼馅、月饼皮和月饼油分别打包食用。（AlynxZhou）
 - Arch Linux 用户喜欢购买 Debian 的月饼，然后将月饼馅、月饼皮和月饼油拆开自行组装并打包。（AlynxZhou）
-- Manjaro 用戶買來 Arch 組裝好的 Debian 月餅然後敲了個花紋上去重新裝了起來。（farseefc）
+- Manjaro 用戶買來 Arch 組裝好的 Debian 月餅然後敲了個花紋上去重新裝了起來。（farseerfc）
 - Manjaro 用户经常吃了 Arch Linux 的月饼然后抱怨这个月饼为什么不是 Manjaro 牌的。（AlynxZhou）
 - CentOS 的月饼过期了。（KRyuJo）但总有人喜欢这个传统口味，不想换。甚至有人资助 RedHat 厨师学校传承老字号。（whyme）
 - RedHat：我们将通过电话联系在线指导您服用月饼。（ArielAxionL）
