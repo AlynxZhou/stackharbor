@@ -44,7 +44,7 @@ tags:
 - Epic：月饼独占一年！（KRyuJo）
 - Go 用户把所有月饼当作一种月饼（`interface {}`）。（Sherlock\_Holo）
 - Rust 用户表示月饼的保质期很短（离开视线就被 drop 了）。（Sherlock\_Holo）Rust 家的月饼可以多人一起看着，但是吃的时候不仅只能有一个人吃，而且别人不能看。有人不信邪，使用 unsafe 魔法看到了正在吃月饼的人，然后整个世界崩塌了。（lilydjwg）
-- SystemD 用户正在策划将月饼改名为 `systemd-月饼` 的投票。（AlynxZhou）
+- systemd 用户正在策划将月饼改名为 `systemd-月饼` 的投票。（AlynxZhou）
 - C++ 用户表示月饼馅还不在厨房里。（wuliao00）建议食用 `boost::月饼`。（Rocket1184）
 - fish 用户正在重写他们的 `/etc/profile`，没有时间吃月饼。（AlynxZhou）
 - TensorFlow 用户依赖他们的 NVIDIA GPU 来识别月饼皮上的文字。（AlynxZhou）
