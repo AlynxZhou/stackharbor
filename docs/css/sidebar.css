@@ -140,7 +140,6 @@
   transition: 0.3s ease-in-out;
 }
 .sidebar .search .search-input:focus {
-  outline: none;
   border-bottom: 0.1em solid #fff;
 }
 .sidebar .search .search-input::placeholder {
@@ -160,16 +159,9 @@
   background: transparent;
   border: none;
 }
-.sidebar .search .search-submit:hover {
-  outline: none;
-}
 .sidebar .search .search-submit:active {
   top: 0;
   left: 0;
-  outline: none;
-}
-.sidebar .search .search-submit:focus {
-  outline: none;
 }
 .sidebar .sidebar-item {
   margin: 1em;
