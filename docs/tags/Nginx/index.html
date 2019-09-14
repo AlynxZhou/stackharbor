@@ -180,7 +180,7 @@
 <div id="tag" class="tag page">
   <h1 class="page-title">Nginx</h1>
   
-  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <header id="post-header" class="post-header">
       <h1 class="post-title-simple" itemprop="name headline">
         <a class="post-title-link post-title-link-external" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/" itemprop="url">在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</a>
@@ -226,10 +226,10 @@
           
 <aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
   
-  <div class="search">
-    <div class="form-group">
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
-    </div>
+  <div class="search" role="search">
+    <form action="search.html" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
   </div>
   <div class="search-result-box" id="search-result"></div>
   
@@ -376,4 +376,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 12:28:42 UTC. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 13:01:20 UTC. -->

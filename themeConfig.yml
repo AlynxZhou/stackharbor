@@ -89,7 +89,7 @@ search: true
 # `left`, `right`, `false`
 sidebar: right
 
-animate: true
+animate: false
 
 busuanzi: true
 
