@@ -71,10 +71,10 @@ customFont:
   main: Ubuntu
   code: Ubuntu Mono
 
-avatar: images/FutureGazerSmall.png
+avatar: images/FutureGazerSmall.webp
 #avatar: images/MisakaMikotoSmall.png
 
-logo: images/logo.png
+logo: images/logo.webp
 
 # Theme color.
 # Need quote to prevent `#` from comment.

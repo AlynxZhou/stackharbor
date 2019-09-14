@@ -6,7 +6,7 @@ subtitle: Whisper to the World
 description: 全ての存在は滅びるようにデザインされている
 author: Alynx Zhou
 email: alynx.zhou@gmail.com
-language: zh_CN
+language: zh-Hans
 
 baseURL: https://sh.alynx.moe
 rootDir: /
@@ -24,7 +24,7 @@ perPage:
   archives: 15
   category: 15
   tag: 15
- 
+
 skipRender:
   - README.md
 
