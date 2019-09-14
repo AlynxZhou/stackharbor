@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">复制</button>");
+      });
+      var cb = new ClipboardJS("a.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>写给新手的 Linux 手册 1 | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Linux-Manual-for-Newbies-1/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">写给新手的 Linux 手册 1</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-03-25T12:24:45.000Z">2018-03-25 Sun 20:24:45 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>恰如字面意思，这是一篇写给新人的 Linux 指南，当然，不要指望从我这里得到什么详细的配置教程，最起码我没有打算在这篇文章里把你能遇到的 Linux 配置情况全部说清楚。我想在这篇文章里讲述的是一种理解方法或者说是一种 Linux 思维，换个更简单的说法是——它能在 Linux 向你吐出一堆牢骚的时候明白它在说什么，以及一个有经验的 Linux 用户这个时候会做什么，有经验的 Linux 用户是如何学习他们没有接触过的 Linux 知识的。</p>
+<p>准备好了，就继续吧。</p>
+<a id="more"></a>
+
+<h1 id="开宗明义（开篇劝退）"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#%E5%BC%80%E5%AE%97%E6%98%8E%E4%B9%89%EF%BC%88%E5%BC%80%E7%AF%87%E5%8A%9D%E9%80%80%EF%BC%89" title="开宗明义（开篇劝退）"></a>开宗明义（开篇劝退）</h1>
+<p>本页面不适用于如下类型人员：</p>
+<ul>
+<li><p>脑残微软粉丝</p>
+<p>如果你觉得微软爸爸什么都是好的或者你已经完全被微软圈养，现在关闭还来得及，微软不会让你在 Linux 下运行 VS 或者 Office 的，没必要找不痛快。</p>
+</li>
+<li><p>认为电脑应该听我的，或者说稍微有一点不一样就觉得是 Linux 的问题的人</p>
+<p>我不想多说什么，如果你觉得程序员改一下按钮的样式你就不会用想骂人的话，我不想认识这样的蠢货。工具是听从你的命令去帮你解决问题的，如果它工作了，你应该感激它，如果出错了，很大程度上是你给的指令有问题。</p>
+</li>
+<li><p>强行用 Windows 思维去使用 Linux 的人</p>
+<p>你不能强行用一把十字花的螺丝刀去拧一字的螺丝对吧。<strong>使用 Linux 就要有 Linux 的思维</strong>，当然用你熟悉的东西去类比是可以的，事实上我经常这么做，但是在遇到不一样的时候应该以现实情况为准，否则同第二条。</p>
+</li>
+<li><p>没事闲的/听说这东西很少人用/打算用这玩意装X的</p>
+<p>如果你抱着这样的想法我劝你把这种精力放在打游戏上去，很显然你的学习动力是不长久的并且很容易演化成第二种。或者觉得这东西没有达到你想要的装X效果然后再装模作样的黑一通假装自己多么了不起——趁早滚开，Linux 用户们不是觉得 Linux 不能被批评，但前提是被批评的部分确实不好用。</p>
+</li>
+</ul>
+<p>因此本手册适合于那些确实有实际需求——Linux 从被创造出来就是一个务实的项目——并且能够接受新事物的新手，如果你确实想要了解这个系统的方方面面，必读的读物是<a href="http://linux.vbird.org/" target="_blank" rel="noreferrer noopener">鸟哥的 Linux 私房菜</a>，虽然它看起来很厚，但是语言风趣，读下去不是很困难。</p>
+<h1 id="我该选择什么版本的Linux？"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#%E6%88%91%E8%AF%A5%E9%80%89%E6%8B%A9%E4%BB%80%E4%B9%88%E7%89%88%E6%9C%AC%E7%9A%84Linux%EF%BC%9F" title="我该选择什么版本的Linux？"></a>我该选择什么版本的 Linux？</h1>
+<p>和你常见的桌面操作系统不一样，Linux 本身不是一个操作系统——它只是一个操作系统内核，可以操作计算机硬件资源。我们通常把基于 Linux 内核的，由内核和其他常见的一系列软件组成的操作系统也叫做 Linux。因为大部分的组件和内核一样都是开放源代码软件，所以任何有能力的人都可以组织他们自己的操作系统，这被称为 Linux 发行版。不同发行版之间可能存在着配置上的些微差异或者用等价的软件替换掉另一部分软件，当然，它们之间大体上是相似的，学到的知识也都通用。</p>
+<p>如果你需要从头选择一个发行版，选择的条件有以下几个：</p>
+<ol>
+<li><p>尽量选择最新的版本，或者支持期较长的版本中的最新版本。</p>
+<p>过于老旧的版本通常已经失去维护，继续向下看你会发现这是很恐怖的事情。</p>
+</li>
+<li><p>尽量选择用户比较多的发行版本。</p>
+<p>使用的人数越多，代表你出现问题时可能寻找到解决方案的机率也越大。</p>
+</li>
+<li><p>尽量选择你更熟悉的发行版。</p>
+<p>这个不用多说了吧。</p>
+</li>
+</ol>
+<p>如果你打算在自己的电脑上使用 Linux，推荐的版本有 <a href="https://www.ubuntu.com/global" target="_blank" rel="noreferrer noopener">Ubuntu</a>，<a href="https://www.ubuntu.com/global" target="_blank" rel="noreferrer noopener">LinuxMint</a>，<a href="https://getfedora.org/" target="_blank" rel="noreferrer noopener">Fedora</a>，<a href="https://www.opensuse.org/" target="_blank" rel="noreferrer noopener">openSUSE</a>。</p>
+<p>如果你打算在远程服务器上使用 Linux，推荐的版本有 <a href="https://www.debian.org/index.html" target="_blank" rel="noreferrer noopener">Debian</a>，<a href="https://www.ubuntu.com/server" target="_blank" rel="noreferrer noopener">Ubuntu Server</a>, <a href="https://www.centos.org/" target="_blank" rel="noreferrer noopener">CentOS</a>。</p>
+<p>特别需要注意的是 Ubuntu 16.04 之前的版本，Debian 8 之前的版本，CentOS 7 之前的版本由于时间过久，不建议现在选择，同时有些网站使用的是这些系统的开发代号而不是版本号，可自行搜索对照。如果你需要接手一台比较旧的服务器，请自己上网搜索或者参阅鸟哥网站，本手册不加讲解。</p>
+<p>Arch Linux 或者 Gentoo Linux 一类需要使用者有较强能力的高定制性发行版不建议新人使用，如果你对自己的学习能力有信心，希望随时使用最新版本的软件，并且能够判断互联网上的消息有效期，可以考虑使用 Arch Linux，但是请务必多阅读 <a href="https://wiki.archlinux.org/" target="_blank" rel="noreferrer noopener">Arch Wiki</a>。</p>
+<p>以上安装镜像的唯一可靠下载渠道为官方网站（已给出）或者官方指定的镜像站，请务必不要在来历不明的位置下载。</p>
+<h1 id="我该怎样连接到我的服务器？SSH又是什么？"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#%E6%88%91%E8%AF%A5%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%88%91%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9FSSH%E5%8F%88%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F" title="我该怎样连接到我的服务器？SSH又是什么？"></a>我该怎样连接到我的服务器？SSH 又是什么？</h1>
+<p>有关 SSH 的介绍来自维基百科：</p>
+<blockquote>
+<p>Secure Shell（安全外壳协议，简称 SSH）是一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。SSH 通过在网络中创建安全隧道来实现 SSH 客户端与服务器之间的连接。虽然任何网络服务都可以通过 SSH 实现安全传输，SSH 最常见的用途是远程登录系统，人们通常利用 SSH 来传输命令行界面和远程执行命令。使用频率最高的场合类 Unix 系统，但是 Windows 操作系统也能有限度地使用 SSH。2015 年，微软宣布将在未来的操作系统中提供原生 SSH 协议支持。
+在设计上，SSH 是 Telnet 和非安全 shell 的替代品。Telnet 和 Berkeley rlogin、rsh、rexec等协议采用明文传输，使用不可靠的密码，容易遭到监听、嗅探和中间人攻击。SSH 旨在保证非安全网络环境（例如互联网）中信息加密完整可靠。</p>
+</blockquote>
+<p>简单说的话，SSH 是一个协议，在操作系统上有对应的实现软件，用来在你和服务器之间传递消息，SSH 也是 UNIX 世界里最常用的远程控制协议，如果你对命令行界面有所了解，SSH 实际上是把远程 Shell 的输出传送给你，然后把你的输入传递给远程 Shell（在这里传递命令行的原因是网络通常不足以满足传递图形界面的带宽，字符更节省数据流量）。</p>
+<p>需要注意的一点是 SSH 界面的回显是由远程计算机控制的，也就是说只有远程端收到了你的输入并返回给你确认信号之后你的屏幕上才会出现输入，这种设计避免了由于网络延迟带来的输入混乱，但也因此在网络不好的时候会产生延迟，不要认为是你的计算机卡住了。</p>
+<p>SSH 分为两个部分，客户端程序 <code>ssh</code> 和服务端程序 <code>sshd</code>，同样地在 Linux 下面也有两个配置文件 <code>/etc/ssh/ssh_config</code> 和 <code>/etc/ssh/sshd_config</code>，一般情况下不需要修改客户端的配置，你需要修改的是 <strong>服务器端</strong> 的 <code>/etc/ssh/sshd_config</code>。同时服务器端需要将 sshd 作为一个 daemon （守护进程，可以理解为 Windows 里面的服务，在特定的时候由操作系统启动并完成一定工作的程序）启动于后台。在较新的 Linux 发行版中统一使用 Systemd 作为启动管理程序，使用下面的命令将 sshd 添加到开机启动列表并现在启动它：</p>
+<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> sshd --now</span></code></pre></figure></code></pre><p><code>#</code> 是 Shell 提示符，不要复制它，不理解往后看。</p>
+<p>通常情况下你不需要修改 sshd 的配置，默认 sshd 会监听 22 号端口，如果你知道主机名称和主机上一个账户的名字/密码，就可以在客户机上运行：</p>
+<pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code><span class="hljs-variable">$ </span>ssh username<span class="hljs-variable">@hostname</span></code></pre></figure></code></pre><p>连接到远程主机。hostname可以是域名或者 IP 地址。</p>
+<p>最常见的配置更改是改变 sshd 监听的端口，需要你修改 <code>/etc/ssh/sshd_config</code>，找到 <code>#Port 22</code> 这一行，删除掉前面的 <code>#</code> 以取消注释，然后修改 <code>22</code> 为你想要的值（端口范围为 0 - 65535，需要注意的是一些常见端口已经有使用比如 80 是 http 服务的端口，如果你的服务器上有这些服务运行记得避开）。之后用 <code>systemctl restart sshd</code> 重启 sshd 服务。如果你要连接到一个不是使用 22 端口的 sshd，使用 <code>ssh -p xxx username@hostname</code>，<code>xxx</code> 是你服务器的端口号。</p>
+<p>ssh 还带有一个叫做 sftp 的客户端程序，可以在本机和远程之间传递文件，具体用法请自行搜索。</p>
+<h1 id="Shell和终端都是什么？为什么我输入密码没有反应？"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#Shell%E5%92%8C%E7%BB%88%E7%AB%AF%E9%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81%E6%B2%A1%E6%9C%89%E5%8F%8D%E5%BA%94%EF%BC%9F" title="Shell和终端都是什么？为什么我输入密码没有反应？"></a>Shell 和终端都是什么？为什么我输入密码没有反应？</h1>
+<p>Shell 是一个程序（废话），它接受用户的指令并传递给内核，以便完成交互，常见的 Shell 有多种，互相之间基本兼容，通常指的是文字界面的 Shell，用户通过 Shell 执行各种其他程序。</p>
+<p>Linux 是可以没有图形界面的（与 Windows 不同），没有桌面环境的情况下 Linux 会提供叫做 tty 的字符界面，但是字符界面毕竟功能有限（只能显示英文数字，不能显示中文等复杂字符），所以我们常用桌面环境下叫做终端模拟器的程序开启一个在图形环境下的字符界面模拟器来执行各种操作，这个程序简称终端 Terminal。之所以使用字符界面的原因是图形环境通常为了做到简单易用而限制了其功能，Shell 操作相对稳定高效并且能做到各种复杂的操作，并且在服务器上没有必要开启图形界面浪费资源，所以使用 Linux 务必要掌握 Shell 的用法。</p>
+<p>最常见的 Shell 叫做 bash，一般交互方式是这样的：</p>
+<pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code>username<span class="hljs-variable">@hostname</span> currentdir <span class="hljs-variable">$ </span>command --args filename</code></pre></figure></code></pre><p><code>username@hostname currentdir $</code> 是提示符，每次出现它就代表现在掌握权回到了 Shell 上，你可以输入指令了，其中 <code>currentdir</code> 表示了你当前的路径，<code>$</code> 在有些 Shell 里会显示为 <code>%</code>，但是当它是 <code>#</code> 的时候说明你现在不是一般用户而是 root 用户，需要注意的是这个提示符是可以改变样式的。</p>
+<p>在 Linux 下你可以直接在提示符后面输入指令来进行操作，通常第一个位置是指令名称，比如 <code>cp</code> 代表复制，第二个位置是参数，一般以 <code>-</code> 开头，比如 <code>-R</code> 表示递归地复制子目录和目录里的文件，多个参数可以合并写比如 <code>-Ri</code>, 最后一般会接操作的文件名，对于复制来说，第一个是被复制的文件的路径，第二个是复制到的目的地，如果是文件表示复制过后改成这个名字，如果是目录就是将这个文件复制到那个目录下。各个部分之间用空白符分割比如空格或者 Tab，对于 Shell 而言连续的空白符会被识别为一个，如果文件名里有空格，用反斜杠转义。</p>
+<p>常见的命令有很多，但是要介绍的是 <code>man</code> 这个指令，如果你不知道一个命令的用法，只需要运行 <code>man 指令名</code> 就可以获取到内置的帮助文件。</p>
+<p><code>pwd</code> 输出当前所在的路径。<code>ls</code> 指令列出目录下的文件（如果不指定目录则列出当前目录），常见的用法是 <code>ls -alh</code>，表示列出隐藏文件（<code>-a</code>），显示文件权限、所有者等详细信息（<code>-l</code>），将文件大小显示为人类易读格式（<code>-h</code>）。<code>mv</code> 移动文件，用法类似 <code>cp</code>（Linux 下没有重命名命令，将一个文件移动到另一个名字即为重命名）。<code>rm</code> 删除文件，要注意这个命令没有二次确认，同时 <code>-rf</code> 参数表示递归强制删除，慎用！</p>
+<p><code>cat</code> 输出一个文件的内容，当然这个文件最好是纯文本（和 猫 没有关系！），<code>less</code> 也会输出文件内容，但是它增加了翻页功能（<code>cat</code> 是一股脑倒出来，<code>less</code> 则是让你一页一页看）。</p>
+<p>当你运行一个程序的时候，Shell 需要获取到这个文件的位置，Shell 有一个 <code>$PATH</code> 变量，当你只输入一个程序的名字而不是完整路径时，Shell 会逐个搜索 <code>$PATH</code> 的目录，这些目录大部分是系统存放可执行程序的位置。同时注意当前目录不在这个变量里，你可以使用相对路径（<code>.</code> 表示当前目录，<code>..</code> 表示上一层目录，<code>~</code> 表示家目录（这个只有 Shell 支持））如 <code>./a.out</code> 运行当前目录下的文件，当然你也可以使用从根目录开始的绝对路径。</p>
+<p>有些程序可能需要在后台运行，但是用 Shell 启动的程序一般在父进程也就是 Shell 退出的时候就会结束。对于有些没有提供以 daemon 方式运行的程序，可以尝试 <code>screen</code> 或者是 <code>tmux</code> 这一类终端复用器，他们可以保存 Shell 会话到后台，具体用法请自行搜索。</p>
+<p>UNIX 哲学里面，如果一个程序不是以输出信息为目的或者需要显示进度信息，那么 “没有消息就是最好的消息”，没有输出是成功的，有输出一般是报错，复制粘贴谷歌一下。</p>
+<p>最后有关不显示密码的问题，Linux Shell 下输入密码就是不显示的！！！不会显示星号或者圆点！！！这样可以保证安全。</p>
+<h1 id="我该如何编辑文件？怎样安装我需要的软件？"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#%E6%88%91%E8%AF%A5%E5%A6%82%E4%BD%95%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6%EF%BC%9F%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85%E6%88%91%E9%9C%80%E8%A6%81%E7%9A%84%E8%BD%AF%E4%BB%B6%EF%BC%9F" title="我该如何编辑文件？怎样安装我需要的软件？"></a>我该如何编辑文件？怎样安装我需要的软件？</h1>
+<p>首先我在这里不会介绍 vim，不仅仅是因为我是 emacs 用户，而是因为 vim 对于新人而言实在是太难以学习了（除非你想让新手产生一串随机字符串（“Q：如何产生一串随机字符串？A：让新手退出 vim”））。新人一般是没有接触过模式化编辑器的。如果你需要编辑配置文件，使用 <code>nano</code> 这个程序就好了，<code>nano filename</code> 编辑文件就像记事本一样简单，同时它的快捷键都会列在屏幕下方。</p>
+<p>有关安装软件，请把 Windows 安装包有关的思维全部忘掉。Linux 的软件包管理方式大概可以类比为应用商店，由于大部分的软件都是开源的，每个发行版都会维护自己的一个软件仓库，使用包管理程序就可以自动下载并安装到统一位置，安装的位置都是维护者写好的，并且在数据库里有所记录，所以不需要担心卸载的时候有残留（至于什么软件安装到系统盘会影响速度的说法更是无稽之谈）。也不太需要担心软件占用过多空间，Linux 下有良好的库共享机制，所以一般软件的体积远小于 Windows（由于 Windows 缺乏有效的包管理机制，开发者一般会将所有的依赖库打包到程序安装包，造成空间浪费）。</p>
+<p>Linux 下的包管理主要有两种常见软件，Debian、Ubuntu、LinuxMint 使用 Debian 的 <code>dpkg</code> 和 <code>apt-get</code>，CentOS、Fedora、openSUSE 使用 RedHat 的 <code>rpm</code> 和 <code>yum</code>，具体使用方法请自行搜索，简单用法比如安装 <code>nginx</code> 使用 <code>apt-get install nginx</code> 或者 <code>yum install nginx</code>，便会自动从镜像站下载安装（镜像站是为了加快下载速度在全球各地建立的软件仓库的克隆）。</p>
+<p>如果你需要一个软件，首先检查软件源里是否已经有这个软件，版本是否符合要求（有些发行版为了维持稳定，不会在软件源里使用最新版软件），如果没有，搜索你所使用的发行版是否有常见的第三方源包含这些软件。请把在官网下载的安装包作为最后选项使用，因为这些下载的安装包不会被包管理所管理，需要自行删除及检查残留，相比起来包管理是自动化并且可靠的。</p>
+<p>如果你使用一个停止维护的发行版本，通常软件源已经无人维护，也就是说没人可以保证你使用的软件是安全的（甚至可能是无法使用的）。另外有关系统升级，Linux 升级的主动权掌握在你的手里（没有被 Windows <strong>强制更新</strong> 然后 <strong>更新失败</strong> 然后 <strong>回滚</strong> 然后 <strong>回滚失败</strong> 所支配的恐惧了哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这世界上还有什么东西比微软的更新更不靠谱的吗），并且你可以随时打断更新流程（在不影响系统的情况下）（除了内核及相关部分更新，大部份的安装操作 <strong>不需要重新启动</strong>）（服务器很少重启）。另外如果不是新版本软件有什么必须的功能，<strong>最好不要</strong> 更新服务器上的软件。如果你习惯了一个还在维护中的不是最新的软件，Linux 和开发者不会强迫你为了新功能而更新，因为这些新功能你可能不会用到，还可能影响到系统稳定性，当然，如果有安全更新比如修复了漏洞一类的最好更新一下。</p>
+<h1 id="root是谁？权限是什么？为什么没有CDDEFG盘？"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#root%E6%98%AF%E8%B0%81%EF%BC%9F%E6%9D%83%E9%99%90%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89CDDEFG%E7%9B%98%EF%BC%9F" title="root是谁？权限是什么？为什么没有CDDEFG盘？"></a>root 是谁？权限是什么？为什么没有 CDDEFG 盘？</h1>
+<p>简而言之，root 是一个 UID（User ID）为 0 的特殊用户，一般用于系统管理操作，它可以操作系统的任何部分即使这些部分不是属于它的（你的我的都是我的）。因此我们不建议在日常操作中使用 root，并且需要给 root 设置复杂的密码。否则一旦入侵者掌握了 root，你的机器就变成了他的。日常使用 root 则很容易对系统造成损坏（系统不控制 root 的行为）。平时我们使用自己的用户，需要进行高权限操作比如安装软件（Linux 下安装软件是全局的也就是说你要修改不属于自己的部分）时使用 <code>sudo</code> 命令，<code>sudo</code> 会以 root 权限运行后面的命令，同时要求你输入自己的密码。但是只有列在 <code>sudoers</code> 文件里面的用户可以使用 <code>sudo</code>，具体的用法阅读 <a href="http://linux.vbird.org/linux_basic/0410accountmanager.php#sudo" target="_blank" rel="noreferrer noopener">这里</a>。</p>
+<p>权限则是用来管理用户对于文件的操作的。使用 <code>ls -alh</code> 的时候可以看到第一列都是文件的权限，一般看起来像是 <code>-rwxr-xr-x</code>，每一位是一个信息，内容如下：</p>
+<ol>
+<li><p>第一位表示的是文件类型，<code>-</code> 表示这是一个普通文件，<code>l</code> 表示这是一个连接文件（link），<code>d</code> 表示这是一个目录（dir）。</p>
+</li>
+<li><p>第二到四位是文件所有者对于文件的权限（<code>ls -l</code> 的第三列是文件所有者），<code>r</code> 表示可以读，<code>w</code> 表示可以写，<code>x</code> 表示这个文件是可以运行的（当然能不能运行还要看文件内容，比如图片当然不能执行了）。如果没有某项权限，该位置为 <code>-</code>。</p>
+</li>
+<li><p>第五到八位是文件所属用户组对于文件的权限，含义同上。</p>
+</li>
+<li><p>最后三位是既不是所有者也不属于该用户组内的其他用户对于文件的权限。</p>
+</li>
+</ol>
+<p>如果你需要修改一个文件的权限（前提是你对这个文件有写权限），使用 <code>chmod num file</code>，其中 <code>num</code> 对应原则如下：</p>
+<ul>
+<li><p><code>r</code> =&gt; 4，<code>w</code> =&gt; 2, <code>x</code> =&gt; 1</p>
+</li>
+<li><p>每一组加起来获得一个和，第一位不考虑，例如 <code>-rwxr-xr-x</code> 除去第一位，换算成 <code>755</code>。</p>
+</li>
+</ul>
+<p>如果想递归改变一个目录，使用选项 <code>-R</code>。</p>
+<p>任何情况下 <strong>不要</strong> 将文件权限设置为 <code>777</code> 虽然你可能看到网络上有些不会用 Linux 的蠢货为了方便这样做，这意味着任何人都有权限修改这个文件，一旦入侵者在其中加入恶意代码，而你使用 root 执行了它，那么恶意代码就有了 root 权限，可以破坏或窃取任何数据。</p>
+<p>有关目录结构：Linux 使用目录树组织目录结构，与 Windows 不同，如果你需要访问一个设备上的文件，你需要把设备挂载到某个目录（相当于把设备自己的树枝接到总树上的某一枝干上，当然接到哪里不一定是固定的），Linux 下有一些约定的结构，通常我们把 /（根目录）放在一个分区上（其他目录都是接在根目录下面），然后把 /home 放在另一个分区里（通常储存了用户们自己的文件），这样一旦需要重新安装，只需要清空根目录所在分区，保留用户数据文件（同时把自己的文件不放在自己的家目录也是不明智的）。更多复杂的解释参见 <a href="http://linux.vbird.org/linux_basic/0210filepermission.php#dir" target="_blank" rel="noreferrer noopener">这里</a> 和 <a href="http://linux.vbird.org/linux_basic/0230filesystem.php" target="_blank" rel="noreferrer noopener">这里</a>。</p>
+<h1 id="如何管理系统？"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%9F" title="如何管理系统？"></a>如何管理系统？</h1>
+<p>现在的发行版通常使用 Systemd 作为启动后的第一个进程，并且由它后台管理启动项，因此如果你使用的是我所列出的较新发行版本，一旦上网搜索到的说明让你使用 <code>rc.local</code>、<code>/etc/init.d/xxx start</code>，直接关掉，他们过时了。</p>
+<p>一般你所需的开机启动的程序比如 http 服务器 <code>nginx</code>，在打包的时候都会有一个 <code>service</code> 文件供 Systemd 使用，Systemd 主要通过 <code>systemctl</code> 这个指令来控制，常见用法如下：</p>
+<ul>
+<li><p><code>systemctl enable nginx</code> 表示将 <code>nginx.service</code> 添加到启动列表里（<code>.service</code> 可以省略），如果想同时立刻启动它，在后面附加参数 <code>--now</code>。</p>
+</li>
+<li><p><code>systemctl start nginx</code> 表示立即启动 <code>nginx</code>（并不影响系统重启后的操作。）（这里的启动是指由 Systemd 管理，并不是 Shell，可以理解为后台服务）。</p>
+</li>
+<li><p><code>systemctl stop nginx</code> 立即停止 <code>nginx</code>。</p>
+</li>
+<li><p><code>systemctl disable nginx</code> 将 <code>nginx</code> 从开机启动列表里去除，也即下一次启动系统时不启动它。加上 <code>--now</code> 可以同时停止它。</p>
+</li>
+<li><p><code>systemctl status nginx</code> 查看 <code>nginx</code> 当前的运行状态信息。</p>
+</li>
+</ul>
+<p>如果要阅读日志，使用 <code>journalctl</code> 命令。更多详细介绍参见 <a href="https://wiki.archlinux.org/index.php/Systemd" target="_blank" rel="noreferrer noopener">这里</a>。</p>
+<h1 id="提问的艺术"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#%E6%8F%90%E9%97%AE%E7%9A%84%E8%89%BA%E6%9C%AF" title="提问的艺术"></a>提问的艺术</h1>
+<p>Linux 开发者们一般都是凭借兴趣和对写程序的热情进行开发的，或者说他们不像微软和苹果的员工拿了你的钱替你解决问题，唯一让他们解决问题的动力就是写出完美的程序。因此一旦你发现了问题求助于他们，请注意你的语气，这里没有人亏欠你什么，最好进行建设性的发言，并且给出足够的信息，方便其他人帮你解决。如果一上来就吐槽但是问题却是你自己的话，做好挨骂的心理准备。</p>
+<h1 id="最后，有关“世界上最好的两种语言”Python……"><a class="headerlink" href="/posts/Linux-Manual-for-Newbies-1/#%E6%9C%80%E5%90%8E%EF%BC%8C%E6%9C%89%E5%85%B3%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8A%E6%9C%80%E5%A5%BD%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%AF%AD%E8%A8%80%E2%80%9DPython%E2%80%A6%E2%80%A6" title="最后，有关“世界上最好的两种语言”Python……"></a>最后，有关 “世界上最好的两种语言” Python……</h1>
+<blockquote class="centerquote">所有使用 Python 却不指明具体版本的人都是耍流氓！</blockquote>
+
+<p>由于 Python2 和 Python3 语法任性的不兼容，而有些发行版默认的 <code>python</code> 链接到 <code>python3</code> 有些还抱着 <code>python2</code>，建议在运行有关指令时使用具体的 <code>python2</code> 或者 <code>python3</code> 而不是 <code>python</code>。同样，使用 <code>pip</code>（Python 的包管理器，安装 Python 一些库的时候尽量用这个）的时候也要指定 <code>pip2</code> 或者 <code>pip3</code>（Python 两个版本有不同的目录，装错了没人管你）。</p>
+<p><strong>不要修改系统默认的 Python 版本</strong>，除非你想让用 Python 编写的系统软件崩溃！</p>
+<p>虽然我是不建议使用 Python2 这个即将停止支持的语言，但是只要你编写的时候加上文件头：</p>
+<pre><code class="python"><figure class="highlight hljs python"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code><span class="hljs-comment">#!/usr/bin/env python2</span></code></pre></figure></code></pre>
+<p>就不会造成太大问题（Python3 用户把 <code>python2</code> 换成 <code>python3</code>）。</p>
+<p>最后，Linux 下的文件请一律使用 无 BOM 的 UTF-8 编码（自己查这是什么！）。</p>
+<p>不懂的一定要多搜索！搜索引擎（谷歌，必应）是好工具，不搜索永远也学不会。</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="fas fa-tag"></i>计算机</a><a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="fas fa-tag"></i>Linux</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" rel="next" title="GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）"><i class="fas fa-angle-left"></i><span class="nav-title">GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Kalafina-My-Music-Life/" rel="prev" title="Kalafina, My Music Life"><span class="nav-title">Kalafina, My Music Life</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "写给新手的 Linux 手册 1",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search" role="search">
+    <form action="search.html" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">62</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">42</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">65</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content">
+        
+        
+        <ol class="list-group toc">
+        
+          <li>
+            <a class="list-group-item toc-link" href="#开宗明义（开篇劝退）">开宗明义（开篇劝退）</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#我该选择什么版本的Linux？">我该选择什么版本的 Linux？</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#我该怎样连接到我的服务器？SSH又是什么？">我该怎样连接到我的服务器？SSH 又是什么？</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#Shell和终端都是什么？为什么我输入密码没有反应？">Shell 和终端都是什么？为什么我输入密码没有反应？</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#我该如何编辑文件？怎样安装我需要的软件？">我该如何编辑文件？怎样安装我需要的软件？</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#root是谁？权限是什么？为什么没有CDDEFG盘？">root 是谁？权限是什么？为什么没有 CDDEFG 盘？</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#如何管理系统？">如何管理系统？</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#提问的艺术">提问的艺术</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#最后，有关“世界上最好的两种语言”Python……">最后，有关 “世界上最好的两种语言” Python……</a>
+            
+          </li>
+        
+        </ol>
+        
+      </div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank" rel="noreferrer noopener">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jm33.me/" target="_blank" rel="noreferrer noopener">Jm33_m0's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sh.yorushika.co/" target="_blank" rel="noreferrer noopener">Yorushika Shi's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.1.6 at 2019-09-14 Sat 22:14:17 CST. -->

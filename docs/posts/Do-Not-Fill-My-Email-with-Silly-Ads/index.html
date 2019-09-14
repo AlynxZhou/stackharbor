@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">复制</button>");
+      });
+      var cb = new ClipboardJS("a.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>不要拿愚蠢的广告来污染我的邮箱 | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Do-Not-Fill-My-Email-with-Silly-Ads/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">不要拿愚蠢的广告来污染我的邮箱</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-04T10:27:00.000Z">2019-05-04 Sat 18:27:00 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">无题</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>一个多月没更新了，这次要写的不是什么技术问题，而是技术的附属问题。</p>
+<a id="more"></a>
+
+<p>一切问题的起源是邮箱里出现的这两封邮件：</p>
+<p><img src="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/email1.png" alt></p>
+<p><img src="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/email2.png" alt></p>
+<p>当你使用的邮箱服务是按某种数字顺序批量注册用户名的时候，你就没办法避免这种情况，不止我自己，而是很多人都收到这种邮件，没办法，谁叫邮箱都是连号的，甚至不需要写脚本，只要用 Excel 拖一下就能生成一大串邮箱地址，毫无技术含量。</p>
+<p>从哪里开始呢？今天我不打算讨论写这么个 app 的技术问题，因为不管怎么说写这么一个系统也不是个简单的活，还是要尊重别人的劳动成果。但除了技术问题，别的问题就一大堆了。</p>
+<h1 id="我不想下载"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E6%88%91%E4%B8%8D%E6%83%B3%E4%B8%8B%E8%BD%BD" title="我不想下载"></a>我不想下载</h1>
+<p>没错，最大的问题其实是我看了这个东西以后根本没有下载的欲望，甚至连让我下载下来找找里面有哪些技术缺陷的欲望都没有。我也不是什么专业的传播学者或广告设计者，但从一个用户的角度而言就没有使用欲望——而且这种现象也不止我自己。</p>
+<h1 id="你的情怀和我有什么关系"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E4%BD%A0%E7%9A%84%E6%83%85%E6%80%80%E5%92%8C%E6%88%91%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB" title="你的情怀和我有什么关系"></a>你的情怀和我有什么关系</h1>
+<blockquote>
+<p>今年春半，凝聚了团队无数努力和心血的项目终于开启了测试阶段。这对于我们整个团队来说都是一个饱含着拼搏意义和激动情绪的时刻。</p>
+</blockquote>
+<p>上一个想要靠卖弄情怀来宣传聊天软件的人叫罗永浩，结果如何呢？提起罗永浩大家还是首先想到 TNT、打脸，有几个想到聊天宝（<strong>原子弹短信</strong>）的？罗老师的原子弹短信一开始可是给用户发红包的，这年头光卖情怀可不行，大家都喜欢红包。</p>
+<p>我知道你们实现了目标非常开心，但能不能冷静下来再发广告，这句话放在这里除了浪费几 Byte 流量之外，对用户了解你的应用有什么帮助嘛？</p>
+<h1 id="AI不是万能形容词"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#AI%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E5%BD%A2%E5%AE%B9%E8%AF%8D" title="AI不是万能形容词"></a>AI 不是万能形容词</h1>
+<blockquote>
+<p>Dreamua 是首款 AI 社交应用。</p>
+</blockquote>
+<p>如果你做了个图片识别程序，你打个标签叫 AI 识图，那我觉得你的可信度有 90%，毕竟有很多现成的例子了。</p>
+<p>如果你做了个文本翻译程序，你打个标签叫 AI 翻译，那我觉得你的可信度有 70%，因为有几家财大气粗的公司在做，虽然效果不一定太好。</p>
+<p>如果你做了个自动驾驶程序，你打个标签叫 AI 驾驶，那你的可信度取决于你是不是在特斯拉上班。</p>
+<p>如果你非得叫 AI 社交……AI 社交了，还要我干什么？社交是人与人之间的互动哎，你这个 AI 社交，AI 在里面扮演什么角色呢？AI 能猜出来“今晚月色真美”的潜台词嘛？要是能猜出来，全世界的翻译官都失业了。</p>
+<p>写广告的人不懂的话可以问问程序员，最起码程序员应该懂。</p>
+<h1 id="求你别搞假大空"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E6%B1%82%E4%BD%A0%E5%88%AB%E6%90%9E%E5%81%87%E5%A4%A7%E7%A9%BA" title="求你别搞假大空"></a>求你别搞假大空</h1>
+<blockquote>
+<p>我们想了很久的slogan，最后把它决定为“Dreamua—遇见宇宙中最契合的TA”。
+“宇宙”、“契合”是很宏大的词，但是我们希望可以和你一起，实现这个slogan的意义。</p>
+</blockquote>
+<p>如果语文老师没教你避免假大空，那软件工程老师应该教过你怎么写文档，<strong>请问你们这个软件是想让我和外星生物配种嘛？</strong></p>
+<h1 id="edu邮箱就很靠谱吗"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#edu%E9%82%AE%E7%AE%B1%E5%B0%B1%E5%BE%88%E9%9D%A0%E8%B0%B1%E5%90%97" title="edu邮箱就很靠谱吗"></a>edu 邮箱就很靠谱吗</h1>
+<blockquote>
+<p>Dreamua是一个仅对edu邮箱用户开放的高校社交App，其核心和灵魂是AI社交。注册Dreamua 账号无需填写复杂简介，仅需一个edu邮箱，一张头像，一个昵称。</p>
+</blockquote>
+<p>废话，<strong>edu 邮箱要是那么靠谱，我就不会收到这个邮件了</strong>——毕竟发件人也是 edu 邮箱。</p>
+<p>一个 edu 邮箱能说明什么呢？学号？学校？这个邮箱的主人可能已经毕业了，比如发邮件的这位 14xxxxxx，你是留级了在读大五？</p>
+<p>知道为什么我用 edu 邮箱申请 GitHub 学生认证不给过吗？就是因为国内的 edu 邮箱管理太松散了，完全没办法辨别真伪。那既然邮箱不能验证我是不是学生，再加一张头像一个昵称就能验证我是不是学生了吗？</p>
+<p>如果你们下次还想发广告，我觉得可以去淘宝搜索一下“教育 邮箱”，多买几个马甲，别总用一个，添加黑名单很容易的，大家只是太懒而已。</p>
+<h1 id="说话能不能说准了"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E8%AF%B4%E8%AF%9D%E8%83%BD%E4%B8%8D%E8%83%BD%E8%AF%B4%E5%87%86%E4%BA%86" title="说话能不能说准了"></a>说话能不能说准了</h1>
+<blockquote>
+<p>Dreamua是一个仅对edu邮箱用户开放的高校社交App。
+Dreamua 测试版仅面向 edu 邮箱用户开放。</p>
+</blockquote>
+<p>第一封邮件告诉我这个社交 app 只对高校学生开放。第二封就告诉我是测试版仅面向 edu 邮箱——那以后呢？</p>
+<h1 id="生人社交本身就是伪命题"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E7%94%9F%E4%BA%BA%E7%A4%BE%E4%BA%A4%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E4%BC%AA%E5%91%BD%E9%A2%98" title="生人社交本身就是伪命题"></a>生人社交本身就是伪命题</h1>
+<p>求求你了我们真的不是没社交就会孤独到死。不是每个人每个晚上都睡不着觉拿着微信疯狂摇一摇。我有自己认识的人，我可以认识我认识的人认识的人，我甚至看到有趣的人也可以直接上去要联系方式——或者我干脆就不想和别人说话。</p>
+<p>从小到大不爱和人说话的同学我见得多了，他们活得好好的，也没见谁需要下个 app“寻找志趣相投的伙伴”。<strong>实在不行的话，我还有沙雕网友呢。</strong></p>
+<h1 id="我为什么非要用你的"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9D%9E%E8%A6%81%E7%94%A8%E4%BD%A0%E7%9A%84" title="我为什么非要用你的"></a>我为什么非要用你的</h1>
+<p>我倒不是说微信微博 QQ 做的比你们技术好，但每个人都或多或少的被这些或者其他 app 黏着。本身这些东西已经够用了，我看不到需要切换到第 N + 1 个 app 来和别人说话的任何理由，特别是对于我们这些生活在地球外面的人，想切换就更艰难了。</p>
+<p>原子弹短信的尸体还在墙头上挂着呢，支付宝也有聊天功能，除了聊天框里的“转账”按钮，你按过别的吗？</p>
+<h1 id="Play商店搜不到"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#Play%E5%95%86%E5%BA%97%E6%90%9C%E4%B8%8D%E5%88%B0" title="Play商店搜不到"></a>Play 商店搜不到</h1>
+<p>这一条可能有些不接地气，但对 Android 用户来说，Play 商店是最可靠的程序来源，就如同苹果的 App Store 一样。只有 Play 会定期检查手机里的 app 是不是有安全问题，其它的国内商店根本没有安全保证——拍个身份证照片注册就安全了吗？</p>
+<p>我看到你们的 app 提交了 App Store，所以应该不差那 25 美元提交 Play Store 吧，毕竟我自己的开源 app 也掏了 25 上了 Play 呢。</p>
+<h1 id="官网没有可用信息"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E5%AE%98%E7%BD%91%E6%B2%A1%E6%9C%89%E5%8F%AF%E7%94%A8%E4%BF%A1%E6%81%AF" title="官网没有可用信息"></a>官网没有可用信息</h1>
+<p>还好我能够在 Google 搜索到 <a href="https://www.dreamua.com/" target="_blank" rel="noreferrer noopener">https://www.dreamua.com/</a>，但这个页面逻辑和我自己的 app 页面 <a href="https://livewallpaper.alynx.xyz/" target="_blank" rel="noreferrer noopener">https://livewallpaper.alynx.xyz/</a> 逻辑差不多嘛——就一个简单的静态页面，分几个段落，写一些半通不通的话（“年轻有朝气的初创团队，致力于打造一家有影响力、有社会责任感的互联网科技公司。”这话怎么读怎么奇怪）。既然你都注册公司了，多写几个页面问题不大吧。你们是公司，我可是一个人单打独斗写的 app，不至于和我一样套开源 bootstrap 主题吧！</p>
+<p>顺便，上面写诞生于高校宿舍，下面又写有 Uber、Facebook、Amazon、腾讯等知名互联网公司工作经验……大概能是真的，就是会让人觉得开发之后已经换了一波人一样，再说，腾讯出来的人写个前端页面不难吧。</p>
+<h1 id="化再浓的妆也没用"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E5%8C%96%E5%86%8D%E6%B5%93%E7%9A%84%E5%A6%86%E4%B9%9F%E6%B2%A1%E7%94%A8" title="化再浓的妆也没用"></a>化再浓的妆也没用</h1>
+<p>说实在的，我对用户群体的评估可能有点失误，真的有人告诉我他们的室友下载了这个 app，后一句就是喜闻乐见的“想通过这玩意脱单”。</p>
+<p>你看看你看看，人家用户都摆明了自己的需求了，就不要写什么“将宇宙中的一座座孤岛连成一片星海”了。单身直男们也该思索一下了，为什么夏目漱石说“今晚月色真美”是表白，你说“今晚月色真美”就是华为 P30 Pro 的高端黑了，你看王跃琨一下子就被开除了！太晦涩难懂是没法脱单的！</p>
+<h1 id="真的别再卖情怀了"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E7%9C%9F%E7%9A%84%E5%88%AB%E5%86%8D%E5%8D%96%E6%83%85%E6%80%80%E4%BA%86" title="真的别再卖情怀了"></a>真的别再卖情怀了</h1>
+<blockquote>
+<p>首先谢谢你打开这封信。
+我们是交大的一个学生团队，我们和你们一样在学活吃渔粉，在球场踢足球，在傍晚看明湖鸭。
+Dreamua 诞生于高校宿舍。</p>
+</blockquote>
+<p>说真的，你这样会让别人对我们宿舍里这些同学的真实水平产生怀疑——我觉得我们学校的教学还是偏重于踏踏实实讲理论老老实实学技术的，而不是选个厮杀的你死我活的行业（你们的对手不止有探探陌陌 Soul 其实还有微信微博 QQ 甚至是 Bilibili 和网易云音乐）来创业，写一堆乱七八糟的文案卖情怀。</p>
+<p>以前好像有个公众号，文案风格如出一辙，也挺喜欢卖情怀的，结果清华评特奖的时候从简历上被人挖出来婊说实际什么都没做。我觉得这种事情给人留的印象挺差的，所以还是别卖情怀了，能好好写文案就好好写，写不出来吃点渔粉踢会足球看看鸭鸭可能就有灵感了。</p>
+<h1 id="百度没收录我的网站"><a class="headerlink" href="/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E7%99%BE%E5%BA%A6%E6%B2%A1%E6%94%B6%E5%BD%95%E6%88%91%E7%9A%84%E7%BD%91%E7%AB%99" title="百度没收录我的网站"></a>百度没收录我的网站</h1>
+<p>最近那个《旗帜鲜明地反对李彦宏当选工程院院士》挺出名的。我先声明一下，我的网站放在地球上，谷歌必应收录了我的网站而百度搜狗 360 这种辣鸡引擎没有收录，特别是百度还把山寨我的站点放在了搜索结果首页上。所以百度和我没什么利害关系，我也就不担心这种问题。</p>
+<p>至于腾讯封了《旗帜鲜明》我也不太担心，毕竟我这人不喜欢用微信，连公众号都没有，生平最烦举报党。</p>
+<p>我恰好想起来今天是我建站的三周年零一个月整，114777 个点击量不算太多，但从第一篇文章开始我的目标就没变过——“网站是属于自己的，我可以记录我自己的想法，喜不喜欢则是你的自由”。</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E6%84%A4%E6%80%92/" rel="tag"><i class="fas fa-tag"></i>愤怒</a><a class="post-tag button" href="/tags/%E5%90%90%E6%A7%BD/" rel="tag"><i class="fas fa-tag"></i>吐槽</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Archlinux-UnityHub/" rel="next" title="Arch Linux 安装 UnityHub 的临时方案"><i class="fas fa-angle-left"></i><span class="nav-title">Arch Linux 安装 UnityHub 的临时方案</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Magnolia/" rel="prev" title="Magnolia"><span class="nav-title">Magnolia</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "不要拿愚蠢的广告来污染我的邮箱",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search" role="search">
+    <form action="search.html" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">62</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">42</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">65</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content">
+        
+        
+        <ol class="list-group toc">
+        
+          <li>
+            <a class="list-group-item toc-link" href="#我不想下载">我不想下载</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#你的情怀和我有什么关系">你的情怀和我有什么关系</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#AI不是万能形容词">AI 不是万能形容词</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#求你别搞假大空">求你别搞假大空</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#edu邮箱就很靠谱吗">edu 邮箱就很靠谱吗</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#说话能不能说准了">说话能不能说准了</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#生人社交本身就是伪命题">生人社交本身就是伪命题</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#我为什么非要用你的">我为什么非要用你的</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#Play商店搜不到">Play 商店搜不到</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#官网没有可用信息">官网没有可用信息</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#化再浓的妆也没用">化再浓的妆也没用</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#真的别再卖情怀了">真的别再卖情怀了</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#百度没收录我的网站">百度没收录我的网站</a>
+            
+          </li>
+        
+        </ol>
+        
+      </div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank" rel="noreferrer noopener">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jm33.me/" target="_blank" rel="noreferrer noopener">Jm33_m0's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sh.yorushika.co/" target="_blank" rel="noreferrer noopener">Yorushika Shi's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.1.6 at 2019-09-14 Sat 22:14:16 CST. -->

@@ -1,0 +1,12 @@
+# robots.txt
+User-agent: *
+Allow: /
+Allow: /posts/
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+Allow: /about/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Sitemap: http://sh.alynx.moe/sitemap.xml

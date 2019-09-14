@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">复制</button>");
+      });
+      var cb = new ClipboardJS("a.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>CoffeeScript 的静态方法和静态变量（类方法和类变量） | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Coffee-Static-Varible-Method/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">CoffeeScript 的静态方法和静态变量（类方法和类变量）</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-01-26T11:04:33.000Z">2018-01-26 Fri 19:04:33 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/CoffeeScript/" itemprop="url" rel="index"><span itemprop="name">CoffeeScript</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="noreferrer noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="noreferrer noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
+<a id="more"></a>
+
+<h1 id="静态变量"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F" title="静态变量"></a>静态变量</h1>
+<p>很遗憾这里没有 <code>static</code> 这么简单的关键字，即使是在 EMCAScript 里 <code>static</code> 这个关键字也只是用来修饰静态方法，用 <code>static</code> 修饰变量仍然是个提案。首先还是来说如何在常规的 JavaScript 里使用静态变量（只考虑 ES6 之后的情况，因为多亏了 CoffeeScript，我也没有写过 ES5），它是如此的简单而又奇怪，简单是因为即使是我这样又笨又懒的人看过一遍也能在 Node 里完整地默写出来不报错，但是这是有原因的——因为它实在是太古怪了以至于你看一眼就忘不了它：</p>
+<pre><code class="JavaScript"><figure class="highlight hljs javascript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+</pre><pre class="code"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>{
+  <span class="hljs-keyword">constructor</span>() {
+    ++Test.counter;
+  }
+}
+Test.counter = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> t = <span class="hljs-keyword">new</span> Test();
+<span class="hljs-built_in">console</span>.log(Test.counter);
+<span class="hljs-comment">// 输出 1</span></code></pre></figure></code></pre>
+<p>没错这段代码是如此的直观，以至于我都不需要写注释来解释每一句干了什么，我敢肯定你有任何一点面向对象的基础都能明白，如果你对任何一个部分表示不理解，我建议你仔细去学习一个面向对象的程序语言—— Java 是个好选择因为它很成熟，同时是个严格的面向对象的程序语言。</p>
+<p>当然，JavaScript 并不是那么纯粹的语言或者说它几乎什么都能做一点并且这个趋势越来越大，所以你并不需要深入的面向对象知识也能看懂上面那一段代码。在 ES6 中实现一个类变量或者叫静态变量就是这个简单地两步：第一在类定义的方法内直接使用类的名字来访问静态成员——你没看错，这里没有 <code>this</code> ——毕竟这里的 <code>this</code> 在上下文中大多数指的还是实例而不是类本身。第二在类定义的外部给你想要的变量进行一个初始化（赋初值）。</p>
+<p>我敢肯定对于 JavaScript 这样一门号称“一切能够用 JavaScript 实现的最终都会用 JavaScript 实现”的语言而言肯定不只这么一种实现类变量的方法，但是最起码对我而言这是最直观的一种，我相信对于一切有一点 JavaScript 基础的人而言这也都是最直观的一种，如果你想问为什么没有更直观的在类定义内部实现的像 Java 或者什么一样的写法，很抱歉，暂时没有，或许你可以等到 ES7 的时代再来学习 JavaScript，当然到那个时候你又会被这门语言其他的问题纠结到 ES8，这很现实，这是一个不完美但同时不断高速进化的语言，它越来越广泛的应用逼着它去填由于愚蠢的商业手段导致的停滞不前带来的坑，当然最起码——JavaScript 虽然出生仓促，但基础并不很糟，或者说它有着各种奇特的实现不断让人燃烧自己的脑细胞。</p>
+<p>好了是时候回到今天的主题了，我觉得我从来就不是一个合格的 JavaScript 程序员因为我喜欢 CoffeeScript——这大概是原罪，特别是在一群 TypeScript 的好战分子眼里——我没有说 TypeScript 不好，但是我只是很喜欢 CoffeeScript 的语法糖以及动态类型带来的天马行空或者乱七八糟的写法——你何必把一只泥沼里的乌龟拉去杀死放在庙里供奉呢？</p>
+<p>CoffeeScript 的官网虽然没有明说，但是它确实有简化这部份的语法糖：</p>
+<p>你只需要像写一个方法一样写一个变量，把它放在和方法一个层次上，然后要在开头加上 <code>@</code>，无论你使用 <code>:</code> 还是 <code>=</code> 来赋值都没有关系。在实例方法中使用时的写法有点变化，你不应该用 <code>@</code> 因为它不属于当前实例这个 <code>this</code>，它属于 <code>this</code> 的 <code>constructor</code> 也就是说 <code>@constructor</code>，CoffeeScript 编译器会正确的把这个替换成类的名字——没办法，JavaScript 并没有代词指代这种情况。</p>
+<pre><code class="CoffeeScript"><figure class="highlight hljs coffeescript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+</pre><pre class="code"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
+  @counter: <span class="hljs-number">0</span>
+  constructor: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
+    ++@constructor.counter
+t = <span class="hljs-keyword">new</span> Test()
+<span class="hljs-built_in">console</span>.log(Test.counter)
+<span class="hljs-comment"># 输出 1</span></code></pre></figure></code></pre>
+<p>编译出来的结果是这样的，虽然有着浓浓的咖啡味道但是也不难懂：</p>
+<pre><code class="JavaScript"><figure class="highlight hljs javascript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+</pre><pre class="code"><code><span class="hljs-comment">// Generated by CoffeeScript 2.1.1</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> Test, t;
+  Test = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>{
+      <span class="hljs-keyword">constructor</span>() {
+        ++<span class="hljs-keyword">this</span>.constructor.counter;
+      }
+    };
+    Test.counter = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> Test;
+  }).call(<span class="hljs-keyword">this</span>);
+  t = <span class="hljs-keyword">new</span> Test();
+  <span class="hljs-built_in">console</span>.log(Test.counter);
+  <span class="hljs-comment">// 输出 1</span>
+}).call(<span class="hljs-keyword">this</span>);</code></pre></figure></code></pre>
+<p>实际上如果你只是想 <strong>创造</strong> 一个属于类的变量还有一种写法，但是严格来讲它并不属于类变量而是访问原型上的一个变量（不要忘了 JavaScript 的原型链），这个变量仍然会实例化，之所以在这里提起是因为网上很多搜索结果把这个也称作类变量，我认为是不正确的。</p>
+<pre><code class="CoffeeScript"><figure class="highlight hljs coffeescript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+</pre><pre class="code"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
+  counter: <span class="hljs-number">0</span>
+  constructor: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
+    ++@counter
+t = <span class="hljs-keyword">new</span> Test()
+<span class="hljs-built_in">console</span>.log(Test::counter)
+<span class="hljs-comment"># 输出 0</span></code></pre></figure></code></pre>
+<p>不推荐这个写法并不是因为它用了一个 C++ 常见的符号 <code>::</code>，而是因为它只能让你访问到一个原型上的变量，最后仍然会被实例化，也没有直观的语法糖让你在方法里修改它（大概直接写 <code>Test::</code> 可行？）。</p>
+<h1 id="静态方法"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95" title="静态方法"></a>静态方法</h1>
+<p>有了前面的基础静态方法无论是在原生 JavaScript 里面还是 CoffeeScript 都变得相当直观——大概只需要一个例子：</p>
+<p>在 CoffeeScript 中和处理静态变量很类似，都是简单地在前面加上 <code>@</code>，当然如果你要在静态方法里操作静态变量不需要写 <code>@constructor</code> 而是直接写 <code>@</code>，因为这个时候上下文的 <code>this</code> 就是这个类本身——严格来说这也是不对的，能够绑定到这个上下文的原因是 CoffeeScript 编译的时候增加的函数作用域——这是个好东西，咖啡味。换句话说 ES6 这里根本就没有和 <code>this</code> 扯上关系，它只能傻乎乎的用类本名，CoffeeScript 在这里自己多搞了一点，用这个来变通，翻译成 JavaScript 的时候再替换掉文本。</p>
+<pre><code class="CoffeeScript"><figure class="highlight hljs coffeescript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+</pre><pre class="code"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
+  @counter: <span class="hljs-number">0</span>
+  @printCounter: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span>
+    <span class="hljs-built_in">console</span>.log(@counter)
+  constructor: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
+    ++@constructor.counter
+t = <span class="hljs-keyword">new</span> Test()
+Test.printCounter()
+<span class="hljs-comment"># 输出 1</span></code></pre></figure></code></pre>
+<p>编译成 JavaScript 之后是这样的，<code>static</code> 关键字终于出来刷存在感了：</p>
+<pre><code class="JavaScript"><figure class="highlight hljs javascript"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+</pre><pre class="code"><code><span class="hljs-comment">// Generated by CoffeeScript 2.1.1</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> Test, t;
+  Test = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>{
+      <span class="hljs-keyword">static</span> printCounter() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(Test.counter);
+      }
+      <span class="hljs-keyword">constructor</span>() {
+        ++<span class="hljs-keyword">this</span>.constructor.counter;
+      }
+    };
+    Test.counter = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> Test;
+  }).call(<span class="hljs-keyword">this</span>);
+  t = <span class="hljs-keyword">new</span> Test();
+  Test.printCounter();
+  <span class="hljs-comment">// 输出 1</span>
+}).call(<span class="hljs-keyword">this</span>);</code></pre></figure></code></pre>
+<h1 id="总结"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E6%80%BB%E7%BB%93" title="总结"></a>总结</h1>
+<p>事实上到上面已经靠几个例子说明了正确的用法，但是由于还有交叉处理的部分，简单总结一下。</p>
+<p>1.把变量写在类定义里面属性的层次并且在变量名前面加上 <code>@</code> 会在 CoffeeScript 里产生一个静态变量。</p>
+<p>2.在方法名前面加 <code>@</code> 会在 CoffeeScript 里产生一个静态方法。</p>
+<p>3.在静态方法中操作静态变量只需要像在实例方法中操作实例变量一样使用 <code>this</code>，这个作用域就是类定义的上下文，CoffeeScript 自动把 <code>@</code> 替换成类的名字以便符合 ES6 语法。</p>
+<p>4.在实例方法中操作静态变量需要使用 <code>@constructor</code>，原因是这个时候的 <code>this</code> 是实例本身而不是类，类在 CoffeeScript 里绑定到了 <code>this.constructor</code>，编译时自动替换成类的名字（因为 ES6 只能这样访问类变量而不是用一个引用）。</p>
+<p><del>5.在静态方法中操作实例变量……<strong>根本没有这样的用法好吧！！！</strong></del></p>
+<h1 id="碎碎念"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E7%A2%8E%E7%A2%8E%E5%BF%B5" title="碎碎念"></a>碎碎念</h1>
+<p>明明是凑数的文章却偏偏写了这么多，反正大概是没有人看的，毕竟 CoffeeScript 是要凉了，就像那些激进分子希望的一样，光是喜欢又有什么用呢？他们是不会管你喜欢不喜欢的，他们不喜欢就得了。短期内倒是希望 Atom 能搞点什么大新闻，可以不要让 VSCode 激进分子在我这边黑 Atom，我就是喜欢用 Atom 不喜欢用 VSCode，就算你觉得 Atom 有很多缺点可是我觉得它足够合适乃至我可以接受它的缺点，在我这边吵除了生气以外还能有什么作用不成？所以我讨厌辩论，光是说，却没什么实际作用。或者这大概是软粉和微软受害者的冲突而已？最近没得东西写出来，还是去推一推 Fate/Stay Night 或者打一打 CSGO 好了。</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Code%20Life/" rel="tag"><i class="fas fa-tag"></i>Code Life</a><a class="post-tag button" href="/tags/CoffeeScript/" rel="tag"><i class="fas fa-tag"></i>CoffeeScript</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Emiya-Menu-ED/" rel="next" title="コラージュ（卫宫家今天的饭 ED）曲谱"><i class="fas fa-angle-left"></i><span class="nav-title">コラージュ（卫宫家今天的饭 ED）曲谱</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/2017-Tail/" rel="prev" title="StackHarbor 的 2017 尾记"><span class="nav-title">StackHarbor 的 2017 尾记</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "CoffeeScript 的静态方法和静态变量（类方法和类变量）",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search" role="search">
+    <form action="search.html" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">62</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">42</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">65</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content">
+        
+        
+        <ol class="list-group toc">
+        
+          <li>
+            <a class="list-group-item toc-link" href="#静态变量">静态变量</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#静态方法">静态方法</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#总结">总结</a>
+            
+          </li>
+        
+          <li>
+            <a class="list-group-item toc-link" href="#碎碎念">碎碎念</a>
+            
+          </li>
+        
+        </ol>
+        
+      </div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank" rel="noreferrer noopener">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jm33.me/" target="_blank" rel="noreferrer noopener">Jm33_m0's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sh.yorushika.co/" target="_blank" rel="noreferrer noopener">Yorushika Shi's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.1.6 at 2019-09-14 Sat 22:14:17 CST. -->
