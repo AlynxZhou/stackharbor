@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script defer type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "/search.json";
+      if ("search.json".length === 0) {
+        searchPath = "/search.json";
+      }
+      searchFunc(searchPath, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<a class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></a>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">复制</button>");
+      });
+      var cb = new ClipboardJS("a.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="index" class="index page">
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Only-My-Railgun/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Only-My-Railgun/" itemprop="url">口琴曲谱：only my railgun</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-02-23T03:28:47.000Z">2017-02-23 Thu 11:28:47 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/" itemprop="url" rel="index"><span itemprop="name">音乐</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/" itemprop="url" rel="index"><span itemprop="name">口琴</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/" itemprop="url" rel="index"><span itemprop="name">曲谱</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>半音阶口琴，<strong>only my railgun</strong> 数字谱，喵自整理版，<a href="/posts/Only-My-Railgun/only_my_railgun.pdf">pdf下载点击这里</a>，<a href="/posts/Only-My-Railgun/only_my_railgun.txt">txt下载点击这里</a>，<a href="/posts/Only-My-Railgun/Music-Score/">读谱方式点击这里</a></p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/" rel="tag"><i class="fas fa-tag"></i>半音阶口琴</a><a class="post-tag button" href="/tags/%E6%9B%B2%E8%B0%B1/" rel="tag"><i class="fas fa-tag"></i>曲谱</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Music-Score/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Music-Score/" itemprop="url">喵的曲谱说明以及目录</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-02-23T03:22:50.000Z">2017-02-23 Thu 11:22:50 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/" itemprop="url" rel="index"><span itemprop="name">音乐</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/" itemprop="url" rel="index"><span itemprop="name">口琴</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/%E5%8F%A3%E7%90%B4/%E6%9B%B2%E8%B0%B1/" itemprop="url" rel="index"><span itemprop="name">曲谱</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p><strong>以十六孔琴、标准音高为准，非口琴常用音高，十二孔请自行移调！</strong></p>
+<p><strong>大部分乐谱经本人手动整理，如有不符合说明的情况请自行处理或者等待更新！</strong></p>
+<p>乐谱为逐句调整，无省略。</p>
+<p>(低音)    中音    [高音]    {倍高音}</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/" rel="tag"><i class="fas fa-tag"></i>半音阶口琴</a><a class="post-tag button" href="/tags/%E6%9B%B2%E8%B0%B1/" rel="tag"><i class="fas fa-tag"></i>曲谱</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Steam-with-Bumblebee/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Steam-with-Bumblebee/" itemprop="url">Linux下使Steam调用Bumblebee使用独显</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-02-16T04:50:22.000Z">2017-02-16 Thu 12:50:22 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Steam/" itemprop="url" rel="index"><span itemprop="name">Steam</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>买了个罗技G502，想想这鼠标狙击键要在fps游戏里才能发挥作用于是入了l4d2的坑，Steam购买，没想到P530核显实在是吃不动这货，FPS上30都很困难，于是研究了一下怎么样调用Bumblebee来使用独显。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="fas fa-tag"></i>Linux</a><a class="post-tag button" href="/tags/%E5%8F%8C%E6%98%BE%E5%8D%A1/" rel="tag"><i class="fas fa-tag"></i>双显卡</a><a class="post-tag button" href="/tags/Bumblebee/" rel="tag"><i class="fas fa-tag"></i>Bumblebee</a><a class="post-tag button" href="/tags/Steam/" rel="tag"><i class="fas fa-tag"></i>Steam</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Some-Words/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Some-Words/" itemprop="url">碎碎念</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-02-01T13:47:07.000Z">2017-02-01 Wed 21:47:07 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <blockquote class="centerquote">我还是会回头、注视，街上每一个像曾经的她的人，但即使我活在过去，心里也很清楚，她的打扮早已不是那时候原来的样子了。</blockquote>
+
+<p>没有什么好说的，无非是些碎碎念，本猹发现自己似乎有了不用 HHKB 就没法安心写代码写网站的毛病。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"><i class="fas fa-tag"></i>随记</a><a class="post-tag button" href="/tags/%E6%9C%AC%E5%91%BD%E7%95%AA/" rel="tag"><i class="fas fa-tag"></i>本命番</a><a class="post-tag button" href="/tags/%E6%8A%98%E8%85%BE/" rel="tag"><i class="fas fa-tag"></i>折腾</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Some-Thoughts/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Some-Thoughts/" itemprop="url">一些想法</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-01-05T01:31:15.000Z">2017-01-05 Thu 09:31:15 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>话是怎么说的来着，生命在于折腾。骑磨烤柿也不能阻止折腾党的决心。</p>
+<p>其实是排着的日程太多了，不得不记录一下。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Code%20Life/" rel="tag"><i class="fas fa-tag"></i>Code Life</a><a class="post-tag button" href="/tags/%E6%8A%98%E8%85%BE/" rel="tag"><i class="fas fa-tag"></i>折腾</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/2016-Tail/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/2016-Tail/" itemprop="url">StackHarbor 的 2016 尾记</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-12-31T09:39:02.000Z">2016-12-31 Sat 17:39:02 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p><img src="/posts/2016-Tail/2016-tail_fushishan.jpg" alt="2016-tail_fushishan.jpg"></p>
+<blockquote class="centerquote">大象永远不会遗忘。</blockquote>
+
+<p>转眼间时光飞逝，站在了2016的尾巴上（2016：好疼！），仔细想想似乎也没什么好说的，无非是考完了高考，上了大学，写了一堆乱七八糟的代码，比如<a href="https://github.com/AlynxZhou/namefight" target="_blank">这个</a>，嘴上天天说要做的事情还是有不少没做，比如改一改Emacs配置（这种flag成本太高了立不得），还有根本就立不了的flag一大堆，说穿了也还是自己太弱了吧。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"><i class="fas fa-tag"></i>随记</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/First-Snow/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/First-Snow/" itemprop="url">初雪</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-11-20T23:25:46.000Z">2016-11-21 Mon 07:25:46 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" itemprop="url" rel="index"><span itemprop="name">时间的恶作剧</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>2016年的第一场雪？仔细想想也许不对，实际意义上的第一场雪，在每年一月份还没开春的时候就应该下完了，这怎么能叫做第一场雪呢？</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E5%88%9D%E9%9B%AA/" rel="tag"><i class="fas fa-tag"></i>初雪</a><a class="post-tag button" href="/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" rel="tag"><i class="fas fa-tag"></i>时间的恶作剧</a><a class="post-tag button" href="/tags/%E6%9C%AA%E8%AF%B4%E5%87%BA%E5%8F%A3%E7%9A%84%E8%AF%9D/" rel="tag"><i class="fas fa-tag"></i>未说出口的话</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/BJTU-Life/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/BJTU-Life/" itemprop="url">生活在BJTU</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-10-08T13:31:56.000Z">2016-10-08 Sat 21:31:56 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/%E5%A4%A7%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">大学</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h1 id="闲扯"><a class="headerlink" href="/posts/BJTU-Life/#%E9%97%B2%E6%89%AF" title="闲扯"></a>闲扯</h1>
+<p>每一次更新都仿佛时隔多年，当然这次不全是因为懒。之前大学第一个月并没有带来自己的电脑，靠着树莓派和机房的电脑怎么折腾也都觉得劳心费力。就算没有产出，到底也是把网站的域名转移到了<a href="http://alynx.xyz/" target="_blank">alynx.xyz</a>。顺便还把多年不换的昵称从头到脚折腾着换了一遍，<em>Alynx</em> 这个名字看起来更像是一个正规的英文名了。</p>
+<p>天气转凉，我要去把阳台的门关好再回来继续。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Code%20Life/" rel="tag"><i class="fas fa-tag"></i>Code Life</a><a class="post-tag button" href="/tags/BJTU/" rel="tag"><i class="fas fa-tag"></i>BJTU</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/RPi-QZone-Bot/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/RPi-QZone-Bot/" itemprop="url">会发说说报时的树莓派</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-08-14T07:40:04.000Z">2016-08-14 Sun 15:40:04 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%A0%91%E8%8E%93%E6%B4%BE/" itemprop="url" rel="index"><span itemprop="name">树莓派</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%A0%91%E8%8E%93%E6%B4%BE/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p><strong>由于WebQQ的验证码机制更新，QQLib的作者已于2016年8月17日更新源代码，本页也随之更新！请之前使用过的朋友用<code># pip3 uninstall qqlib</code>卸载旧版，再重新安装最新版的QQLib，使用本页最新的Python脚本！</strong></p>
+<hr>
+<p>Hello，最近好久没有更新博客了，因为一直没有发现什么好玩的东西来写（其实就是因为懒）。那么前天终于发现了一个好东西，就是这个<a href="https://github.com/gera2ld/qqlib/" target="_blank">QQLib for Python</a>，可以通过Python在QQ空间发说说的库。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag"><i class="fas fa-tag"></i>树莓派</a><a class="post-tag button" href="/tags/Python/" rel="tag"><i class="fas fa-tag"></i>Python</a><a class="post-tag button" href="/tags/QQLib/" rel="tag"><i class="fas fa-tag"></i>QQLib</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Three-Years/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Three-Years/" itemprop="url">如果时光停滞三年</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-07-01T12:18:48.000Z">2016-07-01 Fri 20:18:48 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" itemprop="url" rel="index"><span itemprop="name">时间的恶作剧</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <blockquote>
+<p>You know how the time flies.</p>
+</blockquote>
+<blockquote>
+<p>Only yesterday was the time of our lives.</p>
+</blockquote>
+<blockquote>
+<p>We were born and raised in a summur haze.</p>
+</blockquote>
+<blockquote>
+<p>Bound by the surprise of our glory days.</p>
+</blockquote>
+<p>偶然看到朋友在空间里发出的一张图片，他突发奇想在自己高中的招生网站上输入了自己当初的准考证号，然后惊讶的发现弹出的消息是您已被XX市高级中学录取。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E6%97%B6%E5%85%89%E9%A3%9E%E9%80%9D/" rel="tag"><i class="fas fa-tag"></i>时光飞逝</a><a class="post-tag button" href="/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" rel="tag"><i class="fas fa-tag"></i>时间的恶作剧</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <nav class="pagination">
+    
+    <a class="extend prev" href="/index-4.html" aria-label="上一页"><i class="fas fa-angle-left"></i></a>
+    
+    
+    <a class="page-number" href="/">1</a>
+    <span class="space">…</span>
+    <a class="page-number" href="/index-4.html">4</a>
+    
+    <a class="page-number current" href="/index-5.html">5</a>
+    
+    
+    <a class="page-number" href="/index-6.html">6</a>
+    
+    <a class="page-number" href="/index-7.html">7</a>
+    
+    
+    
+    <a class="extend next" href="/index-6.html" aria-label="下一页"><i class="fas fa-angle-right"></i></a>
+    
+  </nav>
+  
+  
+  
+
+
+
+  
+  
+  
+  
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search">
+    <div class="form-group">
+      <label for="search-input" style="display: none;">搜索</label>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">62</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">42</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">65</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jm33.me/" target="_blank">Jm33_m0's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sh.yorushika.co/" target="_blank">Yorushika Shi's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank">约伊兹的萌狼乡手札</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 11:26:52 UTC. -->
