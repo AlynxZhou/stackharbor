@@ -282,10 +282,10 @@
 <p>这样就行了，运行 <code>hexo deploy</code> 应该就能看到 rsync 的同步状态了。如果你有其他的不使用 Hexo 的网页，可以用命令：</p>
 <pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-variable">$ </span>rsync -azv --delete SOURCE USERNAME<span class="hljs-variable">@IPADDRESS</span><span class="hljs-symbol">:DESTINATION</span></code></pre></figure></code></pre><!-- Marked bug: cannot handle `\)` in URL, use `%29` instead. Waiting hexo-renderer-marked update its dependents version. -->
-<p>上传到服务器上，如果有 git 仓库最好用 <code>--exclude=.git</code> 排除掉，顺便 SOURCE 目录一般不要用 <code>/</code> 结尾，原因参见 <a href="https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92" target="_blank">这里</a>。</p>
+<p>上传到服务器上，如果有 git 仓库最好用 <code>--exclude=.git</code> 排除掉，顺便 SOURCE 目录一般不要用 <code>/</code> 结尾，原因参见 <a href="https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92" target="_blank" rel="noreferrer noopener">这里</a>。</p>
 <p>这个时候我还没有把 DNS 从 GitHub Pages 转到我的服务器上，结果生米煮成了熟饭，只能往下继续了。</p>
 <h1 id="用Letamp;39;sEncrypt生成SSL证书"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Letamp;39;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="用Letamp;39;sEncrypt生成SSL证书"></a>用 Let&#39;s Encrypt 生成 SSL 证书</h1>
-<p>HTTPS 需要有可信机构签发的证书，<a href="https://letsencrypt.org/" target="_blank">Let&#39;s Encrypt</a> 就是一个免费提供这种服务的网站，不过官方推荐的步骤只能对每个域名单独生成证书，比如 <code>alynx.xyz</code> 和 <code>sh.alynx.xyz</code> 需要两个证书，这里介绍生成通配符证书的办法，比如对 <code>*.alynx.xyz</code> 生成一个证书，可以用在所有三级子域名：</p>
+<p>HTTPS 需要有可信机构签发的证书，<a href="https://letsencrypt.org/" target="_blank" rel="noreferrer noopener">Let&#39;s Encrypt</a> 就是一个免费提供这种服务的网站，不过官方推荐的步骤只能对每个域名单独生成证书，比如 <code>alynx.xyz</code> 和 <code>sh.alynx.xyz</code> 需要两个证书，这里介绍生成通配符证书的办法，比如对 <code>*.alynx.xyz</code> 生成一个证书，可以用在所有三级子域名：</p>
 <h2 id="下载certbot-auto"><a class="headerlink" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E4%B8%8B%E8%BD%BDcertbot-auto" title="下载certbot-auto"></a>下载 certbot-auto</h2>
 <p><code>certbot-auto</code> 是用来验证生成证书的交互命令行工具，似乎一般软件源里的版本都不够高，不能生成通配符证书，这里手动下载新版：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
@@ -727,8 +727,7 @@ server {
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -943,4 +942,4 @@ server {
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:33 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:29 CST. -->

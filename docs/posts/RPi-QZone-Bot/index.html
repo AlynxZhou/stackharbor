@@ -212,10 +212,10 @@
     <main class="post-main" itemprop="articleBody">
       <p><strong>由于WebQQ的验证码机制更新，QQLib的作者已于2016年8月17日更新源代码，本页也随之更新！请之前使用过的朋友用<code># pip3 uninstall qqlib</code>卸载旧版，再重新安装最新版的QQLib，使用本页最新的Python脚本！</strong></p>
 <hr>
-<p>Hello，最近好久没有更新博客了，因为一直没有发现什么好玩的东西来写（其实就是因为懒）。那么前天终于发现了一个好东西，就是这个<a href="https://github.com/gera2ld/qqlib/" target="_blank">QQLib for Python</a>，可以通过Python在QQ空间发说说的库。</p>
+<p>Hello，最近好久没有更新博客了，因为一直没有发现什么好玩的东西来写（其实就是因为懒）。那么前天终于发现了一个好东西，就是这个<a href="https://github.com/gera2ld/qqlib/" target="_blank" rel="noreferrer noopener">QQLib for Python</a>，可以通过Python在QQ空间发说说的库。</p>
 <a id="more"></a>
 
-<p>说到找这个东西的原因嘛……由于一些你懂得的原因，<a href="https://telegram.org/" target="_blank">Telegram</a>被封锁是日益严重啊。我以前写了个非常有用的<a href="https://github.com/Alynx/telebot/" target="_blank">TeleBot</a>跑在树莓派上，无奈身边用Telegram的人太少（<del>无法装X</del>），所以最开始想在树莓派上跑一个微信公众号来玩。然后发现微信的Api要求你指定一个域名，可是我树莓派跑在家里电信是不会白给我一个固定ip的（555……），为了解决这个问题我还特地造了个轮子，用Python自己封装了一个CloudXNS的Api用来定期ddns更新A记录，脚本写好了之后上网搜了一下发现有人说你在自己家里跑httpd被抓到是会被电信查水表的……虽然没有法律明文规定，但是就是这样，嗯，<del>这背后一定有肮脏的PY交易</del>（和谐）。于是微信公众号的计划就这样流产了……正好<a href="http://lgiki.xyz/" target="_blank">L Giki</a>说他和他的朋友实现了一个QQ的聊天机器人，然而他们是PHP党……而且实现方法很复杂，主要是腾讯丧心病狂的加密……还有webQQ协议已经被腾讯阉割的不成样子了。百般无奈之时发现了这个GitHub项目，本着有轮子就不要自己造的原则，我决定写一个定期发说说的程序运行在树莓派上，那就是这样。</p>
+<p>说到找这个东西的原因嘛……由于一些你懂得的原因，<a href="https://telegram.org/" target="_blank" rel="noreferrer noopener">Telegram</a>被封锁是日益严重啊。我以前写了个非常有用的<a href="https://github.com/Alynx/telebot/" target="_blank" rel="noreferrer noopener">TeleBot</a>跑在树莓派上，无奈身边用Telegram的人太少（<del>无法装X</del>），所以最开始想在树莓派上跑一个微信公众号来玩。然后发现微信的Api要求你指定一个域名，可是我树莓派跑在家里电信是不会白给我一个固定ip的（555……），为了解决这个问题我还特地造了个轮子，用Python自己封装了一个CloudXNS的Api用来定期ddns更新A记录，脚本写好了之后上网搜了一下发现有人说你在自己家里跑httpd被抓到是会被电信查水表的……虽然没有法律明文规定，但是就是这样，嗯，<del>这背后一定有肮脏的PY交易</del>（和谐）。于是微信公众号的计划就这样流产了……正好<a href="http://lgiki.xyz/" target="_blank" rel="noreferrer noopener">L Giki</a>说他和他的朋友实现了一个QQ的聊天机器人，然而他们是PHP党……而且实现方法很复杂，主要是腾讯丧心病狂的加密……还有webQQ协议已经被腾讯阉割的不成样子了。百般无奈之时发现了这个GitHub项目，本着有轮子就不要自己造的原则，我决定写一个定期发说说的程序运行在树莓派上，那就是这样。</p>
 <p>老规矩，这个脚本不是很长，下面贴上来吧，它的名字叫做<code>qclock.py</code>（2016-08-17更新）：</p>
 <pre><code class="Python"><figure class="highlight hljs python"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -347,9 +347,9 @@ unit = <span class="hljs-string">"°C"</span>
 <p>然后一句话运行起来：</p>
 <pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code>$ python3 ./qclock.py</code></pre></figure></code></pre>
-<p>保持它不要关闭，最好的办法还是<a href="https://www.gnu.org/software/screen/" target="_blank">GNU Screen</a>啊～</p>
+<p>保持它不要关闭，最好的办法还是<a href="https://www.gnu.org/software/screen/" target="_blank" rel="noreferrer noopener">GNU Screen</a>啊～</p>
 <p>每到整点和半点你的树莓派就会自动发一条说说报时并附上当前的CPU温度～如果你想做更多的话完全可以自己扩展我这个脚本。记住那个<code>time.sleep(60)</code>的60不是随便能改的，一分钟一次的循环不会特别耗资源，如果你改小了间隔，可能会导致一分钟内它走了两次循环，发了两条说说。时间的精确度保持在分钟级别。</p>
-<p>然后，我用来测试的QQ号是<code>3530795351</code>，这是它的<a href="http://user.qzone.qq.com/3530795351" target="_blank">QQ空间</a>，欢迎围观效果。</p>
+<p>然后，我用来测试的QQ号是<code>3530795351</code>，这是它的<a href="http://user.qzone.qq.com/3530795351" target="_blank" rel="noreferrer noopener">QQ空间</a>，欢迎围观效果。</p>
 <p>好啦，这个脚本就先介绍到这里了，我要去继续完善更多功能咯，首先还是要搞好我的Emacs，然后，我不是针对腾讯，我是说BAT这三个货都是辣鸡！</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -461,8 +461,7 @@ unit = <span class="hljs-string">"°C"</span>
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -612,4 +611,4 @@ unit = <span class="hljs-string">"°C"</span>
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:34 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:30 CST. -->

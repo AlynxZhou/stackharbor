@@ -210,7 +210,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>
+      <p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank" rel="noreferrer noopener">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>
 <a id="more"></a>
 
 <p>话先说在前面，虽然标题我写了 OpenGL，但是我实际上使用的是 OpenGL ES —— 你可以把它当作是 OpenGL 的一个子集，只包含基于可编程管线的部分 API，去掉了那些过时的旧模式。虽然 OpenGL ES 主要为移动设备设计，但是在电脑上也能正常使用。Wayland 和 Weston —— Linux 的下一代桌面协议以及它的简单实现 —— 为了去掉 Xorg 的依赖就使用了 OpenGL ES（Linux 下的 libGL 总会引入 X）。</p>
@@ -795,8 +795,7 @@
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -1015,4 +1014,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:33 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:29 CST. -->

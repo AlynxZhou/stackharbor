@@ -215,7 +215,7 @@
 <a id="more"></a>
 
 <p>有关为什么要启用 HTTPS 就不多说了，HTTPS 会对传输的内容进行加密，最常见的就是防止无良运营商拦截你的流量添加广告了，也能防止用户接触被劫持的页面而上当受骗，同时不会对浏览造成什么太大的代价。</p>
-<p>按照 <a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/" target="_blank">GitHub 给出的说明</a>，似乎我什么都不做就能开启 HTTPS 了，仔细尝试了却发现不是这样。</p>
+<p>按照 <a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/" target="_blank" rel="noreferrer noopener">GitHub 给出的说明</a>，似乎我什么都不做就能开启 HTTPS 了，仔细尝试了却发现不是这样。</p>
 <p>首先如果你开启了 CloudFlare 的 CDN 和 HTTPS，建议把它们关闭。CloudFlare 的 HTTPS 加密在 <em>Crypto</em> 面板里，找到第一项 <em>SSL*，设置成 <code>Off</code>，然后如果你在 *Page Rules</em> 里面添加了 <code>Always HTTPS</code> 之类的选项，可以删除，因为我们可以用 GitHub 提供的 <code>Enforce HTTPS</code> 选项进行跳转。然后去到 <em>DNS</em> 面板，看到那几朵红色的云朵了吗？它们代表访问时候会首先使用 CloudFlare 的 CDN，考虑到受众，这里可以点击让它变成灰色的 <code>DNS Only</code>，从而加快访问速度……</p>
 <p>然后如果你是设置 A 记录来跳转到 GitHub Pages 的话，需要修改成新的 IP 地址，GitHub 提供了下面四个 IP，不过我是比较喜欢设置 CNAME 啦：</p>
 <ul>
@@ -342,8 +342,7 @@
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -493,4 +492,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:33 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:29 CST. -->

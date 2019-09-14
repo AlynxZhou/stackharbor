@@ -215,10 +215,10 @@
 <a id="more"></a>
 
 <p>由于刷机时候没拍照片我就不上图了，到手时候已经解锁了，不过既然是亲儿子想必也不会像一些国内厂商一样恶心你。按照 Lineage OS 的说法就是打开开发者选项里 <code>允许 OEM 解锁</code> 和 <code>允许 USB 调试</code>，按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后连接电脑，<code>fastboot devices</code>，如果检测到了就 <code>fastboot oem unlock</code>，然后结束之后重启。（会清除所有数据，并且解锁之后每次开机会在 bootloader 停止 30 秒）。</p>
-<p>首先是去 <a href="https://download.lineageos.org/dragon" target="_blank">Lineage OS 官网</a> 下载给 Pixel C（代号 dragon）的 nightly build ZIP。</p>
-<p>然后去 <a href="https://drive.google.com/drive/folders/0By6p5AdQfavBUTZmNWJoaU1iazg" target="_blank">这个 Google Drive</a> 下载开发者提供的 <code>vendor.img</code>。（<strong>务必要下载这个，如果有不止一个就选择最新的，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。</strong>）</p>
-<p>然后去 <a href="https://dl.twrp.me/dragon/" target="_blank">TWRP 官网</a> 下载给 Pixel C 用的 Recovery。</p>
-<p>需要 Google Apps 就去 <a href="https://opengapps.org" target="_blank">Open GApps</a> 下一个 ZIP，我用的是 <code>ARM64</code> -&gt; <code>8.1</code> -&gt; <code>stock</code>。</p>
+<p>首先是去 <a href="https://download.lineageos.org/dragon" target="_blank" rel="noreferrer noopener">Lineage OS 官网</a> 下载给 Pixel C（代号 dragon）的 nightly build ZIP。</p>
+<p>然后去 <a href="https://drive.google.com/drive/folders/0By6p5AdQfavBUTZmNWJoaU1iazg" target="_blank" rel="noreferrer noopener">这个 Google Drive</a> 下载开发者提供的 <code>vendor.img</code>。（<strong>务必要下载这个，如果有不止一个就选择最新的，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。</strong>）</p>
+<p>然后去 <a href="https://dl.twrp.me/dragon/" target="_blank" rel="noreferrer noopener">TWRP 官网</a> 下载给 Pixel C 用的 Recovery。</p>
+<p>需要 Google Apps 就去 <a href="https://opengapps.org" target="_blank" rel="noreferrer noopener">Open GApps</a> 下一个 ZIP，我用的是 <code>ARM64</code> -&gt; <code>8.1</code> -&gt; <code>stock</code>。</p>
 <p>如果你需要 Magisk 就自己去下载一个。</p>
 <p>把这些都放好，在自己电脑上安装 <code>adb</code> 和 <code>fastboot</code>，然后打开 <code>允许 USB 调试</code>。按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后 <code>fastboot flash recovery TWRP-IMG-FILE</code> 刷入 TWRP，然后再按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，选择 Recovery Mode 确认 TWRP 已经刷进去了。</p>
 <p>接下来在 TWRP 里面全部 wipe（syste, data, cache, sdcard），然后接上电脑用 <code>adb push FILE /sdcard/</code> 把下好的 ROM ZIP、<code>verdor.img</code> 和 OpenGApps ZIP 都 push 到 sdcard 里面。</p>
@@ -338,8 +338,7 @@
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -489,4 +488,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:33 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:29 CST. -->

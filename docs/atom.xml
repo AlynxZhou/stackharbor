@@ -77,7 +77,7 @@
     
     <summary type="html">
     
-    <![CDATA[<p>这是一篇 <a href="https://dev.to/jeromegamez" target="_blank">Jérôme Gamez</a> 的文章 <a href="https://dev.to/jeromegamez/i-am-lucky-you-are-not-2eco" target="_blank">I am lucky, you are not.</a> 的简体中文翻译。</p>]]>
+    <![CDATA[<p>这是一篇 <a href="https://dev.to/jeromegamez" target="_blank" rel="noreferrer noopener">Jérôme Gamez</a> 的文章 <a href="https://dev.to/jeromegamez/i-am-lucky-you-are-not-2eco" target="_blank" rel="noreferrer noopener">I am lucky, you are not.</a> 的简体中文翻译。</p>]]>
     
     </summary>
     
@@ -123,7 +123,7 @@
     
     <summary type="html">
     
-    <![CDATA[<p>ロード・エルメロイⅡ世の事件簿 -魔眼蒐集列車 Grace note- ED</p><p>五线谱（带歌词）点击链接下载：<a href="/posts/Hibari/hibari.pdf">PDF 格式</a>、<a href="/posts/Hibari/hibari.mscz">MSCZ 格式</a>（需使用 MuseScore3 打开）。</p><p>歌词参考自微博用户 <a href="https://weibo.com/u/5699383914" target="_blank">@小蟲子的覺魂</a>。曲谱由我自己听写。</p>]]>
+    <![CDATA[<p>ロード・エルメロイⅡ世の事件簿 -魔眼蒐集列車 Grace note- ED</p><p>五线谱（带歌词）点击链接下载：<a href="/posts/Hibari/hibari.pdf">PDF 格式</a>、<a href="/posts/Hibari/hibari.mscz">MSCZ 格式</a>（需使用 MuseScore3 打开）。</p><p>歌词参考自微博用户 <a href="https://weibo.com/u/5699383914" target="_blank" rel="noreferrer noopener">@小蟲子的覺魂</a>。曲谱由我自己听写。</p>]]>
     
     </summary>
     
@@ -241,7 +241,7 @@
     
     <summary type="html">
     
-    <![CDATA[<p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>]]>
+    <![CDATA[<p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank" rel="noreferrer noopener">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>]]>
     
     </summary>
     
@@ -269,7 +269,7 @@
     
     <summary type="html">
     
-    <![CDATA[<p>事情的起因是这样的，我写了 <a href="https://livewallpaper.alynx.xyz" target="_blank">一个 Android App</a>，打算把它发给更多的人试用，发给同学什么的都好说，但我想发给我妈用的时候遇到了一系列问题。我觉得恰好可以说一下在国内用 Android 环境是多么痛苦。</p>]]>
+    <![CDATA[<p>事情的起因是这样的，我写了 <a href="https://livewallpaper.alynx.xyz" target="_blank" rel="noreferrer noopener">一个 Android App</a>，打算把它发给更多的人试用，发给同学什么的都好说，但我想发给我妈用的时候遇到了一系列问题。我觉得恰好可以说一下在国内用 Android 环境是多么痛苦。</p>]]>
     
     </summary>
     
@@ -459,7 +459,7 @@
     
     <summary type="html">
     
-    <![CDATA[<p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>]]>
+    <![CDATA[<p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank" rel="noreferrer noopener">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>]]>
     
     </summary>
     

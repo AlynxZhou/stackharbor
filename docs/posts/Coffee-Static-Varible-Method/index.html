@@ -210,7 +210,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
+      <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="noreferrer noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="noreferrer noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
 <a id="more"></a>
 
 <h1 id="静态变量"><a class="headerlink" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F" title="静态变量"></a>静态变量</h1>
@@ -481,8 +481,7 @@ Test.printCounter()
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -665,4 +664,4 @@ Test.printCounter()
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:33 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:29 CST. -->

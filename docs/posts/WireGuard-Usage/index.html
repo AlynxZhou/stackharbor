@@ -216,9 +216,9 @@
 
 <p>WireGuard 的原理是使用一个公网服务器做 Endpoint，内网的数据通过该服务器进行转发，因此子网的各个设备可以没有固定的 IP，只要都能连接公网服务器就好了。</p>
 <h1 id="安装"><a class="headerlink" href="/posts/WireGuard-Usage/#%E5%AE%89%E8%A3%85" title="安装"></a>安装</h1>
-<p>由于不同的系统安装方法不一样，建议参照 <a href="https://www.wireguard.com/install/" target="_blank">WireGuard 官网的安装说明</a> 和各个系统的 Wiki，Android 手机可以搜索下载 WireGuard 的 APK 进行安装。</p>
+<p>由于不同的系统安装方法不一样，建议参照 <a href="https://www.wireguard.com/install/" target="_blank" rel="noreferrer noopener">WireGuard 官网的安装说明</a> 和各个系统的 Wiki，Android 手机可以搜索下载 WireGuard 的 APK 进行安装。</p>
 <h1 id="配置"><a class="headerlink" href="/posts/WireGuard-Usage/#%E9%85%8D%E7%BD%AE" title="配置"></a>配置</h1>
-<div class="alert-blue">以下部分内容参考自 <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank">WireGuard - ArchWiki</a>。</div>
+<div class="alert-blue">以下部分内容参考自 <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank" rel="noreferrer noopener">WireGuard - ArchWiki</a>。</div>
 
 <p>首先需要生成公钥和私钥，建议将其设置为只有拥有者才能操作，我这里放在 <code>/etc/wireguard</code> 这个目录里面，这个目录应该是只有 root 才可以访问的。<strong>服务器和客户端都需要分别进行这一步</strong>。</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
@@ -458,8 +458,7 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -663,4 +662,4 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:33 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:29 CST. -->

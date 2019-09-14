@@ -262,7 +262,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <p>大约从我写好 ARIA （指把我自己的网站换成它做主题）到现在为止已经有一个月了，这一个月里它有了 <a href="https://github.com/AlynxZhou/hexo-theme-aria/stargazers" target="_blank">20 个 Star</a>、<a href="https://github.com/AlynxZhou/hexo-theme-aria/issues?q=is%3Aissue+is%3Aclosed" target="_blank">4 个 Issue</a> 和 <a href="https://github.com/AlynxZhou/hexo-theme-aria/commits/master" target="_blank">128 个 Commit</a>（都是我自己，残念啊）。大概算是我现在最得意的项目，当然不排除以后也是。</p>
+      <p>大约从我写好 ARIA （指把我自己的网站换成它做主题）到现在为止已经有一个月了，这一个月里它有了 <a href="https://github.com/AlynxZhou/hexo-theme-aria/stargazers" target="_blank" rel="noreferrer noopener">20 个 Star</a>、<a href="https://github.com/AlynxZhou/hexo-theme-aria/issues?q=is%3Aissue+is%3Aclosed" target="_blank" rel="noreferrer noopener">4 个 Issue</a> 和 <a href="https://github.com/AlynxZhou/hexo-theme-aria/commits/master" target="_blank" rel="noreferrer noopener">128 个 Commit</a>（都是我自己，残念啊）。大概算是我现在最得意的项目，当然不排除以后也是。</p>
 <p>虽然这么说有点敷衍，但是我是和一些无聊的人进行了一点无谓的争执 —— 我讨厌辩论，所以尽可能把这种冲动压制在一点 —— 所以我现在来写这篇文章，聊聊那些代码里面没有告诉你的事情。写点经过脑子的思考总是有用处的，不仅是对自己而言。</p>
 
       
@@ -505,7 +505,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
+      <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="noreferrer noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="noreferrer noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
 
       
     </main>
@@ -701,8 +701,7 @@
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -850,4 +849,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 11:43:34 UTC. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 12:13:30 UTC. -->

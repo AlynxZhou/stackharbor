@@ -210,7 +210,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>
+      <p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank" rel="noreferrer noopener">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>
 <a id="more"></a>
 
 <p>首先你需要新建一个项目，通常应该都是使用 Android Studio，我就忽略你如何与网络搏斗让 Android Studio 可用了。什么程序模板可以随便选，反正你还是要自己新建 class。最低 API 版本不要太低就行，如果你只是写一个动态壁纸，应该不需要很高的 API，因为 Android 很早就支持动态壁纸了（但为了让开发方便一点，建议只考虑 5.0 以上的就行了，反正现在即使有 5.0 以下的机器多半也成垃圾了）。</p>
@@ -1299,7 +1299,7 @@
 <h1 id="一杯咖啡都没有……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6" title="一杯咖啡都没有……"></a>一杯咖啡都没有……</h1>
 <p>如果你只是觉得市面上所有的视频动态壁纸程序都太臃肿太不可靠（包括抖音和火萤）而想自己写一个，我建议你还是放弃，因为遇到的坑比你想象的多，解决起来也很麻烦。而且实际上，你完全可以使用我写好的程序。</p>
 <p>这个程序只有 3.06M，支持加载本地壁纸，支持平板电脑，支持壁纸滑动，不显示时自动暂停播放节约电量，严格遵循 Android 规范，没有任何敏感权限（比如联网和操作外置存储），不请求文件真实路径，测试下来功能基本没有问题。如果你还不放心，所有的代码都在 GitHub 上，我不怕你说我代码写的不好，你大可以看一遍有没有后门。</p>
-<p>你可以分别从 <a href="https://github.com/AlynxZhou/AlynxLiveWallpaper/releases/latest" target="_blank">GitHub Release</a>，<a href="https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper" target="_blank">Google Play</a> 和 <a href="https://www.coolapk.com/apk/xyz.alynx.livewallpaper" target="_blank">酷安网</a> 下载这个应用。</p>
+<p>你可以分别从 <a href="https://github.com/AlynxZhou/AlynxLiveWallpaper/releases/latest" target="_blank" rel="noreferrer noopener">GitHub Release</a>，<a href="https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper" target="_blank" rel="noreferrer noopener">Google Play</a> 和 <a href="https://www.coolapk.com/apk/xyz.alynx.livewallpaper" target="_blank" rel="noreferrer noopener">酷安网</a> 下载这个应用。</p>
 <p>为了上架 Google Play 我支付了 25 美元申请了开发者账户，应用是免费的，但我放置了捐赠页面。不过已经有几百个下载量（大部分是酷安）之后，我还没有从这个应用里得到一点回报，如果你觉得应用不错并且手头宽裕，可以打开 App 赞助我一杯咖啡。毕竟解决上面提到的所有的坑并不容易。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -1411,8 +1411,7 @@
   
   <div class="search">
     <div class="form-group">
-      <label for="search-input" style="display: none;">搜索</label>
-      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control"/>
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control" aria-label="搜索"/>
     </div>
   </div>
   <div class="search-result-box" id="search-result"></div>
@@ -1605,4 +1604,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.3 at 2019-09-14 Sat 19:43:33 CST. -->
+<!-- Page built by Hikaru v2.1.4 at 2019-09-14 Sat 20:13:29 CST. -->
