@@ -118,8 +118,21 @@
     });
     </script>
     
+
+<script defer type="text/javascript" src="/js/search.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+  var searchPath = "/search.json";
+  if ("search.json".length === 0) {
+    searchPath = "/search.json";
+  }
+  loadSearch(searchPath, window.location.search, "search-result");
+});
+</script>
+
+
     <script defer type="text/javascript" src="/js/custom.js"></script>
-    <title>忧从中来，不可断绝 | 喵's StackHarbor - Whisper to the World</title>
+    <title>搜索 | 喵's StackHarbor - Whisper to the World</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
     
@@ -165,10 +178,10 @@
         <div class="main-container">
           <div class="content">
             
-<div id="post" class="page">
-  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+<div id="page" class="page">
+  <article class="article post card">
     <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Song-And-Sadness/">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/search.html">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
         <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
@@ -179,135 +192,16 @@
       </span>
     </div>
     <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">忧从中来，不可断绝</h1>
+      <h1 class="post-title" itemprop="name headline">搜索</h1>
       <div class="post-meta">
-        
-        <span class="post-date meta-block">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-11-11T13:18:51.000Z">2017-11-11 Sat 21:18:51 CST</time></span>
-        </span>
-        
-        
-        <span class="post-categories meta-block">
-          
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" itemprop="url" rel="index"><span itemprop="name">时间的恶作剧</span></a></span>
-        </span>
-        
-        
-        
         
       </div>
     </header>
-    <main class="post-main" itemprop="articleBody">
-      <p><img src="/posts/Song-And-Sadness/Sadness.jpg" alt="Sadness.jpg">
-那个弹吉他的人在我的隔壁。</p>
-<a id="more"></a>
-
-<p>老实说他弹的很一般，但却让在琴房待了一下午一晚上的我决定多待一会。开始他只是练音阶和唱音高，但是后来他唱了几首歌，有董小姐，有不再见，还有我没听过的。</p>
-<p>虽然中间不是很连贯，有的地方还要重来，而且还隔着琴房的隔音墙。但是在这个普通的周六晚上却让我有了想哭的冲动。</p>
-<p>也许歌者无意但听者有心。当一首歌被写出来的时候，它纪录的不过是创作者的故事，但是当它被人听到的时候，就不再是只属于作者的了。喜欢听歌不过是因为想从其中听到自己的故事。</p>
-<p>有些歌曲听过了才会明白。有些故事经历过了才会懂。</p>
-<p>在这个特殊的日子里听到一段段歌声。</p>
-<p>他不需要知道我为什么哭泣。</p>
-<p>不如永远不见。</p>
-<p><em>Alynx Zhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
-
+    <main class="post-main">
+      <div class="search-result" id="search-result"></div>
     </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"><i class="fas fa-tag"></i>随记</a><a class="post-tag button" href="/tags/%E6%97%B6%E9%97%B4%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" rel="tag"><i class="fas fa-tag"></i>时间的恶作剧</a>
-      </div>
-      
-    </footer>
+    <footer class="post-footer"></footer>
   </article>
-  
-  <nav class="page-nav">
-    <div class="page-nav-next page-nav-item">
-      
-      <a href="/posts/2017-Tail/" rel="next" title="StackHarbor 的 2017 尾记"><i class="fas fa-angle-left"></i><span class="nav-title">StackHarbor 的 2017 尾记</span></a>
-      
-    </div>
-    <div class="page-nav-prev page-nav-item">
-      
-      <a href="/posts/Winter-is-Coming/" rel="prev" title="冬天来了"><span class="nav-title">冬天来了</span><i class="fas fa-angle-right"></i></a>
-      
-    </div>
-  </nav>
-  
-  
-  
-
-<div class="reward" id="reward">
-  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
-  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
-    
-    <div id="wechatpay">
-      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
-      <span>微信支付</span>
-    </div>
-    
-    
-    <div id="alipay">
-      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
-      <span>支付宝</span>
-    </div>
-    
-    
-  </div>
-</div>
-
-
-
-  
-  
-  
-
-<div class="comments" id="comments">
-  
-  <div class="commentjs" id="comment-thread"></div>
-  <link rel="stylesheet" href="/css/commentjs.css">
-  <script defer type="text/javascript" src="/js/marked.min.js"></script>
-  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
-  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
-  <script defer type="text/javascript" src="/js/commentjs.js"></script>
-  <script type="text/javascript">
-  $(document).ready(function () {
-    getComments({
-      "type": "github",
-      "user": "AlynxZhou",
-      "repo": "stackharbor",
-      "clientID": "",
-      "clientSecret": "6db7dd16477eadc1e96160a23c6ba4cf687dcecf",
-      "no_comment": "这个页面还没有评论，现在就去评论吧！",
-      "go_to_comment": "去评论",
-      "issue_title": "忧从中来，不可断绝",
-      "btn_class": "button",
-      "comments_target": "#comment-thread"
-    });
-    marked.setOptions({
-      "highlight": function (code, lang) {
-        return hljs.highlightAuto(code).value;
-      }
-    });
-    function mark() {
-      var markdowns = document.getElementsByClassName("markdown");
-      for (var i = 0; i < markdowns.length; ++i){
-        if (markdowns[i].innerHTML) {
-          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
-        }
-      }
-    }
-    window.addEventListener("DOMContentLoaded", mark, false);
-    window.addEventListener("load", mark, false);
-  });
-  </script>
-  
-</div>
-
-
-
   
 </div>
 
@@ -371,8 +265,6 @@
 
 
   <div class="sidebar-sticky">
-    
-    
     
     
     <hr>
@@ -468,4 +360,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.5 at 2019-09-14 Sat 21:50:12 CST. -->
+<!-- Page built by Hikaru v2.1.5 at 2019-09-14 Sat 13:50:13 UTC. -->

@@ -53,6 +53,7 @@ highlight:
 search:
   enable: true
   path: search.json
+  page: search.html
 
 feed:
   enable: true
