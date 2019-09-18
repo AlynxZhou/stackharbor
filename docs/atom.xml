@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-09-14T14:31:27.100Z</updated>
+  <updated>2019-09-18T08:32:01.430Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,34 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>前端博客搜索引擎</title>
+    <link href="https://sh.alynx.moe/posts/Frontend-Blog-Search/" />
+    <id>https://sh.alynx.moe/posts/Frontend-Blog-Search/</id>
+    <published>2019-09-18T07:24:00.000Z</published>
+    <updated>2019-09-18T08:32:01.430Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。</p><p>但是这个设计引发了 lilydjwg 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过 lilydjwg 给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="网络" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
+    
+    <category term="网站" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    
+    
+    <category term="网站" scheme="https://sh.alynx.moe/tags/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="搜索" scheme="https://sh.alynx.moe/tags/%E6%90%9C%E7%B4%A2/" />
+    
+    <category term="JavaScript" scheme="https://sh.alynx.moe/tags/JavaScript/" />
+    
+  </entry>
   
   <entry>
     <title>Linux 用户的月饼食用手册</title>
@@ -475,30 +503,6 @@
     <category term="C 语言" scheme="https://sh.alynx.moe/tags/C%20%E8%AF%AD%E8%A8%80/" />
     
     <category term="编程" scheme="https://sh.alynx.moe/tags/%E7%BC%96%E7%A8%8B/" />
-    
-  </entry>
-  
-  <entry>
-    <title>Automata: A Story of Love and Lives</title>
-    <link href="https://sh.alynx.moe/posts/Automata/" />
-    <id>https://sh.alynx.moe/posts/Automata/</id>
-    <published>2018-07-16T09:39:01.000Z</published>
-    <updated>2019-05-19T12:30:47.993Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p><img src="/posts/Automata/Automata.jpg" alt></p><blockquote class="centerquote">我没有办法评价这款游戏<br>因为我觉得我被结结实实地折腾了一回</blockquote>]]>
-    
-    </summary>
-    
-    <category term="游戏" scheme="https://sh.alynx.moe/categories/%E6%B8%B8%E6%88%8F/" />
-    
-    
-    <category term="游戏" scheme="https://sh.alynx.moe/tags/%E6%B8%B8%E6%88%8F/" />
-    
-    <category term="尼尔：机械纪元" scheme="https://sh.alynx.moe/tags/%E5%B0%BC%E5%B0%94%EF%BC%9A%E6%9C%BA%E6%A2%B0%E7%BA%AA%E5%85%83/" />
-    
-    <category term="NieR: Automata" scheme="https://sh.alynx.moe/tags/NieR:%20Automata/" />
     
   </entry>
   
