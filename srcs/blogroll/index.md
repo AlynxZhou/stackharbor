@@ -33,7 +33,7 @@ reward: false
 | <img src="https://farseerfc.me/images/avatar.jpg" style="width: 5em;"> | [Farseerfc 的小窝](https://farseerfc.me/) |  | ~~爱呼吸~~ fc 老师！似乎是日本某大学的教授，人生赢家，实名羡慕。 |
 | <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33\_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
 |  | [Nick's Nichijou](https://nichi.co/) |  | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
-|  | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
+| <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width :5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 
 # 其他地方认识的
 
