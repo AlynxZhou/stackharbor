@@ -197,6 +197,9 @@ blogroll:
     - name: 惠狐之书
       link: https://blog.megumifox.com/
       icon: <i class="fas fa-link"></i>
+    - name: 初等記憶體
+      link: https://axionl.me/
+      icon: <i class="fas fa-link"></i>
 
 # `comment.commentjs.type`: Choose between `github` and `oschina`.
 comment:
