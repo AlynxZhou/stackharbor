@@ -200,6 +200,9 @@ blogroll:
     - name: 初等記憶體
       link: https://axionl.me/
       icon: <i class="fas fa-link"></i>
+    - name: OriginCode 札記
+      link: https://blog.origincode.me/
+      icon: <i class="fas fa-link"></i>
 
 # `comment.commentjs.type`: Choose between `github` and `oschina`.
 comment:
