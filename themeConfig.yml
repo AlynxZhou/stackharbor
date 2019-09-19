@@ -176,9 +176,6 @@ blogroll:
     - name: Art_Chen's Blog
       link: http://chenxy.moe/
       icon: <i class="fas fa-link"></i>
-    - name: Jm33_m0's Blog
-      link: https://jm33.me/
-      icon: <i class="fas fa-link"></i>
     - name: Farseerfc 的小窝
       link: https://farseerfc.me/
       icon: <i class="fas fa-link"></i>
@@ -188,14 +185,14 @@ blogroll:
     - name: 鸡腿工坊
       link: https://jitui.moe/
       icon: <i class="fas fa-link"></i>
-    - name: Yorushika Shi's Blog
-      link: https://sh.yorushika.co/
-      icon: <i class="fas fa-link"></i>
     - name: Sqyon's Blog
       link: https://sqyon.com/
       icon: <i class="fas fa-link"></i>
     - name: 约伊兹的萌狼乡手札
       link: https://blog.yoitsu.moe/
+      icon: <i class="fas fa-link"></i>
+    - name: Nick's Nichijou
+      link: https://nichi.co/
       icon: <i class="fas fa-link"></i>
 
 # `comment.commentjs.type`: Choose between `github` and `oschina`.
