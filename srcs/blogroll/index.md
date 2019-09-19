@@ -31,8 +31,9 @@ reward: false
 | :------------: | :------------: | :------------: | :------------: |
 | <img src="https://blog.yoitsu.moe/theme/images/wiki.png" style="width: 5em;"> | [约伊兹的萌狼乡手札](https://blog.yoitsu.moe/) | 「虽然咱长久以来被尊为神，且被束缚在这块土地上，但咱根本不是什么伟大的神。咱就是咱。咱是赫萝。」 | 我大概能理解这是个什么物种吧……反正我是猫。 |
 | <img src="https://farseerfc.me/images/avatar.jpg" style="width: 5em;"> | [Farseerfc 的小窝](https://farseerfc.me/) |  | ~~爱呼吸~~ fc 老师！似乎是日本某大学的教授，人生赢家，实名羡慕。 |
-| <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
+| <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33\_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
 |  | [Nick's Nichijou](https://nichi.co/) |  | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
+|  | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 
 # 其他地方认识的
 

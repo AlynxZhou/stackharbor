@@ -194,6 +194,9 @@ blogroll:
     - name: Nick's Nichijou
       link: https://nichi.co/
       icon: <i class="fas fa-link"></i>
+    - name: 惠狐之书
+      link: https://blog.megumifox.com/
+      icon: <i class="fas fa-link"></i>
 
 # `comment.commentjs.type`: Choose between `github` and `oschina`.
 comment:
