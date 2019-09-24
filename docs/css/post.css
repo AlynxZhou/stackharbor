@@ -24,7 +24,7 @@
   outline: 0;
   padding: 0em 0.5em;
   margin: 0.5em 0;
-  background: #ff2a2a;
+  background: #9f1313;
   border: 0.1em solid #f5c6cb;
   line-height: 2em;
 }
@@ -90,18 +90,18 @@
 }
 .post .post-tag {
   display: inline-block;
-  background: #721c24;
+  background: #9f1313;
   border: 0.1em solid #f5c6cb;
   padding: 0.15em;
   line-height: 1.2em;
   font-size: 1em;
 }
 .post .post-tag:nth-child(2n) {
-  background: #155724;
+  background: #237f23;
   border: 0.1em solid #c3e6cb;
 }
 .post .post-tag:nth-child(3n) {
-  background: #004085;
+  background: #2356af;
   border: 0.1em solid #b8daff;
 }
 .post .post-footer {
