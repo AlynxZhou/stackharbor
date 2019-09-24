@@ -157,7 +157,8 @@
   transition: 0.3s ease-in-out;
   color: #fff;
   text-decoration: none;
-  border-bottom: none;
+  padding: 0;
+  margin: 0.25em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;

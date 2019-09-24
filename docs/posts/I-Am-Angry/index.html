@@ -81,7 +81,7 @@
         $(e).before([
           "<div class=\"code-titlebar\">",
             "<div class=\"titlebar-left\">",
-              "<a class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></a>",
+              "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
             "</div>",
             "<div class=\"titlebar-center\">",
               lang.length ? lang.toUpperCase() : "代码",
@@ -95,7 +95,7 @@
         ].join(""));
         // $(e).before("<button class=\"copy button\">复制</button>");
       });
-      var cb = new ClipboardJS("a.copy", {
+      var cb = new ClipboardJS("button.copy", {
         "target": function (trigger) {
             // Get target element by DOM API.
             // trigger.parentNode.parentNode is code-titlebar.
@@ -501,4 +501,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.1.6 at 2019-09-24 Tue 17:37:27 CST. -->
+<!-- Page built by Hikaru v2.1.6 at 2019-09-24 Tue 18:42:21 CST. -->
