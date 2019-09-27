@@ -213,8 +213,8 @@ comment:
     type: github
     user: AlynxZhou
     repo: stackharbor
-    clientId: fdfb4f0d020ee7b8d5cb
-    clientSecret: 6db7dd16477eadc1e96160a23c6ba4cf687dcecf
+    clientID:
+    clientSecret:
   valine:
     enable: false
     appID:

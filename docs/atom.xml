@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-09-18T08:32:01.430Z</updated>
+  <updated>2019-09-26T10:42:54.980Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,34 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>蜗牛星际安装 Arch Linux 作为 NAS</title>
+    <link href="https://sh.alynx.moe/posts/SnailSpace-as-NAS/" />
+    <id>https://sh.alynx.moe/posts/SnailSpace-as-NAS/</id>
+    <published>2019-09-26T08:15:00.000Z</published>
+    <updated>2019-09-26T10:42:54.980Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<h1 id="需求"><a class="headerlink" href="/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1><p>以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派电源也不是很放心。特别是我还拆下来笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Linux" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    
+    <category term="Arch Linux" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Arch%20Linux/" />
+    
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Arch Linux" scheme="https://sh.alynx.moe/tags/Arch%20Linux/" />
+    
+    <category term="蜗牛星际" scheme="https://sh.alynx.moe/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/" />
+    
+  </entry>
   
   <entry>
     <title>前端博客搜索引擎</title>
@@ -475,34 +503,6 @@
     <category term="随记" scheme="https://sh.alynx.moe/tags/%E9%9A%8F%E8%AE%B0/" />
     
     <category term="无题" scheme="https://sh.alynx.moe/tags/%E6%97%A0%E9%A2%98/" />
-    
-  </entry>
-  
-  <entry>
-    <title>学习 OpenGL 1</title>
-    <link href="https://sh.alynx.moe/posts/Learn-OpenGL-1/" />
-    <id>https://sh.alynx.moe/posts/Learn-OpenGL-1/</id>
-    <published>2018-08-28T00:21:50.000Z</published>
-    <updated>2019-08-06T07:56:28.984Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank" rel="noreferrer noopener">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>]]>
-    
-    </summary>
-    
-    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="编程" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
-    
-    <category term="OpenGL" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/OpenGL/" />
-    
-    
-    <category term="OpenGL" scheme="https://sh.alynx.moe/tags/OpenGL/" />
-    
-    <category term="C 语言" scheme="https://sh.alynx.moe/tags/C%20%E8%AF%AD%E8%A8%80/" />
-    
-    <category term="编程" scheme="https://sh.alynx.moe/tags/%E7%BC%96%E7%A8%8B/" />
     
   </entry>
   
