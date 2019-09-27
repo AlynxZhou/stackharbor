@@ -52,8 +52,11 @@ highlight:
 
 search:
   enable: true
-  path: search.json
-  page: search.html
+  path:
+    - search/1.json
+    - search/2.json
+    - search/3.json
+  page: search/index.html
 
 feed:
   enable: true
