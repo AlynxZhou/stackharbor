@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-09-26T10:42:54.980Z</updated>
+  <updated>2019-09-27T04:42:52.565Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -23,11 +23,11 @@
     <link href="https://sh.alynx.moe/posts/SnailSpace-as-NAS/" />
     <id>https://sh.alynx.moe/posts/SnailSpace-as-NAS/</id>
     <published>2019-09-26T08:15:00.000Z</published>
-    <updated>2019-09-26T10:42:54.980Z</updated>
+    <updated>2019-09-27T04:42:52.565Z</updated>
     
     <summary type="html">
     
-    <![CDATA[<h1 id="需求"><a class="headerlink" href="/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1><p>以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派电源也不是很放心。特别是我还拆下来笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。</p>]]>
+    <![CDATA[<p><strong>未完待续</strong></p><h1 id="需求"><a class="headerlink" href="/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1><p>以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派电源也不是很放心。特别是我还拆下来笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。</p>]]>
     
     </summary>
     
