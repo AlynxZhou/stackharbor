@@ -21,7 +21,7 @@ tags:
 
 <!--more-->
 
-<blockquote class="centerquote">目录</blockquote>
+<blockquote class="center-quote">目录</blockquote>
 
 -------
 

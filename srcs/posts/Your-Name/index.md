@@ -48,7 +48,7 @@ tags:
 
 最后仍旧是羁绊而回头。
 
-<blockquote class="centerquote">“从你的前前前世开始，我便一直在寻找着你的踪迹。”</blockquote>
+<blockquote class="center-quote">“从你的前前前世开始，我便一直在寻找着你的踪迹。”</blockquote>
 
 **即使我不记得你的名字，那就让我再大声的问你一次吧。”**
 

@@ -10,7 +10,7 @@ categories:
 tags:
   - Dirty words
 ---
-<blockquote class="centerquote">I'm so honor that I can speak another language when they ask me to shut up with their language.</blockquote>
+<blockquote class="center-quote">I'm so honor that I can speak another language when they ask me to shut up with their language.</blockquote>
 
 There are some ways to fight against with them, but only when you have enough power, sadly.
 

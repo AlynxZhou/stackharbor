@@ -828,9 +828,10 @@ blockquote p {
   padding: 0;
   margin: 0;
 }
+.center-quote,
 .centerquote {
   margin: 1em 0;
-  padding: 0.5em 1em;
+  padding: 0.5em 15%;
   border-left: none;
   border-top: 0.2em solid #ccc;
   border-bottom: 0.2em solid #ccc;
@@ -838,7 +839,9 @@ blockquote p {
   color: #666;
   word-wrap: break-word;
 }
+.center-quote p,
 .centerquote p,
+.center-quote div,
 .centerquote div {
   text-align: center;
 }
@@ -847,7 +850,7 @@ blockquote p {
 .alert-blue {
   text-align: center;
   margin: 1em 0;
-  padding: 0.5em;
+  padding: 0.5em 15%;
   border-radius: 0.3em;
 }
 .alert-red {

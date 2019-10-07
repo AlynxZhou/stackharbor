@@ -11,7 +11,7 @@ tags:
 ---
 ![2016-tail_fushishan.jpg](2016-tail_fushishan.jpg)
 
-<blockquote class="centerquote">大象永远不会遗忘。</blockquote>
+<blockquote class="center-quote">大象永远不会遗忘。</blockquote>
 
 转眼间时光飞逝，站在了2016的尾巴上（2016：好疼！），仔细想想似乎也没什么好说的，无非是考完了高考，上了大学，写了一堆乱七八糟的代码，比如[这个](https://github.com/AlynxZhou/namefight)，嘴上天天说要做的事情还是有不少没做，比如改一改Emacs配置（这种flag成本太高了立不得），还有根本就立不了的flag一大堆，说穿了也还是自己太弱了吧。
 

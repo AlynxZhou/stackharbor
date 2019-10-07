@@ -190,7 +190,7 @@ Linux 开发者们一般都是凭借兴趣和对写程序的热情进行开发�
 
 # 最后，有关 “世界上最好的两种语言” Python……
 
-<blockquote class="centerquote">所有使用 Python 却不指明具体版本的人都是耍流氓！</blockquote>
+<blockquote class="center-quote">所有使用 Python 却不指明具体版本的人都是耍流氓！</blockquote>
 
 由于 Python2 和 Python3 语法任性的不兼容，而有些发行版默认的 `python` 链接到 `python3` 有些还抱着 `python2`，建议在运行有关指令时使用具体的 `python2` 或者 `python3` 而不是 `python`。同样，使用 `pip`（Python 的包管理器，安装 Python 一些库的时候尽量用这个）的时候也要指定 `pip2` 或者 `pip3`（Python 两个版本有不同的目录，装错了没人管你）。
 

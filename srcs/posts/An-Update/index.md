@@ -12,7 +12,7 @@ tags:
   - 随记
   - 无题
 ---
-<blockquote class="centerquote">谨以这篇没营养的更新表明我现在闲着。</blockquote>
+<blockquote class="center-quote">谨以这篇没营养的更新表明我现在闲着。</blockquote>
 
 嘛，好久不见，我还是那只猹喵*Alynx*，本着我一向诚实的原则，丑话说在前头，这篇间隔许久的更新注定是没营养的，如果你珍惜你的流量的话——
 

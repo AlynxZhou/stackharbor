@@ -14,7 +14,7 @@ comment: true
 ---
 ![Angry.jpg](Angry.jpg)
 
-<blockquote class="centerquote">I AM ANGRY!!!</blockquote>
+<blockquote class="center-quote">I AM ANGRY!!!</blockquote>
 
 这里多了一只发怒的猹喵。愤怒能抑制懒惰。
 

@@ -18,7 +18,7 @@ enc_pwd:
 
 # 满天
 
-<blockquote class="centerquote">满天思念化作繁星</blockquote>
+<blockquote class="center-quote">满天思念化作繁星</blockquote>
 
 我想不是所有人都能理解我此刻的心情。消息来的很突然，但是却不出乎意料。
 
@@ -34,7 +34,7 @@ Kalafina 不只是一个演唱动漫音乐的歌手组合，在我心里歌曲�
 
 # To The Beginning
 
-<blockquote class="centerquote">奇迹还会最后降临一次吧</blockquote>
+<blockquote class="center-quote">奇迹还会最后降临一次吧</blockquote>
 
 梶浦由纪退出事务所的时候，我觉得自己的半个世界崩塌了。
 
@@ -52,7 +52,7 @@ Kalafina 不只是一个演唱动漫音乐的歌手组合，在我心里歌曲�
 
 # ARIA
 
-<blockquote class="centerquote">没有你的未来 此刻刚刚开始</blockquote>
+<blockquote class="center-quote">没有你的未来 此刻刚刚开始</blockquote>
 
 我曾经一度失望。
 
@@ -84,7 +84,7 @@ Kalafina 不只是一个演唱动漫音乐的歌手组合，在我心里歌曲�
 
 # 君が光に変えて行く
 
-<blockquote class="centerquote">为了这份渺茫的信念 你将化作光芒将它们照亮</blockquote>
+<blockquote class="center-quote">为了这份渺茫的信念 你将化作光芒将它们照亮</blockquote>
 
 在我爱上 Kalafina 的时候，我是没有看过空之境界的，也没有看过 Fate。
 
@@ -106,7 +106,7 @@ Kalafina 不只是一个演唱动漫音乐的歌手组合，在我心里歌曲�
 
 # 傷跡
 
-<blockquote class="centerquote">我从寂静中迈步而出 走向未曾见过的爱情</blockquote>
+<blockquote class="center-quote">我从寂静中迈步而出 走向未曾见过的爱情</blockquote>
 
 我还能多说什么呢？
 
@@ -118,7 +118,7 @@ Kalafina 不只是一个演唱动漫音乐的歌手组合，在我心里歌曲�
 
 # Lacrimosa
 
-<blockquote class="centerquote">想再一次爱上这眩目的世界</blockquote>
+<blockquote class="center-quote">想再一次爱上这眩目的世界</blockquote>
 
 镇魂曲。
 
@@ -132,7 +132,7 @@ Kalafina 不只是一个演唱动漫音乐的歌手组合，在我心里歌曲�
 
 # 辉く空の静寂には
 
-<blockquote class="centerquote">有多么爱 有多么狂 似如就像这胸膛即将要烧尽狂乱一样</blockquote>
+<blockquote class="center-quote">有多么爱 有多么狂 似如就像这胸膛即将要烧尽狂乱一样</blockquote>
 
 很抱歉，我真的很抱歉。
 
