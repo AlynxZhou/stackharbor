@@ -2,7 +2,7 @@
 title: 蜗牛星际安装 Arch Linux 作为 NAS
 layout: post
 #comment: true
-createdTime: 2019-09-26 16:15:00
+createdTime: 2019-10-07 17:01:00
 categories:
   - 计算机
   - Linux
