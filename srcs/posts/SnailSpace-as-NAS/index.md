@@ -60,7 +60,7 @@ tags:
 
 # 软件处理
 
-软件部分就十分舒服自在了，接显示器网线键盘开机按 F7 进入 BIOS 设置 UEFI 模式从 U 盘启动，然后进入 Archiso 按照 [安装指南](https://wiki.archlinux.org/index.php/Installation_guide) 安装系统（据说他们最近在处理 base 组，建议随时跟进 wiki，我就不复制了），分区的时候我是在能引导的 2.5 寸硬盘上建立了 ESP，然后其他空间全部用作 LVM，1T 硬盘的剩余空间作为一个 pv，并且给 2T 的硬盘分了三个区做 pv（万一我哪天脑子抽了想缩个分区出来呢？），然后建立 vg，建立给根目录和家目录的 lv，然后创建 ext4 文件系统。这一段参照 wiki 对应页面就行了，命令十分简明直观，我第一次用就成功了。配置好的效果如图：
+软件部分就十分舒服自在了，接显示器网线键盘开机按 F7 进入 BIOS 设置 UEFI 模式从 U 盘启动，然后进入 Archiso 按照 [安装指南](https://wiki.archlinux.org/index.php/Installation_guide) 安装系统（据说他们最近在处理 base 组，建议随时跟进 wiki，我就不复制了），分区的时候我是在能引导的 2.5 寸硬盘上建立了 ESP，然后其他空间全部用作 LVM，1T 硬盘的剩余空间作为一个 pv，~~并且给 2T 的硬盘分了三个区做 pv（万一我哪天脑子抽了想缩个分区出来呢？）~~，然后建立 vg，建立给根目录和家目录的 lv，然后创建 ext4 文件系统。这一段参照 wiki 对应页面就行了，命令十分简明直观，我第一次用就成功了。配置好的效果如图：
 
 ![分区状况](3.jpg)
 
@@ -70,6 +70,19 @@ tags:
 MODULES=(intel_agp i915)
 HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)
 ```
+
+至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，但我手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份），于是建了 `/data` 和 `/data/alynx` 两个子卷，`/data` 就挂载到 `/data`，`/data/alynx` 挂载到我家目录下面。话说 btrfs 的子卷原来很像普通目录，但是又可以分别挂载，不需要用 `mount --rbind`。然后在 samba 下面添加一个 datas 配置，就像 homes 一样每个用户都有个目录（当然得手动创建）：
+
+```ini
+[datas]
+   comment = Data Directories
+   browseable = yes
+   writable = yes
+   valid users = %S
+   path = /data/%S
+```
+
+然后我在某东买了一块东芝 2T 64M 7200 转的机械硬盘，到手之后打算加入 btrfs 里面，建立 RAID1，btrfs 的好处就在于这个可以先弄一块之后渐进修改，而且看起来目前没什么大问题的样子（按我的理解并行读取的性能问题大概是用来并行加速的，但是实际上 RAID1 不并行读取也可以读出数据吧）。虽然我本来也可以把数据移出来然后建 mdadm，但是不排除以后再加盘做 RAID 10，似乎 mdadm 没法直接转换的样子？按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。
 
 安装 bootloader 的时候我直接用了 systemd-boot，我在自己笔记本上也用的这个，功能够用了就没考虑安装 GRUB，编写 entry 时候内核参数里的 root 可以写 `/dev/vg0/rootlv` 也可以写 `/dev/mapper/vg0-rootlv`（这里中文 wiki 和英文 wiki 分别是这俩，亲测都可以），比如我的就是下面这样：
 
@@ -95,7 +108,7 @@ DHCP=ipv4
 
 意思是对于所有以 `en` 开头的网卡使用 DHCPv4，然后 `systemctl enable --now systemd-networkd systemd-resolved` 就可以了。
 
-其它的配置基本都是正常操作，samba 参照 wiki 页面配置就行了，我打算以后插新硬盘直接加进 LVM 加给 `/home`，省得还得操心挂载到哪里。在外面访问我选择配置 WireGuard，参照我 [这篇文章](https://sh.alynx.moe/posts/WireGuard-Usage/) 就可以了，如果只是 SSH 远程控制一下效果还可以。
+其它的配置基本都是正常操作参照 Arch Wiki，~~我打算以后插新硬盘直接加进 LVM 加给 `/home`，省得还得操心挂载到哪里~~ 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 [这篇文章](https://sh.alynx.moe/posts/WireGuard-Usage/) 就可以了，如果只是 SSH 远程控制一下效果还可以。
 
 # 效果
 
@@ -104,4 +117,3 @@ DHCP=ipv4
 *Alynx Zhou*
 
 **A Coder & Dreamer**
-
