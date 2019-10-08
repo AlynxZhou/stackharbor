@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">复制</button>");
+      });
+      var cb = new ClipboardJS("button.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Dirty Words | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Dirty-Words/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Dirty Words</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-07-01T10:42:09.000Z">2017-07-01 Sat 18:42:09 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Dirty%20words/" itemprop="url" rel="index"><span itemprop="name">Dirty words</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <blockquote class="center-quote">I'm so honor that I can speak another language when they ask me to shut up with their language.</blockquote>
+
+<p>There are some ways to fight against with them, but only when you have enough power, sadly.</p>
+<p>I feel so lucky, though I cannot speak English so good, but if you are with me, I believe you can feel what I wanna say.</p>
+<a id="more"></a>
+
+<p>And it seems that they do not care about English essay.</p>
+<p>I don&#39;t know how to say in normal words, oh yes they won&#39;t let you say.</p>
+<p>What could let a man give up his native language speaking something?</p>
+<p>There is examine everywhere, and what&#39;s more horrible, the people in this &quot;wonderful&quot; land developed a kind of &quot;self-examine&quot;.</p>
+<p>Because abnormal things happen every day.</p>
+<p>Inside their border. some words even some people can disappear suddenly, just because they are something different from the main idea. Even the minority is correct.</p>
+<p>Out of the border, they cannot simply remove it, but they block their people from watching.</p>
+<p>I were able not to speak those, because I am a poor programing monkey(or cat)? I am so tiny so weak. The old saying goes that &quot;Being quiet will save your life&quot;. I should just write my code and live my poor life.</p>
+<p>But I can&#39;t.</p>
+<p>Firstly they blocked words negative to them, I said nothing, because I don&#39;t believe those words, partly they taught everyone those are fake.</p>
+<p>Secondly they blocked colorful hairs on TV, I said nothing, because I don&#39;t like colorful head.</p>
+<p>Thirdly they said gay and lesbian are abnormal, I said nothing, because I am not one of them.</p>
+<p>But finally when you want to say some words, they just disappear, like you never live.</p>
+<p>That&#39;s interesting? You and many people before you developed tools, you wanna to build a dream world, you believe that every one in the world shoud be friendly, because we are all mankind, we should love each other and be brothers or sisters, aren&#39;t we?</p>
+<p>And what do you think when you see devil destroyed your world?</p>
+<p>Constructors are great, who can only make problems to others is shit.</p>
+<p>That&#39;s when self-examine come into existance.</p>
+<p>What a strong life a man is!</p>
+<p>Even your mouth loses your voice, you eyes lose your vision, you ears can hear nothing but &quot;positive energy.&quot;</p>
+<p>If the so-called positive energy is everywhere, where could negative energy be? Your heart? My heart?</p>
+<p>Remove the speaking function of your mouth and leave eating here, isn&#39;t it good?</p>
+<p>But we are not born like these!</p>
+<p>There are days we say everything we want on the Internet, but you see, a post with hundreds of thousands of reposts were removed, you find you are so tiny.</p>
+<p>Together we stand but then get killed?</p>
+<p>Or most of the people have a hard mind and a soft heart? Just some cheap words can let people believe a bad man is for their peace.</p>
+<p>Sorry I never eat chicken soup.</p>
+<p>If you did something with a totally wrong direction and think your practice can let others respect you, you are a totally dog shit. If you asked a group of people doing wrong thing for you, you are totally a son of the bitch.</p>
+<p>If not, what should we do for the people in the correct direction?</p>
+<p>Don&#39;t disturb me with these silly things you made. Do what you should do.</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Dirty%20words/" rel="tag"><i class="fas fa-tag"></i>Dirty words</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Be-Brave/" rel="next" title="Be Brave"><i class="fas fa-angle-left"></i><span class="nav-title">Be Brave</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Your-Name/" rel="prev" title="你的名字。"><span class="nav-title">你的名字。</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "Dirty Words",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">64</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">42</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">68</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank" rel="noreferrer noopener">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nick's Nichijou</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://axionl.me/" target="_blank" rel="noreferrer noopener">初等記憶體</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.origincode.me/" target="_blank" rel="noreferrer noopener">OriginCode 札記</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.3.0 at 2019-10-08 Tue 19:04:24 CST. -->

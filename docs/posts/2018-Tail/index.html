@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">复制</button>");
+      });
+      var cb = new ClipboardJS("button.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>StackHarbor 的 2018 尾记 | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/2018-Tail/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">StackHarbor 的 2018 尾记</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-12-31T08:14:32.000Z">2018-12-31 Mon 16:14:32 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p><img src="/posts/2018-Tail/2B.jpg" alt></p>
+<p>还没有到月亮升起的时候呢。</p>
+<a id="more"></a>
+
+<p>不是所有特殊的日子都能让人开心，特别是对于一个记性不太好的人来说。虽然距离上一个这样标题的已经过了一年，但我似乎想不起来这一年有什么值得开心的事情。我是指那种能维持很久的开心，但是很遗憾似乎让人难过的事情总是能持续的更久一点。</p>
+<p>今年大概保证了一个月一篇 post 的频率，虽然有些月份就懒的什么也不想干，但回头翻一翻之前还有存货，让人变懒的原因不是无事可做，往往是由于各种没什么意义还不得不做的事情，一旦沉迷在这些事情里太久，就容易让人忘记自己应该做什么事情。</p>
+<p>似乎这一年来就一直不清楚自己该做什么，虽然对于自己不想做什么有清晰的了解，但是说到做什么，似乎每一件事都不是很容易完成，特别是一些没接触过的东西。而且糟糕的是我觉得这个状态还会继续存在下去——我还没搞到该死的创新创业学分！</p>
+<p>说句实在话，我不想当韭菜，也没当韭菜的成本。我还有好多事情没有完成呢！大概对于一棵韭菜来说，长得和其他韭菜不一样就是错误。</p>
+<p>所以说实话，最近没有什么值得开心的事情，更远一些也没有。</p>
+<p>如果从最早开始说的话，今年大概从 <em>空之境界</em> 开始，然后是 <em>Fate/Stay Night</em>，然后是 <em>Fate/Zero</em>。第一遍看空之境界的时候还不知道整个在说什么，只是模糊地觉得十分喜欢，最近又拿起来重新看了一遍，才发现一些不一样的意思。</p>
+<p>话说回来，虽然是第一次看，但是却有十分熟悉的感觉，大概是因为里面一些插曲早就不知道循环了多少个深夜的原因。总有一些旋律是停留在记忆里面的，理解它们从来就没有什么困难。</p>
+<p>然后是 Fate，最开始只是因为把 <em>卫宫家今天的饭</em> 当成泡面番来看的，没想到一下子就点开了一年霸权（真·年番）。当然看过 Stay Night 之后和没看之前看这部的感觉是不一样的——一同经历过很多，怎么能不留下些痕迹呢——大概和所有人一样，只要看到他们还在一起就满足了。</p>
+<p>然后大概 Unlimited Blade Works 线的动画从音乐上整个就输给了 Fate 线动画，除了 LAST STARDUST 是确确实实的超水平，believe 和 ring your bell 表现实际很一般（这里一般的意思就是指没什么第一遍就吸引人的地方）。Fate/Zero 也是完完全全的超出 Unlimited Blade Works 的音乐（只要把满天拉出来就可以吊打了），至于 2019 年 1 月 11 日的 Heaven&#39;s Feel……我并不是樱厨，所以大概这条线不适合我吧。还有 <em>幻想嘉年华</em> 大概和卫宫家今天的饭是同一水平的作品，太严肃了也是很累的。至于 <em>Fate/Apocrypha</em>？这不是讲的莫德雷德和狮子劫界离的故事嘛？写的挺好的！就是 23 集就完结有点奇怪……后面还做两集多余的骗收视率嘛？（摸着良心说，阿福这个配角也挺可爱的。）</p>
+<p>Fate 系列其他的作品就没看过了，我觉得也没有看的必要，FGO 从看完 Stay Night 开始玩，到现在也差不多没什么动力了（主要是懒），反正一年过去了，我还是没有抽到蓝呆毛。（93 连抽！279 个石头！一个五星都没有！）虽然金卡有了一大堆一般的本也都轻轻松松，但是我还是很想要蓝呆。（无独有偶，信用卡我也只拿到武藏的，没有蓝呆。）明年有第六七章的动画化，第七章我只是觉得故事性很好，但第六章的动画是我最期待的。</p>
+<p>导致不开心的大概是在我重新开始听 Kalafina 的时候听见了 Keiko 退出的消息，完全不愿意回想这件事发生的前后过程。无论希望还是失望也都已经过去了，那剩下的复杂的感情又是什么呢？与其空怀希望，不如让时间回到一切还没发生的时候，重来一遍的话，我应该不会错过那些不该错过的机会了吧。与已经得不到的相比，每天都在重复的无聊事情有什么意义吗？</p>
+<p>顺便一提，假期之前通关了 NieR: Automata，但现在的我恐怕没有再来一次的勇气。</p>
+<p>也许我可以有更多的事情可以做，但是实际上我只有两个作品，一个是现在正在用的主题 ARIA，某种程度上它和我的想法一样简单，本来就是非常简单的逻辑嘛。这个东西写的非常直白，样式也全部是我自己完成的，不会出现什么奇怪的乱七八糟的调用。也没有对一些历史垃圾进行没必要的适配，直接采用最合适的技术，去掉那些对内容没什么帮助还消耗资源的东西就好了。</p>
+<p>还有一个是 Hikaru，基于和上面类似的原因，我对 Hexo 也有一定的不满，虽然看起来其它的让我更没什么兴趣。于是大致按照逻辑设计了自己的生成器，并且给它起了我最喜欢的歌手的名字。这个程序也是一样的直白，反正只是生成一遍页面而已，没有必要搞什么乱七八糟的数据库嘛，就算有必要也可以直接上 SQLite（当然我没有，而是直接用对象引用了）。包括一些乱七八糟的模板里的工具，总之是把所有不符合自己习惯的地方都改了一遍。截至目前一切工作的都很良好，甚至一些我开始不知道怎么实现的地方也都工作了。我也并不觉得需要有多少多少人来用它，只要满足我自己用就行了，至于别人，随意。</p>
+<p>然后大概就是换手机，一加 3T 使用了两年已经是伤痕累累，但是看起来又没什么符合要求的手机，一加的后几代产品完全就是“不讲究”，MIX2S 看起来不错但没有耳机孔也没有防水，而且我并不是很喜欢 MIUI，Pixel 3 的性价比完全就是冲着“有种别买”去的，何况这个价格一旦出了问题没保修就要了命了。<strong>反正我都是晚上充电，充的太快反而让我不放心，快充完全没什么需求</strong>，所以最后考虑加钱买 Galaxy S9（因为 128G 的 S9+ 实在是超出预算了），但是看到 S9+ 有 64G 的版本（反正可以插存储卡），同时 4G 内存实在是太小，咬咬牙就 S9+ 了，反正有奖学金和上个月的结余。别问我 6k+ 为什么不买 iPhone，我考虑了一下，这东西我拿来完全不能用（<strong>没文件管理</strong> 怎么愉快的用 Samba 在 Arch 和手机之间交换文件，以及 Shadowsocks 处理起来也很麻烦，我也不可能因为一个 iPhone 迁移我整个生态和习惯，顺便还 <strong>没有耳机孔</strong>，以及 <strong>被限制的 NFC</strong>，也 <strong>不能随便外接 U 盘</strong>……），所以还不如当它不存在，不存在的东西就不考虑了，这样一来 Galaxy S9+ 就变成了第一档配置的选项。</p>
+<p>拿到 S9+ 以后才发现多出来的价格完全没有白花。对我来说这个手机唯一的缺点就是这个曲屏太难贴膜以及担心摔碎（所以想办法搞了碎屏险）。至于其它的完全 OK，防水是一个平时我不会故意去用（我不洗手机！）但总能让人很安心的功能，双摄也是到手了之后发现 2X 变焦在拍猫的时候很有用（不用担心追的太近猫猫跑掉了），指纹识别在后面总比没有要强（毕竟我很讨厌实体按压 Home 键），有 NFC，屏幕水平中规中矩（手机居然可以切换分辨率你敢信！平时用 1080P 就很清晰了。），可以插存储卡，耳机孔绝对是加分项目，特别是 <strong>随包装送了 AKG 耳机、USB-C 到 MicroUSB 的转接头，USB-C 到 USB-A 的转接头（本来是换机助手用的，但完全可以用来接 U 盘）、透明手机壳甚至还有无线充电器（聊胜于无，对我来说只是多了一个充电的位置，角度什么的并不十分合适）</strong>，甚至似乎还可以一边接收 WiFi 一边开热点（！！！）。另外软件上也和当初的 TouchWiz 有天壤之别，整个系统的动画很复杂，可配置项多到根本翻不完（对我来说这是优点），比如我喜欢返回键在左侧（OK），还可以设置桌面下拉通知栏，<strong>不但可以设置是否显示二级菜单（二级菜单爱好者手动吐槽一众国产和 iPhone），甚至可以设置是手势开启二级菜单还是单独图标（可惜图标不能换位置，不过反正我用手势）</strong>，桌面可以横屏……以及 Android P 的更新……顺便还有能解决毒瘤但是又不过分突出的智能管理器（真的好用，不是假的，实名推荐），连我这种原生党也非常满意。甚至在 Note 9 上用任意线缆就能开启 DeX 的特性也在 Android P 通过软件更新就实现了（在 S9 上 <strong>不是硬件限制</strong>！三星也 <strong>没有强行要求你买他自家底座</strong> 的意思！亲测完全没有阉割。），手动 @ 某没良心配件厂一下。</p>
+<p>最后一个月稍微有点安慰的就是又看了一部 9.8 分的番（上一个 9.8 的是卫宫家今天的饭），<em>青春猪头少年不会梦到兔女郎学姐</em>，真正的高情商男主和真正的高情商女主以及不狗血的爱情故事让人实名羡慕啊，顺便樱岛麻衣真可爱！回头再看看某些废物后宫男，整个的质量已经是在恶心人了，要不是为了明年的电磁炮，谁会花钱看这种东西啊喂！都不是小学生了，天天比这个强比那个强算战斗力有意思吗？</p>
+<p>总而言之，幸福的事情都是相似的，不幸的事情则各有各的不幸，某种程度上来说，<strong>幸福的事情并不在于事情本身，而是在等待这件事情到来的过程中</strong>，就像一个慢慢升起的气球，当它上升到看不见的时候，反而会有难以掩盖的失落感。反正天下没有不散的宴席，幸福的事情也总会结束，也许是如此人们才会给自己一个又一个理由让平凡的日子变的不平凡，好有下一个盼头支撑自己活下去。但是回过头来看，这些事情又留下了什么呢？</p>
+<p>已经是月亮升起的时候了，何等愚蠢而幸福的人啊！</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"><i class="fas fa-tag"></i>随记</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/JavaScript-YAML-Timezone-Moment/" rel="next" title="使用 Moment 处理 JavaScript 与 YAML 的时区转换"><i class="fas fa-angle-left"></i><span class="nav-title">使用 Moment 处理 JavaScript 与 YAML 的时区转换</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Learning-C-1/" rel="prev" title="C 语言学习 1"><span class="nav-title">C 语言学习 1</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "StackHarbor 的 2018 尾记",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">64</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">42</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">68</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank" rel="noreferrer noopener">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nick's Nichijou</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://axionl.me/" target="_blank" rel="noreferrer noopener">初等記憶體</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.origincode.me/" target="_blank" rel="noreferrer noopener">OriginCode 札記</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.3.0 at 2019-10-08 Tue 19:04:24 CST. -->

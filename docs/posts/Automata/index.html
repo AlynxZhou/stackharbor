@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $(".post pre code figure.highlight").each(function (i, e) {
+        var lang = e.parentNode.className;
+        $(e).before([
+          "<div class=\"code-titlebar\">",
+            "<div class=\"titlebar-left\">",
+              "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+            "</div>",
+            "<div class=\"titlebar-center\">",
+              lang.length ? lang.toUpperCase() : "代码",
+            "</div>",
+            "<div class=\"titlebar-right\">",
+              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+            "</div>",
+          "</div>"
+        ].join(""));
+        // $(e).before("<button class=\"copy button\">复制</button>");
+      });
+      var cb = new ClipboardJS("button.copy", {
+        "target": function (trigger) {
+            // Get target element by DOM API.
+            // trigger.parentNode.parentNode is code-titlebar.
+            // nextElementSibling is figure.highlight, lastChild is pre.code.
+            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+        }
+      });
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Automata: A Story of Love and Lives | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Automata/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Automata: A Story of Love and Lives</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-07-16T09:39:01.000Z">2018-07-16 Mon 17:39:01 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B8%B8%E6%88%8F/" itemprop="url" rel="index"><span itemprop="name">游戏</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p><img src="/posts/Automata/Automata.jpg" alt></p>
+<blockquote class="center-quote">我没有办法评价这款游戏<br>因为我觉得我被结结实实地折腾了一回</blockquote>
+
+<a id="more"></a>
+
+<blockquote>
+<p>Everything that lives is designed to end.
+一切活着的事物，都注定要终结。
+We are perpetually trapped ...
+我们被永远地囚禁……
+... in a never-ending spiral of life and death.
+……于永无止境的生死轮回之中。
+Is this a curse?
+这是一种诅咒？
+Or some kind of punishment?
+还是某种惩罚？
+I often think about the god who blessed us with this cryptic puzzle ...
+我时常想起那用模糊的谜团祝福我们的神……
+... and wonder if we&#39;ll ever have the chance to kill him.
+……并猜想我们是否终有弑神的机会。</p>
+</blockquote>
+<p>我大概对动作游戏不感冒。在我最开始对 NieR: Automata 感兴趣的时候，是把它当作剧情游戏来看的，动作只是买剧情附赠的而已。</p>
+<p>一周目结束的时候，我以为这是个讲生命和进化的故事。</p>
+<p>二周目结束的时候，我以为它要说的是爱情。</p>
+<p>三周目开始，我才发现作者是要给玩家一个彻头彻尾的绝望。</p>
+<p>能写出这样的开场白的人，不可能做出一款糟糕的游戏。尽管整个游戏的游玩方式实在是逊色于剧情，整个游戏的玩法总结起来大概就是无穷无尽的跑打跑打跑打，伴随着优美或者说是诡异的配乐。然而排除掉动作和开放世界元素仍然可以维持形式完整，以视觉小说的形式，开放世界大概是由于经费限制并没有什么玩法，我又不是有闲情逸致跑来跑去做任务的人。</p>
+<p>以机械构成昆虫或者战车的形式确实很好的在震撼和恶心之间取得了平衡，随时出现的视角锁定也可以说是独树一帜的特色。</p>
+<p>原本以为一二周目就完整地讲述了进化与爱情，但是和后面的故事比起来，前面的打斗只是岁月静好罢了。</p>
+<p>前两周目是一个玩的人很累但看的人很爽的游戏，当然 PC 版就算了，毕竟 bug 太多，PS4 的优化和画质还是很不错的，特别是与巨型兵器战斗时的满天阴霾。至于配音，英语和日语一样优秀，有时反而是中文翻译失去了英文的特殊味道，第一次在 PC 上启动英文版之后许多表达方式就印在了脑海里。</p>
+<p>三周目则是让看的人和玩的人都感到痛苦。失去 Bunker，失去爱人，足以让人疯狂。机械都进化出了感情，人造人怎么会没有呢？</p>
+<p>故事有多绝望，剧情就可以有多荒谬。</p>
+<p>凌晨三点，经历过所有优秀的战斗场面和恰到好处的音乐之后，还是删掉了存档。一切的一切好像终于结束了，没有办法评价这个故事，没有办法评论其中各种可以说是鬼才的设计，没有办法评价这个游戏。它不像是会让你流出眼泪，只是会让你觉得，这次是结结实实地被横尾太郎折腾了一把呢。</p>
+<p>2B，9S 和 A2 都留下来了，还有什么需要留恋的吗？可惜缺乏的是再来一次的勇气。</p>
+<p>“如果没有战争，我们也不是士兵，是不是也能在这里像人类一样购物呢？”</p>
+<p>但愿是吧。</p>
+<blockquote>
+<p>Everything that lives is designed to end.
+一切活着的事物，都注定要终结。
+They are perpetually trapped ...
+我们被永远地囚禁……
+... in a never-ending spiral of life and death.
+……于永无止境的生死轮回之中。
+However ... life is all about the struggle within this cycle.
+但是……生命的全部意义就在于这轮回中的挣扎。
+That is what we believe.
+那正是我们所相信的。</p>
+</blockquote>
+<hr>
+<p>后记：在 NieR: Automata 原生音乐会“人形们的记忆”上的朗读剧里交待了 Pod 们修复好 2B 和 9S 身体后发生的事情，也就是 E 结局之后的真正结局。按照 <a href="https://theark.wiki/w/Farewell" target="_blank" rel="noreferrer noopener">The Ark</a> 这个网站的记录，原本的台本是这样的（可靠性未知）（我在这里附上翻译）（看完伤心欲绝的往后看）：</p>
+<blockquote>
+<p>（前情：2B 磨损了自己的手在「塔」的遗迹 40 米深处挖掘方舟留下来的结晶直到由于过载自动关机，然后使用结晶制作疫苗尝试修复 9S 但却失败了。）
+Pod 042: Hypothesis: Unit 9S&#39;s personal data has been lost.
+辅助机 042: 猜测：机体 9S 的个人数据已经丢失。
+2B: His personal data ... is lost ...?
+2B：他的个人数据……丢失了……？
+Pod 042: His personal data was wiped of his own accord, but there is the possibility it was moved to a different location.
+辅助机 042：他的个人数据被从他的个人记录中擦除了，但是也有可能是被移动到了别处。
+Pod 042: According to unit A2&#39;s records, it is possible his data evacuated using the machine lifeforms&#39; Ark.
+辅助机 042：按照机体 A2 的记录，他的数据有可能是通过机械生命体的方舟疏散到了别处。
+Pod 042: Report: Possibility of recovering 9S&#39;s personal data extremely low.
+辅助机 042：报告：9S 的数据恢复可能性极低。
+S.P.
+（这个不知道是什么的缩写了……有人知道请教教我。）
+2B: No ...
+2B：不……
+(Three beeps suddenly sound.)
+（突然响起了三声蜂鸣。）
+Pod 153: Report: Memory components discovered within traces of personal data.
+辅助机 153：报告：内存组件发现了个人数据的痕迹。
+Pod 153: Partial playback possible of memory containing the reason behind his personal data&#39;s reparation failure.
+辅助机 153：可用的内存局部回放包含有他个人数据修理失败的原因。
+Pod 153: Query: Does unit 2B feel it necessary to repair this memory component?
+辅助机 153：询问：机体 2B 是否认为有必要修复该内存组件？
+2B: ... Repair it.
+2B：……修复。
+Pod 153: Understood.
+辅助机 153：了解。
+Pod 153: Data repair complete.
+辅助机 153：数据修复成功。
+Pod 153: Starting playback.
+辅助机 153：开始回放。
+(9S&#39;s voice begins to play back with the sound quality of a radio.)
+（9S 的声音开始以无线设备的音质回放。）
+(He seems to be suffering.)
+（他听起来很痛苦。）
+9S: I didn&#39;t ... get on the Ark created by the machine lifeforms.
+9S：我没有……乘上机械生物制造的方舟。
+9S: We YoRHa ... We don&#39;t deserve to be loved by this world ... We&#39;re just soldiers created to die ...
+9S：我们寄叶部队……我们不值得得到这个世界的爱……我们只是为了死去而制造出来的士兵而已。
+9S: But I ... I think I&#39;m glad ... that I was born as myself ...
+9S：但是我……我很高兴……能够作为我自己而生……
+9S: My personal data, it ... it can&#39;t keep it&#39;s shape any longer.
+9S：我的个人数据…，它……它没办法再保持它的形式了。
+9S: I wonder if I&#39;m about to disappear ...
+9S：我想我是该离去了……
+9S: But ... I&#39;m okay with that ...
+9S：但是……我觉得还好……
+(2B begins crying, without making a sound.)
+（2B 开始无声地哭泣。）
+9S: Hey, 2B ... We&#39;re ... we&#39;re not immortal or anything.
+9S：嘿，2B……我们……我们不是不朽的也不是无所不在的。
+9S: Someday, we&#39;ll break down and return to the Earth.
+9S：终有一天，我们会损坏并归于尘土。
+9S: But, my existence ... It wasn&#39;t meaningless ...
+9S：但是，我的存在……并不是毫无意义……
+9S: Meeting you ... gave meaning to my birth ...
+9S：遇见你……给了我出生的意义……
+9S: Thank you ...
+9S：谢谢你……
+9S: Thank you ...
+9S：谢谢你……
+(9S&#39;s voice becomes hidden behind static.)
+（9S 的声音逐渐消失在静电声里。）
+(2B begins weeping.)
+（2B 开始抽泣。）
+2B: Nines ...
+2B：Nines……（抱歉我觉得“奈兹”这个翻译还不如不翻译……太糟糕了……）
+Pod 042 (narration): 2B didn&#39;t move from where she was.
+辅助机 042（叙述）：2B 没有从她所在的地方移动过。
+Pod 042 (narration): She remained there, unmoving ... forever.
+辅助机 042（叙述）：她留在那里没有移动……永远地。
+Pod 042 (narration): It was a completely irrational act.
+辅助机 042（叙述）：这是个十分不合理的举动。
+Pod 042 (narration): However, &quot;we&quot; can now understand the reason behind it.
+辅助机 042（叙述）：然而，“我们”现在可以理解这样做的原因。
+Pod 042 (narration): Why it was that 2B didn&#39;t move.
+辅助机 042（叙述）：为什么 2B 不再移动。
+Pod 042 (narration): Why it was that she didn&#39;t speak.
+辅助机 042（叙述）：为什么她不再说话。
+Pod 042 (narration): Because &quot;we&quot; are now in that same place, feeling the same thing.
+辅助机 042（叙述）：因为“我们”如今也在相同的位置，感受着相同的事情。</p>
+</blockquote>
+<p>然而不知出于什么原因，最终公开的剧本里是 9S “不知出于什么原因” 在疫苗修复失败后醒过来了（“你还知道醒过来啊喂！”），推测可能是横尾老贼害怕继续虐 2B 小姐姐被玩家打死吧。下面附上 B 站带中文字幕的视频，一定要看完啊！</p>
+<iframe src="//player.bilibili.com/player.html?aid=10344669&cid=17095298&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640" height="480"></iframe>
+
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"><i class="fas fa-tag"></i>游戏</a><a class="post-tag button" href="/tags/%E5%B0%BC%E5%B0%94%EF%BC%9A%E6%9C%BA%E6%A2%B0%E7%BA%AA%E5%85%83/" rel="tag"><i class="fas fa-tag"></i>尼尔：机械纪元</a><a class="post-tag button" href="/tags/NieR:%20Automata/" rel="tag"><i class="fas fa-tag"></i>NieR: Automata</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Learn-OpenGL-1/" rel="next" title="学习 OpenGL 1"><i class="fas fa-angle-left"></i><span class="nav-title">学习 OpenGL 1</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/" rel="prev" title="在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面"><span class="nav-title">在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "github",
+      "user": "AlynxZhou",
+      "repo": "stackharbor",
+      "clientID": "",
+      "clientSecret": "",
+      "no_comment": "这个页面还没有评论，现在就去评论吧！",
+      "go_to_comment": "去评论",
+      "issue_title": "Automata: A Story of Love and Lives",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+  
+  <h1 class="author-name">Alynx Zhou</h1>
+  <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">64</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">42</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">68</a></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank" rel="noreferrer noopener">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nick's Nichijou</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://axionl.me/" target="_blank" rel="noreferrer noopener">初等記憶體</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.origincode.me/" target="_blank" rel="noreferrer noopener">OriginCode 札記</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://github.com/AlynxZhou/hikaru/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v2.3.0 at 2019-10-08 Tue 19:04:24 CST. -->

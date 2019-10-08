@@ -86,7 +86,7 @@ HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)
 
 安装 bootloader 的时候我直接用了 systemd-boot，我在自己笔记本上也用的这个，功能够用了就没考虑安装 GRUB，编写 entry 时候内核参数里的 root 可以写 `/dev/vg0/rootlv` 也可以写 `/dev/mapper/vg0-rootlv`（这里中文 wiki 和英文 wiki 分别是这俩，亲测都可以），比如我的就是下面这样：
 
-```
+```plain
 title	Arch Linux
 linux	/vmlinuz-linux
 initrd	/intel-ucode.img
