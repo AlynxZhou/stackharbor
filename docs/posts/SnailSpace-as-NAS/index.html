@@ -209,8 +209,8 @@
 <blockquote class="center-quote">做人还是得懂点计算机。</blockquote>
 
 <p>这个机器有好多型号，细节差距也有很多，网上有现成的帖子分析，我就不分析了，反正我这一台是 A 款单网口绿主板，妥妥的千兆。而且似乎背板有 PCI 槽，不过主板又没有 PCI 接口就不管了。A 款还有个特点是硬盘架侧面可以放个 2.5 寸硬盘，正好装上我拆下来的笔记本硬盘。（硬盘和安装方式如下图。）安装时候需要两个小螺丝固定硬盘一侧，另外一侧是卡住的，不需要螺丝。</p>
-<p><img src="/posts/SnailSpace-as-NAS/5.jpg" alt="笔记本硬盘"></p>
-<p><img src="/posts/SnailSpace-as-NAS/6.jpg" alt="安装示意"></p>
+<p><img src="/posts/SnailSpace-as-NAS/5.jpg" alt="笔记本硬盘">
+<img src="/posts/SnailSpace-as-NAS/6.jpg" alt="安装示意"></p>
 <h1 id="硬件处理"><a class="headerlink" href="/posts/SnailSpace-as-NAS/#%E7%A1%AC%E4%BB%B6%E5%A4%84%E7%90%86" title="硬件处理"></a>硬件处理</h1>
 <p>手头这一台运气比较好，是 zumax 的 150W 电源，虽然都说这个是所有各种电源里最好的，但是接口只是刚刚够，没有多余的，没办法给侧面硬盘供电。再说都是山寨货谁又比谁强到哪里。按照隔壁老司机的推荐淘宝买了益衡 250W 的 Flex 电源（也叫小 1u 电源）替换掉，花了 250 软妹币左右，感觉车速稳了很多，而且多出了许多接口。安装时候需要把原来电源上后面用来装到侧面的铁片拆掉，然后上下翻转才能装上蜗牛里面的支撑片，然后主板有一长一方两个供电口都插上，背板用的大 4pin 接口，不太够长，把卖家赠送的两条大 4pin 延长线都接上就可以了，然后取一个 SATA 供电线给侧面的硬盘。</p>
 <p>蜗牛自带一个 16G 的 mSATA 硬盘，速度比 U 盘还慢，而且据说用着用着就坏了，很多人都拿这个做引导盘放系统，因为四个硬盘槽连接的 SATA 口是扩展的，不支持引导，但是 <strong>实际上蜗牛主板上还有一个 SATA2 的口可以引导</strong>，正好连接我的笔记本硬盘，直接拧下四个螺丝把主板抽出来，然后拧掉 mSATA 杂牌硬盘，插上 SATA 线装回去即可。</p>
@@ -220,11 +220,20 @@
 <div class="alert-red">这个防护片不要拧太紧，以免把它拧裂了，这种是和机箱配套卖的，淘宝上有卖那种金属的防护网，但是都是厂家批发，不太好买。</div>
 
 <p>你问我怎么知道的？当然是大力出悲剧拧裂了然后没办法只能 502 直接粘风扇边上了。</p>
-<p><img src="/posts/SnailSpace-as-NAS/1.jpg" alt="大了一圈的风扇"></p>
-<p><img src="/posts/SnailSpace-as-NAS/2.jpg" alt="装上之后的效果"></p>
-<p>我还在京东购买了一块 2TB 的西数紫盘，没有买 NAS 专用盘是因为太贵了，而最便宜的只便宜了十几块，但是却是大缓存叠瓦式硬盘，性能非常差，这款紫盘则是标准的 64M 缓存垂直式硬盘，建议自行搜索叠瓦式硬盘了解原因。考虑了一下还是不做 RAID1 了，经济条件不允许，而且本来 RAID 是为了高可用不是为了备份，如果是硬件损坏估计两块盘一起炸了，不如冷备份。</p>
-<p><img src="/posts/SnailSpace-as-NAS/4.jpg" alt="只有带包装的照片了"></p>
+<p><img src="/posts/SnailSpace-as-NAS/1.jpg" alt="大了一圈的风扇">
+<img src="/posts/SnailSpace-as-NAS/2.jpg" alt="装上之后的效果"></p>
+<p>我还在京东购买了一块 2TB 的西数紫盘，没有买 NAS 专用盘是因为太贵了，而最便宜的只便宜了十几块，但是却是大缓存叠瓦式硬盘，性能非常差，这款紫盘则是标准的 64M 缓存垂直式硬盘，建议自行搜索叠瓦式硬盘了解原因。<del>考虑了一下还是不做 RAID1 了，经济条件不允许，而且本来 RAID 是为了高可用不是为了备份，如果是硬件损坏估计两块盘一起炸了，不如冷备份</del>。</p>
+<p><strong>更新</strong>：我又买了一块东芝 P300，也是 64M 非叠瓦式，加进去做 RAID1（真香！）。</p>
 <p>往硬盘架安装硬盘需要四个沉孔螺丝分别锁在两侧，当然我这种硬件渣渣其实是不知道啥是沉孔螺丝的，具体多大多粗我也不懂，我装 2.5 硬盘的螺丝是同学买大疆编程小车多出来的内六角，尺寸正好，至于 3.5 硬盘是隔壁老司机送给我的装机剩下的，反正车速很稳，如果自己买的话京东淘宝好像都有装机用的成套螺丝，建议顺手买一套，不要螺丝钉难倒程序员。</p>
+<p><img src="/posts/SnailSpace-as-NAS/4.jpg" alt="西数带包装">
+<img src="/posts/SnailSpace-as-NAS/14.jpg" alt="东芝带包装">
+<img src="/posts/SnailSpace-as-NAS/13.jpg" alt="打开外包装之后">
+<img src="/posts/SnailSpace-as-NAS/12.jpg" alt="取出来正面">
+<img src="/posts/SnailSpace-as-NAS/11.jpg" alt="取出来背面">
+<img src="/posts/SnailSpace-as-NAS/10.jpg" alt="硬盘托侧面螺丝">
+<img src="/posts/SnailSpace-as-NAS/8.jpg" alt="西数装上硬盘托正面">
+<img src="/posts/SnailSpace-as-NAS/9.jpg" alt="东芝装上硬盘托正面">
+<img src="/posts/SnailSpace-as-NAS/7.jpg" alt="从硬盘架上拔出来一半"></p>
 <h1 id="软件处理"><a class="headerlink" href="/posts/SnailSpace-as-NAS/#%E8%BD%AF%E4%BB%B6%E5%A4%84%E7%90%86" title="软件处理"></a>软件处理</h1>
 <p>软件部分就十分舒服自在了，接显示器网线键盘开机按 F7 进入 BIOS 设置 UEFI 模式从 U 盘启动，然后进入 Archiso 按照 <a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noreferrer noopener">安装指南</a> 安装系统（据说他们最近在处理 base 组，建议随时跟进 wiki，我就不复制了），分区的时候我是在能引导的 2.5 寸硬盘上建立了 ESP，然后其他空间全部用作 LVM，1T 硬盘的剩余空间作为一个 pv，<del>并且给 2T 的硬盘分了三个区做 pv（万一我哪天脑子抽了想缩个分区出来呢？）</del>，然后建立 vg，建立给根目录和家目录的 lv，然后创建 ext4 文件系统。这一段参照 wiki 对应页面就行了，命令十分简明直观，我第一次用就成功了。配置好的效果如图：</p>
 <p><img src="/posts/SnailSpace-as-NAS/3.jpg" alt="分区状况"></p>
@@ -233,7 +242,13 @@
 <span class="line">2</span>
 </pre><pre class="code"><code>MODULES=(intel_agp i915)
 HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)</code></pre></figure></code></pre>
-<p>至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，但我手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份），于是建了 <code>/data</code> 和 <code>/data/alynx</code> 两个子卷，<code>/data</code> 就挂载到 <code>/data</code>，<code>/data/alynx</code> 挂载到我家目录下面。话说 btrfs 的子卷原来很像普通目录，但是又可以分别挂载，不需要用 <code>mount --rbind</code>。然后在 samba 下面添加一个 datas 配置，就像 homes 一样每个用户都有个目录（当然得手动创建）：</p>
+<p>至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，<del>但我手头只有一块</del> 决定的时候手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份）。</p>
+<p>买回来硬盘之后想想反正两块都没啥数据（搬出去了），索性直接格式化成 btrfs，不然也可以在已有一块 btrfs 设备之后 add 然后 balance，就可以修改策为 RAID1，格式化命令很简单就这样：</p>
+<pre><code class="plain"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span>
+</pre><pre class="code"><code># mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV</code></pre></figure></code></pre>
+<p><code>-m raid1</code> 是指 metadata 要做 RAID1 备份，<code>-d raid1</code> 是指 data 也要 RAID1 备份，然后需要跟两个设备，推荐是一样大的，挂载时候就随便挂一个设备就行了，btrfs 会自己执行 RAID1 策略的。</p>
+<p>btrfs 的子卷看起来很像普通目录，但是又可以分别直接挂载，不需要先挂载设备然后再用 <code>mount --rbind</code>。于是建了 <code>/data</code> 和 <code>/data/alynx</code> 两个子卷，<code>/data</code> 就挂载到 <code>/data</code>，<code>/data/alynx</code> 挂载到我家目录下面。</p>
+<p>然后在 samba 下面添加一个 datas 配置，就像 homes 一样每个用户都有个目录（当然得手动创建）（我知道语法不是这么变形但强迫症发作了谁叫 samba 默认的叫 <code>homes</code> 啊！）：</p>
 <pre><code class="ini"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
@@ -246,7 +261,7 @@ HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)</code>
    writable = yes
    valid users = %S
    path = /data/%S</code></pre></figure></code></pre>
-<p>然后我在某东买了一块东芝 2T 64M 7200 转的机械硬盘，到手之后打算加入 btrfs 里面，建立 RAID1，btrfs 的好处就在于这个可以先弄一块之后渐进修改，而且看起来目前没什么大问题的样子（按我的理解并行读取的性能问题大概是用来并行加速的，但是实际上 RAID1 不并行读取也可以读出数据吧）。虽然我本来也可以把数据移出来然后建 mdadm，但是不排除以后再加盘做 RAID 10，似乎 mdadm 没法直接转换的样子？按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。</p>
+<p><del>然后我在某东买了一块东芝 2T 64M 7200 转的机械硬盘，到手之后打算加入 btrfs 里面，建立 RAID1，btrfs 的好处就在于这个可以先弄一块之后渐进修改，而且看起来目前没什么大问题的样子（按我的理解并行读取的性能问题大概是用来并行加速的，但是实际上 RAID1 不并行读取也可以读出数据吧）。</del> 虽然我本来也可以把数据移出来然后建 mdadm，但是不排除以后再加盘做 RAID 10，似乎 mdadm 没法直接转换的样子？按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。</p>
 <p>安装 bootloader 的时候我直接用了 systemd-boot，我在自己笔记本上也用的这个，功能够用了就没考虑安装 GRUB，编写 entry 时候内核参数里的 root 可以写 <code>/dev/vg0/rootlv</code> 也可以写 <code>/dev/mapper/vg0-rootlv</code>（这里中文 wiki 和英文 wiki 分别是这俩，亲测都可以），比如我的就是下面这样：</p>
 <pre><code class="plain"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -258,7 +273,7 @@ linux    /vmlinuz-linux
 initrd    /intel-ucode.img
 initrd    /initramfs-linux.img
 options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></pre>
-<p>最近 systemd-boot 添加了什么校验设置，在蜗牛上会报错，直接 chroot 进去安装根本装不上，临时解决方案是退出 chroot，然后用 Archiso 里的 bootctl 安装到 <code>/mnt/boot</code>，虽然有点 dirty，但是能用？不过还是会报个错，但是启动需要的文件已经安装上了，不管它也能用，只不过每次重启还是会说校验失败，目测是个 bug。</p>
+<p>最近 systemd-boot 添加了什么校验设置，在蜗牛上会报错，直接 chroot 进去安装根本装不上，临时解决方案是退出 chroot，然后用 Archiso 里的 <code>bootctl</code> 安装到 <code>/mnt/boot</code>，虽然有点 dirty，但是能用？不过还是会报个错，但是启动需要的文件已经安装上了，不管它也能用，只不过每次重启还是会说校验失败，目测是个 bug。</p>
 <p>然后由于 NAS 的网络不会经常变化，所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager。直接创建 <code>/etc/systemd/network/wired.network</code>，写入如下内容：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
@@ -573,4 +588,4 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.0 at 2019-10-09 Wed 09:37:58 CST. -->
+<!-- Page built by Hikaru v2.3.0 at 2019-10-09 Wed 16:32:20 CST. -->
