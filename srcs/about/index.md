@@ -27,7 +27,7 @@ reward: false
 
 8. Alynx 坚持用 Steam 并拒绝 Origin/Epic/Battle.net 等不打算支持 Linux 的平台（既然你忽略 Alynx 的需求，Alynx 也忽略你），*Counter-Strike: Global Offensive* 是目前为止唯一一个玩了超过 600 小时的游戏，唯一能够玩进去的 RPG 大概是 *NieR: Automata*，感谢室友特地带 PS4 到学校还和高中同学借了光盘让 Alynx 能和另一个室友一起以 60FPS 和高清画质通关主线（这话说的有点乱套）。另外表示室友四个人一起玩 *Overcooked!* 非常开心，所以预购了 *Overcooked!2*。
 
-9. Alynx 的 Steam ID 是 Alynx Zhou，如果你想和 Alynx 一起玩游戏的话。不定期在线，并且 **如果你是那种很吵很暴躁张口就喷队友的人请不要来打扰 Alynx**。
+9. Alynx 的 Steam ID 是 AlynxZhou，如果你想和 Alynx 一起玩游戏的话。不定期在线，并且 **如果你是那种很吵很暴躁张口就喷队友的人请不要来打扰 Alynx**。
 
 10. Alynx 喜欢 Minecraft（Java版），**不接受 Win10 版**，PE/Java 版正版玩家（非网易版）。
 
