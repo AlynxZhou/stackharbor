@@ -74,8 +74,8 @@ customFont:
 avatar: images/FutureGazerSmall.webp
 #avatar: images/MisakaMikotoSmall.png
 
-logo: images/logo.webp
-#logo: images/ph.webp
+#logo: images/logo.webp
+logo: images/sticker_arch.webp
 
 # Theme color.
 # Need quote to prevent `#` from comment.
