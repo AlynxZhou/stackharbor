@@ -13,7 +13,8 @@
 }
 .reward .qr div img {
   width: 10em;
-  display: inline-block;
+  margin: 0 auto;
+  display: block;
 }
 .reward .qr div span {
   display: block;

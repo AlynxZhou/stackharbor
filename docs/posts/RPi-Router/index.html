@@ -240,7 +240,7 @@
 </ol>
 <hr>
 <p>下面正式开始：</p>
-<h1 id="下载并刷入镜像"><a class="headerlink" href="/posts/RPi-Router/#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F" title="下载并刷入镜像"></a>下载并刷入镜像</h1>
+<h1 id="下载并刷入镜像"><a class="header-link" href="/posts/RPi-Router/#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F" title="下载并刷入镜像"></a>下载并刷入镜像</h1>
 <p>首先，我们要去<a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/brcm2708/" target="_blank" rel="noreferrer noopener">OpenWrt的官网</a>获取官方编译好的img镜像。下面有两个子目录，pi1对应的是<code>bcm2708</code>，pi2对应的是<code>bcm2709</code>，点击进入之后点击 <code>openwrt-15.05.1-brcm2708-bcm2708-sdcard-vfat-ext4.img</code> 即可开始下载，pi2对应的只是把2708全部换成了2709。</p>
 <p>PS 请务必选择带有<code>sdcard-vfat-ext4</code>的镜像。</p>
 <p>PPS 由于国内网络的特殊性，可能导致下载奇慢，可以复制下载地址之后利用百度云的离线下载。</p>
@@ -256,7 +256,7 @@
 <p>完事以后多执行几次sync是个好习惯：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> sync</span></code></pre></figure></code></pre><p>下面可以把卡拔下来插到Pi里面啦！当然如果你想调整分区（可选）请往下看——</p>
-<h2 id="调节分区"><a class="headerlink" href="/posts/RPi-Router/#%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA" title="调节分区"></a>调节分区</h2>
+<h2 id="调节分区"><a class="header-link" href="/posts/RPi-Router/#%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA" title="调节分区"></a>调节分区</h2>
 <p>为什么要调节分区呢？相信我，用一下</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> fdisk -l /dev/sdb</span></code></pre></figure></code></pre><p>你就明白了。。。</p>
@@ -304,7 +304,7 @@
 <span class="hljs-meta">#</span><span class="bash"> mount /dev/sdb2 /mnt &amp;&amp; <span class="hljs-built_in">cd</span> /mnt</span>
 <span class="hljs-meta">#</span><span class="bash"> tar -cpvzf ~/oproot.tar.gz ./</span>
 <span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> ~ &amp;&amp; umount /mnt</span></code></pre></figure></code></pre><p><img src="/posts/RPi-Router/RPi-Router_7.png" alt="RPi-Router_7.png"></p>
-<h1 id="连接电脑进行初次必要调试"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95" title="连接电脑进行初次必要调试"></a>连接电脑进行初次必要调试</h1>
+<h1 id="连接电脑进行初次必要调试"><a class="header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95" title="连接电脑进行初次必要调试"></a>连接电脑进行初次必要调试</h1>
 <p>先别急着把你的pi插到路由器上，op默认pi的ip是192.168.1.1，要知道大部分家里的路由器的ip也是这个，所以我们先把它用网线接到电脑上，开机后修改下ip。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_8.jpg" alt="RPi-Router_8.jpg"></p>
 <p>关掉你的无线连接，给pi连上电源，打开浏览器输入192.168.1.1回车，你会看到luci登陆界面，点击Login登入。</p>
@@ -315,7 +315,7 @@
 <p>在进入的页面中设置IP，设为你路由器网段下的一个没有被占用的ip即可，我设置为 <code>192.168.1.234</code> ，之后下面的netmask选择 <code>255.255.255.0</code> ，gateway输入路由器地址 <code>192.168.1.1</code> ，DNS也输入 <code>192.168.1.1</code> 。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_10.png" alt="RPi-Router_10.png"></p>
 <p>好啦，现在树莓派基本的设置已经完成了，接下来可以关机接到路由器上了。什么？你说OpenWrt没有关机？好吧没办法，因为我也不知道怎么办，我用OpenWrt一直都是拔电源，没什么问题。</p>
-<h1 id="连接路由器进行主要调试"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95" title="连接路由器进行主要调试"></a>连接路由器进行主要调试</h1>
+<h1 id="连接路由器进行主要调试"><a class="header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95" title="连接路由器进行主要调试"></a>连接路由器进行主要调试</h1>
 <p>现在我们把pi拿出来～<em>无线网卡插到pi上，pi插到网线上，网线插到路由器上，电源线插到pi上，开机！</em></p>
 <p><img src="/posts/RPi-Router/RPi-Router_11.jpg" alt="RPi-Router_11.jpg"></p>
 <p>稍等一会绿灯熄灭，这时候通过家庭局域网应该能连接上Pi了，同样，打开浏览器 <code>192.168.1.234</code> （按照你刚才设置的ip来），输入密码点击Login。</p>
@@ -332,7 +332,7 @@
 <p>下面开始安装一些必要的软件包！据我统计有 <code>kmod-usb2</code> 、 <code>kmod-usb-ohci</code> 、 <code>kmod-usb-ohci</code> 、 <code>kmod-ath9k-common</code> 、 <code>kmod-ath9k-htc</code> （ath9k这两个包是我的网卡对应的驱动，<strong>你的网卡需要什么驱动要根据你的芯片来定！我真的不知道你用的什么网卡！</strong>）、 <code>hostapd</code> 。什么？你问我怎么安？过滤器在那！都是中文难道还看不懂吗？自己搜索一下！</p>
 <p>当然我更喜欢ssh一条命令解决：</p>
 <pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd</span></code></pre></figure></code></pre><h2 id="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"><a class="headerlink" href="/posts/RPi-Router/#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Shadow%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89Socks%EF%BC%8CChina%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89DNS%E4%BB%A5%E4%BE%BF%E6%84%89%E5%BF%AB%E7%9A%84%E7%95%AA%E8%8C%84" title="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"></a>编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄</h2>
+</pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd</span></code></pre></figure></code></pre><h2 id="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"><a class="header-link" href="/posts/RPi-Router/#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Shadow%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89Socks%EF%BC%8CChina%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89DNS%E4%BB%A5%E4%BE%BF%E6%84%89%E5%BF%AB%E7%9A%84%E7%95%AA%E8%8C%84" title="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"></a>编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄</h2>
 <p>为什么要编译呢？因为pi是小众路由器，openwrt-dist没提供预编译版……</p>
 <p>首先我们要下载openwrt的sdk，就在你下载img的那个目录里，点击 <code>OpenWrt-SDK-15.05.1-brcm2708-bcm2708_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2</code> 下载这个压缩好的SDK，回来之后用 <code>tar -xpvjf</code> 解压之，进入解压后的目录。</p>
 <p>PS 老规矩，Pi2用户是bcm2709。</p>
@@ -370,7 +370,7 @@
 <p>再切换到网络——DHCP/DNS，基本设置里的DNS转发填写<code>127.0.0.1#5353</code>，HOSTS和解析文件里<strong>勾选忽略解析文件</strong>。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_26.png" alt="RPi-Router_26.png"></p>
 <p>现在ss部署完成！</p>
-<h1 id="建立AP并调节WiFi"><a class="headerlink" href="/posts/RPi-Router/#%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi" title="建立AP并调节WiFi"></a>建立AP并调节WiFi</h1>
+<h1 id="建立AP并调节WiFi"><a class="header-link" href="/posts/RPi-Router/#%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi" title="建立AP并调节WiFi"></a>建立AP并调节WiFi</h1>
 <p>安装完成之后我们来开启wifi！首先这个必须要ssh连接上去了，电脑就是</p>
 <pre><code><figure class="highlight hljs gams"><pre class="gutter"><span class="line">1</span>
 </pre><pre class="code"><code><span class="hljs-symbol">$</span> ssh root@你的<span class="hljs-built-in">pi</span>的ip地址</code></pre></figure></code></pre><p>手机可以用juicessh，良心软件。</p>
@@ -389,11 +389,11 @@
 <p><img src="/posts/RPi-Router/RPi-Router_29.png" alt="RPi-Router_29.png"></p>
 <p>接着就能搜索并连接到wifi了～</p>
 <p><img src="/posts/RPi-Router/RPi-Router_30.png" alt="RPi-Router_30.png"></p>
-<h1 id="分离WAN口和LAN口。"><a class="headerlink" href="/posts/RPi-Router/#%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82" title="分离WAN口和LAN口。"></a>分离WAN口和LAN口。</h1>
+<h1 id="分离WAN口和LAN口。"><a class="header-link" href="/posts/RPi-Router/#%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82" title="分离WAN口和LAN口。"></a>分离WAN口和LAN口。</h1>
 <p>现在Wi-Fi和有线网卡都在LAN这个网段下，要做便携路由器自然要有个WAN口，首先你要通过Wi-Fi连接，再登陆LuCI，先去到网络——接口，点击添加新接口，接口名称输入<code>wan</code>，协议选择<code>pppoe</code>，之后再去修改LAN，把IP和WAN错开，比如我设置为<code>192.168.234.234</code>，再<strong>把网关和DNS都清空</strong>（因为接下来pi就是网关了喵～）之后在物理设置里<strong>取消勾选eth0</strong>，再把桥接也取消，保存！</p>
-<h1 id="连接ADSL开始工作"><a class="headerlink" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C" title="连接ADSL开始工作"></a>连接ADSL开始工作</h1>
+<h1 id="连接ADSL开始工作"><a class="header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C" title="连接ADSL开始工作"></a>连接ADSL开始工作</h1>
 <p>把Pi和ADSL Modem连接，开机，即可作为无线路由器使用！</p>
-<h1 id="已知问题和注意事项"><a class="headerlink" href="/posts/RPi-Router/#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" title="已知问题和注意事项"></a>已知问题和注意事项</h1>
+<h1 id="已知问题和注意事项"><a class="header-link" href="/posts/RPi-Router/#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" title="已知问题和注意事项"></a>已知问题和注意事项</h1>
 <ul>
 <li><p>调节完成后dropbear（轻量的ssh服务器端）不能开机自启动，需要在系统——管理权里保存应用一下。</p>
 </li>
@@ -739,4 +739,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.0 at 2019-10-09 Wed 16:32:21 CST. -->
+<!-- Page built by Hikaru v2.3.1 at 2019-10-10 Thu 10:16:43 CST. -->

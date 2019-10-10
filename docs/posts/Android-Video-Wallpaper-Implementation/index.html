@@ -202,7 +202,7 @@
 <a id="more"></a>
 
 <p>首先你需要新建一个项目，通常应该都是使用 Android Studio，我就忽略你如何与网络搏斗让 Android Studio 可用了。什么程序模板可以随便选，反正你还是要自己新建 class。最低 API 版本不要太低就行，如果你只是写一个动态壁纸，应该不需要很高的 API，因为 Android 很早就支持动态壁纸了（但为了让开发方便一点，建议只考虑 5.0 以上的就行了，反正现在即使有 5.0 以下的机器多半也成垃圾了）。</p>
-<h1 id="首先让系统知道你是个壁纸……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E9%A6%96%E5%85%88%E8%AE%A9%E7%B3%BB%E7%BB%9F%E7%9F%A5%E9%81%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E5%A3%81%E7%BA%B8%E2%80%A6%E2%80%A6" title="首先让系统知道你是个壁纸……"></a>首先让系统知道你是个壁纸……</h1>
+<h1 id="首先让系统知道你是个壁纸……"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E9%A6%96%E5%85%88%E8%AE%A9%E7%B3%BB%E7%BB%9F%E7%9F%A5%E9%81%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E5%A3%81%E7%BA%B8%E2%80%A6%E2%80%A6" title="首先让系统知道你是个壁纸……"></a>首先让系统知道你是个壁纸……</h1>
 <p>在开始写逻辑代码之前，我们还得先让系统知道你写的这是个壁纸，这需要一些起声明作用的代码。先把你 Android Studio 左侧侧栏调成文件树模式（忘了什么诡异的分类模式吧，不然你连文件在哪都找不到，试图隐藏细节只会让事情变的更复杂）。</p>
 <p>应该有一个自动生成的 <code>AndroidManifest.xml</code> 文件，我觉得你应该比我更了解这玩意是干嘛的，因为实际上我没系统地研究过 Android，我只是会一点点 Java 而已——然后靠不停的查看手册来自学。加上这两行：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span>
@@ -251,7 +251,7 @@
   <span class="hljs-attr">android:settingsActivity</span>=<span class="hljs-string">"xyz.alynx.livewallpaper.MainActivity"</span> /&gt;</span></code></pre></figure></code></pre>
 <p>这里面也有些地方需要改，首先那个 <code>@drawable/ic_icon</code> 是你这个程序在系统的动态壁纸列表里面的图标（然而大部分定制的系统都忽略了这玩意），你可以用 Android Studio 在 <code>res/drawable</code> 目录下面生成一个，这个可以自己去查官方文档，<code>ic_icon</code> 要换成你生成的文件的名字。<code>@string/wallpaper_description</code> 则是你的程序在列表里的名字或介绍，这个格式的意思是去 <code>res/values/strings.xml</code> 或者其他语言的 <code>strings.xml</code> 里面找字符串（写过点复杂程序的人应该都懂吧！不懂自学去！我这不是教你怎么写代码！），你可以用 Android Studio 的字符串编辑器添加一条，然后把这里的键改成你添加的。最后一个 <code>settingsActivity</code> 是干嘛的呢？在预览动态壁纸的页面会有个设置按钮，如果你的动态壁纸可以设置参数，点击那个按钮会跳进动态壁纸设置页面，设置页面就是在这里指定的类，因为我设置项不多直接放菜单里了，所以我写的是直接跳进 <code>MainActivity</code>，你写的时候也可以这样，但记得换成你的包名（不换的人我怀疑你没写过 Java，那你学个毛 Android App 开发？）。</p>
 <p>废话终于说完了可以写代码了好开心啊……</p>
-<h1 id="然后你看见网上一堆胶水代码……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6" title="然后你看见网上一堆胶水代码……"></a>然后你看见网上一堆胶水代码……</h1>
+<h1 id="然后你看见网上一堆胶水代码……"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6" title="然后你看见网上一堆胶水代码……"></a>然后你看见网上一堆胶水代码……</h1>
 <p>如果你找过网上的教程，你会觉得视频壁纸是很简单的，他们都告诉你播放视频有现成的组件，你只要写几行胶水代码把它和壁纸连起来就行了……</p>
 <p>行个头！要是那么简单我就不用写这一篇文章了好吗？</p>
 <p>我们先从最基础的知识开始，动态壁纸实际上是一个 <code>Service</code>，你去实现一个 <code>Service</code>，然后系统来调用，你需要继承一个叫做 <code>WallpaperService</code> 的类，实现里面的一些方法。但实际上这个类只是个包装，真正的工作代码是里面一个叫 <code>Engine</code> 的类，具体的动态壁纸实现都是在它里面。</p>
@@ -344,7 +344,7 @@
 <p>如果你开始翻文档，你会发现一个 <code>setVideoScalingMode()</code> 的方法，可以设置为 <code>FIT_WITH_CROPPING</code>，你想着这不就是我们要的效果嘛：把视频放屏幕中间，然后裁出正中间最大的一块……当然不行啦！不然我写什么！</p>
 <p>很高兴告诉你这个其实是包装了系统的 <code>MediaCodec</code> 的参数，但这个实现及其不靠谱，比如在模拟器上这个功能根本就没实现！在我的 Galaxy S9+ 上虽然实现了，但在切换界面的时候（比如锁屏啦，打开应用界面啦），会突然变成没有剪裁的，总之你会看到一个奇怪的切换（这哪个程序员写的出来祭天）。</p>
 <p>所以如果你想正确剪裁视频的话……当然要自己动手！Android 的 <code>View</code> 是可以设置尺寸缩放没错，但是别忘了，这里只有 <code>Surface</code>，没有 <code>View</code>，所以没戏。用 CPU 剪裁视频的话（剪裁不是剪辑！）怕是你一帧剪完那边 30 帧都播完了，解决方案就是用 OpenGL ES 来进行这个操作。</p>
-<h1 id="明明是杀鸡，还是得掏牛刀！"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E6%98%8E%E6%98%8E%E6%98%AF%E6%9D%80%E9%B8%A1%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BE%97%E6%8E%8F%E7%89%9B%E5%88%80%EF%BC%81" title="明明是杀鸡，还是得掏牛刀！"></a>明明是杀鸡，还是得掏牛刀！</h1>
+<h1 id="明明是杀鸡，还是得掏牛刀！"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E6%98%8E%E6%98%8E%E6%98%AF%E6%9D%80%E9%B8%A1%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BE%97%E6%8E%8F%E7%89%9B%E5%88%80%EF%BC%81" title="明明是杀鸡，还是得掏牛刀！"></a>明明是杀鸡，还是得掏牛刀！</h1>
 <p>如果你比较熟悉 OpenGL 的话，其实这个剪裁本身的难度比构建一个 OpenGL 环境的难度低的多……只要算一下比例做个缩放矩阵就行了，视频是矩形所以我们就先弄个正方形出来然后把每一帧解码的画面当成纹理贴上去。</p>
 <p>解码的工作我们可以交给 <code>MediaPlayer</code>，然后因为性能需要，我们不能每一帧都保存为图片然后再转读为 OpenGL 的纹理，Android 有一个 OpenGL 的扩展，可以把视频解码到的 <code>Surface</code> 作为一个纹理，大部分机型都支持，不支持的机型其实也可以告别动态壁纸了，啥都不支持，你还不给我钱，我为啥要给你写代码？</p>
 <p>但是这个过程需要一些 hack。</p>
@@ -1243,7 +1243,7 @@
 <p>当然 <code>WallpaperCard</code> 是我自己封装的类，关系不大。总之是使用 <code>MediaMetadataRetriever</code> 就可以了。至于你说视频元数据和实际内容不符怎么办？那是用户问题，用户自己处理不好视频为什么要我来解决？随便让他拿电脑上修改一下好了。</p>
 <p>这些实际上是这个应用的核心内容，其它的播放之类的都大同小异，总之如果你实现了 OpenGL 的剪裁功能，应该就可以正常播放壁纸了。其它部分直接参考我的代码或者网上的样例就可以了。</p>
 <p>顺便说一下，<code>SurfaceTexture</code> 似乎会给一个纹理矩阵，但我试着用了一下发现并不是需要的效果……所以还是自己处理吧。</p>
-<h1 id="然后声音又不对劲了……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E5%A3%B0%E9%9F%B3%E5%8F%88%E4%B8%8D%E5%AF%B9%E5%8A%B2%E4%BA%86%E2%80%A6%E2%80%A6" title="然后声音又不对劲了……"></a>然后声音又不对劲了……</h1>
+<h1 id="然后声音又不对劲了……"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E5%A3%B0%E9%9F%B3%E5%8F%88%E4%B8%8D%E5%AF%B9%E5%8A%B2%E4%BA%86%E2%80%A6%E2%80%A6" title="然后声音又不对劲了……"></a>然后声音又不对劲了……</h1>
 <p>就算你给 <code>MediaPlayer</code> 设置了静音，还是不太对劲！正常来说在桌面按音量键设置的是铃声音量，为什么变成了媒体音量！</p>
 <p>这当然是因为虽然 <code>MediaPlayer</code> 虽然静音了，但还是占据着音频通道，我们都知道 Android 分为媒体、铃声、系统等音量通道，如果 <code>MediaPlayer</code> 一直占着媒体通道，其它的媒体 App 比如音乐播放器一类的就没有办法播放。</p>
 <p>使用 <code>MediaPlayer</code> 是没有解决办法的，因为它没提供关闭音轨的接口，一开始我差点基于 <code>MediaCodec</code> 自己编写一个视频播放器，但始终没办法把解码器从主线程转移开，而且 CPU 占用率很高。后来发现 <code>ExoPlayer</code> 有办法关闭音轨，所以我换成了 <code>ExoPlayer</code>。</p>
@@ -1275,7 +1275,7 @@
             }</code></pre></figure></code></pre>
 <p>主要是创建 Player 时候单独给它一个 DefaultTrackSelector。然后关掉音轨。</p>
 <p>这样大概就可以运行了，剩下的一些问题都和视频渲染无关。</p>
-<h1 id="写UI也很麻烦！"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81" title="写UI也很麻烦！"></a>写 UI 也很麻烦！</h1>
+<h1 id="写UI也很麻烦！"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81" title="写UI也很麻烦！"></a>写 UI 也很麻烦！</h1>
 <p>虽然我知道你肯定不满足只使用内嵌视频，但如果你像我一样写了个可以设置其它视频的 UI，就会遇到各种各样的问题。写 UI 的时候，你不是在编写回调函数，就是在调用回调函数的路上。</p>
 <p>最令人恶心的是 <code>Context</code> 管理，很多地方都需要 <code>Context</code>，但很多地方都没法传 <code>Context</code>，比如 Android 推荐你用 <code>Uri</code> 而不是直接用文件路径，但所有使用 <code>Uri</code> 的地方都要求你传 <code>Context</code> 来解析 <code>Uri</code>！比如我添加视频，需要解析 <code>Uri</code> 并生成缩略图，为了不阻塞线程，必须开启一个 <code>AsyncTask</code>，但是，<code>AsyncTask</code> 不能直接拿走 <code>MainActivity</code> 作为自己的 <code>Context</code>！必须要传弱引用，总之没有一个优雅的解决方案。</p>
 <p>再比如你需要一些在各个位置都能访问到的数据，你可以自己写一个 <code>Application</code> 类并给它静态变量，但是静态和动态不能互相交叉，也就是说你不能封装一个操作数据的同时需要访问 <code>Context</code> 的方法，所以很多地方就只能拆开写，没办法封装。</p>
@@ -1284,7 +1284,7 @@
 <p>当然我最后还是想办法绕开了，添加了一个单独的应用按钮，用户点击这个按钮就是忽略预览，直接设置为壁纸。</p>
 <p>动态壁纸预览器调用你的壁纸服务的时候，你的 <code>Engine</code> 里 <code>isPreview()</code> 方法会返回 <code>true</code>，可以根据这个判断是不是在预览状态。因为我只有一个壁纸服务，所以我做了一些判断，对预览和桌面分别做了一些不同了逻辑，以便防止预览的结果影响到本来桌面上的壁纸效果。</p>
 <p>最后要注意：你可以在 <code>Service</code> 里面访问 <code>Application</code> 的静态方法，但似乎你不能一直依靠这个。比如当你设置壁纸以后重启了，<code>Service</code> 会被启动，但这时似乎没办法访问到 <code>Application</code> 里的变量。我解决的办法是将数据写入到 <code>SharedPreference</code>，如果从 <code>Application</code> 加载失败就去读取 <code>SharedPreference</code>，但总之我没找到有关 <code>Service</code> 和 <code>Application</code> 会不会一起创建的说明，所以这部份的代码写的很混乱（也包含上面说的不能封装的原因）。</p>
-<h1 id="一杯咖啡都没有……"><a class="headerlink" href="/posts/Android-Video-Wallpaper-Implementation/#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6" title="一杯咖啡都没有……"></a>一杯咖啡都没有……</h1>
+<h1 id="一杯咖啡都没有……"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6" title="一杯咖啡都没有……"></a>一杯咖啡都没有……</h1>
 <p>如果你只是觉得市面上所有的视频动态壁纸程序都太臃肿太不可靠（包括抖音和火萤）而想自己写一个，我建议你还是放弃，因为遇到的坑比你想象的多，解决起来也很麻烦。而且实际上，你完全可以使用我写好的程序。</p>
 <p>这个程序只有 3.06M，支持加载本地壁纸，支持平板电脑，支持壁纸滑动，不显示时自动暂停播放节约电量，严格遵循 Android 规范，没有任何敏感权限（比如联网和操作外置存储），不请求文件真实路径，测试下来功能基本没有问题。如果你还不放心，所有的代码都在 GitHub 上，我不怕你说我代码写的不好，你大可以看一遍有没有后门。</p>
 <p>你可以分别从 <a href="https://github.com/AlynxZhou/AlynxLiveWallpaper/releases/latest" target="_blank" rel="noreferrer noopener">GitHub Release</a>，<a href="https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper" target="_blank" rel="noreferrer noopener">Google Play</a> 和 <a href="https://www.coolapk.com/apk/xyz.alynx.livewallpaper" target="_blank" rel="noreferrer noopener">酷安网</a> 下载这个应用。</p>
@@ -1595,4 +1595,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.0 at 2019-10-09 Wed 16:32:21 CST. -->
+<!-- Page built by Hikaru v2.3.1 at 2019-10-10 Thu 10:16:43 CST. -->

@@ -13,7 +13,8 @@
 }
 .reward .qr div img {
   width: 10em;
-  display: inline-block;
+  margin: 0 auto;
+  display: block;
 }
 .reward .qr div span {
   display: block;
@@ -73,17 +74,25 @@
   top: 0.1em;
 }
 .post .post-header .post-meta span.meta-block {
-  margin: 0 0.1em;
+  display: block;
+  margin: 0.5em;
 }
+.post .post-main img {
+  max-width: 90%;
+}
+.post .post-main a.header-link,
 .post .post-main a.headerlink {
   border: none;
 }
+.post .post-main a.header-link:hover,
 .post .post-main a.headerlink:hover {
   border: none;
 }
+.post .post-main a.header-link:active,
 .post .post-main a.headerlink:active {
   top: 0;
 }
+.post .post-main a.header-link::before,
 .post .post-main a.headerlink::before {
   content: "#";
   margin-right: 0.3em;
