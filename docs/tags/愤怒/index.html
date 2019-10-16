@@ -75,47 +75,47 @@
     
     <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
-    $(document).ready(function () {
-      $(".post pre code figure.highlight").each(function (i, e) {
-        var lang = e.parentNode.className;
-        $(e).before([
-          "<div class=\"code-titlebar\">",
-            "<div class=\"titlebar-left\">",
-              "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
-            "</div>",
-            "<div class=\"titlebar-center\">",
-              lang.length ? lang.toUpperCase() : "代码",
-            "</div>",
-            "<div class=\"titlebar-right\">",
-              "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-              "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-              "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-            "</div>",
-          "</div>"
-        ].join(""));
-        // $(e).before("<button class=\"copy button\">复制</button>");
+      $(document).ready(function () {
+        $(".post pre code figure.highlight").each(function (i, e) {
+          var lang = e.parentNode.className;
+          $(e).before([
+            "<div class=\"code-titlebar\">",
+              "<div class=\"titlebar-left\">",
+                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+              "</div>",
+              "<div class=\"titlebar-center\">",
+                lang.length ? lang.toUpperCase() : "代码",
+              "</div>",
+              "<div class=\"titlebar-right\">",
+                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+              "</div>",
+            "</div>"
+          ].join(""));
+          // $(e).before("<button class=\"copy button\">复制</button>");
+        });
+        var cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", function (e) {
+          e.clearSelection();
+          var trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          $(trigger).addClass("copied");
+          // Change button text back;
+          setTimeout(function () {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            $(trigger).removeClass("copied");
+          }, 1500);
+        });
       });
-      var cb = new ClipboardJS("button.copy", {
-        "target": function (trigger) {
-            // Get target element by DOM API.
-            // trigger.parentNode.parentNode is code-titlebar.
-            // nextElementSibling is figure.highlight, lastChild is pre.code.
-            return trigger.parentNode.parentNode.nextElementSibling.lastChild;
-        }
-      });
-      cb.on("success", function (e) {
-        e.clearSelection();
-        var trigger = e.trigger;
-        // Change button text as a user tip.
-        trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
-        $(trigger).addClass("copied");
-        // Change button text back;
-        setTimeout(function () {
-          trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
-          $(trigger).removeClass("copied");
-        }, 1500);
-      });
-    });
     </script>
     
     <script defer type="text/javascript" src="/js/custom.js"></script>
@@ -393,4 +393,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.1 at 2019-10-11 Fri 08:18:25 UTC. -->
+<!-- Page built by Hikaru v2.3.1 at 2019-10-16 Wed 01:27:19 UTC. -->
