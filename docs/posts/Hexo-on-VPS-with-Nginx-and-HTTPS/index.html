@@ -203,7 +203,7 @@
 
 <p>要说我受害的经历能说好几篇博客，最常见的比如说昨天答辩 PPT 轮到我时候就崩溃了（我可以确定不是我 PPT 的问题，因为关掉所有的 PowerPoint 再打开就没问题了）（“再碰这辣鸡玩意我就是狗！”）。再比如说那个出了名不靠谱的自动更新，你见过更新更新失败回滚回滚失败的嘛？合着我一小时只能对着电脑发呆看你自爆？（当然软粉肯定不承认：“我们更新都成功了！”，这玩意还心诚则灵？反正我被坑了）。倒不是说它收购 GitHub 罪大恶极了，只不过是我自己觉得不舒服就是了，至于普罗大众该干什么干什么，不要管我。</p>
 <p>然后我就把我还算有价值的东西——我的网站，搬到了 VPS 上面，搬迁过程相对简单，用 git 做这个同步肯定是不现实的，因为你想像 GitHub 一样可以直接用 <code>hexo-deployer-git</code> push 的话，你需要建立的是裸仓库，也就是正常的 <code>.git</code> 目录里面的东西，很显然这不是网站内容。看了一圈其他的同步方式，rsync 看起来是最合适的一个了，然后就尝试了一下。</p>
-<h1 id="用Rsync上传Hexo生成的网页-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Rsync%E4%B8%8A%E4%BC%A0Hexo%E7%94%9F%E6%88%90%E7%9A%84%E7%BD%91%E9%A1%B5-NaN" title="用Rsync上传Hexo生成的网页"></a>用 Rsync 上传 Hexo 生成的网页</h1>
+<h1 id="用Rsync上传Hexo生成的网页"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Rsync%E4%B8%8A%E4%BC%A0Hexo%E7%94%9F%E6%88%90%E7%9A%84%E7%BD%91%E9%A1%B5" title="用Rsync上传Hexo生成的网页"></a>用 Rsync 上传 Hexo 生成的网页</h1>
 <p>首先需要安装 <code>hexo-deployer-rsync</code>，另外也要在自己的电脑和 VPS 上面安装 <code>rsync</code>，首先进入你的 Hexo 站点目录，然后：</p>
 <pre><code><figure class="highlight hljs stylus"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ npm <span class="hljs-selector-tag">i</span> -s hexo-deployer-rsync</code></pre></figure></code></pre><p>根据发行版不同使用不同的命令安装 <code>rsync</code>：</p>
 <p>Archlinux / Manjaro / Antergos：</p>
@@ -242,12 +242,12 @@
 <pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-variable">$ </span>rsync -azv --delete SOURCE USERNAME<span class="hljs-variable">@IPADDRESS</span><span class="hljs-symbol">:DESTINATION</span></code></pre></figure></code></pre><!-- Marked bug: cannot handle `\)` in URL, use `%29` instead. Waiting hexo-renderer-marked update its dependents version. -->
 <p>上传到服务器上，如果有 git 仓库最好用 <code>--exclude=.git</code> 排除掉，顺便 SOURCE 目录一般不要用 <code>/</code> 结尾，原因参见 <a href="https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92" target="_blank" rel="noreferrer noopener">这里</a>。</p>
 <p>这个时候我还没有把 DNS 从 GitHub Pages 转到我的服务器上，结果生米煮成了熟饭，只能往下继续了。</p>
-<h1 id="用Letamp;39;sEncrypt生成SSL证书-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Letamp;39;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6-NaN" title="用Letamp;39;sEncrypt生成SSL证书"></a>用 Let&#39;s Encrypt 生成 SSL 证书</h1>
+<h1 id="用Letamp;39;sEncrypt生成SSL证书"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Letamp;39;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="用Letamp;39;sEncrypt生成SSL证书"></a>用 Let&#39;s Encrypt 生成 SSL 证书</h1>
 <p>HTTPS 需要有可信机构签发的证书，<a href="https://letsencrypt.org/" target="_blank" rel="noreferrer noopener">Let&#39;s Encrypt</a> 就是一个免费提供这种服务的网站，不过官方推荐的步骤只能对每个域名单独生成证书，比如 <code>alynx.xyz</code> 和 <code>sh.alynx.xyz</code> 需要两个证书，这里介绍生成通配符证书的办法，比如对 <code>*.alynx.xyz</code> 生成一个证书，可以用在所有三级子域名：</p>
-<h2 id="下载certbot-auto-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E4%B8%8B%E8%BD%BDcertbot-auto-NaN" title="下载certbot-auto"></a>下载 certbot-auto</h2>
+<h2 id="下载certbot-auto"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E4%B8%8B%E8%BD%BDcertbot-auto" title="下载certbot-auto"></a>下载 certbot-auto</h2>
 <p><code>certbot-auto</code> 是用来验证生成证书的交互命令行工具，似乎一般软件源里的版本都不够高，不能生成通配符证书，这里手动下载新版：</p>
 <pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/dl.eff.org/certbot</span>-auto
-<span class="hljs-variable">$ </span>chmod +x ./certbot-auto</code></pre></figure></code></pre><h2 id="手动生成证书-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E6%89%8B%E5%8A%A8%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6-NaN" title="手动生成证书"></a>手动生成证书</h2>
+<span class="hljs-variable">$ </span>chmod +x ./certbot-auto</code></pre></figure></code></pre><h2 id="手动生成证书"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E6%89%8B%E5%8A%A8%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6" title="手动生成证书"></a>手动生成证书</h2>
 <p>生成证书的话需要我们手动操作，命令如下（用你的域名替换掉 <code>example.com</code>）：</p>
 <pre><code><figure class="highlight hljs brainfuck"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment">#</span> <span class="hljs-string">.</span><span class="hljs-comment">/certbot</span><span class="hljs-literal">-</span><span class="hljs-comment">auto</span> <span class="hljs-comment">certonly</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">manual</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">preferred</span><span class="hljs-literal">-</span><span class="hljs-comment">challenges=dns</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">server=https://acme</span><span class="hljs-literal">-</span><span class="hljs-comment">v02</span><span class="hljs-string">.</span><span class="hljs-comment">api</span><span class="hljs-string">.</span><span class="hljs-comment">letsencrypt</span><span class="hljs-string">.</span><span class="hljs-comment">org/directory</span> <span class="hljs-literal">-</span><span class="hljs-comment">d</span> <span class="hljs-comment">*</span><span class="hljs-string">.</span><span class="hljs-comment">example</span><span class="hljs-string">.</span><span class="hljs-comment">com</span> <span class="hljs-literal">-</span><span class="hljs-comment">d</span> <span class="hljs-comment">example</span><span class="hljs-string">.</span><span class="hljs-comment">com</span></code></pre></figure></code></pre><p>这里 <code>certonly</code> 表示我们只需要生成证书，我们不需要它帮我们改服务器配置。<code>--manual</code> 表示手动配置参数。生成证书需要你证明域名属于你，由于我们是通配符自然不能一个一个页面去放文件验证（默认的验证方法，类似 Google 的页面验证），所以用 <code>--preferred-challenges=dns</code> 设置为验证 DNS 记录。<code>--server=https://acme-v02.api.letsencrypt.org/directory</code> 表示使用第二版的 api 服务器，默认的第一版是不支持通配符证书的签发的。最后 <code>-d *.example.com -d example.com</code> 添加你的域名，需要注意的是只包含 <code>*.example.com</code> 的证书是不能用在 <code>example.com</code> 上的，所以我们把两个都写上，生成的证书就会同时包含两个域名。</p>
 <pre><code><figure class="highlight hljs pgsql"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code>Saving <span class="hljs-keyword">debug</span> <span class="hljs-keyword">log</span> <span class="hljs-keyword">to</span> /var/<span class="hljs-keyword">log</span>/letsencrypt/letsencrypt.<span class="hljs-keyword">log</span>
@@ -316,10 +316,10 @@ IMPORTANT NOTES:
    Donating <span class="hljs-keyword">to</span> ISRG / Let<span class="hljs-string">'s Encrypt:   https://letsencrypt.org/donate
    Donating to EFF:                    https://eff.org/donate-le</span></code></pre></figure></code></pre><p><del>又是一次验证，把刚才的记录内容改成新的，</del> 按照评论的指正，这里是可以建立两个同名记录的，所以不需要修改两次，这里可以再添加一条同样名字但内容不同的记录，然后多 <code>dig</code> 几次再回车，如果没通过重新运行命令会从记录 IP 那里开始。</p>
 <p>需要注意 certbot 似乎会很弱智的用 Nginx 服务的目录的名字作为它认为的你的域名，所以最好在开启 Nginx 之前设置它，它每次都把我的域名当成 <code>stackharbor.alynx.xyz</code> 也是把我气个半死。</p>
-<h1 id="设置Nginx-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E8%AE%BE%E7%BD%AENginx-NaN" title="设置Nginx"></a>设置 Nginx</h1>
+<h1 id="设置Nginx"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E8%AE%BE%E7%BD%AENginx" title="设置Nginx"></a>设置 Nginx</h1>
 <p>这里稍微复杂一点啦，因为我还有另一个页面。</p>
 <p>首先我们要安装 Nginx，我的习惯肯定是安装包管理里面的然后用 systemd 管理，我是 Debian9，你们看着来。</p>
-<h2 id="强制HTTPS-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E5%BC%BA%E5%88%B6HTTPS-NaN" title="强制HTTPS"></a>强制 HTTPS</h2>
+<h2 id="强制HTTPS"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E5%BC%BA%E5%88%B6HTTPS" title="强制HTTPS"></a>强制 HTTPS</h2>
 <p>首先我们要把所有的 HTTP 请求定向到 HTTPS 上，编辑 <code>/etc/nginx/nginx.conf</code>，在 <code>include /etc/nginx/sites-enabled/*;</code> 前面插入：</p>
 <pre><code class="lua"><figure class="highlight hljs lua"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span></pre><pre class="code"><code># Forward all HTTP requests to HTTPS.
 server {
@@ -328,7 +328,7 @@ server {
     <span class="hljs-keyword">return</span> <span class="hljs-number">301</span> https://$host$request_uri;
 }</code></pre></figure></code></pre>
 <p>这段表示所有 80 端口的请求都被 301 永久重定向到 https 的网址上面。</p>
-<h2 id="配置虚拟主机-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA-NaN" title="配置虚拟主机"></a>配置虚拟主机</h2>
+<h2 id="配置虚拟主机"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA" title="配置虚拟主机"></a>配置虚拟主机</h2>
 <p>然后在 <code>/etc/nginx/sites-available/</code> 下面创建一个文件，名字可以随意，我用的是我的域名，然后编辑它：</p>
 <pre><code class="lua"><figure class="highlight hljs lua"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span></pre><pre class="code"><code># Forward www domain to non-www domain.
 server {
@@ -396,7 +396,7 @@ server {
 <pre><code><figure class="highlight hljs angelscript"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code># openssl dhparam -<span class="hljs-keyword">out</span> /etc/ssl/certs/dhparam.pem <span class="hljs-number">2048</span></code></pre></figure></code></pre><p>然后创建软连接使配置生效，并重启 Nginx：</p>
 <pre><code><figure class="highlight hljs gradle"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code># ln -s <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-available/</span>example.com <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-enabled/</span>
 # systemctl restart nginx</code></pre></figure></code></pre><p>如果你还有其他的页面，放在另一个目录里，然后再创建一份配置文件，当然这次只要有第二个 server 字段就好了，修改路径，然后连接重启。</p>
-<h1 id="自动更新证书-NaN"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%AF%81%E4%B9%A6-NaN" title="自动更新证书"></a>自动更新证书</h1>
+<h1 id="自动更新证书"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%AF%81%E4%B9%A6" title="自动更新证书"></a>自动更新证书</h1>
 <p>安全起见，Let&#39;s Encrypt 签发的证书只有 90 天有效期，官方推荐使用自动定期刷新的方式更新证书，只需要建立一个定时任务运行 <code>/PATH/TO/certbot-auto renew --pre-hook &quot;systemctl stop nginx&quot; --post-hook &quot;systemctl start nginx&quot;</code>（如果你用的不是 systemd 管理 Nginx 记得换成其它的停止和启动 Nginx 的命令）。很大可能你知道怎么用 crontab 做这件事情，但我使用 systemd-timer 做。</p>
 <p>首先建立 <code>/lib/systemd/system/certbot-renew.service</code> 这个文件，内容如下：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span></pre><pre class="code"><code><span class="hljs-section">[Unit]</span>
@@ -594,23 +594,23 @@ server {
         <ol class="list-group toc">
         
           <li>
-            <a class="list-group-item toc-link" href="#用Rsync上传Hexo生成的网页-NaN">用 Rsync 上传 Hexo 生成的网页</a>
+            <a class="list-group-item toc-link" href="#用Rsync上传Hexo生成的网页">用 Rsync 上传 Hexo 生成的网页</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#用Letamp;39;sEncrypt生成SSL证书-NaN">用 Let&#39;s Encrypt 生成 SSL 证书</a>
+            <a class="list-group-item toc-link" href="#用Letamp;39;sEncrypt生成SSL证书">用 Let&#39;s Encrypt 生成 SSL 证书</a>
             
             
         <ol >
         
           <li>
-            <a class="list-group-item toc-link" href="#下载certbot-auto-NaN">下载 certbot-auto</a>
+            <a class="list-group-item toc-link" href="#下载certbot-auto">下载 certbot-auto</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#手动生成证书-NaN">手动生成证书</a>
+            <a class="list-group-item toc-link" href="#手动生成证书">手动生成证书</a>
             
           </li>
         
@@ -620,18 +620,18 @@ server {
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#设置Nginx-NaN">设置 Nginx</a>
+            <a class="list-group-item toc-link" href="#设置Nginx">设置 Nginx</a>
             
             
         <ol >
         
           <li>
-            <a class="list-group-item toc-link" href="#强制HTTPS-NaN">强制 HTTPS</a>
+            <a class="list-group-item toc-link" href="#强制HTTPS">强制 HTTPS</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#配置虚拟主机-NaN">配置虚拟主机</a>
+            <a class="list-group-item toc-link" href="#配置虚拟主机">配置虚拟主机</a>
             
           </li>
         
@@ -641,7 +641,7 @@ server {
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#自动更新证书-NaN">自动更新证书</a>
+            <a class="list-group-item toc-link" href="#自动更新证书">自动更新证书</a>
             
           </li>
         
@@ -749,4 +749,4 @@ server {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.0.0 at 2019-10-21 Mon 18:36:36 CST. -->
+<!-- Page built by Hikaru v1.0.2 at 2019-10-21 Mon 20:44:50 CST. -->

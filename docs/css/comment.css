@@ -1,0 +1,42 @@
+.comments .commentjs {
+  margin: 1em 2em;
+}
+.comments .commentjs .avatar-parent-child a {
+  text-decoration: none;
+  border-bottom: none;
+  display: block;
+  text-align: center;
+}
+.comments .commentjs .avatar-parent-child a img {
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  border: 0.15em solid #ccc;
+}
+.comments .commentjs .avatar-parent-child a:hover {
+  border-bottom: none;
+}
+.comments .commentjs .avatar-parent-child a:hover img {
+  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+}
+.comments .commentjs .avatar-parent-child .avatar {
+  width: 3em;
+  height: 3em;
+}
+.comments .commentjs .comment-body {
+  width: 85%;
+}
+.comments .commentjs .comment-body pre {
+  background: #f6f8fa;
+  padding: 1em;
+  border-radius: 0.3em;
+  overflow: auto;
+}
+.comments .commentjs .button {
+  padding: 0.3em 1em;
+  background: #9f1313;
+  border: 0.1em solid #f5c6cb;
+}

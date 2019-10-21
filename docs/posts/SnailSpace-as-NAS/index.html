@@ -198,21 +198,21 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <h1 id="需求-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82-NaN" title="需求"></a>需求</h1>
+      <h1 id="需求"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1>
 <p>以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派的电源也不是很放心。特别是我还拆下来一块笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。</p>
 <a id='more'></a>
 
 <p>有点想买一台 NAS，但是看看群晖的价格实在接受不能，然后又看到说群晖把系统放在用户的磁盘里加速读写一类的，其实这些对我来说不太重要，但群晖是个定制化程度很高的 Linux，虽然用起来有很多便利的功能，比如官方的内网穿透（服务器似乎在台湾，速度不快），比较成熟的 btrfs 使用之类的，但比起这些我更想要一台全功能的 Linux 服务器，这样不仅可以作为存储，还可以 SSH 连接上去做一些简单工作。作为一个比较熟练的 Linux 用户，我不需要什么 Webui 或者 App 来访问文件，Solid Explorer 和 VLC 组合起来访问 Samba 好用得很。</p>
 <p>机缘巧合我看到隔壁的同学弄了台 D 款的蜗牛星际矿渣，研究一下之后觉得可以上车，正好 Arch CN 群里 <a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">@NickCao</a> 打算出掉买了回来没时间玩的蜗牛 A 款，于是坐地铁到五道口一起喝了杯咖啡然后当面交易了一下。</p>
-<h1 id="介绍-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E4%BB%8B%E7%BB%8D-NaN" title="介绍"></a>介绍</h1>
+<h1 id="介绍"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E4%BB%8B%E7%BB%8D" title="介绍"></a>介绍</h1>
 <p>蜗牛星际的矿渣是怎么来的呢？简单说就是忽悠别人说这个机器可以挖矿，打着区块链旗号骗人买机器，当然这个机器其实并不需要挖矿，所谓的挖矿就是简单的 App，让你以为自己挖出矿了（毕竟宣传说不用插电也能挖），为了降低成本机器全部都是用现成的山寨货，所以机箱造型是 NAS，而且还带硬盘背板，就是因为这个很成熟。成本不到一千块的机器五千块一台卖给受骗者，受骗者为了挖矿都是十几台几十台的买，然后放小道消息说要涨价到八千块榨干受骗者钱包，最后国际惯例圈钱跑路，受骗者血本无归。</p>
 <blockquote class="center-quote">做人还是得懂点计算机。</blockquote>
 
 <p>这个机器有好多型号，细节差距也有很多，网上有现成的帖子分析，我就不分析了，反正我这一台是 A 款单网口绿主板，妥妥的千兆。而且似乎背板有 PCI 槽，不过主板又没有 PCI 接口就不管了。A 款还有个特点是硬盘架侧面可以放个 2.5 寸硬盘，正好装上我拆下来的笔记本硬盘。</p>
-<h1 id="硬件处理-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E7%A1%AC%E4%BB%B6%E5%A4%84%E7%90%86-NaN" title="硬件处理"></a>硬件处理</h1>
-<h2 id="更换电源-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E7%94%B5%E6%BA%90-NaN" title="更换电源"></a>更换电源</h2>
+<h1 id="硬件处理"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E7%A1%AC%E4%BB%B6%E5%A4%84%E7%90%86" title="硬件处理"></a>硬件处理</h1>
+<h2 id="更换电源"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E7%94%B5%E6%BA%90" title="更换电源"></a>更换电源</h2>
 <p>手头这一台运气比较好，是 zumax 的 150W 电源，虽然都说这个是所有各种电源里最好的，但是接口只是刚刚够，没有多余的，没办法给侧面硬盘供电。再说都是山寨货谁又比谁强到哪里。按照隔壁老司机的推荐淘宝买了益衡 250W 的 Flex 电源（也叫小 1u 电源）替换掉，花了 250 软妹币左右，感觉车速稳了很多，而且多出了许多接口。安装时候需要把原来电源上后面用来装到侧面的铁片拆掉，然后上下翻转才能装上蜗牛里面的支撑片，然后主板有一长一方两个供电口都插上，背板用的大 4pin 接口，不太够长，把卖家赠送的两条大 4pin 延长线都接上就可以了，然后取一个 SATA 供电线给侧面的硬盘。</p>
-<h2 id="更换风扇-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E9%A3%8E%E6%89%87-NaN" title="更换风扇"></a>更换风扇</h2>
+<h2 id="更换风扇"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E9%A3%8E%E6%89%87" title="更换风扇"></a>更换风扇</h2>
 <p>蜗牛自带的风扇声音很大，因此需要更换一个静音风扇，A 款用的是 8cm 的 3pin 风扇，不支持调速，BCD 都是 12cm 的。8cm 不太好买，开始我在京东找到两个超频三的风扇，一个 2200 转一个 1400 转，标定噪音都是 18dB，于是就买了 2200 转，没想到转速上来了噪音也更大，正好之前在淘宝买了另一个超频三皓月（下面上图），1500 转应该问题不大，装上发现声音小了，但是蜗牛背板有个铆钉，这个 LED 风扇尺寸稍微大一点，正好顶着铆钉。没办法还是换了京东 1400 转的那款，噪音合适，尺寸也合适，蜗牛本来发热也不严重。因此 <strong>建议大家购买 1500 转左右不带 LED 灯效正常尺寸的</strong>。</p>
 <div class="alert-green">更换时候记得把原来蜗牛风扇上用来防止线缆伸进风扇里的塑料防护片拧下来装到新风扇没有阻拦的一侧，这一侧朝里，安装之后蜗牛向外吹风。</div>
 
@@ -222,13 +222,13 @@
 <p><strong>再次提醒各位注意不要买下图的带灯条的风扇。</strong></p>
 <p><img src="/posts/SnailSpace-as-NAS/1.jpg" alt="大了一圈的风扇">
 <img src="/posts/SnailSpace-as-NAS/2.jpg" alt="装上之后的效果"></p>
-<h2 id="安装侧面25寸硬盘-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98-NaN" title="安装侧面25寸硬盘"></a>安装侧面 2.5 寸硬盘</h2>
+<h2 id="安装侧面25寸硬盘"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98" title="安装侧面25寸硬盘"></a>安装侧面 2.5 寸硬盘</h2>
 <p>蜗牛自带一个 16G 的 mSATA 硬盘，速度比 U 盘还慢，而且据说用着用着就坏了，很多人都拿这个做引导盘放系统，但我不打算用，直接拧下四个螺丝把主板抽出来，然后拧掉 mSATA 杂牌硬盘。</p>
 <p>因为四个硬盘托连接的 SATA 口是扩展的，不支持引导，但是 <strong>实际上蜗牛主板正中间上还有一个 SATA2 的口可以引导</strong>，正好连接我的笔记本硬盘，自己插上一根 SATA 线把主板装回去即可。</p>
 <p>硬盘本体安装时候需要两个小螺丝固定硬盘一侧，另外一侧是卡住的，不需要螺丝。然后把电源线和刚才插的 SATA 线插到硬盘上面。</p>
 <p><img src="/posts/SnailSpace-as-NAS/5.jpg" alt="笔记本硬盘">
 <img src="/posts/SnailSpace-as-NAS/6.jpg" alt="安装位置示意"></p>
-<h2 id="仓库盘安装-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E4%BB%93%E5%BA%93%E7%9B%98%E5%AE%89%E8%A3%85-NaN" title="仓库盘安装"></a>仓库盘安装</h2>
+<h2 id="仓库盘安装"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E4%BB%93%E5%BA%93%E7%9B%98%E5%AE%89%E8%A3%85" title="仓库盘安装"></a>仓库盘安装</h2>
 <p>我还在京东购买了一块 2TB 的西数紫盘和一块 2TB 的东芝 P300 硬盘，没有买 NAS 专用盘是因为太贵了。而其他便宜的比如西数蓝盘和希捷酷鱼只便宜了十几块，但是却是大缓存叠瓦式（SMR）硬盘，性能非常差，紫盘和 P300 则是标准的 64M 缓存垂直式（PMR）硬盘，价格也比较实惠。建议自行搜索叠瓦式硬盘了解不推荐的原因。<del>考虑了一下还是不做 RAID1 了，经济条件不允许，而且本来 RAID 是为了高可用不是为了备份，如果是硬件损坏估计两块盘一起炸了，不如冷备份</del> 还是做了 RAID1（真香！）。</p>
 <p>往硬盘架安装硬盘需要四个沉孔螺丝分别锁在两侧，当然我这种硬件渣渣其实是不知道啥是沉孔螺丝的，具体多大多粗我也不懂，我装 2.5 硬盘的螺丝是同学买大疆编程小车多出来的内六角，尺寸正好，至于 3.5 硬盘是隔壁老司机送给我的装机剩下的，反正车速很稳，如果自己买的话京东淘宝好像都有装机用的成套螺丝，建议顺手买一套，不要螺丝钉难倒程序员。</p>
 <p><img src="/posts/SnailSpace-as-NAS/4.jpg" alt="西数带包装">
@@ -240,8 +240,8 @@
 <img src="/posts/SnailSpace-as-NAS/8.jpg" alt="西数装上硬盘托正面">
 <img src="/posts/SnailSpace-as-NAS/9.jpg" alt="东芝装上硬盘托正面">
 <img src="/posts/SnailSpace-as-NAS/7.jpg" alt="从硬盘架上拔出来一半"></p>
-<h1 id="软件处理-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E8%BD%AF%E4%BB%B6%E5%A4%84%E7%90%86-NaN" title="软件处理"></a>软件处理</h1>
-<h2 id="分区-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%88%86%E5%8C%BA-NaN" title="分区"></a>分区</h2>
+<h1 id="软件处理"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E8%BD%AF%E4%BB%B6%E5%A4%84%E7%90%86" title="软件处理"></a>软件处理</h1>
+<h2 id="分区"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%88%86%E5%8C%BA" title="分区"></a>分区</h2>
 <p>软件部分就十分舒服自在了，接显示器网线键盘开机按 F7 进入 BIOS 设置 UEFI 模式从 U 盘启动，然后进入 Archiso 按照 <a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noreferrer noopener">安装指南</a> 安装系统（据说他们最近在处理 base 组，建议随时跟进 wiki，我就不复制了），分区的时候我是在能引导的 2.5 寸硬盘上建立了 ESP，然后其他空间全部用作 LVM，1T 硬盘的剩余空间作为一个 pv，<del>并且给 2T 的硬盘分了三个区做 pv（万一我哪天脑子抽了想缩个分区出来呢？）</del>，然后建立 vg，建立给根目录和家目录的 lv，然后创建 ext4 文件系统。这一段参照 wiki 对应页面就行了，命令十分简明直观，我第一次用就成功了。配置好的效果如图：</p>
 <p><img src="/posts/SnailSpace-as-NAS/3.jpg" alt="分区状况"></p>
 <p>至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，<del>但我手头只有一块</del> 决定的时候手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份）。按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。</p>
@@ -249,7 +249,7 @@
 <p>买回来硬盘之后想想反正两块都没啥数据（搬出去了），索性直接格式化成 btrfs，不然也可以在已有一块 btrfs 设备之后 add 然后 balance，就可以修改策为 RAID1，格式化命令很简单就这样：</p>
 <pre><code class="plain"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code># mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV</code></pre></figure></code></pre>
 <p><code>-m raid1</code> 是指 metadata 要做 RAID1 备份，<code>-d raid1</code> 是指 data 也要 RAID1 备份，然后需要跟两个设备，推荐是一样大的，挂载时候就随便挂一个设备就行了，btrfs 会自己执行 RAID1 策略的。</p>
-<h2 id="启动配置-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE-NaN" title="启动配置"></a>启动配置</h2>
+<h2 id="启动配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE" title="启动配置"></a>启动配置</h2>
 <p><code>/etc/mkinitcpio.conf</code> 里需要给 HOOKS 添加 lvm2，然后运行 <code>mkinitcpio -p linux</code>，这样生成的 initramfs 才能支持 LVM。我还给 MODULES 添加了和 intel 显卡有关的部分（虽然可能用不到了），具体修改的位置如下：</p>
 <pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code>MODULES=(intel_agp i915)
 HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)</code></pre></figure></code></pre>
@@ -260,7 +260,7 @@ initrd    /intel-ucode.img
 initrd    /initramfs-linux.img
 options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></pre>
 <p>最近 systemd-boot 添加了什么校验设置，在蜗牛上会报错，直接 chroot 进去安装根本装不上，临时解决方案是退出 chroot，然后用 Archiso 里的 <code>bootctl</code> 安装到 <code>/mnt/boot</code>，虽然有点 dirty，但是能用？不过还是会报个错，但是启动需要的文件已经安装上了，不管它也能用，只不过每次重启还是会说校验失败，目测是个 bug。</p>
-<h2 id="网络配置-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE-NaN" title="网络配置"></a>网络配置</h2>
+<h2 id="网络配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE" title="网络配置"></a>网络配置</h2>
 <p>然后由于 NAS 的网络不会经常变化，所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager。直接创建 <code>/etc/systemd/network/wired.network</code>，写入如下内容：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span></pre><pre class="code"><code><span class="hljs-section">[Match]</span>
 <span class="hljs-attr">Name</span>=en*
@@ -268,7 +268,7 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 [Network]</span>
 <span class="hljs-attr">DHCP</span>=ipv4</code></pre></figure></code></pre>
 <p>意思是对于所有以 <code>en</code> 开头的网卡使用 DHCPv4，然后 <code>systemctl enable --now systemd-networkd systemd-resolved</code> 就可以了。</p>
-<h2 id="Samba配置-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE-NaN" title="Samba配置"></a>Samba 配置</h2>
+<h2 id="Samba配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE" title="Samba配置"></a>Samba 配置</h2>
 <p>btrfs 的子卷看起来很像普通目录，但是又可以分别直接挂载，不需要先挂载设备然后再用 <code>mount --rbind</code>。于是建了 <code>/data</code> 和 <code>/data/alynx</code> 两个子卷，<code>/data</code> 就挂载到 <code>/data</code>，<code>/data/alynx</code> 挂载到我家目录下面。</p>
 <p>在 <code>/etc/samba/smb.conf</code> 添加如下配置，就可以分别通过 <code>home</code> 和 <code>data</code> 访问每个用户在 <code>/home</code> 和 <code>/data</code> 下面的同名文件夹了，<code>%u</code> 代表的就是连接的用户名。（当然权限要你自己处理一下。）</p>
 <pre><code class="ini"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span></pre><pre class="code"><code>[home]
@@ -283,7 +283,7 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
    writeable = yes
    path = /data/%u</code></pre></figure></code></pre>
 <p>其它的配置基本都是正常操作参照 Arch Wiki，<del>我打算以后插新硬盘直接加进 LVM 加给 <code>/home</code>，省得还得操心挂载到哪里</del> 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 <a href="https://sh.alynx.moe/posts/WireGuard-Usage/">这篇文章</a> 就可以了，如果只是 SSH 远程控制一下效果还可以。</p>
-<h1 id="效果-NaN"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C-NaN" title="效果"></a>效果</h1>
+<h1 id="效果"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C" title="效果"></a>效果</h1>
 <p>笔记本插了有线之后可以测试千兆对拷，我的路由器还是大一时候买的 WNDR3800，虽然很旧，但四个有线全部都是千兆口（当时价格和配置差不多的极路由 3 只有一个内网千兆好像），<del>samba 拷贝速度轻松达到 110M/s 的满速，甚至比蜗牛的 USB3.0 还快</del> 用了 btrfs 之后似乎速度只有 80M/s 左右了，或者 Windows 和 Linux 下面 Samba 对拷速度显示有区别？110M/s 是我在 Windows 下面测出来的。</p>
 <p>蜗牛后面两个 USB3.0 只有下面的那个是真的，上面的也就 2.0 速度，下面的跑满了也就 80 到 90M/s，我的 U 盘是 CZ80，放笔记本上比这快多了，而且有时候上面那个也可以跑到 70M/s，具体原因不知道，如果是真的土豪建议直接换主板算了，非土豪完全可以插笔记本然后网络拷进蜗牛，比这奇葩接口还快。</p>
 <p><em>Alynx Zhou</em></p>
@@ -457,38 +457,38 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
         <ol class="list-group toc">
         
           <li>
-            <a class="list-group-item toc-link" href="#需求-NaN">需求</a>
+            <a class="list-group-item toc-link" href="#需求">需求</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#介绍-NaN">介绍</a>
+            <a class="list-group-item toc-link" href="#介绍">介绍</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#硬件处理-NaN">硬件处理</a>
+            <a class="list-group-item toc-link" href="#硬件处理">硬件处理</a>
             
             
         <ol >
         
           <li>
-            <a class="list-group-item toc-link" href="#更换电源-NaN">更换电源</a>
+            <a class="list-group-item toc-link" href="#更换电源">更换电源</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#更换风扇-NaN">更换风扇</a>
+            <a class="list-group-item toc-link" href="#更换风扇">更换风扇</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#安装侧面25寸硬盘-NaN">安装侧面 2.5 寸硬盘</a>
+            <a class="list-group-item toc-link" href="#安装侧面25寸硬盘">安装侧面 2.5 寸硬盘</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#仓库盘安装-NaN">仓库盘安装</a>
+            <a class="list-group-item toc-link" href="#仓库盘安装">仓库盘安装</a>
             
           </li>
         
@@ -498,28 +498,28 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#软件处理-NaN">软件处理</a>
+            <a class="list-group-item toc-link" href="#软件处理">软件处理</a>
             
             
         <ol >
         
           <li>
-            <a class="list-group-item toc-link" href="#分区-NaN">分区</a>
+            <a class="list-group-item toc-link" href="#分区">分区</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#启动配置-NaN">启动配置</a>
+            <a class="list-group-item toc-link" href="#启动配置">启动配置</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#网络配置-NaN">网络配置</a>
+            <a class="list-group-item toc-link" href="#网络配置">网络配置</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#Samba配置-NaN">Samba 配置</a>
+            <a class="list-group-item toc-link" href="#Samba配置">Samba 配置</a>
             
           </li>
         
@@ -529,7 +529,7 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#效果-NaN">效果</a>
+            <a class="list-group-item toc-link" href="#效果">效果</a>
             
           </li>
         
@@ -637,4 +637,4 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.0.0 at 2019-10-21 Mon 18:36:36 CST. -->
+<!-- Page built by Hikaru v1.0.2 at 2019-10-21 Mon 20:44:49 CST. -->
