@@ -200,115 +200,77 @@
     <main class="post-main" itemprop="articleBody">
       <p>一入Arch深似海，不挂全需人品高～家里添了台联想昭阳E49,奔腾2020M,2G内存。早就想写一篇安装手札来做LOFTER的开篇了～我没那么多脑洞……代码还是有的……</p>
 <p>Arch的安装出了名的难，没安过三次不要说你会Arch，但安装完你会对Linux有更好理解，如同打通任督二脉～我这次是第四次成功了～感谢好朋友Maxfan的帮助～另外LOFTER真的很不错～   </p>
-<a id="more"></a>
+<a id='more'></a>
 
 <p>下面正文开始～   </p>
 <p>到<a href="https://www.archlinux.org/download/" target="_blank" rel="noreferrer noopener">Arch的下载页面</a>下载最新的镜像，Windows下用Win32diskmanager写入U盘，Linux下用   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># dd if=~/archlinux-2014.07.03.iso of=/dev/sdb</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># dd if=~/archlinux-2014.07.03.iso of=/dev/sdb</span></code></pre></figure></code></pre>
 <p>写入U盘。   </p>
 <p>开机按<f12>选择U盘引导， <em>Boot Arch Linux(x86_64)</em> ，root自动登录。可以手机看<a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noreferrer noopener">Arch Wiki新手指南</a>。~/有一份英文的install.txt，可以在tty2打开看。   </f12></p>
 <p>首先   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># iw dev</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># iw dev</span></code></pre></figure></code></pre>
 <p>记下无线接口名。本例为 <em>wlp2s0</em>    </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># wifi-menu wlp2s0</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># wifi-menu wlp2s0</span></code></pre></figure></code></pre>
 <p>选择无线网，两次ok，键入密码连接。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># ping -c 3 www.baidu.com</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># ping -c 3 www.baidu.com</span></code></pre></figure></code></pre>
 <p>确定是否已联网。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># cfdisk</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># cfdisk</span></code></pre></figure></code></pre>
 <p>听说高手都用fdisk分区，我习惯cfdisk，反正不从头分，在末尾的空闲分区划分70G/dev/sda3作为/，3G/dev/sda4swap，都是主分区。由于Arch用pacstrap安装基本系统，所以单/分区也能保留/home重装～只要删掉其他目录即可。千万不要乱按Bootable！给我惹了好大麻烦……   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># partprobe</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># partprobe</span></code></pre></figure></code></pre>
 <p>让内核重新读取分区表。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-comment"># mkfs.brtfs /dev/sda3</span>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span></pre><pre class="code"><code><span class="hljs-comment"># mkfs.brtfs /dev/sda3</span>
 <span class="hljs-comment"># mkswap /dev/sda4</span>
 <span class="hljs-comment"># swapon /dev/sda4</span></code></pre></figure></code></pre>
 <p>根目录用btrfs，由于btrfs不能用交换文件，所以分交换分区并启用。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># mount /dev/sda3 /mnt</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># mount /dev/sda3 /mnt</span></code></pre></figure></code></pre>
 <p>挂载到/mnt。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># nano /etc/pacman.d/mirrorlist</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># nano /etc/pacman.d/mirrorlist</span></code></pre></figure></code></pre>
 <p>安装前需要编辑 <em>/etc/pacman.d/mirrorlist</em> , mirrorlist文件也会被pacstrap复制到新系统。到<a href="https://www.archlinux.org/mirrorlist/" target="_blank" rel="noreferrer noopener">镜像列表生成器</a>生成中国源列表添加到前面。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># pacman -Syy</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># pacman -Syy</span></code></pre></figure></code></pre>
 <p>更新pacman数据。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># pacstrap -i /mnt base base-devel</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># pacstrap -i /mnt base base-devel</span></code></pre></figure></code></pre>
 <p>安装基本系统到/mnt，sudo什么的都在base-devel里。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-comment"># genfstab -p -U /mnt &gt;&gt; /mnt/etc/fstab</span>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-comment"># genfstab -p -U /mnt &gt;&gt; /mnt/etc/fstab</span>
 <span class="hljs-comment"># nano /mnt/etc/fstab</span></code></pre></figure></code></pre>
 <p>生成fstab并检查一下。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># arch-chroot /mnt /bin/bash</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># arch-chroot /mnt /bin/bash</span></code></pre></figure></code></pre>
 <p>chroot到新系统的bash shell，初步认为arch-chroot的特点是可以运行systemd。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># nano /etc/locale.gen</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># nano /etc/locale.gen</span></code></pre></figure></code></pre>
 <p>编辑本地化标准，去掉en_US.UTF-8和zh_CN.UTF-8前的#。执行   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># locale-gen</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># locale-gen</span></code></pre></figure></code></pre>
 <p>应用更改。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</span></code></pre></figure></code></pre>
 <p>设置LANG变量，在此设置中文会使tty乱码。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span></code></pre></figure></code></pre>
 <p>设置时区，这里设为中国上海(UTC+8:00)。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># hwclock --systohc --utc</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># hwclock --systohc --utc</span></code></pre></figure></code></pre>
 <p>设置硬件时间为UTC，稍后再把Windows改为UTC。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># echo ShaX-Laptop &gt; /etc/hostname</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># echo ShaX-Laptop &gt; /etc/hostname</span></code></pre></figure></code></pre>
 <p>设置主机名为ShaX-Laptop。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># nano /etc/hosts</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># nano /etc/hosts</span></code></pre></figure></code></pre>
 <p>127.0.0.1一行最后按<tab>键入ShaX-Laptop。   </tab></p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># pacman -S iw wpa_supplicant dialog</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># pacman -S iw wpa_supplicant dialog</span></code></pre></figure></code></pre>
 <p>为新系统安装联网所需组件，第一次虚拟机安装时忘了配置网络，结果一pacman -S就满屏错误……   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># pacman -S ntfs-3g vim zsh</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># pacman -S ntfs-3g vim zsh</span></code></pre></figure></code></pre>
 <p>安装必需软件，ntfs-3g可以让Linux读取NTFS。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># passwd</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># passwd</span></code></pre></figure></code></pre>
 <p>设置root密码。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># pacman -S grub</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># pacman -S grub</span></code></pre></figure></code></pre>
 <p>安装GRUB。为了能用Windows引导GRUB，选择安装到PBR。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-</pre><pre class="code"><code><span class="hljs-comment"># chattr -i /boot/grub/i386-pc/core.img</span>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code><span class="hljs-comment"># chattr -i /boot/grub/i386-pc/core.img</span>
 <span class="hljs-comment"># grub-install --target=i386-pc --recheck --debug --force /dev/sda3</span>
 <span class="hljs-comment"># chattr +i /boot/grub/i386-pc/core.img</span>
 <span class="hljs-comment"># grub-mkconfig -o /boot/grub/grub.cfg</span></code></pre></figure></code></pre>
 <p>为了防止由于硬盘文件移动导致找不到GRUB核心文件，给它添加i(不可动)标记。建立GRUB配置文件。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># mount /dev/sda1 /mnt</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># mount /dev/sda1 /mnt</span></code></pre></figure></code></pre>
 <p>挂载C盘到/mnt。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-comment"># mkdir /mnt/NST</span>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-comment"># mkdir /mnt/NST</span>
 <span class="hljs-comment"># dd if=/dev/sda3 of=/mnt/NST/Linux.mbr bs=446 count=1</span></code></pre></figure></code></pre>
 <p>将前446字节的loader写到C:\NST\Linux.mbr。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-comment"># umount /mnt</span>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-comment"># umount /mnt</span>
 <span class="hljs-comment"># exit</span></code></pre></figure></code></pre>
 <p>退出chroot。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-comment"># umount /mnt</span>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-comment"># umount /mnt</span>
 <span class="hljs-comment"># reboot</span></code></pre></figure></code></pre>
 <p>不要忘了拔出U盘，进入Windows。   </p>
 <p>打开regedit，定位到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\，新建DWORD值RealTimeIsUniversal，键值设为1。以应用UTC。   </p>
@@ -316,55 +278,37 @@
 <p>重启按<f1>进入BIOS，硬件时钟倒设8小时为UTC。   </f1></p>
 <p>选择Arch Linux进入GRUB引导。   </p>
 <p>先用root登录，wifi-menu连接网络，创建用户shax并添加密码。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-</pre><pre class="code"><code><span class="hljs-comment"># useradd -m shax</span>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-comment"># useradd -m shax</span>
 <span class="hljs-comment"># passwd shax</span></code></pre></figure></code></pre>
 <p>参数-m的作用是自动在/home下建立以用户名为名的主文件夹。<br>然后   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># visudo</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># visudo</span></code></pre></figure></code></pre>
 <p>修改可以提权的用户，光标定位到root ALL=(ALL) ALL一行，按i键进入编辑模式，将该行修改为root ALL=(ALL) NOPASSWD: ALL，以关闭密码保护，在这一行下面添加shax ALL=(ALL) NOPASSWD: ALL，给shax开放权限。按<esc>键退出编辑模式，输入:wq回车以保存并退出。   </esc></p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-comment"># logout</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># logout</span></code></pre></figure></code></pre>
 <p>以shax登录。执行   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ sudo pacman -S xf86-video-intel xorg-server xorg-server-utils xorg-utils xorg-xinit alsa-utils xf86-input-synaptics</code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo pacman -S xf86-video-intel xorg-server xorg-server-utils xorg-utils xorg-xinit alsa-utils xf86-input-synaptics</code></pre></figure></code></pre>
 <p>安装显声卡触摸板驱动和X接口。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ sudo pacman -S acpi</code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo pacman -S acpi</code></pre></figure></code></pre>
 <p>安装高级电源管理支持(?)。   </p>
-<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code><span class="hljs-meta">$</span><span class="bash"> sudo pacman -S gnome gdm wqy-microhei</span></code></pre></figure></code></pre><p>安装GNOME3桌面环境和它对应的登录管理器GDM以及好看的中文字体文泉驿微米黑。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ cp /etc/skel/.xinitrc ~/</code></pre></figure></code></pre>
+<pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-variable">$ </span>sudo pacman -S gnome gdm wqy-microhei</code></pre></figure></code></pre><p>安装GNOME3桌面环境和它对应的登录管理器GDM以及好看的中文字体文泉驿微米黑。   </p>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ cp /etc/skel/.xinitrc ~/</code></pre></figure></code></pre>
 <p>复制一份X样板文件到主目录，不要加sudo，否则所有者会变成root。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ nano ~/.xinitrc</code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ nano ~/.xinitrc</code></pre></figure></code></pre>
 <p>去掉exec gnome-session前的#。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ sudo systemctl <span class="hljs-built_in">enable</span> gdm</code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo systemctl <span class="hljs-built_in">enable</span> gdm</code></pre></figure></code></pre>
 <p>开机自动启动登录管理器。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ startx</code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ startx</code></pre></figure></code></pre>
 <p>启动X会话。   </p>
 <p>在Settings→Language&amp;Location里全部修改为汉语&amp;中国。包括右上角的Login。   </p>
 <p>右上角点击用户名选logout重新登录。   </p>
 <p>登录后打开终端，输入   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ sudo pacman -S ibus-libpinyin</code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo pacman -S ibus-libpinyin</code></pre></figure></code></pre>
 <p>安装ibus-libpinyin中文输入法，之后去设置里添加即可。   </p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ sudo nano /etc/pacman.conf</code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo nano /etc/pacman.conf</code></pre></figure></code></pre>
 <p>添加如下以安装yaourt。   </p>
-<pre><code><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-</pre><pre class="code"><code><span class="hljs-section">[archlinuxcn]</span>
+<pre><code><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code><span class="hljs-section">[archlinuxcn]</span>
 <span class="hljs-comment">#The Chinese Arch Linux communities packages.</span>
 <span class="hljs-attr">SigLevel</span> = Optional TrustAll
-<span class="hljs-attr">Server</span> = http://repo.archlinuxcn.org/<span class="hljs-variable">$arch</span></code></pre></figure></code></pre><pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ sudo pacman -Syu yaourt</code></pre></figure></code></pre>
+<span class="hljs-attr">Server</span> = http://repo.archlinuxcn.org/<span class="hljs-variable">$arch</span></code></pre></figure></code></pre><pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo pacman -Syu yaourt</code></pre></figure></code></pre>
 <p>可以自动安装AUR工具yaourt。   </p>
 <p>再次感谢好友Maxfan。   </p>
 <p>欢迎关注<a href="https://www.archlinux.org/" target="_blank" rel="noreferrer noopener">Arch Linux官网</a>   </p>
@@ -635,4 +579,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.4 at 2019-10-20 Sun 22:30:06 CST. -->
+<!-- Page built by Hikaru v1.0.0 at 2019-10-21 Mon 18:36:37 CST. -->

@@ -201,14 +201,7 @@
       <p>如果你直接使用 AUR 里 UnityHub 的 PKGBUILD 安装会出一些问题。解决方案也很简单。</p>
 <p>首先似乎 PKGBUILD 下载的版本很奇怪，不管你在 Unity 论坛里哪个链接下载的版本其实都是一个，并且和 PKGBUILD 里面的不一样，解决方法就是自己计算一下 md5 然后替换掉 PKGBUILD 里面的 md5sums。</p>
 <p>第二个就是 PKGBUILD 里面最后有这几句：</p>
-<pre><code><figure class="highlight hljs perl"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-</pre><pre class="code"><code><span class="hljs-comment"># Fix 7z permissions</span>
+<pre><code><figure class="highlight hljs perl"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span></pre><pre class="code"><code><span class="hljs-comment"># Fix 7z permissions</span>
 <span class="hljs-keyword">chmod</span> +<span class="hljs-keyword">x</span> <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources"</span> \
          <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked"</span> \
          <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external"</span> \
@@ -478,4 +471,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.4 at 2019-10-20 Sun 22:30:05 CST. -->
+<!-- Page built by Hikaru v1.0.0 at 2019-10-21 Mon 18:36:36 CST. -->

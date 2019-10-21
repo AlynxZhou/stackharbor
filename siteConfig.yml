@@ -12,21 +12,23 @@ baseURL: https://sh.alynx.moe
 rootDir: /
 srcDir: srcs
 docDir: docs
-themeDir: aria
+themeDir: themes/aria
 
+# Those paths are under `docDir`.
 indexDir: /
 archiveDir: archives
 categoryDir: categories
 tagDir: tags
+
+# Those paths are under `srcDir`.
+skipRender:
+  - README.md
 
 perPage:
   index: 10
   archives: 15
   category: 15
   tag: 15
-
-skipRender:
-  - README.md
 
 nunjucks:
   autoescape: false

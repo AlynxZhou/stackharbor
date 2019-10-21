@@ -199,38 +199,21 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。</p>
-<a id="more"></a>
+<a id='more'></a>
 
 <p>首先按照惯例应该介绍下GDB，搭配GCC使用的调试器，也是众多使用GCC为编译器的IDE的默认调试器（大概？），虽然无聊的实验报告模板还很搞笑的写了一个部分叫XXX调试器和VC6.0的比较（看戏的内心：我看过两年学生出生时间比VC6还晚的时候这些课还怎么拿VC6讲）。</p>
 <p>所以掌握GDB的使用还是很有必要的，毕竟掌握某个使用GDB的IDE终究只是掌握了一个图形壳子，原理估计还是要深入一层到直接用GDB（强行接入正经模式）。</p>
 <p>这里只是按照实验报告的要求写一下断点调试和单步执行的用法（PS：Word实在是太难用了，字号缩进和标题序号就没有按照我想要的方式工作过。</p>
 <hr>
-<h1 id="准备"><a class="header-link" href="/posts/Using-Gdb/#%E5%87%86%E5%A4%87" title="准备"></a>准备</h1>
-<h2 id="调试模式编译程序"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F" title="调试模式编译程序"></a>调试模式编译程序</h2>
+<h1 id="准备-NaN"><a class="header-link" href="/posts/Using-Gdb/#%E5%87%86%E5%A4%87-NaN" title="准备"></a>准备</h1>
+<h2 id="调试模式编译程序-NaN"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F-NaN" title="调试模式编译程序"></a>调试模式编译程序</h2>
 <p>首先应该明确调试的实现方式，GDB能够暂时的停下程序操作程序其实是通过向编译过程中的二进制流中添加钩子（HOOKS）来实现的。但是对于一个正常的，打算释出给用户使用的程序而言不应该以调试模式编译，因为这些添加进去的钩子不但会增大文件体积，还会降低程序的运行效率。所以GCC默认编译程序的时候时不会添加这个钩子的，需要的时候以<code>-g</code>参数来启用调试模式。</p>
 <p>本例中以文件<a href="/posts/2017/03/15/Using-Gdb/Lab2.c">Lab2.c</a>为例，使用命令</p>
-<pre><code><figure class="highlight hljs llvm"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>$ gcc -std=<span class="hljs-keyword">c</span><span class="hljs-number">11</span> -g -o lab Lab<span class="hljs-number">2</span>.<span class="hljs-keyword">c</span></code></pre></figure></code></pre><p>将它编译到可执行文件lab。</p>
-<h2 id="用GDB打开程序。"><a class="header-link" href="/posts/Using-Gdb/#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82" title="用GDB打开程序。"></a>用GDB打开程序。</h2>
+<pre><code><figure class="highlight hljs llvm"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ gcc -std=<span class="hljs-keyword">c</span><span class="hljs-number">11</span> -g -o lab Lab<span class="hljs-number">2</span>.<span class="hljs-keyword">c</span></code></pre></figure></code></pre><p>将它编译到可执行文件lab。</p>
+<h2 id="用GDB打开程序。-NaN"><a class="header-link" href="/posts/Using-Gdb/#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82-NaN" title="用GDB打开程序。"></a>用GDB打开程序。</h2>
 <p>打开程序的命令很简单，就是<code>$ gdb lab</code>，但是有可能遇到的问题是程序要处理命令行参数，在使用GDB的时候是不能直接在命令行后面附加程序参数的，需要使用参数可以在打开GDB之后输入<code>set args 参数1 参数2 ...</code>附加上参数。</p>
 <p>用GDB打开程序之后是一个交互界面，显示了一些信息和<code>(gdb)</code>这个提示符，表示你现在是在和GDB进行交互而不是程序。这个时候程序是不会运行的。</p>
-<pre><code><figure class="highlight hljs sqf"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-</pre><pre class="code"><code>GNU gdb (GDB) <span class="hljs-number">7.12</span>.<span class="hljs-number">1</span>
+<pre><code><figure class="highlight hljs sqf"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span></pre><pre class="code"><code>GNU gdb (GDB) <span class="hljs-number">7.12</span>.<span class="hljs-number">1</span>
 Copyright (C) <span class="hljs-number">2017</span> Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version <span class="hljs-number">3</span> <span class="hljs-built_in">or</span> later &lt;http:<span class="hljs-comment">//gnu.org/licenses/gpl.html&gt;</span>
 This is free software: you are free <span class="hljs-keyword">to</span> change <span class="hljs-built_in">and</span> redistribute it.
@@ -245,68 +228,37 @@ This GDB was configured as <span class="hljs-string">"x86_64-pc-linux-gnu"</span
 <span class="hljs-keyword">For</span> help, <span class="hljs-built_in">type</span> <span class="hljs-string">"help"</span>.
 <span class="hljs-built_in">Type</span> <span class="hljs-string">"apropos word"</span> <span class="hljs-keyword">to</span> search <span class="hljs-keyword">for</span> commands related <span class="hljs-keyword">to</span> <span class="hljs-string">"word"</span>...
 Reading symbols <span class="hljs-keyword">from</span> lab...done.
-(gdb)</code></pre></figure></code></pre><h1 id="调试"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95" title="调试"></a>调试</h1>
-<h2 id="设置断点"><a class="header-link" href="/posts/Using-Gdb/#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9" title="设置断点"></a>设置断点</h2>
+(gdb)</code></pre></figure></code></pre><h1 id="调试-NaN"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95-NaN" title="调试"></a>调试</h1>
+<h2 id="设置断点-NaN"><a class="header-link" href="/posts/Using-Gdb/#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9-NaN" title="设置断点"></a>设置断点</h2>
 <p>首先使用<code>break</code>指令就可以添加一个断点，断点顾名思义就是程序运行到这个位置会暂停下来交给GDB，这样你才能够在程序运行到一半的时候查看一些可疑的变量，断点是针对函数使用的，比如我想在所有的printf()进入的时候暂停，可以使用：</p>
-<pre><code><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span>
-</pre><pre class="code"><code>(gdb) <span class="hljs-keyword">break</span> <span class="hljs-built_in">printf</span></code></pre></figure></code></pre><p>显示的是这样的：</p>
-<pre><code><figure class="highlight hljs maxima"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-</pre><pre class="code"><code>(gdb) <span class="hljs-built_in">break</span> <span class="hljs-built_in">printf</span>
-Breakpoint <span class="hljs-number">1</span> <span class="hljs-built_in">at</span> <span class="hljs-number">0x400540</span></code></pre></figure></code></pre><p>当然接下来可以继续添加更多的断点。</p>
+<pre><code><figure class="highlight hljs cpp"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>(gdb) <span class="hljs-keyword">break</span> <span class="hljs-built_in">printf</span></code></pre></figure></code></pre><p>显示的是这样的：</p>
+<pre><code><figure class="highlight hljs angelscript"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code>(gdb) <span class="hljs-keyword">break</span> printf
+Breakpoint <span class="hljs-number">1</span> at <span class="hljs-number">0x400540</span></code></pre></figure></code></pre><p>当然接下来可以继续添加更多的断点。</p>
 <p>然后使用<code>run</code>就可以让程序跑起来：</p>
-<pre><code><figure class="highlight hljs gradle"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-</pre><pre class="code"><code>(gdb) run
-Starting program: <span class="hljs-regexp">/home/</span>alynx<span class="hljs-regexp">/Homework/</span>实验材料（学生版）<span class="hljs-regexp">/实验2/</span>lab
+<pre><code><figure class="highlight hljs angelscript"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span></pre><pre class="code"><code>(gdb) run
+Starting program: /home/alynx/Homework/实验材料（学生版）/实验<span class="hljs-number">2</span>/lab
 [实验<span class="hljs-number">2</span>说明]本练习运行一个三重<span class="hljs-keyword">for</span>循环, 循环结构如下:
-<span class="hljs-keyword">int</span> <span class="hljs-keyword">count</span> = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; j&lt;LoopEnd1; i++)
+<span class="hljs-built_in">int</span> count = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; j&lt;LoopEnd1; i++)
 {
     <span class="hljs-comment">//第一重循环体</span>
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;LoopEnd2; j++)
+    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> j=<span class="hljs-number">0</span>; j&lt;LoopEnd2; j++)
     {
         <span class="hljs-comment">//第二重循环体</span>
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> s=<span class="hljs-number">0</span>; s&lt;LoopEnd3; s++)
+        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> s=<span class="hljs-number">0</span>; s&lt;LoopEnd3; s++)
         {
-            <span class="hljs-keyword">count</span>++;<span class="hljs-comment">//第三重循环体</span>
+            count++;<span class="hljs-comment">//第三重循环体</span>
         }
     }
 }
 
-Breakpoint <span class="hljs-number">1</span>, <span class="hljs-number">0</span>x00007ffff7a86e00 in printf () <span class="hljs-keyword">from</span> <span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/libc.so.6</span></code></pre></figure></code></pre><p>这时候使用<code>print</code>指令可以打印任意的内容：</p>
-<pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-</pre><pre class="code"><code>(gdb) <span class="hljs-builtin-name">print</span> printf
+Breakpoint <span class="hljs-number">1</span>, <span class="hljs-number">0x00007ffff7a86e00</span> <span class="hljs-keyword">in</span> printf () <span class="hljs-keyword">from</span> /usr/lib/libc.so<span class="hljs-number">.6</span></code></pre></figure></code></pre><p>这时候使用<code>print</code>指令可以打印任意的内容：</p>
+<pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code>(gdb) <span class="hljs-builtin-name">print</span> printf
 <span class="hljs-variable">$1</span> = {&lt;text variable, <span class="hljs-literal">no</span> <span class="hljs-builtin-name">debug</span> info&gt;} 0x7ffff7a86e00 &lt;printf&gt;</code></pre></figure></code></pre><p>使用<code>bt</code>指令可以显示出程序的栈（Backtrace）：</p>
-<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-</pre><pre class="code"><code>(gdb) bt
-<span class="hljs-meta">#</span><span class="bash">0  0x00007ffff7a86e00 <span class="hljs-keyword">in</span> <span class="hljs-built_in">printf</span> () from /usr/lib/libc.so.6</span>
-<span class="hljs-meta">#</span><span class="bash">1  0x0000000000400745 <span class="hljs-keyword">in</span> main (argc=1, argv=0x7fffffffe078) at Lab2.c:26</span></code></pre></figure></code></pre><p>输入<code>c</code>就是继续运行程序的意思。但是<code>step</code>指令的功能更加有用，顾名思义这个就是单步运行，每次只运行一行代码，这是个step-in的模式，即如果该行有函数则进入函数内一行一行运行，而<code>next</code>则是step-over的模式，即如果该行有函数会运行函数返回结果而不是进入函数内部。</p>
-<pre><code><figure class="highlight hljs awk"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-</pre><pre class="code"><code>(gdb) step
+<pre><code><figure class="highlight hljs angelscript"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span></pre><pre class="code"><code>(gdb) bt
+#<span class="hljs-number">0</span>  <span class="hljs-number">0x00007ffff7a86e00</span> <span class="hljs-keyword">in</span> printf () <span class="hljs-keyword">from</span> /usr/lib/libc.so<span class="hljs-number">.6</span>
+#<span class="hljs-number">1</span>  <span class="hljs-number">0x0000000000400745</span> <span class="hljs-keyword">in</span> main (argc=<span class="hljs-number">1</span>, argv=<span class="hljs-number">0x7fffffffe078</span>) at Lab2.c:<span class="hljs-number">26</span></code></pre></figure></code></pre><p>输入<code>c</code>就是继续运行程序的意思。但是<code>step</code>指令的功能更加有用，顾名思义这个就是单步运行，每次只运行一行代码，这是个step-in的模式，即如果该行有函数则进入函数内一行一行运行，而<code>next</code>则是step-over的模式，即如果该行有函数会运行函数返回结果而不是进入函数内部。</p>
+<pre><code><figure class="highlight hljs awk"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span></pre><pre class="code"><code>(gdb) step
 Single stepping until <span class="hljs-keyword">exit</span> from <span class="hljs-keyword">function</span> printf,
 which has no line number information.
 main (argc=<span class="hljs-number">1</span>, argv=<span class="hljs-number">0</span>x7fffffffe078) at Lab2.c:<span class="hljs-number">27</span>
@@ -486,18 +438,18 @@ main (argc=<span class="hljs-number">1</span>, argv=<span class="hljs-number">0<
         <ol class="list-group toc">
         
           <li>
-            <a class="list-group-item toc-link" href="#准备">准备</a>
+            <a class="list-group-item toc-link" href="#准备-NaN">准备</a>
             
             
         <ol >
         
           <li>
-            <a class="list-group-item toc-link" href="#调试模式编译程序">调试模式编译程序</a>
+            <a class="list-group-item toc-link" href="#调试模式编译程序-NaN">调试模式编译程序</a>
             
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#用GDB打开程序。">用GDB打开程序。</a>
+            <a class="list-group-item toc-link" href="#用GDB打开程序。-NaN">用GDB打开程序。</a>
             
           </li>
         
@@ -507,13 +459,13 @@ main (argc=<span class="hljs-number">1</span>, argv=<span class="hljs-number">0<
           </li>
         
           <li>
-            <a class="list-group-item toc-link" href="#调试">调试</a>
+            <a class="list-group-item toc-link" href="#调试-NaN">调试</a>
             
             
         <ol >
         
           <li>
-            <a class="list-group-item toc-link" href="#设置断点">设置断点</a>
+            <a class="list-group-item toc-link" href="#设置断点-NaN">设置断点</a>
             
           </li>
         
@@ -626,4 +578,4 @@ main (argc=<span class="hljs-number">1</span>, argv=<span class="hljs-number">0<
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.4 at 2019-10-20 Sun 22:30:05 CST. -->
+<!-- Page built by Hikaru v1.0.0 at 2019-10-21 Mon 18:36:37 CST. -->

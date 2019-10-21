@@ -199,7 +199,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。</p>
-<a id="more"></a>
+<a id='more'></a>
 
 <p>首先说明我是 Linux 用户，使用 ibus-rime 做输入引擎，所以使用什么小狼毫鼠须管或者 fcitx-rime 的如果发现不好用最好别烦我，那些我都没用过。（不好意思因为配置这玩意有点暴躁。）</p>
 <p>然后我要吐槽一下 RIME 的文档，完全没有一致的类似 API 手册的东西，而且全繁体加上佛振独特的说话风格读起来真的很累，然后这个项目习惯又是起一大堆奇奇怪怪的名字（虽然我有时候也这样）。假如你想修改一点配置，读了文档里的示例“我懂了，巴拉巴拉”，打开配置一看一堆乱七八糟的就懵了。</p>
@@ -224,31 +224,11 @@
 <p>怎么确定要修改的 key 名字呢？我这里的都是在 <code>build/default.yaml</code> 下面找到的，你也可以试试其他的 YAML 文件。</p>
 <p>RIME 的文档说什么要用 <code>/</code> 把不同层次的 key 折叠成一个比如 <code>ascii_composer/switch_key</code>，亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。</p>
 <p>然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-</pre><pre class="code"><code><span class="hljs-attr">patch:</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span></pre><pre class="code"><code><span class="hljs-attr">patch:</span>
 <span class="hljs-attr">  schema_list:</span>
 <span class="hljs-attr">    - schema:</span> <span class="hljs-string">"luna_pinyin_simp"</span></code></pre></figure></code></pre>
 <p>然后就是改掉那个自作聪明的英文输入模式：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-</pre><pre class="code"><code><span class="hljs-attr">  ascii_composer:</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span></pre><pre class="code"><code><span class="hljs-attr">  ascii_composer:</span>
     <span class="hljs-comment"># 按 CapsLock 输出大写英文字母。</span>
 <span class="hljs-attr">    good_old_caps_lock:</span> <span class="hljs-literal">true</span>
     <span class="hljs-comment"># `inline_ascii` 在输入框内插入英文。</span>
@@ -267,17 +247,7 @@
 <span class="hljs-attr">      Control_R:</span> <span class="hljs-string">"noop"</span></code></pre></figure></code></pre>
 <p>大部分坑我都写在注释里了可以自己看。</p>
 <p>然后我看那个设置选单也不是很爽，我习惯简体字，这个也可以自己改：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-</pre><pre class="code"><code><span class="hljs-attr">  switcher:</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span></pre><pre class="code"><code><span class="hljs-attr">  switcher:</span>
     <span class="hljs-comment"># 改掉原来的繁体字标题。</span>
 <span class="hljs-attr">    caption:</span> <span class="hljs-string">"【设置菜单】"</span>
     <span class="hljs-comment"># 用半角斜线而不是奇丑无比的全角斜线做分隔符。</span>
@@ -288,60 +258,7 @@
 <span class="hljs-bullet">      -</span> <span class="hljs-string">"Control+grave"</span>
 <span class="hljs-bullet">      -</span> <span class="hljs-string">"F4"</span></code></pre></figure></code></pre>
 <p>然后就是改掉它奇怪的键位，Emacs 键位挺好的，但是有几个不知道为什么用不了，再者就是为什么按向左是跳一个字拼音向右是跳一个字母？</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span>
-<span class="line">35</span>
-<span class="line">36</span>
-<span class="line">37</span>
-<span class="line">38</span>
-<span class="line">39</span>
-<span class="line">40</span>
-<span class="line">41</span>
-<span class="line">42</span>
-<span class="line">43</span>
-<span class="line">44</span>
-<span class="line">45</span>
-<span class="line">46</span>
-<span class="line">47</span>
-<span class="line">48</span>
-<span class="line">49</span>
-<span class="line">50</span>
-<span class="line">51</span>
-<span class="line">52</span>
-<span class="line">53</span>
-</pre><pre class="code"><code><span class="hljs-attr">  key_binder:</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span></pre><pre class="code"><code><span class="hljs-attr">  key_binder:</span>
 <span class="hljs-attr">    bindings:</span>
       <span class="hljs-comment"># Emacs 键位，我喜欢。</span>
       <span class="hljs-comment"># 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？</span>
@@ -395,27 +312,7 @@
 <span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Down"</span>
 <span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span></code></pre></figure></code></pre>
 <p>还没完，我觉得正常人不会用 Tab 在拼音之间切换，除非你一次输入一句话（那你不觉得候选框太小了看着累吗？？？），设置 Tab 为跳候选词更自然一点，但我也不知道为什么 Shift-Tab 用不了：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-</pre><pre class="code"><code>      <span class="hljs-comment"># 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span></pre><pre class="code"><code>      <span class="hljs-comment"># 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。</span>
       <span class="hljs-comment"># - accept: "ISO_Left_Tab"</span>
       <span class="hljs-comment">#   send: "Shift+Left"</span>
       <span class="hljs-comment">#   when: "composing"</span>
@@ -436,26 +333,7 @@
 <span class="hljs-attr">        send:</span> <span class="hljs-string">"Up"</span>
 <span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span></code></pre></figure></code></pre>
 <p>以及我觉得正常人不用逗号和句号翻页，毕竟下面的默认设置是逗号句号直接上屏，你设置了翻页也没啥卵用，反正我用减号等号或者上下，不过方括号也不错就是了：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-</pre><pre class="code"><code><span class="hljs-attr">      - accept:</span> <span class="hljs-string">"minus"</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span></pre><pre class="code"><code><span class="hljs-attr">      - accept:</span> <span class="hljs-string">"minus"</span>
 <span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Up"</span>
 <span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
 <span class="hljs-attr">      - accept:</span> <span class="hljs-string">"equal"</span>
@@ -475,45 +353,7 @@
       <span class="hljs-comment">#   send: "Page_Down"</span>
       <span class="hljs-comment">#   when: "has_menu"</span></code></pre></figure></code></pre>
 <p>最后就是那一堆乱七八糟的快捷键了，鬼才记得住，有那时间直接翻菜单就行了，那个 Shift+Space 就是我动不动就变成全角的罪魁祸首，全部不要：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span>
-<span class="line">35</span>
-<span class="line">36</span>
-<span class="line">37</span>
-<span class="line">38</span>
-</pre><pre class="code"><code>      <span class="hljs-comment"># 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span></pre><pre class="code"><code>      <span class="hljs-comment"># 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。</span>
       <span class="hljs-comment"># - accept: "Control+Shift+1"</span>
       <span class="hljs-comment">#   select: ".next"</span>
       <span class="hljs-comment">#   when: "always"</span>
@@ -554,67 +394,7 @@
 <p>我自己是不习惯写 inline 的字典和列表，都写的展开的。</p>
 <p>然后是符号设置了，因为我们上面取消了逗号句号翻页，所以这里也就不用显式写 commit 直接上屏了。然后我去掉了一大堆菜单，我输入井号星号波浪线百分号就是想要英文标点，你给我弹个菜单我还得多确认好麻烦的。以及我觉得真的没人用那个巨长的全角斜杠，输入斜杠就是为了斜杠，什么通过朙月拼音命令输入假名有意义吗？我为什么不直接切日语输入法呢？另一些标点在中文语境下直接输出中文标点就好了，需要英文标点时候我敲一下 Shift 比看菜单选容易多了！比如书名号，竖线输出人名中间的点，反斜杠输出顿号之类的。</p>
 <p>由于我不是金融行业的，我就把一些英文标点常见但对应中文标点也可能会用到的都丢到了 <code>$</code> 的菜单里面：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span>
-<span class="line">35</span>
-<span class="line">36</span>
-<span class="line">37</span>
-<span class="line">38</span>
-<span class="line">39</span>
-<span class="line">40</span>
-<span class="line">41</span>
-<span class="line">42</span>
-<span class="line">43</span>
-<span class="line">44</span>
-<span class="line">45</span>
-<span class="line">46</span>
-<span class="line">47</span>
-<span class="line">48</span>
-<span class="line">49</span>
-<span class="line">50</span>
-<span class="line">51</span>
-<span class="line">52</span>
-<span class="line">53</span>
-<span class="line">54</span>
-<span class="line">55</span>
-<span class="line">56</span>
-<span class="line">57</span>
-<span class="line">58</span>
-<span class="line">59</span>
-<span class="line">60</span>
-</pre><pre class="code"><code>  <span class="hljs-comment"># 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span></pre><pre class="code"><code>  <span class="hljs-comment"># 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。</span>
   <span class="hljs-comment"># 另一些直接默认输出中文符号，需要英文符号可以切换英文输入。</span>
   <span class="hljs-comment"># 有关 `"!": {commit: "！"}` 的写法含义是你设置这个键为翻页按键了，</span>
   <span class="hljs-comment"># 但是你又想在输入拼音出现选单之后输入这个按键直接上屏（常见的逗号句号问号叹号），</span>
@@ -939,4 +719,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v2.3.4 at 2019-10-20 Sun 22:30:05 CST. -->
+<!-- Page built by Hikaru v1.0.0 at 2019-10-21 Mon 18:36:36 CST. -->
