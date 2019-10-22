@@ -1,6 +1,3 @@
 [submodule "themes/aria"]
 	path = themes/aria
 	url = https://github.com/AlynxZhou/hikaru-theme-aria.git
-[submodule "themes/nes"]
-	path = themes/nes
-	url = git@github.com:AlynxZhou/hikaru-theme-nes.git
