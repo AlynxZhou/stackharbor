@@ -5,7 +5,25 @@ layout: page
 comment: true
 reward: false
 ---
-# 关于我
+# 个人简介
+
+Alynx Zhou
+
+[北京交通大学](https://bjtu.edu.cn/) [计算机信息与技术学院](https://scit.bjtu.edu.cn) 计算机科学与技术专业 大四本科生
+
+[SUSE](https://suse.com/) 北京分部实习生
+
+Arch Linux 用户
+
+邮箱：[alynx.zhou@gmail.com](mailto:alynx.zhou@gmail.com)
+
+Telegram: [@AlynxZhou](https://t.me/AlynxZhou)
+
+GitHub: [@AlynxZhou](https://github.com/AlynxZhou)
+
+PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
+
+# 关于 Alynx 的33 条
 
 <div class="alert-green">此部分上次更新时间 2019-01-24 16:13:00。</div>
 
