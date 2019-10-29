@@ -2,7 +2,7 @@
 title: 写给新手的 Linux 手册 1
 layout: post
 comment: true
-createdTime: 2018-03-25 20:24:45
+createdDate: 2018-03-25 20:24:45
 categories:
   - 计算机
   - Linux

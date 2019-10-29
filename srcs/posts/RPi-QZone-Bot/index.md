@@ -10,7 +10,7 @@ tags:
     - Python
     - QQLib
 comment: true
-createdTime: 2016-08-14 15:40:04
+createdDate: 2016-08-14 15:40:04
 ---
 **由于WebQQ的验证码机制更新，QQLib的作者已于2016年8月17日更新源代码，本页也随之更新！请之前使用过的朋友用`# pip3 uninstall qqlib`卸载旧版，再重新安装最新版的QQLib，使用本页最新的Python脚本！**
 

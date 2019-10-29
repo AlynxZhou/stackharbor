@@ -2,7 +2,7 @@
 title: Linux 下面常见的代理设置
 layout: post
 comment: true
-createdTime: 2019-02-10 09:28:00
+createdDate: 2019-02-10 09:28:00
 categories:
 - 计算机
 - 网络

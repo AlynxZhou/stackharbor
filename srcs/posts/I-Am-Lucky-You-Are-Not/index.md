@@ -2,7 +2,7 @@
 title: 翻译：我很幸运，但你不是。
 layout: post
 comment: true
-createdTime: 2019-07-31 15:24:00
+createdDate: 2019-07-31 15:24:00
 zone: Asia/Shanghai
 categories:
   - 随记

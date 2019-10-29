@@ -2,7 +2,7 @@
 title: Linux下使Steam调用Bumblebee使用独显
 layout: post
 comment: true
-createdTime: 2017-02-16 12:50:22
+createdDate: 2017-02-16 12:50:22
 categories:
   - 计算机
   - Linux

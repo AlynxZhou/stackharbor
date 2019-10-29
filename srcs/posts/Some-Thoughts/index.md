@@ -2,7 +2,7 @@
 title: 一些想法
 layout: post
 comment: true
-createdTime: 2017-01-05 09:31:15
+createdDate: 2017-01-05 09:31:15
 categories:
   - 随记
   - 生活

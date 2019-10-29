@@ -3,7 +3,7 @@ title: CoffeeScript 的静态方法和静态变量（类方法和类变量）
 layout: post
 encrypt: false
 comment: true
-createdTime: 2018-01-26 19:04:33
+createdDate: 2018-01-26 19:04:33
 categories:
   - 计算机
   - 编程

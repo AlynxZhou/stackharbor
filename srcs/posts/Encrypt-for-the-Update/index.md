@@ -3,7 +3,7 @@ title: Encrypted for the Update.
 layout: post
 comment: true
 encrypt: true
-createdTime: 2017-05-30 16:46:02
+createdDate: 2017-05-30 16:46:02
 password: 980215
 message: Welcome to my blog, enter password to read.
 abstract: Welcome to my blog, enter password to read.

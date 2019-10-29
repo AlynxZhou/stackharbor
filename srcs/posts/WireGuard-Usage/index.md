@@ -2,7 +2,7 @@
 title: WireGuard 配置与使用
 layout: post
 comment: true
-createdTime: 2019-01-27 10:29:30
+createdDate: 2019-01-27 10:29:30
 categories:
 - 计算机
 - 网络

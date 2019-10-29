@@ -2,7 +2,7 @@
 title: 六月，如梦一般的日子
 layout: post
 comment: true
-createdTime: 2019-06-27 16:18:00
+createdDate: 2019-06-27 16:18:00
 zone: Asia/Shanghai
 categories:
   - 随记
