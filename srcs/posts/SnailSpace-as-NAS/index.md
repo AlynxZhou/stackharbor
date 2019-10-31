@@ -121,7 +121,7 @@ options	root=/dev/vg0/rootlv rw add_efi_memmap
 
 ## 网络配置
 
-然后由于 NAS 的网络不会经常变化，所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager。直接创建 `/etc/systemd/network/wired.network`，写入如下内容：
+然后由于 NAS 的网络不会经常变化，~~所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager~~ 我装桌面了所以还是用了 NetworkManager！不过这部分也留着好了。直接创建 `/etc/systemd/network/wired.network`，写入如下内容：
 
 ```ini
 [Match]
@@ -132,6 +132,8 @@ DHCP=ipv4
 ```
 
 意思是对于所有以 `en` 开头的网卡使用 DHCPv4，然后 `systemctl enable --now systemd-networkd systemd-resolved` 就可以了。
+
+NetworkManager 就很简单，直接安装然后 `systemctl enable NetworkManager --now` 应该就行了！
 
 ## Samba 配置
 

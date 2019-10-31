@@ -261,13 +261,14 @@ initrd    /initramfs-linux.img
 options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></pre>
 <p>最近 systemd-boot 添加了什么校验设置，在蜗牛上会报错，直接 chroot 进去安装根本装不上，临时解决方案是退出 chroot，然后用 Archiso 里的 <code>bootctl</code> 安装到 <code>/mnt/boot</code>，虽然有点 dirty，但是能用？不过还是会报个错，但是启动需要的文件已经安装上了，不管它也能用，只不过每次重启还是会说校验失败，目测是个 bug。</p>
 <h2 id="网络配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE" title="网络配置"></a>网络配置</h2>
-<p>然后由于 NAS 的网络不会经常变化，所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager。直接创建 <code>/etc/systemd/network/wired.network</code>，写入如下内容：</p>
+<p>然后由于 NAS 的网络不会经常变化，<del>所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager</del> 我装桌面了所以还是用了 NetworkManager！不过这部分也留着好了。直接创建 <code>/etc/systemd/network/wired.network</code>，写入如下内容：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span></pre><pre class="code"><code><span class="hljs-section">[Match]</span>
 <span class="hljs-attr">Name</span>=en*
 <span class="hljs-section">
 [Network]</span>
 <span class="hljs-attr">DHCP</span>=ipv4</code></pre></figure></code></pre>
 <p>意思是对于所有以 <code>en</code> 开头的网卡使用 DHCPv4，然后 <code>systemctl enable --now systemd-networkd systemd-resolved</code> 就可以了。</p>
+<p>NetworkManager 就很简单，直接安装然后 <code>systemctl enable NetworkManager --now</code> 应该就行了！</p>
 <h2 id="Samba配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE" title="Samba配置"></a>Samba 配置</h2>
 <p>btrfs 的子卷看起来很像普通目录，但是又可以分别直接挂载，不需要先挂载设备然后再用 <code>mount --rbind</code>。于是建了 <code>/data</code> 和 <code>/data/alynx</code> 两个子卷，<code>/data</code> 就挂载到 <code>/data</code>，<code>/data/alynx</code> 挂载到我家目录下面。</p>
 <p>在 <code>/etc/samba/smb.conf</code> 添加如下配置，就可以分别通过 <code>home</code> 和 <code>data</code> 访问每个用户在 <code>/home</code> 和 <code>/data</code> 下面的同名文件夹了，<code>%u</code> 代表的就是连接的用户名。（当然权限要你自己处理一下。）</p>
@@ -634,4 +635,4 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.0 at 2019-10-31 Thu 13:35:55 CST. -->
+<!-- Page built by Hikaru v1.2.1 at 2019-10-31 Thu 13:58:53 CST. -->
