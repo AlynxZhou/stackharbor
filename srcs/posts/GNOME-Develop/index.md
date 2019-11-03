@@ -9,6 +9,8 @@ categories:
 tags:
 - GNOME
 ---
+<div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
+
 对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。
 
 <!--more-->

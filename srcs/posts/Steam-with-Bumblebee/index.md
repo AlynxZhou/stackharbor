@@ -17,7 +17,7 @@ tags:
 
 <!--more-->
 
-要使用独显首先你得保证你有个独显（这不是废话吗），我的独显是Nvidia Quadro M1000M，虽然是工作站显卡，但是玩游戏应该能达到GTX960左右的性能吧（这卡渲染视频才可怕，但是我不搞多媒体~话说现在新款Precision 5520直接用台式工作站显卡了更可怕），然后你得安装Bumblebee（我只弄过N卡的，A卡不清楚），但是不是简单的安装Bumblebee这个包，按照[ArchWiki](https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))，需要安装的包有`bumblebee bbswitch primus virtualgl lib32-primus lib32-virtualgl mesa xf86-video-intel nvidia nvidia-settings lib32-nvidia-utils lib32-mesa`，各个包的作用在下面：
+要使用独显首先你得保证你有个独显（这不是废话吗），我的独显是Nvidia Quadro M1000M，虽然是工作站显卡，但是玩游戏应该能达到GTX960左右的性能吧，然后你得安装Bumblebee（我只弄过N卡的，A卡不清楚），但是不是简单的安装Bumblebee这个包，按照[ArchWiki](https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))，需要安装的包有`bumblebee bbswitch primus virtualgl lib32-primus lib32-virtualgl mesa nvidia nvidia-settings lib32-nvidia-utils lib32-mesa`，各个包的作用在下面：
 
 - bumblebee
 
@@ -35,9 +35,11 @@ tags:
 
 这两个是32位库，因为Steam和大部分上面的游戏都是32位的。
 
-- mesa xf86-video-intel nvidia nvidia-settings lib32-nvidia-utils lib32-mesa
+- mesa nvidia nvidia-settings lib32-nvidia-utils lib32-mesa
 
-mesa是开源的OpenGL标准实现，另外的则是I卡的驱动（官方开源）和N卡的闭源驱动（性能较好），N卡的设置，以及它们对应的32位库。
+mesa是开源的OpenGL标准实现，另外的则是 ~~I卡的驱动（官方开源）和~~ N卡的闭源驱动（性能较好），N卡的设置，以及它们对应的32位库。
+
+**更新**：I 卡推荐用内核实现了，不用装那个了。
 
 接下来将你的用户加入bumblebee组，启动bumblebeed：
 
