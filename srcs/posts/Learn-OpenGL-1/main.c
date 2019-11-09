@@ -1,18 +1,17 @@
 #include <stdio.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <GLFW/glfw3.h>
 #include <GLES3/gl3.h>
+#define LINE_LENGTH 512
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }
-
-#include <stdlib.h>
-#include <string.h>
-#define LINE_LENGTH 512
 
 GLuint make_shader(GLenum type, const char *const shader_src)
 {
@@ -63,7 +62,7 @@ GLuint load_shader(GLenum type, const char *const shader_path)
 		return 0;
 	}
 	fseek(fp, 0l, SEEK_END);
-	file_length = ftell(fp);
+	file_length = ftell(fp) + 1;
 	rewind(fp);
 	if (!(file_content = malloc(file_length))) {
 		fprintf(stderr, "Malloc Error.\n");
