@@ -130,14 +130,17 @@ int main(int argc, char *argv[])
 {
 	glfwInit();
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	unsigned int width = 800;
-	unsigned int height = 600;
+	unsigned int width = 1920;
+	unsigned int height = 1080;
 	GLFWwindow *window = glfwCreateWindow(width, height, "learn-gles", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSetKeyCallback(window, key_callback);
 
 	glViewport(0, 0, width, height);
 
+	float xscale, yscale;
+	glfwGetWindowContentScale(window, &xscale, &yscale);
+	printf("scale: %f %f\n", xscale, yscale);
 	unsigned int program = load_program("triangle.v.glsl", "triangle.f.glsl");
 
 	const float vertices[] = {
