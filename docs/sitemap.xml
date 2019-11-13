@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sh.alynx.moe/posts/Difference-between-X-and-Wayland/</loc>
+    
+    <lastmod>2019-11-13T06:26:37.698Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sh.alynx.moe/posts/SnailSpace-as-NAS/</loc>
     
     <lastmod>2019-10-31T05:57:42.878Z</lastmod>
@@ -904,6 +911,11 @@
     
     <url>
       <loc>https://sh.alynx.moe/tags/VPN/</loc>
+      
+    </url>
+    
+    <url>
+      <loc>https://sh.alynx.moe/tags/Wayland/</loc>
       
     </url>
     

@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-10-31T05:57:42.878Z</updated>
+  <updated>2019-11-13T06:26:37.698Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,30 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>X 和 Wayland 的主要区别</title>
+    <link href="https://sh.alynx.moe/posts/Difference-between-X-and-Wayland/" />
+    <id>https://sh.alynx.moe/posts/Difference-between-X-and-Wayland/</id>
+    <published>2019-11-13T05:31:33.000Z</published>
+    <updated>2019-11-13T06:26:37.698Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>最近在写一个 Wayland Compositor，虽然我以前大概知道这是什么，但是并不是很清楚它和 Xserver 有什么区别，虽然 <a href="https://farseerfc.me/compositor-in-X-and-compositext.html" target="_blank" rel="noreferrer noopener">fc 老师的这篇文章</a> 写的相当不错，但我一点也不懂 X 所以看的迷迷糊糊。偶然读了 <a href="https://magcius.github.io/xplain/article/" target="_blank" rel="noreferrer noopener">这篇文章</a> 发现十分不错，但因为是英文文章读起来很累，打算把一些理解的内容记下来。顺便说一下，原文是带示例的，效果非常不错，建议有时间的人慢慢看一遍。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Linux" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    
+    
+    <category term="Linux" scheme="https://sh.alynx.moe/tags/Linux/" />
+    
+    <category term="Wayland" scheme="https://sh.alynx.moe/tags/Wayland/" />
+    
+  </entry>
   
   <entry>
     <title>蜗牛星际安装 Arch Linux 作为 NAS</title>
@@ -479,30 +503,6 @@
     
     
     <category term="C 语言" scheme="https://sh.alynx.moe/tags/C%20%E8%AF%AD%E8%A8%80/" />
-    
-  </entry>
-  
-  <entry>
-    <title>我们如何哭泣</title>
-    <link href="https://sh.alynx.moe/posts/Too-Busy-for-Tears/" />
-    <id>https://sh.alynx.moe/posts/Too-Busy-for-Tears/</id>
-    <published>2018-09-30T12:31:33.000Z</published>
-    <updated>2019-10-29T14:27:37.084Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p><img src="/posts/Too-Busy-for-Tears/1.jpg" alt></p><p>九月的最后一天，我的网站突破了八万访问量。</p><p>本来有好多可以随便写一点来掩盖自己“九月就要过去了我什么也没写”的恐慌感，比如接着写一篇有关怎么画立方体的 OpenGL 教程，比如还没有文档的 Hikaru 代码里有哪些奇怪的解决方案和奇怪的设定，比如我最近又写了什么乱七八糟的代码（没有）。</p><p>但与其随便说说外界的事情，不如把自己随便想的东西写出来更加严肃。</p>]]>
-    
-    </summary>
-    
-    <category term="随记" scheme="https://sh.alynx.moe/categories/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="无题" scheme="https://sh.alynx.moe/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
-    
-    
-    <category term="随记" scheme="https://sh.alynx.moe/tags/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="无题" scheme="https://sh.alynx.moe/tags/%E6%97%A0%E9%A2%98/" />
     
   </entry>
   
