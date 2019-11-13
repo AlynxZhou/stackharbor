@@ -162,6 +162,9 @@ social:
 blogroll:
   enable: true
   links:
+    - name: H-el-ical//
+      link: https://h-el-ical.com/
+      icon: <i class="fas fa-link"></i>
     - name: Meow's Blog
       link: https://lrscy.github.io/
       icon: <i class="fas fa-link"></i>
