@@ -471,8 +471,7 @@ footer {
 }
 .container {
   padding: 0;
-  max-width: 80em;
-  width: 100%;
+  width: 75%;
   margin: 0 auto;
 }
 ol,
@@ -884,4 +883,9 @@ blockquote p {
 }
 .svg-inline--fa {
   margin: 0 0.2em;
+}
+@media (max-width: 80em) {
+  .container {
+    width: 100%;
+  }
 }
