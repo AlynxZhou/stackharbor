@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-11-13T06:48:50.211Z</updated>
+  <updated>2019-11-25T04:22:11.768Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,26 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>装机小记</title>
+    <link href="https://sh.alynx.moe/posts/My-Desktop-PC/" />
+    <id>https://sh.alynx.moe/posts/My-Desktop-PC/</id>
+    <published>2019-11-25T02:14:00.000Z</published>
+    <updated>2019-11-25T04:22:11.768Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>由于笔记本散热和性能实在是不适合打游戏（有一说一，Optimus 双显卡还是没有直接单卡来得爽），所以很早就想组装一台台式机。特别是最近一直和高中同桌玩 Dota2，我的笔记本如果直播 Dota2，直播推流就会十分卡顿，而我又不想像 CSGO 一样降低画质玩。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+  </entry>
   
   <entry>
     <title>X 和 Wayland 的主要区别</title>
@@ -479,30 +499,6 @@
     
     
     <category term="随记" scheme="https://sh.alynx.moe/tags/%E9%9A%8F%E8%AE%B0/" />
-    
-  </entry>
-  
-  <entry>
-    <title>C 语言学习 1</title>
-    <link href="https://sh.alynx.moe/posts/Learning-C-1/" />
-    <id>https://sh.alynx.moe/posts/Learning-C-1/</id>
-    <published>2018-11-27T12:42:00.000Z</published>
-    <updated>2019-10-29T14:27:37.084Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>这个是给 2018 级 C 语言辅导准备的文档，写来写去写了好多，索性在网站也发一份。有很多是我觉得老师不会讲，但一开始很难理解，不理解又听不懂的，有学 C 的可以看一看。</p>]]>
-    
-    </summary>
-    
-    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="编程" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
-    
-    <category term="C 语言" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/C%20%E8%AF%AD%E8%A8%80/" />
-    
-    
-    <category term="C 语言" scheme="https://sh.alynx.moe/tags/C%20%E8%AF%AD%E8%A8%80/" />
     
   </entry>
   
