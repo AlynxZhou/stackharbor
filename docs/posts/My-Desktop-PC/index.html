@@ -223,11 +223,14 @@
 <p>说到机箱和风扇我就一肚子气！本着对京东自营品质和速度的信赖，我全套都是在京东买的，结果拿到手全部安装上之后发现机箱开机跳线是短路的，插上电源就开机，开一会因为短路主板以为你在长按电源又关了！开始我还以为是主板坏了，结果发现螺丝刀手动碰一下开机跳线开关是可以正常开机的！于是又费了九牛二虎之力拆下来退货，主板散热器显卡都在盒子里椅子上放了两天，还好新机箱没问题，但是我买风扇的时候又给我发了个断轴的！东哥呀东哥，我拿你当兄弟，你拿我当代价？你是盯上我了？虽然我平时说你两句坏话但是对京东的服务还是好评的，但是经过这次之后我还是得重新考虑考虑了……顺便据说启航者 S5 这个机箱前面板音频口有的是 HD Audio 有的是老版 AC97，涉嫌虚假宣传，如果你遇到 AC97 的大概可以换货，麻烦一点，不过反正便宜货就这样子，我的抽奖抽到 HD Audio 了。</p>
 <p>其他的外设我自己都有，显示器就是之前买的优派 XG2402，1080p@144Hz 并且自带扬声器，鼠标就卓威 EC1-B CSGO 特别版（这个版本已经停产了，而且有偶尔指天/指地的 bug，建议买新的 EC1/2 或者 DIVINA 版本），键盘则是前段时间买的 ikbc C87 红轴，便宜还好用。</p>
 <p>顺便由于我手残以及力气小和室友跃跃欲试，很多东西都是他装的，非常感谢。话说回来装这东西还真是个力气活，毕竟接口都有防呆设计仔细看看不会装错，但是真的很紧很难拔……非常担心把主板搞坏了。</p>
+<p>更新：</p>
+<p><img src="/posts/My-Desktop-PC/1.jpg" alt="装好的完全体照片"></p>
 <p>接下来是喜闻乐见的 debug 时间，首先是 Linux 下的，相对比较好调：</p>
 <p>三代 Ryzen 有一个 <a href="https://www.infoq.cn/article/BRebwaBfJ9eP28X9wQQc" target="_blank" rel="noreferrer noopener">每次都返回 0xFFFFFFFF 作为随机数的 BUG</a>，在我这主要影响 wireguard，巧的是购买前几天我刚读过这篇文章，AMD 已经发了新的固件修正错误，建议更新到主板厂家提供的最新 BIOS 版本一般即可解决，如果主板厂家最新的 BIOS 还没更新固件建议联系售后催一下。</p>
 <p>在我这不知道为什么 GDM 有时候没法自动启动，但是手动切 tty start 又可以显示，查了一下 <a href="https://wiki.archlinux.org/index.php/GDM#GDM_freezes_with_systemd" target="_blank" rel="noreferrer noopener">ArchWiki 的 GDM 页面</a> 发现有解决方案，但是并没有原因，搜索了一下也没发现原因是什么。</p>
 <p>我还发现有时候刚开机没多久很快就关机会卡在什么 systemd-udevd 进程没结束，最后 event loop failed + timed out，大概要卡好几分钟才关机，但如果你用一会再关机就没问题。检查好几次关机日志没发现问题，后来群友火眼金睛对比了完整日志发现有个叫 <code>ucsi_ccg</code> 的模块开机加载了两分钟，猜测是这个的问题，搜索一下发现是 <a href="https://github.com/torvalds/linux/blob/da94001239cceb93c132a31928d6ddc4214862d5/drivers/usb/typec/ucsi/ucsi_ccg.c" target="_blank" rel="noreferrer noopener">5.3 内核里 NVIDIA 添加的相关代码</a>，用来控制 NVIDIA 显卡上的 Type-C 接口的，可是我这块显卡根本就没提供 Type-C 接口！（以及很多笔记本内置的有输出的 N 卡也有这个问题。）临时在 <code>/etc/modprobe.d/</code> 里加了个 <code>blacklist ucsi_ccg</code> 的 conf 屏蔽了这个，好像没什么不良影响……</p>
 <p>然后是奇怪的 Windows 的问题，我一开始装的 LTSC，不知道怎么回事输入法没了……折腾无果只能重装。以及现在除了不要联网装 Windows 之外（否则会强制你登录微软账户然后用你名字拼音前五位做用户名），还得不要联网装 NVIDIA 驱动，否则 Win10 自动更新驱动会给你安装 DCH 版的，虽然没什么影响（只是在 NVIDIA 官网升级驱动时候不能选标准选 DCH），但是就是让人很不爽。声卡驱动要装主板厂商的，Win10 自带的只能输出，不能接麦克风录音。还有要关掉快速启动，不然直接开机会卡在黑屏一个鼠标光标……反正就很烦人。</p>
+<p>更新：还有一个奇怪的问题是 Win10 关机重启也要卡很久，上网搜了一下全是一些忽悠小白的办法，经过我不懈搜索发现了一个熟悉的名字 <code>UCSI</code>！微软承认存在 <code>UCSI</code> 问题，既然又是这个 <code>UCSI</code>，多半还是 NVIDIA Type-C 的问题！反正我没这个接口，果断重新安装 N 卡驱动，选择清洁安装（删除旧驱动）并不勾选 Type-C Driver，问题解决……</p>
 <p>最后既然设备到位了，大概就每周一三四五晚上八点半在 <a href="https://live.bilibili.com/4312992" target="_blank" rel="noreferrer noopener">Bilibili 4312991 直播间</a> 播一个半小时游戏，反正我玩什么播什么，大概就 CSGO Dota2 PUBG 什么的吧，尼尔也有可能，反正不是恶心反胃的就可以。周末随缘直播，如果没什么事情白天就播一会，周二可能晚一点开播因为有课。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -489,4 +492,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.5 at 2019-11-25 Mon 12:22:34 CST. -->
+<!-- Page built by Hikaru v1.2.5 at 2019-11-25 Mon 22:48:45 CST. -->
