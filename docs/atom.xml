@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.moe/" />
   
-  <updated>2019-12-17T10:13:46.619Z</updated>
+  <updated>2019-12-18T09:32:43.046Z</updated>
   
   <id>https://sh.alynx.moe/</id>
   
@@ -17,6 +17,32 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>让你们的主题商店离我远点！</title>
+    <link href="https://sh.alynx.moe/posts/Taking-Your-Theme-Store-Away/" />
+    <id>https://sh.alynx.moe/posts/Taking-Your-Theme-Store-Away/</id>
+    <published>2019-12-18T08:17:00.000Z</published>
+    <updated>2019-12-18T09:32:43.046Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>我不觉得我是个刻薄的人，但对于一些实在令我讨厌的人，不把他们的名字挂出来就是我最后的怜悯。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="网络" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
+    
+    <category term="网站" scheme="https://sh.alynx.moe/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    
+    
+    <category term="空手套白狼" scheme="https://sh.alynx.moe/tags/%E7%A9%BA%E6%89%8B%E5%A5%97%E7%99%BD%E7%8B%BC/" />
+    
+    <category term="全靠一张嘴" scheme="https://sh.alynx.moe/tags/%E5%85%A8%E9%9D%A0%E4%B8%80%E5%BC%A0%E5%98%B4/" />
+    
+  </entry>
   
   <entry>
     <title>装机小记</title>
@@ -477,28 +503,6 @@
     <category term="编程" scheme="https://sh.alynx.moe/tags/%E7%BC%96%E7%A8%8B/" />
     
     <category term="JavaScript" scheme="https://sh.alynx.moe/tags/JavaScript/" />
-    
-  </entry>
-  
-  <entry>
-    <title>StackHarbor 的 2018 尾记</title>
-    <link href="https://sh.alynx.moe/posts/2018-Tail/" />
-    <id>https://sh.alynx.moe/posts/2018-Tail/</id>
-    <published>2018-12-31T08:14:32.000Z</published>
-    <updated>2019-10-29T14:27:37.094Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p><img src="/posts/2018-Tail/2B.jpg" alt></p><p>还没有到月亮升起的时候呢。</p>]]>
-    
-    </summary>
-    
-    <category term="随记" scheme="https://sh.alynx.moe/categories/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="生活" scheme="https://sh.alynx.moe/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" />
-    
-    
-    <category term="随记" scheme="https://sh.alynx.moe/tags/%E9%9A%8F%E8%AE%B0/" />
     
   </entry>
   

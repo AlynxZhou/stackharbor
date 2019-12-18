@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".post pre code figure.highlight").each(function (i, e) {
+          var lang = e.parentNode.className;
+          $(e).before([
+            "<div class=\"code-titlebar\">",
+              "<div class=\"titlebar-left\">",
+                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+              "</div>",
+              "<div class=\"titlebar-center\">",
+                lang.length ? lang.toUpperCase() : "代码",
+              "</div>",
+              "<div class=\"titlebar-right\">",
+                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+              "</div>",
+            "</div>"
+          ].join(""));
+          // $(e).before("<button class=\"copy button\">复制</button>");
+        });
+        var cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", function (e) {
+          e.clearSelection();
+          var trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          $(trigger).addClass("copied");
+          // Change button text back;
+          setTimeout(function () {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            $(trigger).removeClass("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>让你们的主题商店离我远点！ | 喵's StackHarbor - Whisper to the World</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Shell-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Shell Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.moe/posts/Taking-Your-Theme-Store-Away/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">让你们的主题商店离我远点！</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-12-18T08:17:00.000Z">2019-12-18 Wed 16:17:00 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span>
+        </span>
+        
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>我不觉得我是个刻薄的人，但对于一些实在令我讨厌的人，不把他们的名字挂出来就是我最后的怜悯。</p>
+<a id='more'></a>
+
+<p>已经有不止一个人询问过我有关把博客主题移植到其他生成器上的问题了，这实际上是超出我范围的工作，因为我并不熟悉他们的生成器。但如果有人这样询问我（当然最好的方式是发 issue），我一般会先了解一下他说的生成器，然后解释是因为我没有时间或者我不熟悉目标技术栈。</p>
+<p>我还记得的最远范围是某个 Gridea 的用户发邮件问我怎么把我的主题用到他这个生成器上。某种程度上我觉得他要么是真的无知要么就是装成无知然后提一些在技术上很显而易见的问题来气人（我今天新学的词叫 troll），于是我去查了一下 Gridea，是个一条龙的基于 Vue 的图形化博客系统。对我足够熟悉的人可能知道我不喜欢把博客做成单页应用的样子，而且在我理解里博客生成器就应该是一个比较简单的命令行工具，而不是一个图形化数据库管理工具。尽管我不太喜欢这个项目和它的宣传方式，但万一对方真的是个并不了解这些的小白用户呢？我回复的语气可能并不是十分客气，但我还是解释了一下博客主题和生成器的关系，以及我不了解 Gridea 的技术栈也不是很喜欢这个项目，所以没办法写一个 收费/免费 的主题给这个项目。当然最后结果相对还不错，他也理解我给他的解释。</p>
+<p>但是我最近又收到一封标题为“诚邀合作事宜”的邮件，为了不破坏我第一句的承诺，我修改了部分名词：</p>
+<blockquote>
+<p>很喜欢你博客的风格，可否为Cxxxxx-CMS开发一套（免费/付费）主题，然后发布到Cxxxxx商店里面？</p>
+<p>CxxxxxJS：是一款顶级NodeJS全栈业务开发框架, 基于KoaJS + EggJS + VueJS + Framework7 
+Cxxxxx-CMS：是基于CxxxxxJS全栈业务开发框架开发的动静结合的CMS，可以快速构建企业网站、博客、社区、商城等Web应用
+Cxxxxx商店：包括品类广泛的各类模块，满足不同场景的开发需求</p>
+<p>CxxxxxJS介绍：<a href="https://cxxxxx.com/zh-cn/articles/introduce.html" target="_blank" rel="noreferrer noopener">https://cxxxxx.com/zh-cn/articles/introduce.html</a>
+Cxxxxx-CMS介绍：<a href="https://cxxxxx.com/zh-cn/articles/cms-introduce.html" target="_blank" rel="noreferrer noopener">https://cxxxxx.com/zh-cn/articles/cms-introduce.html</a></p>
+<p>Cxxxxx商店运营模式：<a href="https://cxxxxx.com/zh-cn/articles/store.html" target="_blank" rel="noreferrer noopener">https://cxxxxx.com/zh-cn/articles/store.html</a></p>
+</blockquote>
+<p>我也不是个专业的前端工程师，现在不是，将来大概也不是前端“全栈”工程师，但我还是能懂这封邮件的内容。俗话说“文无第一，武无第二”，程序员的圈子里这句话应该也十分受用，所以我通读全文之后，目光就落在了“顶级”两个字上面。毕竟去掉套话之后，满足这类泛泛功能的项目也不少，所以还是先看看“顶级”比较有意思。</p>
+<p>在 Google 搜索这个 Cxxxxx 之后，还是有一些相关度比较高的内容的，出于个人习惯，我直接点开了他在 GitHub 上的仓库。既然是“顶级”框架，想必受益者众多，star 数量高达……108 个（截止昨日 18:00）。</p>
+<p>这就十分可笑了，虽然我也不是什么大牛，但是这个数量级 star 的仓库也有，虽然 star 不能说明代码质量，但是说明“顶级”这种人气形容词拿来正合适，如果我有这么个仓库，我肯定不会腆着脸在宣传语里加“顶级”二字。然后在大概阅读了一下文档和官网之后，我觉得就是个普通的 CMS，而且我也不认为静态博客生成器需要和 CMS 结合起来，我更希望静态博客生成器像编译器。而说到 JS 框架的话，既然都基于 <code>KoaJS</code>、<code>EggJS</code>、<code>VueJS</code> 了，我想不出还能在这些套娃外面再套什么娃（禁止套娃！）。</p>
+<p>于是我就回了一封有点嘲讽意味的邮件（我知道可能换个人不会说这种话，不过这种情况稍微嘲讽一下也没什么错吧）：</p>
+<blockquote>
+<p>前几天有个意思和你差不多的，但他没你这么能吹，他就是另一个博客生成器的普通用户。</p>
+<p>可能我这话有点刻薄，但假如我自己有一个 100 个 star 的项目，我不会在宣传语里用 <strong>顶级</strong> 这种形容词。</p>
+<p>写博客是我个人爱好，换句话说就是我也没打算靠这个玩意赚钱，就是自己用着爽然后开源出来有人喜欢随便用。我也没觉得自己技术强到可以靠这个吃饭了。</p>
+<p>既然是“诚邀”，那我觉得应该先看看我博客主题吧，不然容易让人觉得你是爬个 Hexo 主题作者列表然后群发邮件的哎。如果真看了就知道我这个主题的技术栈和你这个项目完全不搭。我的定位是静态博客生成器哎，我也不是很懂这种 CMS 或者 Koa Egg Vue，对这种快速批量构建网站没兴趣，毕竟个人博客嘛，随便折腾折腾才好玩。</p>
+<p>因此我建议你另请高明，或者真有兴趣，Fork 我的主题随便改。</p>
+</blockquote>
+<p>然后我就去忙别的去了，手头正好有个奇葩 Bug。我想这下大概清净了，没想到过一会又来了一封邮件。</p>
+<blockquote>
+<p>这就是一般大学生傲慢的地方了。如果是业务爱好者，我不好说什么。如果是一位志于软件开发的同行，就会一个静态博客生成器有什么可炫耀的呢？只怕你还真没有好好看看CxxxxxJS的文档了。</p>
+</blockquote>
+<p>这话说的很讨人厌哎。我脾气还算好，实在懒得一点点找出这话里有问题的地方反驳他，就随便回了一句：</p>
+<blockquote>
+<p>我再说一遍，我可没有给我自己的哪个项目加上“顶级”两个字</p>
+</blockquote>
+<p>然后他又来：</p>
+<blockquote>
+<p>你可以细细思考这个问题：我用顶级二字就把你伤到了吗？</p>
+</blockquote>
+<p>Arch Linux CN 群里的群友建议我直接拉黑算了，我也这么想的，但是晚上回去闲的没事翻了翻，发现了其他的东西：</p>
+<p><img src="/posts/Taking-Your-Theme-Store-Away/1.png" alt="骚扰证据"></p>
+<p>好啊！你还敢说你是“诚邀”！还真被我说中了，明明就是爬了 Hexo 主题列表挨个作者群发！一开始邮件是我略有刻薄，不想再逐条反驳他，但看到这个我实在是 <strong>口区</strong>。</p>
+<p>首先对于这类“主题商店”，细细想想就知道不对劲，不仅仅这一个项目，还有别的没什么用户又跟你说邀请你驻入商店也是，他说他是诚邀你设计一款主题放在他商店收费，可是主题作者真的拿到好处了吗？主题做的好，<strong>作者拿到的钱是用户掏的</strong>，<strong>而用户的使用习惯和黏性是落在他的项目上的</strong>！图里的有些主题我都看过，真的是非常优秀的作者，从作者角度想不得到任何好处加入某一项目，也会希望这一项目的人气能给自己带来一些用户口碑，而这个项目很显然不满足！<strong>好一招空手套白狼！</strong>用户的钱三七分成，豪绅的钱……豪绅现在连钱都不用掏了，全靠一张嘴吹一吹？</p>
+<p>其次说句不客气的，这类 CMS 项目说到底是拼工作量的东西，我也不是没写过。如果作者就是谦虚的说“我写了个 CMS，希望大家能给点意见使用一下”，我一个一般大学生哪里来的毛病非要嘲讽你？我最起码还得心里叨咕一句作者做这种项目坚持下来不容易，先支持一下劳动量再说。可是既然您把自己放在“顶级”的位子上，而且还看不起我，我也就不说什么客套话了。</p>
+<p><strong>这种项目 V2EX 上一天能刷个十来个，有些就是很诚恳用来练手刷简历的，有些则是这种没有痛点制造痛点也要上的</strong>。我还再仔细搜了一遍这个项目，发现了好几篇什么掘金知乎<strong>甚至还真有 V2EX</strong> 上作者发的宣传帖，什么“动静结合”、“全栈开发利器”、“开发业务实战”，这种套话一套一套的。V2EX 帖子就 6 个回帖，有人表示不理解，本来 Hexo 是个静态博客生成器，为啥非得搞个动静结合解决痛点呢？然后作者复读机上身又复制了一下这类套话，换我我也不接着看了。</p>
+<p>“一般大学生傲慢的地方”，这话说的真是让人恶心啊，一般大学生怎么了呢？一般大学生哪里傲慢了呢？一般大学生是不会在自己项目上用“顶级”二字做宣传的。“就会一个静态博客生成器有什么可炫耀的”，我倒是想问问这位同行（呕，请别叫我前端全栈工程师啊各位，我知道自己还不合格呢），您在哪里看到我炫耀啦？我也不在知乎掘金 V2EX 发宣传帖，我甚至还没来得及在我自己博客上介绍一下，请问您在哪听见的？<strong>莫非是我在隔壁宿舍和同学聊天时候跟他提了提您听见了？如果真是这样，我还得告您搞窃听呢。</strong>哦对了，我也不是什么就会一个静态博客生成器，我写生成器是为了解决我自己遇到的痛点的，这只是我涉及领域的一小部分，如果您真的仔细看了我的博客我的 GitHub，就知道我不是只搞前端，反而我看您 GitHub 都是 EggJS 的插件来着，真是令人眼花缭乱啊。</p>
+<p>什么你说让我看文档？文档有什么好看的，你想写什么就写什么，我也能把文档写出花来，那就能欺骗我自己项目本来没解决别人什么痛点嘛？</p>
+<p>让我细细思考？我看是您用了“顶级”二字，被我伤到了吧。都是写点胶水代码的玩意，我生成器还没用 Koa、Egg、Vue 这种框架呢，库是别人写的，框架逻辑都是我自己的，我 <strong>细细思考</strong> 一下真的很好奇在三大框架（甚至还有个企业级框架）上面能套出什么框架呢？如果你愿意一层一层一层的剥开我的心？本来我不想扯技术方面的，可是别的方面也没看到这个项目对主题作者有什么优势和好处啊！</p>
+<p>我要时时刻刻提醒我自己，我就是个一般大学生，不懂的东西还有很多，也不能学这种说话语气，不然会被人当成知乎上那种讨人厌的家长，就是自己本来也没什么见识还在年轻人面前的死要面子那种，年轻人说点什么就贬低他什么。</p>
+<p>我个人是不习惯在知乎掘金 V2EX 上写帖子骗眼球的，所以就写到我自己博客上了，想必“一般大学生”的博客，估计也没什么人看吧！如果您真的介意，还是那句话，“文无第一，武无第二”，评论区或者在您的博客上，放马过来，反驳我这篇文章，我不介意的。但是，我真的很厌恶往别人仓库刷这种“诚邀合作事宜”的 issue，issue 是用来说代码相关问题的也算是程序员的自我修养之一了吧。我写这个也是希望万一有主题作者看到了别上当了，这不是“诚邀”，是“白嫖”作者人气。</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E7%A9%BA%E6%89%8B%E5%A5%97%E7%99%BD%E7%8B%BC/" rel="tag"><i class="fas fa-tag"></i>空手套白狼</a><a class="post-tag button" href="/tags/%E5%85%A8%E9%9D%A0%E4%B8%80%E5%BC%A0%E5%98%B4/" rel="tag"><i class="fas fa-tag"></i>全靠一张嘴</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/My-Desktop-PC/" rel="prev" title="装机小记"><span class="nav-title">装机小记</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+
+<div class="comments" id="comments">
+  
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="/css/commentjs.css">
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      getComments({
+        "type": "github",
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "clientID": "",
+        "clientSecret": "",
+        "no_comment": "这个页面还没有评论，现在就去评论吧！",
+        "go_to_comment": "去评论",
+        "issue_title": "让你们的主题商店离我远点！",
+        "btn_class": "button",
+        "comments_target": "#comment-thread"
+      });
+      marked.setOptions({
+        "highlight": function (code, lang) {
+          return hljs.highlightAuto(code).value;
+        }
+      });
+      function mark() {
+        var markdowns = document.getElementsByClassName("markdown");
+        for (var i = 0; i < markdowns.length; ++i){
+          if (markdowns[i].innerHTML) {
+            markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+          }
+        }
+      }
+      window.addEventListener("DOMContentLoaded", mark, false);
+      window.addEventListener("load", mark, false);
+    });
+  </script>
+  
+</div>
+
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.webp);">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+    
+    <h1 class="author-name">Alynx Zhou</h1>
+    <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">66</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">42</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">71</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.cc/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://hackghost.com/" target="_blank" rel="noreferrer noopener">HackGhost's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nick's Nichijou</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://axionl.me/" target="_blank" rel="noreferrer noopener">初等記憶體</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.origincode.me/" target="_blank" rel="noreferrer noopener">OriginCode 札記</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.moe/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.2.5 at 2019-12-18 Wed 17:32:54 CST. -->
