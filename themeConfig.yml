@@ -202,7 +202,7 @@ blogroll:
       link: https://axionl.me/
       icon: <i class="fas fa-link"></i>
     - name: OriginCode 札記
-      link: https://blog.origincode.me/
+      link: https://originco.de/
       icon: <i class="fas fa-link"></i>
 
 # `comment.commentjs.type`: Choose between `github` and `oschina`.
