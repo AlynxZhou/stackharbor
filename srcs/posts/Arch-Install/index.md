@@ -8,7 +8,7 @@ categories:
   - Linux
   - Arch Linux
 tags:
-  - Arch linux
+  - Arch Linux
 ---
 <div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
 
