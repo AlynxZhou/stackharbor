@@ -16,14 +16,15 @@ tags:
 
 我相信很多人在搜索 Wayland 的时候都看过这两张著名的图片：
 
-- ![](https://wayland.freedesktop.org/x-architecture.png)
-- ![](https://wayland.freedesktop.org/wayland-architecture.png)
+![](https://wayland.freedesktop.org/x-architecture.png)
+
+![](https://wayland.freedesktop.org/wayland-architecture.png)
 
 但我觉得可能看了也不明白，怎么把 Xserver 砍掉就提高性能了？为什么没有见到 window manager？为什么桌面环境需要去支持 Wayland？
 
 Wikipedia 上还有一些奇奇怪怪的图片比如这种：
 
-- ![](https://upload.wikimedia.org/wikipedia/commons/c/c2/Linux_Graphics_Stack_2013.svg)
+![](https://upload.wikimedia.org/wikipedia/commons/c/c2/Linux_Graphics_Stack_2013.svg)
 
 在加上所有介绍 Wayland 的文章都会扯上 DRM，EGL，GLES 之类的，如果不懂这些就完全绕进去了，比如我就看到过有人问 Wayland 用 OpenGL ES 那用 OpenGL 的游戏是不是就跑不了了之类的。
 
