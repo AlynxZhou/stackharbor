@@ -13,8 +13,8 @@ menu:
   - name: tags
     link: tags/
     icon: <i class="fas fa-tags"></i>
-  - name: Undefined Shell Works!
-    link: Undefined-Shell-Works/
+  - name: Undefined Script Works!
+    link: Undefined-Script-Works/
     icon: <i class="fas fa-terminal"></i>
   - name: blogroll
     link: blogroll/
