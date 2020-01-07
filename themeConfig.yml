@@ -205,7 +205,7 @@ blogroll:
 comment:
   enable: true
   # disqusShortName: stackharboralynxxyz
-  builtin:
+  issue:
     enable: true
     user: AlynxZhou
     repo: stackharbor
