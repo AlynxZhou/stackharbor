@@ -1,5 +1,9 @@
 .comments .comment-results {
-  margin: 1em;
+  padding: 1em;
+}
+.comments .comment-results .comment-fail {
+  text-align: center;
+  color: #444;
 }
 .comments .comment-results .comments-header {
   padding: 0.5em;
@@ -25,15 +29,33 @@
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
+  -webkit-box-pack: stretch;
+  -moz-box-pack: stretch;
+  -o-box-pack: stretch;
+  -ms-flex-pack: stretch;
+  -webkit-justify-content: stretch;
+  justify-content: stretch;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -o-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: start;
+  align-items: start;
   margin: 1em 0;
 }
 .comments .comment-results .comments-main .comment .comment-avatar-container {
-  margin: 0 1em 0 0;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  width: 10%;
 }
 .comments .comment-results .comments-main .comment .comment-avatar-container .comment-avatar {
-  width: 3em;
-  height: 3em;
-  border: 0.3em solid #fff;
+  width: 70%;
+  border: 0.1em solid #fff;
   border-radius: 50%;
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
@@ -51,7 +73,14 @@
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
 .comments .comment-results .comments-main .comment .comment-body-container {
-  width: 100%;
+  -webkit-box-flex: 9;
+  -moz-box-flex: 9;
+  -o-box-flex: 9;
+  box-flex: 9;
+  -webkit-flex: 9 9 auto;
+  -ms-flex: 9 9 auto;
+  flex: 9 9 auto;
+  width: 90%;
   border-radius: 0.3em;
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
@@ -62,6 +91,7 @@
 .comments .comment-results .comments-main .comment .comment-body-container .comment-info {
   padding: 0.5em;
   background: #33363b;
+  overflow: auto;
 }
 .comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author {
   margin: 0 0.5em;
@@ -96,6 +126,14 @@
 .comments .comment-results .comments-main .comment .comment-body-container .comment-content {
   padding: 0.5em 1em;
   background: #fff;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-content pre {
+  overflow: auto;
+  padding: 0.5em;
+  background: #f8f8f8;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-content pre code {
+  background: transparent;
 }
 .comments .comment-results .comments-main .comment .comment-body-container:hover {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
@@ -207,9 +245,9 @@
   -moz-box-flex: 1;
   -o-box-flex: 1;
   box-flex: 1;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
   font-size: 1.2em;
 }
 .page .page-nav .page-nav-item a {
