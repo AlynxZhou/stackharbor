@@ -1,41 +1,127 @@
-.comments .commentjs {
-  margin: 1em 2em;
+.comments .comment-results {
+  margin: 1em;
 }
-.comments .commentjs .avatar-parent-child a {
-  text-decoration: none;
-  border-bottom: none;
-  display: block;
+.comments .comment-results .comments-header {
+  padding: 0.5em;
   text-align: center;
+  color: #444;
 }
-.comments .commentjs .avatar-parent-child a img {
+.comments .comment-results .comments-main .comment {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-lines: single;
+  -moz-box-lines: single;
+  -o-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  margin: 1em 0;
+}
+.comments .comment-results .comments-main .comment .comment-avatar-container {
+  margin: 0 1em 0 0;
+}
+.comments .comment-results .comments-main .comment .comment-avatar-container .comment-avatar {
+  width: 3em;
+  height: 3em;
+  border: 0.3em solid #fff;
+  border-radius: 50%;
+  -webkit-transition: 1s ease-in-out;
+  -moz-transition: 1s ease-in-out;
+  -o-transition: 1s ease-in-out;
+  -ms-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+}
+.comments .comment-results .comments-main .comment .comment-avatar-container .comment-avatar:hover {
+  -webkit-transform: rotateY(720deg);
+  -moz-transform: rotateY(720deg);
+  -o-transform: rotateY(720deg);
+  -ms-transform: rotateY(720deg);
+  transform: rotateY(720deg);
+  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+}
+.comments .comment-results .comments-main .comment .comment-body-container {
+  width: 100%;
+  border-radius: 0.3em;
+  -webkit-transition: 1s ease-in-out;
+  -moz-transition: 1s ease-in-out;
+  -o-transition: 1s ease-in-out;
+  -ms-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info {
+  padding: 0.5em;
+  background: #33363b;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author {
+  margin: 0 0.5em;
+  position: relative;
+  color: #ddd;
+  text-decoration: none;
+  border-bottom: 0.05em dotted #ddd;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
-  border: 0.15em solid #ccc;
 }
-.comments .commentjs .avatar-parent-child a:hover {
-  border-bottom: none;
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author:hover {
+  color: #fff;
+  border-bottom: 0.05em solid #fff;
 }
-.comments .commentjs .avatar-parent-child a:hover img {
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author:active {
+  top: 0.1em;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-date {
+  margin: 0 0.5em;
+  color: #eee;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-association {
+  margin: 0 0.5em;
+  padding: 0 0.5em;
+  border: 0.05em solid #eee;
+  border-radius: 0.3em;
+  color: #eee;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-content {
+  padding: 0.5em 1em;
+  background: #fff;
+}
+.comments .comment-results .comments-main .comment .comment-body-container:hover {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
-.comments .commentjs .avatar-parent-child .avatar {
-  width: 3em;
-  height: 3em;
+.comments .comment-results .comments-footer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
-.comments .commentjs .comment-body {
-  width: 85%;
-}
-.comments .commentjs .comment-body pre {
-  background: #f6f8fa;
-  padding: 1em;
-  border-radius: 0.3em;
-  overflow: auto;
-}
-.comments .commentjs .button {
+.comments .comment-results .comments-footer .comments-send {
   padding: 0.3em 1em;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;

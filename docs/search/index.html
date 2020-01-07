@@ -53,11 +53,11 @@
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
-<link rel="stylesheet" type="text/css" href="/css/spinkit.css">
 
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script defer type="text/javascript" src="/js/util.js"></script>
@@ -126,7 +126,12 @@
     
     var searchPaths = ["/search/1.json", "/search/2.json", "/search/3.json"];
     
-    loadSearch(searchPaths, window.location.search, "search-result");
+    loadSearch({
+      "paths": searchPaths,
+      "queryString": window.location.search,
+      "containerID": "search-result",
+      "noResultText": "未找到符合要求的搜索结果。"
+    });
   });
 </script>
 
@@ -371,4 +376,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.5 at 2020-01-06 Mon 14:24:32 CST. -->
+<!-- Page built by Hikaru v1.2.5 at 2020-01-07 Tue 13:16:50 CST. -->

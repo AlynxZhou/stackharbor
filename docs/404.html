@@ -57,6 +57,7 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script defer type="text/javascript" src="/js/util.js"></script>
@@ -201,7 +202,9 @@
   
 
 <div class="reward" id="reward">
-  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
   <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
@@ -225,7 +228,21 @@
   
   
   
-
+<div class="comments" id="comments">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      })
+    });
+  </script>
+  
+  
+</div>
 
 
   
@@ -409,4 +426,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.5 at 2020-01-06 Mon 14:24:30 CST. -->
+<!-- Page built by Hikaru v1.2.5 at 2020-01-07 Tue 13:16:49 CST. -->

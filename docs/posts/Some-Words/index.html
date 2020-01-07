@@ -57,6 +57,7 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script defer type="text/javascript" src="/js/util.js"></script>
@@ -194,6 +195,10 @@
         
         
         
+        <span class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/Some-Words/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="碎碎念" itemprop="commentCount">阅读评论</span></a></span>
+        </span>
+        
         
       </div>
     </header>
@@ -245,7 +250,9 @@
   
 
 <div class="reward" id="reward">
-  <p>既然看了喵写的文章，不打算投喂一下再走吗？哼！</p>
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
   <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
@@ -269,49 +276,50 @@
   
   
   
-
 <div class="comments" id="comments">
   
-  <div class="commentjs" id="comment-thread"></div>
-  <link rel="stylesheet" href="/css/commentjs.css">
-  <script defer type="text/javascript" src="/js/marked.min.js"></script>
-  <script defer type="text/javascript" src="/js/timeago.min.js"></script>
-  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
-  <script defer type="text/javascript" src="/js/commentjs.js"></script>
+  <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
-      getComments({
-        "type": "github",
+      loadCommentCount({
         "user": "AlynxZhou",
         "repo": "stackharbor",
-        "clientID": "",
-        "clientSecret": "",
-        "no_comment": "这个页面还没有评论，现在就去评论吧！",
-        "go_to_comment": "去评论",
-        "issue_title": "碎碎念",
-        "btn_class": "button",
-        "comments_target": "#comment-thread"
-      });
+        "containerClass": "comment-count"
+      })
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
       marked.setOptions({
         "highlight": function (code, lang) {
           return hljs.highlightAuto(code).value;
         }
       });
-      function mark() {
-        var markdowns = document.getElementsByClassName("markdown");
-        for (var i = 0; i < markdowns.length; ++i){
-          if (markdowns[i].innerHTML) {
-            markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
-          }
-        }
-      }
-      window.addEventListener("DOMContentLoaded", mark, false);
-      window.addEventListener("load", mark, false);
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "title": "碎碎念",
+        "containerID": "comment-results"
+      });
     });
   </script>
   
+  
 </div>
-
 
 
   
@@ -477,4 +485,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.5 at 2020-01-06 Mon 14:24:30 CST. -->
+<!-- Page built by Hikaru v1.2.5 at 2020-01-07 Tue 13:16:49 CST. -->

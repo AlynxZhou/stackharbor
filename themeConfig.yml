@@ -129,10 +129,7 @@ libCDN:
   normalize:
   search:
   marked:
-  timeAgo: //cdn.bootcss.com/normalize/8.0.0/normalize.min.css
-  commentjs:
-    js:
-    css:
+  spinkit:
   avMin: //cdn1.lncld.net/static/js/3.0.4/av-min.js
   valine: //unpkg.com/valine/dist/Valine.min.js
   clipboard:
@@ -205,17 +202,13 @@ blogroll:
       link: https://originco.de/
       icon: <i class="fas fa-link"></i>
 
-# `comment.commentjs.type`: Choose between `github` and `oschina`.
 comment:
   enable: true
   # disqusShortName: stackharboralynxxyz
-  commentjs:
+  builtin:
     enable: true
-    type: github
     user: AlynxZhou
     repo: stackharbor
-    clientID:
-    clientSecret:
   valine:
     enable: false
     appID:
