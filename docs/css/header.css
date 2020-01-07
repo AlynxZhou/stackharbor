@@ -84,6 +84,7 @@
 .header .header-container .logo img {
   display: inline-block;
   max-height: 5em;
+  width: auto;
 }
 @media (max-width: 40em) {
   .header .header-container {

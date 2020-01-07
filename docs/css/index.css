@@ -84,6 +84,7 @@
 .header .header-container .logo img {
   display: inline-block;
   max-height: 5em;
+  width: auto;
 }
 @media (max-width: 40em) {
   .header .header-container {
@@ -495,6 +496,9 @@ a:hover {
 }
 a:active {
   top: 0.1em;
+}
+img {
+  width: 100%;
 }
 a.gallery-item,
 a.img-link {
