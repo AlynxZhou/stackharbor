@@ -90,11 +90,11 @@
 }
 .comments .comment-results .comments-main .comment .comment-body-container .comment-info {
   padding: 0.5em;
+  color: #eee;
   background: #33363b;
   overflow: auto;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author {
-  margin: 0 0.5em;
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info a {
   position: relative;
   color: #ddd;
   text-decoration: none;
@@ -105,16 +105,18 @@
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author:hover {
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info a:hover {
   color: #fff;
   border-bottom: 0.05em solid #fff;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author:active {
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info a:active {
   top: 0.1em;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author {
+  margin: 0 0.5em;
 }
 .comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-date {
   margin: 0 0.5em;
-  color: #eee;
 }
 .comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-association {
   margin: 0 0.5em;
@@ -122,6 +124,9 @@
   border: 0.05em solid #eee;
   border-radius: 0.3em;
   color: #eee;
+}
+.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-link::before {
+  content: "#";
 }
 .comments .comment-results .comments-main .comment .comment-body-container .comment-content {
   padding: 0.5em 1em;
