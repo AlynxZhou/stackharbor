@@ -12,7 +12,7 @@ tags:
   - 时间的恶作剧
 enc_pwd:
 ---
-![Sadness.jpg](Sadness.jpg)
+![Sadness.jpg](./Sadness.jpg)
 那个弹吉他的人在我的隔壁。
 
 <!--more-->

@@ -11,7 +11,7 @@ tags:
   - 半音阶口琴
   - 曲谱
 ---
-半音阶口琴，**only my railgun** 数字谱，喵自整理版，[pdf下载点击这里](only_my_railgun.pdf)，[txt下载点击这里](only_my_railgun.txt)，[读谱方式点击这里](Music-Score/)
+半音阶口琴，**only my railgun** 数字谱，[pdf下载点击这里](./only_my_railgun.pdf)，[txt下载点击这里](./only_my_railgun.txt)，[读谱方式点击这里](./Music-Score/)。
 
 <!--more-->
 

@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
 $ cc -std=c11 -lglfw -lGLESv2 yourcode.c && ./a.out
 ```
 
-![black.png](black.png)
+![black.png](./black.png)
 
 Mesa 把 GLES 3 当作 GLES 2 的扩展，所以这里链接的是 `libGLESv2`。
 
@@ -375,7 +375,7 @@ OpenGL 的坐标是这样安排的：
 	glDeleteProgram(program);
 ```
 
-![triangle.png](triangle.png)
+![triangle.png](./triangle.png)
 
 # 还有一件事……
 

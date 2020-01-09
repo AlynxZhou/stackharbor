@@ -90,7 +90,7 @@ except KeyboardInterrupt:
     exit()
 ```
 
-当然，下载链接在[这里](/posts/2016/08/14/RPi-QZone-Bot/qclock.py)（2016-08-17更新）。
+当然，下载链接在[这里](./qclock.py)（2016-08-17更新）。
 
 使用的时候先把`QQ_NUM`的值修改为你打算用来~~装X~~发说说的QQ号码，`QQ_PASSWD`的值则是你QQ的密码咯。这里建议各位不要使用自己用的QQ号做实验，而是另申请QQ号来作报时～不然谁知道腾讯哪天会不会找个什么理由关闭webQQ再冻结你的QQ号呢～
 

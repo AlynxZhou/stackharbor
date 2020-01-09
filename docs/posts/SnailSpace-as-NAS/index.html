@@ -288,7 +288,7 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
    browseable = yes
    writeable = yes
    path = /data/%u</code></pre></figure></code></pre>
-<p>其它的配置基本都是正常操作参照 Arch Wiki，<del>我打算以后插新硬盘直接加进 LVM 加给 <code>/home</code>，省得还得操心挂载到哪里</del> 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 <a href="https://sh.alynx.moe/posts/WireGuard-Usage/">这篇文章</a> 就可以了，如果只是 SSH 远程控制一下效果还可以。</p>
+<p>其它的配置基本都是正常操作参照 Arch Wiki，<del>我打算以后插新硬盘直接加进 LVM 加给 <code>/home</code>，省得还得操心挂载到哪里</del> 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 <a href="/posts/SnailSpace-as-NAS/WireGuard-Usage/">这篇文章</a> 就可以了，如果只是 SSH 远程控制一下效果还可以。</p>
 <h1 id="效果"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C" title="效果"></a>效果</h1>
 <p>笔记本插了有线之后可以测试千兆对拷，我的路由器还是大一时候买的 WNDR3800，虽然很旧，但四个有线全部都是千兆口（当时价格和配置差不多的极路由 3 只有一个内网千兆好像），<del>samba 拷贝速度轻松达到 110M/s 的满速，甚至比蜗牛的 USB3.0 还快</del> 用了 btrfs 之后似乎速度只有 80M/s 左右了，或者 Windows 和 Linux 下面 Samba 对拷速度显示有区别？110M/s 是我在 Windows 下面测出来的。</p>
 <p>蜗牛后面两个 USB3.0 只有下面的那个是真的，上面的也就 2.0 速度，下面的跑满了也就 80 到 90M/s，我的 U 盘是 CZ80，放笔记本上比这快多了，而且有时候上面那个也可以跑到 70M/s，具体原因不知道，如果是真的土豪建议直接换主板算了，非土豪完全可以插笔记本然后网络拷进蜗牛，比这奇葩接口还快。</p>
@@ -648,4 +648,4 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.5 at 2020-01-07 Tue 22:20:06 CST. -->
+<!-- Page built by Hikaru v1.2.5 at 2020-01-09 Thu 12:52:15 CST. -->

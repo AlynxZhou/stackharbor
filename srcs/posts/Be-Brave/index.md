@@ -16,9 +16,9 @@ It's really hard for me to type something in this post, all I want but can't exp
 
 <!--more-->
 
-![Be-Brave_1.png](Be-Brave_1.png)
+![Be-Brave_1.png](./Be-Brave_1.png)
 
-![Be-Brave_2.png](Be-Brave_2.png)
+![Be-Brave_2.png](./Be-Brave_2.png)
 
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=503268&auto=0&height=66"></iframe>
 

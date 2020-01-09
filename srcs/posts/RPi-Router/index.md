@@ -62,11 +62,11 @@ PS 请务必选择带有`sdcard-vfat-ext4`的镜像。
 
 PPS 由于国内网络的特殊性，可能导致下载奇慢，可以复制下载地址之后利用百度云的离线下载。
 
-![RPi-Router_1.png](RPi-Router_1.png)
+![RPi-Router_1.png](./RPi-Router_1.png)
 
 下载到本地之后呢，我们要用读卡器把MicroSD卡连接上电脑，用 `lsblk -f` 查看一下SD卡的设备名，一般是/dev/sdb，如果你的系统自动挂载了SD卡，请务必用umount卸载。
 
-![RPi-Router_2.jpg](RPi-Router_2.jpg)
+![RPi-Router_2.jpg](./RPi-Router_2.jpg)
 
 随后我们要用dd命令把img文件烧录进SD卡！命令如下：
 
@@ -80,7 +80,7 @@ PS 不要在意下图中有一个bs=2M的参数，那个是可选的！
 
 PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如果你还遇到接电源后红绿灯都长亮不灭不能启动的话，可以试试重新刷写一次镜像，一般都会有效。
 
-![RPi-Router_3.png](RPi-Router_3.png)
+![RPi-Router_3.png](./RPi-Router_3.png)
 
 完事以后多执行几次sync是个好习惯：
 
@@ -100,7 +100,7 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 
 你就明白了。。。
 
-![RPi-Router_4.png](RPi-Router_4.png)
+![RPi-Router_4.png](./RPi-Router_4.png)
 
 😂这磔磔磔磔这这。。。*这开发者是喝着冰啤酒吃着火锅唱着歌做的img吗？*（别看我！我写东西时候从来不吃东西不唱歌！！！别看我！！！真的没有……）这这这分区位置都是什么鬼！！！根本都不整齐强迫症不能忍！！！还有这么大点的根分区虽然绝对够用了但是怎么能体现本喵是用2GB存储卡的有钱人（*手动斜眼滑稽*）呢？
 
@@ -134,7 +134,7 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 # cd ~ && umount /mnt
 ````
 
-![RPi-Router_5.png](RPi-Router_5.png)
+![RPi-Router_5.png](./RPi-Router_5.png)
 
 接下来就可以用fdisk了，这里我给boot分区分100M，root分区分768M（openwrt的软件都很小的，默认的分区大小就够用了。），剩下1G单独划分一个分区留着备用。
 
@@ -152,7 +152,7 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 
 按w退出并写入更改。
 
-![RPi-Router_6.png](RPi-Router_6.png)
+![RPi-Router_6.png](./RPi-Router_6.png)
 
 接下来我们用mkfs格式化分区～这里boot分区必须是vfat格式，root分区必须是ext4格式，第三个分区可以随意，但我也格式化成ext4。
 
@@ -178,19 +178,19 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 # cd ~ && umount /mnt
 ````
 
-![RPi-Router_7.png](RPi-Router_7.png)
+![RPi-Router_7.png](./RPi-Router_7.png)
 
 # 连接电脑进行初次必要调试
 
 先别急着把你的pi插到路由器上，op默认pi的ip是192\.168\.1\.1，要知道大部分家里的路由器的ip也是这个，所以我们先把它用网线接到电脑上，开机后修改下ip。
 
-![RPi-Router_8.jpg](RPi-Router_8.jpg)
+![RPi-Router_8.jpg](./RPi-Router_8.jpg)
 
 关掉你的无线连接，给pi连上电源，打开浏览器输入192.168.1.1回车，你会看到luci登陆界面，点击Login登入。
 
 接着按照屏幕上指示，我们去设置路由器登陆的密码，点击`Go to password configuration`
 
-![RPi-Router_9.png](RPi-Router_9.png)
+![RPi-Router_9.png](./RPi-Router_9.png)
 
 进入密码设置页面，在password里输入两次密码，滚动到最下端点击`Save and apply`。
 
@@ -198,7 +198,7 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 
 在进入的页面中设置IP，设为你路由器网段下的一个没有被占用的ip即可，我设置为 `192.168.1.234` ，之后下面的netmask选择 `255.255.255.0` ，gateway输入路由器地址 `192.168.1.1` ，DNS也输入 `192.168.1.1` 。
 
-![RPi-Router_10.png](RPi-Router_10.png)
+![RPi-Router_10.png](./RPi-Router_10.png)
 
 好啦，现在树莓派基本的设置已经完成了，接下来可以关机接到路由器上了。什么？你说OpenWrt没有关机？好吧没办法，因为我也不知道怎么办，我用OpenWrt一直都是拔电源，没什么问题。
 
@@ -206,29 +206,29 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 
 现在我们把pi拿出来～*无线网卡插到pi上，pi插到网线上，网线插到路由器上，电源线插到pi上，开机！*
 
-![RPi-Router_11.jpg](RPi-Router_11.jpg)
+![RPi-Router_11.jpg](./RPi-Router_11.jpg)
 
 稍等一会绿灯熄灭，这时候通过家庭局域网应该能连接上Pi了，同样，打开浏览器 `192.168.1.234` （按照你刚才设置的ip来），输入密码点击Login。
 
 是不是觉得满屏英文很不爽呢？没关系，我们先来安装中文语言。切换到System——Softwave，点击该页面的 `Update list` ，当然你也可以 `ssh root@192.168.1.234` ，登入之后执行 `opkg update` ，效果是一样的，这个命令就等价于Linux里的 `apt-get update` ， `pacman -Syy` ， `emerge --sync` ，opkg就是openwrt的包管理。当然我比较偏好ssh，因为可以即时看到命令反馈，而**luci基于网页，命令执行过程会表现为刷新，会像卡住一样。**
 
-![RPi-Router_12.png](RPi-Router_12.png)
+![RPi-Router_12.png](./RPi-Router_12.png)
 
 执行完了之后会输出信息 。
 
-![RPi-Router_13.png](RPi-Router_13.png)
+![RPi-Router_13.png](./RPi-Router_13.png)
 
 接下来在Filter里面输入chinese，点击Find package，稍等一会点击下面的Available packages，就能看到所有包名含有chinese的包啦，我们要安装的是 `luci-i18n-base-zh-cn` 和 `luci-i18n-firewall-zh-cn` ，点击名字左侧Install，弹出框里点确定稍等即可。
 
-![RPi-Router_14.png](RPi-Router_14.png)
+![RPi-Router_14.png](./RPi-Router_14.png)
 
-![RPi-Router_15.png](RPi-Router_15.png)
+![RPi-Router_15.png](./RPi-Router_15.png)
 
 现在我们切换到System——System里，点击Language and style选项卡里面的Language，看看里面是不是有一个普通话的选项了？选中之后点击Save and apply，还没有变成中文就Logout一下看看！
 
 等进去以后我们再进入系统——系统里，第一个选项卡基本设置，把里面的时区改为Asia/Shanghai，再点击上面的同步浏览器时间，最后在主机名里给你的pi设置一个独特的名字！
 
-![RPi-Router_16.png](RPi-Router_16.png)
+![RPi-Router_16.png](./RPi-Router_16.png)
 
 下面开始安装一些必要的软件包！据我统计有 `kmod-usb2` 、 `kmod-usb-ohci` 、 `kmod-usb-ohci` 、 `kmod-ath9k-common` 、 `kmod-ath9k-htc` （ath9k这两个包是我的网卡对应的驱动，**你的网卡需要什么驱动要根据你的芯片来定！我真的不知道你用的什么网卡！**）、 `hostapd` 。什么？你问我怎么安？过滤器在那！都是中文难道还看不懂吗？自己搜索一下！
 
@@ -246,7 +246,7 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 
 PS 老规矩，Pi2用户是bcm2709。
 
-![RPi-Router_17.png](RPi-Router_17.png)
+![RPi-Router_17.png](./RPi-Router_17.png)
 
 有关编译工具链的问题，我在Gentoo Linux下直接就能编译，所以我也不知道需要哪些依赖，据我所知包括但不限于gcc，git，ulibc。
 
@@ -258,7 +258,7 @@ PS 老规矩，Pi2用户是bcm2709。
 # git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
 ````
 
-![RPi-Router_18.png](RPi-Router_18.png)
+![RPi-Router_18.png](./RPi-Router_18.png)
 
 之后我们用menuconfig选择需要编译的软件包，熟悉Linux内核编译的人都会这个：
 
@@ -266,13 +266,13 @@ PS 老规矩，Pi2用户是bcm2709。
 # make menuconfig
 ````
 
-![RPi-Router_19.png](RPi-Router_19.png)
+![RPi-Router_19.png](./RPi-Router_19.png)
 
 首先进入LuCI——Network里选择上带有ChinaDNS和shadowsocks的行（按空格使前面出现M），之后左右方向键切换下面到Exit，按空格以退回到首页，再切换到下面为Select，再进入Network，选中 `ChinaDNS` 和 `shadowsocks-libev-spec` 到M，之后切换下面到Save，保存之后退出。
 
-![RPi-Router_20.png](RPi-Router_20.png)
+![RPi-Router_20.png](./RPi-Router_20.png)
 
-![RPi-Router_21.png](RPi-Router_21.png)
+![RPi-Router_21.png](./RPi-Router_21.png)
 
 退出之后就可以用
 
@@ -284,7 +284,7 @@ PS 老规矩，Pi2用户是bcm2709。
 
 PS Pi2用户请注意，由于Openwrt把Pi1和Pi2的架构统称为brcm2708，所以**编译出来的软件包显示有brcm2708是正确的**。
 
-![RPi-Router_22.png](RPi-Router_22.png)
+![RPi-Router_22.png](./RPi-Router_22.png)
 
 下面还是要ssh到你的pi上，进入你ipk文件存放的地方，先opkg update一下，因为一会需要连网安装依赖。（每次路由器开机都需要执行一次update。）
 
@@ -302,17 +302,17 @@ PS Pi2用户请注意，由于Openwrt把Pi1和Pi2的架构统称为brcm2708，�
 
 之后下面的服务器配置添上**你的ss服务器的配置**，UDP转发**勾选启用**，被忽略IP列表选择**ChinaDNS路由表**。保存应用。
 
-![RPi-Router_23.jpg](RPi-Router_23.jpg)
+![RPi-Router_23.jpg](./RPi-Router_23.jpg)
 
-![RPi-Router_24.png](RPi-Router_24.png)
+![RPi-Router_24.png](./RPi-Router_24.png)
 
 接下来切换到ChinaDNS，勾选启用和启用双向配置。上游服务器改为 114.114.114.114,127.0.0.1#5300`。
 
-![RPi-Router_25.png](RPi-Router_25.png)
+![RPi-Router_25.png](./RPi-Router_25.png)
 
 再切换到网络——DHCP/DNS，基本设置里的DNS转发填写`127.0.0.1#5353`，HOSTS和解析文件里**勾选忽略解析文件**。
 
-![RPi-Router_26.png](RPi-Router_26.png)
+![RPi-Router_26.png](./RPi-Router_26.png)
 
 现在ss部署完成！
 
@@ -344,21 +344,21 @@ $ ssh root@你的pi的ip地址
 
 注释掉`option disabled 1`的那一行（注释的意思就是在那一行开头输入个‘#’！你要会用vim直接把光标定位到那里，按dd把那行删了也行！）。
 
-![RPi-Router_27.png](RPi-Router_27.png)
+![RPi-Router_27.png](./RPi-Router_27.png)
 
 现在系统——重启——执行重启，之后LuCI的网络里应该能看到无线了。点击`修改`来编辑一下。
 
 首先要注意wifi信道不能设置为auto，这是个bug。
 
-![RPi-Router_28.png](RPi-Router_28.png)
+![RPi-Router_28.png](./RPi-Router_28.png)
 
 下面的ESSID就是你的WiFi显示的名字，自己设定好。之后去无线安全，加密选择`WPA-PSK/WPA2-PSK Mixed Mode`，密码自然是你的密码咯～
 
-![RPi-Router_29.png](RPi-Router_29.png)
+![RPi-Router_29.png](./RPi-Router_29.png)
 
 接着就能搜索并连接到wifi了～
 
-![RPi-Router_30.png](RPi-Router_30.png)
+![RPi-Router_30.png](./RPi-Router_30.png)
 
 # 分离WAN口和LAN口。
 

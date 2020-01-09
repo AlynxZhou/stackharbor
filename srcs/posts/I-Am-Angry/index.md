@@ -12,7 +12,7 @@ encrypt: false
 enc_pwd:
 comment: true
 ---
-![Angry.jpg](Angry.jpg)
+![Angry.jpg](./Angry.jpg)
 
 <blockquote class="center-quote">I AM ANGRY!!!</blockquote>
 

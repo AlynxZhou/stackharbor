@@ -24,7 +24,7 @@ tags:
 
 > 很喜欢你博客的风格，可否为Cxxxxx-CMS开发一套（免费/付费）主题，然后发布到Cxxxxx商店里面？
 >
-> CxxxxxJS：是一款顶级NodeJS全栈业务开发框架, 基于KoaJS + EggJS + VueJS + Framework7 
+> CxxxxxJS：是一款顶级NodeJS全栈业务开发框架, 基于KoaJS + EggJS + VueJS + Framework7
 > Cxxxxx-CMS：是基于CxxxxxJS全栈业务开发框架开发的动静结合的CMS，可以快速构建企业网站、博客、社区、商城等Web应用
 > Cxxxxx商店：包括品类广泛的各类模块，满足不同场景的开发需求
 >
@@ -65,7 +65,7 @@ tags:
 
 Arch Linux CN 群里的群友建议我直接拉黑算了，我也这么想的，但是晚上回去闲的没事翻了翻，发现了其他的东西：
 
-![骚扰证据](1.png)
+![骚扰证据](./1.png)
 
 好啊！你还敢说你是“诚邀”！还真被我说中了，明明就是爬了 Hexo 主题列表挨个作者群发！一开始邮件是我略有刻薄，不想再逐条反驳他，但看到这个我实在是 **口区**。
 

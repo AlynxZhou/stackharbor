@@ -11,7 +11,7 @@ tags:
   - 半音阶口琴
   - 曲谱
 ---
-半音阶口琴，**sister's noise** 数字谱，喵自整理版，[txt下载点击这里](sister-s-noise.txt)，[读谱方式点击这里](Music-Score/)
+半音阶口琴，**sister's noise** 数字谱，喵自整理版，[txt下载点击这里](./sister-s-noise.txt)，[读谱方式点击这里](./Music-Score/)。
 
 <!--more-->
 

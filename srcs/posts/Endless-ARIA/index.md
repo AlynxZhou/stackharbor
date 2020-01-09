@@ -35,7 +35,7 @@ Hexo 当初打出的招牌就是它比 Jekyll 和 Octopress 快，当然现在 O
 
 然后就是选择模板和预处理器了，ejs 这种又挫又丑的东西我是不会去用的，然后看起来 Hexo 的 Nunjucks 插件还算能用（当然并不好用，都没人更新了还占着最好的名字，于是我只能自己写了一个，这是后话），唯一对 Nunjucks 不满的地方大概是它的关键字是 Python 风格（我讨厌这两种叫做 Python 的语言）。CSS 预处理器看起来在 Sass 和 Less 之间有个更好的选择叫做 Stylus（也是 Node 社区比较喜欢用的），既然这次是自己写样式了，纠结了好久我还是没有添加 Bootstrap。
 
-参照的原型是 [hexo-theme-hueman](https://github.com/ppoffice/hexo-theme-hueman)，我很喜欢它的风格，但是看起来 Ppoffice 维护了好几个主题，但是哪个都不是很精细好用，当然随着我的设计进行 ARIA 和 Hueman 产生了不一样的设计，我比较喜欢现在的样子。
+参照的原型是 [hexo-theme-hueman](https://github.com/ppoffice/hexo-theme-hueman)，我很喜欢它的风格，但是看起来 ppoffice 维护了好几个主题，但是哪个都不是很精细好用，当然随着我的设计进行 ARIA 和 Hueman 产生了不一样的设计，我比较喜欢现在的样子。
 
 在艰难地摸掉了 Hexo、hexo-renderer-nunjucks（就是这个坑货不更新还占着好名字） 和 Stylus 的一些坑之后，开始正式的进入到编写阶段，果然对于我而言 CSS 才是最难驾驭的语言，不过还是顶着各种困难把它做成了我想要的样子（优秀的前端工程师想要什么样就做成什么样，我是做成什么样就算什么样），其中的经历不太想多说，比如 Hexo 的中文文档没有告诉我 page.posts 是个什么类型（不是 Array，ejs （就是嵌入的 JavaScript）可以迭代，但是 Nunjucks 却不行），英文文档又出现了 Array of `???`，请问 `???` 是什么？点击链接又跳转到了 Hexo 的一个叫做 Warehouse 的子项目，这又是什么？后来终于我在 Issue 列表里找到了答案，这是个数据库，为了能让 Nunjucks 和 Swig 迭代，作者又添加了个 `toArray()` 方法。再比如 hexo-renderer-nunjucks 的版本卡在 Nunjucks 2，我又自己写了个插件支持 Nunjucks 3。还有自己差不多完全重写了一个用来搜索的 js。好在最后是做出来了。
 

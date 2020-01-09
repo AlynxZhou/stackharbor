@@ -10,7 +10,7 @@ tags:
   - 无题
   - 未说出口的话
 ---
-![Title-Nil-1_1.png](Title-Nil-1_1.png)
+![Title-Nil-1_1.png](./Title-Nil-1_1.png)
 Say to me.
 
 Why are you so tired?

@@ -11,7 +11,7 @@ tags:
 - "NieR: Automata"
 ---
 
-![](Automata.jpg)
+![](./Automata.jpg)
 
 <blockquote class="center-quote">我没有办法评价这款游戏<br>因为我觉得我被结结实实地折腾了一回</blockquote>
 

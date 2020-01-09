@@ -213,7 +213,7 @@
 <h1 id="准备"><a class="header-link" href="/posts/Using-Gdb/#%E5%87%86%E5%A4%87" title="准备"></a>准备</h1>
 <h2 id="调试模式编译程序"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F" title="调试模式编译程序"></a>调试模式编译程序</h2>
 <p>首先应该明确调试的实现方式，GDB能够暂时的停下程序操作程序其实是通过向编译过程中的二进制流中添加钩子（HOOKS）来实现的。但是对于一个正常的，打算释出给用户使用的程序而言不应该以调试模式编译，因为这些添加进去的钩子不但会增大文件体积，还会降低程序的运行效率。所以GCC默认编译程序的时候时不会添加这个钩子的，需要的时候以<code>-g</code>参数来启用调试模式。</p>
-<p>本例中以文件<a href="/posts/2017/03/15/Using-Gdb/Lab2.c">Lab2.c</a>为例，使用命令</p>
+<p>本例中以文件<a href="/posts/Using-Gdb/Lab2.c">Lab2.c</a>为例，使用命令</p>
 <pre><code><figure class="highlight hljs llvm"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ gcc -std=<span class="hljs-keyword">c</span><span class="hljs-number">11</span> -g -o lab Lab<span class="hljs-number">2</span>.<span class="hljs-keyword">c</span></code></pre></figure></code></pre><p>将它编译到可执行文件lab。</p>
 <h2 id="用GDB打开程序。"><a class="header-link" href="/posts/Using-Gdb/#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82" title="用GDB打开程序。"></a>用GDB打开程序。</h2>
 <p>打开程序的命令很简单，就是<code>$ gdb lab</code>，但是有可能遇到的问题是程序要处理命令行参数，在使用GDB的时候是不能直接在命令行后面附加程序参数的，需要使用参数可以在打开GDB之后输入<code>set args 参数1 参数2 ...</code>附加上参数。</p>
@@ -586,4 +586,4 @@ main (argc=<span class="hljs-number">1</span>, argv=<span class="hljs-number">0<
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.5 at 2020-01-07 Tue 22:20:07 CST. -->
+<!-- Page built by Hikaru v1.2.5 at 2020-01-09 Thu 12:52:16 CST. -->
