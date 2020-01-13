@@ -36,13 +36,12 @@ reward: false
 | <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width :5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 | <img src="https://avatars0.githubusercontent.com/u/8396456?s=460&v=4" style="width: 5em;"> | [初等記憶體](https://axionl.me/) | 「 一個你知道的地方，和一個沒有酒的故事 ｜ 言文 」 | 听起来好像萌妹啊！|
 | <img src="https://avatars1.githubusercontent.com/u/17294071?s=460&v=4" style="width: 5em;"> | [OriginCode 札記](https://originco.de/) | 「無人訪問之無趣博客 * 1」 | 好像现在是 ~~初中生~~ 高中生来着…… |
-| <img src="https://viflythink.com/img/avatar.png" style="width: 5em;"> | [Vifly 的博客](https://viflythink.com/) | 世上只有一种英雄主义——就是在认清生活的真相之后依然热爱生活。 | 好像是炼丹的，反正我又不懂炼丹……加速迫害不要停下来啊！ |
-| <img src="https://avatars0.githubusercontent.com/u/10810336?s=460&v=4" style="width: 5em;"> | [Leo's Field](https://szclsya.me/zh-cn/) |  | 呃……之前忘记了……（逃 | 
+| <img src="https://viflythink.com/img/avatar.png" style="width: 5em;"> | [Vifly 的博客](https://viflythink.com/) | “世上只有一种英雄主义——就是在认清生活的真相之后依然热爱生活。” | 好像是炼丹的，反正我又不懂炼丹……加速迫害不要停下来啊！ |
+| <img src="https://avatars0.githubusercontent.com/u/10810336?s=460&v=4" style="width: 5em;"> | [Leo's Field](https://szclsya.me/zh-cn/) | "Time to change drinks and mix... wait" | 呃……之前忘记了……（逃 | 
 
 # 其他地方认识的
 
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
 | <img src="https://avatars1.githubusercontent.com/u/21106371?s=460&v=4" style="width: 5em;"> | [鸡腿工坊](https://jitui.moe/) |  | ~~新鲜~~ 可爱的鸡腿！ |
-| <img src="https://avatars1.githubusercontent.com/u/25676311?s=460&v=4" style="width: 5em;"> | [Yorushika Shi](https://sh.yorushika.live/) |  | 评论框里认识的朋友，看来保留评论框还是有必要的。 |
-|  | [Stack Pub](https://www.opfanswyx.top/) |  | 评论框认识的朋友。 |
+
