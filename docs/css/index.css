@@ -371,6 +371,9 @@
 .footer .back-to-top a:hover {
   color: #36e;
 }
+.footer .back-to-top a:active {
+  top: 0;
+}
 @media (max-width: 40em) {
   .footer .footer-container {
     -webkit-box-direction: reverse;
@@ -524,6 +527,17 @@ a.gallery-item:hover img,
 a.img-link:hover img {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+}
+a#top {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+a#top:hover {
+  border: none;
+}
+a#top:active {
+  top: 0;
 }
 .caption {
   color: #666;

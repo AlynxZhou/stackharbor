@@ -104,6 +104,9 @@
 .footer .back-to-top a:hover {
   color: #36e;
 }
+.footer .back-to-top a:active {
+  top: 0;
+}
 @media (max-width: 40em) {
   .footer .footer-container {
     -webkit-box-direction: reverse;
