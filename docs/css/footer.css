@@ -87,7 +87,7 @@
   display: block;
   text-align: center;
 }
-.footer .back-to-top button {
+.footer .back-to-top a {
   border: none;
   outline: 0;
   background: #ccc;
@@ -101,7 +101,7 @@
   border-bottom-right-radius: 0.3em;
   font-size: 2em;
 }
-.footer .back-to-top button:hover {
+.footer .back-to-top a:hover {
   color: #36e;
 }
 @media (max-width: 40em) {
