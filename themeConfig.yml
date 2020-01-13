@@ -165,12 +165,12 @@ blogroll:
     - name: Meow's Blog
       link: https://lrscy.github.io/
       icon: <i class="fas fa-link"></i>
-    - name: LGiki's Blog
-      link: https://lgiki.cc/
-      icon: <i class="fas fa-link"></i>
-    - name: HackGhost's Blog
-      link: http://hackghost.com/
-      icon: <i class="fas fa-link"></i>
+    # - name: LGiki's Blog
+    #   link: https://lgiki.cc/
+    #   icon: <i class="fas fa-link"></i>
+    # - name: HackGhost's Blog
+    #   link: http://hackghost.com/
+    #   icon: <i class="fas fa-link"></i>
     - name: Art_Chen's Blog
       link: http://chenxy.moe/
       icon: <i class="fas fa-link"></i>
@@ -183,9 +183,9 @@ blogroll:
     - name: 鸡腿工坊
       link: https://jitui.moe/
       icon: <i class="fas fa-link"></i>
-    - name: Sqyon's Blog
-      link: https://sqyon.com/
-      icon: <i class="fas fa-link"></i>
+    # - name: Sqyon's Blog
+    #   link: https://sqyon.com/
+    #   icon: <i class="fas fa-link"></i>
     - name: 约伊兹的萌狼乡手札
       link: https://blog.yoitsu.moe/
       icon: <i class="fas fa-link"></i>
@@ -195,9 +195,9 @@ blogroll:
     - name: 惠狐之书
       link: https://blog.megumifox.com/
       icon: <i class="fas fa-link"></i>
-    - name: 初等記憶體
-      link: https://axionl.me/
-      icon: <i class="fas fa-link"></i>
+    # - name: 初等記憶體
+    #   link: https://axionl.me/
+    #   icon: <i class="fas fa-link"></i>
     - name: OriginCode 札記
       link: https://originco.de/
       icon: <i class="fas fa-link"></i>
