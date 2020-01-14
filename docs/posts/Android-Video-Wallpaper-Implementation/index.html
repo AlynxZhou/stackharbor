@@ -58,44 +58,44 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
-    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script defer type="text/javascript" src="/js/util.js"></script>
-    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
-    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     
     <script defer src="/js/busuanzi.pure.mini.js"></script>
     
     
-    <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $(".post pre code figure.highlight").each(function (i, e) {
-          var lang = e.parentNode.className;
-          $(e).before([
-            "<div class=\"code-titlebar\">",
-              "<div class=\"titlebar-left\">",
-                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
-              "</div>",
-              "<div class=\"titlebar-center\">",
-                lang.length ? lang.toUpperCase() : "代码",
-              "</div>",
-              "<div class=\"titlebar-right\">",
-                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-              "</div>",
-            "</div>"
-          ].join(""));
-          // $(e).before("<button class=\"copy button\">复制</button>");
-        });
+      documentReady(function () {
+        elementsEach(
+          document.querySelectorAll(".post pre code figure.highlight"),
+          function (e, i) {
+            var lang = e.parentNode.className;
+            e.insertAdjacentElement("beforebegin", createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
         var cb = new ClipboardJS("button.copy", {
           "target": function (trigger) {
               // Get target element by DOM API.
@@ -109,11 +109,11 @@
           var trigger = e.trigger;
           // Change button text as a user tip.
           trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
-          $(trigger).addClass("copied");
+          trigger.classList.add("copied");
           // Change button text back;
           setTimeout(function () {
             trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
-            $(trigger).removeClass("copied");
+            trigger.classList.remove("copied");
           }, 1500);
         });
       });
@@ -122,7 +122,7 @@
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <title>如何编写 Android 视频壁纸 | 喵's StackHarbor - Whisper to the World</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+  <body itemscope itemtype="http://schema.org/WebPage">
     <a id="top"></a>
     
 <header id="header" class="header" style="background: #33363b;">
@@ -203,7 +203,7 @@
         
       </div>
     </header>
-    <main class="post-main" itemprop="articleBody">
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank" rel="noreferrer noopener">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>
 <a id='more'></a>
 
@@ -853,12 +853,12 @@
   
   <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       loadCommentCount({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "containerClass": "comment-count"
-      })
+      });
     });
   </script>
   
@@ -874,7 +874,7 @@
   <script defer type="text/javascript" src="/js/marked.min.js"></script>
   <script defer type="text/javascript" src="/js/highlight.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       marked.setOptions({
         "highlight": function (code, lang) {
           return hljs.highlightAuto(code).value;
@@ -959,46 +959,44 @@
     
     
     <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
+    <div class="post-toc sidebar-item">
       <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#首先让系统知道你是个壁纸……">首先让系统知道你是个壁纸……</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#然后你看见网上一堆胶水代码……">然后你看见网上一堆胶水代码……</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#明明是杀鸡，还是得掏牛刀！">明明是杀鸡，还是得掏牛刀！</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#然后声音又不对劲了……">然后声音又不对劲了……</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#写UI也很麻烦！">写 UI 也很麻烦！</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#一杯咖啡都没有……">一杯咖啡都没有……</a>
-            
-          </li>
-        
-        </ol>
-        
-      </div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          <a class="list-group-item toc-link" href="#首先让系统知道你是个壁纸……">首先让系统知道你是个壁纸……</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#然后你看见网上一堆胶水代码……">然后你看见网上一堆胶水代码……</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#明明是杀鸡，还是得掏牛刀！">明明是杀鸡，还是得掏牛刀！</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#然后声音又不对劲了……">然后声音又不对劲了……</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#写UI也很麻烦！">写 UI 也很麻烦！</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#一杯咖啡都没有……">一杯咖啡都没有……</a>
+          
+        </li>
+      
+      </ol>
+      
     </div>
     
     
@@ -1094,4 +1092,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.6 at 2020-01-13 Mon 17:17:43 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-01-14 Tue 13:03:46 CST. -->

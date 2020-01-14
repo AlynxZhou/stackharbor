@@ -58,44 +58,44 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
-    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script defer type="text/javascript" src="/js/util.js"></script>
-    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
-    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     
     <script defer src="/js/busuanzi.pure.mini.js"></script>
     
     
-    <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $(".post pre code figure.highlight").each(function (i, e) {
-          var lang = e.parentNode.className;
-          $(e).before([
-            "<div class=\"code-titlebar\">",
-              "<div class=\"titlebar-left\">",
-                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
-              "</div>",
-              "<div class=\"titlebar-center\">",
-                lang.length ? lang.toUpperCase() : "代码",
-              "</div>",
-              "<div class=\"titlebar-right\">",
-                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-              "</div>",
-            "</div>"
-          ].join(""));
-          // $(e).before("<button class=\"copy button\">复制</button>");
-        });
+      documentReady(function () {
+        elementsEach(
+          document.querySelectorAll(".post pre code figure.highlight"),
+          function (e, i) {
+            var lang = e.parentNode.className;
+            e.insertAdjacentElement("beforebegin", createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
         var cb = new ClipboardJS("button.copy", {
           "target": function (trigger) {
               // Get target element by DOM API.
@@ -109,11 +109,11 @@
           var trigger = e.trigger;
           // Change button text as a user tip.
           trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
-          $(trigger).addClass("copied");
+          trigger.classList.add("copied");
           // Change button text back;
           setTimeout(function () {
             trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
-            $(trigger).removeClass("copied");
+            trigger.classList.remove("copied");
           }, 1500);
         });
       });
@@ -122,7 +122,7 @@
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <title>分类: 输入法 | 喵's StackHarbor - Whisper to the World</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+  <body itemscope itemtype="http://schema.org/WebPage">
     <a id="top"></a>
     
 <header id="header" class="header" style="background: #33363b;">
@@ -211,12 +211,12 @@
   
   <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       loadCommentCount({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "containerClass": "comment-count"
-      })
+      });
     });
   </script>
   
@@ -377,4 +377,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.6 at 2020-01-13 Mon 17:17:43 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-01-14 Tue 13:03:46 CST. -->

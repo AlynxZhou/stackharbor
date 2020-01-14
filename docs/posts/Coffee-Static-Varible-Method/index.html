@@ -58,44 +58,44 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
-    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script defer type="text/javascript" src="/js/util.js"></script>
-    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
-    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     
     <script defer src="/js/busuanzi.pure.mini.js"></script>
     
     
-    <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $(".post pre code figure.highlight").each(function (i, e) {
-          var lang = e.parentNode.className;
-          $(e).before([
-            "<div class=\"code-titlebar\">",
-              "<div class=\"titlebar-left\">",
-                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
-              "</div>",
-              "<div class=\"titlebar-center\">",
-                lang.length ? lang.toUpperCase() : "代码",
-              "</div>",
-              "<div class=\"titlebar-right\">",
-                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-              "</div>",
-            "</div>"
-          ].join(""));
-          // $(e).before("<button class=\"copy button\">复制</button>");
-        });
+      documentReady(function () {
+        elementsEach(
+          document.querySelectorAll(".post pre code figure.highlight"),
+          function (e, i) {
+            var lang = e.parentNode.className;
+            e.insertAdjacentElement("beforebegin", createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
         var cb = new ClipboardJS("button.copy", {
           "target": function (trigger) {
               // Get target element by DOM API.
@@ -109,11 +109,11 @@
           var trigger = e.trigger;
           // Change button text as a user tip.
           trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
-          $(trigger).addClass("copied");
+          trigger.classList.add("copied");
           // Change button text back;
           setTimeout(function () {
             trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
-            $(trigger).removeClass("copied");
+            trigger.classList.remove("copied");
           }, 1500);
         });
       });
@@ -122,7 +122,7 @@
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <title>CoffeeScript 的静态方法和静态变量（类方法和类变量） | 喵's StackHarbor - Whisper to the World</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+  <body itemscope itemtype="http://schema.org/WebPage">
     <a id="top"></a>
     
 <header id="header" class="header" style="background: #33363b;">
@@ -203,7 +203,7 @@
         
       </div>
     </header>
-    <main class="post-main" itemprop="articleBody">
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="noreferrer noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="noreferrer noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
 <a id='more'></a>
 
@@ -358,12 +358,12 @@ Test.printCounter()
   
   <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       loadCommentCount({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "containerClass": "comment-count"
-      })
+      });
     });
   </script>
   
@@ -379,7 +379,7 @@ Test.printCounter()
   <script defer type="text/javascript" src="/js/marked.min.js"></script>
   <script defer type="text/javascript" src="/js/highlight.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       marked.setOptions({
         "highlight": function (code, lang) {
           return hljs.highlightAuto(code).value;
@@ -464,36 +464,34 @@ Test.printCounter()
     
     
     <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
+    <div class="post-toc sidebar-item">
       <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#静态变量">静态变量</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#静态方法">静态方法</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#总结">总结</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#碎碎念">碎碎念</a>
-            
-          </li>
-        
-        </ol>
-        
-      </div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          <a class="list-group-item toc-link" href="#静态变量">静态变量</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#静态方法">静态方法</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#总结">总结</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#碎碎念">碎碎念</a>
+          
+        </li>
+      
+      </ol>
+      
     </div>
     
     
@@ -589,4 +587,4 @@ Test.printCounter()
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.6 at 2020-01-13 Mon 17:17:43 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-01-14 Tue 13:03:46 CST. -->

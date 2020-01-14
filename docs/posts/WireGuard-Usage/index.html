@@ -58,44 +58,44 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
-    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script defer type="text/javascript" src="/js/util.js"></script>
-    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
-    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     
     <script defer src="/js/busuanzi.pure.mini.js"></script>
     
     
-    <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $(".post pre code figure.highlight").each(function (i, e) {
-          var lang = e.parentNode.className;
-          $(e).before([
-            "<div class=\"code-titlebar\">",
-              "<div class=\"titlebar-left\">",
-                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
-              "</div>",
-              "<div class=\"titlebar-center\">",
-                lang.length ? lang.toUpperCase() : "代码",
-              "</div>",
-              "<div class=\"titlebar-right\">",
-                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-              "</div>",
-            "</div>"
-          ].join(""));
-          // $(e).before("<button class=\"copy button\">复制</button>");
-        });
+      documentReady(function () {
+        elementsEach(
+          document.querySelectorAll(".post pre code figure.highlight"),
+          function (e, i) {
+            var lang = e.parentNode.className;
+            e.insertAdjacentElement("beforebegin", createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
         var cb = new ClipboardJS("button.copy", {
           "target": function (trigger) {
               // Get target element by DOM API.
@@ -109,11 +109,11 @@
           var trigger = e.trigger;
           // Change button text as a user tip.
           trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
-          $(trigger).addClass("copied");
+          trigger.classList.add("copied");
           // Change button text back;
           setTimeout(function () {
             trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
-            $(trigger).removeClass("copied");
+            trigger.classList.remove("copied");
           }, 1500);
         });
       });
@@ -122,7 +122,7 @@
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <title>WireGuard 配置与使用 | 喵's StackHarbor - Whisper to the World</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+  <body itemscope itemtype="http://schema.org/WebPage">
     <a id="top"></a>
     
 <header id="header" class="header" style="background: #33363b;">
@@ -203,7 +203,7 @@
         
       </div>
     </header>
-    <main class="post-main" itemprop="articleBody">
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <h1 id="需求"><a class="header-link" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1>
 <p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p>
 <a id='more'></a>
@@ -345,12 +345,12 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
   
   <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       loadCommentCount({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "containerClass": "comment-count"
-      })
+      });
     });
   </script>
   
@@ -366,7 +366,7 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
   <script defer type="text/javascript" src="/js/marked.min.js"></script>
   <script defer type="text/javascript" src="/js/highlight.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       marked.setOptions({
         "highlight": function (code, lang) {
           return hljs.highlightAuto(code).value;
@@ -451,57 +451,55 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
     
     
     <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
+    <div class="post-toc sidebar-item">
       <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#需求">需求</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#安装">安装</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#配置">配置</a>
-            
-            
-        <ol >
-        
-          <li>
-            <a class="list-group-item toc-link" href="#服务端">服务端</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#客户端">客户端</a>
-            
-          </li>
-        
-        </ol>
-        
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#启动">启动</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#后记">后记</a>
-            
-          </li>
-        
-        </ol>
-        
-      </div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          <a class="list-group-item toc-link" href="#需求">需求</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#安装">安装</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#配置">配置</a>
+          
+          
+      <ol >
+      
+        <li>
+          <a class="list-group-item toc-link" href="#服务端">服务端</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#客户端">客户端</a>
+          
+        </li>
+      
+      </ol>
+      
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#启动">启动</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#后记">后记</a>
+          
+        </li>
+      
+      </ol>
+      
     </div>
     
     
@@ -597,4 +595,4 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.6 at 2020-01-13 Mon 17:17:43 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-01-14 Tue 13:03:46 CST. -->

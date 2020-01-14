@@ -528,15 +528,18 @@ a.img-link:hover img {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
-a#top {
+a#top,
+a#more {
   border: none;
   margin: 0;
   padding: 0;
 }
-a#top:hover {
+a#top:hover,
+a#more:hover {
   border: none;
 }
-a#top:active {
+a#top:active,
+a#more:active {
   top: 0;
 }
 .caption {

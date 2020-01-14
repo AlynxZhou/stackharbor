@@ -58,44 +58,44 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
-    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script defer type="text/javascript" src="/js/util.js"></script>
-    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
-    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     
     <script defer src="/js/busuanzi.pure.mini.js"></script>
     
     
-    <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $(".post pre code figure.highlight").each(function (i, e) {
-          var lang = e.parentNode.className;
-          $(e).before([
-            "<div class=\"code-titlebar\">",
-              "<div class=\"titlebar-left\">",
-                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
-              "</div>",
-              "<div class=\"titlebar-center\">",
-                lang.length ? lang.toUpperCase() : "代码",
-              "</div>",
-              "<div class=\"titlebar-right\">",
-                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-              "</div>",
-            "</div>"
-          ].join(""));
-          // $(e).before("<button class=\"copy button\">复制</button>");
-        });
+      documentReady(function () {
+        elementsEach(
+          document.querySelectorAll(".post pre code figure.highlight"),
+          function (e, i) {
+            var lang = e.parentNode.className;
+            e.insertAdjacentElement("beforebegin", createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
         var cb = new ClipboardJS("button.copy", {
           "target": function (trigger) {
               // Get target element by DOM API.
@@ -109,11 +109,11 @@
           var trigger = e.trigger;
           // Change button text as a user tip.
           trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
-          $(trigger).addClass("copied");
+          trigger.classList.add("copied");
           // Change button text back;
           setTimeout(function () {
             trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
-            $(trigger).removeClass("copied");
+            trigger.classList.remove("copied");
           }, 1500);
         });
       });
@@ -122,7 +122,7 @@
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <title>写给新手的 Linux 手册 1 | 喵's StackHarbor - Whisper to the World</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+  <body itemscope itemtype="http://schema.org/WebPage">
     <a id="top"></a>
     
 <header id="header" class="header" style="background: #33363b;">
@@ -203,7 +203,7 @@
         
       </div>
     </header>
-    <main class="post-main" itemprop="articleBody">
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <p>恰如字面意思，这是一篇写给新人的 Linux 指南，当然，不要指望从我这里得到什么详细的配置教程，最起码我没有打算在这篇文章里把你能遇到的 Linux 配置情况全部说清楚。我想在这篇文章里讲述的是一种理解方法或者说是一种 Linux 思维，换个更简单的说法是——它能在 Linux 向你吐出一堆牢骚的时候明白它在说什么，以及一个有经验的 Linux 用户这个时候会做什么，有经验的 Linux 用户是如何学习他们没有接触过的 Linux 知识的。</p>
 <p>准备好了，就继续吧。</p>
 <a id='more'></a>
@@ -388,12 +388,12 @@
   
   <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       loadCommentCount({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "containerClass": "comment-count"
-      })
+      });
     });
   </script>
   
@@ -409,7 +409,7 @@
   <script defer type="text/javascript" src="/js/marked.min.js"></script>
   <script defer type="text/javascript" src="/js/highlight.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       marked.setOptions({
         "highlight": function (code, lang) {
           return hljs.highlightAuto(code).value;
@@ -494,61 +494,59 @@
     
     
     <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
+    <div class="post-toc sidebar-item">
       <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#开宗明义（开篇劝退）">开宗明义（开篇劝退）</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#我该选择什么版本的Linux？">我该选择什么版本的 Linux？</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#我该怎样连接到我的服务器？SSH又是什么？">我该怎样连接到我的服务器？SSH 又是什么？</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#Shell和终端都是什么？为什么我输入密码没有反应？">Shell 和终端都是什么？为什么我输入密码没有反应？</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#我该如何编辑文件？怎样安装我需要的软件？">我该如何编辑文件？怎样安装我需要的软件？</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#root是谁？权限是什么？为什么没有CDDEFG盘？">root 是谁？权限是什么？为什么没有 CDDEFG 盘？</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#如何管理系统？">如何管理系统？</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#提问的艺术">提问的艺术</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#最后，有关“世界上最好的两种语言”Python……">最后，有关 “世界上最好的两种语言” Python……</a>
-            
-          </li>
-        
-        </ol>
-        
-      </div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          <a class="list-group-item toc-link" href="#开宗明义（开篇劝退）">开宗明义（开篇劝退）</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#我该选择什么版本的Linux？">我该选择什么版本的 Linux？</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#我该怎样连接到我的服务器？SSH又是什么？">我该怎样连接到我的服务器？SSH 又是什么？</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#Shell和终端都是什么？为什么我输入密码没有反应？">Shell 和终端都是什么？为什么我输入密码没有反应？</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#我该如何编辑文件？怎样安装我需要的软件？">我该如何编辑文件？怎样安装我需要的软件？</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#root是谁？权限是什么？为什么没有CDDEFG盘？">root 是谁？权限是什么？为什么没有 CDDEFG 盘？</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#如何管理系统？">如何管理系统？</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#提问的艺术">提问的艺术</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#最后，有关“世界上最好的两种语言”Python……">最后，有关 “世界上最好的两种语言” Python……</a>
+          
+        </li>
+      
+      </ol>
+      
     </div>
     
     
@@ -644,4 +642,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.6 at 2020-01-13 Mon 17:17:43 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-01-14 Tue 13:03:46 CST. -->

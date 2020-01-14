@@ -58,44 +58,44 @@
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
-    <!-- You should not set `defer` to jQuery because other scripts dependents it! -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script defer type="text/javascript" src="/js/util.js"></script>
-    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
-    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
     <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
     
     <script defer src="/js/busuanzi.pure.mini.js"></script>
     
     
-    <script defer type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $(".post pre code figure.highlight").each(function (i, e) {
-          var lang = e.parentNode.className;
-          $(e).before([
-            "<div class=\"code-titlebar\">",
-              "<div class=\"titlebar-left\">",
-                "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
-              "</div>",
-              "<div class=\"titlebar-center\">",
-                lang.length ? lang.toUpperCase() : "代码",
-              "</div>",
-              "<div class=\"titlebar-right\">",
-                "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-                "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-              "</div>",
-            "</div>"
-          ].join(""));
-          // $(e).before("<button class=\"copy button\">复制</button>");
-        });
+      documentReady(function () {
+        elementsEach(
+          document.querySelectorAll(".post pre code figure.highlight"),
+          function (e, i) {
+            var lang = e.parentNode.className;
+            e.insertAdjacentElement("beforebegin", createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
         var cb = new ClipboardJS("button.copy", {
           "target": function (trigger) {
               // Get target element by DOM API.
@@ -109,11 +109,11 @@
           var trigger = e.trigger;
           // Change button text as a user tip.
           trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
-          $(trigger).addClass("copied");
+          trigger.classList.add("copied");
           // Change button text back;
           setTimeout(function () {
             trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
-            $(trigger).removeClass("copied");
+            trigger.classList.remove("copied");
           }, 1500);
         });
       });
@@ -122,7 +122,7 @@
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <title>不要拿愚蠢的广告来污染我的邮箱 | 喵's StackHarbor - Whisper to the World</title>
   </head>
-  <body itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".list-group">
+  <body itemscope itemtype="http://schema.org/WebPage">
     <a id="top"></a>
     
 <header id="header" class="header" style="background: #33363b;">
@@ -203,7 +203,7 @@
         
       </div>
     </header>
-    <main class="post-main" itemprop="articleBody">
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <p>一个多月没更新了，这次要写的不是什么技术问题，而是技术的附属问题。</p>
 <a id='more'></a>
 
@@ -336,12 +336,12 @@ Dreamua 诞生于高校宿舍。</p>
   
   <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       loadCommentCount({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "containerClass": "comment-count"
-      })
+      });
     });
   </script>
   
@@ -357,7 +357,7 @@ Dreamua 诞生于高校宿舍。</p>
   <script defer type="text/javascript" src="/js/marked.min.js"></script>
   <script defer type="text/javascript" src="/js/highlight.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    documentReady(function () {
       marked.setOptions({
         "highlight": function (code, lang) {
           return hljs.highlightAuto(code).value;
@@ -442,81 +442,79 @@ Dreamua 诞生于高校宿舍。</p>
     
     
     <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
+    <div class="post-toc sidebar-item">
       <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content">
-        
-        
-        <ol class="list-group toc">
-        
-          <li>
-            <a class="list-group-item toc-link" href="#我不想下载">我不想下载</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#你的情怀和我有什么关系">你的情怀和我有什么关系</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#AI不是万能形容词">AI 不是万能形容词</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#求你别搞假大空">求你别搞假大空</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#edu邮箱就很靠谱吗">edu 邮箱就很靠谱吗</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#说话能不能说准了">说话能不能说准了</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#生人社交本身就是伪命题">生人社交本身就是伪命题</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#我为什么非要用你的">我为什么非要用你的</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#Play商店搜不到">Play 商店搜不到</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#官网没有可用信息">官网没有可用信息</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#化再浓的妆也没用">化再浓的妆也没用</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#真的别再卖情怀了">真的别再卖情怀了</a>
-            
-          </li>
-        
-          <li>
-            <a class="list-group-item toc-link" href="#百度没收录我的网站">百度没收录我的网站</a>
-            
-          </li>
-        
-        </ol>
-        
-      </div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          <a class="list-group-item toc-link" href="#我不想下载">我不想下载</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#你的情怀和我有什么关系">你的情怀和我有什么关系</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#AI不是万能形容词">AI 不是万能形容词</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#求你别搞假大空">求你别搞假大空</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#edu邮箱就很靠谱吗">edu 邮箱就很靠谱吗</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#说话能不能说准了">说话能不能说准了</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#生人社交本身就是伪命题">生人社交本身就是伪命题</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#我为什么非要用你的">我为什么非要用你的</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#Play商店搜不到">Play 商店搜不到</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#官网没有可用信息">官网没有可用信息</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#化再浓的妆也没用">化再浓的妆也没用</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#真的别再卖情怀了">真的别再卖情怀了</a>
+          
+        </li>
+      
+        <li>
+          <a class="list-group-item toc-link" href="#百度没收录我的网站">百度没收录我的网站</a>
+          
+        </li>
+      
+      </ol>
+      
     </div>
     
     
@@ -612,4 +610,4 @@ Dreamua 诞生于高校宿舍。</p>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.6 at 2020-01-13 Mon 17:17:43 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-01-14 Tue 13:03:46 CST. -->

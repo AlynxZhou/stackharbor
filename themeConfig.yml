@@ -109,10 +109,7 @@ mathjax:
 # If you don't know what you are doing, don't change it.
 libCDN:
   enable: false
-  jQuery:  //cdn.bootcss.com/jquery/3.3.1/jquery.min.js
   fontAwesome: //use.fontawesome.com/releases/v5.0.8/js/all.js
-  scrollSpy:
-  util:
   lightGallery:
     js:
     css: //cdn.jsdelivr.net/npm/lightgallery.js@1.0.2/dist/css/lightgallery.min.css
@@ -127,7 +124,6 @@ libCDN:
   solarized-dark:
   solarized-light:
   normalize:
-  search:
   marked:
   spinkit:
   avMin: //cdn1.lncld.net/static/js/3.0.4/av-min.js
