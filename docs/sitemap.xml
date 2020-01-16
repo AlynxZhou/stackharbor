@@ -472,13 +472,6 @@
    </url>
    
    <url>
-     <loc>https://sh.alynx.moe/blogroll/</loc>
-     
-     <lastmod>2020-01-13T02:54:01.598Z</lastmod>
-     
-   </url>
-   
-   <url>
      <loc>https://sh.alynx.moe/about/</loc>
      
      <lastmod>2019-12-23T01:17:55.614Z</lastmod>
@@ -486,9 +479,16 @@
    </url>
    
    <url>
+     <loc>https://sh.alynx.moe/blogroll/</loc>
+     
+     <lastmod>2020-01-13T02:54:01.598Z</lastmod>
+     
+   </url>
+   
+   <url>
      <loc>https://sh.alynx.moe/Undefined-Script-Works/</loc>
      
-     <lastmod>2020-01-06T06:19:09.992Z</lastmod>
+     <lastmod>2020-01-16T00:40:11.699Z</lastmod>
      
    </url>
    

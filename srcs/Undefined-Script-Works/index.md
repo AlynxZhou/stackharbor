@@ -42,3 +42,9 @@ createdDate: 2018-04-04 08:15:40
 - 主页：<https://piano.alynx.moe/>
 - 仓库：<https://github.com/AlynxZhou/azpiano-react/>
 
+## Alynx Live Wallpaper
+
+让你选择视频作为壁纸的 Android 应用。
+
+- 主页：<https://livewallpaper.alynx.moe/>
+- 仓库：<https://github.com/AlynxZhou/alynx-live-wallpaper/>
