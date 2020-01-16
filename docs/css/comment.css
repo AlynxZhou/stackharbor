@@ -1,16 +1,16 @@
-.comments .comment-results {
+.comment .comment-results {
   padding: 1em;
 }
-.comments .comment-results .comment-fail {
+.comment .comment-results .comment-fail {
   text-align: center;
   color: #444;
 }
-.comments .comment-results .comments-header {
+.comment .comment-results .comments-header {
   padding: 0.5em;
   text-align: center;
   color: #444;
 }
-.comments .comment-results .comments-main .comment {
+.comment .comment-results .comments-main .comment {
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -43,7 +43,7 @@
   align-items: start;
   margin: 1em 0;
 }
-.comments .comment-results .comments-main .comment .comment-avatar-container {
+.comment .comment-results .comments-main .comment .comment-avatar-container {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -53,7 +53,7 @@
   flex: 1 1 auto;
   width: 10%;
 }
-.comments .comment-results .comments-main .comment .comment-avatar-container .comment-avatar {
+.comment .comment-results .comments-main .comment .comment-avatar-container .comment-avatar {
   width: 70%;
   border: 0.1em solid #fff;
   border-radius: 50%;
@@ -63,7 +63,7 @@
   -ms-transition: 1s ease-in-out;
   transition: 1s ease-in-out;
 }
-.comments .comment-results .comments-main .comment .comment-avatar-container .comment-avatar:hover {
+.comment .comment-results .comments-main .comment .comment-avatar-container .comment-avatar:hover {
   -webkit-transform: rotateY(720deg);
   -moz-transform: rotateY(720deg);
   -o-transform: rotateY(720deg);
@@ -72,7 +72,7 @@
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
-.comments .comment-results .comments-main .comment .comment-body-container {
+.comment .comment-results .comments-main .comment .comment-body-container {
   -webkit-box-flex: 9;
   -moz-box-flex: 9;
   -o-box-flex: 9;
@@ -88,13 +88,13 @@
   -ms-transition: 1s ease-in-out;
   transition: 1s ease-in-out;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info {
   padding: 0.5em;
   color: #eee;
   background: #33363b;
   overflow: auto;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info a {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info a {
   position: relative;
   color: #ddd;
   text-decoration: none;
@@ -105,46 +105,46 @@
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info a:hover {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info a:hover {
   color: #fff;
   border-bottom: 0.05em solid #fff;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info a:active {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info a:active {
   top: 0.1em;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author {
   margin: 0 0.5em;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-date {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-date {
   margin: 0 0.5em;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-association {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-association {
   margin: 0 0.5em;
   padding: 0 0.5em;
   border: 0.05em solid #eee;
   border-radius: 0.3em;
   color: #eee;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-link::before {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-link::before {
   content: "#";
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-content {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-content {
   padding: 0.5em 1em;
   background: #fff;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-content pre {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-content pre {
   overflow: auto;
   padding: 0.5em;
   background: #f8f8f8;
 }
-.comments .comment-results .comments-main .comment .comment-body-container .comment-content pre code {
+.comment .comment-results .comments-main .comment .comment-body-container .comment-content pre code {
   background: transparent;
 }
-.comments .comment-results .comments-main .comment .comment-body-container:hover {
+.comment .comment-results .comments-main .comment .comment-body-container:hover {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
-.comments .comment-results .comments-footer {
+.comment .comment-results .comments-footer {
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -164,7 +164,7 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
-.comments .comment-results .comments-footer .comments-send {
+.comment .comment-results .comments-footer .comment-send {
   padding: 0.3em 1em;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;

@@ -200,7 +200,7 @@ blogroll:
 
 comment:
   enable: true
-  # disqusShortName: stackharboralynxxyz
+  disqusShortName: stackharboralynxxyz
   issue:
     enable: true
     user: AlynxZhou
