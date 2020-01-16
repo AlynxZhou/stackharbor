@@ -354,7 +354,7 @@
   display: block;
   text-align: center;
 }
-.footer .back-to-top a {
+.footer .back-to-top button {
   border: none;
   outline: 0;
   background: #ccc;
@@ -368,11 +368,8 @@
   border-bottom-right-radius: 0.3em;
   font-size: 2em;
 }
-.footer .back-to-top a:hover {
+.footer .back-to-top button:hover {
   color: #36e;
-}
-.footer .back-to-top a:active {
-  top: 0;
 }
 @media (max-width: 40em) {
   .footer .footer-container {
