@@ -1,13 +1,13 @@
 .footer {
   background: #33363b;
   color: #eee;
-  margin-top: 1.5em;
+  margin-top: 1.5rem;
 }
 .footer .footer-container {
   width: auto;
   word-wrap: break-word;
   line-height: 2em;
-  padding: 1em;
+  padding: 1rem;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -95,16 +95,16 @@
   overflow: hidden;
   display: inline-block;
   margin: 0 auto;
-  padding: 0 0.7em;
+  padding: 0 0.75em;
   cursor: pointer;
   border-bottom-left-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
-  font-size: 2em;
+  font-size: 2rem;
 }
 .footer .back-to-top button:hover {
   color: #36e;
 }
-@media (max-width: 40em) {
+@media (max-width: 40rem) {
   .footer .footer-container {
     -webkit-box-direction: reverse;
     -moz-box-direction: reverse;

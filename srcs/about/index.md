@@ -95,11 +95,13 @@ PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
 
 33. Alynx 说你好，世界。
 
+<!--
 # Build with Atom.
 
 **A hackable text editor for the 21st Century.**
 
 [![Build with Atom](/images/Atom.png)](https://atom.io/)
+-->
 
 <!--
 <div id="snakeGame" class="snakeGame">

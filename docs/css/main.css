@@ -1,6 +1,6 @@
 .main {
   font: 16px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  margin-top: -3em;
+  margin-top: -3rem;
 }
 .main .main-container {
   width: auto;
@@ -8,8 +8,8 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
+  box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   border-bottom-left-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
   display: -webkit-box;
@@ -54,7 +54,7 @@
   flex: 3 3 auto;
   width: 75%;
 }
-@media (max-width: 60em) {
+@media (max-width: 60rem) {
   .main .main-container {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;

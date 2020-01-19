@@ -1,5 +1,5 @@
 .header {
-  padding-bottom: 3em;
+  padding-bottom: 3rem;
   margin-bottom: 0;
   background: #33363b;
   color: #eee;
@@ -35,7 +35,7 @@
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  padding: 1em;
+  padding: 1rem;
 }
 .header .header-container .header-title {
   text-align: left;
@@ -63,12 +63,12 @@
   top: 0;
 }
 .header .header-container .header-title .title {
-  font: bold 2em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  margin: 0 0 0.5em 0;
+  font: bold 2rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+  margin: 0 0 0.5rem 0;
 }
 .header .header-container .header-title .subtitle {
-  font: italic 1.5em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  margin: 0.5em 0 0 0;
+  font: italic 1.5rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+  margin: 0.5rem 0 0 0;
 }
 .header .header-container .logo {
   text-align: right;
@@ -83,10 +83,10 @@
 }
 .header .header-container .logo img {
   display: inline-block;
-  max-height: 5em;
+  max-height: 5rem;
   width: auto;
 }
-@media (max-width: 40em) {
+@media (max-width: 40rem) {
   .header .header-container {
     -webkit-box-direction: reverse;
     -moz-box-direction: reverse;

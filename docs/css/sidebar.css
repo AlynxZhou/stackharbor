@@ -4,18 +4,18 @@
 .info .author-avatar {
   width: 90%;
   display: block;
-  margin: 1em auto;
-  border: 0.3em solid #fff;
+  margin: 1rem auto;
+  border: 0.3rem solid #fff;
   border-radius: 50%;
-  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
-  -webkit-transition: 1s ease-in-out;
-  -moz-transition: 1s ease-in-out;
-  -o-transition: 1s ease-in-out;
-  -ms-transition: 1s ease-in-out;
-  transition: 1s ease-in-out;
+  -webkit-transition: box-shadow 0.3s ease-in-out, -webkit-transform 1s ease-in-out;
+  -moz-transition: box-shadow 0.3s ease-in-out, -moz-transform 1s ease-in-out;
+  -o-transition: box-shadow 0.3s ease-in-out, -o-transform 1s ease-in-out;
+  -ms-transition: box-shadow 0.3s ease-in-out, -ms-transform 1s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
 .info .author-avatar:hover {
+  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   -webkit-transform: rotateY(720deg);
   -moz-transform: rotateY(720deg);
   -o-transform: rotateY(720deg);
@@ -24,15 +24,15 @@
 }
 .info .author-name {
   color: #26272b;
-  font-size: 1.8em;
+  font-size: 1.8rem;
   font-weight: normal;
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
 }
 .info .author-description {
   color: #444;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: normal;
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
 }
 .info .site-count {
   display: -webkit-box;
@@ -66,9 +66,8 @@
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   width: 100%;
-  margin: 1em 0;
+  margin: 1rem 0;
   text-align: center;
-  font-size: 1em;
 }
 .info .site-count div.count-block {
   -webkit-box-flex: 1;
@@ -78,8 +77,8 @@
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  border-left: 0.05em #666 solid;
-  border-right: 0.05em #666 solid;
+  border-left: 0.05rem #666 solid;
+  border-right: 0.05rem #666 solid;
 }
 .info .site-count div.count-block:first-child {
   border-left: none;
@@ -89,16 +88,16 @@
 }
 .info .site-count .site-count-title {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 .info .rss {
-  margin: 1em 0;
+  margin: 1rem 0;
   padding: 0;
 }
 .info .rss .rss-link {
   display: block;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   color: #fff;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
@@ -119,16 +118,16 @@
   word-wrap: break-word;
 }
 .sidebar .search {
-  height: 2.5em;
+  height: 2.5rem;
   display: block;
   text-align: center;
   background: #36e;
   color: #fff;
-  padding-top: 0.5em;
+  padding-top: 0.5rem;
 }
 .sidebar .search .search-input {
   width: 70%;
-  height: 1.8em;
+  height: 1.8rem;
   border: none;
   border-bottom: 0.1em dotted #fff;
   background: #36e;
@@ -173,7 +172,7 @@
   left: 0;
 }
 .sidebar .sidebar-item {
-  margin: 1em;
+  margin: 1rem;
 }
 .sidebar .sidebar-sticky {
   position: -webkit-sticky;
@@ -186,13 +185,13 @@
   border-bottom: 0.05em solid #36e;
 }
 .sidebar hr {
-  background: -webkit-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
-  background: -moz-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
-  background: -o-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
-  background: -ms-repeating-linear-gradient(135deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
-  background: repeating-linear-gradient(-45deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
+  background: -webkit-repeating-linear-gradient(135deg, #fff, #fff 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: -moz-repeating-linear-gradient(135deg, #fff, #fff 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: -o-repeating-linear-gradient(135deg, #fff, #fff 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: -ms-repeating-linear-gradient(135deg, #fff, #fff 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: repeating-linear-gradient(-45deg, #fff, #fff 0.25rem, transparent 0.25rem, transparent 0.5rem);
 }
-@media (max-width: 60em) {
+@media (max-width: 60rem) {
   .sidebar {
     width: 100%;
   }

@@ -3,8 +3,8 @@
   margin: 0;
   padding: 0 0.5em;
   background: #33363b;
-  -webkit-box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
+  box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
   display: block;
@@ -27,16 +27,15 @@
 .nav ul li a {
   position: relative;
   display: block;
-  font-size: 1.5em;
-  padding: 0.75em;
+  font-size: 1.5rem;
+  padding: 0.75em 0.5em;
   color: #ddd;
   text-decoration: none;
-  text-shadow: 0 0.05em rgba(0,0,0,0.2);
-  -webkit-transition: 0.2s ease-in-out;
-  -moz-transition: 0.2s ease-in-out;
-  -o-transition: 0.2s ease-in-out;
-  -ms-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
   border-bottom: none;
 }
 .nav ul li a:hover {
@@ -52,7 +51,7 @@
 }
 .nav .nav-toggle {
   text-align: center;
-  font-size: 2em;
+  font-size: 2rem;
   position: relative;
   cursor: pointer;
   color: #ddd;
@@ -65,7 +64,7 @@
   border-bottom: none;
   color: #fff;
 }
-@media (max-width: 40em) {
+@media (max-width: 40rem) {
   .nav .nav-toggle {
     display: block;
   }

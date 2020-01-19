@@ -1,5 +1,5 @@
 .header {
-  padding-bottom: 3em;
+  padding-bottom: 3rem;
   margin-bottom: 0;
   background: #33363b;
   color: #eee;
@@ -35,7 +35,7 @@
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  padding: 1em;
+  padding: 1rem;
 }
 .header .header-container .header-title {
   text-align: left;
@@ -63,12 +63,12 @@
   top: 0;
 }
 .header .header-container .header-title .title {
-  font: bold 2em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  margin: 0 0 0.5em 0;
+  font: bold 2rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+  margin: 0 0 0.5rem 0;
 }
 .header .header-container .header-title .subtitle {
-  font: italic 1.5em Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  margin: 0.5em 0 0 0;
+  font: italic 1.5rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+  margin: 0.5rem 0 0 0;
 }
 .header .header-container .logo {
   text-align: right;
@@ -83,10 +83,10 @@
 }
 .header .header-container .logo img {
   display: inline-block;
-  max-height: 5em;
+  max-height: 5rem;
   width: auto;
 }
-@media (max-width: 40em) {
+@media (max-width: 40rem) {
   .header .header-container {
     -webkit-box-direction: reverse;
     -moz-box-direction: reverse;
@@ -112,8 +112,8 @@
   margin: 0;
   padding: 0 0.5em;
   background: #33363b;
-  -webkit-box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
+  box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
   display: block;
@@ -136,16 +136,15 @@
 .nav ul li a {
   position: relative;
   display: block;
-  font-size: 1.5em;
-  padding: 0.75em;
+  font-size: 1.5rem;
+  padding: 0.75em 0.5em;
   color: #ddd;
   text-decoration: none;
-  text-shadow: 0 0.05em rgba(0,0,0,0.2);
-  -webkit-transition: 0.2s ease-in-out;
-  -moz-transition: 0.2s ease-in-out;
-  -o-transition: 0.2s ease-in-out;
-  -ms-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
   border-bottom: none;
 }
 .nav ul li a:hover {
@@ -161,7 +160,7 @@
 }
 .nav .nav-toggle {
   text-align: center;
-  font-size: 2em;
+  font-size: 2rem;
   position: relative;
   cursor: pointer;
   color: #ddd;
@@ -174,7 +173,7 @@
   border-bottom: none;
   color: #fff;
 }
-@media (max-width: 40em) {
+@media (max-width: 40rem) {
   .nav .nav-toggle {
     display: block;
   }
@@ -198,7 +197,7 @@
 }
 .main {
   font: 16px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  margin-top: -3em;
+  margin-top: -3rem;
 }
 .main .main-container {
   width: auto;
@@ -206,8 +205,8 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
+  box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   border-bottom-left-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
   display: -webkit-box;
@@ -252,7 +251,7 @@
   flex: 3 3 auto;
   width: 75%;
 }
-@media (max-width: 60em) {
+@media (max-width: 60rem) {
   .main .main-container {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
@@ -268,13 +267,13 @@
 .footer {
   background: #33363b;
   color: #eee;
-  margin-top: 1.5em;
+  margin-top: 1.5rem;
 }
 .footer .footer-container {
   width: auto;
   word-wrap: break-word;
   line-height: 2em;
-  padding: 1em;
+  padding: 1rem;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -362,16 +361,16 @@
   overflow: hidden;
   display: inline-block;
   margin: 0 auto;
-  padding: 0 0.7em;
+  padding: 0 0.75em;
   cursor: pointer;
   border-bottom-left-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
-  font-size: 2em;
+  font-size: 2rem;
 }
 .footer .back-to-top button:hover {
   color: #36e;
 }
-@media (max-width: 40em) {
+@media (max-width: 40rem) {
   .footer .footer-container {
     -webkit-box-direction: reverse;
     -moz-box-direction: reverse;
@@ -580,11 +579,11 @@ hr {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  background: -webkit-repeating-linear-gradient(135deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
-  background: -moz-repeating-linear-gradient(135deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
-  background: -o-repeating-linear-gradient(135deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
-  background: -ms-repeating-linear-gradient(135deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
-  background: repeating-linear-gradient(-45deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
+  background: -webkit-repeating-linear-gradient(135deg, #ccc, #ccc 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: -moz-repeating-linear-gradient(135deg, #ccc, #ccc 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: -o-repeating-linear-gradient(135deg, #ccc, #ccc 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: -ms-repeating-linear-gradient(135deg, #ccc, #ccc 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: repeating-linear-gradient(-45deg, #ccc, #ccc 0.25rem, transparent 0.25rem, transparent 0.5rem);
 }
 article table {
   margin: 1em auto;
@@ -597,14 +596,14 @@ article table thead tr {
 }
 article table thead tr th {
   padding: 0.4em 0.7em;
-  border: 0.1em solid #999;
+  border: 0.1rem solid #999;
 }
 article table tbody tr {
   background: #eee;
 }
 article table tbody tr td {
   padding: 0.4em 0.7em;
-  border: 0.1em solid #ddd;
+  border: 0.1rem solid #ddd;
 }
 article table tbody tr td:nth-child(2n) {
   background: #fff;
@@ -614,7 +613,7 @@ article table tbody tr:nth-child(2n) {
 }
 article table tbody tr:nth-child(2n) td {
   padding: 0.4em 0.7em;
-  border: 0.1em solid #ddd;
+  border: 0.1rem solid #ddd;
 }
 article table tbody tr:nth-child(2n) td:nth-child(2n) {
   background: #eee;
@@ -627,7 +626,6 @@ code {
   word-wrap: break-word;
   border-radius: 0.3em;
   font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  font-size: 16px;
   background: #f8f8f8;
   -webkit-font-feature-settings: "liga" 0; /* No variation */
   -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
@@ -714,11 +712,11 @@ pre code {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   color: #ddd;
-  -webkit-transition: 0.2s ease-in-out;
-  -moz-transition: 0.2s ease-in-out;
-  -o-transition: 0.2s ease-in-out;
-  -ms-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 .code-titlebar button.copy:hover {
   color: #fff;
@@ -883,17 +881,17 @@ blockquote p {
 .card {
   display: block;
   background: #fff;
-  -webkit-transition: 0.2s ease-in-out;
-  -moz-transition: 0.2s ease-in-out;
-  -o-transition: 0.2s ease-in-out;
-  -ms-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-radius: 0.3em;
-  padding: 0.5em 1em;
-  margin: 0.5em;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 .card:hover {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
@@ -902,7 +900,7 @@ blockquote p {
 .svg-inline--fa {
   margin: 0 0.2em;
 }
-@media (max-width: 80em) {
+@media (max-width: 80rem) {
   .container {
     width: 100%;
   }

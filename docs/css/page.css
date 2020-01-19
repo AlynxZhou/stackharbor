@@ -1,5 +1,5 @@
 .comment .comment-results {
-  padding: 1em;
+  padding: 1rem;
 }
 .comment .comment-results .comment-fail {
   text-align: center;
@@ -41,7 +41,7 @@
   -ms-flex-align: start;
   -webkit-align-items: start;
   align-items: start;
-  margin: 1em 0;
+  margin: 0.5rem 0;
 }
 .comment .comment-results .comments-main .comment .comment-avatar-container {
   -webkit-box-flex: 1;
@@ -55,22 +55,22 @@
 }
 .comment .comment-results .comments-main .comment .comment-avatar-container .comment-avatar {
   width: 70%;
-  border: 0.1em solid #fff;
+  border: 0.1rem solid #fff;
   border-radius: 50%;
-  -webkit-transition: 1s ease-in-out;
-  -moz-transition: 1s ease-in-out;
-  -o-transition: 1s ease-in-out;
-  -ms-transition: 1s ease-in-out;
-  transition: 1s ease-in-out;
+  -webkit-transition: box-shadow 0.3s ease-in-out, -webkit-transform 1s ease-in-out;
+  -moz-transition: box-shadow 0.3s ease-in-out, -moz-transform 1s ease-in-out;
+  -o-transition: box-shadow 0.3s ease-in-out, -o-transform 1s ease-in-out;
+  -ms-transition: box-shadow 0.3s ease-in-out, -ms-transform 1s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
 .comment .comment-results .comments-main .comment .comment-avatar-container .comment-avatar:hover {
+  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   -webkit-transform: rotateY(720deg);
   -moz-transform: rotateY(720deg);
   -o-transform: rotateY(720deg);
   -ms-transform: rotateY(720deg);
   transform: rotateY(720deg);
-  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
-  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
 .comment .comment-results .comments-main .comment .comment-body-container {
   -webkit-box-flex: 9;
@@ -81,12 +81,13 @@
   -ms-flex: 9 9 auto;
   flex: 9 9 auto;
   width: 90%;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  overflow: hidden;
   border-radius: 0.3em;
-  -webkit-transition: 1s ease-in-out;
-  -moz-transition: 1s ease-in-out;
-  -o-transition: 1s ease-in-out;
-  -ms-transition: 1s ease-in-out;
-  transition: 1s ease-in-out;
 }
 .comment .comment-results .comments-main .comment .comment-body-container .comment-info {
   padding: 0.5em;
@@ -135,6 +136,7 @@
 .comment .comment-results .comments-main .comment .comment-body-container .comment-content pre {
   overflow: auto;
   padding: 0.5em;
+  border-radius: 0.3em;
   background: #f8f8f8;
 }
 .comment .comment-results .comments-main .comment .comment-body-container .comment-content pre code {
@@ -176,8 +178,8 @@
   text-align: center;
 }
 .page .pagination {
-  margin: 1em 0;
-  padding: 1em 0;
+  margin: 1rem 0;
+  padding: 1rem 0;
   display: block;
   text-align: center;
   color: #666;
@@ -185,7 +187,7 @@
 .page .pagination .page-number,
 .page .pagination .extend {
   overflow: hidden;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   padding: 0.5em;
   margin: 0 0.5em;
   text-decoration: none;
@@ -207,12 +209,11 @@
   border-top: 0.07em solid #36e;
 }
 .page .pagination .space {
-  font-size: 1em;
   margin: 0 0.5em;
   color: #666;
 }
 .page .page-nav {
-  margin: 0 1em;
+  margin: 0 1rem;
   padding: 0;
   display: -webkit-box;
   display: -moz-box;
@@ -253,7 +254,7 @@
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 .page .page-nav .page-nav-item a {
   position: relative;
