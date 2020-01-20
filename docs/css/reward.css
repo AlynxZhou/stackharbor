@@ -23,9 +23,8 @@
   cursor: pointer;
   border: none;
   outline: 0;
-  padding: 0 0.5em;
+  padding: 0.5em 0.5em;
   margin: 0.5em 0;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
-  line-height: 2em;
 }

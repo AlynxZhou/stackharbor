@@ -127,7 +127,6 @@
   white-space: nowrap;
 }
 .nav ul li {
-  line-height: 2em;
   position: relative;
   text-align: center;
   display: inline-block;
@@ -137,7 +136,8 @@
   position: relative;
   display: block;
   font-size: 1.5rem;
-  padding: 0.75em 0.5em;
+  line-height: 1.5;
+  padding: 0.5em;
   color: #ddd;
   text-decoration: none;
   -webkit-transition: 0.3s ease-in-out;
@@ -272,7 +272,7 @@
 .footer .footer-container {
   width: auto;
   word-wrap: break-word;
-  line-height: 2em;
+  line-height: 2;
   padding: 1rem;
   display: -webkit-box;
   display: -moz-box;
@@ -794,7 +794,7 @@ figure.highlight {
 figure.highlight pre {
   font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   font-size: 16px;
-  line-height: 1.5em;
+  line-height: 1.5;
   margin: 0;
 }
 figure.highlight pre.gutter {

@@ -6,7 +6,7 @@
 .footer .footer-container {
   width: auto;
   word-wrap: break-word;
-  line-height: 2em;
+  line-height: 2;
   padding: 1rem;
   display: -webkit-box;
   display: -moz-box;
