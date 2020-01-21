@@ -1,25 +1,25 @@
-.reward {
+div.reward {
   margin: 1rem auto;
   width: 90%;
   text-align: center;
   color: #444;
 }
-.reward .qr {
+div.reward div.qr {
   text-align: center;
 }
-.reward .qr div {
+div.reward div.qr div {
   padding: 0.5em;
   display: inline-block;
 }
-.reward .qr div img {
+div.reward div.qr div img {
   width: 10rem;
   margin: 0 auto;
   display: block;
 }
-.reward .qr div span {
+div.reward div.qr div span {
   display: block;
 }
-.reward .button {
+div.reward button.button {
   cursor: pointer;
   border: none;
   outline: 0;
@@ -28,20 +28,20 @@
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
 }
-.post .post-header {
+article.post header.post-header {
   text-align: center;
 }
-.post .post-header .post-title-simple {
+article.post header.post-header h1.post-title-simple {
   margin: 0;
 }
-.post .post-header .post-title .post-title-link {
+article.post header.post-header h1.post-title a.post-title-link {
   display: inline-block;
   position: relative;
   text-decoration: none;
   border-bottom: none;
   color: #26272b;
 }
-.post .post-header .post-title .post-title-link::after {
+article.post header.post-header h1.post-title a.post-title-link::after {
   content: " ";
   position: absolute;
   width: 100%;
@@ -61,7 +61,7 @@
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.post .post-header .post-title .post-title-link:hover::after {
+article.post header.post-header h1.post-title a.post-title-link:hover::after {
   visibility: visible;
   -webkit-transform: scaleX(1);
   -moz-transform: scaleX(1);
@@ -69,56 +69,53 @@
   -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
-.post .post-header .post-title .post-title-link:active {
+article.post header.post-header h1.post-title a.post-title-link:active {
   top: 0.1em;
 }
-.post .post-header .post-meta span.meta-block {
+article.post header.post-header div.post-meta span.meta-block {
   display: block;
   margin: 0.5em;
 }
-.post .post-main img {
-  max-width: 90%;
-}
-.post .post-main a.header-link,
-.post .post-main a.headerlink {
+article.post main.post-main a.header-link,
+article.post main.post-main a.headerlink {
   border: none;
 }
-.post .post-main a.header-link:hover,
-.post .post-main a.headerlink:hover {
+article.post main.post-main a.header-link:hover,
+article.post main.post-main a.headerlink:hover {
   border: none;
 }
-.post .post-main a.header-link:active,
-.post .post-main a.headerlink:active {
+article.post main.post-main a.header-link:active,
+article.post main.post-main a.headerlink:active {
   top: 0;
 }
-.post .post-main a.header-link::before,
-.post .post-main a.headerlink::before {
+article.post main.post-main a.header-link::before,
+article.post main.post-main a.headerlink::before {
   content: "#";
   margin-right: 0.3em;
 }
-.post .post-tag {
+article.post a.post-tag {
   display: inline-block;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
   padding: 0.15em;
 }
-.post .post-tag:nth-child(2n) {
+article.post a.post-tag:nth-child(2n) {
   background: #237f23;
   border: 0.1em solid #c3e6cb;
 }
-.post .post-tag:nth-child(3n) {
+article.post a.post-tag:nth-child(3n) {
   background: #2356af;
   border: 0.1em solid #b8daff;
 }
-.post .post-footer {
+article.post footer.post-footer {
   text-align: center;
 }
-.post .post-footer .post-tags .post-tag {
+article.post footer.post-footer div.post-tags a.post-tag {
   margin: 0.5em;
 }
-.post .tags-cloud {
+article.post div.tags-cloud {
   text-align: center;
 }
-.post .tags-cloud .post-tag {
+article.post div.tags-cloud a.post-tag {
   margin: 0.1em 0.5em;
 }

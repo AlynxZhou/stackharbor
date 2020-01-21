@@ -1,8 +1,8 @@
-.main {
+main.main {
   font: 16px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   margin-top: -3rem;
 }
-.main .main-container {
+main.main div.main-container {
   width: auto;
   background: #eee;
   -webkit-box-sizing: border-box;
@@ -44,7 +44,7 @@
   flex-wrap: nowrap;
   padding: 0;
 }
-.main .main-container .content {
+main.main div.main-container div.content {
   -webkit-box-flex: 3;
   -moz-box-flex: 3;
   -o-box-flex: 3;
@@ -55,7 +55,7 @@
   width: 75%;
 }
 @media (max-width: 60rem) {
-  .main .main-container {
+  main.main div.main-container {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
     -o-box-orient: vertical;
@@ -63,7 +63,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
   }
-  .main .main-container .content {
+  main.main div.main-container div.content {
     width: 100%;
   }
 }

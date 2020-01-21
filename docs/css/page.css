@@ -1,16 +1,16 @@
-.comment .comment-results {
+div.comment div.comment-results {
   padding: 1rem;
 }
-.comment .comment-results .comment-fail {
+div.comment div.comment-results div.comment-fail {
   text-align: center;
   color: #444;
 }
-.comment .comment-results .comments-header {
+div.comment div.comment-results header.comments-header {
   padding: 0.5em;
   text-align: center;
   color: #444;
 }
-.comment .comment-results .comments-main .comment {
+div.comment div.comment-results main.comments-main div.comment {
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -43,7 +43,7 @@
   align-items: start;
   margin: 0.5rem 0;
 }
-.comment .comment-results .comments-main .comment .comment-avatar-container {
+div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -53,7 +53,7 @@
   flex: 1 1 auto;
   width: 10%;
 }
-.comment .comment-results .comments-main .comment .comment-avatar-container .comment-avatar {
+div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container img.comment-avatar {
   width: 70%;
   border: 0.1rem solid #fff;
   border-radius: 50%;
@@ -63,7 +63,7 @@
   -ms-transition: box-shadow 0.3s ease-in-out, -ms-transform 1s ease-in-out;
   transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
-.comment .comment-results .comments-main .comment .comment-avatar-container .comment-avatar:hover {
+div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container img.comment-avatar:hover {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   -webkit-transform: rotateY(720deg);
@@ -72,7 +72,7 @@
   -ms-transform: rotateY(720deg);
   transform: rotateY(720deg);
 }
-.comment .comment-results .comments-main .comment .comment-body-container {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container {
   -webkit-box-flex: 9;
   -moz-box-flex: 9;
   -o-box-flex: 9;
@@ -89,13 +89,13 @@
   overflow: hidden;
   border-radius: 0.3em;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info {
   padding: 0.5em;
   color: #eee;
   background: #33363b;
   overflow: auto;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info a {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a {
   position: relative;
   color: #ddd;
   text-decoration: none;
@@ -106,47 +106,47 @@
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info a:hover {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a:hover {
   color: #fff;
   border-bottom: 0.05em solid #fff;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info a:active {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a:active {
   top: 0.1em;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-author {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info span.comment-info-author {
   margin: 0 0.5em;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-date {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info span.comment-info-date {
   margin: 0 0.5em;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-association {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info span.comment-info-association {
   margin: 0 0.5em;
   padding: 0 0.5em;
   border: 0.05em solid #eee;
   border-radius: 0.3em;
   color: #eee;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-info .comment-info-link::before {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a.comment-info-link::before {
   content: "#";
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-content {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
   padding: 0.5em 1em;
   background: #fff;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-content pre {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
   overflow: auto;
   padding: 0.5em;
   border-radius: 0.3em;
   background: #f8f8f8;
 }
-.comment .comment-results .comments-main .comment .comment-body-container .comment-content pre code {
-  background: transparent;
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre code {
+  background: inherit;
 }
-.comment .comment-results .comments-main .comment .comment-body-container:hover {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container:hover {
   -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
-.comment .comment-results .comments-footer {
+div.comment div.comment-results footer.comments-footer {
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -166,26 +166,27 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
-.comment .comment-results .comments-footer .comment-send {
+div.comment div.comment-results footer.comments-footer a.comment-send {
   padding: 0.3em 1em;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
 }
-.page .page-title {
+div.page h1.page-title,
+div.page h2.page-title {
   text-align: center;
 }
-.page .page-counter {
+div.page h2.page-counter {
   text-align: center;
 }
-.page .pagination {
+div.page nav.pagination {
   margin: 1rem 0;
   padding: 1rem 0;
   display: block;
   text-align: center;
   color: #666;
 }
-.page .pagination .page-number,
-.page .pagination .extend {
+div.page nav.pagination a.page-number,
+div.page nav.pagination a.extend {
   overflow: hidden;
   font-size: 1.2rem;
   padding: 0.5em;
@@ -198,21 +199,21 @@
   -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
-.page .pagination .page-number:hover,
-.page .pagination .extend:hover {
+div.page nav.pagination a.page-number:hover,
+div.page nav.pagination a.extend:hover {
   border-bottom: 0.15em solid #36e;
 }
-.page .pagination .page-number.current,
-.page .pagination .extend.current {
+div.page nav.pagination a.page-number.current,
+div.page nav.pagination a.extend.current {
   color: #36e;
   border-bottom: 0.15em solid #36e;
   border-top: 0.07em solid #36e;
 }
-.page .pagination .space {
+div.page nav.pagination span.space {
   margin: 0 0.5em;
   color: #666;
 }
-.page .page-nav {
+div.page nav.page-nav {
   margin: 0 1rem;
   padding: 0;
   display: -webkit-box;
@@ -246,7 +247,7 @@
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
-.page .page-nav .page-nav-item {
+div.page nav.page-nav div.page-nav-item {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -256,7 +257,7 @@
   flex: 1 1 auto;
   font-size: 1.2rem;
 }
-.page .page-nav .page-nav-item a {
+div.page nav.page-nav div.page-nav-item a {
   position: relative;
   display: -webkit-inline-box;
   display: -moz-inline-box;
@@ -285,17 +286,17 @@
   text-decoration: none;
   border-bottom: none;
 }
-.page .page-nav .page-nav-item a span {
+div.page nav.page-nav div.page-nav-item a span {
   margin: 0.3em;
 }
-.page .page-nav .page-nav-item a:active {
+div.page nav.page-nav div.page-nav-item a:active {
   top: 0.1em;
 }
-.page .page-nav .page-nav-next {
+div.page nav.page-nav div.page-nav-next {
   width: 45%;
   text-align: left;
 }
-.page .page-nav .page-nav-next a {
+div.page nav.page-nav div.page-nav-next a {
   -webkit-box-pack: start;
   -moz-box-pack: start;
   -o-box-pack: start;
@@ -303,11 +304,11 @@
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
-.page .page-nav .page-nav-prev {
+div.page nav.page-nav div.page-nav-prev {
   width: 45%;
   text-align: right;
 }
-.page .page-nav .page-nav-prev a {
+div.page nav.page-nav div.page-nav-prev a {
   -webkit-box-pack: end;
   -moz-box-pack: end;
   -o-box-pack: end;

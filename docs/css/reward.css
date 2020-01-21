@@ -1,25 +1,25 @@
-.reward {
+div.reward {
   margin: 1rem auto;
   width: 90%;
   text-align: center;
   color: #444;
 }
-.reward .qr {
+div.reward div.qr {
   text-align: center;
 }
-.reward .qr div {
+div.reward div.qr div {
   padding: 0.5em;
   display: inline-block;
 }
-.reward .qr div img {
+div.reward div.qr div img {
   width: 10rem;
   margin: 0 auto;
   display: block;
 }
-.reward .qr div span {
+div.reward div.qr div span {
   display: block;
 }
-.reward .button {
+div.reward button.button {
   cursor: pointer;
   border: none;
   outline: 0;
