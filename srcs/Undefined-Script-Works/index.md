@@ -27,6 +27,15 @@ createdDate: 2018-04-04 08:15:40
 - 主页：<https://hikaru.alynx.moe/>
 - 仓库：<https://github.com/AlynxZhou/hikaru/>
 
+## FlipClock
+
+C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出现的翻页时钟屏保）。基于 SDL2。
+
+支持 Linux/Windows 且 **不依赖 Adobe Flash**。可直接设置为 Windows 屏保，绿色免安装。
+
+- 仓库：<https://github.com/AlynxZhou/flipclock/>
+- Windows 编译好的安装包下载：[点击带有 win 的压缩包](https://github.com/AlynxZhou/flipclock/releases/latest)
+
 ## AZTGBot
 
 零依赖 Node.JS Telegram Bot API 框架。
