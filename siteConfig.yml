@@ -9,7 +9,7 @@ email: alynx.zhou@gmail.com
 language: zh-Hans
 
 # Those makes up your site's full URL.
-baseURL: https://sh.alynx.moe
+baseURL: https://sh.alynx.one
 rootDir: /
 
 # Those paths exists on your disk.
