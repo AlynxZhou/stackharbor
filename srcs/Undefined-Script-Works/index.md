@@ -24,7 +24,7 @@ createdDate: 2018-04-04 08:15:40
 
 生成这个网站的静态生成器。
 
-- 主页：<https://hikaru.alynx.moe/>
+- 主页：<https://hikaru.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/hikaru/>
 
 ## FlipClock
@@ -40,7 +40,7 @@ C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出�
 
 零依赖 Node.JS Telegram Bot API 框架。
 
-- 主页：<https://tgbot.alynx.moe/>
+- 主页：<https://tgbot.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/aztgbot/>
 - 酒仙：[点这里让酒仙帮你决定晚上吃什么](https://t.me/mangix_bot)
 
@@ -48,7 +48,7 @@ C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出�
 
 一个把你的按键映射成钢琴并且能记录下来的 React Web App。
 
-- 主页：<https://piano.alynx.moe/>
+- 主页：<https://piano.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/azpiano-react/>
 
 ## Alynx Live Wallpaper
