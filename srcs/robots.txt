@@ -9,4 +9,4 @@ Allow: /about/
 Allow: /images/
 Allow: /css/
 Allow: /js/
-Sitemap: http://sh.alynx.moe/sitemap.xml
+Sitemap: http://sh.alynx.one/sitemap.xml
