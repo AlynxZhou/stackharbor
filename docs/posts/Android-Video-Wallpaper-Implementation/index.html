@@ -607,8 +607,8 @@
     }</code></pre></figure></code></pre><p>这里是让播放器把解码的目标位置设置成 <code>Renderer</code> 里面和 OpenGL 纹理绑定的 <code>SurfaceTexture</code> 上，这个类是 Android 专门设置用来干这个的，可以阅读手册。</p>
 <p>为什么是把播放器给 <code>Renderer</code> 让 <code>Renderer</code> 设置呢？因为 <code>Engine</code> 的生命周期里只用了一个 <code>Renderer</code> 但会经常释放重建 <code>Player</code>，每次都要重新建立对应视频大小的 <code>SurfaceTexture</code>，所以不能让 <code>Renderer</code> 暴露 <code>SurfaceTexture</code> 出去。</p>
 <p>我这里没有用 <code>MediaPlayer</code>，而是用了 Google 的 <code>ExoPlayer</code> 这个项目，具体原因一会再说。</p>
-<pre><code><figure class="highlight hljs processing"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span></pre><pre class="code"><code>    @Override
-    <span class="hljs-keyword">void</span> setScreenSize(<span class="hljs-built_in">int</span> <span class="hljs-built_in">width</span>, <span class="hljs-built_in">int</span> <span class="hljs-built_in">height</span>) {
+<pre><code><figure class="highlight hljs arduino"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span></pre><pre class="code"><code>    @<span class="hljs-function">Override
+    <span class="hljs-keyword">void</span> <span class="hljs-title">setScreenSize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">width</span>, <span class="hljs-keyword">int</span> <span class="hljs-built_in">height</span>)</span> </span>{
         <span class="hljs-keyword">if</span> (screenWidth != <span class="hljs-built_in">width</span> || screenHeight != <span class="hljs-built_in">height</span>) {
             screenWidth = <span class="hljs-built_in">width</span>;
             screenHeight = <span class="hljs-built_in">height</span>;
@@ -619,12 +619,12 @@
         }
     }
 
-    @Override
-    <span class="hljs-keyword">void</span> setVideoSizeAndRotation(<span class="hljs-built_in">int</span> <span class="hljs-built_in">width</span>, <span class="hljs-built_in">int</span> <span class="hljs-built_in">height</span>, <span class="hljs-built_in">int</span> rotation) {
+    @<span class="hljs-function">Override
+    <span class="hljs-keyword">void</span> <span class="hljs-title">setVideoSizeAndRotation</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">width</span>, <span class="hljs-keyword">int</span> <span class="hljs-built_in">height</span>, <span class="hljs-keyword">int</span> rotation)</span> </span>{
         <span class="hljs-comment">// MediaMetadataRetriever always give us raw width and height and won't rotate them.</span>
         <span class="hljs-comment">// So we rotate them by ourselves.</span>
         <span class="hljs-keyword">if</span> (rotation % <span class="hljs-number">180</span> != <span class="hljs-number">0</span>) {
-            <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> swap = <span class="hljs-built_in">width</span>;
+            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> swap = <span class="hljs-built_in">width</span>;
             <span class="hljs-built_in">width</span> = <span class="hljs-built_in">height</span>;
             <span class="hljs-built_in">height</span> = swap;
         }
@@ -1035,6 +1035,8 @@
         
         <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
         
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
         <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
         
         <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
@@ -1096,4 +1098,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.7 at 2020-03-19 Thu 10:56:57 CST. -->
+<!-- Page built by Hikaru v1.2.9 at 2020-04-07 Tue 10:59:53 CST. -->

@@ -164,9 +164,9 @@ blogroll:
     - name: Meow's Blog
       link: https://lrscy.github.io/
       icon: <i class="fas fa-link"></i>
-    # - name: LGiki's Blog
-    #   link: https://lgiki.cc/
-    #   icon: <i class="fas fa-link"></i>
+    - name: LGiki's Blog
+      link: https://lgiki.net/
+      icon: <i class="fas fa-link"></i>
     # - name: HackGhost's Blog
     #   link: http://hackghost.com/
     #   icon: <i class="fas fa-link"></i>

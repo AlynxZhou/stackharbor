@@ -13,7 +13,7 @@ reward: false
 
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
-| <img src="https://lgiki.cc/images/avatar.jpg" style="width: 5em;"> | [LGiki](https://lgiki.cc/) | “喵喵喵” | 节奏王 Dogiki！每天咕咕咕，从不写博客！ |
+| <img src="https://lgiki.net/images/avatar.jpg" style="width: 5em;"> | [LGiki](https://lgiki.net/) | “喵喵喵” | 节奏王 Dogiki！每天咕咕咕，从不写博客！ |
 | <img src="http://www.hackghost.com/image/logo.jpg" style="width: 5em;"> | [HackGhost](http://www.hackghost.com/) |  | 在五道口睡觉的某头。博客从某一天起就不更新了。 |
 | <img src="https://chenxy.moe/pic/chen.jpg" style="width: 5em;"> | [Art_Chen](https://chenxy.moe/) |  | 某著名 ROM 开发者，上大学了要努力写代码啊。|
 
