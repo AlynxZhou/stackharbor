@@ -182,9 +182,9 @@ blogroll:
     - name: 鸡腿工坊
       link: https://jitui.moe/
       icon: <i class="fas fa-link"></i>
-    # - name: Sqyon's Blog
-    #   link: https://sqyon.com/
-    #   icon: <i class="fas fa-link"></i>
+    - name: Sqyon's Blog
+      link: https://sqyon.com/
+      icon: <i class="fas fa-link"></i>
     - name: 约伊兹的萌狼乡手札
       link: https://blog.yoitsu.moe/
       icon: <i class="fas fa-link"></i>
