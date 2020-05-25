@@ -126,6 +126,9 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
   border-radius: 0.3em;
   color: #eee;
 }
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a.comment-info-link {
+  margin: 0 0.5em;
+}
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a.comment-info-link::before {
   content: "#";
 }
