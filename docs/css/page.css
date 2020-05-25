@@ -113,7 +113,7 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a:active {
   top: 0.1em;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info span.comment-info-author {
+div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a.comment-info-author {
   margin: 0 0.5em;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info span.comment-info-date {
