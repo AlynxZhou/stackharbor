@@ -1,7 +1,5 @@
 # Alynx Zhou <alynx.zhou@gmail.com> (https://alynx.moe/)
 patch:
-  style:
-    horizontal: true
   schema_list:
     # 我只用朙月拼音简化字模式
     - schema: "luna_pinyin_simp"

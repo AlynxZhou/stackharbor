@@ -11,6 +11,8 @@ tags:
 - 输入法
 - RIME
 ---
+# 为什么我要折腾这个
+
 在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。
 
 <!--more-->
@@ -28,20 +30,22 @@ RIME 的拼音功能确实很好用（虽然有时候它和我对于词组的想
 - 关掉 RIME 的中英混输功能，在候选框输入英文字母真的很打断思路，我要输入英文要么就是打代码要么就是打单词，反正都不需要输入法，RIME 来就是给我找麻烦。
 - 还有一些奇奇怪怪的 RIME 的键位设置，偏偏要和其他输入法不一样，我已经习惯了那些操作，RIME 的键位只会降低输入速度。
 
-下面介绍一下我的配置，只需要一个文件就可以，我没有对朙月拼音的配置做修改，只是修改了默认配置，朙月拼音自己的配置优先级低于默认配置。
+下面介绍一下我的配置，只需要两个文件就可以，我没有对朙月拼音的配置做修改，只是修改了默认配置。
 
-首先建立一个干净的 RIME 配置环境，直接移走 `~/.config/ibus/rime` 然后执行 `ibus-daemon -rdx` 重新生成（就是它文档里扯的部署部署部署）一套配置，由于我用的都是内置输入法所以也不需要什么乱七八糟的东风破RIME Kit地球拼音之类的。
+首先建立一个干净的 RIME 配置环境，直接移走 `~/.config/ibus/rime` 然后执行 `ibus-daemon -rdx` 重新生成（就是它文档里扯的部署部署部署）一套配置，由于我用的都是内置输入法所以也不需要什么乱七八糟的东风破 RIME Kit 地球拼音之类的。
 
 然后你进去 `~/.config/ibus/rime` 新版大概有以下几个东西：
 
-- 目录 `build`：里面放了各种 RIME 的默认配置，我们不需要动这个。
+- 目录 `build`：~~里面放了各种 RIME 的默认配置，我们不需要动这个。~~ 很好，我搞错了，原来它是从 `/usr/share/rime-data/` 和 `~/.config/ibus/rime/` 下面加载不带 custom 的文件，然后再读取 custom 文件给之前的文件打 patch，最后生成到 `build` 目录下面。
 - 目录 `luna_pinyin.userdb`：看起来像是朙月拼音的词库，当然也不用修改。
 - 文件 `installation.yaml`：我猜不用管。
 - 文件 `user.yaml`：我猜也不用管。
 
-按照 RIME 打 patch 的配置方式我们需要在这个目录下创建一个叫 `default.custom.yaml` 的文件，当然你得先会写 YAML。第一行首先写个叫 `patch:` 的 key，RIME 要求这样，所有的自定义配置都是在 `patch` 字段下面。
+# 各种乱七八糟操作逻辑的配置
 
-怎么确定要修改的 key 名字呢？我这里的都是在 `build/default.yaml` 下面找到的，你也可以试试其他的 YAML 文件。
+按照 RIME 打 patch 的配置方式我们需要在这个目录下创建一个叫 `default.custom.yaml` 的文件，这样就可以给 `/usr/share/rime-data/default.yaml` 这个文件 patch 辣，当然你得先会写 YAML。第一行首先写个叫 `patch:` 的 key，RIME 要求这样，所有的自定义配置都是在 `patch` 字段下面。
+
+怎么确定要修改的 key 名字呢？~~我这里的都是在 `build/default.yaml` 下面找到的，~~ 因为 patch 的是 `/usr/share/rime-data/default.yaml` 所以就去看这个辣，之前又写错了，那个其实是生成的文件。你也可以试试其他的 YAML 文件。
 
 RIME 的文档说什么要用 `/` 把不同层次的 key 折叠成一个比如 `ascii_composer/switch_key`，亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。
 
@@ -312,9 +316,28 @@ patch:
       "~": "~"
 ```
 
-总之写完这些配置再执行 `ibus-daemon -rdx` 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。
+总之写完这些配置 **之后要手动移除 `~/.config/ibus/rime/build/` 这个生成目录** 再执行 `ibus-daemon -rdx` 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。
 
-最后如果你想试一试，点击 [这里](./default.custom.yaml) 下载。
+# 有关为什么 ibus-rime 总是竖着的
+
+ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。
+
+ibus-rime 会读一个叫做 `ibus_rime.yaml` 的配置文件，有这么一个配置可以让他变成横着的：
+
+```yaml
+style:
+  horizontal: true
+```
+
+可能看了之前的你会和我一样想那就打个 patch 到 `ibus_rime.custom.yaml` 不就行了嘛！但是不行，为什么呢？因为不管是 rime 还是 librime 还是 ibus-rime 都没有提供 `/usr/share/rime-data/ibus_rime.yaml` 的文件，所以你的 patch 找不到被打的文件，那就不会被生成到 `build` 目录里。
+
+不要忘了之前说 rime 会读取 `~/.config/ibus/rime/` 下面的 yaml，所以其实只要自己建立 `~/.config/ibus/rime/ibus_rime.yaml` 写入那段配置就可以啦，因为本来也没有所以就不用打 patch 了，或者你在那两个位置建立一个空的 `ibus_rime.yaml` 然后再打 patch 也行……
+
+不要忘了删掉 `build` 目录再 `ibus-daemon -rdx`。
+
+# 下载
+
+如果你想试一试我的配置，其实就两个文件，[default.custom.yaml](./default.custom.yaml) 和 [ibus_rime.yaml](./ibus_rime.yaml)。
 
 *Alynx Zhou*
 
