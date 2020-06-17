@@ -235,92 +235,92 @@
 <p>RIME 的文档说什么要用 <code>/</code> 把不同层次的 key 折叠成一个比如 <code>ascii_composer/switch_key</code>，亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。</p>
 <p>然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：</p>
 <pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span></pre><pre class="code"><code><span class="hljs-attr">patch:</span>
-  <span class="hljs-attr">schema_list:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-attr">schema:</span> <span class="hljs-string">"luna_pinyin_simp"</span></code></pre></figure></code></pre>
+<span class="hljs-attr">  schema_list:</span>
+<span class="hljs-attr">    - schema:</span> <span class="hljs-string">"luna_pinyin_simp"</span></code></pre></figure></code></pre>
 <p>然后就是改掉那个自作聪明的英文输入模式：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span></pre><pre class="code"><code>  <span class="hljs-attr">ascii_composer:</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span></pre><pre class="code"><code><span class="hljs-attr">  ascii_composer:</span>
     <span class="hljs-comment"># 按 CapsLock 输出大写英文字母。</span>
-    <span class="hljs-attr">good_old_caps_lock:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">    good_old_caps_lock:</span> <span class="hljs-literal">true</span>
     <span class="hljs-comment"># `inline_ascii` 在输入框内插入英文。</span>
     <span class="hljs-comment"># `commit_text` 候选文字上屏并切换至英文。</span>
     <span class="hljs-comment"># `commit_code` 输入拼音上屏并切换至英文。</span>
     <span class="hljs-comment"># `clear` 清除拼音并切换至英文。</span>
     <span class="hljs-comment"># `noop` 屏蔽此按键。</span>
-    <span class="hljs-attr">switch_key:</span>
+<span class="hljs-attr">    switch_key:</span>
       <span class="hljs-comment"># 如果你设置 `Caps_Lock` 为 `noop`，</span>
       <span class="hljs-comment"># 一个奇怪的问题是退格键不能用了，除非取消大写锁定。</span>
       <span class="hljs-comment"># 所以我直接设置文字上屏了。</span>
-      <span class="hljs-attr">Caps_Lock:</span> <span class="hljs-string">"commit_text"</span>
-      <span class="hljs-attr">Shift_L:</span> <span class="hljs-string">"commit_code"</span>
-      <span class="hljs-attr">Shift_R:</span> <span class="hljs-string">"commit_code"</span>
-      <span class="hljs-attr">Control_L:</span> <span class="hljs-string">"noop"</span>
-      <span class="hljs-attr">Control_R:</span> <span class="hljs-string">"noop"</span></code></pre></figure></code></pre>
+<span class="hljs-attr">      Caps_Lock:</span> <span class="hljs-string">"commit_text"</span>
+<span class="hljs-attr">      Shift_L:</span> <span class="hljs-string">"commit_code"</span>
+<span class="hljs-attr">      Shift_R:</span> <span class="hljs-string">"commit_code"</span>
+<span class="hljs-attr">      Control_L:</span> <span class="hljs-string">"noop"</span>
+<span class="hljs-attr">      Control_R:</span> <span class="hljs-string">"noop"</span></code></pre></figure></code></pre>
 <p>大部分坑我都写在注释里了可以自己看。</p>
 <p>然后我看那个设置选单也不是很爽，我习惯简体字，这个也可以自己改：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span></pre><pre class="code"><code>  <span class="hljs-attr">switcher:</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span></pre><pre class="code"><code><span class="hljs-attr">  switcher:</span>
     <span class="hljs-comment"># 改掉原来的繁体字标题。</span>
-    <span class="hljs-attr">caption:</span> <span class="hljs-string">"【设置菜单】"</span>
+<span class="hljs-attr">    caption:</span> <span class="hljs-string">"【设置菜单】"</span>
     <span class="hljs-comment"># 用半角斜线而不是奇丑无比的全角斜线做分隔符。</span>
-    <span class="hljs-attr">option_list_separator:</span> <span class="hljs-string">"/"</span>
+<span class="hljs-attr">    option_list_separator:</span> <span class="hljs-string">"/"</span>
     <span class="hljs-comment"># 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。</span>
-    <span class="hljs-attr">hotkeys:</span>
+<span class="hljs-attr">    hotkeys:</span>
       <span class="hljs-comment"># - "Control+s"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">"Control+grave"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">"F4"</span></code></pre></figure></code></pre>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"Control+grave"</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"F4"</span></code></pre></figure></code></pre>
 <p>然后就是改掉它奇怪的键位，Emacs 键位挺好的，但是有几个不知道为什么用不了，再者就是为什么按向左是跳一个字拼音向右是跳一个字母？</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span></pre><pre class="code"><code>  <span class="hljs-attr">key_binder:</span>
-    <span class="hljs-attr">bindings:</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span></pre><pre class="code"><code><span class="hljs-attr">  key_binder:</span>
+<span class="hljs-attr">    bindings:</span>
       <span class="hljs-comment"># Emacs 键位，我喜欢。</span>
       <span class="hljs-comment"># 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+p"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Up"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+n"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Down"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+b"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Left"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+f"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Right"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Alt+b"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Shift+Left"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Alt+f"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Shift+Right"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+a"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Home"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+e"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"End"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+d"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Delete"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+p"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+n"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+b"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Left"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+f"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Right"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+b"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Shift+Left"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+f"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Shift+Right"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+a"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Home"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+e"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"End"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+d"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Delete"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
       <span class="hljs-comment"># 这个用不了，不过估计也用不到。</span>
       <span class="hljs-comment"># - accept: "Control+k"</span>
       <span class="hljs-comment">#   send: "Shift+Delete"</span>
       <span class="hljs-comment">#   when: "composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+h"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"BackSpace"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Alt+h"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Shift+BackSpace"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+g"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Escape"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+bracketleft"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Escape"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Alt+v"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Page_Up"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Control+v"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Page_Down"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"composing"</span></code></pre></figure></code></pre>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+h"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"BackSpace"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+h"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Shift+BackSpace"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+g"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Escape"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+bracketleft"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Escape"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Alt+v"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Control+v"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"composing"</span></code></pre></figure></code></pre>
 <p>还没完，我觉得正常人不会用 Tab 在拼音之间切换，除非你一次输入一句话（那你不觉得候选框太小了看着累吗？？？），设置 Tab 为跳候选词更自然一点，但我也不知道为什么 Shift-Tab 用不了：</p>
 <pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span></pre><pre class="code"><code>      <span class="hljs-comment"># 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。</span>
       <span class="hljs-comment"># - accept: "ISO_Left_Tab"</span>
@@ -332,29 +332,29 @@
       <span class="hljs-comment"># - accept: "Tab"</span>
       <span class="hljs-comment">#   send: "Shift+Right"</span>
       <span class="hljs-comment">#   when: "composing"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Tab"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Down"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"has_menu"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"ISO_Left_Tab"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Up"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Tab"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"ISO_Left_Tab"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
       <span class="hljs-comment"># 鬼知道为什么这个也用不了！</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"Shift+Tab"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Up"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"has_menu"</span></code></pre></figure></code></pre>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"Shift+Tab"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span></code></pre></figure></code></pre>
 <p>以及我觉得正常人不用逗号和句号翻页，毕竟下面的默认设置是逗号句号直接上屏，你设置了翻页也没啥卵用，反正我用减号等号或者上下，不过方括号也不错就是了：</p>
-<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span></pre><pre class="code"><code>      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"minus"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Page_Up"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"has_menu"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"equal"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Page_Down"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"has_menu"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"bracketleft"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Page_Up"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"has_menu"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">accept:</span> <span class="hljs-string">"bracketright"</span>
-        <span class="hljs-attr">send:</span> <span class="hljs-string">"Page_Down"</span>
-        <span class="hljs-attr">when:</span> <span class="hljs-string">"has_menu"</span>
+<pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span></pre><pre class="code"><code><span class="hljs-attr">      - accept:</span> <span class="hljs-string">"minus"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"equal"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"bracketleft"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Up"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
+<span class="hljs-attr">      - accept:</span> <span class="hljs-string">"bracketright"</span>
+<span class="hljs-attr">        send:</span> <span class="hljs-string">"Page_Down"</span>
+<span class="hljs-attr">        when:</span> <span class="hljs-string">"has_menu"</span>
       <span class="hljs-comment"># 我觉得正常人不应该用逗号和句号翻页。</span>
       <span class="hljs-comment"># - accept: "comma"</span>
       <span class="hljs-comment">#   send: "Page_Up"</span>
@@ -410,36 +410,36 @@
   <span class="hljs-comment"># 但是你又想在输入拼音出现选单之后输入这个按键直接上屏（常见的逗号句号问号叹号），</span>
   <span class="hljs-comment"># 我觉得这是多此一举，为什么你非要拿这几个符号翻页？反正我不用。</span>
   <span class="hljs-comment"># 乱七八糟的符号都塞给 `$` 就好了反正我不是会计不用天天输入 `￥`。</span>
-  <span class="hljs-attr">punctuator:</span>
+<span class="hljs-attr">  punctuator:</span>
     <span class="hljs-comment"># 我不会使用全角英文的，我觉得其他程序员也不会。</span>
     <span class="hljs-comment"># 但是中文的标点又是全角的，所以我就只留下半角然后改它的标点。</span>
-    <span class="hljs-attr">half_shape:</span>
+<span class="hljs-attr">    half_shape:</span>
       <span class="hljs-string">"!"</span><span class="hljs-string">:</span> <span class="hljs-string">"！"</span>
       <span class="hljs-string">"\""</span><span class="hljs-string">:</span>
-        <span class="hljs-attr">pair:</span>
-          <span class="hljs-bullet">-</span> <span class="hljs-string">"“"</span>
-          <span class="hljs-bullet">-</span> <span class="hljs-string">"”"</span>
+<span class="hljs-attr">        pair:</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"“"</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"”"</span>
       <span class="hljs-string">"#"</span><span class="hljs-string">:</span> <span class="hljs-string">"#"</span>
       <span class="hljs-string">"$"</span><span class="hljs-string">:</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"￥"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"$"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"€"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"～"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"×"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"÷"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"°"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"℃"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"‰"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"‱"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"℉"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"©"</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-string">"®"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"￥"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"$"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"€"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"～"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"×"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"÷"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"°"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"℃"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"‰"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"‱"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"℉"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"©"</span>
+<span class="hljs-bullet">        -</span> <span class="hljs-string">"®"</span>
       <span class="hljs-string">"%"</span><span class="hljs-string">:</span> <span class="hljs-string">"%"</span>
       <span class="hljs-string">"&amp;"</span><span class="hljs-string">:</span> <span class="hljs-string">"&amp;"</span>
       <span class="hljs-string">"'"</span><span class="hljs-string">:</span>
-        <span class="hljs-attr">pair:</span>
-          <span class="hljs-bullet">-</span> <span class="hljs-string">"‘"</span>
-          <span class="hljs-bullet">-</span> <span class="hljs-string">"’"</span>
+<span class="hljs-attr">        pair:</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"‘"</span>
+<span class="hljs-bullet">          -</span> <span class="hljs-string">"’"</span>
       <span class="hljs-string">"*"</span><span class="hljs-string">:</span> <span class="hljs-string">"*"</span>
       <span class="hljs-string">"+"</span><span class="hljs-string">:</span> <span class="hljs-string">"+"</span>
       <span class="hljs-string">","</span><span class="hljs-string">:</span> <span class="hljs-string">"，"</span>
@@ -461,7 +461,7 @@
       <span class="hljs-string">"&lt;"</span><span class="hljs-string">:</span> <span class="hljs-string">"《"</span>
       <span class="hljs-string">"&gt;"</span><span class="hljs-string">:</span> <span class="hljs-string">"》"</span>
       <span class="hljs-string">"^"</span><span class="hljs-string">:</span> <span class="hljs-string">"……"</span>
-      <span class="hljs-attr">"_":</span> <span class="hljs-string">"——"</span>
+<span class="hljs-attr">      "_":</span> <span class="hljs-string">"——"</span>
       <span class="hljs-string">"`"</span><span class="hljs-string">:</span> <span class="hljs-string">"`"</span>
       <span class="hljs-string">"|"</span><span class="hljs-string">:</span> <span class="hljs-string">"·"</span>
       <span class="hljs-string">"~"</span><span class="hljs-string">:</span> <span class="hljs-string">"~"</span></code></pre></figure></code></pre>
@@ -470,7 +470,7 @@
 <p>ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。</p>
 <p>ibus-rime 会读一个叫做 <code>ibus_rime.yaml</code> 的配置文件，有这么一个配置可以让他变成横着的：</p>
 <pre><code class="yaml"><figure class="highlight hljs yaml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-attr">style:</span>
-  <span class="hljs-attr">horizontal:</span> <span class="hljs-literal">true</span></code></pre></figure></code></pre>
+<span class="hljs-attr">  horizontal:</span> <span class="hljs-literal">true</span></code></pre></figure></code></pre>
 <p>可能看了之前的你会和我一样想那就打个 patch 到 <code>ibus_rime.custom.yaml</code> 不就行了嘛！但是不行，为什么呢？因为不管是 rime 还是 librime 还是 ibus-rime 都没有提供 <code>/usr/share/rime-data/ibus_rime.yaml</code> 的文件，所以你的 patch 找不到被打的文件，那就不会被生成到 <code>build</code> 目录里。</p>
 <p>不要忘了之前说 rime 会读取 <code>~/.config/ibus/rime/</code> 下面的 yaml，所以其实只要自己建立 <code>~/.config/ibus/rime/ibus_rime.yaml</code> 写入那段配置就可以啦，因为本来也没有所以就不用打 patch 了，或者你在那两个位置建立一个空的 <code>ibus_rime.yaml</code> 然后再打 patch 也行……</p>
 <p>不要忘了删掉 <code>build</code> 目录再 <code>ibus-daemon -rdx</code>。</p>
@@ -771,4 +771,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.9 at 2020-06-10 Wed 15:35:55 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-06-17 Wed 23:12:10 CST. -->

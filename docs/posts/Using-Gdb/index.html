@@ -221,21 +221,21 @@
 <h2 id="用GDB打开程序。"><a class="header-link" href="/posts/Using-Gdb/#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82" title="用GDB打开程序。"></a>用GDB打开程序。</h2>
 <p>打开程序的命令很简单，就是<code>$ gdb lab</code>，但是有可能遇到的问题是程序要处理命令行参数，在使用GDB的时候是不能直接在命令行后面附加程序参数的，需要使用参数可以在打开GDB之后输入<code>set args 参数1 参数2 ...</code>附加上参数。</p>
 <p>用GDB打开程序之后是一个交互界面，显示了一些信息和<code>(gdb)</code>这个提示符，表示你现在是在和GDB进行交互而不是程序。这个时候程序是不会运行的。</p>
-<pre><code><figure class="highlight hljs livecodeserver"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span></pre><pre class="code"><code>GNU gdb (GDB) <span class="hljs-number">7.12</span><span class="hljs-number">.1</span>
+<pre><code><figure class="highlight hljs sqf"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span></pre><pre class="code"><code>GNU gdb (GDB) <span class="hljs-number">7.12</span>.<span class="hljs-number">1</span>
 Copyright (C) <span class="hljs-number">2017</span> Free Software Foundation, Inc.
-License GPLv3+: GNU GPL <span class="hljs-built_in">version</span> <span class="hljs-number">3</span> <span class="hljs-keyword">or</span> later &lt;<span class="hljs-keyword">http</span>://gnu.org/licenses/gpl.html&gt;
-This is free software: you are free <span class="hljs-built_in">to</span> change <span class="hljs-keyword">and</span> redistribute <span class="hljs-keyword">it</span>.
-There is NO WARRANTY, <span class="hljs-built_in">to</span> <span class="hljs-keyword">the</span> extent permitted <span class="hljs-keyword">by</span> law.  Type <span class="hljs-string">"show copying"</span>
-<span class="hljs-keyword">and</span> <span class="hljs-string">"show warranty"</span> <span class="hljs-keyword">for</span> details.
-This GDB was configured <span class="hljs-keyword">as</span> <span class="hljs-string">"x86_64-pc-linux-gnu"</span>.
-Type <span class="hljs-string">"show configuration"</span> <span class="hljs-keyword">for</span> configuration details.
-For bug reporting instructions, please see:
-&lt;<span class="hljs-keyword">http</span>://www.gnu.org/software/gdb/bugs/&gt;.
-Find <span class="hljs-keyword">the</span> GDB manual <span class="hljs-keyword">and</span> other documentation resources online <span class="hljs-keyword">at</span>:
-&lt;<span class="hljs-keyword">http</span>://www.gnu.org/software/gdb/documentation/&gt;.
-For help, type <span class="hljs-string">"help"</span>.
-Type <span class="hljs-string">"apropos word"</span> <span class="hljs-built_in">to</span> search <span class="hljs-keyword">for</span> commands related <span class="hljs-built_in">to</span> <span class="hljs-string">"word"</span>...
-Reading symbols <span class="hljs-built_in">from</span> lab...done.
+License GPLv3+: GNU GPL version <span class="hljs-number">3</span> <span class="hljs-built_in">or</span> later &lt;http:<span class="hljs-comment">//gnu.org/licenses/gpl.html&gt;</span>
+This is free software: you are free <span class="hljs-keyword">to</span> change <span class="hljs-built_in">and</span> redistribute it.
+There is NO WARRANTY, <span class="hljs-keyword">to</span> the extent permitted by law.  <span class="hljs-built_in">Type</span> <span class="hljs-string">"show copying"</span>
+<span class="hljs-built_in">and</span> <span class="hljs-string">"show warranty"</span> <span class="hljs-keyword">for</span> details.
+This GDB was configured as <span class="hljs-string">"x86_64-pc-linux-gnu"</span>.
+<span class="hljs-built_in">Type</span> <span class="hljs-string">"show configuration"</span> <span class="hljs-keyword">for</span> configuration details.
+<span class="hljs-keyword">For</span> bug reporting instructions, please see:
+&lt;http:<span class="hljs-comment">//www.gnu.org/software/gdb/bugs/&gt;.</span>
+<span class="hljs-built_in">Find</span> the GDB manual <span class="hljs-built_in">and</span> other documentation <span class="hljs-built_in">resources</span> online at:
+&lt;http:<span class="hljs-comment">//www.gnu.org/software/gdb/documentation/&gt;.</span>
+<span class="hljs-keyword">For</span> help, <span class="hljs-built_in">type</span> <span class="hljs-string">"help"</span>.
+<span class="hljs-built_in">Type</span> <span class="hljs-string">"apropos word"</span> <span class="hljs-keyword">to</span> search <span class="hljs-keyword">for</span> commands related <span class="hljs-keyword">to</span> <span class="hljs-string">"word"</span>...
+Reading symbols <span class="hljs-keyword">from</span> lab...done.
 (gdb)</code></pre></figure></code></pre><h1 id="调试"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95" title="调试"></a>调试</h1>
 <h2 id="设置断点"><a class="header-link" href="/posts/Using-Gdb/#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9" title="设置断点"></a>设置断点</h2>
 <p>首先使用<code>break</code>指令就可以添加一个断点，断点顾名思义就是程序运行到这个位置会暂停下来交给GDB，这样你才能够在程序运行到一半的时候查看一些可疑的变量，断点是针对函数使用的，比如我想在所有的printf()进入的时候暂停，可以使用：</p>
@@ -585,4 +585,4 @@ main (argc=<span class="hljs-number">1</span>, argv=<span class="hljs-number">0<
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.9 at 2020-06-10 Wed 15:35:56 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-06-17 Wed 23:12:10 CST. -->
