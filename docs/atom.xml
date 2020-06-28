@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.one/" />
   
-  <updated>2020-01-10T10:35:03.565Z</updated>
+  <updated>2020-06-28T11:31:22.067Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -17,6 +17,30 @@
   </author>
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
+  
+  <entry>
+    <title>修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题</title>
+    <link href="https://sh.alynx.one/posts/Fix-Windows-Wireless-Adapter-Name/" />
+    <id>https://sh.alynx.one/posts/Fix-Windows-Wireless-Adapter-Name/</id>
+    <published>2020-06-28T11:02:00.000Z</published>
+    <updated>2020-06-28T11:31:22.067Z</updated>
+    
+    <summary type="html">
+    
+    <![CDATA[<p>这是一篇其实没什么逻辑也没什么技术的文章，但踩到这个坑又很头痛，所以记录一下。</p>]]>
+    
+    </summary>
+    
+    <category term="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
+    
+    
+    <category term="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
+    
+    <category term="Windows" scheme="https://sh.alynx.one/tags/Windows/" />
+    
+  </entry>
   
   <entry>
     <title>让你们的主题商店离我远点！</title>
@@ -477,34 +501,6 @@
     <category term="VPN" scheme="https://sh.alynx.one/tags/VPN/" />
     
     <category term="WireGuard" scheme="https://sh.alynx.one/tags/WireGuard/" />
-    
-  </entry>
-  
-  <entry>
-    <title>使用 Moment 处理 JavaScript 与 YAML 的时区转换</title>
-    <link href="https://sh.alynx.one/posts/JavaScript-YAML-Timezone-Moment/" />
-    <id>https://sh.alynx.one/posts/JavaScript-YAML-Timezone-Moment/</id>
-    <published>2019-01-01T12:00:00.000Z</published>
-    <updated>2019-10-29T14:27:37.084Z</updated>
-    
-    <summary type="html">
-    
-    <![CDATA[<p>开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。</p>]]>
-    
-    </summary>
-    
-    <category term="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
-    
-    <category term="JavaScript" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/JavaScript/" />
-    
-    
-    <category term="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="编程" scheme="https://sh.alynx.one/tags/%E7%BC%96%E7%A8%8B/" />
-    
-    <category term="JavaScript" scheme="https://sh.alynx.one/tags/JavaScript/" />
     
   </entry>
   

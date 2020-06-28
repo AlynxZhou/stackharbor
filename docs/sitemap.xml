@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sh.alynx.one/posts/Fix-Windows-Wireless-Adapter-Name/</loc>
+    
+    <lastmod>2020-06-28T11:31:22.067Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sh.alynx.one/posts/Taking-Your-Theme-Store-Away/</loc>
     
     <lastmod>2020-01-10T10:35:03.565Z</lastmod>
@@ -925,6 +932,11 @@
     
     <url>
       <loc>https://sh.alynx.one/tags/Wayland/</loc>
+      
+    </url>
+    
+    <url>
+      <loc>https://sh.alynx.one/tags/Windows/</loc>
       
     </url>
     
