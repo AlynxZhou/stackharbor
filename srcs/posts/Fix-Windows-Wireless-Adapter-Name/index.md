@@ -24,9 +24,11 @@ tags:
 
 接下来需要去掉 `#2` 的后缀，让 Windows 把这个插槽里的卡认成唯一的一张，这里就十分晦涩，Windows 试图隐藏起这个逻辑，但导致了一个令强迫症十分不爽的问题。我搜索了一下，发现了一个 [百度文库文档](https://wenku.baidu.com/view/275565c68bd63186bcebbc96.html) 提供的方案。
 
-首先打开注册表编辑器定位到 `HKEY_LOCAL_MACHINE\SYSTEM\_ControlSet001\Control\Network\{4D36E972-E325-11CE-BFC1-08002BE10318}\Descriptions` 这一项，然后在右侧找到你无线网卡的名称，里面的值应该是 `2`，改成 `1`，然后重启，应该就解决了，而且因为设备名字恢复了，`WLAN 2` 也应该变回 `WLAN` 了。
+首先打开注册表编辑器定位到 `HKEY_LOCAL_MACHINE\SYSTEM\_ControlSet001\Control\Network\{4D36E972-E325-11CE-BFC1-08002BE10318}\Descriptions` 这一项，然后在右侧找到你无线网卡的名称，里面的值应该是 `2`，改成 `1`，然后卸载网卡设备，然后重启，应该就解决了，而且因为设备名字恢复了，`WLAN 2` 也应该变回 `WLAN` 了。
 
 所以其实这篇文章并没有什么逻辑和技术，但是 Windows 自作主张非要保存一个隐藏的不存在的设备，实在是令人头痛，又没什么明显的解决方式，所以也只好记下来以防再次被恶心到。
+
+更新：Arch Linux CN offtopic Telegram 群组里面叫 Give Way 的网友表示并不需要这么复杂，只要把两个无线网卡的设备都卸载掉重启就可以了。理论上确实是如此，但我没机会再试了，遇到相同问题的朋友可以试试。
 
 *Alynx Zhou*
 

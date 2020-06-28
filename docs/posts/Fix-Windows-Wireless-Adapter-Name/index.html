@@ -214,8 +214,9 @@
 <p>切到 Windows 发现不太对劲，首先就是我的 WiFi 适配器名字变成了 <code>WLAN 2</code>，想要重命名成 <code>WLAN</code> 又提示已经存在，但是我又看不到，点进去发现它选择的无线网卡名字后面多了个 <code>#2</code> 的后缀，总之我也不知道怎么回事，但是强迫症觉得很难受，明明我只有一张网卡啊。</p>
 <p>上网搜索了一下，首先是在设备管理器的查看菜单里选择显示隐藏的设备，这样就会发现一个灰色的没有后缀的网卡，我也不知道 Windows 为什么要存一个隐藏的之前存在现在不存在的 PCI-E 设备，首先按照网上的说法卸载掉这个设备然后重启，再开机就没有这个隐藏设备了。</p>
 <p>接下来需要去掉 <code>#2</code> 的后缀，让 Windows 把这个插槽里的卡认成唯一的一张，这里就十分晦涩，Windows 试图隐藏起这个逻辑，但导致了一个令强迫症十分不爽的问题。我搜索了一下，发现了一个 <a href="https://wenku.baidu.com/view/275565c68bd63186bcebbc96.html" target="_blank" rel="noreferrer noopener">百度文库文档</a> 提供的方案。</p>
-<p>首先打开注册表编辑器定位到 <code>HKEY_LOCAL_MACHINE\SYSTEM\_ControlSet001\Control\Network\{4D36E972-E325-11CE-BFC1-08002BE10318}\Descriptions</code> 这一项，然后在右侧找到你无线网卡的名称，里面的值应该是 <code>2</code>，改成 <code>1</code>，然后重启，应该就解决了，而且因为设备名字恢复了，<code>WLAN 2</code> 也应该变回 <code>WLAN</code> 了。</p>
+<p>首先打开注册表编辑器定位到 <code>HKEY_LOCAL_MACHINE\SYSTEM\_ControlSet001\Control\Network\{4D36E972-E325-11CE-BFC1-08002BE10318}\Descriptions</code> 这一项，然后在右侧找到你无线网卡的名称，里面的值应该是 <code>2</code>，改成 <code>1</code>，然后卸载网卡设备，然后重启，应该就解决了，而且因为设备名字恢复了，<code>WLAN 2</code> 也应该变回 <code>WLAN</code> 了。</p>
 <p>所以其实这篇文章并没有什么逻辑和技术，但是 Windows 自作主张非要保存一个隐藏的不存在的设备，实在是令人头痛，又没什么明显的解决方式，所以也只好记下来以防再次被恶心到。</p>
+<p>更新：Arch Linux CN offtopic Telegram 群组里面叫 Give Way 的网友表示并不需要这么复杂，只要把两个无线网卡的设备都卸载掉重启就可以了。理论上确实是如此，但我没机会再试了，遇到相同问题的朋友可以试试。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
@@ -478,4 +479,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.6 at 2020-06-28 Sun 19:31:34 CST. -->
+<!-- Page built by Hikaru v1.2.6 at 2020-06-28 Sun 19:41:33 CST. -->
