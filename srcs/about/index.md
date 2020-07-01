@@ -9,9 +9,9 @@ reward: false
 
 Alynx Zhou
 
-[北京交通大学](https://bjtu.edu.cn/) [计算机信息与技术学院](https://scit.bjtu.edu.cn) 计算机科学与技术专业 大四本科生
+[北京交通大学](https://bjtu.edu.cn/) [计算机信息与技术学院](https://scit.bjtu.edu.cn) 计算机科学与技术专业 本科毕业生
 
-[SUSE](https://suse.com/) 北京分部实习生
+[SUSE](https://suse.com/) 北京分公司桌面开发者
 
 Arch Linux 用户
 
