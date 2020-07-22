@@ -228,7 +228,7 @@
 <span class="hljs-keyword">from</span> qqlib <span class="hljs-keyword">import</span> qzone
 
 QQ_NUM = <span class="hljs-number">1234567890</span>
-QQ_PASSWD = <span class="hljs-string">"MyPassWord."</span>
+QQ_PASSWD = <span class="hljs-string">&quot;MyPassWord.&quot;</span>
 
 qz = qzone.QZone(QQ_NUM, QQ_PASSWD)
 
@@ -237,28 +237,28 @@ qz = qzone.QZone(QQ_NUM, QQ_PASSWD)
 <span class="hljs-keyword">except</span> qqlib.NeedVerifyCode <span class="hljs-keyword">as</span> nvc:
     <span class="hljs-comment"># Get a verify code.</span>
     verifier = nvc.verifier
-    <span class="hljs-keyword">with</span> open(<span class="hljs-string">"verify.jpg"</span>, <span class="hljs-string">"wb"</span>) <span class="hljs-keyword">as</span> verify_jpg:
+    <span class="hljs-keyword">with</span> open(<span class="hljs-string">&quot;verify.jpg&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> verify_jpg:
         verify_jpg.write(verifier.image)
-    print(<span class="hljs-string">"Saved verify photo to verify.jpg, please open it by yourself."</span>)
-    vcode = input(<span class="hljs-string">"Enter verify code here: "</span>)
+    print(<span class="hljs-string">&quot;Saved verify photo to verify.jpg, please open it by yourself.&quot;</span>)
+    vcode = input(<span class="hljs-string">&quot;Enter verify code here: &quot;</span>)
     <span class="hljs-keyword">try</span>:
         <span class="hljs-comment"># Test verify code.</span>
         kw = verifier.verify(vcode)
     <span class="hljs-keyword">except</span> qqlib.VerifyCodeError <span class="hljs-keyword">as</span> vce:
-        os.remove(<span class="hljs-string">"verify.jpg"</span>)
-        <span class="hljs-keyword">raise</span> vce(<span class="hljs-string">"Wrong verify code!"</span>)
+        os.remove(<span class="hljs-string">&quot;verify.jpg&quot;</span>)
+        <span class="hljs-keyword">raise</span> vce(<span class="hljs-string">&quot;Wrong verify code!&quot;</span>)
     <span class="hljs-keyword">else</span>:
         <span class="hljs-comment"># Finish login.</span>
         qz.login()
-        os.remove(<span class="hljs-string">"verify.jpg"</span>)
+        os.remove(<span class="hljs-string">&quot;verify.jpg&quot;</span>)
 
-print(<span class="hljs-string">"Login finished."</span>)
+print(<span class="hljs-string">&quot;Login finished.&quot;</span>)
 
-unit = <span class="hljs-string">"°C"</span>
+unit = <span class="hljs-string">&quot;°C&quot;</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_temp</span><span class="hljs-params">()</span>:</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_temp</span>():</span>
     <span class="hljs-comment"># Get internal CPU temperature.</span>
-    <span class="hljs-keyword">with</span> open(<span class="hljs-string">"/sys/class/thermal/thermal_zone0/temp"</span>) <span class="hljs-keyword">as</span> temp_open:
+    <span class="hljs-keyword">with</span> open(<span class="hljs-string">&quot;/sys/class/thermal/thermal_zone0/temp&quot;</span>) <span class="hljs-keyword">as</span> temp_open:
         temp = float(temp_open.read())/<span class="hljs-number">1000</span>
     <span class="hljs-keyword">return</span> temp
 
@@ -267,11 +267,11 @@ unit = <span class="hljs-string">"°C"</span>
     <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
         tm = time.localtime()
         <span class="hljs-keyword">if</span> tm.tm_min == <span class="hljs-number">0</span>:
-            qz.feed(<span class="hljs-string">"树莓派自动报时：\n现在是%d年%d月%d日 %d时整。\nCPU温度为%.2f%s。"</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, get_temp(), unit))
-            print(<span class="hljs-string">"Feeded at %d-%.2d-%.d %.2d:%.2d."</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
+            qz.feed(<span class="hljs-string">&quot;树莓派自动报时：\n现在是%d年%d月%d日 %d时整。\nCPU温度为%.2f%s。&quot;</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, get_temp(), unit))
+            print(<span class="hljs-string">&quot;Feeded at %d-%.2d-%.d %.2d:%.2d.&quot;</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
         <span class="hljs-keyword">elif</span> tm.tm_min == <span class="hljs-number">30</span>:
-            qz.feed(<span class="hljs-string">"树莓派自动报时：\n现在是%d年%d月%d日 %d时%d分。\nCPU温度为%.2f%s。"</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, get_temp(), unit))
-            print(<span class="hljs-string">"Feeded at %d-%.2d-%.d %.2d:%.2d."</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
+            qz.feed(<span class="hljs-string">&quot;树莓派自动报时：\n现在是%d年%d月%d日 %d时%d分。\nCPU温度为%.2f%s。&quot;</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, get_temp(), unit))
+            print(<span class="hljs-string">&quot;Feeded at %d-%.2d-%.d %.2d:%.2d.&quot;</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
         <span class="hljs-comment"># Use 60 to keep only one feed in the minute.</span>
         time.sleep(<span class="hljs-number">60</span>)
 <span class="hljs-keyword">except</span> KeyboardInterrupt:
@@ -550,4 +550,4 @@ unit = <span class="hljs-string">"°C"</span>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.9 at 2020-07-03 Fri 18:01:35 CST. -->
+<!-- Page built by Hikaru v1.2.9 at 2020-07-22 Wed 09:43:07 CST. -->

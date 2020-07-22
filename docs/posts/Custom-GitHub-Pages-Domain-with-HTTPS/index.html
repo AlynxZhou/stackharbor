@@ -212,7 +212,7 @@
 
 <p>有关为什么要启用 HTTPS 就不多说了，HTTPS 会对传输的内容进行加密，最常见的就是防止无良运营商拦截你的流量添加广告了，也能防止用户接触被劫持的页面而上当受骗，同时不会对浏览造成什么太大的代价。</p>
 <p>按照 <a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/" target="_blank" rel="noreferrer noopener">GitHub 给出的说明</a>，似乎我什么都不做就能开启 HTTPS 了，仔细尝试了却发现不是这样。</p>
-<p>首先如果你开启了 CloudFlare 的 CDN 和 HTTPS，建议把它们关闭。CloudFlare 的 HTTPS 加密在 <em>Crypto</em> 面板里，找到第一项 <em>SSL*，设置成 <code>Off</code>，然后如果你在 *Page Rules</em> 里面添加了 <code>Always HTTPS</code> 之类的选项，可以删除，因为我们可以用 GitHub 提供的 <code>Enforce HTTPS</code> 选项进行跳转。然后去到 <em>DNS</em> 面板，看到那几朵红色的云朵了吗？它们代表访问时候会首先使用 CloudFlare 的 CDN，考虑到受众，这里可以点击让它变成灰色的 <code>DNS Only</code>，从而加快访问速度……</p>
+<p>首先如果你开启了 CloudFlare 的 CDN 和 HTTPS，建议把它们关闭。CloudFlare 的 HTTPS 加密在 <em>Crypto</em> 面板里，找到第一项 <em>SSL</em>，设置成 <code>Off</code>，然后如果你在 <em>Page Rules</em> 里面添加了 <code>Always HTTPS</code> 之类的选项，可以删除，因为我们可以用 GitHub 提供的 <code>Enforce HTTPS</code> 选项进行跳转。然后去到 <em>DNS</em> 面板，看到那几朵红色的云朵了吗？它们代表访问时候会首先使用 CloudFlare 的 CDN，考虑到受众，这里可以点击让它变成灰色的 <code>DNS Only</code>，从而加快访问速度……</p>
 <p>然后如果你是设置 A 记录来跳转到 GitHub Pages 的话，需要修改成新的 IP 地址，GitHub 提供了下面四个 IP，不过我是比较喜欢设置 CNAME 啦：</p>
 <ul>
 <li><p>185.199.108.153</p>
@@ -227,7 +227,7 @@
 <p>如果是 CNAME 的记录就简单啦（虽然 GitHub 文档里推荐的是 ALIAS 或者 ANAME 不过大部分的 DNS 都只有 CNAME 吧），保持你之前 <code>你的用户名.github.io</code> 的模式就行啦，比如我是 <code>AlynxZhou.github.io</code>。</p>
 <p>由于 DNS 多级缓存的存在，DNS 有关的设置需要一定时间来生效，最长大概需要 24 小时，不过一般都是很快的。</p>
 <p>然后我们需要去到你开启 Pages 服务的仓库，点击 Settings 面板往下拉，找到 <em>GitHub Pages</em> 一节的 <em>Custom Domain</em> 选项。<del>重点在这里啦！如果你什么都不做，会发现下面 <em>Enforce HTTPS</em> 的选项是灰色的，边上可能还写着说您使用了自定义域名不能开启，难道是虚假宣传？实际上你需要 <strong>先去掉你的自定义域名，然后再添加回来，这里才能开启</strong>，至于你问我为什么，我也不知道。</del></p>
-<p><del>所以首先我们把这个框里面的自定义域名删掉，然后 save，然后可以访问一下 <code>https://你的用户名.github.io/</code>（如果这不是用户主页的话后面要加上仓库名字）测试一下。然后回来再次添加自定义域名，保存。</del> 应该可以发现 <em>Enforce HTTPS</em> 边上的小字变成了 <em>正在处理您的 HTTPS 加密证书<em>（大意），因为这个是 GitHub 和 Let&#39;s Encrypt 这个授权验证机构合作推出的服务，证书需要进行处理，*</em>大概一小时之内就可以完成**，然后这次访问 <code>https://你的自定义域名/</code>，地址栏里应该就会出现小锁头，表示已经加密，就可以放心的勾选 *Enforce HTTPS</em> 啦！</p>
+<p><del>所以首先我们把这个框里面的自定义域名删掉，然后 save，然后可以访问一下 <code>https://你的用户名.github.io/</code>（如果这不是用户主页的话后面要加上仓库名字）测试一下。然后回来再次添加自定义域名，保存。</del> 应该可以发现 <em>Enforce HTTPS</em> 边上的小字变成了 <em>正在处理您的 HTTPS 加密证书</em>（大意），因为这个是 GitHub 和 Let&#39;s Encrypt 这个授权验证机构合作推出的服务，证书需要进行处理，<strong>大概一小时之内就可以完成</strong>，然后这次访问 <code>https://你的自定义域名/</code>，地址栏里应该就会出现小锁头，表示已经加密，就可以放心的勾选 <em>Enforce HTTPS</em> 啦！</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
@@ -492,4 +492,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.9 at 2020-07-03 Fri 18:01:35 CST. -->
+<!-- Page built by Hikaru v1.2.9 at 2020-07-22 Wed 09:43:07 CST. -->

@@ -10,8 +10,7 @@ main.main div.main-container {
   box-sizing: border-box;
   -webkit-box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
-  border-bottom-left-radius: 0.3em;
-  border-bottom-right-radius: 0.3em;
+  border-radius: 0 0 0.3em 0.3em;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;

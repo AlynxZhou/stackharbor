@@ -96,8 +96,7 @@ footer.footer div.back-to-top button {
   margin: 0 auto;
   padding: 0 0.75em;
   cursor: pointer;
-  border-bottom-left-radius: 0.3em;
-  border-bottom-right-radius: 0.3em;
+  border-radius: 0 0 0.3em 0.3em;
   font-size: 2rem;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;

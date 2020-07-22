@@ -299,7 +299,8 @@
 <p>安装显声卡触摸板驱动和X接口。   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo pacman -S acpi</code></pre></figure></code></pre>
 <p>安装高级电源管理支持(?)。   </p>
-<pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-variable">$ </span>sudo pacman -S gnome gdm wqy-microhei</code></pre></figure></code></pre><p>安装GNOME3桌面环境和它对应的登录管理器GDM以及好看的中文字体文泉驿微米黑。   </p>
+<pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-variable">$ </span>sudo pacman -S gnome gdm wqy-microhei</code></pre></figure></code></pre>
+<p>安装GNOME3桌面环境和它对应的登录管理器GDM以及好看的中文字体文泉驿微米黑。   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ cp /etc/skel/.xinitrc ~/</code></pre></figure></code></pre>
 <p>复制一份X样板文件到主目录，不要加sudo，否则所有者会变成root。   </p>
 <pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ nano ~/.xinitrc</code></pre></figure></code></pre>
@@ -318,7 +319,8 @@
 <pre><code><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code><span class="hljs-section">[archlinuxcn]</span>
 <span class="hljs-comment">#The Chinese Arch Linux communities packages.</span>
 <span class="hljs-attr">SigLevel</span> = Optional TrustAll
-<span class="hljs-attr">Server</span> = http://repo.archlinuxcn.org/<span class="hljs-variable">$arch</span></code></pre></figure></code></pre><pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo pacman -Syu yaourt</code></pre></figure></code></pre>
+<span class="hljs-attr">Server</span> = http://repo.archlinuxcn.org/<span class="hljs-variable">$arch</span></code></pre></figure></code></pre>
+<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ sudo pacman -Syu yaourt</code></pre></figure></code></pre>
 <p>可以自动安装AUR工具yaourt。   </p>
 <p>再次感谢好友Maxfan。   </p>
 <p>欢迎关注<a href="https://www.archlinux.org/" target="_blank" rel="noreferrer noopener">Arch Linux官网</a>   </p>
@@ -590,4 +592,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.9 at 2020-07-03 Fri 18:01:35 CST. -->
+<!-- Page built by Hikaru v1.2.9 at 2020-07-22 Wed 09:43:07 CST. -->

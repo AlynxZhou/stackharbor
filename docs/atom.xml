@@ -7,7 +7,7 @@
   
   <link href="https://sh.alynx.one/" />
   
-  <updated>2020-06-28T11:41:25.661Z</updated>
+  <updated>2020-07-21T08:59:37.745Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -18,12 +18,13 @@
   
   <generator uri="https://github.com/AlynxZhou/hikaru/">Hikaru</generator>
   
+  
   <entry>
     <title>修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题</title>
     <link href="https://sh.alynx.one/posts/Fix-Windows-Wireless-Adapter-Name/" />
     <id>https://sh.alynx.one/posts/Fix-Windows-Wireless-Adapter-Name/</id>
     <published>2020-06-28T11:02:00.000Z</published>
-    <updated>2020-06-28T11:41:25.661Z</updated>
+    <updated>2020-07-21T08:59:37.745Z</updated>
     
     <summary type="html">
     
@@ -42,12 +43,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>让你们的主题商店离我远点！</title>
     <link href="https://sh.alynx.one/posts/Taking-Your-Theme-Store-Away/" />
     <id>https://sh.alynx.one/posts/Taking-Your-Theme-Store-Away/</id>
     <published>2019-12-18T08:17:00.000Z</published>
-    <updated>2020-01-10T10:35:03.565Z</updated>
+    <updated>2020-07-13T03:15:24.334Z</updated>
     
     <summary type="html">
     
@@ -70,12 +73,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>装机小记</title>
     <link href="https://sh.alynx.one/posts/My-Desktop-PC/" />
     <id>https://sh.alynx.one/posts/My-Desktop-PC/</id>
     <published>2019-11-25T02:14:00.000Z</published>
-    <updated>2020-06-17T15:12:04.407Z</updated>
+    <updated>2020-07-13T03:15:24.314Z</updated>
     
     <summary type="html">
     
@@ -90,12 +95,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>X 和 Wayland 的主要区别</title>
     <link href="https://sh.alynx.one/posts/Difference-between-X-and-Wayland/" />
     <id>https://sh.alynx.one/posts/Difference-between-X-and-Wayland/</id>
     <published>2019-11-13T05:31:33.000Z</published>
-    <updated>2020-01-04T16:20:36.058Z</updated>
+    <updated>2020-07-13T03:15:24.288Z</updated>
     
     <summary type="html">
     
@@ -114,12 +121,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>蜗牛星际安装 Arch Linux 作为 NAS</title>
     <link href="https://sh.alynx.one/posts/SnailSpace-as-NAS/" />
     <id>https://sh.alynx.one/posts/SnailSpace-as-NAS/</id>
     <published>2019-10-07T09:01:00.000Z</published>
-    <updated>2020-01-10T10:35:03.565Z</updated>
+    <updated>2020-07-13T03:15:24.334Z</updated>
     
     <summary type="html">
     
@@ -142,12 +151,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>前端博客搜索引擎</title>
     <link href="https://sh.alynx.one/posts/Frontend-Blog-Search/" />
     <id>https://sh.alynx.one/posts/Frontend-Blog-Search/</id>
     <published>2019-09-18T07:24:00.000Z</published>
-    <updated>2019-10-29T14:27:37.037Z</updated>
+    <updated>2020-07-13T03:15:24.291Z</updated>
     
     <summary type="html">
     
@@ -170,12 +181,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>Linux 用户的月饼食用手册</title>
     <link href="https://sh.alynx.one/posts/Linux-Mooncake-Jokes/" />
     <id>https://sh.alynx.one/posts/Linux-Mooncake-Jokes/</id>
     <published>2019-09-13T10:47:00.000Z</published>
-    <updated>2019-10-29T14:27:37.037Z</updated>
+    <updated>2020-07-13T03:15:24.304Z</updated>
     
     <summary type="html">
     
@@ -194,12 +207,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>可能只适合我自己的 RIME 配置</title>
     <link href="https://sh.alynx.one/posts/My-RIME/" />
     <id>https://sh.alynx.one/posts/My-RIME/</id>
     <published>2019-08-19T07:16:00.000Z</published>
-    <updated>2020-06-17T15:03:36.703Z</updated>
+    <updated>2020-07-13T03:15:24.314Z</updated>
     
     <summary type="html">
     
@@ -220,12 +235,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>翻译：我很幸运，但你不是。</title>
     <link href="https://sh.alynx.one/posts/I-Am-Lucky-You-Are-Not/" />
     <id>https://sh.alynx.one/posts/I-Am-Lucky-You-Are-Not/</id>
     <published>2019-07-31T07:24:00.000Z</published>
-    <updated>2019-10-29T14:27:37.084Z</updated>
+    <updated>2020-07-13T03:15:24.291Z</updated>
     
     <summary type="html">
     
@@ -240,12 +257,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>在 Pixel C 上安装 Lineage OS</title>
     <link href="https://sh.alynx.one/posts/Pixel-C-Lineage/" />
     <id>https://sh.alynx.one/posts/Pixel-C-Lineage/</id>
     <published>2019-07-24T09:24:00.000Z</published>
-    <updated>2019-10-29T14:27:37.060Z</updated>
+    <updated>2020-07-13T03:15:24.314Z</updated>
     
     <summary type="html">
     
@@ -266,12 +285,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>雲雀</title>
     <link href="https://sh.alynx.one/posts/Hibari/" />
     <id>https://sh.alynx.one/posts/Hibari/</id>
     <published>2019-07-15T01:02:00.000Z</published>
-    <updated>2019-10-29T14:27:37.060Z</updated>
+    <updated>2020-07-13T03:15:24.291Z</updated>
     
     <summary type="html">
     
@@ -292,12 +313,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>六月，如梦一般的日子</title>
     <link href="https://sh.alynx.one/posts/June-or-Dream/" />
     <id>https://sh.alynx.one/posts/June-or-Dream/</id>
     <published>2019-06-27T08:18:00.000Z</published>
-    <updated>2020-01-10T10:35:03.562Z</updated>
+    <updated>2020-07-13T03:15:24.291Z</updated>
     
     <summary type="html">
     
@@ -316,12 +339,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>Arch Linux 安装 UnityHub 的临时方案</title>
     <link href="https://sh.alynx.one/posts/Archlinux-UnityHub/" />
     <id>https://sh.alynx.one/posts/Archlinux-UnityHub/</id>
     <published>2019-05-10T14:09:00.000Z</published>
-    <updated>2019-10-29T14:27:37.060Z</updated>
+    <updated>2020-07-13T03:15:24.281Z</updated>
     
     <summary type="html">
     
@@ -340,12 +365,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>不要拿愚蠢的广告来污染我的邮箱</title>
     <link href="https://sh.alynx.one/posts/Do-Not-Fill-My-Email-with-Silly-Ads/" />
     <id>https://sh.alynx.one/posts/Do-Not-Fill-My-Email-with-Silly-Ads/</id>
     <published>2019-05-04T10:27:00.000Z</published>
-    <updated>2020-01-10T10:35:03.562Z</updated>
+    <updated>2020-07-13T03:15:24.288Z</updated>
     
     <summary type="html">
     
@@ -364,12 +391,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>Magnolia</title>
     <link href="https://sh.alynx.one/posts/Magnolia/" />
     <id>https://sh.alynx.one/posts/Magnolia/</id>
     <published>2019-04-01T12:52:00.000Z</published>
-    <updated>2019-10-29T14:27:37.084Z</updated>
+    <updated>2020-07-13T03:15:24.304Z</updated>
     
     <summary type="html">
     
@@ -384,12 +413,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>如何编写 Android 视频壁纸</title>
     <link href="https://sh.alynx.one/posts/Android-Video-Wallpaper-Implementation/" />
     <id>https://sh.alynx.one/posts/Android-Video-Wallpaper-Implementation/</id>
     <published>2019-03-22T08:18:00.000Z</published>
-    <updated>2019-10-29T14:27:37.097Z</updated>
+    <updated>2020-07-13T03:15:24.281Z</updated>
     
     <summary type="html">
     
@@ -412,12 +443,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>在中国 Android 环境下传个 APK 有多难</title>
     <link href="https://sh.alynx.one/posts/Hard-to-Transfer-APK-with-Chinese-Android/" />
     <id>https://sh.alynx.one/posts/Hard-to-Transfer-APK-with-Chinese-Android/</id>
     <published>2019-03-18T06:47:00.000Z</published>
-    <updated>2019-10-29T14:27:37.084Z</updated>
+    <updated>2020-07-13T03:15:24.291Z</updated>
     
     <summary type="html">
     
@@ -434,12 +467,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>GNOME 的修改开发与测试</title>
     <link href="https://sh.alynx.one/posts/GNOME-Develop/" />
     <id>https://sh.alynx.one/posts/GNOME-Develop/</id>
     <published>2019-02-10T14:58:00.000Z</published>
-    <updated>2019-11-03T07:05:50.250Z</updated>
+    <updated>2020-07-13T03:15:24.291Z</updated>
     
     <summary type="html">
     
@@ -456,12 +491,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>Linux 下面常见的代理设置</title>
     <link href="https://sh.alynx.one/posts/Proxy-Settings/" />
     <id>https://sh.alynx.one/posts/Proxy-Settings/</id>
     <published>2019-02-10T01:28:00.000Z</published>
-    <updated>2019-10-29T14:27:37.040Z</updated>
+    <updated>2020-07-13T03:15:24.314Z</updated>
     
     <summary type="html">
     
@@ -478,12 +515,14 @@
     
   </entry>
   
+  
+  
   <entry>
     <title>WireGuard 配置与使用</title>
     <link href="https://sh.alynx.one/posts/WireGuard-Usage/" />
     <id>https://sh.alynx.one/posts/WireGuard-Usage/</id>
     <published>2019-01-27T02:29:30.000Z</published>
-    <updated>2019-10-29T14:27:37.060Z</updated>
+    <updated>2020-07-13T03:15:24.338Z</updated>
     
     <summary type="html">
     
@@ -503,5 +542,6 @@
     <category term="WireGuard" scheme="https://sh.alynx.one/tags/WireGuard/" />
     
   </entry>
+  
   
 </feed>

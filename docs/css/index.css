@@ -115,8 +115,7 @@ nav.nav {
   background: #33363b;
   -webkit-box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
-  border-top-left-radius: 0.3em;
-  border-top-right-radius: 0.3em;
+  border-radius: 0.3em 0.3em 0 0;
   display: block;
 }
 nav.nav ul {
@@ -208,8 +207,7 @@ main.main div.main-container {
   box-sizing: border-box;
   -webkit-box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   box-shadow: 0 0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
-  border-bottom-left-radius: 0.3em;
-  border-bottom-right-radius: 0.3em;
+  border-radius: 0 0 0.3em 0.3em;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -363,8 +361,7 @@ footer.footer div.back-to-top button {
   margin: 0 auto;
   padding: 0 0.75em;
   cursor: pointer;
-  border-bottom-left-radius: 0.3em;
-  border-bottom-right-radius: 0.3em;
+  border-radius: 0 0 0.3em 0.3em;
   font-size: 2rem;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
@@ -667,8 +664,7 @@ div.code-titlebar {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-  border-top-left-radius: 0.3em;
-  border-top-right-radius: 0.3em;
+  border-radius: 0.3em 0.3em 0 0;
   color: #fff;
   background: #33363b;
   padding: 0.25em 0.5em;

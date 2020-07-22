@@ -225,7 +225,7 @@ Test.counter = <span class="hljs-number">0</span>;
 <p>我敢肯定对于 JavaScript 这样一门号称“一切能够用 JavaScript 实现的最终都会用 JavaScript 实现”的语言而言肯定不只这么一种实现类变量的方法，但是最起码对我而言这是最直观的一种，我相信对于一切有一点 JavaScript 基础的人而言这也都是最直观的一种，如果你想问为什么没有更直观的在类定义内部实现的像 Java 或者什么一样的写法，很抱歉，暂时没有，或许你可以等到 ES7 的时代再来学习 JavaScript，当然到那个时候你又会被这门语言其他的问题纠结到 ES8，这很现实，这是一个不完美但同时不断高速进化的语言，它越来越广泛的应用逼着它去填由于愚蠢的商业手段导致的停滞不前带来的坑，当然最起码——JavaScript 虽然出生仓促，但基础并不很糟，或者说它有着各种奇特的实现不断让人燃烧自己的脑细胞。</p>
 <p>好了是时候回到今天的主题了，我觉得我从来就不是一个合格的 JavaScript 程序员因为我喜欢 CoffeeScript——这大概是原罪，特别是在一群 TypeScript 的好战分子眼里——我没有说 TypeScript 不好，但是我只是很喜欢 CoffeeScript 的语法糖以及动态类型带来的天马行空或者乱七八糟的写法——你何必把一只泥沼里的乌龟拉去杀死放在庙里供奉呢？</p>
 <p>CoffeeScript 的官网虽然没有明说，但是它确实有简化这部份的语法糖：</p>
-<p>你只需要像写一个方法一样写一个变量，把它放在和方法一个层次上，然后要在开头加上 <code>@</code>，无论你使用 <code>:</code> 还是 <code>=</code> 来赋值都没有关系。在实例方法中使用时的写法有点变化，你不应该用 <code>@</code> 因为它不属于当前实例这个 <code>this</code>，它属于 <code>this</code> 的 <code>constructor</code> 也就是说 <code>@constructor</code>，CoffeeScript 编译器会正确的把这个替换成类的名字——没办法，JavaScript 并没有代词指代这种情况。</p>
+<p>你只需要像写一个方法一样写一个变量，把它放在和方法一个层次上，然后要在开头加上 <code>@</code>，无论你使用 <code>: </code> 还是 <code>=</code> 来赋值都没有关系。在实例方法中使用时的写法有点变化，你不应该用 <code>@</code> 因为它不属于当前实例这个 <code>this</code>，它属于 <code>this</code> 的 <code>constructor</code> 也就是说 <code>@constructor</code>，CoffeeScript 编译器会正确的把这个替换成类的名字——没办法，JavaScript 并没有代词指代这种情况。</p>
 <pre><code class="CoffeeScript"><figure class="highlight hljs coffeescript"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span></pre><pre class="code"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
   @counter: <span class="hljs-number">0</span>
   constructor: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
@@ -240,16 +240,16 @@ t = <span class="hljs-keyword">new</span> Test()
   Test = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>{
       <span class="hljs-keyword">constructor</span>() {
-        ++<span class="hljs-keyword">this</span>.constructor.counter;
+        ++<span class="hljs-built_in">this</span>.constructor.counter;
       }
     };
     Test.counter = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">return</span> Test;
-  }).call(<span class="hljs-keyword">this</span>);
+  }).call(<span class="hljs-built_in">this</span>);
   t = <span class="hljs-keyword">new</span> Test();
   <span class="hljs-built_in">console</span>.log(Test.counter);
   <span class="hljs-comment">// 输出 1</span>
-}).call(<span class="hljs-keyword">this</span>);</code></pre></figure></code></pre>
+}).call(<span class="hljs-built_in">this</span>);</code></pre></figure></code></pre>
 <p>实际上如果你只是想 <strong>创造</strong> 一个属于类的变量还有一种写法，但是严格来讲它并不属于类变量而是访问原型上的一个变量（不要忘了 JavaScript 的原型链），这个变量仍然会实例化，之所以在这里提起是因为网上很多搜索结果把这个也称作类变量，我认为是不正确的。</p>
 <pre><code class="CoffeeScript"><figure class="highlight hljs coffeescript"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span></pre><pre class="code"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
   counter: <span class="hljs-number">0</span>
@@ -281,16 +281,16 @@ Test.printCounter()
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(Test.counter);
       }
       <span class="hljs-keyword">constructor</span>() {
-        ++<span class="hljs-keyword">this</span>.constructor.counter;
+        ++<span class="hljs-built_in">this</span>.constructor.counter;
       }
     };
     Test.counter = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">return</span> Test;
-  }).call(<span class="hljs-keyword">this</span>);
+  }).call(<span class="hljs-built_in">this</span>);
   t = <span class="hljs-keyword">new</span> Test();
   Test.printCounter();
   <span class="hljs-comment">// 输出 1</span>
-}).call(<span class="hljs-keyword">this</span>);</code></pre></figure></code></pre>
+}).call(<span class="hljs-built_in">this</span>);</code></pre></figure></code></pre>
 <h1 id="总结"><a class="header-link" href="/posts/Coffee-Static-Varible-Method/#%E6%80%BB%E7%BB%93" title="总结"></a>总结</h1>
 <p>事实上到上面已经靠几个例子说明了正确的用法，但是由于还有交叉处理的部分，简单总结一下。</p>
 <p>1.把变量写在类定义里面属性的层次并且在变量名前面加上 <code>@</code> 会在 CoffeeScript 里产生一个静态变量。</p>
@@ -595,4 +595,4 @@ Test.printCounter()
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.9 at 2020-07-03 Fri 18:01:35 CST. -->
+<!-- Page built by Hikaru v1.2.9 at 2020-07-22 Wed 09:43:07 CST. -->

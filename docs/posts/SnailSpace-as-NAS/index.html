@@ -272,25 +272,25 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 <p>然后由于 NAS 的网络不会经常变化，<del>所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager</del> 我装桌面了所以还是用了 NetworkManager！不过这部分也留着好了。直接创建 <code>/etc/systemd/network/wired.network</code>，写入如下内容：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span></pre><pre class="code"><code><span class="hljs-section">[Match]</span>
 <span class="hljs-attr">Name</span>=en*
-<span class="hljs-section">
-[Network]</span>
+
+<span class="hljs-section">[Network]</span>
 <span class="hljs-attr">DHCP</span>=ipv4</code></pre></figure></code></pre>
 <p>意思是对于所有以 <code>en</code> 开头的网卡使用 DHCPv4，然后 <code>systemctl enable --now systemd-networkd systemd-resolved</code> 就可以了。</p>
 <p>NetworkManager 就很简单，直接安装然后 <code>systemctl enable NetworkManager --now</code> 应该就行了！</p>
 <h2 id="Samba配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE" title="Samba配置"></a>Samba 配置</h2>
 <p>btrfs 的子卷看起来很像普通目录，但是又可以分别直接挂载，不需要先挂载设备然后再用 <code>mount --rbind</code>。于是建了 <code>/data</code> 和 <code>/data/alynx</code> 两个子卷，<code>/data</code> 就挂载到 <code>/data</code>，<code>/data/alynx</code> 挂载到我家目录下面。</p>
 <p>在 <code>/etc/samba/smb.conf</code> 添加如下配置，就可以分别通过 <code>home</code> 和 <code>data</code> 访问每个用户在 <code>/home</code> 和 <code>/data</code> 下面的同名文件夹了，<code>%u</code> 代表的就是连接的用户名。（当然权限要你自己处理一下。）</p>
-<pre><code class="ini"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span></pre><pre class="code"><code>[home]
-   comment = Home Directories
-   browseable = yes
-   writeable = yes
-   path = /home/%u
+<pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span></pre><pre class="code"><code><span class="hljs-section">[home]</span>
+   <span class="hljs-attr">comment</span> = Home Directories
+   <span class="hljs-attr">browseable</span> = <span class="hljs-literal">yes</span>
+   <span class="hljs-attr">writeable</span> = <span class="hljs-literal">yes</span>
+   <span class="hljs-attr">path</span> = /home/%u
 
-[data]
-   comment = Data Directories
-   browseable = yes
-   writeable = yes
-   path = /data/%u</code></pre></figure></code></pre>
+<span class="hljs-section">[data]</span>
+   <span class="hljs-attr">comment</span> = Data Directories
+   <span class="hljs-attr">browseable</span> = <span class="hljs-literal">yes</span>
+   <span class="hljs-attr">writeable</span> = <span class="hljs-literal">yes</span>
+   <span class="hljs-attr">path</span> = /data/%u</code></pre></figure></code></pre>
 <p>其它的配置基本都是正常操作参照 Arch Wiki，<del>我打算以后插新硬盘直接加进 LVM 加给 <code>/home</code>，省得还得操心挂载到哪里</del> 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 <a href="/posts/SnailSpace-as-NAS/WireGuard-Usage/">这篇文章</a> 就可以了，如果只是 SSH 远程控制一下效果还可以。</p>
 <h1 id="效果"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C" title="效果"></a>效果</h1>
 <p>笔记本插了有线之后可以测试千兆对拷，我的路由器还是大一时候买的 WNDR3800，虽然很旧，但四个有线全部都是千兆口（当时价格和配置差不多的极路由 3 只有一个内网千兆好像），<del>samba 拷贝速度轻松达到 110M/s 的满速，甚至比蜗牛的 USB3.0 还快</del> 用了 btrfs 之后似乎速度只有 80M/s 左右了，或者 Windows 和 Linux 下面 Samba 对拷速度显示有区别？110M/s 是我在 Windows 下面测出来的。</p>
@@ -647,4 +647,4 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.2.9 at 2020-07-03 Fri 18:01:35 CST. -->
+<!-- Page built by Hikaru v1.2.9 at 2020-07-22 Wed 09:43:07 CST. -->
