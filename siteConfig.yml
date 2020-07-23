@@ -68,7 +68,7 @@ feed:
   path: atom.xml
   limit: 20
   hub:
-  content: false
+  content: true
   contentLimit: 140
 
 sitemap:
