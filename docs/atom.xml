@@ -26,8 +26,12 @@
     <title>修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Fix-Windows-Wireless-Adapter-Name/" />
     <id>https://sh.alynx.one/posts/Fix-Windows-Wireless-Adapter-Name/</id>
+    
     <published>2020-06-28T11:02:00.000Z</published>
+    
+    
     <updated>2020-06-28T11:02:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>这是一篇其实没什么逻辑也没什么技术的文章，但踩到这个坑又很头痛，所以记录一下。</p>]]>
@@ -56,8 +60,12 @@
     <title>让你们的主题商店离我远点！</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Taking-Your-Theme-Store-Away/" />
     <id>https://sh.alynx.one/posts/Taking-Your-Theme-Store-Away/</id>
+    
     <published>2019-12-18T08:17:00.000Z</published>
+    
+    
     <updated>2019-12-18T08:17:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>我不觉得我是个刻薄的人，但对于一些实在令我讨厌的人，不把他们的名字挂出来就是我最后的怜悯。</p>]]>
@@ -90,8 +98,12 @@
     <title>装机小记</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/My-Desktop-PC/" />
     <id>https://sh.alynx.one/posts/My-Desktop-PC/</id>
+    
     <published>2019-11-25T02:14:00.000Z</published>
+    
+    
     <updated>2019-11-25T02:14:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>由于笔记本散热和性能实在是不适合打游戏（有一说一，Optimus 双显卡还是没有直接单卡来得爽），所以很早就想组装一台台式机。特别是最近一直和高中同桌玩 Dota2，我的笔记本如果直播 Dota2，直播推流就会十分卡顿，而我又不想像 CSGO 一样降低画质玩。</p>]]>
@@ -116,8 +128,12 @@
     <title>X 和 Wayland 的主要区别</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Difference-between-X-and-Wayland/" />
     <id>https://sh.alynx.one/posts/Difference-between-X-and-Wayland/</id>
+    
     <published>2019-11-13T05:31:33.000Z</published>
+    
+    
     <updated>2019-11-13T05:31:33.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>最近在写一个 Wayland Compositor，虽然我以前大概知道这是什么，但是并不是很清楚它和 Xserver 有什么区别，虽然 <a href="https://farseerfc.me/compositor-in-X-and-compositext.html" target="_blank" rel="noreferrer noopener">fc 老师的这篇文章</a> 写的相当不错，但我一点也不懂 X 所以看的迷迷糊糊。偶然读了 <a href="https://magcius.github.io/xplain/article/" target="_blank" rel="noreferrer noopener">这篇文章</a> 发现十分不错，但因为是英文文章读起来很累，打算把一些理解的内容记下来。顺便说一下，原文是带示例的，效果非常不错，建议有时间的人慢慢看一遍。</p>]]>
@@ -146,8 +162,12 @@
     <title>蜗牛星际安装 Arch Linux 作为 NAS</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/SnailSpace-as-NAS/" />
     <id>https://sh.alynx.one/posts/SnailSpace-as-NAS/</id>
+    
     <published>2019-10-07T09:01:00.000Z</published>
+    
+    
     <updated>2019-10-07T09:01:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<h1 id="需求"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1><p>以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派的电源也不是很放心。特别是我还拆下来一块笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。</p>]]>
@@ -180,8 +200,12 @@
     <title>前端博客搜索引擎</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Frontend-Blog-Search/" />
     <id>https://sh.alynx.one/posts/Frontend-Blog-Search/</id>
+    
     <published>2019-09-18T07:24:00.000Z</published>
+    
+    
     <updated>2019-09-18T07:24:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。</p><p>但是这个设计引发了 lilydjwg 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过 lilydjwg 给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。</p>]]>
@@ -214,8 +238,12 @@
     <title>Linux 用户的月饼食用手册</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Linux-Mooncake-Jokes/" />
     <id>https://sh.alynx.one/posts/Linux-Mooncake-Jokes/</id>
+    
     <published>2019-09-13T10:47:00.000Z</published>
+    
+    
     <updated>2019-09-13T10:47:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>中秋节到了，Arch Linux CN 社区里富有生活情趣（？）的用户们聚在一起，开始讨论起如何食用月饼。</p>]]>
@@ -244,8 +272,12 @@
     <title>可能只适合我自己的 RIME 配置</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/My-RIME/" />
     <id>https://sh.alynx.one/posts/My-RIME/</id>
+    
     <published>2019-08-19T07:16:00.000Z</published>
+    
+    
     <updated>2019-08-19T07:16:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<h1 id="为什么我要折腾这个"><a class="header-link" href="/posts/My-RIME/#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%A6%81%E6%8A%98%E8%85%BE%E8%BF%99%E4%B8%AA" title="为什么我要折腾这个"></a>为什么我要折腾这个</h1><p>在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。</p>]]>
@@ -276,8 +308,12 @@
     <title>翻译：我很幸运，但你不是。</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/I-Am-Lucky-You-Are-Not/" />
     <id>https://sh.alynx.one/posts/I-Am-Lucky-You-Are-Not/</id>
+    
     <published>2019-07-31T07:24:00.000Z</published>
+    
+    
     <updated>2019-07-31T07:24:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>这是一篇 <a href="https://dev.to/jeromegamez" target="_blank" rel="noreferrer noopener">Jérôme Gamez</a> 的文章 <a href="https://dev.to/jeromegamez/i-am-lucky-you-are-not-2eco" target="_blank" rel="noreferrer noopener">I am lucky, you are not.</a> 的简体中文翻译。</p>]]>
@@ -302,8 +338,12 @@
     <title>在 Pixel C 上安装 Lineage OS</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Pixel-C-Lineage/" />
     <id>https://sh.alynx.one/posts/Pixel-C-Lineage/</id>
+    
     <published>2019-07-24T09:24:00.000Z</published>
+    
+    
     <updated>2019-07-24T09:24:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>Pixel C 刚出来的时候我就很喜欢，但无奈价格太贵，同时 Android M 不能说是很好的利用平板电脑硬件。由于咕鸽战略失误，现在 Pixel C 已经变成热门洋垃圾了，所以在咸鱼捡了一台玩玩。</p><p>官方系统升级只支持到 8.1（真的好意思起名叫 Pixel），Lineage OS 支持也是到 8.1（LOS 版本号就是 15.1，没有 Bug），所有的 9.0 都是 Unofficial 的，不过反正我就拿来看看文档，所以直接刷 LOS 15.1 Official 了（为什么不刷官方？因为我手机不想刷第三方，就拿平板过过瘾）。</p>]]>
@@ -334,8 +374,12 @@
     <title>雲雀</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Hibari/" />
     <id>https://sh.alynx.one/posts/Hibari/</id>
+    
     <published>2019-07-15T01:02:00.000Z</published>
+    
+    
     <updated>2019-07-15T01:02:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>ロード・エルメロイⅡ世の事件簿 -魔眼蒐集列車 Grace note- ED</p><p>五线谱（带歌词）点击链接下载：<a href="/posts/Hibari/hibari.pdf">PDF 格式</a>、<a href="/posts/Hibari/hibari.mscz">MSCZ 格式</a>（需使用 MuseScore3 打开）。</p><p>歌词参考自微博用户 <a href="https://weibo.com/u/5699383914" target="_blank" rel="noreferrer noopener">@小蟲子的覺魂</a>。曲谱由我自己听写。</p>]]>
@@ -366,8 +410,12 @@
     <title>六月，如梦一般的日子</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/June-or-Dream/" />
     <id>https://sh.alynx.one/posts/June-or-Dream/</id>
+    
     <published>2019-06-27T08:18:00.000Z</published>
+    
+    
     <updated>2019-06-27T08:18:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<blockquote><p>One day I wake up,finding that I am on one of the most crazy trips in my life.It has been into my dream for many times,but now it comes into reality,which becomes the best birthday present.</p></blockquote>]]>
@@ -396,8 +444,12 @@
     <title>Arch Linux 安装 UnityHub 的临时方案</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Archlinux-UnityHub/" />
     <id>https://sh.alynx.one/posts/Archlinux-UnityHub/</id>
+    
     <published>2019-05-10T14:09:00.000Z</published>
+    
+    
     <updated>2019-05-10T14:09:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>如果你直接使用 AUR 里 UnityHub 的 PKGBUILD 安装会出一些问题。解决方案也很简单。 首先似乎 PKGBUILD 下载的版本很奇怪，不管你在 Unity 论坛里哪个链接下载的版本其实都是一个，并且和 PKGBUILD 里面的不一样，解决方法就是自己计算一下 m...</p>]]>
@@ -426,8 +478,12 @@
     <title>不要拿愚蠢的广告来污染我的邮箱</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Do-Not-Fill-My-Email-with-Silly-Ads/" />
     <id>https://sh.alynx.one/posts/Do-Not-Fill-My-Email-with-Silly-Ads/</id>
+    
     <published>2019-05-04T10:27:00.000Z</published>
+    
+    
     <updated>2019-05-04T10:27:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>一个多月没更新了，这次要写的不是什么技术问题，而是技术的附属问题。</p>]]>
@@ -456,8 +512,12 @@
     <title>Magnolia</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Magnolia/" />
     <id>https://sh.alynx.one/posts/Magnolia/</id>
+    
     <published>2019-04-01T12:52:00.000Z</published>
+    
+    
     <updated>2019-04-01T12:52:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>我不是很能欣赏花。</p><p>我的鼻子并不懂得花的芬芳，我的眼睛也不是很了解花的鲜艳，大部分情况下，我连分辨花种类的兴趣都没有。但我今天还是认出了一株玉兰树，就像我高中楼门口两侧的玉兰树一样，开着白色花瓣。</p>]]>
@@ -482,8 +542,12 @@
     <title>如何编写 Android 视频壁纸</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Android-Video-Wallpaper-Implementation/" />
     <id>https://sh.alynx.one/posts/Android-Video-Wallpaper-Implementation/</id>
+    
     <published>2019-03-22T08:18:00.000Z</published>
+    
+    
     <updated>2019-03-22T08:18:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank" rel="noreferrer noopener">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>]]>
@@ -516,8 +580,12 @@
     <title>在中国 Android 环境下传个 APK 有多难</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Hard-to-Transfer-APK-with-Chinese-Android/" />
     <id>https://sh.alynx.one/posts/Hard-to-Transfer-APK-with-Chinese-Android/</id>
+    
     <published>2019-03-18T06:47:00.000Z</published>
+    
+    
     <updated>2019-03-18T06:47:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>事情的起因是这样的，我写了 <a href="https://livewallpaper.alynx.xyz" target="_blank" rel="noreferrer noopener">一个 Android App</a>，打算把它发给更多的人试用，发给同学什么的都好说，但我想发给我妈用的时候遇到了一系列问题。我觉得恰好可以说一下在国内用 Android 环境是多么痛苦。</p>]]>
@@ -544,8 +612,12 @@
     <title>GNOME 的修改开发与测试</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/GNOME-Develop/" />
     <id>https://sh.alynx.one/posts/GNOME-Develop/</id>
+    
     <published>2019-02-10T14:58:00.000Z</published>
+    
+    
     <updated>2019-02-10T14:58:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div><p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>]]>
@@ -572,8 +644,12 @@
     <title>Linux 下面常见的代理设置</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Proxy-Settings/" />
     <id>https://sh.alynx.one/posts/Proxy-Settings/</id>
+    
     <published>2019-02-10T01:28:00.000Z</published>
+    
+    
     <updated>2019-02-10T01:28:00.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<p>通常情况下在 Linux 下面配置好的是 socks5 代理（你懂的），但是这个代理并不能让所有程序自动走它，需要手动的做一些转换。</p>]]>
@@ -600,8 +676,12 @@
     <title>WireGuard 配置与使用</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/WireGuard-Usage/" />
     <id>https://sh.alynx.one/posts/WireGuard-Usage/</id>
+    
     <published>2019-01-27T02:29:30.000Z</published>
+    
+    
     <updated>2019-01-27T02:29:30.000Z</updated>
+    
     
     <summary type="html">
       <![CDATA[<h1 id="需求"><a class="header-link" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1><p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p>]]>
