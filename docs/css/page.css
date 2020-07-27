@@ -11,45 +11,14 @@ div.comment div.comment-results header.comments-header {
   color: #444;
 }
 div.comment div.comment-results main.comments-main div.comment {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-lines: single;
-  -moz-box-lines: single;
-  -o-box-lines: single;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-box-pack: stretch;
-  -moz-box-pack: stretch;
-  -o-box-pack: stretch;
-  -ms-flex-pack: stretch;
-  -webkit-justify-content: stretch;
   justify-content: stretch;
-  -webkit-box-align: start;
-  -moz-box-align: start;
-  -o-box-align: start;
-  -ms-flex-align: start;
-  -webkit-align-items: start;
   align-items: start;
   margin: 0.5rem 0;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   width: 10%;
 }
@@ -57,34 +26,15 @@ div.comment div.comment-results main.comments-main div.comment div.comment-avata
   width: 70%;
   border: 0.1rem solid #fff;
   border-radius: 50%;
-  -webkit-transition: box-shadow 0.3s ease-in-out, -webkit-transform 1s ease-in-out;
-  -moz-transition: box-shadow 0.3s ease-in-out, -moz-transform 1s ease-in-out;
-  -o-transition: box-shadow 0.3s ease-in-out, -o-transform 1s ease-in-out;
-  -ms-transition: box-shadow 0.3s ease-in-out, -ms-transform 1s ease-in-out;
   transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container img.comment-avatar:hover {
-  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
-  -webkit-transform: rotateY(720deg);
-  -moz-transform: rotateY(720deg);
-  -o-transform: rotateY(720deg);
-  -ms-transform: rotateY(720deg);
   transform: rotateY(720deg);
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container {
-  -webkit-box-flex: 9;
-  -moz-box-flex: 9;
-  -o-box-flex: 9;
-  box-flex: 9;
-  -webkit-flex: 9 9 auto;
-  -ms-flex: 9 9 auto;
   flex: 9 9 auto;
   width: 90%;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   overflow: hidden;
   border-radius: 0.3em;
@@ -100,10 +50,6 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
   color: #ddd;
   text-decoration: none;
   border-bottom: 0.05em dotted #ddd;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a:hover {
@@ -146,27 +92,11 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
   background: inherit;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container:hover {
-  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
 div.comment div.comment-results footer.comments-footer {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -o-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
   justify-content: center;
 }
 div.comment div.comment-results footer.comments-footer a.comment-send {
@@ -196,10 +126,6 @@ div.page nav.pagination a.extend {
   margin: 0 0.5em;
   text-decoration: none;
   border-bottom: 0.15em solid #666;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 div.page nav.pagination a.page-number:hover,
@@ -219,72 +145,21 @@ div.page nav.pagination span.space {
 div.page nav.page-nav {
   margin: 0 1rem;
   padding: 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -moz-box-pack: justify;
-  -o-box-pack: justify;
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-between;
   justify-content: space-between;
-  -webkit-box-align: stretch;
-  -moz-box-align: stretch;
-  -o-box-align: stretch;
-  -ms-flex-align: stretch;
-  -webkit-align-items: stretch;
   align-items: stretch;
-  -webkit-box-lines: single;
-  -moz-box-lines: single;
-  -o-box-lines: single;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 div.page nav.page-nav div.page-nav-item {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   font-size: 1.2rem;
 }
 div.page nav.page-nav div.page-nav-item a {
   position: relative;
-  display: -webkit-inline-box;
-  display: -moz-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-box;
   display: inline-flex;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-lines: single;
-  -moz-box-lines: single;
-  -o-box-lines: single;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  -o-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
   align-items: center;
   text-decoration: none;
   border-bottom: none;
@@ -300,11 +175,6 @@ div.page nav.page-nav div.page-nav-next {
   text-align: left;
 }
 div.page nav.page-nav div.page-nav-next a {
-  -webkit-box-pack: start;
-  -moz-box-pack: start;
-  -o-box-pack: start;
-  -ms-flex-pack: start;
-  -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 div.page nav.page-nav div.page-nav-prev {
@@ -312,10 +182,5 @@ div.page nav.page-nav div.page-nav-prev {
   text-align: right;
 }
 div.page nav.page-nav div.page-nav-prev a {
-  -webkit-box-pack: end;
-  -moz-box-pack: end;
-  -o-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }

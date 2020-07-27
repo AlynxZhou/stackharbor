@@ -8,55 +8,18 @@ footer.footer div.footer-container {
   word-wrap: break-word;
   line-height: 2;
   padding: 1rem;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: stretch;
-  -moz-box-pack: stretch;
-  -o-box-pack: stretch;
-  -ms-flex-pack: stretch;
-  -webkit-justify-content: stretch;
   justify-content: stretch;
-  -webkit-box-align: end;
-  -moz-box-align: end;
-  -o-box-align: end;
-  -ms-flex-align: end;
-  -webkit-align-items: flex-end;
   align-items: flex-end;
-  -webkit-box-lines: single;
-  -moz-box-lines: single;
-  -o-box-lines: single;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 footer.footer div.footer-container div.footer-left {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   text-align: left;
   width: 50%;
 }
 footer.footer div.footer-container div.footer-right {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   text-align: right;
   width: 50%;
@@ -70,10 +33,6 @@ footer.footer a {
   color: #ddd;
   text-decoration: none;
   border-bottom: 0.05em dotted #ddd;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 footer.footer a:hover {
@@ -98,10 +57,6 @@ footer.footer div.back-to-top button {
   cursor: pointer;
   border-radius: 0 0 0.3em 0.3em;
   font-size: 2rem;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 footer.footer div.back-to-top button:hover {
@@ -109,20 +64,7 @@ footer.footer div.back-to-top button:hover {
 }
 @media (max-width: 40rem) {
   footer.footer div.footer-container {
-    -webkit-box-direction: reverse;
-    -moz-box-direction: reverse;
-    -o-box-direction: reverse;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    -o-box-orient: vertical;
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
-    -webkit-box-align: stretch;
-    -moz-box-align: stretch;
-    -o-box-align: stretch;
-    -ms-flex-align: stretch;
-    -webkit-align-items: stretch;
     align-items: stretch;
   }
   footer.footer div.footer-container div.footer-left {

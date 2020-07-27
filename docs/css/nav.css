@@ -4,7 +4,6 @@ nav.nav {
   padding: 0 0.5em;
   overflow: hidden;
   background: #33363b;
-  -webkit-box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
   border-radius: 0.3em 0.3em 0 0;
   display: block;
@@ -31,10 +30,6 @@ nav.nav ul li a {
   padding: 0.5em;
   color: #ddd;
   text-decoration: none;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   border-bottom: none;
 }
@@ -59,10 +54,6 @@ nav.nav button.nav-toggle {
   cursor: pointer;
   color: #ddd;
   width: 100%;
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 nav.nav button.nav-toggle:hover {

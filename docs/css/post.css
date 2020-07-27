@@ -50,23 +50,11 @@ article.post header.post-header h1.post-title a.post-title-link::after {
   left: 0;
   background: #26272b;
   visibility: hidden;
-  -webkit-transform: scaleX(0);
-  -moz-transform: scaleX(0);
-  -o-transform: scaleX(0);
-  -ms-transform: scaleX(0);
   transform: scaleX(0);
-  -webkit-transition: 0.3s ease-in-out;
-  -moz-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
-  -ms-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 article.post header.post-header h1.post-title a.post-title-link:hover::after {
   visibility: visible;
-  -webkit-transform: scaleX(1);
-  -moz-transform: scaleX(1);
-  -o-transform: scaleX(1);
-  -ms-transform: scaleX(1);
   transform: scaleX(1);
 }
 article.post header.post-header h1.post-title a.post-title-link:active {

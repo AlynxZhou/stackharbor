@@ -7,19 +7,10 @@ div.info img.author-avatar {
   margin: 1rem auto;
   border: 0.3rem solid #fff;
   border-radius: 50%;
-  -webkit-transition: box-shadow 0.3s ease-in-out, -webkit-transform 1s ease-in-out;
-  -moz-transition: box-shadow 0.3s ease-in-out, -moz-transform 1s ease-in-out;
-  -o-transition: box-shadow 0.3s ease-in-out, -o-transform 1s ease-in-out;
-  -ms-transition: box-shadow 0.3s ease-in-out, -ms-transform 1s ease-in-out;
   transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
 div.info img.author-avatar:hover {
-  -webkit-box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
-  -webkit-transform: rotateY(720deg);
-  -moz-transform: rotateY(720deg);
-  -o-transform: rotateY(720deg);
-  -ms-transform: rotateY(720deg);
   transform: rotateY(720deg);
 }
 div.info h1.author-name {
@@ -35,47 +26,16 @@ div.info h2.author-description {
   margin: 0.5rem 0;
 }
 div.info div.site-count {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: distribute;
-  -moz-box-pack: distribute;
-  -o-box-pack: distribute;
-  -ms-flex-pack: distribute;
-  -webkit-justify-content: space-around;
   justify-content: space-around;
-  -webkit-box-align: stretch;
-  -moz-box-align: stretch;
-  -o-box-align: stretch;
-  -ms-flex-align: stretch;
-  -webkit-align-items: stretch;
   align-items: stretch;
-  -webkit-box-lines: single;
-  -moz-box-lines: single;
-  -o-box-lines: single;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   width: 100%;
   margin: 1rem 0;
   text-align: center;
 }
 div.info div.site-count div.count-block {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   border-left: 0.05rem #666 solid;
   border-right: 0.05rem #666 solid;
