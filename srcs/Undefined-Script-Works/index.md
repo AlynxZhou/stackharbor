@@ -36,6 +36,12 @@ C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出�
 - 仓库：<https://github.com/AlynxZhou/flipclock/>
 - Windows 编译好的安装包下载：[点击带有 win 的压缩包](https://github.com/AlynxZhou/flipclock/releases/latest)
 
+## GNOME Terminal Middle Click Close Tab Patch
+
+一个添加了使用鼠标中键关闭 Tab 功能的 GNOME Terminal（上游不知道为什么一直没收我的 Patch）。
+
+Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-terminal-middle-click-close-tab/) 安装。
+
 ## AZTGBot
 
 零依赖 Node.JS Telegram Bot API 框架。
