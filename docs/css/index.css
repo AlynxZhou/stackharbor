@@ -297,6 +297,11 @@ body,
 .container {
   height: 100%;
 }
+html {
+  transition: 0.3s ease-in-out;
+  scrollbar-width: thin;
+  scrollbar-color: #999 transparent;
+}
 html ::selection {
   color: #222;
   background: #cbeafb;
@@ -676,6 +681,9 @@ article.card:hover {
 }
 svg.svg-inline--fa {
   margin: 0 0.2em;
+}
+html[data-theme="dark"] {
+  scrollbar-color: #ddd transparent;
 }
 html[data-theme="dark"] ::-webkit-scrollbar {
   background: transparent;
