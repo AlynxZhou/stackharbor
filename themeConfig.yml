@@ -105,11 +105,14 @@ mathjax:
   global:
   cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML
 
-# Note: `fontawesome` is fontawesome-all. `scrollspy` and `util` are from bootstrap. `busuanzi` is `busuanzi.pure.mini.js`.
+# Note: `fontAwesome.loader` is `fontawesome.min.js`. `busuanzi` is `busuanzi.pure.mini.js`.
 # If you don't know what you are doing, don't change it.
 libCDN:
   enable: false
-  fontAwesome: //use.fontawesome.com/releases/v5.0.8/js/all.js
+  fontAwesome:
+    loader:
+    solid:
+    brands:
   lightGallery:
     js:
     css: //cdn.jsdelivr.net/npm/lightgallery.js@1.0.2/dist/css/lightgallery.min.css
