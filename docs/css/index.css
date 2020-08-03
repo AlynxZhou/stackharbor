@@ -700,9 +700,17 @@ html[data-theme="dark"] a:hover {
   color: #fff;
   border-bottom: 0.05em solid #fff;
 }
+html[data-theme="dark"] a.gallery-item,
+html[data-theme="dark"] a.img-link {
+  border-bottom: none;
+}
 html[data-theme="dark"] a.gallery-item img,
 html[data-theme="dark"] a.img-link img {
   border: 0.15em solid #999;
+}
+html[data-theme="dark"] a.gallery-item:hover,
+html[data-theme="dark"] a.img-link:hover {
+  border-bottom: none;
 }
 html[data-theme="dark"] span.caption {
   color: #999;
