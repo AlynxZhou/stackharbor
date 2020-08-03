@@ -113,6 +113,7 @@ libCDN:
     loader:
     solid:
     brands:
+    regular:
   lightGallery:
     js:
     css: //cdn.jsdelivr.net/npm/lightgallery.js@1.0.2/dist/css/lightgallery.min.css
