@@ -122,6 +122,7 @@ libCDN:
   lgPager: //cdn.jsdelivr.net/npm/lg-pager.js@1.0.0/dist/lg-pager.min.js
   lgThumbnail: //cdn.jsdelivr.net/npm/lg-thumbnail.js@1.0.0/dist/lg-thumbnail.min.js
   lgZoom: //cdn.jsdelivr.net/npm/lg-zoom.js@1.0.1/dist/lg-zoom.min.js
+  lgVideo:
   busuanzi: //dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js
   atom-one-dark:
   atom-one-light:
