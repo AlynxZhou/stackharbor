@@ -14,14 +14,14 @@ reward: false
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
 | <img src="https://lgiki.net/images/avatar.webp" style="width: 5em;"> | [LGiki](https://lgiki.net/) | “喵喵喵” | 节奏王 Dogiki！每天咕咕咕，从不写博客！ |
-| <img src="http://www.hackghost.com/image/logo.jpg" style="width: 5em;"> | [HackGhost](http://www.hackghost.com/) |  | 在五道口睡觉的某头。博客从某一天起就不更新了。 |
+| <img src="https://avatars1.githubusercontent.com/u/4464926?s=400&u=8e7701ee107c6a606fa5752058f6a13d4537fe37&v=4" style="width: 5em;"> | [HackGhost](http://www.hackghost.com/) |  | 在五道口睡觉的某头。博客从某一天起就不更新了。 |
 | <img src="https://chenxy.moe/pic/chen.jpg" style="width: 5em;"> | [Art_Chen](https://chenxy.moe/) |  | 某著名 ROM 开发者，上大学了要努力写代码啊。|
 
 # 大学认识的
 
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
-|  | [Meow](https://lrscy.github.io/) | “一只有吱的喵~” | 刚入学的时候认识的学长，似乎也是一只猫，现在大概在美国呼吸自由的空气（大雾）。 |
+| <img src="https://avatars2.githubusercontent.com/u/6890021?s=400&u=0c9847296a0aa5e9a16be20ec0d3a708dae3d27a&v=4" style="width: 5em;"> | [Meow](https://lrscy.github.io/) | “一只有吱的喵~” | 刚入学的时候认识的学长，似乎也是一只猫，现在大概在美国呼吸自由的空气（大雾）。 |
 | <img src="https://tvax4.sinaimg.cn/crop.0.0.480.480.180/005ttpDdly8fwz8wsaiw5j30dc0dcwfu.jpg" style="width: 5em;"> | [sqyon](https://sqyon.com/) | “试图让机器帮我学习的假 ACMer” | 优秀的学弟，一定是优秀的学弟。 |
 | <img src="https://avatars0.githubusercontent.com/u/11513730?s=460&v=4" style="width: 5em;"> | [滑稽仓库](http://huaji.store/) |  | 董老师（咕老师）的奇怪网站。希望下次打 CSGO 前董老师能找到带麦克风的耳机。 |
 | <img src="https://berlin-98.github.io/img/avatar.jpg" style="width: 5em;"> | [Bo Lin's Blog](https://berlin-98.github.io/) | “既来之 则安之” | 是学术界大佬了！是学术界大佬了！ |
@@ -33,8 +33,8 @@ reward: false
 | <img src="https://blog.yoitsu.moe/theme/images/wiki.png" style="width: 5em;"> | [约伊兹的萌狼乡手札](https://blog.yoitsu.moe/) | 「虽然咱长久以来被尊为神，且被束缚在这块土地上，但咱根本不是什么伟大的神。咱就是咱。咱是赫萝。」 | 我大概能理解这是个什么物种吧……反正我是猫。 |
 | <img src="https://farseerfc.me/images/avatar.jpg" style="width: 5em;"> | [Farseerfc 的小窝](https://farseerfc.me/) |  | ~~爱呼吸~~ fc 老师！似乎是日本某大学的教授，人生赢家，实名羡慕。 |
 | <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33\_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
-|  | [Nichi Yorozuya](https://nichi.co/) |  | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
-| <img src="https://avatars3.githubusercontent.com/u/6873988?s=460&u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&v=4" style="width: 5em;"> | [Bruce Z Blog](https://blog.brucezhang.cf/)  |   | 经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。 |
+| <img src="https://avatars2.githubusercontent.com/u/15247171?s=400&u=42dbf0d7048c9b3eda5c77ec31b9d13efca1cc28&v=4" style="width: 5em;"> | [Nichi Yorozuya](https://nichi.co/) | "🐰🐰" | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
+| <img src="https://avatars3.githubusercontent.com/u/6873988?s=460&u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&v=4" style="width: 5em;"> | [Bruce Z Blog](https://blog.brucezhang.cf/)  | 「我不是兔子」 | 经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。 |
 | <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width :5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 | <img src="https://avatars0.githubusercontent.com/u/259684?s=460&v=4" style="width: 5em;"> | [CS Slayer](https://www.csslayer.info/) |  | 资深 ~~休伯利安号甲板清洁工~~ 崩坏三玩家，Fcitx 的作者。~~可是这和我冷酷无情的 iBus 用户有有什么关系呢。~~ |
 | <img src="https://avatars0.githubusercontent.com/u/8396456?s=460&v=4" style="width: 5em;"> | [初等記憶體](https://axionl.me/) | 「 一個你知道的地方，和一個沒有酒的故事 ｜ 言文 」 | 听起来好像萌妹啊！|
