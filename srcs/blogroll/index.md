@@ -34,6 +34,7 @@ reward: false
 | <img src="https://farseerfc.me/images/avatar.jpg" style="width: 5em;"> | [Farseerfc 的小窝](https://farseerfc.me/) |  | ~~爱呼吸~~ fc 老师！似乎是日本某大学的教授，人生赢家，实名羡慕。 |
 | <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33\_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
 |  | [Nichi Yorozuya](https://nichi.co/) |  | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
+| <img src="https://avatars3.githubusercontent.com/u/6873988?s=460&u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&v=4" style="width: 5em;"> | [Bruce Z Blog](https://blog.brucezhang.cf/)  |   | 经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。 |
 | <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width :5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 | <img src="https://avatars0.githubusercontent.com/u/8396456?s=460&v=4" style="width: 5em;"> | [初等記憶體](https://axionl.me/) | 「 一個你知道的地方，和一個沒有酒的故事 ｜ 言文 」 | 听起来好像萌妹啊！|
 | <img src="https://avatars1.githubusercontent.com/u/17294071?s=460&v=4" style="width: 5em;"> | [OriginCode 札記](https://originco.de/) | 「無人訪問之無趣博客 * 1」 | 好像现在是 ~~初中生~~ 高中生来着…… |

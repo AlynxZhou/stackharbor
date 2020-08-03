@@ -2,10 +2,12 @@ div.comment div.comment-results {
   padding: 1rem;
 }
 div.comment div.comment-results div.comment-fail {
+  transition: 0.3s ease-in-out;
   text-align: center;
   color: #444;
 }
 div.comment div.comment-results header.comments-header {
+  transition: 0.3s ease-in-out;
   padding: 0.5em;
   text-align: center;
   color: #444;
@@ -79,10 +81,12 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
   content: "#";
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
+  transition: 0.3s ease-in-out;
   padding: 0.5em 1em;
   background: #fff;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
+  transition: 0.3s ease-in-out;
   overflow: auto;
   padding: 0.5em;
   border-radius: 0.3em;
@@ -104,6 +108,18 @@ div.comment div.comment-results footer.comments-footer a.comment-send {
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
 }
+html[data-theme="dark"] div.comment div.comment-results div.comment-fail {
+  color: #ddd;
+}
+html[data-theme="dark"] div.comment div.comment-results header.comments-header {
+  color: #ddd;
+}
+html[data-theme="dark"] div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
+  background: #3d444c;
+}
+html[data-theme="dark"] div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
+  background: $color-dark-code-background;
+}
 div.page h1.page-title,
 div.page h2.page-title {
   text-align: center;
@@ -116,6 +132,7 @@ div.page nav.pagination {
   padding: 1rem 0;
   display: block;
   text-align: center;
+  transition: 0.3s ease-in-out;
   color: #666;
 }
 div.page nav.pagination a.page-number,
@@ -140,6 +157,7 @@ div.page nav.pagination a.extend.current {
 }
 div.page nav.pagination span.space {
   margin: 0 0.5em;
+  transition: 0.3s ease-in-out;
   color: #666;
 }
 div.page nav.page-nav {
@@ -183,4 +201,25 @@ div.page nav.page-nav div.page-nav-prev {
 }
 div.page nav.page-nav div.page-nav-prev a {
   justify-content: flex-end;
+}
+html[data-theme="dark"] div.page nav.pagination {
+  color: #ddd;
+}
+html[data-theme="dark"] div.page nav.pagination a.page-number,
+html[data-theme="dark"] div.page nav.pagination a.extend {
+  border-bottom: 0.15em solid #ddd;
+}
+html[data-theme="dark"] div.page nav.pagination a.page-number:hover,
+html[data-theme="dark"] div.page nav.pagination a.extend:hover {
+  border-bottom: 0.15em solid #fff;
+}
+html[data-theme="dark"] div.page nav.pagination a.page-number.current,
+html[data-theme="dark"] div.page nav.pagination a.extend.current {
+  color: #fff;
+  border-bottom: 0.15em solid #fff;
+  border-top: 0.07em solid #fff;
+}
+html[data-theme="dark"] div.page nav.pagination span.space {
+  margin: 0 0.5em;
+  color: #ddd;
 }

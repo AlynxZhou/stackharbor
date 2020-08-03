@@ -8,7 +8,7 @@ header.header div.header-container {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: nowrap;
   padding: 1rem;
 }

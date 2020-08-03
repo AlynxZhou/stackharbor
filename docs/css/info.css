@@ -14,12 +14,14 @@ div.info img.author-avatar:hover {
   transform: rotateY(720deg);
 }
 div.info h1.author-name {
+  transition: 0.3s ease-in-out;
   color: #26272b;
   font-size: 1.8rem;
   font-weight: normal;
   margin: 0.5rem 0;
 }
 div.info h2.author-description {
+  transition: 0.3s ease-in-out;
   color: #444;
   font-size: 1.2rem;
   font-weight: normal;
@@ -28,7 +30,7 @@ div.info h2.author-description {
 div.info div.site-count {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: stretch;
   flex-wrap: nowrap;
   width: 100%;
@@ -37,6 +39,7 @@ div.info div.site-count {
 }
 div.info div.site-count div.count-block {
   flex: 1 1 auto;
+  transition: 0.3s ease-in-out;
   border-left: 0.05rem #666 solid;
   border-right: 0.05rem #666 solid;
 }
@@ -56,10 +59,26 @@ div.info div.rss {
 }
 div.info div.rss a.rss-link {
   display: block;
-  text-align: center;
+  transition: 0.3s ease-in-out;
   font-size: 1.5rem;
   color: #fff;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
   padding: 0.2em;
+}
+html[data-theme="dark"] div.info h1.author-name {
+  color: #eee;
+}
+html[data-theme="dark"] div.info h2.author-description {
+  color: #ddd;
+}
+html[data-theme="dark"] div.info div.site-count div.count-block {
+  border-left: 0.05rem #999 solid;
+  border-right: 0.05rem #999 solid;
+}
+html[data-theme="dark"] div.info div.site-count div.count-block:first-child {
+  border-left: none;
+}
+html[data-theme="dark"] div.info div.site-count div.count-block:last-child {
+  border-right: none;
 }

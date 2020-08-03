@@ -61,6 +61,14 @@ footer.footer div.back-to-top button {
 }
 footer.footer div.back-to-top button:hover {
   color: #36e;
+  border: none;
+}
+html[data-theme="dark"] footer.footer div.back-to-top button {
+  background: #252525;
+  color: #ddd;
+}
+html[data-theme="dark"] footer.footer div.back-to-top button:hover {
+  color: #fff;
 }
 @media (max-width: 40rem) {
   footer.footer div.footer-container {

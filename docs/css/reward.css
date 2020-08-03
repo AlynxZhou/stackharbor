@@ -2,6 +2,7 @@ div.reward {
   margin: 1rem auto;
   width: 90%;
   text-align: center;
+  transition: 0.3s ease-in-out;
   color: #444;
 }
 div.reward div.qr {
@@ -27,4 +28,7 @@ div.reward button.button {
   margin: 0.5em 0;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
+}
+html[data-theme="dark"] div.reward {
+  color: #ddd;
 }

@@ -2,10 +2,12 @@ div.comment div.comment-results {
   padding: 1rem;
 }
 div.comment div.comment-results div.comment-fail {
+  transition: 0.3s ease-in-out;
   text-align: center;
   color: #444;
 }
 div.comment div.comment-results header.comments-header {
+  transition: 0.3s ease-in-out;
   padding: 0.5em;
   text-align: center;
   color: #444;
@@ -79,10 +81,12 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
   content: "#";
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
+  transition: 0.3s ease-in-out;
   padding: 0.5em 1em;
   background: #fff;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
+  transition: 0.3s ease-in-out;
   overflow: auto;
   padding: 0.5em;
   border-radius: 0.3em;
@@ -103,4 +107,16 @@ div.comment div.comment-results footer.comments-footer a.comment-send {
   padding: 0.3em 1em;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
+}
+html[data-theme="dark"] div.comment div.comment-results div.comment-fail {
+  color: #ddd;
+}
+html[data-theme="dark"] div.comment div.comment-results header.comments-header {
+  color: #ddd;
+}
+html[data-theme="dark"] div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
+  background: #3d444c;
+}
+html[data-theme="dark"] div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
+  background: $color-dark-code-background;
 }
