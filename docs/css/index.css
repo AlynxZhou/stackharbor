@@ -133,7 +133,8 @@ nav.nav ul li a.current {
 }
 nav.nav button.theme-toggle {
   display: block;
-  flex: 0 0 5%;
+  flex: 0 0 auto;
+  width: 5%;
   text-align: center;
   border: none;
   outline: 0;
@@ -141,7 +142,6 @@ nav.nav button.theme-toggle {
   font-size: 2rem;
   cursor: pointer;
   color: #ddd;
-  width: 100%;
   transition: 0.3s ease-in-out;
 }
 nav.nav button.theme-toggle:hover {
@@ -170,6 +170,7 @@ nav.nav button.theme-toggle:hover {
   nav.nav button.theme-toggle {
     display: block;
     flex: auto;
+    width: 100%;
   }
 }
 main.main {
@@ -307,12 +308,14 @@ html ::-moz-selection {
 html ::-webkit-scrollbar {
   width: 0.5em;
   height: 0.5em;
+  transition: 0.3s ease-in-out;
   background: transparent;
 }
 html ::-webkit-scrollbar-track {
   background: 0 0;
 }
 html ::-webkit-scrollbar-thumb {
+  transition: 0.3s ease-in-out;
   background: #999;
   border-radius: 0.25em;
 }
@@ -320,9 +323,11 @@ html ::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
 html ::-webkit-scrollbar-corner {
+  transition: 0.3s ease-in-out;
   background: #666;
 }
 html ::-webkit-scrollbar-resizer {
+  transition: 0.3s ease-in-out;
   background: #999;
 }
 body {
@@ -659,7 +664,6 @@ div.alert-blue {
 }
 article.card {
   display: block;
-  transition: 0.3s ease-in-out;
   background: #fff;
   box-sizing: border-box;
   border-radius: 0.3em;
@@ -683,10 +687,10 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
   background: #eee;
 }
 html[data-theme="dark"] ::-webkit-scrollbar-corner {
-  background: #666;
+  background: #eee;
 }
 html[data-theme="dark"] ::-webkit-scrollbar-resizer {
-  background: #999;
+  background: #ddd;
 }
 html[data-theme="dark"] body {
   color: #eee;
@@ -722,23 +726,14 @@ html[data-theme="dark"] button.button {
 html[data-theme="dark"] article table thead tr {
   background: #26272b;
 }
-html[data-theme="dark"] article table thead tr th {
-  border: 0.1rem solid $color-dark-table-head-border;
-}
 html[data-theme="dark"] article table tbody tr {
   background: #33363b;
-}
-html[data-theme="dark"] article table tbody tr td {
-  border: 0.1rem solid $color-dark-table-border;
 }
 html[data-theme="dark"] article table tbody tr td:nth-child(2n) {
   background: #26272b;
 }
 html[data-theme="dark"] article table tbody tr:nth-child(2n) {
   background: #26272b;
-}
-html[data-theme="dark"] article table tbody tr:nth-child(2n) td {
-  border: 0.1rem solid $color-dark-table-border;
 }
 html[data-theme="dark"] article table tbody tr:nth-child(2n) td:nth-child(2n) {
   background: #33363b;
@@ -758,6 +753,7 @@ html[data-theme="dark"] blockquote p {
 }
 html[data-theme="dark"] blockquote.center-quote,
 html[data-theme="dark"] blockquote.centerquote {
+  border-left: none;
   border-top: 0.2em solid #999;
   border-bottom: 0.2em solid #999;
   color: #999;

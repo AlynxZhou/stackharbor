@@ -37,7 +37,6 @@ div.comment div.comment-results main.comments-main div.comment div.comment-avata
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container {
   flex: 9 9 auto;
   width: 90%;
-  transition: 0.3s ease-in-out;
   overflow: hidden;
   border-radius: 0.3em;
 }
@@ -116,9 +115,6 @@ html[data-theme="dark"] div.comment div.comment-results header.comments-header {
 }
 html[data-theme="dark"] div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
   background: #3d444c;
-}
-html[data-theme="dark"] div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
-  background: $color-dark-code-background;
 }
 div.page h1.page-title,
 div.page h2.page-title {
@@ -220,6 +216,5 @@ html[data-theme="dark"] div.page nav.pagination a.extend.current {
   border-top: 0.07em solid #fff;
 }
 html[data-theme="dark"] div.page nav.pagination span.space {
-  margin: 0 0.5em;
   color: #ddd;
 }

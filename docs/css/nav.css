@@ -69,7 +69,8 @@ nav.nav ul li a.current {
 }
 nav.nav button.theme-toggle {
   display: block;
-  flex: 0 0 5%;
+  flex: 0 0 auto;
+  width: 5%;
   text-align: center;
   border: none;
   outline: 0;
@@ -77,7 +78,6 @@ nav.nav button.theme-toggle {
   font-size: 2rem;
   cursor: pointer;
   color: #ddd;
-  width: 100%;
   transition: 0.3s ease-in-out;
 }
 nav.nav button.theme-toggle:hover {
@@ -106,5 +106,6 @@ nav.nav button.theme-toggle:hover {
   nav.nav button.theme-toggle {
     display: block;
     flex: auto;
+    width: 100%;
   }
 }
