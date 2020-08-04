@@ -257,11 +257,11 @@
 <a id='more'></a>
 
 <p>我相信很多人在搜索 Wayland 的时候都看过这两张著名的图片：</p>
-<p><img src="https://wayland.freedesktop.org/x-architecture.png" alt></p>
-<p><img src="https://wayland.freedesktop.org/wayland-architecture.png" alt></p>
+<p><img src="https://wayland.freedesktop.org/x-architecture.png" alt=""></p>
+<p><img src="https://wayland.freedesktop.org/wayland-architecture.png" alt=""></p>
 <p>但我觉得可能看了也不明白，怎么把 Xserver 砍掉就提高性能了？为什么没有见到 window manager？为什么桌面环境需要去支持 Wayland？</p>
 <p>Wikipedia 上还有一些奇奇怪怪的图片比如这种：</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Linux_Graphics_Stack_2013.svg" alt></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Linux_Graphics_Stack_2013.svg" alt=""></p>
 <p>在加上所有介绍 Wayland 的文章都会扯上 DRM，EGL，GLES 之类的，如果不懂这些就完全绕进去了，比如我就看到过有人问 Wayland 用 OpenGL ES 那用 OpenGL 的游戏是不是就跑不了了之类的。</p>
 <p>这一切都得从头说起。</p>
 <p>X 协议设计于 1980 年代，那时候窗口界面刚刚起步，人们还没什么 3D 特效一类的想法，而且机能也不允许，放到今天任何一个有点桌面基础的人都能理解应该给每个窗口一个 buffer 然后把这些 buffer 里的 texture 贴出来的设计逻辑，但 <strong>那时候可没那么多内存让你给每个窗口一个 buffer</strong>。所以就如同各种常见的领域一样，有个小天才一拍脑子想，反正 <strong>最后显示到桌面上的都是一个屏幕大小</strong>，我们只要准备这么大一块内存就行了嘛！换句话说，每个窗口的 buffer 要去掉自己被覆盖住的内存，整体内存大小就是可控的，<strong>在内存里是直接没有被覆盖的部分的</strong>。</p>
@@ -544,4 +544,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.3.0 at 2020-08-03 Mon 19:20:54 CST. -->
+<!-- Page built by Hikaru v1.4.0 at 2020-08-04 Tue 11:31:35 CST. -->

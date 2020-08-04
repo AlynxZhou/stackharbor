@@ -284,46 +284,46 @@
 <span class="hljs-keyword">import</span> argparse
 
 <span class="hljs-comment">### Deal with the argument.</span>
-parser = argparse.ArgumentParser(description=<span class="hljs-string">&quot;hrit -- Hexo Rename Images Tool.&quot;</span>)
-parser.add_argument(<span class="hljs-string">&quot;-f&quot;</span>,<span class="hljs-string">&quot;--forehead&quot;</span>,action=<span class="hljs-string">&quot;store&quot;</span>,type=str,help=<span class="hljs-string">&quot;The string will be added to the begin of the file name.Default is the directory name(dir).&quot;</span>)
-parser.add_argument(<span class="hljs-string">&quot;-m&quot;</span>,<span class="hljs-string">&quot;--middle&quot;</span>,action=<span class="hljs-string">&quot;store&quot;</span>,default=<span class="hljs-string">&#x27;_&#x27;</span>,type=str,help=<span class="hljs-string">&quot;This will be put between the head and the tail.Default &#x27;_&#x27;&quot;</span>)
-parser.add_argument(<span class="hljs-string">&quot;-n&quot;</span>,<span class="hljs-string">&quot;--number&quot;</span>,action=<span class="hljs-string">&quot;store_true&quot;</span>,help=<span class="hljs-string">&quot;If this argument is set,the file name between the head and the last dot will be set as an increasing number.&quot;</span>)
-<span class="hljs-comment">#parser.add_argument(&quot;dir&quot;,action=&quot;store&quot;,nargs=&#x27;?&#x27;,default=&quot;./&quot;,type=str,help=&quot;The directory to work.&quot;)</span>
-parser.add_argument(<span class="hljs-string">&quot;dir&quot;</span>,action=<span class="hljs-string">&quot;store&quot;</span>,type=str,help=<span class="hljs-string">&quot;The directory to work.&quot;</span>)
+parser = argparse.ArgumentParser(description=<span class="hljs-string">"hrit -- Hexo Rename Images Tool."</span>)
+parser.add_argument(<span class="hljs-string">"-f"</span>,<span class="hljs-string">"--forehead"</span>,action=<span class="hljs-string">"store"</span>,type=str,help=<span class="hljs-string">"The string will be added to the begin of the file name.Default is the directory name(dir)."</span>)
+parser.add_argument(<span class="hljs-string">"-m"</span>,<span class="hljs-string">"--middle"</span>,action=<span class="hljs-string">"store"</span>,default=<span class="hljs-string">'_'</span>,type=str,help=<span class="hljs-string">"This will be put between the head and the tail.Default '_'"</span>)
+parser.add_argument(<span class="hljs-string">"-n"</span>,<span class="hljs-string">"--number"</span>,action=<span class="hljs-string">"store_true"</span>,help=<span class="hljs-string">"If this argument is set,the file name between the head and the last dot will be set as an increasing number."</span>)
+<span class="hljs-comment">#parser.add_argument("dir",action="store",nargs='?',default="./",type=str,help="The directory to work.")</span>
+parser.add_argument(<span class="hljs-string">"dir"</span>,action=<span class="hljs-string">"store"</span>,type=str,help=<span class="hljs-string">"The directory to work."</span>)
 args = parser.parse_args()
 
 <span class="hljs-comment">### Remember the original path.</span>
 opath = os.getcwd()
 
 <span class="hljs-comment">### Change directory.</span>
-print(<span class="hljs-string">&quot;Entering directory %s …&quot;</span>%(args.dir))
+print(<span class="hljs-string">"Entering directory %s …"</span>%(args.dir))
 <span class="hljs-keyword">try</span>:
     os.chdir(args.dir)
 <span class="hljs-keyword">except</span> FileNotFoundError:
-    print(<span class="hljs-string">&quot;ERROR!Can&#x27;t find directory %s !&quot;</span>%(args.dir))
-    print(<span class="hljs-string">&quot;Quiting…&quot;</span>)
+    print(<span class="hljs-string">"ERROR!Can't find directory %s !"</span>%(args.dir))
+    print(<span class="hljs-string">"Quiting…"</span>)
     exit()
 curdir = os.getcwd()
 
 <span class="hljs-comment">### Ask.</span>
-print(<span class="hljs-string">&quot;Now it is going to work in &quot;</span>)
-print(<span class="hljs-string">&quot;=====================================================&quot;</span>)
-print(<span class="hljs-string">&quot;%s&quot;</span>%(curdir))
-print(<span class="hljs-string">&quot;=====================================================&quot;</span>)
-print(<span class="hljs-string">&quot;Please check weither it is the exact directory you want!&quot;</span>)
-print(<span class="hljs-string">&quot;Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!&quot;</span>)
-answer = input(<span class="hljs-string">&quot;Continue?[y/N] &quot;</span>)
-<span class="hljs-keyword">if</span> answer != <span class="hljs-string">&#x27;y&#x27;</span> <span class="hljs-keyword">and</span> answer != <span class="hljs-string">&quot;yes&quot;</span>:
-    print(<span class="hljs-string">&quot;Quiting…&quot;</span>)
+print(<span class="hljs-string">"Now it is going to work in "</span>)
+print(<span class="hljs-string">"====================================================="</span>)
+print(<span class="hljs-string">"%s"</span>%(curdir))
+print(<span class="hljs-string">"====================================================="</span>)
+print(<span class="hljs-string">"Please check weither it is the exact directory you want!"</span>)
+print(<span class="hljs-string">"Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!"</span>)
+answer = input(<span class="hljs-string">"Continue?[y/N] "</span>)
+<span class="hljs-keyword">if</span> answer != <span class="hljs-string">'y'</span> <span class="hljs-keyword">and</span> answer != <span class="hljs-string">"yes"</span>:
+    print(<span class="hljs-string">"Quiting…"</span>)
     os.chdir(opath)
     exit()
 
-print(<span class="hljs-string">&quot;Wating 5 seconds to regret…&quot;</span>)
-ilist = [<span class="hljs-string">&quot;5…&quot;</span>,<span class="hljs-string">&quot;5 4…&quot;</span>,<span class="hljs-string">&quot;5 4 3…&quot;</span>,<span class="hljs-string">&quot;5 4 3 2…&quot;</span>,<span class="hljs-string">&quot;5 4 3 2 1…&quot;</span>]
+print(<span class="hljs-string">"Wating 5 seconds to regret…"</span>)
+ilist = [<span class="hljs-string">"5…"</span>,<span class="hljs-string">"5 4…"</span>,<span class="hljs-string">"5 4 3…"</span>,<span class="hljs-string">"5 4 3 2…"</span>,<span class="hljs-string">"5 4 3 2 1…"</span>]
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> ilist:
-    print(<span class="hljs-string">&quot;%s\r&quot;</span>%(i),end=<span class="hljs-string">&quot;&quot;</span>)
+    print(<span class="hljs-string">"%s\r"</span>%(i),end=<span class="hljs-string">""</span>)
     time.sleep(<span class="hljs-number">1</span>)
-print(<span class="hljs-string">&quot;5 4 3 2 1…Start!\n&quot;</span>)
+print(<span class="hljs-string">"5 4 3 2 1…Start!\n"</span>)
 
 <span class="hljs-comment">### Get dir.</span>
 <span class="hljs-keyword">if</span> args.forehead == <span class="hljs-literal">None</span>:
@@ -333,36 +333,36 @@ print(<span class="hljs-string">&quot;5 4 3 2 1…Start!\n&quot;</span>)
 
 <span class="hljs-comment">### List files.</span>
 filelist = os.listdir(curdir)
-print(<span class="hljs-string">&quot;Found files:%s.\n&quot;</span>%(filelist))
+print(<span class="hljs-string">"Found files:%s.\n"</span>%(filelist))
 
 <span class="hljs-comment">### Rename.</span>
 <span class="hljs-keyword">if</span> args.number == <span class="hljs-literal">True</span>:
     <span class="hljs-comment">## Number name.</span>
     number = <span class="hljs-number">1</span>
     <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> filelist:
-        filel = file.split(<span class="hljs-string">&#x27;.&#x27;</span>)
+        filel = file.split(<span class="hljs-string">'.'</span>)
         <span class="hljs-keyword">if</span> len(filel) == <span class="hljs-number">1</span>:
             <span class="hljs-comment">## Without extand name.</span>
             newname = forehead + args.middle + str(number)
         <span class="hljs-keyword">else</span>:
             <span class="hljs-comment">## With extand name.</span>
-            newname = forehead + args.middle + str(number) + <span class="hljs-string">&#x27;.&#x27;</span> + filel[<span class="hljs-number">-1</span>]
+            newname = forehead + args.middle + str(number) + <span class="hljs-string">'.'</span> + filel[<span class="hljs-number">-1</span>]
 
         os.renames(file,newname)
-        print(<span class="hljs-string">&quot;Renamed %s to %s.&quot;</span>%(file,newname))
+        print(<span class="hljs-string">"Renamed %s to %s."</span>%(file,newname))
         number = number + <span class="hljs-number">1</span>
 <span class="hljs-keyword">else</span>:
     <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> filelist:
         newname = forehead + args.middle + file
 
         os.renames(file,newname)
-        print(<span class="hljs-string">&quot;Renamed %s to %s.&quot;</span>%(file,newname))
+        print(<span class="hljs-string">"Renamed %s to %s."</span>%(file,newname))
 
 <span class="hljs-comment">### Get new file list.</span>
 newlist = os.listdir(curdir)
-print(<span class="hljs-string">&quot;\nNow you can copy the follow hexo tags to your markdown post.\n&quot;</span>)
+print(<span class="hljs-string">"\nNow you can copy the follow hexo tags to your markdown post.\n"</span>)
 <span class="hljs-keyword">for</span> new <span class="hljs-keyword">in</span> newlist:
-    print(<span class="hljs-string">&quot;{%% asset_img %s %s %%}\n&quot;</span>%(new,new))
+    print(<span class="hljs-string">"{%% asset_img %s %s %%}\n"</span>%(new,new))
 
 <span class="hljs-comment">### Go back to original path.</span>
 os.chdir(opath)</code></pre></figure></code></pre>
@@ -390,7 +390,7 @@ Continue?[y/N] y
 Wating 5 seconds to regret…
 5 4 3 2 1…Start!
 
-Found files:[&#x27;aaa&#x27;, &#x27;c.c.c&#x27;, &#x27;bb.b&#x27;].
+Found files:['aaa', 'c.c.c', 'bb.b'].
 
 Renamed aaa to test<span class="hljs-emphasis">_aaa.
 Renamed c.c.c to test_</span>c.c.c.
@@ -417,7 +417,7 @@ Continue?[y/N] y
 Wating 5 seconds to regret…
 5 4 3 2 1…Start!
 
-Found files:[&#x27;test<span class="hljs-emphasis">_c.c.c&#x27;, &#x27;test_</span>bb.b&#x27;, &#x27;test<span class="hljs-emphasis">_aaa&#x27;].
+Found files:['test<span class="hljs-emphasis">_c.c.c', 'test_</span>bb.b', 'test<span class="hljs-emphasis">_aaa'].
 
 Renamed test_</span>c.c.c to xxx<span class="hljs-emphasis">_test_</span>c.c.c.
 Renamed test<span class="hljs-emphasis">_bb.b to xxx_</span>test<span class="hljs-emphasis">_bb.b.
@@ -443,7 +443,7 @@ Continue?[y/N] y
 Wating 5 seconds to regret…
 5 4 3 2 1…Start!
 
-Found files:[&#x27;xxx<span class="hljs-emphasis">_test_</span>c.c.c&#x27;, &#x27;xxx<span class="hljs-emphasis">_test_</span>aaa&#x27;, &#x27;xxx<span class="hljs-emphasis">_test_</span>bb.b&#x27;].
+Found files:['xxx<span class="hljs-emphasis">_test_</span>c.c.c', 'xxx<span class="hljs-emphasis">_test_</span>aaa', 'xxx<span class="hljs-emphasis">_test_</span>bb.b'].
 
 Renamed xxx<span class="hljs-emphasis">_test_</span>c.c.c to test<span class="hljs-emphasis">_1.c.
 Renamed xxx_</span>test<span class="hljs-emphasis">_aaa to test_</span>2.
@@ -751,4 +751,4 @@ Now you can copy the follow hexo tags to your markdown post.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.3.0 at 2020-08-03 Mon 19:20:54 CST. -->
+<!-- Page built by Hikaru v1.4.0 at 2020-08-04 Tue 11:31:35 CST. -->

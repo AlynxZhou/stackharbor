@@ -283,7 +283,7 @@
     glfwInit();
     <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> width = <span class="hljs-number">800</span>;
     <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> height = <span class="hljs-number">600</span>;
-    GLFWwindow *window = glfwCreateWindow(width, height, <span class="hljs-string">&quot;learn-gles&quot;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);
+    GLFWwindow *window = glfwCreateWindow(width, height, <span class="hljs-string">"learn-gles"</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
 
@@ -355,7 +355,7 @@
     GLint compiled = <span class="hljs-number">0</span>;
     <span class="hljs-comment">// 创建 shader。</span>
     <span class="hljs-keyword">if</span> (!(shader = glCreateShader(type))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Shader Create Error.\n&quot;</span>);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Shader Create Error.\n"</span>);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
     <span class="hljs-comment">// 加载 shader 内容。</span>
@@ -371,12 +371,12 @@
         <span class="hljs-keyword">if</span> (info_len) {
         <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
         <span class="hljs-keyword">if</span> (!info) {
-            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Malloc Error.\n&quot;</span>);
+            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
             glDeleteShader(shader);
             <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         }
         glGetShaderInfoLog(shader, info_len, <span class="hljs-literal">NULL</span>, info);
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Compile Error: %s\n&quot;</span>, info);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Compile Error: %s\n"</span>, info);
         <span class="hljs-built_in">free</span>(info);
         }
         glDeleteShader(shader);
@@ -393,19 +393,19 @@
     <span class="hljs-keyword">char</span> *file_content = <span class="hljs-literal">NULL</span>;
     <span class="hljs-keyword">char</span> temp_line[LINE_LENGTH];
     <span class="hljs-comment">// 读取文件不用解释了吧……</span>
-    <span class="hljs-keyword">if</span> (!(fp = fopen(shader_path, <span class="hljs-string">&quot;r&quot;</span>))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Open file %s failed.\n&quot;</span>, shader_path);
+    <span class="hljs-keyword">if</span> (!(fp = fopen(shader_path, <span class="hljs-string">"r"</span>))) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Open file %s failed.\n"</span>, shader_path);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
     fseek(fp, <span class="hljs-number">0l</span>, SEEK_END);
     file_length = ftell(fp);
     rewind(fp);
     <span class="hljs-keyword">if</span> (!(file_content = <span class="hljs-built_in">malloc</span>(file_length))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Malloc Error.\n&quot;</span>);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
         fclose(fp);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
-    file_content[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+    file_content[<span class="hljs-number">0</span>] = <span class="hljs-string">'\0'</span>;
     <span class="hljs-keyword">while</span> (fgets(temp_line, LINE_LENGTH, fp))
         <span class="hljs-built_in">strncat</span>(file_content, temp_line, LINE_LENGTH);
     fclose(fp);
@@ -428,7 +428,7 @@
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     <span class="hljs-comment">// 创建 Shader Program。</span>
     <span class="hljs-keyword">if</span> (!(program = glCreateProgram())) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Program Create Error.\n&quot;</span>);
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Program Create Error.\n"</span>);
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
     <span class="hljs-comment">// 给 Program 添加 Shader。</span>
@@ -448,12 +448,12 @@
         <span class="hljs-keyword">if</span> (info_len) {
             <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
             <span class="hljs-keyword">if</span> (!info) {
-                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Malloc Error.\n&quot;</span>);
+                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
                 glDeleteProgram(program);
                 <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
             }
             glGetProgramInfoLog(program, info_len, <span class="hljs-literal">NULL</span>, info);
-            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Link Error: %s\n&quot;</span>, info);
+            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Link Error: %s\n"</span>, info);
             <span class="hljs-built_in">free</span>(info);
         }
         glDeleteProgram(program);
@@ -462,7 +462,7 @@
     <span class="hljs-keyword">return</span> program;
 }</code></pre></figure></code></pre>
 <p>有了这个之后只需要在 <code>glViewport()</code> 和 <code>/* Code Here */</code> 之间调用 <code>load_program()</code> 生成 Shader Program。</p>
-<pre><code class="c"><figure class="highlight hljs c"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> program = load_program(<span class="hljs-string">&quot;triangle.v.glsl&quot;</span>, <span class="hljs-string">&quot;triangle.f.glsl&quot;</span>);</code></pre></figure></code></pre>
+<pre><code class="c"><figure class="highlight hljs c"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> program = load_program(<span class="hljs-string">"triangle.v.glsl"</span>, <span class="hljs-string">"triangle.f.glsl"</span>);</code></pre></figure></code></pre>
 <h2 id="顶点数据"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE" title="顶点数据"></a>顶点数据</h2>
 <p>接下来我们需要准备绘制的数据了，对于一个三角形来说，需要三个顶点来确定它的位置，每个顶点需要三个坐标，同时我们还要给它们创建不同的颜色，让我们的三角形变的多彩一点，所以需要像下面一样组织数据。把这段插入到之前 <code>/* Code Here */</code> 和 <code>glViewport(0, 0, width, height);</code> 之间。对于 3D 程序来说 float 的精度足够了，double需要更多的运算时间。</p>
 <pre><code class="c"><figure class="highlight hljs c"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span></pre><pre class="code"><code>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">float</span> vertices[] = {
@@ -868,4 +868,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.3.0 at 2020-08-03 Mon 19:20:54 CST. -->
+<!-- Page built by Hikaru v1.4.0 at 2020-08-04 Tue 11:31:35 CST. -->

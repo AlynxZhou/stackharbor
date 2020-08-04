@@ -257,12 +257,12 @@
 <p>首先似乎 PKGBUILD 下载的版本很奇怪，不管你在 Unity 论坛里哪个链接下载的版本其实都是一个，并且和 PKGBUILD 里面的不一样，解决方法就是自己计算一下 md5 然后替换掉 PKGBUILD 里面的 md5sums。</p>
 <p>第二个就是 PKGBUILD 里面最后有这几句：</p>
 <pre><code><figure class="highlight hljs perl"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span></pre><pre class="code"><code><span class="hljs-comment"># Fix 7z permissions</span>
-<span class="hljs-keyword">chmod</span> +<span class="hljs-keyword">x</span> <span class="hljs-string">&quot;<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources&quot;</span> \
-         <span class="hljs-string">&quot;<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked&quot;</span> \
-         <span class="hljs-string">&quot;<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external&quot;</span> \
-         <span class="hljs-string">&quot;<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z&quot;</span> \
-         <span class="hljs-string">&quot;<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z/linux64&quot;</span> \
-         <span class="hljs-string">&quot;<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z/linux64/7z&quot;</span></code></pre></figure></code></pre>
+<span class="hljs-keyword">chmod</span> +<span class="hljs-keyword">x</span> <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources"</span> \
+         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked"</span> \
+         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external"</span> \
+         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z"</span> \
+         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z/linux64"</span> \
+         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z/linux64/7z"</span></code></pre></figure></code></pre>
 <p>但解压出来实际上没这些文件，然后就会报错，注释掉就好了。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -528,4 +528,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.3.0 at 2020-08-03 Mon 19:20:54 CST. -->
+<!-- Page built by Hikaru v1.4.0 at 2020-08-04 Tue 11:31:35 CST. -->

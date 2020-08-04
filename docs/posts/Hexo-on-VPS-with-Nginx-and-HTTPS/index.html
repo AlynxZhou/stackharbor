@@ -289,7 +289,7 @@
     <span class="hljs-attr">repo:</span> <span class="hljs-comment"># 像这样设置多个 git 仓库，`名称: 地址,分支`，逗号后面没有空格。</span>
       <span class="hljs-attr">github:</span> <span class="hljs-string">git@github.com:XXXXXX/XXXXXX.git,branch</span>
       <span class="hljs-attr">coding:</span> <span class="hljs-string">git@git.coding.net:XXXXXXX/XXXXXXX,coding-pages</span>
-    <span class="hljs-attr">message:</span> <span class="hljs-string">Site</span> <span class="hljs-string">updated</span> <span class="hljs-string">by</span> <span class="hljs-string">Hexo</span> <span class="hljs-string">at</span> {{ <span class="hljs-string">now(&#x27;YYYY-MM-DD</span> <span class="hljs-string">HH:mm:ss&#x27;)</span> }}<span class="hljs-string">.</span>
+    <span class="hljs-attr">message:</span> <span class="hljs-string">Site</span> <span class="hljs-string">updated</span> <span class="hljs-string">by</span> <span class="hljs-string">Hexo</span> <span class="hljs-string">at</span> {{ <span class="hljs-string">now('YYYY-MM-DD</span> <span class="hljs-string">HH:mm:ss')</span> }}<span class="hljs-string">.</span>
   <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">rsync</span>
     <span class="hljs-attr">host:</span> <span class="hljs-string">YOUR</span> <span class="hljs-string">VPS</span> <span class="hljs-string">IP</span> <span class="hljs-comment"># 你的服务器的 IP 地址</span>
     <span class="hljs-attr">user:</span> <span class="hljs-string">YOUR</span> <span class="hljs-string">USERNAME</span> <span class="hljs-comment"># 你刚刚复制密钥的那个用户</span>
@@ -304,8 +304,8 @@
 <!-- Marked bug: cannot handle `\)` in URL, use `%29` instead. Waiting hexo-renderer-marked update its dependents version. -->
 <p>上传到服务器上，如果有 git 仓库最好用 <code>--exclude=.git</code> 排除掉，顺便 SOURCE 目录一般不要用 <code>/</code> 结尾，原因参见 <a href="https://wiki.archlinux.org/index.php/Rsync_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E6.B3.A8.E6.84.8F.E5.B0.BE.E9.9A.8F.E4.B8.8B.E5.88.92" target="_blank" rel="noreferrer noopener">这里</a>。</p>
 <p>这个时候我还没有把 DNS 从 GitHub Pages 转到我的服务器上，结果生米煮成了熟饭，只能往下继续了。</p>
-<h1 id="用Letamp;39;sEncrypt生成SSL证书"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Letamp;39;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="用Letamp;39;sEncrypt生成SSL证书"></a>用 Let&#39;s Encrypt 生成 SSL 证书</h1>
-<p>HTTPS 需要有可信机构签发的证书，<a href="https://letsencrypt.org/" target="_blank" rel="noreferrer noopener">Let&#39;s Encrypt</a> 就是一个免费提供这种服务的网站，不过官方推荐的步骤只能对每个域名单独生成证书，比如 <code>alynx.xyz</code> 和 <code>sh.alynx.xyz</code> 需要两个证书，这里介绍生成通配符证书的办法，比如对 <code>*.alynx.xyz</code> 生成一个证书，可以用在所有三级子域名：</p>
+<h1 id="用Let039;sEncrypt生成SSL证书"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8Let039;sEncrypt%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6" title="用Let039;sEncrypt生成SSL证书"></a>用 Let's Encrypt 生成 SSL 证书</h1>
+<p>HTTPS 需要有可信机构签发的证书，<a href="https://letsencrypt.org/" target="_blank" rel="noreferrer noopener">Let's Encrypt</a> 就是一个免费提供这种服务的网站，不过官方推荐的步骤只能对每个域名单独生成证书，比如 <code>alynx.xyz</code> 和 <code>sh.alynx.xyz</code> 需要两个证书，这里介绍生成通配符证书的办法，比如对 <code>*.alynx.xyz</code> 生成一个证书，可以用在所有三级子域名：</p>
 <h2 id="下载certbot-auto"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E4%B8%8B%E8%BD%BDcertbot-auto" title="下载certbot-auto"></a>下载 certbot-auto</h2>
 <p><code>certbot-auto</code> 是用来验证生成证书的交互命令行工具，似乎一般软件源里的版本都不够高，不能生成通配符证书，这里手动下载新版：</p>
 <pre><code><figure class="highlight hljs elixir"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/dl.eff.org/certbot</span>-auto
@@ -316,7 +316,7 @@
 <p>这里 <code>certonly</code> 表示我们只需要生成证书，我们不需要它帮我们改服务器配置。<code>--manual</code> 表示手动配置参数。生成证书需要你证明域名属于你，由于我们是通配符自然不能一个一个页面去放文件验证（默认的验证方法，类似 Google 的页面验证），所以用 <code>--preferred-challenges=dns</code> 设置为验证 DNS 记录。<code>--server=https://acme-v02.api.letsencrypt.org/directory</code> 表示使用第二版的 api 服务器，默认的第一版是不支持通配符证书的签发的。最后 <code>-d *.example.com -d example.com</code> 添加你的域名，需要注意的是只包含 <code>*.example.com</code> 的证书是不能用在 <code>example.com</code> 上的，所以我们把两个都写上，生成的证书就会同时包含两个域名。</p>
 <pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code>Saving <span class="hljs-builtin-name">debug</span> log <span class="hljs-keyword">to</span> /var/log/letsencrypt/letsencrypt.log
 Plugins selected: Authenticator manual, Installer None
-Enter email<span class="hljs-built_in"> address </span>(used <span class="hljs-keyword">for</span> urgent renewal <span class="hljs-keyword">and</span> security notices) (Enter <span class="hljs-string">&#x27;c&#x27;</span> <span class="hljs-keyword">to</span>
+Enter email<span class="hljs-built_in"> address </span>(used <span class="hljs-keyword">for</span> urgent renewal <span class="hljs-keyword">and</span> security notices) (Enter <span class="hljs-string">'c'</span> <span class="hljs-keyword">to</span>
 cancel): YOUR EMAIL</code></pre></figure></code></pre>
 <p>这里会让你输入你的邮箱。</p>
 <pre><code><figure class="highlight hljs livecodeserver"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span></pre><pre class="code"><code><span class="hljs-comment">-------------------------------------------------------------------------------</span>
@@ -329,8 +329,8 @@ agree <span class="hljs-keyword">in</span> order <span class="hljs-built_in">to<
 <p>这里输入 A 表示同意条款。</p>
 <pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span></pre><pre class="code"><code>-------------------------------------------------------------------------------
 Would you be willing <span class="hljs-keyword">to</span> share your email<span class="hljs-built_in"> address </span>with the Electronic Frontier
-Foundation, a founding partner of the Let<span class="hljs-string">&#x27;s Encrypt project and the non-profit
-organization that develops Certbot? We&#x27;</span>d like <span class="hljs-keyword">to</span> send you email about EFF <span class="hljs-keyword">and</span>
+Foundation, a founding partner of the Let<span class="hljs-string">'s Encrypt project and the non-profit
+organization that develops Certbot? We'</span>d like <span class="hljs-keyword">to</span> send you email about EFF <span class="hljs-keyword">and</span>
 our work <span class="hljs-keyword">to</span> encrypt the web, protect its<span class="hljs-built_in"> users </span><span class="hljs-keyword">and</span> defend digital rights.
 -------------------------------------------------------------------------------
 (Y)es/(N)o: N</code></pre></figure></code></pre>
@@ -342,8 +342,8 @@ dns-01 challenge <span class="hljs-keyword">for</span> alynx.xyz
 
 -------------------------------------------------------------------------------
 NOTE: The<span class="hljs-built_in"> IP </span>of this machine will be publicly logged as having requested this
-certificate. <span class="hljs-keyword">If</span> you<span class="hljs-string">&#x27;re running certbot in manual mode on a machine that is not
-your server, please ensure you&#x27;</span>re okay with that.
+certificate. <span class="hljs-keyword">If</span> you<span class="hljs-string">'re running certbot in manual mode on a machine that is not
+your server, please ensure you'</span>re okay with that.
 
 Are you OK with your<span class="hljs-built_in"> IP </span>being logged?
 -------------------------------------------------------------------------------
@@ -379,10 +379,10 @@ IMPORTANT NOTES:
    Your cert will <span class="hljs-keyword">expire</span> <span class="hljs-keyword">on</span> <span class="hljs-number">2018</span><span class="hljs-number">-09</span><span class="hljs-number">-02.</span> <span class="hljs-keyword">To</span> obtain a <span class="hljs-keyword">new</span> <span class="hljs-keyword">or</span> tweaked
    <span class="hljs-keyword">version</span> <span class="hljs-keyword">of</span> this certificate <span class="hljs-keyword">in</span> the future, simply run certbot-<span class="hljs-keyword">auto</span>
    again. <span class="hljs-keyword">To</span> non-interactively renew *<span class="hljs-keyword">all</span>* <span class="hljs-keyword">of</span> your certificates, run
-   <span class="hljs-string">&quot;certbot-auto renew&quot;</span>
+   <span class="hljs-string">"certbot-auto renew"</span>
  - <span class="hljs-keyword">If</span> you <span class="hljs-keyword">like</span> Certbot, please <span class="hljs-keyword">consider</span> supporting our <span class="hljs-keyword">work</span> <span class="hljs-keyword">by</span>:
 
-   Donating <span class="hljs-keyword">to</span> ISRG / Let<span class="hljs-string">&#x27;s Encrypt:   https://letsencrypt.org/donate
+   Donating <span class="hljs-keyword">to</span> ISRG / Let<span class="hljs-string">'s Encrypt:   https://letsencrypt.org/donate
    Donating to EFF:                    https://eff.org/donate-le</span></code></pre></figure></code></pre>
 <p><del>又是一次验证，把刚才的记录内容改成新的，</del> 按照评论的指正，这里是可以建立两个同名记录的，所以不需要修改两次，这里可以再添加一条同样名字但内容不同的记录，然后多 <code>dig</code> 几次再回车，如果没通过重新运行命令会从记录 IP 那里开始。</p>
 <p>需要注意 certbot 似乎会很弱智的用 Nginx 服务的目录的名字作为它认为的你的域名，所以最好在开启 Nginx 之前设置它，它每次都把我的域名当成 <code>stackharbor.alynx.xyz</code> 也是把我气个半死。</p>
@@ -409,7 +409,7 @@ server {
     ssl_certificate /etc/letsencrypt/live/alynx.xyz/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/alynx.xyz/privkey.pem;
     ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    ssl_ciphers <span class="hljs-string">&#x27;ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS&#x27;</span>;
+    ssl_ciphers <span class="hljs-string">'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS'</span>;
     ssl_prefer_server_ciphers on;
     ssl_protocols TLSv1 TLSv1<span class="hljs-number">.1</span> TLSv1<span class="hljs-number">.2</span>;
     ssl_session_cache shared:SSL:<span class="hljs-number">50</span>m;
@@ -431,7 +431,7 @@ server {
     ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
     ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    ssl_ciphers <span class="hljs-string">&#x27;ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS&#x27;</span>;
+    ssl_ciphers <span class="hljs-string">'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS'</span>;
     ssl_prefer_server_ciphers on;
     ssl_protocols TLSv1 TLSv1<span class="hljs-number">.1</span> TLSv1<span class="hljs-number">.2</span>;
     ssl_session_cache shared:SSL:<span class="hljs-number">50</span>m;
@@ -469,14 +469,14 @@ server {
 # systemctl restart nginx</code></pre></figure></code></pre>
 <p>如果你还有其他的页面，放在另一个目录里，然后再创建一份配置文件，当然这次只要有第二个 server 字段就好了，修改路径，然后连接重启。</p>
 <h1 id="自动更新证书"><a class="header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%AF%81%E4%B9%A6" title="自动更新证书"></a>自动更新证书</h1>
-<p>安全起见，Let&#39;s Encrypt 签发的证书只有 90 天有效期，官方推荐使用自动定期刷新的方式更新证书，只需要建立一个定时任务运行 <code>/PATH/TO/certbot-auto renew --pre-hook &quot;systemctl stop nginx&quot; --post-hook &quot;systemctl start nginx&quot;</code>（如果你用的不是 systemd 管理 Nginx 记得换成其它的停止和启动 Nginx 的命令）。很大可能你知道怎么用 crontab 做这件事情，但我使用 systemd-timer 做。</p>
+<p>安全起见，Let's Encrypt 签发的证书只有 90 天有效期，官方推荐使用自动定期刷新的方式更新证书，只需要建立一个定时任务运行 <code>/PATH/TO/certbot-auto renew --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"</code>（如果你用的不是 systemd 管理 Nginx 记得换成其它的停止和启动 Nginx 的命令）。很大可能你知道怎么用 crontab 做这件事情，但我使用 systemd-timer 做。</p>
 <p>首先建立 <code>/lib/systemd/system/certbot-renew.service</code> 这个文件，内容如下：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span></pre><pre class="code"><code><span class="hljs-section">[Unit]</span>
 <span class="hljs-attr">Description</span>=Updates cert file via certbot
 
 <span class="hljs-section">[Service]</span>
 <span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot
-<span class="hljs-attr">ExecStart</span>=/home/alynx/certbot-auto renew --pre-hook <span class="hljs-string">&quot;systemctl stop nginx&quot;</span> --post-hook <span class="hljs-string">&quot;systemctl start nginx&quot;</span></code></pre></figure></code></pre>
+<span class="hljs-attr">ExecStart</span>=/home/alynx/certbot-auto renew --pre-hook <span class="hljs-string">"systemctl stop nginx"</span> --post-hook <span class="hljs-string">"systemctl start nginx"</span></code></pre></figure></code></pre>
 <p>然后建立对应的 timer <code>/lib/systemd/system/certbot-renew.timer</code>，内容如下：</p>
 <pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span></pre><pre class="code"><code><span class="hljs-section">[Unit]</span>
 <span class="hljs-attr">Description</span>=Updates cert files via certbot every week
@@ -674,7 +674,7 @@ server {
       
         <li>
           
-          <a class="list-group-item toc-link" href="#用Letamp;39;sEncrypt生成SSL证书">用 Let&#39;s Encrypt 生成 SSL 证书</a>
+          <a class="list-group-item toc-link" href="#用Let039;sEncrypt生成SSL证书">用 Let's Encrypt 生成 SSL 证书</a>
           
           
       <ol >
@@ -829,4 +829,4 @@ server {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.3.0 at 2020-08-03 Mon 19:20:54 CST. -->
+<!-- Page built by Hikaru v1.4.0 at 2020-08-04 Tue 11:31:35 CST. -->

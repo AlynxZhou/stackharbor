@@ -260,30 +260,30 @@
 <h1 id="首先让系统知道你是个壁纸……"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E9%A6%96%E5%85%88%E8%AE%A9%E7%B3%BB%E7%BB%9F%E7%9F%A5%E9%81%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E5%A3%81%E7%BA%B8%E2%80%A6%E2%80%A6" title="首先让系统知道你是个壁纸……"></a>首先让系统知道你是个壁纸……</h1>
 <p>在开始写逻辑代码之前，我们还得先让系统知道你写的这是个壁纸，这需要一些起声明作用的代码。先把你 Android Studio 左侧侧栏调成文件树模式（忘了什么诡异的分类模式吧，不然你连文件在哪都找不到，试图隐藏细节只会让事情变的更复杂）。</p>
 <p>应该有一个自动生成的 <code>AndroidManifest.xml</code> 文件，我觉得你应该比我更了解这玩意是干嘛的，因为实际上我没系统地研究过 Android，我只是会一点点 Java 而已——然后靠不停的查看手册来自学。加上这两行：</p>
-<pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.permission.SET_WALLPAPER&quot;</span> /&gt;</span>
+<pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.SET_WALLPAPER"</span> /&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
-  <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.software.live_wallpaper&quot;</span>
-  <span class="hljs-attr">android:required</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span></code></pre></figure></code></pre>
+  <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.software.live_wallpaper"</span>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /&gt;</span></code></pre></figure></code></pre>
 <p>你要是能把这一行加到 <code>&lt;manifest&gt;</code> 标签外面，我觉得你也没必要写代码了……但这个要放在 <code>&lt;application&gt;</code> 标签的外面，具体放在哪直接翻我仓库里的文件好了，比我用文字描述清晰的多。</p>
 <p>但是下面这个要加到 <code>&lt;application&gt;</code> 标签的里面：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span></pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">service</span>
-  <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.GLWallpaperService&quot;</span>
-  <span class="hljs-attr">android:permission</span>=<span class="hljs-string">&quot;android.permission.BIND_WALLPAPER&quot;</span>&gt;</span>
+  <span class="hljs-attr">android:name</span>=<span class="hljs-string">".GLWallpaperService"</span>
+  <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"android.permission.BIND_WALLPAPER"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.service.wallpaper.WallpaperService&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.service.wallpaper.WallpaperService"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span>
-    <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.service.wallpaper&quot;</span>
-    <span class="hljs-attr">android:resource</span>=<span class="hljs-string">&quot;@xml/wallpaper&quot;</span> /&gt;</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.service.wallpaper"</span>
+    <span class="hljs-attr">android:resource</span>=<span class="hljs-string">"@xml/wallpaper"</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">service</span>&gt;</span></code></pre></figure></code></pre>
 <p>看到那个叫 <code>android:name</code> 的属性了吗，<code>.</code> 不能少，后面的名字则是一会你的 class 叫什么名字这里就什么名字。然后别的都是套路，可以不管，除了那个 <code>@xml/wallpaper</code>，这玩意要自己写。</p>
 <p>在你侧栏找到 <code>res</code> 目录，如果底下没有叫 <code>xml</code> 的目录的话，你就新建一个。然后你刚才那里斜杠后面是什么你就建立一个叫什么的 xml 文件，比如我写了 <code>@xml/wallpaper</code>，那就建立一个 <code>wallpaper.xml</code> 的文件，内容如下：</p>
-<pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span></pre><pre class="code"><code><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span></pre><pre class="code"><code><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">wallpaper</span>
-  <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemas.android.com/apk/res/android&quot;</span>
-  <span class="hljs-attr">android:thumbnail</span>=<span class="hljs-string">&quot;@drawable/ic_icon&quot;</span>
-  <span class="hljs-attr">android:description</span>=<span class="hljs-string">&quot;@string/wallpaper_description&quot;</span>
-  <span class="hljs-attr">android:settingsActivity</span>=<span class="hljs-string">&quot;xyz.alynx.livewallpaper.MainActivity&quot;</span> /&gt;</span></code></pre></figure></code></pre>
+  <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>
+  <span class="hljs-attr">android:thumbnail</span>=<span class="hljs-string">"@drawable/ic_icon"</span>
+  <span class="hljs-attr">android:description</span>=<span class="hljs-string">"@string/wallpaper_description"</span>
+  <span class="hljs-attr">android:settingsActivity</span>=<span class="hljs-string">"xyz.alynx.livewallpaper.MainActivity"</span> /&gt;</span></code></pre></figure></code></pre>
 <p>这里面也有些地方需要改，首先那个 <code>@drawable/ic_icon</code> 是你这个程序在系统的动态壁纸列表里面的图标（然而大部分定制的系统都忽略了这玩意），你可以用 Android Studio 在 <code>res/drawable</code> 目录下面生成一个，这个可以自己去查官方文档，<code>ic_icon</code> 要换成你生成的文件的名字。<code>@string/wallpaper_description</code> 则是你的程序在列表里的名字或介绍，这个格式的意思是去 <code>res/values/strings.xml</code> 或者其他语言的 <code>strings.xml</code> 里面找字符串（写过点复杂程序的人应该都懂吧！不懂自学去！我这不是教你怎么写代码！），你可以用 Android Studio 的字符串编辑器添加一条，然后把这里的键改成你添加的。最后一个 <code>settingsActivity</code> 是干嘛的呢？在预览动态壁纸的页面会有个设置按钮，如果你的动态壁纸可以设置参数，点击那个按钮会跳进动态壁纸设置页面，设置页面就是在这里指定的类，因为我设置项不多直接放菜单里了，所以我写的是直接跳进 <code>MainActivity</code>，你写的时候也可以这样，但记得换成你的包名（不换的人我怀疑你没写过 Java，那你学个毛 Android App 开发？）。</p>
 <p>废话终于说完了可以写代码了好开心啊……</p>
 <h1 id="然后你看见网上一堆胶水代码……"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6" title="然后你看见网上一堆胶水代码……"></a>然后你看见网上一堆胶水代码……</h1>
@@ -346,7 +346,7 @@
 <p>但是这个过程需要一些 hack。</p>
 <p>显然系统不给你现成的 <code>GLSurfaceView</code>，而只是一个 <code>SurfaceHolder</code>，所以正常的思路是自己弄 <code>GLThread</code> 白手起家……并不，我们在 <code>Engine</code> 里插入下面的代码：</p>
 <pre><code class="java"><figure class="highlight hljs java"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span></pre><pre class="code"><code>        <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperSurfaceView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">GLSurfaceView</span> </span>{
-            <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = <span class="hljs-string">&quot;GLWallpaperSurface&quot;</span>;
+            <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = <span class="hljs-string">"GLWallpaperSurface"</span>;
 
             <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GLWallpaperSurfaceView</span><span class="hljs-params">(Context context)</span> </span>{
                 <span class="hljs-keyword">super</span>(context);
@@ -367,8 +367,8 @@
 <p>然后我们就可以实现 <code>GLSurfaceView.Renderer</code> 了，这是个已经包装好的 OpenGL Renderer，我们只要负责在里面画就行了。至于 GLES 的版本，如果你想省事，只用 v2 就好了，除非像我一样对 v3 很熟悉，当然我 v2 v3 都写了 Renderer，能支持 v3 的先调用 v3（除了模拟器不支持，手机基本都支持了）。我这里用 v3 做例子，你应该自己也会写 v2 吧？如果你只会写固定管线，请你不要说自己会 OpenGL。</p>
 <p>当然最好在 <code>AndroidManifest.xml</code> 声明一下你这个应用需要的 GLES 版本：</p>
 <pre><code class="xml"><figure class="highlight hljs xml"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span></pre><pre class="code"><code><span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
-  <span class="hljs-attr">android:glEsVersion</span>=<span class="hljs-string">&quot;0x00020000&quot;</span>
-  <span class="hljs-attr">android:required</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span></code></pre></figure></code></pre>
+  <span class="hljs-attr">android:glEsVersion</span>=<span class="hljs-string">"0x00020000"</span>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /&gt;</span></code></pre></figure></code></pre>
 <p>如果你只支持 v3，就把 2 改成 3。</p>
 <p>（已经进入这个阶段了，打算拿这个当“我的第一个 Android App”的同学就自己退出吧。）</p>
 <p>我直接帖完整代码解释好了，因为实在是不好一点点讲了，反正会写 OpenGL 的人应该也能理解这种程度的代码了。</p>
@@ -429,7 +429,7 @@
     <span class="hljs-keyword">try</span> {
         <span class="hljs-keyword">while</span> ((line = bufferedReader.readLine()) != <span class="hljs-keyword">null</span>) {
             stringBuilder.append(line);
-            stringBuilder.append(<span class="hljs-string">&#x27;\n&#x27;</span>);
+            stringBuilder.append(<span class="hljs-string">'\n'</span>);
         }
     } <span class="hljs-keyword">catch</span> (IOException e) {
         e.printStackTrace();
@@ -438,7 +438,7 @@
     <span class="hljs-keyword">final</span> String shaderSource = stringBuilder.toString();
     <span class="hljs-keyword">int</span> shader = GLES30.glCreateShader(shaderType);
     <span class="hljs-keyword">if</span> (shader == <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Failed to create shader&quot;</span>);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Failed to create shader"</span>);
     }
     GLES30.glShaderSource(shader, shaderSource);
     GLES30.glCompileShader(shader);
@@ -458,7 +458,7 @@
 )</span> <span class="hljs-keyword">throws</span> RuntimeException </span>{
     <span class="hljs-keyword">int</span> program = GLES30.glCreateProgram();
     <span class="hljs-keyword">if</span> (program == <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Failed to create program&quot;</span>);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Failed to create program"</span>);
     }
     GLES30.glAttachShader(program, vertShader);
     GLES30.glAttachShader(program, fragShader);
@@ -603,7 +603,7 @@
                 context, GLES30.GL_FRAGMENT_SHADER, R.raw.fragment_30
             )
         );
-        mvpLocation = GLES30.glGetUniformLocation(program, <span class="hljs-string">&quot;mvp&quot;</span>);
+        mvpLocation = GLES30.glGetUniformLocation(program, <span class="hljs-string">"mvp"</span>);
         <span class="hljs-comment">// Position is set in shader sources.</span>
         GLES30.glVertexAttribPointer(
             <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, GLES30.GL_FLOAT,
@@ -633,7 +633,7 @@
             surfaceTexture.updateTexImage();
             ++renderedFrame;
             <span class="hljs-comment">// Utils.debug(</span>
-            <span class="hljs-comment">//     TAG, &quot;renderedFrame: &quot; + renderedFrame + &quot; updatedFrame: &quot; + updatedFrame</span>
+            <span class="hljs-comment">//     TAG, "renderedFrame: " + renderedFrame + " updatedFrame: " + updatedFrame</span>
             <span class="hljs-comment">// );</span>
         }
 
@@ -662,7 +662,7 @@
             screenWidth = <span class="hljs-built_in">width</span>;
             screenHeight = <span class="hljs-built_in">height</span>;
             Utils.debug(TAG, <span class="hljs-keyword">String</span>.format(
-                Locale.US, <span class="hljs-string">&quot;Set screen size to %dx%d&quot;</span>, screenWidth, screenHeight
+                Locale.US, <span class="hljs-string">"Set screen size to %dx%d"</span>, screenWidth, screenHeight
             ));
             updateMatrix();
         }
@@ -670,7 +670,7 @@
 
     @<span class="hljs-function">Override
     <span class="hljs-keyword">void</span> <span class="hljs-title">setVideoSizeAndRotation</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">width</span>, <span class="hljs-keyword">int</span> <span class="hljs-built_in">height</span>, <span class="hljs-keyword">int</span> rotation)</span> </span>{
-        <span class="hljs-comment">// MediaMetadataRetriever always give us raw width and height and won&#x27;t rotate them.</span>
+        <span class="hljs-comment">// MediaMetadataRetriever always give us raw width and height and won't rotate them.</span>
         <span class="hljs-comment">// So we rotate them by ourselves.</span>
         <span class="hljs-keyword">if</span> (rotation % <span class="hljs-number">180</span> != <span class="hljs-number">0</span>) {
             <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> swap = <span class="hljs-built_in">width</span>;
@@ -682,10 +682,10 @@
             videoHeight = <span class="hljs-built_in">height</span>;
             videoRotation = rotation;
             Utils.debug(TAG, <span class="hljs-keyword">String</span>.format(
-                Locale.US, <span class="hljs-string">&quot;Set video size to %dx%d&quot;</span>, videoWidth, videoHeight
+                Locale.US, <span class="hljs-string">"Set video size to %dx%d"</span>, videoWidth, videoHeight
             ));
             Utils.debug(TAG, <span class="hljs-keyword">String</span>.format(
-                Locale.US, <span class="hljs-string">&quot;Set video rotation to %d&quot;</span>, videoRotation
+                Locale.US, <span class="hljs-string">"Set video rotation to %d"</span>, videoRotation
             ));
             updateMatrix();
         }
@@ -715,7 +715,7 @@
             <span class="hljs-keyword">this</span>.xOffset = xOffset;
             <span class="hljs-keyword">this</span>.yOffset = yOffset;
             Utils.debug(TAG, String.format(
-                Locale.US, <span class="hljs-string">&quot;Set offset to %fx%f&quot;</span>, <span class="hljs-keyword">this</span>.xOffset, <span class="hljs-keyword">this</span>.yOffset
+                Locale.US, <span class="hljs-string">"Set offset to %fx%f"</span>, <span class="hljs-keyword">this</span>.xOffset, <span class="hljs-keyword">this</span>.yOffset
             ));
             updateMatrix();
         }
@@ -749,7 +749,7 @@
         <span class="hljs-keyword">final</span> <span class="hljs-built_in">float</span> videoRatio = (<span class="hljs-built_in">float</span>)videoWidth / videoHeight;
         <span class="hljs-keyword">final</span> <span class="hljs-built_in">float</span> screenRatio = (<span class="hljs-built_in">float</span>)screenWidth / screenHeight;
         <span class="hljs-keyword">if</span> (videoRatio &gt;= screenRatio) {
-            Utils.debug(TAG, <span class="hljs-string">&quot;X-cropping&quot;</span>);
+            Utils.debug(TAG, <span class="hljs-string">"X-cropping"</span>);
             <span class="hljs-comment">// Treat video and screen width as 1, and compare width to scale.</span>
             Matrix.scaleM(
                 mvp, <span class="hljs-number">0</span>,
@@ -763,7 +763,7 @@
             }
             Matrix.translateM(mvp, <span class="hljs-number">0</span>, xOffset, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
         } <span class="hljs-keyword">else</span> {
-            Utils.debug(TAG, <span class="hljs-string">&quot;Y-cropping&quot;</span>);
+            Utils.debug(TAG, <span class="hljs-string">"Y-cropping"</span>);
             <span class="hljs-comment">// Treat video and screen height as 1, and compare height to scale.</span>
             Matrix.scaleM(
                 mvp, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>,
@@ -1159,4 +1159,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.3.0 at 2020-08-03 Mon 19:20:54 CST. -->
+<!-- Page built by Hikaru v1.4.0 at 2020-08-04 Tue 11:31:35 CST. -->

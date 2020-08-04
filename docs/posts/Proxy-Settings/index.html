@@ -274,7 +274,7 @@
 <h1 id="端口转发"><a class="header-link" href="/posts/Proxy-Settings/#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91" title="端口转发"></a>端口转发</h1>
 <p>有时候你的网络很奇葩，连接所有代理服务器都很慢，可以通过一个国内服务器做端口转发，需要在国内服务器执行下列命令。</p>
 <h2 id="开启流量转发"><a class="header-link" href="/posts/Proxy-Settings/#%E5%BC%80%E5%90%AF%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91" title="开启流量转发"></a>开启流量转发</h2>
-<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;net.ipv4.ip_forward=1&quot;</span> &gt;&gt; /etc/sysctl.conf</span>
+<pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">echo</span> <span class="hljs-string">"net.ipv4.ip_forward=1"</span> &gt;&gt; /etc/sysctl.conf</span>
 <span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre>
 <h2 id="配置转发规则"><a class="header-link" href="/posts/Proxy-Settings/#%E9%85%8D%E7%BD%AE%E8%BD%AC%E5%8F%91%E8%A7%84%E5%88%99" title="配置转发规则"></a>配置转发规则</h2>
 <pre><code><figure class="highlight hljs css"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code># <span class="hljs-selector-tag">iptables</span> <span class="hljs-selector-tag">-t</span> <span class="hljs-selector-tag">nat</span> <span class="hljs-selector-tag">-A</span> <span class="hljs-selector-tag">PREROUTING</span> <span class="hljs-selector-tag">-p</span> <span class="hljs-selector-tag">tcp</span> <span class="hljs-selector-tag">--dport</span> <span class="hljs-selector-attr">[端口号]</span> <span class="hljs-selector-tag">-j</span> <span class="hljs-selector-tag">DNAT</span> <span class="hljs-selector-tag">--to-destination</span> <span class="hljs-selector-attr">[代理服务器地址]</span>
@@ -611,4 +611,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.3.0 at 2020-08-03 Mon 19:20:54 CST. -->
+<!-- Page built by Hikaru v1.4.0 at 2020-08-04 Tue 11:31:35 CST. -->
