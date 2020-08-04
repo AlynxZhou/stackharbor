@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
+    
+    
+    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    
+    <link rel="canonical" href="https://sh.alynx.one/posts/Dark-Mode-in-Theme/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-video.min.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-solid.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-brands.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-regular.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script type="text/javascript">
+      documentReady(function () {
+        var themeToggle = document.getElementById("theme-toggle");
+        var preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        var theme = localStorage.getItem("theme");
+        var checkPreference = function (query) {
+          if (query.matches) {
+            themeToggle.innerHTML = "<i class=\"far fa-moon\" aria-label=\"accessibility.themeDark\"></i>";
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+          } else {
+            themeToggle.innerHTML = "<i class=\"far fa-sun\" aria-label=\"accessibility.themeLight\"></i>";
+            document.documentElement.setAttribute("data-theme", "light");
+            localStorage.setItem("theme", "light");
+          }
+        }
+        // Check user's choice from localStorage.
+        if (theme === "dark") {
+          themeToggle.innerHTML = "<i class=\"far fa-moon\" aria-label=\"accessibility.themeDark\"></i>";
+          document.documentElement.setAttribute("data-theme", "dark");;
+        } else if (theme === "light") {
+          themeToggle.innerHTML = "<i class=\"far fa-sun\" aria-label=\"accessibility.themeLight\"></i>";
+          document.documentElement.setAttribute("data-theme", "light")
+        } else {
+          // Init from user's system settings if no choice.
+          checkPreference(preferenceQuery);
+        }
+        // User changed system settings, update.
+        preferenceQuery.addListener(checkPreference);
+        // User changed website settings, update.
+        themeToggle.onclick = function () {
+          var theme = document.documentElement.getAttribute("data-theme");
+          if (theme === "dark") {
+            themeToggle.innerHTML = "<i class=\"far fa-sun\" aria-label=\"accessibility.themeLight\"></i>";
+            document.documentElement.setAttribute("data-theme", "light");
+            localStorage.setItem("theme", "light");
+          } else {
+            themeToggle.innerHTML = "<i class=\"far fa-moon\" aria-label=\"accessibility.themeDark\"></i>";
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+          }
+        }
+        elementsEach(
+          document.querySelectorAll(".post pre code figure.highlight"),
+          function (e, i) {
+            var lang = e.parentNode.className;
+            e.insertAdjacentElement("beforebegin", createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        var cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", function (e) {
+          e.clearSelection();
+          var trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          setTimeout(function () {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>给你的主题来点暗色！ - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
+        <h2 class="subtitle">Whisper to the World</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        <i class="far fa-moon" aria-label="accessibility.themeDark"></i>
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Dark-Mode-in-Theme/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="image" content="/images/FutureGazerSmall.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">给你的主题来点暗色！</h1>
+      <div class="post-meta">
+        
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2020-08-04T09:15:00.000Z">2020-08-04 Tue 17:15:00 CST</time></span>
+        </span>
+        
+        
+        <span class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span>
+        </span>
+        
+        
+        
+        <span class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/Dark-Mode-in-Theme/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="给你的主题来点暗色！" itemprop="commentCount">阅读评论</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。</p>
+<a id='more'></a>
+<h1 id="跟着系统变色就行了吗？"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F" title="跟着系统变色就行了吗？"></a>跟着系统变色就行了吗？</h1>
+<p>现在的系统大概都支持暗色模式（Linux 的桌面环境早就有这种设置了，Firefox 可以直接读取我的系统设置，Android/iOS 也都有暗色模式开关），浏览器也紧跟潮流提供了 <code>@media</code> 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme" target="_blank" rel="noreferrer noopener">查询属性</a>（IE：那……是……什……么……）。理论上来说只要简单地在 CSS 里面查询然后编写修改颜色的代码就可以了，问题只是如何修改颜色比较轻松。</p>
+<h1 id="CSS变量是好东西！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81" title="CSS变量是好东西！"></a>CSS 变量是好东西！</h1>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noreferrer noopener">使用 CSS 变量</a> 当然是最简单的解决方案了，就像我们平时编程一样使用变量作为 <code>color</code> 和 <code>background</code> 的值，然后在查询到暗色模式的代码块里给这些变量重新赋值，一切都十分简单有条理，而且最重要的是你不需要一个一个选择器查找有哪些需要变色的属性，所有的颜色变量都是放在一起的。</p>
+<h1 id="真是恨死IE这废物了！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81" title="真是恨死IE这废物了！"></a>真是恨死 IE 这废物了！</h1>
+<p>虽然 IE 有很多不支持的选项，但是不支持 CSS 变量真是让我工作量剧增的一件事情。虽然我从不测试我的网站在 IE 上能否运行，但是在最新版 IE 上一般都是没问题的，因此我也会放弃一些最新版 IE 不支持的新特性，CSS 变量就是其中之一。</p>
+<p>既然没有办法用 CSS 变量，那就只能自己一个一个找选择器下面和颜色相关的属性，然后给它们重新设置属性了，真是找的人头晕眼花啊。</p>
+<p>可能有人会说你不是用 CSS 预处理器吗，预处理器不是也有变量吗？但是预处理器是在生成阶段把变量编译掉了啊！不方便到运行时（浏览器）里去替换变量。</p>
+<h1 id="我就是想在暗色浏览器里用亮色啊！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81" title="我就是想在暗色浏览器里用亮色啊！"></a>我就是想在暗色浏览器里用亮色啊！</h1>
+<p>在全部重新调整过颜色并能看之后（其实就是把浅色的色块换成深色，颜色层次基本不变，背景图搞个反色，至于那些彩色的按钮标签我实在没精力重新配色了，把透明度调低一点就好了），我自己还是比较喜欢自己一开始设计的样子，但我又是个习惯电脑全局暗色的人，这怎么能忍！</p>
+<p>CSS 的媒体属性不像一般的属性，只能是浏览器设置我们读取，没有办法用 JS 控制，于是也就没法简单地利用这个添加切换按钮。上网搜了半天也只有曲线救国的方案。</p>
+<h1 id="曲线救国"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD" title="曲线救国"></a>曲线救国</h1>
+<p>如果并不是想那么和系统的设置同步而只是给自己的网站添加切换的话，并不需要媒体查询。只要设计一个按钮给 <code>&lt;html&gt;</code> 或 <code>&lt;body&gt;</code> 添加删除 class/attribute 就行了。然后如果要和系统同步，在 JavaScript 里也有 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia" target="_blank" rel="noreferrer noopener">相关的 API</a> 可以做到查询和监听，在检测到变化的时候也修改 class/attribute 即可。</p>
+<p>我选择的是给 <code>&lt;html&gt;</code> 加 <code>data-theme="dark"</code> 或 <code>data-theme="light"</code> 属性，不选 <code>&lt;body&gt;</code> 是因为 WebKit 那些该死的不遵循标准的 scrollbar 选择器，文档没有说他们到底依附哪个元素，我尝试得到的是 <code>&lt;html&gt;</code>。接下来只要把之前的 CSS 里面的媒体查询选择器改成 <code>html[data-theme="dark"]</code> 就行了。</p>
+<p>不过还要注意继承关系，这样写的话有些属性并不是继承外面的，而是在这个选择器里面就近继承。比如假如修改了 <code>html[data-theme="dark"] a</code> 的边框，那 <code>html[data-theme="dark"] a.cls</code> 的边框会优先继承这个，而不是 <code>a.cls</code>。我知道有些人可能会笑我半懂不懂了，但是我确实遇到了这个问题，并且思考了一下找到了原因。</p>
+<p>还有一个比较尴尬的事情，我给一些元素设置了 <code>transition</code> 用于 <code>::hover</code> 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 <code>color</code> 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 <code>transition</code>。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？</p>
+<p>不管了，反正我用 Firefox，Firefox 效果好得很，完全不掉帧。</p>
+<h1 id="怎么你这破网站换个页面还要重新点一次？"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F" title="怎么你这破网站换个页面还要重新点一次？"></a>怎么你这破网站换个页面还要重新点一次？</h1>
+<p>一切看起来都十分美好，直到我把一个暗色页面切成亮色然后点了个链接，下一个页面并不会理会我们上一个页面设置了什么主题，又变成了暗色。每个页面点一下切换按钮也太烦人了，我们得来点持久化。</p>
+<p>某个域名想在用户的浏览器里存点是完全可行的，使用 <code>localStorage</code> 就行了，就是简单的键值对。但是这样我们就有了多种可能切换亮暗的动作：<code>localStorage</code> 里面存的选项，网页加载时浏览器媒体查询的结果，用户点了网页上的切换按钮，用户点了系统切换亮暗的设置。这些的判断顺序要好好处理一下，不然某些就会被忽视掉变成“我点了怎么不动啊！！！”。</p>
+<p>经过我考虑一下之后，这个玩意的逻辑应该是这样的：</p>
+<ol>
+<li>假如 <code>localStorage</code> 里面没有值，用户是首次打开网站，此时读取媒体查询按照系统的主题设置。</li>
+<li>否则说明用户之前打开过网站，已经有他自己的喜好了，按照 <code>localStorage</code> 里面的值设置。</li>
+<li>上两个步骤结束之后注册一个媒体查询监听器，用于响应用户修改系统设置。</li>
+<li>注册一个按钮监听器，用于响应用户点击网页切换按钮设置。</li>
+</ol>
+<p>以上 1 和 2 的顺序不能反了，并且每一个设置动作里都要把这次设置的值写入 <code>localStorage</code> 用于后续加载用户的选择。</p>
+<p>现在看起来一切都很满意，是时候发布了！</p>
+<h1 id="用户：啊！我的眼睛！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E7%94%A8%E6%88%B7%EF%BC%9A%E5%95%8A%EF%BC%81%E6%88%91%E7%9A%84%E7%9C%BC%E7%9D%9B%EF%BC%81" title="用户：啊！我的眼睛！"></a>用户：啊！我的眼睛！</h1>
+<p>我躺在床上用手机测试的时候又发现了一个问题。因为网页在生成的时候总有一个初始状态（JS 要等到 document 加载完成才开始处理 DOM，不像那些单页应用），假如我设置成暗色然后切换到别的页面，网页就会以亮色加载然后变成暗色，用户在晚上看起来就像是个闪光弹（伏拉什棒！）。</p>
+<p>其实没什么好的解决办法，因为这是传统 HTML 页面的限制之一，我也不想找有没有什么新的东西能解决这些问题，最后的方案其实相当简单，既然亮色到暗色会让人受不了，我搞成暗色到亮色不就行了。</p>
+<p>于是就是把模板里按钮的初始状态修改一下，渲染的时候出来的是 <code>data-theme="dark"</code>，假如用户选择亮色，加载页面时会有一个暗色到亮色的变化。反正我自己都不在意。</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E7%BD%91%E7%AB%99/" rel="tag"><i class="fas fa-tag"></i>网站</a><a class="post-tag button" href="/tags/%E4%B8%BB%E9%A2%98/" rel="tag"><i class="fas fa-tag"></i>主题</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Fix-Windows-Wireless-Adapter-Name/" rel="prev" title="修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题"><span class="nav-title">修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(function () {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script defer type="text/javascript" src="/js/marked.min.js"></script>
+  <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+  <script type="text/javascript">
+    documentReady(function () {
+      marked.setOptions({
+        "highlight": function (code, lang) {
+          return hljs.highlightAuto(code).value;
+        }
+      });
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "给你的主题来点暗色！",
+        "containerID": "comment-results"
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
+    
+    <h1 class="author-name">Alynx Zhou</h1>
+    <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">68</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">42</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">73</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#跟着系统变色就行了吗？">跟着系统变色就行了吗？</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#CSS变量是好东西！">CSS 变量是好东西！</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#真是恨死IE这废物了！">真是恨死 IE 这废物了！</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#我就是想在暗色浏览器里用亮色啊！">我就是想在暗色浏览器里用亮色啊！</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#曲线救国">曲线救国</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#怎么你这破网站换个页面还要重新点一次？">怎么你这破网站换个页面还要重新点一次？</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#用户：啊！我的眼睛！">用户：啊！我的眼睛！</a>
+          
+        </li>
+      
+      </ol>
+      
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-video"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://jitui.moe/" target="_blank" rel="noreferrer noopener">鸡腿工坊</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://originco.de/" target="_blank" rel="noreferrer noopener">OriginCode 札記</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.4.1 at 2020-08-04 Tue 17:45:20 CST. -->

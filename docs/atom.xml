@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2020-06-28T11:02:00.000Z</updated>
+  <updated>2020-08-04T09:15:00.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,42 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="2.2.4">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>给你的主题来点暗色！</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Dark-Mode-in-Theme/" />
+    <id>https://sh.alynx.one/posts/Dark-Mode-in-Theme/</id>
+    
+    <published>2020-08-04T09:15:00.000Z</published>
+    
+    
+    <updated>2020-08-04T09:15:00.000Z</updated>
+    
+    
+    <summary type="html">
+      <![CDATA[<p>我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。</p>]]>
+    </summary>
+    
+    
+    <content type="html">
+      <![CDATA[<p>我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。</p><a id='more'></a><h1 id="跟着系统变色就行了吗？"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F" title="跟着系统变色就行了吗？"></a>跟着系统变色就行了吗？</h1><p>现在的系统大概都支持暗色模式（Linux 的桌面环境早就有这种设置了，Firefox 可以直接读取我的系统设置，Android/iOS 也都有暗色模式开关），浏览器也紧跟潮流提供了 <code>@media</code> 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme" target="_blank" rel="noreferrer noopener">查询属性</a>（IE：那……是……什……么……）。理论上来说只要简单地在 CSS 里面查询然后编写修改颜色的代码就可以了，问题只是如何修改颜色比较轻松。</p><h1 id="CSS变量是好东西！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81" title="CSS变量是好东西！"></a>CSS 变量是好东西！</h1><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noreferrer noopener">使用 CSS 变量</a> 当然是最简单的解决方案了，就像我们平时编程一样使用变量作为 <code>color</code> 和 <code>background</code> 的值，然后在查询到暗色模式的代码块里给这些变量重新赋值，一切都十分简单有条理，而且最重要的是你不需要一个一个选择器查找有哪些需要变色的属性，所有的颜色变量都是放在一起的。</p><h1 id="真是恨死IE这废物了！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81" title="真是恨死IE这废物了！"></a>真是恨死 IE 这废物了！</h1><p>虽然 IE 有很多不支持的选项，但是不支持 CSS 变量真是让我工作量剧增的一件事情。虽然我从不测试我的网站在 IE 上能否运行，但是在最新版 IE 上一般都是没问题的，因此我也会放弃一些最新版 IE 不支持的新特性，CSS 变量就是其中之一。</p><p>既然没有办法用 CSS 变量，那就只能自己一个一个找选择器下面和颜色相关的属性，然后给它们重新设置属性了，真是找的人头晕眼花啊。</p><p>可能有人会说你不是用 CSS 预处理器吗，预处理器不是也有变量吗？但是预处理器是在生成阶段把变量编译掉了啊！不方便到运行时（浏览器）里去替换变量。</p><h1 id="我就是想在暗色浏览器里用亮色啊！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81" title="我就是想在暗色浏览器里用亮色啊！"></a>我就是想在暗色浏览器里用亮色啊！</h1><p>在全部重新调整过颜色并能看之后（其实就是把浅色的色块换成深色，颜色层次基本不变，背景图搞个反色，至于那些彩色的按钮标签我实在没精力重新配色了，把透明度调低一点就好了），我自己还是比较喜欢自己一开始设计的样子，但我又是个习惯电脑全局暗色的人，这怎么能忍！</p><p>CSS 的媒体属性不像一般的属性，只能是浏览器设置我们读取，没有办法用 JS 控制，于是也就没法简单地利用这个添加切换按钮。上网搜了半天也只有曲线救国的方案。</p><h1 id="曲线救国"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD" title="曲线救国"></a>曲线救国</h1><p>如果并不是想那么和系统的设置同步而只是给自己的网站添加切换的话，并不需要媒体查询。只要设计一个按钮给 <code>&lt;html&gt;</code> 或 <code>&lt;body&gt;</code> 添加删除 class/attribute 就行了。然后如果要和系统同步，在 JavaScript 里也有 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia" target="_blank" rel="noreferrer noopener">相关的 API</a> 可以做到查询和监听，在检测到变化的时候也修改 class/attribute 即可。</p><p>我选择的是给 <code>&lt;html&gt;</code> 加 <code>data-theme="dark"</code> 或 <code>data-theme="light"</code> 属性，不选 <code>&lt;body&gt;</code> 是因为 WebKit 那些该死的不遵循标准的 scrollbar 选择器，文档没有说他们到底依附哪个元素，我尝试得到的是 <code>&lt;html&gt;</code>。接下来只要把之前的 CSS 里面的媒体查询选择器改成 <code>html[data-theme="dark"]</code> 就行了。</p><p>不过还要注意继承关系，这样写的话有些属性并不是继承外面的，而是在这个选择器里面就近继承。比如假如修改了 <code>html[data-theme="dark"] a</code> 的边框，那 <code>html[data-theme="dark"] a.cls</code> 的边框会优先继承这个，而不是 <code>a.cls</code>。我知道有些人可能会笑我半懂不懂了，但是我确实遇到了这个问题，并且思考了一下找到了原因。</p><p>还有一个比较尴尬的事情，我给一些元素设置了 <code>transition</code> 用于 <code>::hover</code> 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 <code>color</code> 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 <code>transition</code>。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？</p><p>不管了，反正我用 Firefox，Firefox 效果好得很，完全不掉帧。</p><h1 id="怎么你这破网站换个页面还要重新点一次？"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F" title="怎么你这破网站换个页面还要重新点一次？"></a>怎么你这破网站换个页面还要重新点一次？</h1><p>一切看起来都十分美好，直到我把一个暗色页面切成亮色然后点了个链接，下一个页面并不会理会我们上一个页面设置了什么主题，又变成了暗色。每个页面点一下切换按钮也太烦人了，我们得来点持久化。</p><p>某个域名想在用户的浏览器里存点是完全可行的，使用 <code>localStorage</code> 就行了，就是简单的键值对。但是这样我们就有了多种可能切换亮暗的动作：<code>localStorage</code> 里面存的选项，网页加载时浏览器媒体查询的结果，用户点了网页上的切换按钮，用户点了系统切换亮暗的设置。这些的判断顺序要好好处理一下，不然某些就会被忽视掉变成“我点了怎么不动啊！！！”。</p><p>经过我考虑一下之后，这个玩意的逻辑应该是这样的：</p><ol><li>假如 <code>localStorage</code> 里面没有值，用户是首次打开网站，此时读取媒体查询按照系统的主题设置。</li><li>否则说明用户之前打开过网站，已经有他自己的喜好了，按照 <code>localStorage</code> 里面的值设置。</li><li>上两个步骤结束之后注册一个媒体查询监听器，用于响应用户修改系统设置。</li><li>注册一个按钮监听器，用于响应用户点击网页切换按钮设置。</li></ol><p>以上 1 和 2 的顺序不能反了，并且每一个设置动作里都要把这次设置的值写入 <code>localStorage</code> 用于后续加载用户的选择。</p><p>现在看起来一切都很满意，是时候发布了！</p><h1 id="用户：啊！我的眼睛！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E7%94%A8%E6%88%B7%EF%BC%9A%E5%95%8A%EF%BC%81%E6%88%91%E7%9A%84%E7%9C%BC%E7%9D%9B%EF%BC%81" title="用户：啊！我的眼睛！"></a>用户：啊！我的眼睛！</h1><p>我躺在床上用手机测试的时候又发现了一个问题。因为网页在生成的时候总有一个初始状态（JS 要等到 document 加载完成才开始处理 DOM，不像那些单页应用），假如我设置成暗色然后切换到别的页面，网页就会以亮色加载然后变成暗色，用户在晚上看起来就像是个闪光弹（伏拉什棒！）。</p><p>其实没什么好的解决办法，因为这是传统 HTML 页面的限制之一，我也不想找有没有什么新的东西能解决这些问题，最后的方案其实相当简单，既然亮色到暗色会让人受不了，我搞成暗色到亮色不就行了。</p><p>于是就是把模板里按钮的初始状态修改一下，渲染的时候出来的是 <code>data-theme="dark"</code>，假如用户选择亮色，加载页面时会有一个暗色到亮色的变化。反正我自己都不在意。</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
+    
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    
+    
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="主题" label="主题" scheme="https://sh.alynx.one/tags/%E4%B8%BB%E9%A2%98/" />
+    
+  </entry>
   
   
   
@@ -667,42 +703,6 @@
     
     
     <category term="网络" label="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>WireGuard 配置与使用</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/WireGuard-Usage/" />
-    <id>https://sh.alynx.one/posts/WireGuard-Usage/</id>
-    
-    <published>2019-01-27T02:29:30.000Z</published>
-    
-    
-    <updated>2019-01-27T02:29:30.000Z</updated>
-    
-    
-    <summary type="html">
-      <![CDATA[<h1 id="需求"><a class="header-link" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1><p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p>]]>
-    </summary>
-    
-    
-    <content type="html">
-      <![CDATA[<h1 id="需求"><a class="header-link" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82" title="需求"></a>需求</h1><p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p><a id='more'></a><p>WireGuard 的原理是使用一个公网服务器做 Endpoint，内网的数据通过该服务器进行转发，因此子网的各个设备可以没有固定的 IP，只要都能连接公网服务器就好了。</p><h1 id="安装"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%AE%89%E8%A3%85" title="安装"></a>安装</h1><p>由于不同的系统安装方法不一样，建议参照 <a href="https://www.wireguard.com/install/" target="_blank" rel="noreferrer noopener">WireGuard 官网的安装说明</a> 和各个系统的 Wiki，Android 手机可以搜索下载 WireGuard 的 APK 进行安装。</p><h1 id="配置"><a class="header-link" href="/posts/WireGuard-Usage/#%E9%85%8D%E7%BD%AE" title="配置"></a>配置</h1><div class="alert-blue">以下部分内容参考自 <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank" rel="noreferrer noopener">WireGuard - ArchWiki</a>。</div><p>首先需要生成公钥和私钥，建议将其设置为只有拥有者才能操作，我这里放在 <code>/etc/wireguard</code> 这个目录里面，这个目录应该是只有 root 才可以访问的。<strong>服务器和客户端都需要分别进行这一步</strong>。</p><pre><code><figure class="highlight hljs vala"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-meta"># cd /etc/wireguard</span><span class="hljs-meta"># wg genkey | tee privatekey | wg pubkey &gt; publickey</span></code></pre></figure></code></pre><h2 id="服务端"><a class="header-link" href="/posts/WireGuard-Usage/#%E6%9C%8D%E5%8A%A1%E7%AB%AF" title="服务端"></a>服务端</h2><p>然后需要手写配置文件，这一步对于服务端和客户端不一样，先进行服务端的配置。</p><p>首先在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），服务端的配置文件内容看起来像这个样子：</p><pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span></pre><pre class="code"><code>[Interface]<span class="hljs-built_in">Address </span>= 10.0.0.1ListenPort = 7456PrivateKey = [服务器的私钥]PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t<span class="hljs-built_in"> nat </span>-A POSTROUTING -o eth0 -j MASQUERADEPostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t<span class="hljs-built_in"> nat </span>-D POSTROUTING -o eth0 -j MASQUERADE<span class="hljs-built_in">DNS </span>= 8.8.8.8[peer]PublicKey = [客户端 1 的公钥]AllowedIPs = 10.0.0.2/32[peer]PublicKey = [客户端 2 的公钥]AllowedIPs = 10.0.0.3/32[peer]PublicKey = [客户端 3 的公钥]AllowedIPs = 10.0.0.4/32</code></pre></figure></code></pre><p>然后我们依次分析每个字段的内容，首先是 Interface，这个部分指的是 WireGuard 在本机上面的接口，它是以内核模块的形式工作的，<code>Address</code> 指本机在子网内的私有 IP 地址，我这里分配了保留段 <code>10.0.0.0/24</code> 作为子网网段（看不懂的自己去复习计网），你也可以用 <code>10.0.0.0/8</code> 这个网段再进行划分，这个主机地址是你自己随意分配的，只要不冲突就行。<code>ListenPort</code> 是监听的服务器 UDP 端口，这个也是自己设置，只要不冲突就行。<code>PrivateKey</code> 则是刚刚 <strong>服务端</strong> 生成的 <code>privatekey</code> 这个文件的内容。<code>PostUp</code> 和 <code>PostDown</code> 是配置 iptables 的命令，建议直接复制即可，如果你服务器的公网网卡不是 <code>eth0</code> 则需要自己修改。<code>DNS</code> 则是解析域名用的 DNS，这里直接使用 <code>8.8.8.8</code>。</p><p>然后每一个 Peer 字段对应了一个客户端（或其他服务端，WireGuard 实际上是 P2P 的），需要分别将该客户端的 <code>publickey</code> 文件的内容贴到 <code>PublicKey</code>，以及需要转发到该客户端的流量的 IP 地址范围贴到 <code>AllowedIPs</code>，我这里直接给每个客户端设置固定的 IP，因此就写了 <code>10.0.0.2/32</code>（看不懂的自己去复习计网），意思是该客户端对应的 IP 就是这个，所有向这个 IP 发送的流量都会被转发到这个客户端。</p><p><strong>每添加一个新的客户端，就要在这个文件里添加一个 Peer 字段</strong>，然后设置 <code>PublicKey</code> 和 <code>AllowedIPs</code>。</p><p>然后在服务器的 <code>/etc/sysctl.conf</code> 最后加上一句 <code>net.ipv4.ip_forward=1</code>，开启 IPv4 流量转发，然后运行下面的命令加载新设置：</p><pre><code><figure class="highlight hljs vala"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-meta"># sysctl -p</span></code></pre></figure></code></pre><h2 id="客户端"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%AE%A2%E6%88%B7%E7%AB%AF" title="客户端"></a>客户端</h2><p>客户端也需要在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），内容看起来是这样：</p><pre><code><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span></pre><pre class="code"><code><span class="hljs-section">[Interface]</span><span class="hljs-attr">Address</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.4</span><span class="hljs-attr">PrivateKey</span> = [客户端的私钥]<span class="hljs-section">[Peer]</span><span class="hljs-attr">PublicKey</span> = [服务端 <span class="hljs-number">1</span> 的公钥]<span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">24</span><span class="hljs-attr">Endpoint</span> = [服务端 <span class="hljs-number">1</span> 的公网 IP]:[服务端 <span class="hljs-number">1</span> 的端口]<span class="hljs-attr">PersistentKeepalive</span> = <span class="hljs-number">25</span></code></pre></figure></code></pre><p>Interface 字段自然是客户端本机的设置，<code>Address</code> 还是给本机分配的 IP，这里要和服务器在同一个子网，并且要和服务器配置文件里允许的 IP 段对上。<code>PrivateKey</code> 则是刚刚 <strong>客户端</strong> 生成的 <code>privatekey</code> 这个文件的内容。</p><p>然后通过添加 Peer 字段来添加服务端，服务端作为这个网络的出口和转发点，首先需要填写对应的 <strong>服务端</strong> 的公钥，然后这里的 <code>AllowedIPs</code> 设置的是 <strong>该客户端有哪些 IP 段的流量要通过该服务端进行转发</strong>，由于我只希望内网的流量进行转发，自然设置的是内网的 IP 段 <code>10.0.0.0/24</code>（看不懂的你计网挂科了！），然后需要设置 <code>Endpoint</code> 以便能正确的在公网上找到服务器（虚拟专用网，连不上网还哪来的虚拟网啊？），格式就是 <code>服务器公网 IP:你设置的监听端口</code>。<code>PersistentKeepalive</code> 则是用来保持连接的参数，直接复制即可。</p><p><strong>如果你有多个服务器，就在这里添加多个 Peer</strong>，分别设置不同的 <code>AllowedIPs</code> 让他们转发，但 <strong>不需要让客户端之间互相添加 Peer</strong>，本来我们要解决的问题就是客户端之间不能互相连接，所有的流量是经由公网的服务端进行转发才可以到达，公网的服务器是各个不固定的客户端的接头地点。所以只需要保证服务端和所有的客户端认识就可以了。</p><h1 id="启动"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%90%AF%E5%8A%A8" title="启动"></a>启动</h1><p>在分别配置好客户端和服务端之后就可以启动了，这一步两边都一样。注意把 <code>wg0</code> 换成你配置文件的名字。</p><pre><code><figure class="highlight hljs vala"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-meta"># wg-quick up wg0</span></code></pre></figure></code></pre><p>然后使用 <code>wg</code> 命令可以查看状态，由于这些涉及到网络配置，都需要 root 权限。服务端和客户端输出的结果是不一样的，下面这个是我的笔记本输出的结果。</p><pre><code class="plain"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span></pre><pre class="code"><code># wginterface: wg0  public key: [不给你看]  private key: (hidden)  listening port: 51676peer: [不给你看]  endpoint: [不给你看]  allowed ips: 10.0.0.0/24  latest handshake: 1 minute, 41 seconds ago  transfer: 38.36 KiB received, 141.71 KiB sent  persistent keepalive: every 25 seconds</code></pre></figure></code></pre><p>建立成功的话，子网之间是可以使用内网地址互相 ping 的：</p><pre><code><figure class="highlight hljs routeros"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span></pre><pre class="code"><code>$<span class="hljs-built_in"> ping </span>10.0.0.11<span class="hljs-built_in">PING </span>10.0.0.11 (10.0.0.11) 56(84) bytes of data.64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=1 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.1 ms64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=2 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.4 ms64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=3 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.5 ms64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=4 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.4 ms64 bytes <span class="hljs-keyword">from</span> 10.0.0.11: <span class="hljs-attribute">icmp_seq</span>=5 <span class="hljs-attribute">ttl</span>=64 <span class="hljs-attribute">time</span>=30.5 ms^C--- 10.0.0.11<span class="hljs-built_in"> ping </span>statistics ---5 packets transmitted, 5 received, 0% packet loss, time 11msrtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms</code></pre></figure></code></pre><p>如果你确定没有问题，就可以使用 Systemd 管理连接，首先关闭刚才的连接：</p><pre><code><figure class="highlight hljs vala"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-meta"># wg-quick down wg0</span></code></pre></figure></code></pre><p>然后启动现成的 Unit：</p><pre><code><figure class="highlight hljs ruby"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># systemctl enable wg-quick<span class="hljs-doctag">@wg</span>0 --now</span></code></pre></figure></code></pre><h1 id="后记"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%90%8E%E8%AE%B0" title="后记"></a>后记</h1><p>如果你需要在内网之间传递数据，建议选择一个访问较快的服务器，因为数据转发要通过这个服务器。</p><p>但如果你想使用 WireGuard 访问一些被河蟹的内容也可以，首先需要一个在海外的服务器，然后设置客户端该服务器的 <code>AllowedIPs</code> 为 <code>0.0.0.0/0</code>（意思就是所有 IP 都经过这个服务器转发啦！或者你知道该设置某些网段也行！或者避开内网和本地地址！我不建议用这个番茄！所以就写个最蠢的！），就可以了！记得不用时候关掉，不然一些国内 App 也会走海外的！</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
-    
-    
-    <category term="网络" label="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
-    
-    <category term="VPN" label="VPN" scheme="https://sh.alynx.one/tags/VPN/" />
-    
-    <category term="WireGuard" label="WireGuard" scheme="https://sh.alynx.one/tags/WireGuard/" />
     
   </entry>
   
