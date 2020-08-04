@@ -38,11 +38,11 @@ CSS 的媒体属性不像一般的属性，只能是浏览器设置我们读取�
 
 如果并不是想那么和系统的设置同步而只是给自己的网站添加切换的话，并不需要媒体查询。只要设计一个按钮给 `<html>` 或 `<body>` 添加删除 class/attribute 就行了。然后如果要和系统同步，在 JavaScript 里也有 [相关的 API](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) 可以做到查询和监听，在检测到变化的时候也修改 class/attribute 即可。
 
-我选择的是给 `<html>` 加 `data-theme="dark"` 或 `data-theme="light"` 属性，不选 `<body>` 是因为 WebKit 那些该死的不遵循标准的 scrollbar 选择器，文档没有说他们到底依附哪个元素，我尝试得到的是 `<html>`。接下来只要把之前的 CSS 里面的媒体查询选择器改成 `html[data-theme="dark"]` 就行了。
+我选择的是给 `<html>` 加 `data-theme="dark"` 或 `data-theme="light"` 属性，不选 `<body>` 是因为 WebKit 那些该死的不遵循标准的 scrollbar 伪类，文档没有说他们到底依附哪个元素，我尝试得到的是 `<html>`。接下来只要把之前的 CSS 里面的媒体查询选择器改成 `html[data-theme="dark"]` 就行了。
 
 不过还要注意继承关系，这样写的话有些属性并不是继承外面的，而是在这个选择器里面就近继承。比如假如修改了 `html[data-theme="dark"] a` 的边框，那 `html[data-theme="dark"] a.cls` 的边框会优先继承这个，而不是 `a.cls`。我知道有些人可能会笑我半懂不懂了，但是我确实遇到了这个问题，并且思考了一下找到了原因。
 
-还有一个比较尴尬的事情，我给一些元素设置了 `transition` 用于 `::hover` 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 `color` 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 `transition`。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？
+还有一个比较尴尬的事情，我给一些元素设置了 `transition` 用于 `:hover` 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 `color` 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 `transition`。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？
 
 不管了，反正我用 Firefox，Firefox 效果好得很，完全不掉帧。
 
