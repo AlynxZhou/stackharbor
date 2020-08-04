@@ -4,12 +4,11 @@ layout: post
 comment: true
 createdDate: 2018-05-05 23:49:53
 categories:
-  - 计算机
-  - 网络
-  - 网站
-  - ARIA
+- 网站
+- ARIA
 tags:
-  - ARIA
+- 网站
+- ARIA
 ---
 大约从我写好 ARIA （指把我自己的网站换成它做主题）到现在为止已经有一个月了，这一个月里它有了 [20 个 Star](https://github.com/AlynxZhou/hexo-theme-aria/stargazers)、[4 个 Issue](https://github.com/AlynxZhou/hexo-theme-aria/issues?q=is%3Aissue+is%3Aclosed) 和 [128 个 Commit](https://github.com/AlynxZhou/hexo-theme-aria/commits/master)（都是我自己，残念啊）。大概算是我现在最得意的项目，当然不排除以后也是。
 

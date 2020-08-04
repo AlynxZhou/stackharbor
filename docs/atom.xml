@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2020-08-04T09:15:00.000Z</updated>
+  <updated>2020-08-04T13:06:00.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,40 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="2.2.4">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>和 cheerio 说再见！</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Drop-Cheerio/" />
+    <id>https://sh.alynx.one/posts/Drop-Cheerio/</id>
+    
+    <published>2020-08-04T13:06:00.000Z</published>
+    
+    
+    <updated>2020-08-04T13:06:00.000Z</updated>
+    
+    
+    <summary type="html">
+      <![CDATA[<p>我早就想把 cheerio 从 Hikaru 的依赖里移出去了，倒不是我对他的功能有什么不满，但是一年不更新 NPM 上的包也太恶心了吧！</p>]]>
+    </summary>
+    
+    
+    <content type="html">
+      <![CDATA[<p>我早就想把 cheerio 从 Hikaru 的依赖里移出去了，倒不是我对他的功能有什么不满，但是一年不更新 NPM 上的包也太恶心了吧！</p><a id='more'></a><p>我的生成器使用 cheerio 的地方主要有两个，一是给标题生成喵点并依次生成 TOC，二是检查文章里相对路径的图片和链接引用并改成绝对路径，否则如果截取之后放在首页的摘要包含图片的话，会因为当前页面的地址变化而不工作。后者也是我自己编写生成器的原因之一，就是因为像 Hexo 或者 Hugo 这种已有的生成器内部并没有考虑，只能通过插件解决，我在写 Hexo 主题时嵌入了一个使用正则表达式的脚本，但相比之下我觉得还是一个能理解 HTML 的库更加可靠。所以后来我选了 cheerio 来做解析和修改以实现这些功能。</p><p>但是 cheerio 有一个 <a href="https://github.com/cheeriojs/cheerio/issues/1198" target="_blank" rel="noreferrer noopener">很古怪的 bug</a>，存在于它目前在 NPM 上最新的版本 <code>1.0.0-rc3</code> 上。假如你使用 cheerio 解析并编辑包含中文的 HTML 的话，导出字符串时所有的中文都被编码成了 HTML 实体，导致进行下一步处理比如用 <code>substring</code> 截断的话，字符串长度变化了，而且可能会在文字中间截断。假如你使用 <code>decodeEntities: false</code> 的话，原本文档里的 <code>&amp;lt;</code> 一类的字符反而会被 cheerio 导出成 <code>&lt;</code>，变成一团乱麻。</p><p>这个 bug 非常古怪并且我花了一段时间来研究它，上一个版本 <code>0.22.0</code> 使用 <code>decodeEntities: false</code> 是没有这个问题的。最后发现原因是 cheerio 在 <code>1.0.0-rc1</code> 开始引入 parse5 代替原本的 htmlparser2 作为默认的 HTML 解析器，而 parse5 在解析时并不会使用 <code>decodeEntities</code> 这个参数，比如你输入 <code>&amp;lt;</code>，parse5 解析时会在节点里存储原本的值 <code>&lt;</code>，但 cheerio 在序列化的时候还是会依赖这个参数进行编码，所以假如传递 <code>false</code> 进去，cheerio 就不会主动进行 encode，导致最后出来的是 <code>&lt;</code>。而 htmlparser2 会按照这个参数选择解不解码，所以也不会发生这种错误。</p><p>那这么看起来是 parse5 的问题？并不！parse5 有自己的序列化函数，和自己的解析函数是配套的，所以只要使用 parse5 的序列化函数就不会存在这个问题了。</p><p>最后总结起来修复的办法也有很多：首先其实序列化的时候并不需要将所有元素都编码成 HTML 实体，只要对几个字符进行转义即可，我提交了这样的 PR，但因为 cheerio 和它自己的序列化库 dom-serializer 是两个仓库，不是很好处理，而且其实也没有从根源上解决 htmlparser2 和 parse5 表现不一致的问题。cheerio 后来的提交中采用的是简单办法，假如使用 parse5 解析就继续使用 parse5 序列化就好了。</p><p>但是这个提交之后并没有发布到 NPM 上，NPM 挂的一直是有问题的 <code>1.0.0-rc3</code> 版本，至于原因呢很简单，他们打算释出第一个稳定版本 <code>1.0.0</code>，所以要等到所有 TODO 都解决了再发新版本！</p><p>搞毛啊老哥，你这样放着有 bug 的版本是把用户做宝搞吗？而且你是个函数库，下面好多人依赖你处理 DOM 呢，NodeJS 上提供 jQuery 模式的函数库大概也没什么别的替代品了，一堆项目在 issue 里问你就给个这破理由？</p><p>我选择的是锁死 <code>0.22.0</code> 版本，其他下游的项目也都各自做了 workaround，要么安装 GitHub 上的 <code>1.0.0</code> 分支要么回退版本。但总之都让强迫症很不爽啊！</p><p>大家等他发稳定版就这么等了一年，在这一年间有些项目比如 <a href="https://github.com/hexojs/hexo/issues/3677" target="_blank" rel="noreferrer noopener">Hexo 直接抛弃了 cheerio 用正则处理 HTML</a>，虽然他们主要是为了性能。我倒不是那么在乎生成器的性能（真的在乎的话我就该去用 Hugo，而且我也不敢说我自己的代码写的很好）。</p><p>晚上睡觉前我突然想到假如只是过滤链接和图片并检查他们的属性的话其实不需要 jQuery 一样的 API，只需要能理解 HTML，那找个简单的解析器就可以了。而且第二天正好读了 <a href="https://blog.phoenixlzx.com/2017/02/18/dont-ask-me-why-invent-another-planet-river-of-news/#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8" target="_blank" rel="noreferrer noopener">卷老师的这篇博文</a>，发现和我想的也差不多。于是就开始动手。</p><p>卷老师用的 sanitize-html 对我来说不太合适，因为我的静态生成器并不需要过滤内容——都是 Markdown 生成的，而且不安全也是使用者自己故意写的，不是我的责任，生成器也没有不安全的 HTML 的运行环境。sanitize-html 和 cheerio 用的都是 htmlparser2 作为解析器，虽然它号称自己是跑得最快的 HTML 解析器，但经过之前那个问题我还是心有余悸。而且 htmlparser2 是非常简单的基于事件回调的解析器（就像 Python 自带的那个，我太久不写 Python 不记得叫什么了），不会给你构建树状结构也不包含序列化，自己写序列化就容易像之前那个 cheerio bug 一样出问题。所以我考察了一下 parse5 发现还不错，会构建树状结构，数据结构都写在文档里，同时就是简单的可以直接操作的 Object，至于速度虽然慢一点但我并不太在乎那 10 毫秒。</p><p>于是我就先手动造了一些 wrapper 函数比如递归前置遍历一颗树来代替 cheerio 的 <code>$.each()</code>，前置遍历正好是 HTML 文档自上往下的顺序，生成 TOC 的时候也是按照这个顺序来的，然后就是比如获取结点内文本的函数、获取属性和设置属性的函数之类的。至于插入结点我想了个巧妙的办法，因为 parse5 把最终解析到的文本作为单独的结点，我就直接在插入文本的函数里让 parse5 解析输入的 HTML，然后用得到的子结点替换被插入结点的子结点即可。</p><p>随后我重写了生成 TOC，生成标题 ID 和检查文章里相对路径的图片和链接引用并改成绝对路径的函数。然后写了点简单的测试样例跑了一下发现没问题，就用它们替换掉 Hikaru 的 <code>utils.js</code> 里面用 cheerio 的版本，然后修改了 process 代码。我造的这几个简单的 wrapper 完全符合我的要求，于是提交打版本号发布一气呵成，一年不更新的 cheerio 就从我的生成器里拜拜了。</p><p>虽然嘴上说着不追求速度，但是凭我肉体的感觉还是多少快了一点儿，不过我也并不是很在乎生成的时间，感知真的不强，无所谓了。但我真的不能理解这种为了憋个大的不发版本把用户做宝搞的行为，就算是发个 <code>1.0.0-rc4</code> 也比一年不发强吧！就算只是 make user happy 也好，何况面对的不是 user 而是其它项目的 dev 呢，都是同行，这行为算不算托大？反正我是习惯做了点改动就打个新版本，即使我自己安装的都是开发版本，我也希望能把我最新的修改送到用户手上，又不是 breaking change 或者什么不能随便更新的软件，打个小版本号至于那么难吗？？？</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
+    </content>
+    
+    
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="Hikaru" label="Hikaru" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/Hikaru/" />
+    
+    
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="Hikaru" label="Hikaru" scheme="https://sh.alynx.one/tags/Hikaru/" />
+    
+  </entry>
   
   
   
@@ -43,16 +77,14 @@
     </content>
     
     
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
     
-    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/ARIA/" />
     
     
     <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
     
-    <category term="主题" label="主题" scheme="https://sh.alynx.one/tags/%E4%B8%BB%E9%A2%98/" />
+    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
     
   </entry>
   
@@ -253,11 +285,9 @@
     </content>
     
     
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
     
-    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/ARIA/" />
     
     
     <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
@@ -265,6 +295,8 @@
     <category term="搜索" label="搜索" scheme="https://sh.alynx.one/tags/%E6%90%9C%E7%B4%A2/" />
     
     <category term="JavaScript" label="JavaScript" scheme="https://sh.alynx.one/tags/JavaScript/" />
+    
+    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
     
   </entry>
   
@@ -671,38 +703,6 @@
     
     
     <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Linux 下面常见的代理设置</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Proxy-Settings/" />
-    <id>https://sh.alynx.one/posts/Proxy-Settings/</id>
-    
-    <published>2019-02-10T01:28:00.000Z</published>
-    
-    
-    <updated>2019-02-10T01:28:00.000Z</updated>
-    
-    
-    <summary type="html">
-      <![CDATA[<p>通常情况下在 Linux 下面配置好的是 socks5 代理（你懂的），但是这个代理并不能让所有程序自动走它，需要手动的做一些转换。</p>]]>
-    </summary>
-    
-    
-    <content type="html">
-      <![CDATA[<p>通常情况下在 Linux 下面配置好的是 socks5 代理（你懂的），但是这个代理并不能让所有程序自动走它，需要手动的做一些转换。</p><a id='more'></a><h1 id="proxychains"><a class="header-link" href="/posts/Proxy-Settings/#proxychains" title="proxychains"></a>proxychains</h1><p>proxychains 通过 hook libc 里面网络访问的函数实现劫持流量经过代理，配置时首先编辑 <code>/etc/proxychains.conf</code> 添加一行有关自己的代理的配置比如</p><pre><code><figure class="highlight hljs css"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-selector-tag">socks5</span> <span class="hljs-selector-attr">[IP 地址]</span> <span class="hljs-selector-attr">[端口号]</span></code></pre></figure></code></pre><p>然后就可以将你需要走代理的程序跟在 <code>proxychains</code> 后面比如</p><pre><code><figure class="highlight hljs powershell"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-variable">$</span> proxychains <span class="hljs-built_in">wget</span> google.com</code></pre></figure></code></pre><h1 id="环境变量"><a class="header-link" href="/posts/Proxy-Settings/#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F" title="环境变量"></a>环境变量</h1><p>有些奇葩的语言设计时完全静态链接，不会调用 libc 的运行时库（说的就是那个叫 go 的），因此没办法使用 proxychains 进行 hook。但对于命令行程序，通常有个约定，如果用户设置了 <code>http_proxy</code> 和 <code>https_proxy</code>，程序就会使用这个作为代理。可以在这两个里设置 socks5 代理，比如 <code>export http_proxy=socks5://127.0.0.1:1080</code>，但问题不是所有程序都支持 socks5 代理，所以需要一些方案将 socks5 转换成 http 代理。当然如果你遇到一个 go 程序不读取这两个变量怎么办？当然是在心里问候一下开发者先人。</p><h1 id="privoxy"><a class="header-link" href="/posts/Proxy-Settings/#privoxy" title="privoxy"></a>privoxy</h1><p>我个人比较习惯使用 privoxy 做代理转换，当然能实现这个功能的程序非常多，privoxy 是其中一个，安装好之后修改配置文件，添加一行</p><pre><code><figure class="highlight hljs prolog"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>forward-socks5   /               [<span class="hljs-symbol">IP</span> 地址]:[端口号] .</code></pre></figure></code></pre><p>然后使用 <code>systemctl start privoxy</code> 启动即可。</p><h1 id="桌面环境"><a class="header-link" href="/posts/Proxy-Settings/#%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83" title="桌面环境"></a>桌面环境</h1><p>诸如 GNOME 和 KDE Plasma 等都在网络设置里提供了代理选项，按表格填写即可，对于一些内建代理支持的也可以同理比如 Telegram Desktop，本地的 socks5 代理是不需要填写用户名和密码的。对于另外一些同学想要使用 Automatic 的选项的，你需要生成一个 pac 文件，这个文件里记录了哪些网站需要走代理，可以搜索 <code>你用的 socks5 代理协议的名字</code> + <code>pac</code> 得到更多相关内容，然后在这个选项里填写以 <code>file://</code> 开头的 URL，支持的程序就会使用这个 pac。</p><h1 id="浏览器"><a class="header-link" href="/posts/Proxy-Settings/#%E6%B5%8F%E8%A7%88%E5%99%A8" title="浏览器"></a>浏览器</h1><p>通常大家使用插件来调用代理，但如果你上一步设置了桌面环境的代理比如 pac，可以直接走系统代理。</p><h1 id="端口转发"><a class="header-link" href="/posts/Proxy-Settings/#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91" title="端口转发"></a>端口转发</h1><p>有时候你的网络很奇葩，连接所有代理服务器都很慢，可以通过一个国内服务器做端口转发，需要在国内服务器执行下列命令。</p><h2 id="开启流量转发"><a class="header-link" href="/posts/Proxy-Settings/#%E5%BC%80%E5%90%AF%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91" title="开启流量转发"></a>开启流量转发</h2><pre><code><figure class="highlight hljs shell"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">echo</span> <span class="hljs-string">"net.ipv4.ip_forward=1"</span> &gt;&gt; /etc/sysctl.conf</span><span class="hljs-meta">#</span><span class="bash"> sysctl -p</span></code></pre></figure></code></pre><h2 id="配置转发规则"><a class="header-link" href="/posts/Proxy-Settings/#%E9%85%8D%E7%BD%AE%E8%BD%AC%E5%8F%91%E8%A7%84%E5%88%99" title="配置转发规则"></a>配置转发规则</h2><pre><code><figure class="highlight hljs css"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code># <span class="hljs-selector-tag">iptables</span> <span class="hljs-selector-tag">-t</span> <span class="hljs-selector-tag">nat</span> <span class="hljs-selector-tag">-A</span> <span class="hljs-selector-tag">PREROUTING</span> <span class="hljs-selector-tag">-p</span> <span class="hljs-selector-tag">tcp</span> <span class="hljs-selector-tag">--dport</span> <span class="hljs-selector-attr">[端口号]</span> <span class="hljs-selector-tag">-j</span> <span class="hljs-selector-tag">DNAT</span> <span class="hljs-selector-tag">--to-destination</span> <span class="hljs-selector-attr">[代理服务器地址]</span># <span class="hljs-selector-tag">iptables</span> <span class="hljs-selector-tag">-t</span> <span class="hljs-selector-tag">nat</span> <span class="hljs-selector-tag">-A</span> <span class="hljs-selector-tag">PREROUTING</span> <span class="hljs-selector-tag">-p</span> <span class="hljs-selector-tag">udp</span> <span class="hljs-selector-tag">--dport</span> <span class="hljs-selector-attr">[端口号]</span> <span class="hljs-selector-tag">-j</span> <span class="hljs-selector-tag">DNAT</span> <span class="hljs-selector-tag">--to-destination</span> <span class="hljs-selector-attr">[代理服务器地址]</span># <span class="hljs-selector-tag">iptables</span> <span class="hljs-selector-tag">-t</span> <span class="hljs-selector-tag">nat</span> <span class="hljs-selector-tag">-A</span> <span class="hljs-selector-tag">POSTROUTING</span> <span class="hljs-selector-tag">-p</span> <span class="hljs-selector-tag">tcp</span> <span class="hljs-selector-tag">-d</span> <span class="hljs-selector-attr">[代理服务器地址]</span> <span class="hljs-selector-tag">--dport</span> <span class="hljs-selector-attr">[端口号]</span> <span class="hljs-selector-tag">-j</span> <span class="hljs-selector-tag">SNAT</span> <span class="hljs-selector-tag">--to-source</span> <span class="hljs-selector-attr">[国内服务器地址]</span># <span class="hljs-selector-tag">iptables</span> <span class="hljs-selector-tag">-t</span> <span class="hljs-selector-tag">nat</span> <span class="hljs-selector-tag">-A</span> <span class="hljs-selector-tag">POSTROUTING</span> <span class="hljs-selector-tag">-p</span> <span class="hljs-selector-tag">tcp</span> <span class="hljs-selector-tag">-d</span> <span class="hljs-selector-attr">[代理服务器地址]</span> <span class="hljs-selector-tag">--dport</span> <span class="hljs-selector-attr">[端口号]</span> <span class="hljs-selector-tag">-j</span> <span class="hljs-selector-tag">SNAT</span> <span class="hljs-selector-tag">--to-source</span> <span class="hljs-selector-attr">[国内服务器地址]</span></code></pre></figure></code></pre><p>然后修改你本地的 socks5 配置，IP 改为国内的服务器的 IP。如果国内服务器默认有防火墙（安全组），添加规则放行该端口（TCP + UDP）。</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
-    
-    
-    <category term="网络" label="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
     
   </entry>
   

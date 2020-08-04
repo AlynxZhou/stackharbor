@@ -4,13 +4,12 @@ layout: post
 comment: true
 createdDate: 2018-06-04 16:21:17
 categories:
-  - 计算机
-  - 网络
-  - 网站
-  - Hexo
+- 网站
+- Hexo
 tags:
-  - Hexo
-  - Nginx
+- 网站
+- Hexo
+- Nginx
 ---
 <div class="alert-red">这个页面记录的方案已经被作者放弃，并且由于时间久远，作者不能保证此页面内容的正确与否，请不要完全参考。</div>
 
