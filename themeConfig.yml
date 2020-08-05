@@ -19,6 +19,9 @@ menu:
   - name: blogroll
     link: blogroll/
     icon: <i class="fas fa-link"></i>
+  - name: 吐槽频道
+    link: channel/
+    icon: <i class="fas fa-volume-up"></i>
   - name: about
     link: about/
     icon: <i class="fas fa-user-edit"></i>
