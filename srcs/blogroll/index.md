@@ -37,6 +37,7 @@ reward: false
 | <img src="https://avatars3.githubusercontent.com/u/6873988?s=460&u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&v=4" style="width: 5em;"> | [Bruce Z Blog](https://blog.brucezhang.cf/)  | 「我不是兔子」 | 经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。 |
 | <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width :5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 | <img src="https://avatars0.githubusercontent.com/u/259684?s=460&v=4" style="width: 5em;"> | [CS Slayer](https://www.csslayer.info/) |  | 资深 ~~休伯利安号甲板清洁工~~ 崩坏三玩家，Fcitx 的作者。~~可是这和我冷酷无情的 iBus 用户有有什么关系呢。~~ |
+| <img src="https://i.loli.net/2018/12/23/5c1f5a77d8d8e.png" style="width: 5em;" | [wgjak47's blog](http://wgjak47.me/tech/) | “运维开发工程师” | 是我看不懂的那种（指 k8s） |
 | <img src="https://avatars0.githubusercontent.com/u/8396456?s=460&v=4" style="width: 5em;"> | [初等記憶體](https://axionl.me/) | 「 一個你知道的地方，和一個沒有酒的故事 ｜ 言文 」 | 听起来好像萌妹啊！|
 | <img src="https://avatars1.githubusercontent.com/u/17294071?s=460&v=4" style="width: 5em;"> | [OriginCode 札記](https://originco.de/) | 「無人訪問之無趣博客 * 1」 | 好像现在是 ~~初中生~~ 高中生来着…… |
 | <img src="https://viflythink.com/img/avatar.png" style="width: 5em;"> | [Vifly 的博客](https://viflythink.com/) | “世上只有一种英雄主义——就是在认清生活的真相之后依然热爱生活。” | 好像是炼丹的，反正我又不懂炼丹……加速迫害不要停下来啊！ |

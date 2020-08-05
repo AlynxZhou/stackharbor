@@ -160,6 +160,9 @@ social:
 blogroll:
   enable: true
   links:
+    - name: Arch Linux 星球
+      link: https://planet.archlinuxcn.org/
+      icon: <i class="fas fa-link"></i>
     - name: H-el-ical//
       link: https://h-el-ical.com/
       icon: <i class="fas fa-link"></i>
@@ -184,9 +187,9 @@ blogroll:
     - name: 滑稽仓库
       link: http://huaji.store/
       icon: <i class="fas fa-link"></i>
-    - name: 鸡腿工坊
-      link: https://jitui.moe/
-      icon: <i class="fas fa-link"></i>
+    # - name: 鸡腿工坊
+    #   link: https://jitui.moe/
+    #   icon: <i class="fas fa-link"></i>
     - name: Sqyon's Blog
       link: https://sqyon.com/
       icon: <i class="fas fa-link"></i>
