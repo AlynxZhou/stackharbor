@@ -9,6 +9,6 @@ reward: false
 
 <https://t.me/aztucao>
 
-<div class="center">
-  <iframe style="width: 90%; height: 40em;" src="https://rants.nichi.workers.dev/aztucao" frameborder="0"></iframe>
+<div class="center" style="flex: 1 1 auto;">
+  <iframe style="height: 100%;" src="https://rants.nichi.workers.dev/aztucao" frameborder="0"></iframe>
 </div>

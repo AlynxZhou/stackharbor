@@ -1,4 +1,5 @@
 footer.footer {
+  flex: 0 0 auto;
   background: #33363b;
   color: #eee;
   margin-top: 1.5rem;

@@ -1,4 +1,5 @@
 header.header {
+  flex: 0 0 auto;
   padding-bottom: 3rem;
   margin-bottom: 0;
   background: #33363b;

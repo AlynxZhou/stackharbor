@@ -1,4 +1,5 @@
 header.header {
+  flex: 0 0 auto;
   padding-bottom: 3rem;
   margin-bottom: 0;
   background: #33363b;
@@ -174,6 +175,7 @@ nav.nav button.theme-toggle:hover {
   }
 }
 main.main {
+  flex: 1 0 auto;
   font: 16px Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   margin-top: -3rem;
 }
@@ -207,6 +209,7 @@ html[data-theme="dark"] main.main div.main-container {
   }
 }
 footer.footer {
+  flex: 0 0 auto;
   background: #33363b;
   color: #eee;
   margin-top: 1.5rem;
@@ -350,13 +353,6 @@ body {
   flex-wrap: nowrap;
   justify-content: stretch;
   align-items: stretch;
-}
-body main.main {
-  flex: 1 0 auto;
-}
-body header.header,
-body footer.footer {
-  flex: 0 0 auto;
 }
 div.container {
   padding: 0;
