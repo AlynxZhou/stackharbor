@@ -149,7 +149,7 @@ social:
       icon: <i class="fab fa-telegram-plane"></i>
     - name: Bilibili
       link: https://space.bilibili.com/10034969/
-      icon: <i class="fas fa-video"></i>
+      icon: <i class="fas fa-film"></i>
     - name: Steam
       link: https://steamcommunity.com/id/AlynxZhou/
       icon: <i class="fab fa-steam"></i>
@@ -205,9 +205,9 @@ blogroll:
     # - name: 初等記憶體
     #   link: https://axionl.me/
     #   icon: <i class="fas fa-link"></i>
-    - name: OriginCode 札記
-      link: https://originco.de/
-      icon: <i class="fas fa-link"></i>
+    # - name: OriginCode 札記
+    #   link: https://originco.de/
+    #   icon: <i class="fas fa-link"></i>
 
 comment:
   enable: true

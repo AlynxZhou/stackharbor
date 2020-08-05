@@ -9,19 +9,19 @@ reward: false
 
 Alynx Zhou
 
-[北京交通大学](https://bjtu.edu.cn/) [计算机信息与技术学院](https://scit.bjtu.edu.cn/) 计算机科学与技术专业 本科毕业生
+<i class="fas fa-university"></i> [北京交通大学](https://bjtu.edu.cn/) [计算机信息与技术学院](https://scit.bjtu.edu.cn/) 计算机科学与技术专业 本科毕业生
 
-[SUSE](https://suse.com/) 北京分公司桌面开发者
+<i class="fab fa-suse"></i> [SUSE](https://suse.com/) 北京分公司桌面开发者
 
-Arch Linux CN 社区成员
+<i class="fab fa-linux"></i> Arch Linux CN 社区成员
 
-邮箱：[alynx.zhou@gmail.com](mailto:alynx.zhou@gmail.com)
+<i class="fas fa-envelope"></i> 邮箱：[alynx.zhou@gmail.com](mailto:alynx.zhou@gmail.com)
 
-Telegram: [@AlynxZhou](https://t.me/AlynxZhou)
+<i class="fab fa-telegram-plane"></i> Telegram: [@AlynxZhou](https://t.me/AlynxZhou)
 
-GitHub: [@AlynxZhou](https://github.com/AlynxZhou)
+<i class="fab fa-github"></i> GitHub: [@AlynxZhou](https://github.com/AlynxZhou)
 
-PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
+<i class="fas fa-fingerprint"></i> PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
 
 # 关于 Alynx 的 33 条
 
