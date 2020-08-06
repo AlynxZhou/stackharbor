@@ -130,8 +130,8 @@ div.page h2.page-counter {
   text-align: center;
 }
 div.page nav.pagination {
-  margin: 1rem 0;
-  padding: 1rem 0;
+  margin: 0.5em 0;
+  padding: 0.5em;
   display: block;
   text-align: center;
   transition: 0.3s ease-in-out;
@@ -139,10 +139,10 @@ div.page nav.pagination {
 }
 div.page nav.pagination a.page-number,
 div.page nav.pagination a.extend {
-  overflow: hidden;
-  font-size: 1.2rem;
-  padding: 0.5em;
-  margin: 0 0.5em;
+  display: inline-block;
+  font-size: 1.25rem;
+  padding: 0.3em 0.5em;
+  margin: 0 0.25em;
   text-decoration: none;
   border-bottom: 0.15em solid #666;
   transition: 0.3s ease-in-out;
@@ -155,10 +155,12 @@ div.page nav.pagination a.page-number.current,
 div.page nav.pagination a.extend.current {
   color: #36e;
   border-bottom: 0.15em solid #36e;
-  border-top: 0.07em solid #36e;
+  border-top: 0.1em solid #36e;
 }
 div.page nav.pagination span.space {
-  margin: 0 0.5em;
+  display: inline-block;
+  font-size: 1.25rem;
+  margin: 0 0.25em;
   transition: 0.3s ease-in-out;
   color: #666;
 }
@@ -191,14 +193,12 @@ div.page nav.page-nav div.page-nav-item a:active {
   top: 0.1em;
 }
 div.page nav.page-nav div.page-nav-next {
-  width: 45%;
   text-align: left;
 }
 div.page nav.page-nav div.page-nav-next a {
   justify-content: flex-start;
 }
 div.page nav.page-nav div.page-nav-prev {
-  width: 45%;
   text-align: right;
 }
 div.page nav.page-nav div.page-nav-prev a {
