@@ -1,7 +1,7 @@
 ---
 title: about
 createdDate: 2016-04-04 14:36:20
-updatedDate: 2019-12-23 09:15:00
+updatedDate: 2020-08-06 18:58:20
 layout: page
 comment: true
 reward: false
@@ -9,10 +9,6 @@ reward: false
 # 个人简介
 
 Alynx Zhou
-
-<i class="fas fa-university"></i> [北京交通大学](https://bjtu.edu.cn/) [计算机信息与技术学院](https://scit.bjtu.edu.cn/) 计算机科学与技术专业 本科毕业生
-
-<i class="fab fa-suse"></i> [SUSE](https://suse.com/) 北京分公司桌面开发者
 
 <i class="fab fa-linux"></i> Arch Linux CN 社区成员
 
@@ -36,11 +32,11 @@ Alynx Zhou
 
 4. Alynx 是 S / M 双属性，虽然可能表现的更像 M 但是其实 S 的属性更多，**除非你是让我心甘情愿的人**。对 LGBTQIA 没有歧视但是 Alynx **只喜欢女孩子**，想要认识可爱的小姐姐，想脱单。
 
-5. Alynx 像猫一样懒，目前在 ~~北京交通大学~~ **前北下关军事基地**，~~计算机与信息技术学院~~ **反恐精英专业在读**。[北京交通大学自由与开源软件镜像站](https://mirror.bjtu.edu.cn/) 前任维护者。SUSE 北京分部的实习生。Alynx 还是 Arch Linux CN 社区里稀有的 GNOME 用户之一，希望大家爱护稀有动物。
+5. Alynx 像猫一样懒。Alynx 是 Arch Linux CN 社区里稀有的 GNOME 用户之一，希望大家爱护稀有动物。
 
 6. Alynx 喜欢 Arch Linux，Atom，C，Coffee Script，Vala，GNOME，你也许喜欢与这些对立的软件，但是 **每个人选择自己喜欢的东西一定有她的理由**，所以 **请不要强行向 Alynx 安利你喜欢的东西**。
 
-7. Alynx 喜欢音乐，目前最喜欢的乐器是半音阶口琴，有不到 6 年的琴龄，北京交通大学口琴联盟的创始人兼第一任社长，（此处应该有努力练琴的 Flag）。学过 4 年二胡并通过了业余水平十级（虽然现在几乎忘光了），选了扬琴选修课所以大概了解一点点，其他了解一点的乐器还有长号，选到课的小提琴。
+7. Alynx 喜欢音乐，目前最喜欢的乐器是半音阶口琴，有不到 6 年的琴龄。学过 4 年二胡并通过了业余水平十级（虽然现在几乎忘光了），选了扬琴选修课所以大概了解一点点，其他了解一点的乐器还有长号，选到课的小提琴。
 
 8. Alynx 坚持用 Steam 并拒绝 Origin/Epic/Battle.net 等不打算支持 Linux 的平台（既然你忽略 Alynx 的需求，Alynx 也忽略你），*Counter-Strike: Global Offensive* 是目前为止唯一一个玩了超过 600 小时的游戏，唯一能够玩进去的 RPG 大概是 *NieR: Automata*，感谢室友特地带 PS4 到学校还和高中同学借了光盘让 Alynx 能和另一个室友一起以 60FPS 和高清画质通关主线（这话说的有点乱套）。另外表示室友四个人一起玩 *Overcooked!* 非常开心，所以预购了 *Overcooked!2*。
 
