@@ -1,6 +1,7 @@
 ---
 title: about
 createdDate: 2016-04-04 14:36:20
+updatedDate: 2019-12-23 09:15:00
 layout: page
 comment: true
 reward: false
@@ -24,8 +25,6 @@ Alynx Zhou
 <i class="fas fa-fingerprint"></i> PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
 
 # 关于 Alynx 的 33 条
-
-<div class="alert-green">此部分上次更新时间 2019-12-23 09:15:00。</div>
 
 <div class="alert-red">对于一些人，在对着这个页面按 <code>Control + c</code> 之前，麻烦先看一下第 17 条。</div>
 
