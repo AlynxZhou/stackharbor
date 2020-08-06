@@ -1,6 +1,3 @@
-div.comment {
-  flex: 0 0 auto;
-}
 div.comment div.comment-results {
   padding: 1rem;
 }

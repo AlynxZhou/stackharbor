@@ -1,5 +1,4 @@
 div.reward {
-  flex: 0 0 auto;
   margin: 1rem auto;
   width: 90%;
   text-align: center;
@@ -33,16 +32,7 @@ div.reward button.button {
 html[data-theme="dark"] div.reward {
   color: #ddd;
 }
-article.post {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: stretch;
-  align-items: stretch;
-}
 article.post header.post-header {
-  flex: 0 0 auto;
   text-align: center;
 }
 article.post header.post-header h1.post-title-simple {
@@ -79,14 +69,6 @@ article.post header.post-header div.post-meta span.meta-block {
   display: block;
   margin: 0.5em;
 }
-article.post main.post-main {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: stretch;
-  align-items: stretch;
-}
 article.post main.post-main a.header-link,
 article.post main.post-main a.headerlink {
   border-bottom: none;
@@ -119,7 +101,6 @@ article.post a.post-tag:nth-child(3n) {
   border: 0.1em solid #b8daff;
 }
 article.post footer.post-footer {
-  flex: 0 0 auto;
   text-align: center;
 }
 article.post footer.post-footer div.post-tags a.post-tag {
