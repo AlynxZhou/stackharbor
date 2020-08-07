@@ -1,9 +1,9 @@
 div.reward {
-  margin: 1rem auto;
+  margin: 1em auto;
   width: 90%;
   text-align: center;
-  transition: 0.3s ease-in-out;
   color: #666;
+  color: var(--color-reward-font);
 }
 div.reward div.qr {
   text-align: center;
@@ -13,7 +13,7 @@ div.reward div.qr div {
   display: inline-block;
 }
 div.reward div.qr div img {
-  width: 10rem;
+  width: 10em;
   margin: 0 auto;
   display: block;
 }
@@ -29,9 +29,6 @@ div.reward button.button {
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
 }
-html[data-theme="dark"] div.reward {
-  color: #ddd;
-}
 article.post header.post-header {
   text-align: center;
 }
@@ -43,8 +40,8 @@ article.post header.post-header h1.post-title a.post-title-link {
   position: relative;
   text-decoration: none;
   border-bottom: none;
-  transition: 0.3s ease-in-out;
   color: #26272b;
+  color: var(--color-font);
 }
 article.post header.post-header h1.post-title a.post-title-link::after {
   content: " ";
@@ -53,10 +50,11 @@ article.post header.post-header h1.post-title a.post-title-link::after {
   height: 0.1em;
   bottom: 0;
   left: 0;
+  transition: transform 0.3s ease-in-out;
   background: #26272b;
+  background: var(--color-font);
   visibility: hidden;
   transform: scaleX(0);
-  transition: 0.3s ease-in-out;
 }
 article.post header.post-header h1.post-title a.post-title-link:hover::after {
   visibility: visible;
@@ -111,10 +109,4 @@ article.post div.tags-cloud {
 }
 article.post div.tags-cloud a.post-tag {
   margin: 0.1em 0.5em;
-}
-html[data-theme="dark"] article.post header.post-header h1.post-title a.post-title-link {
-  color: #eee;
-}
-html[data-theme="dark"] article.post header.post-header h1.post-title a.post-title-link::after {
-  background: #eee;
 }

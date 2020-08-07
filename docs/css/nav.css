@@ -4,7 +4,7 @@ nav.nav {
   padding: 0 0.5em;
   overflow: hidden;
   background: #33363b;
-  box-shadow: 0 -0.5rem 1rem 0.5rem rgba(0,0,0,0.19);
+  box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
   border-radius: 0.3em 0.3em 0 0;
   display: flex;
   flex-direction: row;
@@ -22,7 +22,7 @@ nav.nav button.nav-toggle {
   cursor: pointer;
   color: #ddd;
   width: 100%;
-  transition: 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 nav.nav button.nav-toggle:hover {
   color: #fff;
@@ -36,6 +36,9 @@ nav.nav ul {
   margin: 0;
   flex: 1 1 auto;
   overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #999 transparent;
+  scrollbar-color: var(--color-scrollbar) var(--color-scrollbar-background);
   white-space: nowrap;
 }
 nav.nav ul li {
@@ -52,7 +55,7 @@ nav.nav ul li a {
   padding: 0.5em;
   color: #ddd;
   text-decoration: none;
-  transition: 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
   border-bottom: none;
 }
 nav.nav ul li a:hover {
@@ -78,14 +81,14 @@ nav.nav button.theme-toggle {
   font-size: 2rem;
   cursor: pointer;
   color: #ddd;
-  transition: 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 nav.nav button.theme-toggle:hover {
   color: #fff;
   background: #252525;
   border: none;
 }
-@media (max-width: 40rem) {
+@media (max-width: 40em) {
   nav.nav {
     flex-direction: column;
     padding: 0;

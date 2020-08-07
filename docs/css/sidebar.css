@@ -4,8 +4,8 @@ div.info {
 div.info img.author-avatar {
   width: 90%;
   display: block;
-  margin: 1rem auto;
-  border: 0.3rem solid #fff;
+  margin: 1em auto;
+  border: 0.3em solid #fff;
   border-radius: 50%;
   transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
@@ -14,18 +14,18 @@ div.info img.author-avatar:hover {
   transform: rotateY(720deg);
 }
 div.info h1.author-name {
-  transition: 0.3s ease-in-out;
   color: #26272b;
+  color: var(--color-author-name-font);
   font-size: 1.8rem;
   font-weight: normal;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
 }
 div.info h2.author-description {
-  transition: 0.3s ease-in-out;
   color: #444;
+  color: var(--color-author-description-font);
   font-size: 1.2rem;
   font-weight: normal;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
 }
 div.info div.site-count {
   display: flex;
@@ -34,14 +34,15 @@ div.info div.site-count {
   align-items: stretch;
   flex-wrap: nowrap;
   width: 100%;
-  margin: 1rem 0;
+  margin: 1em 0;
   text-align: center;
 }
 div.info div.site-count div.count-block {
   flex: 1 1 auto;
-  transition: 0.3s ease-in-out;
-  border-left: 0.05rem #666 solid;
-  border-right: 0.05rem #666 solid;
+  border-left: 0.05em #666 solid;
+  border-left: 0.05em var(--color-quote-font) solid;
+  border-right: 0.05em #666 solid;
+  border-right: 0.05em var(--color-quote-font) solid;
 }
 div.info div.site-count div.count-block:first-child {
   border-left: none;
@@ -54,7 +55,7 @@ div.info div.site-count div.site-count-title {
   font-size: 1.2rem;
 }
 div.info div.rss {
-  margin: 1rem 0;
+  margin: 1em 0;
   padding: 0;
 }
 div.info div.rss a.rss-link {
@@ -65,46 +66,31 @@ div.info div.rss a.rss-link {
   border: 0.1em solid #f5c6cb;
   padding: 0.2em;
 }
-html[data-theme="dark"] div.info h1.author-name {
-  color: #eee;
-}
-html[data-theme="dark"] div.info h2.author-description {
-  color: #ddd;
-}
-html[data-theme="dark"] div.info div.site-count div.count-block {
-  border-left: 0.05rem #999 solid;
-  border-right: 0.05rem #999 solid;
-}
-html[data-theme="dark"] div.info div.site-count div.count-block:first-child {
-  border-left: none;
-}
-html[data-theme="dark"] div.info div.site-count div.count-block:last-child {
-  border-right: none;
-}
 aside.sidebar {
-  transition: 0.3s ease-in-out;
   background: #ddd;
+  background: var(--color-sidebar-background);
   background: url("/images/background.webp");
+  background: var(--url-sidebar-background);
   flex: 1 1 auto;
   width: 25%;
   padding: 0;
 }
 aside.sidebar div.search {
-  height: 2.5rem;
+  height: 2.5em;
   display: block;
   text-align: center;
   background: #36e;
   color: #fff;
-  padding-top: 0.5rem;
+  padding-top: 0.5em;
 }
 aside.sidebar div.search input.search-input {
   width: 70%;
-  height: 1.8rem;
+  height: 1.8em;
   border: none;
   border-bottom: 0.1em dotted #fff;
   background: #36e;
   color: #fff;
-  transition: 0.3s ease-in-out;
+  transition: border-bottom 0.3s ease-in-out;
 }
 aside.sidebar div.search input.search-input:focus {
   border-bottom: 0.1em solid #fff;
@@ -115,7 +101,7 @@ aside.sidebar div.search input.search-input::placeholder {
 }
 aside.sidebar div.search button.search-submit {
   position: relative;
-  transition: 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
   color: #fff;
   text-decoration: none;
   padding: 0;
@@ -133,7 +119,7 @@ aside.sidebar div.search button.search-submit:active {
   left: 0;
 }
 aside.sidebar div.sidebar-item {
-  margin: 1rem;
+  margin: 1em;
 }
 aside.sidebar div.sidebar-sticky {
   position: -webkit-sticky;
@@ -142,26 +128,16 @@ aside.sidebar div.sidebar-sticky {
   padding-bottom: 1em;
 }
 aside.sidebar div.post-toc a.toc-link.active {
-  transition: 0.3s ease-in-out;
   color: #36e;
+  color: var(--color-link-hover-font);
   border-bottom: 0.05em solid #36e;
+  border-bottom: 0.05em solid var(--color-link-hover-font);
 }
 aside.sidebar hr {
-  transition: 0.3s ease-in-out;
-  background: repeating-linear-gradient(-45deg, #fff, #fff 0.25rem, transparent 0.25rem, transparent 0.5rem);
+  background: repeating-linear-gradient(-45deg, #fff, #fff 0.25em, transparent 0.25em, transparent 0.5em);
+  background: repeating-linear-gradient(-45deg, var(--color-hr-sidebar-background), var(--color-hr-sidebar-background) 0.25em, transparent 0.25em, transparent 0.5em);
 }
-html[data-theme="dark"] aside.sidebar {
-  background: #252525;
-  background: url("/images/background-dark.webp");
-}
-html[data-theme="dark"] aside.sidebar div.post-toc a.toc-link.active {
-  color: #fff;
-  border-bottom: 0.05em solid #fff;
-}
-html[data-theme="dark"] aside.sidebar hr {
-  background: repeating-linear-gradient(-45deg, #ccc, #ccc 0.25rem, transparent 0.25rem, transparent 0.5rem);
-}
-@media (max-width: 60rem) {
+@media (max-width: 60em) {
   aside.sidebar {
     width: 100%;
   }

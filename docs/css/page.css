@@ -1,19 +1,20 @@
 div.comment div.comment-results {
-  padding: 1rem;
+  padding: 1em;
 }
 div.comment div.comment-results div.sk-wave div.sk-rect {
   background: #666;
+  background: var(--color-comment-sk-wave-background);
 }
 div.comment div.comment-results div.comment-fail {
-  transition: 0.3s ease-in-out;
   text-align: center;
   color: #666;
+  color: var(--color-comment-font);
 }
 div.comment div.comment-results header.comments-header {
-  transition: 0.3s ease-in-out;
   padding: 0.5em;
   text-align: center;
   color: #666;
+  color: var(--color-comment-font);
 }
 div.comment div.comment-results main.comments-main div.comment {
   display: flex;
@@ -21,7 +22,7 @@ div.comment div.comment-results main.comments-main div.comment {
   flex-wrap: nowrap;
   justify-content: stretch;
   align-items: start;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container {
   flex: 1 1 auto;
@@ -29,7 +30,7 @@ div.comment div.comment-results main.comments-main div.comment div.comment-avata
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container img.comment-avatar {
   width: 70%;
-  border: 0.1rem solid #fff;
+  border: 0.1em solid #fff;
   border-radius: 50%;
   transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
@@ -54,7 +55,7 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
   color: #ddd;
   text-decoration: none;
   border-bottom: 0.05em dotted #ddd;
-  transition: 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a:hover {
   color: #fff;
@@ -83,12 +84,11 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
   content: "#";
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
-  transition: 0.3s ease-in-out;
   padding: 0.5em 1em;
   background: #fff;
+  background: var(--color-comment-content-background);
 }
 div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
-  transition: 0.3s ease-in-out;
   overflow: auto;
   padding: 0.5em;
   border-radius: 0.3em;
@@ -103,24 +103,14 @@ div.comment div.comment-results main.comments-main div.comment div.comment-body-
 div.comment div.comment-results footer.comments-footer {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items: center;
 }
 div.comment div.comment-results footer.comments-footer a.comment-send {
   padding: 0.3em 1em;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
-}
-html[data-theme="dark"] div.comment div.comment-results div.sk-wave div.sk-rect {
-  background: #ddd;
-}
-html[data-theme="dark"] div.comment div.comment-results div.comment-fail {
-  color: #ddd;
-}
-html[data-theme="dark"] div.comment div.comment-results header.comments-header {
-  color: #ddd;
-}
-html[data-theme="dark"] div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
-  background: #3d444c;
 }
 div.page h1.page-title,
 div.page h2.page-title {
@@ -134,8 +124,6 @@ div.page nav.pagination {
   padding: 0.5em;
   display: block;
   text-align: center;
-  transition: 0.3s ease-in-out;
-  color: #666;
 }
 div.page nav.pagination a.page-number,
 div.page nav.pagination a.extend {
@@ -144,28 +132,36 @@ div.page nav.pagination a.extend {
   padding: 0.3em 0.5em;
   margin: 0 0.25em;
   text-decoration: none;
+  color: #666;
+  color: var(--color-link-font);
   border-bottom: 0.15em solid #666;
-  transition: 0.3s ease-in-out;
+  border-bottom: 0.15em solid var(--color-link-font);
 }
 div.page nav.pagination a.page-number:hover,
 div.page nav.pagination a.extend:hover {
+  color: #36e;
+  color: var(--color-link-hover-font);
   border-bottom: 0.15em solid #36e;
+  border-bottom: 0.15em solid var(--color-link-hover-font);
 }
 div.page nav.pagination a.page-number.current,
 div.page nav.pagination a.extend.current {
   color: #36e;
+  color: var(--color-link-hover-font);
   border-bottom: 0.15em solid #36e;
+  border-bottom: 0.15em solid var(--color-link-hover-font);
   border-top: 0.1em solid #36e;
+  border-top: 0.1em solid var(--color-link-hover-font);
 }
 div.page nav.pagination span.space {
   display: inline-block;
   font-size: 1.25rem;
   margin: 0 0.25em;
-  transition: 0.3s ease-in-out;
   color: #666;
+  color: var(--color-link-font);
 }
 div.page nav.page-nav {
-  margin: 0 1rem;
+  margin: 0 1em;
   padding: 0;
   display: flex;
   flex-direction: row;
@@ -203,24 +199,4 @@ div.page nav.page-nav div.page-nav-prev {
 }
 div.page nav.page-nav div.page-nav-prev a {
   justify-content: flex-end;
-}
-html[data-theme="dark"] div.page nav.pagination {
-  color: #ddd;
-}
-html[data-theme="dark"] div.page nav.pagination a.page-number,
-html[data-theme="dark"] div.page nav.pagination a.extend {
-  border-bottom: 0.15em solid #ddd;
-}
-html[data-theme="dark"] div.page nav.pagination a.page-number:hover,
-html[data-theme="dark"] div.page nav.pagination a.extend:hover {
-  border-bottom: 0.15em solid #fff;
-}
-html[data-theme="dark"] div.page nav.pagination a.page-number.current,
-html[data-theme="dark"] div.page nav.pagination a.extend.current {
-  color: #fff;
-  border-bottom: 0.15em solid #fff;
-  border-top: 0.07em solid #fff;
-}
-html[data-theme="dark"] div.page nav.pagination span.space {
-  color: #ddd;
 }

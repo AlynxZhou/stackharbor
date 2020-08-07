@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="dark" lang="zh-Hans">
+<html data-theme="light" lang="zh-Hans">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -243,7 +243,7 @@
         
         
         <span class="post-date meta-block">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateUpdated" datetime="2020-08-06T10:23:00.000Z">2020-08-06 Thu 18:23:00 CST</time></span>
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateUpdated" datetime="2020-08-07T02:50:00.000Z">2020-08-07 Fri 10:50:00 CST</time></span>
         </span>
         
         
@@ -281,6 +281,7 @@
 <p>不过还要注意继承关系，这样写的话有些属性并不是继承外面的，而是在这个选择器里面就近继承。比如假如修改了 <code>html[data-theme="dark"] a</code> 的边框，那 <code>html[data-theme="dark"] a.cls</code> 的边框会优先继承这个，而不是 <code>a.cls</code>。我知道有些人可能会笑我半懂不懂了，但是我确实遇到了这个问题，并且思考了一下找到了原因。</p>
 <p>还有一个比较尴尬的事情，我给一些元素设置了 <code>transition</code> 用于 <code>:hover</code> 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 <code>color</code> 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 <code>transition</code>。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？</p>
 <p>不管了，反正我用 Firefox，Firefox 效果好得很，完全不掉帧。</p>
+<p>更新（2020-08-07 10:50:00）：我怀疑 Chrome 想做新时代的 IE，其实并不是性能问题导致掉帧，WebKit 对于继承来的属性的 transition 存在问题，会导致不是同时变换而是有延迟的变换，效果糟透了，<a href="https://stackoverflow.com/a/36779404" target="_blank" rel="noreferrer noopener">StackOverflow 上也有人遇到这个问题</a>，看起来是 bug 并且不打算解决，而 Firefox 就没有这个问题。使用 CSS 变量在 WebKit 下效果会好一点，不过也不能给所有变色的元素加 transition，还是会卡，只能给 <code>&lt;body&gt;</code> 加一个，因为我的链接有 <code>:hover</code> 时变色的 transition，都是 color 就没办法在那时 transition 而暗色模式时候不 transition。总之由于 WebKit 的存在导致没法让全部元素同步 transition，只能近似。两权相害取其轻，还是让 IE 用户只能用亮色吧，我最后还是选择了 CSS 变量。</p>
 <h1 id="怎么你这破网站换个页面还要重新点一次？"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F" title="怎么你这破网站换个页面还要重新点一次？"></a>怎么你这破网站换个页面还要重新点一次？</h1>
 <p>一切看起来都十分美好，直到我把一个暗色页面切成亮色然后点了个链接，下一个页面并不会理会我们上一个页面设置了什么主题，又变成了暗色。每个页面点一下切换按钮也太烦人了，我们得来点持久化。</p>
 <p>某个域名想在用户的浏览器里存点是完全可行的，使用 <code>localStorage</code> 就行了，就是简单的键值对。但是这样我们就有了多种可能切换亮暗的动作：<code>localStorage</code> 里面存的选项，网页加载时浏览器媒体查询的结果，用户点了网页上的切换按钮，用户点了系统切换亮暗的设置。这些的判断顺序要好好处理一下，不然某些就会被忽视掉变成“我点了怎么不动啊！！！”。</p>
@@ -297,7 +298,7 @@
 <p>我躺在床上用手机测试的时候又发现了一个问题。因为网页在生成的时候总有一个初始状态（JS 要等到 document 加载完成才开始处理 DOM，不像那些单页应用），假如我设置成暗色然后切换到别的页面，网页就会以亮色加载然后变成暗色，用户在晚上看起来就像是个闪光弹（伏拉什棒！）。</p>
 <p>其实没什么好的解决办法，因为这是传统 HTML 页面的限制之一，我也不想找有没有什么新的东西能解决这些问题，最后的方案其实相当简单，既然亮色到暗色会让人受不了，我搞成暗色到亮色不就行了。</p>
 <p>于是就是把模板里按钮的初始状态修改一下，渲染的时候出来的是 <code>data-theme="dark"</code>，假如用户选择亮色，加载页面时会有一个暗色到亮色的变化。反正我自己都不在意。</p>
-<p>更新：我后来阅读了一些其它主题的代码，看它们是怎么在不使用单页应用的前提下解决这个问题的，结果方法相当简单，我自己也想得到：不用等到 <code>DOMContentLoaded</code> 事件之后，反正只是修改 <code>&lt;html&gt;</code> 标签，直接在 <code>&lt;script&gt;</code> 标签里面编辑 <code>document.documentElement</code> 是可以的，因为反正加载到 <code>&lt;script&gt;</code> 的时候肯定也已经加载到 <code>&lt;html&gt;</code> 了。所以就把修改这个属性和修改按钮的 DOM 分开了两部分，并且添加了一个 <code>storage</code> 的监听器，这样假如打开了多个页面，一个页面切换其它页面也会跟随切换。</p>
+<p>更新（2020-08-06 18:23:00）：我后来阅读了一些其它主题的代码，看它们是怎么在不使用单页应用的前提下解决这个问题的，结果方法相当简单，我自己也想得到：不用等到 <code>DOMContentLoaded</code> 事件之后，反正只是修改 <code>&lt;html&gt;</code> 标签，直接在 <code>&lt;script&gt;</code> 标签里面编辑 <code>document.documentElement</code> 是可以的，因为反正加载到 <code>&lt;script&gt;</code> 的时候肯定也已经加载到 <code>&lt;html&gt;</code> 了。所以就把修改这个属性和修改按钮的 DOM 分开了两部分，并且添加了一个 <code>storage</code> 的监听器，这样假如打开了多个页面，一个页面切换其它页面也会跟随切换。</p>
 <h1 id="不要过度设计！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81" title="不要过度设计！"></a>不要过度设计！</h1>
 <p>经过这么一大堆折腾（代码行数++++++++），我甚至在想要不要支持每个页面单独设置亮暗初值，反正只要添加一个 front matter 然后在模板里判断一下嘛。不过后来想了想，就算有这么个功能又有什么用？实际意义几乎为零，徒增复杂度，所以还是不要过度设计了。</p>
 <p><em>Alynx Zhou</em></p>
@@ -623,4 +624,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.4.4 at 2020-08-06 Thu 22:02:34 CST. -->
+<!-- Page built by Hikaru v1.4.4 at 2020-08-07 Fri 10:58:31 CST. -->
