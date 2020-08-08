@@ -6,7 +6,7 @@ layout: page
 comment: true
 reward: false
 ---
-<div class="alert-blue">网站竟然已经运行了四年零四个月零四天，cheers！</div>
+<div class="alert-green">网站竟然已经运行了四年零四个月零四天，cheers！</div>
 
 # 个人简介
 
