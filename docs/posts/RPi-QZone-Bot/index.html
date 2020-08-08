@@ -263,7 +263,7 @@
 <p><strong>由于WebQQ的验证码机制更新，QQLib的作者已于2016年8月17日更新源代码，本页也随之更新！请之前使用过的朋友用<code># pip3 uninstall qqlib</code>卸载旧版，再重新安装最新版的QQLib，使用本页最新的Python脚本！</strong></p>
 <hr>
 <p>Hello，最近好久没有更新博客了，因为一直没有发现什么好玩的东西来写（其实就是因为懒）。那么前天终于发现了一个好东西，就是这个<a href="https://github.com/gera2ld/qqlib/" target="_blank" rel="noreferrer noopener">QQLib for Python</a>，可以通过Python在QQ空间发说说的库。</p>
-<a id='more'></a>
+<a id="more"></a>
 
 <p>说到找这个东西的原因嘛……由于一些你懂得的原因，<a href="https://telegram.org/" target="_blank" rel="noreferrer noopener">Telegram</a>被封锁是日益严重啊。我以前写了个非常有用的<a href="https://github.com/Alynx/telebot/" target="_blank" rel="noreferrer noopener">TeleBot</a>跑在树莓派上，无奈身边用Telegram的人太少（<del>无法装X</del>），所以最开始想在树莓派上跑一个微信公众号来玩。然后发现微信的Api要求你指定一个域名，可是我树莓派跑在家里电信是不会白给我一个固定ip的（555……），为了解决这个问题我还特地造了个轮子，用Python自己封装了一个CloudXNS的Api用来定期ddns更新A记录，脚本写好了之后上网搜了一下发现有人说你在自己家里跑httpd被抓到是会被电信查水表的……虽然没有法律明文规定，但是就是这样，嗯，<del>这背后一定有肮脏的PY交易</del>（和谐）。于是微信公众号的计划就这样流产了……正好<a href="http://lgiki.xyz/" target="_blank" rel="noreferrer noopener">L Giki</a>说他和他的朋友实现了一个QQ的聊天机器人，然而他们是PHP党……而且实现方法很复杂，主要是腾讯丧心病狂的加密……还有webQQ协议已经被腾讯阉割的不成样子了。百般无奈之时发现了这个GitHub项目，本着有轮子就不要自己造的原则，我决定写一个定期发说说的程序运行在树莓派上，那就是这样。</p>
 <p>老规矩，这个脚本不是很长，下面贴上来吧，它的名字叫做<code>qclock.py</code>（2016-08-17更新）：</p>
@@ -602,4 +602,4 @@ unit = <span class="hljs-string">"°C"</span>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.0 at 2020-08-07 Fri 18:09:53 CST. -->
+<!-- Page built by Hikaru v1.5.1 at 2020-08-08 Sat 08:56:16 CST. -->

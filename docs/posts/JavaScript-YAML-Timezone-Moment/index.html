@@ -259,7 +259,7 @@
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <p>开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。</p>
-<a id='more'></a>
+<a id="more"></a>
 
 <p>今天想给 Hikaru 添加文章时间显示时区的功能，本来以为只要无脑调用 Moment.js 就好了，但发现其中坑有很多，本来我就很不擅长计算时区转换，难度变得很大，好在后来处理完了，记录一下遇到的坑。</p>
 <p>首先 Moment 是不支持地区解析和时区显示的，需要安装 <code>moment-timezone</code> 这个扩展包才可以处理，文档在<a href="https://momentjs.com/timezone/docs/" target="_blank" rel="noreferrer noopener">这里</a>。</p>
@@ -552,4 +552,4 @@ moment.tz(moment(newd).format(<span class="hljs-string">"YYYY-MM-DD HH:mm:ss"</s
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.0 at 2020-08-07 Fri 18:09:53 CST. -->
+<!-- Page built by Hikaru v1.5.1 at 2020-08-08 Sat 08:56:16 CST. -->

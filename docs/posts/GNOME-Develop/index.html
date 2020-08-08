@@ -261,7 +261,7 @@
       <div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
 
 <p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>
-<a id='more'></a>
+<a id="more"></a>
 
 <p><code>gitlab.gnome.org</code> 这个网站国内访问很慢，而且 jhbuild 使用 git clone 有时候不会遵循 git 的代理设置（指 <code>git config --global http.proxy 'socks5://127.0.0.1:1080' &amp;&amp; git config --global https.proxy 'socks5://127.0.0.1:1080'</code>），经常不好用，我家里的网又不太好。我改 GNOME Shell 代码只用了一小时，但下载和编译环境来测试用了两天一夜。</p>
 <p>我调试的是 GNOME Shell，首先按照 <a href="https://wiki.gnome.org/action/show/Projects/Jhbuild/Introduction?action=show&amp;redirect=Newcomers%2FBuildSystemComponent%2FJhbuild" target="_blank" rel="noreferrer noopener">说明页面</a> 安装 JHBuild，将安装到的 <code>~/.local/bin</code> 加入 PATH，然后建立 <code>~/jhbuild</code> 目录，运行 <code>jhbuild build gnome-shell</code> 会自动下载编译所有需要的依赖（大概 80 个）。</p>
@@ -549,4 +549,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.0 at 2020-08-07 Fri 18:09:53 CST. -->
+<!-- Page built by Hikaru v1.5.1 at 2020-08-08 Sat 08:56:16 CST. -->

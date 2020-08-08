@@ -259,7 +259,7 @@
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <p>我早就想把 cheerio 从 Hikaru 的依赖里移出去了，倒不是我对他的功能有什么不满，但是一年不更新 NPM 上的包也太恶心了吧！</p>
-<a id='more'></a>
+<a id="more"></a>
 <p>我的生成器使用 cheerio 的地方主要有两个，一是给标题生成喵点并依次生成 TOC，二是检查文章里相对路径的图片和链接引用并改成绝对路径，否则如果截取之后放在首页的摘要包含图片的话，会因为当前页面的地址变化而不工作。后者也是我自己编写生成器的原因之一，就是因为像 Hexo 或者 Hugo 这种已有的生成器内部并没有考虑，只能通过插件解决，我在写 Hexo 主题时嵌入了一个使用正则表达式的脚本，但相比之下我觉得还是一个能理解 HTML 的库更加可靠。所以后来我选了 cheerio 来做解析和修改以实现这些功能。</p>
 <p>但是 cheerio 有一个 <a href="https://github.com/cheeriojs/cheerio/issues/1198" target="_blank" rel="noreferrer noopener">很古怪的 bug</a>，存在于它目前在 NPM 上最新的版本 <code>1.0.0-rc3</code> 上。假如你使用 cheerio 解析并编辑包含中文的 HTML 的话，导出字符串时所有的中文都被编码成了 HTML 实体，导致进行下一步处理比如用 <code>substring</code> 截断的话，字符串长度变化了，而且可能会在文字中间截断。假如你使用 <code>decodeEntities: false</code> 的话，原本文档里的 <code>&amp;lt;</code> 一类的字符反而会被 cheerio 导出成 <code>&lt;</code>，变成一团乱麻。</p>
 <p>这个 bug 非常古怪并且我花了一段时间来研究它，上一个版本 <code>0.22.0</code> 使用 <code>decodeEntities: false</code> 是没有这个问题的。最后发现原因是 cheerio 在 <code>1.0.0-rc1</code> 开始引入 parse5 代替原本的 htmlparser2 作为默认的 HTML 解析器，而 parse5 在解析时并不会使用 <code>decodeEntities</code> 这个参数，比如你输入 <code>&amp;lt;</code>，parse5 解析时会在节点里存储原本的值 <code>&lt;</code>，但 cheerio 在序列化的时候还是会依赖这个参数进行编码，所以假如传递 <code>false</code> 进去，cheerio 就不会主动进行 encode，导致最后出来的是 <code>&lt;</code>。而 htmlparser2 会按照这个参数选择解不解码，所以也不会发生这种错误。</p>
@@ -536,4 +536,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.0 at 2020-08-07 Fri 18:09:53 CST. -->
+<!-- Page built by Hikaru v1.5.1 at 2020-08-08 Sat 08:56:16 CST. -->
