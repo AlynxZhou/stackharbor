@@ -123,9 +123,9 @@
           localStorage.setItem("theme", theme);
         });
         elementsEach(
-          document.querySelectorAll(".post pre code figure.highlight"),
+          document.querySelectorAll(".post figure.code-block"),
           function (e, i) {
-            var lang = e.parentNode.className;
+            var lang = e.getAttribute("data-lang");
             e.insertAdjacentElement("beforebegin", createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
@@ -267,7 +267,127 @@
 
 <p>说到找这个东西的原因嘛……由于一些你懂得的原因，<a href="https://telegram.org/" target="_blank" rel="noreferrer noopener">Telegram</a>被封锁是日益严重啊。我以前写了个非常有用的<a href="https://github.com/Alynx/telebot/" target="_blank" rel="noreferrer noopener">TeleBot</a>跑在树莓派上，无奈身边用Telegram的人太少（<del>无法装X</del>），所以最开始想在树莓派上跑一个微信公众号来玩。然后发现微信的Api要求你指定一个域名，可是我树莓派跑在家里电信是不会白给我一个固定ip的（555……），为了解决这个问题我还特地造了个轮子，用Python自己封装了一个CloudXNS的Api用来定期ddns更新A记录，脚本写好了之后上网搜了一下发现有人说你在自己家里跑httpd被抓到是会被电信查水表的……虽然没有法律明文规定，但是就是这样，嗯，<del>这背后一定有肮脏的PY交易</del>（和谐）。于是微信公众号的计划就这样流产了……正好<a href="http://lgiki.xyz/" target="_blank" rel="noreferrer noopener">L Giki</a>说他和他的朋友实现了一个QQ的聊天机器人，然而他们是PHP党……而且实现方法很复杂，主要是腾讯丧心病狂的加密……还有webQQ协议已经被腾讯阉割的不成样子了。百般无奈之时发现了这个GitHub项目，本着有轮子就不要自己造的原则，我决定写一个定期发说说的程序运行在树莓派上，那就是这样。</p>
 <p>老规矩，这个脚本不是很长，下面贴上来吧，它的名字叫做<code>qclock.py</code>（2016-08-17更新）：</p>
-<pre><code class="Python"><figure class="highlight hljs python"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span></pre><pre class="code"><code><span class="hljs-comment">#!/usr/bin/env python3</span>
+<figure data-raw="#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+
+### Filename: qclock.py
+## Created by Alynx Zhou
+# alynxzhou@gmail.com, http://alynx.xyz/
+
+import os
+import time
+import qqlib
+from qqlib import qzone
+
+QQ_NUM = 1234567890
+QQ_PASSWD = &quot;MyPassWord.&quot;
+
+qz = qzone.QZone(QQ_NUM, QQ_PASSWD)
+
+try:
+    qz.login()
+except qqlib.NeedVerifyCode as nvc:
+    # Get a verify code.
+    verifier = nvc.verifier
+    with open(&quot;verify.jpg&quot;, &quot;wb&quot;) as verify_jpg:
+        verify_jpg.write(verifier.image)
+    print(&quot;Saved verify photo to verify.jpg, please open it by yourself.&quot;)
+    vcode = input(&quot;Enter verify code here: &quot;)
+    try:
+        # Test verify code.
+        kw = verifier.verify(vcode)
+    except qqlib.VerifyCodeError as vce:
+        os.remove(&quot;verify.jpg&quot;)
+        raise vce(&quot;Wrong verify code!&quot;)
+    else:
+        # Finish login.
+        qz.login()
+        os.remove(&quot;verify.jpg&quot;)
+
+print(&quot;Login finished.&quot;)
+
+unit = &quot;°C&quot;
+
+def get_temp():
+    # Get internal CPU temperature.
+    with open(&quot;/sys/class/thermal/thermal_zone0/temp&quot;) as temp_open:
+        temp = float(temp_open.read())/1000
+    return temp
+
+# Loop to get time and feed to qzone.
+try:
+    while True:
+        tm = time.localtime()
+        if tm.tm_min == 0:
+            qz.feed(&quot;树莓派自动报时：\n现在是%d年%d月%d日 %d时整。\nCPU温度为%.2f%s。&quot;%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, get_temp(), unit))
+            print(&quot;Feeded at %d-%.2d-%.d %.2d:%.2d.&quot;%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
+        elif tm.tm_min == 30:
+            qz.feed(&quot;树莓派自动报时：\n现在是%d年%d月%d日 %d时%d分。\nCPU温度为%.2f%s。&quot;%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, get_temp(), unit))
+            print(&quot;Feeded at %d-%.2d-%.d %.2d:%.2d.&quot;%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
+        # Use 60 to keep only one feed in the minute.
+        time.sleep(60)
+except KeyboardInterrupt:
+    exit()" data-lang="python" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+<span class="line">20</span>
+<span class="line">21</span>
+<span class="line">22</span>
+<span class="line">23</span>
+<span class="line">24</span>
+<span class="line">25</span>
+<span class="line">26</span>
+<span class="line">27</span>
+<span class="line">28</span>
+<span class="line">29</span>
+<span class="line">30</span>
+<span class="line">31</span>
+<span class="line">32</span>
+<span class="line">33</span>
+<span class="line">34</span>
+<span class="line">35</span>
+<span class="line">36</span>
+<span class="line">37</span>
+<span class="line">38</span>
+<span class="line">39</span>
+<span class="line">40</span>
+<span class="line">41</span>
+<span class="line">42</span>
+<span class="line">43</span>
+<span class="line">44</span>
+<span class="line">45</span>
+<span class="line">46</span>
+<span class="line">47</span>
+<span class="line">48</span>
+<span class="line">49</span>
+<span class="line">50</span>
+<span class="line">51</span>
+<span class="line">52</span>
+<span class="line">53</span>
+<span class="line">54</span>
+<span class="line">55</span>
+<span class="line">56</span>
+<span class="line">57</span>
+<span class="line">58</span>
+<span class="line">59</span>
+<span class="line">60</span>
+<span class="line">61</span></pre><pre class="code python"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 
 <span class="hljs-comment">### Filename: qclock.py</span>
@@ -327,13 +447,13 @@ unit = <span class="hljs-string">"°C"</span>
         <span class="hljs-comment"># Use 60 to keep only one feed in the minute.</span>
         time.sleep(<span class="hljs-number">60</span>)
 <span class="hljs-keyword">except</span> KeyboardInterrupt:
-    exit()</code></pre></figure></code></pre>
+    exit()</pre></figure>
 <p>当然，下载链接在<a href="/posts/RPi-QZone-Bot/qclock.py">这里</a>（2016-08-17更新）。</p>
 <p>使用的时候先把<code>QQ_NUM</code>的值修改为你打算用来<del>装X</del>发说说的QQ号码，<code>QQ_PASSWD</code>的值则是你QQ的密码咯。这里建议各位不要使用自己用的QQ号做实验，而是另申请QQ号来作报时～不然谁知道腾讯哪天会不会找个什么理由关闭webQQ再冻结你的QQ号呢～</p>
 <p>然后就是一句话的……不对！你还需要先安装QQLib啊，就像下面这样：</p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code><span class="hljs-comment"># pip3 install git+https://github.com/gera2ld/qqlib.git</span></code></pre></figure></code></pre>
+<figure data-raw="# pip3 install git+https://github.com/gera2ld/qqlib.git" data-lang="bash" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span></pre><pre class="code bash"><span class="hljs-comment"># pip3 install git+https://github.com/gera2ld/qqlib.git</span></pre></figure>
 <p>然后一句话运行起来：</p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code>$ python3 ./qclock.py</code></pre></figure></code></pre>
+<figure data-raw="$ python3 ./qclock.py" data-lang="bash" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span></pre><pre class="code bash">$ python3 ./qclock.py</pre></figure>
 <p>保持它不要关闭，最好的办法还是<a href="https://www.gnu.org/software/screen/" target="_blank" rel="noreferrer noopener">GNU Screen</a>啊～</p>
 <p>每到整点和半点你的树莓派就会自动发一条说说报时并附上当前的CPU温度～如果你想做更多的话完全可以自己扩展我这个脚本。记住那个<code>time.sleep(60)</code>的60不是随便能改的，一分钟一次的循环不会特别耗资源，如果你改小了间隔，可能会导致一分钟内它走了两次循环，发了两条说说。时间的精确度保持在分钟级别。</p>
 <p>然后，我用来测试的QQ号是<code>3530795351</code>，这是它的<a href="http://user.qzone.qq.com/3530795351" target="_blank" rel="noreferrer noopener">QQ空间</a>，欢迎围观效果。</p>
@@ -602,4 +722,4 @@ unit = <span class="hljs-string">"°C"</span>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.1 at 2020-08-09 Sun 12:17:19 CST. -->
+<!-- Page built by Hikaru v1.5.3 at 2020-08-09 Sun 21:21:14 CST. -->

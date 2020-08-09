@@ -123,9 +123,9 @@
           localStorage.setItem("theme", theme);
         });
         elementsEach(
-          document.querySelectorAll(".post pre code figure.highlight"),
+          document.querySelectorAll(".post figure.code-block"),
           function (e, i) {
-            var lang = e.parentNode.className;
+            var lang = e.getAttribute("data-lang");
             e.insertAdjacentElement("beforebegin", createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
@@ -253,13 +253,25 @@
     </header>
     <main class="post-main" id="scrollspy-container">
       <h1 id="UndefinedScriptWorks"><a class="header-link" href="/Undefined-Script-Works/#UndefinedScriptWorks" title="UndefinedScriptWorks"></a>Undefined Script Works!</h1>
-<pre><code class="plain"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span></pre><pre class="code"><code>「I am the shell of my system.」
+<figure data-raw="「I am the shell of my system.」
 「Command is my body, and argument is my blood.」
 「I have created over a thousand lines of logs.」
 「Unaware of less, nor aware of more.」
 「Withstood error to create many scripts, waiting for prompt's arrival.」
 「I have no mouse. This is the only bug.」
-「My whole life was `Undefined Script Works`!」</code></pre></figure></code></pre>
+「My whole life was `Undefined Script Works`!」" data-lang="plain" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span></pre><pre class="code">「I am the shell of my system.」
+「Command is my body, and argument is my blood.」
+「I have created over a thousand lines of logs.」
+「Unaware of less, nor aware of more.」
+「Withstood error to create many scripts, waiting for prompt's arrival.」
+「I have no mouse. This is the only bug.」
+「My whole life was `Undefined Script Works`!」</pre></figure>
 <h1 id="一些个人项目"><a class="header-link" href="/Undefined-Script-Works/#%E4%B8%80%E4%BA%9B%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE" title="一些个人项目"></a>一些个人项目</h1>
 <p>大概都是些我觉得比较有意思的小玩意。</p>
 <h2 id="Hikaru"><a class="header-link" href="/Undefined-Script-Works/#Hikaru" title="Hikaru"></a>Hikaru</h2>
@@ -604,4 +616,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.1 at 2020-08-09 Sun 12:17:19 CST. -->
+<!-- Page built by Hikaru v1.5.3 at 2020-08-09 Sun 21:21:14 CST. -->

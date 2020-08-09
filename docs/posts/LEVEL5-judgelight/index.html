@@ -123,9 +123,9 @@
           localStorage.setItem("theme", theme);
         });
         elementsEach(
-          document.querySelectorAll(".post pre code figure.highlight"),
+          document.querySelectorAll(".post figure.code-block"),
           function (e, i) {
-            var lang = e.parentNode.className;
+            var lang = e.getAttribute("data-lang");
             e.insertAdjacentElement("beforebegin", createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
@@ -261,7 +261,115 @@
       <p>半音阶口琴，<strong>LEVEL5 -judgelight-</strong> 数字谱，喵自整理版，<a href="/posts/LEVEL5-judgelight/LEVEL5-judgelight.txt">txt下载点击这里</a>，<a href="/posts/LEVEL5-judgelight/Music-Score/">读谱方式点击这里</a>。</p>
 <a id="more"></a>
 
-<pre><code><figure class="highlight hljs angelscript"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span></pre><pre class="code"><code>;;LEVEL5 -judgelight- 半音阶口琴
+<figure data-raw=";;LEVEL5 -judgelight- 半音阶口琴
+
+7#67[#1#2 #27#6#5#4#2 #4#2#4#5#2]
+[#23#4#57 #6#5#4#1 #23#2]
+7#67[#1#2 #27#6#5#4#2 5#5#6]{#1#1#2}[7]
+[7#6#5 7] {#1}[7#6#4 #67#5]
+
+[#2#2]7 7[#1#2#1#4#1] 77#5 #5#67[#1#1#2#2]
+[3#2#1] 7[#1#2]#6 [#1]7#67#5 #5#6 #67#67#5
+[#2#2]#5 [#2#23 #2#2]#6#6 [#4#4#4 #43#2] 77#1#2
+#5#67 7 #5#67 7[#1]7 [#1#1]7 [#1#13#2]
+
+7#67[#1#2 #27#6#5#4#2 #4#2#4#5#2]
+[#23#4#57 #6#5#4#1 #23#2]
+7#67[#1#2 #27#6#5#4#2 5#5#6]{#1#1#2}[7]
+[7#6#5 7] {#1}[7#6#4 #67#5]
+
+[1]7[123] [3]{1}[7653 53563]
+[3456]{1} [7652 343]
+[1]7[123] [3]{1}[7653 #567]{2231}
+{1}[76] {1} {21}[75 7]{1}[6]
+
+[#2#2]7 7[#1#2#1#4#1] 77#5 #5#67[#1#1#2#2]
+[3#2#1] 7[#1#2]#6 [#1]7#67#5 #5#6 #67#67#5
+[#2#2]#5 [#2#23 #2#2]#6#6 [#4#4#4 #43#2] 77#1#2
+#5#67 7 #5#67 7[#1]7 [#1#1]7 [#1#13#2]
+
+7#67[#1#2 #27#6#5#4#2 #4#2#4#5#2]
+[#23#4#57 #6#5#4#1 #23#2]
+7#67[#1#2 #27#6#5#4#2 5#5#6]{#1#1#2}[7]
+[7#6#5 7] {#1}[7#6#4 #67#5]
+
+[1]7[123] [3]{1}[7653 53563]
+[3456]{1} [7652 343]
+[1]7[123] [3]{1}[7653 #567]{2231}
+{1}[76] {1} {21}[75 7]{1}[6]
+{1}[76] {3} {21}[75 7]{1}[6]
+
+;; 下面是电吉他solo，再下面
+
+7#67[#1#2 #27#6#5#4#2 #4#2#4#5#2]
+[#23#4#57 #6#5#4#1 #23#2]
+7#67[#1#2 #27#6#5#4#2 5#5#6]{#1#1#2}[7]
+[7#6#5 7] {#1}[7#6#4 #67#5]
+
+7#67[#1#2 #27#6#5#4#2 #4#2#4#5#2]
+[#23#4#57 #6#5#4#1 #23#2]
+7#67[#1#2 #27#6#5#4#2 5#5#6]{#1#1#2}[7]
+[7#6#5 7] {#1}[7#6#4 #67#5]
+
+[1]7[123] [3]{1}[7653 53563]
+[3456]{1} [7652 343]
+[1]7[123] [3]{1}[7653 #567]{2231}
+{1}[76] {1} {21}[75 7]{1}[6]
+{1}[76] {3} {21}[75 7]{1}[6]" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span>
+<span class="line">12</span>
+<span class="line">13</span>
+<span class="line">14</span>
+<span class="line">15</span>
+<span class="line">16</span>
+<span class="line">17</span>
+<span class="line">18</span>
+<span class="line">19</span>
+<span class="line">20</span>
+<span class="line">21</span>
+<span class="line">22</span>
+<span class="line">23</span>
+<span class="line">24</span>
+<span class="line">25</span>
+<span class="line">26</span>
+<span class="line">27</span>
+<span class="line">28</span>
+<span class="line">29</span>
+<span class="line">30</span>
+<span class="line">31</span>
+<span class="line">32</span>
+<span class="line">33</span>
+<span class="line">34</span>
+<span class="line">35</span>
+<span class="line">36</span>
+<span class="line">37</span>
+<span class="line">38</span>
+<span class="line">39</span>
+<span class="line">40</span>
+<span class="line">41</span>
+<span class="line">42</span>
+<span class="line">43</span>
+<span class="line">44</span>
+<span class="line">45</span>
+<span class="line">46</span>
+<span class="line">47</span>
+<span class="line">48</span>
+<span class="line">49</span>
+<span class="line">50</span>
+<span class="line">51</span>
+<span class="line">52</span>
+<span class="line">53</span>
+<span class="line">54</span>
+<span class="line">55</span></pre><pre class="code angelscript">;;LEVEL5 -judgelight- 半音阶口琴
 
 <span class="hljs-number">7</span>#<span class="hljs-number">67</span>[#<span class="hljs-number">1</span>#<span class="hljs-number">2</span> #<span class="hljs-number">27</span>#<span class="hljs-number">6</span>#<span class="hljs-number">5</span>#<span class="hljs-number">4</span>#<span class="hljs-number">2</span> #<span class="hljs-number">4</span>#<span class="hljs-number">2</span>#<span class="hljs-number">4</span>#<span class="hljs-number">5</span>#<span class="hljs-number">2</span>]
 [#<span class="hljs-number">23</span>#<span class="hljs-number">4</span>#<span class="hljs-number">57</span> #<span class="hljs-number">6</span>#<span class="hljs-number">5</span>#<span class="hljs-number">4</span>#<span class="hljs-number">1</span> #<span class="hljs-number">23</span>#<span class="hljs-number">2</span>]
@@ -315,7 +423,7 @@
 [<span class="hljs-number">3456</span>]{<span class="hljs-number">1</span>} [<span class="hljs-number">7652</span> <span class="hljs-number">343</span>]
 [<span class="hljs-number">1</span>]<span class="hljs-number">7</span>[<span class="hljs-number">123</span>] [<span class="hljs-number">3</span>]{<span class="hljs-number">1</span>}[<span class="hljs-number">7653</span> #<span class="hljs-number">567</span>]{<span class="hljs-number">2231</span>}
 {<span class="hljs-number">1</span>}[<span class="hljs-number">76</span>] {<span class="hljs-number">1</span>} {<span class="hljs-number">21</span>}[<span class="hljs-number">75</span> <span class="hljs-number">7</span>]{<span class="hljs-number">1</span>}[<span class="hljs-number">6</span>]
-{<span class="hljs-number">1</span>}[<span class="hljs-number">76</span>] {<span class="hljs-number">3</span>} {<span class="hljs-number">21</span>}[<span class="hljs-number">75</span> <span class="hljs-number">7</span>]{<span class="hljs-number">1</span>}[<span class="hljs-number">6</span>]</code></pre></figure></code></pre>
+{<span class="hljs-number">1</span>}[<span class="hljs-number">76</span>] {<span class="hljs-number">3</span>} {<span class="hljs-number">21</span>}[<span class="hljs-number">75</span> <span class="hljs-number">7</span>]{<span class="hljs-number">1</span>}[<span class="hljs-number">6</span>]</pre></figure>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
@@ -580,4 +688,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.1 at 2020-08-09 Sun 12:17:19 CST. -->
+<!-- Page built by Hikaru v1.5.3 at 2020-08-09 Sun 21:21:14 CST. -->

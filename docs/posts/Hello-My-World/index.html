@@ -123,9 +123,9 @@
           localStorage.setItem("theme", theme);
         });
         elementsEach(
-          document.querySelectorAll(".post pre code figure.highlight"),
+          document.querySelectorAll(".post figure.code-block"),
           function (e, i) {
-            var lang = e.parentNode.className;
+            var lang = e.getAttribute("data-lang");
             e.insertAdjacentElement("beforebegin", createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
@@ -261,16 +261,30 @@
       <p>So， <em>喵's StackHarbor</em> 就算是正式开站了，当然在部署过程中有很多有趣的事情值得我专门写一篇日志来记录一下，不过在Coder的世界里面"Every thing is based on Hello World"，所以还是以后再说那个。   </p>
 <a id="more"></a>
 
-<pre><code class="c"><figure class="highlight hljs c"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span></pre><pre class="code"><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<figure data-raw="#include <stdio.h>
+int main(void) {
+    printf(&quot;Hello World!\n&quot;);
+    return 0;
+}" data-lang="c" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span></pre><pre class="code c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello World!\n"</span>);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}</code></pre></figure></code></pre>
+}</pre></figure>
 <p>说起建网站的想法还要追溯到中考刚刚结束的时候，好朋友 <em>Hackghost</em> 跟我说他要建立一个自己的网站用来写博客。当然当时的我什么都不知道，不过好歹或多或少参与了他网站的建设。再后来自己开始用Linux，对于建站自然也是略知一二。不过对于一个高中生而言租用域名和VPS的钱也不是很轻易就能负担的起的。直到今年的愚人节那天Google到GitHub Page服务可以用来托管静态网站，于是抑制不住的在GoDaddy上租用了一年期的 <em>sxshax.xyz</em> 这个域名（现在换成了三年期的alynx.xyz），折腾了一天把这个小站打造成了还比较满意的样子。   </p>
-<pre><code class="python"><figure class="highlight hljs python"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span></pre><pre class="code"><code><span class="hljs-comment">#!/usr/bin/env python3</span>
+<figure data-raw="#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+
+print(&quot;Hello World!&quot;)" data-lang="python" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span></pre><pre class="code python"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 
-print(<span class="hljs-string">"Hello World!"</span>)</code></pre></figure></code></pre>
+print(<span class="hljs-string">"Hello World!"</span>)</pre></figure>
 <p>但是就算你读到这里，朋友，你一定还是一直有一个疑问：“这个网站究竟是用来做什么的呢？”   </p>
 <p>简而言之，<strong>这是一个名叫 <em>Alynx Zhou</em> 的人利用 <em>alynx.xyz</em> 这个域名及hexo和GitHub Page还有Spacemacs、Gentoo GNU/Linux建立的一个名叫 <em>喵's StackHarbor</em> 的网站，他在这里用他还很生疏的Markdown，记录下他生活中每天的迷茫与感慨、愉悦与忧伤。</strong>   </p>
 <p>我知道你要问：“为什么要叫做这么一个拗口的名字呢？”   </p>
@@ -548,4 +562,4 @@ print(<span class="hljs-string">"Hello World!"</span>)</code></pre></figure></co
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.1 at 2020-08-09 Sun 12:17:19 CST. -->
+<!-- Page built by Hikaru v1.5.3 at 2020-08-09 Sun 21:21:14 CST. -->

@@ -123,9 +123,9 @@
           localStorage.setItem("theme", theme);
         });
         elementsEach(
-          document.querySelectorAll(".post pre code figure.highlight"),
+          document.querySelectorAll(".post figure.code-block"),
           function (e, i) {
-            var lang = e.parentNode.className;
+            var lang = e.getAttribute("data-lang");
             e.insertAdjacentElement("beforebegin", createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
@@ -307,32 +307,70 @@
 <p>至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，<del>但我手头只有一块</del> 决定的时候手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份）。按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。</p>
 <p><del>然后我在某东买了一块东芝 2T 64M 7200 转的机械硬盘，到手之后打算加入 btrfs 里面，建立 RAID1，btrfs 的好处就在于这个可以先弄一块之后渐进修改，而且看起来目前没什么大问题的样子（按我的理解并行读取的性能问题大概是用来并行加速的，但是实际上 RAID1 不并行读取也可以读出数据吧）。</del> 虽然我本来也可以把数据移出来然后建 mdadm，但是不排除以后再加盘做 RAID 10，似乎 mdadm 没法直接转换的样子？</p>
 <p>买回来硬盘之后想想反正两块都没啥数据（搬出去了），索性直接格式化成 btrfs，不然也可以在已有一块 btrfs 设备之后 add 然后 balance，就可以修改策为 RAID1，格式化命令很简单就这样：</p>
-<pre><code class="plain"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code># mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV</code></pre></figure></code></pre>
+<figure data-raw="# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV" data-lang="plain" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span></pre><pre class="code"># mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV</pre></figure>
 <p><code>-m raid1</code> 是指 metadata 要做 RAID1 备份，<code>-d raid1</code> 是指 data 也要 RAID1 备份，然后需要跟两个设备，推荐是一样大的，挂载时候就随便挂一个设备就行了，btrfs 会自己执行 RAID1 策略的。</p>
 <h2 id="启动配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE" title="启动配置"></a>启动配置</h2>
 <p><code>/etc/mkinitcpio.conf</code> 里需要给 HOOKS 添加 lvm2，然后运行 <code>mkinitcpio -p linux</code>，这样生成的 initramfs 才能支持 LVM。我还给 MODULES 添加了和 intel 显卡有关的部分（虽然可能用不到了），具体修改的位置如下：</p>
-<pre><code class="bash"><figure class="highlight hljs bash"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span></pre><pre class="code"><code>MODULES=(intel_agp i915)
-HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)</code></pre></figure></code></pre>
+<figure data-raw="MODULES=(intel_agp i915)
+HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)" data-lang="bash" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span></pre><pre class="code bash">MODULES=(intel_agp i915)
+HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)</pre></figure>
 <p>安装 bootloader 的时候我直接用了 systemd-boot，我在自己笔记本上也用的这个，功能够用了就没考虑安装 GRUB，编写 entry 时候内核参数里的 root 可以写 <code>/dev/vg0/rootlv</code> 也可以写 <code>/dev/mapper/vg0-rootlv</code>（这里中文 wiki 和英文 wiki 分别是这俩，亲测都可以），比如我的就是下面这样：</p>
-<pre><code class="plain"><figure class="highlight hljs"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span></pre><pre class="code"><code>title    Arch Linux
+<figure data-raw="title    Arch Linux
 linux    /vmlinuz-linux
 initrd    /intel-ucode.img
 initrd    /initramfs-linux.img
-options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></pre>
+options    root=/dev/vg0/rootlv rw add_efi_memmap" data-lang="plain" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span></pre><pre class="code">title    Arch Linux
+linux    /vmlinuz-linux
+initrd    /intel-ucode.img
+initrd    /initramfs-linux.img
+options    root=/dev/vg0/rootlv rw add_efi_memmap</pre></figure>
 <p>最近 systemd-boot 添加了什么校验设置，在蜗牛上会报错，直接 chroot 进去安装根本装不上，临时解决方案是退出 chroot，然后用 Archiso 里的 <code>bootctl</code> 安装到 <code>/mnt/boot</code>，虽然有点 dirty，但是能用？不过还是会报个错，但是启动需要的文件已经安装上了，不管它也能用，只不过每次重启还是会说校验失败，目测是个 bug。</p>
 <h2 id="网络配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE" title="网络配置"></a>网络配置</h2>
 <p>然后由于 NAS 的网络不会经常变化，<del>所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager</del> 我装桌面了所以还是用了 NetworkManager！不过这部分也留着好了。直接创建 <code>/etc/systemd/network/wired.network</code>，写入如下内容：</p>
-<pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span></pre><pre class="code"><code><span class="hljs-section">[Match]</span>
+<figure data-raw="[Match]
+Name=en*
+
+[Network]
+DHCP=ipv4" data-lang="ini" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span></pre><pre class="code ini"><span class="hljs-section">[Match]</span>
 <span class="hljs-attr">Name</span>=en*
 
 <span class="hljs-section">[Network]</span>
-<span class="hljs-attr">DHCP</span>=ipv4</code></pre></figure></code></pre>
+<span class="hljs-attr">DHCP</span>=ipv4</pre></figure>
 <p>意思是对于所有以 <code>en</code> 开头的网卡使用 DHCPv4，然后 <code>systemctl enable --now systemd-networkd systemd-resolved</code> 就可以了。</p>
 <p>NetworkManager 就很简单，直接安装然后 <code>systemctl enable NetworkManager --now</code> 应该就行了！</p>
 <h2 id="Samba配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE" title="Samba配置"></a>Samba 配置</h2>
 <p>btrfs 的子卷看起来很像普通目录，但是又可以分别直接挂载，不需要先挂载设备然后再用 <code>mount --rbind</code>。于是建了 <code>/data</code> 和 <code>/data/alynx</code> 两个子卷，<code>/data</code> 就挂载到 <code>/data</code>，<code>/data/alynx</code> 挂载到我家目录下面。</p>
 <p>在 <code>/etc/samba/smb.conf</code> 添加如下配置，就可以分别通过 <code>home</code> 和 <code>data</code> 访问每个用户在 <code>/home</code> 和 <code>/data</code> 下面的同名文件夹了，<code>%u</code> 代表的就是连接的用户名。（当然权限要你自己处理一下。）</p>
-<pre><code class="ini"><figure class="highlight hljs ini"><pre class="gutter"><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span></pre><pre class="code"><code><span class="hljs-section">[home]</span>
+<figure data-raw="[home]
+   comment = Home Directories
+   browseable = yes
+   writeable = yes
+   path = /home/%u
+
+[data]
+   comment = Data Directories
+   browseable = yes
+   writeable = yes
+   path = /data/%u" data-lang="ini" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+<span class="line">2</span>
+<span class="line">3</span>
+<span class="line">4</span>
+<span class="line">5</span>
+<span class="line">6</span>
+<span class="line">7</span>
+<span class="line">8</span>
+<span class="line">9</span>
+<span class="line">10</span>
+<span class="line">11</span></pre><pre class="code ini"><span class="hljs-section">[home]</span>
    <span class="hljs-attr">comment</span> = Home Directories
    <span class="hljs-attr">browseable</span> = <span class="hljs-literal">yes</span>
    <span class="hljs-attr">writeable</span> = <span class="hljs-literal">yes</span>
@@ -342,7 +380,7 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
    <span class="hljs-attr">comment</span> = Data Directories
    <span class="hljs-attr">browseable</span> = <span class="hljs-literal">yes</span>
    <span class="hljs-attr">writeable</span> = <span class="hljs-literal">yes</span>
-   <span class="hljs-attr">path</span> = /data/%u</code></pre></figure></code></pre>
+   <span class="hljs-attr">path</span> = /data/%u</pre></figure>
 <p>其它的配置基本都是正常操作参照 Arch Wiki，<del>我打算以后插新硬盘直接加进 LVM 加给 <code>/home</code>，省得还得操心挂载到哪里</del> 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 <a href="/posts/SnailSpace-as-NAS/WireGuard-Usage/">这篇文章</a> 就可以了，如果只是 SSH 远程控制一下效果还可以。</p>
 <h1 id="效果"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C" title="效果"></a>效果</h1>
 <p>笔记本插了有线之后可以测试千兆对拷，我的路由器还是大一时候买的 WNDR3800，虽然很旧，但四个有线全部都是千兆口（当时价格和配置差不多的极路由 3 只有一个内网千兆好像），<del>samba 拷贝速度轻松达到 110M/s 的满速，甚至比蜗牛的 USB3.0 还快</del> 用了 btrfs 之后似乎速度只有 80M/s 左右了，或者 Windows 和 Linux 下面 Samba 对拷速度显示有区别？110M/s 是我在 Windows 下面测出来的。</p>
@@ -712,4 +750,4 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure></code></
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.1 at 2020-08-09 Sun 12:17:19 CST. -->
+<!-- Page built by Hikaru v1.5.3 at 2020-08-09 Sun 21:21:14 CST. -->
