@@ -625,15 +625,6 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/about/</loc>
-    
-    <lastmod>2020-08-08T06:36:20.000Z</lastmod>
-    
-  </url>
-  
-  
-  
-  <url>
     <loc>https://sh.alynx.one/404.html</loc>
     
     <lastmod>2016-04-04T01:00:00.000Z</lastmod>
@@ -643,18 +634,27 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/blogroll/</loc>
+    <loc>https://sh.alynx.one/channel/</loc>
     
-    <lastmod>2019-02-24T02:30:00.000Z</lastmod>
+    <lastmod>2020-08-05T03:22:00.000Z</lastmod>
     
   </url>
   
   
   
   <url>
-    <loc>https://sh.alynx.one/channel/</loc>
+    <loc>https://sh.alynx.one/about/</loc>
     
-    <lastmod>2020-08-05T03:22:00.000Z</lastmod>
+    <lastmod>2020-08-08T06:36:20.000Z</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/blogroll/</loc>
+    
+    <lastmod>2019-02-24T02:30:00.000Z</lastmod>
     
   </url>
   
@@ -952,13 +952,6 @@
   
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/</loc>
-    
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/</loc>
     
   </url>
   

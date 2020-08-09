@@ -4,8 +4,6 @@ layout: post
 #comment: true
 createdDate: 2019-12-18 16:17:00
 categories:
-  - 计算机
-  - 网络
   - 网站
 tags:
   - 空手套白狼

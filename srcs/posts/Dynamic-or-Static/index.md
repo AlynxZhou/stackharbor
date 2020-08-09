@@ -4,12 +4,9 @@ layout: post
 comment: true
 createdDate: 2016-06-12 16:55:14
 categories:
-    - 计算机
-    - 网络
-    - 网站
+  - 网站
 tags:
-    - Hexo
-    - 选择困难
+  - 选择困难
 ---
 本来hexo静态博客用的好好的，结果在静好的鼓动下又想试试动态站，选择困难又犯了……
 

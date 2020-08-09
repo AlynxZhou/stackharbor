@@ -145,11 +145,7 @@
     </content>
     
     
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%AB%99/" />
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
     
     
     <category term="空手套白狼" label="空手套白狼" scheme="https://sh.alynx.one/tags/%E7%A9%BA%E6%89%8B%E5%A5%97%E7%99%BD%E7%8B%BC/" />

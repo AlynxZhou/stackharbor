@@ -4,8 +4,6 @@ layout: post
 comment: true
 createdDate: 2018-05-02 20:30:48
 categories:
-  - 计算机
-  - 网络
   - 网站
 tags:
   - 网站
