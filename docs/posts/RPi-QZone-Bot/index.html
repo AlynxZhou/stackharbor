@@ -51,14 +51,14 @@
     
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
     
-    
-<link rel="stylesheet" type="text/css" href="/css/page.css">
-<link rel="stylesheet" type="text/css" href="/css/post.css">
-
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
     
     <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
@@ -125,14 +125,14 @@
         elementsEach(
           document.querySelectorAll(".post figure.code-block"),
           function (e, i) {
-            var lang = e.getAttribute("data-lang");
+            var info = e.getAttribute("data-info");
             e.insertAdjacentElement("beforebegin", createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
                   "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
                 "</div>",
                 "<div class=\"titlebar-center\">",
-                  lang.length ? lang.toUpperCase() : "代码",
+                  info != null && info.length ? info.toUpperCase() : "代码",
                 "</div>",
                 "<div class=\"titlebar-right\">",
                   "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
@@ -327,7 +327,7 @@ try:
         # Use 60 to keep only one feed in the minute.
         time.sleep(60)
 except KeyboardInterrupt:
-    exit()" data-lang="python" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+    exit()" data-info="language-Python" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
@@ -387,17 +387,17 @@ except KeyboardInterrupt:
 <span class="line">58</span>
 <span class="line">59</span>
 <span class="line">60</span>
-<span class="line">61</span></pre><pre class="code python"><span class="hljs-comment">#!/usr/bin/env python3</span>
-<span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<span class="line">61</span></pre><pre class="code"><code class="language-vim">#!/usr/bin/env <span class="hljs-keyword">python3</span>
+#-*- codin<span class="hljs-variable">g:</span> utf-<span class="hljs-number">8</span> -*-
 
-<span class="hljs-comment">### Filename: qclock.py</span>
-<span class="hljs-comment">## Created by Alynx Zhou</span>
-<span class="hljs-comment"># alynxzhou@gmail.com, http://alynx.xyz/</span>
+### Filename: qclock.<span class="hljs-keyword">py</span>
+## Created by Alynx Zhou
+# alynxzhou@gmail.<span class="hljs-keyword">com</span>, http://alynx.xyz/
 
-<span class="hljs-keyword">import</span> os
-<span class="hljs-keyword">import</span> time
-<span class="hljs-keyword">import</span> qqlib
-<span class="hljs-keyword">from</span> qqlib <span class="hljs-keyword">import</span> qzone
+import os
+import time
+import qqlib
+from qqlib import qzone
 
 QQ_NUM = <span class="hljs-number">1234567890</span>
 QQ_PASSWD = <span class="hljs-string">"MyPassWord."</span>
@@ -406,54 +406,54 @@ qz = qzone.QZone(QQ_NUM, QQ_PASSWD)
 
 <span class="hljs-keyword">try</span>:
     qz.login()
-<span class="hljs-keyword">except</span> qqlib.NeedVerifyCode <span class="hljs-keyword">as</span> nvc:
-    <span class="hljs-comment"># Get a verify code.</span>
+except qqlib.NeedVerifyCode <span class="hljs-keyword">as</span> nvc:
+    # Get <span class="hljs-keyword">a</span> verify code.
     verifier = nvc.verifier
-    <span class="hljs-keyword">with</span> open(<span class="hljs-string">"verify.jpg"</span>, <span class="hljs-string">"wb"</span>) <span class="hljs-keyword">as</span> verify_jpg:
-        verify_jpg.write(verifier.image)
-    print(<span class="hljs-string">"Saved verify photo to verify.jpg, please open it by yourself."</span>)
-    vcode = input(<span class="hljs-string">"Enter verify code here: "</span>)
+    with <span class="hljs-keyword">open</span>(<span class="hljs-string">"verify.jpg"</span>, <span class="hljs-string">"wb"</span>) <span class="hljs-keyword">as</span> verify_jp<span class="hljs-variable">g:</span>
+        verify_jpg.<span class="hljs-keyword">write</span>(verifier.image)
+    <span class="hljs-keyword">print</span>(<span class="hljs-string">"Saved verify photo to verify.jpg, please open it by yourself."</span>)
+    vcode = <span class="hljs-built_in">input</span>(<span class="hljs-string">"Enter verify code here: "</span>)
     <span class="hljs-keyword">try</span>:
-        <span class="hljs-comment"># Test verify code.</span>
+        # Test verify code.
         kw = verifier.verify(vcode)
-    <span class="hljs-keyword">except</span> qqlib.VerifyCodeError <span class="hljs-keyword">as</span> vce:
-        os.remove(<span class="hljs-string">"verify.jpg"</span>)
-        <span class="hljs-keyword">raise</span> vce(<span class="hljs-string">"Wrong verify code!"</span>)
+    except qqlib.VerifyCodeError <span class="hljs-keyword">as</span> vce:
+        os.<span class="hljs-built_in">remove</span>(<span class="hljs-string">"verify.jpg"</span>)
+        raise vce(<span class="hljs-string">"Wrong verify code!"</span>)
     <span class="hljs-keyword">else</span>:
-        <span class="hljs-comment"># Finish login.</span>
+        # Finish login.
         qz.login()
-        os.remove(<span class="hljs-string">"verify.jpg"</span>)
+        os.<span class="hljs-built_in">remove</span>(<span class="hljs-string">"verify.jpg"</span>)
 
-print(<span class="hljs-string">"Login finished."</span>)
+<span class="hljs-keyword">print</span>(<span class="hljs-string">"Login finished."</span>)
 
 unit = <span class="hljs-string">"°C"</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_temp</span>():</span>
-    <span class="hljs-comment"># Get internal CPU temperature.</span>
-    <span class="hljs-keyword">with</span> open(<span class="hljs-string">"/sys/class/thermal/thermal_zone0/temp"</span>) <span class="hljs-keyword">as</span> temp_open:
-        temp = float(temp_open.read())/<span class="hljs-number">1000</span>
+def get_temp():
+    # Get internal CPU temperature.
+    with <span class="hljs-keyword">open</span>(<span class="hljs-string">"/sys/class/thermal/thermal_zone0/temp"</span>) <span class="hljs-keyword">as</span> temp_open:
+        temp = float(temp_open.<span class="hljs-keyword">read</span>())/<span class="hljs-number">1000</span>
     <span class="hljs-keyword">return</span> temp
 
-<span class="hljs-comment"># Loop to get time and feed to qzone.</span>
+# Loop <span class="hljs-keyword">to</span> <span class="hljs-built_in">get</span> time <span class="hljs-built_in">and</span> feed <span class="hljs-keyword">to</span> qzone.
 <span class="hljs-keyword">try</span>:
-    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
-        tm = time.localtime()
-        <span class="hljs-keyword">if</span> tm.tm_min == <span class="hljs-number">0</span>:
-            qz.feed(<span class="hljs-string">"树莓派自动报时：\n现在是%d年%d月%d日 %d时整。\nCPU温度为%.2f%s。"</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, get_temp(), unit))
-            print(<span class="hljs-string">"Feeded at %d-%.2d-%.d %.2d:%.2d."</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
-        <span class="hljs-keyword">elif</span> tm.tm_min == <span class="hljs-number">30</span>:
-            qz.feed(<span class="hljs-string">"树莓派自动报时：\n现在是%d年%d月%d日 %d时%d分。\nCPU温度为%.2f%s。"</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, get_temp(), unit))
-            print(<span class="hljs-string">"Feeded at %d-%.2d-%.d %.2d:%.2d."</span>%(tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min))
-        <span class="hljs-comment"># Use 60 to keep only one feed in the minute.</span>
-        time.sleep(<span class="hljs-number">60</span>)
-<span class="hljs-keyword">except</span> KeyboardInterrupt:
-    exit()</pre></figure>
+    <span class="hljs-keyword">while</span> True:
+        <span class="hljs-keyword">tm</span> = time.<span class="hljs-built_in">localtime</span>()
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">tm</span>.tm_min == <span class="hljs-number">0</span>:
+            qz.feed(<span class="hljs-string">"树莓派自动报时：\n现在是%d年%d月%d日 %d时整。\nCPU温度为%.2f%s。"</span>%(<span class="hljs-keyword">tm</span>.tm_year, <span class="hljs-keyword">tm</span>.tm_mon, <span class="hljs-keyword">tm</span>.tm_mday, <span class="hljs-keyword">tm</span>.tm_hour, get_temp(), unit))
+            <span class="hljs-keyword">print</span>(<span class="hljs-string">"Feeded at %d-%.2d-%.d %.2d:%.2d."</span>%(<span class="hljs-keyword">tm</span>.tm_year, <span class="hljs-keyword">tm</span>.tm_mon, <span class="hljs-keyword">tm</span>.tm_mday, <span class="hljs-keyword">tm</span>.tm_hour, <span class="hljs-keyword">tm</span>.tm_min))
+        elif <span class="hljs-keyword">tm</span>.tm_min == <span class="hljs-number">30</span>:
+            qz.feed(<span class="hljs-string">"树莓派自动报时：\n现在是%d年%d月%d日 %d时%d分。\nCPU温度为%.2f%s。"</span>%(<span class="hljs-keyword">tm</span>.tm_year, <span class="hljs-keyword">tm</span>.tm_mon, <span class="hljs-keyword">tm</span>.tm_mday, <span class="hljs-keyword">tm</span>.tm_hour, <span class="hljs-keyword">tm</span>.tm_min, get_temp(), unit))
+            <span class="hljs-keyword">print</span>(<span class="hljs-string">"Feeded at %d-%.2d-%.d %.2d:%.2d."</span>%(<span class="hljs-keyword">tm</span>.tm_year, <span class="hljs-keyword">tm</span>.tm_mon, <span class="hljs-keyword">tm</span>.tm_mday, <span class="hljs-keyword">tm</span>.tm_hour, <span class="hljs-keyword">tm</span>.tm_min))
+        # Use <span class="hljs-number">60</span> <span class="hljs-keyword">to</span> keep <span class="hljs-keyword">only</span> one feed in the minute.
+        time.<span class="hljs-keyword">sleep</span>(<span class="hljs-number">60</span>)
+except KeyboardInterrup<span class="hljs-variable">t:</span>
+    <span class="hljs-keyword">exit</span>()</code></pre></figure>
 <p>当然，下载链接在<a href="/posts/RPi-QZone-Bot/qclock.py">这里</a>（2016-08-17更新）。</p>
 <p>使用的时候先把<code>QQ_NUM</code>的值修改为你打算用来<del>装X</del>发说说的QQ号码，<code>QQ_PASSWD</code>的值则是你QQ的密码咯。这里建议各位不要使用自己用的QQ号做实验，而是另申请QQ号来作报时～不然谁知道腾讯哪天会不会找个什么理由关闭webQQ再冻结你的QQ号呢～</p>
 <p>然后就是一句话的……不对！你还需要先安装QQLib啊，就像下面这样：</p>
-<figure data-raw="# pip3 install git+https://github.com/gera2ld/qqlib.git" data-lang="bash" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span></pre><pre class="code bash"><span class="hljs-comment"># pip3 install git+https://github.com/gera2ld/qqlib.git</span></pre></figure>
+<figure data-raw="# pip3 install git+https://github.com/gera2ld/qqlib.git" data-info="language-bash" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code class="language-1c"><span class="hljs-meta"># pip3 install git+https:<span class="hljs-comment">//github.com/gera2ld/qqlib.git</span></span></code></pre></figure>
 <p>然后一句话运行起来：</p>
-<figure data-raw="$ python3 ./qclock.py" data-lang="bash" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span></pre><pre class="code bash">$ python3 ./qclock.py</pre></figure>
+<figure data-raw="$ python3 ./qclock.py" data-info="language-bash" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span></pre><pre class="code"><code class="language-vim">$ <span class="hljs-keyword">python3</span> ./qclock.<span class="hljs-keyword">py</span></code></pre></figure>
 <p>保持它不要关闭，最好的办法还是<a href="https://www.gnu.org/software/screen/" target="_blank" rel="noreferrer noopener">GNU Screen</a>啊～</p>
 <p>每到整点和半点你的树莓派就会自动发一条说说报时并附上当前的CPU温度～如果你想做更多的话完全可以自己扩展我这个脚本。记住那个<code>time.sleep(60)</code>的60不是随便能改的，一分钟一次的循环不会特别耗资源，如果你改小了间隔，可能会导致一分钟内它走了两次循环，发了两条说说。时间的精确度保持在分钟级别。</p>
 <p>然后，我用来测试的QQ号是<code>3530795351</code>，这是它的<a href="http://user.qzone.qq.com/3530795351" target="_blank" rel="noreferrer noopener">QQ空间</a>，欢迎围观效果。</p>
@@ -722,4 +722,4 @@ unit = <span class="hljs-string">"°C"</span>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.3 at 2020-08-09 Sun 21:21:14 CST. -->
+<!-- Page built by Hikaru v1.5.5 at 2020-08-10 Mon 11:14:21 CST. -->

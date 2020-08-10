@@ -51,14 +51,14 @@
     
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
     
-    
-<link rel="stylesheet" type="text/css" href="/css/page.css">
-<link rel="stylesheet" type="text/css" href="/css/post.css">
-
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
     
     <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
@@ -125,14 +125,14 @@
         elementsEach(
           document.querySelectorAll(".post figure.code-block"),
           function (e, i) {
-            var lang = e.getAttribute("data-lang");
+            var info = e.getAttribute("data-info");
             e.insertAdjacentElement("beforebegin", createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
                   "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
                 "</div>",
                 "<div class=\"titlebar-center\">",
-                  lang.length ? lang.toUpperCase() : "代码",
+                  info != null && info.length ? info.toUpperCase() : "代码",
                 "</div>",
                 "<div class=\"titlebar-right\">",
                   "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
@@ -271,7 +271,7 @@
 Test.counter = 0;
 let t = new Test();
 console.log(Test.counter);
-// 输出 1" data-lang="javascript" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+// 输出 1" data-info="language-JavaScript" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
@@ -279,15 +279,15 @@ console.log(Test.counter);
 <span class="line">6</span>
 <span class="line">7</span>
 <span class="line">8</span>
-<span class="line">9</span></pre><pre class="code javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>{
-  <span class="hljs-keyword">constructor</span>() {
-    ++Test.counter;
+<span class="line">9</span></pre><pre class="code"><code class="language-reasonml"><span class="hljs-keyword">class</span> Test {
+  constructor<span class="hljs-literal">()</span> {
+    ++<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Test</span>.</span></span>counter;
   }
 }
-Test.counter = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">let</span> t = <span class="hljs-keyword">new</span> Test();
-<span class="hljs-built_in">console</span>.log(Test.counter);
-<span class="hljs-comment">// 输出 1</span></pre></figure>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Test</span>.</span></span>counter = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> t = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Test()</span>;
+console.log(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Test</span>.</span></span>counter);
+<span class="hljs-comment">// 输出 1</span></code></pre></figure>
 <p>没错这段代码是如此的直观，以至于我都不需要写注释来解释每一句干了什么，我敢肯定你有任何一点面向对象的基础都能明白，如果你对任何一个部分表示不理解，我建议你仔细去学习一个面向对象的程序语言—— Java 是个好选择因为它很成熟，同时是个严格的面向对象的程序语言。</p>
 <p>当然，JavaScript 并不是那么纯粹的语言或者说它几乎什么都能做一点并且这个趋势越来越大，所以你并不需要深入的面向对象知识也能看懂上面那一段代码。在 ES6 中实现一个类变量或者叫静态变量就是这个简单地两步：第一在类定义的方法内直接使用类的名字来访问静态成员——你没看错，这里没有 <code>this</code> ——毕竟这里的 <code>this</code> 在上下文中大多数指的还是实例而不是类本身。第二在类定义的外部给你想要的变量进行一个初始化（赋初值）。</p>
 <p>我敢肯定对于 JavaScript 这样一门号称“一切能够用 JavaScript 实现的最终都会用 JavaScript 实现”的语言而言肯定不只这么一种实现类变量的方法，但是最起码对我而言这是最直观的一种，我相信对于一切有一点 JavaScript 基础的人而言这也都是最直观的一种，如果你想问为什么没有更直观的在类定义内部实现的像 Java 或者什么一样的写法，很抱歉，暂时没有，或许你可以等到 ES7 的时代再来学习 JavaScript，当然到那个时候你又会被这门语言其他的问题纠结到 ES8，这很现实，这是一个不完美但同时不断高速进化的语言，它越来越广泛的应用逼着它去填由于愚蠢的商业手段导致的停滞不前带来的坑，当然最起码——JavaScript 虽然出生仓促，但基础并不很糟，或者说它有着各种奇特的实现不断让人燃烧自己的脑细胞。</p>
@@ -300,19 +300,19 @@ Test.counter = <span class="hljs-number">0</span>;
     ++@constructor.counter
 t = new Test()
 console.log(Test.counter)
-# 输出 1" data-lang="coffeescript" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+# 输出 1" data-info="language-CoffeeScript" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 <span class="line">6</span>
-<span class="line">7</span></pre><pre class="code coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
+<span class="line">7</span></pre><pre class="code"><code class="language-delphi"><span class="hljs-keyword">class</span> Test
   @counter: <span class="hljs-number">0</span>
-  constructor: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
-    ++@constructor.counter
-t = <span class="hljs-keyword">new</span> Test()
-<span class="hljs-built_in">console</span>.log(Test.counter)
-<span class="hljs-comment"># 输出 1</span></pre></figure>
+  <span class="hljs-function"><span class="hljs-keyword">constructor</span>:</span> () -&gt;
+    ++@<span class="hljs-keyword">constructor</span>.counter
+t = new Test()
+console.log(Test.counter)
+# 输出 1</code></pre></figure>
 <p>编译出来的结果是这样的，虽然有着浓浓的咖啡味道但是也不难懂：</p>
 <figure data-raw="// Generated by CoffeeScript 2.1.1
 (function() {
@@ -329,7 +329,7 @@ t = <span class="hljs-keyword">new</span> Test()
   t = new Test();
   console.log(Test.counter);
   // 输出 1
-}).call(this);" data-lang="javascript" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+}).call(this);" data-info="language-JavaScript" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
@@ -344,7 +344,7 @@ t = <span class="hljs-keyword">new</span> Test()
 <span class="line">13</span>
 <span class="line">14</span>
 <span class="line">15</span>
-<span class="line">16</span></pre><pre class="code javascript"><span class="hljs-comment">// Generated by CoffeeScript 2.1.1</span>
+<span class="line">16</span></pre><pre class="code"><code class="language-javascript"><span class="hljs-comment">// Generated by CoffeeScript 2.1.1</span>
 (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">var</span> Test, t;
   Test = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -359,7 +359,7 @@ t = <span class="hljs-keyword">new</span> Test()
   t = <span class="hljs-keyword">new</span> Test();
   <span class="hljs-built_in">console</span>.log(Test.counter);
   <span class="hljs-comment">// 输出 1</span>
-}).call(<span class="hljs-built_in">this</span>);</pre></figure>
+}).call(<span class="hljs-built_in">this</span>);</code></pre></figure>
 <p>实际上如果你只是想 <strong>创造</strong> 一个属于类的变量还有一种写法，但是严格来讲它并不属于类变量而是访问原型上的一个变量（不要忘了 JavaScript 的原型链），这个变量仍然会实例化，之所以在这里提起是因为网上很多搜索结果把这个也称作类变量，我认为是不正确的。</p>
 <figure data-raw="class Test
   counter: 0
@@ -367,19 +367,19 @@ t = <span class="hljs-keyword">new</span> Test()
     ++@counter
 t = new Test()
 console.log(Test::counter)
-# 输出 0" data-lang="coffeescript" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+# 输出 0" data-info="language-CoffeeScript" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
 <span class="line">5</span>
 <span class="line">6</span>
-<span class="line">7</span></pre><pre class="code coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
+<span class="line">7</span></pre><pre class="code"><code class="language-delphi"><span class="hljs-keyword">class</span> Test
   counter: <span class="hljs-number">0</span>
-  constructor: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
+  <span class="hljs-function"><span class="hljs-keyword">constructor</span>:</span> () -&gt;
     ++@counter
-t = <span class="hljs-keyword">new</span> Test()
-<span class="hljs-built_in">console</span>.log(Test::counter)
-<span class="hljs-comment"># 输出 0</span></pre></figure>
+t = new Test()
+console.log(Test::counter)
+# 输出 <span class="hljs-number">0</span></code></pre></figure>
 <p>不推荐这个写法并不是因为它用了一个 C++ 常见的符号 <code>::</code>，而是因为它只能让你访问到一个原型上的变量，最后仍然会被实例化，也没有直观的语法糖让你在方法里修改它（大概直接写 <code>Test::</code> 可行？）。</p>
 <h1 id="静态方法"><a class="header-link" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95" title="静态方法"></a>静态方法</h1>
 <p>有了前面的基础静态方法无论是在原生 JavaScript 里面还是 CoffeeScript 都变得相当直观——大概只需要一个例子：</p>
@@ -392,7 +392,7 @@ t = <span class="hljs-keyword">new</span> Test()
     ++@constructor.counter
 t = new Test()
 Test.printCounter()
-# 输出 1" data-lang="coffeescript" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+# 输出 1" data-info="language-CoffeeScript" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
@@ -400,7 +400,7 @@ Test.printCounter()
 <span class="line">6</span>
 <span class="line">7</span>
 <span class="line">8</span>
-<span class="line">9</span></pre><pre class="code coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
+<span class="line">9</span></pre><pre class="code"><code class="language-coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
   @counter: <span class="hljs-number">0</span>
   @printCounter: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span>
     <span class="hljs-built_in">console</span>.log(@counter)
@@ -408,7 +408,7 @@ Test.printCounter()
     ++@constructor.counter
 t = <span class="hljs-keyword">new</span> Test()
 Test.printCounter()
-<span class="hljs-comment"># 输出 1</span></pre></figure>
+<span class="hljs-comment"># 输出 1</span></code></pre></figure>
 <p>编译成 JavaScript 之后是这样的，<code>static</code> 关键字终于出来刷存在感了：</p>
 <figure data-raw="// Generated by CoffeeScript 2.1.1
 (function() {
@@ -428,7 +428,7 @@ Test.printCounter()
   t = new Test();
   Test.printCounter();
   // 输出 1
-}).call(this);" data-lang="javascript" class="code-block hljs highlight"><pre class="gutter"><span class="line">1</span>
+}).call(this);" data-info="language-JavaScript" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
 <span class="line">2</span>
 <span class="line">3</span>
 <span class="line">4</span>
@@ -446,7 +446,7 @@ Test.printCounter()
 <span class="line">16</span>
 <span class="line">17</span>
 <span class="line">18</span>
-<span class="line">19</span></pre><pre class="code javascript"><span class="hljs-comment">// Generated by CoffeeScript 2.1.1</span>
+<span class="line">19</span></pre><pre class="code"><code class="language-javascript"><span class="hljs-comment">// Generated by CoffeeScript 2.1.1</span>
 (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">var</span> Test, t;
   Test = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -464,7 +464,7 @@ Test.printCounter()
   t = <span class="hljs-keyword">new</span> Test();
   Test.printCounter();
   <span class="hljs-comment">// 输出 1</span>
-}).call(<span class="hljs-built_in">this</span>);</pre></figure>
+}).call(<span class="hljs-built_in">this</span>);</code></pre></figure>
 <h1 id="总结"><a class="header-link" href="/posts/Coffee-Static-Varible-Method/#%E6%80%BB%E7%BB%93" title="总结"></a>总结</h1>
 <p>事实上到上面已经靠几个例子说明了正确的用法，但是由于还有交叉处理的部分，简单总结一下。</p>
 <p>1.把变量写在类定义里面属性的层次并且在变量名前面加上 <code>@</code> 会在 CoffeeScript 里产生一个静态变量。</p>
@@ -773,4 +773,4 @@ Test.printCounter()
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.3 at 2020-08-09 Sun 21:21:14 CST. -->
+<!-- Page built by Hikaru v1.5.5 at 2020-08-10 Mon 11:14:21 CST. -->
