@@ -268,13 +268,13 @@
 <figure data-raw="<uses-permission android:name=&quot;android.permission.SET_WALLPAPER&quot; />
 <uses-feature
   android:name=&quot;android.software.live_wallpaper&quot;
-  android:required=&quot;true&quot; />" data-info="language-xml" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span></pre><pre class="code"><code class="language-routeros">&lt;uses-permission android:<span class="hljs-attribute">name</span>=<span class="hljs-string">"android.permission.SET_WALLPAPER"</span> /&gt;
-&lt;uses-feature
-  android:<span class="hljs-attribute">name</span>=<span class="hljs-string">"android.software.live_wallpaper"</span>
-  android:<span class="hljs-attribute">required</span>=<span class="hljs-string">"true"</span> /&gt;</code></pre></figure>
+  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span></pre><pre class="code"><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.SET_WALLPAPER"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
+  <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.software.live_wallpaper"</span>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /&gt;</span></code></pre></figure>
 <p>你要是能把这一行加到 <code>&lt;manifest&gt;</code> 标签外面，我觉得你也没必要写代码了……但这个要放在 <code>&lt;application&gt;</code> 标签的外面，具体放在哪直接翻我仓库里的文件好了，比我用文字描述清晰的多。</p>
 <p>但是下面这个要加到 <code>&lt;application&gt;</code> 标签的里面：</p>
 <figure data-raw="<service
@@ -286,16 +286,16 @@
   <meta-data
     android:name=&quot;android.service.wallpaper&quot;
     android:resource=&quot;@xml/wallpaper&quot; />
-</service>" data-info="language-xml" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span></pre><pre class="code"><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">service</span>
+</service>" data-info="language-xml" data-lang="xml" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span></pre><pre class="code"><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">service</span>
   <span class="hljs-attr">android:name</span>=<span class="hljs-string">".GLWallpaperService"</span>
   <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"android.permission.BIND_WALLPAPER"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
@@ -312,12 +312,12 @@
   xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
   android:thumbnail=&quot;@drawable/ic_icon&quot;
   android:description=&quot;@string/wallpaper_description&quot;
-  android:settingsActivity=&quot;xyz.alynx.livewallpaper.MainActivity&quot; />" data-info="language-xml" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span></pre><pre class="code"><code class="language-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+  android:settingsActivity=&quot;xyz.alynx.livewallpaper.MainActivity&quot; />" data-info="language-xml" data-lang="xml" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span></pre><pre class="code"><code class="language-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">wallpaper</span>
   <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>
   <span class="hljs-attr">android:thumbnail</span>=<span class="hljs-string">"@drawable/ic_icon"</span>
@@ -343,31 +343,31 @@ public class GLWallpaperService extends WallpaperService {
     public Engine onCreateEngine() {
         return new GLWallpaperEngine();
     }
-}" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span></pre><pre class="code"><code class="language-scala"><span class="hljs-keyword">package</span> xyz.alynx.livewallpaper;
+}" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span></pre><pre class="code"><code class="language-java"><span class="hljs-keyword">package</span> xyz.alynx.livewallpaper;
 
-<span class="hljs-keyword">import</span> android.service.wallpaper.<span class="hljs-type">WallpaperService</span>;
+<span class="hljs-keyword">import</span> android.service.wallpaper.WallpaperService;
 
-public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WallpaperService</span> </span>{
-    public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperEngine</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Engine</span> </span>{
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WallpaperService</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperEngine</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Engine</span> </span>{
 
     }
 
     <span class="hljs-meta">@Override</span>
-    public <span class="hljs-type">Engine</span> onCreateEngine() {
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-type">GLWallpaperEngine</span>();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Engine <span class="hljs-title">onCreateEngine</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GLWallpaperEngine();
     }
 }</code></pre></figure>
 <p>所以你看，你只需要实现 <code>WallpaperService</code> 的一个方法，就是在系统需要 <code>Engine</code> 的时候，返回你自己的 <code>Engine</code> 实例。</p>
@@ -396,46 +396,46 @@ public <span class="hljs-class"><span class="hljs-keyword">class</span> <span cl
                 xOffset, yOffset, xOffsetStep,
                 yOffsetStep, xPixelOffset, yPixelOffset
             );
-        }" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span></pre><pre class="code"><code class="language-aspectj">        <span class="hljs-meta">@Override</span>
-        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onSurfaceCreated</span><span class="hljs-params">(SurfaceHolder surfaceHolder)</span> </span>{
+        }" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span></pre><pre class="code"><code class="language-java">        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSurfaceCreated</span><span class="hljs-params">(SurfaceHolder surfaceHolder)</span> </span>{
             <span class="hljs-keyword">super</span>.onSurfaceCreated(surfaceHolder);
         }
 
         <span class="hljs-meta">@Override</span>
-        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onVisibilityChanged</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> visible)</span> </span>{
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onVisibilityChanged</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> visible)</span> </span>{
             <span class="hljs-keyword">super</span>.onVisibilityChanged(visible);
         }
 
         <span class="hljs-meta">@Override</span>
-        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onSurfaceDestroyed</span><span class="hljs-params">(SurfaceHolder holder)</span> </span>{
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSurfaceDestroyed</span><span class="hljs-params">(SurfaceHolder holder)</span> </span>{
            <span class="hljs-keyword">super</span>.onSurfaceDestroyed(holder);
         }
         <span class="hljs-meta">@Override</span>
-        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onOffsetsChanged</span><span class="hljs-params">(
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onOffsetsChanged</span><span class="hljs-params">(
             <span class="hljs-keyword">float</span> xOffset, <span class="hljs-keyword">float</span> yOffset,
             <span class="hljs-keyword">float</span> xOffsetStep, <span class="hljs-keyword">float</span> yOffsetStep,
             <span class="hljs-keyword">int</span> xPixelOffset, <span class="hljs-keyword">int</span> yPixelOffset
@@ -473,34 +473,34 @@ public <span class="hljs-class"><span class="hljs-keyword">class</span> <span cl
             public void onDestroy() {
                 super.onDetachedFromWindow();
             }
-        }" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span></pre><pre class="code"><code class="language-scala">        <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperSurfaceView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">GLSurfaceView</span> </span>{
-            <span class="hljs-keyword">private</span> static <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-type">TAG</span> = <span class="hljs-string">"GLWallpaperSurface"</span>;
+        }" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span></pre><pre class="code"><code class="language-java">        <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperSurfaceView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">GLSurfaceView</span> </span>{
+            <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = <span class="hljs-string">"GLWallpaperSurface"</span>;
 
-            public <span class="hljs-type">GLWallpaperSurfaceView</span>(<span class="hljs-type">Context</span> context) {
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GLWallpaperSurfaceView</span><span class="hljs-params">(Context context)</span> </span>{
                 <span class="hljs-keyword">super</span>(context);
             }
 
             <span class="hljs-meta">@Override</span>
-            public <span class="hljs-type">SurfaceHolder</span> getHolder() {
+            <span class="hljs-function"><span class="hljs-keyword">public</span> SurfaceHolder <span class="hljs-title">getHolder</span><span class="hljs-params">()</span> </span>{
                 <span class="hljs-keyword">return</span> getSurfaceHolder();
             }
 
-            public void onDestroy() {
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>{
                 <span class="hljs-keyword">super</span>.onDetachedFromWindow();
             }
         }</code></pre></figure>
@@ -511,11 +511,11 @@ public <span class="hljs-class"><span class="hljs-keyword">class</span> <span cl
 <p>当然最好在 <code>AndroidManifest.xml</code> 声明一下你这个应用需要的 GLES 版本：</p>
 <figure data-raw="<uses-feature
   android:glEsVersion=&quot;0x00020000&quot;
-  android:required=&quot;true&quot; />" data-info="language-xml" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span></pre><pre class="code"><code class="language-routeros">&lt;uses-feature
-  android:<span class="hljs-attribute">glEsVersion</span>=<span class="hljs-string">"0x00020000"</span>
-  android:<span class="hljs-attribute">required</span>=<span class="hljs-string">"true"</span> /&gt;</code></pre></figure>
+  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span></pre><pre class="code"><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-feature</span>
+  <span class="hljs-attr">android:glEsVersion</span>=<span class="hljs-string">"0x00020000"</span>
+  <span class="hljs-attr">android:required</span>=<span class="hljs-string">"true"</span> /&gt;</span></code></pre></figure>
 <p>如果你只支持 v3，就把 2 改成 3。</p>
 <p>（已经进入这个阶段了，打算拿这个当“我的第一个 Android App”的同学就自己退出吧。）</p>
 <p>我直接帖完整代码解释好了，因为实在是不好一点点讲了，反正会写 OpenGL 的人应该也能理解这种程度的代码了。</p>
@@ -537,21 +537,21 @@ out vec2 tex_coord;
 void main() {
     gl_Position = mvp * vec4(in_position, 1.0f, 1.0f);
     tex_coord = in_tex_coord;
-}" data-info="language-glsl" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span></pre><pre class="code"><code class="language-glsl"><span class="hljs-meta">#version 300 es</span>
+}" data-info="language-glsl" data-lang="glsl" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span></pre><pre class="code"><code class="language-glsl"><span class="hljs-meta">#version 300 es</span>
 
 <span class="hljs-comment">// Some Android phone driver needs to put pre-processor in the first line. (e.g. Huawei Kirin)</span>
 
@@ -588,25 +588,25 @@ out vec4 frag_color;
 
 void main() {
     frag_color = texture(frame, tex_coord);
-}" data-info="language-glsl" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span></pre><pre class="code"><code class="language-glsl"><span class="hljs-meta">#version 300 es</span>
+}" data-info="language-glsl" data-lang="glsl" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span></pre><pre class="code"><code class="language-glsl"><span class="hljs-meta">#version 300 es</span>
 <span class="hljs-meta">#ifdef GL_OES_EGL_image_external_essl3</span>
 <span class="hljs-meta">#extension GL_OES_EGL_image_external_essl3 : require</span>
 <span class="hljs-meta">#else</span>
@@ -682,112 +682,112 @@ static int linkProgramGLES30(
         throw new RuntimeException(log);
     }
     return program;
-}" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span>
-<span class="line">35</span>
-<span class="line">36</span>
-<span class="line">37</span>
-<span class="line">38</span>
-<span class="line">39</span>
-<span class="line">40</span>
-<span class="line">41</span>
-<span class="line">42</span>
-<span class="line">43</span>
-<span class="line">44</span>
-<span class="line">45</span>
-<span class="line">46</span>
-<span class="line">47</span>
-<span class="line">48</span>
-<span class="line">49</span>
-<span class="line">50</span>
-<span class="line">51</span>
-<span class="line">52</span>
-<span class="line">53</span>
-<span class="line">54</span>
-<span class="line">55</span></pre><pre class="code"><code class="language-processing"><span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> compileShaderResourceGLES30(
-    @NonNull Context context,
-    <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> shaderType,
-    <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> shaderRes
-) <span class="hljs-keyword">throws</span> RuntimeException {
+}" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span></pre><pre class="code"><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compileShaderResourceGLES30</span><span class="hljs-params">(
+    <span class="hljs-meta">@NonNull</span> Context context,
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> shaderType,
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> shaderRes
+)</span> <span class="hljs-keyword">throws</span> RuntimeException </span>{
     <span class="hljs-keyword">final</span> InputStream inputStream = context.getResources().openRawResource(shaderRes);
-    <span class="hljs-keyword">final</span> <span class="hljs-keyword">BufferedReader</span> bufferedReader = <span class="hljs-keyword">new</span> <span class="hljs-keyword">BufferedReader</span>(<span class="hljs-keyword">new</span> InputStreamReader(inputStream));
-    <span class="hljs-keyword">String</span> <span class="hljs-built_in">line</span>;
+    <span class="hljs-keyword">final</span> BufferedReader bufferedReader = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(inputStream));
+    String line;
     <span class="hljs-keyword">final</span> StringBuilder stringBuilder = <span class="hljs-keyword">new</span> StringBuilder();
     <span class="hljs-keyword">try</span> {
-        <span class="hljs-keyword">while</span> ((<span class="hljs-built_in">line</span> = bufferedReader.readLine()) != <span class="hljs-keyword">null</span>) {
-            stringBuilder.<span class="hljs-built_in">append</span>(<span class="hljs-built_in">line</span>);
-            stringBuilder.<span class="hljs-built_in">append</span>(<span class="hljs-string">'\n'</span>);
+        <span class="hljs-keyword">while</span> ((line = bufferedReader.readLine()) != <span class="hljs-keyword">null</span>) {
+            stringBuilder.append(line);
+            stringBuilder.append(<span class="hljs-string">'\n'</span>);
         }
     } <span class="hljs-keyword">catch</span> (IOException e) {
         e.printStackTrace();
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
-    <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> shaderSource = stringBuilder.toString();
-    <span class="hljs-built_in">int</span> <span class="hljs-built_in">shader</span> = GLES30.glCreateShader(shaderType);
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">shader</span> == <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">final</span> String shaderSource = stringBuilder.toString();
+    <span class="hljs-keyword">int</span> shader = GLES30.glCreateShader(shaderType);
+    <span class="hljs-keyword">if</span> (shader == <span class="hljs-number">0</span>) {
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Failed to create shader"</span>);
     }
-    GLES30.glShaderSource(<span class="hljs-built_in">shader</span>, shaderSource);
-    GLES30.glCompileShader(<span class="hljs-built_in">shader</span>);
-    <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span>[] status = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[<span class="hljs-number">1</span>];
-    GLES30.glGetShaderiv(<span class="hljs-built_in">shader</span>, GLES30.GL_COMPILE_STATUS, status, <span class="hljs-number">0</span>);
+    GLES30.glShaderSource(shader, shaderSource);
+    GLES30.glCompileShader(shader);
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] status = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">1</span>];
+    GLES30.glGetShaderiv(shader, GLES30.GL_COMPILE_STATUS, status, <span class="hljs-number">0</span>);
     <span class="hljs-keyword">if</span> (status[<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> <span class="hljs-built_in">log</span> = GLES30.glGetShaderInfoLog(<span class="hljs-built_in">shader</span>);
-        GLES30.glDeleteShader(<span class="hljs-built_in">shader</span>);
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-built_in">log</span>);
+        <span class="hljs-keyword">final</span> String log = GLES30.glGetShaderInfoLog(shader);
+        GLES30.glDeleteShader(shader);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(log);
     }
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">shader</span>;
+    <span class="hljs-keyword">return</span> shader;
 }
 
-<span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> linkProgramGLES30(
-    <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> vertShader,
-    <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> fragShader
-) <span class="hljs-keyword">throws</span> RuntimeException {
-    <span class="hljs-built_in">int</span> program = GLES30.glCreateProgram();
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">linkProgramGLES30</span><span class="hljs-params">(
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> vertShader,
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> fragShader
+)</span> <span class="hljs-keyword">throws</span> RuntimeException </span>{
+    <span class="hljs-keyword">int</span> program = GLES30.glCreateProgram();
     <span class="hljs-keyword">if</span> (program == <span class="hljs-number">0</span>) {
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Failed to create program"</span>);
     }
     GLES30.glAttachShader(program, vertShader);
     GLES30.glAttachShader(program, fragShader);
     GLES30.glLinkProgram(program);
-    <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span>[] status = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] status = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">1</span>];
     GLES30.glGetProgramiv(program, GLES30.GL_LINK_STATUS, status, <span class="hljs-number">0</span>);
     <span class="hljs-keyword">if</span> (status[<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> <span class="hljs-built_in">log</span> = GLES30.glGetProgramInfoLog(program);
+        <span class="hljs-keyword">final</span> String log = GLES30.glGetProgramInfoLog(program);
         GLES30.glDeleteProgram(program);
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-built_in">log</span>);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(log);
     }
     <span class="hljs-keyword">return</span> program;
 }</code></pre></figure>
@@ -819,39 +819,39 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     private float xOffset = 0;
     private float yOffset = 0;
     private long updatedFrame = 0;
-    private long renderedFrame = 0;" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span></pre><pre class="code"><code class="language-groovy"><span class="hljs-keyword">package</span> xyz.alynx.livewallpaper;
+    private long renderedFrame = 0;" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span></pre><pre class="code"><code class="language-java"><span class="hljs-keyword">package</span> xyz.alynx.livewallpaper;
 
 <span class="hljs-keyword">import</span> android.content.Context;
 <span class="hljs-keyword">import</span> android.opengl.GLSurfaceView;
 <span class="hljs-keyword">import</span> android.support.annotation.NonNull;
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperRenderer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">GLSurfaceView</span>.<span class="hljs-title">Renderer</span> {</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GLWallpaperRenderer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">GLSurfaceView</span>.<span class="hljs-title">Renderer</span> </span>{
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BYTES_PER_FLOAT = <span class="hljs-number">4</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BYTES_PER_INT = <span class="hljs-number">4</span>;
     <span class="hljs-keyword">private</span> Context context;
@@ -862,7 +862,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> program = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mvpLocation = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] textures;
-    <span class="hljs-keyword">private</span> SurfaceTexture surfaceTexture = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">private</span> SurfaceTexture surfaceTexture = <span class="hljs-keyword">null</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> screenWidth = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> screenHeight = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> videoWidth = <span class="hljs-number">0</span>;
@@ -931,65 +931,65 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     @NonNull
     public Context getContext() {
         return context;
-    }" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span>
-<span class="line">35</span>
-<span class="line">36</span>
-<span class="line">37</span>
-<span class="line">38</span>
-<span class="line">39</span>
-<span class="line">40</span>
-<span class="line">41</span>
-<span class="line">42</span>
-<span class="line">43</span>
-<span class="line">44</span>
-<span class="line">45</span>
-<span class="line">46</span>
-<span class="line">47</span>
-<span class="line">48</span>
-<span class="line">49</span>
-<span class="line">50</span>
-<span class="line">51</span>
-<span class="line">52</span>
-<span class="line">53</span>
-<span class="line">54</span>
-<span class="line">55</span>
-<span class="line">56</span>
-<span class="line">57</span>
-<span class="line">58</span>
-<span class="line">59</span></pre><pre class="code"><code class="language-angelscript">    GLWallpaperRenderer(@NonNull <span class="hljs-keyword">final</span> Context context) {
+    }" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span></pre><pre class="code"><code class="language-angelscript">    GLWallpaperRenderer(@NonNull <span class="hljs-keyword">final</span> Context context) {
         <span class="hljs-keyword">this</span>.context = context;
 
         <span class="hljs-comment">// Those replaced glGenBuffers() and glBufferData().</span>
@@ -1129,90 +1129,90 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         GLES30.glUseProgram(program);
         GLES30.glUniformMatrix4fv(mvpLocation, 1, false, mvp, 0);
         GLES30.glDrawElements(GLES30.GL_TRIANGLES, 6, GLES30.GL_UNSIGNED_INT, indices);
-    }" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span>
-<span class="line">35</span>
-<span class="line">36</span>
-<span class="line">37</span>
-<span class="line">38</span>
-<span class="line">39</span>
-<span class="line">40</span>
-<span class="line">41</span>
-<span class="line">42</span>
-<span class="line">43</span>
-<span class="line">44</span>
-<span class="line">45</span>
-<span class="line">46</span>
-<span class="line">47</span>
-<span class="line">48</span>
-<span class="line">49</span>
-<span class="line">50</span>
-<span class="line">51</span>
-<span class="line">52</span>
-<span class="line">53</span>
-<span class="line">54</span>
-<span class="line">55</span>
-<span class="line">56</span>
-<span class="line">57</span>
-<span class="line">58</span>
-<span class="line">59</span>
-<span class="line">60</span>
-<span class="line">61</span>
-<span class="line">62</span>
-<span class="line">63</span>
-<span class="line">64</span>
-<span class="line">65</span>
-<span class="line">66</span>
-<span class="line">67</span>
-<span class="line">68</span>
-<span class="line">69</span>
-<span class="line">70</span>
-<span class="line">71</span>
-<span class="line">72</span>
-<span class="line">73</span>
-<span class="line">74</span>
-<span class="line">75</span>
-<span class="line">76</span>
-<span class="line">77</span>
-<span class="line">78</span>
-<span class="line">79</span>
-<span class="line">80</span></pre><pre class="code"><code class="language-angelscript">    @Override
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
+    }" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span></pre><pre class="code"><code class="language-java">    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSurfaceCreated</span><span class="hljs-params">(GL10 gl10, EGLConfig eglConfig)</span> </span>{
         <span class="hljs-comment">// No depth test for 2D video.</span>
         GLES30.glDisable(GLES30.GL_DEPTH_TEST);
-        GLES30.glDepthMask(<span class="hljs-literal">false</span>);
+        GLES30.glDepthMask(<span class="hljs-keyword">false</span>);
         GLES30.glDisable(GLES30.GL_CULL_FACE);
         GLES30.glDisable(GLES30.GL_BLEND);
 
@@ -1252,25 +1252,25 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         <span class="hljs-comment">// Position is set in shader sources.</span>
         GLES30.glVertexAttribPointer(
             <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, GLES30.GL_FLOAT,
-            <span class="hljs-literal">false</span>, <span class="hljs-number">0</span>, vertices
+            <span class="hljs-keyword">false</span>, <span class="hljs-number">0</span>, vertices
         );
         GLES30.glVertexAttribPointer(
             <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, GLES30.GL_FLOAT,
-            <span class="hljs-literal">false</span>, <span class="hljs-number">0</span>, texCoords
+            <span class="hljs-keyword">false</span>, <span class="hljs-number">0</span>, texCoords
         );
 
         GLES30.glEnableVertexAttribArray(<span class="hljs-number">0</span>);
         GLES30.glEnableVertexAttribArray(<span class="hljs-number">1</span>);
     }
 
-    @Override
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> onSurfaceChanged(GL10 gl10, <span class="hljs-built_in">int</span> width, <span class="hljs-built_in">int</span> height) {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSurfaceChanged</span><span class="hljs-params">(GL10 gl10, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span> </span>{
         GLES30.glViewport(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, width, height);
     }
 
-    @Override
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> onDrawFrame(GL10 gl10) {
-        <span class="hljs-keyword">if</span> (surfaceTexture == <span class="hljs-literal">null</span>) {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDrawFrame</span><span class="hljs-params">(GL10 gl10)</span> </span>{
+        <span class="hljs-keyword">if</span> (surfaceTexture == <span class="hljs-keyword">null</span>) {
             <span class="hljs-keyword">return</span>;
         }
 
@@ -1285,7 +1285,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         GLES30.glClearColor(<span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>);
         GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
         GLES30.glUseProgram(program);
-        GLES30.glUniformMatrix4fv(mvpLocation, <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>, mvp, <span class="hljs-number">0</span>);
+        GLES30.glUniformMatrix4fv(mvpLocation, <span class="hljs-number">1</span>, <span class="hljs-keyword">false</span>, mvp, <span class="hljs-number">0</span>);
         GLES30.glDrawElements(GLES30.GL_TRIANGLES, <span class="hljs-number">6</span>, GLES30.GL_UNSIGNED_INT, indices);
     }</code></pre></figure>
 <p>这部份方法看名字就能看出来，需要注意的是那个 <code>gl10</code> 是 GLESv1 的用法，至于 v2 和 v3 都改成静态类了，所以我们用不到它。既然是 2D 贴图，就不需要深度测试和背面剔除了。然后设置纹理参数时需要用 <code>GLES11Ext.GL_TEXTURE_EXTERNAL_OES</code>，这个和 shader 里面是关联的。（哪个家伙把 GLESv2 和 v3 都支持的变量归属到 <code>GLES11Ext</code> 的，出来挨打！），别的地方会 OpenGL 的人都能看懂吧？最后，只有这三个函数有 OpenGL 上下文，其它的里面不能执行 OpenGL 操作。</p>
@@ -1297,13 +1297,13 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         // Because maybe a new video is loaded.
         createSurfaceTexture();
         exoPlayer.setVideoSurface(new Surface(surfaceTexture));
-    }" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span></pre><pre class="code"><code class="language-less">    <span class="hljs-variable">@Override</span>
+    }" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span></pre><pre class="code"><code class="language-less">    <span class="hljs-variable">@Override</span>
     void setSourcePlayer(<span class="hljs-variable">@NonNull</span> final SimpleExoPlayer exoPlayer) {
         <span class="hljs-comment">// Re-create SurfaceTexture when getting a new player.</span>
         <span class="hljs-comment">// Because maybe a new video is loaded.</span>
@@ -1346,40 +1346,40 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span></pre><pre class="code"><code class="language-arduino">    @<span class="hljs-function">Override
+    }" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span></pre><pre class="code"><code class="language-arduino">    @<span class="hljs-function">Override
     <span class="hljs-keyword">void</span> <span class="hljs-title">setScreenSize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">width</span>, <span class="hljs-keyword">int</span> <span class="hljs-built_in">height</span>)</span> </span>{
         <span class="hljs-keyword">if</span> (screenWidth != <span class="hljs-built_in">width</span> || screenHeight != <span class="hljs-built_in">height</span>) {
             screenWidth = <span class="hljs-built_in">width</span>;
@@ -1442,35 +1442,35 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span></pre><pre class="code"><code class="language-gradle">    @Override
+    }" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span></pre><pre class="code"><code class="language-gradle">    @Override
     <span class="hljs-keyword">void</span> setOffset(<span class="hljs-keyword">float</span> xOffset, <span class="hljs-keyword">float</span> yOffset) {
         <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> maxXOffset = (<span class="hljs-number">1.0</span>f - (
             (<span class="hljs-keyword">float</span>)screenWidth <span class="hljs-regexp">/ screenHeight) /</span> ((<span class="hljs-keyword">float</span>)videoWidth / videoHeight)
@@ -1515,22 +1515,22 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                 ++updatedFrame;
             }
         });
-    }" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span></pre><pre class="code"><code class="language-reasonml">    <span class="hljs-keyword">private</span> void create<span class="hljs-constructor">SurfaceTexture()</span> {
+    }" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span></pre><pre class="code"><code class="language-reasonml">    <span class="hljs-keyword">private</span> void create<span class="hljs-constructor">SurfaceTexture()</span> {
         <span class="hljs-keyword">if</span> (surfaceTexture != null) {
             surfaceTexture.release<span class="hljs-literal">()</span>;
             surfaceTexture = null;
@@ -1587,47 +1587,47 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         }
         // This is a 2D center crop, so we only need model matrix, no view and projection.
     }
-}" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span>
-<span class="line">31</span>
-<span class="line">32</span>
-<span class="line">33</span>
-<span class="line">34</span>
-<span class="line">35</span>
-<span class="line">36</span>
-<span class="line">37</span>
-<span class="line">38</span>
-<span class="line">39</span>
-<span class="line">40</span>
-<span class="line">41</span></pre><pre class="code"><code class="language-angelscript">    <span class="hljs-keyword">private</span> <span class="hljs-built_in">void</span> updateMatrix() {
+}" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span></pre><pre class="code"><code class="language-angelscript">    <span class="hljs-keyword">private</span> <span class="hljs-built_in">void</span> updateMatrix() {
         <span class="hljs-comment">// Players are buggy and unclear, so we do crop by ourselves.</span>
         <span class="hljs-comment">// Start with an identify matrix.</span>
         <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">16</span>; ++i) {
@@ -1699,64 +1699,64 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             videoRotation = Integer.parseInt(rotation);
             videoWidth = Integer.parseInt(width);
             videoHeight = Integer.parseInt(height);
-        }" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span>
-<span class="line">13</span>
-<span class="line">14</span>
-<span class="line">15</span>
-<span class="line">16</span>
-<span class="line">17</span>
-<span class="line">18</span>
-<span class="line">19</span>
-<span class="line">20</span>
-<span class="line">21</span>
-<span class="line">22</span>
-<span class="line">23</span>
-<span class="line">24</span>
-<span class="line">25</span>
-<span class="line">26</span>
-<span class="line">27</span>
-<span class="line">28</span>
-<span class="line">29</span>
-<span class="line">30</span></pre><pre class="code"><code class="language-arduino">        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getVideoMetadata</span><span class="hljs-params">()</span> throws IOException </span>{
+        }" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span></pre><pre class="code"><code class="language-java">        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getVideoMetadata</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>{
             <span class="hljs-keyword">final</span> MediaMetadataRetriever mmr = <span class="hljs-keyword">new</span> MediaMetadataRetriever();
             <span class="hljs-keyword">switch</span> (wallpaperCard.getType()) {
-            <span class="hljs-keyword">case</span> <span class="hljs-literal">INTERNAL</span>:
+            <span class="hljs-keyword">case</span> INTERNAL:
                 <span class="hljs-keyword">final</span> AssetFileDescriptor afd = getAssets().openFd(wallpaperCard.getPath());
                 mmr.setDataSource(
                     afd.getFileDescriptor(),
                     afd.getStartOffset(),
                     afd.getDeclaredLength()
                 );
-                afd.<span class="hljs-built_in">close</span>();
+                afd.close();
                 <span class="hljs-keyword">break</span>;
-            <span class="hljs-keyword">case</span> <span class="hljs-literal">EXTERNAL</span>:
+            <span class="hljs-keyword">case</span> EXTERNAL:
                 mmr.setDataSource(context, wallpaperCard.getUri());
                 <span class="hljs-keyword">break</span>;
             }
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> rotation = mmr.extractMetadata(
+            <span class="hljs-keyword">final</span> String rotation = mmr.extractMetadata(
                 MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION
             );
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> <span class="hljs-built_in">width</span> = mmr.extractMetadata(
+            <span class="hljs-keyword">final</span> String width = mmr.extractMetadata(
                 MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH
             );
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> <span class="hljs-built_in">height</span> = mmr.extractMetadata(
+            <span class="hljs-keyword">final</span> String height = mmr.extractMetadata(
                 MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT
             );
-            mmr.<span class="hljs-built_in">release</span>();
-            videoRotation = Integer.<span class="hljs-built_in">parseInt</span>(rotation);
-            videoWidth = Integer.<span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">width</span>);
-            videoHeight = Integer.<span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">height</span>);
+            mmr.release();
+            videoRotation = Integer.parseInt(rotation);
+            videoWidth = Integer.parseInt(width);
+            videoHeight = Integer.parseInt(height);
         }</code></pre></figure>
 <p>当然 <code>WallpaperCard</code> 是我自己封装的类，关系不大。总之是使用 <code>MediaMetadataRetriever</code> 就可以了。至于你说视频元数据和实际内容不符怎么办？那是用户问题，用户自己处理不好视频为什么要我来解决？随便让他拿电脑上修改一下好了。</p>
 <p>这些实际上是这个应用的核心内容，其它的播放之类的都大同小异，总之如果你实现了 OpenGL 的剪裁功能，应该就可以正常播放壁纸了。其它部分直接参考我的代码或者网上的样例就可以了。</p>
@@ -1778,23 +1778,23 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                         trackSelector.buildUponParameters().setRendererDisabled(i, true)
                     );
                 }
-            }" data-info="language-java" class="code-block highlight hljs"><pre class="gutter"><span class="line">1</span>
-<span class="line">2</span>
-<span class="line">3</span>
-<span class="line">4</span>
-<span class="line">5</span>
-<span class="line">6</span>
-<span class="line">7</span>
-<span class="line">8</span>
-<span class="line">9</span>
-<span class="line">10</span>
-<span class="line">11</span>
-<span class="line">12</span></pre><pre class="code"><code class="language-axapta">            trackSelector = <span class="hljs-keyword">new</span> DefaultTrackSelector();
+            }" data-info="language-java" data-lang="java" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span></pre><pre class="code"><code class="language-java">            trackSelector = <span class="hljs-keyword">new</span> DefaultTrackSelector();
             exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
-            exoPlayer.setVolume(<span class="hljs-number">0.0</span>f);
+            exoPlayer.setVolume(<span class="hljs-number">0.0f</span>);
             <span class="hljs-comment">// Disable audio decoder.</span>
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-keyword">count</span> = exoPlayer.getRendererCount();
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">count</span>; ++i) {
+            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> count = exoPlayer.getRendererCount();
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; ++i) {
                 <span class="hljs-keyword">if</span> (exoPlayer.getRendererType(i) == C.TRACK_TYPE_AUDIO) {
                     trackSelector.setParameters(
                         trackSelector.buildUponParameters().setRendererDisabled(i, <span class="hljs-keyword">true</span>)
@@ -2128,4 +2128,4 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.6 at 2020-08-10 Mon 15:09:53 CST. -->
+<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:43:16 CST. -->
