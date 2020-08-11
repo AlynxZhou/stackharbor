@@ -49,6 +49,7 @@ div.logo img {
 @media (max-width: 40em) {
   div.header-container {
     flex-direction: column-reverse;
+    align-items: stretch;
   }
   div.header-title,
   div.logo {
