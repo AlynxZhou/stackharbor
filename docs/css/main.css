@@ -4,7 +4,7 @@ main.main {
   margin-top: -3em;
   margin-bottom: 1.5em;
 }
-main.main div.main-container {
+div.main-container {
   width: auto;
   background: #eee;
   background: var(--color-main-background);
@@ -18,15 +18,15 @@ main.main div.main-container {
   flex-wrap: nowrap;
   padding: 0;
 }
-main.main div.main-container div.content {
+div.content {
   flex: 3 3 auto;
   width: 75%;
 }
 @media (max-width: 60em) {
-  main.main div.main-container {
+  div.main-container {
     flex-direction: column;
   }
-  main.main div.main-container div.content {
+  div.content {
     width: 100%;
   }
 }

@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
@@ -265,9 +264,9 @@
       <p>我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。</p>
 <a id="more"></a>
 <h1 id="跟着系统变色就行了吗？"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F" title="跟着系统变色就行了吗？"></a>跟着系统变色就行了吗？</h1>
-<p>现在的系统大概都支持暗色模式（Linux 的桌面环境早就有这种设置了，Firefox 可以直接读取我的系统设置，Android/iOS 也都有暗色模式开关），浏览器也紧跟潮流提供了 <code>@media</code> 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme" target="_blank" rel="noreferrer noopener">查询属性</a>（IE：那……是……什……么……）。理论上来说只要简单地在 CSS 里面查询然后编写修改颜色的代码就可以了，问题只是如何修改颜色比较轻松。</p>
+<p>现在的系统大概都支持暗色模式（Linux 的桌面环境早就有这种设置了，Firefox 可以直接读取我的系统设置，Android/iOS 也都有暗色模式开关），浏览器也紧跟潮流提供了 <code>@media</code> 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme" target="_blank" rel="external nofollow noreferrer noopener">查询属性</a>（IE：那……是……什……么……）。理论上来说只要简单地在 CSS 里面查询然后编写修改颜色的代码就可以了，问题只是如何修改颜色比较轻松。</p>
 <h1 id="CSS变量是好东西！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81" title="CSS变量是好东西！"></a>CSS 变量是好东西！</h1>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noreferrer noopener">使用 CSS 变量</a> 当然是最简单的解决方案了，就像我们平时编程一样使用变量作为 <code>color</code> 和 <code>background</code> 的值，然后在查询到暗色模式的代码块里给这些变量重新赋值，一切都十分简单有条理，而且最重要的是你不需要一个一个选择器查找有哪些需要变色的属性，所有的颜色变量都是放在一起的。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="external nofollow noreferrer noopener">使用 CSS 变量</a> 当然是最简单的解决方案了，就像我们平时编程一样使用变量作为 <code>color</code> 和 <code>background</code> 的值，然后在查询到暗色模式的代码块里给这些变量重新赋值，一切都十分简单有条理，而且最重要的是你不需要一个一个选择器查找有哪些需要变色的属性，所有的颜色变量都是放在一起的。</p>
 <h1 id="真是恨死IE这废物了！"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81" title="真是恨死IE这废物了！"></a>真是恨死 IE 这废物了！</h1>
 <p>虽然 IE 有很多不支持的选项，但是不支持 CSS 变量真是让我工作量剧增的一件事情。虽然我从不测试我的网站在 IE 上能否运行，但是在最新版 IE 上一般都是没问题的，因此我也会放弃一些最新版 IE 不支持的新特性，CSS 变量就是其中之一。</p>
 <p>既然没有办法用 CSS 变量，那就只能自己一个一个找选择器下面和颜色相关的属性，然后给它们重新设置属性了，真是找的人头晕眼花啊。</p>
@@ -276,12 +275,12 @@
 <p>在全部重新调整过颜色并能看之后（其实就是把浅色的色块换成深色，颜色层次基本不变，背景图搞个反色，至于那些彩色的按钮标签我实在没精力重新配色了，把透明度调低一点就好了），我自己还是比较喜欢自己一开始设计的样子，但我又是个习惯电脑全局暗色的人，这怎么能忍！</p>
 <p>CSS 的媒体属性不像一般的属性，只能是浏览器设置我们读取，没有办法用 JS 控制，于是也就没法简单地利用这个添加切换按钮。上网搜了半天也只有曲线救国的方案。</p>
 <h1 id="曲线救国"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD" title="曲线救国"></a>曲线救国</h1>
-<p>如果并不是想那么和系统的设置同步而只是给自己的网站添加切换的话，并不需要媒体查询。只要设计一个按钮给 <code>&lt;html&gt;</code> 或 <code>&lt;body&gt;</code> 添加删除 class/attribute 就行了。然后如果要和系统同步，在 JavaScript 里也有 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia" target="_blank" rel="noreferrer noopener">相关的 API</a> 可以做到查询和监听，在检测到变化的时候也修改 class/attribute 即可。</p>
+<p>如果并不是想那么和系统的设置同步而只是给自己的网站添加切换的话，并不需要媒体查询。只要设计一个按钮给 <code>&lt;html&gt;</code> 或 <code>&lt;body&gt;</code> 添加删除 class/attribute 就行了。然后如果要和系统同步，在 JavaScript 里也有 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia" target="_blank" rel="external nofollow noreferrer noopener">相关的 API</a> 可以做到查询和监听，在检测到变化的时候也修改 class/attribute 即可。</p>
 <p>我选择的是给 <code>&lt;html&gt;</code> 加 <code>data-theme="dark"</code> 或 <code>data-theme="light"</code> 属性，不选 <code>&lt;body&gt;</code> 是因为 WebKit 那些该死的不遵循标准的 scrollbar 伪类，文档没有说他们到底依附哪个元素，我尝试得到的是 <code>&lt;html&gt;</code>。接下来只要把之前的 CSS 里面的媒体查询选择器改成 <code>html[data-theme="dark"]</code> 就行了。</p>
 <p>不过还要注意继承关系，这样写的话有些属性并不是继承外面的，而是在这个选择器里面就近继承。比如假如修改了 <code>html[data-theme="dark"] a</code> 的边框，那 <code>html[data-theme="dark"] a.cls</code> 的边框会优先继承这个，而不是 <code>a.cls</code>。我知道有些人可能会笑我半懂不懂了，但是我确实遇到了这个问题，并且思考了一下找到了原因。</p>
 <p>还有一个比较尴尬的事情，我给一些元素设置了 <code>transition</code> 用于 <code>:hover</code> 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 <code>color</code> 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 <code>transition</code>。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？</p>
 <p>不管了，反正我用 Firefox，Firefox 效果好得很，完全不掉帧。</p>
-<p>更新（2020-08-07 10:50:00）：我怀疑 Chrome 想做新时代的 IE，其实并不是性能问题导致掉帧，WebKit 对于继承来的属性的 transition 存在问题，会导致不是同时变换而是有延迟的变换，效果糟透了，<a href="https://stackoverflow.com/a/36779404" target="_blank" rel="noreferrer noopener">StackOverflow 上也有人遇到这个问题</a>，看起来是 bug 并且不打算解决，而 Firefox 就没有这个问题。使用 CSS 变量在 WebKit 下效果会好一点，不过也不能给所有变色的元素加 transition，还是会卡，只能给 <code>&lt;body&gt;</code> 加一个，因为我的链接有 <code>:hover</code> 时变色的 transition，都是 color 就没办法在那时 transition 而暗色模式时候不 transition。总之由于 WebKit 的存在导致没法让全部元素同步 transition，只能近似。两权相害取其轻，还是让 IE 用户只能用亮色吧，我最后还是选择了 CSS 变量。</p>
+<p>更新（2020-08-07 10:50:00）：我怀疑 Chrome 想做新时代的 IE，其实并不是性能问题导致掉帧，WebKit 对于继承来的属性的 transition 存在问题，会导致不是同时变换而是有延迟的变换，效果糟透了，<a href="https://stackoverflow.com/a/36779404" target="_blank" rel="external nofollow noreferrer noopener">StackOverflow 上也有人遇到这个问题</a>，看起来是 bug 并且不打算解决，而 Firefox 就没有这个问题。使用 CSS 变量在 WebKit 下效果会好一点，不过也不能给所有变色的元素加 transition，还是会卡，只能给 <code>&lt;body&gt;</code> 加一个，因为我的链接有 <code>:hover</code> 时变色的 transition，都是 color 就没办法在那时 transition 而暗色模式时候不 transition。总之由于 WebKit 的存在导致没法让全部元素同步 transition，只能近似。两权相害取其轻，还是让 IE 用户只能用亮色吧，我最后还是选择了 CSS 变量。</p>
 <h1 id="怎么你这破网站换个页面还要重新点一次？"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F" title="怎么你这破网站换个页面还要重新点一次？"></a>怎么你这破网站换个页面还要重新点一次？</h1>
 <p>一切看起来都十分美好，直到我把一个暗色页面切成亮色然后点了个链接，下一个页面并不会理会我们上一个页面设置了什么主题，又变成了暗色。每个页面点一下切换按钮也太烦人了，我们得来点持久化。</p>
 <p>某个域名想在用户的浏览器里存点是完全可行的，使用 <code>localStorage</code> 就行了，就是简单的键值对。但是这样我们就有了多种可能切换亮暗的动作：<code>localStorage</code> 里面存的选项，网页加载时浏览器媒体查询的结果，用户点了网页上的切换按钮，用户点了系统切换亮暗的设置。这些的判断顺序要好好处理一下，不然某些就会被忽视掉变成“我点了怎么不动啊！！！”。</p>
@@ -334,7 +333,7 @@
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
     <div id="wechatpay">
@@ -534,17 +533,17 @@
       <div><i class="far fa-address-card"></i>社交链接</div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
         
-        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
         
-        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
         
-        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
         
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
         
       </ul>
     </div>
@@ -555,29 +554,29 @@
       <div><i class="fas fa-user-friends"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">Arch Linux 星球</a></li>
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
         
       </ul>
     </div>
@@ -599,7 +598,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
         
         <div class="busuanzi">
@@ -614,7 +613,7 @@
           
         </div>
         <div class="powered-by">
-          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
         </div>
       </div>
     </div>
@@ -624,4 +623,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:45:40 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 12:09:58 CST. -->

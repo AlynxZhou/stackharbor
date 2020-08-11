@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
@@ -304,12 +303,12 @@
 <p><img src="/posts/My-Desktop-PC/9.jpg" alt="显卡"></p>
 <p><img src="/posts/My-Desktop-PC/10.jpg" alt="全景"></p>
 <p>接下来是喜闻乐见的 debug 时间，首先是 Linux 下的，相对比较好调：</p>
-<p>三代 Ryzen 有一个 <a href="https://www.infoq.cn/article/BRebwaBfJ9eP28X9wQQc" target="_blank" rel="noreferrer noopener">每次都返回 0xFFFFFFFF 作为随机数的 BUG</a>，在我这主要影响 wireguard，巧的是购买前几天我刚读过这篇文章，AMD 已经发了新的固件修正错误，建议更新到主板厂家提供的最新 BIOS 版本一般即可解决，如果主板厂家最新的 BIOS 还没更新固件建议联系售后催一下。</p>
-<p>在我这不知道为什么 GDM 有时候没法自动启动，但是手动切 tty start 又可以显示，查了一下 <a href="https://wiki.archlinux.org/index.php/GDM#GDM_freezes_with_systemd" target="_blank" rel="noreferrer noopener">ArchWiki 的 GDM 页面</a> 发现有解决方案，但是并没有原因，搜索了一下也没发现原因是什么。</p>
-<p>我还发现有时候刚开机没多久很快就关机会卡在什么 systemd-udevd 进程没结束，最后 event loop failed + timed out，大概要卡好几分钟才关机，但如果你用一会再关机就没问题。检查好几次关机日志没发现问题，后来群友火眼金睛对比了完整日志发现有个叫 <code>ucsi_ccg</code> 的模块开机加载了两分钟，猜测是这个的问题，搜索一下发现是 <a href="https://github.com/torvalds/linux/blob/da94001239cceb93c132a31928d6ddc4214862d5/drivers/usb/typec/ucsi/ucsi_ccg.c" target="_blank" rel="noreferrer noopener">5.3 内核里 NVIDIA 添加的相关代码</a>，用来控制 NVIDIA 显卡上的 Type-C 接口的，可是我这块显卡根本就没提供 Type-C 接口！（以及很多笔记本内置的有输出的 N 卡也有这个问题。）临时在 <code>/etc/modprobe.d/</code> 里加了个 <code>blacklist ucsi_ccg</code> 的 conf 屏蔽了这个，好像没什么不良影响……</p>
+<p>三代 Ryzen 有一个 <a href="https://www.infoq.cn/article/BRebwaBfJ9eP28X9wQQc" target="_blank" rel="external nofollow noreferrer noopener">每次都返回 0xFFFFFFFF 作为随机数的 BUG</a>，在我这主要影响 wireguard，巧的是购买前几天我刚读过这篇文章，AMD 已经发了新的固件修正错误，建议更新到主板厂家提供的最新 BIOS 版本一般即可解决，如果主板厂家最新的 BIOS 还没更新固件建议联系售后催一下。</p>
+<p>在我这不知道为什么 GDM 有时候没法自动启动，但是手动切 tty start 又可以显示，查了一下 <a href="https://wiki.archlinux.org/index.php/GDM#GDM_freezes_with_systemd" target="_blank" rel="external nofollow noreferrer noopener">ArchWiki 的 GDM 页面</a> 发现有解决方案，但是并没有原因，搜索了一下也没发现原因是什么。</p>
+<p>我还发现有时候刚开机没多久很快就关机会卡在什么 systemd-udevd 进程没结束，最后 event loop failed + timed out，大概要卡好几分钟才关机，但如果你用一会再关机就没问题。检查好几次关机日志没发现问题，后来群友火眼金睛对比了完整日志发现有个叫 <code>ucsi_ccg</code> 的模块开机加载了两分钟，猜测是这个的问题，搜索一下发现是 <a href="https://github.com/torvalds/linux/blob/da94001239cceb93c132a31928d6ddc4214862d5/drivers/usb/typec/ucsi/ucsi_ccg.c" target="_blank" rel="external nofollow noreferrer noopener">5.3 内核里 NVIDIA 添加的相关代码</a>，用来控制 NVIDIA 显卡上的 Type-C 接口的，可是我这块显卡根本就没提供 Type-C 接口！（以及很多笔记本内置的有输出的 N 卡也有这个问题。）临时在 <code>/etc/modprobe.d/</code> 里加了个 <code>blacklist ucsi_ccg</code> 的 conf 屏蔽了这个，好像没什么不良影响……</p>
 <p>然后是奇怪的 Windows 的问题，我一开始装的 LTSC，不知道怎么回事输入法没了……折腾无果只能重装。以及现在除了不要联网装 Windows 之外（否则会强制你登录微软账户然后用你名字拼音前五位做用户名），还得不要联网装 NVIDIA 驱动，否则 Win10 自动更新驱动会给你安装 DCH 版的，虽然没什么影响（只是在 NVIDIA 官网升级驱动时候不能选标准选 DCH），但是就是让人很不爽。声卡驱动要装主板厂商的，Win10 自带的只能输出，不能接麦克风录音，然后如果麦克风声音很小就打开 Realtek 的声音控制程序，在右上角齿轮里取消掉什么把所有输入结合到一起的设定（什么乱七八糟的玩意！）。还有要关掉快速启动，不然直接开机会卡在黑屏一个鼠标光标……反正就很烦人。</p>
 <p>更新：还有一个奇怪的问题是 Win10 关机重启也要卡很久，上网搜了一下全是一些忽悠小白的办法，经过我不懈搜索发现了一个熟悉的名字 <code>UCSI</code>！微软承认存在 <code>UCSI</code> 问题，既然又是这个 <code>UCSI</code>，多半还是 NVIDIA Type-C 的问题！反正我没这个接口，果断重新安装 N 卡驱动，选择清洁安装（删除旧驱动）并不勾选 Type-C Driver，问题解决……</p>
-<p>最后既然设备到位了，大概就每周一三四五晚上八点半在 <a href="https://live.bilibili.com/4312992" target="_blank" rel="noreferrer noopener">Bilibili 4312991 直播间</a> 播一个半小时游戏，反正我玩什么播什么，大概就 CSGO Dota2 PUBG 什么的吧，尼尔也有可能，反正不是恶心反胃的就可以。周末随缘直播，如果没什么事情白天就播一会，周二可能晚一点开播因为有课。</p>
+<p>最后既然设备到位了，大概就每周一三四五晚上八点半在 <a href="https://live.bilibili.com/4312992" target="_blank" rel="external nofollow noreferrer noopener">Bilibili 4312991 直播间</a> 播一个半小时游戏，反正我玩什么播什么，大概就 CSGO Dota2 PUBG 什么的吧，尼尔也有可能，反正不是恶心反胃的就可以。周末随缘直播，如果没什么事情白天就播一会，周二可能晚一点开播因为有课。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
@@ -343,7 +342,7 @@
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
     <div id="wechatpay">
@@ -484,17 +483,17 @@
       <div><i class="far fa-address-card"></i>社交链接</div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
         
-        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
         
-        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
         
-        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
         
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
         
       </ul>
     </div>
@@ -505,29 +504,29 @@
       <div><i class="fas fa-user-friends"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">Arch Linux 星球</a></li>
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
         
       </ul>
     </div>
@@ -549,7 +548,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
         
         <div class="busuanzi">
@@ -564,7 +563,7 @@
           
         </div>
         <div class="powered-by">
-          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
         </div>
       </div>
     </div>
@@ -574,4 +573,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:45:40 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 12:09:58 CST. -->

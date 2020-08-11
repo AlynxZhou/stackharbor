@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
@@ -261,15 +260,15 @@
       <p>我早就想把 cheerio 从 Hikaru 的依赖里移出去了，倒不是我对他的功能有什么不满，但是一年不更新 NPM 上的包也太恶心了吧！</p>
 <a id="more"></a>
 <p>我的生成器使用 cheerio 的地方主要有两个，一是给标题生成喵点并依次生成 TOC，二是检查文章里相对路径的图片和链接引用并改成绝对路径，否则如果截取之后放在首页的摘要包含图片的话，会因为当前页面的地址变化而不工作。后者也是我自己编写生成器的原因之一，就是因为像 Hexo 或者 Hugo 这种已有的生成器内部并没有考虑，只能通过插件解决，我在写 Hexo 主题时嵌入了一个使用正则表达式的脚本，但相比之下我觉得还是一个能理解 HTML 的库更加可靠。所以后来我选了 cheerio 来做解析和修改以实现这些功能。</p>
-<p>但是 cheerio 有一个 <a href="https://github.com/cheeriojs/cheerio/issues/1198" target="_blank" rel="noreferrer noopener">很古怪的 bug</a>，存在于它目前在 NPM 上最新的版本 <code>1.0.0-rc3</code> 上。假如你使用 cheerio 解析并编辑包含中文的 HTML 的话，导出字符串时所有的中文都被编码成了 HTML 实体，导致进行下一步处理比如用 <code>substring</code> 截断的话，字符串长度变化了，而且可能会在文字中间截断。假如你使用 <code>decodeEntities: false</code> 的话，原本文档里的 <code>&amp;lt;</code> 一类的字符反而会被 cheerio 导出成 <code>&lt;</code>，变成一团乱麻。</p>
+<p>但是 cheerio 有一个 <a href="https://github.com/cheeriojs/cheerio/issues/1198" target="_blank" rel="external nofollow noreferrer noopener">很古怪的 bug</a>，存在于它目前在 NPM 上最新的版本 <code>1.0.0-rc3</code> 上。假如你使用 cheerio 解析并编辑包含中文的 HTML 的话，导出字符串时所有的中文都被编码成了 HTML 实体，导致进行下一步处理比如用 <code>substring</code> 截断的话，字符串长度变化了，而且可能会在文字中间截断。假如你使用 <code>decodeEntities: false</code> 的话，原本文档里的 <code>&amp;lt;</code> 一类的字符反而会被 cheerio 导出成 <code>&lt;</code>，变成一团乱麻。</p>
 <p>这个 bug 非常古怪并且我花了一段时间来研究它，上一个版本 <code>0.22.0</code> 使用 <code>decodeEntities: false</code> 是没有这个问题的。最后发现原因是 cheerio 在 <code>1.0.0-rc1</code> 开始引入 parse5 代替原本的 htmlparser2 作为默认的 HTML 解析器，而 parse5 在解析时并不会使用 <code>decodeEntities</code> 这个参数，比如你输入 <code>&amp;lt;</code>，parse5 解析时会在节点里存储原本的值 <code>&lt;</code>，但 cheerio 在序列化的时候还是会依赖这个参数进行编码，所以假如传递 <code>false</code> 进去，cheerio 就不会主动进行 encode，导致最后出来的是 <code>&lt;</code>。而 htmlparser2 会按照这个参数选择解不解码，所以也不会发生这种错误。</p>
 <p>那这么看起来是 parse5 的问题？并不！parse5 有自己的序列化函数，和自己的解析函数是配套的，所以只要使用 parse5 的序列化函数就不会存在这个问题了。</p>
 <p>最后总结起来修复的办法也有很多：首先其实序列化的时候并不需要将所有元素都编码成 HTML 实体，只要对几个字符进行转义即可，我提交了这样的 PR，但因为 cheerio 和它自己的序列化库 dom-serializer 是两个仓库，不是很好处理，而且其实也没有从根源上解决 htmlparser2 和 parse5 表现不一致的问题。cheerio 后来的提交中采用的是简单办法，假如使用 parse5 解析就继续使用 parse5 序列化就好了。</p>
 <p>但是这个提交之后并没有发布到 NPM 上，NPM 挂的一直是有问题的 <code>1.0.0-rc3</code> 版本，至于原因呢很简单，他们打算释出第一个稳定版本 <code>1.0.0</code>，所以要等到所有 TODO 都解决了再发新版本！</p>
 <p>搞毛啊老哥，你这样放着有 bug 的版本是把用户做宝搞吗？而且你是个函数库，下面好多人依赖你处理 DOM 呢，NodeJS 上提供 jQuery 模式的函数库大概也没什么别的替代品了，一堆项目在 issue 里问你就给个这破理由？</p>
 <p>我选择的是锁死 <code>0.22.0</code> 版本，其他下游的项目也都各自做了 workaround，要么安装 GitHub 上的 <code>1.0.0</code> 分支要么回退版本。但总之都让强迫症很不爽啊！</p>
-<p>大家等他发稳定版就这么等了一年，在这一年间有些项目比如 <a href="https://github.com/hexojs/hexo/issues/3677" target="_blank" rel="noreferrer noopener">Hexo 直接抛弃了 cheerio 用正则处理 HTML</a>，虽然他们主要是为了性能。我倒不是那么在乎生成器的性能（真的在乎的话我就该去用 Hugo，而且我也不敢说我自己的代码写的很好）。</p>
-<p>晚上睡觉前我突然想到假如只是过滤链接和图片并检查他们的属性的话其实不需要 jQuery 一样的 API，只需要能理解 HTML，那找个简单的解析器就可以了。而且第二天正好读了 <a href="https://blog.phoenixlzx.com/2017/02/18/dont-ask-me-why-invent-another-planet-river-of-news/#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8" target="_blank" rel="noreferrer noopener">卷老师的这篇博文</a>，发现和我想的也差不多。于是就开始动手。</p>
+<p>大家等他发稳定版就这么等了一年，在这一年间有些项目比如 <a href="https://github.com/hexojs/hexo/issues/3677" target="_blank" rel="external nofollow noreferrer noopener">Hexo 直接抛弃了 cheerio 用正则处理 HTML</a>，虽然他们主要是为了性能。我倒不是那么在乎生成器的性能（真的在乎的话我就该去用 Hugo，而且我也不敢说我自己的代码写的很好）。</p>
+<p>晚上睡觉前我突然想到假如只是过滤链接和图片并检查他们的属性的话其实不需要 jQuery 一样的 API，只需要能理解 HTML，那找个简单的解析器就可以了。而且第二天正好读了 <a href="https://blog.phoenixlzx.com/2017/02/18/dont-ask-me-why-invent-another-planet-river-of-news/#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8" target="_blank" rel="external nofollow noreferrer noopener">卷老师的这篇博文</a>，发现和我想的也差不多。于是就开始动手。</p>
 <p>卷老师用的 sanitize-html 对我来说不太合适，因为我的静态生成器并不需要过滤内容——都是 Markdown 生成的，而且不安全也是使用者自己故意写的，不是我的责任，生成器也没有不安全的 HTML 的运行环境。sanitize-html 和 cheerio 用的都是 htmlparser2 作为解析器，虽然它号称自己是跑得最快的 HTML 解析器，但经过之前那个问题我还是心有余悸。而且 htmlparser2 是非常简单的基于事件回调的解析器（就像 Python 自带的那个，我太久不写 Python 不记得叫什么了），不会给你构建树状结构也不包含序列化，自己写序列化就容易像之前那个 cheerio bug 一样出问题。所以我考察了一下 parse5 发现还不错，会构建树状结构，数据结构都写在文档里，同时就是简单的可以直接操作的 Object，至于速度虽然慢一点但我并不太在乎那 10 毫秒。</p>
 <p>于是我就先手动造了一些 wrapper 函数比如递归前置遍历一颗树来代替 cheerio 的 <code>$.each()</code>，前置遍历正好是 HTML 文档自上往下的顺序，生成 TOC 的时候也是按照这个顺序来的，然后就是比如获取结点内文本的函数、获取属性和设置属性的函数之类的。至于插入结点我想了个巧妙的办法，因为 parse5 把最终解析到的文本作为单独的结点，我就直接在插入文本的函数里让 parse5 解析输入的 HTML，然后用得到的子结点替换被插入结点的子结点即可。</p>
 <p>随后我重写了生成 TOC，生成标题 ID 和检查文章里相对路径的图片和链接引用并改成绝对路径的函数。然后写了点简单的测试样例跑了一下发现没问题，就用它们替换掉 Hikaru 的 <code>utils.js</code> 里面用 cheerio 的版本，然后修改了 process 代码。我造的这几个简单的 wrapper 完全符合我的要求，于是提交打版本号发布一气呵成，一年不更新的 cheerio 就从我的生成器里拜拜了。</p>
@@ -305,7 +304,7 @@
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
     <div id="wechatpay">
@@ -446,17 +445,17 @@
       <div><i class="far fa-address-card"></i>社交链接</div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
         
-        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
         
-        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
         
-        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
         
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
         
       </ul>
     </div>
@@ -467,29 +466,29 @@
       <div><i class="fas fa-user-friends"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">Arch Linux 星球</a></li>
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
         
       </ul>
     </div>
@@ -511,7 +510,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
         
         <div class="busuanzi">
@@ -526,7 +525,7 @@
           
         </div>
         <div class="powered-by">
-          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
         </div>
       </div>
     </div>
@@ -536,4 +535,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:45:40 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 12:09:58 CST. -->

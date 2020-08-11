@@ -5,22 +5,7 @@ div.reward {
   color: #666;
   color: var(--color-reward-font);
 }
-div.reward div.qr {
-  text-align: center;
-}
-div.reward div.qr div {
-  padding: 0.5em;
-  display: inline-block;
-}
-div.reward div.qr div img {
-  width: 10em;
-  margin: 0 auto;
-  display: block;
-}
-div.reward div.qr div span {
-  display: block;
-}
-div.reward button.button {
+button.reward-button {
   cursor: pointer;
   border: none;
   outline: 0;
@@ -29,13 +14,28 @@ div.reward button.button {
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
 }
-article.post header.post-header {
+div.qr {
   text-align: center;
 }
-article.post header.post-header h1.post-title-simple {
+div.qr div {
+  padding: 0.5em;
+  display: inline-block;
+}
+div.qr div img {
+  width: 10em;
+  margin: 0 auto;
+  display: block;
+}
+div.qr div span {
+  display: block;
+}
+header.post-header {
+  text-align: center;
+}
+h1.post-title-simple {
   margin: 0;
 }
-article.post header.post-header h1.post-title a.post-title-link {
+h1.post-title a.post-title-link {
   display: inline-block;
   position: relative;
   text-decoration: none;
@@ -43,7 +43,7 @@ article.post header.post-header h1.post-title a.post-title-link {
   color: #26272b;
   color: var(--color-font);
 }
-article.post header.post-header h1.post-title a.post-title-link::after {
+h1.post-title a.post-title-link::after {
   content: " ";
   position: absolute;
   width: 100%;
@@ -56,57 +56,52 @@ article.post header.post-header h1.post-title a.post-title-link::after {
   visibility: hidden;
   transform: scaleX(0);
 }
-article.post header.post-header h1.post-title a.post-title-link:hover::after {
+h1.post-title a.post-title-link:hover::after {
   visibility: visible;
   transform: scaleX(1);
 }
-article.post header.post-header h1.post-title a.post-title-link:active {
+h1.post-title a.post-title-link:active {
   top: 0.1em;
 }
-article.post header.post-header div.post-meta span.meta-block {
+span.meta-block {
   display: block;
   margin: 0.5em;
 }
-article.post main.post-main a.header-link,
-article.post main.post-main a.headerlink {
+a.header-link,
+a.headerlink {
   border-bottom: none;
 }
-article.post main.post-main a.header-link:hover,
-article.post main.post-main a.headerlink:hover {
+a.header-link:hover,
+a.headerlink:hover {
   border-bottom: none;
 }
-article.post main.post-main a.header-link:active,
-article.post main.post-main a.headerlink:active {
+a.header-link:active,
+a.headerlink:active {
   top: 0;
 }
-article.post main.post-main a.header-link::before,
-article.post main.post-main a.headerlink::before {
+a.header-link::before,
+a.headerlink::before {
   content: "#";
   margin-right: 0.3em;
 }
-article.post a.post-tag {
+a.post-tag {
+  margin: 0.1em 0.5em;
   display: inline-block;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
   padding: 0.15em;
 }
-article.post a.post-tag:nth-child(2n) {
+a.post-tag:nth-child(2n) {
   background: #237f23;
   border: 0.1em solid #c3e6cb;
 }
-article.post a.post-tag:nth-child(3n) {
+a.post-tag:nth-child(3n) {
   background: #2356af;
   border: 0.1em solid #b8daff;
 }
-article.post footer.post-footer {
+footer.post-footer {
   text-align: center;
 }
-article.post footer.post-footer div.post-tags a.post-tag {
-  margin: 0.5em;
-}
-article.post div.tags-cloud {
+div.tags-cloud {
   text-align: center;
-}
-article.post div.tags-cloud a.post-tag {
-  margin: 0.1em 0.5em;
 }

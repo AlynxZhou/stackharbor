@@ -5,7 +5,7 @@ header.header {
   background: #33363b;
   color: #eee;
 }
-header.header div.header-container {
+div.header-container {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
@@ -13,52 +13,49 @@ header.header div.header-container {
   flex-wrap: nowrap;
   padding: 1em;
 }
-header.header div.header-container div.header-title {
+div.header-title {
   text-align: left;
   width: 50%;
   word-wrap: break-word;
   flex: 1 1 auto;
   color: #eee;
 }
-header.header div.header-container div.header-title a {
+div.header-title a {
   color: #eee;
   text-decoration: none;
   border-bottom: none;
 }
-header.header div.header-container div.header-title a:hover {
+div.header-title a:hover {
   color: #eee;
   border-bottom: none;
 }
-header.header div.header-container div.header-title a:active {
+div.header-title a:active {
   top: 0;
 }
-header.header div.header-container div.header-title h1.title {
+h1.title {
   font: bold 2rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   margin: 0 0 0.5em 0;
 }
-header.header div.header-container div.header-title h2.subtitle {
+h2.subtitle {
   font: italic 1.5rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   margin: 0.5em 0 0 0;
 }
-header.header div.header-container div.logo {
+div.logo {
   text-align: right;
   width: 50%;
   flex: 1 1 auto;
 }
-header.header div.header-container div.logo img {
+div.logo img {
   display: inline-block;
   max-height: 5em;
   width: auto;
 }
 @media (max-width: 40em) {
-  header.header div.header-container {
+  div.header-container {
     flex-direction: column-reverse;
   }
-  header.header div.header-container div.header-title {
-    text-align: center;
-    width: auto;
-  }
-  header.header div.header-container div.logo {
+  div.header-title,
+  div.logo {
     text-align: center;
     width: auto;
   }
@@ -76,23 +73,6 @@ nav.nav {
   justify-content: stretch;
   align-items: stretch;
   flex-wrap: nowrap;
-}
-nav.nav button.nav-toggle {
-  display: none;
-  text-align: center;
-  border: none;
-  outline: 0;
-  background: inherit;
-  font-size: 2rem;
-  cursor: pointer;
-  color: #ddd;
-  width: 100%;
-  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
-}
-nav.nav button.nav-toggle:hover {
-  color: #fff;
-  background: #252525;
-  border: none;
 }
 nav.nav ul {
   display: block;
@@ -135,10 +115,9 @@ nav.nav ul li a.current {
   color: #fff;
   background: #222;
 }
-nav.nav button.theme-toggle {
-  display: block;
+button.nav-toggle,
+button.theme-toggle {
   flex: 0 0 auto;
-  width: 5%;
   text-align: center;
   border: none;
   outline: 0;
@@ -148,19 +127,24 @@ nav.nav button.theme-toggle {
   color: #ddd;
   transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 }
-nav.nav button.theme-toggle:hover {
+button.nav-toggle:hover,
+button.theme-toggle:hover {
   color: #fff;
   background: #252525;
   border: none;
+}
+button.nav-toggle {
+  display: none;
+  width: 100%;
+}
+button.theme-toggle {
+  display: block;
+  width: 5%;
 }
 @media (max-width: 40em) {
   nav.nav {
     flex-direction: column;
     padding: 0;
-  }
-  nav.nav button.nav-toggle {
-    display: block;
-    flex: auto;
   }
   nav.nav ul {
     display: none;
@@ -171,9 +155,10 @@ nav.nav button.theme-toggle:hover {
     text-align: center;
     margin: 0.1em 0;
   }
-  nav.nav button.theme-toggle {
+  button.nav-toggle,
+  button.theme-toggle {
     display: block;
-    flex: auto;
+    flex: 1 1 auto;
     width: 100%;
   }
 }
@@ -183,7 +168,7 @@ main.main {
   margin-top: -3em;
   margin-bottom: 1.5em;
 }
-main.main div.main-container {
+div.main-container {
   width: auto;
   background: #eee;
   background: var(--color-main-background);
@@ -197,15 +182,15 @@ main.main div.main-container {
   flex-wrap: nowrap;
   padding: 0;
 }
-main.main div.main-container div.content {
+div.content {
   flex: 3 3 auto;
   width: 75%;
 }
 @media (max-width: 60em) {
-  main.main div.main-container {
+  div.main-container {
     flex-direction: column;
   }
-  main.main div.main-container div.content {
+  div.content {
     width: 100%;
   }
 }
@@ -213,31 +198,6 @@ footer.footer {
   flex: 0 0 auto;
   background: #33363b;
   color: #eee;
-}
-footer.footer div.footer-container {
-  width: auto;
-  word-wrap: break-word;
-  line-height: 2;
-  padding: 1em;
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: stretch;
-  flex-wrap: nowrap;
-}
-footer.footer div.footer-container div.footer-left {
-  flex: 1 1 auto;
-  text-align: left;
-  width: 50%;
-}
-footer.footer div.footer-container div.footer-right {
-  flex: 1 1 auto;
-  text-align: right;
-  width: 50%;
-}
-footer.footer div.footer-container div.footer-right div.custom-info {
-  width: 100%;
-  word-wrap: break-word;
 }
 footer.footer a {
   position: relative;
@@ -253,11 +213,37 @@ footer.footer a:hover {
 footer.footer a:active {
   top: 0.1em;
 }
-footer.footer div.back-to-top {
+div.footer-container {
+  width: auto;
+  word-wrap: break-word;
+  line-height: 2;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+div.footer-left,
+div.footer-right {
+  flex: 1 1 auto;
+  width: 50%;
+}
+div.footer-left {
+  text-align: left;
+}
+div.footer-right {
+  text-align: right;
+}
+div.custom-info {
+  width: 100%;
+  word-wrap: break-word;
+}
+div.back-to-top {
   display: block;
   text-align: center;
 }
-footer.footer div.back-to-top button {
+div.back-to-top button {
   border: none;
   outline: 0;
   transition: color 0.3s ease-in-out;
@@ -272,21 +258,18 @@ footer.footer div.back-to-top button {
   border-radius: 0 0 0.3em 0.3em;
   font-size: 2rem;
 }
-footer.footer div.back-to-top button:hover {
+div.back-to-top button:hover {
   color: #36e;
   color: var(--color-link-hover-font);
   border: none;
 }
 @media (max-width: 40em) {
-  footer.footer div.footer-container {
+  div.footer-container {
     flex-direction: column-reverse;
     align-items: stretch;
   }
-  footer.footer div.footer-container div.footer-left {
-    text-align: center;
-    width: auto;
-  }
-  footer.footer div.footer-container div.footer-right {
+  div.footer-left,
+  div.footer-right {
     text-align: center;
     width: auto;
   }
@@ -309,6 +292,7 @@ footer.footer div.back-to-top button:hover {
   --color-table-even-row-background: #fff;
   --color-card-background: #fff;
   --color-hr-sidebar-background: #fff;
+  --color-sk-wave-background: #33363b;
   --color-comment-sk-wave-background: #666;
   --color-comment-font: #666;
   --color-comment-content-background: #fff;
@@ -337,6 +321,7 @@ footer.footer div.back-to-top button:hover {
   --color-table-even-row-background: #26272b;
   --color-card-background: #3d444c;
   --color-hr-sidebar-background: #ccc;
+  --color-sk-wave-background: #eee;
   --color-comment-sk-wave-background: #ddd;
   --color-comment-font: #ddd;
   --color-comment-content-background: #3d444c;
@@ -564,23 +549,23 @@ div.code-titlebar {
   padding: 0 0.25em;
   margin: 0;
 }
-div.code-titlebar div.titlebar-left {
+div.titlebar-left {
   flex: 0 0 auto;
   text-align: left;
   padding: 0 0.25em;
 }
-div.code-titlebar div.titlebar-center {
+div.titlebar-center {
   flex: 1 1 auto;
   text-align: center;
   padding: 0 0.25em;
 }
-div.code-titlebar div.titlebar-right {
+div.titlebar-right {
   flex: 0 0 auto;
   text-align: right;
   padding: 0 0.25em;
 }
-div.code-titlebar button.copy {
-  background: transparent;
+button.copy {
+  background: inherit;
   text-decoration: none;
   border: none;
   padding: 0;
@@ -589,14 +574,14 @@ div.code-titlebar button.copy {
   color: #ddd;
   transition: color 0.3s ease-in-out;
 }
-div.code-titlebar button.copy:hover {
+button.copy:hover {
   color: #fff;
   border: none;
 }
-div.code-titlebar button.copy.copied {
+button.copy.copied {
   color: #fff;
 }
-div.code-titlebar button.button-dot {
+button.button-dot {
   text-decoration: none;
   border: none;
   padding: 0;
@@ -606,17 +591,17 @@ div.code-titlebar button.button-dot {
   height: 1em;
   transition: opacity 0.3s ease-in-out;
 }
-div.code-titlebar button.button-dot:hover {
+button.button-dot:hover {
   opacity: 0.7;
   border: none;
 }
-div.code-titlebar button.dot-close {
+button.dot-close {
   background: #ff2a2a;
 }
-div.code-titlebar button.dot-maximize {
+button.dot-maximize {
   background: #37cf38;
 }
-div.code-titlebar button.dot-minimize {
+button.dot-minimize {
   background: #fdbc40;
 }
 figure.code-block {
@@ -630,11 +615,6 @@ figure.code-block {
   border-right: 0.1em solid #33363b;
   padding: 0;
   margin: 0;
-  -webkit-font-feature-settings: "liga" 0; /* No variation */
-  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
-  font-feature-settings: "liga" 0; /* No variation */
 }
 figure.code-block:not(.hljs) {
   color: #999;
@@ -644,6 +624,11 @@ figure.code-block pre {
   font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
   font-size: 16px;
   line-height: 1.5;
+  -webkit-font-feature-settings: "liga" 0; /* No variation */
+  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
+  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
+  font-feature-settings: "liga" 0; /* No variation */
   margin: 0;
 }
 figure.code-block pre.gutter {
@@ -665,7 +650,7 @@ figure.code-block pre.code code {
   margin: 0;
   padding: 0;
   color: inherit;
-  background: transparent;
+  background: inherit;
   word-wrap: normal;
   border-radius: 0;
 }
@@ -724,12 +709,40 @@ div.alert-blue {
   border: 0.1em solid #b8daff;
   background-color: #cce5ff;
 }
+div.sk-wave {
+  font-size: 1rem;
+  margin: 2em auto;
+  height: 3em;
+  text-align: center;
+}
+div.sk-rect {
+  background: #33363b;
+  background: var(--color-sk-wave-background);
+  height: 100%;
+  width: 0.5em;
+  display: inline-block;
+  animation: sk-wave-stretch-delay 1.2s infinite ease-in-out;
+  animation-delay: -1.2s;
+}
+div.sk-rect:nth-child(2n) {
+  animation-delay: -1.1s;
+}
+div.sk-rect:nth-child(3n) {
+  animation-delay: -1s;
+}
+div.sk-rect:nth-child(4n) {
+  animation-delay: -0.9s;
+}
+div.sk-rect:nth-child(5n) {
+  animation-delay: -0.8s;
+}
 article.card {
   display: block;
   transition: box-shadow 0.3s ease-in-out;
   background: #fff;
   background: var(--color-card-background);
   box-sizing: border-box;
+  overflow: hidden;
   border-radius: 0.3em;
   padding: 0.5em 1em;
   margin: 0.5em;
@@ -743,5 +756,37 @@ svg.svg-inline--fa {
 @media (max-width: 80em) {
   div.container {
     width: 100%;
+  }
+}
+@-moz-keyframes sk-wave-stretch-delay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
+@-webkit-keyframes sk-wave-stretch-delay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
+@-o-keyframes sk-wave-stretch-delay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
+@keyframes sk-wave-stretch-delay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
   }
 }

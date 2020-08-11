@@ -3,31 +3,6 @@ footer.footer {
   background: #33363b;
   color: #eee;
 }
-footer.footer div.footer-container {
-  width: auto;
-  word-wrap: break-word;
-  line-height: 2;
-  padding: 1em;
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: stretch;
-  flex-wrap: nowrap;
-}
-footer.footer div.footer-container div.footer-left {
-  flex: 1 1 auto;
-  text-align: left;
-  width: 50%;
-}
-footer.footer div.footer-container div.footer-right {
-  flex: 1 1 auto;
-  text-align: right;
-  width: 50%;
-}
-footer.footer div.footer-container div.footer-right div.custom-info {
-  width: 100%;
-  word-wrap: break-word;
-}
 footer.footer a {
   position: relative;
   color: #ddd;
@@ -42,11 +17,37 @@ footer.footer a:hover {
 footer.footer a:active {
   top: 0.1em;
 }
-footer.footer div.back-to-top {
+div.footer-container {
+  width: auto;
+  word-wrap: break-word;
+  line-height: 2;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+div.footer-left,
+div.footer-right {
+  flex: 1 1 auto;
+  width: 50%;
+}
+div.footer-left {
+  text-align: left;
+}
+div.footer-right {
+  text-align: right;
+}
+div.custom-info {
+  width: 100%;
+  word-wrap: break-word;
+}
+div.back-to-top {
   display: block;
   text-align: center;
 }
-footer.footer div.back-to-top button {
+div.back-to-top button {
   border: none;
   outline: 0;
   transition: color 0.3s ease-in-out;
@@ -61,21 +62,18 @@ footer.footer div.back-to-top button {
   border-radius: 0 0 0.3em 0.3em;
   font-size: 2rem;
 }
-footer.footer div.back-to-top button:hover {
+div.back-to-top button:hover {
   color: #36e;
   color: var(--color-link-hover-font);
   border: none;
 }
 @media (max-width: 40em) {
-  footer.footer div.footer-container {
+  div.footer-container {
     flex-direction: column-reverse;
     align-items: stretch;
   }
-  footer.footer div.footer-container div.footer-left {
-    text-align: center;
-    width: auto;
-  }
-  footer.footer div.footer-container div.footer-right {
+  div.footer-left,
+  div.footer-right {
     text-align: center;
     width: auto;
   }

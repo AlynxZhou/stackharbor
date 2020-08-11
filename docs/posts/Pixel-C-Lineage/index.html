@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
@@ -263,10 +262,10 @@
 <a id="more"></a>
 
 <p>由于刷机时候没拍照片我就不上图了，到手时候已经解锁了，不过既然是亲儿子想必也不会像一些国内厂商一样恶心你。按照 Lineage OS 的说法就是打开开发者选项里 <code>允许 OEM 解锁</code> 和 <code>允许 USB 调试</code>，按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后连接电脑，<code>fastboot devices</code>，如果检测到了就 <code>fastboot oem unlock</code>，然后结束之后重启。（会清除所有数据，并且解锁之后每次开机会在 bootloader 停止 30 秒）。</p>
-<p>首先是去 <a href="https://download.lineageos.org/dragon" target="_blank" rel="noreferrer noopener">Lineage OS 官网</a> 下载给 Pixel C（代号 dragon）的 nightly build ZIP。</p>
-<p>然后去 <a href="https://drive.google.com/drive/folders/0By6p5AdQfavBUTZmNWJoaU1iazg" target="_blank" rel="noreferrer noopener">这个 Google Drive</a> 下载开发者提供的 <code>vendor.img</code>。（<strong>务必要下载这个，如果有不止一个就选择最新的，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。</strong>）</p>
-<p>然后去 <a href="https://dl.twrp.me/dragon/" target="_blank" rel="noreferrer noopener">TWRP 官网</a> 下载给 Pixel C 用的 Recovery。</p>
-<p>需要 Google Apps 就去 <a href="https://opengapps.org" target="_blank" rel="noreferrer noopener">Open GApps</a> 下一个 ZIP，我用的是 <code>ARM64</code> -&gt; <code>8.1</code> -&gt; <code>stock</code>。</p>
+<p>首先是去 <a href="https://download.lineageos.org/dragon" target="_blank" rel="external nofollow noreferrer noopener">Lineage OS 官网</a> 下载给 Pixel C（代号 dragon）的 nightly build ZIP。</p>
+<p>然后去 <a href="https://drive.google.com/drive/folders/0By6p5AdQfavBUTZmNWJoaU1iazg" target="_blank" rel="external nofollow noreferrer noopener">这个 Google Drive</a> 下载开发者提供的 <code>vendor.img</code>。（<strong>务必要下载这个，如果有不止一个就选择最新的，因为 ROM 里不包含 vendor，其他下载的版本又和 ROM 包不匹配。</strong>）</p>
+<p>然后去 <a href="https://dl.twrp.me/dragon/" target="_blank" rel="external nofollow noreferrer noopener">TWRP 官网</a> 下载给 Pixel C 用的 Recovery。</p>
+<p>需要 Google Apps 就去 <a href="https://opengapps.org" target="_blank" rel="external nofollow noreferrer noopener">Open GApps</a> 下一个 ZIP，我用的是 <code>ARM64</code> -&gt; <code>8.1</code> -&gt; <code>stock</code>。</p>
 <p>如果你需要 Magisk 就自己去下载一个。</p>
 <p>把这些都放好，在自己电脑上安装 <code>adb</code> 和 <code>fastboot</code>，然后打开 <code>允许 USB 调试</code>。按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后 <code>fastboot flash recovery TWRP-IMG-FILE</code> 刷入 TWRP，然后再按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，选择 Recovery Mode 确认 TWRP 已经刷进去了。</p>
 <p>接下来在 TWRP 里面全部 wipe（syste, data, cache, sdcard），然后接上电脑用 <code>adb push FILE /sdcard/</code> 把下好的 ROM ZIP、<code>verdor.img</code> 和 OpenGApps ZIP 都 push 到 sdcard 里面。</p>
@@ -309,7 +308,7 @@
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
     <div id="wechatpay">
@@ -450,17 +449,17 @@
       <div><i class="far fa-address-card"></i>社交链接</div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
         
-        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
         
-        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
         
-        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
         
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
         
       </ul>
     </div>
@@ -471,29 +470,29 @@
       <div><i class="fas fa-user-friends"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">Arch Linux 星球</a></li>
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
         
       </ul>
     </div>
@@ -515,7 +514,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
         
         <div class="busuanzi">
@@ -530,7 +529,7 @@
           
         </div>
         <div class="powered-by">
-          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
         </div>
       </div>
     </div>
@@ -540,4 +539,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:45:40 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 12:09:58 CST. -->

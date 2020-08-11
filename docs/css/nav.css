@@ -12,23 +12,6 @@ nav.nav {
   align-items: stretch;
   flex-wrap: nowrap;
 }
-nav.nav button.nav-toggle {
-  display: none;
-  text-align: center;
-  border: none;
-  outline: 0;
-  background: inherit;
-  font-size: 2rem;
-  cursor: pointer;
-  color: #ddd;
-  width: 100%;
-  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
-}
-nav.nav button.nav-toggle:hover {
-  color: #fff;
-  background: #252525;
-  border: none;
-}
 nav.nav ul {
   display: block;
   list-style: none;
@@ -70,10 +53,9 @@ nav.nav ul li a.current {
   color: #fff;
   background: #222;
 }
-nav.nav button.theme-toggle {
-  display: block;
+button.nav-toggle,
+button.theme-toggle {
   flex: 0 0 auto;
-  width: 5%;
   text-align: center;
   border: none;
   outline: 0;
@@ -83,19 +65,24 @@ nav.nav button.theme-toggle {
   color: #ddd;
   transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 }
-nav.nav button.theme-toggle:hover {
+button.nav-toggle:hover,
+button.theme-toggle:hover {
   color: #fff;
   background: #252525;
   border: none;
+}
+button.nav-toggle {
+  display: none;
+  width: 100%;
+}
+button.theme-toggle {
+  display: block;
+  width: 5%;
 }
 @media (max-width: 40em) {
   nav.nav {
     flex-direction: column;
     padding: 0;
-  }
-  nav.nav button.nav-toggle {
-    display: block;
-    flex: auto;
   }
   nav.nav ul {
     display: none;
@@ -106,9 +93,10 @@ nav.nav button.theme-toggle:hover {
     text-align: center;
     margin: 0.1em 0;
   }
-  nav.nav button.theme-toggle {
+  button.nav-toggle,
+  button.theme-toggle {
     display: block;
-    flex: auto;
+    flex: 1 1 auto;
     width: 100%;
   }
 }

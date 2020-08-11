@@ -1,22 +1,22 @@
-div.comment div.comment-results {
+div.comment-results {
   padding: 1em;
 }
-div.comment div.comment-results div.sk-wave div.sk-rect {
+div.comment-results div.sk-wave div.sk-rect {
   background: #666;
   background: var(--color-comment-sk-wave-background);
 }
-div.comment div.comment-results div.comment-fail {
+div.comment-fail {
   text-align: center;
   color: #666;
   color: var(--color-comment-font);
 }
-div.comment div.comment-results header.comments-header {
+header.comments-header {
   padding: 0.5em;
   text-align: center;
   color: #666;
   color: var(--color-comment-font);
 }
-div.comment div.comment-results main.comments-main div.comment {
+div.comment-result {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -24,109 +24,116 @@ div.comment div.comment-results main.comments-main div.comment {
   align-items: start;
   margin: 0.5em 0;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container {
+div.comment-avatar-container {
   flex: 1 1 auto;
   width: 10%;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container img.comment-avatar {
+img.comment-avatar {
   width: 70%;
   border: 0.1em solid #fff;
   border-radius: 50%;
   transition: box-shadow 0.3s ease-in-out, transform 1s ease-in-out;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-avatar-container img.comment-avatar:hover {
+img.comment-avatar:hover {
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   transform: rotateY(720deg);
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container {
+div.comment-body-container {
   flex: 9 9 auto;
   width: 90%;
+  box-sizing: border-box;
   overflow: hidden;
   border-radius: 0.3em;
+  transition: box-shadow 0.3s ease-in-out;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info {
+div.comment-body-container:hover {
+  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+}
+div.comment-info {
   padding: 0.5em;
   color: #eee;
   background: #33363b;
   overflow: auto;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a {
+div.comment-info a {
   position: relative;
   color: #ddd;
   text-decoration: none;
   border-bottom: 0.05em dotted #ddd;
   transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a:hover {
+div.comment-info a:hover {
   color: #fff;
   border-bottom: 0.05em solid #fff;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a:active {
+div.comment-info a:active {
   top: 0.1em;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a.comment-info-author {
+div.comment-info a.comment-info-author {
   margin: 0 0.5em;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info span.comment-info-date {
+div.comment-info span.comment-info-date {
   margin: 0 0.5em;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info span.comment-info-association {
+div.comment-info span.comment-info-association {
   margin: 0 0.5em;
   padding: 0 0.5em;
   border: 0.05em solid #eee;
   border-radius: 0.3em;
   color: #eee;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a.comment-info-link {
+div.comment-info a.comment-info-link {
   margin: 0 0.5em;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-info a.comment-info-link::before {
+div.comment-info a.comment-info-link::before {
   content: "#";
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content {
+div.comment-content {
   padding: 0.5em 1em;
   background: #fff;
   background: var(--color-comment-content-background);
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre {
+div.comment-content pre {
   overflow: auto;
   padding: 0.5em;
   border-radius: 0.3em;
-  background: #f8f8f8;
+  color: #999;
+  background: #26272b;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container div.comment-content pre code {
+div.comment-content pre code {
+  margin: 0;
+  padding: 0;
+  color: inherit;
   background: inherit;
+  word-wrap: normal;
+  border-radius: 0;
 }
-div.comment div.comment-results main.comments-main div.comment div.comment-body-container:hover {
-  box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
+footer.comments-footer {
+  padding: 0.5em;
+  text-align: center;
+  color: #666;
+  color: var(--color-comment-font);
 }
-div.comment div.comment-results footer.comments-footer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-}
-div.comment div.comment-results footer.comments-footer a.comment-send {
+a.comment-send {
   padding: 0.3em 1em;
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
 }
-div.page h1.page-title,
-div.page h2.page-title {
+h1.page-title,
+h2.page-title {
   text-align: center;
 }
-div.page h2.page-counter {
+h2.page-counter {
   text-align: center;
 }
-div.page nav.pagination {
+nav.pagination {
   margin: 0.5em 0;
   padding: 0.5em;
   display: block;
   text-align: center;
 }
-div.page nav.pagination a.page-number,
-div.page nav.pagination a.extend {
+a.page-number,
+a.extend {
   display: inline-block;
   font-size: 1.25rem;
   padding: 0.3em 0.5em;
@@ -137,15 +144,15 @@ div.page nav.pagination a.extend {
   border-bottom: 0.15em solid #666;
   border-bottom: 0.15em solid var(--color-link-font);
 }
-div.page nav.pagination a.page-number:hover,
-div.page nav.pagination a.extend:hover {
+a.page-number:hover,
+a.extend:hover {
   color: #36e;
   color: var(--color-link-hover-font);
   border-bottom: 0.15em solid #36e;
   border-bottom: 0.15em solid var(--color-link-hover-font);
 }
-div.page nav.pagination a.page-number.current,
-div.page nav.pagination a.extend.current {
+a.page-number.current,
+a.extend.current {
   color: #36e;
   color: var(--color-link-hover-font);
   border-bottom: 0.15em solid #36e;
@@ -153,14 +160,14 @@ div.page nav.pagination a.extend.current {
   border-top: 0.1em solid #36e;
   border-top: 0.1em solid var(--color-link-hover-font);
 }
-div.page nav.pagination span.space {
+span.space {
   display: inline-block;
   font-size: 1.25rem;
   margin: 0 0.25em;
   color: #666;
   color: var(--color-link-font);
 }
-div.page nav.page-nav {
+nav.page-nav {
   margin: 0 1em;
   padding: 0;
   display: flex;
@@ -169,11 +176,11 @@ div.page nav.page-nav {
   align-items: stretch;
   flex-wrap: nowrap;
 }
-div.page nav.page-nav div.page-nav-item {
+div.page-nav-item {
   flex: 1 1 auto;
   font-size: 1.2rem;
 }
-div.page nav.page-nav div.page-nav-item a {
+div.page-nav-item a {
   position: relative;
   display: inline-flex;
   flex-direction: row;
@@ -182,21 +189,21 @@ div.page nav.page-nav div.page-nav-item a {
   text-decoration: none;
   border-bottom: none;
 }
-div.page nav.page-nav div.page-nav-item a span {
+div.page-nav-item a span {
   margin: 0.3em;
 }
-div.page nav.page-nav div.page-nav-item a:active {
+div.page-nav-item a:active {
   top: 0.1em;
 }
-div.page nav.page-nav div.page-nav-next {
+div.page-nav-next {
   text-align: left;
 }
-div.page nav.page-nav div.page-nav-next a {
+div.page-nav-next a {
   justify-content: flex-start;
 }
-div.page nav.page-nav div.page-nav-prev {
+div.page-nav-prev {
   text-align: right;
 }
-div.page nav.page-nav div.page-nav-prev a {
+div.page-nav-prev a {
   justify-content: flex-end;
 }

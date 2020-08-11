@@ -127,16 +127,17 @@ libCDN:
   lgZoom: //cdn.jsdelivr.net/npm/lg-zoom.js@1.0.1/dist/lg-zoom.min.js
   lgVideo:
   busuanzi: //dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js
+  normalize:
+  marked:
+  avMin: //cdn1.lncld.net/static/js/3.0.4/av-min.js
+  valine: //unpkg.com/valine/dist/Valine.min.js
+  clipboard:
+  # Don't use camelCase for hljs theme CSS files,
+  # because they need to keep the same as highlight values.
   atom-one-dark:
   atom-one-light:
   solarized-dark:
   solarized-light:
-  normalize:
-  marked:
-  spinkit:
-  avMin: //cdn1.lncld.net/static/js/3.0.4/av-min.js
-  valine: //unpkg.com/valine/dist/Valine.min.js
-  clipboard:
 
 social:
   enable: true

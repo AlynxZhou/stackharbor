@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
@@ -262,8 +261,8 @@
 <a id="more"></a>
 
 <p>今天想给 Hikaru 添加文章时间显示时区的功能，本来以为只要无脑调用 Moment.js 就好了，但发现其中坑有很多，本来我就很不擅长计算时区转换，难度变得很大，好在后来处理完了，记录一下遇到的坑。</p>
-<p>首先 Moment 是不支持地区解析和时区显示的，需要安装 <code>moment-timezone</code> 这个扩展包才可以处理，文档在<a href="https://momentjs.com/timezone/docs/" target="_blank" rel="noreferrer noopener">这里</a>。</p>
-<p>然后就是 js-yaml 开发者认为是标准但我觉得是 Bug 的<a href="https://github.com/nodeca/js-yaml/issues/91" target="_blank" rel="noreferrer noopener">问题</a>。我在 front matter 里写的时间是不包含时区的，比如 <code>2018-12-31 16:00:00</code>，按照正常的解析方式（就是直接 <code>new Date("2018-12-31 16:00:00")</code>），应当把这个时间当作 localtime 来看待，也就是 UTC+8h 的时间，但偏偏 js-yaml 的开发者认为按照 YAML 标准应当把这个时间当作 UTC 来处理（问题是他 <strong>根本解析不了附加时区的表示方式啊！</strong>）然后时间就错乱了，不过还好，JS Date() 对象内置的 <code>getTimezoneOffset()</code> 方法可以获取到 UTC 与 localtime 的分钟差（和标注的 UTC+8h 正好相反，这个是 -8h，在这里正好把这个错误的 UTC 换算回正确的 UTC）。具体的代码如下。</p>
+<p>首先 Moment 是不支持地区解析和时区显示的，需要安装 <code>moment-timezone</code> 这个扩展包才可以处理，文档在<a href="https://momentjs.com/timezone/docs/" target="_blank" rel="external nofollow noreferrer noopener">这里</a>。</p>
+<p>然后就是 js-yaml 开发者认为是标准但我觉得是 Bug 的<a href="https://github.com/nodeca/js-yaml/issues/91" target="_blank" rel="external nofollow noreferrer noopener">问题</a>。我在 front matter 里写的时间是不包含时区的，比如 <code>2018-12-31 16:00:00</code>，按照正常的解析方式（就是直接 <code>new Date("2018-12-31 16:00:00")</code>），应当把这个时间当作 localtime 来看待，也就是 UTC+8h 的时间，但偏偏 js-yaml 的开发者认为按照 YAML 标准应当把这个时间当作 UTC 来处理（问题是他 <strong>根本解析不了附加时区的表示方式啊！</strong>）然后时间就错乱了，不过还好，JS Date() 对象内置的 <code>getTimezoneOffset()</code> 方法可以获取到 UTC 与 localtime 的分钟差（和标注的 UTC+8h 正好相反，这个是 -8h，在这里正好把这个错误的 UTC 换算回正确的 UTC）。具体的代码如下。</p>
 <figure data-raw="const yaml = require(&quot;js-yaml&quot;)
 const d = yaml.safeLoad(&quot;2018-12-31 16:00:00&quot;)  // -> 2018-12-31T16:00:00.000Z
 new Date(&quot;2018-12-31 16:00:00&quot;) // -> 2018-12-31T08:00:00.000Z
@@ -349,7 +348,7 @@ moment.tz(moment(newd).format(<span class="hljs-string">"YYYY-MM-DD HH:mm:ss"</s
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
     <div id="wechatpay">
@@ -490,17 +489,17 @@ moment.tz(moment(newd).format(<span class="hljs-string">"YYYY-MM-DD HH:mm:ss"</s
       <div><i class="far fa-address-card"></i>社交链接</div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
         
-        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
         
-        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
         
-        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
         
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
         
       </ul>
     </div>
@@ -511,29 +510,29 @@ moment.tz(moment(newd).format(<span class="hljs-string">"YYYY-MM-DD HH:mm:ss"</s
       <div><i class="fas fa-user-friends"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">Arch Linux 星球</a></li>
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
         
       </ul>
     </div>
@@ -555,7 +554,7 @@ moment.tz(moment(newd).format(<span class="hljs-string">"YYYY-MM-DD HH:mm:ss"</s
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
         
         <div class="busuanzi">
@@ -570,7 +569,7 @@ moment.tz(moment(newd).format(<span class="hljs-string">"YYYY-MM-DD HH:mm:ss"</s
           
         </div>
         <div class="powered-by">
-          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
         </div>
       </div>
     </div>
@@ -580,4 +579,4 @@ moment.tz(moment(newd).format(<span class="hljs-string">"YYYY-MM-DD HH:mm:ss"</s
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:45:40 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 12:09:58 CST. -->

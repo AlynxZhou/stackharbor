@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
@@ -263,7 +262,7 @@
 <p>没有什么好说的，无非是些碎碎念，本猹发现自己似乎有了不用 HHKB 就没法安心写代码写网站的毛病。</p>
 <a id="more"></a>
 
-<p>叫喊着假期要学新语言选择了 Node.js 作为新目标，当然有很大的原因是 Hexo，然后发现自己还是 Too young too simple, sometimes naive 面对这么一个硬骨头无从下口，想要搞懂 Node 看来必须了解 Javascript，而 Javascript 似乎是个非常广阔的东西自己并没有找到详尽的参考，回头又发现前端的 Javascript 好多地方是不能直接拿到后端的 Node.js 上用的，然后抱着瞧一瞧看一看的思维由掉进了 CoffeeScript 的坑，用了两天时间看完了 Coffee 官网上的教程之后觉得不甚了解又想用这货写点什么，昨晚玩着 UNO 就突发奇想开了个<a href="https://github.com/AlynxZhou/uno-coffee/" target="_blank" rel="noreferrer noopener">新坑</a>想用 CoffeeScript 实现一个联机的 UNO 游戏，仔细想了想发现需要了解的还有很多，打算边走边看（弃坑什么的才不会呢！），好像似乎大概也就是自己写个 HTTP Server 用来交换信息再写个 HTML5 的界面然后可能还会有基于 Electron 的应用（神啊我再也不给自己立 Flag 了杀了我吧！）。</p>
+<p>叫喊着假期要学新语言选择了 Node.js 作为新目标，当然有很大的原因是 Hexo，然后发现自己还是 Too young too simple, sometimes naive 面对这么一个硬骨头无从下口，想要搞懂 Node 看来必须了解 Javascript，而 Javascript 似乎是个非常广阔的东西自己并没有找到详尽的参考，回头又发现前端的 Javascript 好多地方是不能直接拿到后端的 Node.js 上用的，然后抱着瞧一瞧看一看的思维由掉进了 CoffeeScript 的坑，用了两天时间看完了 Coffee 官网上的教程之后觉得不甚了解又想用这货写点什么，昨晚玩着 UNO 就突发奇想开了个<a href="https://github.com/AlynxZhou/uno-coffee/" target="_blank" rel="external nofollow noreferrer noopener">新坑</a>想用 CoffeeScript 实现一个联机的 UNO 游戏，仔细想了想发现需要了解的还有很多，打算边走边看（弃坑什么的才不会呢！），好像似乎大概也就是自己写个 HTTP Server 用来交换信息再写个 HTML5 的界面然后可能还会有基于 Electron 的应用（神啊我再也不给自己立 Flag 了杀了我吧！）。</p>
 <p>然后说着上次的换编辑器，大概是用上了 Atom，好多地方还得适应，首先就是不像 Emacs 几乎一套快捷键全搞定了，然后模仿 Emacs 键位的插件多多少少有些问题，某个插件导致 CPU 占用率上升，这个还没排除，总之以后有时间会解决的，最近光是把 Gentoo 换回 Arch Linux 就够折腾的了。</p>
 <p>接下来是重点！电磁炮真是太可爱了！</p>
 <p>具体怎么掉进 <strong>某科学的超电磁炮/科学超电磁炮</strong> 的坑说来很离奇。考完思修的下午紧接着就是两天周末休息，于是舍友高喊着应该看番放松一下，又补充了一句不看柯南，然后我就想起来说看电磁炮怎么样我一直想看（其实最早知道超炮还是 Android吧 的帖子 安吧基佬眼中的世界，其中有一幅 安吧基佬听到电磁炮 上面就是炮姐），结果舍友拒绝了，我就说那我自己看好了，打开 Bilibili 看了一集，又看了一集，又看了一集，又看了一集……然后发现由于实在太过好看剧情连贯发现自己根本停不下来，从六点一直刷到晚上十二点半刷了1-17集（其实二周目的时候发现自己不小心漏掉了第四集所以是看了16集），第二天早上起床还是没忍住用了一上午刷完了超炮第一季觉得这大概就是所谓的发现了自己的本命番的感觉美琴是真爱啊，然后决定把超炮S缓存下来留到回家的火车上看。这之间因为不过瘾又把魔法禁书目录小说/动漫里面美琴出现的地方都刷了一遍，了解了剧情走向也有点失望，于是又把科学超电磁炮的漫画刷了一遍（我也不知道窝一个从来不看漫画的人为什么会破例！)。</p>
@@ -308,7 +307,7 @@
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
     <div id="wechatpay">
@@ -449,17 +448,17 @@
       <div><i class="far fa-address-card"></i>社交链接</div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
         
-        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
         
-        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
         
-        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
         
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
         
       </ul>
     </div>
@@ -470,29 +469,29 @@
       <div><i class="fas fa-user-friends"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">Arch Linux 星球</a></li>
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
         
       </ul>
     </div>
@@ -514,7 +513,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
         
         <div class="busuanzi">
@@ -529,7 +528,7 @@
           
         </div>
         <div class="powered-by">
-          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
         </div>
       </div>
     </div>
@@ -539,4 +538,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:45:40 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 12:09:58 CST. -->

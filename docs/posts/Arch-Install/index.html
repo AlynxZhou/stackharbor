@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/spinkit.css">
     
 <link rel="stylesheet" type="text/css" href="/css/page.css">
 <link rel="stylesheet" type="text/css" href="/css/post.css">
@@ -265,10 +264,10 @@
 <a id="more"></a>
 
 <p>下面正文开始～   </p>
-<p>到<a href="https://www.archlinux.org/download/" target="_blank" rel="noreferrer noopener">Arch的下载页面</a>下载最新的镜像，Windows下用Win32diskmanager写入U盘，Linux下用   </p>
+<p>到<a href="https://www.archlinux.org/download/" target="_blank" rel="external nofollow noreferrer noopener">Arch的下载页面</a>下载最新的镜像，Windows下用Win32diskmanager写入U盘，Linux下用   </p>
 <figure data-raw="# dd if=~/archlinux-2014.07.03.iso of=/dev/sdb" data-info="language-bash" data-lang="bash" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-bash"><span class="hljs-comment"># dd if=~/archlinux-2014.07.03.iso of=/dev/sdb</span></code></pre></figure>
 <p>写入U盘。   </p>
-<p>开机按<f12>选择U盘引导， <em>Boot Arch Linux(x86_64)</em> ，root自动登录。可以手机看<a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noreferrer noopener">Arch Wiki新手指南</a>。~/有一份英文的install.txt，可以在tty2打开看。   </f12></p>
+<p>开机按<f12>选择U盘引导， <em>Boot Arch Linux(x86_64)</em> ，root自动登录。可以手机看<a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="external nofollow noreferrer noopener">Arch Wiki新手指南</a>。~/有一份英文的install.txt，可以在tty2打开看。   </f12></p>
 <p>首先   </p>
 <figure data-raw="# iw dev" data-info="language-bash" data-lang="bash" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-bash"><span class="hljs-comment"># iw dev</span></code></pre></figure>
 <p>记下无线接口名。本例为 <em>wlp2s0</em>    </p>
@@ -291,7 +290,7 @@
 <figure data-raw="# mount /dev/sda3 /mnt" data-info="language-bash" data-lang="bash" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-bash"><span class="hljs-comment"># mount /dev/sda3 /mnt</span></code></pre></figure>
 <p>挂载到/mnt。   </p>
 <figure data-raw="# nano /etc/pacman.d/mirrorlist" data-info="language-bash" data-lang="bash" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-bash"><span class="hljs-comment"># nano /etc/pacman.d/mirrorlist</span></code></pre></figure>
-<p>安装前需要编辑 <em>/etc/pacman.d/mirrorlist</em> , mirrorlist文件也会被pacstrap复制到新系统。到<a href="https://www.archlinux.org/mirrorlist/" target="_blank" rel="noreferrer noopener">镜像列表生成器</a>生成中国源列表添加到前面。   </p>
+<p>安装前需要编辑 <em>/etc/pacman.d/mirrorlist</em> , mirrorlist文件也会被pacstrap复制到新系统。到<a href="https://www.archlinux.org/mirrorlist/" target="_blank" rel="external nofollow noreferrer noopener">镜像列表生成器</a>生成中国源列表添加到前面。   </p>
 <figure data-raw="# pacman -Syy" data-info="language-bash" data-lang="bash" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-bash"><span class="hljs-comment"># pacman -Syy</span></code></pre></figure>
 <p>更新pacman数据。   </p>
 <figure data-raw="# pacstrap -i /mnt base base-devel" data-info="language-bash" data-lang="bash" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-bash"><span class="hljs-comment"># pacstrap -i /mnt base base-devel</span></code></pre></figure>
@@ -401,9 +400,9 @@ Server = http://repo.archlinuxcn.org/$arch" class="code-block highlight hljs"><p
 <figure data-raw="$ sudo pacman -Syu yaourt" data-info="language-bash" data-lang="bash" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-bash">$ sudo pacman -Syu yaourt</code></pre></figure>
 <p>可以自动安装AUR工具yaourt。   </p>
 <p>再次感谢好友Maxfan。   </p>
-<p>欢迎关注<a href="https://www.archlinux.org/" target="_blank" rel="noreferrer noopener">Arch Linux官网</a>   </p>
-<p><a href="http://www.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">中文官网</a>   </p>
-<p><a href="https://wiki.archlinux.org/index.php/Main_Page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noreferrer noopener">中文wiki</a>   </p>
+<p>欢迎关注<a href="https://www.archlinux.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux官网</a>   </p>
+<p><a href="http://www.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">中文官网</a>   </p>
+<p><a href="https://wiki.archlinux.org/index.php/Main_Page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="external nofollow noreferrer noopener">中文wiki</a>   </p>
 <p>2014-07-28 17:00   </p>
 <p><em>Alynx Zhou</em>   </p>
 <p><strong>A Coder &amp; Dreamer</strong>   </p>
@@ -439,7 +438,7 @@ Server = http://repo.archlinuxcn.org/$arch" class="code-block highlight hljs"><p
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
-  <button id="reward-button" class="button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
     
     <div id="wechatpay">
@@ -580,17 +579,17 @@ Server = http://repo.archlinuxcn.org/$arch" class="code-block highlight hljs"><p
       <div><i class="far fa-address-card"></i>社交链接</div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="noreferrer noopener">GitHub</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
         
-        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="noreferrer noopener">Telegram</a></li>
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
         
-        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="noreferrer noopener">Bilibili</a></li>
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
         
-        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="noreferrer noopener">Steam</a></li>
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
         
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="noreferrer noopener">Weibo</a></li>
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
         
       </ul>
     </div>
@@ -601,29 +600,29 @@ Server = http://repo.archlinuxcn.org/$arch" class="code-block highlight hljs"><p
       <div><i class="fas fa-user-friends"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="noreferrer noopener">Arch Linux 星球</a></li>
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="noreferrer noopener">H-el-ical//</a></li>
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="noreferrer noopener">Bo Lin's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="noreferrer noopener">Meow's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="noreferrer noopener">LGiki's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="noreferrer noopener">Art_Chen's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
         
-        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="noreferrer noopener">滑稽仓库</a></li>
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="noreferrer noopener">Sqyon's Blog</a></li>
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="noreferrer noopener">Nichi Yorozuya</a></li>
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
         
-        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="noreferrer noopener">惠狐之书</a></li>
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
         
       </ul>
     </div>
@@ -645,7 +644,7 @@ Server = http://repo.archlinuxcn.org/$arch" class="code-block highlight hljs"><p
     <div class="footer-container">
       <div class="footer-left">
         <div class="copyright">
-          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer noopener">BY-NC-ND 4.0</a></span>
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
         
         <div class="busuanzi">
@@ -660,7 +659,7 @@ Server = http://repo.archlinuxcn.org/$arch" class="code-block highlight hljs"><p
           
         </div>
         <div class="powered-by">
-          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="noreferrer noopener">ARIA</a>
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
         </div>
       </div>
     </div>
@@ -670,4 +669,4 @@ Server = http://repo.archlinuxcn.org/$arch" class="code-block highlight hljs"><p
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.7 at 2020-08-10 Mon 17:45:40 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 12:09:58 CST. -->
