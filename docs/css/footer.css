@@ -24,7 +24,7 @@ div.footer-container {
   padding: 1em;
   display: flex;
   justify-content: stretch;
-  align-items: stretch;
+  align-items: flex-end;
 }
 div.footer-left,
 div.footer-right {

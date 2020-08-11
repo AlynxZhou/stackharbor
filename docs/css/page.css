@@ -19,7 +19,7 @@ header.comments-header {
 div.comment-result {
   display: flex;
   justify-content: stretch;
-  align-items: stretch;
+  align-items: flex-start;
   margin: 0.5em 0;
 }
 div.comment-avatar-container {
@@ -167,7 +167,7 @@ nav.page-nav {
   padding: 0;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: flex-start;
 }
 div.page-nav-item {
   flex: 1 1 auto;

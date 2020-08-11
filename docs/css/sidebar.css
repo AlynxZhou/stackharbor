@@ -78,7 +78,7 @@ aside.sidebar hr {
   background: repeating-linear-gradient(-45deg, var(--color-hr-sidebar-background), var(--color-hr-sidebar-background) 0.25em, transparent 0.25em, transparent 0.5em);
 }
 div.search {
-  height: 2.5em;
+  height: 3em;
   display: block;
   text-align: center;
   background: #36e;
