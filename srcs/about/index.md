@@ -1,13 +1,11 @@
 ---
 title: about
 createdDate: 2016-04-04 14:36:20
-updatedDate: 2020-08-08 14:36:20
+updatedDate: 2020-08-11 17:01:00
 layout: page
 comment: true
 reward: false
 ---
-<div class="alert-green">网站竟然已经运行了四年零四个月零四天，cheers！</div>
-
 # 个人简介
 
 Alynx Zhou
@@ -36,7 +34,7 @@ Alynx Zhou
 
 5. Alynx 像猫一样懒。Alynx 是 Arch Linux CN 社区里稀有的 GNOME 用户之一，希望大家爱护稀有动物。
 
-6. Alynx 喜欢 Arch Linux，Atom，C，Coffee Script，Vala，GNOME，你也许喜欢与这些对立的软件，但是 **每个人选择自己喜欢的东西一定有她的理由**，所以 **请不要强行向 Alynx 安利你喜欢的东西**。
+6. Alynx 喜欢 Arch Linux、Atom、C、Coffee Script、Vala、GNOME、Firefox、Android，你也许喜欢与这些对立的软件，但是 **每个人选择自己喜欢的东西一定有她的理由**，所以 **请不要强行向 Alynx 安利你喜欢的东西**。
 
 7. Alynx 喜欢音乐，目前最喜欢的乐器是半音阶口琴，有不到 6 年的琴龄。学过 4 年二胡并通过了业余水平十级（虽然现在几乎忘光了），选了扬琴选修课所以大概了解一点点，其他了解一点的乐器还有长号，选到课的小提琴。
 
