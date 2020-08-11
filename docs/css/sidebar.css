@@ -29,10 +29,8 @@ h2.author-description {
 }
 div.site-count {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: stretch;
-  flex-wrap: nowrap;
   width: 100%;
   margin: 1em 0;
   text-align: center;
@@ -104,23 +102,18 @@ input.search-input::placeholder {
   opacity: 0.7;
 }
 button.search-submit {
-  position: relative;
+  position: static;
   transition: color 0.3s ease-in-out;
   color: #fff;
   text-decoration: none;
   padding: 0;
   margin: 0.25em;
-  box-sizing: border-box;
   background: inherit;
   border: none;
 }
 button.search-submit:hover {
   color: #ddd;
   border: none;
-}
-button.search-submit:active {
-  top: 0;
-  left: 0;
 }
 div.sidebar-item {
   margin: 1em;

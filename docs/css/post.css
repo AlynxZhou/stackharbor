@@ -1,6 +1,5 @@
 div.reward {
-  margin: 1em auto;
-  width: 90%;
+  margin: 1em;
   text-align: center;
   color: #666;
   color: var(--color-reward-font);
@@ -20,13 +19,11 @@ div.qr {
 div.qr div {
   padding: 0.5em;
   display: inline-block;
+  text-align: center;
 }
 div.qr div img {
   width: 10em;
   margin: 0 auto;
-  display: block;
-}
-div.qr div span {
   display: block;
 }
 header.post-header {
@@ -69,15 +66,12 @@ span.meta-block {
 }
 a.header-link,
 a.headerlink {
+  position: static;
   border-bottom: none;
 }
 a.header-link:hover,
 a.headerlink:hover {
   border-bottom: none;
-}
-a.header-link:active,
-a.headerlink:active {
-  top: 0;
 }
 a.header-link::before,
 a.headerlink::before {

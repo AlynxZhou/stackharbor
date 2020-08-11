@@ -1,6 +1,5 @@
 div.reward {
-  margin: 1em auto;
-  width: 90%;
+  margin: 1em;
   text-align: center;
   color: #666;
   color: var(--color-reward-font);
@@ -20,12 +19,10 @@ div.qr {
 div.qr div {
   padding: 0.5em;
   display: inline-block;
+  text-align: center;
 }
 div.qr div img {
   width: 10em;
   margin: 0 auto;
-  display: block;
-}
-div.qr div span {
   display: block;
 }

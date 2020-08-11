@@ -7,10 +7,8 @@ header.header {
 }
 div.header-container {
   display: flex;
-  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  flex-wrap: nowrap;
   padding: 1em;
 }
 div.header-title {
@@ -21,6 +19,7 @@ div.header-title {
   color: #eee;
 }
 div.header-title a {
+  position: static;
   color: #eee;
   text-decoration: none;
   border-bottom: none;
@@ -28,9 +27,6 @@ div.header-title a {
 div.header-title a:hover {
   color: #eee;
   border-bottom: none;
-}
-div.header-title a:active {
-  top: 0;
 }
 h1.title {
   font: bold 2rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;

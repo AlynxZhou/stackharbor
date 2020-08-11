@@ -1,5 +1,5 @@
-div.comment-results {
-  padding: 1em;
+div.comment {
+  margin: 1em;
 }
 div.comment-results div.sk-wave div.sk-rect {
   background: #666;
@@ -18,10 +18,8 @@ header.comments-header {
 }
 div.comment-result {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: stretch;
-  align-items: start;
+  align-items: stretch;
   margin: 0.5em 0;
 }
 div.comment-avatar-container {
@@ -41,7 +39,6 @@ img.comment-avatar:hover {
 div.comment-body-container {
   flex: 9 9 auto;
   width: 90%;
-  box-sizing: border-box;
   overflow: hidden;
   border-radius: 0.3em;
   transition: box-shadow 0.3s ease-in-out;
@@ -69,9 +66,7 @@ div.comment-info a:hover {
 div.comment-info a:active {
   top: 0.1em;
 }
-div.comment-info a.comment-info-author {
-  margin: 0 0.5em;
-}
+div.comment-info a.comment-info-author,
 div.comment-info span.comment-info-date {
   margin: 0 0.5em;
 }
@@ -171,10 +166,8 @@ nav.page-nav {
   margin: 0 1em;
   padding: 0;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  flex-wrap: nowrap;
 }
 div.page-nav-item {
   flex: 1 1 auto;
@@ -183,8 +176,6 @@ div.page-nav-item {
 div.page-nav-item a {
   position: relative;
   display: inline-flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   align-items: center;
   text-decoration: none;
   border-bottom: none;

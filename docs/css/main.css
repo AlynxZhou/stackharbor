@@ -8,14 +8,11 @@ div.main-container {
   width: auto;
   background: #eee;
   background: var(--color-main-background);
-  box-sizing: border-box;
   box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
   border-radius: 0 0 0.3em 0.3em;
   display: flex;
-  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  flex-wrap: nowrap;
   padding: 0;
 }
 div.content {

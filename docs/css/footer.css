@@ -23,10 +23,8 @@ div.footer-container {
   line-height: 2;
   padding: 1em;
   display: flex;
-  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  flex-wrap: nowrap;
 }
 div.footer-left,
 div.footer-right {
@@ -47,7 +45,7 @@ div.back-to-top {
   display: block;
   text-align: center;
 }
-div.back-to-top button {
+button.back-to-top {
   border: none;
   outline: 0;
   transition: color 0.3s ease-in-out;
@@ -62,7 +60,7 @@ div.back-to-top button {
   border-radius: 0 0 0.3em 0.3em;
   font-size: 2rem;
 }
-div.back-to-top button:hover {
+button.back-to-top:hover {
   color: #36e;
   color: var(--color-link-hover-font);
   border: none;

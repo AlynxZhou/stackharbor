@@ -7,10 +7,8 @@ header.header {
 }
 div.header-container {
   display: flex;
-  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  flex-wrap: nowrap;
   padding: 1em;
 }
 div.header-title {
@@ -21,6 +19,7 @@ div.header-title {
   color: #eee;
 }
 div.header-title a {
+  position: static;
   color: #eee;
   text-decoration: none;
   border-bottom: none;
@@ -28,9 +27,6 @@ div.header-title a {
 div.header-title a:hover {
   color: #eee;
   border-bottom: none;
-}
-div.header-title a:active {
-  top: 0;
 }
 h1.title {
   font: bold 2rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
@@ -61,18 +57,13 @@ div.logo img {
   }
 }
 nav.nav {
-  position: relative;
-  margin: 0;
   padding: 0 0.5em;
-  overflow: hidden;
   background: #33363b;
   box-shadow: 0 -0.5em 1em 0.5em rgba(0,0,0,0.19);
   border-radius: 0.3em 0.3em 0 0;
   display: flex;
-  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  flex-wrap: nowrap;
 }
 nav.nav ul {
   display: block;
@@ -87,13 +78,12 @@ nav.nav ul {
   white-space: nowrap;
 }
 nav.nav ul li {
-  position: relative;
   text-align: center;
   display: inline-block;
   margin: 0 0.1em;
 }
 nav.nav ul li a {
-  position: relative;
+  position: static;
   display: block;
   font-size: 1.5rem;
   line-height: 1.5;
@@ -107,9 +97,6 @@ nav.nav ul li a:hover {
   color: #fff;
   background: #252525;
   border-bottom: none;
-}
-nav.nav ul li a:active {
-  top: 0;
 }
 nav.nav ul li a.current {
   color: #fff;
@@ -172,14 +159,11 @@ div.main-container {
   width: auto;
   background: #eee;
   background: var(--color-main-background);
-  box-sizing: border-box;
   box-shadow: 0 0.5em 1em 0.5em rgba(0,0,0,0.19);
   border-radius: 0 0 0.3em 0.3em;
   display: flex;
-  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  flex-wrap: nowrap;
   padding: 0;
 }
 div.content {
@@ -219,10 +203,8 @@ div.footer-container {
   line-height: 2;
   padding: 1em;
   display: flex;
-  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  flex-wrap: nowrap;
 }
 div.footer-left,
 div.footer-right {
@@ -243,7 +225,7 @@ div.back-to-top {
   display: block;
   text-align: center;
 }
-div.back-to-top button {
+button.back-to-top {
   border: none;
   outline: 0;
   transition: color 0.3s ease-in-out;
@@ -258,7 +240,7 @@ div.back-to-top button {
   border-radius: 0 0 0.3em 0.3em;
   font-size: 2rem;
 }
-div.back-to-top button:hover {
+button.back-to-top:hover {
   color: #36e;
   color: var(--color-link-hover-font);
   border: none;
@@ -377,7 +359,6 @@ body {
   background: var(--color-background);
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
   justify-content: stretch;
   align-items: stretch;
 }
@@ -412,15 +393,13 @@ a:hover {
 a:active {
   top: 0.1em;
 }
-img {
-  max-width: 100%;
-}
 a.gallery-item,
 a.img-link {
   border-bottom: none;
 }
 a.gallery-item img,
 a.img-link img {
+  transition: box-shadow 0.3s ease-in-out;
   border: 0.15em solid #666;
   border: 0.15em solid var(--color-quote-font);
 }
@@ -434,6 +413,7 @@ a.img-link:hover img {
 }
 a#top,
 a#more {
+  position: static;
   border: none;
   margin: 0;
   padding: 0;
@@ -442,16 +422,9 @@ a#top:hover,
 a#more:hover {
   border: none;
 }
-a#top:active,
-a#more:active {
-  top: 0;
-}
 span.caption {
   color: #666;
   color: var(--color-quote-font);
-  display: block;
-  text-align: center;
-  margin: 0 0 1em 0;
 }
 a.button,
 button.button {
@@ -459,8 +432,6 @@ button.button {
   transition: box-shadow 0.3s ease-in-out;
   text-decoration: none;
   border-radius: 0.3em;
-  border-bottom: none;
-  box-sizing: border-box;
   color: #fff;
   background: #999;
   border: 0.1em solid #ddd;
@@ -479,31 +450,28 @@ hr {
   border: none;
   margin: 1.5em 0;
   width: 100%;
-  box-sizing: content-box;
   background: repeating-linear-gradient(-45deg, #ccc, #ccc 0.25em, transparent 0.25em, transparent 0.5em);
 }
 article table {
   margin: 0 auto;
-  border-spacing: 0;
-  border-collapse: collapse;
+}
+article table th {
+  padding: 0.4em 0.7em;
+  border: 0.1em solid #999;
+  border: 0.1em solid var(--color-table-head-border);
+}
+article table td {
+  padding: 0.4em 0.7em;
+  border: 0.1em solid #ddd;
+  border: 0.1em solid var(--color-table-border);
 }
 article table thead tr {
   background: #fff;
   background: var(--color-table-head-background);
 }
-article table thead tr th {
-  padding: 0.4em 0.7em;
-  border: 0.1em solid #999;
-  border: 0.1em solid var(--color-table-head-border);
-}
 article table tbody tr {
   background: #eee;
   background: var(--color-table-odd-row-background);
-}
-article table tbody tr td {
-  padding: 0.4em 0.7em;
-  border: 0.1em solid #ddd;
-  border: 0.1em solid var(--color-table-border);
 }
 article table tbody tr td:nth-child(2n) {
   background: #fff;
@@ -513,41 +481,33 @@ article table tbody tr:nth-child(2n) {
   background: #fff;
   background: var(--color-table-even-row-background);
 }
-article table tbody tr:nth-child(2n) td {
-  padding: 0.4em 0.7em;
-  border: 0.1em solid #ddd;
-  border: 0.1em solid var(--color-table-border);
-}
 article table tbody tr:nth-child(2n) td:nth-child(2n) {
   background: #eee;
   background: var(--color-table-odd-row-background);
 }
 code {
-  margin: 0 0.05em;
   padding: 0 0.25em;
   color: #fc6423;
   background: #f8f8f8;
-  overflow: auto;
   word-wrap: break-word;
   border-radius: 0.3em;
   font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  -webkit-font-feature-settings: "liga" 0; /* No variation */
-  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
-  font-feature-settings: "liga" 0; /* No variation */
+  font-feature-settings: "liga" 0;
+}
+pre {
+  font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-feature-settings: "liga" 0;
 }
 div.code-titlebar {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: stretch;
+  align-items: stretch;
   border-radius: 0.3em 0.3em 0 0;
   color: #fff;
   background: #33363b;
   padding: 0 0.25em;
-  margin: 0;
 }
 div.titlebar-left {
   flex: 0 0 auto;
@@ -570,7 +530,6 @@ button.copy {
   border: none;
   padding: 0;
   margin: 0.25em;
-  box-sizing: border-box;
   color: #ddd;
   transition: color 0.3s ease-in-out;
 }
@@ -606,8 +565,6 @@ button.dot-minimize {
 }
 figure.code-block {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: stretch;
   align-items: stretch;
   border-left: 0.1em solid #33363b;
@@ -621,14 +578,6 @@ figure.code-block:not(.hljs) {
   background: #26272b;
 }
 figure.code-block pre {
-  font-family: Monaco, Menlo, "Roboto Mono", Consolas, monospace, Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  line-height: 1.5;
-  -webkit-font-feature-settings: "liga" 0; /* No variation */
-  -moz-font-feature-settings: "liga=0"; /* Firefox 4.0 to 14.0 */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards */
-  -moz-font-feature-settings: "liga" 0; /* Firefox 15.0 onwards explicitly set feature values */
-  font-feature-settings: "liga" 0; /* No variation */
   margin: 0;
 }
 figure.code-block pre.gutter {
@@ -639,7 +588,6 @@ figure.code-block pre.gutter {
 }
 figure.code-block pre.code {
   flex: 1 1 auto;
-  text-align: left;
   padding: 0.5em;
   overflow: auto;
   scrollbar-width: thin;
@@ -741,7 +689,6 @@ article.card {
   transition: box-shadow 0.3s ease-in-out;
   background: #fff;
   background: var(--color-card-background);
-  box-sizing: border-box;
   overflow: hidden;
   border-radius: 0.3em;
   padding: 0.5em 1em;
