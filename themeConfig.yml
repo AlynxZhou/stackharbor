@@ -111,27 +111,28 @@ mathjax:
 # Note: `fontAwesome.loader` is `fontawesome.min.js`. `busuanzi` is `busuanzi.pure.mini.js`.
 # If you don't know what you are doing, don't change it.
 libCDN:
-  enable: false
+  enable: true
   fontAwesome:
-    loader:
-    solid:
-    brands:
-    regular:
+    loader: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/fontawesome.min.js
+    solid: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/solid.min.js
+    brands: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/brands.min.js
+    regular: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/regular.min.js
   lightGallery:
     js:
-    css: //cdn.jsdelivr.net/npm/lightgallery.js@1.0.2/dist/css/lightgallery.min.css
-  lgFullscreen: //cdn.jsdelivr.net/npm/lg-fullscreen.js@1.0.0/dist/lg-fullscreen.min.js
-  lgHash: //cdn.jsdelivr.net/npm/lg-hash.js@1.0.0/dist/lg-hash.min.js
-  lgPager: //cdn.jsdelivr.net/npm/lg-pager.js@1.0.0/dist/lg-pager.min.js
-  lgThumbnail: //cdn.jsdelivr.net/npm/lg-thumbnail.js@1.0.0/dist/lg-thumbnail.min.js
-  lgZoom: //cdn.jsdelivr.net/npm/lg-zoom.js@1.0.1/dist/lg-zoom.min.js
+    css:
+  lgFullscreen:
+  lgHash:
+  lgPager:
+  lgThumbnail:
+  lgZoom:
   lgVideo:
-  busuanzi: //dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js
+  busuanzi:
   normalize:
-  marked:
-  avMin: //cdn1.lncld.net/static/js/3.0.4/av-min.js
-  valine: //unpkg.com/valine/dist/Valine.min.js
-  clipboard:
+  marked: //cdn.bootcdn.net/ajax/libs/marked/1.1.1/marked.min.js
+  highlight: //cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js
+  avMin:
+  valine:
+  clipboard: //cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js
   # Don't use camelCase for hljs theme CSS files,
   # because they need to keep the same as highlight values.
   atom-one-dark:
