@@ -352,7 +352,7 @@
   <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
   <script type="text/javascript">
     documentReady(function () {
-      marked.setOptions({
+      window.marked.setOptions({
         "highlight": function (code, lang) {
           return hljs.highlightAuto(code).value;
         }
@@ -360,10 +360,13 @@
       loadComment({
         "user": "AlynxZhou",
         "repo": "stackharbor",
+        "perPage": "10",
         "sendButtonText": "去评论",
         "noCommentText": "这个页面还没有评论，现在就去评论吧！",
         "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
         "title": "生活在BJTU",
+        "queryString": window.location.search,
+        "basePath": "/posts/BJTU-Life/",
         "containerID": "comment-results"
       });
     });
@@ -563,4 +566,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 09:37:29 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 16:26:30 CST. -->

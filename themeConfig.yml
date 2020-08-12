@@ -221,6 +221,7 @@ comment:
     enable: true
     user: AlynxZhou
     repo: stackharbor
+    perPage: 10
   valine:
     enable: false
     appID:
