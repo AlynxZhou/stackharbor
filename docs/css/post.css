@@ -29,10 +29,16 @@ div.qr div img {
 header.post-header {
   text-align: center;
 }
-h1.post-title-simple {
-  margin: 0;
+div.post-title-simple {
+  font-size: 2rem;
+  font-weight: bold;
 }
-h1.post-title a.post-title-link {
+div.post-title {
+  font-size: 2rem;
+  margin: 0.67em 0;
+  font-weight: bold;
+}
+div.post-title a.post-title-link {
   display: inline-block;
   position: relative;
   text-decoration: none;
@@ -40,7 +46,7 @@ h1.post-title a.post-title-link {
   color: #26272b;
   color: var(--color-font);
 }
-h1.post-title a.post-title-link::after {
+div.post-title a.post-title-link::after {
   content: " ";
   position: absolute;
   width: 100%;
@@ -53,15 +59,14 @@ h1.post-title a.post-title-link::after {
   visibility: hidden;
   transform: scaleX(0);
 }
-h1.post-title a.post-title-link:hover::after {
+div.post-title a.post-title-link:hover::after {
   visibility: visible;
   transform: scaleX(1);
 }
-h1.post-title a.post-title-link:active {
+div.post-title a.post-title-link:active {
   top: 0.1em;
 }
-span.meta-block {
-  display: block;
+div.meta-block {
   margin: 0.5em;
 }
 a.header-link,
@@ -79,6 +84,7 @@ a.headerlink::before {
   margin-right: 0.3em;
 }
 a.post-tag {
+  line-height: 1.5;
   margin: 0.1em 0.5em;
   display: inline-block;
   background: #9f1313;

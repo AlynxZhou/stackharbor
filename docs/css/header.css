@@ -28,12 +28,12 @@ div.header-title a:hover {
   color: #eee;
   border-bottom: none;
 }
-h1.title {
-  font: bold 2rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+div.title {
+  font: bold 2rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif;
   margin: 0 0 0.5em 0;
 }
-h2.subtitle {
-  font: italic 1.5rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif, "Roboto Slab", "Noto Serif", "Noto Serif CJK", Georgia, "Times New Roman", serif;
+div.subtitle {
+  font: italic 1.5rem Roboto, "Noto Sans", "Noto Sans CJK", Helvetica, Arial, sans-serif;
   margin: 0.5em 0 0 0;
 }
 div.logo {

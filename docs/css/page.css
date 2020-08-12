@@ -114,12 +114,17 @@ a.comment-send {
   background: #9f1313;
   border: 0.1em solid #f5c6cb;
 }
-h1.page-title,
-h2.page-title {
+div.page-title {
   text-align: center;
+  font-size: 2rem;
+  margin: 0.67em 0;
+  font-weight: bold;
 }
-h2.page-counter {
+div.page-counter {
   text-align: center;
+  font-size: 1.5rem;
+  margin: 0.83em 0;
+  font-weight: bold;
 }
 nav.pagination {
   margin: 0.5em 0;

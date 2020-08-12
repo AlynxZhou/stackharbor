@@ -13,18 +13,16 @@ img.author-avatar:hover {
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   transform: rotateY(720deg);
 }
-h1.author-name {
+div.author-name {
   color: #26272b;
   color: var(--color-author-name-font);
   font-size: 1.8rem;
-  font-weight: normal;
   margin: 0.5em 0;
 }
-h2.author-description {
+div.author-description {
   color: #444;
   color: var(--color-author-description-font);
   font-size: 1.2rem;
-  font-weight: normal;
   margin: 0.5em 0;
 }
 div.site-count {

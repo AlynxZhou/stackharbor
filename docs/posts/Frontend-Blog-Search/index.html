@@ -15,7 +15,7 @@
     <meta name="keywords" content="Code, Music, Life, Linux, Arch Linux, Gentoo, JavaScript, ARIA, Hikaru">
     
     
-    <meta name="description" content="全ての存在は滅びるようにデザインされている">
+    <meta name="description" content="本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。 但是这个设计引发了 lilydjwg 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过 lilydjwg 给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。">
     
     <link rel="canonical" href="https://sh.alynx.one/posts/Frontend-Blog-Search/">
     
@@ -174,8 +174,8 @@
   <div class="container">
     <div class="header-container">
       <div class="header-title">
-        <h1 class="title"><a href="/">喵's StackHarbor</a></h1>
-        <h2 class="subtitle">Whisper to the World</h2>
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
       </div>
       
       <div class="logo">
@@ -225,7 +225,7 @@
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Frontend-Blog-Search/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="全ての存在は滅びるようにデザインされている">
+        <meta itemprop="description" content="Whisper to the World">
         <meta itemprop="image" content="/images/FutureGazerSmall.webp">
       </span>
       <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -233,25 +233,25 @@
       </span>
     </div>
     <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">前端博客搜索引擎</h1>
+      <div class="post-title" itemprop="name headline">前端博客搜索引擎</div>
       <div class="post-meta">
         
-        <span class="post-date meta-block">
+        <div class="post-date meta-block">
           <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-18T07:24:00.000Z">2019-09-18 Wed 15:24:00 CST</time></span>
-        </span>
+        </div>
         
         
         
-        <span class="post-categories meta-block">
+        <div class="post-categories meta-block">
           
           <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/ARIA/" itemprop="url" rel="index"><span itemprop="name">ARIA</span></a></span>
-        </span>
+        </div>
         
         
         
-        <span class="post-comment-count meta-block">
+        <div class="post-comment-count meta-block">
           <i class="far fa-comments"></i><span><a href="/posts/Frontend-Blog-Search/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="前端博客搜索引擎" itemprop="commentCount">阅读评论</span></a></span>
-        </span>
+        </div>
         
         
       </div>
@@ -412,8 +412,8 @@
     
     <img class="author-avatar" src="/images/FutureGazerSmall.webp" alt="Alynx Zhou">
     
-    <h1 class="author-name">Alynx Zhou</h1>
-    <h2 class="author-description">全ての存在は滅びるようにデザインされている</h2>
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">Whisper to the World</div>
     <div class="site-count">
       
       
@@ -554,4 +554,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.8 at 2020-08-11 Tue 20:19:50 CST. -->
+<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 09:31:42 CST. -->
