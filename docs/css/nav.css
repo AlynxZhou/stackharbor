@@ -50,7 +50,7 @@ button.theme-toggle {
   text-align: center;
   border: none;
   outline: 0;
-  background: inherit;
+  background: #33363b;
   font-size: 2rem;
   cursor: pointer;
   color: #ddd;

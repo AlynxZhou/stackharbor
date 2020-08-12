@@ -98,8 +98,8 @@ div.comment-content pre {
 div.comment-content pre code {
   margin: 0;
   padding: 0;
-  color: inherit;
-  background: inherit;
+  color: #999;
+  background: #26272b;
   word-wrap: normal;
   border-radius: 0;
 }

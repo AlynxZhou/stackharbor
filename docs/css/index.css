@@ -109,7 +109,7 @@ button.theme-toggle {
   text-align: center;
   border: none;
   outline: 0;
-  background: inherit;
+  background: #33363b;
   font-size: 2rem;
   cursor: pointer;
   color: #ddd;
@@ -533,12 +533,12 @@ div.titlebar-right {
   padding: 0 0.25em;
 }
 button.copy {
-  background: inherit;
+  color: #ddd;
+  background: #33363b;
   text-decoration: none;
   border: none;
   padding: 0;
   margin: 0.25em;
-  color: #ddd;
   transition: color 0.3s ease-in-out;
 }
 button.copy:hover {
@@ -606,7 +606,7 @@ figure.code-block pre.code code {
   margin: 0;
   padding: 0;
   color: inherit;
-  background: inherit;
+  background: transparent;
   word-wrap: normal;
   border-radius: 0;
 }
