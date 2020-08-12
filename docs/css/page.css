@@ -193,3 +193,9 @@ div.page-nav-prev {
 div.page-nav-prev a {
   justify-content: flex-end;
 }
+@media (max-width: 40em) {
+  nav.page-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
