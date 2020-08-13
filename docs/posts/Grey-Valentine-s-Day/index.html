@@ -83,7 +83,14 @@
     <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
     <script type="text/javascript">
       documentReady(function () {
-        hljs.initHighlighting();
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          function (e, i) {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
       });
     </script>
     
@@ -541,4 +548,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.9 at 2020-08-13 Thu 15:56:58 CST. -->
+<!-- Page built by Hikaru v1.5.9 at 2020-08-13 Thu 16:20:15 CST. -->

@@ -582,7 +582,7 @@ figure.code-block {
   margin: 0;
 }
 figure.code-block:not(.hljs) {
-  color: #999;
+  color: #ccc;
   background: #26272b;
 }
 figure.code-block pre {
@@ -592,7 +592,7 @@ figure.code-block pre.gutter {
   flex: 0 0 auto;
   text-align: right;
   padding: 0.5em;
-  border-right: 0.1em dotted #999;
+  border-right: 0.1em dotted #ccc;
 }
 figure.code-block pre.code {
   flex: 1 1 auto;
