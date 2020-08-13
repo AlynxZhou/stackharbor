@@ -610,6 +610,10 @@ figure.code-block pre.code code {
   word-wrap: normal;
   border-radius: 0;
 }
+figure.code-block pre.code code.hljs {
+  display: inline;
+  overflow: visible;
+}
 blockquote {
   margin: 1em 0;
   padding: 0 1em;

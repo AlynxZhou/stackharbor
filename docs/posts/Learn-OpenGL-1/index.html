@@ -78,6 +78,15 @@
     <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
     
     
+    
+    
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(function () {
+        hljs.initHighlighting();
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -274,28 +283,28 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <GLFW/glfw3.h>
-#include <GLES3/gl3.h>" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+#include <GLES3/gl3.h>" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stddef.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;GLFW/glfw3.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;GLES3/gl3.h&gt;</span></span></code></pre></figure>
+<span class="line-number">5</span></pre><pre class="code"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stddef.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;GLFW/glfw3.h&gt;
+#include &lt;GLES3/gl3.h&gt;</code></pre></figure>
 <p>这里很明显了。OpenGL 只是一个绘图 API，GLFW 同时帮你封装了有关键盘鼠标输入的部分，但是你需要给它实现一个回调函数。</p>
 <figure data-raw="void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
     if (key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-}" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">key_callback</span><span class="hljs-params">(GLFWwindow *window, <span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span> scancode, <span class="hljs-keyword">int</span> action, <span class="hljs-keyword">int</span> mode)</span>
-</span>{
-    <span class="hljs-keyword">if</span> (key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, <span class="hljs-literal">true</span>);
+<span class="line-number">5</span></pre><pre class="code"><code class="language-c">void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
+{
+    if (key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 }</code></pre></figure>
 <p>只是简单实现了按 Esc 之后发送关闭窗口事件。然后我们编写 main 函数。</p>
 <figure data-raw="int main(int argc, char *argv[])
@@ -312,7 +321,7 @@
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
-}" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -326,20 +335,20 @@
 <span class="line-number">12</span>
 <span class="line-number">13</span>
 <span class="line-number">14</span>
-<span class="line-number">15</span></pre><pre class="code"><code class="language-c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span>
-</span>{
+<span class="line-number">15</span></pre><pre class="code"><code class="language-c">int main(int argc, char *argv[])
+{
     glfwInit();
-    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> width = <span class="hljs-number">800</span>;
-    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> height = <span class="hljs-number">600</span>;
-    GLFWwindow *window = glfwCreateWindow(width, height, <span class="hljs-string">"learn-gles"</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);
+    unsigned int width = 800;
+    unsigned int height = 600;
+    GLFWwindow *window = glfwCreateWindow(width, height, "learn-gles", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
 
-    <span class="hljs-comment">/* Code Here */</span>
+    /* Code Here */
 
     glfwDestroyWindow(window);
     glfwTerminate();
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    return 0;
 }</code></pre></figure>
 <p>先别急着编译它，因为你还没有正确链接。如果你编译好了，这个程序运行之后窗口一闪而过就会消失，但你已经完成了窗口创建。</p>
 <p>如果是 macOS 请在 <code>glfwInit()</code> 之后添加 <code>glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);</code>，并咒骂苹果为什么去掉了 OpenGL 支持。</p>
@@ -349,7 +358,7 @@
 <h2 id="创建视口（Viewport）"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E5%88%9B%E5%BB%BA%E8%A7%86%E5%8F%A3%EF%BC%88Viewport%EF%BC%89" title="创建视口（Viewport）"></a>创建视口（Viewport）</h2>
 <p>首先我们创建 OpenGL 的 Viewport，事实上不管你的窗口分辨率是多少，OpenGL 都会把这个平面映射到 <code>-1.0f</code> 到 <code>+1.0f</code>，你使用时候的坐标都是在这个范围内，而不是屏幕上的像素点数目。</p>
 <p>下面的代码需要插入到上面 <code>/* Code Here */</code> 的上面。</p>
-<figure data-raw="    glViewport(0, 0, width, height);" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-c">    glViewport(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, width, height);</code></pre></figure>
+<figure data-raw="    glViewport(0, 0, width, height);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-c">    glViewport(0, 0, width, height);</code></pre></figure>
 <p>因为我们的程序太过简单，就不需要开启其它特性了，否则在这里你可以开启一些 OpenGL 的特性比如背面剔除（如果你玩 CS，你会发现死亡画面你的摄像机经常会穿进敌人体内，这时候敌人的后背变成了透明的，这就是背面剔除，可以减少绘制的图形的数量。</p>
 <h2 id="大循环"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E5%A4%A7%E5%BE%AA%E7%8E%AF" title="大循环"></a>大循环</h2>
 <p>如果你对游戏引擎有所了解，应该知道整个流程就是一个大循环：引擎不断地绘制图案并把它更新到屏幕上，每一帧我们更新一些数据，就会形成动画。我们这里也是这样进行，在 <code>glViewport()</code> 和 <code>glfwTerminate()</code> 之间插入这个。</p>
@@ -362,7 +371,7 @@
         /* Draw Here */
 
         glfwSwapBuffers(window);
-    }" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+    }" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -371,19 +380,19 @@
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-<span class="line-number">10</span></pre><pre class="code"><code class="language-c">    <span class="hljs-keyword">while</span> (!glfwWindowShouldClose(window)) {
+<span class="line-number">10</span></pre><pre class="code"><code class="language-c">    while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
-        glClearColor(<span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        <span class="hljs-comment">/* Draw Here */</span>
+        /* Draw Here */
 
         glfwSwapBuffers(window);
     }</code></pre></figure>
 <p>现在我们有一个大循环了，这个循环里首先拉取 GLFW 的事件以便响应（目前只有 Esc 退出），然后用黑色清除整个 Viewport（四个参数分别是 rgba，<code>0.0f</code> 是无色，<code>1.0f</code> 是满色），最后 GLFW 把绘制好的缓冲区交换到窗口上。</p>
 <p>现在你可以使用下面的命令编译并运行它了。会出现一个全黑的窗口。</p>
-<figure data-raw="$ cc -std=c11 -lglfw -lGLESv2 yourcode.c &amp;&amp; ./a.out" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-llvm">$ <span class="hljs-keyword">cc</span> -std=<span class="hljs-keyword">c</span><span class="hljs-number">11</span> -lglfw -lGLESv<span class="hljs-number">2</span> yourcode.<span class="hljs-keyword">c</span> &amp;&amp; ./a.out</code></pre></figure>
+<figure data-raw="$ cc -std=c11 -lglfw -lGLESv2 yourcode.c &amp;&amp; ./a.out" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code>$ cc -std=c11 -lglfw -lGLESv2 yourcode.c &amp;&amp; ./a.out</code></pre></figure>
 <p><img src="/posts/Learn-OpenGL-1/black.png" alt="black.png"></p>
 <p>Mesa 把 GLES 3 当作 GLES 2 的扩展，所以这里链接的是 <code>libGLESv2</code>。</p>
 <h2 id="着色器（Shader）"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E7%9D%80%E8%89%B2%E5%99%A8%EF%BC%88Shader%EF%BC%89" title="着色器（Shader）"></a>着色器（Shader）</h2>
@@ -397,7 +406,7 @@ void main()
 {
     gl_Position = vec4(pos, 1.0f);
     pass_color = color;
-}" data-info="language-glsl" data-lang="glsl" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -405,13 +414,13 @@ void main()
 <span class="line-number">6</span>
 <span class="line-number">7</span>
 <span class="line-number">8</span>
-<span class="line-number">9</span></pre><pre class="code"><code class="language-glsl"><span class="hljs-meta">#version 300 es</span>
-<span class="hljs-keyword">layout</span> (<span class="hljs-keyword">location</span> = <span class="hljs-number">0</span>) <span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> pos;
-<span class="hljs-keyword">layout</span> (<span class="hljs-keyword">location</span> = <span class="hljs-number">1</span>) <span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> color;
-<span class="hljs-keyword">out</span> <span class="hljs-type">vec3</span> pass_color;
-<span class="hljs-type">void</span> main()
+<span class="line-number">9</span></pre><pre class="code"><code class="language-glsl">#version 300 es
+layout (location = 0) in vec3 pos;
+layout (location = 1) in vec3 color;
+out vec3 pass_color;
+void main()
 {
-    <span class="hljs-built_in">gl_Position</span> = <span class="hljs-type">vec4</span>(pos, <span class="hljs-number">1.0</span>f);
+    gl_Position = vec4(pos, 1.0f);
     pass_color = color;
 }</code></pre></figure>
 <p>第一行的预处理指令表明了我们使用的是 3.00 版本的 OpenGL ES，如果是 OpenGL 可以使用 <code>#version 330 core</code>，然后二三行声明了输入变量，前面的 <code>layout (location = 0)</code> 指定了它们的位置，也可以省略，但是就需要在程序里手动查找位置了。后面的 <code>in</code> 表明是输入变量，<code>vec3</code> 表明是由三个数字组成的向量，后面是变量名，我们用到了位置和颜色。然后下面 <code>out</code> 表明是输出变量，很明显 Vertex Shader 是不能控制颜色的，Fragment Shader 才控制颜色，所以我们在这里把传进来的颜色再输出，下一步传给 Fragment Shader。</p>
@@ -424,20 +433,20 @@ out vec4 frag_color;
 void main()
 {
     frag_color = vec4(pass_color, 1.0f);
-}" data-info="language-glsl" data-lang="glsl" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-<span class="line-number">8</span></pre><pre class="code"><code class="language-glsl"><span class="hljs-meta">#version 300 es</span>
-<span class="hljs-keyword">precision</span> <span class="hljs-keyword">mediump</span> <span class="hljs-type">float</span>;
-<span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> pass_color;
-<span class="hljs-keyword">out</span> <span class="hljs-type">vec4</span> frag_color;
-<span class="hljs-type">void</span> main()
+<span class="line-number">8</span></pre><pre class="code"><code class="language-glsl">#version 300 es
+precision mediump float;
+in vec3 pass_color;
+out vec4 frag_color;
+void main()
 {
-    frag_color = <span class="hljs-type">vec4</span>(pass_color, <span class="hljs-number">1.0</span>f);
+    frag_color = vec4(pass_color, 1.0f);
 }</code></pre></figure>
 <p>第二行表明的是设置精度为 <code>float</code>，OpenGL ES 要求 Fragment Shader 必须有这一条，标准 OpenGL 可以去掉，与 <code>gl_Position</code> 不同，为了满足多样化的需求，Fragment Shader 的输出变量需要自己声明，然后我们给输入的颜色加上 <code>1.0f</code> 的 Alpha 值输出。</p>
 <p>接下来类似于我们编译 C 程序的过程，不同的是我们要编写 C 代码读取文件，分别编译并链接为一个程序。我在这里直接给出我封装好的过程来简化代码量，具体说明参见注释。你可以把它们添加到 main 函数外面（上面）。</p>
@@ -556,7 +565,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
         return 0;
     }
     return program;
-}" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -671,124 +680,124 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 <span class="line-number">113</span>
 <span class="line-number">114</span>
 <span class="line-number">115</span>
-<span class="line-number">116</span></pre><pre class="code"><code class="language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LINE_LENGTH 512</span>
+<span class="line-number">116</span></pre><pre class="code"><code class="language-c">#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#define LINE_LENGTH 512
 
-<span class="hljs-function">GLuint <span class="hljs-title">make_shader</span><span class="hljs-params">(GLenum type, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> shader_src)</span>
-</span>{
-    GLuint shader = <span class="hljs-number">0</span>;
-    GLint compiled = <span class="hljs-number">0</span>;
-    <span class="hljs-comment">// 创建 shader。</span>
-    <span class="hljs-keyword">if</span> (!(shader = glCreateShader(type))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Shader Create Error.\n"</span>);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+GLuint make_shader(GLenum type, const char *const shader_src)
+{
+    GLuint shader = 0;
+    GLint compiled = 0;
+    // 创建 shader。
+    if (!(shader = glCreateShader(type))) {
+        fprintf(stderr, "Shader Create Error.\n");
+        return 0;
     }
-    <span class="hljs-comment">// 加载 shader 内容。</span>
-    glShaderSource(shader, <span class="hljs-number">1</span>, &amp;shader_src, <span class="hljs-literal">NULL</span>);
-    <span class="hljs-comment">// 开始编译。</span>
+    // 加载 shader 内容。
+    glShaderSource(shader, 1, &amp;shader_src, NULL);
+    // 开始编译。
     glCompileShader(shader);
-    <span class="hljs-comment">// 检查编译结果。</span>
+    // 检查编译结果。
     glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;compiled);
-    <span class="hljs-comment">// 编译失败的话读取错误输出。</span>
-    <span class="hljs-keyword">if</span> (!compiled) {
-        GLint info_len = <span class="hljs-number">0</span>;
+    // 编译失败的话读取错误输出。
+    if (!compiled) {
+        GLint info_len = 0;
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &amp;info_len);
-        <span class="hljs-keyword">if</span> (info_len) {
-        <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
-        <span class="hljs-keyword">if</span> (!info) {
-            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
+        if (info_len) {
+        char *info = malloc(info_len * sizeof(*info));
+        if (!info) {
+            fprintf(stderr, "Malloc Error.\n");
             glDeleteShader(shader);
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            return 0;
         }
-        glGetShaderInfoLog(shader, info_len, <span class="hljs-literal">NULL</span>, info);
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Compile Error: %s\n"</span>, info);
-        <span class="hljs-built_in">free</span>(info);
+        glGetShaderInfoLog(shader, info_len, NULL, info);
+        fprintf(stderr, "Compile Error: %s\n", info);
+        free(info);
         }
         glDeleteShader(shader);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        return 0;
     }
-    <span class="hljs-keyword">return</span> shader;
+    return shader;
 }
 
-<span class="hljs-function">GLuint <span class="hljs-title">load_shader</span><span class="hljs-params">(GLenum type, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> shader_path)</span>
-</span>{
-    GLuint result = <span class="hljs-number">0</span>;
-    FILE *fp = <span class="hljs-literal">NULL</span>;
-    <span class="hljs-keyword">size_t</span> file_length = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">char</span> *file_content = <span class="hljs-literal">NULL</span>;
-    <span class="hljs-keyword">char</span> temp_line[LINE_LENGTH];
-    <span class="hljs-comment">// 读取文件不用解释了吧……</span>
-    <span class="hljs-keyword">if</span> (!(fp = fopen(shader_path, <span class="hljs-string">"r"</span>))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Open file %s failed.\n"</span>, shader_path);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+GLuint load_shader(GLenum type, const char *const shader_path)
+{
+    GLuint result = 0;
+    FILE *fp = NULL;
+    size_t file_length = 0;
+    char *file_content = NULL;
+    char temp_line[LINE_LENGTH];
+    // 读取文件不用解释了吧……
+    if (!(fp = fopen(shader_path, "r"))) {
+        fprintf(stderr, "Open file %s failed.\n", shader_path);
+        return 0;
     }
-    fseek(fp, <span class="hljs-number">0l</span>, SEEK_END);
+    fseek(fp, 0l, SEEK_END);
     file_length = ftell(fp);
     rewind(fp);
-    <span class="hljs-keyword">if</span> (!(file_content = <span class="hljs-built_in">malloc</span>(file_length))) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
+    if (!(file_content = malloc(file_length))) {
+        fprintf(stderr, "Malloc Error.\n");
         fclose(fp);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        return 0;
     }
-    file_content[<span class="hljs-number">0</span>] = <span class="hljs-string">'\0'</span>;
-    <span class="hljs-keyword">while</span> (fgets(temp_line, LINE_LENGTH, fp))
-        <span class="hljs-built_in">strncat</span>(file_content, temp_line, LINE_LENGTH);
+    file_content[0] = '\0';
+    while (fgets(temp_line, LINE_LENGTH, fp))
+        strncat(file_content, temp_line, LINE_LENGTH);
     fclose(fp);
     result = make_shader(type, file_content);
-    <span class="hljs-built_in">free</span>(file_content);
-    <span class="hljs-keyword">return</span> result;
+    free(file_content);
+    return result;
 }
 
-<span class="hljs-function">GLuint <span class="hljs-title">load_program</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> vshader_path, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> fshader_path)</span>
-</span>{
-    GLint linked = <span class="hljs-number">0</span>;
-    GLuint vshader = <span class="hljs-number">0</span>;
-    GLuint fshader = <span class="hljs-number">0</span>;
-    GLuint program = <span class="hljs-number">0</span>;
-    <span class="hljs-comment">// 加载类型为 GL_VERTEX_SHADER。</span>
+GLuint load_program(const char *const vshader_path, const char *const fshader_path)
+{
+    GLint linked = 0;
+    GLuint vshader = 0;
+    GLuint fshader = 0;
+    GLuint program = 0;
+    // 加载类型为 GL_VERTEX_SHADER。
     vshader = load_shader(GL_VERTEX_SHADER, vshader_path);
-    <span class="hljs-comment">// 加载类型为 GL_FRAGMENT_SHADER。</span>
+    // 加载类型为 GL_FRAGMENT_SHADER。
     fshader = load_shader(GL_FRAGMENT_SHADER, fshader_path);
-    <span class="hljs-keyword">if</span> (!vshader || !fshader)
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-    <span class="hljs-comment">// 创建 Shader Program。</span>
-    <span class="hljs-keyword">if</span> (!(program = glCreateProgram())) {
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Program Create Error.\n"</span>);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    if (!vshader || !fshader)
+        return 0;
+    // 创建 Shader Program。
+    if (!(program = glCreateProgram())) {
+        fprintf(stderr, "Program Create Error.\n");
+        return 0;
     }
-    <span class="hljs-comment">// 给 Program 添加 Shader。</span>
+    // 给 Program 添加 Shader。
     glAttachShader(program, vshader);
     glAttachShader(program, fshader);
-    <span class="hljs-comment">// 将两个 Shader 链接成 Program。</span>
+    // 将两个 Shader 链接成 Program。
     glLinkProgram(program);
-    <span class="hljs-comment">// 链接完成可以删除 Shader 了。</span>
+    // 链接完成可以删除 Shader 了。
     glDeleteShader(vshader);
     glDeleteShader(fshader);
-    <span class="hljs-comment">// 检查链接状态。</span>
+    // 检查链接状态。
     glGetProgramiv(program, GL_LINK_STATUS, &amp;linked);
-    <span class="hljs-comment">// 链接失败读取错误输出。</span>
-    <span class="hljs-keyword">if</span> (!linked) {
-        GLint info_len = <span class="hljs-number">0</span>;
+    // 链接失败读取错误输出。
+    if (!linked) {
+        GLint info_len = 0;
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &amp;info_len);
-        <span class="hljs-keyword">if</span> (info_len) {
-            <span class="hljs-keyword">char</span> *info = <span class="hljs-built_in">malloc</span>(info_len * <span class="hljs-keyword">sizeof</span>(*info));
-            <span class="hljs-keyword">if</span> (!info) {
-                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Malloc Error.\n"</span>);
+        if (info_len) {
+            char *info = malloc(info_len * sizeof(*info));
+            if (!info) {
+                fprintf(stderr, "Malloc Error.\n");
                 glDeleteProgram(program);
-                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+                return 0;
             }
-            glGetProgramInfoLog(program, info_len, <span class="hljs-literal">NULL</span>, info);
-            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Link Error: %s\n"</span>, info);
-            <span class="hljs-built_in">free</span>(info);
+            glGetProgramInfoLog(program, info_len, NULL, info);
+            fprintf(stderr, "Link Error: %s\n", info);
+            free(info);
         }
         glDeleteProgram(program);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        return 0;
     }
-    <span class="hljs-keyword">return</span> program;
+    return program;
 }</code></pre></figure>
 <p>有了这个之后只需要在 <code>glViewport()</code> 和 <code>/* Code Here */</code> 之间调用 <code>load_program()</code> 生成 Shader Program。</p>
-<figure data-raw="    unsigned int program = load_program(&quot;triangle.v.glsl&quot;, &quot;triangle.f.glsl&quot;);" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-c">    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> program = load_program(<span class="hljs-string">"triangle.v.glsl"</span>, <span class="hljs-string">"triangle.f.glsl"</span>);</code></pre></figure>
+<figure data-raw="    unsigned int program = load_program(&quot;triangle.v.glsl&quot;, &quot;triangle.f.glsl&quot;);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-c">    unsigned int program = load_program("triangle.v.glsl", "triangle.f.glsl");</code></pre></figure>
 <h2 id="顶点数据"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE" title="顶点数据"></a>顶点数据</h2>
 <p>接下来我们需要准备绘制的数据了，对于一个三角形来说，需要三个顶点来确定它的位置，每个顶点需要三个坐标，同时我们还要给它们创建不同的颜色，让我们的三角形变的多彩一点，所以需要像下面一样组织数据。把这段插入到之前 <code>/* Code Here */</code> 和 <code>glViewport(0, 0, width, height);</code> 之间。对于 3D 程序来说 float 的精度足够了，double需要更多的运算时间。</p>
 <figure data-raw="    const float vertices[] = {
@@ -796,16 +805,16 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
         -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
         0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
-    };" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+    };" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-<span class="line-number">6</span></pre><pre class="code"><code class="language-c">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">float</span> vertices[] = {
-        <span class="hljs-comment">// 坐标           颜色</span>
-        <span class="hljs-number">-0.5f</span>, <span class="hljs-number">-0.5f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>,
-        <span class="hljs-number">0.5f</span>, <span class="hljs-number">-0.5f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>,
-        <span class="hljs-number">0.0f</span>,  <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>
+<span class="line-number">6</span></pre><pre class="code"><code class="language-c">    const float vertices[] = {
+        // 坐标           颜色
+        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+        0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
     };</code></pre></figure>
 <p>OpenGL 的坐标是这样安排的：</p>
 <ul>
@@ -819,15 +828,15 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     glGenBuffers(1, &amp;buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c">    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> buffer;
-    glGenBuffers(<span class="hljs-number">1</span>, &amp;buffer);
+<span class="line-number">5</span></pre><pre class="code"><code class="language-c">    unsigned int buffer;
+    glGenBuffers(1, &amp;buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, <span class="hljs-keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, <span class="hljs-number">0</span>);</code></pre></figure>
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);</code></pre></figure>
 <p>这里的 <code>buffer</code> 只是一个符号，真正的空间分配我们是不能干预的。<code>glGenBuffers()</code>可以生成多个 Buffer，这里我们只生成一个，所以第一个参数设置为 1，第二个则是一个指针，我们这里只有一个所以没有使用数组，而是直接取了地址。</p>
 <p>接下来我们把这个 <code>buffer</code> 用 <code>glBindBuffer()</code> 绑定到 <code>GL_ARRAY_BUFFER</code> 表示这里是放置顶点的数组。<code>glBufferData()</code> 则会把数据写入到刚才绑定好的 <code>buffer</code>，所以要先进行绑定，这里第一个参数表示写入的目标，就是刚才的 <code>GL_ARRAY_BUFFER</code>，第二个则是写入数据的大小，第三个是写入数据的指针，第四个 <code>GL_STATIC_DRAW</code> 表示写入的数据是用来绘图的，不会经常改变。做完这一切我们取消绑定，把 <code>GL_ARRAY_BUFFER</code> 绑定到默认的 <code>0</code>。</p>
 <p>题外话：经常有人吐槽 OpenGL 这个状态机的设定，觉得绑来绑去很麻烦，但是你可以封装一下让它变的好用点。关键要记得处理完就解绑，避免状态混乱。至于 D3D 是什么样子的，我不知道，我也并不关心，就算 D3D 再好，不能让我在 Linux 下使用就是致命的，OpenGL 也许不完美，但它能用，我觉得也挺好。</p>
@@ -843,7 +852,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     glEnableVertexAttribArray(1);
     glUseProgram(0);
     glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -854,18 +863,18 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 <span class="line-number">9</span>
 <span class="line-number">10</span>
 <span class="line-number">11</span>
-<span class="line-number">12</span></pre><pre class="code"><code class="language-c">    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> vertex_array;
-    glGenVertexArrays(<span class="hljs-number">1</span>, &amp;vertex_array);
+<span class="line-number">12</span></pre><pre class="code"><code class="language-c">    unsigned int vertex_array;
+    glGenVertexArrays(1, &amp;vertex_array);
     glUseProgram(program);
     glBindVertexArray(vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glVertexAttribPointer(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, GL_FLOAT, GL_FALSE, <span class="hljs-number">6</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">float</span>), (<span class="hljs-keyword">void</span> *)<span class="hljs-number">0</span>);
-    glEnableVertexAttribArray(<span class="hljs-number">0</span>);
-    glVertexAttribPointer(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, GL_FLOAT, GL_FALSE, <span class="hljs-number">6</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">float</span>), (<span class="hljs-keyword">void</span> *)(<span class="hljs-number">3</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">float</span>)));
-    glEnableVertexAttribArray(<span class="hljs-number">1</span>);
-    glUseProgram(<span class="hljs-number">0</span>);
-    glBindVertexArray(<span class="hljs-number">0</span>);
-    glBindBuffer(GL_ARRAY_BUFFER, <span class="hljs-number">0</span>);</code></pre></figure>
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    glUseProgram(0);
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);</code></pre></figure>
 <p>首先我们还是创建一个标记符。然后使用 <code>glGenVertexArrays()</code> 生成，因为这里的数据要输入给 Program，在对 Program 操作之前先要绑定当前 Program，所以调用 <code>glUseProgram(program);</code>，接下来把 <code>vertex_array</code> 绑定到当前状态，然后我们要告诉 OpenGL 这个 VertexArray 对应的是哪个 Buffer，所以也要把刚才的 <code>buffer</code> 绑定到当前状态让它们关联。</p>
 <p>然后调用 <code>glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);</code> 传递坐标的信息，第一个参数表明这里的数据会被传递到 Vertex Shader 里面 <code>location = 0</code> 的地方，第二个参数表示一次传递三个数据（对应 <code>vec3</code>），第三个表示传进去的是 <code>float</code> 类型，第四个表示是否进行标准化（缩放到 0 和 1 之间），很显然我们不需要，第五个是步长，表示传递完一组数据之后 <strong>从这一组数据开头跳过多长会到下一组数据的开头</strong>，我们这里是三个坐标三个颜色，所以是六个 <code>float</code>，最后一个是偏移量 Offset，因为我们坐标是从第一个开始，所以是 <code>(void *)0</code>。最后用 <code>glEnableVertexAttribArray(0);</code> 启用位置 0。</p>
 <p>接下来用 <code>glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));</code> 传递颜色的信息，这次是位置 1，区别在于第一个颜色是在第四个数据开始的，所以偏移量设置为 <code>(void *)(3 * sizeof(float)))</code>。最后用 <code>glEnableVertexAttribArray(1);</code> 启用位置 1。</p>
@@ -876,24 +885,24 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     glBindVertexArray(vertex_array);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glUseProgram(0);
-    glBindVertexArray(0);" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+    glBindVertexArray(0);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span></pre><pre class="code"><code class="language-c">    glUseProgram(program);
     glBindVertexArray(vertex_array);
-    glDrawArrays(GL_TRIANGLES, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
-    glUseProgram(<span class="hljs-number">0</span>);
-    glBindVertexArray(<span class="hljs-number">0</span>);</code></pre></figure>
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glUseProgram(0);
+    glBindVertexArray(0);</code></pre></figure>
 <p>简单多了对不对！因为我们已经准备好了一切，所以这里只要加载你的 Shader Program，然后绑定你的 VertexArray，用 <code>glDrawArrays(GL_TRIANGLES, 0, 3);</code> 告诉 OpenGL 绘制当前 Array 即可，第一个参数 <code>GL_TRIANGLES</code> 表示我们要画三角形（还记得吗，大部分复杂图形都可以用三角形近似拼出来，所以这里有复数），第二个表示从第几个顶点开始，第三个则表示画几个顶点。然后 OpenGL就会按你的要求去画图。最后不要忘记解绑。</p>
 <h1 id="清理"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E6%B8%85%E7%90%86" title="清理"></a>清理</h1>
 <p>在退出程序之前最好清理掉你分配的空间，所以在循环后面和 <code>glfwDestroyWindow(window);</code> 之间插入如下部分。</p>
 <figure data-raw="    glDeleteBuffers(1, &amp;buffer);
     glDeleteVertexArrays(1, &amp;vertex_array);
-    glDeleteProgram(program);" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+    glDeleteProgram(program);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
-<span class="line-number">3</span></pre><pre class="code"><code class="language-c">    glDeleteBuffers(<span class="hljs-number">1</span>, &amp;buffer);
-    glDeleteVertexArrays(<span class="hljs-number">1</span>, &amp;vertex_array);
+<span class="line-number">3</span></pre><pre class="code"><code class="language-c">    glDeleteBuffers(1, &amp;buffer);
+    glDeleteVertexArrays(1, &amp;vertex_array);
     glDeleteProgram(program);</code></pre></figure>
 <p><img src="/posts/Learn-OpenGL-1/triangle.png" alt="triangle.png"></p>
 <h1 id="还有一件事……"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E8%BF%98%E6%9C%89%E4%B8%80%E4%BB%B6%E4%BA%8B%E2%80%A6%E2%80%A6" title="还有一件事……"></a>还有一件事……</h1>
@@ -1249,4 +1258,4 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 18:34:23 CST. -->
+<!-- Page built by Hikaru v1.5.9 at 2020-08-13 Thu 15:56:14 CST. -->

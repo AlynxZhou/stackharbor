@@ -49,7 +49,7 @@ stylus:
     basePath: .
 
 highlight:
-  enable: true
+  enable: false
   gutter: true
   hljs: true
 

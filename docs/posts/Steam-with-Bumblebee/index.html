@@ -78,6 +78,15 @@
     <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
     
     
+    
+    
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(function () {
+        hljs.initHighlighting();
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -284,9 +293,9 @@
 <p><strong>更新</strong>：I 卡推荐用内核实现了，不用装那个了。</p>
 <p>接下来将你的用户加入bumblebee组，启动bumblebeed：</p>
 <figure data-raw="# gpasswd -a user bumblebee
-# systemctl enable bumblebeed --now" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span></pre><pre class="code"><code class="language-vala"><span class="hljs-meta"># gpasswd -a user bumblebee</span>
-<span class="hljs-meta"># systemctl enable bumblebeed --now</span></code></pre></figure>
+# systemctl enable bumblebeed --now" class="code-block"><pre class="gutter"><span class="line-number">1</span>
+<span class="line-number">2</span></pre><pre class="code"><code># gpasswd -a user bumblebee
+# systemctl enable bumblebeed --now</code></pre></figure>
 <p>然后测试：</p>
 <ul>
 <li><p>64位<code>$ optirun glxspheres64</code></p>
@@ -300,7 +309,7 @@
 <p>首先<code>$ optirun bash</code>，在这个bash里面用<code>$ optirun java -jar HMCL.jar</code>启动启动器，再打开游戏就是独显啦！</p>
 <p><del>本来<code>$ optirun status</code>是应该能查看N卡状态的，但是Arch似乎没法运行这个命令，可以用<code>$ cat /proc/acpi/bbswitch</code>查看ON/OFF。</del>这里是我记错了，应该是用<code>$ optirun --status</code>查看N卡状态。</p>
 <p>对于一些版本比较老的bumblebee，optirun开启了独显后没法自动关掉它，是一个bug，手动关闭需要：</p>
-<figure data-raw="# rmmod nvidia_modeset nvidia &amp;&amp; sudo tee /proc/acpi/bbswitch <<<OFF" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-gradle"># rmmod nvidia_modeset nvidia &amp;&amp; sudo tee <span class="hljs-regexp">/proc/</span>acpi/bbswitch &lt;&lt;&lt;OFF</code></pre></figure>
+<figure data-raw="# rmmod nvidia_modeset nvidia &amp;&amp; sudo tee /proc/acpi/bbswitch <<<OFF" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code># rmmod nvidia_modeset nvidia &amp;&amp; sudo tee /proc/acpi/bbswitch &lt;&lt;&lt;OFF</code></pre></figure>
 <p>但是新版已经解决了这个bug。</p>
 <p>如果你想开启N卡的设置，不能简单地运行nvidia-settings，因为这时候N卡并没有开启，也没有连接到当前的桌面上，使用<code>$ optirun nvidia-settings -c :8</code>就可以开启了。</p>
 <p>参考了<a href="https://support.steampowered.com/kb_article.php?ref=6316-GJKC-7437" target="_blank" rel="external nofollow noreferrer noopener">Steam的说明</a>，现在剩余的问题就是玩游戏太热了。</p>
@@ -571,4 +580,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 18:34:23 CST. -->
+<!-- Page built by Hikaru v1.5.9 at 2020-08-13 Thu 15:56:14 CST. -->

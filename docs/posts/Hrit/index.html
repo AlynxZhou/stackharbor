@@ -78,6 +78,15 @@
     <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
     
     
+    
+    
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(function () {
+        hljs.initHighlighting();
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -264,9 +273,9 @@
 <a id="more"></a>
 
 <p>好了还是不要瞎扯了，总而言之对于我这么一个懒+强迫症晚期+半吊子程序员（？），当然在写网站的时候得把网站组织的有条理，所以肯定不能把所有的文章里的图片都堆到images/目录里就得了，幸好hexo提供了所谓的资源文件夹的方式，在新建Markdown文件的时候会自动建立同名的资源文件夹，只需编辑站点配置文件<code>_config.yml</code>开启如下项即可。</p>
-<figure data-raw="post_asset_folder: true    #开启资源文件夹" data-info="language-yaml" data-lang="yaml" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-yaml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span>    <span class="hljs-comment">#开启资源文件夹</span></code></pre></figure>
+<figure data-raw="post_asset_folder: true    #开启资源文件夹" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-yaml">post_asset_folder: true    #开启资源文件夹</code></pre></figure>
 <p>OK!这时候我天真的觉得只要把图片按数字命名为1.jpg、2.png之类的丢到对应资源文件夹里即可！然而生活远没有这么美好……首先在资源文件夹里的图片如果想在文章和首页的摘要里都显示的话就不能简单的用Markdown引用图片的语法，必须要用hexo的<code>asset_img</code>标签。</p>
-<figure data-raw="![图片名称](图片名称)" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-markdown">![<span class="hljs-string">图片名称</span>](<span class="hljs-link">图片名称</span>)</code></pre></figure>
+<figure data-raw="![图片名称](图片名称)" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code>![图片名称](图片名称)</code></pre></figure>
 <p>我开始方了，难道要我自己一个个手动打成这个标签……</p>
 <p>还没完，如果你的访客想下载一些图片，如果恰好你不同资源文件夹里都有一个1.jpg，他下载这两个的时候就会都保存为1.jpg……那不就乱套了么……</p>
 <p>所以我想要是能一次性给某个文件夹下的文件改名为 <em>文件夹名_数字.扩展名</em> 并且还能自动输出成hexo标签该多好啊……本着Linux用户没有轮子自己造的精神我决定写个程序解决这个问题（Windows用户应该习惯于找别的东西解决吧……没有就自认倒霉一个一个手动改？想想就麻烦……）</p>
@@ -369,7 +378,7 @@ for new in newlist:
     print(&quot;{%% asset_img %s %s %%}\n&quot;%(new,new))
 
 ### Go back to original path.
-os.chdir(opath)" data-info="language-Python" data-lang="Python" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+os.chdir(opath)" data-info="language-Python" data-lang="Python" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -462,100 +471,100 @@ os.chdir(opath)" data-info="language-Python" data-lang="Python" class="code-bloc
 <span class="line-number">91</span>
 <span class="line-number">92</span>
 <span class="line-number">93</span>
-<span class="line-number">94</span></pre><pre class="code"><code class="language-vim">#!/usr/bin/env <span class="hljs-keyword">python3</span>
-#-*- codin<span class="hljs-variable">g:utf</span>-<span class="hljs-number">8</span> -*-
+<span class="line-number">94</span></pre><pre class="code"><code class="language-Python">#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
 
-### Filename:hrit.<span class="hljs-keyword">py</span>
+### Filename:hrit.py
 ## Created by Alynx Zhou
-# alynxzhou@gmail.<span class="hljs-keyword">com</span>, http://alynx.xyz/
+# alynxzhou@gmail.com, http://alynx.xyz/
 
 import os
 import time
 import argparse
 
-### Deal with the <span class="hljs-keyword">argument</span>.
-parser = argparse.ArgumentParser(description=<span class="hljs-string">"hrit -- Hexo Rename Images Tool."</span>)
-parser.add_argument(<span class="hljs-string">"-f"</span>,<span class="hljs-string">"--forehead"</span>,action=<span class="hljs-string">"store"</span>,<span class="hljs-built_in">type</span>=str,<span class="hljs-keyword">help</span>=<span class="hljs-string">"The string will be added to the begin of the file name.Default is the directory name(dir)."</span>)
-parser.add_argument(<span class="hljs-string">"-m"</span>,<span class="hljs-string">"--middle"</span>,action=<span class="hljs-string">"store"</span>,default=<span class="hljs-string">'_'</span>,<span class="hljs-built_in">type</span>=str,<span class="hljs-keyword">help</span>=<span class="hljs-string">"This will be put between the head and the tail.Default '_'"</span>)
-parser.add_argument(<span class="hljs-string">"-n"</span>,<span class="hljs-string">"--number"</span>,action=<span class="hljs-string">"store_true"</span>,<span class="hljs-keyword">help</span>=<span class="hljs-string">"If this argument is set,the file name between the head and the last dot will be set as an increasing number."</span>)
-#parser.add_argument(<span class="hljs-string">"dir"</span>,action=<span class="hljs-string">"store"</span>,nargs=<span class="hljs-string">'?'</span>,default=<span class="hljs-string">"./"</span>,<span class="hljs-built_in">type</span>=str,<span class="hljs-keyword">help</span>=<span class="hljs-string">"The directory to work."</span>)
-parser.add_argument(<span class="hljs-string">"dir"</span>,action=<span class="hljs-string">"store"</span>,<span class="hljs-built_in">type</span>=str,<span class="hljs-keyword">help</span>=<span class="hljs-string">"The directory to work."</span>)
-<span class="hljs-keyword">args</span> = parser.parse_args()
+### Deal with the argument.
+parser = argparse.ArgumentParser(description="hrit -- Hexo Rename Images Tool.")
+parser.add_argument("-f","--forehead",action="store",type=str,help="The string will be added to the begin of the file name.Default is the directory name(dir).")
+parser.add_argument("-m","--middle",action="store",default='_',type=str,help="This will be put between the head and the tail.Default '_'")
+parser.add_argument("-n","--number",action="store_true",help="If this argument is set,the file name between the head and the last dot will be set as an increasing number.")
+#parser.add_argument("dir",action="store",nargs='?',default="./",type=str,help="The directory to work.")
+parser.add_argument("dir",action="store",type=str,help="The directory to work.")
+args = parser.parse_args()
 
 ### Remember the original path.
-opath = os.<span class="hljs-built_in">getcwd</span>()
+opath = os.getcwd()
 
 ### Change directory.
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"Entering directory %s …"</span>%(<span class="hljs-keyword">args</span>.dir))
-<span class="hljs-keyword">try</span>:
-    os.<span class="hljs-keyword">chdir</span>(<span class="hljs-keyword">args</span>.dir)
+print("Entering directory %s …"%(args.dir))
+try:
+    os.chdir(args.dir)
 except FileNotFoundError:
-    <span class="hljs-keyword">print</span>(<span class="hljs-string">"ERROR!Can't find directory %s !"</span>%(<span class="hljs-keyword">args</span>.dir))
-    <span class="hljs-keyword">print</span>(<span class="hljs-string">"Quiting…"</span>)
-    <span class="hljs-keyword">exit</span>()
-curdir = os.<span class="hljs-built_in">getcwd</span>()
+    print("ERROR!Can't find directory %s !"%(args.dir))
+    print("Quiting…")
+    exit()
+curdir = os.getcwd()
 
 ### Ask.
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"Now it is going to work in "</span>)
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"====================================================="</span>)
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"%s"</span>%(curdir))
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"====================================================="</span>)
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"Please check weither it is the exact directory you want!"</span>)
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!"</span>)
-answer = <span class="hljs-built_in">input</span>(<span class="hljs-string">"Continue?[y/N] "</span>)
-<span class="hljs-keyword">if</span> answer != <span class="hljs-string">'y'</span> <span class="hljs-built_in">and</span> answer != <span class="hljs-string">"yes"</span>:
-    <span class="hljs-keyword">print</span>(<span class="hljs-string">"Quiting…"</span>)
-    os.<span class="hljs-keyword">chdir</span>(opath)
-    <span class="hljs-keyword">exit</span>()
+print("Now it is going to work in ")
+print("=====================================================")
+print("%s"%(curdir))
+print("=====================================================")
+print("Please check weither it is the exact directory you want!")
+print("Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!")
+answer = input("Continue?[y/N] ")
+if answer != 'y' and answer != "yes":
+    print("Quiting…")
+    os.chdir(opath)
+    exit()
 
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"Wating 5 seconds to regret…"</span>)
-<span class="hljs-keyword">ilist</span> = [<span class="hljs-string">"5…"</span>,<span class="hljs-string">"5 4…"</span>,<span class="hljs-string">"5 4 3…"</span>,<span class="hljs-string">"5 4 3 2…"</span>,<span class="hljs-string">"5 4 3 2 1…"</span>]
-<span class="hljs-keyword">for</span> i in ilis<span class="hljs-variable">t:</span>
-    <span class="hljs-keyword">print</span>(<span class="hljs-string">"%s\r"</span>%(i),end=<span class="hljs-string">""</span>)
-    time.<span class="hljs-keyword">sleep</span>(<span class="hljs-number">1</span>)
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"5 4 3 2 1…Start!\n"</span>)
+print("Wating 5 seconds to regret…")
+ilist = ["5…","5 4…","5 4 3…","5 4 3 2…","5 4 3 2 1…"]
+for i in ilist:
+    print("%s\r"%(i),end="")
+    time.sleep(1)
+print("5 4 3 2 1…Start!\n")
 
 ### Get dir.
-<span class="hljs-keyword">if</span> <span class="hljs-keyword">args</span>.forehead == None:
-    forehead = curdir.<span class="hljs-keyword">split</span>(os.sep)[-<span class="hljs-number">1</span>]
-<span class="hljs-keyword">else</span>:
-    forehead = <span class="hljs-keyword">args</span>.forehead
+if args.forehead == None:
+    forehead = curdir.split(os.sep)[-1]
+else:
+    forehead = args.forehead
 
-### List <span class="hljs-keyword">files</span>.
+### List files.
 filelist = os.listdir(curdir)
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"Found files:%s.\n"</span>%(filelist))
+print("Found files:%s.\n"%(filelist))
 
 ### Rename.
-<span class="hljs-keyword">if</span> <span class="hljs-keyword">args</span>.<span class="hljs-keyword">number</span> == True:
+if args.number == True:
     ## Number name.
-    <span class="hljs-keyword">number</span> = <span class="hljs-number">1</span>
-    <span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> in filelis<span class="hljs-variable">t:</span>
-        filel = <span class="hljs-keyword">file</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">'.'</span>)
-        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(filel) == <span class="hljs-number">1</span>:
+    number = 1
+    for file in filelist:
+        filel = file.split('.')
+        if len(filel) == 1:
             ## Without extand name.
-            newname = forehead + <span class="hljs-keyword">args</span>.middle + str(<span class="hljs-keyword">number</span>)
-        <span class="hljs-keyword">else</span>:
+            newname = forehead + args.middle + str(number)
+        else:
             ## With extand name.
-            newname = forehead + <span class="hljs-keyword">args</span>.middle + str(<span class="hljs-keyword">number</span>) + <span class="hljs-string">'.'</span> + filel[-<span class="hljs-number">1</span>]
+            newname = forehead + args.middle + str(number) + '.' + filel[-1]
 
-        os.renames(<span class="hljs-keyword">file</span>,newname)
-        <span class="hljs-keyword">print</span>(<span class="hljs-string">"Renamed %s to %s."</span>%(<span class="hljs-keyword">file</span>,newname))
-        <span class="hljs-keyword">number</span> = <span class="hljs-keyword">number</span> + <span class="hljs-number">1</span>
-<span class="hljs-keyword">else</span>:
-    <span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> in filelis<span class="hljs-variable">t:</span>
-        newname = forehead + <span class="hljs-keyword">args</span>.middle + <span class="hljs-keyword">file</span>
+        os.renames(file,newname)
+        print("Renamed %s to %s."%(file,newname))
+        number = number + 1
+else:
+    for file in filelist:
+        newname = forehead + args.middle + file
 
-        os.renames(<span class="hljs-keyword">file</span>,newname)
-        <span class="hljs-keyword">print</span>(<span class="hljs-string">"Renamed %s to %s."</span>%(<span class="hljs-keyword">file</span>,newname))
+        os.renames(file,newname)
+        print("Renamed %s to %s."%(file,newname))
 
-### Get <span class="hljs-keyword">new</span> <span class="hljs-keyword">file</span> <span class="hljs-keyword">list</span>.
+### Get new file list.
 newlist = os.listdir(curdir)
-<span class="hljs-keyword">print</span>(<span class="hljs-string">"\nNow you can copy the follow hexo tags to your markdown post.\n"</span>)
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">new</span> in newlis<span class="hljs-variable">t:</span>
-    <span class="hljs-keyword">print</span>(<span class="hljs-string">"{%% asset_img %s %s %%}\n"</span>%(<span class="hljs-keyword">new</span>,<span class="hljs-keyword">new</span>))
+print("\nNow you can copy the follow hexo tags to your markdown post.\n")
+for new in newlist:
+    print("{%% asset_img %s %s %%}\n"%(new,new))
 
-### Go back <span class="hljs-keyword">to</span> original path.
-os.<span class="hljs-keyword">chdir</span>(opath)</code></pre></figure>
+### Go back to original path.
+os.chdir(opath)</code></pre></figure>
 <p>好了亲爱的观众们我知道你们又要抱怨你们的Vim/Emacs设置了代码自动缩进粘贴Python很麻烦……（你说你用Sublime Text或者Notepad++？好吧自便。你说你用记事本？这我就不能忍了，哪凉快哪呆着去！→_→）我就大发慈悲把源文件传上来吧，右键点击<a href="/posts/2016/05/03/Hrit/hrit.py">这里</a>另存为即可。然后拷贝到你的PATH中任意一个目录。</p>
 <p>接下来说用法～什么用法？直接执行hrit -h不就有用法了吗？</p>
 <p>总而言之hrit会以一个文件夹为单位把里面所有的文件按照指定的规则重命名，所以最后必须接一个文件夹参数比如./test/，没有设置默认./的原因是为了安全～hrit将文件名分为五部分操作，前缀、连接符、后缀、英文句点和扩展名。然后如果指定了 <em>-f 前缀</em> 的话文件都会被添加上同一前缀，没有-f则默认以当前目录名为前缀。 * -m 连接符* 指定连接符，默认是“_”。最后hrit会把原本的文件名（包括句点和扩展名）一起接上作为后缀。如果开启了 <em>-n</em> 它会用从1开始递增的数字作为后缀，并连接上句点和原本的扩展名（如果你非要把文件命名为aaa.bb.c那hrit只会把.c连接上……）。</p>
@@ -566,19 +575,19 @@ drwxr-xr-x 2 shax shax 4.0K May  2 21:58 .
 drwxr-xr-x 3 shax shax 4.0K May  2 11:44 ..
 -rw-r--r-- 1 shax shax    0 May  2 21:58 aaa
 -rw-r--r-- 1 shax shax    0 May  2 21:58 bb.b
--rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+-rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-<span class="line-number">7</span></pre><pre class="code"><code class="language-angelscript">$ cd test/ &amp;&amp; ls -alh
-total <span class="hljs-number">8.0</span>K
-drwxr-xr-x <span class="hljs-number">2</span> shax shax <span class="hljs-number">4.0</span>K May  <span class="hljs-number">2</span> <span class="hljs-number">21</span>:<span class="hljs-number">58</span> .
-drwxr-xr-x <span class="hljs-number">3</span> shax shax <span class="hljs-number">4.0</span>K May  <span class="hljs-number">2</span> <span class="hljs-number">11</span>:<span class="hljs-number">44</span> ..
--rw-r--r-- <span class="hljs-number">1</span> shax shax    <span class="hljs-number">0</span> May  <span class="hljs-number">2</span> <span class="hljs-number">21</span>:<span class="hljs-number">58</span> aaa
--rw-r--r-- <span class="hljs-number">1</span> shax shax    <span class="hljs-number">0</span> May  <span class="hljs-number">2</span> <span class="hljs-number">21</span>:<span class="hljs-number">58</span> bb.b
--rw-r--r-- <span class="hljs-number">1</span> shax shax    <span class="hljs-number">0</span> May  <span class="hljs-number">2</span> <span class="hljs-number">21</span>:<span class="hljs-number">58</span> c.c.c</code></pre></figure>
+<span class="line-number">7</span></pre><pre class="code"><code>$ cd test/ &amp;&amp; ls -alh
+total 8.0K
+drwxr-xr-x 2 shax shax 4.0K May  2 21:58 .
+drwxr-xr-x 3 shax shax 4.0K May  2 11:44 ..
+-rw-r--r-- 1 shax shax    0 May  2 21:58 aaa
+-rw-r--r-- 1 shax shax    0 May  2 21:58 bb.b
+-rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c</code></pre></figure>
 <p>下面执行下</p>
 <figure data-raw="$ hrit ./
 Entering directory ./ …
@@ -604,7 +613,7 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![test_bb.b](test_bb.b)
 
-![test_aaa](test_aaa)" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+![test_aaa](test_aaa)" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -628,12 +637,12 @@ Now you can copy the follow hexo tags to your markdown post.
 <span class="line-number">22</span>
 <span class="line-number">23</span>
 <span class="line-number">24</span>
-<span class="line-number">25</span></pre><pre class="code"><code class="language-markdown">$ hrit ./
+<span class="line-number">25</span></pre><pre class="code"><code>$ hrit ./
 Entering directory ./ …
-<span class="hljs-section">Now it is going to work in
-=====================================================</span>
-<span class="hljs-section">/home/shax/ProgramPractice/hrit/test
-=====================================================</span>
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
 Please check weither it is the exact directory you want!
 Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
 Continue?[y/N] y
@@ -642,17 +651,17 @@ Wating 5 seconds to regret…
 
 Found files:['aaa', 'c.c.c', 'bb.b'].
 
-Renamed aaa to test<span class="hljs-emphasis">_aaa.
-Renamed c.c.c to test_</span>c.c.c.
-Renamed bb.b to test<span class="hljs-emphasis">_bb.b.
+Renamed aaa to test_aaa.
+Renamed c.c.c to test_c.c.c.
+Renamed bb.b to test_bb.b.
 
 Now you can copy the follow hexo tags to your markdown post.
 
-![<span class="hljs-string">test_c.c.c</span>](<span class="hljs-link">test_c.c.c</span>)
+![test_c.c.c](test_c.c.c)
 
-![<span class="hljs-string">test_bb.b</span>](<span class="hljs-link">test_bb.b</span>)
+![test_bb.b](test_bb.b)
 
-![<span class="hljs-string">test_aaa</span>](<span class="hljs-link">test_aaa</span>)</span></code></pre></figure>
+![test_aaa](test_aaa)</code></pre></figure>
 <p>为了防止搞错了目录设置了一个确认和5秒反悔时间。</p>
 <p>下面试试 <code>-f</code></p>
 <figure data-raw="$ hrit -f xxx ./
@@ -679,7 +688,7 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![xxx_test_aaa](xxx_test_aaa)
 
-![xxx_test_bb.b](xxx_test_bb.b)" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+![xxx_test_bb.b](xxx_test_bb.b)" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -703,31 +712,31 @@ Now you can copy the follow hexo tags to your markdown post.
 <span class="line-number">22</span>
 <span class="line-number">23</span>
 <span class="line-number">24</span>
-<span class="line-number">25</span></pre><pre class="code"><code class="language-markdown">$ hrit -f xxx ./
+<span class="line-number">25</span></pre><pre class="code"><code>$ hrit -f xxx ./
 Entering directory ./ …
-<span class="hljs-section">Now it is going to work in
-=====================================================</span>
-<span class="hljs-section">/home/shax/ProgramPractice/hrit/test
-=====================================================</span>
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
 Please check weither it is the exact directory you want!
 Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
 Continue?[y/N] y
 Wating 5 seconds to regret…
 5 4 3 2 1…Start!
 
-Found files:['test<span class="hljs-emphasis">_c.c.c', 'test_</span>bb.b', 'test<span class="hljs-emphasis">_aaa'].
+Found files:['test_c.c.c', 'test_bb.b', 'test_aaa'].
 
-Renamed test_</span>c.c.c to xxx<span class="hljs-emphasis">_test_</span>c.c.c.
-Renamed test<span class="hljs-emphasis">_bb.b to xxx_</span>test<span class="hljs-emphasis">_bb.b.
-Renamed test_</span>aaa to xxx<span class="hljs-emphasis">_test_</span>aaa.
+Renamed test_c.c.c to xxx_test_c.c.c.
+Renamed test_bb.b to xxx_test_bb.b.
+Renamed test_aaa to xxx_test_aaa.
 
 Now you can copy the follow hexo tags to your markdown post.
 
-![<span class="hljs-string">xxx_test_c.c.c</span>](<span class="hljs-link">xxx_test_c.c.c</span>)
+![xxx_test_c.c.c](xxx_test_c.c.c)
 
-![<span class="hljs-string">xxx_test_aaa</span>](<span class="hljs-link">xxx_test_aaa</span>)
+![xxx_test_aaa](xxx_test_aaa)
 
-![<span class="hljs-string">xxx_test_bb.b</span>](<span class="hljs-link">xxx_test_bb.b</span>)</code></pre></figure>
+![xxx_test_bb.b](xxx_test_bb.b)</code></pre></figure>
 <p>最后 <code>-n</code></p>
 <figure data-raw="$ hrit -n ./
 Entering directory ./ …
@@ -753,7 +762,7 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![test_1.c](test_1.c)
 
-![test_3.b](test_3.b)" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+![test_3.b](test_3.b)" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -777,31 +786,31 @@ Now you can copy the follow hexo tags to your markdown post.
 <span class="line-number">22</span>
 <span class="line-number">23</span>
 <span class="line-number">24</span>
-<span class="line-number">25</span></pre><pre class="code"><code class="language-markdown">$ hrit -n ./
+<span class="line-number">25</span></pre><pre class="code"><code>$ hrit -n ./
 Entering directory ./ …
-<span class="hljs-section">Now it is going to work in
-=====================================================</span>
-<span class="hljs-section">/home/shax/ProgramPractice/hrit/test
-=====================================================</span>
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
 Please check weither it is the exact directory you want!
 Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
 Continue?[y/N] y
 Wating 5 seconds to regret…
 5 4 3 2 1…Start!
 
-Found files:['xxx<span class="hljs-emphasis">_test_</span>c.c.c', 'xxx<span class="hljs-emphasis">_test_</span>aaa', 'xxx<span class="hljs-emphasis">_test_</span>bb.b'].
+Found files:['xxx_test_c.c.c', 'xxx_test_aaa', 'xxx_test_bb.b'].
 
-Renamed xxx<span class="hljs-emphasis">_test_</span>c.c.c to test<span class="hljs-emphasis">_1.c.
-Renamed xxx_</span>test<span class="hljs-emphasis">_aaa to test_</span>2.
-Renamed xxx<span class="hljs-emphasis">_test_</span>bb.b to test<span class="hljs-emphasis">_3.b.
+Renamed xxx_test_c.c.c to test_1.c.
+Renamed xxx_test_aaa to test_2.
+Renamed xxx_test_bb.b to test_3.b.
 
 Now you can copy the follow hexo tags to your markdown post.
 
-![<span class="hljs-string">test_2</span>](<span class="hljs-link">test_2</span>)
+![test_2](test_2)
 
-![<span class="hljs-string">test_1.c</span>](<span class="hljs-link">test_1.c</span>)
+![test_1.c](test_1.c)
 
-![<span class="hljs-string">test_3.b</span>](<span class="hljs-link">test_3.b</span>)</span></code></pre></figure>
+![test_3.b](test_3.b)</code></pre></figure>
 <p>不错吧，这样以后直接把所有图片拷贝到资源文件夹里用<code>hrit -n ./xxxx/</code>即可批量命名了～然后直接把输出的标签拷贝到Markdown文件～</p>
 <p>最后说一个小插曲，开始我设置了询问继续和五秒倒计时的时候其实并不觉得有什么用……直到某次调试时不小心在home下执行了hrit……幸好有5秒按Ctrl+C，顿时觉得自己真是太机智了。</p>
 <p><em>Alynx Zhou</em></p>
@@ -1100,4 +1109,4 @@ Now you can copy the follow hexo tags to your markdown post.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 18:34:23 CST. -->
+<!-- Page built by Hikaru v1.5.9 at 2020-08-13 Thu 15:56:14 CST. -->

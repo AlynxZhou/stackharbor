@@ -78,6 +78,15 @@
     <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
     
     
+    
+    
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(function () {
+        hljs.initHighlighting();
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -266,19 +275,19 @@ chmod +x &quot;${pkgdir}/opt/${pkgname}/resources&quot; \
          &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external&quot; \
          &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z&quot; \
          &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64&quot; \
-         &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64/7z&quot;" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+         &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64/7z&quot;" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-<span class="line-number">7</span></pre><pre class="code"><code class="language-perl"><span class="hljs-comment"># Fix 7z permissions</span>
-<span class="hljs-keyword">chmod</span> +<span class="hljs-keyword">x</span> <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources"</span> \
-         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked"</span> \
-         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external"</span> \
-         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z"</span> \
-         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z/linux64"</span> \
-         <span class="hljs-string">"<span class="hljs-subst">${pkgdir}</span>/opt/<span class="hljs-subst">${pkgname}</span>/resources/app.asar.unpacked/external/7z/linux64/7z"</span></code></pre></figure>
+<span class="line-number">7</span></pre><pre class="code"><code># Fix 7z permissions
+chmod +x "${pkgdir}/opt/${pkgname}/resources" \
+         "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked" \
+         "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external" \
+         "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z" \
+         "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64" \
+         "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64/7z"</code></pre></figure>
 <p>但解压出来实际上没这些文件，然后就会报错，注释掉就好了。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -547,4 +556,4 @@ chmod +x &quot;${pkgdir}/opt/${pkgname}/resources&quot; \
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 18:34:23 CST. -->
+<!-- Page built by Hikaru v1.5.9 at 2020-08-13 Thu 15:56:14 CST. -->

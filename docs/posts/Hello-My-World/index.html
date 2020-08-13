@@ -78,6 +78,15 @@
     <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
     
     
+    
+    
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(function () {
+        hljs.initHighlighting();
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -264,26 +273,26 @@
 int main(void) {
     printf(&quot;Hello World!\n&quot;);
     return 0;
-}" data-info="language-c" data-lang="c" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello World!\n"</span>);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<span class="line-number">5</span></pre><pre class="code"><code class="language-c">#include &lt;stdio.h&gt;
+int main(void) {
+    printf("Hello World!\n");
+    return 0;
 }</code></pre></figure>
 <p>说起建网站的想法还要追溯到中考刚刚结束的时候，好朋友 <em>Hackghost</em> 跟我说他要建立一个自己的网站用来写博客。当然当时的我什么都不知道，不过好歹或多或少参与了他网站的建设。再后来自己开始用Linux，对于建站自然也是略知一二。不过对于一个高中生而言租用域名和VPS的钱也不是很轻易就能负担的起的。直到今年的愚人节那天Google到GitHub Page服务可以用来托管静态网站，于是抑制不住的在GoDaddy上租用了一年期的 <em>sxshax.xyz</em> 这个域名（现在换成了三年期的alynx.xyz），折腾了一天把这个小站打造成了还比较满意的样子。   </p>
 <figure data-raw="#!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-print(&quot;Hello World!&quot;)" data-info="language-python" data-lang="python" class="code-block highlight hljs"><pre class="gutter"><span class="line-number">1</span>
+print(&quot;Hello World!&quot;)" data-info="language-python" data-lang="python" class="code-block"><pre class="gutter"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-<span class="line-number">4</span></pre><pre class="code"><code class="language-python"><span class="hljs-comment">#!/usr/bin/env python3</span>
-<span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<span class="line-number">4</span></pre><pre class="code"><code class="language-python">#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
 
-print(<span class="hljs-string">"Hello World!"</span>)</code></pre></figure>
+print("Hello World!")</code></pre></figure>
 <p>但是就算你读到这里，朋友，你一定还是一直有一个疑问：“这个网站究竟是用来做什么的呢？”   </p>
 <p>简而言之，<strong>这是一个名叫 <em>Alynx Zhou</em> 的人利用 <em>alynx.xyz</em> 这个域名及hexo和GitHub Page还有Spacemacs、Gentoo GNU/Linux建立的一个名叫 <em>喵's StackHarbor</em> 的网站，他在这里用他还很生疏的Markdown，记录下他生活中每天的迷茫与感慨、愉悦与忧伤。</strong>   </p>
 <p>我知道你要问：“为什么要叫做这么一个拗口的名字呢？”   </p>
@@ -564,4 +573,4 @@ print(<span class="hljs-string">"Hello World!"</span>)</code></pre></figure>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.8 at 2020-08-12 Wed 18:34:23 CST. -->
+<!-- Page built by Hikaru v1.5.9 at 2020-08-13 Thu 15:56:14 CST. -->
