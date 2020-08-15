@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2020-08-04T13:06:00.000Z</updated>
+  <updated>2020-08-15T10:25:00.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,44 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="2.2.6">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>基于 GitHub Issue 的前端评论框</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/" />
+    <id>https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/</id>
+    
+    <published>2020-08-15T10:25:00.000Z</published>
+    
+    
+    <updated>2020-08-15T10:25:00.000Z</updated>
+    
+    
+    <summary type="html">
+      <![CDATA[<p>自从造了 <a href="/posts/Frontend-Blog-Search/">前端博客搜索引擎</a> 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。</p><p>（这标题怎么写的和毕业论文似的！）</p>]]>
+    </summary>
+    
+    
+    <content type="html">
+      <![CDATA[<p>自从造了 <a href="/posts/Frontend-Blog-Search/">前端博客搜索引擎</a> 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。</p><p>（这标题怎么写的和毕业论文似的！）</p><a id="more"></a><p>从我建站以来我的评论框就命途多舛，Disqus 虽然是最著名的评论系统，但是在国内访问不太顺畅。多说火了一段时间之后便关门大吉，HyperComments 则在我用了一段时间后发邮件提示要收费了，于是我之前的评论便华丽流失。而对于 Valine 这种基于 LeanCloud 的评论系统，我对 LeanCloud 不甚了解所以也不想尝试（而且 Valine 现在似乎转向闭源了，当初也许是个正确的决定）。然后赶上 Gitment 和 Gitalk 火了起来，大家意识到 GitHub Issue 正是个放评论的好地方。但是由于 <a href="https://github.com/iissnan/hexo-theme-next/pull/1634#issuecomment-313596649" target="_blank" rel="external nofollow noreferrer noopener">Gitment 和 Gitalk 采用他们自己的服务器实现博客评论框提交——转发到 GitHub API 的实现</a>，以及 <a href="https://www.v2ex.com/t/535608" target="_blank" rel="external nofollow noreferrer noopener">采用的 OAuth App 权限过高</a>，有人怀疑这不太安全，于是我也没太敢参与。后来遇到 <a href="https://github.com/wzpan/comment.js" target="_blank" rel="external nofollow noreferrer noopener">comment.js</a> 这个项目，它绕过了提交评论的问题——直接给一个到 GitHub Issue 的评论框的链接就可以了。于是我就开始用这个，至于什么 utterances 这种用 GitHub App 降低权限的评论系统，我也懒得尝试了。</p><p>但我为什么决定替换掉 comment.js 我已经记不清楚了，可能是为了对主题的显示有更好的掌握吧，毕竟它带有自己的 CSS 样式而且经常和我的冲突，也可能是因为它迟迟没提供像 Disqus 一样查找每篇文章评论数目的功能，不过它现在已经不再维护了，所以我也算是未雨绸缪。</p><p>研究了一下原理其实并不是很难，首先就是从 GitHub 的 API 上 ajax 获取数据，然后操作 DOM 添进去就可以了，所以我就先阅读了 <a href="https://docs.github.com/en/rest/reference/issues" target="_blank" rel="external nofollow noreferrer noopener">GitHub API 的文档</a>，总之还算容易，只要先获取一个仓库的 issue 列表，然后按照某种方法在里面查找相关的 issue，如果没有就渲染一个到新建 issue 的链接，否则获取该 issue 的全部评论并显示就可以了。</p><p>查找 issue 的 key 也算容易，我给它做成了函数参数，然后在主题模板里填一个每个页面唯一的字符串就行了，比如文章标题，然后新生成 issue 页面时候就把这个作为 issue 的标题，这样查找 GitHub Issue 页面时候也比较容易看。然后 GitHub 把 PR 也视为 issue，这个不要紧，收到数组之后过滤一下就好了。而显示数目我琢磨了一下其实也没什么难的嘛！我都获取到所有 issue 的信息了。做一个新的函数，主题作者在页面上放置一系列空的元素并设置好 class 属性，然后同样地把每个页面唯一的字符串设置成这些元素的属性（Disqus 也是这样的），加载函数时候把 class 作为参数传进去，分别从 issue 列表里查找对应的标题就可以了。还有一个奇葩问题是 GitHub issue 的 comments 指的是除了顶楼以外的评论，但很显然看起来不是这样的，这个也简单，直接把顶楼加到数组里就成了嘛。剩下就是艰苦的在浏览器里刀耕火种写 JS 拼 HTML 字符串发 ajax 请求写嵌套回调（没有 async/await 也太痛苦了吧！。</p><p>一切正常工作了一段时间一后我发现不太对劲，怎么评论太多的时候显示不全呢？仔细查了一下发现 GitHub API 是强制分页的，也就是说不管你怎么设置，最多一次只能获取 100 条评论，默认则是 30 条，本来我不太想给博客加评论分页功能的，现在看来是 GitHub 被迫让我加啊。当然这个并不是最痛苦的，最痛苦的是它查找仓库的 issue 列表的时候也是强制分页的！这就麻烦了，还记得我们之前说要获取到列表之后查找标题吗？获取不到完整列表还怎么查找啊！</p><p>当然你可以说按顺序多查几页不就行了嘛，这就是它分页难受的地方了！ajax 是异步的啊亲！你不会想让我一个 for 循环几个 ajax 还指望优雅的等他们结束了再跑查找吧！我知道能用 <code>Promise.all()</code> 解决，但是由于我大发慈悲的支持使用 IE11 的用户（微软我&amp;A%￥S&amp;……省略一千字儒雅随和），所以我的函数是基于回调的，那也没什么办法。而且这样首先你得读一下仓库信息才能知道有多少个 open 的 issue（没错只能算 open 的不能算 close 的！所以在后面查 issue 的时候我也不得不筛选掉 close 的，不过这大概也许是个 feature？），然后自己计算有多少页。最后我只能造了一个不那么优雅的尾递归回调（反正就那个意思），不过它工作的不错，这样我就可以获取到全部的 issue 列表了。</p><p>然后后面其实还是差不多，至于评论分页又不一样了，既然 GitHub 只有分页 API，我也就半推半就啊不是将计就计吧。我才不要继续获取全部评论了，我也每次直接获取 GitHub 那边的一页就行了，每页个数则由主题作者传参进来。至于如何确定我要哪一页呢？和搜索功能一样，继续前端解析 query string 呗。根据 issue 评论总数计算一下有几页，然后生成几个链接放在页尾，每次加载时候解析一下参数确定当前页是哪个即可。当然，不要忘了 issue 顶楼不算评论，计算分页的时候也不要给它加进去！而且既然是这么分页，我也懒得把顶楼算在里面了（不然真的麻烦的要死啊后面分页和每页个数全乱了），所以假如你设置每页 10 个评论，那第一页其实有 11 个，别烦我，代码在那，不满意自己改……然后继续刀耕火种……</p><p>为了减轻负担，我没有实现太多的功能，比如时间戳我没有搞成什么几分钟几小时前，这种东西又不清晰又浪费带宽，我只搞了基于 marked 的 Markdown 渲染（必须的）和语法高亮。为了保证效果统一，这个 JS 只是建立了 HTML 布局，给每个元素添加了 class，具体的样式则完全是主题自己编写的，所以配合起来也比较好看。</p><p>最后的效果其实还可以，完整的脚本就是 <a href="/js/comment.js">这个网站在用的 JS</a>，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。</p><p>也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
+    </content>
+    
+    
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/ARIA/" />
+    
+    
+    <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
+    
+    <category term="评论" label="评论" scheme="https://sh.alynx.one/tags/%E8%AF%84%E8%AE%BA/" />
+    
+    <category term="JavaScript" label="JavaScript" scheme="https://sh.alynx.one/tags/JavaScript/" />
+    
+    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
+    
+  </entry>
   
   
   
@@ -268,16 +306,16 @@
     <published>2019-09-18T07:24:00.000Z</published>
     
     
-    <updated>2019-09-18T07:24:00.000Z</updated>
+    <updated>2020-08-15T10:25:00.000Z</updated>
     
     
     <summary type="html">
-      <![CDATA[<p>本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。</p><p>但是这个设计引发了 lilydjwg 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过 lilydjwg 给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。</p>]]>
+      <![CDATA[<p>本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。</p><p>但是这个设计引发了 <a href="https://blog.lilydjwg.me/" target="_blank" rel="external nofollow noreferrer noopener">@依云</a> 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过依云给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。</p>]]>
     </summary>
     
     
     <content type="html">
-      <![CDATA[<p>本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。</p><p>但是这个设计引发了 lilydjwg 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过 lilydjwg 给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。</p><a id="more"></a><p>首先既然要搜索那还是得有个索引或者数据库，比较简单的方案就是把所有文章的标题 URL 和内容丢到一个 json 文件里面，这个功能在 Hexo 里可以使用 <code>hexo-generator-search</code> 实现，我也给我的 Hikaru 添加了这个生成器。然后下面的事情基本就与生成器无关了。</p><p>首先第一件事是实现搜索跳转页面，这一步只要简单的使用 HTML 表单就能实现，首先将我的搜索框改造为如下格式：</p><figure data-raw="<form action=&quot;{{ getPath(&quot;search.html&quot;) }}&quot; method=&quot;get&quot;>  <button type=&quot;submit&quot; class=&quot;search-submit&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;>    <i class=&quot;fas fa-search&quot;></i>  </button>  <input type=&quot;search&quot; id=&quot;search-input&quot; class=&quot;search-input&quot; name=&quot;q&quot; results=&quot;0&quot; placeholder=&quot;{{ __(&quot;search&quot;) }}&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;></form>" data-info="language-html" data-lang="html" class="code-block"><pre class="gutter"><span class="line-number">1</span><span class="line-number">2</span><span class="line-number">3</span><span class="line-number">4</span><span class="line-number">5</span><span class="line-number">6</span></pre><pre class="code"><code class="language-html">&lt;form action="{{ getPath("search.html") }}" method="get"&gt;  &lt;button type="submit" class="search-submit" aria-label="{{ __("search") }}"&gt;    &lt;i class="fas fa-search"&gt;&lt;/i&gt;  &lt;/button&gt;  &lt;input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="{{ __("search") }}" aria-label="{{ __("search") }}"&gt;&lt;/form&gt;</code></pre></figure><p>使用 <code>button</code> 而不是 <code>input</code> 的原因是我想用我的图标做搜索按钮，反正 <code>&lt;input type="submit"&gt;</code> 只是个特化的 <code>button</code>。理论上来说不放按钮靠回车提交也是 OK，但是觉得这样又会被某些用户批评不友好了……</p><p>搜索框就很简单，<code>name="q"</code> 表示生成的 query string 里 keywords 的 key 是 <code>q</code>，然后按照表单写法会被提交到 <code>search.html</code>，理论上来说搜索应该发 GET 请求所以就是 <code>method="get"</code>，当然 POST 就实现不了复制链接查看搜索结果了。</p><p>这个表单就是标准的 HTML 表单，不需要用 JavaScript 处理。生成的 GET 请求的 URL 类似于 <code>/search.html?q=xxx</code></p><p>然后接下来是处理请求了，既然是发送到 <code>search.html</code>，对于静态后端肯定是要返回这个页面的，那就得先创建页面，然后对这个页面进行特殊处理，我选择给它 layout 设置成 <code>search</code>，然后就可以单独给它编写模板添加处理部分了。</p><p><code>search.html</code> 加载之后是可以通过 <code>window.location.search</code> 获取到 query string 的，然后我加载我修改过的 <code>search.js</code>（<a href="/js/search.js">这里</a>），用它处理搜索过程。同时在页面里添加了一个 container 用来放置检索结果。</p><p><code>search.js</code> 其实没什么黑科技，毕竟我们的难点就是在无后端情况下处理关键词和数据库，关键词已经用 <code>window.location.search</code> 拿到了，调用 API 里面 <code>URLSearchParams</code> 类就可以解析，然后只要通过 ajax 请求数据就行了，封装 ajax 的代码网上到处都是，实在不行用 jQuery 也成。</p><p>然后剔除重复关键词主要是为了优化一下性能，接下来我的解决方案就是简单粗暴 <code>indexOf()</code>，不要跟我提什么算法什么优化，短平快实现效果，我是个实用主义者，目前这一步其实还没有成为瓶颈。</p><p>然后对于原版文件我的改进主要是按匹配次数排序，文章出现关键词越多则排序越靠前，相对可以提高效率。</p><p>接下来使用正则表达式给关键词加上 <code>&lt;strong&gt;</code>，这样显示起来比较显眼。最后把字符串拼起来显示就好了。</p><p>如果有性能瓶颈的话，多半也会先出现在 ajax，不过目前我文章还没有多到加载不出来的情况，也许可以靠分块加载解决？</p><p>最后我加了个简单的 SpinKit 动画，在查询结束之前先跑一下提升用户体验。</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
+      <![CDATA[<p>本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。</p><p>但是这个设计引发了 <a href="https://blog.lilydjwg.me/" target="_blank" rel="external nofollow noreferrer noopener">@依云</a> 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过依云给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。</p><a id="more"></a><p>首先既然要搜索那还是得有个索引或者数据库，比较简单的方案就是把所有文章的标题 URL 和内容丢到一个 json 文件里面，这个功能在 Hexo 里可以使用 <code>hexo-generator-search</code> 实现，我也给我的 Hikaru 添加了这个生成器，用来生成 JSON。</p><p>首先第一件事是实现搜索跳转页面，这一步只要简单的使用 HTML 表单就能实现，首先将我的搜索框改造为如下格式：</p><figure data-raw="<form action=&quot;{{ getPath(&quot;search.html&quot;) }}&quot; method=&quot;get&quot;>  <button type=&quot;submit&quot; class=&quot;search-submit&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;>    <i class=&quot;fas fa-search&quot;></i>  </button>  <input type=&quot;search&quot; id=&quot;search-input&quot; class=&quot;search-input&quot; name=&quot;q&quot; results=&quot;0&quot; placeholder=&quot;{{ __(&quot;search&quot;) }}&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;></form>" data-info="language-html" data-lang="html" class="code-block"><pre class="gutter"><span class="line-number">1</span><span class="line-number">2</span><span class="line-number">3</span><span class="line-number">4</span><span class="line-number">5</span><span class="line-number">6</span></pre><pre class="code"><code class="language-html">&lt;form action="{{ getPath("search.html") }}" method="get"&gt;  &lt;button type="submit" class="search-submit" aria-label="{{ __("search") }}"&gt;    &lt;i class="fas fa-search"&gt;&lt;/i&gt;  &lt;/button&gt;  &lt;input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="{{ __("search") }}" aria-label="{{ __("search") }}"&gt;&lt;/form&gt;</code></pre></figure><p>使用 <code>button</code> 而不是 <code>input</code> 的原因是我想用我的图标做搜索按钮，反正 <code>&lt;input type="submit"&gt;</code> 只是个特化的 <code>button</code>。理论上来说不放按钮靠回车提交也是 OK，但是觉得这样又会被某些用户批评不友好了……</p><p>搜索框就很简单，<code>name="q"</code> 表示生成的 query string 里 keywords 的 key 是 <code>q</code>，然后按照表单写法会被提交到 <code>search.html</code>，理论上来说搜索应该发 GET 请求所以就是 <code>method="get"</code>，当然 POST 就实现不了复制链接查看搜索结果了。</p><p>这个表单就是标准的 HTML 表单，不需要用 JavaScript 处理。生成的 GET 请求的 URL 类似于 <code>/search.html?q=xxx</code></p><p>然后接下来是处理请求了，既然是发送到 <code>search.html</code>，对于静态后端肯定是要返回这个页面的，那就得先创建页面，然后对这个页面进行特殊处理，这里我同样利用生成器生成一个 layout 设置成 <code>search</code> 的页面，然后就可以单独给它编写模板添加处理部分了。</p><p><code>search.html</code> 加载之后是可以通过 <code>window.location.search</code> 获取到 query string 的，然后我加载我修改过的 <code>search.js</code>（<a href="/js/search.js">这里</a>），用它处理搜索过程。同时在页面里添加了一个 container 用来放置检索结果。</p><p><code>search.js</code> 其实没什么黑科技，毕竟我们的难点就是在无后端情况下处理关键词和数据库，关键词已经用 <code>window.location.search</code> 拿到了，解析一下然后只要通过 ajax/fetch 请求数据就行了，封装 ajax 的代码网上到处都是，实在不行用 jQuery 也成。</p><p>然后剔除重复关键词主要是为了优化一下性能，接下来我的解决方案就是简单粗暴 <code>indexOf()</code>，不要跟我提什么算法什么优化，短平快实现效果，我是个实用主义者，目前这一步其实还没有成为瓶颈。</p><p>然后对于原版文件我的改进主要是按匹配次数排序，文章出现关键词越多则排序越靠前，相对可以提高效率。</p><p>接下来使用正则表达式给关键词加上 <code>&lt;strong&gt;</code>，这样显示起来比较显眼。最后把字符串拼起来显示就好了。其实这里的算法还有点意思，比如假如两个关键词出现的位置中间大于多少个字符则插入省略号，否则合并两个的上下文，具体实现也可以参照代码。</p><p>如果有性能瓶颈的话，多半也会先出现在 ajax，不过目前我文章还没有多到加载不出来的情况，也许可以靠分块加载解决？</p><p>更新（2020-08-15 18:25:00）：我给代码添加了简单的分块支持。由于这里需要主题和生成器约定好路径，不太适合让生成器自动生成路径，所以采用了一个简单的方法就是让用户在设置文件里手动指定几个 JSON 文件的路径，然后生成器只是读取一下配置，假如是数组就分块写到指定好的路径里面。然后前端查找的时候分别异步查找每个文件并合并排序结果，理论来说大概会有性能提升？</p><p>最后我加了个简单的 SpinKit 动画，在查询结束之前先跑一下提升用户体验。</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
     </content>
     
     
@@ -667,38 +705,6 @@
     <category term="Android" label="Android" scheme="https://sh.alynx.one/tags/Android/" />
     
     <category term="愤怒" label="愤怒" scheme="https://sh.alynx.one/tags/%E6%84%A4%E6%80%92/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>GNOME 的修改开发与测试</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/GNOME-Develop/" />
-    <id>https://sh.alynx.one/posts/GNOME-Develop/</id>
-    
-    <published>2019-02-10T14:58:00.000Z</published>
-    
-    
-    <updated>2019-02-10T14:58:00.000Z</updated>
-    
-    
-    <summary type="html">
-      <![CDATA[<div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div><p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>]]>
-    </summary>
-    
-    
-    <content type="html">
-      <![CDATA[<div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div><p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p><a id="more"></a><p><code>gitlab.gnome.org</code> 这个网站国内访问很慢，而且 jhbuild 使用 git clone 有时候不会遵循 git 的代理设置（指 <code>git config --global http.proxy 'socks5://127.0.0.1:1080' &amp;&amp; git config --global https.proxy 'socks5://127.0.0.1:1080'</code>），经常不好用，我家里的网又不太好。我改 GNOME Shell 代码只用了一小时，但下载和编译环境来测试用了两天一夜。</p><p>我调试的是 GNOME Shell，首先按照 <a href="https://wiki.gnome.org/action/show/Projects/Jhbuild/Introduction?action=show&amp;redirect=Newcomers%2FBuildSystemComponent%2FJhbuild" target="_blank" rel="external nofollow noreferrer noopener">说明页面</a> 安装 JHBuild，将安装到的 <code>~/.local/bin</code> 加入 PATH，然后建立 <code>~/jhbuild</code> 目录，运行 <code>jhbuild build gnome-shell</code> 会自动下载编译所有需要的依赖（大概 80 个）。</p><p>JHBuild 编译下载一些包的时候经常会出问题，一般编译一个包有四个阶段：</p><ul><li><code>checkout</code>：clone 仓库，设置 origin，然后 fetch。</li><li><code>configure</code>：运行 <code>autogen.sh</code>，<code>configure</code> 或者 <code>meson</code>。</li><li><code>build</code>：<code>make</code> 或者 <code>ninja</code>。</li><li><code>install</code>：就是 <code>install</code>，目的地是 JHBuild 的环境。</li></ul><p>按了 Ctrl+C 之后会给几个选项，第一个通常是继续当前阶段，第二个是进行下一阶段，第三个是放弃当前的包，第四个是开一个 shell 子程序，第五个是刷新配置文件，对于 JHBuild 不走代理 clone 没速度的时候可以先 Ctrl+C，然后开启 shell，自己手动 clone，然后 Ctrl+D 退出 Shell 回到 JHBuild，这时候会继续让你选择，如果是 checkout 的话选择继续当前阶段，它会发现你同步好了。</p><p>如果是某个包需要特殊操作，默认的参数配置不过去的话，建议也是 Ctrl+C 开 shell 手动运行 <code>./autogen.sh</code> 之类的，然后选择下一阶段（<code>configure</code> 的下一阶段是 <code>build</code>），如果继续的话它会再 <code>configure</code> 一遍，就覆盖了你的。虽然可以在 JHBuild 配置文件里添加某个包的参数，但是似乎我也搞不清楚 JHBuild 什么时候重新加载配置，经常选了 5 它没变化，把配置文件对应的行删掉它又加上了之前的参数。</p><p>反正 JHBuild 搞不定的都手动搞定然后切换下一阶段基本都可以。</p><p><code>colord</code> 这个包的 man page 构建时候依赖 <code>docbook-xsl-ns</code>，这个包在 AUR 里，但是装上了它也检测不到，所以建议添加 <code>-Dman=false</code> 到 <code>autogen.sh</code> 的参数，关闭 man page 的生成，反正也用不到（所以 Arch 官方的打包姬怎么打包的啊！）。</p><p><code>webkitgtk</code> 不负众望是编译起来最慢的，几年前用 Gentoo 的时候轻松两小时（我当时 Skylake 移动版 Xeon E3-1505M 可是最强的笔记本 CPU），最近有改善了，但还是要半个小时多。</p><p><code>ibus</code> 配置的时候需要加 <code>--with-ucd-dir=/usr/share/unicode/</code> 不然它默认去 <code>/usr/share/unicode/ucd/</code> 找文件但 Arch 打包的路径不是这个。</p><p><code>libgdata</code> 不支持 <code>automake-1.16</code>，需要降级到 1.15 来 configure，但是生成的 Makefile 有一句没展开的宏（我这里是 4141 行的 <code>@CODE_COVERAGE_RULES@</code>）（开发者出来修 bug ！），需要注释掉，然后 <code>make</code> 就可以过了，似乎没啥不利影响。</p><p><code>uhttpmock</code> 的来源 URL 搞错了，现在指向的旧的是被废弃的仓库，新仓库是 <a href="https://gitlab.com/uhttpmock/uhttpmock/" target="_blank" rel="external nofollow noreferrer noopener">这个</a>，需要修改 <code>~/.config/jhbuildrc</code> 添加 <code>branches['uhttpmock'] = ('https://gitlab.com/uhttpmock/uhttpmock.git', 'master')</code>。</p><p>都编译完就可以用 <code>jhbuild run gnome-shell --replace</code> 启动你编译的版本了，其他的 GNOME 程序编译的也可以 run 比如 <code>jhbuild run dconf-editor</code>。但是用 wayland 会话似乎既不能直接运行 <code>gnome-shell --replace</code> 也不能 <code>gnome-shell --nested</code> （像 weston 小窗口一样，但 gnome-shell 有 lock），所以我用的 x11 测试。测试时候不要锁屏不要看 lookingGlass，锁屏了回去就会没法输密码解锁，看了 lookingGlass 之后我卡住了……测试完最好重启，不然似乎没啥简单办法回到你系统的程序里。</p><p>没搞清楚怎么修改 jhbuild 的仓库来源，也就是说它只会去 GNOME/gnome-shell clone 但没法改成你 fork 的仓库，我只能把改过的文件复制到 <code>~/jhbuild/checkout</code> 目录下面对应的仓库里，然后 <code>jhbuild buildone -n gnome-shell</code>，<code>buildone</code> 的意思是不管其他依赖，只重新编译后面的（用 <code>build</code> 会依次检查依赖，很慢的！），<code>-n</code> 是就算仓库被改了也不要重新 <code>checkout</code>，不然你的文件就被覆盖回去了……</p><p>哦对了，GNOME Shell 有个单独的 <code>gnome-shell-sass</code> 的仓库存放样式表（CSS/SASS），但看说明这是个只读仓库，是从 <code>gnome-shell</code> 里分离出来给别的扩展用的，所以直接修改 <code>gnome-shell</code> 里面的就好了。还有一般跟顶栏有关的 GSettings 选项都在 <code>org.gnome.desktop.interface</code> 下面，但是这些 schema 对应的 XML 文件都在一个叫 <code>gsettings-desktop-schemas</code> 的仓库里，所以需要去那边改。</p><p>最后狠狠地吐槽一下砍掉 GNOME Shell 顶栏透明的老哥，为了一点点边缘情况（有人说高对比度颜色壁纸下看不清顶栏文字，但大部分人都看得清并且实在不行换壁纸呗！）就砍掉这个好评如潮的功能。我提了个添加一个 GSettings 选项，让顶栏根据选项决定是透明还是纯黑（壁纸看不清就设成纯黑呗），结果被这个老哥拒绝了，还说添加个选项只会阻止其他人修 bug……大部分人都不觉得这是个 bug 好吗？我不觉得程序识别壁纸颜色改变顶栏会比用户自己调更准确，Android 的变色顶栏过了这么久，在许多壁纸上也不能正确识别颜色，添加一个让用户自己选择的功能才会更方便。但我又不想因为一个奇葩老哥就放弃我这么久的 GNOME 使用习惯，看来还是等等看能折腾出什么名堂吧！</p><p>等到 GNOME 3.32 释出稳定版之后我尽量生成一个透明顶栏的 patch 就好了，反正主要的代码都是前人做的，大概 Arch Linux CN 的源愿意接受一个新包。不要和那个奇葩老哥一样说为啥不写扩展，就算是程序员家里养的猫也该知道 GNOME Shell 扩展 API 经常变还经常把整个桌面搞崩，真亏他们好意思提出来！</p><p><em>Alynx Zhou</em></p><p><strong>A Coder &amp; Dreamer</strong></p>]]>
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" />
-    
-    
-    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
     
   </entry>
   
