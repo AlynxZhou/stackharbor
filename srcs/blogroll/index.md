@@ -67,6 +67,8 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 | <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
 | <img src="https://avatars2.githubusercontent.com/u/15247171?s=400&u=42dbf0d7048c9b3eda5c77ec31b9d13efca1cc28&v=4" style="width: 5em;"> | [Nichi Yorozuya](https://nichi.co/) | "🐰🐰" | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
 | <img src="https://avatars3.githubusercontent.com/u/6873988?s=460&u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&v=4" style="width: 5em;"> | [Bruce Z Blog](https://blog.brucezhang.cf/)  | 「我不是兔子」 | 经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。 |
+| <img src="https://avatars3.githubusercontent.com/u/34574198?s=400&u=f711be85d4c32aa09a846fb739dc3d87924a7c51&v=4" style="width: 5em;"> | [Liolok's Blog](https://liolok.com/blog/) | "I am not a cat, how disappointing :(" | 纠结的皓奇老师，他好像也想当猫。 |
+| <img src="https://blog.edward-p.xyz/images/favicon.png" style="width: 5em;"> | [Edward-P's Blog](https://blog.edward-p.xyz/) |  | 虽然咱经常叫他坏德华，但并不是什么坏人，保护各种德华从我做起。 |
 | <img src="https://blog.lilydjwg.me/user_files/lilydjwg/config/avatar.png?1375032417" style="width: 5em;">  | [依云's Blog](https://blog.lilydjwg.me/) |  | 这也是一只狐狸，而且懂得很多很多很多于是我经常经常经常阅读博客。 |
 | <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width: 5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 | <img src="https://avatars0.githubusercontent.com/u/259684?s=460&v=4" style="width: 5em;"> | [CS Slayer](https://www.csslayer.info/) |  | 资深 ~~休伯利安号甲板清洁工~~ 崩坏三玩家，Fcitx 的作者。~~可是这和我冷酷无情的 iBus 用户有有什么关系呢。~~ |
