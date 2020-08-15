@@ -72,7 +72,7 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 | <img src="https://blog.lilydjwg.me/user_files/lilydjwg/config/avatar.png?1375032417" style="width: 5em;">  | [依云's Blog](https://blog.lilydjwg.me/) |  | 这也是一只狐狸，而且懂得很多很多很多于是我经常经常经常阅读博客。 |
 | <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width: 5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
 | <img src="https://avatars0.githubusercontent.com/u/259684?s=460&v=4" style="width: 5em;"> | [CS Slayer](https://www.csslayer.info/) |  | 资深 ~~休伯利安号甲板清洁工~~ 崩坏三玩家，Fcitx 的作者。~~可是这和我冷酷无情的 iBus 用户有有什么关系呢。~~ |
-| <img src="https://cdn.jsdelivr.net/npm/skx@0.2.3/avatar/96x96.png" style="width: 5em;"> | [Sukka's Blog](https://blog.skk.moe/) | “童话只美在真实却从不续写” | 自称有大尾巴那我猜也是狐狸？是 Hexo 的维护者之一！虽然我不用 Hexo 了但是觉得还是很厉害因为我之前看过 Hexo 的代码觉得迷迷糊糊！还有很多干货！ |
+| <img src="https://cdn.jsdelivr.net/npm/skx@0.2.3/avatar/96x96.png" style="width: 5em;"> | [Sukka's Blog](https://blog.skk.moe/) | “童话只美在真实却从不续写” | 自称有大尾巴那我猜也是狐狸？是 Hexo 的维护者之一。虽然我不用 Hexo 了但是觉得还是很厉害因为我之前看过 Hexo 的代码觉得迷迷糊糊。 |
 | <img src="https://i.loli.net/2018/12/23/5c1f5a77d8d8e.png" style="width: 5em;"> | [wgjak47's blog](http://wgjak47.me/tech/) | “运维开发工程师” | 是我看不懂的那种（指 k8s） |
 | <img src="https://avatars0.githubusercontent.com/u/8396456?s=460&v=4" style="width: 5em;"> | [初等記憶體](https://axionl.me/) | 「 一個你知道的地方，和一個沒有酒的故事 ｜ 言文 」 | 听起来好像萌妹啊！|
 | <img src="https://avatars1.githubusercontent.com/u/17294071?s=460&v=4" style="width: 5em;"> | [OriginCode 札記](https://originco.de/) | 「無人訪問之無趣博客 * 1」 | 好像现在是 ~~初中生~~ 高中生来着…… |
