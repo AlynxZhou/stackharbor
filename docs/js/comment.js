@@ -7,6 +7,7 @@
 
 var GITHUB_BASE_URL = "https://github.com";
 var GITHUB_API_BASE_URL = "https://api.github.com";
+var GITHUB_API_HEADERS = {"Accept": "application/vnd.github.v3.html+json"};
 
 function buildRepoURL(user, repo) {
   return [
@@ -57,9 +58,13 @@ function parseQueryString(queryString) {
   return result;
 }
 
-function fetchJSON(path, callback) {
+function fetchJSON(path, opts = {}, callback) {
+  if (callback == null) {
+    callback = opts;
+    opts = null;
+  }
   if (window.fetch != null) {
-    window.fetch(path).then(function (response) {
+    window.fetch(path, opts).then(function (response) {
       if (response.status !== 200) {
         // fetch does not reject on HTTP error, so we do this manually.
         throw new Error("Unexpected HTTP status code " + response.status);
@@ -94,6 +99,15 @@ function fetchJSON(path, callback) {
       }
       callback(null, JSON.parse(xhr.response));
     };
+    if (opts["headers"] != null) {
+      // Object.keys() is not supported by IE 9,
+      // but who cares? I only support IE 11.
+      var headerKeys = Object.keys(opts["headers"]);
+      // But IE 11 does not support for...of! I hate it!
+      for (var i = 0; i < headerKeys.length; ++i) {
+        xhr.setRequestHeader(headerKeys[i], opts["headers"][headerKeys[i]]);
+      }
+    }
     xhr.open("GET", path, true);
     xhr.send(null);
   }
@@ -109,44 +123,37 @@ function getRepo(path, callback) {
   });
 }
 
+// An ugly way to collect all issues,
+// because GitHub's API is paginated,
+// but our fetch is async.
 function getIssues(repo, callback) {
   var ISSUES_PER_PAGE = 70;
   var openIssuesCount = repo["open_issues_count"];
   var pagesLength = calPagesLength(openIssuesCount, ISSUES_PER_PAGE);
-  var nextPage = 1;
+  var fetchedPagesCount = 0;
   var results = [];
-  // An ugly way to collect all issues,
-  // because GitHub's API is paginated,
-  // but our fetch is async.
-  function handler(err, issues) {
-    ++nextPage;
-    if (err != null) {
-      callback(err, results);
-      return;
-    }
-    results = results.concat(issues);
-    if (nextPage <= pagesLength) {
-      fetchJSON([
-        repo["url"],
-        "/issues",
-        "?state=open&per_page=",
-        ISSUES_PER_PAGE,
-        "&page=",
-        nextPage
-      ].join(""), handler);
-    } else {
-      // No more issues, loop finished.
-      callback(null, results);
-    }
+  var lastError = null;
+  for (var i = 0; i < pagesLength; ++i) {
+    fetchJSON([
+      repo["url"],
+      "/issues",
+      "?state=open&per_page=",
+      ISSUES_PER_PAGE,
+      "&page=",
+      i
+    ].join(""), {"headers": GITHUB_API_HEADERS}, function (err, issues) {
+      ++fetchedPagesCount;
+      // Only last error can be handled, so sad.
+      if (err != null) {
+        lastError = err;
+      } else {
+        results = results.concat(issues);
+      }
+      if (fetchedPagesCount === pagesLength) {
+        callback(lastError, results);
+      }
+    });
   }
-  fetchJSON([
-    repo["url"],
-    "/issues",
-    "?state=open&per_page=",
-    ISSUES_PER_PAGE,
-    "&page=",
-    nextPage
-  ].join(""), handler);
 }
 
 function findIssueByTitle(issues, title, callback) {
@@ -160,11 +167,21 @@ function findIssueByTitle(issues, title, callback) {
   callback(null);
 }
 
-function getComments(issue, perPage, currentIndex, callback) {
+function getComments(issue, currentIndex, perPage, callback) {
   if (issue == null) {
     // Not a network error, just means no comment.
-    callback(null, []);
+    callback(null, [], 0, 0);
     return;
+  }
+  // We skip fetching comments if there is only one body,
+  // because pagesLength and currentIndex will be 0 and that's hard to handle.
+  if (issue["comments"] === 0) {
+    callback(null, [issue], 1, 1);
+    return;
+  }
+  var pagesLength = calPagesLength(issue["comments"], perPage);
+  if (currentIndex > pagesLength) {
+    currentIndex = pagesLength;
   }
   fetchJSON([
     issue["url"],
@@ -173,17 +190,16 @@ function getComments(issue, perPage, currentIndex, callback) {
     perPage,
     "&page=",
     currentIndex
-  ].join(""), function (err, comments) {
+  ].join(""), {"headers": GITHUB_API_HEADERS}, function (err, comments) {
     if (err != null) {
       callback(err, null);
     }
     if (currentIndex === 1) {
       // GitHub does not treat issue content as comment, but we need.
       // Anyway, the first page will have perPage + 1 comments.
-      callback(null, [issue].concat(comments));
-    } else {
-      callback(null, comments);
+      comments = [issue].concat(comments);
     }
+    callback(null, comments, currentIndex, pagesLength);
   });
 }
 
@@ -239,7 +255,7 @@ function renderComment(comment) {
     "</span>",
     "</div>",
     "<div class=\"comment-content\">",
-    window.marked == null ? comment["body"] : window.marked(comment["body"]),
+    comment["body_html"],
     "</div>",
     "</div>",
     "</div>"
@@ -329,16 +345,9 @@ var loadComment = function (opts) {
         return;
       }
       findIssueByTitle(issues, opts["title"], function (issue) {
-        var pagesLength = 1;
-        // Issue might be null here.
-        if (issue != null) {
-          pagesLength = calPagesLength(issue["comments"], opts["perPage"]);
-        }
-        if (commentPage > pagesLength) {
-          commentPage = pagesLength;
-        }
         getComments(
-          issue, opts["perPage"], commentPage, function (err, comments) {
+          issue, commentPage, opts["perPage"],
+          function (err, comments, commentPage, pagesLength) {
             if (err != null) {
               container.innerHTML = renderError(err, opts);
               return;

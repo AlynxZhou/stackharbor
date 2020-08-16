@@ -128,7 +128,6 @@ libCDN:
   lgVideo:
   busuanzi:
   normalize:
-  marked: //cdn.bootcdn.net/ajax/libs/marked/1.1.1/marked.min.js
   highlight: //cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js
   clipboard: //cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js
   # Don't use camelCase for hljs theme CSS files,
