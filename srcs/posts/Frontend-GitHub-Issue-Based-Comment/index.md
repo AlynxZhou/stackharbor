@@ -2,6 +2,7 @@
 title: 基于 GitHub Issue 的前端评论框
 layout: post
 createdDate: 2020-08-15 18:25:00
+updatedDate: 2020-08-17 10:34:00
 categories:
 - 网站
 - ARIA
@@ -31,11 +32,119 @@ tags:
 
 然后后面其实还是差不多，至于评论分页又不一样了，既然 GitHub 只有分页 API，我也就半推半就啊不是将计就计吧。我才不要继续获取全部评论了，我也每次直接获取 GitHub 那边的一页就行了，每页个数则由主题作者传参进来。至于如何确定我要哪一页呢？和搜索功能一样，继续前端解析 query string 呗。根据 issue 评论总数计算一下有几页，然后生成几个链接放在页尾，每次加载时候解析一下参数确定当前页是哪个即可。当然，不要忘了 issue 顶楼不算评论，计算分页的时候也不要给它加进去！而且既然是这么分页，我也懒得把顶楼算在里面了（不然真的麻烦的要死啊后面分页和每页个数全乱了），所以假如你设置每页 10 个评论，那第一页其实有 11 个，别烦我，代码在那，不满意自己改……然后继续刀耕火种……
 
-为了减轻负担，我没有实现太多的功能，比如时间戳我没有搞成什么几分钟几小时前，这种东西又不清晰又浪费带宽，我只搞了基于 marked 的 Markdown 渲染（必须的）和语法高亮。为了保证效果统一，这个 JS 只是建立了 HTML 布局，给每个元素添加了 class，具体的样式则完全是主题自己编写的，所以配合起来也比较好看。
+为了减轻负担，我没有实现太多的功能，比如时间戳我没有搞成什么几分钟几小时前，这种东西又不清晰又浪费带宽，我只搞了~~基于 marked 的 Markdown 渲染（必须的）和~~语法高亮，Markdown 渲染不是必须的，因为你可以 [设置 header 让 GitHub 直接返回 HTML](https://docs.github.com/en/rest/overview/media-types#comment-body-properties)。为了保证效果统一，这个 JS 只是建立了 HTML 布局，给每个元素添加了 class，具体的样式则完全是主题自己编写的，所以配合起来也比较好看。
 
 最后的效果其实还可以，完整的脚本就是 [这个网站在用的 JS](/js/comment.js)，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。
 
 也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃
+
+# 其实你知道，烦恼（bug）会解决烦恼（bug）。
+
+<div class="alert-green">这一部分更新于 2020-08-17 10:34:00）。</div>
+
+GitHub API 推荐用户 [缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests)。我心想这也简单，那就在前端搞一个缓存就可以了。
+
+然后我搜索了一番找到了 CacheStorage，看起来它是唯一一个跨标签页的基于 Session 的正宗的前端缓存。但是很显然 IE 又不支持，而且这个 API 基于 Promise 并且只能缓存 Response 对象，也就是说没办法简单的通过在 XHR 的时候判断一下跳过不支持的情况，要 Polyfill 则需要引入完整的 Promise 和 fetch/Response，所以我们做了一个~~艰难~~容易的决定——是时候去掉 IE 支持了！
+
+于是我把请求 API 的函数改成了如下操作：
+
+```JavaScript
+let cachePromise = window.caches.open("cacheName");
+
+// Fetching JSON with cache for GitHub API.
+const cachedFetchJSON = (path, opts = {}) => {
+  let cachedResponse = null;
+  return cachePromise.then((cache) => {
+    return cache.match(path);
+  }).then((response) => {
+    // No cache or no ETag, just re-fetch;
+    if (response == null || !response.headers.has("ETag")) {
+      return window.fetch(path, opts);
+    }
+    // Ask GitHub API whether cache is outdated.
+    cachedResponse = response;
+    opts["headers"] = opts["headers"] || {};
+    opts["headers"]["If-None-Match"] = cachedResponse.headers.get("ETag");
+    return window.fetch(path, opts);
+  }).then((response) => {
+    if (response.status === 200) {
+      // No cache or cache outdated and succeed.
+      // Update cache.
+      cachePromise.then((cache) => {
+        return cache.put(path, response);
+      });
+      // Cache needs an unconsumed response,
+      // so we clone respone before consume it.
+      return response.clone().json();
+    } else if (response.status === 304 && cachedResponse != null) {
+      // Not modified so use cache.
+      return cachedResponse.clone().json();
+    } else {
+      // fetch does not reject on HTTP error, so we do this manually.
+      throw new Error("Unexpected HTTP status code " + response.status);
+    }
+  });
+};
+```
+
+当然理想很丰满现实很骨感，在不支持 CacheStorage 的浏览器里要 fallback 到不带缓存的版本，本来我以为很简单，但是……（下面开启吐槽时间。）
+
+<div class="center-quote">支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。</div>
+
+为什么非 HTTPS + localhost 不能用 CacheStorage 啊，难道他们没考虑过在电脑上开发然后手机访问测试移动版吗？还是说他们打算在手机上起一个开发服务器？为什么 Firefox 在非 HTTPS 时限制 CacheStorage 的方法是在 Promise 里 reject 一个 Error 从而导致这个过程变成了异步的？为什么 CacheStorage 只能缓存 Response 而不是任意数据结构？Safari 不能完整支持 Response 对象也就算了，为什么移动版 Chrome 和 Firefox 也不支持？合着你们 fetch 返回的 Response 还不是 Response？这世界到底怎么了……
+
+所以最后需要一个长长的基于 Promise 的判断加载函数：
+
+```JavaScript
+// 加载评论的时候才加载缓存。
+let cachePromise = null;
+
+let fetchJSON = uncachedFetchJSON;
+
+const loadCache = (name) => {
+  // Unlike in .then(),
+  // we must explicit resolve and reject in a Promise's execuator.
+  return new Promise((resolve, reject) => {
+    if (cachePromise != null && fetchJSON !== uncachedFetchJSON) {
+      return reject(new Error("Cache is already loaded!"));
+    }
+    // Old version browsers does not support Response.
+    if (window.Response == null) {
+      return reject(
+        new Error("Old version browsers does not support Response.")
+      );
+    }
+    const testResponse = new window.Response();
+    // Safari and most mobile browsers do not support `Response.clone()`.
+    if (testResponse.headers == null || testResponse.clone == null) {
+      return reject(new Error(
+        "Safari and most mobile browsers do not support `Response.clone()`."
+      ));
+    }
+    // Chromium and Safari set `window.caches` to `undefined` if not HTTPS.
+    if (window.caches == null) {
+      return reject(new Error(
+        "Chromium and Safari set `window.caches` to `undefined` if not HTTPS."
+      ));
+    }
+    window.caches.open("CacheStorageTest").then((cache) => {
+      fetchJSON = cachedFetchJSON;
+      cachePromise = window.caches.open(name);
+      return window.caches.delete("CacheStorageTest");
+    }).then(() => {
+      return resolve();
+    }).catch((error) => {
+      // Firefox throws `SecurityError` if not HTTPS.
+      console.error(error);
+      return reject(new Error("Firefox throws `SecurityError` if not HTTPS."));
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+};
+```
+
+不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。
 
 *Alynx Zhou*
 
