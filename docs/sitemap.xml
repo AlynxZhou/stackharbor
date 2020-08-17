@@ -634,15 +634,6 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/about/</loc>
-    
-    <lastmod>2020-08-11T09:01:00.000Z</lastmod>
-    
-  </url>
-  
-  
-  
-  <url>
     <loc>https://sh.alynx.one/404.html</loc>
     
     <lastmod>2016-04-04T01:00:00.000Z</lastmod>
@@ -655,6 +646,15 @@
     <loc>https://sh.alynx.one/blogroll/</loc>
     
     <lastmod>2020-08-11T09:00:00.000Z</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/about/</loc>
+    
+    <lastmod>2020-08-11T09:01:00.000Z</lastmod>
     
   </url>
   
