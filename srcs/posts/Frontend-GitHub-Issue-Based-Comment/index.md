@@ -89,7 +89,7 @@ const cachedFetchJSON = (path, opts = {}) => {
 
 当然理想很丰满现实很骨感，在不支持 CacheStorage 的浏览器里要 fallback 到不带缓存的版本，本来我以为很简单，但是……（下面开启吐槽时间。）
 
-<div class="center-quote">支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。</div>
+<blockquote class="center-quote">支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。</blockquote>
 
 为什么非 HTTPS + localhost 不能用 CacheStorage 啊，难道他们没考虑过在电脑上开发然后手机访问测试移动版吗？还是说他们打算在手机上起一个开发服务器？为什么 Firefox 在非 HTTPS 时限制 CacheStorage 的方法是在 Promise 里 reject 一个 Error 从而导致这个过程变成了异步的？为什么 CacheStorage 只能缓存 Response 而不是任意数据结构？Safari 不能完整支持 Response 对象也就算了，为什么移动版 Chrome 和 Firefox 也不支持？合着你们 fetch 返回的 Response 还不是 Response？这世界到底怎么了……
 
