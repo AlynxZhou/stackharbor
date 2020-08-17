@@ -530,6 +530,17 @@
         "queryString": window.location.search,
         "basePath": "/blogroll/",
         "containerID": "comment-results"
+      }).then(() => {
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName === "A") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
       });
     });
   </script>
@@ -758,4 +769,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 10:57:23 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:13:34 CST. -->

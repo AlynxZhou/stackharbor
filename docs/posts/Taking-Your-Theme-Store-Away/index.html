@@ -414,6 +414,17 @@ Cxxxxx-CMS介绍：<a href="https://cxxxxx.com/zh-cn/articles/cms-introduce.html
         "queryString": window.location.search,
         "basePath": "/posts/Taking-Your-Theme-Store-Away/",
         "containerID": "comment-results"
+      }).then(() => {
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName === "A") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
       });
     });
   </script>
@@ -583,4 +594,4 @@ Cxxxxx-CMS介绍：<a href="https://cxxxxx.com/zh-cn/articles/cms-introduce.html
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 10:57:23 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:13:34 CST. -->

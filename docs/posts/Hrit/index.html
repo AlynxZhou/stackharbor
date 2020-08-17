@@ -911,6 +911,17 @@ Now you can copy the follow hexo tags to your markdown post.
         "queryString": window.location.search,
         "basePath": "/posts/Hrit/",
         "containerID": "comment-results"
+      }).then(() => {
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName === "A") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
       });
     });
   </script>
@@ -1109,4 +1120,4 @@ Now you can copy the follow hexo tags to your markdown post.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 10:57:23 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:13:34 CST. -->
