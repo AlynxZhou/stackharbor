@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -332,42 +357,7 @@ const cachedFetchJSON = (path, opts = {}) => {
       throw new Error(&quot;Unexpected HTTP status code &quot; + response.status);
     }
   });
-};" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span></pre><pre class="code"><code class="language-JavaScript">let cachePromise = window.caches.open("cacheName");
+};" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">let cachePromise = window.caches.open("cacheName");
 
 // Fetching JSON with cache for GitHub API.
 const cachedFetchJSON = (path, opts = {}) =&gt; {
@@ -453,52 +443,7 @@ const loadCache = (name) => {
   }).catch((error) => {
     console.error(error);
   });
-};" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span></pre><pre class="code"><code class="language-JavaScript">// 加载评论的时候才加载缓存。
+};" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">// 加载评论的时候才加载缓存。
 let cachePromise = null;
 
 let fetchJSON = uncachedFetchJSON;
@@ -831,4 +776,4 @@ const loadCache = (name) =&gt; {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->

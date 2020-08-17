@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -322,24 +347,19 @@
 <p>至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，<del>但我手头只有一块</del> 决定的时候手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份）。按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。</p>
 <p><del>然后我在某东买了一块东芝 2T 64M 7200 转的机械硬盘，到手之后打算加入 btrfs 里面，建立 RAID1，btrfs 的好处就在于这个可以先弄一块之后渐进修改，而且看起来目前没什么大问题的样子（按我的理解并行读取的性能问题大概是用来并行加速的，但是实际上 RAID1 不并行读取也可以读出数据吧）。</del> 虽然我本来也可以把数据移出来然后建 mdadm，但是不排除以后再加盘做 RAID 10，似乎 mdadm 没法直接转换的样子？</p>
 <p>买回来硬盘之后想想反正两块都没啥数据（搬出去了），索性直接格式化成 btrfs，不然也可以在已有一块 btrfs 设备之后 add 然后 balance，就可以修改策为 RAID1，格式化命令很简单就这样：</p>
-<figure data-raw="# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV" data-info="language-plain" data-lang="plain" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-plain"># mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV</code></pre></figure>
+<figure data-raw="# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV" data-info="language-plain" data-lang="plain" class="code-block"><pre class="code"><code class="language-plain"># mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV</code></pre></figure>
 <p><code>-m raid1</code> 是指 metadata 要做 RAID1 备份，<code>-d raid1</code> 是指 data 也要 RAID1 备份，然后需要跟两个设备，推荐是一样大的，挂载时候就随便挂一个设备就行了，btrfs 会自己执行 RAID1 策略的。</p>
 <h2 id="启动配置"><a class="header-link" href="/posts/SnailSpace-as-NAS/#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE" title="启动配置"></a>启动配置</h2>
 <p><code>/etc/mkinitcpio.conf</code> 里需要给 HOOKS 添加 lvm2，然后运行 <code>mkinitcpio -p linux</code>，这样生成的 initramfs 才能支持 LVM。我还给 MODULES 添加了和 intel 显卡有关的部分（虽然可能用不到了），具体修改的位置如下：</p>
 <figure data-raw="MODULES=(intel_agp i915)
-HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)" data-info="language-bash" data-lang="bash" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span></pre><pre class="code"><code class="language-bash">MODULES=(intel_agp i915)
+HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)" data-info="language-bash" data-lang="bash" class="code-block"><pre class="code"><code class="language-bash">MODULES=(intel_agp i915)
 HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)</code></pre></figure>
 <p>安装 bootloader 的时候我直接用了 systemd-boot，我在自己笔记本上也用的这个，功能够用了就没考虑安装 GRUB，编写 entry 时候内核参数里的 root 可以写 <code>/dev/vg0/rootlv</code> 也可以写 <code>/dev/mapper/vg0-rootlv</code>（这里中文 wiki 和英文 wiki 分别是这俩，亲测都可以），比如我的就是下面这样：</p>
 <figure data-raw="title    Arch Linux
 linux    /vmlinuz-linux
 initrd    /intel-ucode.img
 initrd    /initramfs-linux.img
-options    root=/dev/vg0/rootlv rw add_efi_memmap" data-info="language-plain" data-lang="plain" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-plain">title    Arch Linux
+options    root=/dev/vg0/rootlv rw add_efi_memmap" data-info="language-plain" data-lang="plain" class="code-block"><pre class="code"><code class="language-plain">title    Arch Linux
 linux    /vmlinuz-linux
 initrd    /intel-ucode.img
 initrd    /initramfs-linux.img
@@ -351,11 +371,7 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap</code></pre></figure>
 Name=en*
 
 [Network]
-DHCP=ipv4" data-info="language-ini" data-lang="ini" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-ini">[Match]
+DHCP=ipv4" data-info="language-ini" data-lang="ini" class="code-block"><pre class="code"><code class="language-ini">[Match]
 Name=en*
 
 [Network]
@@ -375,17 +391,7 @@ DHCP=ipv4</code></pre></figure>
    comment = Data Directories
    browseable = yes
    writeable = yes
-   path = /data/%u" data-info="language-ini" data-lang="ini" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span></pre><pre class="code"><code class="language-ini">[home]
+   path = /data/%u" data-info="language-ini" data-lang="ini" class="code-block"><pre class="code"><code class="language-ini">[home]
    comment = Home Directories
    browseable = yes
    writeable = yes
@@ -772,4 +778,4 @@ DHCP=ipv4</code></pre></figure>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->

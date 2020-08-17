@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -280,11 +305,7 @@
 int main(void) {
     printf(&quot;Hello World!\n&quot;);
     return 0;
-}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c">#include &lt;stdio.h&gt;
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include &lt;stdio.h&gt;
 int main(void) {
     printf("Hello World!\n");
     return 0;
@@ -293,10 +314,7 @@ int main(void) {
 <figure data-raw="#!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-print(&quot;Hello World!&quot;)" data-info="language-python" data-lang="python" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span></pre><pre class="code"><code class="language-python">#!/usr/bin/env python3
+print(&quot;Hello World!&quot;)" data-info="language-python" data-lang="python" class="code-block"><pre class="code"><code class="language-python">#!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
 print("Hello World!")</code></pre></figure>
@@ -584,4 +602,4 @@ print("Hello World!")</code></pre></figure>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->

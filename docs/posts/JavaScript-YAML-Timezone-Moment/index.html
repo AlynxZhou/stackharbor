@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -283,11 +308,7 @@
 const d = yaml.safeLoad(&quot;2018-12-31 16:00:00&quot;)  // -> 2018-12-31T16:00:00.000Z
 new Date(&quot;2018-12-31 16:00:00&quot;) // -> 2018-12-31T08:00:00.000Z
 d.getTimezoneOffset() // -> -480
-new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2018-12-31T08:00:00.000Z" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
+new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2018-12-31T08:00:00.000Z" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
 const d = yaml.safeLoad("2018-12-31 16:00:00")  // -&gt; 2018-12-31T16:00:00.000Z
 new Date("2018-12-31 16:00:00") // -&gt; 2018-12-31T08:00:00.000Z
 d.getTimezoneOffset() // -&gt; -480
@@ -300,12 +321,7 @@ const moment = require(&quot;moment-timezone&quot;)
 const d = yaml.safeLoad(&quot;2019-01-01 21:00:00&quot;)  // -> 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2019-01-01T13:00:00.000Z
 moment.tz(newd, &quot;Asia/Tokyo&quot;).toISOString() // -> 2019-01-01T13:00:00.000Z
-moment.tz(newd, &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;)  // -> 2019-01-01 22:00:00 JST" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span></pre><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
+moment.tz(newd, &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;)  // -> 2019-01-01 22:00:00 JST" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
 const moment = require("moment-timezone")
 const d = yaml.safeLoad("2019-01-01 21:00:00")  // -&gt; 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -&gt; 2019-01-01T13:00:00.000Z
@@ -318,12 +334,7 @@ const moment = require(&quot;moment-timezone&quot;)
 const d = yaml.safeLoad(&quot;2019-01-01 21:00:00&quot;)  // -> 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2019-01-01T13:00:00.000Z
 moment.tz(moment(newd).format(&quot;YYYY-MM-DD HH:mm:ss&quot;), &quot;Asia/Tokyo&quot;).toISOString() // -> 2019-01-01T12:00:00.000Z
-moment.tz(moment(newd).format(&quot;YYYY-MM-DD HH:mm:ss&quot;), &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;) // -> 2019-01-01 21:00:00 JST" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span></pre><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
+moment.tz(moment(newd).format(&quot;YYYY-MM-DD HH:mm:ss&quot;), &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;) // -> 2019-01-01 21:00:00 JST" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
 const moment = require("moment-timezone")
 const d = yaml.safeLoad("2019-01-01 21:00:00")  // -&gt; 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -&gt; 2019-01-01T13:00:00.000Z
@@ -602,4 +613,4 @@ moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->

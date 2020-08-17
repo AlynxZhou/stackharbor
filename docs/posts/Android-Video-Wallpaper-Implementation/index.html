@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -283,10 +308,7 @@
 <figure data-raw="<uses-permission android:name=&quot;android.permission.SET_WALLPAPER&quot; />
 <uses-feature
   android:name=&quot;android.software.live_wallpaper&quot;
-  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span></pre><pre class="code"><code class="language-xml">&lt;uses-permission android:name="android.permission.SET_WALLPAPER" /&gt;
+  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;uses-permission android:name="android.permission.SET_WALLPAPER" /&gt;
 &lt;uses-feature
   android:name="android.software.live_wallpaper"
   android:required="true" /&gt;</code></pre></figure>
@@ -301,16 +323,7 @@
   <meta-data
     android:name=&quot;android.service.wallpaper&quot;
     android:resource=&quot;@xml/wallpaper&quot; />
-</service>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span></pre><pre class="code"><code class="language-xml">&lt;service
+</service>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;service
   android:name=".GLWallpaperService"
   android:permission="android.permission.BIND_WALLPAPER"&gt;
   &lt;intent-filter&gt;
@@ -327,12 +340,7 @@
   xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
   android:thumbnail=&quot;@drawable/ic_icon&quot;
   android:description=&quot;@string/wallpaper_description&quot;
-  android:settingsActivity=&quot;xyz.alynx.livewallpaper.MainActivity&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span></pre><pre class="code"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  android:settingsActivity=&quot;xyz.alynx.livewallpaper.MainActivity&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;wallpaper
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:thumbnail="@drawable/ic_icon"
@@ -358,20 +366,7 @@ public class GLWallpaperService extends WallpaperService {
     public Engine onCreateEngine() {
         return new GLWallpaperEngine();
     }
-}" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span></pre><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
+}" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
 
 import android.service.wallpaper.WallpaperService;
 
@@ -411,31 +406,7 @@ public class GLWallpaperService extends WallpaperService {
                 xOffset, yOffset, xOffsetStep,
                 yOffsetStep, xPixelOffset, yPixelOffset
             );
-        }" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span></pre><pre class="code"><code class="language-java">        @Override
+        }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        @Override
         public void onSurfaceCreated(SurfaceHolder surfaceHolder) {
             super.onSurfaceCreated(surfaceHolder);
         }
@@ -488,22 +459,7 @@ public class GLWallpaperService extends WallpaperService {
             public void onDestroy() {
                 super.onDetachedFromWindow();
             }
-        }" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span></pre><pre class="code"><code class="language-java">        private class GLWallpaperSurfaceView extends GLSurfaceView {
+        }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        private class GLWallpaperSurfaceView extends GLSurfaceView {
             private static final String TAG = "GLWallpaperSurface";
 
             public GLWallpaperSurfaceView(Context context) {
@@ -526,9 +482,7 @@ public class GLWallpaperService extends WallpaperService {
 <p>当然最好在 <code>AndroidManifest.xml</code> 声明一下你这个应用需要的 GLES 版本：</p>
 <figure data-raw="<uses-feature
   android:glEsVersion=&quot;0x00020000&quot;
-  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span></pre><pre class="code"><code class="language-xml">&lt;uses-feature
+  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;uses-feature
   android:glEsVersion="0x00020000"
   android:required="true" /&gt;</code></pre></figure>
 <p>如果你只支持 v3，就把 2 改成 3。</p>
@@ -552,21 +506,7 @@ out vec2 tex_coord;
 void main() {
     gl_Position = mvp * vec4(in_position, 1.0f, 1.0f);
     tex_coord = in_tex_coord;
-}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span></pre><pre class="code"><code class="language-glsl">#version 300 es
+}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
 
 // Some Android phone driver needs to put pre-processor in the first line. (e.g. Huawei Kirin)
 
@@ -603,25 +543,7 @@ out vec4 frag_color;
 
 void main() {
     frag_color = texture(frame, tex_coord);
-}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span></pre><pre class="code"><code class="language-glsl">#version 300 es
+}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
 #ifdef GL_OES_EGL_image_external_essl3
 #extension GL_OES_EGL_image_external_essl3 : require
 #else
@@ -697,61 +619,7 @@ static int linkProgramGLES30(
         throw new RuntimeException(log);
     }
     return program;
-}" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span></pre><pre class="code"><code class="language-java">static int compileShaderResourceGLES30(
+}" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">static int compileShaderResourceGLES30(
     @NonNull Context context,
     final int shaderType,
     final int shaderRes
@@ -834,33 +702,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     private float xOffset = 0;
     private float yOffset = 0;
     private long updatedFrame = 0;
-    private long renderedFrame = 0;" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span></pre><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
+    private long renderedFrame = 0;" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
@@ -946,65 +788,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     @NonNull
     public Context getContext() {
         return context;
-    }" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span></pre><pre class="code"><code>    GLWallpaperRenderer(@NonNull final Context context) {
+    }" class="code-block"><pre class="code"><code>    GLWallpaperRenderer(@NonNull final Context context) {
         this.context = context;
 
         // Those replaced glGenBuffers() and glBufferData().
@@ -1144,86 +928,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         GLES30.glUseProgram(program);
         GLES30.glUniformMatrix4fv(mvpLocation, 1, false, mvp, 0);
         GLES30.glDrawElements(GLES30.GL_TRIANGLES, 6, GLES30.GL_UNSIGNED_INT, indices);
-    }" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-<span class="line-number">68</span>
-<span class="line-number">69</span>
-<span class="line-number">70</span>
-<span class="line-number">71</span>
-<span class="line-number">72</span>
-<span class="line-number">73</span>
-<span class="line-number">74</span>
-<span class="line-number">75</span>
-<span class="line-number">76</span>
-<span class="line-number">77</span>
-<span class="line-number">78</span>
-<span class="line-number">79</span>
-<span class="line-number">80</span></pre><pre class="code"><code class="language-java">    @Override
+    }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">    @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         // No depth test for 2D video.
         GLES30.glDisable(GLES30.GL_DEPTH_TEST);
@@ -1312,13 +1017,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         // Because maybe a new video is loaded.
         createSurfaceTexture();
         exoPlayer.setVideoSurface(new Surface(surfaceTexture));
-    }" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span></pre><pre class="code"><code>    @Override
+    }" class="code-block"><pre class="code"><code>    @Override
     void setSourcePlayer(@NonNull final SimpleExoPlayer exoPlayer) {
         // Re-create SurfaceTexture when getting a new player.
         // Because maybe a new video is loaded.
@@ -1361,40 +1060,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span></pre><pre class="code"><code>    @Override
+    }" class="code-block"><pre class="code"><code>    @Override
     void setScreenSize(int width, int height) {
         if (screenWidth != width || screenHeight != height) {
             screenWidth = width;
@@ -1457,35 +1123,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span></pre><pre class="code"><code>    @Override
+    }" class="code-block"><pre class="code"><code>    @Override
     void setOffset(float xOffset, float yOffset) {
         final float maxXOffset = (1.0f - (
             (float)screenWidth / screenHeight) / ((float)videoWidth / videoHeight)
@@ -1530,22 +1168,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                 ++updatedFrame;
             }
         });
-    }" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span></pre><pre class="code"><code>    private void createSurfaceTexture() {
+    }" class="code-block"><pre class="code"><code>    private void createSurfaceTexture() {
         if (surfaceTexture != null) {
             surfaceTexture.release();
             surfaceTexture = null;
@@ -1602,47 +1225,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         }
         // This is a 2D center crop, so we only need model matrix, no view and projection.
     }
-}" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span></pre><pre class="code"><code>    private void updateMatrix() {
+}" class="code-block"><pre class="code"><code>    private void updateMatrix() {
         // Players are buggy and unclear, so we do crop by ourselves.
         // Start with an identify matrix.
         for (int i = 0; i &lt; 16; ++i) {
@@ -1714,36 +1297,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             videoRotation = Integer.parseInt(rotation);
             videoWidth = Integer.parseInt(width);
             videoHeight = Integer.parseInt(height);
-        }" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span></pre><pre class="code"><code class="language-java">        private void getVideoMetadata() throws IOException {
+        }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        private void getVideoMetadata() throws IOException {
             final MediaMetadataRetriever mmr = new MediaMetadataRetriever();
             switch (wallpaperCard.getType()) {
             case INTERNAL:
@@ -1793,18 +1347,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                         trackSelector.buildUponParameters().setRendererDisabled(i, true)
                     );
                 }
-            }" data-info="language-java" data-lang="java" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span></pre><pre class="code"><code class="language-java">            trackSelector = new DefaultTrackSelector();
+            }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">            trackSelector = new DefaultTrackSelector();
             exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
             exoPlayer.setVolume(0.0f);
             // Disable audio decoder.
@@ -2150,4 +1693,4 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->

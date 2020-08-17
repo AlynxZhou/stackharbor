@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -274,13 +299,7 @@
 「Unaware of less, nor aware of more.」
 「Withstood error to create many scripts, waiting for prompt's arrival.」
 「I have no mouse. This is the only bug.」
-「My whole life was `Undefined Script Works`!」" data-info="language-plain" data-lang="plain" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span></pre><pre class="code"><code class="language-plain">「I am the shell of my system.」
+「My whole life was `Undefined Script Works`!」" data-info="language-plain" data-lang="plain" class="code-block"><pre class="code"><code class="language-plain">「I am the shell of my system.」
 「Command is my body, and argument is my blood.」
 「I have created over a thousand lines of logs.」
 「Unaware of less, nor aware of more.」
@@ -638,4 +657,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->

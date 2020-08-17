@@ -50,7 +50,7 @@ stylus:
 
 highlight:
   enable: false
-  gutter: true
+  gutter: false
   hljs: true
 
 search:

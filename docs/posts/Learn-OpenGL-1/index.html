@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -290,11 +315,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <GLFW/glfw3.h>
-#include <GLES3/gl3.h>" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c">#include &lt;stdio.h&gt;
+#include <GLES3/gl3.h>" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;stddef.h&gt;
 #include &lt;stdbool.h&gt;
 #include &lt;GLFW/glfw3.h&gt;
@@ -304,11 +325,7 @@
 {
     if (key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c">void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
     if (key == GLFW_KEY_ESCAPE &amp;&amp; action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -328,21 +345,7 @@
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
-}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span></pre><pre class="code"><code class="language-c">int main(int argc, char *argv[])
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">int main(int argc, char *argv[])
 {
     glfwInit();
     unsigned int width = 800;
@@ -365,7 +368,7 @@
 <h2 id="创建视口（Viewport）"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E5%88%9B%E5%BB%BA%E8%A7%86%E5%8F%A3%EF%BC%88Viewport%EF%BC%89" title="创建视口（Viewport）"></a>创建视口（Viewport）</h2>
 <p>首先我们创建 OpenGL 的 Viewport，事实上不管你的窗口分辨率是多少，OpenGL 都会把这个平面映射到 <code>-1.0f</code> 到 <code>+1.0f</code>，你使用时候的坐标都是在这个范围内，而不是屏幕上的像素点数目。</p>
 <p>下面的代码需要插入到上面 <code>/* Code Here */</code> 的上面。</p>
-<figure data-raw="    glViewport(0, 0, width, height);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-c">    glViewport(0, 0, width, height);</code></pre></figure>
+<figure data-raw="    glViewport(0, 0, width, height);" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    glViewport(0, 0, width, height);</code></pre></figure>
 <p>因为我们的程序太过简单，就不需要开启其它特性了，否则在这里你可以开启一些 OpenGL 的特性比如背面剔除（如果你玩 CS，你会发现死亡画面你的摄像机经常会穿进敌人体内，这时候敌人的后背变成了透明的，这就是背面剔除，可以减少绘制的图形的数量。</p>
 <h2 id="大循环"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E5%A4%A7%E5%BE%AA%E7%8E%AF" title="大循环"></a>大循环</h2>
 <p>如果你对游戏引擎有所了解，应该知道整个流程就是一个大循环：引擎不断地绘制图案并把它更新到屏幕上，每一帧我们更新一些数据，就会形成动画。我们这里也是这样进行，在 <code>glViewport()</code> 和 <code>glfwTerminate()</code> 之间插入这个。</p>
@@ -378,16 +381,7 @@
         /* Draw Here */
 
         glfwSwapBuffers(window);
-    }" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span></pre><pre class="code"><code class="language-c">    while (!glfwWindowShouldClose(window)) {
+    }" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -399,7 +393,7 @@
     }</code></pre></figure>
 <p>现在我们有一个大循环了，这个循环里首先拉取 GLFW 的事件以便响应（目前只有 Esc 退出），然后用黑色清除整个 Viewport（四个参数分别是 rgba，<code>0.0f</code> 是无色，<code>1.0f</code> 是满色），最后 GLFW 把绘制好的缓冲区交换到窗口上。</p>
 <p>现在你可以使用下面的命令编译并运行它了。会出现一个全黑的窗口。</p>
-<figure data-raw="$ cc -std=c11 -lglfw -lGLESv2 yourcode.c &amp;&amp; ./a.out" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code>$ cc -std=c11 -lglfw -lGLESv2 yourcode.c &amp;&amp; ./a.out</code></pre></figure>
+<figure data-raw="$ cc -std=c11 -lglfw -lGLESv2 yourcode.c &amp;&amp; ./a.out" class="code-block"><pre class="code"><code>$ cc -std=c11 -lglfw -lGLESv2 yourcode.c &amp;&amp; ./a.out</code></pre></figure>
 <p><img src="/posts/Learn-OpenGL-1/black.png" alt="black.png"></p>
 <p>Mesa 把 GLES 3 当作 GLES 2 的扩展，所以这里链接的是 <code>libGLESv2</code>。</p>
 <h2 id="着色器（Shader）"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E7%9D%80%E8%89%B2%E5%99%A8%EF%BC%88Shader%EF%BC%89" title="着色器（Shader）"></a>着色器（Shader）</h2>
@@ -413,15 +407,7 @@ void main()
 {
     gl_Position = vec4(pos, 1.0f);
     pass_color = color;
-}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span></pre><pre class="code"><code class="language-glsl">#version 300 es
+}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
 layout (location = 0) in vec3 pos;
 layout (location = 1) in vec3 color;
 out vec3 pass_color;
@@ -440,14 +426,7 @@ out vec4 frag_color;
 void main()
 {
     frag_color = vec4(pass_color, 1.0f);
-}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span></pre><pre class="code"><code class="language-glsl">#version 300 es
+}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
 precision mediump float;
 in vec3 pass_color;
 out vec4 frag_color;
@@ -572,122 +551,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
         return 0;
     }
     return program;
-}" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-<span class="line-number">68</span>
-<span class="line-number">69</span>
-<span class="line-number">70</span>
-<span class="line-number">71</span>
-<span class="line-number">72</span>
-<span class="line-number">73</span>
-<span class="line-number">74</span>
-<span class="line-number">75</span>
-<span class="line-number">76</span>
-<span class="line-number">77</span>
-<span class="line-number">78</span>
-<span class="line-number">79</span>
-<span class="line-number">80</span>
-<span class="line-number">81</span>
-<span class="line-number">82</span>
-<span class="line-number">83</span>
-<span class="line-number">84</span>
-<span class="line-number">85</span>
-<span class="line-number">86</span>
-<span class="line-number">87</span>
-<span class="line-number">88</span>
-<span class="line-number">89</span>
-<span class="line-number">90</span>
-<span class="line-number">91</span>
-<span class="line-number">92</span>
-<span class="line-number">93</span>
-<span class="line-number">94</span>
-<span class="line-number">95</span>
-<span class="line-number">96</span>
-<span class="line-number">97</span>
-<span class="line-number">98</span>
-<span class="line-number">99</span>
-<span class="line-number">100</span>
-<span class="line-number">101</span>
-<span class="line-number">102</span>
-<span class="line-number">103</span>
-<span class="line-number">104</span>
-<span class="line-number">105</span>
-<span class="line-number">106</span>
-<span class="line-number">107</span>
-<span class="line-number">108</span>
-<span class="line-number">109</span>
-<span class="line-number">110</span>
-<span class="line-number">111</span>
-<span class="line-number">112</span>
-<span class="line-number">113</span>
-<span class="line-number">114</span>
-<span class="line-number">115</span>
-<span class="line-number">116</span></pre><pre class="code"><code class="language-c">#include &lt;stdlib.h&gt;
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #define LINE_LENGTH 512
 
@@ -804,7 +668,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     return program;
 }</code></pre></figure>
 <p>有了这个之后只需要在 <code>glViewport()</code> 和 <code>/* Code Here */</code> 之间调用 <code>load_program()</code> 生成 Shader Program。</p>
-<figure data-raw="    unsigned int program = load_program(&quot;triangle.v.glsl&quot;, &quot;triangle.f.glsl&quot;);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span></pre><pre class="code"><code class="language-c">    unsigned int program = load_program("triangle.v.glsl", "triangle.f.glsl");</code></pre></figure>
+<figure data-raw="    unsigned int program = load_program(&quot;triangle.v.glsl&quot;, &quot;triangle.f.glsl&quot;);" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    unsigned int program = load_program("triangle.v.glsl", "triangle.f.glsl");</code></pre></figure>
 <h2 id="顶点数据"><a class="header-link" href="/posts/Learn-OpenGL-1/#%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE" title="顶点数据"></a>顶点数据</h2>
 <p>接下来我们需要准备绘制的数据了，对于一个三角形来说，需要三个顶点来确定它的位置，每个顶点需要三个坐标，同时我们还要给它们创建不同的颜色，让我们的三角形变的多彩一点，所以需要像下面一样组织数据。把这段插入到之前 <code>/* Code Here */</code> 和 <code>glViewport(0, 0, width, height);</code> 之间。对于 3D 程序来说 float 的精度足够了，double需要更多的运算时间。</p>
 <figure data-raw="    const float vertices[] = {
@@ -812,12 +676,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
         -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
         0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
-    };" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span></pre><pre class="code"><code class="language-c">    const float vertices[] = {
+    };" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    const float vertices[] = {
         // 坐标           颜色
         -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
@@ -835,11 +694,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     glGenBuffers(1, &amp;buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c">    unsigned int buffer;
+    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    unsigned int buffer;
     glGenBuffers(1, &amp;buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -859,18 +714,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     glEnableVertexAttribArray(1);
     glUseProgram(0);
     glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span></pre><pre class="code"><code class="language-c">    unsigned int vertex_array;
+    glBindBuffer(GL_ARRAY_BUFFER, 0);" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    unsigned int vertex_array;
     glGenVertexArrays(1, &amp;vertex_array);
     glUseProgram(program);
     glBindVertexArray(vertex_array);
@@ -892,11 +736,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     glBindVertexArray(vertex_array);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glUseProgram(0);
-    glBindVertexArray(0);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span></pre><pre class="code"><code class="language-c">    glUseProgram(program);
+    glBindVertexArray(0);" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    glUseProgram(program);
     glBindVertexArray(vertex_array);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glUseProgram(0);
@@ -906,9 +746,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 <p>在退出程序之前最好清理掉你分配的空间，所以在循环后面和 <code>glfwDestroyWindow(window);</code> 之间插入如下部分。</p>
 <figure data-raw="    glDeleteBuffers(1, &amp;buffer);
     glDeleteVertexArrays(1, &amp;vertex_array);
-    glDeleteProgram(program);" data-info="language-c" data-lang="c" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span></pre><pre class="code"><code class="language-c">    glDeleteBuffers(1, &amp;buffer);
+    glDeleteProgram(program);" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    glDeleteBuffers(1, &amp;buffer);
     glDeleteVertexArrays(1, &amp;vertex_array);
     glDeleteProgram(program);</code></pre></figure>
 <p><img src="/posts/Learn-OpenGL-1/triangle.png" alt="triangle.png"></p>
@@ -1269,4 +1107,4 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->

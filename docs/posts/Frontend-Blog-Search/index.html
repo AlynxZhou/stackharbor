@@ -94,6 +94,31 @@
       });
     </script>
     
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const linesLength = code.split(/\r?\n/g).length;
+            for (let i = 0; i < linesLength; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== linesLength - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -288,12 +313,7 @@
     <i class=&quot;fas fa-search&quot;></i>
   </button>
   <input type=&quot;search&quot; id=&quot;search-input&quot; class=&quot;search-input&quot; name=&quot;q&quot; results=&quot;0&quot; placeholder=&quot;{{ __(&quot;search&quot;) }}&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;>
-</form>" data-info="language-html" data-lang="html" class="code-block"><pre class="gutter"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span></pre><pre class="code"><code class="language-html">&lt;form action="{{ getPath("search.html") }}" method="get"&gt;
+</form>" data-info="language-html" data-lang="html" class="code-block"><pre class="code"><code class="language-html">&lt;form action="{{ getPath("search.html") }}" method="get"&gt;
   &lt;button type="submit" class="search-submit" aria-label="{{ __("search") }}"&gt;
     &lt;i class="fas fa-search"&gt;&lt;/i&gt;
   &lt;/button&gt;
@@ -582,4 +602,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 11:53:46 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->
