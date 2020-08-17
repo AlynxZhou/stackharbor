@@ -50,7 +50,9 @@ div.comment-info {
   padding: 0.5em;
   color: #eee;
   background: #33363b;
-  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #999 transparent;
+  scrollbar-color: var(--color-scrollbar) var(--color-scrollbar-background);
 }
 div.comment-info a {
   position: relative;
