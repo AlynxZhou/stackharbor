@@ -2,7 +2,7 @@
 title: 基于 GitHub Issue 的前端评论框
 layout: post
 createdDate: 2020-08-15 18:25:00
-updatedDate: 2020-08-17 10:34:00
+updatedDate: 2020-08-18 12:25:00
 categories:
 - 网站
 - ARIA
@@ -12,15 +12,21 @@ tags:
 - JavaScript
 - ARIA
 ---
+# 造轮子是病，得治。
+
 自从造了 [前端博客搜索引擎](../Frontend-Blog-Search/) 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。
 
 （这标题怎么写的和毕业论文似的！）
 
 <!--more-->
 
+# 轮子也不是白造的。
+
 从我建站以来我的评论框就命途多舛，Disqus 虽然是最著名的评论系统，但是在国内访问不太顺畅。多说火了一段时间之后便关门大吉，HyperComments 则在我用了一段时间后发邮件提示要收费了，于是我之前的评论便华丽流失。而对于 Valine 这种基于 LeanCloud 的评论系统，我对 LeanCloud 不甚了解所以也不想尝试（而且 Valine 现在似乎转向闭源了，当初也许是个正确的决定）。然后赶上 Gitment 和 Gitalk 火了起来，大家意识到 GitHub Issue 正是个放评论的好地方。但是由于 [Gitment 和 Gitalk 采用他们自己的服务器实现博客评论框提交——转发到 GitHub API 的实现](https://github.com/iissnan/hexo-theme-next/pull/1634#issuecomment-313596649)，以及 [采用的 OAuth App 权限过高](https://www.v2ex.com/t/535608)，有人怀疑这不太安全，于是我也没太敢参与。后来遇到 [comment.js](https://github.com/wzpan/comment.js) 这个项目，它绕过了提交评论的问题——直接给一个到 GitHub Issue 的评论框的链接就可以了。于是我就开始用这个，至于什么 utterances 这种用 GitHub App 降低权限的评论系统，我也懒得尝试了。
 
 但我为什么决定替换掉 comment.js 我已经记不清楚了，可能是为了对主题的显示有更好的掌握吧，毕竟它带有自己的 CSS 样式而且经常和我的冲突，也可能是因为它迟迟没提供像 Disqus 一样查找每篇文章评论数目的功能，不过它现在已经不再维护了，所以我也算是未雨绸缪。
+
+# 事情本该很简单。
 
 研究了一下原理其实并不是很难，首先就是从 GitHub 的 API 上 ajax 获取数据，然后操作 DOM 添进去就可以了，所以我就先阅读了 [GitHub API 的文档](https://docs.github.com/en/rest/reference/issues)，总之还算容易，只要先获取一个仓库的 issue 列表，然后按照某种方法在里面查找相关的 issue，如果没有就渲染一个到新建 issue 的链接，否则获取该 issue 的全部评论并显示就可以了。
 
@@ -40,7 +46,7 @@ tags:
 
 # 其实你知道，烦恼（bug）会解决烦恼（bug）。
 
-<div class="alert-green">这一部分更新于 2020-08-17 10:34:00）。</div>
+<div class="alert-green">这一部分更新于 2020-08-17 10:34:00。</div>
 
 GitHub API 推荐用户 [缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests)。我心想这也简单，那就在前端搞一个缓存就可以了。
 
@@ -145,6 +151,12 @@ const loadCache = (name) => {
 ```
 
 不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。
+
+# 由俭入奢易，由奢入俭难。
+
+<div class="alert-green">这一部分更新于 2020-08-18 12:25:00。</div>
+
+我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 `fetch` 和 `Promise` 都有成熟的 polyfill，甚至 `URLSearchParams` 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、`for…of…` 循环以及 MapReduce（IE 竟然支持 `const` 和 `let` 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？
 
 *Alynx Zhou*
 
