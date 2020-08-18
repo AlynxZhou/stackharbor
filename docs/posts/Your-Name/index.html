@@ -130,6 +130,7 @@
         theme = preferenceQuery.matches ? "dark" : "light";
       }
       // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
       document.documentElement.setAttribute("data-theme", theme);
       localStorage.setItem("theme", theme);
       documentReady(() => {
@@ -145,7 +146,9 @@
         preferenceQuery.addListener((event) => {
           theme = event.matches ? "dark" : "light";
           setThemeToggle(themeToggle, theme);
-          document.documentElement.setAttribute("data-theme", theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
           localStorage.setItem("theme", theme);
         });
         // Other page of site changed storage, update.
@@ -153,21 +156,25 @@
           if (event.key === "theme" && event.newValue !== event.oldValue) {
             theme = event.newValue;
             setThemeToggle(themeToggle, theme);
-            document.documentElement.setAttribute("data-theme", theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
           }
         });
         // User changed website settings, update.
         themeToggle.addEventListener("click", (event) => {
           theme = theme === "dark" ? "light" : "dark";
           setThemeToggle(themeToggle, theme);
-          document.documentElement.setAttribute("data-theme", theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
           localStorage.setItem("theme", theme);
         });
         elementsEach(
           document.querySelectorAll(".post figure.code-block"),
           (e, i) => {
             const lang = e.getAttribute("data-lang");
-            e.insertAdjacentElement("beforebegin", createElementFromString([
+            elementBefore(e, createElementFromString([
               "<div class=\"code-titlebar\">",
                 "<div class=\"titlebar-left\">",
                   "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
@@ -595,4 +602,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.14 at 2020-08-17 Mon 12:08:24 CST. -->
+<!-- Page built by Hikaru v1.5.14 at 2020-08-18 Tue 12:18:41 CST. -->
