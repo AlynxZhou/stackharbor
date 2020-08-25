@@ -297,7 +297,7 @@ button.back-to-top:hover {
   --color-background: #252525;
   --color-link-font: #ddd;
   --color-link-hover-font: #fff;
-  --color-quote-font: #999;
+  --color-quote-font: #ccc;
   --color-table-head-background: #26272b;
   --color-table-head-border: #ddd;
   --color-table-odd-row-background: #33363b;
@@ -402,21 +402,17 @@ table,
 img {
   max-width: 100%;
 }
-a.gallery-item,
 a.img-link {
   border-bottom: none;
 }
-a.gallery-item img,
 a.img-link img {
   transition: box-shadow 0.3s ease-in-out;
   border: 0.15em solid #666;
   border: 0.15em solid var(--color-quote-font);
 }
-a.gallery-item:hover,
 a.img-link:hover {
   border-bottom: none;
 }
-a.gallery-item:hover img,
 a.img-link:hover img {
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }

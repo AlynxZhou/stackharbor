@@ -117,15 +117,6 @@ libCDN:
     solid: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/solid.min.js
     brands: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/brands.min.js
     regular: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/regular.min.js
-  lightGallery:
-    js:
-    css:
-  lgFullscreen:
-  lgHash:
-  lgPager:
-  lgThumbnail:
-  lgZoom:
-  lgVideo:
   busuanzi:
   normalize:
   highlight: //cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js
