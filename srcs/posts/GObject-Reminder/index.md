@@ -85,9 +85,9 @@ static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};
 
 static void set_property_impl(
 	GObject *object,
-        guint property_id,
+	guint property_id,
 	const GValue *value,
-        GParamSpec *pspec
+	GParamSpec *pspec
 )
 {
 	TestAnimal *animal = TEST_ANIMAL(object);
@@ -109,9 +109,9 @@ static void set_property_impl(
 
 static void get_property_impl(
 	GObject *object,
-        guint property_id,
+	guint property_id,
 	GValue *value,
-        GParamSpec *pspec
+	GParamSpec *pspec
 )
 {
 	TestAnimal *animal = TEST_ANIMAL(object);
@@ -257,9 +257,9 @@ static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};
 
 static void set_property_impl(
 	GObject *object,
-        guint property_id,
+	guint property_id,
 	const GValue *value,
-        GParamSpec *pspec
+	GParamSpec *pspec
 )
 {
 	TestCat *cat = TEST_CAT(object);
@@ -279,9 +279,9 @@ static void set_property_impl(
 
 static void get_property_impl(
 	GObject *object,
-        guint property_id,
+	guint property_id,
 	GValue *value,
-        GParamSpec *pspec
+	GParamSpec *pspec
 )
 {
 	TestCat *cat = TEST_CAT(object);
