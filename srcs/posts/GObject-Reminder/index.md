@@ -76,9 +76,9 @@ G_DEFINE_TYPE_WITH_PRIVATE(TestAnimal, test_animal, G_TYPE_OBJECT)
 
 // 要想通过 new 函数直接初始化一些值就需要搞点属性。
 enum {
-  PROP_0,
-  PROP_ANIMAL_NAME,
-  N_PROPERTIES
+	PROP_0,
+	PROP_ANIMAL_NAME,
+	N_PROPERTIES
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};
@@ -248,9 +248,9 @@ struct _TestCat {
 G_DEFINE_TYPE(TestCat, test_cat, TEST_TYPE_ANIMAL)
 
 enum {
-  PROP_0,
-  PROP_CAT_NAME,
-  N_PROPERTIES
+	PROP_0,
+	PROP_CAT_NAME,
+	N_PROPERTIES
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};

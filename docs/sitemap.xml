@@ -643,18 +643,18 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/404.html</loc>
+    <loc>https://sh.alynx.one/about/</loc>
     
-    <lastmod>2016-04-04T01:00:00.000Z</lastmod>
+    <lastmod>2020-08-11T09:01:00.000Z</lastmod>
     
   </url>
   
   
   
   <url>
-    <loc>https://sh.alynx.one/about/</loc>
+    <loc>https://sh.alynx.one/404.html</loc>
     
-    <lastmod>2020-08-11T09:01:00.000Z</lastmod>
+    <lastmod>2016-04-04T01:00:00.000Z</lastmod>
     
   </url>
   
@@ -1662,14 +1662,14 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/atom.xml</loc>
+    <loc>https://sh.alynx.one/sitemap.xml</loc>
     
   </url>
   
   
   
   <url>
-    <loc>https://sh.alynx.one/sitemap.xml</loc>
+    <loc>https://sh.alynx.one/atom.xml</loc>
     
   </url>
   
