@@ -2,8 +2,7 @@
 title: 使用 Moment 处理 JavaScript 与 YAML 的时区转换
 layout: post
 comment: true
-createdDate: 2019-01-01 21:00:00
-zone: Asia/Tokyo
+createdDate: 2019-01-01T21:00:00
 categories:
   - 计算机
   - 编程
@@ -13,6 +12,8 @@ tags:
   - 编程
   - JavaScript
 ---
+<div class="alert-red">这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。</div>
+
 开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。
 
 <!--more-->

@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.5.18">
+    <meta name="generator" content="Hikaru v1.6.0">
     <link rel="canonical" href="https://sh.alynx.one/index-7.html">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -164,6 +164,33 @@
           });
           localStorage.setItem("theme", theme);
         });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
         elementsEach(
           document.querySelectorAll(".post figure.code-block"),
           (e, i) => {
@@ -284,7 +311,7 @@
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-06-12T08:55:14.000Z">2016-06-12 Sun 16:55:14 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-06-12T08:55:14.000Z">6/12/2016, 4:55:14 PM</time></span>
         </div>
         
         
@@ -337,7 +364,7 @@
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-05-02T22:20:40.000Z">2016-05-03 Tue 06:20:40 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-05-02T22:20:40.000Z">5/3/2016, 6:20:40 AM</time></span>
         </div>
         
         
@@ -393,7 +420,7 @@
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-12T14:18:56.000Z">2016-04-12 Tue 22:18:56 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-12T14:18:56.000Z">4/12/2016, 10:18:56 PM</time></span>
         </div>
         
         
@@ -448,7 +475,7 @@
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-12T13:27:04.000Z">2016-04-12 Tue 21:27:04 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-12T13:27:04.000Z">4/12/2016, 9:27:04 PM</time></span>
         </div>
         
         
@@ -503,7 +530,7 @@
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:46:01.000Z">2016-04-10 Sun 11:46:01 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:46:01.000Z">4/10/2016, 11:46:01 AM</time></span>
         </div>
         
         
@@ -561,7 +588,7 @@ Say to me.</p>
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:35:05.000Z">2016-04-10 Sun 11:35:05 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:35:05.000Z">4/10/2016, 11:35:05 AM</time></span>
         </div>
         
         
@@ -615,7 +642,7 @@ Say to me.</p>
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:53.000Z">2016-04-10 Sun 11:34:53 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:53.000Z">4/10/2016, 11:34:53 AM</time></span>
         </div>
         
         
@@ -670,7 +697,7 @@ Say to me.</p>
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:18.000Z">2016-04-10 Sun 11:34:18 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:18.000Z">4/10/2016, 11:34:18 AM</time></span>
         </div>
         
         
@@ -723,7 +750,7 @@ Say to me.</p>
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:13:50.000Z">2016-04-10 Sun 11:13:50 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:13:50.000Z">4/10/2016, 11:13:50 AM</time></span>
         </div>
         
         
@@ -780,7 +807,7 @@ Say to me.</p>
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-06T22:26:23.000Z">2016-04-07 Thu 06:26:23 CST</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-06T22:26:23.000Z">4/7/2016, 6:26:23 AM</time></span>
         </div>
         
         
@@ -1043,4 +1070,4 @@ Say to me.</p>
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.18 at 2020-09-05 Sat 16:29:10 CST. -->
+<!-- Page built by Hikaru v1.6.0 at 2020-09-17T02:36:23.733Z. -->

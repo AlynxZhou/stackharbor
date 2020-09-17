@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.5.18">
+    <meta name="generator" content="Hikaru v1.6.0">
     <link rel="canonical" href="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Python/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -164,6 +164,33 @@
           });
           localStorage.setItem("theme", theme);
         });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
         elementsEach(
           document.querySelectorAll(".post figure.code-block"),
           (e, i) => {
@@ -273,7 +300,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-05-02T22:20:40.000Z">05-03</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-05-02T22:20:40.000Z">5-3</time>
       </span>
       
     </header>
@@ -477,4 +504,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.18 at 2020-09-05 Sat 16:29:10 CST. -->
+<!-- Page built by Hikaru v1.6.0 at 2020-09-17T02:36:23.781Z. -->

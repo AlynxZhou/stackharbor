@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.5.18">
+    <meta name="generator" content="Hikaru v1.6.0">
     <link rel="canonical" href="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -164,6 +164,33 @@
           });
           localStorage.setItem("theme", theme);
         });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
         elementsEach(
           document.querySelectorAll(".post figure.code-block"),
           (e, i) => {
@@ -273,7 +300,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-09-05T01:23:00.000Z">09-05</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-09-05T01:23:00.000Z">9-5</time>
       </span>
       
     </header>
@@ -286,7 +313,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-06-28T11:02:00.000Z">06-28</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-06-28T11:02:00.000Z">6-28</time>
       </span>
       
     </header>
@@ -325,7 +352,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-10-07T09:01:00.000Z">10-07</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-10-07T09:01:00.000Z">10-7</time>
       </span>
       
     </header>
@@ -338,7 +365,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-08-19T07:16:00.000Z">08-19</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-08-19T07:16:00.000Z">8-19</time>
       </span>
       
     </header>
@@ -351,7 +378,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">07-24</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">7-24</time>
       </span>
       
     </header>
@@ -364,7 +391,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-10T14:09:00.000Z">05-10</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-10T14:09:00.000Z">5-10</time>
       </span>
       
     </header>
@@ -377,7 +404,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-03-22T08:18:00.000Z">03-22</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-03-22T08:18:00.000Z">3-22</time>
       </span>
       
     </header>
@@ -390,7 +417,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T14:58:00.000Z">02-10</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T14:58:00.000Z">2-10</time>
       </span>
       
     </header>
@@ -403,7 +430,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">02-10</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">2-10</time>
       </span>
       
     </header>
@@ -416,7 +443,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-27T02:29:30.000Z">01-27</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-27T02:29:30.000Z">1-27</time>
       </span>
       
     </header>
@@ -429,7 +456,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-01T12:00:00.000Z">01-01</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-01T13:00:00.000Z">1-1</time>
       </span>
       
     </header>
@@ -455,7 +482,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-08-28T00:21:50.000Z">08-28</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-08-28T00:21:50.000Z">8-28</time>
       </span>
       
     </header>
@@ -663,4 +690,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.18 at 2020-09-05 Sat 16:29:10 CST. -->
+<!-- Page built by Hikaru v1.6.0 at 2020-09-17T02:36:23.774Z. -->

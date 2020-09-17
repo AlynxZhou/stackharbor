@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.5.18">
+    <meta name="generator" content="Hikaru v1.6.0">
     <link rel="canonical" href="https://sh.alynx.one/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -164,6 +164,33 @@
           });
           localStorage.setItem("theme", theme);
         });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
         elementsEach(
           document.querySelectorAll(".post figure.code-block"),
           (e, i) => {
@@ -273,7 +300,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-04T10:27:00.000Z">05-04</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-04T10:27:00.000Z">5-4</time>
       </span>
       
     </header>
@@ -286,7 +313,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-09-30T12:31:33.000Z">09-30</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-09-30T12:31:33.000Z">9-30</time>
       </span>
       
     </header>
@@ -299,7 +326,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-10-08T14:14:00.000Z">10-08</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-10-08T14:14:00.000Z">10-8</time>
       </span>
       
     </header>
@@ -312,7 +339,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-05-30T07:14:51.000Z">05-30</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-05-30T07:14:51.000Z">5-30</time>
       </span>
       
     </header>
@@ -325,7 +352,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-03-18T14:48:49.000Z">03-18</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-03-18T14:48:49.000Z">3-18</time>
       </span>
       
     </header>
@@ -338,7 +365,7 @@
       </div>
       
       <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:46:01.000Z">04-10</time>
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:46:01.000Z">4-10</time>
       </span>
       
     </header>
@@ -542,4 +569,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.5.18 at 2020-09-05 Sat 16:29:10 CST. -->
+<!-- Page built by Hikaru v1.6.0 at 2020-09-17T02:36:23.783Z. -->
