@@ -27,7 +27,7 @@ GNOME Shell 有个令人很不爽的“特性”，它的输入法列表使用�
 
 扩展主要有 `init()`，`enable()` 和 `disable()` 三个函数，`init()` 在 GNOME Shell 加载扩展时候调用，我这个显然不需要。`enable()` 是你在 Extensions app 里面打开开关时候调用的，`disable()` 是关掉开关时候调用的。
 
-在 `enable()` 里面有几个需要我修改的地方，一个是阻止 `InputSourceManager` 在输入法切换之后的最近使用优先排列，解决方法很简单，需要自己替换掉 `_currentInputSourceChangedOrig` 函数，注释掉 <https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L447-453> 这一段更新代码。
+在 `enable()` 里面有几个需要我修改的地方，一个是阻止 `InputSourceManager` 在输入法切换之后的最近使用优先排列，解决方法很简单，需要自己替换掉 `_currentInputSourceChanged` 函数，注释掉 <https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L447-453> 这一段更新代码。
 
 当然光有这个还是不行的，这样假如你是先切换过再打开扩展，实际上列表是你开启扩展之前的状态而不是用户设置的顺序，所以我们还需要在打开扩展之后更新它的列表，让它直接读取用户设置。更新列表的函数是 `_updateMruSources`，假如检测到当前列表为空，会先从一个缓存的 gsettings 里读取之前存储的最近使用优先排列列表，这显然是很恶心的所以要注释掉 <https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L504-522> 这一段。之后它会先加载当前列表里的，然后再把用户列表里增加的当前列表里没有的加到后面，因为我们已经决定要清空当前列表并且不加载 gsettings 里面的缓存，所以这个当前列表肯定是空，那直接加用户列表就行了，所以注释掉 <https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L525-533>。这样我们后续只要清空 `_mruSources` 设置 `_mruSourcesBackup` 为 `null` 然后调用 `_updateMruSources` 就可以了。
 
