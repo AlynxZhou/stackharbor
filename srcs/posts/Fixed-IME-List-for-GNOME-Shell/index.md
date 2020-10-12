@@ -2,7 +2,7 @@
 title: 固定 GNOME Shell 的输入法列表
 layout: post
 #comment: true
-createdDate: 2020-09-26T10:40:00+0800
+created: 2020-09-26T10:40:00+0800
 categories:
 - 计算机
 - GNOME

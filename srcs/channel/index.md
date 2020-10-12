@@ -1,6 +1,6 @@
 ---
 title: 吐槽频道
-createdDate: 2020-08-05 11:22:00
+created: 2020-08-05 11:22:00
 layout: page
 comment: true
 reward: false

@@ -2,7 +2,7 @@
 title: C 语言学习 1
 layout: post
 comment: true
-createdDate: 2018-11-27 20:42:00
+created: 2018-11-27 20:42:00
 categories:
   - 计算机
   - 编程

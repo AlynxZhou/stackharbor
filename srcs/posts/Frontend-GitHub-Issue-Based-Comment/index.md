@@ -1,8 +1,8 @@
 ---
 title: 基于 GitHub Issue 的前端评论框
 layout: post
-createdDate: 2020-08-15 18:25:00
-updatedDate: 2020-08-18 12:25:00
+created: 2020-08-15 18:25:00
+updated: 2020-08-18 12:25:00
 categories:
 - 网站
 - ARIA

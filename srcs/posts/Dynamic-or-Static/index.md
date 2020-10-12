@@ -2,7 +2,7 @@
 title: 动态？静态？
 layout: post
 comment: true
-createdDate: 2016-06-12 16:55:14
+created: 2016-06-12 16:55:14
 categories:
   - 网站
 tags:

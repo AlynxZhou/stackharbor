@@ -1,7 +1,7 @@
 ---
 title: 你好，世界。
 layout: post
-createdDate: 2016-04-04 12:34:18
+created: 2016-04-04 12:34:18
 comment: true
 categories:
   - 随记

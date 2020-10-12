@@ -1,7 +1,7 @@
 ---
 title: GObject 备忘录
 layout: post
-createdDate: 2020-09-05 09:23:00
+created: 2020-09-05 09:23:00
 categories:
 - 计算机
 - 编程

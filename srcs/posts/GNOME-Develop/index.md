@@ -2,7 +2,7 @@
 title: GNOME 的修改开发与测试
 layout: post
 comment: true
-createdDate: 2019-02-10 22:58:00
+created: 2019-02-10 22:58:00
 categories:
 - 计算机
 - GNOME

@@ -2,8 +2,8 @@
 title: 装机小记
 layout: post
 #comment: true
-createdDate: 2019-11-25T10:14:00
-updatedDate: 2020-10-12T11:00:00
+created: 2019-11-25T10:14:00
+updated: 2020-10-12T11:00:00
 categories:
 - 计算机
 tags:

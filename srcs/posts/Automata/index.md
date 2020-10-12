@@ -2,7 +2,7 @@
 title: "Automata: A Story of Love and Lives"
 layout: post
 #comment: true
-createdDate: 2018-07-16 17:39:01
+created: 2018-07-16 17:39:01
 categories:
 - 游戏
 tags:

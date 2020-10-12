@@ -2,7 +2,7 @@
 title: Undefined Script Works!
 layout: page
 comment: true
-createdDate: 2018-04-04 08:15:40
+created: 2018-04-04 08:15:40
 ---
 # Undefined Script Works!
 

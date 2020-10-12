@@ -1,7 +1,7 @@
 ---
 title: about
-createdDate: 2016-04-04 14:36:20
-updatedDate: 2020-08-11 17:01:00
+created: 2016-04-04 14:36:20
+updated: 2020-08-11 17:01:00
 layout: page
 comment: true
 reward: false

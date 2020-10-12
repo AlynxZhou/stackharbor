@@ -2,7 +2,7 @@
 title: X 和 Wayland 的主要区别
 layout: post
 #comment: true
-createdDate: 2019-11-13 13:31:33
+created: 2019-11-13 13:31:33
 categories:
 - 计算机
 - Linux

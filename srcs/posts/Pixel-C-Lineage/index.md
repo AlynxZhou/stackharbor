@@ -2,7 +2,7 @@
 title: 在 Pixel C 上安装 Lineage OS
 layout: post
 comment: true
-createdDate: 2019-07-24 17:24:00
+created: 2019-07-24 17:24:00
 zone: Asia/Shanghai
 categories:
   - 计算机

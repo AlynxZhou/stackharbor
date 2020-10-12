@@ -2,7 +2,7 @@
 title: 学习 OpenGL 1
 layout: post
 comment: true
-createdDate: 2018-08-28 08:21:50
+created: 2018-08-28 08:21:50
 categories:
   - 计算机
   - 编程

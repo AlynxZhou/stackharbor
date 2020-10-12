@@ -2,7 +2,7 @@
 title: "可能只适合我自己的 RIME 配置"
 layout: post
 #comment: true
-createdDate: 2019-08-19 15:16:00
+created: 2019-08-19 15:16:00
 categories:
 - 计算机
 - 输入法

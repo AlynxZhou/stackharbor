@@ -2,7 +2,7 @@
 title: 使用 Moment 处理 JavaScript 与 YAML 的时区转换
 layout: post
 comment: true
-createdDate: 2019-01-01T21:00:00
+created: 2019-01-01T21:00:00
 categories:
   - 计算机
   - 编程

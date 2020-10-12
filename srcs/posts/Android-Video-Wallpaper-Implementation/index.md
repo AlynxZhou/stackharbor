@@ -2,7 +2,7 @@
 title: 如何编写 Android 视频壁纸
 layout: post
 #comment: true
-createdDate: 2019-03-22 16:18:00
+created: 2019-03-22 16:18:00
 categories:
   - 计算机
   - 编程

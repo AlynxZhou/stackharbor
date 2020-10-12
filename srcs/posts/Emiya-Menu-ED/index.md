@@ -3,7 +3,7 @@ title: コラージュ（卫宫家今天的饭 ED）曲谱
 layout: post
 encrypt: false
 comment: true
-createdDate: 2018-02-04 12:18:45
+created: 2018-02-04 12:18:45
 categories:
   - 音乐
   - 口琴

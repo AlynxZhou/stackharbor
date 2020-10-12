@@ -2,7 +2,7 @@
 title: 奇怪的书名和我和吐槽
 layout: post
 #comment: true
-createdDate: 2020-10-06T17:48:00
+created: 2020-10-06T17:48:00
 categories:
 - 随记
 tags:
