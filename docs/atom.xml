@@ -1410,7 +1410,7 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
     <published>2019-11-25T02:14:00.000Z</published>
     
     
-    <updated>2019-11-25T02:14:00.000Z</updated>
+    <updated>2020-10-12T03:00:00.000Z</updated>
     
     
     <summary type="html">
@@ -1436,9 +1436,9 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;li&gt;散热：利民 AK120 145（之前是 超频三 东海x5 89）&lt;/li&gt;
 &lt;li&gt;散热：利民 M.2 硬盘散热片 39&lt;/li&gt;
 &lt;li&gt;机箱：先马 鲁班1 209&lt;/li&gt;
-&lt;li&gt;风扇：Arctic F12 PWM 温控 x3 120（一个被我用来替换散热器上的风扇了，就它带灯，好烦人。然后一个显卡前一个 CPU 后。）&lt;/li&gt;
+&lt;li&gt;风扇：利民 TL-C12R-S x2 + 利民 TL-C12S 418（TL-C12R-S 只有 299 的三联包）（之前是 Arctic F12 PWM 温控 x3 120）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;总计 10420。（有些具体价格我记不清了，而且京东价格总是波动。）性价比一般，因为我在其它人觉得没必要的地方分了很多预算比如主板风扇和硬盘，选 B450M 和西数的 NVMe 以及随便买个不带温控但是带灯的风扇的大有人在。&lt;/p&gt;
+&lt;p&gt;总计 10727。（有些具体价格我记不清了，而且京东价格总是波动。）性价比一般，因为我在其它人觉得没必要的地方分了很多预算比如主板风扇和硬盘，选 B450M 和西数的 NVMe 以及随便买个不带温控但是带灯的风扇的大有人在。&lt;/p&gt;
 &lt;p&gt;选这样一套配置其实有原因，可能很多人觉得为什么要给 R5 配 X570 这种高端主板，不如换成 B450 然后把预算加到别的上面。但按照我朋友的使用经验，4 代和以前的 AMD 芯片组存在 USB 兼容性问题，而且我装好机器后就在 Arch Linux CN 群里看到有人遇到这种问题，5 代似乎重新设计了 USB 控制器，目前一切正常。&lt;/p&gt;
 &lt;p&gt;如果仅仅是打游戏也可以把 R5-3600X + X570 换成 i5-9600KF + Z390，大概可以便宜一点然后升级一下显卡？我觉得差价是不够 2060 换 2060S 的。或者如果要求不高换成 R5-3600 也行。但 R5-3600(X) 是 12 线程而 i5-9600KF 只有 6 线程，所以我还是选择了 Ryzen，反正 AMD CPU 最近表现都很不错，没必要给 Intel 掏更多的钱。如果你在京东买，建议自己翻翻店铺，一般买主板 CPU 套装更便宜，但是它不会摆出来……&lt;/p&gt;
 &lt;p&gt;显卡一开始我是打算买个 1999 的 GTX 1660Ti 的，反正我玩的游戏也不需要光线追踪（难道真相不是本来就没几个游戏支持光线追踪嘛？），然而看到七彩虹最便宜的 2060 正在特价 2199，果断少买一条内存，加钱上这个。反正 1999 的 1660Ti 也是便宜货，而且看了一下视频似乎这块卡也不是丐中丐中丐，质量还可以（同价位索泰铭瑄也不能说是什么高端货吧？），反正内存可以再插新的，而显卡二手不值钱。什么你说 A 卡？虽然 A 卡对于 Linux 的驱动支持更好一点，但是 N 卡也不是不能用，而且我要开直播的话 NVENC 编码挺香的，而且对我的 Steam 库存来说 N 卡也更友好一点（但是骂老黄还是要骂的）。另外虽然我不做机器学习，但万一室友毕设需要的话，反正我上班也不用台式机，装个 CUDA 让他 SSH 上去用岂不是你好我好大家好。&lt;/p&gt;
@@ -1448,23 +1448,36 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;p&gt;说到机箱和风扇我就一肚子气！本着对京东自营品质和速度的信赖，我全套都是在京东买的，结果拿到手全部安装上之后发现机箱开机跳线是短路的，插上电源就开机，开一会因为短路主板以为你在长按电源又关了！开始我还以为是主板坏了，结果发现螺丝刀手动碰一下开机跳线开关是可以正常开机的！于是又费了九牛二虎之力拆下来退货，主板散热器显卡都在盒子里椅子上放了两天，还好新机箱没问题，但是我买风扇的时候又给我发了个断轴的！东哥呀东哥，我拿你当兄弟，你拿我当代价？你是盯上我了？虽然我平时说你两句坏话但是对京东的服务还是好评的，但是经过这次之后我还是得重新考虑考虑了……顺便据说启航者 S5 这个机箱前面板音频口有的是 HD Audio 有的是老版 AC97，涉嫌虚假宣传，如果你遇到 AC97 的大概可以换货，麻烦一点，不过反正便宜货就这样子，我的抽奖抽到 HD Audio 了。但是这个机箱设计的很抠门，比如主板装上了就没法在上面走 CPU 电源线了，有两个走线口直接被 ATX 主板盖住，所以主板和显卡的电源线只能从一个口里挤出去，然后固态硬盘就在这个口下面所以也很难接线……而且机箱侧板是个黑色半透明的亚克力（那就别宣传透明啊！），金属外壳感觉也不是很厚实。所以最后还是换了先马的鲁班 1，各种设计都宽松了许多，装起来也很好看。&lt;/p&gt;
 &lt;p&gt;其他的外设我自己都有，显示器就是之前买的优派 XG2402，1080p@144Hz 并且自带扬声器，鼠标就卓威 EC1-B CSGO 特别版（这个版本已经停产了，而且有偶尔指天/指地的 bug，建议买新的 EC1/2 或者 DIVINA 版本），键盘则是前段时间买的 ikbc C87 红轴，便宜还好用。&lt;/p&gt;
 &lt;p&gt;顺便由于我手残以及力气小和室友跃跃欲试，很多东西都是他装的，非常感谢。话说回来装这东西还真是个力气活，毕竟接口都有防呆设计仔细看看不会装错，但是真的很紧很难拔……非常担心把主板搞坏了。&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;更新：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/1.jpg&quot; alt=&quot;装好的完全体照片&quot;&gt;&lt;/p&gt;
-&lt;p&gt;更新：避免你们说我灵魂走线，重新整理了一下，线太硬了。 &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;更新：避免你们说我灵魂走线，重新整理了一下，线太硬了。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/2.jpg&quot; alt=&quot;重新走线正面&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/3.jpg&quot; alt=&quot;重新走线背面&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;更新：内存插满。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/4.jpg&quot; alt=&quot;内存插满&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;更新：NVMe + 蓝牙无线网卡的完全体。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/5.jpg&quot; alt=&quot;完全体&quot;&gt;&lt;/p&gt;
 &lt;p&gt;这个机箱 CPU 线走上面是要把主板拿下来才能穿过去的，而且右边两个有硅胶垫的孔 ATX 完全不能用，只能用一个孔，而且不能把线固定在机箱中间，很难盖上。&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;再更新：新机箱比原来的好看多了也宽敞多了。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/6.jpg&quot; alt=&quot;正面&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/7.jpg&quot; alt=&quot;背面&quot;&gt;&lt;/p&gt;
 &lt;p&gt;公司的蜥蜴（明明是变色龙！）玩偶太高了，显卡下面放不开，挂着我又不放心，盖盖子之前还是拿出来了。&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;更新：换上了公版 2070 SUPER 和利民 AK120。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/9.jpg&quot; alt=&quot;显卡&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/10.jpg&quot; alt=&quot;全景&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;更新：冬天到了，还是换了几个支持 ARGB 的风扇，我个人不喜欢蓝光紫光夜店土嗨风，所以就弄了点温暖的颜色假装是个电暖气。前面是利民 TL-C12R-S，后面是利民 TL-C12S，虽然是三联包，但是似乎螺丝有问题，有一个风扇螺纹被拧花了，而且后面的风扇竟然少一个角上的橡胶减震垫，于是我就没装拧花的那个，并且把它的减震垫安装到后面了。反正考虑到我最下面是机械硬盘，装上这个风扇风道也不畅通，而且那里并没有什么需要散热的设备，电源风道是独立的。每把风扇两根线，ARGB 线要串联，PWM 线要一分三，而且有前有后，风扇线还有编织保护套，还要防止线材打到风扇扇叶。理线花了好久，最后把他们用扎带固定到下面和前面空的风扇挂架上。而且我还有三个 SATA 硬盘打算换一下 SATA 线……我真的想不出来那些水冷排且上下左右全都是 ARGB 风扇的人怎么理线的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/11.jpg&quot; alt=&quot;灯光&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我不会告诉你其实我是想调出我 TB 至宝的颜色：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/12.jpg&quot; alt=&quot;TB 至宝&quot;&gt;&lt;/p&gt;
+&lt;p&gt;一开始我以为需要用 OpenRGB 这个项目才能在 Linux 下控制颜色，但是这种 ARGB 风扇好像有存储机制，会自动记住上次的设置。于是就在 Windows 下面安装了一个有一大堆乱七八糟组件和功能的 MSI Dragon Center，其实我只需要调成长亮，然后重启进 Linux 颜色就一直是我设置的，然后我想关掉 Dragon Center 的自启动因为反正也用不到，但是微星的软件自己拉跨，重启进 Linux 灯光不变，重启进 Windows 又变呼吸彩虹灯光了。最后发现 Dragon Center 里面有一个类似“覆盖第三方RGB软件”的选项……好像他把他自己上次存储的结果也当第三方软件了，关掉就好了。原理我猜因为 Dragon Center 只是个 Client，真正控制颜色的是他某个 SDK 里面的 Daemon，这个选项的意思其实就是 Daemon 每次启动都按照 Dragon Center 设置的颜色重新设置风扇就实现覆盖功能了……但是 Dragon Center 的启动被我关了所以就默认了，不管了，统统关掉就 OK。&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;接下来是喜闻乐见的 debug 时间，首先是 Linux 下的，相对比较好调：&lt;/p&gt;
 &lt;p&gt;三代 Ryzen 有一个 &lt;a href=&quot;https://www.infoq.cn/article/BRebwaBfJ9eP28X9wQQc&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;每次都返回 0xFFFFFFFF 作为随机数的 BUG&lt;/a&gt;，在我这主要影响 wireguard，巧的是购买前几天我刚读过这篇文章，AMD 已经发了新的固件修正错误，建议更新到主板厂家提供的最新 BIOS 版本一般即可解决，如果主板厂家最新的 BIOS 还没更新固件建议联系售后催一下。&lt;/p&gt;
 &lt;p&gt;在我这不知道为什么 GDM 有时候没法自动启动，但是手动切 tty start 又可以显示，查了一下 &lt;a href=&quot;https://wiki.archlinux.org/index.php/GDM#GDM_freezes_with_systemd&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;ArchWiki 的 GDM 页面&lt;/a&gt; 发现有解决方案，但是并没有原因，搜索了一下也没发现原因是什么。&lt;/p&gt;
