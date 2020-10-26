@@ -31,10 +31,12 @@ created: 2018-04-04 08:15:40
 
 C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出现的翻页时钟屏保）。基于 SDL2。
 
-支持 Linux/Windows 且 **不依赖 Adobe Flash**。可直接设置为 Windows 屏保，绿色免安装。
+支持 Linux/Windows/Android 且 **不依赖 Adobe Flash**。可直接设置为 Windows 屏保，绿色免安装。
 
 - 仓库：<https://github.com/AlynxZhou/flipclock/>
+- Android 仓库：<https://github.com/AlynxZhou/flipclock-android/>
 - Windows 编译好的安装包下载：[点击带有 win 的压缩包](https://github.com/AlynxZhou/flipclock/releases/latest)
+- Android 编译好的安装包下载：[点击 apk 文件](https://github.com/AlynxZhou/flipclock-android/releases/latest) 或者去 [酷安网](http://www.coolapk.com/apk/277663) 或 [Google Play Store](https://play.google.com/store/apps/details?id=one.alynx.flipclock)。
 
 ## GNOME Terminal Middle Click Close Tab Patch
 
@@ -63,3 +65,4 @@ Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-termin
 
 - 主页：<https://livewallpaper.alynx.moe/>
 - 仓库：<https://github.com/AlynxZhou/alynx-live-wallpaper/>
+- 下载：[酷安网](http://www.coolapk.com/apk/220573) 或 [Google Play Store](https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper)。
