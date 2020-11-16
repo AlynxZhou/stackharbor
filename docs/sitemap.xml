@@ -77,7 +77,7 @@
   <url>
     <loc>https://sh.alynx.one/posts/My-Desktop-PC/</loc>
     
-    <lastmod>2020-10-12T03:00:00.000Z</lastmod>
+    <lastmod>2020-11-16T07:06:00.000Z</lastmod>
     
   </url>
   
@@ -661,15 +661,6 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/404.html</loc>
-    
-    <lastmod>2016-04-04T01:00:00.000Z</lastmod>
-    
-  </url>
-  
-  
-  
-  <url>
     <loc>https://sh.alynx.one/about/</loc>
     
     <lastmod>2020-10-22T09:01:00.000Z</lastmod>
@@ -679,9 +670,9 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/channel/</loc>
+    <loc>https://sh.alynx.one/404.html</loc>
     
-    <lastmod>2020-08-05T03:22:00.000Z</lastmod>
+    <lastmod>2016-04-04T01:00:00.000Z</lastmod>
     
   </url>
   
@@ -691,6 +682,15 @@
     <loc>https://sh.alynx.one/blogroll/</loc>
     
     <lastmod>2020-08-24T01:20:00.000Z</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/channel/</loc>
+    
+    <lastmod>2020-08-05T03:22:00.000Z</lastmod>
     
   </url>
   
