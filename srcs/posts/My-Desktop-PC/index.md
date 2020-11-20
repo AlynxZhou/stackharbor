@@ -17,7 +17,7 @@ tags:
 
 - CPU：AMD Ryzen 7 5800X 3199（之前是 AMD Ryzen 5 3600X）
 - 主板：ROG STRIX X570-E GAMING 1999（特价）（之前是 微星 X570-A PRO 套装 2349）
-- 显卡：NVIDIA Geforce RTX 2070 SUPER 4300（之前是 七彩虹 RTX 2060 战斧 6G 2199）
+- 显卡：NVIDIA GeForce RTX 2070 SUPER 4300（之前是 七彩虹 RTX 2060 战斧 6G 2199）
 - 显卡支架：酷冷至尊 显卡支撑架 70
 - 内存：铂胜 C9BJZ 颗粒 白马甲 DDR4 3000 8G x4 1000
 - 网卡：Intel AX200（主板内置，之前是单独购买的花了 150）
