@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2020-10-06T09:48:00.000Z</updated>
+  <updated>2020-11-26T08:43:12.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,92 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.2">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>解决 Spleeter 愚蠢的依赖问题</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Fix-Silly-Spleeter-Dependencies/" />
+    <id>https://sh.alynx.one/posts/Fix-Silly-Spleeter-Dependencies/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2020-11-26T08:43:12.000Z</published>
+    
+    
+    <updated>2020-11-26T08:43:12.000Z</updated>
+    
+    
+    <summary type="html">
+      &lt;p&gt;我倒不是对机器学习有什么莫名的偏见。事实上有些只能用机器学习搞定的东西我也很支持用机器学习解决，比如 waifu2x 这种增加图片分辨率的或者 Spleeter 这种分离人声和伴奏的，用传统的分离人声的方法就是不能完美解决这类问题，而机器学习模糊分类则可以无限接近完美解决。我讨厌的有两个，一个是传统方法很好解决的东西非要用机器学习解决，另一个是混乱的机器学习项目，后者更严重。&lt;/p&gt;
+
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;我倒不是对机器学习有什么莫名的偏见。事实上有些只能用机器学习搞定的东西我也很支持用机器学习解决，比如 waifu2x 这种增加图片分辨率的或者 Spleeter 这种分离人声和伴奏的，用传统的分离人声的方法就是不能完美解决这类问题，而机器学习模糊分类则可以无限接近完美解决。我讨厌的有两个，一个是传统方法很好解决的东西非要用机器学习解决，另一个是混乱的机器学习项目，后者更严重。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;不知道是因为什么原因，许多机器学习从业者似乎都缺乏整理代码和依赖的能力——能轻松地把一个这类开源项目打包简直是奇迹，更多时候别提打包了，你想自己安装然后跑起来都不太现实，哪怕是同样做机器学习的其他人也有这样的苦恼：实现者似乎把论文写好然后在自己电脑上能跑起来就心满意足了，丢出来一份没什么文档的代码，不折腾几天根本不知道这坨代码需要装些什么才能跑起来。对我这种洁癖用户就更严重了，我可不希望 pip 在我的系统里塞一堆乱七八糟的东西，这个需要其他项目才能避免全局安装的程序比起 npm 真是差远了，解决依赖的能力也远不如 pacman 和 npm。&lt;/p&gt;
+&lt;p&gt;然后有人发明了 conda 和 docker 这样的 &lt;del&gt;辣鸡&lt;/del&gt; 项目来拯救其他的辣鸡，但事实上不过是变得更糟而已——它们给了一些懒人名正言顺不维护项目的借口——反正我丢一个 conda 配置或者 docker 文件上去，你们拉上一大堆和我一样的过期依赖就能跑了，至于占了你多少硬盘，干不干净，关我什么事？如果不是物理限制，恐怕这些懒人会把整个宇宙都塞进去。而且他们再也不会管版本更新，什么 tensorflow 2 与我何干？用了我的 docker 你的系统里就会有几百个不同的过期的 tensorflow 1，买硬盘就完了呗？这和买显卡就完了呗还真是一路货色，这样依赖商业公司的产品，总有一天感觉会被割韭菜。&lt;/p&gt;
+&lt;p&gt;今天我用到的这个 Spleeter 某种意义上也是这样的一坨辣鸡，它的仓库里面的 README 是完全过时的，但这起码是件好事：代码还在更新。只是你按照文档是没办法顺利的搞定它的，我总结了一下我的解决方案，可能不适合其他人，但我大概知道怎么解决了。&lt;/p&gt;
+&lt;p&gt;这个文档有多离谱呢？它说你如果使用 GPU 加速的版本，必须从 conda-forge 安装，pip 和 GitHub 的版本都只有 CPU——那你这也是按揭开源？然后整个文档没有一个地方告诉我我需要单独下载训练好的模型才能跑起来，直接运行程序则丢一个段错误——可能他们搞机器学习的人觉得下模型是常识不需要说吧。&lt;/p&gt;
+&lt;p&gt;如果直接按它的方法运行 &lt;code&gt;conda install -c conda-forge spleeter-gpu&lt;/code&gt;，你会得到一个不能用 GPU 的 GPU 版，这实在是太搞笑了。我捏着鼻子用 conda 就是为了能让你一步把这一坨东西给我弄好，现在你说你弄不好？&lt;/p&gt;
+&lt;p&gt;但是有一点好处就是实际上他们的代码已经更新到支持 tensorflow 2 了，所以其实完全不需要用那个过期的 conda-forge 的版本，你完全可以直接在 Python 3.8 里面 &lt;code&gt;pip install spleeter-gpu&lt;/code&gt; 安装最新的版本——然后我又遇到了依赖问题，我的一些系统软件包依赖 numpy，然后 Arch 官方源里的 numpy 版本还是比 spleeter-gpu 依赖的 tensorflow 依赖的 numpy 版本新——你们写 Python 的人真麻烦，版本号兼容性是可以随便 break 的吗？&lt;/p&gt;
+&lt;p&gt;所以这时候我还是用 conda 解决，总之就是搞一个和系统独立的虚拟环境（npm：这不应该是内置功能吗？还需要用商业软件？）。总之&lt;a href=&quot;https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;去 TUNA 搞一个 Miniconda 3 最新的安装包来&lt;/a&gt;，然后直接安装，看着它往你的 shell 配置里塞一坨辣鸡（我把实际用到的命令拿出来做了个 alias，这样就可以只在我需要的时候打开 conda 了）。&lt;/p&gt;
+&lt;p&gt;为什么使用 miniconda 而不是 anaconda？因为 anaconda 带的那个图形界面根本用不了，miniconda 够用了。&lt;/p&gt;
+&lt;p&gt;然后创建一个 Python 3.8 的环境，高了低了都不行，真是难伺候，同时别忘了带上 cuda 和 cudnn，不然它一声不吭的就会只能用 CPU：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ conda create -n spleeter python=3.8 cudatoolkit cudnn&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda create -n spleeter python=3.8 cudatoolkit cudnn&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;cuda 不叫 cuda，叫 cudatoolkit 就离谱。&lt;/p&gt;
+&lt;p&gt;然后切进去：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ conda activate spleeter&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda activate spleeter&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;然后装 &lt;code&gt;spleeter-gpu&lt;/code&gt; 到 conda 新创建的这个 Python 环境：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ pip install spleeter-gpu&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ pip install spleeter-gpu&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我本机已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，但我都创建虚拟环境了你还读取我系统的干嘛？不过其实好像也不影响使用，或者此时可以 &lt;code&gt;pip install numpy==1.18.5&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;然后到 &lt;a href=&quot;https://github.com/deezer/spleeter/releases&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/deezer/spleeter/releases&lt;/a&gt; 去下载训练好的模型，这也是个弱智的地方：哪有 tar 打包不把目录本身打进去的？然后还得给这个程序创建一个工作目录，因为它是写死的到当前目录下面的 &lt;code&gt;pretrained_models&lt;/code&gt; 下面去找模型。&lt;/p&gt;
+&lt;figure data-raw=&quot;$ mkdir -p spleeter/pretrained_models
+$ cd spleeter/pretrained_models&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ mkdir -p spleeter/pretrained_models
+$ cd spleeter/pretrained_models&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;我这里用 2stems 的模型示范，因为我只需要分离人声和伴奏：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ wget -c &#039;https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz&#039;
+$ mkdir 2stems
+$ cd 2stems
+$ tar -xpvzf ../2stems.tar.gz&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ wget -c &#039;https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz&#039;
+$ mkdir 2stems
+$ cd 2stems
+$ tar -xpvzf ../2stems.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;因为他们打 tar 包时候没把目录打进去，所以别忘了自己创建目录！&lt;/p&gt;
+&lt;p&gt;然后回到你的工作目录就可以用了，我这里结构是 &lt;code&gt;spleeter/pretrained_models/2stems&lt;/code&gt; 所以工作目录就是 &lt;code&gt;spleeter&lt;/code&gt;：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ cd ../../
+$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ cd ../../
+$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 &lt;code&gt;-finetune&lt;/code&gt; 的是高品质模型，它们的模型目录名字应该是比如 &lt;code&gt;2stems-finetune&lt;/code&gt;，但是参数名字却不是这个而是 &lt;code&gt;-p spleeter:2stems-16kHz&lt;/code&gt;，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档。&lt;/p&gt;
+&lt;p&gt;我这里必须使用 &lt;code&gt;-B tensorflow&lt;/code&gt; 才会走显卡加速。&lt;/p&gt;
+&lt;p&gt;用完了就可以 &lt;code&gt;conda deactivate&lt;/code&gt; 退出虚拟环境，要用的时候别忘了 &lt;code&gt;conda activate spleeter&lt;/code&gt; 切换进来，&lt;/p&gt;
+&lt;p&gt;遇到类似问题的同学可以参考我的文章，但是因为这个处理过程影响因素太多了，如果你的不能用我也没什么办法。&lt;/p&gt;
+&lt;p&gt;回头一看，这个项目犯了一大堆禁忌：难以解决的依赖，写死的模型路径还有匮乏的文档，导致配环境就要配一大堆。当然，好在他们还是在努力更新跟上依赖而不是撒手不管让它慢慢死去，并且功能非常好。真正对开发者友好应该是不需要配环境的，比如在 Linux 下面开发软件，包管理已经帮你考虑好各种依赖了。只有像 Windows 或者 Android 这种不以开发者为中心或者是许多机器学习项目这种“数据好看就行”的地方才会有这么多麻烦。真的很希望这些人能补一点务实的基础，不要让他们的软件这么难用。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="Python" label="Python" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Python/" />
+    
+    
+    <category term="Python" label="Python" scheme="https://sh.alynx.one/tags/Python/" />
+    
+    <category term="Spleeter" label="Spleeter" scheme="https://sh.alynx.one/tags/Spleeter/" />
+    
+  </entry>
   
   
   
@@ -2863,123 +2949,6 @@ chmod +x &quot;${pkgdir}/opt/${pkgname}/resources&quot; \
     
     
     <category term="UnityHub" label="UnityHub" scheme="https://sh.alynx.one/tags/UnityHub/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>不要拿愚蠢的广告来污染我的邮箱</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Do-Not-Fill-My-Email-with-Silly-Ads/" />
-    <id>https://sh.alynx.one/posts/Do-Not-Fill-My-Email-with-Silly-Ads/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2019-05-04T10:27:00.000Z</published>
-    
-    
-    <updated>2020-10-23T01:16:00.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;一个多月没更新了，这次要写的不是什么技术问题，而是技术的附属问题。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;一个多月没更新了，这次要写的不是什么技术问题，而是技术的附属问题。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;一切问题的起源是邮箱里出现的这两封邮件：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/email1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/email2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;当你使用的邮箱服务是按某种数字顺序批量注册用户名的时候，你就没办法避免这种情况，不止我自己，而是很多人都收到这种邮件，没办法，谁叫邮箱都是连号的，甚至不需要写脚本，只要用 Excel 拖一下就能生成一大串邮箱地址，毫无技术含量。&lt;/p&gt;
-&lt;p&gt;从哪里开始呢？今天我不打算讨论写这么个 app 的技术问题，因为不管怎么说写这么一个系统也不是个简单的活，还是要尊重别人的劳动成果。但除了技术问题，别的问题就一大堆了。&lt;/p&gt;
-&lt;h1 id=&quot;我不想下载&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E6%88%91%E4%B8%8D%E6%83%B3%E4%B8%8B%E8%BD%BD&quot; title=&quot;我不想下载&quot;&gt;&lt;/a&gt;我不想下载&lt;/h1&gt;
-&lt;p&gt;没错，最大的问题其实是我看了这个东西以后根本没有下载的欲望，甚至连让我下载下来找找里面有哪些技术缺陷的欲望都没有。我也不是什么专业的传播学者或广告设计者，但从一个用户的角度而言就没有使用欲望——而且这种现象也不止我自己。&lt;/p&gt;
-&lt;h1 id=&quot;你的情怀和我有什么关系&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E4%BD%A0%E7%9A%84%E6%83%85%E6%80%80%E5%92%8C%E6%88%91%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB&quot; title=&quot;你的情怀和我有什么关系&quot;&gt;&lt;/a&gt;你的情怀和我有什么关系&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;今年春半，凝聚了团队无数努力和心血的项目终于开启了测试阶段。这对于我们整个团队来说都是一个饱含着拼搏意义和激动情绪的时刻。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;上一个想要靠卖弄情怀来宣传聊天软件的人叫罗永浩，结果如何呢？提起罗永浩大家还是首先想到 TNT、打脸，有几个想到聊天宝（&lt;strong&gt;原子弹短信&lt;/strong&gt;）的？罗老师的原子弹短信一开始可是给用户发红包的，这年头光卖情怀可不行，大家都喜欢红包。&lt;/p&gt;
-&lt;p&gt;我知道你们实现了目标非常开心，但能不能冷静下来再发广告，这句话放在这里除了浪费几 Byte 流量之外，对用户了解你的应用有什么帮助嘛？&lt;/p&gt;
-&lt;h1 id=&quot;AI不是万能形容词&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#AI%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E5%BD%A2%E5%AE%B9%E8%AF%8D&quot; title=&quot;AI不是万能形容词&quot;&gt;&lt;/a&gt;AI 不是万能形容词&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Dreamua 是首款 AI 社交应用。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果你做了个图片识别程序，你打个标签叫 AI 识图，那我觉得你的可信度有 90%，毕竟有很多现成的例子了。&lt;/p&gt;
-&lt;p&gt;如果你做了个文本翻译程序，你打个标签叫 AI 翻译，那我觉得你的可信度有 70%，因为有几家财大气粗的公司在做，虽然效果不一定太好。&lt;/p&gt;
-&lt;p&gt;如果你做了个自动驾驶程序，你打个标签叫 AI 驾驶，那你的可信度取决于你是不是在特斯拉上班。&lt;/p&gt;
-&lt;p&gt;如果你非得叫 AI 社交……AI 社交了，还要我干什么？社交是人与人之间的互动哎，你这个 AI 社交，AI 在里面扮演什么角色呢？AI 能猜出来“今晚月色真美”的潜台词嘛？要是能猜出来，全世界的翻译官都失业了。&lt;/p&gt;
-&lt;p&gt;写广告的人不懂的话可以问问程序员，最起码程序员应该懂。&lt;/p&gt;
-&lt;h1 id=&quot;求你别搞假大空&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E6%B1%82%E4%BD%A0%E5%88%AB%E6%90%9E%E5%81%87%E5%A4%A7%E7%A9%BA&quot; title=&quot;求你别搞假大空&quot;&gt;&lt;/a&gt;求你别搞假大空&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我们想了很久的slogan，最后把它决定为“Dreamua—遇见宇宙中最契合的TA”。
-“宇宙”、“契合”是很宏大的词，但是我们希望可以和你一起，实现这个slogan的意义。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果语文老师没教你避免假大空，那软件工程老师应该教过你怎么写文档，&lt;strong&gt;请问你们这个软件是想让我和外星生物配种嘛？&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&quot;edu邮箱就很靠谱吗&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#edu%E9%82%AE%E7%AE%B1%E5%B0%B1%E5%BE%88%E9%9D%A0%E8%B0%B1%E5%90%97&quot; title=&quot;edu邮箱就很靠谱吗&quot;&gt;&lt;/a&gt;edu 邮箱就很靠谱吗&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Dreamua是一个仅对edu邮箱用户开放的高校社交App，其核心和灵魂是AI社交。注册Dreamua 账号无需填写复杂简介，仅需一个edu邮箱，一张头像，一个昵称。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;废话，&lt;strong&gt;edu 邮箱要是那么靠谱，我就不会收到这个邮件了&lt;/strong&gt;——毕竟发件人也是 edu 邮箱。&lt;/p&gt;
-&lt;p&gt;一个 edu 邮箱能说明什么呢？学号？学校？这个邮箱的主人可能已经毕业了，比如发邮件的这位 14xxxxxx，你是留级了在读大五？&lt;/p&gt;
-&lt;p&gt;知道为什么我用 edu 邮箱申请 GitHub 学生认证不给过吗？就是因为国内的 edu 邮箱管理太松散了，完全没办法辨别真伪。那既然邮箱不能验证我是不是学生，再加一张头像一个昵称就能验证我是不是学生了吗？&lt;/p&gt;
-&lt;p&gt;如果你们下次还想发广告，我觉得可以去淘宝搜索一下“教育 邮箱”，多买几个马甲，别总用一个，添加黑名单很容易的，大家只是太懒而已。&lt;/p&gt;
-&lt;h1 id=&quot;说话能不能说准了&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E8%AF%B4%E8%AF%9D%E8%83%BD%E4%B8%8D%E8%83%BD%E8%AF%B4%E5%87%86%E4%BA%86&quot; title=&quot;说话能不能说准了&quot;&gt;&lt;/a&gt;说话能不能说准了&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Dreamua是一个仅对edu邮箱用户开放的高校社交App。
-Dreamua 测试版仅面向 edu 邮箱用户开放。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;第一封邮件告诉我这个社交 app 只对高校学生开放。第二封就告诉我是测试版仅面向 edu 邮箱——那以后呢？&lt;/p&gt;
-&lt;h1 id=&quot;生人社交本身就是伪命题&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E7%94%9F%E4%BA%BA%E7%A4%BE%E4%BA%A4%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E4%BC%AA%E5%91%BD%E9%A2%98&quot; title=&quot;生人社交本身就是伪命题&quot;&gt;&lt;/a&gt;生人社交本身就是伪命题&lt;/h1&gt;
-&lt;p&gt;求求你了我们真的不是没社交就会孤独到死。不是每个人每个晚上都睡不着觉拿着微信疯狂摇一摇。我有自己认识的人，我可以认识我认识的人认识的人，我甚至看到有趣的人也可以直接上去要联系方式——或者我干脆就不想和别人说话。&lt;/p&gt;
-&lt;p&gt;从小到大不爱和人说话的同学我见得多了，他们活得好好的，也没见谁需要下个 app“寻找志趣相投的伙伴”。&lt;strong&gt;实在不行的话，我还有沙雕网友呢。&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&quot;我为什么非要用你的&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9D%9E%E8%A6%81%E7%94%A8%E4%BD%A0%E7%9A%84&quot; title=&quot;我为什么非要用你的&quot;&gt;&lt;/a&gt;我为什么非要用你的&lt;/h1&gt;
-&lt;p&gt;我倒不是说微信微博 QQ 做的比你们技术好，但每个人都或多或少的被这些或者其他 app 黏着。本身这些东西已经够用了，我看不到需要切换到第 N + 1 个 app 来和别人说话的任何理由，特别是对于我们这些生活在地球外面的人，想切换就更艰难了。&lt;/p&gt;
-&lt;p&gt;原子弹短信的尸体还在墙头上挂着呢，支付宝也有聊天功能，除了聊天框里的“转账”按钮，你按过别的吗？&lt;/p&gt;
-&lt;h1 id=&quot;Play商店搜不到&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#Play%E5%95%86%E5%BA%97%E6%90%9C%E4%B8%8D%E5%88%B0&quot; title=&quot;Play商店搜不到&quot;&gt;&lt;/a&gt;Play 商店搜不到&lt;/h1&gt;
-&lt;p&gt;这一条可能有些不接地气，但对 Android 用户来说，Play 商店是最可靠的程序来源，就如同苹果的 App Store 一样。只有 Play 会定期检查手机里的 app 是不是有安全问题，其它的国内商店根本没有安全保证——拍个身份证照片注册就安全了吗？&lt;/p&gt;
-&lt;p&gt;我看到你们的 app 提交了 App Store，所以应该不差那 25 美元提交 Play Store 吧，毕竟我自己的开源 app 也掏了 25 上了 Play 呢。&lt;/p&gt;
-&lt;h1 id=&quot;官网没有可用信息&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E5%AE%98%E7%BD%91%E6%B2%A1%E6%9C%89%E5%8F%AF%E7%94%A8%E4%BF%A1%E6%81%AF&quot; title=&quot;官网没有可用信息&quot;&gt;&lt;/a&gt;官网没有可用信息&lt;/h1&gt;
-&lt;p&gt;还好我能够在 Google 搜索到 &lt;a href=&quot;https://www.dreamua.com/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://www.dreamua.com/&lt;/a&gt;，但这个页面逻辑和我自己的 app 页面 &lt;a href=&quot;https://livewallpaper.alynx.xyz/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://livewallpaper.alynx.xyz/&lt;/a&gt; 逻辑差不多嘛——就一个简单的静态页面，分几个段落，写一些半通不通的话（“年轻有朝气的初创团队，致力于打造一家有影响力、有社会责任感的互联网科技公司。”这话怎么读怎么奇怪）。既然你都注册公司了，多写几个页面问题不大吧。你们是公司，我可是一个人单打独斗写的 app，不至于和我一样套开源 bootstrap 主题吧！&lt;/p&gt;
-&lt;p&gt;顺便，上面写诞生于高校宿舍，下面又写有 Uber、Facebook、Amazon、腾讯等知名互联网公司工作经验……大概能是真的，就是会让人觉得开发之后已经换了一波人一样，再说，腾讯出来的人写个前端页面不难吧。&lt;/p&gt;
-&lt;h1 id=&quot;化再浓的妆也没用&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E5%8C%96%E5%86%8D%E6%B5%93%E7%9A%84%E5%A6%86%E4%B9%9F%E6%B2%A1%E7%94%A8&quot; title=&quot;化再浓的妆也没用&quot;&gt;&lt;/a&gt;化再浓的妆也没用&lt;/h1&gt;
-&lt;p&gt;说实在的，我对用户群体的评估可能有点失误，真的有人告诉我他们的室友下载了这个 app，后一句就是喜闻乐见的“想通过这玩意脱单”。&lt;/p&gt;
-&lt;p&gt;你看看你看看，人家用户都摆明了自己的需求了，就不要写什么“将宇宙中的一座座孤岛连成一片星海”了。单身直男们也该思索一下了，为什么夏目漱石说“今晚月色真美”是表白，你说“今晚月色真美”就是华为 P30 Pro 的高端黑了，你看王跃琨一下子就被开除了！太晦涩难懂是没法脱单的！&lt;/p&gt;
-&lt;h1 id=&quot;真的别再卖情怀了&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E7%9C%9F%E7%9A%84%E5%88%AB%E5%86%8D%E5%8D%96%E6%83%85%E6%80%80%E4%BA%86&quot; title=&quot;真的别再卖情怀了&quot;&gt;&lt;/a&gt;真的别再卖情怀了&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;首先谢谢你打开这封信。
-我们是交大的一个学生团队，我们和你们一样在学活吃渔粉，在球场踢足球，在傍晚看明湖鸭。
-Dreamua 诞生于高校宿舍。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;说真的，你这样会让别人对我们宿舍里这些同学的真实水平产生怀疑——我觉得我们学校的教学还是偏重于踏踏实实讲理论老老实实学技术的，而不是选个厮杀的你死我活的行业（你们的对手不止有探探陌陌 Soul 其实还有微信微博 QQ 甚至是 Bilibili 和网易云音乐）来创业，写一堆乱七八糟的文案卖情怀。&lt;/p&gt;
-&lt;p&gt;以前好像有个公众号，文案风格如出一辙，也挺喜欢卖情怀的，结果清华评特奖的时候从简历上被人挖出来婊说实际什么都没做。我觉得这种事情给人留的印象挺差的，所以还是别卖情怀了，能好好写文案就好好写，写不出来吃点渔粉踢会足球看看鸭鸭可能就有灵感了。&lt;/p&gt;
-&lt;h1 id=&quot;百度没收录我的网站&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Do-Not-Fill-My-Email-with-Silly-Ads/#%E7%99%BE%E5%BA%A6%E6%B2%A1%E6%94%B6%E5%BD%95%E6%88%91%E7%9A%84%E7%BD%91%E7%AB%99&quot; title=&quot;百度没收录我的网站&quot;&gt;&lt;/a&gt;百度没收录我的网站&lt;/h1&gt;
-&lt;p&gt;最近那个《旗帜鲜明地反对李彦宏当选工程院院士》挺出名的。我先声明一下，我的网站放在地球上，谷歌必应收录了我的网站而百度搜狗 360 这种辣鸡引擎没有收录，特别是百度还把山寨我的站点放在了搜索结果首页上。所以百度和我没什么利害关系，我也就不担心这种问题。&lt;/p&gt;
-&lt;p&gt;至于腾讯封了《旗帜鲜明》我也不太担心，毕竟我这人不喜欢用微信，连公众号都没有，生平最烦举报党。&lt;/p&gt;
-&lt;p&gt;我恰好想起来今天是我建站的三周年零一个月整，114777 个点击量不算太多，但从第一篇文章开始我的目标就没变过——“网站是属于自己的，我可以记录我自己的想法，喜不喜欢则是你的自由”。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2020-10-23）：&lt;a href=&quot;https://www.dreamua.com/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://www.dreamua.com/&lt;/a&gt; 已经打不开了，看来应该是创业失败了吧！而我的网站依然活着，是不是可以大声说出那句“你死我都未死！”了。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="随记" label="随记" scheme="https://sh.alynx.one/categories/%E9%9A%8F%E8%AE%B0/" />
-    
-    <category term="无题" label="无题" scheme="https://sh.alynx.one/categories/%E9%9A%8F%E8%AE%B0/%E6%97%A0%E9%A2%98/" />
-    
-    
-    <category term="愤怒" label="愤怒" scheme="https://sh.alynx.one/tags/%E6%84%A4%E6%80%92/" />
-    
-    <category term="吐槽" label="吐槽" scheme="https://sh.alynx.one/tags/%E5%90%90%E6%A7%BD/" />
     
   </entry>
   
