@@ -78,7 +78,7 @@ $ cd ../../
 $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow
 ```
 
-如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 `-finetune` 的是高品质模型，它们的模型目录名字应该是比如 `2stems-finetune`，但是参数名字却不是这个而是 `-p spleeter:2stems-16kHz`，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档。
+如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 `-finetune` 的是高品质模型，它们的模型目录名字应该是比如 `2stems-finetune`，但是参数名字却不是这个而是 `-p spleeter:2stems-16kHz`，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档（不过我又看了一下，这个 finetune 对于分离音轨没什么用好像）。
 
 我这里必须使用 `-B tensorflow` 才会走显卡加速。
 

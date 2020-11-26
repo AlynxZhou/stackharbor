@@ -367,7 +367,7 @@ $ tar -xpvzf ../2stems.tar.gz</code></pre></figure>
 <figure data-raw="$ cd ../../
 $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow" class="code-block"><pre class="code"><code>$ cd ../../
 $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow</code></pre></figure>
-<p>如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 <code>-finetune</code> 的是高品质模型，它们的模型目录名字应该是比如 <code>2stems-finetune</code>，但是参数名字却不是这个而是 <code>-p spleeter:2stems-16kHz</code>，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档。</p>
+<p>如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 <code>-finetune</code> 的是高品质模型，它们的模型目录名字应该是比如 <code>2stems-finetune</code>，但是参数名字却不是这个而是 <code>-p spleeter:2stems-16kHz</code>，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档（不过我又看了一下，这个 finetune 对于分离音轨没什么用好像）。</p>
 <p>我这里必须使用 <code>-B tensorflow</code> 才会走显卡加速。</p>
 <p>用完了就可以 <code>conda deactivate</code> 退出虚拟环境，要用的时候别忘了 <code>conda activate spleeter</code> 切换进来，</p>
 <p>遇到类似问题的同学可以参考我的文章，但是因为这个处理过程影响因素太多了，如果你的不能用我也没什么办法。</p>
@@ -670,4 +670,4 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.6.1 at 2020-11-26T08:46:38.987Z. -->
+<!-- Page built by Hikaru v1.6.1 at 2020-11-26T08:53:05.711Z. -->

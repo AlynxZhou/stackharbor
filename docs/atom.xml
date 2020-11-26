@@ -82,7 +82,7 @@ $ tar -xpvzf ../2stems.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;figure data-raw=&quot;$ cd ../../
 $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ cd ../../
 $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 &lt;code&gt;-finetune&lt;/code&gt; 的是高品质模型，它们的模型目录名字应该是比如 &lt;code&gt;2stems-finetune&lt;/code&gt;，但是参数名字却不是这个而是 &lt;code&gt;-p spleeter:2stems-16kHz&lt;/code&gt;，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档。&lt;/p&gt;
+&lt;p&gt;如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 &lt;code&gt;-finetune&lt;/code&gt; 的是高品质模型，它们的模型目录名字应该是比如 &lt;code&gt;2stems-finetune&lt;/code&gt;，但是参数名字却不是这个而是 &lt;code&gt;-p spleeter:2stems-16kHz&lt;/code&gt;，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档（不过我又看了一下，这个 finetune 对于分离音轨没什么用好像）。&lt;/p&gt;
 &lt;p&gt;我这里必须使用 &lt;code&gt;-B tensorflow&lt;/code&gt; 才会走显卡加速。&lt;/p&gt;
 &lt;p&gt;用完了就可以 &lt;code&gt;conda deactivate&lt;/code&gt; 退出虚拟环境，要用的时候别忘了 &lt;code&gt;conda activate spleeter&lt;/code&gt; 切换进来，&lt;/p&gt;
 &lt;p&gt;遇到类似问题的同学可以参考我的文章，但是因为这个处理过程影响因素太多了，如果你的不能用我也没什么办法。&lt;/p&gt;
