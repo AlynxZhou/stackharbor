@@ -54,10 +54,9 @@ div.post-title a.post-title-link::after {
   bottom: 0;
   left: 0;
   transition: transform 0.3s ease-in-out;
+  transform: scaleX(0);
   background: #26272b;
   background: var(--color-font);
-  visibility: hidden;
-  transform: scaleX(0);
 }
 div.post-title a.post-title-link:hover::after {
   visibility: visible;
