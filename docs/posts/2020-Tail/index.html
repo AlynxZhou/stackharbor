@@ -13,13 +13,13 @@
     
     <meta name="author" content="Alynx Zhou">
     
-    <meta name="description" content="最近在写一个 Wayland Compositor，虽然我以前大概知道这是什么，但是并不是很清楚它和 Xserver 有什么区别，虽然 fc 老师的这篇文章 写的相当不错，但我一点也不懂 X 所以看的迷迷糊糊。偶然读了 这篇文章 发现十分不错，但因为是英文文章读起来很累，打算把一些理解的内容记下来。顺便说一下，原文是带示例的，效果非常不错，建议有时间的人慢慢看一遍。">
+    <meta name="description" content="我最近思考了一下，总是记不起来去年的总结写了什么，结果翻了一下博客发现我的记忆力是对的——我去年还真的就忘了写总结。 今年的总结因为各种原因写的稍微晚了一点，不过总之还算是写了，比忘记写要好得多吧！">
     
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
     <meta name="generator" content="Hikaru v1.6.1">
-    <link rel="canonical" href="https://sh.alynx.one/posts/Difference-between-X-and-Wayland/">
+    <link rel="canonical" href="https://sh.alynx.one/posts/2020-Tail/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     
@@ -235,7 +235,7 @@
       });
     </script>
     
-    <title>X 和 Wayland 的主要区别 - 喵's StackHarbor</title>
+    <title>StackHarbor 的 2020 尾记 - 喵's StackHarbor</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
     
@@ -293,7 +293,7 @@
 <div id="page" class="page">
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Difference-between-X-and-Wayland/">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/2020-Tail/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         
         <meta itemprop="name" content="Alynx Zhou">
@@ -306,11 +306,11 @@
       </span>
     </div>
     <header class="post-header">
-      <div class="post-title" itemprop="name headline">X 和 Wayland 的主要区别</div>
+      <div class="post-title" itemprop="name headline">StackHarbor 的 2020 尾记</div>
       <div class="post-meta">
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2019-11-13T05:31:33.000Z">11/13/2019, 1:31:33 PM</time></span>
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-01-04T09:21:33.000Z">1/4/2021, 5:21:33 PM</time></span>
         </div>
         
         
@@ -318,46 +318,36 @@
         
         <div class="post-categories meta-block">
           
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9A%8F%E8%AE%B0/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
         </div>
         
         
         
         <div class="post-comment-count meta-block">
-          <i class="far fa-comments"></i><span><a href="/posts/Difference-between-X-and-Wayland/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="X 和 Wayland 的主要区别" itemprop="commentCount">阅读评论</span></a></span>
+          <i class="far fa-comments"></i><span><a href="/posts/2020-Tail/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="StackHarbor 的 2020 尾记" itemprop="commentCount">阅读评论</span></a></span>
         </div>
         
         
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <p>最近在写一个 Wayland Compositor，虽然我以前大概知道这是什么，但是并不是很清楚它和 Xserver 有什么区别，虽然 <a href="https://farseerfc.me/compositor-in-X-and-compositext.html" target="_blank" rel="external nofollow noreferrer noopener">fc 老师的这篇文章</a> 写的相当不错，但我一点也不懂 X 所以看的迷迷糊糊。偶然读了 <a href="https://magcius.github.io/xplain/article/" target="_blank" rel="external nofollow noreferrer noopener">这篇文章</a> 发现十分不错，但因为是英文文章读起来很累，打算把一些理解的内容记下来。顺便说一下，原文是带示例的，效果非常不错，建议有时间的人慢慢看一遍。</p>
+      <p>我最近思考了一下，总是记不起来去年的总结写了什么，结果翻了一下博客发现我的记忆力是对的——我去年还真的就忘了写总结。</p>
+<p>今年的总结因为各种原因写的稍微晚了一点，不过总之还算是写了，比忘记写要好得多吧！</p>
 <a id="more"></a>
 
-<p>我相信很多人在搜索 Wayland 的时候都看过这两张著名的图片：</p>
-<p><img src="https://wayland.freedesktop.org/x-architecture.png" alt=""></p>
-<p><img src="https://wayland.freedesktop.org/wayland-architecture.png" alt=""></p>
-<p>但我觉得可能看了也不明白，怎么把 Xserver 砍掉就提高性能了？为什么没有见到 window manager？为什么桌面环境需要去支持 Wayland？</p>
-<p>Wikipedia 上还有一些奇奇怪怪的图片比如这种：</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Linux_Graphics_Stack_2013.svg" alt=""></p>
-<p>在加上所有介绍 Wayland 的文章都会扯上 DRM，EGL，GLES 之类的，如果不懂这些就完全绕进去了，比如我就看到过有人问 Wayland 用 OpenGL ES 那用 OpenGL 的游戏是不是就跑不了了之类的。</p>
-<p>这一切都得从头说起。</p>
-<p>X 协议设计于 1980 年代，那时候窗口界面刚刚起步，人们还没什么 3D 特效一类的想法，而且机能也不允许，放到今天任何一个有点桌面基础的人都能理解应该给每个窗口一个 buffer 然后把这些 buffer 里的 texture 贴出来的设计逻辑，但 <strong>那时候可没那么多内存让你给每个窗口一个 buffer</strong>。所以就如同各种常见的领域一样，有个小天才一拍脑子想，反正 <strong>最后显示到桌面上的都是一个屏幕大小</strong>，我们只要准备这么大一块内存就行了嘛！换句话说，每个窗口的 buffer 要去掉自己被覆盖住的内存，整体内存大小就是可控的，<strong>在内存里是直接没有被覆盖的部分的</strong>。</p>
-<p>不得不说这位的思路在当时还是很有意义的，加上窗口大小都是矩形的假设，计算实际显示区域并不难，于是 Xserver 就是这样设计的。它维护一个屏幕大小的 buffer 自己计算窗口的实际位置，发生了变化（比如一个窗口盖住另一个），就给变化的窗口发一个重绘信号，这个窗口再发出绘图申请，<strong>直接绘制到 Xserver 的 buffer 里</strong>。由于 Xserver 知道所有窗口的位置，它就可以重定向鼠标键盘输入过去。然后具体的窗口移动缩放交给 window manager，它再把改过的位置回报给 Xserver。</p>
-<p>一切事情都变得很美好，直到某天一个人提出一个问题：我想要半透明的终端！</p>
-<p>程序员是不屑于解决提出问题的人的，如果用现代程序员的思维，做一下 alpha 混合其实很简单，只要 Xserver 能读取上层窗口的颜色和下层窗口的颜色就行了，可是你还记得当年的小天才吗？Xserver 说不太好意思，对于 <strong>一个像素我内存里只有一层，就是最上面显示的那个窗口</strong>……并且积习难改，我们不能改这个 feature……你想上下混合？死宅不要整天做梦，这是老祖宗留下来的不能改啊。</p>
-<p>如果你用过没开启 混成 Compositing 的 XFCE 和半透明的 XFCE-Terminal，你会发现它是可以透出窗口下面的壁纸的，先别着急喊我骗子，你在终端下面放一个别的窗口试试？神奇的现象发生了，终端显示的还是壁纸……</p>
-<p>上有政策下有对策嘛，一些终端作者想到反正壁纸总是固定的，我读取壁纸图片，取出终端所在的位置，然后在我窗口做个 alpha 混合不就行了？但是人不能自己骗自己啊，这是个客户端的假透明，我们要学习 GNOME 开发者的思维：不够好就砍掉。（大雾</p>
-<p>X 一看不行啊，那我们改一下协议吧，加一个叫 混成器 compositor 的东西，如果你写了这个东西，X 就不是直接更新他自己的内存 buffer 了，而是交给混成器。混成器可以获取一系列窗口的内容，让它们都画到不同的 buffer 里面（内存终于够大了啊！），再把它们处理了丢到屏幕上去。Xserver 只是要求 compositor 最后返回一整个屏幕（通常是，也可以小一点）然后给这个直接贴到最上面去（可以简单理解为混成器画好一整张就行了，别的都不管了）。</p>
-<p>理论上来说，混成器想怎么放这些窗口就怎么放这些窗口，就算想把他们丢到屏幕外边都行，反正你最后返回一个图就行了，Xserver 也不管是不是涩图。</p>
-<p>但是有个尴尬的事情，输出给你管了，输入你管不着啊！之前说了 Xserver 自己按照自己存的窗口位置分配输入，你把窗口挪走了，Xserver 可还是按照自己记录的窗口位置分配输入的，如果你想自己处理窗口位置分配输入，好嘛，Xserver 里面的代码你再复制到你混成器里一份吧！</p>
-<p>所以实际上 compositor 里面怎么做的呢？我最后处理完的窗口，位置和 Xserver 记录的位置还得一样，然后 Xserver 给我那个返回整张屏幕的顶层窗口，我就不接收输入了，这样直接透过顶层点到下面，就和窗口位置对应了（什么乱七八糟的破玩意啊！）。如果你要做个动画呢？你做动画的时候，Xserver 那边记录的位置可不跟你变（要是变，按照 X 的设计你这数据得跑好几个来回），你的鼠标点击在这时候是不准的，传不到窗口里面。</p>
-<p>这些 compositor 都是各个桌面环境做的，他们一般都集成到自己的 window manager 里了。</p>
-<p>而且随着时间发展，越来越多的 Xserver 和 client 是跑在同一个机器上的，很多 client 想自己利用显卡处理图形，就有人在协议上打洞，Xserver 做的越来越少了，更多的事情 client 自己都做了。</p>
-<p>你还想再往 X 协议上糊一层吗？别糊了兄弟，你这也太挫了！一开始 X 的设计是提供机制而非策略，Xserver 自己是符合了（然后除了 Xorg 其他实现都死了），和 Xserver 配合的可是被他绑的死死的比如 compositor，性能翻了几倍还得拉着这些历史垃圾跑，Xserver 终于活成了自己最讨厌的样子。</p>
-<p>Wayland 做的事情很简单，反正 compositor 都做这么多了，那直接把 Xserver 的功能也丢给 compositor 吧！Compositor 下层接的是 DRM 控制渲染，libinput 控制输入，GBM/EGLStreams 控制内存管理，上层更简单了，每个窗口丢给我一个 texture，我负责安排你们这些 texture 放在哪里，然后我按照我安排的位置，告诉你们鼠标进谁窗口了键盘进谁窗口了。然后因为要把这些 texture 混合到屏幕上，一般都用 OpenGL 的硬件加速，但在 Linux 下创建 OpenGL Context 的 GLX 库是和 X 绑定的，所以一般大家都用 OpenGL ES Context 的库 EGL。这个库只干扰最后合成图片时候的事情，至于你的 texture 用的是 OpenGL 还是 OpenGL ES 还是 CPU 画的都没有关系，现在 Wayland 一概不管了，你自己客户端处理自己的内容吧，我又不是 Xserver！</p>
-<p>所以对于 GNOME 和 KDE 等等而言，现在他们打交道的一个是内核一个是窗口，而不是以前一样和 Xserver 打交道了，省了数据交换，同时自己可以自由控制窗口输入输出面积。Xorg 应该被淘汰不是因为功能性原因，而是因为它的设计在当时很聪明，但现在只是历史包袱，实在太挫了。</p>
-<p>看完这篇文章建议回去阅读开头的两个链接，可以了解更多的实现细节，现在再看就不会那么混乱了。</p>
+<p>以前小时候总是觉得一年过得很慢，要过很久才到新一年放烟花吃饺子，但是现在觉得一年过得很快，可能要忙的事情多了就会觉得时间不够用。但我一般来说又不觉得自己做了什么值得记录的事情，看到别人的博客年终总结写的特别充实，又是自己出国求学又是自己找实习转正的，但是到了我自己总觉得这些也没什么好写的。再加上我是个相当讨厌计划的人，所以也没什么“检查自己一年的完成度”的机会。</p>
+<p>不过我在那些不错的年终总结里面还是学到了一些东西，所以打算也写点类似的。不过我虽然是程序员，写文章还是习惯从头到尾写，不擅长做那些分类加标题的事情，所以就想到哪写到哪。</p>
+<p>2020 年感觉最不错的事情大概是加入某绿色蜥蜴工作，虽然这个严格来说从 2019 年就开始了，但是我去年忘记写总结了……多亏了同学的推荐得到了一份实习，面试感觉很好，没有考什么我特别不擅长的算法题而是一些实践性的知识，这个我还是挺擅长的。然后同事也都相当好相处，一开始是测试相关的工作，也了解了很多测试方面的知识，甚至还写了点 perl（虽然只了解皮毛），总之是很有意思的经历，然后更意外的是领导居然主动问我有没有什么别的感兴趣的领域，因为我一直是 GNOME 用户所以对 GNOME 维护挺感兴趣的，结果后面就转到 GNOME 组去实习了（这也太好了吧天哪）。然后就是快毕业了需要准备正式工作，一般来说这边没有类似国内互联网企业那样招一大堆实习生然后给几个转正名额竞（yang）争（gu）的途径，并且他们也几乎不进行校招，对毕业生和社招一视同仁，虽然我个人很想在这工作，但是如果想留下来的话还挺看运气的。这时候领导又和我说正好组里有空缺职位，可以安排面试，只要能保证一直实习到正式入职就可以了，于是又十分幸运的毕业之后正式入职。总之能在自己感兴趣的领域做工作已经是十分幸运了，然后待遇相对来说也不错，特别是看多了加班猝死的新闻，心里更加满足了……同事也都很友善，而且都是技术类型的，做的又都是开源相关，平时也很聊得来。今年整体来说不是那么容易找工作的，我都要反思我为什么那么幸运了……顺便由于疫情原因，我司今年一直是在家办公状态，也节省了好多通勤的时间金钱……</p>
+<p>在找工作这方面我实在是没什么经验可谈，我太靠运气了……如果非要说的话，就是平时自己多学习多写写程序吧……</p>
+<p>因为工作的原因今年一直是自己在外面住的，房租好贵啊……至于自己住虽然挺安静的但也挺麻烦的……把东西从学校搬出来也花了不少麻烦。</p>
+<p>今年个人项目方面没做什么新东西，去年把 Hikaru 从 CoffeeScript 换成 JavaScript 之后基本就只是写文档、加测试、改功能，大改是去掉了 cheerio 改成自己实现了一部分功能，谁叫他们一年不……主题方面给 ARIA 做了个大改是去掉了 jQuery 加上了暗色模式，当然我自己看起来界面并没有什么变化。大一时候写的 FlipClock 努努力改成了 CMake，然后这样就可以跨平台做成 Windows 屏保了。顺便了解了一下怎么在 Android 上面运行 SDL，做了个 Android 的 FlipClock。而至于我的弹钢琴页面和 Telegram Bot，我已经忘记是今年还是去年写的了……</p>
+<p>今年折腾了一遍我的电脑，因为终于有时间和钱玩自己的台式机了，仔细想想好像把之前的能换的都换了，27 寸的显示器对没有双屏空间的人来说提升了不少工作效率，5800X 打游戏也很爽，就是钱包不太舒服……</p>
+<p>口琴方面今年年末又高产起来了，而且开始剪视频，发现达芬奇可以在 Linux 下面用（虽然有些限制）（Adobe 看看人家！），而且还挺流畅的，于是看了影视飓风的达芬奇教程学了一些基本的剪辑知识，为了用的更舒服还闲鱼买了个加密狗（假货很多，安全下车），今后可能剪视频的频率会逐渐增多，就当练习新技能了。</p>
+<p>手机打算再用一年，今年手机厂商出的都是什么垃圾？我现在也想清楚了反正手机又不能给我带来收入，有这个钱还不如投资到台式机上，希望各种换手机患者也考虑一下，我现在是能用就行了。除非哪个厂家出一个摄像头不丑还有耳机孔最好还是直屏系统不要乱删乱改的旗舰机。</p>
+<p>动漫除了看电磁炮 T 以外就是看了紫罗兰永恒花园，一开始很多人吹导致我对这个比较反感，实际看了以后觉得还是很不错的，所以吹得太过果然会招黑吗……电磁炮 T 总之中规中矩，能有第三部已经很不错了，我还想看第四部……、</p>
+<p>认识了一些新朋友，同时很多老朋友也都有各自要忙的事情，总之几乎没什么人一起打游戏了……不过经常能和蓝猫她们一起出去玩还是避免了成为死宅的命运，本来我都打算在家打游戏跨年了，最后和蓝猫狐狸一起吃了海底捞，虽然三点才回家导致第二天犯了鼻炎，不过还是非常开心。</p>
+<p>年末通关了 Titanfall 2，剧情很短，中规中矩，但是就已经是非常不错了，除了操作不适合我这个手残以外都很适合我。今年几乎没怎么玩 CSGO，但是下班之后有很多空余时间基本都投入在 Dota 2 上面了，虽然我也看很久 Dota 2 了，但是玩起来确实很难……不过我这一年一直都沉迷在中单光一直播里面，已经成了我玩 Dota 2 的动力了……现在多少也算入门了，虽然偶尔还是操作不过来，但至少明白是个怎么回事了。中单光一的直播真的很好看！正人君子，皮又好看，说话又好听，打游戏厉害，又很温柔。一开始我只是看他打 Dota，反正讲围棋我又看不懂，但我发现他读围棋棋手传记有意思多了，已经进入追小说模式了……拖到现在才写年终总结也是因为坐了 16 个小时的火车跑到上海去看 VirtuaReal 的第一次线下 Live，不过互动环节没抽到我实在是令人沮丧，我太非了，那么多人根本没我的机会呜呜呜呜呜……</p>
+<p>就写这些吧，希望 2021 年大家的生活都能变得顺利！</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
@@ -365,7 +355,7 @@
     <footer class="post-footer">
       
       <div class="post-tags">
-        <a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="fas fa-tag"></i>Linux</a><a class="post-tag button" href="/tags/Wayland/" rel="tag"><i class="fas fa-tag"></i>Wayland</a>
+        <a class="post-tag button" href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"><i class="fas fa-tag"></i>随记</a>
       </div>
       
     </footer>
@@ -374,12 +364,10 @@
   <nav class="page-nav">
     <div class="page-nav-next page-nav-item">
       
-      <a href="/posts/My-Desktop-PC/" rel="next" title="装机小记"><i class="fas fa-angle-left"></i><span class="nav-title">装机小记</span></a>
-      
     </div>
     <div class="page-nav-prev page-nav-item">
       
-      <a href="/posts/SnailSpace-as-NAS/" rel="prev" title="蜗牛星际安装 Arch Linux 作为 NAS"><span class="nav-title">蜗牛星际安装 Arch Linux 作为 NAS</span><i class="fas fa-angle-right"></i></a>
+      <a href="/posts/Fix-Silly-Spleeter-Dependencies/" rel="prev" title="解决 Spleeter 愚蠢的依赖问题"><span class="nav-title">解决 Spleeter 愚蠢的依赖问题</span><i class="fas fa-angle-right"></i></a>
       
     </div>
   </nav>
@@ -445,9 +433,9 @@
         "sendButtonText": "去评论",
         "noCommentText": "这个页面还没有评论，现在就去评论吧！",
         "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
-        "title": "X 和 Wayland 的主要区别",
+        "title": "StackHarbor 的 2020 尾记",
         "queryString": window.location.search,
-        "basePath": "/posts/Difference-between-X-and-Wayland/",
+        "basePath": "/posts/2020-Tail/",
         "containerID": "comment-results"
       }).then(() => {
         // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
@@ -658,4 +646,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.6.1 at 2021-01-04T11:00:50.178Z. -->
+<!-- Page built by Hikaru v1.6.1 at 2021-01-04T11:00:50.125Z. -->
