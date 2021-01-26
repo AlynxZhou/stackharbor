@@ -2138,7 +2138,7 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
     <published>2019-08-19T07:16:00.000Z</published>
     
     
-    <updated>2019-08-19T07:16:00.000Z</updated>
+    <updated>2021-01-26T01:10:44.000Z</updated>
     
     
     <summary type="html">
@@ -2630,9 +2630,19 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   horizontal: true&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;可能看了之前的你会和我一样想那就打个 patch 到 &lt;code&gt;ibus_rime.custom.yaml&lt;/code&gt; 不就行了嘛！但是不行，为什么呢？因为不管是 rime 还是 librime 还是 ibus-rime 都没有提供 &lt;code&gt;/usr/share/rime-data/ibus_rime.yaml&lt;/code&gt; 的文件，所以你的 patch 找不到被打的文件，那就不会被生成到 &lt;code&gt;build&lt;/code&gt; 目录里。&lt;/p&gt;
 &lt;p&gt;不要忘了之前说 rime 会读取 &lt;code&gt;~/.config/ibus/rime/&lt;/code&gt; 下面的 yaml，所以其实只要自己建立 &lt;code&gt;~/.config/ibus/rime/ibus_rime.yaml&lt;/code&gt; 写入那段配置就可以啦，因为本来也没有所以就不用打 patch 了，或者你在那两个位置建立一个空的 &lt;code&gt;ibus_rime.yaml&lt;/code&gt; 然后再打 patch 也行……&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;更新（2021 年 1 月 26 日）：Arch 的 librime 现在打包了一个 &lt;code&gt;/usr/share/rime/ibus_rime.yaml&lt;/code&gt; 文件，所以上面手动创建一个 &lt;code&gt;ibus_rime.yaml&lt;/code&gt; 的办法会被覆盖，所以现在建议创建 &lt;code&gt;~/.config/ibus/rime/ibus_rime.custom.yaml&lt;/code&gt; 然后对照着打patch，比如我写的是：&lt;/p&gt;
+&lt;figure data-raw=&quot;patch:
+  style:
+    horizontal: true
+    inline_preedit: false&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
+  style:
+    horizontal: true
+    inline_preedit: false&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;hr&gt;
 &lt;p&gt;不要忘了删掉 &lt;code&gt;build&lt;/code&gt; 目录再 &lt;code&gt;ibus-daemon -rdx&lt;/code&gt;。&lt;/p&gt;
 &lt;h1 id=&quot;下载&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E4%B8%8B%E8%BD%BD&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h1&gt;
-&lt;p&gt;如果你想试一试我的配置，其实就两个文件，&lt;a href=&quot;/posts/My-RIME/default.custom.yaml&quot;&gt;default.custom.yaml&lt;/a&gt; 和 &lt;a href=&quot;/posts/My-RIME/ibus_rime.yaml&quot;&gt;ibus_rime.yaml&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;如果你想试一试我的配置，其实就两个文件，&lt;a href=&quot;/posts/My-RIME/default.custom.yaml&quot;&gt;default.custom.yaml&lt;/a&gt; 和 &lt;a href=&quot;/posts/My-RIME/ibus_rime.custom.yaml&quot;&gt;ibus_rime.custom.yaml&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 

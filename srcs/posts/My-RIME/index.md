@@ -2,7 +2,8 @@
 title: "可能只适合我自己的 RIME 配置"
 layout: post
 #comment: true
-created: 2019-08-19 15:16:00
+created: 2019-08-19T15:16:00
+updated: 2021-01-26T09:10:44
 categories:
 - 计算机
 - 输入法
@@ -333,11 +334,24 @@ style:
 
 不要忘了之前说 rime 会读取 `~/.config/ibus/rime/` 下面的 yaml，所以其实只要自己建立 `~/.config/ibus/rime/ibus_rime.yaml` 写入那段配置就可以啦，因为本来也没有所以就不用打 patch 了，或者你在那两个位置建立一个空的 `ibus_rime.yaml` 然后再打 patch 也行……
 
+-------
+
+更新（2021 年 1 月 26 日）：Arch 的 librime 现在打包了一个 `/usr/share/rime/ibus_rime.yaml` 文件，所以上面手动创建一个 `ibus_rime.yaml` 的办法会被覆盖，所以现在建议创建 `~/.config/ibus/rime/ibus_rime.custom.yaml` 然后对照着打patch，比如我写的是：
+
+```yaml
+patch:
+  style:
+    horizontal: true
+    inline_preedit: false
+```
+
+-------
+
 不要忘了删掉 `build` 目录再 `ibus-daemon -rdx`。
 
 # 下载
 
-如果你想试一试我的配置，其实就两个文件，[default.custom.yaml](./default.custom.yaml) 和 [ibus_rime.yaml](./ibus_rime.yaml)。
+如果你想试一试我的配置，其实就两个文件，[default.custom.yaml](./default.custom.yaml) 和 [ibus_rime.custom.yaml](./ibus_rime.custom.yaml)。
 
 *Alynx Zhou*
 
