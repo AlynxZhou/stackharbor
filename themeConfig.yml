@@ -69,8 +69,9 @@ customFont:
   main: Ubuntu
   code: Ubuntu Mono
 
-avatar: images/FutureGazerSmall.webp
+#avatar: images/FutureGazerSmall.webp
 #avatar: images/MisakaMikotoSmall.png
+avatar: images/Mikoto_Karon_White.webp
 
 #logo: images/logo.webp
 #logo: images/sticker_arch.webp
