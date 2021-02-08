@@ -40,8 +40,6 @@ created: 2016-06-28 10:53:49
 
 3. 连接路由器进行主要调试；
 
-   - Optional：自己编译并安装Shadow（河蟹）Socks，China（河蟹）DNS；
-
 4. 建立AP并调节WiFi；
 
 5. 分离广域网WAN接口和局域网LAN；
@@ -237,84 +235,6 @@ PPS 好久之前B\+用OpenWrt不能启动的bug在15\.05里已经修复啦！如
 ````
 # opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd
 ````
-
-## 编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄
-
-为什么要编译呢？因为pi是小众路由器，openwrt-dist没提供预编译版……
-
-首先我们要下载openwrt的sdk，就在你下载img的那个目录里，点击 `OpenWrt-SDK-15.05.1-brcm2708-bcm2708_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2` 下载这个压缩好的SDK，回来之后用 `tar -xpvjf` 解压之，进入解压后的目录。
-
-PS 老规矩，Pi2用户是bcm2709。
-
-![RPi-Router_17.png](./RPi-Router_17.png)
-
-有关编译工具链的问题，我在Gentoo Linux下直接就能编译，所以我也不知道需要哪些依赖，据我所知包括但不限于gcc，git，ulibc。
-
-下面我们来获取所需软件包的源码，这一步用到git：
-
-````
-# git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
-# git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
-# git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
-````
-
-![RPi-Router_18.png](./RPi-Router_18.png)
-
-之后我们用menuconfig选择需要编译的软件包，熟悉Linux内核编译的人都会这个：
-
-````
-# make menuconfig
-````
-
-![RPi-Router_19.png](./RPi-Router_19.png)
-
-首先进入LuCI——Network里选择上带有ChinaDNS和shadowsocks的行（按空格使前面出现M），之后左右方向键切换下面到Exit，按空格以退回到首页，再切换到下面为Select，再进入Network，选中 `ChinaDNS` 和 `shadowsocks-libev-spec` 到M，之后切换下面到Save，保存之后退出。
-
-![RPi-Router_20.png](./RPi-Router_20.png)
-
-![RPi-Router_21.png](./RPi-Router_21.png)
-
-退出之后就可以用
-
-````
-# make V=99
-````
-
-这条命令来编译啦，编译好的文件在bin/brcm2708/package/base/里，我们要想办法把它传到pi上，最简单的方法就是把pi关掉，卡接到电脑上，把文件随便拷到卡里的一个目录，之后再开机即可安装。
-
-PS Pi2用户请注意，由于Openwrt把Pi1和Pi2的架构统称为brcm2708，所以**编译出来的软件包显示有brcm2708是正确的**。
-
-![RPi-Router_22.png](./RPi-Router_22.png)
-
-下面还是要ssh到你的pi上，进入你ipk文件存放的地方，先opkg update一下，因为一会需要连网安装依赖。（每次路由器开机都需要执行一次update。）
-
-之后用
-
-````
-# opkg install 你拷贝的ipk
-````
-
-把四个ipk都安装上。
-
-下面浏览器进入LuCI，在服务里你就能看见Shadowsocks和ChinaDNS啦！
-
-首先进入Shadowsocks，把全局服务器选为`127.0.0.1#1080`，再把下面的UDP服务器设置为与全局服务器相同。
-
-之后下面的服务器配置添上**你的ss服务器的配置**，UDP转发**勾选启用**，被忽略IP列表选择**ChinaDNS路由表**。保存应用。
-
-![RPi-Router_23.jpg](./RPi-Router_23.jpg)
-
-![RPi-Router_24.png](./RPi-Router_24.png)
-
-接下来切换到ChinaDNS，勾选启用和启用双向配置。上游服务器改为 114.114.114.114,127.0.0.1#5300`。
-
-![RPi-Router_25.png](./RPi-Router_25.png)
-
-再切换到网络——DHCP/DNS，基本设置里的DNS转发填写`127.0.0.1#5353`，HOSTS和解析文件里**勾选忽略解析文件**。
-
-![RPi-Router_26.png](./RPi-Router_26.png)
-
-现在ss部署完成！
 
 # 建立AP并调节WiFi
 

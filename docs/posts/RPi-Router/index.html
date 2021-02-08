@@ -358,9 +358,6 @@
 <li><p>连接电脑进行初次必要调试；</p>
 </li>
 <li><p>连接路由器进行主要调试；</p>
-<ul>
-<li>Optional：自己编译并安装Shadow（河蟹）Socks，China（河蟹）DNS；</li>
-</ul>
 </li>
 <li><p>建立AP并调节WiFi；</p>
 </li>
@@ -465,44 +462,6 @@
 <p>下面开始安装一些必要的软件包！据我统计有 <code>kmod-usb2</code> 、 <code>kmod-usb-ohci</code> 、 <code>kmod-usb-ohci</code> 、 <code>kmod-ath9k-common</code> 、 <code>kmod-ath9k-htc</code> （ath9k这两个包是我的网卡对应的驱动，<strong>你的网卡需要什么驱动要根据你的芯片来定！我真的不知道你用的什么网卡！</strong>）、 <code>hostapd</code> 。什么？你问我怎么安？过滤器在那！都是中文难道还看不懂吗？自己搜索一下！</p>
 <p>当然我更喜欢ssh一条命令解决：</p>
 <figure data-raw="# opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd" class="code-block"><pre class="code"><code># opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd</code></pre></figure>
-<h2 id="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"><a class="header-link" href="/posts/RPi-Router/#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Shadow%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89Socks%EF%BC%8CChina%EF%BC%88%E6%B2%B3%E8%9F%B9%EF%BC%89DNS%E4%BB%A5%E4%BE%BF%E6%84%89%E5%BF%AB%E7%9A%84%E7%95%AA%E8%8C%84" title="编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄"></a>编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄</h2>
-<p>为什么要编译呢？因为pi是小众路由器，openwrt-dist没提供预编译版……</p>
-<p>首先我们要下载openwrt的sdk，就在你下载img的那个目录里，点击 <code>OpenWrt-SDK-15.05.1-brcm2708-bcm2708_gcc-4.8-linaro_uClibc-0.9.33.2_eabi.Linux-x86_64.tar.bz2</code> 下载这个压缩好的SDK，回来之后用 <code>tar -xpvjf</code> 解压之，进入解压后的目录。</p>
-<p>PS 老规矩，Pi2用户是bcm2709。</p>
-<p><img src="/posts/RPi-Router/RPi-Router_17.png" alt="RPi-Router_17.png"></p>
-<p>有关编译工具链的问题，我在Gentoo Linux下直接就能编译，所以我也不知道需要哪些依赖，据我所知包括但不限于gcc，git，ulibc。</p>
-<p>下面我们来获取所需软件包的源码，这一步用到git：</p>
-<figure data-raw="# git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
-# git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
-# git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci" class="code-block"><pre class="code"><code># git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
-# git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
-# git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci</code></pre></figure>
-<p><img src="/posts/RPi-Router/RPi-Router_18.png" alt="RPi-Router_18.png"></p>
-<p>之后我们用menuconfig选择需要编译的软件包，熟悉Linux内核编译的人都会这个：</p>
-<figure data-raw="# make menuconfig" class="code-block"><pre class="code"><code># make menuconfig</code></pre></figure>
-<p><img src="/posts/RPi-Router/RPi-Router_19.png" alt="RPi-Router_19.png"></p>
-<p>首先进入LuCI——Network里选择上带有ChinaDNS和shadowsocks的行（按空格使前面出现M），之后左右方向键切换下面到Exit，按空格以退回到首页，再切换到下面为Select，再进入Network，选中 <code>ChinaDNS</code> 和 <code>shadowsocks-libev-spec</code> 到M，之后切换下面到Save，保存之后退出。</p>
-<p><img src="/posts/RPi-Router/RPi-Router_20.png" alt="RPi-Router_20.png"></p>
-<p><img src="/posts/RPi-Router/RPi-Router_21.png" alt="RPi-Router_21.png"></p>
-<p>退出之后就可以用</p>
-<figure data-raw="# make V=99" class="code-block"><pre class="code"><code># make V=99</code></pre></figure>
-<p>这条命令来编译啦，编译好的文件在bin/brcm2708/package/base/里，我们要想办法把它传到pi上，最简单的方法就是把pi关掉，卡接到电脑上，把文件随便拷到卡里的一个目录，之后再开机即可安装。</p>
-<p>PS Pi2用户请注意，由于Openwrt把Pi1和Pi2的架构统称为brcm2708，所以<strong>编译出来的软件包显示有brcm2708是正确的</strong>。</p>
-<p><img src="/posts/RPi-Router/RPi-Router_22.png" alt="RPi-Router_22.png"></p>
-<p>下面还是要ssh到你的pi上，进入你ipk文件存放的地方，先opkg update一下，因为一会需要连网安装依赖。（每次路由器开机都需要执行一次update。）</p>
-<p>之后用</p>
-<figure data-raw="# opkg install 你拷贝的ipk" class="code-block"><pre class="code"><code># opkg install 你拷贝的ipk</code></pre></figure>
-<p>把四个ipk都安装上。</p>
-<p>下面浏览器进入LuCI，在服务里你就能看见Shadowsocks和ChinaDNS啦！</p>
-<p>首先进入Shadowsocks，把全局服务器选为<code>127.0.0.1#1080</code>，再把下面的UDP服务器设置为与全局服务器相同。</p>
-<p>之后下面的服务器配置添上<strong>你的ss服务器的配置</strong>，UDP转发<strong>勾选启用</strong>，被忽略IP列表选择<strong>ChinaDNS路由表</strong>。保存应用。</p>
-<p><img src="/posts/RPi-Router/RPi-Router_23.jpg" alt="RPi-Router_23.jpg"></p>
-<p><img src="/posts/RPi-Router/RPi-Router_24.png" alt="RPi-Router_24.png"></p>
-<p>接下来切换到ChinaDNS，勾选启用和启用双向配置。上游服务器改为 114.114.114.114,127.0.0.1#5300`。</p>
-<p><img src="/posts/RPi-Router/RPi-Router_25.png" alt="RPi-Router_25.png"></p>
-<p>再切换到网络——DHCP/DNS，基本设置里的DNS转发填写<code>127.0.0.1#5353</code>，HOSTS和解析文件里<strong>勾选忽略解析文件</strong>。</p>
-<p><img src="/posts/RPi-Router/RPi-Router_26.png" alt="RPi-Router_26.png"></p>
-<p>现在ss部署完成！</p>
 <h1 id="建立AP并调节WiFi"><a class="header-link" href="/posts/RPi-Router/#%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi" title="建立AP并调节WiFi"></a>建立AP并调节WiFi</h1>
 <p>安装完成之后我们来开启wifi！首先这个必须要ssh连接上去了，电脑就是</p>
 <figure data-raw="$ ssh root@你的pi的ip地址" class="code-block"><pre class="code"><code>$ ssh root@你的pi的ip地址</code></pre></figure>
@@ -777,18 +736,6 @@
           
           <a class="list-group-item toc-link" href="#连接路由器进行主要调试">连接路由器进行主要调试</a>
           
-          
-      <ol >
-      
-        <li>
-          
-          <a class="list-group-item toc-link" href="#编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄">编译安装Shadow（河蟹）Socks，China（河蟹）DNS以便愉快的番茄</a>
-          
-        </li>
-      
-      </ol>
-      
-          
         </li>
       
         <li>
@@ -916,4 +863,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.6.1 at 2021-01-29T05:21:06.736Z. -->
+<!-- Page built by Hikaru v1.6.1 at 2021-02-08T07:03:45.971Z. -->
