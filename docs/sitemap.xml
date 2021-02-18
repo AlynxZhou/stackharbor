@@ -3,6 +3,15 @@
   
   
   <url>
+    <loc>https://sh.alynx.one/posts/Run-PulseAudio-on-Top-of-JACK/</loc>
+    
+    <lastmod>2021-02-18T02:51:11.000Z</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://sh.alynx.one/posts/2020-Tail/</loc>
     
     <lastmod>2021-01-04T09:21:33.000Z</lastmod>
@@ -679,18 +688,18 @@
   
   
   <url>
-    <loc>https://sh.alynx.one/about/</loc>
+    <loc>https://sh.alynx.one/404.html</loc>
     
-    <lastmod>2021-01-04T09:21:00.000Z</lastmod>
+    <lastmod>2016-04-04T01:00:00.000Z</lastmod>
     
   </url>
   
   
   
   <url>
-    <loc>https://sh.alynx.one/404.html</loc>
+    <loc>https://sh.alynx.one/about/</loc>
     
-    <lastmod>2016-04-04T01:00:00.000Z</lastmod>
+    <lastmod>2021-01-04T09:21:00.000Z</lastmod>
     
   </url>
   
@@ -810,6 +819,13 @@
   
   <url>
     <loc>https://sh.alynx.one/archives/index-5.html</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/archives/index-6.html</loc>
     
   </url>
   
@@ -936,6 +952,13 @@
   
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Steam/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E9%9F%B3%E9%A2%91/</loc>
     
   </url>
   
@@ -1257,6 +1280,13 @@
   
   
   <url>
+    <loc>https://sh.alynx.one/tags/JACK/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://sh.alynx.one/tags/Java/</loc>
     
   </url>
@@ -1307,6 +1337,13 @@
   
   <url>
     <loc>https://sh.alynx.one/tags/OpenWrt/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/tags/PulseAudio/</loc>
     
   </url>
   
@@ -1468,6 +1505,13 @@
   
   <url>
     <loc>https://sh.alynx.one/tags/%E5%BB%BA%E7%AB%99/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/tags/%E5%BD%95%E9%9F%B3/</loc>
     
   </url>
   
