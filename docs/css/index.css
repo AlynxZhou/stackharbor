@@ -434,6 +434,7 @@ span.caption {
 }
 a.button,
 button.button {
+  display: inline-block;
   position: relative;
   transition: 0.3s ease-in-out;
   text-decoration: none;
