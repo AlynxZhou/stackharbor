@@ -435,7 +435,7 @@ span.caption {
 a.button,
 button.button {
   position: relative;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
   text-decoration: none;
   border-radius: 0.3em;
   color: #fff;
@@ -446,6 +446,7 @@ a.button:hover,
 button.button:hover {
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
   border: 0.1em solid #ddd;
+  transform: scale(1.05, 1.05);
 }
 a.button:active,
 button.button:active {
