@@ -48,7 +48,7 @@ RIME 的拼音功能确实很好用（虽然有时候它和我对于词组的想
 
 怎么确定要修改的 key 名字呢？~~我这里的都是在 `build/default.yaml` 下面找到的，~~ 因为 patch 的是 `/usr/share/rime-data/default.yaml` 所以就去看这个辣，之前又写错了，那个其实是生成的文件。你也可以试试其他的 YAML 文件。
 
-RIME 的文档说什么要用 `/` 把不同层次的 key 折叠成一个比如 `ascii_composer/switch_key`，~~亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。~~ 我说佛老师对不起对不起，我不懂规矩。a/b/c 是只 patch c，展开了则变成了 patch a，a/b/c 是只 patch c，展开了则变成了 patch a。
+RIME 的文档说什么要用 `/` 把不同层次的 key 折叠成一个比如 `ascii_composer/switch_key`，~~亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。~~ 我说佛老师对不起对不起，我不懂规矩。a/b/c 是只 patch c，展开了则变成了 patch a。
 
 然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：
 

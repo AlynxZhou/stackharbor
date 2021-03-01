@@ -2244,7 +2244,7 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;h1 id=&quot;各种乱七八糟操作逻辑的配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE&quot; title=&quot;各种乱七八糟操作逻辑的配置&quot;&gt;&lt;/a&gt;各种乱七八糟操作逻辑的配置&lt;/h1&gt;
 &lt;p&gt;按照 RIME 打 patch 的配置方式我们需要在这个目录下创建一个叫 &lt;code&gt;default.custom.yaml&lt;/code&gt; 的文件，这样就可以给 &lt;code&gt;/usr/share/rime-data/default.yaml&lt;/code&gt; 这个文件 patch 辣，当然你得先会写 YAML。第一行首先写个叫 &lt;code&gt;patch:&lt;/code&gt; 的 key，RIME 要求这样，所有的自定义配置都是在 &lt;code&gt;patch&lt;/code&gt; 字段下面。&lt;/p&gt;
 &lt;p&gt;怎么确定要修改的 key 名字呢？&lt;del&gt;我这里的都是在 &lt;code&gt;build/default.yaml&lt;/code&gt; 下面找到的，&lt;/del&gt; 因为 patch 的是 &lt;code&gt;/usr/share/rime-data/default.yaml&lt;/code&gt; 所以就去看这个辣，之前又写错了，那个其实是生成的文件。你也可以试试其他的 YAML 文件。&lt;/p&gt;
-&lt;p&gt;RIME 的文档说什么要用 &lt;code&gt;/&lt;/code&gt; 把不同层次的 key 折叠成一个比如 &lt;code&gt;ascii_composer/switch_key&lt;/code&gt;，&lt;del&gt;亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。&lt;/del&gt; 我说佛老师对不起对不起，我不懂规矩。a/b/c 是只 patch c，展开了则变成了 patch a，a/b/c 是只 patch c，展开了则变成了 patch a。&lt;/p&gt;
+&lt;p&gt;RIME 的文档说什么要用 &lt;code&gt;/&lt;/code&gt; 把不同层次的 key 折叠成一个比如 &lt;code&gt;ascii_composer/switch_key&lt;/code&gt;，&lt;del&gt;亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。&lt;/del&gt; 我说佛老师对不起对不起，我不懂规矩。a/b/c 是只 patch c，展开了则变成了 patch a。&lt;/p&gt;
 &lt;p&gt;然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：&lt;/p&gt;
 &lt;figure data-raw=&quot;patch:
   schema_list:
