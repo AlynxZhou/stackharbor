@@ -315,7 +315,7 @@
         
         
         <div class="post-date meta-block">
-          <i class="far fa-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2021-01-26T01:10:44.000Z">1/26/2021, 9:10:44 AM</time></span>
+          <i class="far fa-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2021-03-01T09:51:11.000Z">3/1/2021, 5:51:11 PM</time></span>
         </div>
         
         
@@ -361,7 +361,7 @@
 <h1 id="各种乱七八糟操作逻辑的配置"><a class="header-link" href="/posts/My-RIME/#%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE" title="各种乱七八糟操作逻辑的配置"></a>各种乱七八糟操作逻辑的配置</h1>
 <p>按照 RIME 打 patch 的配置方式我们需要在这个目录下创建一个叫 <code>default.custom.yaml</code> 的文件，这样就可以给 <code>/usr/share/rime-data/default.yaml</code> 这个文件 patch 辣，当然你得先会写 YAML。第一行首先写个叫 <code>patch:</code> 的 key，RIME 要求这样，所有的自定义配置都是在 <code>patch</code> 字段下面。</p>
 <p>怎么确定要修改的 key 名字呢？<del>我这里的都是在 <code>build/default.yaml</code> 下面找到的，</del> 因为 patch 的是 <code>/usr/share/rime-data/default.yaml</code> 所以就去看这个辣，之前又写错了，那个其实是生成的文件。你也可以试试其他的 YAML 文件。</p>
-<p>RIME 的文档说什么要用 <code>/</code> 把不同层次的 key 折叠成一个比如 <code>ascii_composer/switch_key</code>，亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。</p>
+<p>RIME 的文档说什么要用 <code>/</code> 把不同层次的 key 折叠成一个比如 <code>ascii_composer/switch_key</code>，<del>亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。</del> 我说佛老师对不起对不起，我不懂规矩。a/b/c 是只 patch c，展开了则变成了 patch a，a/b/c 是只 patch c，展开了则变成了 patch a。</p>
 <p>然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：</p>
 <figure data-raw="patch:
   schema_list:
@@ -369,166 +369,158 @@
   schema_list:
     - schema: "luna_pinyin_simp"</code></pre></figure>
 <p>然后就是改掉那个自作聪明的英文输入模式：</p>
-<figure data-raw="  ascii_composer:
-    # 按 CapsLock 输出大写英文字母。
-    good_old_caps_lock: true
-    # `inline_ascii` 在输入框内插入英文。
-    # `commit_text` 候选文字上屏并切换至英文。
-    # `commit_code` 输入拼音上屏并切换至英文。
-    # `clear` 清除拼音并切换至英文。
-    # `noop` 屏蔽此按键。
-    switch_key:
-      # 如果你设置 `Caps_Lock` 为 `noop`，
-      # 一个奇怪的问题是退格键不能用了，除非取消大写锁定。
-      # 所以我直接设置文字上屏了。
-      Caps_Lock: &quot;commit_text&quot;
-      Shift_L: &quot;commit_code&quot;
-      Shift_R: &quot;commit_code&quot;
-      Control_L: &quot;noop&quot;
-      Control_R: &quot;noop&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  ascii_composer:
-    # 按 CapsLock 输出大写英文字母。
-    good_old_caps_lock: true
-    # `inline_ascii` 在输入框内插入英文。
-    # `commit_text` 候选文字上屏并切换至英文。
-    # `commit_code` 输入拼音上屏并切换至英文。
-    # `clear` 清除拼音并切换至英文。
-    # `noop` 屏蔽此按键。
-    switch_key:
-      # 如果你设置 `Caps_Lock` 为 `noop`，
-      # 一个奇怪的问题是退格键不能用了，除非取消大写锁定。
-      # 所以我直接设置文字上屏了。
-      Caps_Lock: "commit_text"
-      Shift_L: "commit_code"
-      Shift_R: "commit_code"
-      Control_L: "noop"
-      Control_R: "noop"</code></pre></figure>
+<figure data-raw="  # 按 CapsLock 输出大写英文字母。
+  ascii_composer/good_old_caps_lock: true
+  # `inline_ascii` 在输入框内插入英文。
+  # `commit_text` 候选文字上屏并切换至英文。
+  # `commit_code` 输入拼音上屏并切换至英文。
+  # `clear` 清除拼音并切换至英文。
+  # `noop` 屏蔽此按键。
+  # 如果你设置 `Caps_Lock` 为 `noop`，
+  # 一个奇怪的问题是退格键不能用了，除非取消大写锁定。
+  # 所以我直接设置文字上屏了。
+  ascii_composer/switch_key/Caps_Lock: &quot;commit_text&quot;
+  ascii_composer/switch_key/Shift_L: &quot;commit_code&quot;
+  ascii_composer/switch_key/Shift_R: &quot;commit_code&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 按 CapsLock 输出大写英文字母。
+  ascii_composer/good_old_caps_lock: true
+  # `inline_ascii` 在输入框内插入英文。
+  # `commit_text` 候选文字上屏并切换至英文。
+  # `commit_code` 输入拼音上屏并切换至英文。
+  # `clear` 清除拼音并切换至英文。
+  # `noop` 屏蔽此按键。
+  # 如果你设置 `Caps_Lock` 为 `noop`，
+  # 一个奇怪的问题是退格键不能用了，除非取消大写锁定。
+  # 所以我直接设置文字上屏了。
+  ascii_composer/switch_key/Caps_Lock: "commit_text"
+  ascii_composer/switch_key/Shift_L: "commit_code"
+  ascii_composer/switch_key/Shift_R: "commit_code"</code></pre></figure>
 <p>大部分坑我都写在注释里了可以自己看。</p>
 <p>然后我看那个设置选单也不是很爽，我习惯简体字，这个也可以自己改：</p>
-<figure data-raw="  switcher:
-    # 改掉原来的繁体字标题。
-    caption: &quot;【设置菜单】&quot;
-    # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
-    option_list_separator: &quot;/&quot;
-    # 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。
-    hotkeys:
-      # - &quot;Control+s&quot;
-      - &quot;Control+grave&quot;
-      - &quot;F4&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  switcher:
-    # 改掉原来的繁体字标题。
-    caption: "【设置菜单】"
-    # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
-    option_list_separator: "/"
-    # 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。
-    hotkeys:
-      # - "Control+s"
-      - "Control+grave"
-      - "F4"</code></pre></figure>
+<figure data-raw="  # 改掉原来的繁体字标题。
+  switcher/caption: &quot;【设置菜单】&quot;
+  # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
+  switcher/option_list_separator: &quot;/&quot;
+  # 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。
+  switcher/hotkeys:
+    # - &quot;Control+s&quot;
+    - &quot;Control+grave&quot;
+    - &quot;F4&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 改掉原来的繁体字标题。
+  switcher/caption: "【设置菜单】"
+  # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
+  switcher/option_list_separator: "/"
+  # 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。
+  switcher/hotkeys:
+    # - "Control+s"
+    - "Control+grave"
+    - "F4"</code></pre></figure>
 <p>然后就是改掉它奇怪的键位，Emacs 键位挺好的，但是有几个不知道为什么用不了，再者就是为什么按向左是跳一个字拼音向右是跳一个字母？</p>
-<figure data-raw="  key_binder:
-    bindings:
-      # Emacs 键位，我喜欢。
-      # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
-      - accept: &quot;Control+p&quot;
-        send: &quot;Up&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+n&quot;
-        send: &quot;Down&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+b&quot;
-        send: &quot;Left&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+f&quot;
-        send: &quot;Right&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Alt+b&quot;
-        send: &quot;Shift+Left&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Alt+f&quot;
-        send: &quot;Shift+Right&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+a&quot;
-        send: &quot;Home&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+e&quot;
-        send: &quot;End&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+d&quot;
-        send: &quot;Delete&quot;
-        when: &quot;composing&quot;
-      # 这个用不了，不过估计也用不到。
-      # - accept: &quot;Control+k&quot;
-      #   send: &quot;Shift+Delete&quot;
-      #   when: &quot;composing&quot;
-      - accept: &quot;Control+h&quot;
-        send: &quot;BackSpace&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Alt+h&quot;
-        send: &quot;Shift+BackSpace&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+g&quot;
-        send: &quot;Escape&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+bracketleft&quot;
-        send: &quot;Escape&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Alt+v&quot;
-        send: &quot;Page_Up&quot;
-        when: &quot;composing&quot;
-      - accept: &quot;Control+v&quot;
-        send: &quot;Page_Down&quot;
-        when: &quot;composing&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  key_binder:
-    bindings:
-      # Emacs 键位，我喜欢。
-      # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
-      - accept: "Control+p"
-        send: "Up"
-        when: "composing"
-      - accept: "Control+n"
-        send: "Down"
-        when: "composing"
-      - accept: "Control+b"
-        send: "Left"
-        when: "composing"
-      - accept: "Control+f"
-        send: "Right"
-        when: "composing"
-      - accept: "Alt+b"
-        send: "Shift+Left"
-        when: "composing"
-      - accept: "Alt+f"
-        send: "Shift+Right"
-        when: "composing"
-      - accept: "Control+a"
-        send: "Home"
-        when: "composing"
-      - accept: "Control+e"
-        send: "End"
-        when: "composing"
-      - accept: "Control+d"
-        send: "Delete"
-        when: "composing"
-      # 这个用不了，不过估计也用不到。
-      # - accept: "Control+k"
-      #   send: "Shift+Delete"
-      #   when: "composing"
-      - accept: "Control+h"
-        send: "BackSpace"
-        when: "composing"
-      - accept: "Alt+h"
-        send: "Shift+BackSpace"
-        when: "composing"
-      - accept: "Control+g"
-        send: "Escape"
-        when: "composing"
-      - accept: "Control+bracketleft"
-        send: "Escape"
-        when: "composing"
-      - accept: "Alt+v"
-        send: "Page_Up"
-        when: "composing"
-      - accept: "Control+v"
-        send: "Page_Down"
-        when: "composing"</code></pre></figure>
+<figure data-raw="# 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+# 但我暂时不需要。
+# Emacs 键位，我喜欢。
+# 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
+key_binder/bindings:
+  - accept: &quot;Control+p&quot;
+    send: &quot;Up&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+n&quot;
+    send: &quot;Down&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+b&quot;
+    send: &quot;Left&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+f&quot;
+    send: &quot;Right&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Alt+b&quot;
+    send: &quot;Shift+Left&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Alt+f&quot;
+    send: &quot;Shift+Right&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+a&quot;
+    send: &quot;Home&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+e&quot;
+    send: &quot;End&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+d&quot;
+    send: &quot;Delete&quot;
+    when: &quot;composing&quot;
+  # 这个用不了，不过估计也用不到。
+  # - accept: &quot;Control+k&quot;
+  #   send: &quot;Shift+Delete&quot;
+  #   when: &quot;composing&quot;
+  - accept: &quot;Control+h&quot;
+    send: &quot;BackSpace&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Alt+h&quot;
+    send: &quot;Shift+BackSpace&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+g&quot;
+    send: &quot;Escape&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+bracketleft&quot;
+    send: &quot;Escape&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Alt+v&quot;
+    send: &quot;Page_Up&quot;
+    when: &quot;composing&quot;
+  - accept: &quot;Control+v&quot;
+    send: &quot;Page_Down&quot;
+    when: &quot;composing&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml"># 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+# 但我暂时不需要。
+# Emacs 键位，我喜欢。
+# 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
+key_binder/bindings:
+  - accept: "Control+p"
+    send: "Up"
+    when: "composing"
+  - accept: "Control+n"
+    send: "Down"
+    when: "composing"
+  - accept: "Control+b"
+    send: "Left"
+    when: "composing"
+  - accept: "Control+f"
+    send: "Right"
+    when: "composing"
+  - accept: "Alt+b"
+    send: "Shift+Left"
+    when: "composing"
+  - accept: "Alt+f"
+    send: "Shift+Right"
+    when: "composing"
+  - accept: "Control+a"
+    send: "Home"
+    when: "composing"
+  - accept: "Control+e"
+    send: "End"
+    when: "composing"
+  - accept: "Control+d"
+    send: "Delete"
+    when: "composing"
+  # 这个用不了，不过估计也用不到。
+  # - accept: "Control+k"
+  #   send: "Shift+Delete"
+  #   when: "composing"
+  - accept: "Control+h"
+    send: "BackSpace"
+    when: "composing"
+  - accept: "Alt+h"
+    send: "Shift+BackSpace"
+    when: "composing"
+  - accept: "Control+g"
+    send: "Escape"
+    when: "composing"
+  - accept: "Control+bracketleft"
+    send: "Escape"
+    when: "composing"
+  - accept: "Alt+v"
+    send: "Page_Up"
+    when: "composing"
+  - accept: "Control+v"
+    send: "Page_Down"
+    when: "composing"</code></pre></figure>
 <p>还没完，我觉得正常人不会用 Tab 在拼音之间切换，除非你一次输入一句话（那你不觉得候选框太小了看着累吗？？？），设置 Tab 为跳候选词更自然一点，但我也不知道为什么 Shift-Tab 用不了：</p>
 <figure data-raw="      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
       # - accept: &quot;ISO_Left_Tab&quot;
@@ -570,243 +562,400 @@
         send: "Up"
         when: "has_menu"</code></pre></figure>
 <p>以及我觉得正常人不用逗号和句号翻页，毕竟下面的默认设置是逗号句号直接上屏，你设置了翻页也没啥卵用，反正我用减号等号或者上下，不过方括号也不错就是了：</p>
-<figure data-raw="      - accept: &quot;minus&quot;
-        send: &quot;Page_Up&quot;
-        when: &quot;has_menu&quot;
-      - accept: &quot;equal&quot;
-        send: &quot;Page_Down&quot;
-        when: &quot;has_menu&quot;
-      - accept: &quot;bracketleft&quot;
-        send: &quot;Page_Up&quot;
-        when: &quot;has_menu&quot;
-      - accept: &quot;bracketright&quot;
-        send: &quot;Page_Down&quot;
-        when: &quot;has_menu&quot;
-      # 我觉得正常人不应该用逗号和句号翻页。
-      # - accept: &quot;comma&quot;
-      #   send: &quot;Page_Up&quot;
-      #   when: &quot;paging&quot;
-      # - accept: &quot;period&quot;
-      #   send: &quot;Page_Down&quot;
-      #   when: &quot;has_menu&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">      - accept: "minus"
-        send: "Page_Up"
-        when: "has_menu"
-      - accept: "equal"
-        send: "Page_Down"
-        when: "has_menu"
-      - accept: "bracketleft"
-        send: "Page_Up"
-        when: "has_menu"
-      - accept: "bracketright"
-        send: "Page_Down"
-        when: "has_menu"
-      # 我觉得正常人不应该用逗号和句号翻页。
-      # - accept: "comma"
-      #   send: "Page_Up"
-      #   when: "paging"
-      # - accept: "period"
-      #   send: "Page_Down"
-      #   when: "has_menu"</code></pre></figure>
+<figure data-raw="  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+  # 但我暂时不需要。
+  # Emacs 键位，我喜欢。
+  # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
+  key_binder/bindings:
+    - accept: &quot;Control+p&quot;
+      send: &quot;Up&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+n&quot;
+      send: &quot;Down&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+b&quot;
+      send: &quot;Left&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+f&quot;
+      send: &quot;Right&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Alt+b&quot;
+      send: &quot;Shift+Left&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Alt+f&quot;
+      send: &quot;Shift+Right&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+a&quot;
+      send: &quot;Home&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+e&quot;
+      send: &quot;End&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+d&quot;
+      send: &quot;Delete&quot;
+      when: &quot;composing&quot;
+    # 这个用不了，不过估计也用不到。
+    # - accept: &quot;Control+k&quot;
+    #   send: &quot;Shift+Delete&quot;
+    #   when: &quot;composing&quot;
+    - accept: &quot;Control+h&quot;
+      send: &quot;BackSpace&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Alt+h&quot;
+      send: &quot;Shift+BackSpace&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+g&quot;
+      send: &quot;Escape&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+bracketleft&quot;
+      send: &quot;Escape&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Alt+v&quot;
+      send: &quot;Page_Up&quot;
+      when: &quot;composing&quot;
+    - accept: &quot;Control+v&quot;
+      send: &quot;Page_Down&quot;
+      when: &quot;composing&quot;
+    # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
+    # - accept: &quot;ISO_Left_Tab&quot;
+    #   send: &quot;Shift+Left&quot;
+    #   when: &quot;composing&quot;
+    # - accept: &quot;Shift+Tab&quot;
+    #   send: &quot;Shift+Left&quot;
+    #   when: &quot;composing&quot;
+    # - accept: &quot;Tab&quot;
+    #   send: &quot;Shift+Right&quot;
+    #   when: &quot;composing&quot;
+    - accept: &quot;Tab&quot;
+      send: &quot;Down&quot;
+      when: &quot;has_menu&quot;
+    - accept: &quot;ISO_Left_Tab&quot;
+      send: &quot;Up&quot;
+      when: &quot;has_menu&quot;
+    # 鬼知道为什么这个也用不了！
+    - accept: &quot;Shift+Tab&quot;
+      send: &quot;Up&quot;
+      when: &quot;has_menu&quot;
+    - accept: &quot;minus&quot;
+      send: &quot;Page_Up&quot;
+      when: &quot;has_menu&quot;
+    - accept: &quot;equal&quot;
+      send: &quot;Page_Down&quot;
+      when: &quot;has_menu&quot;
+    - accept: &quot;bracketleft&quot;
+      send: &quot;Page_Up&quot;
+      when: &quot;has_menu&quot;
+    - accept: &quot;bracketright&quot;
+      send: &quot;Page_Down&quot;
+      when: &quot;has_menu&quot;
+    # 我觉得正常人不应该用逗号和句号翻页。
+    # - accept: &quot;comma&quot;
+    #   send: &quot;Page_Up&quot;
+    #   when: &quot;paging&quot;
+    # - accept: &quot;period&quot;
+    #   send: &quot;Page_Down&quot;
+    #   when: &quot;has_menu&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+  # 但我暂时不需要。
+  # Emacs 键位，我喜欢。
+  # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
+  key_binder/bindings:
+    - accept: "Control+p"
+      send: "Up"
+      when: "composing"
+    - accept: "Control+n"
+      send: "Down"
+      when: "composing"
+    - accept: "Control+b"
+      send: "Left"
+      when: "composing"
+    - accept: "Control+f"
+      send: "Right"
+      when: "composing"
+    - accept: "Alt+b"
+      send: "Shift+Left"
+      when: "composing"
+    - accept: "Alt+f"
+      send: "Shift+Right"
+      when: "composing"
+    - accept: "Control+a"
+      send: "Home"
+      when: "composing"
+    - accept: "Control+e"
+      send: "End"
+      when: "composing"
+    - accept: "Control+d"
+      send: "Delete"
+      when: "composing"
+    # 这个用不了，不过估计也用不到。
+    # - accept: "Control+k"
+    #   send: "Shift+Delete"
+    #   when: "composing"
+    - accept: "Control+h"
+      send: "BackSpace"
+      when: "composing"
+    - accept: "Alt+h"
+      send: "Shift+BackSpace"
+      when: "composing"
+    - accept: "Control+g"
+      send: "Escape"
+      when: "composing"
+    - accept: "Control+bracketleft"
+      send: "Escape"
+      when: "composing"
+    - accept: "Alt+v"
+      send: "Page_Up"
+      when: "composing"
+    - accept: "Control+v"
+      send: "Page_Down"
+      when: "composing"
+    # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
+    # - accept: "ISO_Left_Tab"
+    #   send: "Shift+Left"
+    #   when: "composing"
+    # - accept: "Shift+Tab"
+    #   send: "Shift+Left"
+    #   when: "composing"
+    # - accept: "Tab"
+    #   send: "Shift+Right"
+    #   when: "composing"
+    - accept: "Tab"
+      send: "Down"
+      when: "has_menu"
+    - accept: "ISO_Left_Tab"
+      send: "Up"
+      when: "has_menu"
+    # 鬼知道为什么这个也用不了！
+    - accept: "Shift+Tab"
+      send: "Up"
+      when: "has_menu"
+    - accept: "minus"
+      send: "Page_Up"
+      when: "has_menu"
+    - accept: "equal"
+      send: "Page_Down"
+      when: "has_menu"
+    - accept: "bracketleft"
+      send: "Page_Up"
+      when: "has_menu"
+    - accept: "bracketright"
+      send: "Page_Down"
+      when: "has_menu"
+    # 我觉得正常人不应该用逗号和句号翻页。
+    # - accept: "comma"
+    #   send: "Page_Up"
+    #   when: "paging"
+    # - accept: "period"
+    #   send: "Page_Down"
+    #   when: "has_menu"</code></pre></figure>
 <p>最后就是那一堆乱七八糟的快捷键了，鬼才记得住，有那时间直接翻菜单就行了，那个 Shift+Space 就是我动不动就变成全角的罪魁祸首，全部不要：</p>
-<figure data-raw="      # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
-      # - accept: &quot;Control+Shift+1&quot;
-      #   select: &quot;.next&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+2&quot;
-      #   toggle: &quot;ascii_mode&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+3&quot;
-      #   toggle: &quot;full_shape&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+4&quot;
-      #   toggle: simplification
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+5&quot;
-      #   toggle: &quot;extended_charset&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+exclam&quot;
-      #   select: &quot;&quot;.next&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+at&quot;
-      #   toggle: &quot;ascii_mode&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+numbersign&quot;
-      #   toggle: &quot;full_shape&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+dollar&quot;
-      #   toggle: &quot;simplification&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+Shift+percent&quot;
-      #   toggle: &quot;extended_charset&quot;
-      #   when: &quot;always&quot;
-      # 你就是那个经常害我变成全角的罪魁祸首！
-      # - accept: &quot;Shift+space&quot;
-      #   toggle: &quot;full_shape&quot;
-      #   when: &quot;always&quot;
-      # - accept: &quot;Control+period&quot;
-      #   toggle: &quot;ascii_punct&quot;
-      #   when: &quot;always&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">      # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
-      # - accept: "Control+Shift+1"
-      #   select: ".next"
-      #   when: "always"
-      # - accept: "Control+Shift+2"
-      #   toggle: "ascii_mode"
-      #   when: "always"
-      # - accept: "Control+Shift+3"
-      #   toggle: "full_shape"
-      #   when: "always"
-      # - accept: "Control+Shift+4"
-      #   toggle: simplification
-      #   when: "always"
-      # - accept: "Control+Shift+5"
-      #   toggle: "extended_charset"
-      #   when: "always"
-      # - accept: "Control+Shift+exclam"
-      #   select: "".next"
-      #   when: "always"
-      # - accept: "Control+Shift+at"
-      #   toggle: "ascii_mode"
-      #   when: "always"
-      # - accept: "Control+Shift+numbersign"
-      #   toggle: "full_shape"
-      #   when: "always"
-      # - accept: "Control+Shift+dollar"
-      #   toggle: "simplification"
-      #   when: "always"
-      # - accept: "Control+Shift+percent"
-      #   toggle: "extended_charset"
-      #   when: "always"
-      # 你就是那个经常害我变成全角的罪魁祸首！
-      # - accept: "Shift+space"
-      #   toggle: "full_shape"
-      #   when: "always"
-      # - accept: "Control+period"
-      #   toggle: "ascii_punct"
-      #   when: "always"</code></pre></figure>
+<figure data-raw="    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
+    # - accept: &quot;Control+Shift+1&quot;
+    #   select: &quot;.next&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+2&quot;
+    #   toggle: &quot;ascii_mode&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+3&quot;
+    #   toggle: &quot;full_shape&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+4&quot;
+    #   toggle: simplification
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+5&quot;
+    #   toggle: &quot;extended_charset&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+exclam&quot;
+    #   select: &quot;&quot;.next&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+at&quot;
+    #   toggle: &quot;ascii_mode&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+numbersign&quot;
+    #   toggle: &quot;full_shape&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+dollar&quot;
+    #   toggle: &quot;simplification&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+Shift+percent&quot;
+    #   toggle: &quot;extended_charset&quot;
+    #   when: &quot;always&quot;
+    # 你就是那个经常害我变成全角的罪魁祸首！
+    # - accept: &quot;Shift+space&quot;
+    #   toggle: &quot;full_shape&quot;
+    #   when: &quot;always&quot;
+    # - accept: &quot;Control+period&quot;
+    #   toggle: &quot;ascii_punct&quot;
+    #   when: &quot;always&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
+    # - accept: "Control+Shift+1"
+    #   select: ".next"
+    #   when: "always"
+    # - accept: "Control+Shift+2"
+    #   toggle: "ascii_mode"
+    #   when: "always"
+    # - accept: "Control+Shift+3"
+    #   toggle: "full_shape"
+    #   when: "always"
+    # - accept: "Control+Shift+4"
+    #   toggle: simplification
+    #   when: "always"
+    # - accept: "Control+Shift+5"
+    #   toggle: "extended_charset"
+    #   when: "always"
+    # - accept: "Control+Shift+exclam"
+    #   select: "".next"
+    #   when: "always"
+    # - accept: "Control+Shift+at"
+    #   toggle: "ascii_mode"
+    #   when: "always"
+    # - accept: "Control+Shift+numbersign"
+    #   toggle: "full_shape"
+    #   when: "always"
+    # - accept: "Control+Shift+dollar"
+    #   toggle: "simplification"
+    #   when: "always"
+    # - accept: "Control+Shift+percent"
+    #   toggle: "extended_charset"
+    #   when: "always"
+    # 你就是那个经常害我变成全角的罪魁祸首！
+    # - accept: "Shift+space"
+    #   toggle: "full_shape"
+    #   when: "always"
+    # - accept: "Control+period"
+    #   toggle: "ascii_punct"
+    #   when: "always"</code></pre></figure>
 <p>我自己是不习惯写 inline 的字典和列表，都写的展开的。</p>
-<p>然后是符号设置了，因为我们上面取消了逗号句号翻页，所以这里也就不用显式写 commit 直接上屏了。然后我去掉了一大堆菜单，我输入井号星号波浪线百分号就是想要英文标点，你给我弹个菜单我还得多确认好麻烦的。以及我觉得真的没人用那个巨长的全角斜杠，输入斜杠就是为了斜杠，什么通过朙月拼音命令输入假名有意义吗？我为什么不直接切日语输入法呢？另一些标点在中文语境下直接输出中文标点就好了，需要英文标点时候我敲一下 Shift 比看菜单选容易多了！比如书名号，竖线输出人名中间的点，反斜杠输出顿号之类的。</p>
+<p>然后是符号设置了，一开始我以为改 default 里面的符号表就行了，但是最近（2021-03-01）发现不行了，翻了一下代码，发现朙月拼音现在不读 default 了，而是加载 symbols 里面的。然后文档建议的是在输入法方案里面添加自定义的符号表，所以需要建立 <code>luna_pinyin_simp.custom.yaml</code> 并修改。</p>
+<p>因为我们上面取消了逗号句号翻页，所以这里也就不用显式写 commit 直接上屏了。然后我去掉了一大堆菜单，我输入井号星号波浪线百分号就是想要英文标点，你给我弹个菜单我还得多确认好麻烦的。以及我觉得真的没人用那个巨长的全角斜杠，输入斜杠就是为了斜杠，什么通过朙月拼音命令输入假名有意义吗？我为什么不直接切日语输入法呢？另一些标点在中文语境下直接输出中文标点就好了，需要英文标点时候我敲一下 Shift 比看菜单选容易多了！比如书名号，竖线输出人名中间的点，反斜杠输出顿号之类的。</p>
 <p>由于我不是金融行业的，我就把一些英文标点常见但对应中文标点也可能会用到的都丢到了 <code>$</code> 的菜单里面：</p>
-<figure data-raw="  # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
+<figure data-raw="patch:
+  # 现在朙月拼音加载标点候选是加载 symbols 里面的，根本不加载 default。
+  # 然后文档建议的是自己修改的标点符号表放在输入法方案配置里面。
+  # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
   # 另一些直接默认输出中文符号，需要英文符号可以切换英文输入。
   # 有关 `&quot;!&quot;: {commit: &quot;！&quot;}` 的写法含义是你设置这个键为翻页按键了，
   # 但是你又想在输入拼音出现选单之后输入这个按键直接上屏（常见的逗号句号问号叹号），
   # 我觉得这是多此一举，为什么你非要拿这几个符号翻页？反正我不用。
   # 乱七八糟的符号都塞给 `$` 就好了反正我不是会计不用天天输入 `￥`。
-  punctuator:
-    # 我不会使用全角英文的，我觉得其他程序员也不会。
-    # 但是中文的标点又是全角的，所以我就只留下半角然后改它的标点。
-    half_shape:
-      &quot;!&quot;: &quot;！&quot;
-      &quot;\&quot;&quot;:
-        pair:
-          - &quot;“&quot;
-          - &quot;”&quot;
-      &quot;#&quot;: &quot;#&quot;
-      &quot;$&quot;:
-        - &quot;￥&quot;
-        - &quot;$&quot;
-        - &quot;€&quot;
-        - &quot;～&quot;
-        - &quot;×&quot;
-        - &quot;÷&quot;
-        - &quot;°&quot;
-        - &quot;℃&quot;
-        - &quot;‰&quot;
-        - &quot;‱&quot;
-        - &quot;℉&quot;
-        - &quot;©&quot;
-        - &quot;®&quot;
-      &quot;%&quot;: &quot;%&quot;
-      &quot;&amp;&quot;: &quot;&amp;&quot;
-      &quot;'&quot;:
-        pair:
-          - &quot;‘&quot;
-          - &quot;’&quot;
-      &quot;*&quot;: &quot;*&quot;
-      &quot;+&quot;: &quot;+&quot;
-      &quot;,&quot;: &quot;，&quot;
-      &quot;-&quot;: &quot;-&quot;
-      &quot;.&quot;: &quot;。&quot;
-      &quot;/&quot;: &quot;/&quot;
-      &quot;\\&quot;: &quot;、&quot;
-      &quot;:&quot;: &quot;：&quot;
-      &quot;;&quot;: &quot;；&quot;
-      &quot;=&quot;: &quot;=&quot;
-      &quot;?&quot;: &quot;？&quot;
-      &quot;@&quot;: &quot;@&quot;
-      &quot;(&quot;: &quot;（&quot;
-      &quot;)&quot;: &quot;）&quot;
-      &quot;[&quot;: &quot;【&quot;
-      &quot;]&quot;: &quot;】&quot;
-      &quot;{&quot;: &quot;「&quot;
-      &quot;}&quot;: &quot;」&quot;
-      &quot;<&quot;: &quot;《&quot;
-      &quot;>&quot;: &quot;》&quot;
-      &quot;^&quot;: &quot;……&quot;
-      &quot;_&quot;: &quot;——&quot;
-      &quot;`&quot;: &quot;`&quot;
-      &quot;|&quot;: &quot;·&quot;
-      &quot;~&quot;: &quot;~&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
+  # 我不会使用全角英文的，我觉得其他程序员也不会。
+  # 但是中文的标点又是全角的，所以我就只改半角。
+  punctuator/half_shape:
+    &quot;!&quot;: &quot;！&quot;
+    &quot;\&quot;&quot;:
+      pair:
+        - &quot;“&quot;
+        - &quot;”&quot;
+    &quot;#&quot;: &quot;#&quot;
+    &quot;$&quot;:
+      - &quot;￥&quot;
+      - &quot;$&quot;
+      - &quot;€&quot;
+      - &quot;～&quot;
+      - &quot;×&quot;
+      - &quot;÷&quot;
+      - &quot;°&quot;
+      - &quot;℃&quot;
+      - &quot;‰&quot;
+      - &quot;‱&quot;
+      - &quot;℉&quot;
+      - &quot;©&quot;
+      - &quot;®&quot;
+    &quot;%&quot;: &quot;%&quot;
+    &quot;&amp;&quot;: &quot;&amp;&quot;
+    &quot;'&quot;:
+      pair:
+        - &quot;‘&quot;
+        - &quot;’&quot;
+    &quot;*&quot;: &quot;*&quot;
+    &quot;+&quot;: &quot;+&quot;
+    &quot;,&quot;: &quot;，&quot;
+    &quot;-&quot;: &quot;-&quot;
+    &quot;.&quot;: &quot;。&quot;
+    &quot;/&quot;: &quot;/&quot;
+    &quot;\\&quot;: &quot;、&quot;
+    &quot;:&quot;: &quot;：&quot;
+    &quot;;&quot;: &quot;；&quot;
+    &quot;=&quot;: &quot;=&quot;
+    &quot;?&quot;: &quot;？&quot;
+    &quot;@&quot;: &quot;@&quot;
+    &quot;(&quot;: &quot;（&quot;
+    &quot;)&quot;: &quot;）&quot;
+    &quot;[&quot;: &quot;【&quot;
+    &quot;]&quot;: &quot;】&quot;
+    &quot;{&quot;: &quot;「&quot;
+    &quot;}&quot;: &quot;」&quot;
+    &quot;<&quot;: &quot;《&quot;
+    &quot;>&quot;: &quot;》&quot;
+    &quot;^&quot;: &quot;……&quot;
+    &quot;_&quot;: &quot;——&quot;
+    &quot;`&quot;: &quot;`&quot;
+    &quot;|&quot;: &quot;·&quot;
+    &quot;~&quot;: &quot;~&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
+  # 现在朙月拼音加载标点候选是加载 symbols 里面的，根本不加载 default。
+  # 然后文档建议的是自己修改的标点符号表放在输入法方案配置里面。
+  # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
   # 另一些直接默认输出中文符号，需要英文符号可以切换英文输入。
   # 有关 `"!": {commit: "！"}` 的写法含义是你设置这个键为翻页按键了，
   # 但是你又想在输入拼音出现选单之后输入这个按键直接上屏（常见的逗号句号问号叹号），
   # 我觉得这是多此一举，为什么你非要拿这几个符号翻页？反正我不用。
   # 乱七八糟的符号都塞给 `$` 就好了反正我不是会计不用天天输入 `￥`。
-  punctuator:
-    # 我不会使用全角英文的，我觉得其他程序员也不会。
-    # 但是中文的标点又是全角的，所以我就只留下半角然后改它的标点。
-    half_shape:
-      "!": "！"
-      "\"":
-        pair:
-          - "“"
-          - "”"
-      "#": "#"
-      "$":
-        - "￥"
-        - "$"
-        - "€"
-        - "～"
-        - "×"
-        - "÷"
-        - "°"
-        - "℃"
-        - "‰"
-        - "‱"
-        - "℉"
-        - "©"
-        - "®"
-      "%": "%"
-      "&amp;": "&amp;"
-      "'":
-        pair:
-          - "‘"
-          - "’"
-      "*": "*"
-      "+": "+"
-      ",": "，"
-      "-": "-"
-      ".": "。"
-      "/": "/"
-      "\\": "、"
-      ":": "："
-      ";": "；"
-      "=": "="
-      "?": "？"
-      "@": "@"
-      "(": "（"
-      ")": "）"
-      "[": "【"
-      "]": "】"
-      "{": "「"
-      "}": "」"
-      "&lt;": "《"
-      "&gt;": "》"
-      "^": "……"
-      "_": "——"
-      "`": "`"
-      "|": "·"
-      "~": "~"</code></pre></figure>
+  # 我不会使用全角英文的，我觉得其他程序员也不会。
+  # 但是中文的标点又是全角的，所以我就只改半角。
+  punctuator/half_shape:
+    "!": "！"
+    "\"":
+      pair:
+        - "“"
+        - "”"
+    "#": "#"
+    "$":
+      - "￥"
+      - "$"
+      - "€"
+      - "～"
+      - "×"
+      - "÷"
+      - "°"
+      - "℃"
+      - "‰"
+      - "‱"
+      - "℉"
+      - "©"
+      - "®"
+    "%": "%"
+    "&amp;": "&amp;"
+    "'":
+      pair:
+        - "‘"
+        - "’"
+    "*": "*"
+    "+": "+"
+    ",": "，"
+    "-": "-"
+    ".": "。"
+    "/": "/"
+    "\\": "、"
+    ":": "："
+    ";": "；"
+    "=": "="
+    "?": "？"
+    "@": "@"
+    "(": "（"
+    ")": "）"
+    "[": "【"
+    "]": "】"
+    "{": "「"
+    "}": "」"
+    "&lt;": "《"
+    "&gt;": "》"
+    "^": "……"
+    "_": "——"
+    "`": "`"
+    "|": "·"
+    "~": "~"</code></pre></figure>
+<p>最近的朙月拼音添加了反查笔画的功能，按下反引号并输入候选字来启动，但是反引号对于写 Markdown 的人很常用，所以我要关掉这个恼人的功能：</p>
+<figure data-raw="  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
+  recognizer/patterns/reverse_lookup:" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
+  recognizer/patterns/reverse_lookup:</code></pre></figure>
 <p>总之写完这些配置 <strong>之后要手动移除 <code>~/.config/ibus/rime/build/</code> 这个生成目录</strong> 再执行 <code>ibus-daemon -rdx</code> 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。</p>
 <h1 id="有关为什么ibus-rime总是竖着的"><a class="header-link" href="/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84" title="有关为什么ibus-rime总是竖着的"></a>有关为什么 ibus-rime 总是竖着的</h1>
 <p>ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。</p>
@@ -819,16 +968,18 @@
 <hr>
 <p>更新（2021 年 1 月 26 日）：Arch 的 librime 现在打包了一个 <code>/usr/share/rime/ibus_rime.yaml</code> 文件，所以上面手动创建一个 <code>ibus_rime.yaml</code> 的办法会被覆盖，所以现在建议创建 <code>~/.config/ibus/rime/ibus_rime.custom.yaml</code> 然后对照着打patch，比如我写的是：</p>
 <figure data-raw="patch:
-  style:
-    horizontal: true
-    inline_preedit: false" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
-  style:
-    horizontal: true
-    inline_preedit: false</code></pre></figure>
+  # 舒服不如倒着。
+  style/horizontal: true
+  # 有些软件的行内预测支持有 bug，所以我一般不开。
+  style/inline_preedit: false" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
+  # 舒服不如倒着。
+  style/horizontal: true
+  # 有些软件的行内预测支持有 bug，所以我一般不开。
+  style/inline_preedit: false</code></pre></figure>
 <hr>
 <p>不要忘了删掉 <code>build</code> 目录再 <code>ibus-daemon -rdx</code>。</p>
 <h1 id="下载"><a class="header-link" href="/posts/My-RIME/#%E4%B8%8B%E8%BD%BD" title="下载"></a>下载</h1>
-<p>如果你想试一试我的配置，其实就两个文件，<a href="/posts/My-RIME/default.custom.yaml">default.custom.yaml</a> 和 <a href="/posts/My-RIME/ibus_rime.custom.yaml">ibus_rime.custom.yaml</a>。</p>
+<p>如果你想试一试我的配置，一共三个文件，<a href="/posts/My-RIME/default.custom.yaml">default.custom.yaml</a>、<a href="/posts/My-RIME/luna_pinyin_simp.custom.yaml">luna_pinyin_simp.custom.yaml</a> 和 <a href="/posts/My-RIME/ibus_rime.custom.yaml">ibus_rime.custom.yaml</a>。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
 
@@ -1164,4 +1315,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.6.1 at 2021-02-23T06:26:53.194Z. -->
+<!-- Page built by Hikaru v1.6.1 at 2021-03-01T09:51:24.276Z. -->
