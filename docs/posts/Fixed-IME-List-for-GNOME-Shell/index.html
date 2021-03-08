@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.6.1">
+    <meta name="generator" content="Hikaru v1.7.3">
     <link rel="canonical" href="https://sh.alynx.one/posts/Fixed-IME-List-for-GNOME-Shell/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -347,9 +347,11 @@
 <p>然后你会发现另一个弱智的地方，怎么每次按下切换键，切换框都是从第一个切换到第二个？不是应该从我当前的切换到下一个吗？这个对于当前输入法总在第一个的最近使用优先排列是可以的，但在我们这个场景选中的并不总是第一个，所以需要修改。这部分函数是 <code>_switchInputSource</code>，可以看到它只是展示了一个 <code>InputSourcePopup</code>，而 <code>InputSourcePopup</code> 继承的是 <code>imports.ui.switcherPopup.SwitcherPopup</code>，这个类有一个叫做 <code>_selectedIndex</code> 的变量用于选择下一个上一个时候的计算，而且它默认是 0！不能通过参数初始化！真是头秃，不过我们可以在创建完切换框但展示之前单独设置这个值就行了，所以我在 <a href="https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L412" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L412</a> 的下一行插入如下代码：</p>
 <figure data-raw="if (this._currentSource != null) {
   popup._selectedIndex = this._mruSources.indexOf(this._currentSource);
-}" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">if (this._currentSource != null) {
+}
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">if (this._currentSource != null) {
   popup._selectedIndex = this._mruSources.indexOf(this._currentSource);
-}</code></pre></figure>
+}
+</code></pre></figure>
 <p>因为我们不一定总有 <code>_currentSource</code> 所以还是要检查一下，如果没有的话让它从 0 开始也无所谓。</p>
 <p>然后还有一个比较头痛的是快捷键是绑定的回调函数，回调函数又绑定了 <code>this</code>，所以我们光修改原型是改不了被回调的函数的，这个也简单，我们需要读一下 <code>InputSourceManager</code> 的 <code>constructor</code> 的代码，然后删掉它在 <code>Main.wm</code> 里面绑定的组合键重新绑定成我们的，就是这样：</p>
 <figure data-raw="Main.wm.removeKeybinding(&quot;switch-input-source&quot;);
@@ -369,7 +371,8 @@ _inputSourceManager._keybindingActionBackward =
     Meta.KeyBindingFlags.IS_REVERSED,
     Shell.ActionMode.ALL,
     InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
-  );" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">Main.wm.removeKeybinding("switch-input-source");
+  );
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">Main.wm.removeKeybinding("switch-input-source");
 _inputSourceManager._keybindingAction =
   Main.wm.addKeybinding(
     "switch-input-source",
@@ -386,16 +389,19 @@ _inputSourceManager._keybindingActionBackward =
     Meta.KeyBindingFlags.IS_REVERSED,
     Shell.ActionMode.ALL,
     InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
-  );</code></pre></figure>
+  );
+</code></pre></figure>
 <p>同样我们也不要忘记绑定 <code>this</code>，实际上我们希望调用的时候绑定的 <code>this</code> 是那个单例，那直接 <code>bind</code> 它就好了。</p>
 <p>但是你会发现这个弱智的家伙没有按我们想象的工作！这是什么意思！仔细阅读代码之后我发现有如下逻辑：你按下的第一次组合键其实并不是算在那个弹框的按键回调里面，而是我们通过构造函数传递进去的，然后它分析这个传进去的按键是哪一种，调用 <code>_initialSelection</code> 执行第一次切换，而这个家伙更弱智了！明明有 <code>_selectedIndex</code> 它不用，竟然用硬编码的倒数第一个和第一个！真有你的啊！我不太敢修改 <code>SwitcherPopup</code> 因为还有别的东西使用它，那就修改 <code>InputSourcePopup</code> 这个子类吧，其实就是把 <code>InputSourcePopup.prototype._initialSelection</code> 这个函数原来的的 <code>this._select(this._items.length - 1);</code> 换成 <code>this._select(this._previous());</code>，<code>this._select(1)</code> 换成 <code>this._select(this._next())</code>（1 其实是 0 + 1 的意思），不但功能增加了，可读性也提升了！</p>
 <p>现在搭配起来应该和我们的需求一致了！但假如我关掉扩展之后希望列表是打开之前的状态怎么办！还记得之前说的那个 <code>_updateMruSources</code> 会读取 gsettings 吗？这个 gsettings 实际上在每次切换输入法的时候都会写入当前状态，那我们只要让它开启扩展时候不要写入，关掉扩展恢复的时候再更新不就读取了之前的状态吗。所以需要修改 <code>InputSourceManager.prototype._updateMruSettings</code>，注释掉 <a href="https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L432-438" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L432-438</a>。</p>
 <p>总结一下其实就是在 <code>enable</code> 的时候修改这些函数，然后获取单例，重新绑定快捷键，然后清空当前的列表重新更新列表，然后为了避免 bug，我们总是激活列表里的第一个输入法：</p>
 <figure data-raw="if (_inputSourceManager._mruSources.length > 0) {
   _inputSourceManager._mruSources[0].activate(true);
-}" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">if (_inputSourceManager._mruSources.length &gt; 0) {
+}
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">if (_inputSourceManager._mruSources.length &gt; 0) {
   _inputSourceManager._mruSources[0].activate(true);
-}</code></pre></figure>
+}
+</code></pre></figure>
 <p><code>disable</code> 的时候同样是把函数修改回去，然后获取单例，重新绑定快捷键这样它又绑成了原来的函数，然后清空当前的列表重新更新列表这样它就恢复到开启之前的顺序了，接下来同样地，因为最近使用优先列表的第一个元素肯定是正在用的，所以我们也还是激活第一个输入法就可以了。</p>
 <p>完整的项目参见 <a href="https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a>，Arch Linux 用户也可以从 AUR 或者 Arch Linux CN 源安装 <code>gnome-shell-extension-fixed-ime-list</code>。</p>
 <p><em>Alynx Zhou</em></p>
@@ -698,4 +704,4 @@ _inputSourceManager._keybindingActionBackward =
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.6.1 at 2021-03-01T10:16:59.680Z. -->
+<!-- Page built by Hikaru v1.7.3 at 2021-03-08T11:26:40.671Z. -->

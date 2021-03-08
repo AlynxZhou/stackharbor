@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.6.1">
+    <meta name="generator" content="Hikaru v1.7.3">
     <link rel="canonical" href="https://sh.alynx.one/posts/JavaScript-YAML-Timezone-Moment/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -343,11 +343,13 @@
 const d = yaml.safeLoad(&quot;2018-12-31 16:00:00&quot;)  // -> 2018-12-31T16:00:00.000Z
 new Date(&quot;2018-12-31 16:00:00&quot;) // -> 2018-12-31T08:00:00.000Z
 d.getTimezoneOffset() // -> -480
-new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2018-12-31T08:00:00.000Z" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
+new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2018-12-31T08:00:00.000Z
+" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
 const d = yaml.safeLoad("2018-12-31 16:00:00")  // -&gt; 2018-12-31T16:00:00.000Z
 new Date("2018-12-31 16:00:00") // -&gt; 2018-12-31T08:00:00.000Z
 d.getTimezoneOffset() // -&gt; -480
-new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -&gt; 2018-12-31T08:00:00.000Z</code></pre></figure>
+new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -&gt; 2018-12-31T08:00:00.000Z
+</code></pre></figure>
 <p>接下来遇到另一个问题，Nunjucks 似乎对传递参数有很大限制，比如 <code>moment</code> 既是函数也有成员，我没办法在 Nunjucks 里面调用它的 <code>moment.tz.guess()</code> 成员，所以只能把设置地区单独做成文章参数传进去。</p>
 <p>然后发现这样有一个问题，比如我在日本写文章的时间是 21 点，回到中国发布，它解析时会当成东 8 区的 21 点来解析，然后使用 <code>moment("2019-01-01 21:00").tz("Asia/Tokyo").format()</code> 时进行转换，将东 8 区（中国）的 21 点转换成东 9 区（日本）的 22 点。然而实际上我觉得更常见的是一个人在国外写了一篇文章，自然标注的是国外时间（谁叫 js-yaml 不支持时区记号呢！），然后用另一个参数注明自己现在的地区，这样回到自己的国家之后，发布时仍然以外国时区解析时间。</p>
 <p>很显然解决方案是要改变解析时间的时区，但似乎 JavaScript 并没有什么好的修改时区的办法，使用 <code>moment.tz(时间，地区)</code> 似乎可以限定解析的时区，但是直接像下面这样做完全没用。</p>
@@ -356,12 +358,14 @@ const moment = require(&quot;moment-timezone&quot;)
 const d = yaml.safeLoad(&quot;2019-01-01 21:00:00&quot;)  // -> 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2019-01-01T13:00:00.000Z
 moment.tz(newd, &quot;Asia/Tokyo&quot;).toISOString() // -> 2019-01-01T13:00:00.000Z
-moment.tz(newd, &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;)  // -> 2019-01-01 22:00:00 JST" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
+moment.tz(newd, &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;)  // -> 2019-01-01 22:00:00 JST
+" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
 const moment = require("moment-timezone")
 const d = yaml.safeLoad("2019-01-01 21:00:00")  // -&gt; 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -&gt; 2019-01-01T13:00:00.000Z
 moment.tz(newd, "Asia/Tokyo").toISOString() // -&gt; 2019-01-01T13:00:00.000Z
-moment.tz(newd, "Asia/Tokyo").format("YYYY-MM-DD HH:mm:ss z")  // -&gt; 2019-01-01 22:00:00 JST</code></pre></figure>
+moment.tz(newd, "Asia/Tokyo").format("YYYY-MM-DD HH:mm:ss z")  // -&gt; 2019-01-01 22:00:00 JST
+</code></pre></figure>
 <p>它仍然是将 21 点当作东 8 区转换为东 9 区的 22 点了，时区完全没变，不然应该是有一小时的变化（从东 8 到 东 9），原因是如果一个时间已经标注了时区（各种合法的格式，比如 <code>JST</code>、<code>CST</code>、<code>+0800</code> 等，单独的 <code>Z</code> 在 ISO 标准里就表示 UTC，因此也算标定），Moment 就不会用程序员给定的地区做解析，而是用作输出时的转换（等价于 <code>moment(时间).tz(地区)</code>）（这么设计 API 的人你出来我保证不打死你）（我觉得我应该去看一眼那个叫 <code>You-Dont-Need-Momentjs</code>）的项目。</p>
 <p>解决方案似乎没什么特别优雅的，既然你不肯去掉，那我自己造一个没时区的字符串然后再解析一次呗。</p>
 <figure data-raw="const yaml = require(&quot;js-yaml&quot;)
@@ -369,12 +373,14 @@ const moment = require(&quot;moment-timezone&quot;)
 const d = yaml.safeLoad(&quot;2019-01-01 21:00:00&quot;)  // -> 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -> 2019-01-01T13:00:00.000Z
 moment.tz(moment(newd).format(&quot;YYYY-MM-DD HH:mm:ss&quot;), &quot;Asia/Tokyo&quot;).toISOString() // -> 2019-01-01T12:00:00.000Z
-moment.tz(moment(newd).format(&quot;YYYY-MM-DD HH:mm:ss&quot;), &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;) // -> 2019-01-01 21:00:00 JST" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
+moment.tz(moment(newd).format(&quot;YYYY-MM-DD HH:mm:ss&quot;), &quot;Asia/Tokyo&quot;).format(&quot;YYYY-MM-DD HH:mm:ss z&quot;) // -> 2019-01-01 21:00:00 JST
+" data-info="language-javascript" data-lang="javascript" class="code-block"><pre class="code"><code class="language-javascript">const yaml = require("js-yaml")
 const moment = require("moment-timezone")
 const d = yaml.safeLoad("2019-01-01 21:00:00")  // -&gt; 2019-01-01T21:00:00.000Z
 const newd = new Date(d.getTime() + d.getTimezoneOffset() * 60 * 1000) // -&gt; 2019-01-01T13:00:00.000Z
 moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").toISOString() // -&gt; 2019-01-01T12:00:00.000Z
-moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY-MM-DD HH:mm:ss z") // -&gt; 2019-01-01 21:00:00 JST</code></pre></figure>
+moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY-MM-DD HH:mm:ss z") // -&gt; 2019-01-01 21:00:00 JST
+</code></pre></figure>
 <p>这样结果就对了。至于接下来你想用什么地区的时间输出无所谓，反正内部的时间已经改变了，不再是你本机的时间。</p>
 <p>新年新 Bug：当我在研究为什么我的生成器没有在首页生成这篇新文章半小时之后，我发现问题的源头是我把 <code>2019-01-01</code> 写成了 <code>2018-01-01</code>。</p>
 <p><em>Alynx Zhou</em></p>
@@ -677,4 +683,4 @@ moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.6.1 at 2021-03-01T10:16:59.698Z. -->
+<!-- Page built by Hikaru v1.7.3 at 2021-03-08T11:26:40.689Z. -->
