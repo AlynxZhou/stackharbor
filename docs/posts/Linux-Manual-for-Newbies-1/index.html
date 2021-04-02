@@ -363,17 +363,16 @@
 <p>和你常见的桌面操作系统不一样，Linux 本身不是一个操作系统——它只是一个操作系统内核，可以操作计算机硬件资源。我们通常把基于 Linux 内核的，由内核和其他常见的一系列软件组成的操作系统也叫做 Linux。因为大部分的组件和内核一样都是开放源代码软件，所以任何有能力的人都可以组织他们自己的操作系统，这被称为 Linux 发行版。不同发行版之间可能存在着配置上的些微差异或者用等价的软件替换掉另一部分软件，当然，它们之间大体上是相似的，学到的知识也都通用。</p>
 <p>如果你需要从头选择一个发行版，选择的条件有以下几个：</p>
 <ol>
-<li>尽量选择最新的版本，或者支持期较长的版本中的最新版本。</li>
+<li><p>尽量选择最新的版本，或者支持期较长的版本中的最新版本。</p>
+<p>过于老旧的版本通常已经失去维护，继续向下看你会发现这是很恐怖的事情。</p>
+</li>
+<li><p>尽量选择用户比较多的发行版本。</p>
+<p>使用的人数越多，代表你出现问题时可能寻找到解决方案的机率也越大。</p>
+</li>
+<li><p>尽量选择你更熟悉的发行版。</p>
+<p>这个不用多说了吧。</p>
+</li>
 </ol>
-<p>  过于老旧的版本通常已经失去维护，继续向下看你会发现这是很恐怖的事情。</p>
-<ol start="2">
-<li>尽量选择用户比较多的发行版本。</li>
-</ol>
-<p>  使用的人数越多，代表你出现问题时可能寻找到解决方案的机率也越大。</p>
-<ol start="3">
-<li>尽量选择你更熟悉的发行版。</li>
-</ol>
-<p>  这个不用多说了吧。</p>
 <p>如果你打算在自己的电脑上使用 Linux，推荐的版本有 <a href="https://www.ubuntu.com/global" target="_blank" rel="external nofollow noreferrer noopener">Ubuntu</a>，<a href="https://www.ubuntu.com/global" target="_blank" rel="external nofollow noreferrer noopener">LinuxMint</a>，<a href="https://getfedora.org/" target="_blank" rel="external nofollow noreferrer noopener">Fedora</a>，<a href="https://www.opensuse.org/" target="_blank" rel="external nofollow noreferrer noopener">openSUSE</a>。</p>
 <p>如果你打算在远程服务器上使用 Linux，推荐的版本有 <a href="https://www.debian.org/index.html" target="_blank" rel="external nofollow noreferrer noopener">Debian</a>，<a href="https://www.ubuntu.com/server" target="_blank" rel="external nofollow noreferrer noopener">Ubuntu Server</a>, <a href="https://www.centos.org/" target="_blank" rel="external nofollow noreferrer noopener">CentOS</a>。</p>
 <p>特别需要注意的是 Ubuntu 16.04 之前的版本，Debian 8 之前的版本，CentOS 7 之前的版本由于时间过久，不建议现在选择，同时有些网站使用的是这些系统的开发代号而不是版本号，可自行搜索对照。如果你需要接手一台比较旧的服务器，请自己上网搜索或者参阅鸟哥网站，本手册不加讲解。</p>
@@ -388,14 +387,10 @@
 <p>简单说的话，SSH 是一个协议，在操作系统上有对应的实现软件，用来在你和服务器之间传递消息，SSH 也是 UNIX 世界里最常用的远程控制协议，如果你对命令行界面有所了解，SSH 实际上是把远程 Shell 的输出传送给你，然后把你的输入传递给远程 Shell（在这里传递命令行的原因是网络通常不足以满足传递图形界面的带宽，字符更节省数据流量）。</p>
 <p>需要注意的一点是 SSH 界面的回显是由远程计算机控制的，也就是说只有远程端收到了你的输入并返回给你确认信号之后你的屏幕上才会出现输入，这种设计避免了由于网络延迟带来的输入混乱，但也因此在网络不好的时候会产生延迟，不要认为是你的计算机卡住了。</p>
 <p>SSH 分为两个部分，客户端程序 <code>ssh</code> 和服务端程序 <code>sshd</code>，同样地在 Linux 下面也有两个配置文件 <code>/etc/ssh/ssh_config</code> 和 <code>/etc/ssh/sshd_config</code>，一般情况下不需要修改客户端的配置，你需要修改的是 <strong>服务器端</strong> 的 <code>/etc/ssh/sshd_config</code>。同时服务器端需要将 sshd 作为一个 daemon （守护进程，可以理解为 Windows 里面的服务，在特定的时候由操作系统启动并完成一定工作的程序）启动于后台。在较新的 Linux 发行版中统一使用 Systemd 作为启动管理程序，使用下面的命令将 sshd 添加到开机启动列表并现在启动它：</p>
-<figure data-raw="# systemctl enable sshd --now
-" class="code-block"><pre class="code"><code># systemctl enable sshd --now
-</code></pre></figure>
+<figure data-raw="# systemctl enable sshd --now" class="code-block"><pre class="code"><code># systemctl enable sshd --now</code></pre></figure>
 <p><code>#</code> 是 Shell 提示符，不要复制它，不理解往后看。</p>
 <p>通常情况下你不需要修改 sshd 的配置，默认 sshd 会监听 22 号端口，如果你知道主机名称和主机上一个账户的名字/密码，就可以在客户机上运行：</p>
-<figure data-raw="$ ssh username@hostname
-" class="code-block"><pre class="code"><code>$ ssh username@hostname
-</code></pre></figure>
+<figure data-raw="$ ssh username@hostname" class="code-block"><pre class="code"><code>$ ssh username@hostname</code></pre></figure>
 <p>连接到远程主机。hostname可以是域名或者 IP 地址。</p>
 <p>最常见的配置更改是改变 sshd 监听的端口，需要你修改 <code>/etc/ssh/sshd_config</code>，找到 <code>#Port 22</code> 这一行，删除掉前面的 <code>#</code> 以取消注释，然后修改 <code>22</code> 为你想要的值（端口范围为 0 - 65535，需要注意的是一些常见端口已经有使用比如 80 是 http 服务的端口，如果你的服务器上有这些服务运行记得避开）。之后用 <code>systemctl restart sshd</code> 重启 sshd 服务。如果你要连接到一个不是使用 22 端口的 sshd，使用 <code>ssh -p xxx username@hostname</code>，<code>xxx</code> 是你服务器的端口号。</p>
 <p>ssh 还带有一个叫做 sftp 的客户端程序，可以在本机和远程之间传递文件，具体用法请自行搜索。</p>
@@ -403,9 +398,7 @@
 <p>Shell 是一个程序（废话），它接受用户的指令并传递给内核，以便完成交互，常见的 Shell 有多种，互相之间基本兼容，通常指的是文字界面的 Shell，用户通过 Shell 执行各种其他程序。</p>
 <p>Linux 是可以没有图形界面的（与 Windows 不同），没有桌面环境的情况下 Linux 会提供叫做 tty 的字符界面，但是字符界面毕竟功能有限（只能显示英文数字，不能显示中文等复杂字符），所以我们常用桌面环境下叫做终端模拟器的程序开启一个在图形环境下的字符界面模拟器来执行各种操作，这个程序简称终端 Terminal。之所以使用字符界面的原因是图形环境通常为了做到简单易用而限制了其功能，Shell 操作相对稳定高效并且能做到各种复杂的操作，并且在服务器上没有必要开启图形界面浪费资源，所以使用 Linux 务必要掌握 Shell 的用法。</p>
 <p>最常见的 Shell 叫做 bash，一般交互方式是这样的：</p>
-<figure data-raw="username@hostname currentdir $ command --args filename
-" class="code-block"><pre class="code"><code>username@hostname currentdir $ command --args filename
-</code></pre></figure>
+<figure data-raw="username@hostname currentdir $ command --args filename" class="code-block"><pre class="code"><code>username@hostname currentdir $ command --args filename</code></pre></figure>
 <p><code>username@hostname currentdir $</code> 是提示符，每次出现它就代表现在掌握权回到了 Shell 上，你可以输入指令了，其中 <code>currentdir</code> 表示了你当前的路径，<code>$</code> 在有些 Shell 里会显示为 <code>%</code>，但是当它是 <code>#</code> 的时候说明你现在不是一般用户而是 root 用户，需要注意的是这个提示符是可以改变样式的。</p>
 <p>在 Linux 下你可以直接在提示符后面输入指令来进行操作，通常第一个位置是指令名称，比如 <code>cp</code> 代表复制，第二个位置是参数，一般以 <code>-</code> 开头，比如 <code>-R</code> 表示递归地复制子目录和目录里的文件，多个参数可以合并写比如 <code>-Ri</code>, 最后一般会接操作的文件名，对于复制来说，第一个是被复制的文件的路径，第二个是复制到的目的地，如果是文件表示复制过后改成这个名字，如果是目录就是将这个文件复制到那个目录下。各个部分之间用空白符分割比如空格或者 Tab，对于 Shell 而言连续的空白符会被识别为一个，如果文件名里有空格，用反斜杠转义。</p>
 <p>常见的命令有很多，但是要介绍的是 <code>man</code> 这个指令，如果你不知道一个命令的用法，只需要运行 <code>man 指令名</code> 就可以获取到内置的帮助文件。</p>
@@ -468,9 +461,7 @@
 <p>由于 Python2 和 Python3 语法任性的不兼容，而有些发行版默认的 <code>python</code> 链接到 <code>python3</code> 有些还抱着 <code>python2</code>，建议在运行有关指令时使用具体的 <code>python2</code> 或者 <code>python3</code> 而不是 <code>python</code>。同样，使用 <code>pip</code>（Python 的包管理器，安装 Python 一些库的时候尽量用这个）的时候也要指定 <code>pip2</code> 或者 <code>pip3</code>（Python 两个版本有不同的目录，装错了没人管你）。</p>
 <p><strong>不要修改系统默认的 Python 版本</strong>，除非你想让用 Python 编写的系统软件崩溃！</p>
 <p>虽然我是不建议使用 Python2 这个即将停止支持的语言，但是只要你编写的时候加上文件头：</p>
-<figure data-raw="#!/usr/bin/env python2
-" data-info="language-python" data-lang="python" class="code-block"><pre class="code"><code class="language-python">#!/usr/bin/env python2
-</code></pre></figure>
+<figure data-raw="#!/usr/bin/env python2" data-info="language-python" data-lang="python" class="code-block"><pre class="code"><code class="language-python">#!/usr/bin/env python2</code></pre></figure>
 <p>就不会造成太大问题（Python3 用户把 <code>python2</code> 换成 <code>python3</code>）。</p>
 <p>最后，Linux 下的文件请一律使用 无 BOM 的 UTF-8 编码（自己查这是什么！）。</p>
 <p>不懂的一定要多搜索！搜索引擎（谷歌，必应）是好工具，不搜索永远也学不会。</p>
@@ -839,4 +830,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-03-13T02:18:40.907Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-04-02T03:42:26.545Z. -->

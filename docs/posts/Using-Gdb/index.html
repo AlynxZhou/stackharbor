@@ -349,9 +349,7 @@
 <h2 id="调试模式编译程序"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F" title="调试模式编译程序"></a>调试模式编译程序</h2>
 <p>首先应该明确调试的实现方式，GDB能够暂时的停下程序操作程序其实是通过向编译过程中的二进制流中添加钩子（HOOKS）来实现的。但是对于一个正常的，打算释出给用户使用的程序而言不应该以调试模式编译，因为这些添加进去的钩子不但会增大文件体积，还会降低程序的运行效率。所以GCC默认编译程序的时候时不会添加这个钩子的，需要的时候以<code>-g</code>参数来启用调试模式。</p>
 <p>本例中以文件<a href="/posts/Using-Gdb/Lab2.c">Lab2.c</a>为例，使用命令</p>
-<figure data-raw="$ gcc -std=c11 -g -o lab Lab2.c
-" class="code-block"><pre class="code"><code>$ gcc -std=c11 -g -o lab Lab2.c
-</code></pre></figure>
+<figure data-raw="$ gcc -std=c11 -g -o lab Lab2.c" class="code-block"><pre class="code"><code>$ gcc -std=c11 -g -o lab Lab2.c</code></pre></figure>
 <p>将它编译到可执行文件lab。</p>
 <h2 id="用GDB打开程序。"><a class="header-link" href="/posts/Using-Gdb/#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82" title="用GDB打开程序。"></a>用GDB打开程序。</h2>
 <p>打开程序的命令很简单，就是<code>$ gdb lab</code>，但是有可能遇到的问题是程序要处理命令行参数，在使用GDB的时候是不能直接在命令行后面附加程序参数的，需要使用参数可以在打开GDB之后输入<code>set args 参数1 参数2 ...</code>附加上参数。</p>
@@ -371,8 +369,7 @@ Find the GDB manual and other documentation resources online at:
 For help, type &quot;help&quot;.
 Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
 Reading symbols from lab...done.
-(gdb)
-" class="code-block"><pre class="code"><code>GNU gdb (GDB) 7.12.1
+(gdb)" class="code-block"><pre class="code"><code>GNU gdb (GDB) 7.12.1
 Copyright (C) 2017 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
 This is free software: you are free to change and redistribute it.
@@ -387,20 +384,15 @@ Find the GDB manual and other documentation resources online at:
 For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from lab...done.
-(gdb)
-</code></pre></figure>
+(gdb)</code></pre></figure>
 <h1 id="调试"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95" title="调试"></a>调试</h1>
 <h2 id="设置断点"><a class="header-link" href="/posts/Using-Gdb/#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9" title="设置断点"></a>设置断点</h2>
 <p>首先使用<code>break</code>指令就可以添加一个断点，断点顾名思义就是程序运行到这个位置会暂停下来交给GDB，这样你才能够在程序运行到一半的时候查看一些可疑的变量，断点是针对函数使用的，比如我想在所有的printf()进入的时候暂停，可以使用：</p>
-<figure data-raw="(gdb) break printf
-" class="code-block"><pre class="code"><code>(gdb) break printf
-</code></pre></figure>
+<figure data-raw="(gdb) break printf" class="code-block"><pre class="code"><code>(gdb) break printf</code></pre></figure>
 <p>显示的是这样的：</p>
 <figure data-raw="(gdb) break printf
-Breakpoint 1 at 0x400540
-" class="code-block"><pre class="code"><code>(gdb) break printf
-Breakpoint 1 at 0x400540
-</code></pre></figure>
+Breakpoint 1 at 0x400540" class="code-block"><pre class="code"><code>(gdb) break printf
+Breakpoint 1 at 0x400540</code></pre></figure>
 <p>当然接下来可以继续添加更多的断点。</p>
 <p>然后使用<code>run</code>就可以让程序跑起来：</p>
 <figure data-raw="(gdb) run
@@ -420,8 +412,7 @@ for(int i=0; j<LoopEnd1; i++)
     }
 }
 
-Breakpoint 1, 0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6
-" class="code-block"><pre class="code"><code>(gdb) run
+Breakpoint 1, 0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6" class="code-block"><pre class="code"><code>(gdb) run
 Starting program: /home/alynx/Homework/实验材料（学生版）/实验2/lab
 [实验2说明]本练习运行一个三重for循环, 循环结构如下:
 int count = 0;
@@ -438,34 +429,27 @@ for(int i=0; j&lt;LoopEnd1; i++)
     }
 }
 
-Breakpoint 1, 0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6
-</code></pre></figure>
+Breakpoint 1, 0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6</code></pre></figure>
 <p>这时候使用<code>print</code>指令可以打印任意的内容：</p>
 <figure data-raw="(gdb) print printf
-$1 = {<text variable, no debug info>} 0x7ffff7a86e00 <printf>
-" class="code-block"><pre class="code"><code>(gdb) print printf
-$1 = {&lt;text variable, no debug info&gt;} 0x7ffff7a86e00 &lt;printf&gt;
-</code></pre></figure>
+$1 = {<text variable, no debug info>} 0x7ffff7a86e00 <printf>" class="code-block"><pre class="code"><code>(gdb) print printf
+$1 = {&lt;text variable, no debug info&gt;} 0x7ffff7a86e00 &lt;printf&gt;</code></pre></figure>
 <p>使用<code>bt</code>指令可以显示出程序的栈（Backtrace）：</p>
 <figure data-raw="(gdb) bt
 #0  0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6
-#1  0x0000000000400745 in main (argc=1, argv=0x7fffffffe078) at Lab2.c:26
-" class="code-block"><pre class="code"><code>(gdb) bt
+#1  0x0000000000400745 in main (argc=1, argv=0x7fffffffe078) at Lab2.c:26" class="code-block"><pre class="code"><code>(gdb) bt
 #0  0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6
-#1  0x0000000000400745 in main (argc=1, argv=0x7fffffffe078) at Lab2.c:26
-</code></pre></figure>
+#1  0x0000000000400745 in main (argc=1, argv=0x7fffffffe078) at Lab2.c:26</code></pre></figure>
 <p>输入<code>c</code>就是继续运行程序的意思。但是<code>step</code>指令的功能更加有用，顾名思义这个就是单步运行，每次只运行一行代码，这是个step-in的模式，即如果该行有函数则进入函数内一行一行运行，而<code>next</code>则是step-over的模式，即如果该行有函数会运行函数返回结果而不是进入函数内部。</p>
 <figure data-raw="(gdb) step
 Single stepping until exit from function printf,
 which has no line number information.
 main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
-27        scanf(&quot;%d&quot;, &amp;LoopEnd1);
-" class="code-block"><pre class="code"><code>(gdb) step
+27        scanf(&quot;%d&quot;, &amp;LoopEnd1);" class="code-block"><pre class="code"><code>(gdb) step
 Single stepping until exit from function printf,
 which has no line number information.
 main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
-27        scanf("%d", &amp;LoopEnd1);
-</code></pre></figure>
+27        scanf("%d", &amp;LoopEnd1);</code></pre></figure>
 <p>如果不输入指令直接回车，就是重复上一条指令，程序运行结束之后可以使用<code>quit</code>指令退出GDB。</p>
 <hr>
 <p>好了本猹要去补作业了。</p>
@@ -822,4 +806,4 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-03-13T02:18:40.915Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-04-02T03:42:26.551Z. -->

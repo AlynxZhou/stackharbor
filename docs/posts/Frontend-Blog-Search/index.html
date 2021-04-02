@@ -353,14 +353,12 @@
     <i class=&quot;fas fa-search&quot;></i>
   </button>
   <input type=&quot;search&quot; id=&quot;search-input&quot; class=&quot;search-input&quot; name=&quot;q&quot; results=&quot;0&quot; placeholder=&quot;{{ __(&quot;search&quot;) }}&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;>
-</form>
-" data-info="language-html" data-lang="html" class="code-block"><pre class="code"><code class="language-html">&lt;form action="{{ getPath("search.html") }}" method="get"&gt;
+</form>" data-info="language-html" data-lang="html" class="code-block"><pre class="code"><code class="language-html">&lt;form action="{{ getPath("search.html") }}" method="get"&gt;
   &lt;button type="submit" class="search-submit" aria-label="{{ __("search") }}"&gt;
     &lt;i class="fas fa-search"&gt;&lt;/i&gt;
   &lt;/button&gt;
   &lt;input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="{{ __("search") }}" aria-label="{{ __("search") }}"&gt;
-&lt;/form&gt;
-</code></pre></figure>
+&lt;/form&gt;</code></pre></figure>
 <p>使用 <code>button</code> 而不是 <code>input</code> 的原因是我想用我的图标做搜索按钮，反正 <code>&lt;input type="submit"&gt;</code> 只是个特化的 <code>button</code>。理论上来说不放按钮靠回车提交也是 OK，但是觉得这样又会被某些用户批评不友好了……</p>
 <p>搜索框就很简单，<code>name="q"</code> 表示生成的 query string 里 keywords 的 key 是 <code>q</code>，然后按照表单写法会被提交到 <code>search.html</code>，理论上来说搜索应该发 GET 请求所以就是 <code>method="get"</code>，当然 POST 就实现不了复制链接查看搜索结果了。</p>
 <p>这个表单就是标准的 HTML 表单，不需要用 JavaScript 处理。生成的 GET 请求的 URL 类似于 <code>/search.html?q=xxx</code></p>
@@ -673,4 +671,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-03-13T02:18:40.891Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-04-02T03:42:26.531Z. -->

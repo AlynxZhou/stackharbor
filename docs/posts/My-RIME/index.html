@@ -372,11 +372,9 @@
 <p>然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：</p>
 <figure data-raw="patch:
   schema_list:
-    - schema: &quot;luna_pinyin_simp&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
+    - schema: &quot;luna_pinyin_simp&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
   schema_list:
-    - schema: "luna_pinyin_simp"
-</code></pre></figure>
+    - schema: "luna_pinyin_simp"</code></pre></figure>
 <p>然后就是改掉那个自作聪明的英文输入模式：</p>
 <figure data-raw="  # 按 CapsLock 输出大写英文字母。
   ascii_composer/good_old_caps_lock: true
@@ -390,8 +388,7 @@
   # 所以我直接设置文字上屏了。
   ascii_composer/switch_key/Caps_Lock: &quot;commit_text&quot;
   ascii_composer/switch_key/Shift_L: &quot;commit_code&quot;
-  ascii_composer/switch_key/Shift_R: &quot;commit_code&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 按 CapsLock 输出大写英文字母。
+  ascii_composer/switch_key/Shift_R: &quot;commit_code&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 按 CapsLock 输出大写英文字母。
   ascii_composer/good_old_caps_lock: true
   # `inline_ascii` 在输入框内插入英文。
   # `commit_text` 候选文字上屏并切换至英文。
@@ -403,8 +400,7 @@
   # 所以我直接设置文字上屏了。
   ascii_composer/switch_key/Caps_Lock: "commit_text"
   ascii_composer/switch_key/Shift_L: "commit_code"
-  ascii_composer/switch_key/Shift_R: "commit_code"
-</code></pre></figure>
+  ascii_composer/switch_key/Shift_R: "commit_code"</code></pre></figure>
 <p>大部分坑我都写在注释里了可以自己看。</p>
 <p>然后我看那个设置选单也不是很爽，我习惯简体字，这个也可以自己改：</p>
 <figure data-raw="  # 改掉原来的繁体字标题。
@@ -415,8 +411,7 @@
   switcher/hotkeys:
     # - &quot;Control+s&quot;
     - &quot;Control+grave&quot;
-    - &quot;F4&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 改掉原来的繁体字标题。
+    - &quot;F4&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 改掉原来的繁体字标题。
   switcher/caption: "【设置菜单】"
   # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
   switcher/option_list_separator: "/"
@@ -424,8 +419,7 @@
   switcher/hotkeys:
     # - "Control+s"
     - "Control+grave"
-    - "F4"
-</code></pre></figure>
+    - "F4"</code></pre></figure>
 <p>然后就是改掉它奇怪的键位，Emacs 键位挺好的，但是有几个不知道为什么用不了，再者就是为什么按向左是跳一个字拼音向右是跳一个字母？</p>
 <figure data-raw="# 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
 # 但我暂时不需要。
@@ -480,8 +474,7 @@ key_binder/bindings:
     when: &quot;composing&quot;
   - accept: &quot;Control+v&quot;
     send: &quot;Page_Down&quot;
-    when: &quot;composing&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml"># 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+    when: &quot;composing&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml"># 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
 # 但我暂时不需要。
 # Emacs 键位，我喜欢。
 # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
@@ -534,8 +527,7 @@ key_binder/bindings:
     when: "composing"
   - accept: "Control+v"
     send: "Page_Down"
-    when: "composing"
-</code></pre></figure>
+    when: "composing"</code></pre></figure>
 <p>还没完，我觉得正常人不会用 Tab 在拼音之间切换，除非你一次输入一句话（那你不觉得候选框太小了看着累吗？？？），设置 Tab 为跳候选词更自然一点，但我也不知道为什么 Shift-Tab 用不了：</p>
 <figure data-raw="      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
       # - accept: &quot;ISO_Left_Tab&quot;
@@ -556,8 +548,7 @@ key_binder/bindings:
       # 鬼知道为什么这个也用不了！
       - accept: &quot;Shift+Tab&quot;
         send: &quot;Up&quot;
-        when: &quot;has_menu&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
+        when: &quot;has_menu&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
       # - accept: "ISO_Left_Tab"
       #   send: "Shift+Left"
       #   when: "composing"
@@ -576,8 +567,7 @@ key_binder/bindings:
       # 鬼知道为什么这个也用不了！
       - accept: "Shift+Tab"
         send: "Up"
-        when: "has_menu"
-</code></pre></figure>
+        when: "has_menu"</code></pre></figure>
 <p>以及我觉得正常人不用逗号和句号翻页，毕竟下面的默认设置是逗号句号直接上屏，你设置了翻页也没啥卵用，反正我用减号等号或者上下，不过方括号也不错就是了：</p>
 <figure data-raw="  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
   # 但我暂时不需要。
@@ -671,8 +661,7 @@ key_binder/bindings:
     #   when: &quot;paging&quot;
     # - accept: &quot;period&quot;
     #   send: &quot;Page_Down&quot;
-    #   when: &quot;has_menu&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+    #   when: &quot;has_menu&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
   # 但我暂时不需要。
   # Emacs 键位，我喜欢。
   # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
@@ -764,8 +753,7 @@ key_binder/bindings:
     #   when: "paging"
     # - accept: "period"
     #   send: "Page_Down"
-    #   when: "has_menu"
-</code></pre></figure>
+    #   when: "has_menu"</code></pre></figure>
 <p>最后就是那一堆乱七八糟的快捷键了，鬼才记得住，有那时间直接翻菜单就行了，那个 Shift+Space 就是我动不动就变成全角的罪魁祸首，全部不要：</p>
 <figure data-raw="    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
     # - accept: &quot;Control+Shift+1&quot;
@@ -804,8 +792,7 @@ key_binder/bindings:
     #   when: &quot;always&quot;
     # - accept: &quot;Control+period&quot;
     #   toggle: &quot;ascii_punct&quot;
-    #   when: &quot;always&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
+    #   when: &quot;always&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
     # - accept: "Control+Shift+1"
     #   select: ".next"
     #   when: "always"
@@ -842,8 +829,7 @@ key_binder/bindings:
     #   when: "always"
     # - accept: "Control+period"
     #   toggle: "ascii_punct"
-    #   when: "always"
-</code></pre></figure>
+    #   when: "always"</code></pre></figure>
 <p>我自己是不习惯写 inline 的字典和列表，都写的展开的。</p>
 <p>然后是符号设置了，一开始我以为改 default 里面的符号表就行了，但是最近（2021-03-01）发现不行了，翻了一下代码，发现朙月拼音现在不读 default 了，而是加载 symbols 里面的。然后文档建议的是在输入法方案里面添加自定义的符号表，所以需要建立 <code>luna_pinyin_simp.custom.yaml</code> 并修改。</p>
 <p>因为我们上面取消了逗号句号翻页，所以这里也就不用显式写 commit 直接上屏了。然后我去掉了一大堆菜单，我输入井号星号波浪线百分号就是想要英文标点，你给我弹个菜单我还得多确认好麻烦的。以及我觉得真的没人用那个巨长的全角斜杠，输入斜杠就是为了斜杠，什么通过朙月拼音命令输入假名有意义吗？我为什么不直接切日语输入法呢？另一些标点在中文语境下直接输出中文标点就好了，需要英文标点时候我敲一下 Shift 比看菜单选容易多了！比如书名号，竖线输出人名中间的点，反斜杠输出顿号之类的。</p>
@@ -910,8 +896,7 @@ key_binder/bindings:
     &quot;_&quot;: &quot;——&quot;
     &quot;`&quot;: &quot;`&quot;
     &quot;|&quot;: &quot;·&quot;
-    &quot;~&quot;: &quot;~&quot;
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
+    &quot;~&quot;: &quot;~&quot;" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
   # 现在朙月拼音加载标点候选是加载 symbols 里面的，根本不加载 default。
   # 然后文档建议的是自己修改的标点符号表放在输入法方案配置里面。
   # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
@@ -973,23 +958,18 @@ key_binder/bindings:
     "_": "——"
     "`": "`"
     "|": "·"
-    "~": "~"
-</code></pre></figure>
+    "~": "~"</code></pre></figure>
 <p>最近的朙月拼音添加了反查笔画的功能，按下反引号并输入候选字来启动，但是反引号对于写 Markdown 的人很常用，所以我要关掉这个恼人的功能：</p>
 <figure data-raw="  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
-  recognizer/patterns/reverse_lookup:
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
-  recognizer/patterns/reverse_lookup:
-</code></pre></figure>
+  recognizer/patterns/reverse_lookup:" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
+  recognizer/patterns/reverse_lookup:</code></pre></figure>
 <p>总之写完这些配置 <strong>之后要手动移除 <code>~/.config/ibus/rime/build/</code> 这个生成目录</strong> 再执行 <code>ibus-daemon -rdx</code> 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。</p>
 <h1 id="有关为什么ibus-rime总是竖着的"><a class="header-link" href="/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84" title="有关为什么ibus-rime总是竖着的"></a>有关为什么 ibus-rime 总是竖着的</h1>
 <p>ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。</p>
 <p>ibus-rime 会读一个叫做 <code>ibus_rime.yaml</code> 的配置文件，有这么一个配置可以让他变成横着的：</p>
 <figure data-raw="style:
-  horizontal: true
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">style:
-  horizontal: true
-</code></pre></figure>
+  horizontal: true" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">style:
+  horizontal: true</code></pre></figure>
 <p>可能看了之前的你会和我一样想那就打个 patch 到 <code>ibus_rime.custom.yaml</code> 不就行了嘛！但是不行，为什么呢？因为不管是 rime 还是 librime 还是 ibus-rime 都没有提供 <code>/usr/share/rime-data/ibus_rime.yaml</code> 的文件，所以你的 patch 找不到被打的文件，那就不会被生成到 <code>build</code> 目录里。</p>
 <p>不要忘了之前说 rime 会读取 <code>~/.config/ibus/rime/</code> 下面的 yaml，所以其实只要自己建立 <code>~/.config/ibus/rime/ibus_rime.yaml</code> 写入那段配置就可以啦，因为本来也没有所以就不用打 patch 了，或者你在那两个位置建立一个空的 <code>ibus_rime.yaml</code> 然后再打 patch 也行……</p>
 <hr>
@@ -998,13 +978,11 @@ key_binder/bindings:
   # 舒服不如倒着。
   style/horizontal: true
   # 有些软件的行内预测支持有 bug，所以我一般不开。
-  style/inline_preedit: false
-" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
+  style/inline_preedit: false" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">patch:
   # 舒服不如倒着。
   style/horizontal: true
   # 有些软件的行内预测支持有 bug，所以我一般不开。
-  style/inline_preedit: false
-</code></pre></figure>
+  style/inline_preedit: false</code></pre></figure>
 <hr>
 <p>不要忘了删掉 <code>build</code> 目录再 <code>ibus-daemon -rdx</code>。</p>
 <h1 id="下载"><a class="header-link" href="/posts/My-RIME/#%E4%B8%8B%E8%BD%BD" title="下载"></a>下载</h1>
@@ -1344,4 +1322,4 @@ key_binder/bindings:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-03-13T02:18:40.893Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-04-02T03:42:26.532Z. -->
