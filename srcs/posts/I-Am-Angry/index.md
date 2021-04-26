@@ -3,13 +3,11 @@ title: 我生气了！！！
 layout: post
 created: 2017-10-08 22:14:00
 categories:
-  - 随记
   - 无题
 tags:
   - 愤怒
   - 否定
 encrypt: false
-enc_pwd:
 comment: true
 ---
 ![Angry.jpg](./Angry.jpg)

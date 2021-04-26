@@ -9,9 +9,7 @@ categories:
   - 编程
   - CoffeeScript
 tags:
-  - Code Life
   - CoffeeScript
-enc_pwd:
 ---
 CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，[coffeescript.org](http://coffeescript.org/) 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 [coffee-telegram-bot](https://github.com/AlynxZhou/coffee-telegram-bot) 时尝试出的办法记录下来。
 

@@ -5,12 +5,12 @@ layout: post
 created: 2019-08-19T15:16:00
 updated: 2021-03-01T17:51:11
 categories:
-- 计算机
-- 输入法
-- RIME
+  - 计算机
+  - 输入法
+  - RIME
 tags:
-- 输入法
-- RIME
+  - 输入法
+  - RIME
 ---
 # 为什么我要折腾这个
 

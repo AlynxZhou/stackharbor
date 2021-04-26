@@ -4,11 +4,11 @@ layout: post
 #comment: true
 created: 2020-08-04 21:06:00
 categories:
-- 网站
-- Hikaru
+  - 网站
+  - Hikaru
 tags:
-- 网站
-- Hikaru
+  - 网站
+  - Hikaru
 ---
 我早就想把 cheerio 从 Hikaru 的依赖里移出去了，倒不是我对他的功能有什么不满，但是一年不更新 NPM 上的包也太恶心了吧！
 <!--more-->

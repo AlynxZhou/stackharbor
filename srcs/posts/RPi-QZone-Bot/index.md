@@ -2,13 +2,11 @@
 title: 会发说说报时的树莓派
 layout: post
 categories:
-    - 计算机
-    - 树莓派
-    - Python
+  - 计算机
+  - 树莓派
 tags:
-    - 树莓派
-    - Python
-    - QQLib
+  - 树莓派
+  - Python
 comment: true
 created: 2016-08-14 15:40:04
 ---

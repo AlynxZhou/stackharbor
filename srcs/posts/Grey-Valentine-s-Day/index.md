@@ -4,10 +4,9 @@ layout: post
 comment: true
 created: 2017-03-18 22:48:49
 categories:
-  - 随记
   - 无题
 tags:
-  - 随记
+  - 生活
 ---
 感冒 + 鼻炎 = 浪费纸张，另外也许大脑缺氧会导致胡思乱想，很疲惫又无法入睡。
 

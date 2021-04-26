@@ -4,18 +4,13 @@ layout: post
 comment: true
 created: 2016-07-01 20:18:48
 categories:
-    - 随记
-    - 时间的恶作剧
+  - 时间的恶作剧
 tags:
-    - 时光飞逝
-    - 时间的恶作剧
+  - 时间的恶作剧
 ---
 > You know how the time flies.
-
 > Only yesterday was the time of our lives.
-
 > We were born and raised in a summur haze.
-
 > Bound by the surprise of our glory days.
 
 偶然看到朋友在空间里发出的一张图片，他突发奇想在自己高中的招生网站上输入了自己当初的准考证号，然后惊讶的发现弹出的消息是您已被XX市高级中学录取。

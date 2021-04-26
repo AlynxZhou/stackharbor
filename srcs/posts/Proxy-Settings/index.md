@@ -4,10 +4,10 @@ layout: post
 comment: true
 created: 2019-02-10 09:28:00
 categories:
-- 计算机
-- 网络
+  - 计算机
+  - 网络
 tags:
-- 网络
+  - 网络
 ---
 通常情况下在 Linux 下面配置好的是 socks5 代理（你懂的），但是这个代理并不能让所有程序自动走它，需要手动的做一些转换。
 

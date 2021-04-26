@@ -4,11 +4,11 @@ layout: post
 #comment: true
 created: 2019-05-10 22:09:00
 categories:
-- 计算机
-- Linux
-- Arch Linux
+  - 计算机
+  - Linux
+  - Arch Linux
 tags:
-- UnityHub
+  - UnityHub
 ---
 如果你直接使用 AUR 里 UnityHub 的 PKGBUILD 安装会出一些问题。解决方案也很简单。
 

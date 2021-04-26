@@ -5,7 +5,6 @@ comment: true
 created: 2016-04-10 11:34:18
 categories:
   - 音乐
-  - 口琴
   - 半音阶口琴
 tags:
   - 半音阶口琴

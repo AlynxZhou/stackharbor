@@ -4,13 +4,11 @@ layout: post
 comment: true
 encrypt: false
 categories:
-  - 随记
   - 时间的恶作剧
 tags:
   - 时间的恶作剧
   - 未说出口的话
 created: 2017-07-30 22:50:40
-enc_pwd:
 ---
 It's really hard for me to type something in this post, all I want but can't express is fearness.
 

@@ -4,10 +4,10 @@ layout: post
 comment: true
 created: 2019-02-10 22:58:00
 categories:
-- 计算机
-- GNOME
+  - 计算机
+  - GNOME
 tags:
-- GNOME
+  - GNOME
 ---
 <div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
 

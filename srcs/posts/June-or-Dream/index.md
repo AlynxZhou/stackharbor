@@ -5,10 +5,8 @@ comment: true
 created: 2019-06-27 16:18:00
 zone: Asia/Shanghai
 categories:
-  - 随记
   - 生活
 tags:
-  - 随记
   - 生活
 ---
 > One day I wake up,

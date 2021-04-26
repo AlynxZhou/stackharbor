@@ -4,13 +4,11 @@ layout: post
 comment: true
 encrypt: false
 created: 2017-06-15 00:22:19
-enc_pwd:
 categories:
+  - 生活
   - 电影
-  - 动漫
 tags:
   - 电影
-  - 动漫
 ---
 老实说我也许是个对电影没什么品味的人，但是在看了这个之后总觉得要写点什么。
 

@@ -4,7 +4,6 @@ layout: post
 comment: true
 created: 2016-04-10 11:46:01
 categories:
-  - 随记
   - 无题
 tags:
   - 无题

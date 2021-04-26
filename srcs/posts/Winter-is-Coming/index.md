@@ -5,8 +5,9 @@ encrypt: false
 comment: true
 created: 2017-10-29 21:54:41
 categories:
+  - 生活
 tags:
-enc_pwd:
+  - 生活
 ---
 生活好像脱缰的野马，你我都不是熟练的骑师。
 

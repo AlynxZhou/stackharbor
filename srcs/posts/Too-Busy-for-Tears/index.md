@@ -4,10 +4,8 @@ layout: post
 comment: true
 created: 2018-09-30 20:31:33
 categories:
-  - 随记
   - 无题
 tags:
-  - 随记
   - 无题
 ---
 ![](./1.jpg)

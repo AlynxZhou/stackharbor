@@ -4,10 +4,9 @@ layout: post
 comment: true
 created: 2017-12-31T22:18:57
 categories:
-  - 随记
   - 生活
 tags:
-  - 随记
+  - 时光飞逝
 ---
 ![NJU.jpg](./NJU.jpg)
 

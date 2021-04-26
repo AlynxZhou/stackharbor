@@ -4,13 +4,13 @@ layout: post
 created: 2020-08-15 18:25:00
 updated: 2020-08-18 12:25:00
 categories:
-- 网站
-- ARIA
+  - 网站
+  - ARIA
 tags:
-- 网站
-- 评论
-- JavaScript
-- ARIA
+  - 网站
+  - 评论
+  - JavaScript
+  - ARIA
 ---
 # 造轮子是病，得治。
 

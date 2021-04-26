@@ -2,13 +2,11 @@
 title: 用OpenWrt将树莓派打造成一台便携无线路由器
 layout: post
 categories:
-    - 计算机
-    - 树莓派
-    - OpenWrt
+  - 计算机
+  - 树莓派
 tags:
-    - 树莓派
-    - OpenWrt
-    - 路由器
+  - 树莓派
+  - OpenWrt
 comment: true
 created: 2016-06-28 10:53:49
 ---

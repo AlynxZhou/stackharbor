@@ -6,14 +6,11 @@ comment: true
 created: 2018-02-04 12:18:45
 categories:
   - 音乐
-  - 口琴
-  - 五线谱
+  - 曲谱
 tags:
   - 音乐
-  - 口琴
   - 卫宫家今天的饭
   - Fate
-enc_pwd:
 ---
 コラージュ TV动画 卫宫家今天的饭 ED 曲谱 扒谱 Alynx Zhou
 

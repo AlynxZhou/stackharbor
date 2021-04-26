@@ -4,12 +4,11 @@ layout: post
 comment: true
 created: 2016-05-03 06:20:40
 categories:
-    - 计算机
-    - 编程
-    - Python
+  - 计算机
+  - 编程
+  - Python
 tags:
-    - Python
-    - Code Life
+  - Python
 ---
 <div class="alert-red">此方案已经被作者废弃且由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
 

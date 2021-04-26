@@ -5,12 +5,9 @@ encrypt: false
 comment: true
 created: 2017-11-11 21:18:51
 categories:
-  - 随记
   - 时间的恶作剧
 tags:
-  - 随记
   - 时间的恶作剧
-enc_pwd:
 ---
 ![Sadness.jpg](./Sadness.jpg)
 那个弹吉他的人在我的隔壁。

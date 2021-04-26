@@ -3,10 +3,10 @@ title: GObject 备忘录
 layout: post
 created: 2020-09-05 09:23:00
 categories:
-- 计算机
-- 编程
+  - 计算机
+  - 编程
 tags:
-- GObject
+  - GObject
 ---
 说来惭愧，我一直记不太清 GObject 到底是怎么用的，毕竟作为一个写过 C++ 和 Python 然后常用 JS 的人来说，面向对象的实现是非常自然的，不需要考虑为什么。所以我总是看着一大堆类型转换和分散的定义以及各种 chain up 感到眩晕。而 GObject 的文档写的也相当分散，有种管中窥豹之感。
 

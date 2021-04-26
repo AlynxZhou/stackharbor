@@ -5,9 +5,9 @@ comment: true
 created: 2019-07-31 15:24:00
 zone: Asia/Shanghai
 categories:
-  - 随记
+  - 无题
 tags:
-  - 随记
+  - 无题
 ---
 这是一篇 [Jérôme Gamez](https://dev.to/jeromegamez) 的文章 [I am lucky, you are not.](https://dev.to/jeromegamez/i-am-lucky-you-are-not-2eco) 的简体中文翻译。
 

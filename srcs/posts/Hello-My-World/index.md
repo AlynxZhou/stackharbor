@@ -4,11 +4,9 @@ layout: post
 created: 2016-04-04 12:34:18
 comment: true
 categories:
-  - 随记
+  - 网站
 tags:
-  - Hello World
-  - 随记
-  - 建站
+  - 网站
 ---
 So， *喵's StackHarbor* 就算是正式开站了，当然在部署过程中有很多有趣的事情值得我专门写一篇日志来记录一下，不过在Coder的世界里面"Every thing is based on Hello World"，所以还是以后再说那个。   
 

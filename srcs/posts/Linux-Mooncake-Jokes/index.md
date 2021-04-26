@@ -4,11 +4,11 @@ layout: post
 #comment: true
 created: 2019-09-13 18:47:00
 categories:
-- Linux
-- 笑话
+  - 计算机
+  - Linux
 tags:
-- Linux
-- 月饼
+  - Linux
+  - 月饼
 ---
 中秋节到了，Arch Linux CN 社区里富有生活情趣（？）的用户们聚在一起，开始讨论起如何食用月饼。
 
@@ -55,4 +55,3 @@ tags:
 *Alynx Zhou*
 
 **A Coder & Dreamer**
-

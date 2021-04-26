@@ -4,11 +4,11 @@ layout: post
 #comment: true
 created: 2019-11-13 13:31:33
 categories:
-- 计算机
-- Linux
+  - 计算机
+  - Linux
 tags:
-- Linux
-- Wayland
+  - Linux
+  - Wayland
 ---
 最近在写一个 Wayland Compositor，虽然我以前大概知道这是什么，但是并不是很清楚它和 Xserver 有什么区别，虽然 [fc 老师的这篇文章](https://farseerfc.me/compositor-in-X-and-compositext.html) 写的相当不错，但我一点也不懂 X 所以看的迷迷糊糊。偶然读了 [这篇文章](https://magcius.github.io/xplain/article/) 发现十分不错，但因为是英文文章读起来很累，打算把一些理解的内容记下来。顺便说一下，原文是带示例的，效果非常不错，建议有时间的人慢慢看一遍。
 

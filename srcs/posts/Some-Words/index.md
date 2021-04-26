@@ -4,13 +4,9 @@ layout: post
 comment: true
 created: 2017-02-01 21:47:07
 categories:
-  - 随记
   - 生活
-  - 折腾
 tags:
-  - 随记
-  - 本命番
-  - 折腾
+  - 生活
 ---
 <blockquote class="center-quote">我还是会回头、注视，街上每一个像曾经的她的人，但即使我活在过去，心里也很清楚，她的打扮早已不是那时候原来的样子了。</blockquote>
 

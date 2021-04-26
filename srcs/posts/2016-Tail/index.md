@@ -4,10 +4,9 @@ layout: post
 comment: true
 created: 2016-12-31T17:39:02
 categories:
-  - 随记
   - 生活
 tags:
-  - 随记
+  - 时光飞逝
 ---
 ![2016-tail_fushishan.jpg](./2016-tail_fushishan.jpg)
 

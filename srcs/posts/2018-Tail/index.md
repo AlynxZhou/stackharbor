@@ -4,10 +4,9 @@ layout: post
 comment: true
 created: 2018-12-31T16:14:32
 categories:
-  - 随记
   - 生活
 tags:
-  - 随记
+  - 时光飞逝
 ---
 ![](./2B.jpg)
 

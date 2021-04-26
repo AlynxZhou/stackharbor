@@ -4,11 +4,11 @@ layout: post
 #comment: true
 created: 2020-06-28 19:02:00
 categories:
-- 计算机
-- 网络
+  - 计算机
+  - 网络
 tags:
-- 网络
-- Windows
+  - 网络
+  - Windows
 ---
 这是一篇其实没什么逻辑也没什么技术的文章，但踩到这个坑又很头痛，所以记录一下。
 

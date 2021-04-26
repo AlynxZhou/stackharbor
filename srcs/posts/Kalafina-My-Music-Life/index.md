@@ -10,7 +10,6 @@ categories:
 tags:
   - 音乐
   - Kalafina
-enc_pwd:
 ---
 美好的东西总是在结束的时候才更显珍贵。
 

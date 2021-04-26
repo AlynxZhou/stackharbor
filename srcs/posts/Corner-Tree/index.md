@@ -4,7 +4,7 @@ layout: post
 comment: true
 created: 2016-04-12 21:27:04
 categories:
-  - 随记
+  - 生活
 tags:
   - 树
 ---

@@ -4,12 +4,12 @@ layout: post
 #comment: true
 created: 2019-07-15 09:02:00
 categories:
-- 音乐
-- 曲谱
+  - 音乐
+  - 曲谱
 tags:
-- 音乐
-- 曲谱
-- 梶浦由紀
+  - 音乐
+  - 曲谱
+  - 梶浦由紀
 ---
 ロード・エルメロイⅡ世の事件簿 -魔眼蒐集列車 Grace note- ED
 

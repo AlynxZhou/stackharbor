@@ -4,11 +4,12 @@ layout: post
 #comment: true
 created: 2018-07-16 17:39:01
 categories:
-- 游戏
+  - 生活
+  - 游戏
 tags:
-- 游戏
-- 尼尔：机械纪元
-- "NieR: Automata"
+  - 游戏
+  - 尼尔：机械纪元
+  - "NieR: Automata"
 ---
 
 ![PS4 版 NieR: Automata 的启动图](./Automata.jpg "PS4 版 NieR: Automata 的启动图")

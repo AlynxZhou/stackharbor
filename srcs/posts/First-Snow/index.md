@@ -3,10 +3,8 @@ title: 初雪
 layout: post
 comment: true
 categories:
-  - 随记
   - 时间的恶作剧
 tags:
-  - 初雪
   - 时间的恶作剧
   - 未说出口的话
 created: 2016-11-21 07:25:46
