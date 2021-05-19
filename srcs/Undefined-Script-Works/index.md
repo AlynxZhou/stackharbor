@@ -27,6 +27,13 @@ created: 2018-04-04 08:15:40
 - 主页：<https://hikaru.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/hikaru/>
 
+## Show Me The Key
+
+在屏幕上显示你按的键，Screenkey 的替代品，采用 libinput 作为后端因此可以同时支持 X11 和 Wayland。
+
+- 主页：<https://showmethekey.alynx.one/>
+- 仓库：<https://github.com/AlynxZhou/showmethekey/>
+
 ## FlipClock
 
 C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出现的翻页时钟屏保）。基于 SDL2。

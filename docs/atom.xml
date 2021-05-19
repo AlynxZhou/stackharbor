@@ -248,30 +248,42 @@
 &lt;p&gt;所以这时候我还是用 conda 解决，总之就是搞一个和系统独立的虚拟环境（npm：这不应该是内置功能吗？还需要用商业软件？）。总之&lt;a href=&quot;https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;去 TUNA 搞一个 Miniconda 3 最新的安装包来&lt;/a&gt;，然后直接安装，看着它往你的 shell 配置里塞一坨辣鸡（我把实际用到的命令拿出来做了个 alias，这样就可以只在我需要的时候打开 conda 了）。&lt;/p&gt;
 &lt;p&gt;为什么使用 miniconda 而不是 anaconda？因为 anaconda 带的那个图形界面根本用不了，miniconda 够用了。&lt;/p&gt;
 &lt;p&gt;然后创建一个 Python 3.8 的环境，高了低了都不行，真是难伺候，同时别忘了带上 cuda 和 cudnn，不然它一声不吭的就会只能用 CPU：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ conda create -n spleeter python=3.8 cudatoolkit cudnn&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda create -n spleeter python=3.8 cudatoolkit cudnn&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure data-raw=&quot;$ conda create -n spleeter python=3.8 cudatoolkit cudnn
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda create -n spleeter python=3.8 cudatoolkit cudnn
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;cuda 不叫 cuda，叫 cudatoolkit 就离谱。&lt;/p&gt;
 &lt;p&gt;然后切进去：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ conda activate spleeter&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda activate spleeter&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure data-raw=&quot;$ conda activate spleeter
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda activate spleeter
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后装 &lt;code&gt;spleeter-gpu&lt;/code&gt; 到 conda 新创建的这个 Python 环境：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ pip install spleeter-gpu&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ pip install spleeter-gpu&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure data-raw=&quot;$ pip install spleeter-gpu
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ pip install spleeter-gpu
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我本机已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，但我都创建虚拟环境了你还读取我系统的干嘛？不过其实好像也不影响使用，或者此时可以 &lt;code&gt;pip install numpy==1.18.5&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;然后到 &lt;a href=&quot;https://github.com/deezer/spleeter/releases&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/deezer/spleeter/releases&lt;/a&gt; 去下载训练好的模型，这也是个弱智的地方：哪有 tar 打包不把目录本身打进去的？然后还得给这个程序创建一个工作目录，因为它是写死的到当前目录下面的 &lt;code&gt;pretrained_models&lt;/code&gt; 下面去找模型。&lt;/p&gt;
 &lt;figure data-raw=&quot;$ mkdir -p spleeter/pretrained_models
-$ cd spleeter/pretrained_models&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ mkdir -p spleeter/pretrained_models
-$ cd spleeter/pretrained_models&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+$ cd spleeter/pretrained_models
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ mkdir -p spleeter/pretrained_models
+$ cd spleeter/pretrained_models
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;我这里用 2stems 的模型示范，因为我只需要分离人声和伴奏：&lt;/p&gt;
 &lt;figure data-raw=&quot;$ wget -c &#039;https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz&#039;
 $ mkdir 2stems
 $ cd 2stems
-$ tar -xpvzf ../2stems.tar.gz&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ wget -c &#039;https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz&#039;
+$ tar -xpvzf ../2stems.tar.gz
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ wget -c &#039;https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz&#039;
 $ mkdir 2stems
 $ cd 2stems
-$ tar -xpvzf ../2stems.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+$ tar -xpvzf ../2stems.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;因为他们打 tar 包时候没把目录打进去，所以别忘了自己创建目录！&lt;/p&gt;
 &lt;p&gt;然后回到你的工作目录就可以用了，我这里结构是 &lt;code&gt;spleeter/pretrained_models/2stems&lt;/code&gt; 所以工作目录就是 &lt;code&gt;spleeter&lt;/code&gt;：&lt;/p&gt;
 &lt;figure data-raw=&quot;$ cd ../../
-$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ cd ../../
-$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ cd ../../
+$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 &lt;code&gt;-finetune&lt;/code&gt; 的是高品质模型，它们的模型目录名字应该是比如 &lt;code&gt;2stems-finetune&lt;/code&gt;，但是参数名字却不是这个而是 &lt;code&gt;-p spleeter:2stems-16kHz&lt;/code&gt;，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档（不过我又看了一下，这个 finetune 对于分离音轨没什么用好像）。&lt;/p&gt;
 &lt;p&gt;我这里必须使用 &lt;code&gt;-B tensorflow&lt;/code&gt; 才会走显卡加速。&lt;/p&gt;
 &lt;p&gt;用完了就可以 &lt;code&gt;conda deactivate&lt;/code&gt; 退出虚拟环境，要用的时候别忘了 &lt;code&gt;conda activate spleeter&lt;/code&gt; 切换进来，&lt;/p&gt;
@@ -407,9 +419,11 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 &lt;p&gt;然后你会发现另一个弱智的地方，怎么每次按下切换键，切换框都是从第一个切换到第二个？不是应该从我当前的切换到下一个吗？这个对于当前输入法总在第一个的最近使用优先排列是可以的，但在我们这个场景选中的并不总是第一个，所以需要修改。这部分函数是 &lt;code&gt;_switchInputSource&lt;/code&gt;，可以看到它只是展示了一个 &lt;code&gt;InputSourcePopup&lt;/code&gt;，而 &lt;code&gt;InputSourcePopup&lt;/code&gt; 继承的是 &lt;code&gt;imports.ui.switcherPopup.SwitcherPopup&lt;/code&gt;，这个类有一个叫做 &lt;code&gt;_selectedIndex&lt;/code&gt; 的变量用于选择下一个上一个时候的计算，而且它默认是 0！不能通过参数初始化！真是头秃，不过我们可以在创建完切换框但展示之前单独设置这个值就行了，所以我在 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L412&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L412&lt;/a&gt; 的下一行插入如下代码：&lt;/p&gt;
 &lt;figure data-raw=&quot;if (this._currentSource != null) {
   popup._selectedIndex = this._mruSources.indexOf(this._currentSource);
-}&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;if (this._currentSource != null) {
+}
+&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;if (this._currentSource != null) {
   popup._selectedIndex = this._mruSources.indexOf(this._currentSource);
-}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;因为我们不一定总有 &lt;code&gt;_currentSource&lt;/code&gt; 所以还是要检查一下，如果没有的话让它从 0 开始也无所谓。&lt;/p&gt;
 &lt;p&gt;然后还有一个比较头痛的是快捷键是绑定的回调函数，回调函数又绑定了 &lt;code&gt;this&lt;/code&gt;，所以我们光修改原型是改不了被回调的函数的，这个也简单，我们需要读一下 &lt;code&gt;InputSourceManager&lt;/code&gt; 的 &lt;code&gt;constructor&lt;/code&gt; 的代码，然后删掉它在 &lt;code&gt;Main.wm&lt;/code&gt; 里面绑定的组合键重新绑定成我们的，就是这样：&lt;/p&gt;
 &lt;figure data-raw=&quot;Main.wm.removeKeybinding(&amp;quot;switch-input-source&amp;quot;);
@@ -429,7 +443,8 @@ _inputSourceManager._keybindingActionBackward =
     Meta.KeyBindingFlags.IS_REVERSED,
     Shell.ActionMode.ALL,
     InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
-  );&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;Main.wm.removeKeybinding(&quot;switch-input-source&quot;);
+  );
+&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;Main.wm.removeKeybinding(&quot;switch-input-source&quot;);
 _inputSourceManager._keybindingAction =
   Main.wm.addKeybinding(
     &quot;switch-input-source&quot;,
@@ -446,16 +461,19 @@ _inputSourceManager._keybindingActionBackward =
     Meta.KeyBindingFlags.IS_REVERSED,
     Shell.ActionMode.ALL,
     InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
-  );&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+  );
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;同样我们也不要忘记绑定 &lt;code&gt;this&lt;/code&gt;，实际上我们希望调用的时候绑定的 &lt;code&gt;this&lt;/code&gt; 是那个单例，那直接 &lt;code&gt;bind&lt;/code&gt; 它就好了。&lt;/p&gt;
 &lt;p&gt;但是你会发现这个弱智的家伙没有按我们想象的工作！这是什么意思！仔细阅读代码之后我发现有如下逻辑：你按下的第一次组合键其实并不是算在那个弹框的按键回调里面，而是我们通过构造函数传递进去的，然后它分析这个传进去的按键是哪一种，调用 &lt;code&gt;_initialSelection&lt;/code&gt; 执行第一次切换，而这个家伙更弱智了！明明有 &lt;code&gt;_selectedIndex&lt;/code&gt; 它不用，竟然用硬编码的倒数第一个和第一个！真有你的啊！我不太敢修改 &lt;code&gt;SwitcherPopup&lt;/code&gt; 因为还有别的东西使用它，那就修改 &lt;code&gt;InputSourcePopup&lt;/code&gt; 这个子类吧，其实就是把 &lt;code&gt;InputSourcePopup.prototype._initialSelection&lt;/code&gt; 这个函数原来的的 &lt;code&gt;this._select(this._items.length - 1);&lt;/code&gt; 换成 &lt;code&gt;this._select(this._previous());&lt;/code&gt;，&lt;code&gt;this._select(1)&lt;/code&gt; 换成 &lt;code&gt;this._select(this._next())&lt;/code&gt;（1 其实是 0 + 1 的意思），不但功能增加了，可读性也提升了！&lt;/p&gt;
 &lt;p&gt;现在搭配起来应该和我们的需求一致了！但假如我关掉扩展之后希望列表是打开之前的状态怎么办！还记得之前说的那个 &lt;code&gt;_updateMruSources&lt;/code&gt; 会读取 gsettings 吗？这个 gsettings 实际上在每次切换输入法的时候都会写入当前状态，那我们只要让它开启扩展时候不要写入，关掉扩展恢复的时候再更新不就读取了之前的状态吗。所以需要修改 &lt;code&gt;InputSourceManager.prototype._updateMruSettings&lt;/code&gt;，注释掉 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L432-438&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L432-438&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;总结一下其实就是在 &lt;code&gt;enable&lt;/code&gt; 的时候修改这些函数，然后获取单例，重新绑定快捷键，然后清空当前的列表重新更新列表，然后为了避免 bug，我们总是激活列表里的第一个输入法：&lt;/p&gt;
 &lt;figure data-raw=&quot;if (_inputSourceManager._mruSources.length &gt; 0) {
   _inputSourceManager._mruSources[0].activate(true);
-}&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;if (_inputSourceManager._mruSources.length &amp;gt; 0) {
+}
+&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;if (_inputSourceManager._mruSources.length &amp;gt; 0) {
   _inputSourceManager._mruSources[0].activate(true);
-}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;disable&lt;/code&gt; 的时候同样是把函数修改回去，然后获取单例，重新绑定快捷键这样它又绑成了原来的函数，然后清空当前的列表重新更新列表这样它就恢复到开启之前的顺序了，接下来同样地，因为最近使用优先列表的第一个元素肯定是正在用的，所以我们也还是激活第一个输入法就可以了。&lt;/p&gt;
 &lt;p&gt;完整的项目参见 &lt;a href=&quot;https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;GitHub&lt;/a&gt;，Arch Linux 用户也可以从 AUR 或者 Arch Linux CN 源安装 &lt;code&gt;gnome-shell-extension-fixed-ime-list&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
@@ -535,7 +553,8 @@ TestAnimal *test_animal_new(gchar *animal_name);
 
 G_END_DECLS
 
-#endif&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#ifndef __TEST_ANIMAL_H__
+#endif
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#ifndef __TEST_ANIMAL_H__
 #define __TEST_ANIMAL_H__
 
 #include &amp;lt;glib-object.h&amp;gt;
@@ -565,7 +584,8 @@ TestAnimal *test_animal_new(gchar *animal_name);
 
 G_END_DECLS
 
-#endif&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+#endif
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;因为代码里写了很多注释所以我这里就不再啰嗦一遍了，说点里面没写的。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;G_DECLARE_DERIVABLE_TYPE&lt;/code&gt; 表示你声明了一个可以继承的类，也就是说你需要自己弄一个虚函数表出来。有时候你会在某个 GObject 的项目里定义了一大堆宏（比如 GTK 就不爱用这个而是手动定义），其实它们和 &lt;code&gt;G_DECLARE_DERIVABLE_TYPE&lt;/code&gt; 做了一样的工作，因为总要做，就写了个宏实现。这个并不会给你定义具体的类结构体（其实就是虚函数表，用来存放所有可以继承重载的函数），所以我们要按照约定自己写一个 &lt;code&gt;_TestAnimalClass&lt;/code&gt; 的结构体，在类型名字前面加下划线作为结构体名也是约定俗成的，&lt;code&gt;G_DECLARE_DERIVABLE_TYPE&lt;/code&gt; 会展开出一句 &lt;code&gt;typedef struct _TestAnimalClass TestAnimalClass&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;这个类结构体约定第一个元素是它的父类型的类结构体——这其实意味着我们复制了一份父类型的虚函数表出来，于是我们就可以覆盖父类型的方法而不修改原本的父类型。这一句可能比较难懂，不过后面还有关联。&lt;/p&gt;
@@ -697,7 +717,8 @@ TestAnimal *test_animal_new(gchar *animal_name)
         &amp;quot;animal-name&amp;quot;, animal_name,
         NULL
     );
-}&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &quot;test-animal.h&quot;
+}
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &quot;test-animal.h&quot;
 
 // Derivable 类型会自动帮你定义实例结构体，
 // 所以你想夹带点私货就得自己搞个 Private 类型。
@@ -823,7 +844,8 @@ TestAnimal *test_animal_new(gchar *animal_name)
         &quot;animal-name&quot;, animal_name,
         NULL
     );
-}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;理论上来说我们直接往实例结构体里添加成员作为私有成员就可以，但是在头文件里定义实例结构体，其它文件是可以看到实例结构体的成员的，所以 &lt;code&gt;G_DECLARE_DERIVABLE_TYPE&lt;/code&gt; 不允许我们这么做。&lt;/p&gt;
 &lt;p&gt;但有一个省事的宏 &lt;code&gt;G_DEFINE_TYPE_WITH_PRIVATE&lt;/code&gt;，它要求我们做一个 Private 类型，里面存放我们想要的任何私有元素，它不会被继承，并且因为定义在 &lt;code&gt;.c&lt;/code&gt; 文件里所以也不会被其它文件看到。它还会提供一些 GObject 内置类型系统的实现函数（不然 GObject 系统怎么知道你建了哪些类型！），还有一些只在实现里面用到的定义。当然 Private 类型的名字也是约定好的。&lt;/p&gt;
 &lt;p&gt;多说一句，按照 GTK 的代码实现，其实 Private 最后就是在实例结构体里面定义了一个叫 &lt;code&gt;priv&lt;/code&gt; 的指针，类型是自己定义的 Private 类型，因为 GTK 是手写的头文件定义然后用的 &lt;code&gt;G_DEFINE_TYPE_WITH_PRIVATE&lt;/code&gt; 同时又没产生冲突，其实你也可以完全不理会这两个宏，全都自己写，只要保证类结构体和实例结构体的第一个成员是父类结构体和父实例结构体就可以了。但是 &lt;code&gt;G_DEFINE_TYPE_WITH_PRIVATE&lt;/code&gt; 提供了一个 &lt;code&gt;项目名_类型名_get_instance_private&lt;/code&gt; 的函数，我们就不用直接访问 &lt;code&gt;priv&lt;/code&gt; 成员了。&lt;/p&gt;
@@ -849,7 +871,8 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name);
 
 G_END_DECLS
 
-#endif&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#ifndef __TEST_CAT_H__
+#endif
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#ifndef __TEST_CAT_H__
 #define __TEST_CAT_H__
 
 #include &amp;lt;glib-object.h&amp;gt;
@@ -865,7 +888,8 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name);
 
 G_END_DECLS
 
-#endif&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+#endif
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;TestCat&lt;/code&gt; 是继承 &lt;code&gt;TestAnimal&lt;/code&gt; 的，并且我们不想让它被继承，所以它就不需要写类结构体了（因为虚函数表是用来重载的，没有继承当然也没有重载）。&lt;/p&gt;
 &lt;p&gt;所以接下来就直接到实现部分了，在 &lt;code&gt;test-cat.c&lt;/code&gt;:&lt;/p&gt;
 &lt;figure data-raw=&quot;#include &amp;quot;test-cat.h&amp;quot;
@@ -984,7 +1008,8 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
         &amp;quot;cat-name&amp;quot;, cat_name,
         NULL
     );
-}&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &quot;test-cat.h&quot;
+}
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &quot;test-cat.h&quot;
 
 // Final 类型也没有 Private，但是它自己本身就是容器嘛！
 // 所以实例结构体就给你自己写了。
@@ -1100,7 +1125,8 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
         &quot;cat-name&quot;, cat_name,
         NULL
     );
-}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;Final 类型没有 Private，因为它自己就是 Private，所以这个定义实例结构体的权力交给了你，直接在里面写私有成员即可，但是不要忘了套娃（指第一个成员一定要是父实例结构体）。&lt;/p&gt;
 &lt;p&gt;然后就是设置我们自己的 property 并重载 GObject 的虚函数，当然你可能会说这样父类型的 property 不就丢了吗？其实 property 是放在 GObject 系统单独的一个表里，需要的时候它去查询，并且会考虑父类型的继承链，所以我们不需要考虑重载时候覆盖掉父类型的问题。&lt;/p&gt;
 &lt;p&gt;接下来就是重载父类型提供给我们的虚函数也就是 &lt;code&gt;TestCatClass.print&lt;/code&gt; 了！当然首先是把我们自己的类结构体里面的父类结构体的虚函数换掉。&lt;/p&gt;
@@ -1118,7 +1144,8 @@ int main(int argc, char *argv[])
     test_animal_print(animal);
     test_animal_print(TEST_ANIMAL(cat));
     return 0;
-}&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &quot;test-animal.h&quot;
+}
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &quot;test-animal.h&quot;
 #include &quot;test-cat.h&quot;
 
 int main(int argc, char *argv[])
@@ -1128,7 +1155,8 @@ int main(int argc, char *argv[])
     test_animal_print(animal);
     test_animal_print(TEST_ANIMAL(cat));
     return 0;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后用这个 &lt;code&gt;Makefile&lt;/code&gt;:&lt;/p&gt;
 &lt;figure data-raw=&quot;CC := cc
 OBJECTS := main.o test-animal.o test-cat.o
@@ -1149,7 +1177,8 @@ test-cat.o: test-animal.h
 
 .PHONY: clean
 clean:
-    -rm test ${OBJECTS}&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;CC := cc
+    -rm test ${OBJECTS}
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;CC := cc
 OBJECTS := main.o test-animal.o test-cat.o
 CFLAGS := `pkg-config --cflags gobject-2.0`
 LIBS := `pkg-config --libs gobject-2.0`
@@ -1168,13 +1197,16 @@ test-cat.o: test-animal.h
 
 .PHONY: clean
 clean:
-    -rm test ${OBJECTS}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    -rm test ${OBJECTS}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;运行的结果是这样的：&lt;/p&gt;
 &lt;figure data-raw=&quot;** Message: 11:23:25.727: I am an Animal called animal1.
 ** Message: 11:23:25.729: I am a Cat called cat1.
-** Message: 11:23:25.729: I am an Animal called animal2.&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;** Message: 11:23:25.727: I am an Animal called animal1.
+** Message: 11:23:25.729: I am an Animal called animal2.
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;** Message: 11:23:25.727: I am an Animal called animal1.
 ** Message: 11:23:25.729: I am a Cat called cat1.
-** Message: 11:23:25.729: I am an Animal called animal2.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+** Message: 11:23:25.729: I am an Animal called animal2.
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;你可以看到第一行是父类也就是 &lt;code&gt;TestAnimalClass&lt;/code&gt; 的函数的输出。第二行是 &lt;code&gt;TestCatClass&lt;/code&gt; 重载的函数的输出，第三行则是 &lt;code&gt;TestCatClass&lt;/code&gt; 重载的函数 chain up 到 &lt;code&gt;TestAnimalClass&lt;/code&gt; 的输出，但是输出的是子类继承的父类的属性！&lt;/p&gt;
 &lt;p&gt;最后有关我到底该声明成子类还是父类以及传参时候要不要类型转换：其实在这个 GObject 的样例里面看起来是无所谓的，类型转换可行不可行其实取决于具体 new 的是什么，而不是声明的指针是什么，所以其实声明成父类和子类都没有关系，类型转换也主要是为了满足 C 语言对指针类型和函数声明的要求罢了。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
@@ -1278,7 +1310,8 @@ const cachedFetchJSON = (path, opts = {}) =&gt; {
       throw new Error(&amp;quot;Unexpected HTTP status code &amp;quot; + response.status);
     }
   });
-};&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;let cachePromise = window.caches.open(&quot;cacheName&quot;);
+};
+&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;let cachePromise = window.caches.open(&quot;cacheName&quot;);
 
 // Fetching JSON with cache for GitHub API.
 const cachedFetchJSON = (path, opts = {}) =&amp;gt; {
@@ -1313,7 +1346,8 @@ const cachedFetchJSON = (path, opts = {}) =&amp;gt; {
       throw new Error(&quot;Unexpected HTTP status code &quot; + response.status);
     }
   });
-};&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;当然理想很丰满现实很骨感，在不支持 CacheStorage 的浏览器里要 fallback 到不带缓存的版本，本来我以为很简单，但是……（下面开启吐槽时间。）&lt;/p&gt;
 &lt;blockquote class=&quot;center-quote&quot;&gt;支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。&lt;/blockquote&gt;
 
@@ -1364,7 +1398,8 @@ const loadCache = (name) =&gt; {
   }).catch((error) =&gt; {
     console.error(error);
   });
-};&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;// 加载评论的时候才加载缓存。
+};
+&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;// 加载评论的时候才加载缓存。
 let cachePromise = null;
 
 let fetchJSON = uncachedFetchJSON;
@@ -1409,7 +1444,8 @@ const loadCache = (name) =&amp;gt; {
   }).catch((error) =&amp;gt; {
     console.error(error);
   });
-};&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。&lt;/p&gt;
 &lt;h1 id=&quot;由俭入奢易，由奢入俭难。&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82&quot; title=&quot;由俭入奢易，由奢入俭难。&quot;&gt;&lt;/a&gt;由俭入奢易，由奢入俭难。&lt;/h1&gt;
 &lt;div class=&quot;alert-green&quot;&gt;这一部分更新于 2020-08-18 12:25:00。&lt;/div&gt;
@@ -2011,23 +2047,29 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;p&gt;至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，&lt;del&gt;但我手头只有一块&lt;/del&gt; 决定的时候手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份）。按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。&lt;/p&gt;
 &lt;p&gt;&lt;del&gt;然后我在某东买了一块东芝 2T 64M 7200 转的机械硬盘，到手之后打算加入 btrfs 里面，建立 RAID1，btrfs 的好处就在于这个可以先弄一块之后渐进修改，而且看起来目前没什么大问题的样子（按我的理解并行读取的性能问题大概是用来并行加速的，但是实际上 RAID1 不并行读取也可以读出数据吧）。&lt;/del&gt; 虽然我本来也可以把数据移出来然后建 mdadm，但是不排除以后再加盘做 RAID 10，似乎 mdadm 没法直接转换的样子？&lt;/p&gt;
 &lt;p&gt;买回来硬盘之后想想反正两块都没啥数据（搬出去了），索性直接格式化成 btrfs，不然也可以在已有一块 btrfs 设备之后 add 然后 balance，就可以修改策为 RAID1，格式化命令很简单就这样：&lt;/p&gt;
-&lt;figure data-raw=&quot;# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV&quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure data-raw=&quot;# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV
+&quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;-m raid1&lt;/code&gt; 是指 metadata 要做 RAID1 备份，&lt;code&gt;-d raid1&lt;/code&gt; 是指 data 也要 RAID1 备份，然后需要跟两个设备，推荐是一样大的，挂载时候就随便挂一个设备就行了，btrfs 会自己执行 RAID1 策略的。&lt;/p&gt;
 &lt;h2 id=&quot;启动配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE&quot; title=&quot;启动配置&quot;&gt;&lt;/a&gt;启动配置&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;/etc/mkinitcpio.conf&lt;/code&gt; 里需要给 HOOKS 添加 lvm2，然后运行 &lt;code&gt;mkinitcpio -p linux&lt;/code&gt;，这样生成的 initramfs 才能支持 LVM。我还给 MODULES 添加了和 intel 显卡有关的部分（虽然可能用不到了），具体修改的位置如下：&lt;/p&gt;
 &lt;figure data-raw=&quot;MODULES=(intel_agp i915)
-HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)&quot; data-info=&quot;language-bash&quot; data-lang=&quot;bash&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;MODULES=(intel_agp i915)
-HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)
+&quot; data-info=&quot;language-bash&quot; data-lang=&quot;bash&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;MODULES=(intel_agp i915)
+HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;安装 bootloader 的时候我直接用了 systemd-boot，我在自己笔记本上也用的这个，功能够用了就没考虑安装 GRUB，编写 entry 时候内核参数里的 root 可以写 &lt;code&gt;/dev/vg0/rootlv&lt;/code&gt; 也可以写 &lt;code&gt;/dev/mapper/vg0-rootlv&lt;/code&gt;（这里中文 wiki 和英文 wiki 分别是这俩，亲测都可以），比如我的就是下面这样：&lt;/p&gt;
 &lt;figure data-raw=&quot;title    Arch Linux
 linux    /vmlinuz-linux
 initrd    /intel-ucode.img
 initrd    /initramfs-linux.img
-options    root=/dev/vg0/rootlv rw add_efi_memmap&quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;title    Arch Linux
+options    root=/dev/vg0/rootlv rw add_efi_memmap
+&quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;title    Arch Linux
 linux    /vmlinuz-linux
 initrd    /intel-ucode.img
 initrd    /initramfs-linux.img
-options    root=/dev/vg0/rootlv rw add_efi_memmap&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+options    root=/dev/vg0/rootlv rw add_efi_memmap
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;最近 systemd-boot 添加了什么校验设置，在蜗牛上会报错，直接 chroot 进去安装根本装不上，临时解决方案是退出 chroot，然后用 Archiso 里的 &lt;code&gt;bootctl&lt;/code&gt; 安装到 &lt;code&gt;/mnt/boot&lt;/code&gt;，虽然有点 dirty，但是能用？不过还是会报个错，但是启动需要的文件已经安装上了，不管它也能用，只不过每次重启还是会说校验失败，目测是个 bug。&lt;/p&gt;
 &lt;h2 id=&quot;网络配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE&quot; title=&quot;网络配置&quot;&gt;&lt;/a&gt;网络配置&lt;/h2&gt;
 &lt;p&gt;然后由于 NAS 的网络不会经常变化，&lt;del&gt;所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager&lt;/del&gt; 我装桌面了所以还是用了 NetworkManager！不过这部分也留着好了。直接创建 &lt;code&gt;/etc/systemd/network/wired.network&lt;/code&gt;，写入如下内容：&lt;/p&gt;
@@ -2035,11 +2077,13 @@ options    root=/dev/vg0/rootlv rw add_efi_memmap&lt;/code&gt;&lt;/pre&gt;&lt;/f
 Name=en*
 
 [Network]
-DHCP=ipv4&quot; data-info=&quot;language-ini&quot; data-lang=&quot;ini&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-ini&quot;&gt;[Match]
+DHCP=ipv4
+&quot; data-info=&quot;language-ini&quot; data-lang=&quot;ini&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-ini&quot;&gt;[Match]
 Name=en*
 
 [Network]
-DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+DHCP=ipv4
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;意思是对于所有以 &lt;code&gt;en&lt;/code&gt; 开头的网卡使用 DHCPv4，然后 &lt;code&gt;systemctl enable --now systemd-networkd systemd-resolved&lt;/code&gt; 就可以了。&lt;/p&gt;
 &lt;p&gt;NetworkManager 就很简单，直接安装然后 &lt;code&gt;systemctl enable NetworkManager --now&lt;/code&gt; 应该就行了！&lt;/p&gt;
 &lt;h2 id=&quot;Samba配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE&quot; title=&quot;Samba配置&quot;&gt;&lt;/a&gt;Samba 配置&lt;/h2&gt;
@@ -2055,7 +2099,8 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
    comment = Data Directories
    browseable = yes
    writeable = yes
-   path = /data/%u&quot; data-info=&quot;language-ini&quot; data-lang=&quot;ini&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-ini&quot;&gt;[home]
+   path = /data/%u
+&quot; data-info=&quot;language-ini&quot; data-lang=&quot;ini&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-ini&quot;&gt;[home]
    comment = Home Directories
    browseable = yes
    writeable = yes
@@ -2065,7 +2110,8 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
    comment = Data Directories
    browseable = yes
    writeable = yes
-   path = /data/%u&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+   path = /data/%u
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;其它的配置基本都是正常操作参照 Arch Wiki，&lt;del&gt;我打算以后插新硬盘直接加进 LVM 加给 &lt;code&gt;/home&lt;/code&gt;，省得还得操心挂载到哪里&lt;/del&gt; 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 &lt;a href=&quot;/posts/SnailSpace-as-NAS/WireGuard-Usage/&quot;&gt;这篇文章&lt;/a&gt; 就可以了，如果只是 SSH 远程控制一下效果还可以。&lt;/p&gt;
 &lt;h1 id=&quot;效果&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h1&gt;
 &lt;p&gt;笔记本插了有线之后可以测试千兆对拷，我的路由器还是大一时候买的 WNDR3800，虽然很旧，但四个有线全部都是千兆口（当时价格和配置差不多的极路由 3 只有一个内网千兆好像），&lt;del&gt;samba 拷贝速度轻松达到 110M/s 的满速，甚至比蜗牛的 USB3.0 还快&lt;/del&gt; 用了 btrfs 之后似乎速度只有 80M/s 左右了，或者 Windows 和 Linux 下面 Samba 对拷速度显示有区别？110M/s 是我在 Windows 下面测出来的。&lt;/p&gt;
@@ -2129,12 +2175,14 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
     &lt;i class=&amp;quot;fas fa-search&amp;quot;&gt;&lt;/i&gt;
   &lt;/button&gt;
   &lt;input type=&amp;quot;search&amp;quot; id=&amp;quot;search-input&amp;quot; class=&amp;quot;search-input&amp;quot; name=&amp;quot;q&amp;quot; results=&amp;quot;0&amp;quot; placeholder=&amp;quot;{{ __(&amp;quot;search&amp;quot;) }}&amp;quot; aria-label=&amp;quot;{{ __(&amp;quot;search&amp;quot;) }}&amp;quot;&gt;
-&lt;/form&gt;&quot; data-info=&quot;language-html&quot; data-lang=&quot;html&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;form action=&quot;{{ getPath(&quot;search.html&quot;) }}&quot; method=&quot;get&quot;&amp;gt;
+&lt;/form&gt;
+&quot; data-info=&quot;language-html&quot; data-lang=&quot;html&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;form action=&quot;{{ getPath(&quot;search.html&quot;) }}&quot; method=&quot;get&quot;&amp;gt;
   &amp;lt;button type=&quot;submit&quot; class=&quot;search-submit&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;&amp;gt;
     &amp;lt;i class=&quot;fas fa-search&quot;&amp;gt;&amp;lt;/i&amp;gt;
   &amp;lt;/button&amp;gt;
   &amp;lt;input type=&quot;search&quot; id=&quot;search-input&quot; class=&quot;search-input&quot; name=&quot;q&quot; results=&quot;0&quot; placeholder=&quot;{{ __(&quot;search&quot;) }}&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;&amp;gt;
-&amp;lt;/form&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&amp;lt;/form&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;使用 &lt;code&gt;button&lt;/code&gt; 而不是 &lt;code&gt;input&lt;/code&gt; 的原因是我想用我的图标做搜索按钮，反正 &lt;code&gt;&amp;lt;input type=&quot;submit&quot;&amp;gt;&lt;/code&gt; 只是个特化的 &lt;code&gt;button&lt;/code&gt;。理论上来说不放按钮靠回车提交也是 OK，但是觉得这样又会被某些用户批评不友好了……&lt;/p&gt;
 &lt;p&gt;搜索框就很简单，&lt;code&gt;name=&quot;q&quot;&lt;/code&gt; 表示生成的 query string 里 keywords 的 key 是 &lt;code&gt;q&lt;/code&gt;，然后按照表单写法会被提交到 &lt;code&gt;search.html&lt;/code&gt;，理论上来说搜索应该发 GET 请求所以就是 &lt;code&gt;method=&quot;get&quot;&lt;/code&gt;，当然 POST 就实现不了复制链接查看搜索结果了。&lt;/p&gt;
 &lt;p&gt;这个表单就是标准的 HTML 表单，不需要用 JavaScript 处理。生成的 GET 请求的 URL 类似于 &lt;code&gt;/search.html?q=xxx&lt;/code&gt;&lt;/p&gt;
@@ -2310,9 +2358,11 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：&lt;/p&gt;
 &lt;figure data-raw=&quot;patch:
   schema_list:
-    - schema: &amp;quot;luna_pinyin_simp&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
+    - schema: &amp;quot;luna_pinyin_simp&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
   schema_list:
-    - schema: &quot;luna_pinyin_simp&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    - schema: &quot;luna_pinyin_simp&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后就是改掉那个自作聪明的英文输入模式：&lt;/p&gt;
 &lt;figure data-raw=&quot;  # 按 CapsLock 输出大写英文字母。
   ascii_composer/good_old_caps_lock: true
@@ -2326,7 +2376,8 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   # 所以我直接设置文字上屏了。
   ascii_composer/switch_key/Caps_Lock: &amp;quot;commit_text&amp;quot;
   ascii_composer/switch_key/Shift_L: &amp;quot;commit_code&amp;quot;
-  ascii_composer/switch_key/Shift_R: &amp;quot;commit_code&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 按 CapsLock 输出大写英文字母。
+  ascii_composer/switch_key/Shift_R: &amp;quot;commit_code&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 按 CapsLock 输出大写英文字母。
   ascii_composer/good_old_caps_lock: true
   # `inline_ascii` 在输入框内插入英文。
   # `commit_text` 候选文字上屏并切换至英文。
@@ -2338,7 +2389,8 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   # 所以我直接设置文字上屏了。
   ascii_composer/switch_key/Caps_Lock: &quot;commit_text&quot;
   ascii_composer/switch_key/Shift_L: &quot;commit_code&quot;
-  ascii_composer/switch_key/Shift_R: &quot;commit_code&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+  ascii_composer/switch_key/Shift_R: &quot;commit_code&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;大部分坑我都写在注释里了可以自己看。&lt;/p&gt;
 &lt;p&gt;然后我看那个设置选单也不是很爽，我习惯简体字，这个也可以自己改：&lt;/p&gt;
 &lt;figure data-raw=&quot;  # 改掉原来的繁体字标题。
@@ -2349,7 +2401,8 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   switcher/hotkeys:
     # - &amp;quot;Control+s&amp;quot;
     - &amp;quot;Control+grave&amp;quot;
-    - &amp;quot;F4&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 改掉原来的繁体字标题。
+    - &amp;quot;F4&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 改掉原来的繁体字标题。
   switcher/caption: &quot;【设置菜单】&quot;
   # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
   switcher/option_list_separator: &quot;/&quot;
@@ -2357,7 +2410,8 @@ DHCP=ipv4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   switcher/hotkeys:
     # - &quot;Control+s&quot;
     - &quot;Control+grave&quot;
-    - &quot;F4&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    - &quot;F4&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后就是改掉它奇怪的键位，Emacs 键位挺好的，但是有几个不知道为什么用不了，再者就是为什么按向左是跳一个字拼音向右是跳一个字母？&lt;/p&gt;
 &lt;figure data-raw=&quot;# 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
 # 但我暂时不需要。
@@ -2412,7 +2466,8 @@ key_binder/bindings:
     when: &amp;quot;composing&amp;quot;
   - accept: &amp;quot;Control+v&amp;quot;
     send: &amp;quot;Page_Down&amp;quot;
-    when: &amp;quot;composing&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;# 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+    when: &amp;quot;composing&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;# 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
 # 但我暂时不需要。
 # Emacs 键位，我喜欢。
 # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
@@ -2465,7 +2520,8 @@ key_binder/bindings:
     when: &quot;composing&quot;
   - accept: &quot;Control+v&quot;
     send: &quot;Page_Down&quot;
-    when: &quot;composing&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    when: &quot;composing&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;还没完，我觉得正常人不会用 Tab 在拼音之间切换，除非你一次输入一句话（那你不觉得候选框太小了看着累吗？？？），设置 Tab 为跳候选词更自然一点，但我也不知道为什么 Shift-Tab 用不了：&lt;/p&gt;
 &lt;figure data-raw=&quot;      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
       # - accept: &amp;quot;ISO_Left_Tab&amp;quot;
@@ -2486,7 +2542,8 @@ key_binder/bindings:
       # 鬼知道为什么这个也用不了！
       - accept: &amp;quot;Shift+Tab&amp;quot;
         send: &amp;quot;Up&amp;quot;
-        when: &amp;quot;has_menu&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
+        when: &amp;quot;has_menu&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
       # - accept: &quot;ISO_Left_Tab&quot;
       #   send: &quot;Shift+Left&quot;
       #   when: &quot;composing&quot;
@@ -2505,7 +2562,8 @@ key_binder/bindings:
       # 鬼知道为什么这个也用不了！
       - accept: &quot;Shift+Tab&quot;
         send: &quot;Up&quot;
-        when: &quot;has_menu&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+        when: &quot;has_menu&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;以及我觉得正常人不用逗号和句号翻页，毕竟下面的默认设置是逗号句号直接上屏，你设置了翻页也没啥卵用，反正我用减号等号或者上下，不过方括号也不错就是了：&lt;/p&gt;
 &lt;figure data-raw=&quot;  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
   # 但我暂时不需要。
@@ -2599,7 +2657,8 @@ key_binder/bindings:
     #   when: &amp;quot;paging&amp;quot;
     # - accept: &amp;quot;period&amp;quot;
     #   send: &amp;quot;Page_Down&amp;quot;
-    #   when: &amp;quot;has_menu&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
+    #   when: &amp;quot;has_menu&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
   # 但我暂时不需要。
   # Emacs 键位，我喜欢。
   # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
@@ -2691,7 +2750,8 @@ key_binder/bindings:
     #   when: &quot;paging&quot;
     # - accept: &quot;period&quot;
     #   send: &quot;Page_Down&quot;
-    #   when: &quot;has_menu&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    #   when: &quot;has_menu&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;最后就是那一堆乱七八糟的快捷键了，鬼才记得住，有那时间直接翻菜单就行了，那个 Shift+Space 就是我动不动就变成全角的罪魁祸首，全部不要：&lt;/p&gt;
 &lt;figure data-raw=&quot;    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
     # - accept: &amp;quot;Control+Shift+1&amp;quot;
@@ -2730,7 +2790,8 @@ key_binder/bindings:
     #   when: &amp;quot;always&amp;quot;
     # - accept: &amp;quot;Control+period&amp;quot;
     #   toggle: &amp;quot;ascii_punct&amp;quot;
-    #   when: &amp;quot;always&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
+    #   when: &amp;quot;always&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
     # - accept: &quot;Control+Shift+1&quot;
     #   select: &quot;.next&quot;
     #   when: &quot;always&quot;
@@ -2767,7 +2828,8 @@ key_binder/bindings:
     #   when: &quot;always&quot;
     # - accept: &quot;Control+period&quot;
     #   toggle: &quot;ascii_punct&quot;
-    #   when: &quot;always&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    #   when: &quot;always&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;我自己是不习惯写 inline 的字典和列表，都写的展开的。&lt;/p&gt;
 &lt;p&gt;然后是符号设置了，一开始我以为改 default 里面的符号表就行了，但是最近（2021-03-01）发现不行了，翻了一下代码，发现朙月拼音现在不读 default 了，而是加载 symbols 里面的。然后文档建议的是在输入法方案里面添加自定义的符号表，所以需要建立 &lt;code&gt;luna_pinyin_simp.custom.yaml&lt;/code&gt; 并修改。&lt;/p&gt;
 &lt;p&gt;因为我们上面取消了逗号句号翻页，所以这里也就不用显式写 commit 直接上屏了。然后我去掉了一大堆菜单，我输入井号星号波浪线百分号就是想要英文标点，你给我弹个菜单我还得多确认好麻烦的。以及我觉得真的没人用那个巨长的全角斜杠，输入斜杠就是为了斜杠，什么通过朙月拼音命令输入假名有意义吗？我为什么不直接切日语输入法呢？另一些标点在中文语境下直接输出中文标点就好了，需要英文标点时候我敲一下 Shift 比看菜单选容易多了！比如书名号，竖线输出人名中间的点，反斜杠输出顿号之类的。&lt;/p&gt;
@@ -2834,7 +2896,8 @@ key_binder/bindings:
     &amp;quot;_&amp;quot;: &amp;quot;——&amp;quot;
     &amp;quot;`&amp;quot;: &amp;quot;`&amp;quot;
     &amp;quot;|&amp;quot;: &amp;quot;·&amp;quot;
-    &amp;quot;~&amp;quot;: &amp;quot;~&amp;quot;&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
+    &amp;quot;~&amp;quot;: &amp;quot;~&amp;quot;
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
   # 现在朙月拼音加载标点候选是加载 symbols 里面的，根本不加载 default。
   # 然后文档建议的是自己修改的标点符号表放在输入法方案配置里面。
   # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
@@ -2896,18 +2959,23 @@ key_binder/bindings:
     &quot;_&quot;: &quot;——&quot;
     &quot;`&quot;: &quot;`&quot;
     &quot;|&quot;: &quot;·&quot;
-    &quot;~&quot;: &quot;~&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    &quot;~&quot;: &quot;~&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;最近的朙月拼音添加了反查笔画的功能，按下反引号并输入候选字来启动，但是反引号对于写 Markdown 的人很常用，所以我要关掉这个恼人的功能：&lt;/p&gt;
 &lt;figure data-raw=&quot;  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
-  recognizer/patterns/reverse_lookup:&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
-  recognizer/patterns/reverse_lookup:&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+  recognizer/patterns/reverse_lookup:
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
+  recognizer/patterns/reverse_lookup:
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;总之写完这些配置 &lt;strong&gt;之后要手动移除 &lt;code&gt;~/.config/ibus/rime/build/&lt;/code&gt; 这个生成目录&lt;/strong&gt; 再执行 &lt;code&gt;ibus-daemon -rdx&lt;/code&gt; 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。&lt;/p&gt;
 &lt;h1 id=&quot;有关为什么ibus-rime总是竖着的&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84&quot; title=&quot;有关为什么ibus-rime总是竖着的&quot;&gt;&lt;/a&gt;有关为什么 ibus-rime 总是竖着的&lt;/h1&gt;
 &lt;p&gt;ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。&lt;/p&gt;
 &lt;p&gt;ibus-rime 会读一个叫做 &lt;code&gt;ibus_rime.yaml&lt;/code&gt; 的配置文件，有这么一个配置可以让他变成横着的：&lt;/p&gt;
 &lt;figure data-raw=&quot;style:
-  horizontal: true&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;style:
-  horizontal: true&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+  horizontal: true
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;style:
+  horizontal: true
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;可能看了之前的你会和我一样想那就打个 patch 到 &lt;code&gt;ibus_rime.custom.yaml&lt;/code&gt; 不就行了嘛！但是不行，为什么呢？因为不管是 rime 还是 librime 还是 ibus-rime 都没有提供 &lt;code&gt;/usr/share/rime-data/ibus_rime.yaml&lt;/code&gt; 的文件，所以你的 patch 找不到被打的文件，那就不会被生成到 &lt;code&gt;build&lt;/code&gt; 目录里。&lt;/p&gt;
 &lt;p&gt;不要忘了之前说 rime 会读取 &lt;code&gt;~/.config/ibus/rime/&lt;/code&gt; 下面的 yaml，所以其实只要自己建立 &lt;code&gt;~/.config/ibus/rime/ibus_rime.yaml&lt;/code&gt; 写入那段配置就可以啦，因为本来也没有所以就不用打 patch 了，或者你在那两个位置建立一个空的 &lt;code&gt;ibus_rime.yaml&lt;/code&gt; 然后再打 patch 也行……&lt;/p&gt;
 &lt;hr&gt;
@@ -2916,11 +2984,13 @@ key_binder/bindings:
   # 舒服不如倒着。
   style/horizontal: true
   # 有些软件的行内预测支持有 bug，所以我一般不开。
-  style/inline_preedit: false&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
+  style/inline_preedit: false
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
   # 舒服不如倒着。
   style/horizontal: true
   # 有些软件的行内预测支持有 bug，所以我一般不开。
-  style/inline_preedit: false&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+  style/inline_preedit: false
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;hr&gt;
 &lt;p&gt;不要忘了删掉 &lt;code&gt;build&lt;/code&gt; 目录再 &lt;code&gt;ibus-daemon -rdx&lt;/code&gt;。&lt;/p&gt;
 &lt;h1 id=&quot;下载&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E4%B8%8B%E8%BD%BD&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h1&gt;

@@ -345,9 +345,13 @@
 <a id="more"></a>
 
 <p>好了还是不要瞎扯了，总而言之对于我这么一个懒+强迫症晚期+半吊子程序员（？），当然在写网站的时候得把网站组织的有条理，所以肯定不能把所有的文章里的图片都堆到images/目录里就得了，幸好hexo提供了所谓的资源文件夹的方式，在新建Markdown文件的时候会自动建立同名的资源文件夹，只需编辑站点配置文件<code>_config.yml</code>开启如下项即可。</p>
-<figure data-raw="post_asset_folder: true    #开启资源文件夹" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">post_asset_folder: true    #开启资源文件夹</code></pre></figure>
+<figure data-raw="post_asset_folder: true    #开启资源文件夹
+" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">post_asset_folder: true    #开启资源文件夹
+</code></pre></figure>
 <p>OK!这时候我天真的觉得只要把图片按数字命名为1.jpg、2.png之类的丢到对应资源文件夹里即可！然而生活远没有这么美好……首先在资源文件夹里的图片如果想在文章和首页的摘要里都显示的话就不能简单的用Markdown引用图片的语法，必须要用hexo的<code>asset_img</code>标签。</p>
-<figure data-raw="![图片名称](图片名称)" class="code-block"><pre class="code"><code>![图片名称](图片名称)</code></pre></figure>
+<figure data-raw="![图片名称](图片名称)
+" class="code-block"><pre class="code"><code>![图片名称](图片名称)
+</code></pre></figure>
 <p>我开始方了，难道要我自己一个个手动打成这个标签……</p>
 <p>还没完，如果你的访客想下载一些图片，如果恰好你不同资源文件夹里都有一个1.jpg，他下载这两个的时候就会都保存为1.jpg……那不就乱套了么……</p>
 <p>所以我想要是能一次性给某个文件夹下的文件改名为 <em>文件夹名_数字.扩展名</em> 并且还能自动输出成hexo标签该多好啊……本着Linux用户没有轮子自己造的精神我决定写个程序解决这个问题（Windows用户应该习惯于找别的东西解决吧……没有就自认倒霉一个一个手动改？想想就麻烦……）</p>
@@ -450,7 +454,8 @@ for new in newlist:
     print(&quot;{%% asset_img %s %s %%}\n&quot;%(new,new))
 
 ### Go back to original path.
-os.chdir(opath)" data-info="language-Python" data-lang="Python" class="code-block"><pre class="code"><code class="language-Python">#!/usr/bin/env python3
+os.chdir(opath)
+" data-info="language-Python" data-lang="Python" class="code-block"><pre class="code"><code class="language-Python">#!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
 ### Filename:hrit.py
@@ -543,7 +548,8 @@ for new in newlist:
     print("{%% asset_img %s %s %%}\n"%(new,new))
 
 ### Go back to original path.
-os.chdir(opath)</code></pre></figure>
+os.chdir(opath)
+</code></pre></figure>
 <p>好了亲爱的观众们我知道你们又要抱怨你们的Vim/Emacs设置了代码自动缩进粘贴Python很麻烦……（你说你用Sublime Text或者Notepad++？好吧自便。你说你用记事本？这我就不能忍了，哪凉快哪呆着去！→_→）我就大发慈悲把源文件传上来吧，右键点击<a href="/posts/2016/05/03/Hrit/hrit.py">这里</a>另存为即可。然后拷贝到你的PATH中任意一个目录。</p>
 <p>接下来说用法～什么用法？直接执行hrit -h不就有用法了吗？</p>
 <p>总而言之hrit会以一个文件夹为单位把里面所有的文件按照指定的规则重命名，所以最后必须接一个文件夹参数比如./test/，没有设置默认./的原因是为了安全～hrit将文件名分为五部分操作，前缀、连接符、后缀、英文句点和扩展名。然后如果指定了 <em>-f 前缀</em> 的话文件都会被添加上同一前缀，没有-f则默认以当前目录名为前缀。 * -m 连接符* 指定连接符，默认是“_”。最后hrit会把原本的文件名（包括句点和扩展名）一起接上作为后缀。如果开启了 <em>-n</em> 它会用从1开始递增的数字作为后缀，并连接上句点和原本的扩展名（如果你非要把文件命名为aaa.bb.c那hrit只会把.c连接上……）。</p>
@@ -554,13 +560,15 @@ drwxr-xr-x 2 shax shax 4.0K May  2 21:58 .
 drwxr-xr-x 3 shax shax 4.0K May  2 11:44 ..
 -rw-r--r-- 1 shax shax    0 May  2 21:58 aaa
 -rw-r--r-- 1 shax shax    0 May  2 21:58 bb.b
--rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c" class="code-block"><pre class="code"><code>$ cd test/ &amp;&amp; ls -alh
+-rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c
+" class="code-block"><pre class="code"><code>$ cd test/ &amp;&amp; ls -alh
 total 8.0K
 drwxr-xr-x 2 shax shax 4.0K May  2 21:58 .
 drwxr-xr-x 3 shax shax 4.0K May  2 11:44 ..
 -rw-r--r-- 1 shax shax    0 May  2 21:58 aaa
 -rw-r--r-- 1 shax shax    0 May  2 21:58 bb.b
--rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c</code></pre></figure>
+-rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c
+</code></pre></figure>
 <p>下面执行下</p>
 <figure data-raw="$ hrit ./
 Entering directory ./ …
@@ -586,7 +594,8 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![test_bb.b](test_bb.b)
 
-![test_aaa](test_aaa)" class="code-block"><pre class="code"><code>$ hrit ./
+![test_aaa](test_aaa)
+" class="code-block"><pre class="code"><code>$ hrit ./
 Entering directory ./ …
 Now it is going to work in
 =====================================================
@@ -610,7 +619,8 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![test_bb.b](test_bb.b)
 
-![test_aaa](test_aaa)</code></pre></figure>
+![test_aaa](test_aaa)
+</code></pre></figure>
 <p>为了防止搞错了目录设置了一个确认和5秒反悔时间。</p>
 <p>下面试试 <code>-f</code></p>
 <figure data-raw="$ hrit -f xxx ./
@@ -637,7 +647,8 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![xxx_test_aaa](xxx_test_aaa)
 
-![xxx_test_bb.b](xxx_test_bb.b)" class="code-block"><pre class="code"><code>$ hrit -f xxx ./
+![xxx_test_bb.b](xxx_test_bb.b)
+" class="code-block"><pre class="code"><code>$ hrit -f xxx ./
 Entering directory ./ …
 Now it is going to work in
 =====================================================
@@ -661,7 +672,8 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![xxx_test_aaa](xxx_test_aaa)
 
-![xxx_test_bb.b](xxx_test_bb.b)</code></pre></figure>
+![xxx_test_bb.b](xxx_test_bb.b)
+</code></pre></figure>
 <p>最后 <code>-n</code></p>
 <figure data-raw="$ hrit -n ./
 Entering directory ./ …
@@ -687,7 +699,8 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![test_1.c](test_1.c)
 
-![test_3.b](test_3.b)" class="code-block"><pre class="code"><code>$ hrit -n ./
+![test_3.b](test_3.b)
+" class="code-block"><pre class="code"><code>$ hrit -n ./
 Entering directory ./ …
 Now it is going to work in
 =====================================================
@@ -711,7 +724,8 @@ Now you can copy the follow hexo tags to your markdown post.
 
 ![test_1.c](test_1.c)
 
-![test_3.b](test_3.b)</code></pre></figure>
+![test_3.b](test_3.b)
+</code></pre></figure>
 <p>不错吧，这样以后直接把所有图片拷贝到资源文件夹里用<code>hrit -n ./xxxx/</code>即可批量命名了～然后直接把输出的标签拷贝到Markdown文件～</p>
 <p>最后说一个小插曲，开始我设置了询问继续和五秒倒计时的时候其实并不觉得有什么用……直到某次调试时不小心在home下执行了hrit……幸好有5秒按Ctrl+C，顿时觉得自己真是太机智了。</p>
 <p><em>Alynx Zhou</em></p>
@@ -1043,4 +1057,4 @@ Now you can copy the follow hexo tags to your markdown post.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-04-26T08:08:43.506Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-05-19T02:20:49.891Z. -->
