@@ -350,42 +350,30 @@
 <p>所以这时候我还是用 conda 解决，总之就是搞一个和系统独立的虚拟环境（npm：这不应该是内置功能吗？还需要用商业软件？）。总之<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external nofollow noreferrer noopener">去 TUNA 搞一个 Miniconda 3 最新的安装包来</a>，然后直接安装，看着它往你的 shell 配置里塞一坨辣鸡（我把实际用到的命令拿出来做了个 alias，这样就可以只在我需要的时候打开 conda 了）。</p>
 <p>为什么使用 miniconda 而不是 anaconda？因为 anaconda 带的那个图形界面根本用不了，miniconda 够用了。</p>
 <p>然后创建一个 Python 3.8 的环境，高了低了都不行，真是难伺候，同时别忘了带上 cuda 和 cudnn，不然它一声不吭的就会只能用 CPU：</p>
-<figure data-raw="$ conda create -n spleeter python=3.8 cudatoolkit cudnn
-" class="code-block"><pre class="code"><code>$ conda create -n spleeter python=3.8 cudatoolkit cudnn
-</code></pre></figure>
+<figure data-raw="$ conda create -n spleeter python=3.8 cudatoolkit cudnn" class="code-block"><pre class="code"><code>$ conda create -n spleeter python=3.8 cudatoolkit cudnn</code></pre></figure>
 <p>cuda 不叫 cuda，叫 cudatoolkit 就离谱。</p>
 <p>然后切进去：</p>
-<figure data-raw="$ conda activate spleeter
-" class="code-block"><pre class="code"><code>$ conda activate spleeter
-</code></pre></figure>
+<figure data-raw="$ conda activate spleeter" class="code-block"><pre class="code"><code>$ conda activate spleeter</code></pre></figure>
 <p>然后装 <code>spleeter-gpu</code> 到 conda 新创建的这个 Python 环境：</p>
-<figure data-raw="$ pip install spleeter-gpu
-" class="code-block"><pre class="code"><code>$ pip install spleeter-gpu
-</code></pre></figure>
+<figure data-raw="$ pip install spleeter-gpu" class="code-block"><pre class="code"><code>$ pip install spleeter-gpu</code></pre></figure>
 <p>所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我本机已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，但我都创建虚拟环境了你还读取我系统的干嘛？不过其实好像也不影响使用，或者此时可以 <code>pip install numpy==1.18.5</code>。</p>
 <p>然后到 <a href="https://github.com/deezer/spleeter/releases" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/deezer/spleeter/releases</a> 去下载训练好的模型，这也是个弱智的地方：哪有 tar 打包不把目录本身打进去的？然后还得给这个程序创建一个工作目录，因为它是写死的到当前目录下面的 <code>pretrained_models</code> 下面去找模型。</p>
 <figure data-raw="$ mkdir -p spleeter/pretrained_models
-$ cd spleeter/pretrained_models
-" class="code-block"><pre class="code"><code>$ mkdir -p spleeter/pretrained_models
-$ cd spleeter/pretrained_models
-</code></pre></figure>
+$ cd spleeter/pretrained_models" class="code-block"><pre class="code"><code>$ mkdir -p spleeter/pretrained_models
+$ cd spleeter/pretrained_models</code></pre></figure>
 <p>我这里用 2stems 的模型示范，因为我只需要分离人声和伴奏：</p>
 <figure data-raw="$ wget -c 'https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz'
 $ mkdir 2stems
 $ cd 2stems
-$ tar -xpvzf ../2stems.tar.gz
-" class="code-block"><pre class="code"><code>$ wget -c 'https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz'
+$ tar -xpvzf ../2stems.tar.gz" class="code-block"><pre class="code"><code>$ wget -c 'https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz'
 $ mkdir 2stems
 $ cd 2stems
-$ tar -xpvzf ../2stems.tar.gz
-</code></pre></figure>
+$ tar -xpvzf ../2stems.tar.gz</code></pre></figure>
 <p>因为他们打 tar 包时候没把目录打进去，所以别忘了自己创建目录！</p>
 <p>然后回到你的工作目录就可以用了，我这里结构是 <code>spleeter/pretrained_models/2stems</code> 所以工作目录就是 <code>spleeter</code>：</p>
 <figure data-raw="$ cd ../../
-$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow
-" class="code-block"><pre class="code"><code>$ cd ../../
-$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow
-</code></pre></figure>
+$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow" class="code-block"><pre class="code"><code>$ cd ../../
+$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow</code></pre></figure>
 <p>如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 <code>-finetune</code> 的是高品质模型，它们的模型目录名字应该是比如 <code>2stems-finetune</code>，但是参数名字却不是这个而是 <code>-p spleeter:2stems-16kHz</code>，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档（不过我又看了一下，这个 finetune 对于分离音轨没什么用好像）。</p>
 <p>我这里必须使用 <code>-B tensorflow</code> 才会走显卡加速。</p>
 <p>用完了就可以 <code>conda deactivate</code> 退出虚拟环境，要用的时候别忘了 <code>conda activate spleeter</code> 切换进来，</p>
@@ -691,4 +679,4 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-05-19T02:20:49.849Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-07-23T11:04:37.624Z. -->

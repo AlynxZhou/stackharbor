@@ -347,15 +347,13 @@ chmod +x &quot;${pkgdir}/opt/${pkgname}/resources&quot; \
          &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external&quot; \
          &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z&quot; \
          &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64&quot; \
-         &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64/7z&quot;
-" class="code-block"><pre class="code"><code># Fix 7z permissions
+         &quot;${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64/7z&quot;" class="code-block"><pre class="code"><code># Fix 7z permissions
 chmod +x "${pkgdir}/opt/${pkgname}/resources" \
          "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked" \
          "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external" \
          "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z" \
          "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64" \
-         "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64/7z"
-</code></pre></figure>
+         "${pkgdir}/opt/${pkgname}/resources/app.asar.unpacked/external/7z/linux64/7z"</code></pre></figure>
 <p>但解压出来实际上没这些文件，然后就会报错，注释掉就好了。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -657,4 +655,4 @@ chmod +x "${pkgdir}/opt/${pkgname}/resources" \
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-05-19T02:20:49.862Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-07-23T11:04:37.635Z. -->

@@ -24,6 +24,12 @@ tags:
 
 然后就是网上“致第一次用 RIME 的你”、“也致第一次用 RIME 的你”，我都看过了，首先他们不用 ibus-rime，其次文章内容毕竟有限，每个人需求不一样，有些我需要的地方他们一笔带过了。
 
+-------
+
+更新（2021-07-23）：另外我是被 felixonmars 惯坏了的 Arch Linux 用户，他已经把各种乱七八糟的 RIME 的配置打包到官方仓库了，所以我不需要和那个什么用来配置 RIME 配置的什么什么东风破打交道。如果你不是 Arch Linux 用户的话，我假设你有能力搞明白那个东风破，**因为我搞不明白**，没办法告诉你怎么用。
+
+-------
+
 RIME 的拼音功能确实很好用（虽然有时候它和我对于词组的想法不太一样），我的需求其实只有几项：
 
 - 对于一些 RIME 默认的中国人几乎都用不到的中文标点直接改成英文标点，这个在书写 Markdown 的时候简直折磨死我了，有几个人会输入全角井号？？？打个标题真的很麻烦。
@@ -31,7 +37,7 @@ RIME 的拼音功能确实很好用（虽然有时候它和我对于词组的想
 - 关掉 RIME 的中英混输功能，在候选框输入英文字母真的很打断思路，我要输入英文要么就是打代码要么就是打单词，反正都不需要输入法，RIME 来就是给我找麻烦。
 - 还有一些奇奇怪怪的 RIME 的键位设置，偏偏要和其他输入法不一样，我已经习惯了那些操作，RIME 的键位只会降低输入速度。
 
-下面介绍一下我的配置，只需要两个文件就可以，我没有对朙月拼音的配置做修改，只是修改了默认配置。
+下面介绍一下我的配置。当然如果你嫌麻烦，最后我会加上我的配置的 GitHub Repo。
 
 首先建立一个干净的 RIME 配置环境，直接移走 `~/.config/ibus/rime` 然后执行 `ibus-daemon -rdx` 重新生成（就是它文档里扯的部署部署部署）一套配置，由于我用的都是内置输入法所以也不需要什么乱七八糟的东风破 RIME Kit 地球拼音之类的。
 
@@ -431,9 +437,61 @@ patch:
 
 不要忘了删掉 `build` 目录再 `ibus-daemon -rdx`。
 
+-------
+
+更新（2021-07-23）：最近研究了一下如何扩展 RIME 的词库，发现还是稍微复杂的，我尝试导入了肥猫打包的 `rime-pinyin-zhwiki`。如果你要给某个输入法导入词库，首先你得自己创建一个扩展词库文件让他继承这个输入法本来的词库和你想要的词库，因为输入法配置里面只能指定一个词库配置文件。
+
+所以对于朙月拼音简化字版本，先创建一个叫 `luna_pinyin_simp.extended.dict.yaml`，`.dict.yaml` 之前的名字其实是随便取的，内容如下：
+
+```yaml
+# 原来要结合默认词库和第三方词库，
+# 需要自己编写一个词库让它 fallback 到朙月拼音和第三方词库。
+# 我说佛老师对不起对不起，我不懂规矩。
+---
+name: luna_pinyin_simp.extended
+version: "0.1"
+# `by_weight`（按词频高低排序）或 `original`（保持原码表中的顺序）。
+sort: by_weight
+# 因为导入的朙月拼音词库是繁转简，所以这里不能导入简化字八股文。
+# 导入简化字八股文。
+# vocabulary: essay-zh-hans
+# 选择是否导入预设词汇表【八股文】。
+use_preset_vocabulary: true
+
+import_tables:
+  - luna_pinyin
+  - zhwiki
+```
+
+应该很容易懂，我就不多唠叨了，记得里面名字和外面文件名要一致。
+
+然后在 `luna_pinyin_simp.custom.yaml` 的 patch 里面加一行：
+
+```yaml
+  translator/dictionary: luna_pinyin_simp.extended
+```
+
+我还研究了一下如何添加 emoji 功能，也是靠肥猫打的 `rime-emoji` 包，只要在 `luna_pinyin_simp.custom.yaml` 的 patch 里面加一行：
+
+```yaml
+  __include: emoji_suggestion:/patch
+```
+
+如果你用的不是 Arch，可能需要自己复制 patch 文件内容而不是简单地使用 include，参见[官方说明](https://github.com/rime/rime-emoji/blob/master/README.md#%E8%87%AA%E5%8A%A9%E5%AE%89%E8%A3%9D)。
+
+当然不要忘了安装这两个依赖的包，我这个配置在 Arch Linux 下面一共需要下面几个包：
+
+```
+# pacman -S librime ibus-rime rime-luna-pinyin rime-emoji rime-pinyin-zhwiki
+```
+
+当然你要有配置好能显示的 emoji 字体。这也是个坑，等我有时间写一下我的 `/etc/fonts/local.conf` 吧。
+
+-------
+
 # 下载
 
-如果你想试一试我的配置，一共三个文件，[default.custom.yaml](./default.custom.yaml)、[luna_pinyin_simp.custom.yaml](./luna_pinyin_simp.custom.yaml) 和 [ibus_rime.custom.yaml](./ibus_rime.custom.yaml)。
+更新（2021-07-23）：因为加了词库和 emoji 之后文件变多了，请直接去 [GitHub Repo](https://github.com/AlynxZhou/alynx-rime-config/) 获取配置。
 
 *Alynx Zhou*
 

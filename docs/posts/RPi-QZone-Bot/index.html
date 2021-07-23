@@ -407,8 +407,7 @@ try:
         # Use 60 to keep only one feed in the minute.
         time.sleep(60)
 except KeyboardInterrupt:
-    exit()
-" data-info="language-Python" data-lang="Python" class="code-block"><pre class="code"><code class="language-Python">#!/usr/bin/env python3
+    exit()" data-info="language-Python" data-lang="Python" class="code-block"><pre class="code"><code class="language-Python">#!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
 ### Filename: qclock.py
@@ -468,18 +467,13 @@ try:
         # Use 60 to keep only one feed in the minute.
         time.sleep(60)
 except KeyboardInterrupt:
-    exit()
-</code></pre></figure>
+    exit()</code></pre></figure>
 <p>当然，下载链接在<a href="/posts/RPi-QZone-Bot/qclock.py">这里</a>（2016-08-17更新）。</p>
 <p>使用的时候先把<code>QQ_NUM</code>的值修改为你打算用来<del>装X</del>发说说的QQ号码，<code>QQ_PASSWD</code>的值则是你QQ的密码咯。这里建议各位不要使用自己用的QQ号做实验，而是另申请QQ号来作报时～不然谁知道腾讯哪天会不会找个什么理由关闭webQQ再冻结你的QQ号呢～</p>
 <p>然后就是一句话的……不对！你还需要先安装QQLib啊，就像下面这样：</p>
-<figure data-raw="# pip3 install git+https://github.com/gera2ld/qqlib.git
-" data-info="language-bash" data-lang="bash" class="code-block"><pre class="code"><code class="language-bash"># pip3 install git+https://github.com/gera2ld/qqlib.git
-</code></pre></figure>
+<figure data-raw="# pip3 install git+https://github.com/gera2ld/qqlib.git" data-info="language-bash" data-lang="bash" class="code-block"><pre class="code"><code class="language-bash"># pip3 install git+https://github.com/gera2ld/qqlib.git</code></pre></figure>
 <p>然后一句话运行起来：</p>
-<figure data-raw="$ python3 ./qclock.py
-" data-info="language-bash" data-lang="bash" class="code-block"><pre class="code"><code class="language-bash">$ python3 ./qclock.py
-</code></pre></figure>
+<figure data-raw="$ python3 ./qclock.py" data-info="language-bash" data-lang="bash" class="code-block"><pre class="code"><code class="language-bash">$ python3 ./qclock.py</code></pre></figure>
 <p>保持它不要关闭，最好的办法还是<a href="https://www.gnu.org/software/screen/" target="_blank" rel="external nofollow noreferrer noopener">GNU Screen</a>啊～</p>
 <p>每到整点和半点你的树莓派就会自动发一条说说报时并附上当前的CPU温度～如果你想做更多的话完全可以自己扩展我这个脚本。记住那个<code>time.sleep(60)</code>的60不是随便能改的，一分钟一次的循环不会特别耗资源，如果你改小了间隔，可能会导致一分钟内它走了两次循环，发了两条说说。时间的精确度保持在分钟级别。</p>
 <p>然后，我用来测试的QQ号是<code>3530795351</code>，这是它的<a href="http://user.qzone.qq.com/3530795351" target="_blank" rel="external nofollow noreferrer noopener">QQ空间</a>，欢迎围观效果。</p>
@@ -784,4 +778,4 @@ except KeyboardInterrupt:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-05-19T02:20:49.889Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-07-23T11:04:37.656Z. -->

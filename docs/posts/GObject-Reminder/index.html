@@ -374,8 +374,7 @@ TestAnimal *test_animal_new(gchar *animal_name);
 
 G_END_DECLS
 
-#endif
-" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#ifndef __TEST_ANIMAL_H__
+#endif" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#ifndef __TEST_ANIMAL_H__
 #define __TEST_ANIMAL_H__
 
 #include &lt;glib-object.h&gt;
@@ -405,8 +404,7 @@ TestAnimal *test_animal_new(gchar *animal_name);
 
 G_END_DECLS
 
-#endif
-</code></pre></figure>
+#endif</code></pre></figure>
 <p>因为代码里写了很多注释所以我这里就不再啰嗦一遍了，说点里面没写的。</p>
 <p><code>G_DECLARE_DERIVABLE_TYPE</code> 表示你声明了一个可以继承的类，也就是说你需要自己弄一个虚函数表出来。有时候你会在某个 GObject 的项目里定义了一大堆宏（比如 GTK 就不爱用这个而是手动定义），其实它们和 <code>G_DECLARE_DERIVABLE_TYPE</code> 做了一样的工作，因为总要做，就写了个宏实现。这个并不会给你定义具体的类结构体（其实就是虚函数表，用来存放所有可以继承重载的函数），所以我们要按照约定自己写一个 <code>_TestAnimalClass</code> 的结构体，在类型名字前面加下划线作为结构体名也是约定俗成的，<code>G_DECLARE_DERIVABLE_TYPE</code> 会展开出一句 <code>typedef struct _TestAnimalClass TestAnimalClass</code>。</p>
 <p>这个类结构体约定第一个元素是它的父类型的类结构体——这其实意味着我们复制了一份父类型的虚函数表出来，于是我们就可以覆盖父类型的方法而不修改原本的父类型。这一句可能比较难懂，不过后面还有关联。</p>
@@ -538,8 +536,7 @@ TestAnimal *test_animal_new(gchar *animal_name)
         &quot;animal-name&quot;, animal_name,
         NULL
     );
-}
-" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-animal.h"
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-animal.h"
 
 // Derivable 类型会自动帮你定义实例结构体，
 // 所以你想夹带点私货就得自己搞个 Private 类型。
@@ -665,8 +662,7 @@ TestAnimal *test_animal_new(gchar *animal_name)
         "animal-name", animal_name,
         NULL
     );
-}
-</code></pre></figure>
+}</code></pre></figure>
 <p>理论上来说我们直接往实例结构体里添加成员作为私有成员就可以，但是在头文件里定义实例结构体，其它文件是可以看到实例结构体的成员的，所以 <code>G_DECLARE_DERIVABLE_TYPE</code> 不允许我们这么做。</p>
 <p>但有一个省事的宏 <code>G_DEFINE_TYPE_WITH_PRIVATE</code>，它要求我们做一个 Private 类型，里面存放我们想要的任何私有元素，它不会被继承，并且因为定义在 <code>.c</code> 文件里所以也不会被其它文件看到。它还会提供一些 GObject 内置类型系统的实现函数（不然 GObject 系统怎么知道你建了哪些类型！），还有一些只在实现里面用到的定义。当然 Private 类型的名字也是约定好的。</p>
 <p>多说一句，按照 GTK 的代码实现，其实 Private 最后就是在实例结构体里面定义了一个叫 <code>priv</code> 的指针，类型是自己定义的 Private 类型，因为 GTK 是手写的头文件定义然后用的 <code>G_DEFINE_TYPE_WITH_PRIVATE</code> 同时又没产生冲突，其实你也可以完全不理会这两个宏，全都自己写，只要保证类结构体和实例结构体的第一个成员是父类结构体和父实例结构体就可以了。但是 <code>G_DEFINE_TYPE_WITH_PRIVATE</code> 提供了一个 <code>项目名_类型名_get_instance_private</code> 的函数，我们就不用直接访问 <code>priv</code> 成员了。</p>
@@ -692,8 +688,7 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name);
 
 G_END_DECLS
 
-#endif
-" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#ifndef __TEST_CAT_H__
+#endif" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#ifndef __TEST_CAT_H__
 #define __TEST_CAT_H__
 
 #include &lt;glib-object.h&gt;
@@ -709,8 +704,7 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name);
 
 G_END_DECLS
 
-#endif
-</code></pre></figure>
+#endif</code></pre></figure>
 <p><code>TestCat</code> 是继承 <code>TestAnimal</code> 的，并且我们不想让它被继承，所以它就不需要写类结构体了（因为虚函数表是用来重载的，没有继承当然也没有重载）。</p>
 <p>所以接下来就直接到实现部分了，在 <code>test-cat.c</code>:</p>
 <figure data-raw="#include &quot;test-cat.h&quot;
@@ -829,8 +823,7 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
         &quot;cat-name&quot;, cat_name,
         NULL
     );
-}
-" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-cat.h"
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-cat.h"
 
 // Final 类型也没有 Private，但是它自己本身就是容器嘛！
 // 所以实例结构体就给你自己写了。
@@ -946,8 +939,7 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
         "cat-name", cat_name,
         NULL
     );
-}
-</code></pre></figure>
+}</code></pre></figure>
 <p>Final 类型没有 Private，因为它自己就是 Private，所以这个定义实例结构体的权力交给了你，直接在里面写私有成员即可，但是不要忘了套娃（指第一个成员一定要是父实例结构体）。</p>
 <p>然后就是设置我们自己的 property 并重载 GObject 的虚函数，当然你可能会说这样父类型的 property 不就丢了吗？其实 property 是放在 GObject 系统单独的一个表里，需要的时候它去查询，并且会考虑父类型的继承链，所以我们不需要考虑重载时候覆盖掉父类型的问题。</p>
 <p>接下来就是重载父类型提供给我们的虚函数也就是 <code>TestCatClass.print</code> 了！当然首先是把我们自己的类结构体里面的父类结构体的虚函数换掉。</p>
@@ -965,8 +957,7 @@ int main(int argc, char *argv[])
     test_animal_print(animal);
     test_animal_print(TEST_ANIMAL(cat));
     return 0;
-}
-" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-animal.h"
+}" data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-animal.h"
 #include "test-cat.h"
 
 int main(int argc, char *argv[])
@@ -976,8 +967,7 @@ int main(int argc, char *argv[])
     test_animal_print(animal);
     test_animal_print(TEST_ANIMAL(cat));
     return 0;
-}
-</code></pre></figure>
+}</code></pre></figure>
 <p>然后用这个 <code>Makefile</code>:</p>
 <figure data-raw="CC := cc
 OBJECTS := main.o test-animal.o test-cat.o
@@ -998,8 +988,7 @@ test-cat.o: test-animal.h
 
 .PHONY: clean
 clean:
-    -rm test ${OBJECTS}
-" class="code-block"><pre class="code"><code>CC := cc
+    -rm test ${OBJECTS}" class="code-block"><pre class="code"><code>CC := cc
 OBJECTS := main.o test-animal.o test-cat.o
 CFLAGS := `pkg-config --cflags gobject-2.0`
 LIBS := `pkg-config --libs gobject-2.0`
@@ -1018,16 +1007,13 @@ test-cat.o: test-animal.h
 
 .PHONY: clean
 clean:
-    -rm test ${OBJECTS}
-</code></pre></figure>
+    -rm test ${OBJECTS}</code></pre></figure>
 <p>运行的结果是这样的：</p>
 <figure data-raw="** Message: 11:23:25.727: I am an Animal called animal1.
 ** Message: 11:23:25.729: I am a Cat called cat1.
-** Message: 11:23:25.729: I am an Animal called animal2.
-" class="code-block"><pre class="code"><code>** Message: 11:23:25.727: I am an Animal called animal1.
+** Message: 11:23:25.729: I am an Animal called animal2." class="code-block"><pre class="code"><code>** Message: 11:23:25.727: I am an Animal called animal1.
 ** Message: 11:23:25.729: I am a Cat called cat1.
-** Message: 11:23:25.729: I am an Animal called animal2.
-</code></pre></figure>
+** Message: 11:23:25.729: I am an Animal called animal2.</code></pre></figure>
 <p>你可以看到第一行是父类也就是 <code>TestAnimalClass</code> 的函数的输出。第二行是 <code>TestCatClass</code> 重载的函数的输出，第三行则是 <code>TestCatClass</code> 重载的函数 chain up 到 <code>TestAnimalClass</code> 的输出，但是输出的是子类继承的父类的属性！</p>
 <p>最后有关我到底该声明成子类还是父类以及传参时候要不要类型转换：其实在这个 GObject 的样例里面看起来是无所谓的，类型转换可行不可行其实取决于具体 new 的是什么，而不是声明的指针是什么，所以其实声明成父类和子类都没有关系，类型转换也主要是为了满足 C 语言对指针类型和函数声明的要求罢了。</p>
 <p><em>Alynx Zhou</em></p>
@@ -1330,4 +1316,4 @@ clean:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-05-19T02:20:49.852Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-07-23T11:04:37.626Z. -->
