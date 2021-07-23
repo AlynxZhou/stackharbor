@@ -3,7 +3,7 @@ title: "可能只适合我自己的 RIME 配置"
 layout: post
 #comment: true
 created: 2019-08-19T15:16:00
-updated: 2021-03-01T17:51:11
+updated: 2021-07-23T19:05:05
 categories:
   - 计算机
   - 输入法
