@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.8.1">
+    <link rel="canonical" href="https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/solid.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/brands.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/regular.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"accessibility.themeDark\"></i>"
+            : "<i class=\"far fa-sun\" aria-label=\"accessibility.themeLight\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>NVIDIA 驱动和 GNOME 和 Wayland - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/channel/"><i class="fas fa-volume-up"></i><span class="menu-text">吐槽频道</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">NVIDIA 驱动和 GNOME 和 Wayland</div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2020-07-29T23:50:39.000Z">7/30/2020, 7:50:39 AM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/NVIDIA-GNOME-Wayland/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="NVIDIA 驱动和 GNOME 和 Wayland" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。</p>
+<a id="more"></a>
+
+<h1 id="常见问题"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" title="常见问题"></a>常见问题</h1>
+<h2 id="为什么NVIDIA的Wayland支持这么差？"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F" title="为什么NVIDIA的Wayland支持这么差？"></a>为什么 NVIDIA 的 Wayland 支持这么差？</h2>
+<p>长话短说，大部分驱动（AMD 的开源和闭源驱动，NVIDIA 的开源驱动 nouveau，Intel 的开源驱动）都同意采用 GBM 作为缓存 API，但是 NVIDIA 像个赌气的小孩一样表示“你们这个不好，我要做个更好的 EGLStreams”所以不支持 GBM，于是所有要兼容 NVIDIA 闭源驱动的混成器都要为它做单独的实现代码。诸如 GNOME 或者 KDE 这种大型项目有足够的人手，同时 NVIDIA 似乎也提供了一定的帮助所以已经有了混成器内部的 EGLStreams 实现，但也有些小型项目并不支持这个玩意。而且 NVIDIA 吹牛皮吹得很大，EGLStreams 哪里“更好”从他们的龟速进展上根本体现不出来。可能是因为挖矿赚得盆满钵满，忘记了显卡的本职工作是显示，NVIDIA 的闭源 Linux 驱动质量一直停留在能用的程度，同时又做各种各样限制导致开源的 nouveau 在较新的显卡上几乎不能用。</p>
+<p>NVIDIA 闭源驱动之前一直是稀泥巴糊不上墙的垃圾，因为它在 Wayland 下对使用 XWayland 的程序没有硬件加速支持——也就是说如果你使用 Xorg 会话，程序是有硬件加速的，你使用 Wayland 会话，Wayland 程序也是有硬件加速的，但是在 Wayland 会话下面那些旧的 Xorg 程序就没有硬件加速（听起来就像捡了芝麻丢了西瓜一样）——而仍然有相当一部分旧程序在 Wayland 下依赖 XWayland 运行，所以 NVIDIA 闭源驱动的 Wayland 会话基本可以认为是不能日常使用的。</p>
+<p>从版本 470 之后 NVIDIA 闭源驱动有所改善，首先是他们的员工提交的<a href="https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/587/diffs" target="_blank" rel="external nofollow noreferrer noopener">补丁</a>在 XWayland 21.1.1 版本释出了，这个补丁添加了对 XWayland 硬件加速的支持（需要新版本驱动），然后新版本驱动在上周变为稳定版，用户可以安装，所以在拖了至少三年之后最后一块空缺终于被补上了。使用 KDE 和 GNOME 的 NVIDIA 显卡用户理论上就可以获得完整的 Wayland 体验了。</p>
+<h2 id="现在NVIDIA用户的Wayland会话可以日常使用了吗？"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F" title="现在NVIDIA用户的Wayland会话可以日常使用了吗？"></a>现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？</h2>
+<p>更新到 470 驱动之后我第一时间体验了一下，结果就是很抱歉，还是不行，不过我遇到的都是一些小问题：</p>
+<ul>
+<li>Firefox 稳定版没法正常工作，但是 Nightly 版本是可以的，原因是 NVIDIA 和 Mesa 的 EGL 实现存在一点小区别，<a href="https://hg.mozilla.org/mozilla-central/rev/c2191ee9cb65" target="_blank" rel="external nofollow noreferrer noopener">修复补丁</a>已经在 Nightly 里面了，我们只要等稳定版版本升上去就可以了。</li>
+<li>GTK3 程序都能工作，但是 GTK4 的程序（比如 GNOME Extensions）却全都挂了，原因应该和 Firefox 一致，<a href="https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3726" target="_blank" rel="external nofollow noreferrer noopener">修复补丁</a>也已经合并了，只是还没有释出稳定版。</li>
+<li>Google Chrome 不能工作，但是比较新的 Chromium 似乎可以，原因推测也是一样的，我懒得查了，同时所有 Electron 的程序（Atom，VSCode）应该都有同样的问题。</li>
+<li>GNOME Shell 的缩略图会显示错误，看起来是个<a href="https://gitlab.gnome.org/GNOME/mutter/-/issues/528" target="_blank" rel="external nofollow noreferrer noopener">两年的老 bug</a>，最近开发者似乎找到了原因，还没修复。</li>
+</ul>
+<p>不过总而言之这些都是能很快修复（废话，大家动作都比 NVIDIA 快，建议老黄把自己的皮衣换成乌龟壳）的问题，不至于被卡很久，至于你的发行版是那种追求“稳定”选择了一个不支持的大版本然后不更新的？哈哈，管我 X 事。</p>
+<p>另外我在 openSUSE Tumbleweed 上测试的时候还遇到一个问题啊，它默认安装的是 nouveau，需要手动在 YaST 里面安装 NVIDIA，装完之后似乎两个驱动冲突把我显示器搞黑屏了，于是我就没法直接重启。而且在那之后我显示器神奇的再也不亮了（PS4、Switch 全都点不亮它），拔掉电源放半分钟再插上才好，很头疼啊。</p>
+<h2 id="我是GNOME用户，为什么装了470版本GDM选单里的GNOME还是Xorg会话？"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F" title="我是GNOME用户，为什么装了470版本GDM选单里的GNOME还是Xorg会话？"></a>我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？</h2>
+<p>这个有几个原因，首先就是 Wayland 需要 Kernel Mode Setting 的支持（这也是个 NVIDIA 拖了好久才补上的特性），所以你的内核参数要有 <code>nvidia-drm.modeset=1</code>。其次要看 <code>/etc/gdm/custom.conf</code> 里面 <code>WaylandEnable=false</code> 是不是被注释掉的（默认应该是）。</p>
+<p>最可能的是 udev 规则，GDM 带了一个 <code>/usr/lib/udev/rules.d/61-gdm.rules</code> 文件，里面有这么几行：</p>
+<figure data-raw="# disable Wayland on Hi1710 chipsets
+ATTR{vendor}==&quot;0x19e5&quot;, ATTR{device}==&quot;0x1711&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;
+# disable Wayland when using the proprietary nvidia driver
+DRIVER==&quot;nvidia&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;
+# disable Wayland if modesetting is disabled
+IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;" class="code-block"><pre class="code"><code># disable Wayland on Hi1710 chipsets
+ATTR{vendor}=="0x19e5", ATTR{device}=="0x1711", RUN+="/usr/lib/gdm-runtime-config set daemon WaylandEnable false"
+# disable Wayland when using the proprietary nvidia driver
+DRIVER=="nvidia", RUN+="/usr/lib/gdm-runtime-config set daemon WaylandEnable false"
+# disable Wayland if modesetting is disabled
+IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon WaylandEnable false"</code></pre></figure>
+<p>第二行表示如果检测到 NVIDIA 闭源驱动就关闭 Wayland，第三行则是如果没开启 Kernel Mode Setting 也关掉 Wayland。</p>
+<p>我猜大部分用户都没有第一行的设备，所以我建议直接 <code>ln -s /dev/null /etc/udev/rules.d/61-gdm.rules</code> 屏蔽掉这个文件。</p>
+<p>别问我既然 470 驱动都出来了 GNOME 开发者为什么不删掉这个文件，NVIDIA 憋出来 470 驱动总共也就一周多点，还有一堆小问题呢，删了怕不是又有一堆人来骂“怎么又把不稳定的东西搞给我了”。</p>
+<h2 id="我是笔记本双显卡用户，主用的是核芯显卡，为什么我GDM选单里的GNOME也是Xorg会话？"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F" title="我是笔记本双显卡用户，主用的是核芯显卡，为什么我GDM选单里的GNOME也是Xorg会话？"></a>我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？</h2>
+<p>检查一下你是不是用了 NVIDIA 之前提供的 Xorg 下面的双显卡管理功能（有群友说叫 prime，我不知道是不是叫 prime）（顺便一提这也是 NVIDIA 憋了好几年才憋出来的本来就该有的东西）？如果你使用那个，首先它是 Xorg 下面的支持，其次它会加载 nvidia 模块，自然就会落到上一个问题里面的 udev 规则上。</p>
+<p>有群友在群里表示他删了那个规则然后进 Wayland，可以是可以，但我感到很迷惑。这个 prime 功能 NVIDIA 之前只是说了在 Xorg 下面可用，所以我不是很理解又要 prime 又要 Wayland 的可行性，我也不知道 NVIDIA 的按需渲染现在到 Wayland 里面还能不能像之前 Xorg 里面提供的功能一样正常工作。就理论上我给 NVIDIA 掏了钱，这是他的义务给我支持这个功能，但这可是垃圾 NVIDIA 啊！</p>
+<p>你问我有没有什么建议？如果你需要这玩意，就按照 GNOME 的规则用 Xorg 就好了，没错虽然我是 Wayland 支持者，但我在这里建议你还是先用着 Xorg。如果你只是想用 Wayland 然后并不是很需要用 NVIDIA 显卡，那就关掉它不让它加载驱动，没错，我在自己的笔记本上用的是 Bumblebee。</p>
+<h2 id="我是KDE用户，你扯这么多GNOME，跟我说说KDE现在有什么问题呗？"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F" title="我是KDE用户，你扯这么多GNOME，跟我说说KDE现在有什么问题呗？"></a>我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？</h2>
+<p>大哥，我是 GNOME 用户啊，既然你是 KDE 用户，建议你自己试试然后给我讲讲……</p>
+<h1 id="没用的观点"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9" title="没用的观点"></a>没用的观点</h1>
+<h2 id="你看这个GDM就是逊啦，我这里卡死根本不能用，大家都推荐换SDDM巴拉巴拉……"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6" title="你看这个GDM就是逊啦，我这里卡死根本不能用，大家都推荐换SDDM巴拉巴拉……"></a>你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……</h2>
+<p>强调一下我的目的是解决问题，比如群里有人问为什么我双显卡 GDM 里没 Wayland 可选你来这么一句我觉得很不礼貌，当别人就是需要用 GDM 的时候说“大家都推荐换 SDDM”我觉得不管是 GNOME 用户还是 KDE 用户都会觉得不是个好回答。其次只说自己 GDM 卡死完全没法判断问题所在，别人都没这个问题，或许问题就不在 GDM 而在你的配置呢？同理，这个“大家都推荐换 SDDM”里的“大家”是哪里来的呢？我觉得这样的回复对解决问题没什么帮助。</p>
+<h2 id="Xorg好！Wayland坏！"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81" title="Xorg好！Wayland坏！"></a>Xorg 好！Wayland 坏！</h2>
+<p>请列举出充分而恰当的理由支持你的观点，而不是人云亦云。比方说你可能觉得 Wayland 缺乏你需要的某些功能，这可能是设计理念上的不同，或者发展时间不够所导致的，毕竟 X 协议的历史比 Wayland 长得多，所以请多一点耐心。而至于不讲道理或者二极管或者言论不友善的行为在哪里都是不受欢迎的。</p>
+<h2 id="我也是NVIDIA用户，我玩XX游戏卡成幻灯片了！"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81" title="我也是NVIDIA用户，我玩XX游戏卡成幻灯片了！"></a>我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！</h2>
+<p>……信息太少，无法给出合理推断，只能告诉你我游戏玩的可欢乐了！</p>
+<h2 id="你们NVIDIA用户真麻烦，谁叫你们自己掏钱买N卡受罪！"><a class="header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81" title="你们NVIDIA用户真麻烦，谁叫你们自己掏钱买N卡受罪！"></a>你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！</h2>
+<p>你又不知道老子都有什么需求，买 N 卡我是暂时没法用 Wayland，但是不买 N 卡我就要达芬奇受罪 Windows 下面打游戏受罪直播编码受罪跑 hashcat 受罪（存疑）。我做的选择是我权衡之后的结果。再说一遍，解决问题和“换 XX”是完全不一样的态度。</p>
+<p>所以就是钱是掏了，骂还是照样骂，而且我都掏钱了，骂得然更有底气了！</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="fas fa-tag"></i>GNOME</a><a class="post-tag button" href="/tags/Wayland/" rel="tag"><i class="fas fa-tag"></i>Wayland</a><a class="post-tag button" href="/tags/NVIDIA%20%E9%A9%B1%E5%8A%A8/" rel="tag"><i class="fas fa-tag"></i>NVIDIA 驱动</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Dark-Mode-in-Theme/" rel="next" title="给你的主题来点暗色！"><i class="fas fa-angle-left"></i><span class="nav-title">给你的主题来点暗色！</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Fix-Windows-Wireless-Adapter-Name/" rel="prev" title="修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题"><span class="nav-title">修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "NVIDIA 驱动和 GNOME 和 Wayland",
+        "queryString": window.location.search,
+        "basePath": "/posts/NVIDIA-GNOME-Wayland/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">78</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">33</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">67</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#常见问题">常见问题</a>
+          
+          
+      <ol >
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#为什么NVIDIA的Wayland支持这么差？">为什么 NVIDIA 的 Wayland 支持这么差？</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#现在NVIDIA用户的Wayland会话可以日常使用了吗？">现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#我是GNOME用户，为什么装了470版本GDM选单里的GNOME还是Xorg会话？">我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#我是笔记本双显卡用户，主用的是核芯显卡，为什么我GDM选单里的GNOME也是Xorg会话？">我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#我是KDE用户，你扯这么多GNOME，跟我说说KDE现在有什么问题呗？">我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？</a>
+          
+        </li>
+      
+      </ol>
+      
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#没用的观点">没用的观点</a>
+          
+          
+      <ol >
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#你看这个GDM就是逊啦，我这里卡死根本不能用，大家都推荐换SDDM巴拉巴拉……">你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#Xorg好！Wayland坏！">Xorg 好！Wayland 坏！</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#我也是NVIDIA用户，我玩XX游戏卡成幻灯片了！">我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#你们NVIDIA用户真麻烦，谁叫你们自己掏钱买N卡受罪！">你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！</a>
+          
+        </li>
+      
+      </ol>
+      
+          
+        </li>
+      
+      </ol>
+      
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.8.1 at 2021-07-30T02:27:06.299Z. -->
