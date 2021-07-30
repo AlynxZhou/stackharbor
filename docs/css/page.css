@@ -122,6 +122,33 @@ div.page-title {
   margin: 0.67em 0;
   font-weight: bold;
 }
+div.page-title a.page-title-link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  border-bottom: none;
+  color: #26272b;
+  color: var(--color-font);
+}
+div.page-title a.page-title-link::after {
+  content: " ";
+  position: absolute;
+  width: 100%;
+  height: 0.1em;
+  bottom: 0;
+  left: 0;
+  transition: transform 0.3s ease-in-out;
+  transform: scaleX(0);
+  background: #26272b;
+  background: var(--color-font);
+}
+div.page-title a.page-title-link:hover::after {
+  visibility: visible;
+  transform: scaleX(1);
+}
+div.page-title a.page-title-link:active {
+  top: 0.1em;
+}
 div.page-counter {
   text-align: center;
   font-size: 1.5rem;

@@ -34,6 +34,7 @@ div.post-title-simple {
   font-weight: bold;
 }
 div.post-title {
+  text-align: center;
   font-size: 2rem;
   margin: 0.67em 0;
   font-weight: bold;
