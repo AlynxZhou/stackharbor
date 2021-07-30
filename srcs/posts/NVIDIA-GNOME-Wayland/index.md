@@ -2,7 +2,7 @@
 title: NVIDIA 驱动和 GNOME 和 Wayland
 layout: post
 #comment: true
-created: 2020-07-30T07:50:39
+created: 2021-07-30T07:50:39
 categories:
   - 计算机
   - GNOME
