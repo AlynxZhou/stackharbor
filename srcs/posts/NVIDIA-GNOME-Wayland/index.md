@@ -9,7 +9,7 @@ categories:
 tags:
   - GNOME
   - Wayland
-  - NVIDIA 驱动
+  - NVIDIA
 ---
 由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。
 

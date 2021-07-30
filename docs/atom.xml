@@ -112,7 +112,7 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
     
     <category term="Wayland" label="Wayland" scheme="https://sh.alynx.one/tags/Wayland/" />
     
-    <category term="NVIDIA 驱动" label="NVIDIA 驱动" scheme="https://sh.alynx.one/tags/NVIDIA%20%E9%A9%B1%E5%8A%A8/" />
+    <category term="NVIDIA" label="NVIDIA" scheme="https://sh.alynx.one/tags/NVIDIA/" />
     
   </entry>
   
