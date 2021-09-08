@@ -61,9 +61,9 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
 | <img src="https://avatars2.githubusercontent.com/u/6890021?s=400&u=0c9847296a0aa5e9a16be20ec0d3a708dae3d27a&v=4" style="width: 5em;"> | [Meow](https://lrscy.github.io/) | “一只有吱的喵~” | 刚入学的时候认识的学长，似乎也是一只猫，现在大概在美国呼吸自由的空气（大雾）。 |
-| <img src="https://tvax4.sinaimg.cn/crop.0.0.480.480.180/005ttpDdly8fwz8wsaiw5j30dc0dcwfu.jpg" style="width: 5em;"> | [sqyon](https://sqyon.com/) | “试图让机器帮我学习的假 ACMer” | 优秀的学弟，一定是优秀的学弟。 |
+| <img src="https://tvax4.sinaimg.cn/crop.0.0.480.480.180/005ttpDdly8fwz8wsaiw5j30dc0dcwfu.jpg" style="width: 5em;"> | [sqyon](https://sqyon.cc/) | “试图让机器帮我学习的假 ACMer” | 优秀的学弟，一定是优秀的学弟。 |
 | <img src="https://avatars0.githubusercontent.com/u/11513730?s=460&v=4" style="width: 5em;"> | [滑稽仓库](http://huaji.store/) |  | 董老师（咕老师）的奇怪网站。希望下次打 CSGO 前董老师能找到带麦克风的耳机。 |
-| <img src="https://avatars3.githubusercontent.com/u/46882838?s=460&u=2cc88f87bef2c222c8daeb4e944d1421b3119c8d&v=4" style="width: 5em;"> | [Litterboy's Blog](https://litterboys.xyz/) | "Good Luck and Have Fun" | 有女朋友的人生赢家…… |
+| <img src="https://avatars3.githubusercontent.com/u/46882838?s=460&u=2cc88f87bef2c222c8daeb4e944d1421b3119c8d&v=4" style="width: 5em;"> | [cserwen的站点](https://cserwen.com/) | "Good Luck and Have Fun" | 有女朋友的人生赢家…… |
 | <img src="https://berlin-98.github.io/img/avatar.jpg" style="width: 5em;"> | [Bo Lin's Blog](https://berlin-98.github.io/) | “既来之 则安之” | 是学术界大佬了！是学术界大佬了！ |
 
 # Arch Linux CN 社区或者 Gentoo Linux CN 社区
@@ -77,7 +77,7 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 | <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
 | <img src="https://avatars2.githubusercontent.com/u/15247171?s=400&u=42dbf0d7048c9b3eda5c77ec31b9d13efca1cc28&v=4" style="width: 5em;"> | [Nichi Yorozuya](https://nichi.co/) | "🐰🐰" | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
 | <img src="https://avatars3.githubusercontent.com/u/6873988?s=460&u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&v=4" style="width: 5em;"> | [Bruce Z Blog](https://brucezhang1993.github.io/)  | 「我不是兔子」 | 经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。 |
-| <img src="https://avatars3.githubusercontent.com/u/34574198?s=400&u=f711be85d4c32aa09a846fb739dc3d87924a7c51&v=4" style="width: 5em;"> | [Liolok's Blog](https://liolok.com/blog/) | "I am not a cat, how disappointing :(" | 纠结的皓奇老师，他好像也想当猫。 |
+| <img src="https://avatars3.githubusercontent.com/u/34574198?s=400&u=f711be85d4c32aa09a846fb739dc3d87924a7c51&v=4" style="width: 5em;"> | [liolok](https://liolok.com/) | "I am not a cat, how disappointing :(" | 纠结的皓奇老师，他好像也想当猫。 |
 | <img src="https://avatars.githubusercontent.com/u/7891089?v=4" style="width: 5em;"> | [Edward-P's Blog](https://blog.edward-p.xyz/) |  | 虽然咱经常叫他坏德华，但并不是什么坏人，保护各种德华从我做起。 |
 | <img src="https://blog.lilydjwg.me/user_files/lilydjwg/config/avatar.png?1375032417" style="width: 5em;">  | [依云's Blog](https://blog.lilydjwg.me/) |  | 这也是一只狐狸，而且懂得很多很多很多于是我经常经常经常阅读博客。 |
 | <img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width: 5em;"> | [惠狐之书](https://blog.megumifox.com/) | "A fox called Megumi" | 又是一只狐狸，私以为 Arch 社区可改名动物园。 |
