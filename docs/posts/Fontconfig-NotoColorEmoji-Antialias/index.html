@@ -341,7 +341,7 @@
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
       <p>我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。</p>
-<p>一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1454152" target="_blank" rel="external nofollow noreferrer noopener">一个 Firefox 的 bug</a>，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：</p>
+<p>一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1454152" target="_blank" rel="external nofollow noreferrer noopener">一个 firefox 的 bug</a>，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：</p>
 <figure data-raw="<!-- 针对所有字体的默认设置，力求显示效果最好。 -->
 <match target=&quot;font&quot;>
   <!-- 禁用内嵌点阵。 -->
@@ -1076,4 +1076,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-09-08T03:02:54.537Z. -->
+<!-- Page built by Hikaru v1.8.1 at 2021-09-08T04:08:51.350Z. -->

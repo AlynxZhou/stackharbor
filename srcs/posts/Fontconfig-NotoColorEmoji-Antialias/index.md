@@ -14,7 +14,7 @@ tags:
 ---
 我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。
 
-一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 [一个 Firefox 的 bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1454152)，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：
+一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 [一个 firefox 的 bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1454152)，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：
 
 ```xml
 <!-- 针对所有字体的默认设置，力求显示效果最好。 -->
