@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="将我漫天心血一一抛到银河">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.8.1">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Fontconfig-NotoColorEmoji-Antialias/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/solid.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/brands.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/regular.min.js"></script>
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"accessibility.themeDark\"></i>"
+            : "<i class=\"far fa-sun\" aria-label=\"accessibility.themeLight\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>Fontconfig 和 Noto Color Emoji 和抗锯齿 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/channel/"><i class="fas fa-volume-up"></i><span class="menu-text">吐槽频道</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Fontconfig-NotoColorEmoji-Antialias/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/posts/Fontconfig-NotoColorEmoji-Antialias/" itemprop="url">Fontconfig 和 Noto Color Emoji 和抗锯齿</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-09-08T01:33:33.000Z">9/8/2021, 9:33:33 AM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E5%AD%97%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">字体</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/Fontconfig-NotoColorEmoji-Antialias/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="Fontconfig 和 Noto Color Emoji 和抗锯齿" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。</p>
+<p>一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1454152" target="_blank" rel="external nofollow noreferrer noopener">一个 Firefox 的 bug</a>，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：</p>
+<figure data-raw="<!-- 针对所有字体的默认设置，力求显示效果最好。 -->
+<match target=&quot;font&quot;>
+  <!-- 禁用内嵌点阵。 -->
+  <edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;>
+    <bool>false</bool>
+  </edit>
+  <!-- 禁用合成粗体。 -->
+  <edit name=&quot;embolden&quot; mode=&quot;assign&quot;>
+    <bool>false</bool>
+  </edit>
+  <!-- 设置显示器为 RGB 排列。 -->
+  <edit name=&quot;rgba&quot; mode=&quot;assign&quot;>
+    <const>rgb</const>
+  </edit>
+  <!-- 开启轻度微调。 -->
+  <edit name=&quot;hinting&quot; mode=&quot;assign&quot;>
+    <bool>true</bool>
+  </edit>
+  <edit name=&quot;autohint&quot; mode=&quot;assign&quot;>
+    <bool>true</bool>
+  </edit>
+  <edit name=&quot;hintstyle&quot; mode=&quot;assign&quot;>
+    <const>hintslight</const>
+  </edit>
+  <!-- 开启抗锯齿。 -->
+  <edit name=&quot;antialias&quot; mode=&quot;assign&quot;>
+    <bool>true</bool>
+  </edit>
+</match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;!-- 针对所有字体的默认设置，力求显示效果最好。 --&gt;
+&lt;match target="font"&gt;
+  &lt;!-- 禁用内嵌点阵。 --&gt;
+  &lt;edit name="embeddedbitmap" mode="assign"&gt;
+    &lt;bool&gt;false&lt;/bool&gt;
+  &lt;/edit&gt;
+  &lt;!-- 禁用合成粗体。 --&gt;
+  &lt;edit name="embolden" mode="assign"&gt;
+    &lt;bool&gt;false&lt;/bool&gt;
+  &lt;/edit&gt;
+  &lt;!-- 设置显示器为 RGB 排列。 --&gt;
+  &lt;edit name="rgba" mode="assign"&gt;
+    &lt;const&gt;rgb&lt;/const&gt;
+  &lt;/edit&gt;
+  &lt;!-- 开启轻度微调。 --&gt;
+  &lt;edit name="hinting" mode="assign"&gt;
+    &lt;bool&gt;true&lt;/bool&gt;
+  &lt;/edit&gt;
+  &lt;edit name="autohint" mode="assign"&gt;
+    &lt;bool&gt;true&lt;/bool&gt;
+  &lt;/edit&gt;
+  &lt;edit name="hintstyle" mode="assign"&gt;
+    &lt;const&gt;hintslight&lt;/const&gt;
+  &lt;/edit&gt;
+  &lt;!-- 开启抗锯齿。 --&gt;
+  &lt;edit name="antialias" mode="assign"&gt;
+    &lt;bool&gt;true&lt;/bool&gt;
+  &lt;/edit&gt;
+&lt;/match&gt;</code></pre></figure>
+<p>那我觉得针对 Noto Color Emoji 关掉这几个选项就行了，正好这个 bug 下面就有人提供了配置：</p>
+<figure data-raw="<!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 -->
+<match target=&quot;font&quot;>
+  <test name=&quot;family&quot; qual=&quot;any&quot;>
+    <string>Noto Color Emoji</string>
+  </test>
+  <edit name=&quot;scalable&quot; mode=&quot;assign&quot;>
+    <bool>true</bool>
+  </edit>
+  <edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;>
+    <bool>true</bool>
+  </edit>
+  <edit name=&quot;hinting&quot; mode=&quot;assign&quot;>
+    <bool>false</bool>
+  </edit>
+  <edit name=&quot;antialias&quot; mode=&quot;assign&quot;>
+    <bool>false</bool>
+  </edit>
+</match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 --&gt;
+&lt;match target="font"&gt;
+  &lt;test name="family" qual="any"&gt;
+    &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+  &lt;/test&gt;
+  &lt;edit name="scalable" mode="assign"&gt;
+    &lt;bool&gt;true&lt;/bool&gt;
+  &lt;/edit&gt;
+  &lt;edit name="embeddedbitmap" mode="assign"&gt;
+    &lt;bool&gt;true&lt;/bool&gt;
+  &lt;/edit&gt;
+  &lt;edit name="hinting" mode="assign"&gt;
+    &lt;bool&gt;false&lt;/bool&gt;
+  &lt;/edit&gt;
+  &lt;edit name="antialias" mode="assign"&gt;
+    &lt;bool&gt;false&lt;/bool&gt;
+  &lt;/edit&gt;
+&lt;/match&gt;</code></pre></figure>
+<p>重新登录，输入法里面的 emoji 都显示出来了，我以为事情到这里就结束了，没想到噩梦才刚刚开始……</p>
+<p>某一天用 firefox 打开 twitter，发现里面字体都是毛毛糙糙的，我觉得很离奇，明明我只是对 Noto Color Emoji 关了抗锯齿，为什么 twitter 的字体也受到影响了？而且其他页面的字体都是正常的，后来我又打开过一个微软的文档页面，也出现了类似的毛病。我研究了一下发现这两个页面都用了自定义的 webfont。可是 webfont 和 Noto Color Emoji 有什么关系？人类摸不着头发。</p>
+<p>我查了很多博客文章，不过它们都关注在正常的字体顺序上，还没有人研究 webfont 有什么问题。于是我只能自己研究，不过我不能保证我对 fontconfig 的理解完全正确，这东西看起来非常复杂，不过我还是大致搞清楚了一些事情。引用我看到的 <a href="https://eev.ee/blog/2015/05/20/i-stared-into-the-fontconfig-and-the-fontconfig-stared-back-at-me/" target="_blank" rel="external nofollow noreferrer noopener">一篇英文博客</a> 的标题：</p>
+<div class="centerquote">
+当我凝视着 fontconfig 时，fontconfig 也在凝视着我。
+</div>
+
+<p>首先我找到了这个叫 <a href="http://marguerite.su/posts/fontconfig_%E5%87%A0%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91/" target="_blank" rel="external nofollow noreferrer noopener">fontconfig 几个常见的坑</a> 的文章，里面信息量挺大的，不过说实话没有解决掉我的问题——我明明只对匹配到 Noto Color Emoji 时候关掉了抗锯齿，为什么 webfont 也受到影响了呢？这篇文章主要介绍怎么调整字体列表顺序，不过说实话我没有遇到那么多障碍，简单的写法就工作了。同一个作者还写了 <a href="http://marguerite.su/posts/color_emoji_in_opensuse/" target="_blank" rel="external nofollow noreferrer noopener">Color Emoji in openSUSE</a> 的文章，不过总感觉是交待到一半，翻了文章列表没有后续了。而且这篇文章关心的也是字体 fallback 时候某些字符选到错误的字体的问题，和我这个不太相关。</p>
+<p>然后还有 <a href="https://catcat.cc/post/2020-10-31/" target="_blank" rel="external nofollow noreferrer noopener">Linux fontconfig 的字体匹配</a> 这篇文章，它介绍了浏览器是怎么和 fontconfig 合作匹配字体的，但是对于 webfont 也是没有提到。包括它的后续文章 <a href="https://catcat.cc/post/2021-03-07/" target="_blank" rel="external nofollow noreferrer noopener">用 fontconfig 治理 Linux 中的字体</a> 也没提到和 Noto Color Emoji 相关的调整（可能和它用的 Twemoji 有关系）。</p>
+<p>然后我尝试按照文章里的办法对 firefox 进行一个 fontconfig 的调试，<code>FC_DEBUG=4 firefox --new-instance --private-window https://twitter.com/</code> 直接吐了 12 万行输出，我实在是不知道从哪里看了。翻了一下午胡乱修改了好几次配置也没找出来哪里有问题。就在我眼花的时候偶然看到一条有用的，fontconfig 吐出来一个匹配结果，family 是 <code>Roboto, Noto Sans CJK SC, Noto Color Emoji, sans-serif…</code> 等等一长串，style 是 <code>¶</code>。这个就很有趣了，因为我看 firefox 里面，twitter 用的 webfont 叫 TwitterChirp，它的 style 也是这么个 <code>¶</code>（我怀疑是个 bug），那这条可能就是相关的了。然后我发现这个匹配结果下面 antialias 是 false，但理论上来说这条又不是最先匹配到 Noto Color Emoji，怎么会应用 Noto Color Emoji 的设置呢？我猜测是因为默认 test 语句是 <code>qual="any"</code> 含义似乎是只要匹配到的有一个满足就应用，正常匹配一个字体应该是不会返回这么一长串 family 的（我用 <code>fc-match</code> 一般只返回一个符合条件的 <code>family</code>），虽然我不知道为什么 webfont 会返回这么一长串结果，总之我改成 <code>qual="all"</code> 也就是必须所有结果都是 Noto Color Emoji 时候才应用就好了对吧！然后重新登录，emoji 能显示，我以为已经胜利了！结果事情证明是半场开香槟……</p>
+<p>当我以为完全没问题，正打算用 atom 整理一下这份配置的时候，突然发现不对劲了……Atom里面的中文字体失去了抗锯齿……你可以想像我当时心情有多绝望。具体为什么还是同样的我不知道，不过我猜测恰好是和 <a href="https://catcat.cc/post/2020-10-31/" target="_blank" rel="external nofollow noreferrer noopener">Linux fontconfig 的字体匹配</a> 里面提到的 chromium 查询字体的奇葩逻辑有关系……可能只是它某次查询刚好漏掉了 Noto Sans CJK SC 匹配到了 Noto Color Emoji 然后就给了个 antialias false，然后再通过什么奇怪的 UI 字体查询找出了中文字体……反正总之我的心好累，我实在不知道该怎么解决了，我只想用个 emoji，我甚至还给 Noto Color Emoji 提了请求支持抗锯齿的 issue……然后我决定要不换成 Twemoji 算了。</p>
+<p>Twemoji 倒也不是开箱即用，它不能禁用内嵌点阵字体，不过好歹这个不像抗锯齿那么要命，就算影响了其他字体大概也许能够忽略吧……于是我改成了这个。不过这时候我突然灵光一闪有了新主意。</p>
+<p>按照前面那几篇博客和 <a href="http://www.jinbuguo.com/gui/fonts.conf.html" target="_blank" rel="external nofollow noreferrer noopener">这一篇手册翻译</a> 的讲解，fontconfig match 的 target 分为三个阶段，第一是 scan，扫描字体文件，构建一个集合。然后是 pattern，按照规则构建一个字体列表。最后是 font，意味着已经挑出了需要的字体列表。所以调整字体回退顺序一般都放在 pattern 阶段。而网上大部分都把对于 freetype2 微调的选项放在了 font 阶段，不过我想放在 scan 阶段是不是也可以？这样扫描到 Noto Color Emoji 的时候就对它设置选项，也就不存在 family 列表可能有很多项的问题了。测试了一下发现基本一切正常，于是就把所有 freetype2 微调选项移到了 scan 阶段。（我不是 fontconfig 的专家，这一段要是有错误还希望指正。）</p>
+<p>下面是我现在的配置，首先我配置文件放的位置是 <code>/etc/fonts/local.conf</code>，因为 <code>/etc/fonts/fonts.conf</code> 是发行版默认的设置，用来加载其他配置文件所以不能改，然后我想对所有用户都生效，所以没有放在我的家目录，Arch Linux 包含一个 <code>/etc/fonts/conf.d/51-local.conf</code> 文件，<code>/etc/fonts/fonts.conf</code> 会加载它，然后它再加载 <code>/etc/fonts/local.conf</code>。</p>
+<p>首先是 XML 开头必须要有的那些东西：</p>
+<figure data-raw="<?xml version=&quot;1.0&quot;?>
+<!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;>
+<fontconfig>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;
+&lt;fontconfig&gt;</code></pre></figure>
+<p>然后接下来就是针对所有字体的 freetype2 微调选项，按照上面介绍的放在 scan 阶段：</p>
+<figure data-raw="  <!-- 针对所有字体的默认设置，力求显示效果最好。 -->
+  <match target=&quot;scan&quot;>
+    <!-- 禁用内嵌点阵。 -->
+    <edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;>
+      <bool>false</bool>
+    </edit>
+    <!-- 禁用合成粗体。 -->
+    <edit name=&quot;embolden&quot; mode=&quot;assign&quot;>
+      <bool>false</bool>
+    </edit>
+    <!-- 设置显示器为 RGB 排列。 -->
+    <edit name=&quot;rgba&quot; mode=&quot;assign&quot;>
+      <const>rgb</const>
+    </edit>
+    <!-- 开启轻度微调。 -->
+    <edit name=&quot;hinting&quot; mode=&quot;assign&quot;>
+      <bool>true</bool>
+    </edit>
+    <edit name=&quot;autohint&quot; mode=&quot;assign&quot;>
+      <bool>true</bool>
+    </edit>
+    <edit name=&quot;hintstyle&quot; mode=&quot;assign&quot;>
+      <const>hintslight</const>
+    </edit>
+    <!-- 开启抗锯齿。 -->
+    <edit name=&quot;antialias&quot; mode=&quot;assign&quot;>
+      <bool>true</bool>
+    </edit>
+  </match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 针对所有字体的默认设置，力求显示效果最好。 --&gt;
+  &lt;match target="scan"&gt;
+    &lt;!-- 禁用内嵌点阵。 --&gt;
+    &lt;edit name="embeddedbitmap" mode="assign"&gt;
+      &lt;bool&gt;false&lt;/bool&gt;
+    &lt;/edit&gt;
+    &lt;!-- 禁用合成粗体。 --&gt;
+    &lt;edit name="embolden" mode="assign"&gt;
+      &lt;bool&gt;false&lt;/bool&gt;
+    &lt;/edit&gt;
+    &lt;!-- 设置显示器为 RGB 排列。 --&gt;
+    &lt;edit name="rgba" mode="assign"&gt;
+      &lt;const&gt;rgb&lt;/const&gt;
+    &lt;/edit&gt;
+    &lt;!-- 开启轻度微调。 --&gt;
+    &lt;edit name="hinting" mode="assign"&gt;
+      &lt;bool&gt;true&lt;/bool&gt;
+    &lt;/edit&gt;
+    &lt;edit name="autohint" mode="assign"&gt;
+      &lt;bool&gt;true&lt;/bool&gt;
+    &lt;/edit&gt;
+    &lt;edit name="hintstyle" mode="assign"&gt;
+      &lt;const&gt;hintslight&lt;/const&gt;
+    &lt;/edit&gt;
+    &lt;!-- 开启抗锯齿。 --&gt;
+    &lt;edit name="antialias" mode="assign"&gt;
+      &lt;bool&gt;true&lt;/bool&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre></figure>
+<p>内嵌点阵的效果通常没有矢量绘制的效果好，合成粗体也只是个临时方案，微调什么的见仁见智了就。</p>
+<p>然后对于 Twemoji 要打开内嵌点阵：</p>
+<figure data-raw="  <!-- 当然另一个简单方案是换成 Twemoji，不过它不能关这个。 -->
+  <match target=&quot;scan&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>Twemoji</string>
+    </test>
+    <edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;>
+      <bool>true</bool>
+    </edit>
+  </match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 当然另一个简单方案是换成 Twemoji，不过它不能关这个。 --&gt;
+  &lt;match target="scan"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;Twemoji&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="embeddedbitmap" mode="assign"&gt;
+      &lt;bool&gt;true&lt;/bool&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre></figure>
+<p>对于 Noto Color Emoji 也是打开内嵌点阵关闭微调和抗锯齿：</p>
+<figure data-raw="  <!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 -->
+  <match target=&quot;scan&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>Noto Color Emoji</string>
+    </test>
+    <edit name=&quot;scalable&quot; mode=&quot;assign&quot;>
+      <bool>true</bool>
+    </edit>
+    <edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;>
+      <bool>true</bool>
+    </edit>
+    <edit name=&quot;hinting&quot; mode=&quot;assign&quot;>
+      <bool>false</bool>
+    </edit>
+    <edit name=&quot;antialias&quot; mode=&quot;assign&quot;>
+      <bool>false</bool>
+    </edit>
+  </match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 --&gt;
+  &lt;match target="scan"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="scalable" mode="assign"&gt;
+      &lt;bool&gt;true&lt;/bool&gt;
+    &lt;/edit&gt;
+    &lt;edit name="embeddedbitmap" mode="assign"&gt;
+      &lt;bool&gt;true&lt;/bool&gt;
+    &lt;/edit&gt;
+    &lt;edit name="hinting" mode="assign"&gt;
+      &lt;bool&gt;false&lt;/bool&gt;
+    &lt;/edit&gt;
+    &lt;edit name="antialias" mode="assign"&gt;
+      &lt;bool&gt;false&lt;/bool&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre></figure>
+<p>我个人还有一个需求，Monaco 作为一个等宽字体竟然支持连字，导致某次我看别人的代码时候 <code>fi</code> 连在一起让我以为他没有对齐缩进，结果人家说是我的问题，十分尴尬，于是我在这里关掉了它。不过有些程序比如 firefox 是不支持这个的，解决方法是用 FontForge 编辑字体文件删掉连字相关的数据再导出……</p>
+<figure data-raw="  <!-- 我真不理解一个等宽字体要连字功能干嘛？故意变得不等宽？ -->
+  <match target=&quot;scan&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>Monaco</string>
+    </test>
+    <edit name=&quot;fontfeatures&quot; mode=&quot;append&quot;>
+      <string>liga off</string>
+      <string>dlig off</string>
+    </edit>
+  </match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 我真不理解一个等宽字体要连字功能干嘛？故意变得不等宽？ --&gt;
+  &lt;match target="scan"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;Monaco&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="fontfeatures" mode="append"&gt;
+      &lt;string&gt;liga off&lt;/string&gt;
+      &lt;string&gt;dlig off&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre></figure>
+<p>然后就是常见的默认字体代称（sans-serif，serif，monospace，emoji）回退列表了，我是按照 <code>Roboto/Roboto Slab/Monaco -&gt; Noto Sans/Serif (Mono) CJK SC -&gt; Noto Color Emoji</code> 的顺序回退的：</p>
+<figure data-raw="  <!-- 下面这一系列等同于 alias。 -->
+  <!-- 默认无衬线字体。 -->
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>sans</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
+      <string>Roboto</string>
+      <string>Noto Sans CJK SC</string>
+      <string>Noto Color Emoji</string>
+    </edit>
+  </match>
+
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>sans-serif</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
+      <string>Roboto</string>
+      <string>Noto Sans CJK SC</string>
+      <string>Noto Color Emoji</string>
+    </edit>
+  </match>
+
+  <!-- 默认有衬线字体。 -->
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>serif</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
+      <string>Roboto Slab</string>
+      <string>Noto Serif CJK SC</string>
+      <string>Noto Color Emoji</string>
+    </edit>
+  </match>
+
+  <!-- 默认等宽字体。 -->
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>monospace</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
+      <string>Monaco</string>
+      <string>Noto Sans Mono CJK SC</string>
+      <string>Noto Color Emoji</string>
+    </edit>
+  </match>
+
+  <!-- 默认 emoji 字体。 -->
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>emoji</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
+      <string>Noto Color Emoji</string>
+    </edit>
+  </match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 下面这一系列等同于 alias。 --&gt;
+  &lt;!-- 默认无衬线字体。 --&gt;
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;sans&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="prepend" binding="same"&gt;
+      &lt;string&gt;Roboto&lt;/string&gt;
+      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
+      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;
+
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;sans-serif&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="prepend" binding="same"&gt;
+      &lt;string&gt;Roboto&lt;/string&gt;
+      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
+      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;
+
+  &lt;!-- 默认有衬线字体。 --&gt;
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;serif&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="prepend" binding="same"&gt;
+      &lt;string&gt;Roboto Slab&lt;/string&gt;
+      &lt;string&gt;Noto Serif CJK SC&lt;/string&gt;
+      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;
+
+  &lt;!-- 默认等宽字体。 --&gt;
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;monospace&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="prepend" binding="same"&gt;
+      &lt;string&gt;Monaco&lt;/string&gt;
+      &lt;string&gt;Noto Sans Mono CJK SC&lt;/string&gt;
+      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;
+
+  &lt;!-- 默认 emoji 字体。 --&gt;
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;emoji&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="prepend" binding="same"&gt;
+      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre></figure>
+<p>这里的写法和 <code>&lt;alias&gt;</code> 是等价的。设置完这个记得把所有软件的自定义字体设置里面无衬线设置为 <code>sans-serif</code>，有衬线设置为 <code>serif</code>，等宽设置为 <code>monospace</code>，这样才会遵守这里的回退顺序。</p>
+<p>然后很多网站写的都是 Apple Color Emoji，我们这里自然是没有的，要换掉：</p>
+<figure data-raw="  <!-- 替换 Apple Color Emoji 字体。 -->
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>Apple Color Emoji</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;assign&quot; binding=&quot;same&quot;>
+      <string>Noto Color Emoji</string>
+    </edit>
+  </match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 替换 Apple Color Emoji 字体。 --&gt;
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;Apple Color Emoji&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="assign" binding="same"&gt;
+      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre></figure>
+<p>然后是个非常弱智的部分，B 站直播首页的 CSS 写死字体回退顺序为 <code>Arial,Microsoft YaHei, "Microsoft Sans Serif",Microsoft SanSerf,微软雅黑</code>，你没看错，这个不合格的前端连最后要加 sans-serif 保证兼容性都不知道，而且还把 Microsoft San Serif 拼错了，如果我是他的老板，我真想一拳打在他头上告诉他这个世界不是只有微软字体，然后再把他开除掉。但现在我需要加条规则让他匹配到我想要的字体，虽然这样在一些需要微软雅黑的 office 软件里面可能有问题，不过反正我的工作不需要用垃圾 office 哈哈哈哈哈哈哈哈哈哈：</p>
+<figure data-raw="  <!--
+    B 站直播首页的前端认为这个世界上只有微软字体（Arial,Microsoft YaHei,
+    &quot;Microsoft Sans Serif&quot;,Microsoft SanSerf,微软雅黑），
+    所以我不得不开着这几个规则。如果我是他的老板，我就会开除掉这个不合格的前端。
+    这里不能换成 sans-serif，因为它们只是插入用的锚点而不是子列表，
+    除非我们把这条抬到最前面。
+  -->
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>Microsoft YaHei</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;append&quot; binding=&quot;same&quot;>
+      <string>Roboto</string>
+      <string>Noto Sans CJK SC</string>
+    </edit>
+  </match>
+
+  <match target=&quot;pattern&quot;>
+    <test name=&quot;family&quot; qual=&quot;any&quot;>
+      <string>Microsoft Sans Serif</string>
+    </test>
+    <edit name=&quot;family&quot; mode=&quot;append&quot; binding=&quot;same&quot;>
+      <string>Roboto</string>
+      <string>Noto Sans CJK SC</string>
+    </edit>
+  </match>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!--
+    B 站直播首页的前端认为这个世界上只有微软字体（Arial,Microsoft YaHei,
+    "Microsoft Sans Serif",Microsoft SanSerf,微软雅黑），
+    所以我不得不开着这几个规则。如果我是他的老板，我就会开除掉这个不合格的前端。
+    这里不能换成 sans-serif，因为它们只是插入用的锚点而不是子列表，
+    除非我们把这条抬到最前面。
+  --&gt;
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;Microsoft YaHei&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="append" binding="same"&gt;
+      &lt;string&gt;Roboto&lt;/string&gt;
+      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;
+
+  &lt;match target="pattern"&gt;
+    &lt;test name="family" qual="any"&gt;
+      &lt;string&gt;Microsoft Sans Serif&lt;/string&gt;
+    &lt;/test&gt;
+    &lt;edit name="family" mode="append" binding="same"&gt;
+      &lt;string&gt;Roboto&lt;/string&gt;
+      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre></figure>
+<p>剩下还有一些冗长的用来在不同语言下选择不同的 Noto Sans CJK 变体的设置，因为 Noto Sans CJK 是一个多语种集合字体，然后中日韩对一些汉字有不同的变体，所以需要这一段，不过我就不贴在这里了，完整的文件可以在文章末尾下载。</p>
+<p>最后收个尾：</p>
+<figure data-raw="</fontconfig>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;/fontconfig&gt;</code></pre></figure>
+<p>完整的文件在这里：<a href="/posts/Fontconfig-NotoColorEmoji-Antialias/local.conf">local.conf</a>。</p>
+<p>😼</p>
+<p><em>Alynx Zhou</em></p>
+<p><strong>A Coder &amp; Dreamer</strong></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="fas fa-tag"></i>计算机</a><a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="fas fa-tag"></i>Linux</a><a class="post-tag button" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag"><i class="fas fa-tag"></i>字体</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/NVIDIA-GNOME-Wayland/" rel="prev" title="NVIDIA 驱动和 GNOME 和 Wayland"><span class="nav-title">NVIDIA 驱动和 GNOME 和 Wayland</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "Fontconfig 和 Noto Color Emoji 和抗锯齿",
+        "queryString": window.location.search,
+        "basePath": "/posts/Fontconfig-NotoColorEmoji-Antialias/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">79</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">68</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.8.1 at 2021-09-08T03:02:54.537Z. -->

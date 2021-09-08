@@ -3,6 +3,15 @@
   
   
   <url>
+    <loc>https://sh.alynx.one/posts/Fontconfig-NotoColorEmoji-Antialias/</loc>
+    
+    <lastmod>2021-09-08T01:33:33.000Z</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/</loc>
     
     <lastmod>2021-07-29T23:50:39.000Z</lastmod>
@@ -715,6 +724,15 @@
   
   
   <url>
+    <loc>https://sh.alynx.one/channel/</loc>
+    
+    <lastmod>2020-08-05T03:22:00.000Z</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://sh.alynx.one/about/</loc>
     
     <lastmod>2021-01-04T09:21:00.000Z</lastmod>
@@ -727,15 +745,6 @@
     <loc>https://sh.alynx.one/blogroll/</loc>
     
     <lastmod>2020-08-24T01:20:00.000Z</lastmod>
-    
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://sh.alynx.one/channel/</loc>
-    
-    <lastmod>2020-08-05T03:22:00.000Z</lastmod>
     
   </url>
   
@@ -970,6 +979,13 @@
   
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Steam/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E5%AD%97%E4%BD%93/</loc>
     
   </url>
   
@@ -1383,6 +1399,13 @@
   
   <url>
     <loc>https://sh.alynx.one/tags/%E5%90%A6%E5%AE%9A/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/tags/%E5%AD%97%E4%BD%93/</loc>
     
   </url>
   
