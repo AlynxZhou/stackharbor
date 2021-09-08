@@ -270,7 +270,7 @@ Twemoji 倒也不是开箱即用，它不能禁用内嵌点阵字体，不过好
 ```
 
 然后是个非常弱智的部分，B 站直播首页的 CSS 写死字体回退顺序为 `Arial,Microsoft YaHei,
-"Microsoft Sans Serif",Microsoft SanSerf,微软雅黑`，你没看错，这个不合格的前端连最后要加 sans-serif 保证兼容性都不知道，而且还把 Microsoft San Serif 拼错了，如果我是他的老板，我真想一拳打在他头上告诉他这个世界不是只有微软字体，然后再把他开除掉。但现在我需要加条规则让他匹配到我想要的字体，虽然这样在一些需要微软雅黑的 office 软件里面可能有问题，不过反正我的工作不需要用垃圾 office 哈哈哈哈哈哈哈哈哈哈：
+"Microsoft Sans Serif",Microsoft SanSerf,微软雅黑`，你没看错，这个不合格的前端连最后要加 sans-serif 保证兼容性都不知道，而且还把 Microsoft Sans Serif 拼错了，如果我是他的老板，我真想一拳打在他头上告诉他这个世界不是只有微软字体，然后再把他开除掉。但现在我需要加条规则让他匹配到我想要的字体，虽然这样在一些需要微软雅黑的 office 软件里面可能有问题，不过反正我的工作不需要用垃圾 office 哈哈哈哈哈哈哈哈哈哈：
 
 ```xml
   <!--
