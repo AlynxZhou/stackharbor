@@ -376,6 +376,26 @@
 <h2 id="GNOMETerminalMiddleClickCloseTabPatch"><a class="header-link" href="/Undefined-Script-Works/#GNOMETerminalMiddleClickCloseTabPatch" title="GNOMETerminalMiddleClickCloseTabPatch"></a>GNOME Terminal Middle Click Close Tab Patch</h2>
 <p>一个添加了使用鼠标中键关闭 Tab 功能的 GNOME Terminal（上游不知道为什么一直没收我的 Patch）。</p>
 <p>Arch Linux 用户直接到 <a href="https://aur.archlinux.org/packages/gnome-terminal-middle-click-close-tab/" target="_blank" rel="external nofollow noreferrer noopener">AUR</a> 安装。</p>
+<h2 id="GNOMEShellExtensionNetSpeed"><a class="header-link" href="/Undefined-Script-Works/#GNOMEShellExtensionNetSpeed" title="GNOMEShellExtensionNetSpeed"></a>GNOME Shell Extension Net Speed</h2>
+<p>由于 Simple Netspeed 这个扩展一直没有修掉它字符乱闪的 bug（好像作者说是什么他不想让这个玩意总变化宽度所以设置了固定的 width 然后删了就好了但是他不想改，不过说实话我觉得这玩意最多也就变两个字符宽），于是我就自己写了一个，我不太需要它那么多模式也不需要调整字号，所以这个扩展只有一种模式和一种字号。</p>
+<ul>
+<li>仓库：<a href="https://github.com/AlynxZhou/gnome-shell-extension-net-speed/" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/AlynxZhou/gnome-shell-extension-net-speed/</a></li>
+<li>GNOME Shell 扩展安装页：<a href="https://extensions.gnome.org/extension/4478/net-speed/" target="_blank" rel="external nofollow noreferrer noopener">https://extensions.gnome.org/extension/4478/net-speed/</a></li>
+<li>AUR: <a href="https://aur.archlinux.org/packages/gnome-shell-extension-net-speed/" target="_blank" rel="external nofollow noreferrer noopener">https://aur.archlinux.org/packages/gnome-shell-extension-net-speed/</a></li>
+</ul>
+<h2 id="GNOMEShellExtensionFixedIMEList"><a class="header-link" href="/Undefined-Script-Works/#GNOMEShellExtensionFixedIMEList" title="GNOMEShellExtensionFixedIMEList"></a>GNOME Shell Extension Fixed IME List</h2>
+<p>我不知道是哪个脑子抽了的小天才在 GNOME Shell 里加了代码给输入法列表改成了最近优先排序，输入法列表顺序一直变化，于是当我有三个输入法的时候再也没办法不看列表盲切到我想要的那一个。这个扩展通过 hook 掉 GNOME Shell 里面一系列的函数去掉了这个添乱的“特性”，还你一个顺序固定的输入法列表。</p>
+<ul>
+<li>仓库：<a href="https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/</a></li>
+<li>GNOME Shell 扩展安装页：<a href="https://extensions.gnome.org/extension/3663/fixed-ime-list/" target="_blank" rel="external nofollow noreferrer noopener">https://extensions.gnome.org/extension/3663/fixed-ime-list/</a></li>
+<li>AUR: <a href="https://aur.archlinux.org/packages/gnome-shell-extension-fixed-ime-list/" target="_blank" rel="external nofollow noreferrer noopener">https://aur.archlinux.org/packages/gnome-shell-extension-fixed-ime-list/</a></li>
+</ul>
+<h2 id="GNOMEShellExtensionAlwaysShowWorkspaceThumbnails"><a class="header-link" href="/Undefined-Script-Works/#GNOMEShellExtensionAlwaysShowWorkspaceThumbnails" title="GNOMEShellExtensionAlwaysShowWorkspaceThumbnails"></a>GNOME Shell Extension Always Show Workspace Thumbnails</h2>
+<p>更新到 GNOME 40 后如果你刚开机只有一个工作区的话，工作区缩略图现在是不显示的，开发者表示“这是为了方便那些不会用工作区的用户，给他们提供更大的空间”，但我觉得这位小天才显然忽视了我们这些高度依赖工作区的用户，另外我个人觉得既然你把工作区作为自己的主要特性之一，那对于那些不会用工作区的用户应当想办法提示并教会他们使用工作区，而不是迁就他们从而影响到已经在使用这个特性的用户。不过反正我看了一眼代码非常简单，这个扩展 hook 掉那个决定是否显示工作区缩略图的函数，不论什么时候都返回 <code>true</code> 就可以了。太过简单以至于我都没有给它打 AUR 的包。</p>
+<ul>
+<li>仓库：<a href="https://github.com/AlynxZhou/gnome-shell-extension-always-show-workspace-thumbnails/" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/AlynxZhou/gnome-shell-extension-always-show-workspace-thumbnails/</a></li>
+<li>GNOME Shell 扩展安装页：<a href="https://extensions.gnome.org/extension/4156/always-show-workspace-thumbnails/" target="_blank" rel="external nofollow noreferrer noopener">https://extensions.gnome.org/extension/4156/always-show-workspace-thumbnails/</a></li>
+</ul>
 <h2 id="AZTGBot"><a class="header-link" href="/Undefined-Script-Works/#AZTGBot" title="AZTGBot"></a>AZTGBot</h2>
 <p>零依赖 Node.JS Telegram Bot API 框架。</p>
 <ul>
@@ -623,6 +643,24 @@
       
         <li>
           
+          <a class="list-group-item toc-link" href="#GNOMEShellExtensionNetSpeed">GNOME Shell Extension Net Speed</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#GNOMEShellExtensionFixedIMEList">GNOME Shell Extension Fixed IME List</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#GNOMEShellExtensionAlwaysShowWorkspaceThumbnails">GNOME Shell Extension Always Show Workspace Thumbnails</a>
+          
+        </li>
+      
+        <li>
+          
           <a class="list-group-item toc-link" href="#AZTGBot">AZTGBot</a>
           
         </li>
@@ -745,4 +783,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.2 at 2021-09-08T08:20:32.562Z. -->
+<!-- Page built by Hikaru v1.8.2 at 2021-09-08T09:00:55.926Z. -->

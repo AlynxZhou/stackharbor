@@ -51,6 +51,29 @@ C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出�
 
 Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-terminal-middle-click-close-tab/) 安装。
 
+## GNOME Shell Extension Net Speed
+
+由于 Simple Netspeed 这个扩展一直没有修掉它字符乱闪的 bug（好像作者说是什么他不想让这个玩意总变化宽度所以设置了固定的 width 然后删了就好了但是他不想改，不过说实话我觉得这玩意最多也就变两个字符宽），于是我就自己写了一个，我不太需要它那么多模式也不需要调整字号，所以这个扩展只有一种模式和一种字号。
+
+- 仓库：<https://github.com/AlynxZhou/gnome-shell-extension-net-speed/>
+- GNOME Shell 扩展安装页：<https://extensions.gnome.org/extension/4478/net-speed/>
+- AUR: <https://aur.archlinux.org/packages/gnome-shell-extension-net-speed/>
+
+## GNOME Shell Extension Fixed IME List
+
+我不知道是哪个脑子抽了的小天才在 GNOME Shell 里加了代码给输入法列表改成了最近优先排序，输入法列表顺序一直变化，于是当我有三个输入法的时候再也没办法不看列表盲切到我想要的那一个。这个扩展通过 hook 掉 GNOME Shell 里面一系列的函数去掉了这个添乱的“特性”，还你一个顺序固定的输入法列表。
+
+- 仓库：<https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/>
+- GNOME Shell 扩展安装页：<https://extensions.gnome.org/extension/3663/fixed-ime-list/>
+- AUR: <https://aur.archlinux.org/packages/gnome-shell-extension-fixed-ime-list/>
+
+## GNOME Shell Extension Always Show Workspace Thumbnails
+
+更新到 GNOME 40 后如果你刚开机只有一个工作区的话，工作区缩略图现在是不显示的，开发者表示“这是为了方便那些不会用工作区的用户，给他们提供更大的空间”，但我觉得这位小天才显然忽视了我们这些高度依赖工作区的用户，另外我个人觉得既然你把工作区作为自己的主要特性之一，那对于那些不会用工作区的用户应当想办法提示并教会他们使用工作区，而不是迁就他们从而影响到已经在使用这个特性的用户。不过反正我看了一眼代码非常简单，这个扩展 hook 掉那个决定是否显示工作区缩略图的函数，不论什么时候都返回 `true` 就可以了。太过简单以至于我都没有给它打 AUR 的包。
+
+- 仓库：<https://github.com/AlynxZhou/gnome-shell-extension-always-show-workspace-thumbnails/>
+- GNOME Shell 扩展安装页：<https://extensions.gnome.org/extension/4156/always-show-workspace-thumbnails/>
+
 ## AZTGBot
 
 零依赖 Node.JS Telegram Bot API 框架。
