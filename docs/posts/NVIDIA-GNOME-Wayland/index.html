@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.8.1">
+    <meta name="generator" content="Hikaru v1.8.2">
     <link rel="canonical" href="https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -366,12 +366,14 @@ ATTR{vendor}==&quot;0x19e5&quot;, ATTR{device}==&quot;0x1711&quot;, RUN+=&quot;/
 # disable Wayland when using the proprietary nvidia driver
 DRIVER==&quot;nvidia&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;
 # disable Wayland if modesetting is disabled
-IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;" class="code-block"><pre class="code"><code># disable Wayland on Hi1710 chipsets
+IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;
+" class="code-block"><pre class="code"><code># disable Wayland on Hi1710 chipsets
 ATTR{vendor}=="0x19e5", ATTR{device}=="0x1711", RUN+="/usr/lib/gdm-runtime-config set daemon WaylandEnable false"
 # disable Wayland when using the proprietary nvidia driver
 DRIVER=="nvidia", RUN+="/usr/lib/gdm-runtime-config set daemon WaylandEnable false"
 # disable Wayland if modesetting is disabled
-IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon WaylandEnable false"</code></pre></figure>
+IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon WaylandEnable false"
+</code></pre></figure>
 <p>第二行表示如果检测到 NVIDIA 闭源驱动就关闭 Wayland，第三行则是如果没开启 Kernel Mode Setting 也关掉 Wayland。</p>
 <p>我猜大部分用户都没有第一行的设备，所以我建议直接 <code>ln -s /dev/null /etc/udev/rules.d/61-gdm.rules</code> 屏蔽掉这个文件。</p>
 <p>别问我既然 470 驱动都出来了 GNOME 开发者为什么不删掉这个文件，NVIDIA 憋出来 470 驱动总共也就一周多点，还有一堆小问题呢，删了怕不是又有一堆人来骂“怎么又把不稳定的东西搞给我了”。</p>
@@ -780,4 +782,4 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-09-08T04:08:51.384Z. -->
+<!-- Page built by Hikaru v1.8.2 at 2021-09-08T08:20:32.500Z. -->

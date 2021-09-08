@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.8.1">
+    <meta name="generator" content="Hikaru v1.8.2">
     <link rel="canonical" href="https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -402,7 +402,8 @@ const cachedFetchJSON = (path, opts = {}) => {
       throw new Error(&quot;Unexpected HTTP status code &quot; + response.status);
     }
   });
-};" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">let cachePromise = window.caches.open("cacheName");
+};
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">let cachePromise = window.caches.open("cacheName");
 
 // Fetching JSON with cache for GitHub API.
 const cachedFetchJSON = (path, opts = {}) =&gt; {
@@ -437,7 +438,8 @@ const cachedFetchJSON = (path, opts = {}) =&gt; {
       throw new Error("Unexpected HTTP status code " + response.status);
     }
   });
-};</code></pre></figure>
+};
+</code></pre></figure>
 <p>当然理想很丰满现实很骨感，在不支持 CacheStorage 的浏览器里要 fallback 到不带缓存的版本，本来我以为很简单，但是……（下面开启吐槽时间。）</p>
 <blockquote class="center-quote">支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。</blockquote>
 
@@ -488,7 +490,8 @@ const loadCache = (name) => {
   }).catch((error) => {
     console.error(error);
   });
-};" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">// 加载评论的时候才加载缓存。
+};
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">// 加载评论的时候才加载缓存。
 let cachePromise = null;
 
 let fetchJSON = uncachedFetchJSON;
@@ -533,7 +536,8 @@ const loadCache = (name) =&gt; {
   }).catch((error) =&gt; {
     console.error(error);
   });
-};</code></pre></figure>
+};
+</code></pre></figure>
 <p>不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。</p>
 <h1 id="由俭入奢易，由奢入俭难。"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82" title="由俭入奢易，由奢入俭难。"></a>由俭入奢易，由奢入俭难。</h1>
 <div class="alert-green">这一部分更新于 2020-08-18 12:25:00。</div>
@@ -880,4 +884,4 @@ const loadCache = (name) =&gt; {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-09-08T04:08:51.390Z. -->
+<!-- Page built by Hikaru v1.8.2 at 2021-09-08T08:20:32.506Z. -->

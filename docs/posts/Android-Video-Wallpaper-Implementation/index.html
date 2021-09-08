@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.8.1">
+    <meta name="generator" content="Hikaru v1.8.2">
     <link rel="canonical" href="https://sh.alynx.one/posts/Android-Video-Wallpaper-Implementation/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -350,10 +350,12 @@
 <figure data-raw="<uses-permission android:name=&quot;android.permission.SET_WALLPAPER&quot; />
 <uses-feature
   android:name=&quot;android.software.live_wallpaper&quot;
-  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;uses-permission android:name="android.permission.SET_WALLPAPER" /&gt;
+  android:required=&quot;true&quot; />
+" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;uses-permission android:name="android.permission.SET_WALLPAPER" /&gt;
 &lt;uses-feature
   android:name="android.software.live_wallpaper"
-  android:required="true" /&gt;</code></pre></figure>
+  android:required="true" /&gt;
+</code></pre></figure>
 <p>你要是能把这一行加到 <code>&lt;manifest&gt;</code> 标签外面，我觉得你也没必要写代码了……但这个要放在 <code>&lt;application&gt;</code> 标签的外面，具体放在哪直接翻我仓库里的文件好了，比我用文字描述清晰的多。</p>
 <p>但是下面这个要加到 <code>&lt;application&gt;</code> 标签的里面：</p>
 <figure data-raw="<service
@@ -365,7 +367,8 @@
   <meta-data
     android:name=&quot;android.service.wallpaper&quot;
     android:resource=&quot;@xml/wallpaper&quot; />
-</service>" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;service
+</service>
+" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;service
   android:name=".GLWallpaperService"
   android:permission="android.permission.BIND_WALLPAPER"&gt;
   &lt;intent-filter&gt;
@@ -374,7 +377,8 @@
   &lt;meta-data
     android:name="android.service.wallpaper"
     android:resource="@xml/wallpaper" /&gt;
-&lt;/service&gt;</code></pre></figure>
+&lt;/service&gt;
+</code></pre></figure>
 <p>看到那个叫 <code>android:name</code> 的属性了吗，<code>.</code> 不能少，后面的名字则是一会你的 class 叫什么名字这里就什么名字。然后别的都是套路，可以不管，除了那个 <code>@xml/wallpaper</code>，这玩意要自己写。</p>
 <p>在你侧栏找到 <code>res</code> 目录，如果底下没有叫 <code>xml</code> 的目录的话，你就新建一个。然后你刚才那里斜杠后面是什么你就建立一个叫什么的 xml 文件，比如我写了 <code>@xml/wallpaper</code>，那就建立一个 <code>wallpaper.xml</code> 的文件，内容如下：</p>
 <figure data-raw="<?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
@@ -382,12 +386,14 @@
   xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
   android:thumbnail=&quot;@drawable/ic_icon&quot;
   android:description=&quot;@string/wallpaper_description&quot;
-  android:settingsActivity=&quot;xyz.alynx.livewallpaper.MainActivity&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  android:settingsActivity=&quot;xyz.alynx.livewallpaper.MainActivity&quot; />
+" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;wallpaper
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:thumbnail="@drawable/ic_icon"
   android:description="@string/wallpaper_description"
-  android:settingsActivity="xyz.alynx.livewallpaper.MainActivity" /&gt;</code></pre></figure>
+  android:settingsActivity="xyz.alynx.livewallpaper.MainActivity" /&gt;
+</code></pre></figure>
 <p>这里面也有些地方需要改，首先那个 <code>@drawable/ic_icon</code> 是你这个程序在系统的动态壁纸列表里面的图标（然而大部分定制的系统都忽略了这玩意），你可以用 Android Studio 在 <code>res/drawable</code> 目录下面生成一个，这个可以自己去查官方文档，<code>ic_icon</code> 要换成你生成的文件的名字。<code>@string/wallpaper_description</code> 则是你的程序在列表里的名字或介绍，这个格式的意思是去 <code>res/values/strings.xml</code> 或者其他语言的 <code>strings.xml</code> 里面找字符串（写过点复杂程序的人应该都懂吧！不懂自学去！我这不是教你怎么写代码！），你可以用 Android Studio 的字符串编辑器添加一条，然后把这里的键改成你添加的。最后一个 <code>settingsActivity</code> 是干嘛的呢？在预览动态壁纸的页面会有个设置按钮，如果你的动态壁纸可以设置参数，点击那个按钮会跳进动态壁纸设置页面，设置页面就是在这里指定的类，因为我设置项不多直接放菜单里了，所以我写的是直接跳进 <code>MainActivity</code>，你写的时候也可以这样，但记得换成你的包名（不换的人我怀疑你没写过 Java，那你学个毛 Android App 开发？）。</p>
 <p>废话终于说完了可以写代码了好开心啊……</p>
 <h1 id="然后你看见网上一堆胶水代码……"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6" title="然后你看见网上一堆胶水代码……"></a>然后你看见网上一堆胶水代码……</h1>
@@ -408,7 +414,8 @@ public class GLWallpaperService extends WallpaperService {
     public Engine onCreateEngine() {
         return new GLWallpaperEngine();
     }
-}" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
+}
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
 
 import android.service.wallpaper.WallpaperService;
 
@@ -421,7 +428,8 @@ public class GLWallpaperService extends WallpaperService {
     public Engine onCreateEngine() {
         return new GLWallpaperEngine();
     }
-}</code></pre></figure>
+}
+</code></pre></figure>
 <p>所以你看，你只需要实现 <code>WallpaperService</code> 的一个方法，就是在系统需要 <code>Engine</code> 的时候，返回你自己的 <code>Engine</code> 实例。</p>
 <p>然后你需要在你的 <code>Engine</code>（我的是 <code>GLWallpaperEngine</code>）里面实现一些系统要求的方法，我们先说最基础的几个：</p>
 <figure data-raw="        @Override
@@ -448,7 +456,8 @@ public class GLWallpaperService extends WallpaperService {
                 xOffset, yOffset, xOffsetStep,
                 yOffsetStep, xPixelOffset, yPixelOffset
             );
-        }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        @Override
+        }
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        @Override
         public void onSurfaceCreated(SurfaceHolder surfaceHolder) {
             super.onSurfaceCreated(surfaceHolder);
         }
@@ -472,7 +481,8 @@ public class GLWallpaperService extends WallpaperService {
                 xOffset, yOffset, xOffsetStep,
                 yOffsetStep, xPixelOffset, yPixelOffset
             );
-        }</code></pre></figure>
+        }
+</code></pre></figure>
 <p>Android 的动态壁纸实际上是一个 <code>Surface</code>（Android 的 <code>Surface</code> 你可以理解为画布……大概吧），系统调用你的 <code>Engine</code>，然后给你一个可以绘制的 <code>SurfaceHolder</code>，你只要往这个 <code>SurfaceHolder</code> 里面的 <code>Surface</code> 画东西就行了。<code>onSurfaceCreated()</code> 表示画布准备好了，<code>onVisibilityChanged()</code> 则表示画布看不见了或者又出来了，<code>onSurfaceDestroyed()</code> 表示画布没了（我不是你英语老师！），<code>onOffsetsChanged()</code> 则是桌面通知壁纸偏移量，通常是实现壁纸随桌面滚动的效果。</p>
 <p>不要把他们和 <code>onCreate()</code> 和 <code>onDestoryed()</code> 搞混了，那俩说的是 <code>Engine</code>，但我们做绘制工作时候操心的是画布。</p>
 <p>为什么说是个胶水代码呢……因为 Android 内建了一个播放器叫 <code>MediaPlayer</code>，它有个方法叫 <code>setSurface()</code>，可以把视频渲染到画布上，然后我们就美滋滋地看……到 bug。</p>
@@ -501,7 +511,8 @@ public class GLWallpaperService extends WallpaperService {
             public void onDestroy() {
                 super.onDetachedFromWindow();
             }
-        }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        private class GLWallpaperSurfaceView extends GLSurfaceView {
+        }
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        private class GLWallpaperSurfaceView extends GLSurfaceView {
             private static final String TAG = "GLWallpaperSurface";
 
             public GLWallpaperSurfaceView(Context context) {
@@ -516,7 +527,8 @@ public class GLWallpaperService extends WallpaperService {
             public void onDestroy() {
                 super.onDetachedFromWindow();
             }
-        }</code></pre></figure>
+        }
+</code></pre></figure>
 <p>看到那个 <code>getHolder()</code> 了吗？没错！<code>GLSurfaceView</code> 似乎内部自己有个 <code>SurfaceHolder</code>，我们 hack 一下它，扩展出一个 <code>GLWallpaperSurfaceView</code>，因为它是个内部类，当它要往自己的 <code>SurfaceHolder</code> 上渲染时，我们偷梁换柱，返回它 <code>Engine.getSurfaceHolder()</code>，可怜的家伙还蒙在鼓里，自己内部的 <code>SurfaceHolder</code> 已经没用了，现在它画的实际上是桌面壁纸的 <code>Surface</code>。</p>
 <p>我也不知道谁先想出的这个套路，但第一个想出这个办法的老哥可真是个天才。</p>
 <p>至于你问 <code>Context</code> 从哪来？<code>Service</code> 就是个 <code>Context</code>，所以你改写一下 <code>Engine</code> 的构造函数把 <code>Service</code> 传进去，然后创建 <code>GLWallpaperSurfaceView</code> 时传给它就行了，基本操作基本操作。</p>
@@ -524,9 +536,11 @@ public class GLWallpaperService extends WallpaperService {
 <p>当然最好在 <code>AndroidManifest.xml</code> 声明一下你这个应用需要的 GLES 版本：</p>
 <figure data-raw="<uses-feature
   android:glEsVersion=&quot;0x00020000&quot;
-  android:required=&quot;true&quot; />" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;uses-feature
+  android:required=&quot;true&quot; />
+" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;uses-feature
   android:glEsVersion="0x00020000"
-  android:required="true" /&gt;</code></pre></figure>
+  android:required="true" /&gt;
+</code></pre></figure>
 <p>如果你只支持 v3，就把 2 改成 3。</p>
 <p>（已经进入这个阶段了，打算拿这个当“我的第一个 Android App”的同学就自己退出吧。）</p>
 <p>我直接帖完整代码解释好了，因为实在是不好一点点讲了，反正会写 OpenGL 的人应该也能理解这种程度的代码了。</p>
@@ -548,7 +562,8 @@ out vec2 tex_coord;
 void main() {
     gl_Position = mvp * vec4(in_position, 1.0f, 1.0f);
     tex_coord = in_tex_coord;
-}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
+}
+" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
 
 // Some Android phone driver needs to put pre-processor in the first line. (e.g. Huawei Kirin)
 
@@ -562,7 +577,8 @@ out vec2 tex_coord;
 void main() {
     gl_Position = mvp * vec4(in_position, 1.0f, 1.0f);
     tex_coord = in_tex_coord;
-}</code></pre></figure>
+}
+</code></pre></figure>
 <p>应该在你画三角形的时候就学会这玩意了吧？注意有些手机的实现要求第一行不能是注释，否则会报错。</p>
 <ul>
 <li>fragment shader</li>
@@ -585,7 +601,8 @@ out vec4 frag_color;
 
 void main() {
     frag_color = texture(frame, tex_coord);
-}" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
+}
+" data-info="language-glsl" data-lang="glsl" class="code-block"><pre class="code"><code class="language-glsl">#version 300 es
 #ifdef GL_OES_EGL_image_external_essl3
 #extension GL_OES_EGL_image_external_essl3 : require
 #else
@@ -603,7 +620,8 @@ out vec4 frag_color;
 
 void main() {
     frag_color = texture(frame, tex_coord);
-}</code></pre></figure>
+}
+</code></pre></figure>
 <p>注意开头的判断！本来在 GLESv3 里面，对这种 Android 直接拿 <code>Surface</code> 当纹理的 flag 是 <code>GL_OES_EGL_image_external_essl3</code>，<code>GL_OES_EGL_image_external</code> 已经被废弃了，但有些支持 GLESv3 的手机只支持旧的表达方法，所以我们判断一下就好。GLESv2 则直接用后面那个，不要用前面的。</p>
 <p>同样，纹理类型也要换成 <code>samplerExternalOES</code>，别的都没关系了。</p>
 <p>编译和链接的过程我直接写成工具函数了，连同加载 <code>res/raw</code> 的代码，我贴上来：</p>
@@ -661,7 +679,8 @@ static int linkProgramGLES30(
         throw new RuntimeException(log);
     }
     return program;
-}" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">static int compileShaderResourceGLES30(
+}
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">static int compileShaderResourceGLES30(
     @NonNull Context context,
     final int shaderType,
     final int shaderRes
@@ -715,7 +734,8 @@ static int linkProgramGLES30(
         throw new RuntimeException(log);
     }
     return program;
-}</code></pre></figure>
+}
+</code></pre></figure>
 <p>当然还是那个令人头疼的问题，你需要传个 <code>Context</code>，这个问题不大，<code>Engine</code> 创建 <code>Renderer</code> 的时候传给它就好了。</p>
 <p><code>Renderer</code> 则是按下面的写：</p>
 <figure data-raw="package xyz.alynx.livewallpaper;
@@ -744,7 +764,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     private float xOffset = 0;
     private float yOffset = 0;
     private long updatedFrame = 0;
-    private long renderedFrame = 0;" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
+    private long renderedFrame = 0;
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">package xyz.alynx.livewallpaper;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
@@ -770,7 +791,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     private float xOffset = 0;
     private float yOffset = 0;
     private long updatedFrame = 0;
-    private long renderedFrame = 0;</code></pre></figure>
+    private long renderedFrame = 0;
+</code></pre></figure>
 <p>上面这部份的变量都是一会要用到的，一会再说。</p>
 <figure data-raw="    GLWallpaperRenderer(@NonNull final Context context) {
         this.context = context;
@@ -830,7 +852,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     @NonNull
     public Context getContext() {
         return context;
-    }" class="code-block"><pre class="code"><code>    GLWallpaperRenderer(@NonNull final Context context) {
+    }
+" class="code-block"><pre class="code"><code>    GLWallpaperRenderer(@NonNull final Context context) {
         this.context = context;
 
         // Those replaced glGenBuffers() and glBufferData().
@@ -888,7 +911,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     @NonNull
     public Context getContext() {
         return context;
-    }</code></pre></figure>
+    }
+</code></pre></figure>
 <p>这部份很好懂吧？先处理 <code>Context</code>，然后我们准备 OpenGL 需要的坐标，正方形的模型坐标，纹理坐标，以及一个索引 buffer，不同的是在 Android 里面不用写 <code>glGenBuffers</code>、<code>glBindBuffer</code> 了，我们用 java 的 nio 准备数组，然后 Android 可以直接加载这里面的 buffer。（但是 mvp 矩阵仍然是数组。）</p>
 <p>当然，这里是没有 OpenGL 的上下文的，所以我们现在不能处理 OpenGL 的设置，需要实现下面这些方法：</p>
 <figure data-raw="    @Override
@@ -970,7 +994,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         GLES30.glUseProgram(program);
         GLES30.glUniformMatrix4fv(mvpLocation, 1, false, mvp, 0);
         GLES30.glDrawElements(GLES30.GL_TRIANGLES, 6, GLES30.GL_UNSIGNED_INT, indices);
-    }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">    @Override
+    }
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">    @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         // No depth test for 2D video.
         GLES30.glDisable(GLES30.GL_DEPTH_TEST);
@@ -1049,7 +1074,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         GLES30.glUseProgram(program);
         GLES30.glUniformMatrix4fv(mvpLocation, 1, false, mvp, 0);
         GLES30.glDrawElements(GLES30.GL_TRIANGLES, 6, GLES30.GL_UNSIGNED_INT, indices);
-    }</code></pre></figure>
+    }
+</code></pre></figure>
 <p>这部份方法看名字就能看出来，需要注意的是那个 <code>gl10</code> 是 GLESv1 的用法，至于 v2 和 v3 都改成静态类了，所以我们用不到它。既然是 2D 贴图，就不需要深度测试和背面剔除了。然后设置纹理参数时需要用 <code>GLES11Ext.GL_TEXTURE_EXTERNAL_OES</code>，这个和 shader 里面是关联的。（哪个家伙把 GLESv2 和 v3 都支持的变量归属到 <code>GLES11Ext</code> 的，出来挨打！），别的地方会 OpenGL 的人都能看懂吧？最后，只有这三个函数有 OpenGL 上下文，其它的里面不能执行 OpenGL 操作。</p>
 <p>绘图时候 <strong>设置 mvp 矩阵不要用 nio 的 ByteBuffer</strong>，虽然有一个多态函数可以用，但似乎那个函数不能工作，所以我直接使用了 float 数组。</p>
 <p>下面是一些针对这个程序用到的方法。</p>
@@ -1059,13 +1085,15 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         // Because maybe a new video is loaded.
         createSurfaceTexture();
         exoPlayer.setVideoSurface(new Surface(surfaceTexture));
-    }" class="code-block"><pre class="code"><code>    @Override
+    }
+" class="code-block"><pre class="code"><code>    @Override
     void setSourcePlayer(@NonNull final SimpleExoPlayer exoPlayer) {
         // Re-create SurfaceTexture when getting a new player.
         // Because maybe a new video is loaded.
         createSurfaceTexture();
         exoPlayer.setVideoSurface(new Surface(surfaceTexture));
-    }</code></pre></figure>
+    }
+</code></pre></figure>
 <p>这里是让播放器把解码的目标位置设置成 <code>Renderer</code> 里面和 OpenGL 纹理绑定的 <code>SurfaceTexture</code> 上，这个类是 Android 专门设置用来干这个的，可以阅读手册。</p>
 <p>为什么是把播放器给 <code>Renderer</code> 让 <code>Renderer</code> 设置呢？因为 <code>Engine</code> 的生命周期里只用了一个 <code>Renderer</code> 但会经常释放重建 <code>Player</code>，每次都要重新建立对应视频大小的 <code>SurfaceTexture</code>，所以不能让 <code>Renderer</code> 暴露 <code>SurfaceTexture</code> 出去。</p>
 <p>我这里没有用 <code>MediaPlayer</code>，而是用了 Google 的 <code>ExoPlayer</code> 这个项目，具体原因一会再说。</p>
@@ -1102,7 +1130,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }" class="code-block"><pre class="code"><code>    @Override
+    }
+" class="code-block"><pre class="code"><code>    @Override
     void setScreenSize(int width, int height) {
         if (screenWidth != width || screenHeight != height) {
             screenWidth = width;
@@ -1135,7 +1164,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }</code></pre></figure>
+    }
+</code></pre></figure>
 <p>因为要计算缩放，所以我这里设置了两个方法，分别获取屏幕尺寸和视频尺寸。然后只要在每次尺寸变化时候重新计算矩阵就行了，因为不是经常变化，所以就不用每次绘制都重新计算。</p>
 <figure data-raw="    @Override
     void setOffset(float xOffset, float yOffset) {
@@ -1165,7 +1195,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }" class="code-block"><pre class="code"><code>    @Override
+    }
+" class="code-block"><pre class="code"><code>    @Override
     void setOffset(float xOffset, float yOffset) {
         final float maxXOffset = (1.0f - (
             (float)screenWidth / screenHeight) / ((float)videoWidth / videoHeight)
@@ -1193,7 +1224,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             ));
             updateMatrix();
         }
-    }</code></pre></figure>
+    }
+</code></pre></figure>
 <p>桌面在滑动的时候会调用 <code>Engine</code> 的方法告诉它滑动的值，为了实现视频随桌面平移的效果，我们可以在 <code>Engine</code> 里把值传给 <code>Renderer</code>，但我们要限制一下，偏移的位置不能超出视频尺寸，否则就出黑边了。</p>
 <figure data-raw="    private void createSurfaceTexture() {
         if (surfaceTexture != null) {
@@ -1210,7 +1242,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                 ++updatedFrame;
             }
         });
-    }" class="code-block"><pre class="code"><code>    private void createSurfaceTexture() {
+    }
+" class="code-block"><pre class="code"><code>    private void createSurfaceTexture() {
         if (surfaceTexture != null) {
             surfaceTexture.release();
             surfaceTexture = null;
@@ -1225,7 +1258,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                 ++updatedFrame;
             }
         });
-    }</code></pre></figure>
+    }
+</code></pre></figure>
 <p>需要注意这个函数里面的回调，为什么要设置一个计数器，而不是直接在这里执行 <code>SurfaceTexture.updateTexImage()</code> 呢？因为后者要求必须有 OpenGL 上下文……有上下文的只有之前的几个方法，其它是没有的。所以为什么这里用了两个计数器而不是一个 bool 变量呢（请自己回看 <code>onDrawFrame()</code> 函数）？因为这个 <code>SurfaceTexture</code> 内部似乎有排队机制，然后如果队列里有内容的话是不会调回调的……假如某一次传来了多于一帧，用 bool 变量翻转的时候就只能解决第一帧，后续视频就会卡住（这都是什么神仙写的 bug 啊喂！）。</p>
 <figure data-raw="    private void updateMatrix() {
         // Players are buggy and unclear, so we do crop by ourselves.
@@ -1267,7 +1301,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         }
         // This is a 2D center crop, so we only need model matrix, no view and projection.
     }
-}" class="code-block"><pre class="code"><code>    private void updateMatrix() {
+}
+" class="code-block"><pre class="code"><code>    private void updateMatrix() {
         // Players are buggy and unclear, so we do crop by ourselves.
         // Start with an identify matrix.
         for (int i = 0; i &lt; 16; ++i) {
@@ -1307,7 +1342,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
         }
         // This is a 2D center crop, so we only need model matrix, no view and projection.
     }
-}</code></pre></figure>
+}
+</code></pre></figure>
 <p>最后是计算矩阵，这里也很简单，只要注意计算时候，要分别以视频和屏幕最长的一条边作为单位一，然后分别缩放两者的另一侧，只是数学计算而已。然后为什么会有旋转呢？如果你不写旋转而又使用手机拍摄的竖屏视频做壁纸，就会发现方向是旋转了 90 度的，所以宽和高也都错了。原因是一些设备录像时候不会旋转帧内容，而是以传感器原生的方向存放像素，然后在视频 Metadata 里面记录一下旋转角度，由播放器做旋转。<code>MediaPlayer</code> 自己直接输出是会旋转的，但由于我们这里用它做解码器，所以它传过来的帧是原样的。</p>
 <p>解决方法是在 <code>Engine</code> 加载视频的时候先读取一下元数据，从元数据里获取视频的尺寸旋转量设置给 <code>Renderer</code>：</p>
 <figure data-raw="        private void getVideoMetadata() throws IOException {
@@ -1339,7 +1375,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             videoRotation = Integer.parseInt(rotation);
             videoWidth = Integer.parseInt(width);
             videoHeight = Integer.parseInt(height);
-        }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        private void getVideoMetadata() throws IOException {
+        }
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">        private void getVideoMetadata() throws IOException {
             final MediaMetadataRetriever mmr = new MediaMetadataRetriever();
             switch (wallpaperCard.getType()) {
             case INTERNAL:
@@ -1368,7 +1405,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
             videoRotation = Integer.parseInt(rotation);
             videoWidth = Integer.parseInt(width);
             videoHeight = Integer.parseInt(height);
-        }</code></pre></figure>
+        }
+</code></pre></figure>
 <p>当然 <code>WallpaperCard</code> 是我自己封装的类，关系不大。总之是使用 <code>MediaMetadataRetriever</code> 就可以了。至于你说视频元数据和实际内容不符怎么办？那是用户问题，用户自己处理不好视频为什么要我来解决？随便让他拿电脑上修改一下好了。</p>
 <p>这些实际上是这个应用的核心内容，其它的播放之类的都大同小异，总之如果你实现了 OpenGL 的剪裁功能，应该就可以正常播放壁纸了。其它部分直接参考我的代码或者网上的样例就可以了。</p>
 <p>顺便说一下，<code>SurfaceTexture</code> 似乎会给一个纹理矩阵，但我试着用了一下发现并不是需要的效果……所以还是自己处理吧。</p>
@@ -1389,7 +1427,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                         trackSelector.buildUponParameters().setRendererDisabled(i, true)
                     );
                 }
-            }" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">            trackSelector = new DefaultTrackSelector();
+            }
+" data-info="language-java" data-lang="java" class="code-block"><pre class="code"><code class="language-java">            trackSelector = new DefaultTrackSelector();
             exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
             exoPlayer.setVolume(0.0f);
             // Disable audio decoder.
@@ -1400,7 +1439,8 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
                         trackSelector.buildUponParameters().setRendererDisabled(i, true)
                     );
                 }
-            }</code></pre></figure>
+            }
+</code></pre></figure>
 <p>主要是创建 Player 时候单独给它一个 DefaultTrackSelector。然后关掉音轨。</p>
 <p>这样大概就可以运行了，剩下的一些问题都和视频渲染无关。</p>
 <h1 id="写UI也很麻烦！"><a class="header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81" title="写UI也很麻烦！"></a>写 UI 也很麻烦！</h1>
@@ -1764,4 +1804,4 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.1 at 2021-09-08T04:08:51.401Z. -->
+<!-- Page built by Hikaru v1.8.2 at 2021-09-08T08:20:32.516Z. -->
