@@ -47,7 +47,7 @@ C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出�
 
 ## GNOME Terminal Middle Click Close Tab Patch
 
-一个添加了使用鼠标中键关闭 Tab 功能的 GNOME Terminal（上游不知道为什么一直没收我的 Patch）。
+一个添加了使用鼠标中键关闭 tab 功能的 GNOME Terminal（上游维护者脾气古怪，觉得鼠标中键关 tab 容易误触并且容易和中键粘贴所以不合 patch，我个人觉得没这么大问题，不过无所谓）。
 
 Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-terminal-middle-click-close-tab/) 安装。
 
