@@ -3,6 +3,7 @@ title: NVIDIA 驱动和 GNOME 和 Wayland
 layout: post
 #comment: true
 created: 2021-07-30T07:50:39
+updated: 2021-09-17T18:51:21
 categories:
   - 计算机
   - GNOME
@@ -27,14 +28,16 @@ NVIDIA 闭源驱动之前一直是稀泥巴糊不上墙的垃圾，因为它在 
 
 ## 现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？
 
-更新到 470 驱动之后我第一时间体验了一下，结果就是很抱歉，还是不行，不过我遇到的都是一些小问题：
+更新到 470 驱动之后我第一时间体验了一下，~~结果就是很抱歉，还是不行，不过~~ 我遇到的都是一些小问题：
 
-- Firefox 稳定版没法正常工作，但是 Nightly 版本是可以的，原因是 NVIDIA 和 Mesa 的 EGL 实现存在一点小区别，[修复补丁](https://hg.mozilla.org/mozilla-central/rev/c2191ee9cb65)已经在 Nightly 里面了，我们只要等稳定版版本升上去就可以了。
-- GTK3 程序都能工作，但是 GTK4 的程序（比如 GNOME Extensions）却全都挂了，原因应该和 Firefox 一致，[修复补丁](https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3726)也已经合并了，只是还没有释出稳定版。
-- Google Chrome 不能工作，但是比较新的 Chromium 似乎可以，原因推测也是一样的，我懒得查了，同时所有 Electron 的程序（Atom，VSCode）应该都有同样的问题。
+- ~~Firefox 稳定版没法正常工作，但是 Nightly 版本是可以的，原因是 NVIDIA 和 Mesa 的 EGL 实现存在一点小区别，[修复补丁](https://hg.mozilla.org/mozilla-central/rev/c2191ee9cb65)已经在 Nightly 里面了，我们只要等稳定版版本升上去就可以了。~~
+- ~~GTK3 程序都能工作，但是 GTK4 的程序（比如 GNOME Extensions）却全都挂了，原因应该和 Firefox 一致，[修复补丁](https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3726)也已经合并了，只是还没有释出稳定版。~~
+- ~~Google Chrome 不能工作，但是比较新的 Chromium 似乎可以，原因推测也是一样的，我懒得查了，同时~~ 所有一直抱着旧版 Electron 不更新的程序应该都有同样的问题。
 - GNOME Shell 的缩略图会显示错误，看起来是个[两年的老 bug](https://gitlab.gnome.org/GNOME/mutter/-/issues/528)，最近开发者似乎找到了原因，还没修复。
 
-不过总而言之这些都是能很快修复（废话，大家动作都比 NVIDIA 快，建议老黄把自己的皮衣换成乌龟壳）的问题，不至于被卡很久，至于你的发行版是那种追求“稳定”选择了一个不支持的大版本然后不更新的？哈哈，管我 X 事。
+不过总而言之这些都是能很快修复（废话，大家动作都比 NVIDIA 快，建议老黄把自己的皮衣换成乌龟壳）的问题，不至于被卡很久，至于你的发行版是那种追求“稳定”选择了一个不支持的大版本然后不更新的？哈哈，关我 X 事。
+
+更新（2021-09-17）：Arch 这边 Firefox 更新到了 92.0，所以已经修好了。Google Chrome 现在是 93.0.4577.63，我也能正常打开。GTK4 的 MR 已经释出了稳定版，所以没问题。Atom 在我这用的是 electron9，能用，反而是用 electron12 的 Code - OSS 不能用了……最后那些不知道打包了几百年前的闭源拖拉机（要不把拖去掉变成垃圾？）也就是我指的很明确的 Slack 不能用，加上 `--disable-gpu` 是能用的，但是是他的问题，为什么要我关掉硬件加速消耗 CPU 资源？最后 GNOME Shell 自己的那个 bug……目前没有开发者搞这个，我简单看了一下发现是个我没涉足过的领域，不过总之我觉得是个看起来不爽但不影响你实际使用的问题，所以现在的状态就是 **“又不是不能用”** ！（我可没说后半句啊！上一个说了后半句的珠海小厂现在还活着吗？）
 
 另外我在 openSUSE Tumbleweed 上测试的时候还遇到一个问题啊，它默认安装的是 nouveau，需要手动在 YaST 里面安装 NVIDIA，装完之后似乎两个驱动冲突把我显示器搞黑屏了，于是我就没法直接重启。而且在那之后我显示器神奇的再也不亮了（PS4、Switch 全都点不亮它），拔掉电源放半分钟再插上才好，很头疼啊。
 
