@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2021-09-08T01:33:33.000Z</updated>
+  <updated>2021-09-18T13:08:08.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,402 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.4">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>通过 USB HID over AOAv2 在 scrcpy 里模拟真实键盘</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/" />
+    <id>https://sh.alynx.one/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2021-09-18T13:08:08.000Z</published>
+    
+    
+    <updated>2021-09-18T13:08:08.000Z</updated>
+    
+    
+    <summary type="html">
+      三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 这个 issue，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因…
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 &lt;a href=&quot;https://github.com/Genymobile/scrcpy/issues/279&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这个 issue&lt;/a&gt;，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因为它和直接在手机上插键盘不一样，显示的还是软键盘，虽然能通过电脑键盘触发输入法，但是却不能用数字键选词。我当时也不太懂，于是就发 issue 问开发者，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 回复说有个叫 HID over AOA 的办法可以实现，但是对有些设备来说有 bug，同时也需要有人花时间读 USB 规范然后做把 SDL event 转换成 HID event 的工作。我又想那能不能直接用电脑的输入法生成字符然后传给手机，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 表示现在就是这么做的，但是 Android 相关的 API 限制只能发送 ASCII 的字符，所以也行不通。&lt;/p&gt;
+&lt;p&gt;我当时稍微了解了一下这些相关的东西，不过显然超出了我的能力范围，于是这件事我就搁置了。一直到最近或者准确的说就是上周和 Hackghost 跟我提起说苹果似乎打算做手机投屏到电脑的功能，然后又说华为好像有个现成的。不过我对这些一向是漠不关心的，这些厂商就是又懒又坏的典型，不会做一个 Linux 版的客户端的。如果他们自己做不了或者不打算做，那就应该公开一点，让能做的人来做而不是藏着掖着。然后就是我们讨论了一气关于成本到底谁付了谁亏了的问题，我坚持认为厂商赚得已经够多了，成本和利润 Linux 用户在买手机的时候也是照样付的，只是这些人贪得无厌能少付出成本就少付出一点而已。最后我说已经有能做的人做了 scrcpy 这个项目出来，投屏完全没问题，支持各种平台，美中不足就是输入体验不太好。这时候我又想已经过去很久了，不如我再试试去看看能不能解决输入体验的问题，于是就回去翻了这个 issue。&lt;/p&gt;
+&lt;p&gt;运气不错，翻过去看到在 2019 年年初的时候 &lt;a href=&quot;https://github.com/amosbird&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@amosbird&lt;/a&gt; 已经写了一份代码，他自称是能用的，然而不知道为什么当初没有合并进主线，现在多半也是跑不起来。我一开始想我把他这个在当前的 HEAD 上重构一下就好了，于是开始读他的代码。一开始还是没什么头绪，看起来他似乎写了不止一个功能，但是都在一个 commit 里面，又没什么关于思路的注释。随后我加上了他的 Telegram，不过他本人表示时间有点久了他也不记得自己写的代码都是什么意思（笑）。于是我只能硬着头皮啃了，好在我现在的经验比以前涨了很多，然后再同时啃 USB 和 Android 的协议，配合一些搜到的其他资料，最终了解了大概是怎么回事。最开始本来以为简单地合并一下代码就可以了，没想到还发现了他代码里的错误，基本是变成重写了。花了头两天事件让程序跑起来，然后用了几天调整成和现有代码一致的风格以便合并进去。 &lt;em&gt;总之很是有一点新手村出来遇到 BOSS 暂时撤退，升级打怪三年之后杀回来的感觉。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;既然是 USB HID over AOAv2，那很显然需要知道 USB HID 是怎么回事，USB 官方有一个 &lt;a href=&quot;https://www.usb.org/document-library/device-class-definition-hid-111&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;很长的 PDF&lt;/a&gt; 规定怎么成为一个合法的 HID 设备，说实话，看不太下去。如果你想要查一些有帮助的例子，直接查 AOAv2 多半是没戏的，只有 &lt;a href=&quot;https://source.android.com/devices/accessories/aoa2&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Android 自己一个惜字如金的文档页&lt;/a&gt;，我的经验就是你找那些主题是用单片机模拟键盘鼠标的文章，他们的目标和这个基本是一致的。不过我说好不碰硬件的话看来是算作废了。&lt;/p&gt;
+&lt;p&gt;基本上成为一个 USB HID 设备需要你发送一大堆的描述符到主机，不过我们这里有点不一样，因为 Android 设备连接电脑的时候，Android 是 USB 从设备，电脑是主设备，而 AOAv2 是从主机反向发数据到从设备，它不要求我们发送一大堆 USB 的描述符，只要向 Android 注册一个设备，发送 HID 的报告描述符，再发送 HID event，再注销就好了。这部分可以通过 libusb 这个库来实现 USB 的数据包传输，然后把 Android 的几个命令封装成函数就可以了，基本是在 &lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246&lt;/a&gt; 这部分。&lt;/p&gt;
+&lt;p&gt;基础的 API 有了之后则是具体的发什么数据包了，HID 的数据实际上就是由 byte 组成的 buffer，首先就是报告描述符，这个描述符是让主设备知道每个发过来的 event 里面的每个 byte 都是什么含义，键盘的描述符其实相对是比较固定的，在 &lt;a href=&quot;https://www.usb.org/document-library/device-class-definition-hid-111&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Device Class Definition for Human Interface Devices&lt;/a&gt; 这个 PDF 里面其实给了一个最简单的 USB 键盘的例子，这个也是保证在 BIOS 里面能正常使用 USB 键盘的最小集合，是在 Appendix B: Boot Interface Descriptors 下面的 B.1 Protocol 1 (Keyboard) 和 Appendix E: Example USB Descriptors for HID Class Devices 下面的 E.6 Report Descriptor (Keyboard)。不过有时候光知道这些还不够，比如报告描述符里面大部分都是两个 byte 一句话，第一个 byte 表示的是类别而第二个表示的是具体的值，后面的大概很好理解，但是第一个 byte 是怎么算出来的可能需要了解，这需要看那个 PDF 里 8. Report Protocol 这一节了，或者中文的话可以看 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/41960639&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这篇知乎文章&lt;/a&gt;，然后你就会明白为什么有时候看起来数字不一样结果含义却一样了，因为其实第一个 byte 的每个 bit 都是有分别的含义的。然后就是对于 Usage Tag 这个有很多，被放在 &lt;a href=&quot;https://usb.org/sites/default/files/hut1_22.pdf&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;另一个单独的 PDF&lt;/a&gt; 里面了。&lt;/p&gt;
+&lt;p&gt;基本上我还是把 &lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&lt;/a&gt; 这段代码贴过来好了，详细的说明我加在了注释里面：&lt;/p&gt;
+&lt;figure data-raw=&quot;unsigned char kb_report_desc_buffer[]  = {
+    // Usage Page (Generic Desktop)
+    // 键盘这个字段应该是 Generic Desktop，为啥是这个我也不知道。
+    0x05, 0x01,
+    // Usage (Keyboard)
+    // 也不用我解释了吧，自己查表去。
+    0x09, 0x06,
+
+    // Collection (Application)
+    // 然后基本上 USB HID 描述符要有不同的 Collection，
+    // 代表你发到主机的一组数据，
+    // 一个设备最少有一个 Collection 吧，不然也没意义了。
+    // 为啥是 Application 好像是因为 Keyboard 的 Usage Page tag 在这个里面。
+    0xA1, 0x01,
+    // Report ID (1)
+    // 你会发现最基础的那个键盘示例里面没有这个字段，
+    // 实际上当你只发一种数据的时候这个字段可以省略。
+    // 但是现在是个机械键盘都带媒体控制按键吧，那个要算另一个 Collection 的，
+    // 所以就通过 Report ID 区分，同时你发数据的时候第一个 byte 就得说明自己发的是哪个
+    // Report ID。所以不要问为什么网上说 USB HID 键盘一个事件 8 个 byte 我们却发了 9 个。
+    0x85, 0x01,
+
+    // Usage Page (Keyboard)
+    // 这里注意 Usage Page 和 Usage 不一样咯。好像这个文档里也叫 Key Codes 来着。
+    0x05, 0x07,
+    // Usage Minimum (224)
+    // 一般来说一组报告数据包含很多用途，你不可能把所有的用途都列出来，给个用途范围就可以了。
+    // 这里表示最小的用途 tag 是 0xE0，应该是 Left Control 的意思。
+    0x19, 0xE0,
+    // Usage Maximum (231)
+    // 最大的用途 tag，是 Right GUI 键。这个 byte 的含义就是键盘上的八个修饰键。
+    // Left Control，Right Control，Left Alt，Right Alt，Left Shift，Right Shift，
+    // Left GUI，Right GUI。
+    // 不过一定要记住 16 进制数转成 2 进制时候最右边是第 0 位，也就是说上边的顺序要倒过来。
+    0x29, 0xE7,
+    // Logical Minimum (0)
+    // 每个 bit 的逻辑最小值当然是 0 啦。
+    0x15, 0x00,
+    // Logical Maximum (1)
+    // 按下去就变成最大值 1。
+    0x25, 0x01,
+    // Report Size (1)
+    // 每个数据只占 1 bit。
+    0x75, 0x01,
+    // Report Count (8)
+    // 一共 8 个数据。
+    0x95, 0x08,
+    // Input (Data, Variable, Absolute): Modifier byte
+    // 关于 Input tag 是什么意思太长了，自己查去吧，总之和上面那些要符合。
+    0x81, 0x02,
+
+    // 下面这段是厂商保留位，一般只要写一个为 0 的 byte 就可以了。
+    // Report Size (8)
+    0x75, 0x08,
+    // Report Count (1)
+    0x95, 0x01,
+    // Input (Constant): Reserved byte
+    0x81, 0x01,
+
+    // 这部分表示主设备返回的关于 LED 灯亮的信号，
+    // HID 键盘自己是不保存什么大写锁定的状态的。
+    // 不过我们毕竟不是真的键盘，这部分抄一下就完事了，程序直接忽略。
+    // 总之键盘上有 5 个灯，和上面的修饰键差不多，一个 bit 代表一个灯。
+    // Usage Page (LEDs)
+    0x05, 0x08,
+    // Usage Minimum (1)
+    0x19, 0x01,
+    // Usage Maximum (5)
+    0x29, 0x05,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (5)
+    0x95, 0x05,
+    // Output (Data, Variable, Absolute): LED report
+    0x91, 0x02,
+
+    // 5 个 bit 对不齐，这 3 个 bit 是为了凑整的。
+    // Report Size (3)
+    0x75, 0x03,
+    // Report Count (1)
+    0x95, 0x01,
+    // Output (Constant): LED report padding
+    0x91, 0x01,
+
+    // 下面就有意思了，键盘上有 101 个普通键，你肯定是不会同时按下 101 个键的，
+    // 所以也不需要像修饰键那样每个 bit 代表一个键
+    //（当然理论上你写个描述符说我这个键盘就是这样的也未尝不可啦），
+    // 所以实际上这里返回的是一个数组，每个 byte 代表一个被按下去的键的键码。
+    // Usage Page (Key Codes)
+    0x05, 0x07,
+    // Usage Minimum (0)
+    // 用途最小值从不代表任何键的空值 0 开始。
+    0x19, 0x00,
+    // Usage Maximum (101)
+    // 这里就是 101 啦，标准键盘上的按键数量，如果要支持非标准键盘自己查表去。
+    0x29, HID_KEYBOARD_KEYS - 1,
+    // Logical Minimum (0)
+    // 因为每个 byte 放的都是键码，键码最小值是 0。
+    0x15, 0x00,
+    // Logical Maximum(101)
+    // 最大值就是第 101 个键。
+    0x25, HID_KEYBOARD_KEYS - 1,
+    // Report Size (8)
+    // 每个值都是 1 byte。
+    0x75, 0x08,
+    // Report Count (6)
+    // 最基础的 USB 键盘一次最多能返回 6 个被同时按下的按键，
+    // 你的 USB 键盘实际上很可能会告诉电脑它能报告更多，
+    // 不过我们毕竟不是真的键盘，6 个键应该能满足大部分情况了。
+    0x95, HID_KEYBOARD_MAX_KEYS,
+    // Input (Data, Array): Keys
+    // 这里也查表去吧，总之变成了 Array 而不是 Variable。
+    // 一个 Collection 应该是只能有一个 Array，必须在末尾来着。
+    0x81, 0x00,
+
+    // End Collection
+    // 这样我们代表正常键盘的 Collection 就结束了。
+    0xC0,
+
+    // Usage Page (Consumer)
+    // 下面则是代表媒体控制的按键，他们属于另一个用途页了。
+    0x05, 0x0C,
+    // Usage (Consumer Control)
+    // 这些键在另一个用途下面。
+    0x09, 0x01,
+
+    // Collection (Application)
+    // 一个新的 Collection，数据和之前不一样了。
+    0xA1, 0x01,
+    // Report ID (2)
+    // 一个新的 Report ID，
+    // 所以这种 event 是 1 byte Report ID 和 1 byte 键码一共 2 byte。
+    0x85, 0x02,
+
+    // Usage Page (Consumer)
+    // 下面的用途都算这里。
+    0x05, 0x0C,
+    // 这些和修饰键基本是一个意思，每个 bit 代表一个按键，不过这些用途不连贯了。
+    // Usage (Scan Next Track)
+    0x09, 0xB5,
+    // Usage (Scan Previous Track)
+    0x09, 0xB6,
+    // Usage (Stop)
+    0x09, 0xB7,
+    // Usage (Eject)
+    0x09, 0xB8,
+    // Usage (Play/Pause)
+    0x09, 0xCD,
+    // Usage (Mute)
+    0x09, 0xE2,
+    // Usage (Volume Increment)
+    0x09, 0xE9,
+    // Usage (Volume Decrement)
+    0x09, 0xEA,
+    // 和修饰键差不多啦下面。
+    // Logical Minimum (0)
+    0x15, 0x00,
+    // Logical Maximum (1)
+    0x25, 0x01,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (8)
+    0x95, 0x08,
+    // Input (Data, Array)
+    0x81, 0x02,
+
+    // End Collection
+    0xC0
+};
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;unsigned char kb_report_desc_buffer[]  = {
+    // Usage Page (Generic Desktop)
+    // 键盘这个字段应该是 Generic Desktop，为啥是这个我也不知道。
+    0x05, 0x01,
+    // Usage (Keyboard)
+    // 也不用我解释了吧，自己查表去。
+    0x09, 0x06,
+
+    // Collection (Application)
+    // 然后基本上 USB HID 描述符要有不同的 Collection，
+    // 代表你发到主机的一组数据，
+    // 一个设备最少有一个 Collection 吧，不然也没意义了。
+    // 为啥是 Application 好像是因为 Keyboard 的 Usage Page tag 在这个里面。
+    0xA1, 0x01,
+    // Report ID (1)
+    // 你会发现最基础的那个键盘示例里面没有这个字段，
+    // 实际上当你只发一种数据的时候这个字段可以省略。
+    // 但是现在是个机械键盘都带媒体控制按键吧，那个要算另一个 Collection 的，
+    // 所以就通过 Report ID 区分，同时你发数据的时候第一个 byte 就得说明自己发的是哪个
+    // Report ID。所以不要问为什么网上说 USB HID 键盘一个事件 8 个 byte 我们却发了 9 个。
+    0x85, 0x01,
+
+    // Usage Page (Keyboard)
+    // 这里注意 Usage Page 和 Usage 不一样咯。好像这个文档里也叫 Key Codes 来着。
+    0x05, 0x07,
+    // Usage Minimum (224)
+    // 一般来说一组报告数据包含很多用途，你不可能把所有的用途都列出来，给个用途范围就可以了。
+    // 这里表示最小的用途 tag 是 0xE0，应该是 Left Control 的意思。
+    0x19, 0xE0,
+    // Usage Maximum (231)
+    // 最大的用途 tag，是 Right GUI 键。这个 byte 的含义就是键盘上的八个修饰键。
+    // Left Control，Right Control，Left Alt，Right Alt，Left Shift，Right Shift，
+    // Left GUI，Right GUI。
+    // 不过一定要记住 16 进制数转成 2 进制时候最右边是第 0 位，也就是说上边的顺序要倒过来。
+    0x29, 0xE7,
+    // Logical Minimum (0)
+    // 每个 bit 的逻辑最小值当然是 0 啦。
+    0x15, 0x00,
+    // Logical Maximum (1)
+    // 按下去就变成最大值 1。
+    0x25, 0x01,
+    // Report Size (1)
+    // 每个数据只占 1 bit。
+    0x75, 0x01,
+    // Report Count (8)
+    // 一共 8 个数据。
+    0x95, 0x08,
+    // Input (Data, Variable, Absolute): Modifier byte
+    // 关于 Input tag 是什么意思太长了，自己查去吧，总之和上面那些要符合。
+    0x81, 0x02,
+
+    // 下面这段是厂商保留位，一般只要写一个为 0 的 byte 就可以了。
+    // Report Size (8)
+    0x75, 0x08,
+    // Report Count (1)
+    0x95, 0x01,
+    // Input (Constant): Reserved byte
+    0x81, 0x01,
+
+    // 这部分表示主设备返回的关于 LED 灯亮的信号，
+    // HID 键盘自己是不保存什么大写锁定的状态的。
+    // 不过我们毕竟不是真的键盘，这部分抄一下就完事了，程序直接忽略。
+    // 总之键盘上有 5 个灯，和上面的修饰键差不多，一个 bit 代表一个灯。
+    // Usage Page (LEDs)
+    0x05, 0x08,
+    // Usage Minimum (1)
+    0x19, 0x01,
+    // Usage Maximum (5)
+    0x29, 0x05,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (5)
+    0x95, 0x05,
+    // Output (Data, Variable, Absolute): LED report
+    0x91, 0x02,
+
+    // 5 个 bit 对不齐，这 3 个 bit 是为了凑整的。
+    // Report Size (3)
+    0x75, 0x03,
+    // Report Count (1)
+    0x95, 0x01,
+    // Output (Constant): LED report padding
+    0x91, 0x01,
+
+    // 下面就有意思了，键盘上有 101 个普通键，你肯定是不会同时按下 101 个键的，
+    // 所以也不需要像修饰键那样每个 bit 代表一个键
+    //（当然理论上你写个描述符说我这个键盘就是这样的也未尝不可啦），
+    // 所以实际上这里返回的是一个数组，每个 byte 代表一个被按下去的键的键码。
+    // Usage Page (Key Codes)
+    0x05, 0x07,
+    // Usage Minimum (0)
+    // 用途最小值从不代表任何键的空值 0 开始。
+    0x19, 0x00,
+    // Usage Maximum (101)
+    // 这里就是 101 啦，标准键盘上的按键数量，如果要支持非标准键盘自己查表去。
+    0x29, HID_KEYBOARD_KEYS - 1,
+    // Logical Minimum (0)
+    // 因为每个 byte 放的都是键码，键码最小值是 0。
+    0x15, 0x00,
+    // Logical Maximum(101)
+    // 最大值就是第 101 个键。
+    0x25, HID_KEYBOARD_KEYS - 1,
+    // Report Size (8)
+    // 每个值都是 1 byte。
+    0x75, 0x08,
+    // Report Count (6)
+    // 最基础的 USB 键盘一次最多能返回 6 个被同时按下的按键，
+    // 你的 USB 键盘实际上很可能会告诉电脑它能报告更多，
+    // 不过我们毕竟不是真的键盘，6 个键应该能满足大部分情况了。
+    0x95, HID_KEYBOARD_MAX_KEYS,
+    // Input (Data, Array): Keys
+    // 这里也查表去吧，总之变成了 Array 而不是 Variable。
+    // 一个 Collection 应该是只能有一个 Array，必须在末尾来着。
+    0x81, 0x00,
+
+    // End Collection
+    // 这样我们代表正常键盘的 Collection 就结束了。
+    0xC0,
+
+    // Usage Page (Consumer)
+    // 下面则是代表媒体控制的按键，他们属于另一个用途页了。
+    0x05, 0x0C,
+    // Usage (Consumer Control)
+    // 这些键在另一个用途下面。
+    0x09, 0x01,
+
+    // Collection (Application)
+    // 一个新的 Collection，数据和之前不一样了。
+    0xA1, 0x01,
+    // Report ID (2)
+    // 一个新的 Report ID，
+    // 所以这种 event 是 1 byte Report ID 和 1 byte 键码一共 2 byte。
+    0x85, 0x02,
+
+    // Usage Page (Consumer)
+    // 下面的用途都算这里。
+    0x05, 0x0C,
+    // 这些和修饰键基本是一个意思，每个 bit 代表一个按键，不过这些用途不连贯了。
+    // Usage (Scan Next Track)
+    0x09, 0xB5,
+    // Usage (Scan Previous Track)
+    0x09, 0xB6,
+    // Usage (Stop)
+    0x09, 0xB7,
+    // Usage (Eject)
+    0x09, 0xB8,
+    // Usage (Play/Pause)
+    0x09, 0xCD,
+    // Usage (Mute)
+    0x09, 0xE2,
+    // Usage (Volume Increment)
+    0x09, 0xE9,
+    // Usage (Volume Decrement)
+    0x09, 0xEA,
+    // 和修饰键差不多啦下面。
+    // Logical Minimum (0)
+    0x15, 0x00,
+    // Logical Maximum (1)
+    0x25, 0x01,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (8)
+    0x95, 0x08,
+    // Input (Data, Array)
+    0x81, 0x02,
+
+    // End Collection
+    0xC0
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;所以基本上我们构建的虚拟键盘就告诉主设备它是这么报告数据的。里面除了要注意具体的数据之外第一个 byte 要放 Report ID 之外也没什么。然后就是怎么把 SDL 的事件转换成 HID 事件了，一开始看 &lt;a href=&quot;https://github.com/amosbird&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@amosbird&lt;/a&gt; 的代码，发现他把 HID event 理解成了和 SDL event 一样的东西了——有一个类似修饰键的数据和一个按下抬起的数据和一个具体哪个键的数据，用户按一个键就生成一个针对这个键单独的 event——但是其实不是，HID 键盘并不会直接告诉你哪个键按下还是抬起了，从上面的报告描述符也能看出来，实际上它是一个基于顺序的协议，比方说我按下了 C，给主机的事件可能是 &lt;code&gt;C键 00 00 00 00 00&lt;/code&gt;，又按下了 B，再发一个 &lt;code&gt;C键 B键 00 00 00 00&lt;/code&gt;，抬起来 C，再发一个 &lt;code&gt;B键 00 00 00 00 00&lt;/code&gt;，然后主机对比之前和之后的事件，得到“C 抬起了”或者“B 按下了”的信息，这才是我们司空见惯的“键盘事件”。所以在程序里面我们需要做个反向操作，把单独针对某个按键的按下抬起的数据变成一个“有哪些键按下”的数据。这里其实很简单，我们内部用一个数组保存当前的按键状态，每次有 SDL 的按键事件发来就更新状态（&lt;strong&gt;不是所有按键事件都是那 101 个键哦&lt;/strong&gt;），然后遍历这个数组，就可以利用哪些索引对应的值是 &lt;code&gt;true&lt;/code&gt; 生成 HID 事件的内容了，同时 HID 也不要求发送的按键在数组里的顺序和按下的顺序一致，而且 SDL 的 scancode 和 HID 的值是一致的。对于修饰键更简单，SDL 每个事件里面的修饰键和 HID 一样，都是包含当前所有修饰键的状态，只是具体的哪个 bit 表示哪个键不一样，转换一下就可以了（&lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L195-L223&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L195-L223&lt;/a&gt;）。&lt;strong&gt;但是千万不要因为发来的按键不是那 101 个键就直接忽略掉整个事件，因为可能用户只是单独按了一下修饰键，所以如果要跳过只要跳过更新按键状态就好了&lt;/strong&gt;（&lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L225-L269&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L225-L269&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;可能有聪明的小朋友要问了，你这最多只能发六个键，我按下七个怎么办？自己好好读一下 HID 协议就行了，这种情况下需要回一个 phantom state，具体就是修饰键一切照常，六个 key 全返回 &lt;code&gt;0x01&lt;/code&gt;（&lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L250-L259&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L250-L259&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;基本上看到这里已经可以成功的给 Android 手机发 HID 键盘事件了，另外就是如果你用桌面环境的话，媒体按键应该会被桌面环境拦截，所以其实我没有发媒体事件，scrcpy 是用组合键单独处理了一部分功能。然后就是一些收尾，比如 &lt;a href=&quot;https://github.com/amosbird&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@amosbird&lt;/a&gt; 忘记在程序结束之前取消注销 HID 设备了，这会导致如果你不拔掉 USB 线，触摸用的软键盘就一直出不来。&lt;/p&gt;
+&lt;p&gt;最后 &lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 表示 scrcpy 是在单独的线程里处理输入的，所以我也给 AOA 单独起了一个线程，这个只要照着 scrcpy 原本 controller 的线程抄一个就可以了。&lt;/p&gt;
+&lt;p&gt;你要是问为什么不把鼠标也用 HID 的方式模拟进去的话，我可以告诉你我也试过了，效果并不算好，AOA 是可以注册不止一个 HID 设备的，只要你分配不同的 ID 并作为参数发过去就可以了，这一部分代码我都留好了。但是一个主要的问题是 HID 鼠标只汇报 X 和 Y 的变化量，导致比方说我把鼠标从 SDL 的窗口挪走，MotionEvent 停止，HID 鼠标就会停在边框上，这时候我再从另一个方向挪进窗口，HID 鼠标的指针和你本机的指针就不再同步了，体验不如 scrcpy 自己注入事件的方式，所以我放弃了。&lt;/p&gt;
+&lt;p&gt;Windows 下面 libusb 似乎不能很好的连接 Android 手机发送数据，这个我没什么办法，看起来是个 &lt;a href=&quot;https://libusb-devel.narkive.com/vENuKzdR/getting-the-serial-number-of-the-camera-fails&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;陈年老 bug&lt;/a&gt;，考虑到我一开始的目的只是我自己能在 Linux 下面方便地聊 QQ，做成这样我觉得就可以了，我的代码逻辑正确，即使要修复，也不至于动 scrcpy 这部分而是动 libusb，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 也表示现在就很不错了。&lt;/p&gt;
+&lt;p&gt;当然因为依赖 USB，所以你利用 ADB over WiFi 的话就没办法用这个功能了，不过我用电脑时候一般会给手机充电，也无所谓。&lt;/p&gt;
+&lt;p&gt;提交的 PR 链接是 &lt;a href=&quot;https://github.com/Genymobile/scrcpy/pull/2632/files&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/Genymobile/scrcpy/pull/2632/files&lt;/a&gt;，感觉是个大工程，最后实际上也就修改了一千行？不过确实挺难的。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="Android" label="Android" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/" />
+    
+    
+    <category term="Android" label="Android" scheme="https://sh.alynx.one/tags/Android/" />
+    
+  </entry>
   
   
   
@@ -2903,776 +3299,6 @@ DHCP=ipv4
     <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
     
     <category term="月饼" label="月饼" scheme="https://sh.alynx.one/tags/%E6%9C%88%E9%A5%BC/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>可能只适合我自己的 RIME 配置</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/My-RIME/" />
-    <id>https://sh.alynx.one/posts/My-RIME/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2019-08-19T07:16:00.000Z</published>
-    
-    
-    <updated>2021-07-23T11:05:05.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;h1 id=&quot;为什么我要折腾这个&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%A6%81%E6%8A%98%E8%85%BE%E8%BF%99%E4%B8%AA&quot; title=&quot;为什么我要折腾这个&quot;&gt;&lt;/a&gt;为什么我要折腾这个&lt;/h1&gt;
-&lt;p&gt;在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;h1 id=&quot;为什么我要折腾这个&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%A6%81%E6%8A%98%E8%85%BE%E8%BF%99%E4%B8%AA&quot; title=&quot;为什么我要折腾这个&quot;&gt;&lt;/a&gt;为什么我要折腾这个&lt;/h1&gt;
-&lt;p&gt;在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;首先说明我是 Linux 用户，使用 ibus-rime 做输入引擎，所以使用什么小狼毫鼠须管或者 fcitx-rime 的如果发现不好用最好别烦我，那些我都没用过。（不好意思因为配置这玩意有点暴躁。）&lt;/p&gt;
-&lt;p&gt;然后我要吐槽一下 RIME 的文档，完全没有一致的类似 API 手册的东西，而且全繁体加上佛振独特的说话风格读起来真的很累，然后这个项目习惯又是起一大堆奇奇怪怪的名字（虽然我有时候也这样）。假如你想修改一点配置，读了文档里的示例“我懂了，巴拉巴拉”，打开配置一看一堆乱七八糟的就懵了。&lt;/p&gt;
-&lt;p&gt;然后就是网上“致第一次用 RIME 的你”、“也致第一次用 RIME 的你”，我都看过了，首先他们不用 ibus-rime，其次文章内容毕竟有限，每个人需求不一样，有些我需要的地方他们一笔带过了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2021-07-23）：另外我是被 felixonmars 惯坏了的 Arch Linux 用户，他已经把各种乱七八糟的 RIME 的配置打包到官方仓库了，所以我不需要和那个什么用来配置 RIME 配置的什么什么东风破打交道。如果你不是 Arch Linux 用户的话，我假设你有能力搞明白那个东风破，&lt;strong&gt;因为我搞不明白&lt;/strong&gt;，没办法告诉你怎么用。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;RIME 的拼音功能确实很好用（虽然有时候它和我对于词组的想法不太一样），我的需求其实只有几项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对于一些 RIME 默认的中国人几乎都用不到的中文标点直接改成英文标点，这个在书写 Markdown 的时候简直折磨死我了，有几个人会输入全角井号？？？打个标题真的很麻烦。&lt;/li&gt;
-&lt;li&gt;有些符号键在其他输入法里约定俗成的就直接输出特定的中文符号，RIME 的默认操作是弹出选择菜单，完全没这个必要，弹出菜单还需要二次选择而且打断了我的按键操作，需要英文标点时候直接切为英文就好了。&lt;/li&gt;
-&lt;li&gt;关掉 RIME 的中英混输功能，在候选框输入英文字母真的很打断思路，我要输入英文要么就是打代码要么就是打单词，反正都不需要输入法，RIME 来就是给我找麻烦。&lt;/li&gt;
-&lt;li&gt;还有一些奇奇怪怪的 RIME 的键位设置，偏偏要和其他输入法不一样，我已经习惯了那些操作，RIME 的键位只会降低输入速度。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;下面介绍一下我的配置。当然如果你嫌麻烦，最后我会加上我的配置的 GitHub Repo。&lt;/p&gt;
-&lt;p&gt;首先建立一个干净的 RIME 配置环境，直接移走 &lt;code&gt;~/.config/ibus/rime&lt;/code&gt; 然后执行 &lt;code&gt;ibus-daemon -rdx&lt;/code&gt; 重新生成（就是它文档里扯的部署部署部署）一套配置，由于我用的都是内置输入法所以也不需要什么乱七八糟的东风破 RIME Kit 地球拼音之类的。&lt;/p&gt;
-&lt;p&gt;然后你进去 &lt;code&gt;~/.config/ibus/rime&lt;/code&gt; 新版大概有以下几个东西：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;目录 &lt;code&gt;build&lt;/code&gt;：&lt;del&gt;里面放了各种 RIME 的默认配置，我们不需要动这个。&lt;/del&gt; 很好，我搞错了，原来它是从 &lt;code&gt;/usr/share/rime-data/&lt;/code&gt; 和 &lt;code&gt;~/.config/ibus/rime/&lt;/code&gt; 下面加载不带 custom 的文件，然后再读取 custom 文件给之前的文件打 patch，最后生成到 &lt;code&gt;build&lt;/code&gt; 目录下面。&lt;/li&gt;
-&lt;li&gt;目录 &lt;code&gt;luna_pinyin.userdb&lt;/code&gt;：看起来像是朙月拼音的词库，当然也不用修改。&lt;/li&gt;
-&lt;li&gt;文件 &lt;code&gt;installation.yaml&lt;/code&gt;：我猜不用管。&lt;/li&gt;
-&lt;li&gt;文件 &lt;code&gt;user.yaml&lt;/code&gt;：我猜也不用管。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;各种乱七八糟操作逻辑的配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE&quot; title=&quot;各种乱七八糟操作逻辑的配置&quot;&gt;&lt;/a&gt;各种乱七八糟操作逻辑的配置&lt;/h1&gt;
-&lt;p&gt;按照 RIME 打 patch 的配置方式我们需要在这个目录下创建一个叫 &lt;code&gt;default.custom.yaml&lt;/code&gt; 的文件，这样就可以给 &lt;code&gt;/usr/share/rime-data/default.yaml&lt;/code&gt; 这个文件 patch 辣，当然你得先会写 YAML。第一行首先写个叫 &lt;code&gt;patch:&lt;/code&gt; 的 key，RIME 要求这样，所有的自定义配置都是在 &lt;code&gt;patch&lt;/code&gt; 字段下面。&lt;/p&gt;
-&lt;p&gt;怎么确定要修改的 key 名字呢？&lt;del&gt;我这里的都是在 &lt;code&gt;build/default.yaml&lt;/code&gt; 下面找到的，&lt;/del&gt; 因为 patch 的是 &lt;code&gt;/usr/share/rime-data/default.yaml&lt;/code&gt; 所以就去看这个辣，之前又写错了，那个其实是生成的文件。你也可以试试其他的 YAML 文件。&lt;/p&gt;
-&lt;p&gt;RIME 的文档说什么要用 &lt;code&gt;/&lt;/code&gt; 把不同层次的 key 折叠成一个比如 &lt;code&gt;ascii_composer/switch_key&lt;/code&gt;，&lt;del&gt;亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。&lt;/del&gt; 我说佛老师对不起对不起，我不懂规矩。a/b/c 是只 patch c，展开了则变成了 patch a。&lt;/p&gt;
-&lt;p&gt;然后首先第一步我要修改输入法列表，我只用朙月拼音简化字模式就行了：&lt;/p&gt;
-&lt;figure data-raw=&quot;patch:
-  schema_list:
-    - schema: &amp;quot;luna_pinyin_simp&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
-  schema_list:
-    - schema: &quot;luna_pinyin_simp&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;然后就是改掉那个自作聪明的英文输入模式：&lt;/p&gt;
-&lt;figure data-raw=&quot;  # 按 CapsLock 输出大写英文字母。
-  ascii_composer/good_old_caps_lock: true
-  # `inline_ascii` 在输入框内插入英文。
-  # `commit_text` 候选文字上屏并切换至英文。
-  # `commit_code` 输入拼音上屏并切换至英文。
-  # `clear` 清除拼音并切换至英文。
-  # `noop` 屏蔽此按键。
-  # 如果你设置 `Caps_Lock` 为 `noop`，
-  # 一个奇怪的问题是退格键不能用了，除非取消大写锁定。
-  # 所以我直接设置文字上屏了。
-  ascii_composer/switch_key/Caps_Lock: &amp;quot;commit_text&amp;quot;
-  ascii_composer/switch_key/Shift_L: &amp;quot;commit_code&amp;quot;
-  ascii_composer/switch_key/Shift_R: &amp;quot;commit_code&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 按 CapsLock 输出大写英文字母。
-  ascii_composer/good_old_caps_lock: true
-  # `inline_ascii` 在输入框内插入英文。
-  # `commit_text` 候选文字上屏并切换至英文。
-  # `commit_code` 输入拼音上屏并切换至英文。
-  # `clear` 清除拼音并切换至英文。
-  # `noop` 屏蔽此按键。
-  # 如果你设置 `Caps_Lock` 为 `noop`，
-  # 一个奇怪的问题是退格键不能用了，除非取消大写锁定。
-  # 所以我直接设置文字上屏了。
-  ascii_composer/switch_key/Caps_Lock: &quot;commit_text&quot;
-  ascii_composer/switch_key/Shift_L: &quot;commit_code&quot;
-  ascii_composer/switch_key/Shift_R: &quot;commit_code&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;大部分坑我都写在注释里了可以自己看。&lt;/p&gt;
-&lt;p&gt;然后我看那个设置选单也不是很爽，我习惯简体字，这个也可以自己改：&lt;/p&gt;
-&lt;figure data-raw=&quot;  # 改掉原来的繁体字标题。
-  switcher/caption: &amp;quot;【设置菜单】&amp;quot;
-  # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
-  switcher/option_list_separator: &amp;quot;/&amp;quot;
-  # 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。
-  switcher/hotkeys:
-    # - &amp;quot;Control+s&amp;quot;
-    - &amp;quot;Control+grave&amp;quot;
-    - &amp;quot;F4&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 改掉原来的繁体字标题。
-  switcher/caption: &quot;【设置菜单】&quot;
-  # 用半角斜线而不是奇丑无比的全角斜线做分隔符。
-  switcher/option_list_separator: &quot;/&quot;
-  # 屏蔽 Ctrl-s 开启菜单，只允许 Ctrl-` 和 F4。
-  switcher/hotkeys:
-    # - &quot;Control+s&quot;
-    - &quot;Control+grave&quot;
-    - &quot;F4&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;然后就是改掉它奇怪的键位，Emacs 键位挺好的，但是有几个不知道为什么用不了，再者就是为什么按向左是跳一个字拼音向右是跳一个字母？&lt;/p&gt;
-&lt;figure data-raw=&quot;# 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
-# 但我暂时不需要。
-# Emacs 键位，我喜欢。
-# 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
-key_binder/bindings:
-  - accept: &amp;quot;Control+p&amp;quot;
-    send: &amp;quot;Up&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+n&amp;quot;
-    send: &amp;quot;Down&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+b&amp;quot;
-    send: &amp;quot;Left&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+f&amp;quot;
-    send: &amp;quot;Right&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Alt+b&amp;quot;
-    send: &amp;quot;Shift+Left&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Alt+f&amp;quot;
-    send: &amp;quot;Shift+Right&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+a&amp;quot;
-    send: &amp;quot;Home&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+e&amp;quot;
-    send: &amp;quot;End&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+d&amp;quot;
-    send: &amp;quot;Delete&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  # 这个用不了，不过估计也用不到。
-  # - accept: &amp;quot;Control+k&amp;quot;
-  #   send: &amp;quot;Shift+Delete&amp;quot;
-  #   when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+h&amp;quot;
-    send: &amp;quot;BackSpace&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Alt+h&amp;quot;
-    send: &amp;quot;Shift+BackSpace&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+g&amp;quot;
-    send: &amp;quot;Escape&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+bracketleft&amp;quot;
-    send: &amp;quot;Escape&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Alt+v&amp;quot;
-    send: &amp;quot;Page_Up&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-  - accept: &amp;quot;Control+v&amp;quot;
-    send: &amp;quot;Page_Down&amp;quot;
-    when: &amp;quot;composing&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;# 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
-# 但我暂时不需要。
-# Emacs 键位，我喜欢。
-# 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
-key_binder/bindings:
-  - accept: &quot;Control+p&quot;
-    send: &quot;Up&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+n&quot;
-    send: &quot;Down&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+b&quot;
-    send: &quot;Left&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+f&quot;
-    send: &quot;Right&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Alt+b&quot;
-    send: &quot;Shift+Left&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Alt+f&quot;
-    send: &quot;Shift+Right&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+a&quot;
-    send: &quot;Home&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+e&quot;
-    send: &quot;End&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+d&quot;
-    send: &quot;Delete&quot;
-    when: &quot;composing&quot;
-  # 这个用不了，不过估计也用不到。
-  # - accept: &quot;Control+k&quot;
-  #   send: &quot;Shift+Delete&quot;
-  #   when: &quot;composing&quot;
-  - accept: &quot;Control+h&quot;
-    send: &quot;BackSpace&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Alt+h&quot;
-    send: &quot;Shift+BackSpace&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+g&quot;
-    send: &quot;Escape&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+bracketleft&quot;
-    send: &quot;Escape&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Alt+v&quot;
-    send: &quot;Page_Up&quot;
-    when: &quot;composing&quot;
-  - accept: &quot;Control+v&quot;
-    send: &quot;Page_Down&quot;
-    when: &quot;composing&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;还没完，我觉得正常人不会用 Tab 在拼音之间切换，除非你一次输入一句话（那你不觉得候选框太小了看着累吗？？？），设置 Tab 为跳候选词更自然一点，但我也不知道为什么 Shift-Tab 用不了：&lt;/p&gt;
-&lt;figure data-raw=&quot;      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
-      # - accept: &amp;quot;ISO_Left_Tab&amp;quot;
-      #   send: &amp;quot;Shift+Left&amp;quot;
-      #   when: &amp;quot;composing&amp;quot;
-      # - accept: &amp;quot;Shift+Tab&amp;quot;
-      #   send: &amp;quot;Shift+Left&amp;quot;
-      #   when: &amp;quot;composing&amp;quot;
-      # - accept: &amp;quot;Tab&amp;quot;
-      #   send: &amp;quot;Shift+Right&amp;quot;
-      #   when: &amp;quot;composing&amp;quot;
-      - accept: &amp;quot;Tab&amp;quot;
-        send: &amp;quot;Down&amp;quot;
-        when: &amp;quot;has_menu&amp;quot;
-      - accept: &amp;quot;ISO_Left_Tab&amp;quot;
-        send: &amp;quot;Up&amp;quot;
-        when: &amp;quot;has_menu&amp;quot;
-      # 鬼知道为什么这个也用不了！
-      - accept: &amp;quot;Shift+Tab&amp;quot;
-        send: &amp;quot;Up&amp;quot;
-        when: &amp;quot;has_menu&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;      # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
-      # - accept: &quot;ISO_Left_Tab&quot;
-      #   send: &quot;Shift+Left&quot;
-      #   when: &quot;composing&quot;
-      # - accept: &quot;Shift+Tab&quot;
-      #   send: &quot;Shift+Left&quot;
-      #   when: &quot;composing&quot;
-      # - accept: &quot;Tab&quot;
-      #   send: &quot;Shift+Right&quot;
-      #   when: &quot;composing&quot;
-      - accept: &quot;Tab&quot;
-        send: &quot;Down&quot;
-        when: &quot;has_menu&quot;
-      - accept: &quot;ISO_Left_Tab&quot;
-        send: &quot;Up&quot;
-        when: &quot;has_menu&quot;
-      # 鬼知道为什么这个也用不了！
-      - accept: &quot;Shift+Tab&quot;
-        send: &quot;Up&quot;
-        when: &quot;has_menu&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;以及我觉得正常人不用逗号和句号翻页，毕竟下面的默认设置是逗号句号直接上屏，你设置了翻页也没啥卵用，反正我用减号等号或者上下，不过方括号也不错就是了：&lt;/p&gt;
-&lt;figure data-raw=&quot;  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
-  # 但我暂时不需要。
-  # Emacs 键位，我喜欢。
-  # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
-  key_binder/bindings:
-    - accept: &amp;quot;Control+p&amp;quot;
-      send: &amp;quot;Up&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+n&amp;quot;
-      send: &amp;quot;Down&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+b&amp;quot;
-      send: &amp;quot;Left&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+f&amp;quot;
-      send: &amp;quot;Right&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Alt+b&amp;quot;
-      send: &amp;quot;Shift+Left&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Alt+f&amp;quot;
-      send: &amp;quot;Shift+Right&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+a&amp;quot;
-      send: &amp;quot;Home&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+e&amp;quot;
-      send: &amp;quot;End&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+d&amp;quot;
-      send: &amp;quot;Delete&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    # 这个用不了，不过估计也用不到。
-    # - accept: &amp;quot;Control+k&amp;quot;
-    #   send: &amp;quot;Shift+Delete&amp;quot;
-    #   when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+h&amp;quot;
-      send: &amp;quot;BackSpace&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Alt+h&amp;quot;
-      send: &amp;quot;Shift+BackSpace&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+g&amp;quot;
-      send: &amp;quot;Escape&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+bracketleft&amp;quot;
-      send: &amp;quot;Escape&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Alt+v&amp;quot;
-      send: &amp;quot;Page_Up&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Control+v&amp;quot;
-      send: &amp;quot;Page_Down&amp;quot;
-      when: &amp;quot;composing&amp;quot;
-    # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
-    # - accept: &amp;quot;ISO_Left_Tab&amp;quot;
-    #   send: &amp;quot;Shift+Left&amp;quot;
-    #   when: &amp;quot;composing&amp;quot;
-    # - accept: &amp;quot;Shift+Tab&amp;quot;
-    #   send: &amp;quot;Shift+Left&amp;quot;
-    #   when: &amp;quot;composing&amp;quot;
-    # - accept: &amp;quot;Tab&amp;quot;
-    #   send: &amp;quot;Shift+Right&amp;quot;
-    #   when: &amp;quot;composing&amp;quot;
-    - accept: &amp;quot;Tab&amp;quot;
-      send: &amp;quot;Down&amp;quot;
-      when: &amp;quot;has_menu&amp;quot;
-    - accept: &amp;quot;ISO_Left_Tab&amp;quot;
-      send: &amp;quot;Up&amp;quot;
-      when: &amp;quot;has_menu&amp;quot;
-    # 鬼知道为什么这个也用不了！
-    - accept: &amp;quot;Shift+Tab&amp;quot;
-      send: &amp;quot;Up&amp;quot;
-      when: &amp;quot;has_menu&amp;quot;
-    - accept: &amp;quot;minus&amp;quot;
-      send: &amp;quot;Page_Up&amp;quot;
-      when: &amp;quot;has_menu&amp;quot;
-    - accept: &amp;quot;equal&amp;quot;
-      send: &amp;quot;Page_Down&amp;quot;
-      when: &amp;quot;has_menu&amp;quot;
-    - accept: &amp;quot;bracketleft&amp;quot;
-      send: &amp;quot;Page_Up&amp;quot;
-      when: &amp;quot;has_menu&amp;quot;
-    - accept: &amp;quot;bracketright&amp;quot;
-      send: &amp;quot;Page_Down&amp;quot;
-      when: &amp;quot;has_menu&amp;quot;
-    # 我觉得正常人不应该用逗号和句号翻页。
-    # - accept: &amp;quot;comma&amp;quot;
-    #   send: &amp;quot;Page_Up&amp;quot;
-    #   when: &amp;quot;paging&amp;quot;
-    # - accept: &amp;quot;period&amp;quot;
-    #   send: &amp;quot;Page_Down&amp;quot;
-    #   when: &amp;quot;has_menu&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 这里修改的是整个输入法全局的键位，某些输入方案有自己的键位可以单独覆盖。
-  # 但我暂时不需要。
-  # Emacs 键位，我喜欢。
-  # 可是谁给我解释一下为什么 Left 是按字拼音跳而 Right 是按字母跳？
-  key_binder/bindings:
-    - accept: &quot;Control+p&quot;
-      send: &quot;Up&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+n&quot;
-      send: &quot;Down&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+b&quot;
-      send: &quot;Left&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+f&quot;
-      send: &quot;Right&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Alt+b&quot;
-      send: &quot;Shift+Left&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Alt+f&quot;
-      send: &quot;Shift+Right&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+a&quot;
-      send: &quot;Home&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+e&quot;
-      send: &quot;End&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+d&quot;
-      send: &quot;Delete&quot;
-      when: &quot;composing&quot;
-    # 这个用不了，不过估计也用不到。
-    # - accept: &quot;Control+k&quot;
-    #   send: &quot;Shift+Delete&quot;
-    #   when: &quot;composing&quot;
-    - accept: &quot;Control+h&quot;
-      send: &quot;BackSpace&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Alt+h&quot;
-      send: &quot;Shift+BackSpace&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+g&quot;
-      send: &quot;Escape&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+bracketleft&quot;
-      send: &quot;Escape&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Alt+v&quot;
-      send: &quot;Page_Up&quot;
-      when: &quot;composing&quot;
-    - accept: &quot;Control+v&quot;
-      send: &quot;Page_Down&quot;
-      when: &quot;composing&quot;
-    # 正常人不会用 Tab 切换拼音光标的，相信我。用它切换选项更快。
-    # - accept: &quot;ISO_Left_Tab&quot;
-    #   send: &quot;Shift+Left&quot;
-    #   when: &quot;composing&quot;
-    # - accept: &quot;Shift+Tab&quot;
-    #   send: &quot;Shift+Left&quot;
-    #   when: &quot;composing&quot;
-    # - accept: &quot;Tab&quot;
-    #   send: &quot;Shift+Right&quot;
-    #   when: &quot;composing&quot;
-    - accept: &quot;Tab&quot;
-      send: &quot;Down&quot;
-      when: &quot;has_menu&quot;
-    - accept: &quot;ISO_Left_Tab&quot;
-      send: &quot;Up&quot;
-      when: &quot;has_menu&quot;
-    # 鬼知道为什么这个也用不了！
-    - accept: &quot;Shift+Tab&quot;
-      send: &quot;Up&quot;
-      when: &quot;has_menu&quot;
-    - accept: &quot;minus&quot;
-      send: &quot;Page_Up&quot;
-      when: &quot;has_menu&quot;
-    - accept: &quot;equal&quot;
-      send: &quot;Page_Down&quot;
-      when: &quot;has_menu&quot;
-    - accept: &quot;bracketleft&quot;
-      send: &quot;Page_Up&quot;
-      when: &quot;has_menu&quot;
-    - accept: &quot;bracketright&quot;
-      send: &quot;Page_Down&quot;
-      when: &quot;has_menu&quot;
-    # 我觉得正常人不应该用逗号和句号翻页。
-    # - accept: &quot;comma&quot;
-    #   send: &quot;Page_Up&quot;
-    #   when: &quot;paging&quot;
-    # - accept: &quot;period&quot;
-    #   send: &quot;Page_Down&quot;
-    #   when: &quot;has_menu&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;最后就是那一堆乱七八糟的快捷键了，鬼才记得住，有那时间直接翻菜单就行了，那个 Shift+Space 就是我动不动就变成全角的罪魁祸首，全部不要：&lt;/p&gt;
-&lt;figure data-raw=&quot;    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
-    # - accept: &amp;quot;Control+Shift+1&amp;quot;
-    #   select: &amp;quot;.next&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+2&amp;quot;
-    #   toggle: &amp;quot;ascii_mode&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+3&amp;quot;
-    #   toggle: &amp;quot;full_shape&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+4&amp;quot;
-    #   toggle: simplification
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+5&amp;quot;
-    #   toggle: &amp;quot;extended_charset&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+exclam&amp;quot;
-    #   select: &amp;quot;&amp;quot;.next&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+at&amp;quot;
-    #   toggle: &amp;quot;ascii_mode&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+numbersign&amp;quot;
-    #   toggle: &amp;quot;full_shape&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+dollar&amp;quot;
-    #   toggle: &amp;quot;simplification&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+Shift+percent&amp;quot;
-    #   toggle: &amp;quot;extended_charset&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # 你就是那个经常害我变成全角的罪魁祸首！
-    # - accept: &amp;quot;Shift+space&amp;quot;
-    #   toggle: &amp;quot;full_shape&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-    # - accept: &amp;quot;Control+period&amp;quot;
-    #   toggle: &amp;quot;ascii_punct&amp;quot;
-    #   when: &amp;quot;always&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;    # 鬼才记得住这么多乱七八糟的快捷键，我翻菜单比背这玩意快多了。
-    # - accept: &quot;Control+Shift+1&quot;
-    #   select: &quot;.next&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+2&quot;
-    #   toggle: &quot;ascii_mode&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+3&quot;
-    #   toggle: &quot;full_shape&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+4&quot;
-    #   toggle: simplification
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+5&quot;
-    #   toggle: &quot;extended_charset&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+exclam&quot;
-    #   select: &quot;&quot;.next&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+at&quot;
-    #   toggle: &quot;ascii_mode&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+numbersign&quot;
-    #   toggle: &quot;full_shape&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+dollar&quot;
-    #   toggle: &quot;simplification&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+Shift+percent&quot;
-    #   toggle: &quot;extended_charset&quot;
-    #   when: &quot;always&quot;
-    # 你就是那个经常害我变成全角的罪魁祸首！
-    # - accept: &quot;Shift+space&quot;
-    #   toggle: &quot;full_shape&quot;
-    #   when: &quot;always&quot;
-    # - accept: &quot;Control+period&quot;
-    #   toggle: &quot;ascii_punct&quot;
-    #   when: &quot;always&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;我自己是不习惯写 inline 的字典和列表，都写的展开的。&lt;/p&gt;
-&lt;p&gt;然后是符号设置了，一开始我以为改 default 里面的符号表就行了，但是最近（2021-03-01）发现不行了，翻了一下代码，发现朙月拼音现在不读 default 了，而是加载 symbols 里面的。然后文档建议的是在输入法方案里面添加自定义的符号表，所以需要建立 &lt;code&gt;luna_pinyin_simp.custom.yaml&lt;/code&gt; 并修改。&lt;/p&gt;
-&lt;p&gt;因为我们上面取消了逗号句号翻页，所以这里也就不用显式写 commit 直接上屏了。然后我去掉了一大堆菜单，我输入井号星号波浪线百分号就是想要英文标点，你给我弹个菜单我还得多确认好麻烦的。以及我觉得真的没人用那个巨长的全角斜杠，输入斜杠就是为了斜杠，什么通过朙月拼音命令输入假名有意义吗？我为什么不直接切日语输入法呢？另一些标点在中文语境下直接输出中文标点就好了，需要英文标点时候我敲一下 Shift 比看菜单选容易多了！比如书名号，竖线输出人名中间的点，反斜杠输出顿号之类的。&lt;/p&gt;
-&lt;p&gt;由于我不是金融行业的，我就把一些英文标点常见但对应中文标点也可能会用到的都丢到了 &lt;code&gt;$&lt;/code&gt; 的菜单里面：&lt;/p&gt;
-&lt;figure data-raw=&quot;patch:
-  # 现在朙月拼音加载标点候选是加载 symbols 里面的，根本不加载 default。
-  # 然后文档建议的是自己修改的标点符号表放在输入法方案配置里面。
-  # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
-  # 另一些直接默认输出中文符号，需要英文符号可以切换英文输入。
-  # 有关 `&amp;quot;!&amp;quot;: {commit: &amp;quot;！&amp;quot;}` 的写法含义是你设置这个键为翻页按键了，
-  # 但是你又想在输入拼音出现选单之后输入这个按键直接上屏（常见的逗号句号问号叹号），
-  # 我觉得这是多此一举，为什么你非要拿这几个符号翻页？反正我不用。
-  # 乱七八糟的符号都塞给 `$` 就好了反正我不是会计不用天天输入 `￥`。
-  # 我不会使用全角英文的，我觉得其他程序员也不会。
-  # 但是中文的标点又是全角的，所以我就只改半角。
-  punctuator/half_shape:
-    &amp;quot;!&amp;quot;: &amp;quot;！&amp;quot;
-    &amp;quot;\&amp;quot;&amp;quot;:
-      pair:
-        - &amp;quot;“&amp;quot;
-        - &amp;quot;”&amp;quot;
-    &amp;quot;#&amp;quot;: &amp;quot;#&amp;quot;
-    &amp;quot;$&amp;quot;:
-      - &amp;quot;￥&amp;quot;
-      - &amp;quot;$&amp;quot;
-      - &amp;quot;€&amp;quot;
-      - &amp;quot;～&amp;quot;
-      - &amp;quot;×&amp;quot;
-      - &amp;quot;÷&amp;quot;
-      - &amp;quot;°&amp;quot;
-      - &amp;quot;℃&amp;quot;
-      - &amp;quot;‰&amp;quot;
-      - &amp;quot;‱&amp;quot;
-      - &amp;quot;℉&amp;quot;
-      - &amp;quot;©&amp;quot;
-      - &amp;quot;®&amp;quot;
-    &amp;quot;%&amp;quot;: &amp;quot;%&amp;quot;
-    &amp;quot;&amp;amp;&amp;quot;: &amp;quot;&amp;amp;&amp;quot;
-    &amp;quot;&#039;&amp;quot;:
-      pair:
-        - &amp;quot;‘&amp;quot;
-        - &amp;quot;’&amp;quot;
-    &amp;quot;*&amp;quot;: &amp;quot;*&amp;quot;
-    &amp;quot;+&amp;quot;: &amp;quot;+&amp;quot;
-    &amp;quot;,&amp;quot;: &amp;quot;，&amp;quot;
-    &amp;quot;-&amp;quot;: &amp;quot;-&amp;quot;
-    &amp;quot;.&amp;quot;: &amp;quot;。&amp;quot;
-    &amp;quot;/&amp;quot;: &amp;quot;/&amp;quot;
-    &amp;quot;\\&amp;quot;: &amp;quot;、&amp;quot;
-    &amp;quot;:&amp;quot;: &amp;quot;：&amp;quot;
-    &amp;quot;;&amp;quot;: &amp;quot;；&amp;quot;
-    &amp;quot;=&amp;quot;: &amp;quot;=&amp;quot;
-    &amp;quot;?&amp;quot;: &amp;quot;？&amp;quot;
-    &amp;quot;@&amp;quot;: &amp;quot;@&amp;quot;
-    &amp;quot;(&amp;quot;: &amp;quot;（&amp;quot;
-    &amp;quot;)&amp;quot;: &amp;quot;）&amp;quot;
-    &amp;quot;[&amp;quot;: &amp;quot;【&amp;quot;
-    &amp;quot;]&amp;quot;: &amp;quot;】&amp;quot;
-    &amp;quot;{&amp;quot;: &amp;quot;「&amp;quot;
-    &amp;quot;}&amp;quot;: &amp;quot;」&amp;quot;
-    &amp;quot;&lt;&amp;quot;: &amp;quot;《&amp;quot;
-    &amp;quot;&gt;&amp;quot;: &amp;quot;》&amp;quot;
-    &amp;quot;^&amp;quot;: &amp;quot;……&amp;quot;
-    &amp;quot;_&amp;quot;: &amp;quot;——&amp;quot;
-    &amp;quot;`&amp;quot;: &amp;quot;`&amp;quot;
-    &amp;quot;|&amp;quot;: &amp;quot;·&amp;quot;
-    &amp;quot;~&amp;quot;: &amp;quot;~&amp;quot;
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
-  # 现在朙月拼音加载标点候选是加载 symbols 里面的，根本不加载 default。
-  # 然后文档建议的是自己修改的标点符号表放在输入法方案配置里面。
-  # 为了方便编写 Markdown，把一些奇怪的写中文根本用不到的符号弹出菜单改成直接输出英文符号。
-  # 另一些直接默认输出中文符号，需要英文符号可以切换英文输入。
-  # 有关 `&quot;!&quot;: {commit: &quot;！&quot;}` 的写法含义是你设置这个键为翻页按键了，
-  # 但是你又想在输入拼音出现选单之后输入这个按键直接上屏（常见的逗号句号问号叹号），
-  # 我觉得这是多此一举，为什么你非要拿这几个符号翻页？反正我不用。
-  # 乱七八糟的符号都塞给 `$` 就好了反正我不是会计不用天天输入 `￥`。
-  # 我不会使用全角英文的，我觉得其他程序员也不会。
-  # 但是中文的标点又是全角的，所以我就只改半角。
-  punctuator/half_shape:
-    &quot;!&quot;: &quot;！&quot;
-    &quot;\&quot;&quot;:
-      pair:
-        - &quot;“&quot;
-        - &quot;”&quot;
-    &quot;#&quot;: &quot;#&quot;
-    &quot;$&quot;:
-      - &quot;￥&quot;
-      - &quot;$&quot;
-      - &quot;€&quot;
-      - &quot;～&quot;
-      - &quot;×&quot;
-      - &quot;÷&quot;
-      - &quot;°&quot;
-      - &quot;℃&quot;
-      - &quot;‰&quot;
-      - &quot;‱&quot;
-      - &quot;℉&quot;
-      - &quot;©&quot;
-      - &quot;®&quot;
-    &quot;%&quot;: &quot;%&quot;
-    &quot;&amp;amp;&quot;: &quot;&amp;amp;&quot;
-    &quot;&#039;&quot;:
-      pair:
-        - &quot;‘&quot;
-        - &quot;’&quot;
-    &quot;*&quot;: &quot;*&quot;
-    &quot;+&quot;: &quot;+&quot;
-    &quot;,&quot;: &quot;，&quot;
-    &quot;-&quot;: &quot;-&quot;
-    &quot;.&quot;: &quot;。&quot;
-    &quot;/&quot;: &quot;/&quot;
-    &quot;\\&quot;: &quot;、&quot;
-    &quot;:&quot;: &quot;：&quot;
-    &quot;;&quot;: &quot;；&quot;
-    &quot;=&quot;: &quot;=&quot;
-    &quot;?&quot;: &quot;？&quot;
-    &quot;@&quot;: &quot;@&quot;
-    &quot;(&quot;: &quot;（&quot;
-    &quot;)&quot;: &quot;）&quot;
-    &quot;[&quot;: &quot;【&quot;
-    &quot;]&quot;: &quot;】&quot;
-    &quot;{&quot;: &quot;「&quot;
-    &quot;}&quot;: &quot;」&quot;
-    &quot;&amp;lt;&quot;: &quot;《&quot;
-    &quot;&amp;gt;&quot;: &quot;》&quot;
-    &quot;^&quot;: &quot;……&quot;
-    &quot;_&quot;: &quot;——&quot;
-    &quot;`&quot;: &quot;`&quot;
-    &quot;|&quot;: &quot;·&quot;
-    &quot;~&quot;: &quot;~&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;最近的朙月拼音添加了反查笔画的功能，按下反引号并输入候选字来启动，但是反引号对于写 Markdown 的人很常用，所以我要关掉这个恼人的功能：&lt;/p&gt;
-&lt;figure data-raw=&quot;  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
-  recognizer/patterns/reverse_lookup:
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  # 反查占据了宝贵的反引号，导致 Markdown 用户非常痛苦，所以关掉。
-  recognizer/patterns/reverse_lookup:
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;总之写完这些配置 &lt;strong&gt;之后要手动移除 &lt;code&gt;~/.config/ibus/rime/build/&lt;/code&gt; 这个生成目录&lt;/strong&gt; 再执行 &lt;code&gt;ibus-daemon -rdx&lt;/code&gt; 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。&lt;/p&gt;
-&lt;h1 id=&quot;有关为什么ibus-rime总是竖着的&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84&quot; title=&quot;有关为什么ibus-rime总是竖着的&quot;&gt;&lt;/a&gt;有关为什么 ibus-rime 总是竖着的&lt;/h1&gt;
-&lt;p&gt;ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。&lt;/p&gt;
-&lt;p&gt;ibus-rime 会读一个叫做 &lt;code&gt;ibus_rime.yaml&lt;/code&gt; 的配置文件，有这么一个配置可以让他变成横着的：&lt;/p&gt;
-&lt;figure data-raw=&quot;style:
-  horizontal: true
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;style:
-  horizontal: true
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;可能看了之前的你会和我一样想那就打个 patch 到 &lt;code&gt;ibus_rime.custom.yaml&lt;/code&gt; 不就行了嘛！但是不行，为什么呢？因为不管是 rime 还是 librime 还是 ibus-rime 都没有提供 &lt;code&gt;/usr/share/rime-data/ibus_rime.yaml&lt;/code&gt; 的文件，所以你的 patch 找不到被打的文件，那就不会被生成到 &lt;code&gt;build&lt;/code&gt; 目录里。&lt;/p&gt;
-&lt;p&gt;不要忘了之前说 rime 会读取 &lt;code&gt;~/.config/ibus/rime/&lt;/code&gt; 下面的 yaml，所以其实只要自己建立 &lt;code&gt;~/.config/ibus/rime/ibus_rime.yaml&lt;/code&gt; 写入那段配置就可以啦，因为本来也没有所以就不用打 patch 了，或者你在那两个位置建立一个空的 &lt;code&gt;ibus_rime.yaml&lt;/code&gt; 然后再打 patch 也行……&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2021 年 1 月 26 日）：Arch 的 librime 现在打包了一个 &lt;code&gt;/usr/share/rime/ibus_rime.yaml&lt;/code&gt; 文件，所以上面手动创建一个 &lt;code&gt;ibus_rime.yaml&lt;/code&gt; 的办法会被覆盖，所以现在建议创建 &lt;code&gt;~/.config/ibus/rime/ibus_rime.custom.yaml&lt;/code&gt; 然后对照着打patch，比如我写的是：&lt;/p&gt;
-&lt;figure data-raw=&quot;patch:
-  # 舒服不如倒着。
-  style/horizontal: true
-  # 有些软件的行内预测支持有 bug，所以我一般不开。
-  style/inline_preedit: false
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
-  # 舒服不如倒着。
-  style/horizontal: true
-  # 有些软件的行内预测支持有 bug，所以我一般不开。
-  style/inline_preedit: false
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;hr&gt;
-&lt;p&gt;不要忘了删掉 &lt;code&gt;build&lt;/code&gt; 目录再 &lt;code&gt;ibus-daemon -rdx&lt;/code&gt;。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2021-07-23）：最近研究了一下如何扩展 RIME 的词库，发现还是稍微复杂的，我尝试导入了肥猫打包的 &lt;code&gt;rime-pinyin-zhwiki&lt;/code&gt;。如果你要给某个输入法导入词库，首先你得自己创建一个扩展词库文件让他继承这个输入法本来的词库和你想要的词库，因为输入法配置里面只能指定一个词库配置文件。&lt;/p&gt;
-&lt;p&gt;所以对于朙月拼音简化字版本，先创建一个叫 &lt;code&gt;luna_pinyin_simp.extended.dict.yaml&lt;/code&gt;，&lt;code&gt;.dict.yaml&lt;/code&gt; 之前的名字其实是随便取的，内容如下：&lt;/p&gt;
-&lt;figure data-raw=&quot;# 原来要结合默认词库和第三方词库，
-# 需要自己编写一个词库让它 fallback 到朙月拼音和第三方词库。
-# 我说佛老师对不起对不起，我不懂规矩。
----
-name: luna_pinyin_simp.extended
-version: &amp;quot;0.1&amp;quot;
-# `by_weight`（按词频高低排序）或 `original`（保持原码表中的顺序）。
-sort: by_weight
-# 因为导入的朙月拼音词库是繁转简，所以这里不能导入简化字八股文。
-# 导入简化字八股文。
-# vocabulary: essay-zh-hans
-# 选择是否导入预设词汇表【八股文】。
-use_preset_vocabulary: true
-
-import_tables:
-  - luna_pinyin
-  - zhwiki
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;# 原来要结合默认词库和第三方词库，
-# 需要自己编写一个词库让它 fallback 到朙月拼音和第三方词库。
-# 我说佛老师对不起对不起，我不懂规矩。
----
-name: luna_pinyin_simp.extended
-version: &quot;0.1&quot;
-# `by_weight`（按词频高低排序）或 `original`（保持原码表中的顺序）。
-sort: by_weight
-# 因为导入的朙月拼音词库是繁转简，所以这里不能导入简化字八股文。
-# 导入简化字八股文。
-# vocabulary: essay-zh-hans
-# 选择是否导入预设词汇表【八股文】。
-use_preset_vocabulary: true
-
-import_tables:
-  - luna_pinyin
-  - zhwiki
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;应该很容易懂，我就不多唠叨了，记得里面名字和外面文件名要一致。&lt;/p&gt;
-&lt;p&gt;然后在 &lt;code&gt;luna_pinyin_simp.custom.yaml&lt;/code&gt; 的 patch 里面加一行：&lt;/p&gt;
-&lt;figure data-raw=&quot;  translator/dictionary: luna_pinyin_simp.extended
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  translator/dictionary: luna_pinyin_simp.extended
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;我还研究了一下如何添加 emoji 功能，也是靠肥猫打的 &lt;code&gt;rime-emoji&lt;/code&gt; 包，只要在 &lt;code&gt;luna_pinyin_simp.custom.yaml&lt;/code&gt; 的 patch 里面加一行：&lt;/p&gt;
-&lt;figure data-raw=&quot;  __include: emoji_suggestion:/patch
-&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  __include: emoji_suggestion:/patch
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;如果你用的不是 Arch，可能需要自己复制 patch 文件内容而不是简单地使用 include，参见&lt;a href=&quot;https://github.com/rime/rime-emoji/blob/master/README.md#%E8%87%AA%E5%8A%A9%E5%AE%89%E8%A3%9D&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;官方说明&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;当然不要忘了安装这两个依赖的包，我这个配置在 Arch Linux 下面一共需要下面几个包：&lt;/p&gt;
-&lt;figure data-raw=&quot;# pacman -S librime ibus-rime rime-luna-pinyin rime-emoji rime-pinyin-zhwiki
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;# pacman -S librime ibus-rime rime-luna-pinyin rime-emoji rime-pinyin-zhwiki
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;当然你要有配置好能显示的 emoji 字体。这也是个坑，等我有时间写一下我的 &lt;code&gt;/etc/fonts/local.conf&lt;/code&gt; 吧。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;下载&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/My-RIME/#%E4%B8%8B%E8%BD%BD&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h1&gt;
-&lt;p&gt;更新（2021-07-23）：因为加了词库和 emoji 之后文件变多了，请直接去 &lt;a href=&quot;https://github.com/AlynxZhou/alynx-rime-config/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;GitHub Repo&lt;/a&gt; 获取配置。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="输入法" label="输入法" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/" />
-    
-    <category term="RIME" label="RIME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/RIME/" />
-    
-    
-    <category term="输入法" label="输入法" scheme="https://sh.alynx.one/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" />
-    
-    <category term="RIME" label="RIME" scheme="https://sh.alynx.one/tags/RIME/" />
     
   </entry>
   
