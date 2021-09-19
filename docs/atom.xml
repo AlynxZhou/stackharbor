@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2021-09-18T13:08:08.000Z</updated>
+  <updated>2021-09-18T15:08:08.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -33,19 +33,26 @@
     </author>
     
     
-    <published>2021-09-18T13:08:08.000Z</published>
+    <published>2021-09-18T15:08:08.000Z</published>
     
     
-    <updated>2021-09-18T13:08:08.000Z</updated>
+    <updated>2021-09-19T04:01:45.000Z</updated>
     
     
     <summary type="html">
-      三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 这个 issue，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因…
+      &lt;p&gt;这篇文章同时有 &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC&quot;&gt;中文版本&lt;/a&gt; 和 &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion&quot;&gt;英文版本&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;This post is both available in &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC&quot;&gt;Chinese version&lt;/a&gt; and &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion&quot;&gt;English version&lt;/a&gt;.&lt;/p&gt;
+
     </summary>
     
     
     <content type="html">
-      &lt;p&gt;三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 &lt;a href=&quot;https://github.com/Genymobile/scrcpy/issues/279&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这个 issue&lt;/a&gt;，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因为它和直接在手机上插键盘不一样，显示的还是软键盘，虽然能通过电脑键盘触发输入法，但是却不能用数字键选词。我当时也不太懂，于是就发 issue 问开发者，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 回复说有个叫 HID over AOA 的办法可以实现，但是对有些设备来说有 bug，同时也需要有人花时间读 USB 规范然后做把 SDL event 转换成 HID event 的工作。我又想那能不能直接用电脑的输入法生成字符然后传给手机，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 表示现在就是这么做的，但是 Android 相关的 API 限制只能发送 ASCII 的字符，所以也行不通。&lt;/p&gt;
+      &lt;p&gt;这篇文章同时有 &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC&quot;&gt;中文版本&lt;/a&gt; 和 &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion&quot;&gt;英文版本&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;This post is both available in &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC&quot;&gt;Chinese version&lt;/a&gt; and &lt;a href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion&quot;&gt;English version&lt;/a&gt;.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;%E4%B8%AD%E6%96%87&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#%E4%B8%AD%E6%96%87&quot;&gt;&lt;/a&gt;中文&lt;/h1&gt;
+&lt;p&gt;三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 &lt;a href=&quot;https://github.com/Genymobile/scrcpy/issues/279&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这个 issue&lt;/a&gt;，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因为它和直接在手机上插键盘不一样，显示的还是软键盘，虽然能通过电脑键盘触发输入法，但是却不能用数字键选词。我当时也不太懂，于是就发 issue 问开发者，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 回复说 Android 有个叫 HID over AOA 的协议可以实现，但是对有些设备来说有 bug，同时也需要有人花时间读 USB 规范然后做把 SDL event 转换成 HID event 的工作。我又想那能不能直接用电脑的输入法生成字符然后传给手机，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 表示现在就是这么做的，但是 Android 相关的 API 限制只能发送 ASCII 的字符，所以也行不通。&lt;/p&gt;
 &lt;p&gt;我当时稍微了解了一下这些相关的东西，不过显然超出了我的能力范围，于是这件事我就搁置了。一直到最近或者准确的说就是上周和 Hackghost 跟我提起说苹果似乎打算做手机投屏到电脑的功能，然后又说华为好像有个现成的。不过我对这些一向是漠不关心的，这些厂商就是又懒又坏的典型，不会做一个 Linux 版的客户端的。如果他们自己做不了或者不打算做，那就应该公开一点，让能做的人来做而不是藏着掖着。然后就是我们讨论了一气关于成本到底谁付了谁亏了的问题，我坚持认为厂商赚得已经够多了，成本和利润 Linux 用户在买手机的时候也是照样付的，只是这些人贪得无厌能少付出成本就少付出一点而已。最后我说已经有能做的人做了 scrcpy 这个项目出来，投屏完全没问题，支持各种平台，美中不足就是输入体验不太好。这时候我又想已经过去很久了，不如我再试试去看看能不能解决输入体验的问题，于是就回去翻了这个 issue。&lt;/p&gt;
 &lt;p&gt;运气不错，翻过去看到在 2019 年年初的时候 &lt;a href=&quot;https://github.com/amosbird&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@amosbird&lt;/a&gt; 已经写了一份代码，他自称是能用的，然而不知道为什么当初没有合并进主线，现在多半也是跑不起来。我一开始想我把他这个在当前的 HEAD 上重构一下就好了，于是开始读他的代码。一开始还是没什么头绪，看起来他似乎写了不止一个功能，但是都在一个 commit 里面，又没什么关于思路的注释。随后我加上了他的 Telegram，不过他本人表示时间有点久了他也不记得自己写的代码都是什么意思（笑）。于是我只能硬着头皮啃了，好在我现在的经验比以前涨了很多，然后再同时啃 USB 和 Android 的协议，配合一些搜到的其他资料，最终了解了大概是怎么回事。最开始本来以为简单地合并一下代码就可以了，没想到还发现了他代码里的错误，基本是变成重写了。花了头两天事件让程序跑起来，然后用了几天调整成和现有代码一致的风格以便合并进去。 &lt;em&gt;总之很是有一点新手村出来遇到 BOSS 暂时撤退，升级打怪三年之后杀回来的感觉。&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;做好之后的效果基本就是下面两张截图，Gboard 开始工作在外接硬件键盘的模式了：&lt;/p&gt;
@@ -54,7 +61,7 @@
 &lt;p&gt;既然是 USB HID over AOAv2，那很显然需要知道 USB HID 是怎么回事，USB 官方有一个 &lt;a href=&quot;https://www.usb.org/document-library/device-class-definition-hid-111&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;很长的 PDF&lt;/a&gt; 规定怎么成为一个合法的 HID 设备，说实话，看不太下去。如果你想要查一些有帮助的例子，直接查 AOAv2 多半是没戏的，只有 &lt;a href=&quot;https://source.android.com/devices/accessories/aoa2&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Android 自己一个惜字如金的文档页&lt;/a&gt;，我的经验就是你找那些主题是用单片机模拟键盘鼠标的文章，他们的目标和这个基本是一致的。不过我说好不碰硬件的话看来是算作废了。&lt;/p&gt;
 &lt;p&gt;基本上成为一个 USB HID 设备需要你发送一大堆的描述符到主机，不过我们这里有点不一样，因为 Android 设备连接电脑的时候，Android 是 USB 从设备，电脑是主设备，而 AOAv2 是从主机反向发数据到从设备，它不要求我们发送一大堆 USB 的描述符，只要向 Android 注册一个设备，发送 HID 的报告描述符，再发送 HID event，再注销就好了。这部分可以通过 libusb 这个库来实现 USB 的数据包传输，然后把 Android 的几个命令封装成函数就可以了，基本是在 &lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246&lt;/a&gt; 这部分。&lt;/p&gt;
 &lt;p&gt;基础的 API 有了之后则是具体的发什么数据包了，HID 的数据实际上就是由 byte 组成的 buffer，首先就是报告描述符，这个描述符是让主设备知道每个发过来的 event 里面的每个 byte 都是什么含义，键盘的描述符其实相对是比较固定的，在 &lt;a href=&quot;https://www.usb.org/document-library/device-class-definition-hid-111&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Device Class Definition for Human Interface Devices&lt;/a&gt; 这个 PDF 里面其实给了一个最简单的 USB 键盘的例子，这个也是保证在 BIOS 里面能正常使用 USB 键盘的最小集合，是在 Appendix B: Boot Interface Descriptors 下面的 B.1 Protocol 1 (Keyboard) 和 Appendix E: Example USB Descriptors for HID Class Devices 下面的 E.6 Report Descriptor (Keyboard)。不过有时候光知道这些还不够，比如报告描述符里面大部分都是两个 byte 一句话，第一个 byte 表示的是类别而第二个表示的是具体的值，后面的大概很好理解，但是第一个 byte 是怎么算出来的可能需要了解，这需要看那个 PDF 里 8. Report Protocol 这一节了，或者中文的话可以看 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/41960639&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这篇知乎文章&lt;/a&gt;，然后你就会明白为什么有时候看起来数字不一样结果含义却一样了，因为其实第一个 byte 的每个 bit 都是有分别的含义的。然后就是对于 Usage Tag 这个有很多，被放在 &lt;a href=&quot;https://usb.org/sites/default/files/hut1_22.pdf&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;另一个单独的 PDF&lt;/a&gt; 里面了。&lt;/p&gt;
-&lt;p&gt;基本上我还是把 &lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&lt;/a&gt; 这段代码贴过来好了，详细的说明我加在了注释里面：&lt;/p&gt;
+&lt;p&gt;我还是把 &lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&lt;/a&gt; 这段代码贴过来好了，详细的说明我加在了注释里面：&lt;/p&gt;
 &lt;figure data-raw=&quot;unsigned char kb_report_desc_buffer[]  = {
     // Usage Page (Generic Desktop)
     // 键盘这个字段应该是 Generic Desktop，为啥是这个我也不知道。
@@ -402,6 +409,362 @@
 &lt;p&gt;Windows 下面 libusb 似乎不能很好的连接 Android 手机发送数据，这个我没什么办法，看起来是个 &lt;a href=&quot;https://libusb-devel.narkive.com/vENuKzdR/getting-the-serial-number-of-the-camera-fails&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;陈年老 bug&lt;/a&gt;，考虑到我一开始的目的只是我自己能在 Linux 下面方便地聊 QQ，做成这样我觉得就可以了，我的代码逻辑正确，即使要修复，也不至于动 scrcpy 这部分而是动 libusb，&lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; 也表示现在就很不错了。&lt;/p&gt;
 &lt;p&gt;当然因为依赖 USB，所以你利用 ADB over WiFi 的话就没办法用这个功能了，不过我用电脑时候一般会给手机充电，也无所谓。&lt;/p&gt;
 &lt;p&gt;提交的 PR 链接是 &lt;a href=&quot;https://github.com/Genymobile/scrcpy/pull/2632/files&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/Genymobile/scrcpy/pull/2632/files&lt;/a&gt;，感觉是个大工程，最后实际上也就修改了一千行？不过确实挺难的。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;EnglishVersion&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion&quot;&gt;&lt;/a&gt;English Version&lt;/h1&gt;
+&lt;p&gt;(Title is Simulate Physical Keyboards in Scrcpy via USB HID over AOAv2.)&lt;/p&gt;
+&lt;p&gt;Three years (2018) ago I opened an &lt;a href=&quot;https://github.com/Genymobile/scrcpy/issues/279&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;issue&lt;/a&gt; on scrcpy&#039;s GitHub repo, because I just found using scrcpy I can mirror my Android phone to computer and control it, so I could use QQ on Linux via my Android phone (I still had to use QQ frequently at that time), but after I tried it, I found it&#039;s inconvenient, because it shows soft keyboard on Android phone instead of simulating physical keyboard, I can trigger input method via typing but using numbers to choose words is not available. I know little about the code at that time and ask the maintainer for some reason, &lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; replied that there is a protocol called HID over AOA supported by Android can implement a physical keyboard, but there is a bug on some devices and needs some one take their time to read specifications and write some code to convert SDL event into HID event. Then I asked that how about using computer&#039;s IME and pass Chinese into Android, &lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; said that&#039;s what scrcpy did but Android has a limitation that you can only pass ASCII chars.&lt;/p&gt;
+&lt;p&gt;I just tried reading some related things but it beyonds my ability, I just put it here. Until last week when I am talking with my friend Hackghost, he said Apple is making their own screen mirror implementation, and seems Huawei has one on their phone. I never care about Hardware manufacturer, neither Apple nor Huawei, because I think they are both lazy and evil, and they won&#039;t make a Linux client for their screen mirror implementation. If they are unable to make it, they should be open and allow users to do it by themselves. Then we talked about cost and profit, I insist that they have enough profit and Linux users also paid for their phone, so the feature should be available on Linux, but they are greedy and want more profit. Finally I said that there is already a hero who made scrcpy, and scrcpy runs on Windows, Linux and macOS, except for the bad IME experience. And I remebered it takes a long time after I opened the issue, maybe I should try again so I did it.&lt;/p&gt;
+&lt;p&gt;I am lucky that &lt;a href=&quot;https://github.com/amosbird&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@amosbird&lt;/a&gt; already wrote some code in 2019 and he said it is able to work but he didn&#039;t send a PR, I guess it won&#039;t work now but I could refactor it to current HEAD so I start to read his code. At first I am wired that he implemented not only one feature in a single commit without any hinting about what he did. Then I managed to contact to him via Telegram, but he forget his code because 2 years past (lol). So I need to do it myself, I am more experienced that 3 years ago and I read USB and Android documents, with some other articles, I know what I should do. At first I think I just merge code, but finally I am re-writing because some mistakes in his code. It takes 2 days to make it work and some other days to tweak it. &lt;em&gt;Sounds like that you met a BOSS when you are a newbie and you escaped, fight to level up and come back after 3 years&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Those are screenshots of this feature:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/1.png&quot; alt=&quot;1.png&quot;&gt;
+&lt;img src=&quot;/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/2.png&quot; alt=&quot;2.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;So it&#039;s USB HID over AOAv2, you need to know what&#039;s USB HID, there is a &lt;a href=&quot;https://www.usb.org/document-library/device-class-definition-hid-111&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;long PDF&lt;/a&gt; from USB IF telling you how to be a HID device, it&#039;s hard to read. And if you want examples, typing AOAv2 in Google is useless, you can only &lt;a href=&quot;https://source.android.com/devices/accessories/aoa2&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;get a little page from Android&#039;s documents&lt;/a&gt;, I found that articles about simulating keyboard with single chip microcomputer (not sure whether this is the correct translation, some thing like Arduino or STM32) are helpful, however I&#039;ve said that I won&#039;t touch hardware, my words are fake now.&lt;/p&gt;
+&lt;p&gt;Basically you need to send a lot of descriptors to host if you want to be a USB HID device, but things are different here. When you connect your Android phone to computer, your computer is the host and your Android is sub-device, AOAv2 is about sending data from host to sub-device, so we don&#039;t need most USB descriptors, just register a device to Android and send HID report descriptor, then send HID event, then unregister it. We can use libusb for data transfering and make some Android&#039;s command into functions, see &lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;After API we need to decide what to send, HID just sends buffer made of bytes, first is the report descriptor, telling host that what&#039;s the meaning of every bytes in event, keyboard has a basic example in &lt;a href=&quot;https://www.usb.org/document-library/device-class-definition-hid-111&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Device Class Definition for Human Interface Devices&lt;/a&gt; which could be used in BIOS, you need to read Appendix B: Boot Interface Descriptors, B.1 Protocol 1 (Keyboard) 和 Appendix E: Example USB Descriptors for HID Class Devices and Appendix E: Example USB Descriptors for HID Class Devices, E.6 Report Descriptor (Keyboard). But those are not enough, mostly two bytes in descriptor made one meaning, the first byte is about type and the second is value, if you want to know how to calculate the first bye, you need to read 8. Report Protocol, and then you&#039;ll know why sometimes different numbers have the same meaning because each bits of the byte have different meaning. And their are a lot of Usage tags, they are in &lt;a href=&quot;https://usb.org/sites/default/files/hut1_22.pdf&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;another PDF&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I copy &lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144&lt;/a&gt; here and add detailed meaning in comments:&lt;/p&gt;
+&lt;figure data-raw=&quot;unsigned char kb_report_desc_buffer[]  = {
+    // Usage Page (Generic Desktop)
+    // I don&#039;t know why keyboard should be Generic Desktop.
+    0x05, 0x01,
+    // Usage (Keyboard)
+    // Go to look up in the table.
+    0x09, 0x06,
+
+    // Collection (Application)
+    // There are collections in descriptor,
+    // they represent for data you send to computer.
+    // A device should have at least 1 collection.
+    // Keyboard&#039;s usage page tag is under Application.
+    0xA1, 0x01,
+    // Report ID (1)
+    // You&#039;ll find there are no Report ID in the keyboard example,
+    // because you can ignore it if you have only 1 collection.
+    // But if your keyboard has media keys, they are in different collection.
+    // So you need a Report ID and you send it as the first byte of event.
+    // You know why we send 9 bytes in event while people say 8 for keyboards?
+    0x85, 0x01,
+
+    // Usage Page (Keyboard)
+    // Usage Page is different from Usage.
+    0x05, 0x07,
+    // Usage Minimum (224)
+    // You have many Usages in a collection, but you cannot list them all,
+    // so you have a range from 224, which is Left Control.
+    0x19, 0xE0,
+    // Usage Maximum (231)
+    // And end to 231, the Right GUI, those are 8 modifier keys.
+    // Left Control，Right Control，Left Alt，Right Alt，Left Shift，Right Shift，
+    // Left GUI，Right GUI。
+    // But when you convert hex to binary, the right is bit 0,
+    // so reverse the sequence.
+    0x29, 0xE7,
+    // Logical Minimum (0)
+    // 0 is the minimum of a bit.
+    0x15, 0x00,
+    // Logical Maximum (1)
+    // Press is the maximum 1.
+    0x25, 0x01,
+    // Report Size (1)
+    // One key for one bit.
+    0x75, 0x01,
+    // Report Count (8)
+    // 8 keys.
+    0x95, 0x08,
+    // Input (Data, Variable, Absolute): Modifier byte
+    // Too long to describe what input means, please read the table,
+    // should match the above.
+    0x81, 0x02,
+
+    // Reserved, just send a byte of 0.
+    // Report Size (8)
+    0x75, 0x08,
+    // Report Count (1)
+    0x95, 0x01,
+    // Input (Constant): Reserved byte
+    0x81, 0x01,
+
+    // LEDs on keyboard, HID keyboard does not handle LED states itself.
+    // This is not a real keyboard so just grab it from Internet.
+    // 5 LEDs works like modifiers but output.
+    // Usage Page (LEDs)
+    0x05, 0x08,
+    // Usage Minimum (1)
+    0x19, 0x01,
+    // Usage Maximum (5)
+    0x29, 0x05,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (5)
+    0x95, 0x05,
+    // Output (Data, Variable, Absolute): LED report
+    0x91, 0x02,
+
+    // 5 bits of LEDs are not aligned so add 3 bits as padding.
+    // Report Size (3)
+    0x75, 0x03,
+    // Report Count (1)
+    0x95, 0x01,
+    // Output (Constant): LED report padding
+    0x91, 0x01,
+
+    // We have 101 normal keys on keyboards so you don&#039;t want to use 101 bits
+    // for them (it might be OK but hard to write), so we return an array and
+    // a byte is for a keycode.
+    // Usage Page (Key Codes)
+    0x05, 0x07,
+    // Usage Minimum (0)
+    // Minimum is 0 for no key pressed.
+    0x19, 0x00,
+    // Usage Maximum (101)
+    // 101 is the max keycode on standard keyboard.
+    0x29, HID_KEYBOARD_KEYS - 1,
+    // Logical Minimum (0)
+    // Bytes are keyboards and the minimum is 0.
+    0x15, 0x00,
+    // Logical Maximum(101)
+    // Maximum is 101.
+    0x25, HID_KEYBOARD_KEYS - 1,
+    // Report Size (8)
+    // Each key takes 1 byte.
+    0x75, 0x08,
+    // Report Count (6)
+    // USB keyboards need to report 6 keys at lease,
+    // your keyboard might tell your computer it can report more,
+    // but 6 is mostly OK.
+    0x95, HID_KEYBOARD_MAX_KEYS,
+    // Input (Data, Array): Keys
+    // Input is an array here, not a variable, array can only be the last
+    // of a collecton.
+    0x81, 0x00,
+
+    // End Collection
+    // Collection for keyboard is end.
+    0xC0,
+
+    // Usage Page (Consumer)
+    // FOr media keys.
+    0x05, 0x0C,
+    // Usage (Consumer Control)
+    0x09, 0x01,
+
+    // Collection (Application)
+    // A new collection because data format changes.
+    0xA1, 0x01,
+    // Report ID (2)
+    // A new Report ID, so event has two bytes, first Report ID then keycode.
+    0x85, 0x02,
+
+    // Usage Page (Consumer)
+    0x05, 0x0C,
+    // Like the modifiers, but those usages are not consistent,
+    // we have to list them here.
+    // Usage (Scan Next Track)
+    0x09, 0xB5,
+    // Usage (Scan Previous Track)
+    0x09, 0xB6,
+    // Usage (Stop)
+    0x09, 0xB7,
+    // Usage (Eject)
+    0x09, 0xB8,
+    // Usage (Play/Pause)
+    0x09, 0xCD,
+    // Usage (Mute)
+    0x09, 0xE2,
+    // Usage (Volume Increment)
+    0x09, 0xE9,
+    // Usage (Volume Decrement)
+    0x09, 0xEA,
+    // Like modifiers.
+    // Logical Minimum (0)
+    0x15, 0x00,
+    // Logical Maximum (1)
+    0x25, 0x01,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (8)
+    0x95, 0x08,
+    // Input (Data, Array)
+    0x81, 0x02,
+
+    // End Collection
+    0xC0
+};
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;unsigned char kb_report_desc_buffer[]  = {
+    // Usage Page (Generic Desktop)
+    // I don&#039;t know why keyboard should be Generic Desktop.
+    0x05, 0x01,
+    // Usage (Keyboard)
+    // Go to look up in the table.
+    0x09, 0x06,
+
+    // Collection (Application)
+    // There are collections in descriptor,
+    // they represent for data you send to computer.
+    // A device should have at least 1 collection.
+    // Keyboard&#039;s usage page tag is under Application.
+    0xA1, 0x01,
+    // Report ID (1)
+    // You&#039;ll find there are no Report ID in the keyboard example,
+    // because you can ignore it if you have only 1 collection.
+    // But if your keyboard has media keys, they are in different collection.
+    // So you need a Report ID and you send it as the first byte of event.
+    // You know why we send 9 bytes in event while people say 8 for keyboards?
+    0x85, 0x01,
+
+    // Usage Page (Keyboard)
+    // Usage Page is different from Usage.
+    0x05, 0x07,
+    // Usage Minimum (224)
+    // You have many Usages in a collection, but you cannot list them all,
+    // so you have a range from 224, which is Left Control.
+    0x19, 0xE0,
+    // Usage Maximum (231)
+    // And end to 231, the Right GUI, those are 8 modifier keys.
+    // Left Control，Right Control，Left Alt，Right Alt，Left Shift，Right Shift，
+    // Left GUI，Right GUI。
+    // But when you convert hex to binary, the right is bit 0,
+    // so reverse the sequence.
+    0x29, 0xE7,
+    // Logical Minimum (0)
+    // 0 is the minimum of a bit.
+    0x15, 0x00,
+    // Logical Maximum (1)
+    // Press is the maximum 1.
+    0x25, 0x01,
+    // Report Size (1)
+    // One key for one bit.
+    0x75, 0x01,
+    // Report Count (8)
+    // 8 keys.
+    0x95, 0x08,
+    // Input (Data, Variable, Absolute): Modifier byte
+    // Too long to describe what input means, please read the table,
+    // should match the above.
+    0x81, 0x02,
+
+    // Reserved, just send a byte of 0.
+    // Report Size (8)
+    0x75, 0x08,
+    // Report Count (1)
+    0x95, 0x01,
+    // Input (Constant): Reserved byte
+    0x81, 0x01,
+
+    // LEDs on keyboard, HID keyboard does not handle LED states itself.
+    // This is not a real keyboard so just grab it from Internet.
+    // 5 LEDs works like modifiers but output.
+    // Usage Page (LEDs)
+    0x05, 0x08,
+    // Usage Minimum (1)
+    0x19, 0x01,
+    // Usage Maximum (5)
+    0x29, 0x05,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (5)
+    0x95, 0x05,
+    // Output (Data, Variable, Absolute): LED report
+    0x91, 0x02,
+
+    // 5 bits of LEDs are not aligned so add 3 bits as padding.
+    // Report Size (3)
+    0x75, 0x03,
+    // Report Count (1)
+    0x95, 0x01,
+    // Output (Constant): LED report padding
+    0x91, 0x01,
+
+    // We have 101 normal keys on keyboards so you don&#039;t want to use 101 bits
+    // for them (it might be OK but hard to write), so we return an array and
+    // a byte is for a keycode.
+    // Usage Page (Key Codes)
+    0x05, 0x07,
+    // Usage Minimum (0)
+    // Minimum is 0 for no key pressed.
+    0x19, 0x00,
+    // Usage Maximum (101)
+    // 101 is the max keycode on standard keyboard.
+    0x29, HID_KEYBOARD_KEYS - 1,
+    // Logical Minimum (0)
+    // Bytes are keyboards and the minimum is 0.
+    0x15, 0x00,
+    // Logical Maximum(101)
+    // Maximum is 101.
+    0x25, HID_KEYBOARD_KEYS - 1,
+    // Report Size (8)
+    // Each key takes 1 byte.
+    0x75, 0x08,
+    // Report Count (6)
+    // USB keyboards need to report 6 keys at lease,
+    // your keyboard might tell your computer it can report more,
+    // but 6 is mostly OK.
+    0x95, HID_KEYBOARD_MAX_KEYS,
+    // Input (Data, Array): Keys
+    // Input is an array here, not a variable, array can only be the last
+    // of a collecton.
+    0x81, 0x00,
+
+    // End Collection
+    // Collection for keyboard is end.
+    0xC0,
+
+    // Usage Page (Consumer)
+    // FOr media keys.
+    0x05, 0x0C,
+    // Usage (Consumer Control)
+    0x09, 0x01,
+
+    // Collection (Application)
+    // A new collection because data format changes.
+    0xA1, 0x01,
+    // Report ID (2)
+    // A new Report ID, so event has two bytes, first Report ID then keycode.
+    0x85, 0x02,
+
+    // Usage Page (Consumer)
+    0x05, 0x0C,
+    // Like the modifiers, but those usages are not consistent,
+    // we have to list them here.
+    // Usage (Scan Next Track)
+    0x09, 0xB5,
+    // Usage (Scan Previous Track)
+    0x09, 0xB6,
+    // Usage (Stop)
+    0x09, 0xB7,
+    // Usage (Eject)
+    0x09, 0xB8,
+    // Usage (Play/Pause)
+    0x09, 0xCD,
+    // Usage (Mute)
+    0x09, 0xE2,
+    // Usage (Volume Increment)
+    0x09, 0xE9,
+    // Usage (Volume Decrement)
+    0x09, 0xEA,
+    // Like modifiers.
+    // Logical Minimum (0)
+    0x15, 0x00,
+    // Logical Maximum (1)
+    0x25, 0x01,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (8)
+    0x95, 0x08,
+    // Input (Data, Array)
+    0x81, 0x02,
+
+    // End Collection
+    0xC0
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;So our keyboard sends this to host. The only thing you need to remember is send Report ID as the first byte of event. Then how to convert SDL event into HID event? Firstly I read &lt;a href=&quot;https://github.com/amosbird&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@amosbird&lt;/a&gt;&#039;s code and he thinks HID event is like SDL event——one field for modifiers and another field for press/release and one field for which key, an event represents for one single key——but it&#039;s not, HID keyboards won&#039;t tell you which key is pressed or release, it&#039;s based on sequence, for example I press C first, it sends &lt;code&gt;C 00 00 00 00 00&lt;/code&gt;, then I press B, sends &lt;code&gt;C B 00 00 00 00&lt;/code&gt;, release C, sends &lt;code&gt;B 00 00 00 00 00&lt;/code&gt;, the host is responsible for comparing the events and getting info like &quot;B pressed&quot; or &quot;C released&quot;. So we need to convert it back to &quot;what are pressed keys&quot;, it&#039;s simple, just use an array for state of current keys, update it when a SDL event is fired (&lt;strong&gt;not all key events are the 101 keys&lt;/strong&gt;), then iterate the array to generate a event contains the indices of &lt;code&gt;true&lt;/code&gt;, the sequence of keys does not matter in HID and SDL&#039;s scancode is the same as HID values. For modifiers are easier, every SDL events contains all modifiers just like HID events, they are just different in bits, so we do a convert (&lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L195-L223&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L195-L223&lt;/a&gt;). &lt;strong&gt;But don&#039;t ignore events just because it&#039;s not inside the 101 keys! User may just press a modifer, and we only skip updating keys state here&lt;/strong&gt; (&lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L225-L269&gt;&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L225-L269&amp;gt;&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;You may ask that what will happen if I press 7 keys at the same time? HID requires to report a phantom state, which fills &lt;code&gt;0x01&lt;/code&gt; as all 6 keys (&lt;a href=&quot;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L250-L259&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L250-L259&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;We almost done it, and if you have a DE, media keys should be caught by it before SDL, so I never send it in code. Scrcpy uses some combination keys for it. And some cleaning, for example &lt;a href=&quot;https://github.com/amosbird&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@amosbird&lt;/a&gt; forget to unregister HID device before program exitting, and you cannot use soft keybaords until you disconnect the USB cable.&lt;/p&gt;
+&lt;p&gt;At last &lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt; says scrcpy uses another thread for input, so I make a thread for AOA, too. Just grab the code from controller.&lt;/p&gt;
+&lt;p&gt;You may ask about HID mouse, I&#039;ve tried it, not good, AOA can register different HID devices, just pass different ID as argument, I have those code. But the biggest problem is that HID mouse only report the delta of X and Y, if I move the mouse outside the window from left edge, MotionEvent stops, the HID cursor will stop on the edge, and then I move my mouse inside the window from right edge, the HID cursor then loses sync with my mouse. The typicall scrcpy injection events work better so I give up.&lt;/p&gt;
+&lt;p&gt;libusb has &lt;a href=&quot;https://libusb-devel.narkive.com/vENuKzdR/getting-the-serial-number-of-the-camera-fails&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;an old bug&lt;/a&gt; on Windows so this cannot work on windows, I have no idea and because at first I just want to use QQ on Linux, I think it&#039;s OK, so does &lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt;. My code is correct and once libusb fixed it, my code should not be updated I think.&lt;/p&gt;
+&lt;p&gt;However you need USB and this won&#039;t work with ADB over WiFi, I typically charge my phone while using computer so it&#039;s not a problem for me.&lt;/p&gt;
+&lt;p&gt;PR is &lt;a href=&quot;https://github.com/Genymobile/scrcpy/pull/2632/files&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/Genymobile/scrcpy/pull/2632/files&lt;/a&gt;, only 1 thousand lines? I spend a lot of time on it.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
@@ -954,12 +1317,12 @@
       &lt;p&gt;由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 
-&lt;h1 id=&quot;常见问题&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot; title=&quot;常见问题&quot;&gt;&lt;/a&gt;常见问题&lt;/h1&gt;
-&lt;h2 id=&quot;为什么NVIDIA的Wayland支持这么差？&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F&quot; title=&quot;为什么NVIDIA的Wayland支持这么差？&quot;&gt;&lt;/a&gt;为什么 NVIDIA 的 Wayland 支持这么差？&lt;/h2&gt;
+&lt;h1 id=&quot;%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot;&gt;&lt;/a&gt;常见问题&lt;/h1&gt;
+&lt;h2 id=&quot;%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F&quot;&gt;&lt;/a&gt;为什么 NVIDIA 的 Wayland 支持这么差？&lt;/h2&gt;
 &lt;p&gt;长话短说，大部分驱动（AMD 的开源和闭源驱动，NVIDIA 的开源驱动 nouveau，Intel 的开源驱动）都同意采用 GBM 作为缓存 API，但是 NVIDIA 像个赌气的小孩一样表示“你们这个不好，我要做个更好的 EGLStreams”所以不支持 GBM，于是所有要兼容 NVIDIA 闭源驱动的混成器都要为它做单独的实现代码。诸如 GNOME 或者 KDE 这种大型项目有足够的人手，同时 NVIDIA 似乎也提供了一定的帮助所以已经有了混成器内部的 EGLStreams 实现，但也有些小型项目并不支持这个玩意。而且 NVIDIA 吹牛皮吹得很大，EGLStreams 哪里“更好”从他们的龟速进展上根本体现不出来。可能是因为挖矿赚得盆满钵满，忘记了显卡的本职工作是显示，NVIDIA 的闭源 Linux 驱动质量一直停留在能用的程度，同时又做各种各样限制导致开源的 nouveau 在较新的显卡上几乎不能用。&lt;/p&gt;
 &lt;p&gt;NVIDIA 闭源驱动之前一直是稀泥巴糊不上墙的垃圾，因为它在 Wayland 下对使用 XWayland 的程序没有硬件加速支持——也就是说如果你使用 Xorg 会话，程序是有硬件加速的，你使用 Wayland 会话，Wayland 程序也是有硬件加速的，但是在 Wayland 会话下面那些旧的 Xorg 程序就没有硬件加速（听起来就像捡了芝麻丢了西瓜一样）——而仍然有相当一部分旧程序在 Wayland 下依赖 XWayland 运行，所以 NVIDIA 闭源驱动的 Wayland 会话基本可以认为是不能日常使用的。&lt;/p&gt;
 &lt;p&gt;从版本 470 之后 NVIDIA 闭源驱动有所改善，首先是他们的员工提交的&lt;a href=&quot;https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/587/diffs&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;补丁&lt;/a&gt;在 XWayland 21.1.1 版本释出了，这个补丁添加了对 XWayland 硬件加速的支持（需要新版本驱动），然后新版本驱动在上周变为稳定版，用户可以安装，所以在拖了至少三年之后最后一块空缺终于被补上了。使用 KDE 和 GNOME 的 NVIDIA 显卡用户理论上就可以获得完整的 Wayland 体验了。&lt;/p&gt;
-&lt;h2 id=&quot;现在NVIDIA用户的Wayland会话可以日常使用了吗？&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F&quot; title=&quot;现在NVIDIA用户的Wayland会话可以日常使用了吗？&quot;&gt;&lt;/a&gt;现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？&lt;/h2&gt;
+&lt;h2 id=&quot;%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;/a&gt;现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？&lt;/h2&gt;
 &lt;p&gt;更新到 470 驱动之后我第一时间体验了一下，&lt;del&gt;结果就是很抱歉，还是不行，不过&lt;/del&gt; 我遇到的都是一些小问题：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;del&gt;Firefox 稳定版没法正常工作，但是 Nightly 版本是可以的，原因是 NVIDIA 和 Mesa 的 EGL 实现存在一点小区别，&lt;a href=&quot;https://hg.mozilla.org/mozilla-central/rev/c2191ee9cb65&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;修复补丁&lt;/a&gt;已经在 Nightly 里面了，我们只要等稳定版版本升上去就可以了。&lt;/del&gt;&lt;/li&gt;
@@ -970,7 +1333,7 @@
 &lt;p&gt;不过总而言之这些都是能很快修复（废话，大家动作都比 NVIDIA 快，建议老黄把自己的皮衣换成乌龟壳）的问题，不至于被卡很久，至于你的发行版是那种追求“稳定”选择了一个不支持的大版本然后不更新的？哈哈，关我 X 事。&lt;/p&gt;
 &lt;p&gt;更新（2021-09-17）：Arch 这边 Firefox 更新到了 92.0，所以已经修好了。Google Chrome 现在是 93.0.4577.63，我也能正常打开。GTK4 的 MR 已经释出了稳定版，所以没问题。Atom 在我这用的是 electron9，能用，反而是用 electron12 的 Code - OSS 不能用了……最后那些不知道打包了几百年前的闭源拖拉机（要不把拖去掉变成垃圾？）也就是我指的很明确的 Slack 不能用，加上 &lt;code&gt;--disable-gpu&lt;/code&gt; 是能用的，但是是他的问题，为什么要我关掉硬件加速消耗 CPU 资源？最后 GNOME Shell 自己的那个 bug……目前没有开发者搞这个，我简单看了一下发现是个我没涉足过的领域，不过总之我觉得是个看起来不爽但不影响你实际使用的问题，所以现在的状态就是 &lt;strong&gt;“又不是不能用”&lt;/strong&gt; ！（我可没说后半句啊！上一个说了后半句的珠海小厂现在还活着吗？）&lt;/p&gt;
 &lt;p&gt;另外我在 openSUSE Tumbleweed 上测试的时候还遇到一个问题啊，它默认安装的是 nouveau，需要手动在 YaST 里面安装 NVIDIA，装完之后似乎两个驱动冲突把我显示器搞黑屏了，于是我就没法直接重启。而且在那之后我显示器神奇的再也不亮了（PS4、Switch 全都点不亮它），拔掉电源放半分钟再插上才好，很头疼啊。&lt;/p&gt;
-&lt;h2 id=&quot;我是GNOME用户，为什么装了470版本GDM选单里的GNOME还是Xorg会话？&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot; title=&quot;我是GNOME用户，为什么装了470版本GDM选单里的GNOME还是Xorg会话？&quot;&gt;&lt;/a&gt;我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？&lt;/h2&gt;
+&lt;h2 id=&quot;%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;/a&gt;我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？&lt;/h2&gt;
 &lt;p&gt;这个有几个原因，首先就是 Wayland 需要 Kernel Mode Setting 的支持（这也是个 NVIDIA 拖了好久才补上的特性），所以你的内核参数要有 &lt;code&gt;nvidia-drm.modeset=1&lt;/code&gt;。其次要看 &lt;code&gt;/etc/gdm/custom.conf&lt;/code&gt; 里面 &lt;code&gt;WaylandEnable=false&lt;/code&gt; 是不是被注释掉的（默认应该是）。&lt;/p&gt;
 &lt;p&gt;最可能的是 udev 规则，GDM 带了一个 &lt;code&gt;/usr/lib/udev/rules.d/61-gdm.rules&lt;/code&gt; 文件，里面有这么几行：&lt;/p&gt;
 &lt;figure data-raw=&quot;# disable Wayland on Hi1710 chipsets
@@ -989,20 +1352,20 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;p&gt;第二行表示如果检测到 NVIDIA 闭源驱动就关闭 Wayland，第三行则是如果没开启 Kernel Mode Setting 也关掉 Wayland。&lt;/p&gt;
 &lt;p&gt;我猜大部分用户都没有第一行的设备，所以我建议直接 &lt;code&gt;ln -s /dev/null /etc/udev/rules.d/61-gdm.rules&lt;/code&gt; 屏蔽掉这个文件。&lt;/p&gt;
 &lt;p&gt;别问我既然 470 驱动都出来了 GNOME 开发者为什么不删掉这个文件，NVIDIA 憋出来 470 驱动总共也就一周多点，还有一堆小问题呢，删了怕不是又有一堆人来骂“怎么又把不稳定的东西搞给我了”。&lt;/p&gt;
-&lt;h2 id=&quot;我是笔记本双显卡用户，主用的是核芯显卡，为什么我GDM选单里的GNOME也是Xorg会话？&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot; title=&quot;我是笔记本双显卡用户，主用的是核芯显卡，为什么我GDM选单里的GNOME也是Xorg会话？&quot;&gt;&lt;/a&gt;我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？&lt;/h2&gt;
+&lt;h2 id=&quot;%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;/a&gt;我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？&lt;/h2&gt;
 &lt;p&gt;检查一下你是不是用了 NVIDIA 之前提供的 Xorg 下面的双显卡管理功能（有群友说叫 prime，我不知道是不是叫 prime）（顺便一提这也是 NVIDIA 憋了好几年才憋出来的本来就该有的东西）？如果你使用那个，首先它是 Xorg 下面的支持，其次它会加载 nvidia 模块，自然就会落到上一个问题里面的 udev 规则上。&lt;/p&gt;
 &lt;p&gt;有群友在群里表示他删了那个规则然后进 Wayland，可以是可以，但我感到很迷惑。这个 prime 功能 NVIDIA 之前只是说了在 Xorg 下面可用，所以我不是很理解又要 prime 又要 Wayland 的可行性，我也不知道 NVIDIA 的按需渲染现在到 Wayland 里面还能不能像之前 Xorg 里面提供的功能一样正常工作。就理论上我给 NVIDIA 掏了钱，这是他的义务给我支持这个功能，但这可是垃圾 NVIDIA 啊！&lt;/p&gt;
 &lt;p&gt;你问我有没有什么建议？如果你需要这玩意，就按照 GNOME 的规则用 Xorg 就好了，没错虽然我是 Wayland 支持者，但我在这里建议你还是先用着 Xorg。如果你只是想用 Wayland 然后并不是很需要用 NVIDIA 显卡，那就关掉它不让它加载驱动，没错，我在自己的笔记本上用的是 Bumblebee。&lt;/p&gt;
-&lt;h2 id=&quot;我是KDE用户，你扯这么多GNOME，跟我说说KDE现在有什么问题呗？&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F&quot; title=&quot;我是KDE用户，你扯这么多GNOME，跟我说说KDE现在有什么问题呗？&quot;&gt;&lt;/a&gt;我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？&lt;/h2&gt;
+&lt;h2 id=&quot;%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F&quot;&gt;&lt;/a&gt;我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？&lt;/h2&gt;
 &lt;p&gt;大哥，我是 GNOME 用户啊，既然你是 KDE 用户，建议你自己试试然后给我讲讲……&lt;/p&gt;
-&lt;h1 id=&quot;没用的观点&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9&quot; title=&quot;没用的观点&quot;&gt;&lt;/a&gt;没用的观点&lt;/h1&gt;
-&lt;h2 id=&quot;你看这个GDM就是逊啦，我这里卡死根本不能用，大家都推荐换SDDM巴拉巴拉……&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6&quot; title=&quot;你看这个GDM就是逊啦，我这里卡死根本不能用，大家都推荐换SDDM巴拉巴拉……&quot;&gt;&lt;/a&gt;你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……&lt;/h2&gt;
+&lt;h1 id=&quot;%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9&quot;&gt;&lt;/a&gt;没用的观点&lt;/h1&gt;
+&lt;h2 id=&quot;%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6&quot;&gt;&lt;/a&gt;你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……&lt;/h2&gt;
 &lt;p&gt;强调一下我的目的是解决问题，比如群里有人问为什么我双显卡 GDM 里没 Wayland 可选你来这么一句我觉得很不礼貌，当别人就是需要用 GDM 的时候说“大家都推荐换 SDDM”我觉得不管是 GNOME 用户还是 KDE 用户都会觉得不是个好回答。其次只说自己 GDM 卡死完全没法判断问题所在，别人都没这个问题，或许问题就不在 GDM 而在你的配置呢？同理，这个“大家都推荐换 SDDM”里的“大家”是哪里来的呢？我觉得这样的回复对解决问题没什么帮助。&lt;/p&gt;
-&lt;h2 id=&quot;Xorg好！Wayland坏！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81&quot; title=&quot;Xorg好！Wayland坏！&quot;&gt;&lt;/a&gt;Xorg 好！Wayland 坏！&lt;/h2&gt;
+&lt;h2 id=&quot;Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81&quot;&gt;&lt;/a&gt;Xorg 好！Wayland 坏！&lt;/h2&gt;
 &lt;p&gt;请列举出充分而恰当的理由支持你的观点，而不是人云亦云。比方说你可能觉得 Wayland 缺乏你需要的某些功能，这可能是设计理念上的不同，或者发展时间不够所导致的，毕竟 X 协议的历史比 Wayland 长得多，所以请多一点耐心。而至于不讲道理或者二极管或者言论不友善的行为在哪里都是不受欢迎的。&lt;/p&gt;
-&lt;h2 id=&quot;我也是NVIDIA用户，我玩XX游戏卡成幻灯片了！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81&quot; title=&quot;我也是NVIDIA用户，我玩XX游戏卡成幻灯片了！&quot;&gt;&lt;/a&gt;我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！&lt;/h2&gt;
+&lt;h2 id=&quot;%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81&quot;&gt;&lt;/a&gt;我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！&lt;/h2&gt;
 &lt;p&gt;……信息太少，无法给出合理推断，只能告诉你我游戏玩的可欢乐了！&lt;/p&gt;
-&lt;h2 id=&quot;你们NVIDIA用户真麻烦，谁叫你们自己掏钱买N卡受罪！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81&quot; title=&quot;你们NVIDIA用户真麻烦，谁叫你们自己掏钱买N卡受罪！&quot;&gt;&lt;/a&gt;你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！&lt;/h2&gt;
+&lt;h2 id=&quot;%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81&quot;&gt;&lt;/a&gt;你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！&lt;/h2&gt;
 &lt;p&gt;你又不知道老子都有什么需求，买 N 卡我是暂时没法用 Wayland，但是不买 N 卡我就要达芬奇受罪 Windows 下面打游戏受罪直播编码受罪跑 hashcat 受罪（存疑）。我做的选择是我权衡之后的结果。再说一遍，解决问题和“换 XX”是完全不一样的态度。&lt;/p&gt;
 &lt;p&gt;所以就是钱是掏了，骂还是照样骂，而且我都掏钱了，骂得然更有底气了！&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
@@ -1050,10 +1413,10 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
     
     <content type="html">
       &lt;p&gt;本来之前是想等新开的项目搞差不多了就来更新博客，结果没想到越写 TODO 越多一直搞到这个月才搞定，所以到现在才更新。&lt;/p&gt;
-&lt;h1 id=&quot;新项目&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E9%A1%B9%E7%9B%AE&quot; title=&quot;新项目&quot;&gt;&lt;/a&gt;新项目&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%96%B0%E9%A1%B9%E7%9B%AE&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E9%A1%B9%E7%9B%AE&quot;&gt;&lt;/a&gt;新项目&lt;/h1&gt;
 &lt;p&gt;从家里回来北京之后第一件事情就是 SUSE 的 HackWeek，我之前大致想好了要做什么，我用过 screenkey 这个项目，但它使用了 X11 的 API，所以不支持 Wayland，我简单调查了一下，发现其实是可以绕过显示部分直接读取输入设备的事件的，于是就打算造一个替代品。&lt;/p&gt;
 &lt;p&gt;读取键盘事件的部分其实很容易，简单试了一下就完成了。但是反而是显示部分比较难搞。一开始我打算用刚发布稳定版的 GTK4，结果发现 GTK4 在 NVIDIA 驱动的 Wayland 会话下面反而是有问题的，只能回退到没问题的 GTK3。我原本以为一周的时间做出一个能用的程序还是挺充足的，但是后来发现中间有各种各样的问题和奇怪的 work around。比如涉及到 GObject 对象在什么时候释放，有些文档说的也不是很清楚。以及因为要用单独的子进程执行需要 root 权限的后端读取输入事件和用单独的子线程查询后端输出带来的进程/线程间通信问题。篇幅有限，打算后续再开一篇博客来介绍这里面的经验。在一周的时间里勉强做出了能用的 demo 参加了 HackWeek 的成果展示环节（给有始有终的参与者的小礼物大概还放在我公司的桌子上，我都不知道是什么，因为一直没去取），然后用了几周打游戏的时间整理代码里面的问题（主要是各种资源释放），以及做一下翻译工作和打包工作，终于在上周达到基本稳定了。如果有兴趣，可以访问 &lt;a href=&quot;https://showmethekey.alynx.one/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://showmethekey.alynx.one/&lt;/a&gt; 或者观看 &lt;a href=&quot;https://www.bilibili.com/video/BV1EB4y1A7QN&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;我发在 B 站上的介绍视频&lt;/a&gt;。&lt;/p&gt;
-&lt;h1 id=&quot;新相机&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E7%9B%B8%E6%9C%BA&quot; title=&quot;新相机&quot;&gt;&lt;/a&gt;新相机&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%96%B0%E7%9B%B8%E6%9C%BA&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E7%9B%B8%E6%9C%BA&quot;&gt;&lt;/a&gt;新相机&lt;/h1&gt;
 &lt;p&gt;之前一直想提升视频的画质，但是还有一个想法是想玩玩摄影，因为平时周末经常是起得很晚然后在家里玩游戏，感觉也挺无聊的，所以打算买个相机，这样周末就有理由出去走走了。拍出来什么东西无所谓，主要是找点乐趣。然后朋友建议我买黑卡，虽然这个玩意确实很黑科技，但我并不是太感兴趣。很久以前我家里有一个数码相机，不是卡片机，是一个能变焦变很长的型号，但是后来智能手机出现之后就很快的不用它了，因为没有手机轻便的同时也没有足够的专业程度。所以我对相机的看法就是要么就搞高级一点的，肯定不会被手机取代，要么就用手机算了，而且说实话最高端的黑卡价格也都达到微单的价格区间了。考虑到要拿来录视频，很多录视频的 UP 主选择的都是微单而不是单反，再查找了一下发现很多人都用的索尼 A73，那选一个大家都在用的总是错不了的吧，于是初步选定了目标。然后又开始考虑是 A73 还是 A7C，虽然很多人对于 A7C 只是缩小体积然后价格却比 A73 高感到不满，但我阅读了一个对比表格之后，觉得还是 A7C 更适合我这种有录视频需求的人，于是就选择了 A7C。&lt;/p&gt;
 &lt;p&gt;我个人是对 A7C 相比 A73 砍掉的部分没什么需求的，只看参数很容易会变成那种“这个也想要那个也想要”的情况，虽然作为消费者而言，当然是希望厂家提供越多的功能越好。但是在只有这几个选项的情况下还是得考虑需求做一下取舍。比如去掉 MicroUSB 接口导致只能接一些 USB-C 接口的配件，看了看配件价格，短期内我大概是不会考虑这些配件的……去掉前拨轮和摇杆对我来说也不是不能接受，毕竟触摸对焦也挺好用的。虽然少了很多自定义按键，但是方向键现在都是可以自定义的，其实差别也不大。反而轻巧的体积和翻转屏，以及没有录制时间限制于我来说很重要。有人说没有双卡槽不够专业，万一给别人录东西丢了数据没有冗余，但可以预见的未来我不会靠这玩意获得收入，录我自己的话丢了也不算什么无法挽回的后果（反正自己选的）。&lt;/p&gt;
 &lt;p&gt;看点作品？虽然我就是随便拍拍，还是有几张觉得好看的。&lt;/p&gt;
@@ -1068,7 +1431,7 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;p&gt;买完了 A7C 莫名开始种草 A7S3，4K 60 帧看起来真诱人啊……1080P 60 帧和 4K 30 帧只能二选一到底是谁想出来的牙膏啊！&lt;/p&gt;
 &lt;p&gt;说起来最近拍照片之后发现存储空间的需求还是很大啊，虽然我两块 2T 的机械应该还足以满足短期内的需求。最近挖矿导致大容量硬盘也涨价了，估计更新存储设备也不太现实，还是有空精简一下吧。NAS 的问题我也考虑过，但是后来想想还是放弃了把星际蜗牛重新搞起来的想法，因为看了很多视频/数码 UP 工作室的介绍之后意识到 NAS 比起存储的用途，更大的用途还是共享，比如多个剪辑师可以同时访问 NAS 上面的一份素材，不用在每台电脑上都复制一份。但我显然没这个需求也没这个网速，只是存储一些数据的话，还是直接插台式机里面比较方便吧！&lt;/p&gt;
 &lt;p&gt;顺便我朋友一直怂恿我买一个大光圈定焦镜头，我也确实心动了，比较了一下之后打算先入 FE 55 F1.8 ZA，然后再考虑 FE 24-105 G F4 代替套头，不过因为一些原因还是暂时搁置了，原因的话就是下一部分。&lt;/p&gt;
-&lt;h1 id=&quot;新住处&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E4%BD%8F%E5%A4%84&quot; title=&quot;新住处&quot;&gt;&lt;/a&gt;新住处&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%96%B0%E4%BD%8F%E5%A4%84&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E4%BD%8F%E5%A4%84&quot;&gt;&lt;/a&gt;新住处&lt;/h1&gt;
 &lt;p&gt;当初因为时间比较紧所以选的这个住处，有几个不太满意的地方：房间太小了，放下柜子床电脑桌就没什么地方了。为了节约空间我是把桌子沿着床边摆的，我自己坐在桌子和衣柜之间，所以如果我要打开衣柜找东西就要把椅子推到桌子下面。然后在我 B 站录的视频里也能看出来，有朋友不止一次吐槽过我录视频环境过于混乱了。房子太旧了，实在是让人连做饭的想法都没，又破又旧，同时上班的话也比较麻烦，不是说交通不便，而是这个房子在一个院子的深处，出门坐公交或者去超市都要走很长一段距离。再加上我的卧室是直接挨着楼道，隔音又比较差，有时候午睡就会被上下楼的脚步声打扰。以及说实话我想要个稍微便宜点的房子，谁不想呢？&lt;/p&gt;
 &lt;p&gt;所以今年快到期的时候我就在考虑搬家的问题。我们现在还是在家办公的状态，所以相对来说位置不太重要，虽然还是想尽可能找个上班方便的地方。但是很少有人和我一个方向上班，所以折腾了很久。本来是打算搬到更西南边的，甚至这一个月跑了好几个不同地方看房子，但是都因为各种原因没有选中，比如同学上班太远，周围没什么生活设施（虽然就在路边但是出门走好远好远才有超市到底是怎么搞的啊，为什么北京这边经常小区靠着路的一侧都是围墙，没有什么商业网点之类的，真的很没生活感），离地铁站太远，小区门禁是人脸识别（谁允许你们随便采集人脸信息的，而且约朋友来我家还要登记算几个意思啊）。而且想一起合租的同学以后可能考了教师资格证之后回老家工作，那样到时候就要再找人合租，我实在是不抱信心，所以还是决定再找别人合租。&lt;/p&gt;
 &lt;p&gt;最后和有猫的孙老师在交大附近找了另一个房子。看了一上午最后直接选中的原因只有一个：实在是太新了，刚装修完，非常干净，而且卫生间和厨房都有采光。让我这个饱受破旧和阴暗厨房之苦的人非常满意。同时面积分配也非常科学，孙老师希望要有阳台的卧室，养猫比较方便，我希望卧室面积别太小，这样我录视频的时候把电脑桌当作背景，可以有一定的景深，让桌子在焦外就不会显得太乱。很多房子都是有阳台的卧室大得不得了而另一个卧室只能放个床，这个房子的次卧则不一样，有充足的地方放桌子。所以我们就敲定了这个，兜兜转转还是没离开学校周边。&lt;/p&gt;
@@ -1343,20 +1706,20 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 &lt;p&gt;今天和同学一起去了书店，在常规意义的书店而非练习册店的部分发现了一些有趣或奇怪的书名，很有槽点，让人想要吐槽。于是拍了点照片发到这里。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 
-&lt;h1 id=&quot;套娃型&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E5%A5%97%E5%A8%83%E5%9E%8B&quot; title=&quot;套娃型&quot;&gt;&lt;/a&gt;套娃型&lt;/h1&gt;
+&lt;h1 id=&quot;%E5%A5%97%E5%A8%83%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E5%A5%97%E5%A8%83%E5%9E%8B&quot;&gt;&lt;/a&gt;套娃型&lt;/h1&gt;
 &lt;p&gt;此类书名非常适合套娃，比如这本《如何阅读一本书》，且不说阅读方法因人而异且随经验变化，单就这个名字还可以有《如何阅读如何阅读一本书》、《如何阅读如何阅读如何阅读一本书》。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/1.jpg&quot; alt=&quot;如何阅读一本书&quot;&gt;&lt;/p&gt;
 &lt;p&gt;我以为只有当代为搏销量疯狂吸引眼球的作者会起这种名字，然而接下来我看到了一本《木心谈木心》。虽然我不太清楚木心是谁，但似乎是个有名的作者。这书名总是让我想后续会不会有《木心谈木心谈木心》、《木心谈木心谈木心谈木心》。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/2.jpg&quot; alt=&quot;木心谈木心&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;性转型&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E6%80%A7%E8%BD%AC%E5%9E%8B&quot; title=&quot;性转型&quot;&gt;&lt;/a&gt;性转型&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%80%A7%E8%BD%AC%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E6%80%A7%E8%BD%AC%E5%9E%8B&quot;&gt;&lt;/a&gt;性转型&lt;/h1&gt;
 &lt;p&gt;这本书的名字非常奇特，她叫做《少女福尔摩斯》，作为半资深福尔摩斯迷和半资深月球氪金母X，我只能说型月都没敢做的这作者做了。由于原作实在是珠玉在前，写老福的故事已经很难了，性转老福怕是难上加难，建议寄一本给蘑菇看看。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/3.jpg&quot; alt=&quot;少女福尔摩斯&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;蹭热度型&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E8%B9%AD%E7%83%AD%E5%BA%A6%E5%9E%8B&quot; title=&quot;蹭热度型&quot;&gt;&lt;/a&gt;蹭热度型&lt;/h1&gt;
+&lt;h1 id=&quot;%E8%B9%AD%E7%83%AD%E5%BA%A6%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E8%B9%AD%E7%83%AD%E5%BA%A6%E5%9E%8B&quot;&gt;&lt;/a&gt;蹭热度型&lt;/h1&gt;
 &lt;p&gt;这位叫蒋勋的作者在书架上占据了一片，又是说唐诗又是说宋词，一会谈莫奈一会谈高达哦不是梵高和达芬奇，想必上知天文下知地理。&lt;strong&gt;不过这书脊把这些名人加粗放在下面，让我总是有一种这是个达芬奇/梵高/莫奈的著作、作品标题叫做蒋勋的感觉。&lt;/strong&gt; 不知道这个叫蒋勋的作品是不是样样通样样松呢？&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/4.jpg&quot; alt=&quot;蒋勋&quot;&gt;&lt;/p&gt;
 &lt;p&gt;还有这本《逝水年华》，连我的输入法都怀疑我是不是想输入《追忆似水年华》，敢问作者是不是有点大舌头，让出版社的编辑听错了标题？&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/5.jpg&quot; alt=&quot;逝水年华&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;连锁反应型&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E8%BF%9E%E9%94%81%E5%8F%8D%E5%BA%94%E5%9E%8B&quot; title=&quot;连锁反应型&quot;&gt;&lt;/a&gt;连锁反应型&lt;/h1&gt;
+&lt;h1 id=&quot;%E8%BF%9E%E9%94%81%E5%8F%8D%E5%BA%94%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E8%BF%9E%E9%94%81%E5%8F%8D%E5%BA%94%E5%9E%8B&quot;&gt;&lt;/a&gt;连锁反应型&lt;/h1&gt;
 &lt;p&gt;《知更鸟》吗？大家都说有本书想杀你，不知道与你是什么关系？&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/6.jpg&quot; alt=&quot;知更鸟&quot;&gt;&lt;/p&gt;
 &lt;p&gt;虽然《重返美丽新世界》和《美丽新世界》是一个作者，但总让我想起狗尾续貂，不知道是不是我错了。&lt;/p&gt;
@@ -2248,7 +2611,7 @@ clean:
     
     
     <summary type="html">
-      &lt;h1 id=&quot;造轮子是病，得治。&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot; title=&quot;造轮子是病，得治。&quot;&gt;&lt;/a&gt;造轮子是病，得治。&lt;/h1&gt;
+      &lt;h1 id=&quot;%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;/a&gt;造轮子是病，得治。&lt;/h1&gt;
 &lt;p&gt;自从造了 &lt;a href=&quot;/posts/Frontend-Blog-Search/&quot;&gt;前端博客搜索引擎&lt;/a&gt; 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。&lt;/p&gt;
 &lt;p&gt;（这标题怎么写的和毕业论文似的！）&lt;/p&gt;
 
@@ -2256,15 +2619,15 @@ clean:
     
     
     <content type="html">
-      &lt;h1 id=&quot;造轮子是病，得治。&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot; title=&quot;造轮子是病，得治。&quot;&gt;&lt;/a&gt;造轮子是病，得治。&lt;/h1&gt;
+      &lt;h1 id=&quot;%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;/a&gt;造轮子是病，得治。&lt;/h1&gt;
 &lt;p&gt;自从造了 &lt;a href=&quot;/posts/Frontend-Blog-Search/&quot;&gt;前端博客搜索引擎&lt;/a&gt; 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。&lt;/p&gt;
 &lt;p&gt;（这标题怎么写的和毕业论文似的！）&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 
-&lt;h1 id=&quot;轮子也不是白造的。&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82&quot; title=&quot;轮子也不是白造的。&quot;&gt;&lt;/a&gt;轮子也不是白造的。&lt;/h1&gt;
+&lt;h1 id=&quot;%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82&quot;&gt;&lt;/a&gt;轮子也不是白造的。&lt;/h1&gt;
 &lt;p&gt;从我建站以来我的评论框就命途多舛，Disqus 虽然是最著名的评论系统，但是在国内访问不太顺畅。多说火了一段时间之后便关门大吉，HyperComments 则在我用了一段时间后发邮件提示要收费了，于是我之前的评论便华丽流失。而对于 Valine 这种基于 LeanCloud 的评论系统，我对 LeanCloud 不甚了解所以也不想尝试（而且 Valine 现在似乎转向闭源了，当初也许是个正确的决定）。然后赶上 Gitment 和 Gitalk 火了起来，大家意识到 GitHub Issue 正是个放评论的好地方。但是由于 &lt;a href=&quot;https://github.com/iissnan/hexo-theme-next/pull/1634#issuecomment-313596649&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Gitment 和 Gitalk 采用他们自己的服务器实现博客评论框提交——转发到 GitHub API 的实现&lt;/a&gt;，以及 &lt;a href=&quot;https://www.v2ex.com/t/535608&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;采用的 OAuth App 权限过高&lt;/a&gt;，有人怀疑这不太安全，于是我也没太敢参与。后来遇到 &lt;a href=&quot;https://github.com/wzpan/comment.js&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;comment.js&lt;/a&gt; 这个项目，它绕过了提交评论的问题——直接给一个到 GitHub Issue 的评论框的链接就可以了。于是我就开始用这个，至于什么 utterances 这种用 GitHub App 降低权限的评论系统，我也懒得尝试了。&lt;/p&gt;
 &lt;p&gt;但我为什么决定替换掉 comment.js 我已经记不清楚了，可能是为了对主题的显示有更好的掌握吧，毕竟它带有自己的 CSS 样式而且经常和我的冲突，也可能是因为它迟迟没提供像 Disqus 一样查找每篇文章评论数目的功能，不过它现在已经不再维护了，所以我也算是未雨绸缪。&lt;/p&gt;
-&lt;h1 id=&quot;事情本该很简单。&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82&quot; title=&quot;事情本该很简单。&quot;&gt;&lt;/a&gt;事情本该很简单。&lt;/h1&gt;
+&lt;h1 id=&quot;%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82&quot;&gt;&lt;/a&gt;事情本该很简单。&lt;/h1&gt;
 &lt;p&gt;研究了一下原理其实并不是很难，首先就是从 GitHub 的 API 上 ajax 获取数据，然后操作 DOM 添进去就可以了，所以我就先阅读了 &lt;a href=&quot;https://docs.github.com/en/rest/reference/issues&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;GitHub API 的文档&lt;/a&gt;，总之还算容易，只要先获取一个仓库的 issue 列表，然后按照某种方法在里面查找相关的 issue，如果没有就渲染一个到新建 issue 的链接，否则获取该 issue 的全部评论并显示就可以了。&lt;/p&gt;
 &lt;p&gt;查找 issue 的 key 也算容易，我给它做成了函数参数，然后在主题模板里填一个每个页面唯一的字符串就行了，比如文章标题，然后新生成 issue 页面时候就把这个作为 issue 的标题，这样查找 GitHub Issue 页面时候也比较容易看。然后 GitHub 把 PR 也视为 issue，这个不要紧，收到数组之后过滤一下就好了。而显示数目我琢磨了一下其实也没什么难的嘛！我都获取到所有 issue 的信息了。做一个新的函数，主题作者在页面上放置一系列空的元素并设置好 class 属性，然后同样地把每个页面唯一的字符串设置成这些元素的属性（Disqus 也是这样的），加载函数时候把 class 作为参数传进去，分别从 issue 列表里查找对应的标题就可以了。还有一个奇葩问题是 GitHub issue 的 comments 指的是除了顶楼以外的评论，但很显然看起来不是这样的，这个也简单，直接把顶楼加到数组里就成了嘛。剩下就是艰苦的在浏览器里刀耕火种写 JS 拼 HTML 字符串发 ajax 请求写嵌套回调（没有 async/await 也太痛苦了吧！。&lt;/p&gt;
 &lt;p&gt;一切正常工作了一段时间一后我发现不太对劲，怎么评论太多的时候显示不全呢？仔细查了一下发现 GitHub API 是强制分页的，也就是说不管你怎么设置，最多一次只能获取 100 条评论，默认则是 30 条，本来我不太想给博客加评论分页功能的，现在看来是 GitHub 被迫让我加啊。当然这个并不是最痛苦的，最痛苦的是它查找仓库的 issue 列表的时候也是强制分页的！这就麻烦了，还记得我们之前说要获取到列表之后查找标题吗？获取不到完整列表还怎么查找啊！&lt;/p&gt;
@@ -2273,7 +2636,7 @@ clean:
 &lt;p&gt;为了减轻负担，我没有实现太多的功能，比如时间戳我没有搞成什么几分钟几小时前，这种东西又不清晰又浪费带宽，我只搞了&lt;del&gt;基于 marked 的 Markdown 渲染（必须的）和&lt;/del&gt;语法高亮，Markdown 渲染不是必须的，因为你可以 &lt;a href=&quot;https://docs.github.com/en/rest/overview/media-types#comment-body-properties&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;设置 header 让 GitHub 直接返回 HTML&lt;/a&gt;。为了保证效果统一，这个 JS 只是建立了 HTML 布局，给每个元素添加了 class，具体的样式则完全是主题自己编写的，所以配合起来也比较好看。&lt;/p&gt;
 &lt;p&gt;最后的效果其实还可以，完整的脚本就是 &lt;a href=&quot;/js/comment.js&quot;&gt;这个网站在用的 JS&lt;/a&gt;，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。&lt;/p&gt;
 &lt;p&gt;也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃&lt;/p&gt;
-&lt;h1 id=&quot;其实你知道，烦恼（bug）会解决烦恼（bug）。&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82&quot; title=&quot;其实你知道，烦恼（bug）会解决烦恼（bug）。&quot;&gt;&lt;/a&gt;其实你知道，烦恼（bug）会解决烦恼（bug）。&lt;/h1&gt;
+&lt;h1 id=&quot;%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82&quot;&gt;&lt;/a&gt;其实你知道，烦恼（bug）会解决烦恼（bug）。&lt;/h1&gt;
 &lt;div class=&quot;alert-green&quot;&gt;这一部分更新于 2020-08-17 10:34:00。&lt;/div&gt;
 
 &lt;p&gt;GitHub API 推荐用户 &lt;a href=&quot;https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码&lt;/a&gt;。我心想这也简单，那就在前端搞一个缓存就可以了。&lt;/p&gt;
@@ -2451,7 +2814,7 @@ const loadCache = (name) =&amp;gt; {
 };
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。&lt;/p&gt;
-&lt;h1 id=&quot;由俭入奢易，由奢入俭难。&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82&quot; title=&quot;由俭入奢易，由奢入俭难。&quot;&gt;&lt;/a&gt;由俭入奢易，由奢入俭难。&lt;/h1&gt;
+&lt;h1 id=&quot;%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82&quot;&gt;&lt;/a&gt;由俭入奢易，由奢入俭难。&lt;/h1&gt;
 &lt;div class=&quot;alert-green&quot;&gt;这一部分更新于 2020-08-18 12:25:00。&lt;/div&gt;
 
 &lt;p&gt;我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 &lt;code&gt;fetch&lt;/code&gt; 和 &lt;code&gt;Promise&lt;/code&gt; 都有成熟的 polyfill，甚至 &lt;code&gt;URLSearchParams&lt;/code&gt; 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、&lt;code&gt;for…of…&lt;/code&gt; 循环以及 MapReduce（IE 竟然支持 &lt;code&gt;const&lt;/code&gt; 和 &lt;code&gt;let&lt;/code&gt; 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？&lt;/p&gt;
@@ -2563,25 +2926,25 @@ const loadCache = (name) =&amp;gt; {
     <content type="html">
       &lt;p&gt;我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;跟着系统变色就行了吗？&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F&quot; title=&quot;跟着系统变色就行了吗？&quot;&gt;&lt;/a&gt;跟着系统变色就行了吗？&lt;/h1&gt;
+&lt;h1 id=&quot;%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;/a&gt;跟着系统变色就行了吗？&lt;/h1&gt;
 &lt;p&gt;现在的系统大概都支持暗色模式（Linux 的桌面环境早就有这种设置了，Firefox 可以直接读取我的系统设置，Android/iOS 也都有暗色模式开关），浏览器也紧跟潮流提供了 &lt;code&gt;@media&lt;/code&gt; 的 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;查询属性&lt;/a&gt;（IE：那……是……什……么……）。理论上来说只要简单地在 CSS 里面查询然后编写修改颜色的代码就可以了，问题只是如何修改颜色比较轻松。&lt;/p&gt;
-&lt;h1 id=&quot;CSS变量是好东西！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81&quot; title=&quot;CSS变量是好东西！&quot;&gt;&lt;/a&gt;CSS 变量是好东西！&lt;/h1&gt;
+&lt;h1 id=&quot;CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81&quot;&gt;&lt;/a&gt;CSS 变量是好东西！&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;使用 CSS 变量&lt;/a&gt; 当然是最简单的解决方案了，就像我们平时编程一样使用变量作为 &lt;code&gt;color&lt;/code&gt; 和 &lt;code&gt;background&lt;/code&gt; 的值，然后在查询到暗色模式的代码块里给这些变量重新赋值，一切都十分简单有条理，而且最重要的是你不需要一个一个选择器查找有哪些需要变色的属性，所有的颜色变量都是放在一起的。&lt;/p&gt;
-&lt;h1 id=&quot;真是恨死IE这废物了！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81&quot; title=&quot;真是恨死IE这废物了！&quot;&gt;&lt;/a&gt;真是恨死 IE 这废物了！&lt;/h1&gt;
+&lt;h1 id=&quot;%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81&quot;&gt;&lt;/a&gt;真是恨死 IE 这废物了！&lt;/h1&gt;
 &lt;p&gt;虽然 IE 有很多不支持的选项，但是不支持 CSS 变量真是让我工作量剧增的一件事情。虽然我从不测试我的网站在 IE 上能否运行，但是在最新版 IE 上一般都是没问题的，因此我也会放弃一些最新版 IE 不支持的新特性，CSS 变量就是其中之一。&lt;/p&gt;
 &lt;p&gt;既然没有办法用 CSS 变量，那就只能自己一个一个找选择器下面和颜色相关的属性，然后给它们重新设置属性了，真是找的人头晕眼花啊。&lt;/p&gt;
 &lt;p&gt;可能有人会说你不是用 CSS 预处理器吗，预处理器不是也有变量吗？但是预处理器是在生成阶段把变量编译掉了啊！不方便到运行时（浏览器）里去替换变量。&lt;/p&gt;
-&lt;h1 id=&quot;我就是想在暗色浏览器里用亮色啊！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81&quot; title=&quot;我就是想在暗色浏览器里用亮色啊！&quot;&gt;&lt;/a&gt;我就是想在暗色浏览器里用亮色啊！&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81&quot;&gt;&lt;/a&gt;我就是想在暗色浏览器里用亮色啊！&lt;/h1&gt;
 &lt;p&gt;在全部重新调整过颜色并能看之后（其实就是把浅色的色块换成深色，颜色层次基本不变，背景图搞个反色，至于那些彩色的按钮标签我实在没精力重新配色了，把透明度调低一点就好了），我自己还是比较喜欢自己一开始设计的样子，但我又是个习惯电脑全局暗色的人，这怎么能忍！&lt;/p&gt;
 &lt;p&gt;CSS 的媒体属性不像一般的属性，只能是浏览器设置我们读取，没有办法用 JS 控制，于是也就没法简单地利用这个添加切换按钮。上网搜了半天也只有曲线救国的方案。&lt;/p&gt;
-&lt;h1 id=&quot;曲线救国&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD&quot; title=&quot;曲线救国&quot;&gt;&lt;/a&gt;曲线救国&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD&quot;&gt;&lt;/a&gt;曲线救国&lt;/h1&gt;
 &lt;p&gt;如果并不是想那么和系统的设置同步而只是给自己的网站添加切换的话，并不需要媒体查询。只要设计一个按钮给 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 或 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 添加删除 class/attribute 就行了。然后如果要和系统同步，在 JavaScript 里也有 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;相关的 API&lt;/a&gt; 可以做到查询和监听，在检测到变化的时候也修改 class/attribute 即可。&lt;/p&gt;
 &lt;p&gt;我选择的是给 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 加 &lt;code&gt;data-theme=&quot;dark&quot;&lt;/code&gt; 或 &lt;code&gt;data-theme=&quot;light&quot;&lt;/code&gt; 属性，不选 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 是因为 WebKit 那些该死的不遵循标准的 scrollbar 伪类，文档没有说他们到底依附哪个元素，我尝试得到的是 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;。接下来只要把之前的 CSS 里面的媒体查询选择器改成 &lt;code&gt;html[data-theme=&quot;dark&quot;]&lt;/code&gt; 就行了。&lt;/p&gt;
 &lt;p&gt;不过还要注意继承关系，这样写的话有些属性并不是继承外面的，而是在这个选择器里面就近继承。比如假如修改了 &lt;code&gt;html[data-theme=&quot;dark&quot;] a&lt;/code&gt; 的边框，那 &lt;code&gt;html[data-theme=&quot;dark&quot;] a.cls&lt;/code&gt; 的边框会优先继承这个，而不是 &lt;code&gt;a.cls&lt;/code&gt;。我知道有些人可能会笑我半懂不懂了，但是我确实遇到了这个问题，并且思考了一下找到了原因。&lt;/p&gt;
 &lt;p&gt;还有一个比较尴尬的事情，我给一些元素设置了 &lt;code&gt;transition&lt;/code&gt; 用于 &lt;code&gt;:hover&lt;/code&gt; 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 &lt;code&gt;color&lt;/code&gt; 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 &lt;code&gt;transition&lt;/code&gt;。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？&lt;/p&gt;
 &lt;p&gt;不管了，反正我用 Firefox，Firefox 效果好得很，完全不掉帧。&lt;/p&gt;
 &lt;p&gt;更新（2020-08-07 10:50:00）：我怀疑 Chrome 想做新时代的 IE，其实并不是性能问题导致掉帧，WebKit 对于继承来的属性的 transition 存在问题，会导致不是同时变换而是有延迟的变换，效果糟透了，&lt;a href=&quot;https://stackoverflow.com/a/36779404&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;StackOverflow 上也有人遇到这个问题&lt;/a&gt;，看起来是 bug 并且不打算解决，而 Firefox 就没有这个问题。使用 CSS 变量在 WebKit 下效果会好一点，不过也不能给所有变色的元素加 transition，还是会卡，只能给 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 加一个，因为我的链接有 &lt;code&gt;:hover&lt;/code&gt; 时变色的 transition，都是 color 就没办法在那时 transition 而暗色模式时候不 transition。总之由于 WebKit 的存在导致没法让全部元素同步 transition，只能近似。两权相害取其轻，还是让 IE 用户只能用亮色吧，我最后还是选择了 CSS 变量。&lt;/p&gt;
-&lt;h1 id=&quot;怎么你这破网站换个页面还要重新点一次？&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F&quot; title=&quot;怎么你这破网站换个页面还要重新点一次？&quot;&gt;&lt;/a&gt;怎么你这破网站换个页面还要重新点一次？&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F&quot;&gt;&lt;/a&gt;怎么你这破网站换个页面还要重新点一次？&lt;/h1&gt;
 &lt;p&gt;一切看起来都十分美好，直到我把一个暗色页面切成亮色然后点了个链接，下一个页面并不会理会我们上一个页面设置了什么主题，又变成了暗色。每个页面点一下切换按钮也太烦人了，我们得来点持久化。&lt;/p&gt;
 &lt;p&gt;某个域名想在用户的浏览器里存点是完全可行的，使用 &lt;code&gt;localStorage&lt;/code&gt; 就行了，就是简单的键值对。但是这样我们就有了多种可能切换亮暗的动作：&lt;code&gt;localStorage&lt;/code&gt; 里面存的选项，网页加载时浏览器媒体查询的结果，用户点了网页上的切换按钮，用户点了系统切换亮暗的设置。这些的判断顺序要好好处理一下，不然某些就会被忽视掉变成“我点了怎么不动啊！！！”。&lt;/p&gt;
 &lt;p&gt;经过我考虑一下之后，这个玩意的逻辑应该是这样的：&lt;/p&gt;
@@ -2593,12 +2956,12 @@ const loadCache = (name) =&amp;gt; {
 &lt;/ol&gt;
 &lt;p&gt;以上 1 和 2 的顺序不能反了，并且每一个设置动作里都要把这次设置的值写入 &lt;code&gt;localStorage&lt;/code&gt; 用于后续加载用户的选择。&lt;/p&gt;
 &lt;p&gt;现在看起来一切都很满意，是时候发布了！&lt;/p&gt;
-&lt;h1 id=&quot;用户：啊！我的眼睛！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E7%94%A8%E6%88%B7%EF%BC%9A%E5%95%8A%EF%BC%81%E6%88%91%E7%9A%84%E7%9C%BC%E7%9D%9B%EF%BC%81&quot; title=&quot;用户：啊！我的眼睛！&quot;&gt;&lt;/a&gt;用户：啊！我的眼睛！&lt;/h1&gt;
+&lt;h1 id=&quot;%E7%94%A8%E6%88%B7%EF%BC%9A%E5%95%8A%EF%BC%81%E6%88%91%E7%9A%84%E7%9C%BC%E7%9D%9B%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E7%94%A8%E6%88%B7%EF%BC%9A%E5%95%8A%EF%BC%81%E6%88%91%E7%9A%84%E7%9C%BC%E7%9D%9B%EF%BC%81&quot;&gt;&lt;/a&gt;用户：啊！我的眼睛！&lt;/h1&gt;
 &lt;p&gt;我躺在床上用手机测试的时候又发现了一个问题。因为网页在生成的时候总有一个初始状态（JS 要等到 document 加载完成才开始处理 DOM，不像那些单页应用），假如我设置成暗色然后切换到别的页面，网页就会以亮色加载然后变成暗色，用户在晚上看起来就像是个闪光弹（伏拉什棒！）。&lt;/p&gt;
 &lt;p&gt;其实没什么好的解决办法，因为这是传统 HTML 页面的限制之一，我也不想找有没有什么新的东西能解决这些问题，最后的方案其实相当简单，既然亮色到暗色会让人受不了，我搞成暗色到亮色不就行了。&lt;/p&gt;
 &lt;p&gt;于是就是把模板里按钮的初始状态修改一下，渲染的时候出来的是 &lt;code&gt;data-theme=&quot;dark&quot;&lt;/code&gt;，假如用户选择亮色，加载页面时会有一个暗色到亮色的变化。反正我自己都不在意。&lt;/p&gt;
 &lt;p&gt;更新（2020-08-06 18:23:00）：我后来阅读了一些其它主题的代码，看它们是怎么在不使用单页应用的前提下解决这个问题的，结果方法相当简单，我自己也想得到：不用等到 &lt;code&gt;DOMContentLoaded&lt;/code&gt; 事件之后，反正只是修改 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 标签，直接在 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 标签里面编辑 &lt;code&gt;document.documentElement&lt;/code&gt; 是可以的，因为反正加载到 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 的时候肯定也已经加载到 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 了。所以就把修改这个属性和修改按钮的 DOM 分开了两部分，并且添加了一个 &lt;code&gt;storage&lt;/code&gt; 的监听器，这样假如打开了多个页面，一个页面切换其它页面也会跟随切换。&lt;/p&gt;
-&lt;h1 id=&quot;不要过度设计！&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81&quot; title=&quot;不要过度设计！&quot;&gt;&lt;/a&gt;不要过度设计！&lt;/h1&gt;
+&lt;h1 id=&quot;%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81&quot;&gt;&lt;/a&gt;不要过度设计！&lt;/h1&gt;
 &lt;p&gt;经过这么一大堆折腾（代码行数++++++++），我甚至在想要不要支持每个页面单独设置亮暗初值，反正只要添加一个 front matter 然后在模板里判断一下嘛。不过后来想了想，就算有这么个功能又有什么用？实际意义几乎为零，徒增复杂度，所以还是不要过度设计了。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
@@ -2995,28 +3358,28 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
     
     
     <summary type="html">
-      &lt;h1 id=&quot;需求&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h1&gt;
+      &lt;h1 id=&quot;%E9%9C%80%E6%B1%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82&quot;&gt;&lt;/a&gt;需求&lt;/h1&gt;
 &lt;p&gt;以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派的电源也不是很放心。特别是我还拆下来一块笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。&lt;/p&gt;
 
     </summary>
     
     
     <content type="html">
-      &lt;h1 id=&quot;需求&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h1&gt;
+      &lt;h1 id=&quot;%E9%9C%80%E6%B1%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E9%9C%80%E6%B1%82&quot;&gt;&lt;/a&gt;需求&lt;/h1&gt;
 &lt;p&gt;以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派的电源也不是很放心。特别是我还拆下来一块笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 
 &lt;p&gt;有点想买一台 NAS，但是看看群晖的价格实在接受不能，然后又看到说群晖把系统放在用户的磁盘里加速读写一类的，其实这些对我来说不太重要，但群晖是个定制化程度很高的 Linux，虽然用起来有很多便利的功能，比如官方的内网穿透（服务器似乎在台湾，速度不快），比较成熟的 btrfs 使用之类的，但比起这些我更想要一台全功能的 Linux 服务器，这样不仅可以作为存储，还可以 SSH 连接上去做一些简单工作。作为一个比较熟练的 Linux 用户，我不需要什么 Webui 或者 App 来访问文件，Solid Explorer 和 VLC 组合起来访问 Samba 好用得很。&lt;/p&gt;
 &lt;p&gt;机缘巧合我看到隔壁的同学弄了台 D 款的蜗牛星际矿渣，研究一下之后觉得可以上车，正好 Arch CN 群里 &lt;a href=&quot;https://nichi.co/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@NickCao&lt;/a&gt; 打算出掉买了回来没时间玩的蜗牛 A 款，于是坐地铁到五道口一起喝了杯咖啡然后当面交易了一下。&lt;/p&gt;
-&lt;h1 id=&quot;介绍&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E4%BB%8B%E7%BB%8D&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;
+&lt;h1 id=&quot;%E4%BB%8B%E7%BB%8D&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E4%BB%8B%E7%BB%8D&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;
 &lt;p&gt;蜗牛星际的矿渣是怎么来的呢？简单说就是忽悠别人说这个机器可以挖矿，打着区块链旗号骗人买机器，当然这个机器其实并不需要挖矿，所谓的挖矿就是简单的 App，让你以为自己挖出矿了（毕竟宣传说不用插电也能挖），为了降低成本机器全部都是用现成的山寨货，所以机箱造型是 NAS，而且还带硬盘背板，就是因为这个很成熟。成本不到一千块的机器五千块一台卖给受骗者，受骗者为了挖矿都是十几台几十台的买，然后放小道消息说要涨价到八千块榨干受骗者钱包，最后国际惯例圈钱跑路，受骗者血本无归。&lt;/p&gt;
 &lt;blockquote class=&quot;center-quote&quot;&gt;做人还是得懂点计算机。&lt;/blockquote&gt;
 
 &lt;p&gt;这个机器有好多型号，细节差距也有很多，网上有现成的帖子分析，我就不分析了，反正我这一台是 A 款单网口绿主板，妥妥的千兆。而且似乎背板有 PCI 槽，不过主板又没有 PCI 接口就不管了。A 款还有个特点是硬盘架侧面可以放个 2.5 寸硬盘，正好装上我拆下来的笔记本硬盘。&lt;/p&gt;
-&lt;h1 id=&quot;硬件处理&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E7%A1%AC%E4%BB%B6%E5%A4%84%E7%90%86&quot; title=&quot;硬件处理&quot;&gt;&lt;/a&gt;硬件处理&lt;/h1&gt;
-&lt;h2 id=&quot;更换电源&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E7%94%B5%E6%BA%90&quot; title=&quot;更换电源&quot;&gt;&lt;/a&gt;更换电源&lt;/h2&gt;
+&lt;h1 id=&quot;%E7%A1%AC%E4%BB%B6%E5%A4%84%E7%90%86&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E7%A1%AC%E4%BB%B6%E5%A4%84%E7%90%86&quot;&gt;&lt;/a&gt;硬件处理&lt;/h1&gt;
+&lt;h2 id=&quot;%E6%9B%B4%E6%8D%A2%E7%94%B5%E6%BA%90&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E7%94%B5%E6%BA%90&quot;&gt;&lt;/a&gt;更换电源&lt;/h2&gt;
 &lt;p&gt;手头这一台运气比较好，是 zumax 的 150W 电源，虽然都说这个是所有各种电源里最好的，但是接口只是刚刚够，没有多余的，没办法给侧面硬盘供电。再说都是山寨货谁又比谁强到哪里。按照隔壁老司机的推荐淘宝买了益衡 250W 的 Flex 电源（也叫小 1u 电源）替换掉，花了 250 软妹币左右，感觉车速稳了很多，而且多出了许多接口。安装时候需要把原来电源上后面用来装到侧面的铁片拆掉，然后上下翻转才能装上蜗牛里面的支撑片，然后主板有一长一方两个供电口都插上，背板用的大 4pin 接口，不太够长，把卖家赠送的两条大 4pin 延长线都接上就可以了，然后取一个 SATA 供电线给侧面的硬盘。&lt;/p&gt;
-&lt;h2 id=&quot;更换风扇&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E9%A3%8E%E6%89%87&quot; title=&quot;更换风扇&quot;&gt;&lt;/a&gt;更换风扇&lt;/h2&gt;
+&lt;h2 id=&quot;%E6%9B%B4%E6%8D%A2%E9%A3%8E%E6%89%87&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%9B%B4%E6%8D%A2%E9%A3%8E%E6%89%87&quot;&gt;&lt;/a&gt;更换风扇&lt;/h2&gt;
 &lt;p&gt;蜗牛自带的风扇声音很大，因此需要更换一个静音风扇，A 款用的是 8cm 的 3pin 风扇，不支持调速，BCD 都是 12cm 的。8cm 不太好买，开始我在京东找到两个超频三的风扇，一个 2200 转一个 1400 转，标定噪音都是 18dB，于是就买了 2200 转，没想到转速上来了噪音也更大，正好之前在淘宝买了另一个超频三皓月（下面上图），1500 转应该问题不大，装上发现声音小了，但是蜗牛背板有个铆钉，这个 LED 风扇尺寸稍微大一点，正好顶着铆钉。没办法还是换了京东 1400 转的那款，噪音合适，尺寸也合适，蜗牛本来发热也不严重。因此 &lt;strong&gt;建议大家购买 1500 转左右不带 LED 灯效正常尺寸的&lt;/strong&gt;。&lt;/p&gt;
 &lt;div class=&quot;alert-green&quot;&gt;更换时候记得把原来蜗牛风扇上用来防止线缆伸进风扇里的塑料防护片拧下来装到新风扇没有阻拦的一侧，这一侧朝里，安装之后蜗牛向外吹风。&lt;/div&gt;
 
@@ -3026,13 +3389,13 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;p&gt;&lt;strong&gt;再次提醒各位注意不要买下图的带灯条的风扇。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/SnailSpace-as-NAS/1.jpg&quot; alt=&quot;大了一圈的风扇&quot;&gt;
 &lt;img src=&quot;/posts/SnailSpace-as-NAS/2.jpg&quot; alt=&quot;装上之后的效果&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;安装侧面25寸硬盘&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98&quot; title=&quot;安装侧面25寸硬盘&quot;&gt;&lt;/a&gt;安装侧面 2.5 寸硬盘&lt;/h2&gt;
+&lt;h2 id=&quot;%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98&quot;&gt;&lt;/a&gt;安装侧面 2.5 寸硬盘&lt;/h2&gt;
 &lt;p&gt;蜗牛自带一个 16G 的 mSATA 硬盘，速度比 U 盘还慢，而且据说用着用着就坏了，很多人都拿这个做引导盘放系统，但我不打算用，直接拧下四个螺丝把主板抽出来，然后拧掉 mSATA 杂牌硬盘。&lt;/p&gt;
 &lt;p&gt;因为四个硬盘托连接的 SATA 口是扩展的，不支持引导，但是 &lt;strong&gt;实际上蜗牛主板正中间上还有一个 SATA2 的口可以引导&lt;/strong&gt;，正好连接我的笔记本硬盘，自己插上一根 SATA 线把主板装回去即可。&lt;/p&gt;
 &lt;p&gt;硬盘本体安装时候需要两个小螺丝固定硬盘一侧，另外一侧是卡住的，不需要螺丝。然后把电源线和刚才插的 SATA 线插到硬盘上面。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/SnailSpace-as-NAS/5.jpg&quot; alt=&quot;笔记本硬盘&quot;&gt;
 &lt;img src=&quot;/posts/SnailSpace-as-NAS/6.jpg&quot; alt=&quot;安装位置示意&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;仓库盘安装&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E4%BB%93%E5%BA%93%E7%9B%98%E5%AE%89%E8%A3%85&quot; title=&quot;仓库盘安装&quot;&gt;&lt;/a&gt;仓库盘安装&lt;/h2&gt;
+&lt;h2 id=&quot;%E4%BB%93%E5%BA%93%E7%9B%98%E5%AE%89%E8%A3%85&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E4%BB%93%E5%BA%93%E7%9B%98%E5%AE%89%E8%A3%85&quot;&gt;&lt;/a&gt;仓库盘安装&lt;/h2&gt;
 &lt;p&gt;我还在京东购买了一块 2TB 的西数紫盘和一块 2TB 的东芝 P300 硬盘，没有买 NAS 专用盘是因为太贵了。而其他便宜的比如西数蓝盘和希捷酷鱼只便宜了十几块，但是却是大缓存叠瓦式（SMR）硬盘，性能非常差，紫盘和 P300 则是标准的 64M 缓存垂直式（PMR）硬盘，价格也比较实惠。建议自行搜索叠瓦式硬盘了解不推荐的原因。&lt;del&gt;考虑了一下还是不做 RAID1 了，经济条件不允许，而且本来 RAID 是为了高可用不是为了备份，如果是硬件损坏估计两块盘一起炸了，不如冷备份&lt;/del&gt; 还是做了 RAID1（真香！）。&lt;/p&gt;
 &lt;p&gt;往硬盘架安装硬盘需要四个沉孔螺丝分别锁在两侧，当然我这种硬件渣渣其实是不知道啥是沉孔螺丝的，具体多大多粗我也不懂，我装 2.5 硬盘的螺丝是同学买大疆编程小车多出来的内六角，尺寸正好，至于 3.5 硬盘是隔壁老司机送给我的装机剩下的，反正车速很稳，如果自己买的话京东淘宝好像都有装机用的成套螺丝，建议顺手买一套，不要螺丝钉难倒程序员。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/SnailSpace-as-NAS/4.jpg&quot; alt=&quot;西数带包装&quot;&gt;
@@ -3044,8 +3407,8 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;img src=&quot;/posts/SnailSpace-as-NAS/8.jpg&quot; alt=&quot;西数装上硬盘托正面&quot;&gt;
 &lt;img src=&quot;/posts/SnailSpace-as-NAS/9.jpg&quot; alt=&quot;东芝装上硬盘托正面&quot;&gt;
 &lt;img src=&quot;/posts/SnailSpace-as-NAS/7.jpg&quot; alt=&quot;从硬盘架上拔出来一半&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;软件处理&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E8%BD%AF%E4%BB%B6%E5%A4%84%E7%90%86&quot; title=&quot;软件处理&quot;&gt;&lt;/a&gt;软件处理&lt;/h1&gt;
-&lt;h2 id=&quot;分区&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E5%88%86%E5%8C%BA&quot; title=&quot;分区&quot;&gt;&lt;/a&gt;分区&lt;/h2&gt;
+&lt;h1 id=&quot;%E8%BD%AF%E4%BB%B6%E5%A4%84%E7%90%86&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E8%BD%AF%E4%BB%B6%E5%A4%84%E7%90%86&quot;&gt;&lt;/a&gt;软件处理&lt;/h1&gt;
+&lt;h2 id=&quot;%E5%88%86%E5%8C%BA&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E5%88%86%E5%8C%BA&quot;&gt;&lt;/a&gt;分区&lt;/h2&gt;
 &lt;p&gt;软件部分就十分舒服自在了，接显示器网线键盘开机按 F7 进入 BIOS 设置 UEFI 模式从 U 盘启动，然后进入 Archiso 按照 &lt;a href=&quot;https://wiki.archlinux.org/index.php/Installation_guide&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;安装指南&lt;/a&gt; 安装系统（据说他们最近在处理 base 组，建议随时跟进 wiki，我就不复制了），分区的时候我是在能引导的 2.5 寸硬盘上建立了 ESP，然后其他空间全部用作 LVM，1T 硬盘的剩余空间作为一个 pv，&lt;del&gt;并且给 2T 的硬盘分了三个区做 pv（万一我哪天脑子抽了想缩个分区出来呢？）&lt;/del&gt;，然后建立 vg，建立给根目录和家目录的 lv，然后创建 ext4 文件系统。这一段参照 wiki 对应页面就行了，命令十分简明直观，我第一次用就成功了。配置好的效果如图：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/SnailSpace-as-NAS/3.jpg&quot; alt=&quot;分区状况&quot;&gt;&lt;/p&gt;
 &lt;p&gt;至于 2T 的硬盘考虑了一下还是打算再加一块硬盘做 RAID1，不然连续跨设备 lvm 坏了一个就全坏了，由于 mdadm 需要两块设备都在才能建立，&lt;del&gt;但我手头只有一块&lt;/del&gt; 决定的时候手头只有一块，于是在 fc 老师建议下决定上 btrfs（而且这货似乎支持多块不同容量硬盘的 RAID1，保证每个文件都在两块盘上有备份）。按照 fc 老师多年使用经验似乎 btrfs 也没那么不可靠。&lt;/p&gt;
@@ -3055,7 +3418,7 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;# mkfs.btrfs -m raid1 -d raid1 /dev/sdXY /dev/sdZV
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;-m raid1&lt;/code&gt; 是指 metadata 要做 RAID1 备份，&lt;code&gt;-d raid1&lt;/code&gt; 是指 data 也要 RAID1 备份，然后需要跟两个设备，推荐是一样大的，挂载时候就随便挂一个设备就行了，btrfs 会自己执行 RAID1 策略的。&lt;/p&gt;
-&lt;h2 id=&quot;启动配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE&quot; title=&quot;启动配置&quot;&gt;&lt;/a&gt;启动配置&lt;/h2&gt;
+&lt;h2 id=&quot;%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE&quot;&gt;&lt;/a&gt;启动配置&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;/etc/mkinitcpio.conf&lt;/code&gt; 里需要给 HOOKS 添加 lvm2，然后运行 &lt;code&gt;mkinitcpio -p linux&lt;/code&gt;，这样生成的 initramfs 才能支持 LVM。我还给 MODULES 添加了和 intel 显卡有关的部分（虽然可能用不到了），具体修改的位置如下：&lt;/p&gt;
 &lt;figure data-raw=&quot;MODULES=(intel_agp i915)
 HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)
@@ -3075,7 +3438,7 @@ initrd    /initramfs-linux.img
 options    root=/dev/vg0/rootlv rw add_efi_memmap
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;最近 systemd-boot 添加了什么校验设置，在蜗牛上会报错，直接 chroot 进去安装根本装不上，临时解决方案是退出 chroot，然后用 Archiso 里的 &lt;code&gt;bootctl&lt;/code&gt; 安装到 &lt;code&gt;/mnt/boot&lt;/code&gt;，虽然有点 dirty，但是能用？不过还是会报个错，但是启动需要的文件已经安装上了，不管它也能用，只不过每次重启还是会说校验失败，目测是个 bug。&lt;/p&gt;
-&lt;h2 id=&quot;网络配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE&quot; title=&quot;网络配置&quot;&gt;&lt;/a&gt;网络配置&lt;/h2&gt;
+&lt;h2 id=&quot;%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE&quot;&gt;&lt;/a&gt;网络配置&lt;/h2&gt;
 &lt;p&gt;然后由于 NAS 的网络不会经常变化，&lt;del&gt;所以联网的部分也直接用 systemd-networkd 管理了，没必要上 NetworkManager&lt;/del&gt; 我装桌面了所以还是用了 NetworkManager！不过这部分也留着好了。直接创建 &lt;code&gt;/etc/systemd/network/wired.network&lt;/code&gt;，写入如下内容：&lt;/p&gt;
 &lt;figure data-raw=&quot;[Match]
 Name=en*
@@ -3090,7 +3453,7 @@ DHCP=ipv4
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;意思是对于所有以 &lt;code&gt;en&lt;/code&gt; 开头的网卡使用 DHCPv4，然后 &lt;code&gt;systemctl enable --now systemd-networkd systemd-resolved&lt;/code&gt; 就可以了。&lt;/p&gt;
 &lt;p&gt;NetworkManager 就很简单，直接安装然后 &lt;code&gt;systemctl enable NetworkManager --now&lt;/code&gt; 应该就行了！&lt;/p&gt;
-&lt;h2 id=&quot;Samba配置&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE&quot; title=&quot;Samba配置&quot;&gt;&lt;/a&gt;Samba 配置&lt;/h2&gt;
+&lt;h2 id=&quot;Samba%E9%85%8D%E7%BD%AE&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE&quot;&gt;&lt;/a&gt;Samba 配置&lt;/h2&gt;
 &lt;p&gt;btrfs 的子卷看起来很像普通目录，但是又可以分别直接挂载，不需要先挂载设备然后再用 &lt;code&gt;mount --rbind&lt;/code&gt;。于是建了 &lt;code&gt;/data&lt;/code&gt; 和 &lt;code&gt;/data/alynx&lt;/code&gt; 两个子卷，&lt;code&gt;/data&lt;/code&gt; 就挂载到 &lt;code&gt;/data&lt;/code&gt;，&lt;code&gt;/data/alynx&lt;/code&gt; 挂载到我家目录下面。&lt;/p&gt;
 &lt;p&gt;在 &lt;code&gt;/etc/samba/smb.conf&lt;/code&gt; 添加如下配置，就可以分别通过 &lt;code&gt;home&lt;/code&gt; 和 &lt;code&gt;data&lt;/code&gt; 访问每个用户在 &lt;code&gt;/home&lt;/code&gt; 和 &lt;code&gt;/data&lt;/code&gt; 下面的同名文件夹了，&lt;code&gt;%u&lt;/code&gt; 代表的就是连接的用户名。（当然权限要你自己处理一下。）&lt;/p&gt;
 &lt;figure data-raw=&quot;[home]
@@ -3117,7 +3480,7 @@ DHCP=ipv4
    path = /data/%u
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;其它的配置基本都是正常操作参照 Arch Wiki，&lt;del&gt;我打算以后插新硬盘直接加进 LVM 加给 &lt;code&gt;/home&lt;/code&gt;，省得还得操心挂载到哪里&lt;/del&gt; 决定单独安排 btrfs 数据区了，参见上面。在外面访问我选择配置 WireGuard，参照我 &lt;a href=&quot;/posts/SnailSpace-as-NAS/WireGuard-Usage/&quot;&gt;这篇文章&lt;/a&gt; 就可以了，如果只是 SSH 远程控制一下效果还可以。&lt;/p&gt;
-&lt;h1 id=&quot;效果&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h1&gt;
+&lt;h1 id=&quot;%E6%95%88%E6%9E%9C&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C&quot;&gt;&lt;/a&gt;效果&lt;/h1&gt;
 &lt;p&gt;笔记本插了有线之后可以测试千兆对拷，我的路由器还是大一时候买的 WNDR3800，虽然很旧，但四个有线全部都是千兆口（当时价格和配置差不多的极路由 3 只有一个内网千兆好像），&lt;del&gt;samba 拷贝速度轻松达到 110M/s 的满速，甚至比蜗牛的 USB3.0 还快&lt;/del&gt; 用了 btrfs 之后似乎速度只有 80M/s 左右了，或者 Windows 和 Linux 下面 Samba 对拷速度显示有区别？110M/s 是我在 Windows 下面测出来的。&lt;/p&gt;
 &lt;p&gt;蜗牛后面两个 USB3.0 只有下面的那个是真的，上面的也就 2.0 速度，下面的跑满了也就 80 到 90M/s，我的 U 盘是 CZ80，放笔记本上比这快多了，而且有时候上面那个也可以跑到 70M/s，具体原因不知道，如果是真的土豪建议直接换主板算了，非土豪完全可以插笔记本然后网络拷进蜗牛，比这奇葩接口还快。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;

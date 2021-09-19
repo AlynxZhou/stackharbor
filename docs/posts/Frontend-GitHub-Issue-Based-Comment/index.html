@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.8.2">
+    <meta name="generator" content="Hikaru v1.8.3">
     <link rel="canonical" href="https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -344,15 +344,15 @@
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <h1 id="造轮子是病，得治。"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82" title="造轮子是病，得治。"></a>造轮子是病，得治。</h1>
+      <h1 id="%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82"></a>造轮子是病，得治。</h1>
 <p>自从造了 <a href="/posts/Frontend-Blog-Search/">前端博客搜索引擎</a> 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。</p>
 <p>（这标题怎么写的和毕业论文似的！）</p>
 <a id="more"></a>
 
-<h1 id="轮子也不是白造的。"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82" title="轮子也不是白造的。"></a>轮子也不是白造的。</h1>
+<h1 id="%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"></a>轮子也不是白造的。</h1>
 <p>从我建站以来我的评论框就命途多舛，Disqus 虽然是最著名的评论系统，但是在国内访问不太顺畅。多说火了一段时间之后便关门大吉，HyperComments 则在我用了一段时间后发邮件提示要收费了，于是我之前的评论便华丽流失。而对于 Valine 这种基于 LeanCloud 的评论系统，我对 LeanCloud 不甚了解所以也不想尝试（而且 Valine 现在似乎转向闭源了，当初也许是个正确的决定）。然后赶上 Gitment 和 Gitalk 火了起来，大家意识到 GitHub Issue 正是个放评论的好地方。但是由于 <a href="https://github.com/iissnan/hexo-theme-next/pull/1634#issuecomment-313596649" target="_blank" rel="external nofollow noreferrer noopener">Gitment 和 Gitalk 采用他们自己的服务器实现博客评论框提交——转发到 GitHub API 的实现</a>，以及 <a href="https://www.v2ex.com/t/535608" target="_blank" rel="external nofollow noreferrer noopener">采用的 OAuth App 权限过高</a>，有人怀疑这不太安全，于是我也没太敢参与。后来遇到 <a href="https://github.com/wzpan/comment.js" target="_blank" rel="external nofollow noreferrer noopener">comment.js</a> 这个项目，它绕过了提交评论的问题——直接给一个到 GitHub Issue 的评论框的链接就可以了。于是我就开始用这个，至于什么 utterances 这种用 GitHub App 降低权限的评论系统，我也懒得尝试了。</p>
 <p>但我为什么决定替换掉 comment.js 我已经记不清楚了，可能是为了对主题的显示有更好的掌握吧，毕竟它带有自己的 CSS 样式而且经常和我的冲突，也可能是因为它迟迟没提供像 Disqus 一样查找每篇文章评论数目的功能，不过它现在已经不再维护了，所以我也算是未雨绸缪。</p>
-<h1 id="事情本该很简单。"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82" title="事情本该很简单。"></a>事情本该很简单。</h1>
+<h1 id="%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82"></a>事情本该很简单。</h1>
 <p>研究了一下原理其实并不是很难，首先就是从 GitHub 的 API 上 ajax 获取数据，然后操作 DOM 添进去就可以了，所以我就先阅读了 <a href="https://docs.github.com/en/rest/reference/issues" target="_blank" rel="external nofollow noreferrer noopener">GitHub API 的文档</a>，总之还算容易，只要先获取一个仓库的 issue 列表，然后按照某种方法在里面查找相关的 issue，如果没有就渲染一个到新建 issue 的链接，否则获取该 issue 的全部评论并显示就可以了。</p>
 <p>查找 issue 的 key 也算容易，我给它做成了函数参数，然后在主题模板里填一个每个页面唯一的字符串就行了，比如文章标题，然后新生成 issue 页面时候就把这个作为 issue 的标题，这样查找 GitHub Issue 页面时候也比较容易看。然后 GitHub 把 PR 也视为 issue，这个不要紧，收到数组之后过滤一下就好了。而显示数目我琢磨了一下其实也没什么难的嘛！我都获取到所有 issue 的信息了。做一个新的函数，主题作者在页面上放置一系列空的元素并设置好 class 属性，然后同样地把每个页面唯一的字符串设置成这些元素的属性（Disqus 也是这样的），加载函数时候把 class 作为参数传进去，分别从 issue 列表里查找对应的标题就可以了。还有一个奇葩问题是 GitHub issue 的 comments 指的是除了顶楼以外的评论，但很显然看起来不是这样的，这个也简单，直接把顶楼加到数组里就成了嘛。剩下就是艰苦的在浏览器里刀耕火种写 JS 拼 HTML 字符串发 ajax 请求写嵌套回调（没有 async/await 也太痛苦了吧！。</p>
 <p>一切正常工作了一段时间一后我发现不太对劲，怎么评论太多的时候显示不全呢？仔细查了一下发现 GitHub API 是强制分页的，也就是说不管你怎么设置，最多一次只能获取 100 条评论，默认则是 30 条，本来我不太想给博客加评论分页功能的，现在看来是 GitHub 被迫让我加啊。当然这个并不是最痛苦的，最痛苦的是它查找仓库的 issue 列表的时候也是强制分页的！这就麻烦了，还记得我们之前说要获取到列表之后查找标题吗？获取不到完整列表还怎么查找啊！</p>
@@ -361,7 +361,7 @@
 <p>为了减轻负担，我没有实现太多的功能，比如时间戳我没有搞成什么几分钟几小时前，这种东西又不清晰又浪费带宽，我只搞了<del>基于 marked 的 Markdown 渲染（必须的）和</del>语法高亮，Markdown 渲染不是必须的，因为你可以 <a href="https://docs.github.com/en/rest/overview/media-types#comment-body-properties" target="_blank" rel="external nofollow noreferrer noopener">设置 header 让 GitHub 直接返回 HTML</a>。为了保证效果统一，这个 JS 只是建立了 HTML 布局，给每个元素添加了 class，具体的样式则完全是主题自己编写的，所以配合起来也比较好看。</p>
 <p>最后的效果其实还可以，完整的脚本就是 <a href="/js/comment.js">这个网站在用的 JS</a>，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。</p>
 <p>也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃</p>
-<h1 id="其实你知道，烦恼（bug）会解决烦恼（bug）。"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82" title="其实你知道，烦恼（bug）会解决烦恼（bug）。"></a>其实你知道，烦恼（bug）会解决烦恼（bug）。</h1>
+<h1 id="%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82"></a>其实你知道，烦恼（bug）会解决烦恼（bug）。</h1>
 <div class="alert-green">这一部分更新于 2020-08-17 10:34:00。</div>
 
 <p>GitHub API 推荐用户 <a href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests" target="_blank" rel="external nofollow noreferrer noopener">缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码</a>。我心想这也简单，那就在前端搞一个缓存就可以了。</p>
@@ -539,7 +539,7 @@ const loadCache = (name) =&gt; {
 };
 </code></pre></figure>
 <p>不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。</p>
-<h1 id="由俭入奢易，由奢入俭难。"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82" title="由俭入奢易，由奢入俭难。"></a>由俭入奢易，由奢入俭难。</h1>
+<h1 id="%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82"></a>由俭入奢易，由奢入俭难。</h1>
 <div class="alert-green">这一部分更新于 2020-08-18 12:25:00。</div>
 
 <p>我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 <code>fetch</code> 和 <code>Promise</code> 都有成熟的 polyfill，甚至 <code>URLSearchParams</code> 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、<code>for…of…</code> 循环以及 MapReduce（IE 竟然支持 <code>const</code> 和 <code>let</code> 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？</p>
@@ -755,31 +755,31 @@ const loadCache = (name) =&gt; {
       
         <li>
           
-          <a class="list-group-item toc-link" href="#造轮子是病，得治。">造轮子是病，得治。</a>
+          <a class="list-group-item toc-link" href="#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82">造轮子是病，得治。</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#轮子也不是白造的。">轮子也不是白造的。</a>
+          <a class="list-group-item toc-link" href="#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82">轮子也不是白造的。</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#事情本该很简单。">事情本该很简单。</a>
+          <a class="list-group-item toc-link" href="#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82">事情本该很简单。</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#其实你知道，烦恼（bug）会解决烦恼（bug）。">其实你知道，烦恼（bug）会解决烦恼（bug）。</a>
+          <a class="list-group-item toc-link" href="#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82">其实你知道，烦恼（bug）会解决烦恼（bug）。</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#由俭入奢易，由奢入俭难。">由俭入奢易，由奢入俭难。</a>
+          <a class="list-group-item toc-link" href="#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82">由俭入奢易，由奢入俭难。</a>
           
         </li>
       
@@ -884,4 +884,4 @@ const loadCache = (name) =&gt; {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.2 at 2021-09-18T15:21:19.138Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-09-19T06:20:40.998Z. -->

@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.8.2">
+    <meta name="generator" content="Hikaru v1.8.3">
     <link rel="canonical" href="https://sh.alynx.one/posts/My-RIME/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -344,7 +344,7 @@
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <h1 id="为什么我要折腾这个"><a class="header-link" href="/posts/My-RIME/#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%A6%81%E6%8A%98%E8%85%BE%E8%BF%99%E4%B8%AA" title="为什么我要折腾这个"></a>为什么我要折腾这个</h1>
+      <h1 id="%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%A6%81%E6%8A%98%E8%85%BE%E8%BF%99%E4%B8%AA"><a class="header-link" href="/posts/My-RIME/#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%A6%81%E6%8A%98%E8%85%BE%E8%BF%99%E4%B8%AA"></a>为什么我要折腾这个</h1>
 <p>在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。</p>
 <a id="more"></a>
 
@@ -370,7 +370,7 @@
 <li>文件 <code>installation.yaml</code>：我猜不用管。</li>
 <li>文件 <code>user.yaml</code>：我猜也不用管。</li>
 </ul>
-<h1 id="各种乱七八糟操作逻辑的配置"><a class="header-link" href="/posts/My-RIME/#%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE" title="各种乱七八糟操作逻辑的配置"></a>各种乱七八糟操作逻辑的配置</h1>
+<h1 id="%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE"><a class="header-link" href="/posts/My-RIME/#%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE"></a>各种乱七八糟操作逻辑的配置</h1>
 <p>按照 RIME 打 patch 的配置方式我们需要在这个目录下创建一个叫 <code>default.custom.yaml</code> 的文件，这样就可以给 <code>/usr/share/rime-data/default.yaml</code> 这个文件 patch 辣，当然你得先会写 YAML。第一行首先写个叫 <code>patch:</code> 的 key，RIME 要求这样，所有的自定义配置都是在 <code>patch</code> 字段下面。</p>
 <p>怎么确定要修改的 key 名字呢？<del>我这里的都是在 <code>build/default.yaml</code> 下面找到的，</del> 因为 patch 的是 <code>/usr/share/rime-data/default.yaml</code> 所以就去看这个辣，之前又写错了，那个其实是生成的文件。你也可以试试其他的 YAML 文件。</p>
 <p>RIME 的文档说什么要用 <code>/</code> 把不同层次的 key 折叠成一个比如 <code>ascii_composer/switch_key</code>，<del>亲测无所谓，我就爱展开了写完整的 YAML，这样更规范。</del> 我说佛老师对不起对不起，我不懂规矩。a/b/c 是只 patch c，展开了则变成了 patch a。</p>
@@ -987,7 +987,7 @@ key_binder/bindings:
   recognizer/patterns/reverse_lookup:
 </code></pre></figure>
 <p>总之写完这些配置 <strong>之后要手动移除 <code>~/.config/ibus/rime/build/</code> 这个生成目录</strong> 再执行 <code>ibus-daemon -rdx</code> 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。</p>
-<h1 id="有关为什么ibus-rime总是竖着的"><a class="header-link" href="/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84" title="有关为什么ibus-rime总是竖着的"></a>有关为什么 ibus-rime 总是竖着的</h1>
+<h1 id="%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84"><a class="header-link" href="/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84"></a>有关为什么 ibus-rime 总是竖着的</h1>
 <p>ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。</p>
 <p>ibus-rime 会读一个叫做 <code>ibus_rime.yaml</code> 的配置文件，有这么一个配置可以让他变成横着的：</p>
 <figure data-raw="style:
@@ -1066,7 +1066,7 @@ import_tables:
 </code></pre></figure>
 <p>当然你要有配置好能显示的 emoji 字体。这也是个坑，等我有时间写一下我的 <code>/etc/fonts/local.conf</code> 吧。</p>
 <hr>
-<h1 id="下载"><a class="header-link" href="/posts/My-RIME/#%E4%B8%8B%E8%BD%BD" title="下载"></a>下载</h1>
+<h1 id="%E4%B8%8B%E8%BD%BD"><a class="header-link" href="/posts/My-RIME/#%E4%B8%8B%E8%BD%BD"></a>下载</h1>
 <p>更新（2021-07-23）：因为加了词库和 emoji 之后文件变多了，请直接去 <a href="https://github.com/AlynxZhou/alynx-rime-config/" target="_blank" rel="external nofollow noreferrer noopener">GitHub Repo</a> 获取配置。</p>
 <p><em>Alynx Zhou</em></p>
 <p><strong>A Coder &amp; Dreamer</strong></p>
@@ -1280,25 +1280,25 @@ import_tables:
       
         <li>
           
-          <a class="list-group-item toc-link" href="#为什么我要折腾这个">为什么我要折腾这个</a>
+          <a class="list-group-item toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E8%A6%81%E6%8A%98%E8%85%BE%E8%BF%99%E4%B8%AA">为什么我要折腾这个</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#各种乱七八糟操作逻辑的配置">各种乱七八糟操作逻辑的配置</a>
+          <a class="list-group-item toc-link" href="#%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE">各种乱七八糟操作逻辑的配置</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#有关为什么ibus-rime总是竖着的">有关为什么 ibus-rime 总是竖着的</a>
+          <a class="list-group-item toc-link" href="#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84">有关为什么 ibus-rime 总是竖着的</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#下载">下载</a>
+          <a class="list-group-item toc-link" href="#%E4%B8%8B%E8%BD%BD">下载</a>
           
         </li>
       
@@ -1403,4 +1403,4 @@ import_tables:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.2 at 2021-09-18T15:21:19.144Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-09-19T06:20:41.005Z. -->

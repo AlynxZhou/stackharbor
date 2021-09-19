@@ -2,7 +2,8 @@
 title: 通过 USB HID over AOAv2 在 scrcpy 里模拟真实键盘
 layout: post
 #comment: true
-created: 2021-09-18T21:08:08
+created: 2021-09-18T23:08:08
+updated: 2021-09-19T12:01:45
 categories:
   - 计算机
   - 编程
@@ -10,7 +11,15 @@ categories:
 tags:
   - Android
 ---
-三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 [这个 issue](https://github.com/Genymobile/scrcpy/issues/279)，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因为它和直接在手机上插键盘不一样，显示的还是软键盘，虽然能通过电脑键盘触发输入法，但是却不能用数字键选词。我当时也不太懂，于是就发 issue 问开发者，[@rom1v][@rom1v] 回复说有个叫 HID over AOA 的办法可以实现，但是对有些设备来说有 bug，同时也需要有人花时间读 USB 规范然后做把 SDL event 转换成 HID event 的工作。我又想那能不能直接用电脑的输入法生成字符然后传给手机，[@rom1v][@rom1v] 表示现在就是这么做的，但是 Android 相关的 API 限制只能发送 ASCII 的字符，所以也行不通。
+这篇文章同时有 [中文版本](#中文版本) 和 [英文版本](#EnglishVersion)。
+
+This post is both available in [Chinese version](#中文版本) and [English version](#EnglishVersion).
+
+<!--more-->
+
+# 中文
+
+三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 [这个 issue][issue]，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因为它和直接在手机上插键盘不一样，显示的还是软键盘，虽然能通过电脑键盘触发输入法，但是却不能用数字键选词。我当时也不太懂，于是就发 issue 问开发者，[@rom1v][@rom1v] 回复说 Android 有个叫 HID over AOA 的协议可以实现，但是对有些设备来说有 bug，同时也需要有人花时间读 USB 规范然后做把 SDL event 转换成 HID event 的工作。我又想那能不能直接用电脑的输入法生成字符然后传给手机，[@rom1v][@rom1v] 表示现在就是这么做的，但是 Android 相关的 API 限制只能发送 ASCII 的字符，所以也行不通。
 
 我当时稍微了解了一下这些相关的东西，不过显然超出了我的能力范围，于是这件事我就搁置了。一直到最近或者准确的说就是上周和 Hackghost 跟我提起说苹果似乎打算做手机投屏到电脑的功能，然后又说华为好像有个现成的。不过我对这些一向是漠不关心的，这些厂商就是又懒又坏的典型，不会做一个 Linux 版的客户端的。如果他们自己做不了或者不打算做，那就应该公开一点，让能做的人来做而不是藏着掖着。然后就是我们讨论了一气关于成本到底谁付了谁亏了的问题，我坚持认为厂商赚得已经够多了，成本和利润 Linux 用户在买手机的时候也是照样付的，只是这些人贪得无厌能少付出成本就少付出一点而已。最后我说已经有能做的人做了 scrcpy 这个项目出来，投屏完全没问题，支持各种平台，美中不足就是输入体验不太好。这时候我又想已经过去很久了，不如我再试试去看看能不能解决输入体验的问题，于是就回去翻了这个 issue。
 
@@ -21,13 +30,13 @@ tags:
 ![1.png](./1.png)
 ![2.png](./2.png)
 
-既然是 USB HID over AOAv2，那很显然需要知道 USB HID 是怎么回事，USB 官方有一个 [很长的 PDF][Device Class Definition for Human Interface Devices] 规定怎么成为一个合法的 HID 设备，说实话，看不太下去。如果你想要查一些有帮助的例子，直接查 AOAv2 多半是没戏的，只有 [Android 自己一个惜字如金的文档页](https://source.android.com/devices/accessories/aoa2)，我的经验就是你找那些主题是用单片机模拟键盘鼠标的文章，他们的目标和这个基本是一致的。不过我说好不碰硬件的话看来是算作废了。
+既然是 USB HID over AOAv2，那很显然需要知道 USB HID 是怎么回事，USB 官方有一个 [很长的 PDF][Device Class Definition for Human Interface Devices] 规定怎么成为一个合法的 HID 设备，说实话，看不太下去。如果你想要查一些有帮助的例子，直接查 AOAv2 多半是没戏的，只有 [Android 自己一个惜字如金的文档页][aoa2]，我的经验就是你找那些主题是用单片机模拟键盘鼠标的文章，他们的目标和这个基本是一致的。不过我说好不碰硬件的话看来是算作废了。
 
 基本上成为一个 USB HID 设备需要你发送一大堆的描述符到主机，不过我们这里有点不一样，因为 Android 设备连接电脑的时候，Android 是 USB 从设备，电脑是主设备，而 AOAv2 是从主机反向发数据到从设备，它不要求我们发送一大堆 USB 的描述符，只要向 Android 注册一个设备，发送 HID 的报告描述符，再发送 HID event，再注销就好了。这部分可以通过 libusb 这个库来实现 USB 的数据包传输，然后把 Android 的几个命令封装成函数就可以了，基本是在 <https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246> 这部分。
 
-基础的 API 有了之后则是具体的发什么数据包了，HID 的数据实际上就是由 byte 组成的 buffer，首先就是报告描述符，这个描述符是让主设备知道每个发过来的 event 里面的每个 byte 都是什么含义，键盘的描述符其实相对是比较固定的，在 [Device Class Definition for Human Interface Devices][Device Class Definition for Human Interface Devices] 这个 PDF 里面其实给了一个最简单的 USB 键盘的例子，这个也是保证在 BIOS 里面能正常使用 USB 键盘的最小集合，是在 Appendix B: Boot Interface Descriptors 下面的 B.1 Protocol 1 (Keyboard) 和 Appendix E: Example USB Descriptors for HID Class Devices 下面的 E.6 Report Descriptor (Keyboard)。不过有时候光知道这些还不够，比如报告描述符里面大部分都是两个 byte 一句话，第一个 byte 表示的是类别而第二个表示的是具体的值，后面的大概很好理解，但是第一个 byte 是怎么算出来的可能需要了解，这需要看那个 PDF 里 8. Report Protocol 这一节了，或者中文的话可以看 [这篇知乎文章](https://zhuanlan.zhihu.com/p/41960639)，然后你就会明白为什么有时候看起来数字不一样结果含义却一样了，因为其实第一个 byte 的每个 bit 都是有分别的含义的。然后就是对于 Usage Tag 这个有很多，被放在 [另一个单独的 PDF](https://usb.org/sites/default/files/hut1_22.pdf) 里面了。
+基础的 API 有了之后则是具体的发什么数据包了，HID 的数据实际上就是由 byte 组成的 buffer，首先就是报告描述符，这个描述符是让主设备知道每个发过来的 event 里面的每个 byte 都是什么含义，键盘的描述符其实相对是比较固定的，在 [Device Class Definition for Human Interface Devices][Device Class Definition for Human Interface Devices] 这个 PDF 里面其实给了一个最简单的 USB 键盘的例子，这个也是保证在 BIOS 里面能正常使用 USB 键盘的最小集合，是在 Appendix B: Boot Interface Descriptors 下面的 B.1 Protocol 1 (Keyboard) 和 Appendix E: Example USB Descriptors for HID Class Devices 下面的 E.6 Report Descriptor (Keyboard)。不过有时候光知道这些还不够，比如报告描述符里面大部分都是两个 byte 一句话，第一个 byte 表示的是类别而第二个表示的是具体的值，后面的大概很好理解，但是第一个 byte 是怎么算出来的可能需要了解，这需要看那个 PDF 里 8. Report Protocol 这一节了，或者中文的话可以看 [这篇知乎文章](https://zhuanlan.zhihu.com/p/41960639)，然后你就会明白为什么有时候看起来数字不一样结果含义却一样了，因为其实第一个 byte 的每个 bit 都是有分别的含义的。然后就是对于 Usage Tag 这个有很多，被放在 [另一个单独的 PDF][Usage Tags] 里面了。
 
-基本上我还是把 <https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144> 这段代码贴过来好了，详细的说明我加在了注释里面：
+我还是把 <https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144> 这段代码贴过来好了，详细的说明我加在了注释里面：
 
 ```c
 unsigned char kb_report_desc_buffer[]  = {
@@ -211,16 +220,231 @@ unsigned char kb_report_desc_buffer[]  = {
 
 你要是问为什么不把鼠标也用 HID 的方式模拟进去的话，我可以告诉你我也试过了，效果并不算好，AOA 是可以注册不止一个 HID 设备的，只要你分配不同的 ID 并作为参数发过去就可以了，这一部分代码我都留好了。但是一个主要的问题是 HID 鼠标只汇报 X 和 Y 的变化量，导致比方说我把鼠标从 SDL 的窗口挪走，MotionEvent 停止，HID 鼠标就会停在边框上，这时候我再从另一个方向挪进窗口，HID 鼠标的指针和你本机的指针就不再同步了，体验不如 scrcpy 自己注入事件的方式，所以我放弃了。
 
-Windows 下面 libusb 似乎不能很好的连接 Android 手机发送数据，这个我没什么办法，看起来是个 [陈年老 bug](https://libusb-devel.narkive.com/vENuKzdR/getting-the-serial-number-of-the-camera-fails)，考虑到我一开始的目的只是我自己能在 Linux 下面方便地聊 QQ，做成这样我觉得就可以了，我的代码逻辑正确，即使要修复，也不至于动 scrcpy 这部分而是动 libusb，[@rom1v][@rom1v] 也表示现在就很不错了。
+Windows 下面 libusb 似乎不能很好的连接 Android 手机发送数据，这个我没什么办法，看起来是个 [陈年老 bug][libusb old bug]，考虑到我一开始的目的只是我自己能在 Linux 下面方便地聊 QQ，做成这样我觉得就可以了，我的代码逻辑正确，即使要修复，也不至于动 scrcpy 这部分而是动 libusb，[@rom1v][@rom1v] 也表示现在就很不错了。
 
 当然因为依赖 USB，所以你利用 ADB over WiFi 的话就没办法用这个功能了，不过我用电脑时候一般会给手机充电，也无所谓。
 
 提交的 PR 链接是 <https://github.com/Genymobile/scrcpy/pull/2632/files>，感觉是个大工程，最后实际上也就修改了一千行？不过确实挺难的。
 
+-------
+
+# English Version
+
+(Title is Simulate Physical Keyboards in Scrcpy via USB HID over AOAv2.)
+
+Three years (2018) ago I opened an [issue][issue] on scrcpy's GitHub repo, because I just found using scrcpy I can mirror my Android phone to computer and control it, so I could use QQ on Linux via my Android phone (I still had to use QQ frequently at that time), but after I tried it, I found it's inconvenient, because it shows soft keyboard on Android phone instead of simulating physical keyboard, I can trigger input method via typing but using numbers to choose words is not available. I know little about the code at that time and ask the maintainer for some reason, [@rom1v][@rom1v] replied that there is a protocol called HID over AOA supported by Android can implement a physical keyboard, but there is a bug on some devices and needs some one take their time to read specifications and write some code to convert SDL event into HID event. Then I asked that how about using computer's IME and pass Chinese into Android, [@rom1v][@rom1v] said that's what scrcpy did but Android has a limitation that you can only pass ASCII chars.
+
+I just tried reading some related things but it beyonds my ability, I just put it here. Until last week when I am talking with my friend Hackghost, he said Apple is making their own screen mirror implementation, and seems Huawei has one on their phone. I never care about Hardware manufacturer, neither Apple nor Huawei, because I think they are both lazy and evil, and they won't make a Linux client for their screen mirror implementation. If they are unable to make it, they should be open and allow users to do it by themselves. Then we talked about cost and profit, I insist that they have enough profit and Linux users also paid for their phone, so the feature should be available on Linux, but they are greedy and want more profit. Finally I said that there is already a hero who made scrcpy, and scrcpy runs on Windows, Linux and macOS, except for the bad IME experience. And I remebered it takes a long time after I opened the issue, maybe I should try again so I did it.
+
+I am lucky that [@amosbird][@amosbird] already wrote some code in 2019 and he said it is able to work but he didn't send a PR, I guess it won't work now but I could refactor it to current HEAD so I start to read his code. At first I am wired that he implemented not only one feature in a single commit without any hinting about what he did. Then I managed to contact to him via Telegram, but he forget his code because 2 years past (lol). So I need to do it myself, I am more experienced that 3 years ago and I read USB and Android documents, with some other articles, I know what I should do. At first I think I just merge code, but finally I am re-writing because some mistakes in his code. It takes 2 days to make it work and some other days to tweak it. *Sounds like that you met a BOSS when you are a newbie and you escaped, fight to level up and come back after 3 years*.
+
+Those are screenshots of this feature:
+
+![1.png](./1.png)
+![2.png](./2.png)
+
+So it's USB HID over AOAv2, you need to know what's USB HID, there is a [long PDF][Device Class Definition for Human Interface Devices] from USB IF telling you how to be a HID device, it's hard to read. And if you want examples, typing AOAv2 in Google is useless, you can only [get a little page from Android's documents][aoa2], I found that articles about simulating keyboard with single chip microcomputer (not sure whether this is the correct translation, some thing like Arduino or STM32) are helpful, however I've said that I won't touch hardware, my words are fake now.
+
+Basically you need to send a lot of descriptors to host if you want to be a USB HID device, but things are different here. When you connect your Android phone to computer, your computer is the host and your Android is sub-device, AOAv2 is about sending data from host to sub-device, so we don't need most USB descriptors, just register a device to Android and send HID report descriptor, then send HID event, then unregister it. We can use libusb for data transfering and make some Android's command into functions, see <https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/aoa_hid.c#L155-L246>.
+
+After API we need to decide what to send, HID just sends buffer made of bytes, first is the report descriptor, telling host that what's the meaning of every bytes in event, keyboard has a basic example in [Device Class Definition for Human Interface Devices][Device Class Definition for Human Interface Devices] which could be used in BIOS, you need to read Appendix B: Boot Interface Descriptors, B.1 Protocol 1 (Keyboard) 和 Appendix E: Example USB Descriptors for HID Class Devices and Appendix E: Example USB Descriptors for HID Class Devices, E.6 Report Descriptor (Keyboard). But those are not enough, mostly two bytes in descriptor made one meaning, the first byte is about type and the second is value, if you want to know how to calculate the first bye, you need to read 8. Report Protocol, and then you'll know why sometimes different numbers have the same meaning because each bits of the byte have different meaning. And their are a lot of Usage tags, they are in [another PDF][Usage Tags].
+
+I copy <https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L28-L144> here and add detailed meaning in comments:
+
+```c
+unsigned char kb_report_desc_buffer[]  = {
+    // Usage Page (Generic Desktop)
+    // I don't know why keyboard should be Generic Desktop.
+    0x05, 0x01,
+    // Usage (Keyboard)
+    // Go to look up in the table.
+    0x09, 0x06,
+
+    // Collection (Application)
+    // There are collections in descriptor,
+    // they represent for data you send to computer.
+    // A device should have at least 1 collection.
+    // Keyboard's usage page tag is under Application.
+    0xA1, 0x01,
+    // Report ID (1)
+    // You'll find there are no Report ID in the keyboard example,
+    // because you can ignore it if you have only 1 collection.
+    // But if your keyboard has media keys, they are in different collection.
+    // So you need a Report ID and you send it as the first byte of event.
+    // You know why we send 9 bytes in event while people say 8 for keyboards?
+    0x85, 0x01,
+
+    // Usage Page (Keyboard)
+    // Usage Page is different from Usage.
+    0x05, 0x07,
+    // Usage Minimum (224)
+    // You have many Usages in a collection, but you cannot list them all,
+    // so you have a range from 224, which is Left Control.
+    0x19, 0xE0,
+    // Usage Maximum (231)
+    // And end to 231, the Right GUI, those are 8 modifier keys.
+    // Left Control，Right Control，Left Alt，Right Alt，Left Shift，Right Shift，
+    // Left GUI，Right GUI。
+    // But when you convert hex to binary, the right is bit 0,
+    // so reverse the sequence.
+    0x29, 0xE7,
+    // Logical Minimum (0)
+    // 0 is the minimum of a bit.
+    0x15, 0x00,
+    // Logical Maximum (1)
+    // Press is the maximum 1.
+    0x25, 0x01,
+    // Report Size (1)
+    // One key for one bit.
+    0x75, 0x01,
+    // Report Count (8)
+    // 8 keys.
+    0x95, 0x08,
+    // Input (Data, Variable, Absolute): Modifier byte
+    // Too long to describe what input means, please read the table,
+    // should match the above.
+    0x81, 0x02,
+
+    // Reserved, just send a byte of 0.
+    // Report Size (8)
+    0x75, 0x08,
+    // Report Count (1)
+    0x95, 0x01,
+    // Input (Constant): Reserved byte
+    0x81, 0x01,
+
+    // LEDs on keyboard, HID keyboard does not handle LED states itself.
+    // This is not a real keyboard so just grab it from Internet.
+    // 5 LEDs works like modifiers but output.
+    // Usage Page (LEDs)
+    0x05, 0x08,
+    // Usage Minimum (1)
+    0x19, 0x01,
+    // Usage Maximum (5)
+    0x29, 0x05,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (5)
+    0x95, 0x05,
+    // Output (Data, Variable, Absolute): LED report
+    0x91, 0x02,
+
+    // 5 bits of LEDs are not aligned so add 3 bits as padding.
+    // Report Size (3)
+    0x75, 0x03,
+    // Report Count (1)
+    0x95, 0x01,
+    // Output (Constant): LED report padding
+    0x91, 0x01,
+
+    // We have 101 normal keys on keyboards so you don't want to use 101 bits
+    // for them (it might be OK but hard to write), so we return an array and
+    // a byte is for a keycode.
+    // Usage Page (Key Codes)
+    0x05, 0x07,
+    // Usage Minimum (0)
+    // Minimum is 0 for no key pressed.
+    0x19, 0x00,
+    // Usage Maximum (101)
+    // 101 is the max keycode on standard keyboard.
+    0x29, HID_KEYBOARD_KEYS - 1,
+    // Logical Minimum (0)
+    // Bytes are keyboards and the minimum is 0.
+    0x15, 0x00,
+    // Logical Maximum(101)
+    // Maximum is 101.
+    0x25, HID_KEYBOARD_KEYS - 1,
+    // Report Size (8)
+    // Each key takes 1 byte.
+    0x75, 0x08,
+    // Report Count (6)
+    // USB keyboards need to report 6 keys at lease,
+    // your keyboard might tell your computer it can report more,
+    // but 6 is mostly OK.
+    0x95, HID_KEYBOARD_MAX_KEYS,
+    // Input (Data, Array): Keys
+    // Input is an array here, not a variable, array can only be the last
+    // of a collecton.
+    0x81, 0x00,
+
+    // End Collection
+    // Collection for keyboard is end.
+    0xC0,
+
+    // Usage Page (Consumer)
+    // FOr media keys.
+    0x05, 0x0C,
+    // Usage (Consumer Control)
+    0x09, 0x01,
+
+    // Collection (Application)
+    // A new collection because data format changes.
+    0xA1, 0x01,
+    // Report ID (2)
+    // A new Report ID, so event has two bytes, first Report ID then keycode.
+    0x85, 0x02,
+
+    // Usage Page (Consumer)
+    0x05, 0x0C,
+    // Like the modifiers, but those usages are not consistent,
+    // we have to list them here.
+    // Usage (Scan Next Track)
+    0x09, 0xB5,
+    // Usage (Scan Previous Track)
+    0x09, 0xB6,
+    // Usage (Stop)
+    0x09, 0xB7,
+    // Usage (Eject)
+    0x09, 0xB8,
+    // Usage (Play/Pause)
+    0x09, 0xCD,
+    // Usage (Mute)
+    0x09, 0xE2,
+    // Usage (Volume Increment)
+    0x09, 0xE9,
+    // Usage (Volume Decrement)
+    0x09, 0xEA,
+    // Like modifiers.
+    // Logical Minimum (0)
+    0x15, 0x00,
+    // Logical Maximum (1)
+    0x25, 0x01,
+    // Report Size (1)
+    0x75, 0x01,
+    // Report Count (8)
+    0x95, 0x08,
+    // Input (Data, Array)
+    0x81, 0x02,
+
+    // End Collection
+    0xC0
+};
+```
+
+So our keyboard sends this to host. The only thing you need to remember is send Report ID as the first byte of event. Then how to convert SDL event into HID event? Firstly I read [@amosbird][@amosbird]'s code and he thinks HID event is like SDL event——one field for modifiers and another field for press/release and one field for which key, an event represents for one single key——but it's not, HID keyboards won't tell you which key is pressed or release, it's based on sequence, for example I press C first, it sends `C 00 00 00 00 00`, then I press B, sends `C B 00 00 00 00`, release C, sends `B 00 00 00 00 00`, the host is responsible for comparing the events and getting info like "B pressed" or "C released". So we need to convert it back to "what are pressed keys", it's simple, just use an array for state of current keys, update it when a SDL event is fired (**not all key events are the 101 keys**), then iterate the array to generate a event contains the indices of `true`, the sequence of keys does not matter in HID and SDL's scancode is the same as HID values. For modifiers are easier, every SDL events contains all modifiers just like HID events, they are just different in bits, so we do a convert (<https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L195-L223>). **But don't ignore events just because it's not inside the 101 keys! User may just press a modifer, and we only skip updating keys state here** (https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L225-L269>).
+
+You may ask that what will happen if I press 7 keys at the same time? HID requires to report a phantom state, which fills `0x01` as all 6 keys (<https://github.com/AlynxZhou/scrcpy/blob/dev/app/src/hid_keyboard.c#L250-L259>).
+
+We almost done it, and if you have a DE, media keys should be caught by it before SDL, so I never send it in code. Scrcpy uses some combination keys for it. And some cleaning, for example [@amosbird][@amosbird] forget to unregister HID device before program exitting, and you cannot use soft keybaords until you disconnect the USB cable.
+
+At last [@rom1v][@rom1v] says scrcpy uses another thread for input, so I make a thread for AOA, too. Just grab the code from controller.
+
+You may ask about HID mouse, I've tried it, not good, AOA can register different HID devices, just pass different ID as argument, I have those code. But the biggest problem is that HID mouse only report the delta of X and Y, if I move the mouse outside the window from left edge, MotionEvent stops, the HID cursor will stop on the edge, and then I move my mouse inside the window from right edge, the HID cursor then loses sync with my mouse. The typicall scrcpy injection events work better so I give up.
+
+libusb has [an old bug][libusb old bug] on Windows so this cannot work on windows, I have no idea and because at first I just want to use QQ on Linux, I think it's OK, so does [@rom1v][@rom1v]. My code is correct and once libusb fixed it, my code should not be updated I think.
+
+However you need USB and this won't work with ADB over WiFi, I typically charge my phone while using computer so it's not a problem for me.
+
+PR is <https://github.com/Genymobile/scrcpy/pull/2632/files>, only 1 thousand lines? I spend a lot of time on it.
+
 *Alynx Zhou*
 
 **A Coder & Dreamer**
 
+[issue]: https://github.com/Genymobile/scrcpy/issues/279
 [@rom1v]: https://github.com/rom1v
 [@amosbird]: https://github.com/amosbird
 [Device Class Definition for Human Interface Devices]: https://www.usb.org/document-library/device-class-definition-hid-111
+[aoa2]: https://source.android.com/devices/accessories/aoa2
+[Usage Tags]: https://usb.org/sites/default/files/hut1_22.pdf
+[libusb old bug]: https://libusb-devel.narkive.com/vENuKzdR/getting-the-serial-number-of-the-camera-fails

@@ -18,7 +18,7 @@
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.8.2">
+    <meta name="generator" content="Hikaru v1.8.3">
     <link rel="canonical" href="https://sh.alynx.one/posts/Using-Gdb/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -347,15 +347,15 @@
 <p>所以掌握GDB的使用还是很有必要的，毕竟掌握某个使用GDB的IDE终究只是掌握了一个图形壳子，原理估计还是要深入一层到直接用GDB（强行接入正经模式）。</p>
 <p>这里只是按照实验报告的要求写一下断点调试和单步执行的用法（PS：Word实在是太难用了，字号缩进和标题序号就没有按照我想要的方式工作过。</p>
 <hr>
-<h1 id="准备"><a class="header-link" href="/posts/Using-Gdb/#%E5%87%86%E5%A4%87" title="准备"></a>准备</h1>
-<h2 id="调试模式编译程序"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F" title="调试模式编译程序"></a>调试模式编译程序</h2>
+<h1 id="%E5%87%86%E5%A4%87"><a class="header-link" href="/posts/Using-Gdb/#%E5%87%86%E5%A4%87"></a>准备</h1>
+<h2 id="%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F"></a>调试模式编译程序</h2>
 <p>首先应该明确调试的实现方式，GDB能够暂时的停下程序操作程序其实是通过向编译过程中的二进制流中添加钩子（HOOKS）来实现的。但是对于一个正常的，打算释出给用户使用的程序而言不应该以调试模式编译，因为这些添加进去的钩子不但会增大文件体积，还会降低程序的运行效率。所以GCC默认编译程序的时候时不会添加这个钩子的，需要的时候以<code>-g</code>参数来启用调试模式。</p>
 <p>本例中以文件<a href="/posts/Using-Gdb/Lab2.c">Lab2.c</a>为例，使用命令</p>
 <figure data-raw="$ gcc -std=c11 -g -o lab Lab2.c
 " class="code-block"><pre class="code"><code>$ gcc -std=c11 -g -o lab Lab2.c
 </code></pre></figure>
 <p>将它编译到可执行文件lab。</p>
-<h2 id="用GDB打开程序。"><a class="header-link" href="/posts/Using-Gdb/#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82" title="用GDB打开程序。"></a>用GDB打开程序。</h2>
+<h2 id="%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82"><a class="header-link" href="/posts/Using-Gdb/#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82"></a>用GDB打开程序。</h2>
 <p>打开程序的命令很简单，就是<code>$ gdb lab</code>，但是有可能遇到的问题是程序要处理命令行参数，在使用GDB的时候是不能直接在命令行后面附加程序参数的，需要使用参数可以在打开GDB之后输入<code>set args 参数1 参数2 ...</code>附加上参数。</p>
 <p>用GDB打开程序之后是一个交互界面，显示了一些信息和<code>(gdb)</code>这个提示符，表示你现在是在和GDB进行交互而不是程序。这个时候程序是不会运行的。</p>
 <figure data-raw="GNU gdb (GDB) 7.12.1
@@ -391,8 +391,8 @@ Type "apropos word" to search for commands related to "word"...
 Reading symbols from lab...done.
 (gdb)
 </code></pre></figure>
-<h1 id="调试"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95" title="调试"></a>调试</h1>
-<h2 id="设置断点"><a class="header-link" href="/posts/Using-Gdb/#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9" title="设置断点"></a>设置断点</h2>
+<h1 id="%E8%B0%83%E8%AF%95"><a class="header-link" href="/posts/Using-Gdb/#%E8%B0%83%E8%AF%95"></a>调试</h1>
+<h2 id="%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9"><a class="header-link" href="/posts/Using-Gdb/#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9"></a>设置断点</h2>
 <p>首先使用<code>break</code>指令就可以添加一个断点，断点顾名思义就是程序运行到这个位置会暂停下来交给GDB，这样你才能够在程序运行到一半的时候查看一些可疑的变量，断点是针对函数使用的，比如我想在所有的printf()进入的时候暂停，可以使用：</p>
 <figure data-raw="(gdb) break printf
 " class="code-block"><pre class="code"><code>(gdb) break printf
@@ -683,20 +683,20 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
       
         <li>
           
-          <a class="list-group-item toc-link" href="#准备">准备</a>
+          <a class="list-group-item toc-link" href="#%E5%87%86%E5%A4%87">准备</a>
           
           
       <ol >
       
         <li>
           
-          <a class="list-group-item toc-link" href="#调试模式编译程序">调试模式编译程序</a>
+          <a class="list-group-item toc-link" href="#%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F">调试模式编译程序</a>
           
         </li>
       
         <li>
           
-          <a class="list-group-item toc-link" href="#用GDB打开程序。">用GDB打开程序。</a>
+          <a class="list-group-item toc-link" href="#%E7%94%A8GDB%E6%89%93%E5%BC%80%E7%A8%8B%E5%BA%8F%E3%80%82">用GDB打开程序。</a>
           
         </li>
       
@@ -707,14 +707,14 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
       
         <li>
           
-          <a class="list-group-item toc-link" href="#调试">调试</a>
+          <a class="list-group-item toc-link" href="#%E8%B0%83%E8%AF%95">调试</a>
           
           
       <ol >
       
         <li>
           
-          <a class="list-group-item toc-link" href="#设置断点">设置断点</a>
+          <a class="list-group-item toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9">设置断点</a>
           
         </li>
       
@@ -824,4 +824,4 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.2 at 2021-09-18T15:21:19.161Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-09-19T06:20:41.021Z. -->
