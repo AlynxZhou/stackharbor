@@ -17,7 +17,7 @@ This post is both available in [Chinese version](#中文版本) and [English ver
 
 <!--more-->
 
-# 中文
+# 中文版本
 
 三年前（2018 年）我在 scrcpy 的 GitHub 仓库里提了 [这个 issue][issue]，因为我当时发现这个项目能把手机投屏到电脑上，也就是说我就可以在 Linux 下面通过 Android 手机聊 QQ 了（我当时大概也许还有高强度聊 QQ 的需求），不过试了之后发现很难用，因为它和直接在手机上插键盘不一样，显示的还是软键盘，虽然能通过电脑键盘触发输入法，但是却不能用数字键选词。我当时也不太懂，于是就发 issue 问开发者，[@rom1v][@rom1v] 回复说 Android 有个叫 HID over AOA 的协议可以实现，但是对有些设备来说有 bug，同时也需要有人花时间读 USB 规范然后做把 SDL event 转换成 HID event 的工作。我又想那能不能直接用电脑的输入法生成字符然后传给手机，[@rom1v][@rom1v] 表示现在就是这么做的，但是 Android 相关的 API 限制只能发送 ASCII 的字符，所以也行不通。
 
