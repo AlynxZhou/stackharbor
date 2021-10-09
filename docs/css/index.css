@@ -654,6 +654,17 @@ div.alert-blue {
   padding: 0.5em 15%;
   border-radius: 0.3em;
 }
+div.alert-red a,
+div.alert-green a,
+div.alert-blue a {
+  color: #666;
+}
+div.alert-red a:hover,
+div.alert-green a:hover,
+div.alert-blue a:hover {
+  color: #36e;
+  border-bottom: 0.05em solid #36e;
+}
 div.alert-red {
   color: #721c24;
   border: 0.1em solid #f5c6cb;
