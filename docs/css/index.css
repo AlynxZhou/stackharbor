@@ -696,6 +696,7 @@ div.sk-rect:nth-child(4n) {
 div.sk-rect:nth-child(5n) {
   animation-delay: -0.8s;
 }
+div.card,
 article.card {
   display: block;
   transition: box-shadow 0.3s ease-in-out;
@@ -706,6 +707,7 @@ article.card {
   padding: 0.5em 1em;
   margin: 0.5em;
 }
+div.card:hover,
 article.card:hover {
   box-shadow: 0 0 1em 0.5em rgba(0,0,0,0.19);
 }
