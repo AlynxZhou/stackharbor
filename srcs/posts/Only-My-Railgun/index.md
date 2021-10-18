@@ -94,6 +94,4 @@ tags:
 [#4#5#5] [7#6#4#2#4] [#4#5#5]
 ````
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

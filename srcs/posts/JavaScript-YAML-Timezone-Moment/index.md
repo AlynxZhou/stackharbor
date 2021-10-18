@@ -64,6 +64,4 @@ moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY
 
 新年新 Bug：当我在研究为什么我的生成器没有在首页生成这篇新文章半小时之后，我发现问题的源头是我把 `2019-01-01` 写成了 `2018-01-01`。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

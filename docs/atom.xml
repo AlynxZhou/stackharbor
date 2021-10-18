@@ -765,8 +765,6 @@
 &lt;p&gt;libusb has &lt;a href=&quot;https://libusb-devel.narkive.com/vENuKzdR/getting-the-serial-number-of-the-camera-fails&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;an old bug&lt;/a&gt; on Windows so this cannot work on windows, I have no idea and because at first I just want to use QQ on Linux, I think it&#039;s OK, so does &lt;a href=&quot;https://github.com/rom1v&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@rom1v&lt;/a&gt;. My code is correct and once libusb fixed it, my code should not be updated I think.&lt;/p&gt;
 &lt;p&gt;However you need USB and this won&#039;t work with ADB over WiFi, I typically charge my phone while using computer so it&#039;s not a problem for me.&lt;/p&gt;
 &lt;p&gt;PR is &lt;a href=&quot;https://github.com/Genymobile/scrcpy/pull/2632/files&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/Genymobile/scrcpy/pull/2632/files&lt;/a&gt;, only 1 thousand lines? I spend a lot of time on it.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1270,8 +1268,6 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;完整的文件在这里：&lt;a href=&quot;/posts/Fontconfig-NotoColorEmoji-Antialias/local.conf&quot;&gt;local.conf&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;😼&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1371,8 +1367,6 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;h2 id=&quot;%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81&quot;&gt;&lt;/a&gt;你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！&lt;/h2&gt;
 &lt;p&gt;你又不知道老子都有什么需求，买 N 卡我是暂时没法用 Wayland，但是不买 N 卡我就要达芬奇受罪 Windows 下面打游戏受罪直播编码受罪跑 hashcat 受罪（存疑）。我做的选择是我权衡之后的结果。再说一遍，解决问题和“换 XX”是完全不一样的态度。&lt;/p&gt;
 &lt;p&gt;所以就是钱是掏了，骂还是照样骂，而且我都掏钱了，骂得然更有底气了！&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1441,8 +1435,6 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;p&gt;当然也没有完美的事情，满足了空间和干净和隔音（卧室并不是直接挨着楼道），价格和位置也就不能太强求了，交通的话看起来还好，离路边不会太远，大学周围也不至于太荒凉吧（街头生活感本来就和整齐不沾边，城市到底是让大人物拿来看的地方还是让小人物生活的地方呢？）。虽然考虑到更高的房租+中介费让我感到心疼肉疼（感觉镜头离自己远去了）……但是安慰自己多花几百块买来了刚装修完崭新的房子其实也很赚了对吧！&lt;/p&gt;
 &lt;p&gt;所以希望接下来能轻松地搬家，毕竟我东西还是挺多的，有了空间就可以仔细布置一下了，让视频看起来更精致一点。&lt;/p&gt;
 &lt;p&gt;总之还是要对生活有希望吧。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1502,8 +1494,6 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;p&gt;最后你需要设置 JACK 在登录时启动，这样 PulseAudio 才能找到 JACK，这个很简单，因为我们已经设置 Qjackctl 无感启动 JACK 了，那只要将 Qjackctl 设置为自动启动即可，比如 GNOME 用户可以在 GNOME Tweaks 里面设置。&lt;/p&gt;
 &lt;p&gt;当然，一般的家庭录音用户都是单声道麦克风，某些客户端程序需要自己手动设置，比如 OBS Studio 需要在 Advanced Sound Properties 里面勾选 Mono。&lt;/p&gt;
 &lt;p&gt;如果你遇到了一些奇怪的明明已经设置 PulseAudio 重定向到 JACK 却没有声音的情况，可能是因为你某些软件或者插件带了奇怪的设置，建议先重置它们试试。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1567,8 +1557,6 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;p&gt;认识了一些新朋友，同时很多老朋友也都有各自要忙的事情，总之几乎没什么人一起打游戏了……不过经常能和蓝猫她们一起出去玩还是避免了成为死宅的命运，本来我都打算在家打游戏跨年了，最后和蓝猫狐狸一起吃了海底捞，虽然三点才回家导致第二天犯了鼻炎，不过还是非常开心。&lt;/p&gt;
 &lt;p&gt;年末通关了 Titanfall 2，剧情很短，中规中矩，但是就已经是非常不错了，除了操作不适合我这个手残以外都很适合我。今年几乎没怎么玩 CSGO，但是下班之后有很多空余时间基本都投入在 Dota 2 上面了，虽然我也看很久 Dota 2 了，但是玩起来确实很难……不过我这一年一直都沉迷在中单光一直播里面，已经成了我玩 Dota 2 的动力了……现在多少也算入门了，虽然偶尔还是操作不过来，但至少明白是个怎么回事了。中单光一的直播真的很好看！正人君子，皮又好看，说话又好听，打游戏厉害，又很温柔。一开始我只是看他打 Dota，反正讲围棋我又看不懂，但我发现他读围棋棋手传记有意思多了，已经进入追小说模式了……拖到现在才写年终总结也是因为坐了 16 个小时的火车跑到上海去看 VirtuaReal 的第一次线下 Live，不过互动环节没抽到我实在是令人沮丧，我太非了，那么多人根本没我的机会呜呜呜呜呜……&lt;/p&gt;
 &lt;p&gt;就写这些吧，希望 2021 年大家的生活都能变得顺利！&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1659,8 +1647,6 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 &lt;p&gt;用完了就可以 &lt;code&gt;conda deactivate&lt;/code&gt; 退出虚拟环境，要用的时候别忘了 &lt;code&gt;conda activate spleeter&lt;/code&gt; 切换进来，&lt;/p&gt;
 &lt;p&gt;遇到类似问题的同学可以参考我的文章，但是因为这个处理过程影响因素太多了，如果你的不能用我也没什么办法。&lt;/p&gt;
 &lt;p&gt;回头一看，这个项目犯了一大堆禁忌：难以解决的依赖，写死的模型路径还有匮乏的文档，导致配环境就要配一大堆。当然，好在他们还是在努力更新跟上依赖而不是撒手不管让它慢慢死去，并且功能非常好。真正对开发者友好应该是不需要配环境的，比如在 Linux 下面开发软件，包管理已经帮你考虑好各种依赖了。只有像 Windows 或者 Android 这种不以开发者为中心或者是许多机器学习项目这种“数据好看就行”的地方才会有这么多麻烦。真的很希望这些人能补一点务实的基础，不要让他们的软件这么难用。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1734,8 +1720,6 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 &lt;p&gt;我以为文学大家不屑于做这种在标题上吸引人的无聊事情，毕竟内容才是王道。我也不是有意冒犯杨绛先生，但是《洗澡》做书名已经是太随意了，再整一本《洗澡之后》是不是过分了？还是说这是出书的不负责任的编辑洗澡前洗澡后决定的两本文集的名字？那这就说得通了。但是说实话《洗澡》、《洗澡之后》接下来摆一本《暗示》是不是店员的恶趣味？&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/10.jpg&quot; alt=&quot;洗澡&quot;&gt;&lt;/p&gt;
 &lt;p&gt;希望看了我文章的朋友不要给我评论“一看到白胳膊……”，我老实承认我不是一个完全脱离了低级趣味的人，写这文章也是让大家开心一下，毕竟实事求是更重要。我也希望写书的作者们都实事求是一点，内容不行，靠标题党吸引人肯定是经不起考验的。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -1846,8 +1830,6 @@ _inputSourceManager._keybindingActionBackward =
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;disable&lt;/code&gt; 的时候同样是把函数修改回去，然后获取单例，重新绑定快捷键这样它又绑成了原来的函数，然后清空当前的列表重新更新列表这样它就恢复到开启之前的顺序了，接下来同样地，因为最近使用优先列表的第一个元素肯定是正在用的，所以我们也还是激活第一个输入法就可以了。&lt;/p&gt;
 &lt;p&gt;完整的项目参见 &lt;a href=&quot;https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;GitHub&lt;/a&gt;，Arch Linux 用户也可以从 AUR 或者 Arch Linux CN 源安装 &lt;code&gt;gnome-shell-extension-fixed-ime-list&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -2579,8 +2561,6 @@ clean:
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;你可以看到第一行是父类也就是 &lt;code&gt;TestAnimalClass&lt;/code&gt; 的函数的输出。第二行是 &lt;code&gt;TestCatClass&lt;/code&gt; 重载的函数的输出，第三行则是 &lt;code&gt;TestCatClass&lt;/code&gt; 重载的函数 chain up 到 &lt;code&gt;TestAnimalClass&lt;/code&gt; 的输出，但是输出的是子类继承的父类的属性！&lt;/p&gt;
 &lt;p&gt;最后有关我到底该声明成子类还是父类以及传参时候要不要类型转换：其实在这个 GObject 的样例里面看起来是无所谓的，类型转换可行不可行其实取决于具体 new 的是什么，而不是声明的指针是什么，所以其实声明成父类和子类都没有关系，类型转换也主要是为了满足 C 语言对指针类型和函数声明的要求罢了。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -2821,8 +2801,6 @@ const loadCache = (name) =&amp;gt; {
 &lt;div class=&quot;alert-green&quot;&gt;这一部分更新于 2020-08-18 12:25:00。&lt;/div&gt;
 
 &lt;p&gt;我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 &lt;code&gt;fetch&lt;/code&gt; 和 &lt;code&gt;Promise&lt;/code&gt; 都有成熟的 polyfill，甚至 &lt;code&gt;URLSearchParams&lt;/code&gt; 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、&lt;code&gt;for…of…&lt;/code&gt; 循环以及 MapReduce（IE 竟然支持 &lt;code&gt;const&lt;/code&gt; 和 &lt;code&gt;let&lt;/code&gt; 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -2884,8 +2862,6 @@ const loadCache = (name) =&amp;gt; {
 &lt;p&gt;于是我就先手动造了一些 wrapper 函数比如递归前置遍历一颗树来代替 cheerio 的 &lt;code&gt;$.each()&lt;/code&gt;，前置遍历正好是 HTML 文档自上往下的顺序，生成 TOC 的时候也是按照这个顺序来的，然后就是比如获取结点内文本的函数、获取属性和设置属性的函数之类的。至于插入结点我想了个巧妙的办法，因为 parse5 把最终解析到的文本作为单独的结点，我就直接在插入文本的函数里让 parse5 解析输入的 HTML，然后用得到的子结点替换被插入结点的子结点即可。&lt;/p&gt;
 &lt;p&gt;随后我重写了生成 TOC，生成标题 ID 和检查文章里相对路径的图片和链接引用并改成绝对路径的函数。然后写了点简单的测试样例跑了一下发现没问题，就用它们替换掉 Hikaru 的 &lt;code&gt;utils.js&lt;/code&gt; 里面用 cheerio 的版本，然后修改了 process 代码。我造的这几个简单的 wrapper 完全符合我的要求，于是提交打版本号发布一气呵成，一年不更新的 cheerio 就从我的生成器里拜拜了。&lt;/p&gt;
 &lt;p&gt;虽然嘴上说着不追求速度，但是凭我肉体的感觉还是多少快了一点儿，不过我也并不是很在乎生成的时间，感知真的不强，无所谓了。但我真的不能理解这种为了憋个大的不发版本把用户做宝搞的行为，就算是发个 &lt;code&gt;1.0.0-rc4&lt;/code&gt; 也比一年不发强吧！就算只是 make user happy 也好，何况面对的不是 user 而是其它项目的 dev 呢，都是同行，这行为算不算托大？反正我是习惯做了点改动就打个新版本，即使我自己安装的都是开发版本，我也希望能把我最新的修改送到用户手上，又不是 breaking change 或者什么不能随便更新的软件，打个小版本号至于那么难吗？？？&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -2966,8 +2942,6 @@ const loadCache = (name) =&amp;gt; {
 &lt;p&gt;更新（2020-08-06 18:23:00）：我后来阅读了一些其它主题的代码，看它们是怎么在不使用单页应用的前提下解决这个问题的，结果方法相当简单，我自己也想得到：不用等到 &lt;code&gt;DOMContentLoaded&lt;/code&gt; 事件之后，反正只是修改 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 标签，直接在 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 标签里面编辑 &lt;code&gt;document.documentElement&lt;/code&gt; 是可以的，因为反正加载到 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 的时候肯定也已经加载到 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 了。所以就把修改这个属性和修改按钮的 DOM 分开了两部分，并且添加了一个 &lt;code&gt;storage&lt;/code&gt; 的监听器，这样假如打开了多个页面，一个页面切换其它页面也会跟随切换。&lt;/p&gt;
 &lt;h1 id=&quot;%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81&quot;&gt;&lt;/a&gt;不要过度设计！&lt;/h1&gt;
 &lt;p&gt;经过这么一大堆折腾（代码行数++++++++），我甚至在想要不要支持每个页面单独设置亮暗初值，反正只要添加一个 front matter 然后在模板里判断一下嘛。不过后来想了想，就算有这么个功能又有什么用？实际意义几乎为零，徒增复杂度，所以还是不要过度设计了。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -3020,8 +2994,6 @@ const loadCache = (name) =&amp;gt; {
 &lt;p&gt;首先打开注册表编辑器定位到 &lt;code&gt;HKEY_LOCAL_MACHINE\SYSTEM\_ControlSet001\Control\Network\{4D36E972-E325-11CE-BFC1-08002BE10318}\Descriptions&lt;/code&gt; 这一项，然后在右侧找到你无线网卡的名称，里面的值应该是 &lt;code&gt;2&lt;/code&gt;，改成 &lt;code&gt;1&lt;/code&gt;，然后卸载网卡设备，然后重启，应该就解决了，而且因为设备名字恢复了，&lt;code&gt;WLAN 2&lt;/code&gt; 也应该变回 &lt;code&gt;WLAN&lt;/code&gt; 了。&lt;/p&gt;
 &lt;p&gt;所以其实这篇文章并没有什么逻辑和技术，但是 Windows 自作主张非要保存一个隐藏的不存在的设备，实在是令人头痛，又没什么明显的解决方式，所以也只好记下来以防再次被恶心到。&lt;/p&gt;
 &lt;p&gt;更新：Arch Linux CN offtopic Telegram 群组里面叫 Give Way 的网友表示并不需要这么复杂，只要把两个无线网卡的设备都卸载掉重启就可以了。理论上确实是如此，但我没机会再试了，遇到相同问题的朋友可以试试。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -3113,8 +3085,6 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;p&gt;让我细细思考？我看是您用了“顶级”二字，被我伤到了吧。都是写点胶水代码的玩意，我生成器还没用 Koa、Egg、Vue 这种框架呢，库是别人写的，框架逻辑都是我自己的，我 &lt;strong&gt;细细思考&lt;/strong&gt; 一下真的很好奇在三大框架（甚至还有个企业级框架）上面能套出什么框架呢？如果你愿意一层一层一层的剥开我的心？本来我不想扯技术方面的，可是别的方面也没看到这个项目对主题作者有什么优势和好处啊！&lt;/p&gt;
 &lt;p&gt;我要时时刻刻提醒我自己，我就是个一般大学生，不懂的东西还有很多，也不能学这种说话语气，不然会被人当成知乎上那种讨人厌的家长，就是自己本来也没什么见识还在年轻人面前的死要面子那种，年轻人说点什么就贬低他什么。&lt;/p&gt;
 &lt;p&gt;我个人是不习惯在知乎掘金 V2EX 上写帖子骗眼球的，所以就写到我自己博客上了，想必“一般大学生”的博客，估计也没什么人看吧！如果您真的介意，还是那句话，“文无第一，武无第二”，评论区或者在您的博客上，放马过来，反驳我这篇文章，我不介意的。但是，我真的很厌恶往别人仓库刷这种“诚邀合作事宜”的 issue，issue 是用来说代码相关问题的也算是程序员的自我修养之一了吧。我写这个也是希望万一有主题作者看到了别上当了，这不是“诚邀”，是“白嫖”作者人气。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -3258,8 +3228,6 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;p&gt;然后是奇怪的 Windows 的问题，我一开始装的 LTSC，不知道怎么回事输入法没了……折腾无果只能重装。以及现在除了不要联网装 Windows 之外（否则会强制你登录微软账户然后用你名字拼音前五位做用户名），还得不要联网装 NVIDIA 驱动，否则 Win10 自动更新驱动会给你安装 DCH 版的，虽然没什么影响（只是在 NVIDIA 官网升级驱动时候不能选标准选 DCH），但是就是让人很不爽。声卡驱动要装主板厂商的，Win10 自带的只能输出，不能接麦克风录音，然后如果麦克风声音很小就打开 Realtek 的声音控制程序，在右上角齿轮里取消掉什么把所有输入结合到一起的设定（什么乱七八糟的玩意！）。还有要关掉快速启动，不然直接开机会卡在黑屏一个鼠标光标……反正就很烦人。&lt;/p&gt;
 &lt;p&gt;更新：还有一个奇怪的问题是 Win10 关机重启也要卡很久，上网搜了一下全是一些忽悠小白的办法，经过我不懈搜索发现了一个熟悉的名字 &lt;code&gt;UCSI&lt;/code&gt;！微软承认存在 &lt;code&gt;UCSI&lt;/code&gt; 问题，既然又是这个 &lt;code&gt;UCSI&lt;/code&gt;，多半还是 NVIDIA Type-C 的问题！反正我没这个接口，果断重新安装 N 卡驱动，选择清洁安装（删除旧驱动）并不勾选 Type-C Driver，问题解决……&lt;/p&gt;
 &lt;p&gt;最后既然设备到位了，大概就每周一三四五晚上八点半在 &lt;a href=&quot;https://live.bilibili.com/4312992&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Bilibili 4312991 直播间&lt;/a&gt; 播一个半小时游戏，反正我玩什么播什么，大概就 CSGO Dota2 PUBG 什么的吧，尼尔也有可能，反正不是恶心反胃的就可以。周末随缘直播，如果没什么事情白天就播一会，周二可能晚一点开播因为有课。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -3324,8 +3292,6 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
 &lt;p&gt;Wayland 做的事情很简单，反正 compositor 都做这么多了，那直接把 Xserver 的功能也丢给 compositor 吧！Compositor 下层接的是 DRM 控制渲染，libinput 控制输入，GBM/EGLStreams 控制内存管理，上层更简单了，每个窗口丢给我一个 texture，我负责安排你们这些 texture 放在哪里，然后我按照我安排的位置，告诉你们鼠标进谁窗口了键盘进谁窗口了。然后因为要把这些 texture 混合到屏幕上，一般都用 OpenGL 的硬件加速，但在 Linux 下创建 OpenGL Context 的 GLX 库是和 X 绑定的，所以一般大家都用 OpenGL ES Context 的库 EGL。这个库只干扰最后合成图片时候的事情，至于你的 texture 用的是 OpenGL 还是 OpenGL ES 还是 CPU 画的都没有关系，现在 Wayland 一概不管了，你自己客户端处理自己的内容吧，我又不是 Xserver！&lt;/p&gt;
 &lt;p&gt;所以对于 GNOME 和 KDE 等等而言，现在他们打交道的一个是内核一个是窗口，而不是以前一样和 Xserver 打交道了，省了数据交换，同时自己可以自由控制窗口输入输出面积。Xorg 应该被淘汰不是因为功能性原因，而是因为它的设计在当时很聪明，但现在只是历史包袱，实在太挫了。&lt;/p&gt;
 &lt;p&gt;看完这篇文章建议回去阅读开头的两个链接，可以了解更多的实现细节，现在再看就不会那么混乱了。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -3486,8 +3452,6 @@ DHCP=ipv4
 &lt;h1 id=&quot;%E6%95%88%E6%9E%9C&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/SnailSpace-as-NAS/#%E6%95%88%E6%9E%9C&quot;&gt;&lt;/a&gt;效果&lt;/h1&gt;
 &lt;p&gt;笔记本插了有线之后可以测试千兆对拷，我的路由器还是大一时候买的 WNDR3800，虽然很旧，但四个有线全部都是千兆口（当时价格和配置差不多的极路由 3 只有一个内网千兆好像），&lt;del&gt;samba 拷贝速度轻松达到 110M/s 的满速，甚至比蜗牛的 USB3.0 还快&lt;/del&gt; 用了 btrfs 之后似乎速度只有 80M/s 左右了，或者 Windows 和 Linux 下面 Samba 对拷速度显示有区别？110M/s 是我在 Windows 下面测出来的。&lt;/p&gt;
 &lt;p&gt;蜗牛后面两个 USB3.0 只有下面的那个是真的，上面的也就 2.0 速度，下面的跑满了也就 80 到 90M/s，我的 U 盘是 CZ80，放笔记本上比这快多了，而且有时候上面那个也可以跑到 70M/s，具体原因不知道，如果是真的土豪建议直接换主板算了，非土豪完全可以插笔记本然后网络拷进蜗牛，比这奇葩接口还快。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -3565,8 +3529,6 @@ DHCP=ipv4
 &lt;p&gt;如果有性能瓶颈的话，多半也会先出现在 ajax，不过目前我文章还没有多到加载不出来的情况，也许可以靠分块加载解决？&lt;/p&gt;
 &lt;p&gt;更新（2020-08-15 18:25:00）：我给代码添加了简单的分块支持。由于这里需要主题和生成器约定好路径，不太适合让生成器自动生成路径，所以采用了一个简单的方法就是让用户在设置文件里手动指定几个 JSON 文件的路径，然后生成器只是读取一下配置，假如是数组就分块写到指定好的路径里面。然后前端查找的时候分别异步查找每个文件并合并排序结果，理论来说大概会有性能提升？&lt;/p&gt;
 &lt;p&gt;最后我加了个简单的 SpinKit 动画，在查询结束之前先跑一下提升用户体验。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     
@@ -3654,8 +3616,6 @@ DHCP=ipv4
 &lt;li&gt;Vala 用户发现自己的月饼是 GLib 承包给 C 牌月饼的贴牌产品。（AlynxZhou）&lt;/li&gt;
 &lt;li&gt;C 用戶不仅要自己制作月饼，还要在月饼制作过程中关注加工机器的操作问题，例如如何防止月饼馅料溢出。更重要的是这些操作都是纯手动完成的。（wnereiz）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;Alynx Zhou&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A Coder &amp;amp; Dreamer&lt;/strong&gt;&lt;/p&gt;
 
     </content>
     

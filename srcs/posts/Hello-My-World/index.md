@@ -49,6 +49,4 @@ print("Hello World!")
 
 So my friend, where's your harbor?   
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

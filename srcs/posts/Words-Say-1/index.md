@@ -160,8 +160,6 @@ Keep sclient.
 
 所以2015，愿一切安好。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**
 
 *搬运自我的LOFTER*

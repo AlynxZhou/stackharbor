@@ -68,6 +68,4 @@ tags:
 
 新的一年，唯愿再无波澜。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

@@ -52,6 +52,4 @@ tags:
 - Vala 用户发现自己的月饼是 GLib 承包给 C 牌月饼的贴牌产品。（AlynxZhou）
 - C 用戶不仅要自己制作月饼，还要在月饼制作过程中关注加工机器的操作问题，例如如何防止月饼馅料溢出。更重要的是这些操作都是纯手动完成的。（wnereiz）
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

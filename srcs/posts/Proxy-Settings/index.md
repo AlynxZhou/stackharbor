@@ -71,6 +71,4 @@ forward-socks5   /               [IP 地址]:[端口号] .
 
 然后修改你本地的 socks5 配置，IP 改为国内的服务器的 IP。如果国内服务器默认有防火墙（安全组），添加规则放行该端口（TCP + UDP）。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

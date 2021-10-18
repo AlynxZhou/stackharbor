@@ -40,6 +40,4 @@ tags:
 
 就写这些吧，希望 2021 年大家的生活都能变得顺利！
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

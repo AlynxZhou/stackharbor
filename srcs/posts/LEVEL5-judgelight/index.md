@@ -72,6 +72,4 @@ tags:
 {1}[76] {3} {21}[75 7]{1}[6]
 ````
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

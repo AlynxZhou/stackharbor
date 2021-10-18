@@ -62,6 +62,4 @@ Wayland 做的事情很简单，反正 compositor 都做这么多了，那直接
 
 看完这篇文章建议回去阅读开头的两个链接，可以了解更多的实现细节，现在再看就不会那么混乱了。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

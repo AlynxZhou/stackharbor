@@ -54,6 +54,4 @@ tags:
 
 如果你遇到了一些奇怪的明明已经设置 PulseAudio 重定向到 JACK 却没有声音的情况，可能是因为你某些软件或者插件带了奇怪的设置，建议先重置它们试试。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

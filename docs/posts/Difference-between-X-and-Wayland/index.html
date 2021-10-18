@@ -365,8 +365,6 @@
 <p>Wayland 做的事情很简单，反正 compositor 都做这么多了，那直接把 Xserver 的功能也丢给 compositor 吧！Compositor 下层接的是 DRM 控制渲染，libinput 控制输入，GBM/EGLStreams 控制内存管理，上层更简单了，每个窗口丢给我一个 texture，我负责安排你们这些 texture 放在哪里，然后我按照我安排的位置，告诉你们鼠标进谁窗口了键盘进谁窗口了。然后因为要把这些 texture 混合到屏幕上，一般都用 OpenGL 的硬件加速，但在 Linux 下创建 OpenGL Context 的 GLX 库是和 X 绑定的，所以一般大家都用 OpenGL ES Context 的库 EGL。这个库只干扰最后合成图片时候的事情，至于你的 texture 用的是 OpenGL 还是 OpenGL ES 还是 CPU 画的都没有关系，现在 Wayland 一概不管了，你自己客户端处理自己的内容吧，我又不是 Xserver！</p>
 <p>所以对于 GNOME 和 KDE 等等而言，现在他们打交道的一个是内核一个是窗口，而不是以前一样和 Xserver 打交道了，省了数据交换，同时自己可以自由控制窗口输入输出面积。Xorg 应该被淘汰不是因为功能性原因，而是因为它的设计在当时很聪明，但现在只是历史包袱，实在太挫了。</p>
 <p>看完这篇文章建议回去阅读开头的两个链接，可以了解更多的实现细节，现在再看就不会那么混乱了。</p>
-<p><em>Alynx Zhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -663,4 +661,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.3 at 2021-10-11T03:56:17.011Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-10-18T03:10:59.861Z. -->

@@ -315,6 +315,4 @@ Twemoji 倒也不是开箱即用，它不能禁用内嵌点阵字体，不过好
 
 😼
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

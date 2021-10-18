@@ -1030,8 +1030,6 @@ clean:
 </code></pre></figure>
 <p>你可以看到第一行是父类也就是 <code>TestAnimalClass</code> 的函数的输出。第二行是 <code>TestCatClass</code> 重载的函数的输出，第三行则是 <code>TestCatClass</code> 重载的函数 chain up 到 <code>TestAnimalClass</code> 的输出，但是输出的是子类继承的父类的属性！</p>
 <p>最后有关我到底该声明成子类还是父类以及传参时候要不要类型转换：其实在这个 GObject 的样例里面看起来是无所谓的，类型转换可行不可行其实取决于具体 new 的是什么，而不是声明的指针是什么，所以其实声明成父类和子类都没有关系，类型转换也主要是为了满足 C 语言对指针类型和函数声明的要求罢了。</p>
-<p><em>Alynx Zhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -1328,4 +1326,4 @@ clean:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.3 at 2021-10-11T03:56:17.007Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-10-18T03:10:59.857Z. -->

@@ -541,8 +541,6 @@ const loadCache = (name) =&gt; {
 <div class="alert-green">这一部分更新于 2020-08-18 12:25:00。</div>
 
 <p>我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 <code>fetch</code> 和 <code>Promise</code> 都有成熟的 polyfill，甚至 <code>URLSearchParams</code> 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、<code>for…of…</code> 循环以及 MapReduce（IE 竟然支持 <code>const</code> 和 <code>let</code> 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？</p>
-<p><em>Alynx Zhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -880,4 +878,4 @@ const loadCache = (name) =&gt; {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.3 at 2021-10-11T03:56:17.008Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-10-18T03:10:59.858Z. -->

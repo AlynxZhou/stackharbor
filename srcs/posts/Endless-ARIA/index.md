@@ -48,6 +48,4 @@ Hexo 当初打出的招牌就是它比 Jekyll 和 Octopress 快，当然现在 O
 
 请务必记住我对这个世界无尽的咏叹，记住这个在深夜里写一点话的孤独的灵魂。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

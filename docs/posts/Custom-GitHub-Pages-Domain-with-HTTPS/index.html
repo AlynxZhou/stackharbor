@@ -360,8 +360,6 @@
 <p>由于 DNS 多级缓存的存在，DNS 有关的设置需要一定时间来生效，最长大概需要 24 小时，不过一般都是很快的。</p>
 <p>然后我们需要去到你开启 Pages 服务的仓库，点击 Settings 面板往下拉，找到 <em>GitHub Pages</em> 一节的 <em>Custom Domain</em> 选项。<del>重点在这里啦！如果你什么都不做，会发现下面 <em>Enforce HTTPS</em> 的选项是灰色的，边上可能还写着说您使用了自定义域名不能开启，难道是虚假宣传？实际上你需要 <strong>先去掉你的自定义域名，然后再添加回来，这里才能开启</strong>，至于你问我为什么，我也不知道。</del></p>
 <p><del>所以首先我们把这个框里面的自定义域名删掉，然后 save，然后可以访问一下 <code>https://你的用户名.github.io/</code>（如果这不是用户主页的话后面要加上仓库名字）测试一下。然后回来再次添加自定义域名，保存。</del> 应该可以发现 <em>Enforce HTTPS</em> 边上的小字变成了 <em>正在处理您的 HTTPS 加密证书</em>（大意），因为这个是 GitHub 和 Let's Encrypt 这个授权验证机构合作推出的服务，证书需要进行处理，<strong>大概一小时之内就可以完成</strong>，然后这次访问 <code>https://你的自定义域名/</code>，地址栏里应该就会出现小锁头，表示已经加密，就可以放心的勾选 <em>Enforce HTTPS</em> 啦！</p>
-<p><em>Alynx Zhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -658,4 +656,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.3 at 2021-10-11T03:56:17.022Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-10-18T03:10:59.871Z. -->

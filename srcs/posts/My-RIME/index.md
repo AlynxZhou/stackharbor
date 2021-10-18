@@ -493,6 +493,4 @@ import_tables:
 
 更新（2021-07-23）：因为加了词库和 emoji 之后文件变多了，请直接去 [GitHub Repo](https://github.com/AlynxZhou/alynx-rime-config/) 获取配置。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

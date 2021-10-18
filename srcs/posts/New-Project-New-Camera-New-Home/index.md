@@ -60,6 +60,4 @@ tags:
 
 总之还是要对生活有希望吧。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

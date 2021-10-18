@@ -41,6 +41,4 @@ tags:
 
 ![](./photo4.jpg)
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

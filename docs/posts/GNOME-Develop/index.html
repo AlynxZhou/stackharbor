@@ -365,8 +365,6 @@
 <p>哦对了，GNOME Shell 有个单独的 <code>gnome-shell-sass</code> 的仓库存放样式表（CSS/SASS），但看说明这是个只读仓库，是从 <code>gnome-shell</code> 里分离出来给别的扩展用的，所以直接修改 <code>gnome-shell</code> 里面的就好了。还有一般跟顶栏有关的 GSettings 选项都在 <code>org.gnome.desktop.interface</code> 下面，但是这些 schema 对应的 XML 文件都在一个叫 <code>gsettings-desktop-schemas</code> 的仓库里，所以需要去那边改。</p>
 <p>最后狠狠地吐槽一下砍掉 GNOME Shell 顶栏透明的老哥，为了一点点边缘情况（有人说高对比度颜色壁纸下看不清顶栏文字，但大部分人都看得清并且实在不行换壁纸呗！）就砍掉这个好评如潮的功能。我提了个添加一个 GSettings 选项，让顶栏根据选项决定是透明还是纯黑（壁纸看不清就设成纯黑呗），结果被这个老哥拒绝了，还说添加个选项只会阻止其他人修 bug……大部分人都不觉得这是个 bug 好吗？我不觉得程序识别壁纸颜色改变顶栏会比用户自己调更准确，Android 的变色顶栏过了这么久，在许多壁纸上也不能正确识别颜色，添加一个让用户自己选择的功能才会更方便。但我又不想因为一个奇葩老哥就放弃我这么久的 GNOME 使用习惯，看来还是等等看能折腾出什么名堂吧！</p>
 <p>等到 GNOME 3.32 释出稳定版之后我尽量生成一个透明顶栏的 patch 就好了，反正主要的代码都是前人做的，大概 Arch Linux CN 的源愿意接受一个新包。不要和那个奇葩老哥一样说为啥不写扩展，就算是程序员家里养的猫也该知道 GNOME Shell 扩展 API 经常变还经常把整个桌面搞崩，真亏他们好意思提出来！</p>
-<p><em>Alynx Zhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -663,4 +661,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.3 at 2021-10-11T03:56:17.017Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-10-18T03:10:59.867Z. -->

@@ -437,9 +437,7 @@ However you need USB and this won't work with ADB over WiFi, I typically charge 
 
 PR is <https://github.com/Genymobile/scrcpy/pull/2632/files>, only 1 thousand lines? I spend a lot of time on it.
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**
 
 [issue]: https://github.com/Genymobile/scrcpy/issues/279
 [@rom1v]: https://github.com/rom1v

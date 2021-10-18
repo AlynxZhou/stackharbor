@@ -58,6 +58,4 @@ tags:
 
 晚安。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

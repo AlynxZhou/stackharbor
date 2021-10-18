@@ -49,6 +49,4 @@ tags:
 
 醒来吧。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

@@ -84,6 +84,4 @@ if (_inputSourceManager._mruSources.length > 0) {
 
 完整的项目参见 [GitHub](https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/)，Arch Linux 用户也可以从 AUR 或者 Arch Linux CN 源安装 `gnome-shell-extension-fixed-ime-list`。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

@@ -46,6 +46,4 @@ tags:
 
 写于2016年4月1日。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

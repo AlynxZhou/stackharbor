@@ -50,6 +50,4 @@ tags:
 
 Tears are our hardest word.
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

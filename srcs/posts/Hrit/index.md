@@ -259,6 +259,4 @@ Now you can copy the follow hexo tags to your markdown post.
 
 最后说一个小插曲，开始我设置了询问继续和五秒倒计时的时候其实并不觉得有什么用……直到某次调试时不小心在home下执行了hrit……幸好有5秒按Ctrl\+C，顿时觉得自己真是太机智了。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

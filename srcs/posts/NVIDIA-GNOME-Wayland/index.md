@@ -94,6 +94,4 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
 
 所以就是钱是掏了，骂还是照样骂，而且我都掏钱了，骂得然更有底气了！
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

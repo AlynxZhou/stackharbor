@@ -30,6 +30,4 @@ tags:
 
 更新：Arch Linux CN offtopic Telegram 群组里面叫 Give Way 的网友表示并不需要这么复杂，只要把两个无线网卡的设备都卸载掉重启就可以了。理论上确实是如此，但我没机会再试了，遇到相同问题的朋友可以试试。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

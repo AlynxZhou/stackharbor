@@ -86,6 +86,4 @@ comment: true
 
 你说，这开始的苦怎么就这么长呢。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

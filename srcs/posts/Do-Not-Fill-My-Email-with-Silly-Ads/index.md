@@ -128,6 +128,4 @@ tags:
 
 更新（2020-10-23）：<https://www.dreamua.com/> 已经打不开了，看来应该是创业失败了吧！而我的网站依然活着，是不是可以大声说出那句“你死我都未死！”了。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

@@ -102,8 +102,6 @@ You can get it one day,maybe.
 
 2016-01-10
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**
 
 *转载自我的LOFTER*

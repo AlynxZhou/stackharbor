@@ -61,6 +61,4 @@ tags:
 [6#5#4 #43 3#1] [6#5#4 #43 3#4#4]
 ```
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

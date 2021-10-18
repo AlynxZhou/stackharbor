@@ -56,6 +56,4 @@ tags:
 
 最后我加了个简单的 SpinKit 动画，在查询结束之前先跑一下提升用户体验。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

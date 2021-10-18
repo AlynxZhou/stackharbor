@@ -28,6 +28,4 @@ tags:
 
 不如永远不见。
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

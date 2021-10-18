@@ -112,6 +112,4 @@ $ python3 ./qclock.py
 
 好啦，这个脚本就先介绍到这里了，我要去继续完善更多功能咯，首先还是要搞好我的Emacs，然后，我不是针对腾讯，我是说BAT这三个货都是辣鸡！
 
-*Alynx Zhou*
 
-**A Coder & Dreamer**

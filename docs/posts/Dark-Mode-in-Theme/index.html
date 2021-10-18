@@ -381,8 +381,6 @@
 <p>更新（2020-08-06 18:23:00）：我后来阅读了一些其它主题的代码，看它们是怎么在不使用单页应用的前提下解决这个问题的，结果方法相当简单，我自己也想得到：不用等到 <code>DOMContentLoaded</code> 事件之后，反正只是修改 <code>&lt;html&gt;</code> 标签，直接在 <code>&lt;script&gt;</code> 标签里面编辑 <code>document.documentElement</code> 是可以的，因为反正加载到 <code>&lt;script&gt;</code> 的时候肯定也已经加载到 <code>&lt;html&gt;</code> 了。所以就把修改这个属性和修改按钮的 DOM 分开了两部分，并且添加了一个 <code>storage</code> 的监听器，这样假如打开了多个页面，一个页面切换其它页面也会跟随切换。</p>
 <h1 id="%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81"><a class="header-link" href="/posts/Dark-Mode-in-Theme/#%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81"></a>不要过度设计！</h1>
 <p>经过这么一大堆折腾（代码行数++++++++），我甚至在想要不要支持每个页面单独设置亮暗初值，反正只要添加一个 front matter 然后在模板里判断一下嘛。不过后来想了想，就算有这么个功能又有什么用？实际意义几乎为零，徒增复杂度，所以还是不要过度设计了。</p>
-<p><em>Alynx Zhou</em></p>
-<p><strong>A Coder &amp; Dreamer</strong></p>
 
     </main>
     <footer class="post-footer">
@@ -738,4 +736,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.8.3 at 2021-10-11T03:56:17.009Z. -->
+<!-- Page built by Hikaru v1.8.3 at 2021-10-18T03:10:59.859Z. -->
