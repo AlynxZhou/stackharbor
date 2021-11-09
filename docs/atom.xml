@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2021-09-18T15:08:08.000Z</updated>
+  <updated>2021-11-09T01:19:55.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,54 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.4">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>把我的时间戳还给我！</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Please-Bring-back-My-Timestamp/" />
+    <id>https://sh.alynx.one/posts/Please-Bring-back-My-Timestamp/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2021-11-09T01:19:55.000Z</published>
+    
+    
+    <updated>2021-11-09T01:19:55.000Z</updated>
+    
+    
+    <summary type="html">
+      &lt;p&gt;当然，我在标题里说的时间戳并不是狭义的 UNIX 时间戳，我只是想表达一下精确的时间记录而已。&lt;/p&gt;
+&lt;p&gt;不知道从什么时候开始，许多网站都不再显示 &lt;code&gt;2021-11-09 09:00:00&lt;/code&gt; 这样精确的时间，而是开始显示“刚刚”、“5 分钟前”、“3 个月前”、“1 年前”，我能猜出来这又是哪些自以为聪明的产品经理以“对用户友好”的理由想出来的或者抄来的，但不幸的是大部分这种行为都很愚蠢。据我所知 Twitter 是这样，Twitter 做什么就抄什么的微博也是这样，令人难以忍受的是 GitHub 也是这样显示时间，以及今天彻底惹恼了我的 YouTube 在视频页面也是这样显示。&lt;/p&gt;
+
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;当然，我在标题里说的时间戳并不是狭义的 UNIX 时间戳，我只是想表达一下精确的时间记录而已。&lt;/p&gt;
+&lt;p&gt;不知道从什么时候开始，许多网站都不再显示 &lt;code&gt;2021-11-09 09:00:00&lt;/code&gt; 这样精确的时间，而是开始显示“刚刚”、“5 分钟前”、“3 个月前”、“1 年前”，我能猜出来这又是哪些自以为聪明的产品经理以“对用户友好”的理由想出来的或者抄来的，但不幸的是大部分这种行为都很愚蠢。据我所知 Twitter 是这样，Twitter 做什么就抄什么的微博也是这样，令人难以忍受的是 GitHub 也是这样显示时间，以及今天彻底惹恼了我的 YouTube 在视频页面也是这样显示。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;如果你还没搞清楚我的愤怒来源，我实际上是想做这样的事情：我知道索尼 A7S3 是在 2020 年 7 月发布，我想快速找到相关的视频，请问我怎么在这一大片的“1 年前”里猜到去年 7 月的大致位置？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/Please-Bring-back-My-Timestamp/1.png&quot; alt=&quot;全都是 1 年前&quot;&gt;&lt;/p&gt;
+&lt;p&gt;“1 年前”这个描述可以包含从“1 年零 1 天”到“1 年零 364 天”这样不精确的时间范围，我觉得和直接不显示时间范围也没什么区别了。或者像 GitHub 那样鼠标悬浮在上方显示时间戳的方案也不好，比如这个页面这么多视频，我的目的是一眼快速找到我需要的时间段，一个一个悬浮多慢？所谓的用户友好？不见得，用户要被气死了。人类的脑子还没弱到连算个大致的时间差都算不出来。从工程上来说，这还引入了额外的复杂度，比如有一个 JS 脚本是专门用来更新这些时间的，你需要引入额外的代码，才能保证从“刚刚”变成“7 秒前”、“10 秒前”、“不到一分钟”、“5 分钟前”（说的就是你 GitHub），哈哈，这简直太好笑了。更别提弱智的微博 API 竟然直接在 JSON 里面返回“X 分钟前”，不过反正这种互不联网说不定什么时候就把 API 给砍了。&lt;/p&gt;
+&lt;p&gt;我觉得 Twitter 和微博这种本身就是短平快讲究时效性的网站使用大致的时间差而不是时间戳还算可以理解，至于 YouTube、 GitHub 这种经常需要查看精确时间的显示大致的时间差纯粹是给用户填堵，这一点 B 站经常脑残的前端反而做得不错，在视频页面显示的是精确的日期。&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    
+    <category term="吐槽" label="吐槽" scheme="https://sh.alynx.one/tags/%E5%90%90%E6%A7%BD/" />
+    
+    <category term="愤怒" label="愤怒" scheme="https://sh.alynx.one/tags/%E6%84%A4%E6%80%92/" />
+    
+  </entry>
   
   
   
@@ -1303,17 +1351,21 @@
     <published>2021-07-29T23:50:39.000Z</published>
     
     
-    <updated>2021-09-17T10:51:21.000Z</updated>
+    <updated>2021-11-09T01:10:21.000Z</updated>
     
     
     <summary type="html">
-      &lt;p&gt;由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。&lt;/p&gt;
+      &lt;p&gt;更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。&lt;/p&gt;
 
     </summary>
     
     
     <content type="html">
-      &lt;p&gt;由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。&lt;/p&gt;
+      &lt;p&gt;更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 
 &lt;h1 id=&quot;%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot;&gt;&lt;/a&gt;常见问题&lt;/h1&gt;
@@ -3545,89 +3597,6 @@ DHCP=ipv4
     <category term="JavaScript" label="JavaScript" scheme="https://sh.alynx.one/tags/JavaScript/" />
     
     <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Linux 用户的月饼食用手册</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Linux-Mooncake-Jokes/" />
-    <id>https://sh.alynx.one/posts/Linux-Mooncake-Jokes/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2019-09-13T10:47:00.000Z</published>
-    
-    
-    <updated>2019-09-13T10:47:00.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;中秋节到了，Arch Linux CN 社区里富有生活情趣（？）的用户们聚在一起，开始讨论起如何食用月饼。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;中秋节到了，Arch Linux CN 社区里富有生活情趣（？）的用户们聚在一起，开始讨论起如何食用月饼。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Gentoo 用户需要自己编译月饼，并且可以设置不同的 USE 编译不同口味。（farseerfc，outvi 和 AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Debian 用户习惯将月饼拆成月饼馅、月饼皮和月饼油分别打包食用。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Arch Linux 用户喜欢购买 Debian 的月饼，然后将月饼馅、月饼皮和月饼油拆开自行组装并打包。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Manjaro 用戶買來 Arch 組裝好的 Debian 月餅然後敲了個花紋上去重新裝了起來。（farseerfc）&lt;/li&gt;
-&lt;li&gt;Manjaro 用户经常吃了 Arch Linux 的月饼然后抱怨这个月饼为什么不是 Manjaro 牌的。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;CentOS 的月饼过期了。（KRyuJo）但总有人喜欢这个传统口味，不想换。甚至有人资助 RedHat 厨师学校传承老字号。（whyme）&lt;/li&gt;
-&lt;li&gt;RedHat：我们将通过电话联系在线指导您服用月饼。（ArielAxionL）&lt;/li&gt;
-&lt;li&gt;openSUSE 用户也喜欢将月饼拆成月饼馅、月饼皮和月饼油分别打包食用，但他们通常编写一个 &lt;code&gt;月饼.spec&lt;/code&gt; 文件，然后将买来的月饼原料和此文件一同上传到 Open Build Service 而不是自己打包月饼。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;随后 openSUSE 的月饼被冻结了，存放到 SUSE Linux Enterprise 的冰箱里。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Ubuntu 的月饼馅过期了，但是依旧没有更新。（wuliao00）&lt;/li&gt;
-&lt;li&gt;Ubuntu 的月饼包装写着豆沙，用户咬了一口发现是五仁，大喊“内部错误！”。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Deepin 用户表示吃月饼时应该配点红酒（wine）。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;LFS 用戶發現需要先自己製作用於製作月餅的工具。（YHNdnzj）然后开始阅读“如何开办一家月饼工厂”。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Antergos 用户收到了一个不幸的消息“此品牌已破产”。（AlynxZhou）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;随后话题变得奇怪了起来，不再仅限于常见的 Linux 发行版。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Windows 10 用户您好！感谢您选购本公司最新发行的月饼，不过要敬告您的是，您的月饼马上就要过期了。（lilydjwg）&lt;/li&gt;
-&lt;li&gt;Windows 用户的冰箱被锁死了，因为“Windows 正在等待月饼”。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;iOS 用户只能购买苹果自家的月饼，买别家月饼苹果抽成 30%。（outvi）&lt;/li&gt;
-&lt;li&gt;Google 表示对于月饼生产商收取 25 美元的生产费。（AlynxZhou）除非你只吃没有馅料的 YOSP。（oldherl）&lt;/li&gt;
-&lt;li&gt;Python 用户用 &lt;code&gt;pip&lt;/code&gt; 安装了一个月饼，然后发现自己安装的月饼明年就过期了。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;NodeJS 用户用 &lt;code&gt;npm&lt;/code&gt; 安装了一个月饼，然后发现整个月饼流水线出现在了自己的厨房里。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Docker 用户发现自己的月饼比别家重很多，但没什么东西，而且吃月饼需要 root。（outvi）&lt;/li&gt;
-&lt;li&gt;Nintendo Switch 用户购买了月饼卡带然后由于太苦无法下咽。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Java 用户发现自己需要先安装一个月饼食用环境来食用月饼。（AlynxZhou）特别是还不知道装哪个版本。（outvi）更要命的是还区分 OpenMooncake 和 OracleMooncake。（Rocket1184）&lt;/li&gt;
-&lt;li&gt;Steam 用户发现自己的月饼上多了绿色的 -40% 标签。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Epic：月饼独占一年！（KRyuJo）&lt;/li&gt;
-&lt;li&gt;Go 用户把所有月饼当作一种月饼（&lt;code&gt;interface {}&lt;/code&gt;）。（Sherlock_Holo）&lt;/li&gt;
-&lt;li&gt;Rust 用户表示月饼的保质期很短（离开视线就被 drop 了）。（Sherlock_Holo）Rust 家的月饼可以多人一起看着，但是吃的时候不仅只能有一个人吃，而且别人不能看。有人不信邪，使用 unsafe 魔法看到了正在吃月饼的人，然后整个世界崩塌了。（lilydjwg）&lt;/li&gt;
-&lt;li&gt;systemd 用户正在策划将月饼改名为 &lt;code&gt;systemd-月饼&lt;/code&gt; 的投票。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;C++ 用户表示月饼馅还不在厨房里。（wuliao00）建议食用 &lt;code&gt;boost::月饼&lt;/code&gt;。（Rocket1184）&lt;/li&gt;
-&lt;li&gt;fish 用户正在重写他们的 &lt;code&gt;/etc/profile&lt;/code&gt;，没有时间吃月饼。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;TensorFlow 用户依赖他们的 NVIDIA GPU 来识别月饼皮上的文字。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;C# 用户的月饼做起来像 Java，吃起来像 Java，区别则是用户嘴里一直喊“我们的月饼比java好，而且终于开源了（一部分）！”。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;Vala 用户发现自己的月饼是 GLib 承包给 C 牌月饼的贴牌产品。（AlynxZhou）&lt;/li&gt;
-&lt;li&gt;C 用戶不仅要自己制作月饼，还要在月饼制作过程中关注加工机器的操作问题，例如如何防止月饼馅料溢出。更重要的是这些操作都是纯手动完成的。（wnereiz）&lt;/li&gt;
-&lt;/ul&gt;
-
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
-    
-    
-    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
-    
-    <category term="月饼" label="月饼" scheme="https://sh.alynx.one/tags/%E6%9C%88%E9%A5%BC/" />
     
   </entry>
   

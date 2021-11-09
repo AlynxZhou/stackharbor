@@ -3,7 +3,7 @@ title: NVIDIA 驱动和 GNOME 和 Wayland
 layout: post
 #comment: true
 created: 2021-07-30T07:50:39
-updated: 2021-09-17T18:51:21
+updated: 2021-11-09T09:10:21
 categories:
   - 计算机
   - GNOME
@@ -12,6 +12,10 @@ tags:
   - Wayland
   - NVIDIA
 ---
+更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。
+
+-------
+
 由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。
 
 <!--more-->
@@ -93,5 +97,3 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
 你又不知道老子都有什么需求，买 N 卡我是暂时没法用 Wayland，但是不买 N 卡我就要达芬奇受罪 Windows 下面打游戏受罪直播编码受罪跑 hashcat 受罪（存疑）。我做的选择是我权衡之后的结果。再说一遍，解决问题和“换 XX”是完全不一样的态度。
 
 所以就是钱是掏了，骂还是照样骂，而且我都掏钱了，骂得然更有底气了！
-
-
