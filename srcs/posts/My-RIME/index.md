@@ -423,7 +423,7 @@ style:
 
 -------
 
-更新（2021 年 1 月 26 日）：Arch 的 librime 现在打包了一个 `/usr/share/rime/ibus_rime.yaml` 文件，所以上面手动创建一个 `ibus_rime.yaml` 的办法会被覆盖，所以现在建议创建 `~/.config/ibus/rime/ibus_rime.custom.yaml` 然后对照着打patch，比如我写的是：
+更新（2021 年 1 月 26 日）：Arch 的 ibus-rime 现在打包了一个 `/usr/share/rime-data/ibus_rime.yaml` 文件，所以上面手动创建一个 `ibus_rime.yaml` 的办法会被覆盖，所以现在建议创建 `~/.config/ibus/rime/ibus_rime.custom.yaml` 然后对照着打patch，比如我写的是：
 
 ```yaml
 patch:
@@ -492,5 +492,3 @@ import_tables:
 # 下载
 
 更新（2021-07-23）：因为加了词库和 emoji 之后文件变多了，请直接去 [GitHub Repo](https://github.com/AlynxZhou/alynx-rime-config/) 获取配置。
-
-
