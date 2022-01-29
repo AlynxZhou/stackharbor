@@ -45,6 +45,13 @@ C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出�
 - Windows 编译好的安装包下载：[点击带有 win 的压缩包](https://github.com/AlynxZhou/flipclock/releases/latest)
 - Android 编译好的安装包下载：[点击 apk 文件](https://github.com/AlynxZhou/flipclock-android/releases/latest) 或者去 [酷安网](http://www.coolapk.com/apk/277663) 或 [Google Play Store](https://play.google.com/store/apps/details?id=one.alynx.flipclock)。
 
+## Kouichi 100
+
+“帮助光一天梯上分”小游戏，基本上是个平面版神庙逃亡，完全使用原生 JS 编写。
+
+- 主页：<https://kouichi100.ismyonly.one/>
+- 仓库：<https://github.com/AlynxZhou/kouichi100/>
+
 ## GNOME Terminal Middle Click Close Tab Patch
 
 一个添加了使用鼠标中键关闭 tab 功能的 GNOME Terminal（上游维护者脾气古怪，觉得鼠标中键关 tab 容易误触并且容易和中键粘贴所以不合 patch，我个人觉得没这么大问题，不过无所谓）。
