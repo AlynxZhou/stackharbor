@@ -114,7 +114,7 @@ mathjax:
 # Note: `fontAwesome.loader` is `fontawesome.min.js`. `busuanzi` is `busuanzi.pure.mini.js`.
 # If you don't know what you are doing, don't change it.
 libCDN:
-  enable: true
+  enable: false
   fontAwesome:
     loader: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/fontawesome.min.js
     solid: //cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/js/solid.min.js
