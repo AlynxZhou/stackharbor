@@ -49,16 +49,19 @@
     
     
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
-    
-    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
-    
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
     
-<link rel="stylesheet" type="text/css" href="/css/page.css">
-<link rel="stylesheet" type="text/css" href="/css/post.css">
-
     
     <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
@@ -299,7 +302,7 @@
   <article class="article post card">
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/categories/" itemprop="url">分类</a>
+        <a class="title-link" href="/categories/" itemprop="url">分类</a>
       </div>
     </header>
     <main class="post-main" id="scrollspy-container">
@@ -721,4 +724,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.9.0 at 2022-01-29T09:43:08.241Z. -->
+<!-- Page built by Hikaru v1.9.0 at 2022-01-31T13:33:05.586Z. -->

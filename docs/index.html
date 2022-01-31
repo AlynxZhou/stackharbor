@@ -49,16 +49,19 @@
     
     
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
-    
-    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
-    
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
     
-<link rel="stylesheet" type="text/css" href="/css/page.css">
-<link rel="stylesheet" type="text/css" href="/css/post.css">
-
     
     <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
@@ -320,7 +323,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Please-Bring-back-My-Timestamp/" itemprop="url">把我的时间戳还给我！</a>
+        <a class="title-link" href="/posts/Please-Bring-back-My-Timestamp/" itemprop="url">把我的时间戳还给我！</a>
       </div>
       <div class="post-meta">
         
@@ -377,7 +380,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/" itemprop="url">通过 USB HID over AOAv2 在 scrcpy 里模拟真实键盘</a>
+        <a class="title-link" href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/" itemprop="url">通过 USB HID over AOAv2 在 scrcpy 里模拟真实键盘</a>
       </div>
       <div class="post-meta">
         
@@ -438,7 +441,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Fontconfig-NotoColorEmoji-Antialias/" itemprop="url">Fontconfig 和 Noto Color Emoji 和抗锯齿</a>
+        <a class="title-link" href="/posts/Fontconfig-NotoColorEmoji-Antialias/" itemprop="url">Fontconfig 和 Noto Color Emoji 和抗锯齿</a>
       </div>
       <div class="post-meta">
         
@@ -494,7 +497,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/NVIDIA-GNOME-Wayland/" itemprop="url">NVIDIA 驱动和 GNOME 和 Wayland</a>
+        <a class="title-link" href="/posts/NVIDIA-GNOME-Wayland/" itemprop="url">NVIDIA 驱动和 GNOME 和 Wayland</a>
       </div>
       <div class="post-meta">
         
@@ -556,7 +559,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/New-Project-New-Camera-New-Home/" itemprop="url">新项目和新相机和新住处</a>
+        <a class="title-link" href="/posts/New-Project-New-Camera-New-Home/" itemprop="url">新项目和新相机和新住处</a>
       </div>
       <div class="post-meta">
         
@@ -611,7 +614,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Run-PulseAudio-on-Top-of-JACK/" itemprop="url">运行在 JACK 上层的 PulseAudio</a>
+        <a class="title-link" href="/posts/Run-PulseAudio-on-Top-of-JACK/" itemprop="url">运行在 JACK 上层的 PulseAudio</a>
       </div>
       <div class="post-meta">
         
@@ -667,7 +670,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/2020-Tail/" itemprop="url">StackHarbor 的 2020 尾记</a>
+        <a class="title-link" href="/posts/2020-Tail/" itemprop="url">StackHarbor 的 2020 尾记</a>
       </div>
       <div class="post-meta">
         
@@ -724,7 +727,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Fix-Silly-Spleeter-Dependencies/" itemprop="url">解决 Spleeter 愚蠢的依赖问题</a>
+        <a class="title-link" href="/posts/Fix-Silly-Spleeter-Dependencies/" itemprop="url">解决 Spleeter 愚蠢的依赖问题</a>
       </div>
       <div class="post-meta">
         
@@ -780,7 +783,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Strange-Book-Names/" itemprop="url">奇怪的书名和我和吐槽</a>
+        <a class="title-link" href="/posts/Strange-Book-Names/" itemprop="url">奇怪的书名和我和吐槽</a>
       </div>
       <div class="post-meta">
         
@@ -837,7 +840,7 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Fixed-IME-List-for-GNOME-Shell/" itemprop="url">固定 GNOME Shell 的输入法列表</a>
+        <a class="title-link" href="/posts/Fixed-IME-List-for-GNOME-Shell/" itemprop="url">固定 GNOME Shell 的输入法列表</a>
       </div>
       <div class="post-meta">
         
@@ -1105,4 +1108,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.9.0 at 2022-01-29T09:43:08.162Z. -->
+<!-- Page built by Hikaru v1.9.0 at 2022-01-31T13:33:05.506Z. -->

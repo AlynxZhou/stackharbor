@@ -49,16 +49,19 @@
     
     
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
-    
-    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
-    
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
     
-<link rel="stylesheet" type="text/css" href="/css/page.css">
-<link rel="stylesheet" type="text/css" href="/css/post.css">
-
     
     <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
@@ -297,13 +300,13 @@
             
 <div id="tag" class="tag page">
   <div class="page-title">
-    <a class="page-title-link page-title-link-external" href="/tags/%E7%94%B5%E5%BD%B1/" itemprop="url">电影</a>
+    <a class="title-link" href="/tags/%E7%94%B5%E5%BD%B1/" itemprop="url">电影</a>
   </div>
   
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <header id="post-header" class="post-header">
       <div class="post-title-simple" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/posts/Your-Name/" itemprop="url">你的名字。</a>
+        <a class="title-link-simple" href="/posts/Your-Name/" itemprop="url">你的名字。</a>
       </div>
       
       <span class="post-date">
@@ -515,4 +518,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.9.0 at 2022-01-29T09:43:08.289Z. -->
+<!-- Page built by Hikaru v1.9.0 at 2022-01-31T13:33:05.631Z. -->
