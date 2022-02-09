@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2021-11-09T01:19:55.000Z</updated>
+  <updated>2022-02-09T02:22:55.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,57 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.4">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>StackHarbor 的 2021 尾记</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/2021-Tail/" />
+    <id>https://sh.alynx.one/posts/2021-Tail/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-02-09T02:22:55.000Z</published>
+    
+    
+    <updated>2022-02-09T02:22:55.000Z</updated>
+    
+    
+    <summary type="html">
+      &lt;p&gt;今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。&lt;/p&gt;
+
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;2021 年工作没什么变化，不过我换了个好一点的住处，虽然仍然是旧楼但是里面是新装修过的，至少让人待着的时候感到舒适，而且还可以吸室友的猫，虽然小猫也经常搞破坏，不过猫做什么都可以原谅。&lt;/p&gt;
+&lt;p&gt;看了去年的总结，才发现我是 2021 年把 FlipClock 改成 Meson 管理编译的，于是想起来我这一年学了 Meson 怎么用，因为 CMake 实在是让我烧脑筋。我今年还终于让 scrcpy 能够模拟 USB 键盘，这样使用 scrcpy 的时候也能用数字键选词了，多少算是在一个大项目里面做了一个大贡献。&lt;/p&gt;
+&lt;p&gt;然后其他能记得住的就是最近折腾的一些东西了，春节假期没写博客也是因为忙着写代码。写了一个简单的网页小游戏，基本是平面版神庙逃亡，感觉还是挺有成就感的。然后给之前的弹钢琴页面改成了原生 JS 实现，放弃 React 的原因是依赖太多了，而且不是每个软件包都能及时更新自己的依赖。比如你用一个老版本的 create-react-app 会带来许多有漏洞的依赖，然后你更新到最新版因为依赖变了，有些库又依赖了另一个有漏洞的版本。我觉得为了简单的 UI 和数据绑定这个代价是不值得的，所以我就重写了一个。然后给我的博客生成器添加了文件依赖的支持，很久很久以前当我刚开始用静态博客生成器的时候就在头疼这个，博客生成器理解不了你的模板引擎或者预处理器的导入和扩展语句，于是没办法在一个文件更新的时候更新所有包含它的依赖，导致主题开发要不停的关掉生成器再开。一开始我是想给这些文件都加上 front matter，但是我发现虽然我自己加载的时候可以去掉 front matter，模板引擎处理导入语句的时候是他自己读文件所以没办法去掉 front matter，我不想给每个模板引擎都写自定义的 loader，所以最后改成用一个单独的文件记录依赖了。最后的结果就是单独抽出了一个 Watcher 类，可以查表查出所有需要更新的文件然后调回调，效果还挺不错的。以及本来我想清理一下博客的样式然后顺便换个 CSS 预处理器，因为感觉 Stylus 不是特别火了，但是考察了一下，less 的语法和 Stylus 差得有点多，而 scss 虽然使用广泛，而且有纯 C 语言写的实现，但是它有好多个实现，并且官网上说只有 Dart 语言写的版本才不过时，其它的都只实现了过时的 &lt;code&gt;@import&lt;/code&gt; 而用户应该用最新的 &lt;code&gt;@use&lt;/code&gt;，总之搞得这么麻烦看起来就不想用。虽然 Dart 能编译成纯 JS，我还是觉得没兴趣。于是最后我把我的样式都改成了原生 CSS，然后去掉了生成器内置的 Stylus 支持。&lt;/p&gt;
+&lt;p&gt;显示器从去年的一个换成了两个，因为我是一个经常最大化窗口的人，切工作区虽然快，但是比如在浏览器和代码编辑器之间切换的时候还是会打断思路，有了双屏就没这个烦恼。一开始我想的是双屏更方便一边全屏游戏一边干别的事情，不过好像也就那样，因为从全屏切出来到另一个屏幕也不是很顺畅。不过买双屏的时候很头疼的就是因为不是一个批次，两个显示器的色温差得不是一点，最终是换了一台然后用校色仪调了好久，虽然不是 100% 一致，但是至少差不多了。&lt;/p&gt;
+&lt;p&gt;说到这个我想说，感觉幸运和倒霉是伴随而来的，不太可能一直幸运，经常是发生一些开心的事之后又发生一些不开心的事，比如去年买了新相机，经常没事拍点照片什么的，结果昨天晚上我突然发现不开镜头盖的时候 CMOS 有个红点……我觉得我基本可以排除激光损伤，应该就是坏点，但是我用机内的像素映射却解决不掉。感觉最后还得跑一趟维修站，而我在老家，一时半会不会回北京，这边也没有维修站，总之麻烦的事情就会让我心累。买了一张升降桌，不过这个最便宜的款式不太靠谱，现在升降功能不太正常，于是只是变成了一台大桌子。不过椅子坏了之后换了个比较便宜的工学椅倒确实令我满意。&lt;/p&gt;
+&lt;p&gt;今年没有换手机，主要是把这个钱投资到镜头或者灯上让我更高兴一点，手机厂商出的手机真是越来越烂了。不过把备用的 iPhone 8 换成了 iPhone XR，在二手频道看到一个成色很好，而且是红色款的，我早就觉得 iPhone 8 屏幕太小了。&lt;/p&gt;
+&lt;p&gt;动漫也想不起来看过什么，今年也许只看了 EVA 最后一部剧场版和 love live superstar，反正看 EVA 就是大家都想看看他怎么收尾而已，总体来说还是不错，特别是看了纪录片之后。然后 love live 我以前没看过，我的评价就是挺好听的。然后我感觉在电影院看到 Fate/Stay Night HF 第三季的可能性应该是没了，特别是考虑到今年院线上的国外电影的比例……还能说什么呢懂得都懂哈哈。&lt;/p&gt;
+&lt;p&gt;今年的另一个好消息是 NVIDIA 驱动终于补全了 Wayland 支持，感谢所有在这个过程中努力的人，比如 NVIDIA 那个一直在处理相关事情的用蜗牛做头像的老哥，事情总要是靠人推进的嘛。不过回家之后莫名发现我的 Atom 在 XWayland 下面会疯狂地闪回，明明我自己住处的电脑也是一样的配置就没问题。然后这时候我发现 Emacs 的纯 GTK 分支已经合并进了主线，也就是说 Emacs 现在终于是纯 Wayland 程序了，我立刻搞了一个最新版本，然后捡起来以前的配置文件，又仔细研究仔细鼓捣，目前多少是堪用了，虽然还有不少地方不像 Atom 那么习惯，主要还是我懒得仔细研究，反正凑合用，我是真的怀念 Atom 上的一些功能，比如注释反注释代码块、移动代码块、方便的查找替换还有现代化的界面……Emacs 的界面元素感觉还是基于文本的，然后包括粗体字渲染感觉也不太光滑，比如 indent guide 或者 80 column ruler 这种东西就应该直接在界面上划线嘛，不要用字符做。不过我在用 Atom 的时候也怀念 Emacs 的一些功能比如纯键盘分屏和 C-SPC Mark Region。&lt;/p&gt;
+&lt;p&gt;今年的游戏时间基本都拿来打 Dota 了，虽然看 TI 看得很难受，但是和朋友一起玩游戏还是挺快乐的，这也属于幸运和倒霉的周期了吧。塞尔达什么的，等我想起来慢慢玩……&lt;/p&gt;
+&lt;p&gt;跨年的时候还是和去年一样朋友聚餐了，我还在 B 站上传了 vlog，和蓝猫铁道迷一起吃寿喜锅很开心。今年写代码没少让琪神当小黄鸭，谢谢琪神。&lt;/p&gt;
+&lt;p&gt;总之先写这些，如果我又想起什么，我后面再慢慢加上吧，最近冻着了嗓子疼，希望倒霉的周期赶紧过去，过段时间还得找找机会去修相机呢……&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="生活" label="生活" scheme="https://sh.alynx.one/categories/%E7%94%9F%E6%B4%BB/" />
+    
+    
+    <category term="时光飞逝" label="时光飞逝" scheme="https://sh.alynx.one/tags/%E6%97%B6%E5%85%89%E9%A3%9E%E9%80%9D/" />
+    
+  </entry>
   
   
   
@@ -1601,7 +1652,7 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;p&gt;2020 年感觉最不错的事情大概是加入某绿色蜥蜴工作，虽然这个严格来说从 2019 年就开始了，但是我去年忘记写总结了……多亏了同学的推荐得到了一份实习，面试感觉很好，没有考什么我特别不擅长的算法题而是一些实践性的知识，这个我还是挺擅长的。然后同事也都相当好相处，一开始是测试相关的工作，也了解了很多测试方面的知识，甚至还写了点 perl（虽然只了解皮毛），总之是很有意思的经历，然后更意外的是领导居然主动问我有没有什么别的感兴趣的领域，因为我一直是 GNOME 用户所以对 GNOME 维护挺感兴趣的，结果后面就转到 GNOME 组去实习了（这也太好了吧天哪）。然后就是快毕业了需要准备正式工作，一般来说这边没有类似国内互联网企业那样招一大堆实习生然后给几个转正名额竞（yang）争（gu）的途径，并且他们也几乎不进行校招，对毕业生和社招一视同仁，虽然我个人很想在这工作，但是如果想留下来的话还挺看运气的。这时候领导又和我说正好组里有空缺职位，可以安排面试，只要能保证一直实习到正式入职就可以了，于是又十分幸运的毕业之后正式入职。总之能在自己感兴趣的领域做工作已经是十分幸运了，然后待遇相对来说也不错，特别是看多了加班猝死的新闻，心里更加满足了……同事也都很友善，而且都是技术类型的，做的又都是开源相关，平时也很聊得来。今年整体来说不是那么容易找工作的，我都要反思我为什么那么幸运了……顺便由于疫情原因，我司今年一直是在家办公状态，也节省了好多通勤的时间金钱……&lt;/p&gt;
 &lt;p&gt;在找工作这方面我实在是没什么经验可谈，我太靠运气了……如果非要说的话，就是平时自己多学习多写写程序吧……&lt;/p&gt;
 &lt;p&gt;因为工作的原因今年一直是自己在外面住的，房租好贵啊……至于自己住虽然挺安静的但也挺麻烦的……把东西从学校搬出来也花了不少麻烦。&lt;/p&gt;
-&lt;p&gt;今年个人项目方面没做什么新东西，去年把 Hikaru 从 CoffeeScript 换成 JavaScript 之后基本就只是写文档、加测试、改功能，大改是去掉了 cheerio 改成自己实现了一部分功能，谁叫他们一年不……主题方面给 ARIA 做了个大改是去掉了 jQuery 加上了暗色模式，当然我自己看起来界面并没有什么变化。大一时候写的 FlipClock 努努力改成了 CMake，然后这样就可以跨平台做成 Windows 屏保了。顺便了解了一下怎么在 Android 上面运行 SDL，做了个 Android 的 FlipClock。而至于我的弹钢琴页面和 Telegram Bot，我已经忘记是今年还是去年写的了……&lt;/p&gt;
+&lt;p&gt;今年个人项目方面没做什么新东西，去年把 Hikaru 从 CoffeeScript 换成 JavaScript 之后基本就只是写文档、加测试、改功能，大改是去掉了 cheerio 改成自己实现了一部分功能，谁叫他们一年不更新……主题方面给 ARIA 做了个大改是去掉了 jQuery 加上了暗色模式，当然我自己看起来界面并没有什么变化。大一时候写的 FlipClock 努努力改成了 CMake，然后这样就可以跨平台做成 Windows 屏保了。顺便了解了一下怎么在 Android 上面运行 SDL，做了个 Android 的 FlipClock。而至于我的弹钢琴页面和 Telegram Bot，我已经忘记是今年还是去年写的了……&lt;/p&gt;
 &lt;p&gt;今年折腾了一遍我的电脑，因为终于有时间和钱玩自己的台式机了，仔细想想好像把之前的能换的都换了，27 寸的显示器对没有双屏空间的人来说提升了不少工作效率，5800X 打游戏也很爽，就是钱包不太舒服……&lt;/p&gt;
 &lt;p&gt;口琴方面今年年末又高产起来了，而且开始剪视频，发现达芬奇可以在 Linux 下面用（虽然有些限制）（Adobe 看看人家！），而且还挺流畅的，于是看了影视飓风的达芬奇教程学了一些基本的剪辑知识，为了用的更舒服还闲鱼买了个加密狗（假货很多，安全下车），今后可能剪视频的频率会逐渐增多，就当练习新技能了。&lt;/p&gt;
 &lt;p&gt;手机打算再用一年，今年手机厂商出的都是什么垃圾？我现在也想清楚了反正手机又不能给我带来收入，有这个钱还不如投资到台式机上，希望各种换手机患者也考虑一下，我现在是能用就行了。除非哪个厂家出一个摄像头不丑还有耳机孔最好还是直屏系统不要乱删乱改的旗舰机。&lt;/p&gt;
@@ -3520,83 +3571,6 @@ DHCP=ipv4
     <category term="Arch Linux" label="Arch Linux" scheme="https://sh.alynx.one/tags/Arch%20Linux/" />
     
     <category term="蜗牛星际" label="蜗牛星际" scheme="https://sh.alynx.one/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>前端博客搜索引擎</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Frontend-Blog-Search/" />
-    <id>https://sh.alynx.one/posts/Frontend-Blog-Search/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2019-09-18T07:24:00.000Z</published>
-    
-    
-    <updated>2020-08-15T10:25:00.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。&lt;/p&gt;
-&lt;p&gt;但是这个设计引发了 &lt;a href=&quot;https://blog.lilydjwg.me/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@依云&lt;/a&gt; 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过依云给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。&lt;/p&gt;
-&lt;p&gt;但是这个设计引发了 &lt;a href=&quot;https://blog.lilydjwg.me/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@依云&lt;/a&gt; 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过依云给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;首先既然要搜索那还是得有个索引或者数据库，比较简单的方案就是把所有文章的标题 URL 和内容丢到一个 json 文件里面，这个功能在 Hexo 里可以使用 &lt;code&gt;hexo-generator-search&lt;/code&gt; 实现，我也给我的 Hikaru 添加了这个生成器，用来生成 JSON。&lt;/p&gt;
-&lt;p&gt;首先第一件事是实现搜索跳转页面，这一步只要简单的使用 HTML 表单就能实现，首先将我的搜索框改造为如下格式：&lt;/p&gt;
-&lt;figure data-raw=&quot;&lt;form action=&amp;quot;{{ getPath(&amp;quot;search.html&amp;quot;) }}&amp;quot; method=&amp;quot;get&amp;quot;&gt;
-  &lt;button type=&amp;quot;submit&amp;quot; class=&amp;quot;search-submit&amp;quot; aria-label=&amp;quot;{{ __(&amp;quot;search&amp;quot;) }}&amp;quot;&gt;
-    &lt;i class=&amp;quot;fas fa-search&amp;quot;&gt;&lt;/i&gt;
-  &lt;/button&gt;
-  &lt;input type=&amp;quot;search&amp;quot; id=&amp;quot;search-input&amp;quot; class=&amp;quot;search-input&amp;quot; name=&amp;quot;q&amp;quot; results=&amp;quot;0&amp;quot; placeholder=&amp;quot;{{ __(&amp;quot;search&amp;quot;) }}&amp;quot; aria-label=&amp;quot;{{ __(&amp;quot;search&amp;quot;) }}&amp;quot;&gt;
-&lt;/form&gt;
-&quot; data-info=&quot;language-html&quot; data-lang=&quot;html&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;form action=&quot;{{ getPath(&quot;search.html&quot;) }}&quot; method=&quot;get&quot;&amp;gt;
-  &amp;lt;button type=&quot;submit&quot; class=&quot;search-submit&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;&amp;gt;
-    &amp;lt;i class=&quot;fas fa-search&quot;&amp;gt;&amp;lt;/i&amp;gt;
-  &amp;lt;/button&amp;gt;
-  &amp;lt;input type=&quot;search&quot; id=&quot;search-input&quot; class=&quot;search-input&quot; name=&quot;q&quot; results=&quot;0&quot; placeholder=&quot;{{ __(&quot;search&quot;) }}&quot; aria-label=&quot;{{ __(&quot;search&quot;) }}&quot;&amp;gt;
-&amp;lt;/form&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;使用 &lt;code&gt;button&lt;/code&gt; 而不是 &lt;code&gt;input&lt;/code&gt; 的原因是我想用我的图标做搜索按钮，反正 &lt;code&gt;&amp;lt;input type=&quot;submit&quot;&amp;gt;&lt;/code&gt; 只是个特化的 &lt;code&gt;button&lt;/code&gt;。理论上来说不放按钮靠回车提交也是 OK，但是觉得这样又会被某些用户批评不友好了……&lt;/p&gt;
-&lt;p&gt;搜索框就很简单，&lt;code&gt;name=&quot;q&quot;&lt;/code&gt; 表示生成的 query string 里 keywords 的 key 是 &lt;code&gt;q&lt;/code&gt;，然后按照表单写法会被提交到 &lt;code&gt;search.html&lt;/code&gt;，理论上来说搜索应该发 GET 请求所以就是 &lt;code&gt;method=&quot;get&quot;&lt;/code&gt;，当然 POST 就实现不了复制链接查看搜索结果了。&lt;/p&gt;
-&lt;p&gt;这个表单就是标准的 HTML 表单，不需要用 JavaScript 处理。生成的 GET 请求的 URL 类似于 &lt;code&gt;/search.html?q=xxx&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;然后接下来是处理请求了，既然是发送到 &lt;code&gt;search.html&lt;/code&gt;，对于静态后端肯定是要返回这个页面的，那就得先创建页面，然后对这个页面进行特殊处理，这里我同样利用生成器生成一个 layout 设置成 &lt;code&gt;search&lt;/code&gt; 的页面，然后就可以单独给它编写模板添加处理部分了。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;search.html&lt;/code&gt; 加载之后是可以通过 &lt;code&gt;window.location.search&lt;/code&gt; 获取到 query string 的，然后我加载我修改过的 &lt;code&gt;search.js&lt;/code&gt;（&lt;a href=&quot;/js/search.js&quot;&gt;这里&lt;/a&gt;），用它处理搜索过程。同时在页面里添加了一个 container 用来放置检索结果。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;search.js&lt;/code&gt; 其实没什么黑科技，毕竟我们的难点就是在无后端情况下处理关键词和数据库，关键词已经用 &lt;code&gt;window.location.search&lt;/code&gt; 拿到了，解析一下然后只要通过 ajax/fetch 请求数据就行了，封装 ajax 的代码网上到处都是，实在不行用 jQuery 也成。&lt;/p&gt;
-&lt;p&gt;然后剔除重复关键词主要是为了优化一下性能，接下来我的解决方案就是简单粗暴 &lt;code&gt;indexOf()&lt;/code&gt;，不要跟我提什么算法什么优化，短平快实现效果，我是个实用主义者，目前这一步其实还没有成为瓶颈。&lt;/p&gt;
-&lt;p&gt;然后对于原版文件我的改进主要是按匹配次数排序，文章出现关键词越多则排序越靠前，相对可以提高效率。&lt;/p&gt;
-&lt;p&gt;接下来使用正则表达式给关键词加上 &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt;，这样显示起来比较显眼。最后把字符串拼起来显示就好了。其实这里的算法还有点意思，比如假如两个关键词出现的位置中间大于多少个字符则插入省略号，否则合并两个的上下文，具体实现也可以参照代码。&lt;/p&gt;
-&lt;p&gt;如果有性能瓶颈的话，多半也会先出现在 ajax，不过目前我文章还没有多到加载不出来的情况，也许可以靠分块加载解决？&lt;/p&gt;
-&lt;p&gt;更新（2020-08-15 18:25:00）：我给代码添加了简单的分块支持。由于这里需要主题和生成器约定好路径，不太适合让生成器自动生成路径，所以采用了一个简单的方法就是让用户在设置文件里手动指定几个 JSON 文件的路径，然后生成器只是读取一下配置，假如是数组就分块写到指定好的路径里面。然后前端查找的时候分别异步查找每个文件并合并排序结果，理论来说大概会有性能提升？&lt;/p&gt;
-&lt;p&gt;最后我加了个简单的 SpinKit 动画，在查询结束之前先跑一下提升用户体验。&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/ARIA/" />
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="搜索" label="搜索" scheme="https://sh.alynx.one/tags/%E6%90%9C%E7%B4%A2/" />
-    
-    <category term="JavaScript" label="JavaScript" scheme="https://sh.alynx.one/tags/JavaScript/" />
-    
-    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
     
   </entry>
   
