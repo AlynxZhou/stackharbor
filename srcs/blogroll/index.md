@@ -74,6 +74,7 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 | :------------: | :------------: | :------------: | :------------: |
 | <img src="https://blog.yoitsu.moe/theme/images/wiki.png" style="width: 5em;"> | [约伊兹的萌狼乡手札](https://blog.yoitsu.moe/) | 「虽然咱长久以来被尊为神，且被束缚在这块土地上，但咱根本不是什么伟大的神。咱就是咱。咱是赫萝。」 | 我大概能理解这是个什么物种吧……反正我是猫。 |
 | <img src="https://farseerfc.me/images/avatar.jpg" style="width: 5em;"> | [Farseerfc 的小窝](https://farseerfc.me/) | 「要是會能讓時間停下的魔法就好了… The World!」 | ~~爱呼吸~~ fc 老师！似乎是日本某大学的教授，人生赢家，实名羡慕。 |
+| <img src="https://avatars.githubusercontent.com/u/172495?v=4" style="width: 5em;"> | [Hydroxide](https://blog.oldherl.one/) | “oldherl 胡言乱语之一氧化二氢” | 我和老海尔挺熟的，我不能总是忘记添加他的友链…… |
 | <img src="https://avatars0.githubusercontent.com/u/10167884?s=460&v=4" style="width: 5em;"> | [jm33_ng](https://jm33.me/) |  | 似乎是个高产的大佬，博客里都是和安全相关的（大概）。 |
 | <img src="https://avatars2.githubusercontent.com/u/15247171?s=400&u=42dbf0d7048c9b3eda5c77ec31b9d13efca1cc28&v=4" style="width: 5em;"> | [Nichi Yorozuya](https://nichi.co/) | "🐰🐰" | 某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。 |
 | <img src="https://avatars3.githubusercontent.com/u/6873988?s=460&u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&v=4" style="width: 5em;"> | [Bruce Z Blog](https://brucezhang1993.github.io/)  | 「我不是兔子」 | 经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。 |
