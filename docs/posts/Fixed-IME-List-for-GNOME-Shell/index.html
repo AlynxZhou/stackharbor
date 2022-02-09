@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="GNOME Shell 有个令人很不爽的“特性”，它的输入法列表使用的是最近使用优先排列。也就是说当你有三个或以上输入法的时候，比如我，我有英文简体中文和日语输入法，我经常在中英之间切换，这没什么，前两个总是中英所以按一次就可以在这两个之间切换，但假如我偶尔用了一次日语输入法，我的列表就被打乱了，我不清楚按几下才能切回中文，并且再切到英文也得看一眼才能知道。">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.10.3">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Fixed-IME-List-for-GNOME-Shell/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-solid.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-brands.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-regular.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"far fa-lightbulb\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>固定 GNOME Shell 的输入法列表 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Fixed-IME-List-for-GNOME-Shell/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Fixed-IME-List-for-GNOME-Shell/" itemprop="url">固定 GNOME Shell 的输入法列表</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2020-09-26T02:40:00.000Z">9/26/2020, 10:40:00 AM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/Fixed-IME-List-for-GNOME-Shell/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="固定 GNOME Shell 的输入法列表" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>GNOME Shell 有个令人很不爽的“特性”，它的输入法列表使用的是最近使用优先排列。也就是说当你有三个或以上输入法的时候，比如我，我有英文简体中文和日语输入法，我经常在中英之间切换，这没什么，前两个总是中英所以按一次就可以在这两个之间切换，但假如我偶尔用了一次日语输入法，我的列表就被打乱了，我不清楚按几下才能切回中文，并且再切到英文也得看一眼才能知道。</p>
+<a id="more"></a>
+
+<p>我不是很理解这个特性存在的意义，设置里面是可以手动调节输入法的顺序的，我明明调成了我想要的顺序，你就给我这个顺序好了，这样我闭着眼睛不用动脑子都能猜出来要按几下，比如从英文到日语按两下，中文到日语按一下等等。可能有些人的脑子长得比较擅长模拟最近使用优先排列？反正我不行。</p>
+<p>既然感觉不爽那就动手处理一下好了，最近看了一些有关写 GNOME Shell 扩展的文档，所以写个扩展解决一下就可以了。为什么不直接提交给上游？因为上游一开始是固定顺序的，但是很久以前某个人加了这个“特性”，现在如果提个请求说删掉这个特性，势必会陷入一场“用户到底是喜欢最近使用优先排列还是固定排列”的争论，这肯定很难得出结论（毕竟大部分的人实际上是不需要使用输入法的英语用户以及只有两种输入法的用户！），并且按照 GNOME 上游的习惯他们也是不愿意为了这个多添加一个开关的。所以比起在拉锯战上浪费时间，先搞一个能用的才是我的风格。至于升级之后扩展挂掉……不就是在上游里和其他代码一起被重构和我自己单独重构的区别吗？只要我还在用应该就会持续更新了。</p>
+<p>具体的解决方法比较 dirty，是我从别的扩展里学来的：把 GNOME Shell 里面的类的原型上的方法替换成自己的，就可以修改实例调用时的函数了（也算 JS 特性之一），不过不要用箭头函数，因为显然我们希望 <code>this</code> 是调用时的上下文也就是实例，而不是绑定到当前上下文。</p>
+<p>因为这算是我第一个扩展所以也多少记录一下踩的坑。</p>
+<p>首先 Gjs 的导入和 Node.js 的导入是不一样的，它通过一个 <code>imports</code> 对象引入其他库，比如通过 GI 导入的就在 <code>gi</code> 下面，因为是 GNOME Shell 扩展所以可以访问 GNOME Shell 的 JS 库，就是简单地把 JS 路径换成对象的 key 然后 JS 文件里所有的 <code>var</code> 和 <code>function</code> 都会被导出。比如导入 <code>Main</code> 就是 <code>imports.ui.main.Main</code>。</p>
+<p>然后就是怎么知道要修改什么以及如何获取到相关对象，不过因为 GNOME Shell JS 部分经常重构，也没什么完整的文档，反正只能多花时间看代码吧，而且它的结构其实比看起来的要复杂，所以经常需要仔细翻来翻去的。比如 GNOME Shell 的输入法部分很多人认为是需要修改 iBus，实际上 GNOME Shell 只是调用 iBus 作为后端，自己处理状态和界面，这部分的代码都在 <code>js/ui/status/keyboard.js</code> 里面。</p>
+<p>扩展主要有 <code>init()</code>，<code>enable()</code> 和 <code>disable()</code> 三个函数，<code>init()</code> 在 GNOME Shell 加载扩展时候调用，我这个显然不需要。<code>enable()</code> 是你在 Extensions app 里面打开开关时候调用的，<code>disable()</code> 是关掉开关时候调用的。</p>
+<p>在 <code>enable()</code> 里面有几个需要我修改的地方，一个是阻止 <code>InputSourceManager</code> 在输入法切换之后的最近使用优先排列，解决方法很简单，需要自己替换掉 <code>_currentInputSourceChanged</code> 函数，注释掉 <a href="https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L447-453" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L447-453</a> 这一段更新代码。</p>
+<p>当然光有这个还是不行的，这样假如你是先切换过再打开扩展，实际上列表是你开启扩展之前的状态而不是用户设置的顺序，所以我们还需要在打开扩展之后更新它的列表，让它直接读取用户设置。更新列表的函数是 <code>_updateMruSources</code>，假如检测到当前列表为空，会先从一个缓存的 gsettings 里读取之前存储的最近使用优先排列列表，这显然是很恶心的所以要注释掉 <a href="https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L504-522" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L504-522</a> 这一段。之后它会先加载当前列表里的，然后再把用户列表里增加的当前列表里没有的加到后面，因为我们已经决定要清空当前列表并且不加载 gsettings 里面的缓存，所以这个当前列表肯定是空，那直接加用户列表就行了，所以注释掉 <a href="https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L525-533" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L525-533</a>。这样我们后续只要清空 <code>_mruSources</code> 设置 <code>_mruSourcesBackup</code> 为 <code>null</code> 然后调用 <code>_updateMruSources</code> 就可以了。</p>
+<p>然后我们需要获取运行时的这个 <code>InputSourceManager</code> 实例，这个实例没有被绑定到 <code>Main</code> 对象上，不过我阅读代码发现它是个单例模式，就是说在 <code>js/ui/status/keyboard.js</code> 有一个 <code>_inputSourceManager</code> 变量，然后有个 <code>getInputSourceManager()</code> 的函数，被调用时候如果有就返回 <code>_inputSourceManager</code> 否则创建一个赋值返回，其他代码都用的这个，所以我们也导入这个就行了。</p>
+<p>然后你会发现另一个弱智的地方，怎么每次按下切换键，切换框都是从第一个切换到第二个？不是应该从我当前的切换到下一个吗？这个对于当前输入法总在第一个的最近使用优先排列是可以的，但在我们这个场景选中的并不总是第一个，所以需要修改。这部分函数是 <code>_switchInputSource</code>，可以看到它只是展示了一个 <code>InputSourcePopup</code>，而 <code>InputSourcePopup</code> 继承的是 <code>imports.ui.switcherPopup.SwitcherPopup</code>，这个类有一个叫做 <code>_selectedIndex</code> 的变量用于选择下一个上一个时候的计算，而且它默认是 0！不能通过参数初始化！真是头秃，不过我们可以在创建完切换框但展示之前单独设置这个值就行了，所以我在 <a href="https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L412" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L412</a> 的下一行插入如下代码：</p>
+<figure data-raw="if (this._currentSource != null) {
+  popup._selectedIndex = this._mruSources.indexOf(this._currentSource);
+}
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">if (this._currentSource != null) {
+  popup._selectedIndex = this._mruSources.indexOf(this._currentSource);
+}
+</code></pre></figure>
+<p>因为我们不一定总有 <code>_currentSource</code> 所以还是要检查一下，如果没有的话让它从 0 开始也无所谓。</p>
+<p>然后还有一个比较头痛的是快捷键是绑定的回调函数，回调函数又绑定了 <code>this</code>，所以我们光修改原型是改不了被回调的函数的，这个也简单，我们需要读一下 <code>InputSourceManager</code> 的 <code>constructor</code> 的代码，然后删掉它在 <code>Main.wm</code> 里面绑定的组合键重新绑定成我们的，就是这样：</p>
+<figure data-raw="Main.wm.removeKeybinding(&quot;switch-input-source&quot;);
+_inputSourceManager._keybindingAction =
+  Main.wm.addKeybinding(
+    &quot;switch-input-source&quot;,
+    new Gio.Settings({&quot;schema_id&quot;: &quot;org.gnome.desktop.wm.keybindings&quot;}),
+    Meta.KeyBindingFlags.NONE,
+    Shell.ActionMode.ALL,
+    InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
+  );
+Main.wm.removeKeybinding(&quot;switch-input-source-backward&quot;);
+_inputSourceManager._keybindingActionBackward =
+  Main.wm.addKeybinding(
+    &quot;switch-input-source-backward&quot;,
+    new Gio.Settings({&quot;schema_id&quot;: &quot;org.gnome.desktop.wm.keybindings&quot;}),
+    Meta.KeyBindingFlags.IS_REVERSED,
+    Shell.ActionMode.ALL,
+    InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
+  );
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">Main.wm.removeKeybinding("switch-input-source");
+_inputSourceManager._keybindingAction =
+  Main.wm.addKeybinding(
+    "switch-input-source",
+    new Gio.Settings({"schema_id": "org.gnome.desktop.wm.keybindings"}),
+    Meta.KeyBindingFlags.NONE,
+    Shell.ActionMode.ALL,
+    InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
+  );
+Main.wm.removeKeybinding("switch-input-source-backward");
+_inputSourceManager._keybindingActionBackward =
+  Main.wm.addKeybinding(
+    "switch-input-source-backward",
+    new Gio.Settings({"schema_id": "org.gnome.desktop.wm.keybindings"}),
+    Meta.KeyBindingFlags.IS_REVERSED,
+    Shell.ActionMode.ALL,
+    InputSourceManager.prototype._switchInputSource.bind(_inputSourceManager)
+  );
+</code></pre></figure>
+<p>同样我们也不要忘记绑定 <code>this</code>，实际上我们希望调用的时候绑定的 <code>this</code> 是那个单例，那直接 <code>bind</code> 它就好了。</p>
+<p>但是你会发现这个弱智的家伙没有按我们想象的工作！这是什么意思！仔细阅读代码之后我发现有如下逻辑：你按下的第一次组合键其实并不是算在那个弹框的按键回调里面，而是我们通过构造函数传递进去的，然后它分析这个传进去的按键是哪一种，调用 <code>_initialSelection</code> 执行第一次切换，而这个家伙更弱智了！明明有 <code>_selectedIndex</code> 它不用，竟然用硬编码的倒数第一个和第一个！真有你的啊！我不太敢修改 <code>SwitcherPopup</code> 因为还有别的东西使用它，那就修改 <code>InputSourcePopup</code> 这个子类吧，其实就是把 <code>InputSourcePopup.prototype._initialSelection</code> 这个函数原来的的 <code>this._select(this._items.length - 1);</code> 换成 <code>this._select(this._previous());</code>，<code>this._select(1)</code> 换成 <code>this._select(this._next())</code>（1 其实是 0 + 1 的意思），不但功能增加了，可读性也提升了！</p>
+<p>现在搭配起来应该和我们的需求一致了！但假如我关掉扩展之后希望列表是打开之前的状态怎么办！还记得之前说的那个 <code>_updateMruSources</code> 会读取 gsettings 吗？这个 gsettings 实际上在每次切换输入法的时候都会写入当前状态，那我们只要让它开启扩展时候不要写入，关掉扩展恢复的时候再更新不就读取了之前的状态吗。所以需要修改 <code>InputSourceManager.prototype._updateMruSettings</code>，注释掉 <a href="https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L432-438" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-36/js/ui/status/keyboard.js#L432-438</a>。</p>
+<p>总结一下其实就是在 <code>enable</code> 的时候修改这些函数，然后获取单例，重新绑定快捷键，然后清空当前的列表重新更新列表，然后为了避免 bug，我们总是激活列表里的第一个输入法：</p>
+<figure data-raw="if (_inputSourceManager._mruSources.length > 0) {
+  _inputSourceManager._mruSources[0].activate(true);
+}
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">if (_inputSourceManager._mruSources.length &gt; 0) {
+  _inputSourceManager._mruSources[0].activate(true);
+}
+</code></pre></figure>
+<p><code>disable</code> 的时候同样是把函数修改回去，然后获取单例，重新绑定快捷键这样它又绑成了原来的函数，然后清空当前的列表重新更新列表这样它就恢复到开启之前的顺序了，接下来同样地，因为最近使用优先列表的第一个元素肯定是正在用的，所以我们也还是激活第一个输入法就可以了。</p>
+<p>完整的项目参见 <a href="https://github.com/AlynxZhou/gnome-shell-extension-fixed-ime-list/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a>，Arch Linux 用户也可以从 AUR 或者 Arch Linux CN 源安装 <code>gnome-shell-extension-fixed-ime-list</code>。</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="fas fa-tag"></i>GNOME</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Strange-Book-Names/" rel="next" title="奇怪的书名和我和吐槽"><i class="fas fa-angle-left"></i><span class="nav-title">奇怪的书名和我和吐槽</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/GObject-Reminder/" rel="prev" title="GObject 备忘录"><span class="nav-title">GObject 备忘录</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "固定 GNOME Shell 的输入法列表",
+        "queryString": window.location.search,
+        "basePath": "/posts/Fixed-IME-List-for-GNOME-Shell/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">82</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">68</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.10.3 at 2022-02-09T06:45:53.844Z. -->

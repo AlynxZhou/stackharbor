@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="造轮子是病，得治。 自从造了 前端博客搜索引擎 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。 （这标题怎么写的和毕业论文似的！）">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.10.3">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-solid.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-brands.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-regular.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"far fa-lightbulb\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>基于 GitHub Issue 的前端评论框 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/" itemprop="url">基于 GitHub Issue 的前端评论框</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2020-08-15T10:25:00.000Z">8/15/2020, 6:25:00 PM</time></span>
+        </div>
+        
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2020-08-18T04:25:00.000Z">8/18/2020, 12:25:00 PM</time></span>
+        </div>
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/ARIA/" itemprop="url" rel="index"><span itemprop="name">ARIA</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/Frontend-GitHub-Issue-Based-Comment/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="基于 GitHub Issue 的前端评论框" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <h1 id="%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82"></a>造轮子是病，得治。</h1>
+<p>自从造了 <a href="/posts/Frontend-Blog-Search/">前端博客搜索引擎</a> 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。</p>
+<p>（这标题怎么写的和毕业论文似的！）</p>
+<a id="more"></a>
+
+<h1 id="%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"></a>轮子也不是白造的。</h1>
+<p>从我建站以来我的评论框就命途多舛，Disqus 虽然是最著名的评论系统，但是在国内访问不太顺畅。多说火了一段时间之后便关门大吉，HyperComments 则在我用了一段时间后发邮件提示要收费了，于是我之前的评论便华丽流失。而对于 Valine 这种基于 LeanCloud 的评论系统，我对 LeanCloud 不甚了解所以也不想尝试（而且 Valine 现在似乎转向闭源了，当初也许是个正确的决定）。然后赶上 Gitment 和 Gitalk 火了起来，大家意识到 GitHub Issue 正是个放评论的好地方。但是由于 <a href="https://github.com/iissnan/hexo-theme-next/pull/1634#issuecomment-313596649" target="_blank" rel="external nofollow noreferrer noopener">Gitment 和 Gitalk 采用他们自己的服务器实现博客评论框提交——转发到 GitHub API 的实现</a>，以及 <a href="https://www.v2ex.com/t/535608" target="_blank" rel="external nofollow noreferrer noopener">采用的 OAuth App 权限过高</a>，有人怀疑这不太安全，于是我也没太敢参与。后来遇到 <a href="https://github.com/wzpan/comment.js" target="_blank" rel="external nofollow noreferrer noopener">comment.js</a> 这个项目，它绕过了提交评论的问题——直接给一个到 GitHub Issue 的评论框的链接就可以了。于是我就开始用这个，至于什么 utterances 这种用 GitHub App 降低权限的评论系统，我也懒得尝试了。</p>
+<p>但我为什么决定替换掉 comment.js 我已经记不清楚了，可能是为了对主题的显示有更好的掌握吧，毕竟它带有自己的 CSS 样式而且经常和我的冲突，也可能是因为它迟迟没提供像 Disqus 一样查找每篇文章评论数目的功能，不过它现在已经不再维护了，所以我也算是未雨绸缪。</p>
+<h1 id="%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82"></a>事情本该很简单。</h1>
+<p>研究了一下原理其实并不是很难，首先就是从 GitHub 的 API 上 ajax 获取数据，然后操作 DOM 添进去就可以了，所以我就先阅读了 <a href="https://docs.github.com/en/rest/reference/issues" target="_blank" rel="external nofollow noreferrer noopener">GitHub API 的文档</a>，总之还算容易，只要先获取一个仓库的 issue 列表，然后按照某种方法在里面查找相关的 issue，如果没有就渲染一个到新建 issue 的链接，否则获取该 issue 的全部评论并显示就可以了。</p>
+<p>查找 issue 的 key 也算容易，我给它做成了函数参数，然后在主题模板里填一个每个页面唯一的字符串就行了，比如文章标题，然后新生成 issue 页面时候就把这个作为 issue 的标题，这样查找 GitHub Issue 页面时候也比较容易看。然后 GitHub 把 PR 也视为 issue，这个不要紧，收到数组之后过滤一下就好了。而显示数目我琢磨了一下其实也没什么难的嘛！我都获取到所有 issue 的信息了。做一个新的函数，主题作者在页面上放置一系列空的元素并设置好 class 属性，然后同样地把每个页面唯一的字符串设置成这些元素的属性（Disqus 也是这样的），加载函数时候把 class 作为参数传进去，分别从 issue 列表里查找对应的标题就可以了。还有一个奇葩问题是 GitHub issue 的 comments 指的是除了顶楼以外的评论，但很显然看起来不是这样的，这个也简单，直接把顶楼加到数组里就成了嘛。剩下就是艰苦的在浏览器里刀耕火种写 JS 拼 HTML 字符串发 ajax 请求写嵌套回调（没有 async/await 也太痛苦了吧！。</p>
+<p>一切正常工作了一段时间一后我发现不太对劲，怎么评论太多的时候显示不全呢？仔细查了一下发现 GitHub API 是强制分页的，也就是说不管你怎么设置，最多一次只能获取 100 条评论，默认则是 30 条，本来我不太想给博客加评论分页功能的，现在看来是 GitHub 被迫让我加啊。当然这个并不是最痛苦的，最痛苦的是它查找仓库的 issue 列表的时候也是强制分页的！这就麻烦了，还记得我们之前说要获取到列表之后查找标题吗？获取不到完整列表还怎么查找啊！</p>
+<p>当然你可以说按顺序多查几页不就行了嘛，这就是它分页难受的地方了！ajax 是异步的啊亲！你不会想让我一个 for 循环几个 ajax 还指望优雅的等他们结束了再跑查找吧！我知道能用 <code>Promise.all()</code> 解决，但是由于我大发慈悲的支持使用 IE11 的用户（微软我&amp;A%￥S&amp;……省略一千字儒雅随和），所以我的函数是基于回调的，那也没什么办法。而且这样首先你得读一下仓库信息才能知道有多少个 open 的 issue（没错只能算 open 的不能算 close 的！所以在后面查 issue 的时候我也不得不筛选掉 close 的，不过这大概也许是个 feature？），然后自己计算有多少页。最后我只能造了一个不那么优雅的尾递归回调（反正就那个意思），不过它工作的不错，这样我就可以获取到全部的 issue 列表了。</p>
+<p>然后后面其实还是差不多，至于评论分页又不一样了，既然 GitHub 只有分页 API，我也就半推半就啊不是将计就计吧。我才不要继续获取全部评论了，我也每次直接获取 GitHub 那边的一页就行了，每页个数则由主题作者传参进来。至于如何确定我要哪一页呢？和搜索功能一样，继续前端解析 query string 呗。根据 issue 评论总数计算一下有几页，然后生成几个链接放在页尾，每次加载时候解析一下参数确定当前页是哪个即可。当然，不要忘了 issue 顶楼不算评论，计算分页的时候也不要给它加进去！而且既然是这么分页，我也懒得把顶楼算在里面了（不然真的麻烦的要死啊后面分页和每页个数全乱了），所以假如你设置每页 10 个评论，那第一页其实有 11 个，别烦我，代码在那，不满意自己改……然后继续刀耕火种……</p>
+<p>为了减轻负担，我没有实现太多的功能，比如时间戳我没有搞成什么几分钟几小时前，这种东西又不清晰又浪费带宽，我只搞了<del>基于 marked 的 Markdown 渲染（必须的）和</del>语法高亮，Markdown 渲染不是必须的，因为你可以 <a href="https://docs.github.com/en/rest/overview/media-types#comment-body-properties" target="_blank" rel="external nofollow noreferrer noopener">设置 header 让 GitHub 直接返回 HTML</a>。为了保证效果统一，这个 JS 只是建立了 HTML 布局，给每个元素添加了 class，具体的样式则完全是主题自己编写的，所以配合起来也比较好看。</p>
+<p>最后的效果其实还可以，完整的脚本就是 <a href="/js/comment.js">这个网站在用的 JS</a>，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。</p>
+<p>也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃</p>
+<h1 id="%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82"></a>其实你知道，烦恼（bug）会解决烦恼（bug）。</h1>
+<div class="alert-green">这一部分更新于 2020-08-17 10:34:00。</div>
+
+<p>GitHub API 推荐用户 <a href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests" target="_blank" rel="external nofollow noreferrer noopener">缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码</a>。我心想这也简单，那就在前端搞一个缓存就可以了。</p>
+<p>然后我搜索了一番找到了 CacheStorage，看起来它是唯一一个跨标签页的基于 Session 的正宗的前端缓存。但是很显然 IE 又不支持，而且这个 API 基于 Promise 并且只能缓存 Response 对象，也就是说没办法简单的通过在 XHR 的时候判断一下跳过不支持的情况，要 Polyfill 则需要引入完整的 Promise 和 fetch/Response，所以我们做了一个<del>艰难</del>容易的决定——是时候去掉 IE 支持了！</p>
+<p>于是我把请求 API 的函数改成了如下操作：</p>
+<figure data-raw="let cachePromise = window.caches.open(&quot;cacheName&quot;);
+
+// Fetching JSON with cache for GitHub API.
+const cachedFetchJSON = (path, opts = {}) => {
+  let cachedResponse = null;
+  return cachePromise.then((cache) => {
+    return cache.match(path);
+  }).then((response) => {
+    // No cache or no ETag, just re-fetch;
+    if (response == null || !response.headers.has(&quot;ETag&quot;)) {
+      return window.fetch(path, opts);
+    }
+    // Ask GitHub API whether cache is outdated.
+    cachedResponse = response;
+    opts[&quot;headers&quot;] = opts[&quot;headers&quot;] || {};
+    opts[&quot;headers&quot;][&quot;If-None-Match&quot;] = cachedResponse.headers.get(&quot;ETag&quot;);
+    return window.fetch(path, opts);
+  }).then((response) => {
+    if (response.status === 200) {
+      // No cache or cache outdated and succeed.
+      // Update cache.
+      cachePromise.then((cache) => {
+        return cache.put(path, response);
+      });
+      // Cache needs an unconsumed response,
+      // so we clone respone before consume it.
+      return response.clone().json();
+    } else if (response.status === 304 &amp;&amp; cachedResponse != null) {
+      // Not modified so use cache.
+      return cachedResponse.clone().json();
+    } else {
+      // fetch does not reject on HTTP error, so we do this manually.
+      throw new Error(&quot;Unexpected HTTP status code &quot; + response.status);
+    }
+  });
+};
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">let cachePromise = window.caches.open("cacheName");
+
+// Fetching JSON with cache for GitHub API.
+const cachedFetchJSON = (path, opts = {}) =&gt; {
+  let cachedResponse = null;
+  return cachePromise.then((cache) =&gt; {
+    return cache.match(path);
+  }).then((response) =&gt; {
+    // No cache or no ETag, just re-fetch;
+    if (response == null || !response.headers.has("ETag")) {
+      return window.fetch(path, opts);
+    }
+    // Ask GitHub API whether cache is outdated.
+    cachedResponse = response;
+    opts["headers"] = opts["headers"] || {};
+    opts["headers"]["If-None-Match"] = cachedResponse.headers.get("ETag");
+    return window.fetch(path, opts);
+  }).then((response) =&gt; {
+    if (response.status === 200) {
+      // No cache or cache outdated and succeed.
+      // Update cache.
+      cachePromise.then((cache) =&gt; {
+        return cache.put(path, response);
+      });
+      // Cache needs an unconsumed response,
+      // so we clone respone before consume it.
+      return response.clone().json();
+    } else if (response.status === 304 &amp;&amp; cachedResponse != null) {
+      // Not modified so use cache.
+      return cachedResponse.clone().json();
+    } else {
+      // fetch does not reject on HTTP error, so we do this manually.
+      throw new Error("Unexpected HTTP status code " + response.status);
+    }
+  });
+};
+</code></pre></figure>
+<p>当然理想很丰满现实很骨感，在不支持 CacheStorage 的浏览器里要 fallback 到不带缓存的版本，本来我以为很简单，但是……（下面开启吐槽时间。）</p>
+<blockquote class="center-quote">支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。</blockquote>
+
+<p>为什么非 HTTPS + localhost 不能用 CacheStorage 啊，难道他们没考虑过在电脑上开发然后手机访问测试移动版吗？还是说他们打算在手机上起一个开发服务器？为什么 Firefox 在非 HTTPS 时限制 CacheStorage 的方法是在 Promise 里 reject 一个 Error 从而导致这个过程变成了异步的？为什么 CacheStorage 只能缓存 Response 而不是任意数据结构？Safari 不能完整支持 Response 对象也就算了，为什么移动版 Chrome 和 Firefox 也不支持？合着你们 fetch 返回的 Response 还不是 Response？这世界到底怎么了……</p>
+<p>所以最后需要一个长长的基于 Promise 的判断加载函数：</p>
+<figure data-raw="// 加载评论的时候才加载缓存。
+let cachePromise = null;
+
+let fetchJSON = uncachedFetchJSON;
+
+const loadCache = (name) => {
+  // Unlike in .then(),
+  // we must explicit resolve and reject in a Promise's execuator.
+  return new Promise((resolve, reject) => {
+    if (cachePromise != null &amp;&amp; fetchJSON !== uncachedFetchJSON) {
+      return reject(new Error(&quot;Cache is already loaded!&quot;));
+    }
+    // Old version browsers does not support Response.
+    if (window.Response == null) {
+      return reject(
+        new Error(&quot;Old version browsers does not support Response.&quot;)
+      );
+    }
+    const testResponse = new window.Response();
+    // Safari and most mobile browsers do not support `Response.clone()`.
+    if (testResponse.headers == null || testResponse.clone == null) {
+      return reject(new Error(
+        &quot;Safari and most mobile browsers do not support `Response.clone()`.&quot;
+      ));
+    }
+    // Chromium and Safari set `window.caches` to `undefined` if not HTTPS.
+    if (window.caches == null) {
+      return reject(new Error(
+        &quot;Chromium and Safari set `window.caches` to `undefined` if not HTTPS.&quot;
+      ));
+    }
+    window.caches.open(&quot;CacheStorageTest&quot;).then((cache) => {
+      fetchJSON = cachedFetchJSON;
+      cachePromise = window.caches.open(name);
+      return window.caches.delete(&quot;CacheStorageTest&quot;);
+    }).then(() => {
+      return resolve();
+    }).catch((error) => {
+      // Firefox throws `SecurityError` if not HTTPS.
+      console.error(error);
+      return reject(new Error(&quot;Firefox throws `SecurityError` if not HTTPS.&quot;));
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+};
+" data-info="language-JavaScript" data-lang="JavaScript" class="code-block"><pre class="code"><code class="language-JavaScript">// 加载评论的时候才加载缓存。
+let cachePromise = null;
+
+let fetchJSON = uncachedFetchJSON;
+
+const loadCache = (name) =&gt; {
+  // Unlike in .then(),
+  // we must explicit resolve and reject in a Promise's execuator.
+  return new Promise((resolve, reject) =&gt; {
+    if (cachePromise != null &amp;&amp; fetchJSON !== uncachedFetchJSON) {
+      return reject(new Error("Cache is already loaded!"));
+    }
+    // Old version browsers does not support Response.
+    if (window.Response == null) {
+      return reject(
+        new Error("Old version browsers does not support Response.")
+      );
+    }
+    const testResponse = new window.Response();
+    // Safari and most mobile browsers do not support `Response.clone()`.
+    if (testResponse.headers == null || testResponse.clone == null) {
+      return reject(new Error(
+        "Safari and most mobile browsers do not support `Response.clone()`."
+      ));
+    }
+    // Chromium and Safari set `window.caches` to `undefined` if not HTTPS.
+    if (window.caches == null) {
+      return reject(new Error(
+        "Chromium and Safari set `window.caches` to `undefined` if not HTTPS."
+      ));
+    }
+    window.caches.open("CacheStorageTest").then((cache) =&gt; {
+      fetchJSON = cachedFetchJSON;
+      cachePromise = window.caches.open(name);
+      return window.caches.delete("CacheStorageTest");
+    }).then(() =&gt; {
+      return resolve();
+    }).catch((error) =&gt; {
+      // Firefox throws `SecurityError` if not HTTPS.
+      console.error(error);
+      return reject(new Error("Firefox throws `SecurityError` if not HTTPS."));
+    });
+  }).catch((error) =&gt; {
+    console.error(error);
+  });
+};
+</code></pre></figure>
+<p>不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。</p>
+<h1 id="%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82"><a class="header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82"></a>由俭入奢易，由奢入俭难。</h1>
+<div class="alert-green">这一部分更新于 2020-08-18 12:25:00。</div>
+
+<p>我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 <code>fetch</code> 和 <code>Promise</code> 都有成熟的 polyfill，甚至 <code>URLSearchParams</code> 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、<code>for…of…</code> 循环以及 MapReduce（IE 竟然支持 <code>const</code> 和 <code>let</code> 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E7%BD%91%E7%AB%99/" rel="tag"><i class="fas fa-tag"></i>网站</a><a class="post-tag button" href="/tags/%E8%AF%84%E8%AE%BA/" rel="tag"><i class="fas fa-tag"></i>评论</a><a class="post-tag button" href="/tags/JavaScript/" rel="tag"><i class="fas fa-tag"></i>JavaScript</a><a class="post-tag button" href="/tags/ARIA/" rel="tag"><i class="fas fa-tag"></i>ARIA</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/GObject-Reminder/" rel="next" title="GObject 备忘录"><i class="fas fa-angle-left"></i><span class="nav-title">GObject 备忘录</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Drop-Cheerio/" rel="prev" title="和 cheerio 说再见！"><span class="nav-title">和 cheerio 说再见！</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "基于 GitHub Issue 的前端评论框",
+        "queryString": window.location.search,
+        "basePath": "/posts/Frontend-GitHub-Issue-Based-Comment/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">82</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">68</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82">造轮子是病，得治。</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82">轮子也不是白造的。</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82">事情本该很简单。</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82">其实你知道，烦恼（bug）会解决烦恼（bug）。</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82">由俭入奢易，由奢入俭难。</a>
+          
+        </li>
+      
+      </ol>
+      
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.10.3 at 2022-02-09T06:45:53.846Z. -->

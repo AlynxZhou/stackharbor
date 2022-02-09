@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="此方案已经被作者废弃且由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。 起因 记得以前读过一篇文章，大意说是懒人推动了社会进步，觉得言之有理。你想，要不是因为原始人懒得天天找吃的，怎么会出现培养出的农作物？要不是人们懒得自己搬庄稼走路，怎么会驯化马？要不是人们懒得自己养马，怎么会出现汽车？">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.10.3">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Hrit/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-solid.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-brands.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-regular.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"far fa-lightbulb\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>批量改名——Hrit.py - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Hrit/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Hrit/" itemprop="url">批量改名——Hrit.py</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2016-05-02T22:20:40.000Z">5/3/2016, 6:20:40 AM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/Hrit/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="批量改名——Hrit.py" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <div class="alert-red">此方案已经被作者废弃且由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
+
+<h3 id="%E8%B5%B7%E5%9B%A0"><a class="header-link" href="/posts/Hrit/#%E8%B5%B7%E5%9B%A0"></a>起因</h3>
+<p>记得以前读过一篇文章，大意说是懒人推动了社会进步，觉得言之有理。你想，要不是因为原始人懒得天天找吃的，怎么会出现培养出的农作物？要不是人们懒得自己搬庄稼走路，怎么会驯化马？要不是人们懒得自己养马，怎么会出现汽车？</p>
+<a id="more"></a>
+
+<p>好了还是不要瞎扯了，总而言之对于我这么一个懒+强迫症晚期+半吊子程序员（？），当然在写网站的时候得把网站组织的有条理，所以肯定不能把所有的文章里的图片都堆到images/目录里就得了，幸好hexo提供了所谓的资源文件夹的方式，在新建Markdown文件的时候会自动建立同名的资源文件夹，只需编辑站点配置文件<code>_config.yml</code>开启如下项即可。</p>
+<figure data-raw="post_asset_folder: true    #开启资源文件夹
+" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">post_asset_folder: true    #开启资源文件夹
+</code></pre></figure>
+<p>OK!这时候我天真的觉得只要把图片按数字命名为1.jpg、2.png之类的丢到对应资源文件夹里即可！然而生活远没有这么美好……首先在资源文件夹里的图片如果想在文章和首页的摘要里都显示的话就不能简单的用Markdown引用图片的语法，必须要用hexo的<code>asset_img</code>标签。</p>
+<figure data-raw="![图片名称](图片名称)
+" class="code-block"><pre class="code"><code>![图片名称](图片名称)
+</code></pre></figure>
+<p>我开始方了，难道要我自己一个个手动打成这个标签……</p>
+<p>还没完，如果你的访客想下载一些图片，如果恰好你不同资源文件夹里都有一个1.jpg，他下载这两个的时候就会都保存为1.jpg……那不就乱套了么……</p>
+<p>所以我想要是能一次性给某个文件夹下的文件改名为 <em>文件夹名_数字.扩展名</em> 并且还能自动输出成hexo标签该多好啊……本着Linux用户没有轮子自己造的精神我决定写个程序解决这个问题（Windows用户应该习惯于找别的东西解决吧……没有就自认倒霉一个一个手动改？想想就麻烦……）</p>
+<h3 id="%E8%A1%8C%E5%8A%A8"><a class="header-link" href="/posts/Hrit/#%E8%A1%8C%E5%8A%A8"></a>行动</h3>
+<p>于是乎高三党为了珍惜劳动节唯一一天假期（<strong>喵的一天也叫假期！！！</strong>）果断决定写代码，开始想想这个简单工作适合shell script但是我不会写shell脚本也不会正则表达式……（观众：你说你一个不用Win只用Linux的人不会shell脚本和正则？！我：我真不会……别打我……）那似乎我会的剩下就是C和Python了……你叫我这么一个C语言水平已经退化到HelloWorld的家伙拿C写个程序处理字符串和文件？好吧刚才的观众们你们麻烦往死里打……所以只剩下Python比较熟练了。最后也是这么做的。</p>
+<h3 id="%E6%88%90%E6%9E%9C"><a class="header-link" href="/posts/Hrit/#%E6%88%90%E6%9E%9C"></a>成果</h3>
+<p>那这样就轮到今天的主角登场了——hrit！</p>
+<p>为什么叫这个名字呢？因为它是Hexo Rename Images Tool！当然使用了os、time和argprase的它其实能给所有文件命名……（hrit：人家只是个不到100行代码的小脚本……我：嘘……观众：他在那！！！）</p>
+<p>所以先贴代码：</p>
+<figure data-raw="#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+
+### Filename:hrit.py
+## Created by Alynx Zhou
+# alynxzhou@gmail.com, http://alynx.xyz/
+
+import os
+import time
+import argparse
+
+### Deal with the argument.
+parser = argparse.ArgumentParser(description=&quot;hrit -- Hexo Rename Images Tool.&quot;)
+parser.add_argument(&quot;-f&quot;,&quot;--forehead&quot;,action=&quot;store&quot;,type=str,help=&quot;The string will be added to the begin of the file name.Default is the directory name(dir).&quot;)
+parser.add_argument(&quot;-m&quot;,&quot;--middle&quot;,action=&quot;store&quot;,default='_',type=str,help=&quot;This will be put between the head and the tail.Default '_'&quot;)
+parser.add_argument(&quot;-n&quot;,&quot;--number&quot;,action=&quot;store_true&quot;,help=&quot;If this argument is set,the file name between the head and the last dot will be set as an increasing number.&quot;)
+#parser.add_argument(&quot;dir&quot;,action=&quot;store&quot;,nargs='?',default=&quot;./&quot;,type=str,help=&quot;The directory to work.&quot;)
+parser.add_argument(&quot;dir&quot;,action=&quot;store&quot;,type=str,help=&quot;The directory to work.&quot;)
+args = parser.parse_args()
+
+### Remember the original path.
+opath = os.getcwd()
+
+### Change directory.
+print(&quot;Entering directory %s …&quot;%(args.dir))
+try:
+    os.chdir(args.dir)
+except FileNotFoundError:
+    print(&quot;ERROR!Can't find directory %s !&quot;%(args.dir))
+    print(&quot;Quiting…&quot;)
+    exit()
+curdir = os.getcwd()
+
+### Ask.
+print(&quot;Now it is going to work in &quot;)
+print(&quot;=====================================================&quot;)
+print(&quot;%s&quot;%(curdir))
+print(&quot;=====================================================&quot;)
+print(&quot;Please check weither it is the exact directory you want!&quot;)
+print(&quot;Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!&quot;)
+answer = input(&quot;Continue?[y/N] &quot;)
+if answer != 'y' and answer != &quot;yes&quot;:
+    print(&quot;Quiting…&quot;)
+    os.chdir(opath)
+    exit()
+
+print(&quot;Wating 5 seconds to regret…&quot;)
+ilist = [&quot;5…&quot;,&quot;5 4…&quot;,&quot;5 4 3…&quot;,&quot;5 4 3 2…&quot;,&quot;5 4 3 2 1…&quot;]
+for i in ilist:
+    print(&quot;%s\r&quot;%(i),end=&quot;&quot;)
+    time.sleep(1)
+print(&quot;5 4 3 2 1…Start!\n&quot;)
+
+### Get dir.
+if args.forehead == None:
+    forehead = curdir.split(os.sep)[-1]
+else:
+    forehead = args.forehead
+
+### List files.
+filelist = os.listdir(curdir)
+print(&quot;Found files:%s.\n&quot;%(filelist))
+
+### Rename.
+if args.number == True:
+    ## Number name.
+    number = 1
+    for file in filelist:
+        filel = file.split('.')
+        if len(filel) == 1:
+            ## Without extand name.
+            newname = forehead + args.middle + str(number)
+        else:
+            ## With extand name.
+            newname = forehead + args.middle + str(number) + '.' + filel[-1]
+
+        os.renames(file,newname)
+        print(&quot;Renamed %s to %s.&quot;%(file,newname))
+        number = number + 1
+else:
+    for file in filelist:
+        newname = forehead + args.middle + file
+
+        os.renames(file,newname)
+        print(&quot;Renamed %s to %s.&quot;%(file,newname))
+
+### Get new file list.
+newlist = os.listdir(curdir)
+print(&quot;\nNow you can copy the follow hexo tags to your markdown post.\n&quot;)
+for new in newlist:
+    print(&quot;{%% asset_img %s %s %%}\n&quot;%(new,new))
+
+### Go back to original path.
+os.chdir(opath)
+" data-info="language-Python" data-lang="Python" class="code-block"><pre class="code"><code class="language-Python">#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+
+### Filename:hrit.py
+## Created by Alynx Zhou
+# alynxzhou@gmail.com, http://alynx.xyz/
+
+import os
+import time
+import argparse
+
+### Deal with the argument.
+parser = argparse.ArgumentParser(description="hrit -- Hexo Rename Images Tool.")
+parser.add_argument("-f","--forehead",action="store",type=str,help="The string will be added to the begin of the file name.Default is the directory name(dir).")
+parser.add_argument("-m","--middle",action="store",default='_',type=str,help="This will be put between the head and the tail.Default '_'")
+parser.add_argument("-n","--number",action="store_true",help="If this argument is set,the file name between the head and the last dot will be set as an increasing number.")
+#parser.add_argument("dir",action="store",nargs='?',default="./",type=str,help="The directory to work.")
+parser.add_argument("dir",action="store",type=str,help="The directory to work.")
+args = parser.parse_args()
+
+### Remember the original path.
+opath = os.getcwd()
+
+### Change directory.
+print("Entering directory %s …"%(args.dir))
+try:
+    os.chdir(args.dir)
+except FileNotFoundError:
+    print("ERROR!Can't find directory %s !"%(args.dir))
+    print("Quiting…")
+    exit()
+curdir = os.getcwd()
+
+### Ask.
+print("Now it is going to work in ")
+print("=====================================================")
+print("%s"%(curdir))
+print("=====================================================")
+print("Please check weither it is the exact directory you want!")
+print("Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!")
+answer = input("Continue?[y/N] ")
+if answer != 'y' and answer != "yes":
+    print("Quiting…")
+    os.chdir(opath)
+    exit()
+
+print("Wating 5 seconds to regret…")
+ilist = ["5…","5 4…","5 4 3…","5 4 3 2…","5 4 3 2 1…"]
+for i in ilist:
+    print("%s\r"%(i),end="")
+    time.sleep(1)
+print("5 4 3 2 1…Start!\n")
+
+### Get dir.
+if args.forehead == None:
+    forehead = curdir.split(os.sep)[-1]
+else:
+    forehead = args.forehead
+
+### List files.
+filelist = os.listdir(curdir)
+print("Found files:%s.\n"%(filelist))
+
+### Rename.
+if args.number == True:
+    ## Number name.
+    number = 1
+    for file in filelist:
+        filel = file.split('.')
+        if len(filel) == 1:
+            ## Without extand name.
+            newname = forehead + args.middle + str(number)
+        else:
+            ## With extand name.
+            newname = forehead + args.middle + str(number) + '.' + filel[-1]
+
+        os.renames(file,newname)
+        print("Renamed %s to %s."%(file,newname))
+        number = number + 1
+else:
+    for file in filelist:
+        newname = forehead + args.middle + file
+
+        os.renames(file,newname)
+        print("Renamed %s to %s."%(file,newname))
+
+### Get new file list.
+newlist = os.listdir(curdir)
+print("\nNow you can copy the follow hexo tags to your markdown post.\n")
+for new in newlist:
+    print("{%% asset_img %s %s %%}\n"%(new,new))
+
+### Go back to original path.
+os.chdir(opath)
+</code></pre></figure>
+<p>好了亲爱的观众们我知道你们又要抱怨你们的Vim/Emacs设置了代码自动缩进粘贴Python很麻烦……（你说你用Sublime Text或者Notepad++？好吧自便。你说你用记事本？这我就不能忍了，哪凉快哪呆着去！→_→）我就大发慈悲把源文件传上来吧，右键点击<a href="/posts/2016/05/03/Hrit/hrit.py">这里</a>另存为即可。然后拷贝到你的PATH中任意一个目录。</p>
+<p>接下来说用法～什么用法？直接执行hrit -h不就有用法了吗？</p>
+<p>总而言之hrit会以一个文件夹为单位把里面所有的文件按照指定的规则重命名，所以最后必须接一个文件夹参数比如./test/，没有设置默认./的原因是为了安全～hrit将文件名分为五部分操作，前缀、连接符、后缀、英文句点和扩展名。然后如果指定了 <em>-f 前缀</em> 的话文件都会被添加上同一前缀，没有-f则默认以当前目录名为前缀。 * -m 连接符* 指定连接符，默认是“_”。最后hrit会把原本的文件名（包括句点和扩展名）一起接上作为后缀。如果开启了 <em>-n</em> 它会用从1开始递增的数字作为后缀，并连接上句点和原本的扩展名（如果你非要把文件命名为aaa.bb.c那hrit只会把.c连接上……）。</p>
+<p>下面示范一下，进入我饱经摧残的test/目录。</p>
+<figure data-raw="$ cd test/ &amp;&amp; ls -alh
+total 8.0K
+drwxr-xr-x 2 shax shax 4.0K May  2 21:58 .
+drwxr-xr-x 3 shax shax 4.0K May  2 11:44 ..
+-rw-r--r-- 1 shax shax    0 May  2 21:58 aaa
+-rw-r--r-- 1 shax shax    0 May  2 21:58 bb.b
+-rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c
+" class="code-block"><pre class="code"><code>$ cd test/ &amp;&amp; ls -alh
+total 8.0K
+drwxr-xr-x 2 shax shax 4.0K May  2 21:58 .
+drwxr-xr-x 3 shax shax 4.0K May  2 11:44 ..
+-rw-r--r-- 1 shax shax    0 May  2 21:58 aaa
+-rw-r--r-- 1 shax shax    0 May  2 21:58 bb.b
+-rw-r--r-- 1 shax shax    0 May  2 21:58 c.c.c
+</code></pre></figure>
+<p>下面执行下</p>
+<figure data-raw="$ hrit ./
+Entering directory ./ …
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
+Please check weither it is the exact directory you want!
+Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
+Continue?[y/N] y
+Wating 5 seconds to regret…
+5 4 3 2 1…Start!
+
+Found files:['aaa', 'c.c.c', 'bb.b'].
+
+Renamed aaa to test_aaa.
+Renamed c.c.c to test_c.c.c.
+Renamed bb.b to test_bb.b.
+
+Now you can copy the follow hexo tags to your markdown post.
+
+![test_c.c.c](test_c.c.c)
+
+![test_bb.b](test_bb.b)
+
+![test_aaa](test_aaa)
+" class="code-block"><pre class="code"><code>$ hrit ./
+Entering directory ./ …
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
+Please check weither it is the exact directory you want!
+Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
+Continue?[y/N] y
+Wating 5 seconds to regret…
+5 4 3 2 1…Start!
+
+Found files:['aaa', 'c.c.c', 'bb.b'].
+
+Renamed aaa to test_aaa.
+Renamed c.c.c to test_c.c.c.
+Renamed bb.b to test_bb.b.
+
+Now you can copy the follow hexo tags to your markdown post.
+
+![test_c.c.c](test_c.c.c)
+
+![test_bb.b](test_bb.b)
+
+![test_aaa](test_aaa)
+</code></pre></figure>
+<p>为了防止搞错了目录设置了一个确认和5秒反悔时间。</p>
+<p>下面试试 <code>-f</code></p>
+<figure data-raw="$ hrit -f xxx ./
+Entering directory ./ …
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
+Please check weither it is the exact directory you want!
+Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
+Continue?[y/N] y
+Wating 5 seconds to regret…
+5 4 3 2 1…Start!
+
+Found files:['test_c.c.c', 'test_bb.b', 'test_aaa'].
+
+Renamed test_c.c.c to xxx_test_c.c.c.
+Renamed test_bb.b to xxx_test_bb.b.
+Renamed test_aaa to xxx_test_aaa.
+
+Now you can copy the follow hexo tags to your markdown post.
+
+![xxx_test_c.c.c](xxx_test_c.c.c)
+
+![xxx_test_aaa](xxx_test_aaa)
+
+![xxx_test_bb.b](xxx_test_bb.b)
+" class="code-block"><pre class="code"><code>$ hrit -f xxx ./
+Entering directory ./ …
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
+Please check weither it is the exact directory you want!
+Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
+Continue?[y/N] y
+Wating 5 seconds to regret…
+5 4 3 2 1…Start!
+
+Found files:['test_c.c.c', 'test_bb.b', 'test_aaa'].
+
+Renamed test_c.c.c to xxx_test_c.c.c.
+Renamed test_bb.b to xxx_test_bb.b.
+Renamed test_aaa to xxx_test_aaa.
+
+Now you can copy the follow hexo tags to your markdown post.
+
+![xxx_test_c.c.c](xxx_test_c.c.c)
+
+![xxx_test_aaa](xxx_test_aaa)
+
+![xxx_test_bb.b](xxx_test_bb.b)
+</code></pre></figure>
+<p>最后 <code>-n</code></p>
+<figure data-raw="$ hrit -n ./
+Entering directory ./ …
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
+Please check weither it is the exact directory you want!
+Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
+Continue?[y/N] y
+Wating 5 seconds to regret…
+5 4 3 2 1…Start!
+
+Found files:['xxx_test_c.c.c', 'xxx_test_aaa', 'xxx_test_bb.b'].
+
+Renamed xxx_test_c.c.c to test_1.c.
+Renamed xxx_test_aaa to test_2.
+Renamed xxx_test_bb.b to test_3.b.
+
+Now you can copy the follow hexo tags to your markdown post.
+
+![test_2](test_2)
+
+![test_1.c](test_1.c)
+
+![test_3.b](test_3.b)
+" class="code-block"><pre class="code"><code>$ hrit -n ./
+Entering directory ./ …
+Now it is going to work in
+=====================================================
+/home/shax/ProgramPractice/hrit/test
+=====================================================
+Please check weither it is the exact directory you want!
+Work in other directories can be dangerous and hard to fix(For instance,/,/home,/usr,etc.)!
+Continue?[y/N] y
+Wating 5 seconds to regret…
+5 4 3 2 1…Start!
+
+Found files:['xxx_test_c.c.c', 'xxx_test_aaa', 'xxx_test_bb.b'].
+
+Renamed xxx_test_c.c.c to test_1.c.
+Renamed xxx_test_aaa to test_2.
+Renamed xxx_test_bb.b to test_3.b.
+
+Now you can copy the follow hexo tags to your markdown post.
+
+![test_2](test_2)
+
+![test_1.c](test_1.c)
+
+![test_3.b](test_3.b)
+</code></pre></figure>
+<p>不错吧，这样以后直接把所有图片拷贝到资源文件夹里用<code>hrit -n ./xxxx/</code>即可批量命名了～然后直接把输出的标签拷贝到Markdown文件～</p>
+<p>最后说一个小插曲，开始我设置了询问继续和五秒倒计时的时候其实并不觉得有什么用……直到某次调试时不小心在home下执行了hrit……幸好有5秒按Ctrl+C，顿时觉得自己真是太机智了。</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Python/" rel="tag"><i class="fas fa-tag"></i>Python</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Dynamic-or-Static/" rel="next" title="动态？静态？"><i class="fas fa-angle-left"></i><span class="nav-title">动态？静态？</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Three-Trees/" rel="prev" title="Three Trees"><span class="nav-title">Three Trees</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "批量改名——Hrit.py",
+        "queryString": window.location.search,
+        "basePath": "/posts/Hrit/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">82</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">68</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E8%B5%B7%E5%9B%A0">起因</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E8%A1%8C%E5%8A%A8">行动</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E6%88%90%E6%9E%9C">成果</a>
+          
+        </li>
+      
+      </ol>
+      
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.10.3 at 2022-02-09T06:45:53.877Z. -->

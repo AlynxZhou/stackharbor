@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="Google 反应还是挺快的，现在这篇博客已经不是精选摘要了。 可能有人在 Google 搜索 “WireGuard 原理” 然后发现精选摘要是这篇博文，这给我带来了很多流量。但我还是要摸着良心说这篇博文并没有涉及到什么深层次具体的 WireGuard 原理，只是简单的配置使用记录。我不知道为什么 Google 会依据文章里唯一的一个“原理”就认为这篇文章是讲述 WireGuard 原理的，我不想误人子弟，所以已经删掉了唯一的一处关键词。我个人建议直接访问 WireGuard 的官网或者 Wikipedia 页面来查找有关它的原理的资料。 由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。 需求 本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.10.3">
+    <link rel="canonical" href="https://sh.alynx.one/posts/WireGuard-Usage/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-solid.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-brands.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-regular.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"far fa-lightbulb\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>WireGuard 配置与使用 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/WireGuard-Usage/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/WireGuard-Usage/" itemprop="url">WireGuard 配置与使用</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-27T02:29:30.000Z">1/27/2019, 10:29:30 AM</time></span>
+        </div>
+        
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2020-08-12T01:37:00.000Z">8/12/2020, 9:37:00 AM</time></span>
+        </div>
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/WireGuard-Usage/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="WireGuard 配置与使用" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <div class="alert-green">Google 反应还是挺快的，现在这篇博客已经不是精选摘要了。</div>
+
+<div class="alert-red">可能有人在 Google 搜索 “WireGuard 原理” 然后发现精选摘要是这篇博文，这给我带来了很多流量。但我还是要摸着良心说这篇博文并没有涉及到什么深层次具体的 WireGuard 原理，只是简单的配置使用记录。我不知道为什么 Google 会依据文章里唯一的一个“原理”就认为这篇文章是讲述 WireGuard 原理的，我不想误人子弟，所以已经删掉了唯一的一处关键词。我个人建议直接访问 WireGuard 的官网或者 Wikipedia 页面来查找有关它的原理的资料。</div>
+
+<div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
+
+<h1 id="%E9%9C%80%E6%B1%82"><a class="header-link" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82"></a>需求</h1>
+<p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p>
+<a id="more"></a>
+
+<p>WireGuard 和大部分 VPN 类似，是使用一个公网服务器做 Endpoint，内网的数据通过该服务器进行转发，因此子网的各个设备可以没有固定的 IP，只要都能连接公网服务器就好了。</p>
+<h1 id="%E5%AE%89%E8%A3%85"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%AE%89%E8%A3%85"></a>安装</h1>
+<p>由于不同的系统安装方法不一样，建议参照 <a href="https://www.wireguard.com/install/" target="_blank" rel="external nofollow noreferrer noopener">WireGuard 官网的安装说明</a> 和各个系统的 Wiki，Android 手机可以搜索下载 WireGuard 的 APK 进行安装。</p>
+<h1 id="%E9%85%8D%E7%BD%AE"><a class="header-link" href="/posts/WireGuard-Usage/#%E9%85%8D%E7%BD%AE"></a>配置</h1>
+<div class="alert-blue">以下部分内容参考自 <a href="https://wiki.archlinux.org/index.php/WireGuard" target="_blank" rel="external nofollow noreferrer noopener">WireGuard - ArchWiki</a>。</div>
+
+<p>首先需要生成公钥和私钥，建议将其设置为只有拥有者才能操作，我这里放在 <code>/etc/wireguard</code> 这个目录里面，这个目录应该是只有 root 才可以访问的。<strong>服务器和客户端都需要分别进行这一步</strong>。</p>
+<figure data-raw="# cd /etc/wireguard
+# wg genkey | tee privatekey | wg pubkey > publickey
+" class="code-block"><pre class="code"><code># cd /etc/wireguard
+# wg genkey | tee privatekey | wg pubkey &gt; publickey
+</code></pre></figure>
+<h2 id="%E6%9C%8D%E5%8A%A1%E7%AB%AF"><a class="header-link" href="/posts/WireGuard-Usage/#%E6%9C%8D%E5%8A%A1%E7%AB%AF"></a>服务端</h2>
+<p>然后需要手写配置文件，这一步对于服务端和客户端不一样，先进行服务端的配置。</p>
+<p>首先在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），服务端的配置文件内容看起来像这个样子：</p>
+<figure data-raw="[Interface]
+Address = 10.0.0.1
+ListenPort = 7456
+PrivateKey = [服务器的私钥]
+PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+DNS = 8.8.8.8
+
+[peer]
+PublicKey = [客户端 1 的公钥]
+AllowedIPs = 10.0.0.2/32
+
+[peer]
+PublicKey = [客户端 2 的公钥]
+AllowedIPs = 10.0.0.3/32
+
+[peer]
+PublicKey = [客户端 3 的公钥]
+AllowedIPs = 10.0.0.4/32
+" class="code-block"><pre class="code"><code>[Interface]
+Address = 10.0.0.1
+ListenPort = 7456
+PrivateKey = [服务器的私钥]
+PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+DNS = 8.8.8.8
+
+[peer]
+PublicKey = [客户端 1 的公钥]
+AllowedIPs = 10.0.0.2/32
+
+[peer]
+PublicKey = [客户端 2 的公钥]
+AllowedIPs = 10.0.0.3/32
+
+[peer]
+PublicKey = [客户端 3 的公钥]
+AllowedIPs = 10.0.0.4/32
+</code></pre></figure>
+<p>然后我们依次分析每个字段的内容，首先是 Interface，这个部分指的是 WireGuard 在本机上面的接口，它是以内核模块的形式工作的，<code>Address</code> 指本机在子网内的私有 IP 地址，我这里分配了保留段 <code>10.0.0.0/24</code> 作为子网网段（看不懂的自己去复习计网），你也可以用 <code>10.0.0.0/8</code> 这个网段再进行划分，这个主机地址是你自己随意分配的，只要不冲突就行。<code>ListenPort</code> 是监听的服务器 UDP 端口，这个也是自己设置，只要不冲突就行。<code>PrivateKey</code> 则是刚刚 <strong>服务端</strong> 生成的 <code>privatekey</code> 这个文件的内容。<code>PostUp</code> 和 <code>PostDown</code> 是配置 iptables 的命令，建议直接复制即可，如果你服务器的公网网卡不是 <code>eth0</code> 则需要自己修改。<code>DNS</code> 则是解析域名用的 DNS，这里直接使用 <code>8.8.8.8</code>。</p>
+<p>然后每一个 Peer 字段对应了一个客户端（或其他服务端，WireGuard 实际上是 P2P 的），需要分别将该客户端的 <code>publickey</code> 文件的内容贴到 <code>PublicKey</code>，以及需要转发到该客户端的流量的 IP 地址范围贴到 <code>AllowedIPs</code>，我这里直接给每个客户端设置固定的 IP，因此就写了 <code>10.0.0.2/32</code>（看不懂的自己去复习计网），意思是该客户端对应的 IP 就是这个，所有向这个 IP 发送的流量都会被转发到这个客户端。</p>
+<p><strong>每添加一个新的客户端，就要在这个文件里添加一个 Peer 字段</strong>，然后设置 <code>PublicKey</code> 和 <code>AllowedIPs</code>。</p>
+<p>然后在服务器的 <code>/etc/sysctl.conf</code> 最后加上一句 <code>net.ipv4.ip_forward=1</code>，开启 IPv4 流量转发，然后运行下面的命令加载新设置：</p>
+<figure data-raw="# sysctl -p
+" class="code-block"><pre class="code"><code># sysctl -p
+</code></pre></figure>
+<h2 id="%E5%AE%A2%E6%88%B7%E7%AB%AF"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%AE%A2%E6%88%B7%E7%AB%AF"></a>客户端</h2>
+<p>客户端也需要在 <code>/etc/wireguard</code> 目录下面建立 <code>wg0.conf</code>（如果你已经有一个了就 <code>wg1</code>，依此类推），内容看起来是这样：</p>
+<figure data-raw="[Interface]
+Address = 10.0.0.4
+PrivateKey = [客户端的私钥]
+
+[Peer]
+PublicKey = [服务端 1 的公钥]
+AllowedIPs = 10.0.0.0/24
+Endpoint = [服务端 1 的公网 IP]:[服务端 1 的端口]
+PersistentKeepalive = 25
+" class="code-block"><pre class="code"><code>[Interface]
+Address = 10.0.0.4
+PrivateKey = [客户端的私钥]
+
+[Peer]
+PublicKey = [服务端 1 的公钥]
+AllowedIPs = 10.0.0.0/24
+Endpoint = [服务端 1 的公网 IP]:[服务端 1 的端口]
+PersistentKeepalive = 25
+</code></pre></figure>
+<p>Interface 字段自然是客户端本机的设置，<code>Address</code> 还是给本机分配的 IP，这里要和服务器在同一个子网，并且要和服务器配置文件里允许的 IP 段对上。<code>PrivateKey</code> 则是刚刚 <strong>客户端</strong> 生成的 <code>privatekey</code> 这个文件的内容。</p>
+<p>然后通过添加 Peer 字段来添加服务端，服务端作为这个网络的出口和转发点，首先需要填写对应的 <strong>服务端</strong> 的公钥，然后这里的 <code>AllowedIPs</code> 设置的是 <strong>该客户端有哪些 IP 段的流量要通过该服务端进行转发</strong>，由于我只希望内网的流量进行转发，自然设置的是内网的 IP 段 <code>10.0.0.0/24</code>（看不懂的你计网挂科了！），然后需要设置 <code>Endpoint</code> 以便能正确的在公网上找到服务器（虚拟专用网，连不上网还哪来的虚拟网啊？），格式就是 <code>服务器公网 IP:你设置的监听端口</code>。<code>PersistentKeepalive</code> 则是用来保持连接的参数，直接复制即可。</p>
+<p><strong>如果你有多个服务器，就在这里添加多个 Peer</strong>，分别设置不同的 <code>AllowedIPs</code> 让他们转发，但 <strong>不需要让客户端之间互相添加 Peer</strong>，本来我们要解决的问题就是客户端之间不能互相连接，所有的流量是经由公网的服务端进行转发才可以到达，公网的服务器是各个不固定的客户端的接头地点。所以只需要保证服务端和所有的客户端认识就可以了。</p>
+<h1 id="%E5%90%AF%E5%8A%A8"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%90%AF%E5%8A%A8"></a>启动</h1>
+<p>在分别配置好客户端和服务端之后就可以启动了，这一步两边都一样。注意把 <code>wg0</code> 换成你配置文件的名字。</p>
+<figure data-raw="# wg-quick up wg0
+" class="code-block"><pre class="code"><code># wg-quick up wg0
+</code></pre></figure>
+<p>然后使用 <code>wg</code> 命令可以查看状态，由于这些涉及到网络配置，都需要 root 权限。服务端和客户端输出的结果是不一样的，下面这个是我的笔记本输出的结果。</p>
+<figure data-raw="# wg
+interface: wg0
+  public key: [不给你看]
+  private key: (hidden)
+  listening port: 51676
+
+peer: [不给你看]
+  endpoint: [不给你看]
+  allowed ips: 10.0.0.0/24
+  latest handshake: 1 minute, 41 seconds ago
+  transfer: 38.36 KiB received, 141.71 KiB sent
+  persistent keepalive: every 25 seconds
+" data-info="language-plain" data-lang="plain" class="code-block"><pre class="code"><code class="language-plain"># wg
+interface: wg0
+  public key: [不给你看]
+  private key: (hidden)
+  listening port: 51676
+
+peer: [不给你看]
+  endpoint: [不给你看]
+  allowed ips: 10.0.0.0/24
+  latest handshake: 1 minute, 41 seconds ago
+  transfer: 38.36 KiB received, 141.71 KiB sent
+  persistent keepalive: every 25 seconds
+</code></pre></figure>
+<p>建立成功的话，子网之间是可以使用内网地址互相 ping 的：</p>
+<figure data-raw="$ ping 10.0.0.11
+PING 10.0.0.11 (10.0.0.11) 56(84) bytes of data.
+64 bytes from 10.0.0.11: icmp_seq=1 ttl=64 time=30.1 ms
+64 bytes from 10.0.0.11: icmp_seq=2 ttl=64 time=30.4 ms
+64 bytes from 10.0.0.11: icmp_seq=3 ttl=64 time=30.5 ms
+64 bytes from 10.0.0.11: icmp_seq=4 ttl=64 time=30.4 ms
+64 bytes from 10.0.0.11: icmp_seq=5 ttl=64 time=30.5 ms
+^C
+--- 10.0.0.11 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 11ms
+rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms
+" class="code-block"><pre class="code"><code>$ ping 10.0.0.11
+PING 10.0.0.11 (10.0.0.11) 56(84) bytes of data.
+64 bytes from 10.0.0.11: icmp_seq=1 ttl=64 time=30.1 ms
+64 bytes from 10.0.0.11: icmp_seq=2 ttl=64 time=30.4 ms
+64 bytes from 10.0.0.11: icmp_seq=3 ttl=64 time=30.5 ms
+64 bytes from 10.0.0.11: icmp_seq=4 ttl=64 time=30.4 ms
+64 bytes from 10.0.0.11: icmp_seq=5 ttl=64 time=30.5 ms
+^C
+--- 10.0.0.11 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 11ms
+rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms
+</code></pre></figure>
+<p>如果你确定没有问题，就可以使用 Systemd 管理连接，首先关闭刚才的连接：</p>
+<figure data-raw="# wg-quick down wg0
+" class="code-block"><pre class="code"><code># wg-quick down wg0
+</code></pre></figure>
+<p>然后启动现成的 Unit：</p>
+<figure data-raw="# systemctl enable wg-quick@wg0 --now
+" class="code-block"><pre class="code"><code># systemctl enable wg-quick@wg0 --now
+</code></pre></figure>
+<h1 id="%E5%90%8E%E8%AE%B0"><a class="header-link" href="/posts/WireGuard-Usage/#%E5%90%8E%E8%AE%B0"></a>后记</h1>
+<p>如果你需要在内网之间传递数据，建议选择一个访问较快的服务器，因为数据转发要通过这个服务器。</p>
+<p>但如果你想使用 WireGuard 访问一些被河蟹的内容也可以，首先需要一个在海外的服务器，然后设置客户端该服务器的 <code>AllowedIPs</code> 为 <code>0.0.0.0/0</code>（意思就是所有 IP 都经过这个服务器转发啦！或者你知道该设置某些网段也行！或者避开内网和本地地址！我不建议用这个番茄！所以就写个最蠢的！），就可以了！记得不用时候关掉，不然一些国内 App 也会走海外的！</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fas fa-tag"></i>网络</a><a class="post-tag button" href="/tags/VPN/" rel="tag"><i class="fas fa-tag"></i>VPN</a><a class="post-tag button" href="/tags/WireGuard/" rel="tag"><i class="fas fa-tag"></i>WireGuard</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/Proxy-Settings/" rel="next" title="Linux 下面常见的代理设置"><i class="fas fa-angle-left"></i><span class="nav-title">Linux 下面常见的代理设置</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/JavaScript-YAML-Timezone-Moment/" rel="prev" title="使用 Moment 处理 JavaScript 与 YAML 的时区转换"><span class="nav-title">使用 Moment 处理 JavaScript 与 YAML 的时区转换</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "WireGuard 配置与使用",
+        "queryString": window.location.search,
+        "basePath": "/posts/WireGuard-Usage/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">82</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">68</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E9%9C%80%E6%B1%82">需求</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%AE%89%E8%A3%85">安装</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E9%85%8D%E7%BD%AE">配置</a>
+          
+          
+      <ol >
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF">服务端</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF">客户端</a>
+          
+        </li>
+      
+      </ol>
+      
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%90%AF%E5%8A%A8">启动</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%90%8E%E8%AE%B0">后记</a>
+          
+        </li>
+      
+      </ol>
+      
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.10.3 at 2022-02-09T06:45:53.858Z. -->

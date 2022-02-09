@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="将我漫天心血一一抛到银河">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.10.3">
+    <link rel="canonical" href="https://sh.alynx.one/posts/New-Project-New-Camera-New-Home/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-solid.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-brands.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-regular.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"far fa-lightbulb\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>新项目和新相机和新住处 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/New-Project-New-Camera-New-Home/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/New-Project-New-Camera-New-Home/" itemprop="url">新项目和新相机和新住处</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-04-25T06:50:00.000Z">4/25/2021, 2:50:00 PM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/posts/New-Project-New-Camera-New-Home/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="新项目和新相机和新住处" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>本来之前是想等新开的项目搞差不多了就来更新博客，结果没想到越写 TODO 越多一直搞到这个月才搞定，所以到现在才更新。</p>
+<h1 id="%E6%96%B0%E9%A1%B9%E7%9B%AE"><a class="header-link" href="/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E9%A1%B9%E7%9B%AE"></a>新项目</h1>
+<p>从家里回来北京之后第一件事情就是 SUSE 的 HackWeek，我之前大致想好了要做什么，我用过 screenkey 这个项目，但它使用了 X11 的 API，所以不支持 Wayland，我简单调查了一下，发现其实是可以绕过显示部分直接读取输入设备的事件的，于是就打算造一个替代品。</p>
+<p>读取键盘事件的部分其实很容易，简单试了一下就完成了。但是反而是显示部分比较难搞。一开始我打算用刚发布稳定版的 GTK4，结果发现 GTK4 在 NVIDIA 驱动的 Wayland 会话下面反而是有问题的，只能回退到没问题的 GTK3。我原本以为一周的时间做出一个能用的程序还是挺充足的，但是后来发现中间有各种各样的问题和奇怪的 work around。比如涉及到 GObject 对象在什么时候释放，有些文档说的也不是很清楚。以及因为要用单独的子进程执行需要 root 权限的后端读取输入事件和用单独的子线程查询后端输出带来的进程/线程间通信问题。篇幅有限，打算后续再开一篇博客来介绍这里面的经验。在一周的时间里勉强做出了能用的 demo 参加了 HackWeek 的成果展示环节（给有始有终的参与者的小礼物大概还放在我公司的桌子上，我都不知道是什么，因为一直没去取），然后用了几周打游戏的时间整理代码里面的问题（主要是各种资源释放），以及做一下翻译工作和打包工作，终于在上周达到基本稳定了。如果有兴趣，可以访问 <a href="https://showmethekey.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">https://showmethekey.alynx.one/</a> 或者观看 <a href="https://www.bilibili.com/video/BV1EB4y1A7QN" target="_blank" rel="external nofollow noreferrer noopener">我发在 B 站上的介绍视频</a>。</p>
+<h1 id="%E6%96%B0%E7%9B%B8%E6%9C%BA"><a class="header-link" href="/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E7%9B%B8%E6%9C%BA"></a>新相机</h1>
+<p>之前一直想提升视频的画质，但是还有一个想法是想玩玩摄影，因为平时周末经常是起得很晚然后在家里玩游戏，感觉也挺无聊的，所以打算买个相机，这样周末就有理由出去走走了。拍出来什么东西无所谓，主要是找点乐趣。然后朋友建议我买黑卡，虽然这个玩意确实很黑科技，但我并不是太感兴趣。很久以前我家里有一个数码相机，不是卡片机，是一个能变焦变很长的型号，但是后来智能手机出现之后就很快的不用它了，因为没有手机轻便的同时也没有足够的专业程度。所以我对相机的看法就是要么就搞高级一点的，肯定不会被手机取代，要么就用手机算了，而且说实话最高端的黑卡价格也都达到微单的价格区间了。考虑到要拿来录视频，很多录视频的 UP 主选择的都是微单而不是单反，再查找了一下发现很多人都用的索尼 A73，那选一个大家都在用的总是错不了的吧，于是初步选定了目标。然后又开始考虑是 A73 还是 A7C，虽然很多人对于 A7C 只是缩小体积然后价格却比 A73 高感到不满，但我阅读了一个对比表格之后，觉得还是 A7C 更适合我这种有录视频需求的人，于是就选择了 A7C。</p>
+<p>我个人是对 A7C 相比 A73 砍掉的部分没什么需求的，只看参数很容易会变成那种“这个也想要那个也想要”的情况，虽然作为消费者而言，当然是希望厂家提供越多的功能越好。但是在只有这几个选项的情况下还是得考虑需求做一下取舍。比如去掉 MicroUSB 接口导致只能接一些 USB-C 接口的配件，看了看配件价格，短期内我大概是不会考虑这些配件的……去掉前拨轮和摇杆对我来说也不是不能接受，毕竟触摸对焦也挺好用的。虽然少了很多自定义按键，但是方向键现在都是可以自定义的，其实差别也不大。反而轻巧的体积和翻转屏，以及没有录制时间限制于我来说很重要。有人说没有双卡槽不够专业，万一给别人录东西丢了数据没有冗余，但可以预见的未来我不会靠这玩意获得收入，录我自己的话丢了也不算什么无法挽回的后果（反正自己选的）。</p>
+<p>看点作品？虽然我就是随便拍拍，还是有几张觉得好看的。</p>
+<p><img src="/posts/New-Project-New-Camera-New-Home/1.jpg" alt=""></p>
+<p>之前去五棵松玩，想试试夜拍效果，结果套头的焦段显然不够拍月亮，不过回家看看感觉这张图还不错。</p>
+<p><img src="/posts/New-Project-New-Camera-New-Home/2.jpg" alt=""></p>
+<p>某天吃完饭散步，坐在长椅上拍了一张，莫名觉得很好看。</p>
+<p><img src="/posts/New-Project-New-Camera-New-Home/3.jpg" alt=""></p>
+<p>之前经常来我窗口咕咕咕叫吵我清梦的珠颈斑鸠，我管它叫大鸽，经常我拿着相机走到窗口它跑了，这张一开始其实拍到了部分室内，导致窗外的部分有点过曝，不过好在 RAW 可以调整，拉低了一些曝光然后裁掉窗户周围的部分，就变得很生动了。</p>
+<p><img src="/posts/New-Project-New-Camera-New-Home/4.jpg" alt=""></p>
+<p>最近大鸽不怎么来了，是不是因为楼下在锯树，大鸽的家没了？（虽然我对珠颈斑鸠再造一个窝需要花的时间表示怀疑。）</p>
+<p>买完了 A7C 莫名开始种草 A7S3，4K 60 帧看起来真诱人啊……1080P 60 帧和 4K 30 帧只能二选一到底是谁想出来的牙膏啊！</p>
+<p>说起来最近拍照片之后发现存储空间的需求还是很大啊，虽然我两块 2T 的机械应该还足以满足短期内的需求。最近挖矿导致大容量硬盘也涨价了，估计更新存储设备也不太现实，还是有空精简一下吧。NAS 的问题我也考虑过，但是后来想想还是放弃了把星际蜗牛重新搞起来的想法，因为看了很多视频/数码 UP 工作室的介绍之后意识到 NAS 比起存储的用途，更大的用途还是共享，比如多个剪辑师可以同时访问 NAS 上面的一份素材，不用在每台电脑上都复制一份。但我显然没这个需求也没这个网速，只是存储一些数据的话，还是直接插台式机里面比较方便吧！</p>
+<p>顺便我朋友一直怂恿我买一个大光圈定焦镜头，我也确实心动了，比较了一下之后打算先入 FE 55 F1.8 ZA，然后再考虑 FE 24-105 G F4 代替套头，不过因为一些原因还是暂时搁置了，原因的话就是下一部分。</p>
+<h1 id="%E6%96%B0%E4%BD%8F%E5%A4%84"><a class="header-link" href="/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E4%BD%8F%E5%A4%84"></a>新住处</h1>
+<p>当初因为时间比较紧所以选的这个住处，有几个不太满意的地方：房间太小了，放下柜子床电脑桌就没什么地方了。为了节约空间我是把桌子沿着床边摆的，我自己坐在桌子和衣柜之间，所以如果我要打开衣柜找东西就要把椅子推到桌子下面。然后在我 B 站录的视频里也能看出来，有朋友不止一次吐槽过我录视频环境过于混乱了。房子太旧了，实在是让人连做饭的想法都没，又破又旧，同时上班的话也比较麻烦，不是说交通不便，而是这个房子在一个院子的深处，出门坐公交或者去超市都要走很长一段距离。再加上我的卧室是直接挨着楼道，隔音又比较差，有时候午睡就会被上下楼的脚步声打扰。以及说实话我想要个稍微便宜点的房子，谁不想呢？</p>
+<p>所以今年快到期的时候我就在考虑搬家的问题。我们现在还是在家办公的状态，所以相对来说位置不太重要，虽然还是想尽可能找个上班方便的地方。但是很少有人和我一个方向上班，所以折腾了很久。本来是打算搬到更西南边的，甚至这一个月跑了好几个不同地方看房子，但是都因为各种原因没有选中，比如同学上班太远，周围没什么生活设施（虽然就在路边但是出门走好远好远才有超市到底是怎么搞的啊，为什么北京这边经常小区靠着路的一侧都是围墙，没有什么商业网点之类的，真的很没生活感），离地铁站太远，小区门禁是人脸识别（谁允许你们随便采集人脸信息的，而且约朋友来我家还要登记算几个意思啊）。而且想一起合租的同学以后可能考了教师资格证之后回老家工作，那样到时候就要再找人合租，我实在是不抱信心，所以还是决定再找别人合租。</p>
+<p>最后和有猫的孙老师在交大附近找了另一个房子。看了一上午最后直接选中的原因只有一个：实在是太新了，刚装修完，非常干净，而且卫生间和厨房都有采光。让我这个饱受破旧和阴暗厨房之苦的人非常满意。同时面积分配也非常科学，孙老师希望要有阳台的卧室，养猫比较方便，我希望卧室面积别太小，这样我录视频的时候把电脑桌当作背景，可以有一定的景深，让桌子在焦外就不会显得太乱。很多房子都是有阳台的卧室大得不得了而另一个卧室只能放个床，这个房子的次卧则不一样，有充足的地方放桌子。所以我们就敲定了这个，兜兜转转还是没离开学校周边。</p>
+<p>当然也没有完美的事情，满足了空间和干净和隔音（卧室并不是直接挨着楼道），价格和位置也就不能太强求了，交通的话看起来还好，离路边不会太远，大学周围也不至于太荒凉吧（街头生活感本来就和整齐不沾边，城市到底是让大人物拿来看的地方还是让小人物生活的地方呢？）。虽然考虑到更高的房租+中介费让我感到心疼肉疼（感觉镜头离自己远去了）……但是安慰自己多花几百块买来了刚装修完崭新的房子其实也很赚了对吧！</p>
+<p>所以希望接下来能轻松地搬家，毕竟我东西还是挺多的，有了空间就可以仔细布置一下了，让视频看起来更精致一点。</p>
+<p>总之还是要对生活有希望吧。</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag"><i class="fas fa-tag"></i>生活</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/NVIDIA-GNOME-Wayland/" rel="next" title="NVIDIA 驱动和 GNOME 和 Wayland"><i class="fas fa-angle-left"></i><span class="nav-title">NVIDIA 驱动和 GNOME 和 Wayland</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Run-PulseAudio-on-Top-of-JACK/" rel="prev" title="运行在 JACK 上层的 PulseAudio"><span class="nav-title">运行在 JACK 上层的 PulseAudio</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="fas fa-donate"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "新项目和新相机和新住处",
+        "queryString": window.location.search,
+        "basePath": "/posts/New-Project-New-Camera-New-Home/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">82</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">68</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E6%96%B0%E9%A1%B9%E7%9B%AE">新项目</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E6%96%B0%E7%9B%B8%E6%9C%BA">新相机</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E6%96%B0%E4%BD%8F%E5%A4%84">新住处</a>
+          
+        </li>
+      
+      </ol>
+      
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.10.3 at 2022-02-09T06:45:53.841Z. -->

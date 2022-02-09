@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="将我漫天心血一一抛到银河">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.10.3">
+    <link rel="canonical" href="https://sh.alynx.one/blogroll/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url(/images/background.webp);
+        --url-dark-sidebar-background: url(/images/background-dark.webp);
+        
+      }
+      
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-solid.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-brands.min.js"></script>
+    <script defer type="text/javascript" src="/js/fa-regular.min.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightBlock(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"far fa-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"far fa-lightbulb\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"far fa-copy\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"far fa-check-square\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"far fa-copy\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>友情链接 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="fas fa-bars" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="fas fa-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        <li role="menuitem"><a href="/blogroll/" class="current"><i class="fas fa-link"></i><span class="menu-text">友情链接</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/blogroll/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/blogroll/" itemprop="url">友情链接</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-24T02:30:00.000Z">2/24/2019, 10:30:00 AM</time></span>
+        </div>
+        
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2020-08-24T01:20:00.000Z">8/24/2020, 9:20:00 AM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="/blogroll/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="友情链接" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container">
+      <p>本来是打算把友情链接放到侧边栏里面的，但后来看好多人的网站里都是给链接单独开了个页面写点介绍。我觉得这样挺不错的，所以自己也搞一个。</p>
+<p><del>在这个页面学一下狼说话应该不会挨打吧？</del></p>
+<h1 id="%E6%83%B3%E5%92%8C%E5%92%B1%E4%BA%A4%E6%8D%A2%E5%8F%8B%E9%93%BE%EF%BC%9F"><a class="header-link" href="/blogroll/#%E6%83%B3%E5%92%8C%E5%92%B1%E4%BA%A4%E6%8D%A2%E5%8F%8B%E9%93%BE%EF%BC%9F"></a>想和咱交换友链？</h1>
+<div class="alert-red">
+
+<p>如果你和一个烦人的叫做“程序猿DD”或“翟永超”的东西交换了友链的话，下面的部分你都不用看了，我不会和你交换友链的。</p>
+<p>很少有东西能让我厌恶到公开说出来，这家伙不幸就是其中之一。也不要问什么你怎么那么看不起人家之类的话，理念不一样，道不同不相为谋，我有权利控制我的网站不要和某些恶心的东西有联系。</p>
+<p>当然其他类似的卖书卖课卖公众号的待遇也是一样的，去 UC 震惊部当个小编或者老实运营自己的公众号不好吗？非要在程序员博客圈子制造这种垃圾？</p>
+</div>
+
+<h2 id="%E4%BD%A0%E6%B7%BB%E5%8A%A0%E5%92%B1"><a class="header-link" href="/blogroll/#%E4%BD%A0%E6%B7%BB%E5%8A%A0%E5%92%B1"></a>你添加咱</h2>
+<p>想添加我友链比较简单，打个招呼然后加到你的网站就行了。</p>
+<p>网站的标题是“喵's StackHarbor”，而我的名字是“Alynx Zhou”，<strong>希望你不要弄混了</strong>，比如把名字写到了网站标题里或者大小写标点符号搞乱了。不过其实我一般懒得管所以问题不大。</p>
+<p>如果你的友链页面可以显示 logo 或者头像，<strong>请务必优先使用本人在侧边栏里的头像</strong>，直接复制图片链接即可。或者复制咱的 GitHub 头像链接也可以。如果你分别显示 logo 和头像那有点难办，不过我想 logo 可以放 <a href="https://sh.alynx.one/favicons/android-chrome-192x192.png">这个高清的 favicon</a>。</p>
+<p>网站介绍建议使用 subtitle "Whisper to the World"，不过你用侧边栏的 description 也是可以的，只不过这个可能经常跟我的心情一起变化。</p>
+<h2 id="%E5%92%B1%E6%B7%BB%E5%8A%A0%E4%BD%A0"><a class="header-link" href="/blogroll/#%E5%92%B1%E6%B7%BB%E5%8A%A0%E4%BD%A0"></a>咱添加你</h2>
+<p>要我添加你可能比较困难，首先我会优先考虑熟悉并且聊得来的人，陌生人的话建议不要贸然提出申请？社交还是比较困难的事情吧。</p>
+<p>如果聊得比较熟的话可能我自己就会和你提出交换友链的申请并且主动添加你了，但是也有可能我只是忘记了，那就发邮件或者消息告诉我你的博客链接吧！</p>
+<p>一般来说我会主动的按照上面要求别人的方式去获取博客相关信息，但你也可以直接把下面表格的内容发给我，朋友的意见总是优先考虑的。</p>
+<p>我会先阅读你的博客再考虑添不添加，所以假如你的博客文章质量很低或者和咱不是一路人，可能你要先从自己身上找找原因？</p>
+<p>Last but not least，侧边栏也有一个友情链接，但是因为空间限制，我不会把所有的友链都放上去，只会放一些比较重要或者干货很多的链接！希望你不要见怪。</p>
+<h1 id="%E8%80%81%E7%9B%B8%E8%AF%86"><a class="header-link" href="/blogroll/#%E8%80%81%E7%9B%B8%E8%AF%86"></a>老相识</h1>
+<p>这都是咱好久之前就认识并且一起写代码搞设备到现在的朋友。</p>
+<table>
+<thead>
+<tr>
+<th align="center">头像</th>
+<th align="center">链接</th>
+<th align="center">自我介绍</th>
+<th align="center">我的介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://avatars.githubusercontent.com/u/20807713?v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></td>
+<td align="center">“喵喵喵”</td>
+<td align="center">节奏王 Dogiki！每天咕咕咕，从不写博客！</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars1.githubusercontent.com/u/4464926?s=400&amp;u=8e7701ee107c6a606fa5752058f6a13d4537fe37&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="http://www.hackghost.com/" target="_blank" rel="external nofollow noreferrer noopener">HackGhost</a></td>
+<td align="center"></td>
+<td align="center">在五道口睡觉的某头。博客从某一天起就不更新了。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://chenxy.moe/pic/chen.jpg" style="width: 5em;"></td>
+<td align="center"><a href="https://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></td>
+<td align="center"></td>
+<td align="center">某著名 ROM 开发者，上大学了要努力写代码啊。</td>
+</tr>
+</tbody></table>
+<h1 id="%E5%A4%A7%E5%AD%A6%E8%AE%A4%E8%AF%86%E7%9A%84"><a class="header-link" href="/blogroll/#%E5%A4%A7%E5%AD%A6%E8%AE%A4%E8%AF%86%E7%9A%84"></a>大学认识的</h1>
+<p>大学里面对面交流过而且关系很不错的朋友。</p>
+<table>
+<thead>
+<tr>
+<th align="center">头像</th>
+<th align="center">链接</th>
+<th align="center">自我介绍</th>
+<th align="center">我的介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://avatars2.githubusercontent.com/u/6890021?s=400&amp;u=0c9847296a0aa5e9a16be20ec0d3a708dae3d27a&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow</a></td>
+<td align="center">“一只有吱的喵~”</td>
+<td align="center">刚入学的时候认识的学长，似乎也是一只猫，现在大概在美国呼吸自由的空气（大雾）。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://tvax4.sinaimg.cn/crop.0.0.480.480.180/005ttpDdly8fwz8wsaiw5j30dc0dcwfu.jpg" style="width: 5em;"></td>
+<td align="center"><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">sqyon</a></td>
+<td align="center">“试图让机器帮我学习的假 ACMer”</td>
+<td align="center">优秀的学弟，一定是优秀的学弟。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars0.githubusercontent.com/u/11513730?s=460&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></td>
+<td align="center"></td>
+<td align="center">董老师（咕老师）的奇怪网站。希望下次打 CSGO 前董老师能找到带麦克风的耳机。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars3.githubusercontent.com/u/46882838?s=460&amp;u=2cc88f87bef2c222c8daeb4e944d1421b3119c8d&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://cserwen.com/" target="_blank" rel="external nofollow noreferrer noopener">cserwen的站点</a></td>
+<td align="center">"Good Luck and Have Fun"</td>
+<td align="center">有女朋友的人生赢家……</td>
+</tr>
+<tr>
+<td align="center"><img src="https://berlin-98.github.io/img/avatar.jpg" style="width: 5em;"></td>
+<td align="center"><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></td>
+<td align="center">“既来之 则安之”</td>
+<td align="center">是学术界大佬了！是学术界大佬了！</td>
+</tr>
+</tbody></table>
+<h1 id="ArchLinuxCN%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85GentooLinuxCN%E7%A4%BE%E5%8C%BA"><a class="header-link" href="/blogroll/#ArchLinuxCN%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85GentooLinuxCN%E7%A4%BE%E5%8C%BA"></a>Arch Linux CN 社区或者 Gentoo Linux CN 社区</h1>
+<p>这里的人懂得好像都很多，咱经常向他们提问题，而且他们经常回复咱在群里的碎碎念，不加个友链好像说不过去。</p>
+<table>
+<thead>
+<tr>
+<th align="center">头像</th>
+<th align="center">链接</th>
+<th align="center">自我介绍</th>
+<th align="center">我的介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://blog.yoitsu.moe/theme/images/wiki.png" style="width: 5em;"></td>
+<td align="center"><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></td>
+<td align="center">「虽然咱长久以来被尊为神，且被束缚在这块土地上，但咱根本不是什么伟大的神。咱就是咱。咱是赫萝。」</td>
+<td align="center">我大概能理解这是个什么物种吧……反正我是猫。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://farseerfc.me/images/avatar.jpg" style="width: 5em;"></td>
+<td align="center"><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></td>
+<td align="center">「要是會能讓時間停下的魔法就好了… The World!」</td>
+<td align="center"><del>爱呼吸</del> fc 老师！似乎是日本某大学的教授，人生赢家，实名羡慕。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars0.githubusercontent.com/u/10167884?s=460&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://jm33.me/" target="_blank" rel="external nofollow noreferrer noopener">jm33_ng</a></td>
+<td align="center"></td>
+<td align="center">似乎是个高产的大佬，博客里都是和安全相关的（大概）。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars2.githubusercontent.com/u/15247171?s=400&amp;u=42dbf0d7048c9b3eda5c77ec31b9d13efca1cc28&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></td>
+<td align="center">"🐰🐰"</td>
+<td align="center">某世界一流大学年轻巨佬（当面确认，本人保证此条可信度）。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars3.githubusercontent.com/u/6873988?s=460&amp;u=b683eedf5e2b18acca130ea3918f7a0936dea6ba&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://brucezhang1993.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bruce Z Blog</a></td>
+<td align="center">「我不是兔子」</td>
+<td align="center">经常迫害我的大白兔子，如果有人捉到了建议先放进锅里煮了再说。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars3.githubusercontent.com/u/34574198?s=400&amp;u=f711be85d4c32aa09a846fb739dc3d87924a7c51&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://liolok.com/" target="_blank" rel="external nofollow noreferrer noopener">liolok</a></td>
+<td align="center">"I am not a cat, how disappointing :("</td>
+<td align="center">纠结的皓奇老师，他好像也想当猫。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars.githubusercontent.com/u/7891089?v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://blog.edward-p.xyz/" target="_blank" rel="external nofollow noreferrer noopener">Edward-P's Blog</a></td>
+<td align="center"></td>
+<td align="center">虽然咱经常叫他坏德华，但并不是什么坏人，保护各种德华从我做起。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://blog.lilydjwg.me/user_files/lilydjwg/config/avatar.png?1375032417" style="width: 5em;"></td>
+<td align="center"><a href="https://blog.lilydjwg.me/" target="_blank" rel="external nofollow noreferrer noopener">依云's Blog</a></td>
+<td align="center"></td>
+<td align="center">这也是一只狐狸，而且懂得很多很多很多于是我经常经常经常阅读博客。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://blog.megumifox.com/touch-icon-144-precomposed.png" style="width: 5em;"></td>
+<td align="center"><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></td>
+<td align="center">"A fox called Megumi"</td>
+<td align="center">又是一只狐狸，私以为 Arch 社区可改名动物园。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars0.githubusercontent.com/u/259684?s=460&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://www.csslayer.info/" target="_blank" rel="external nofollow noreferrer noopener">CS Slayer</a></td>
+<td align="center"></td>
+<td align="center">资深 <del>休伯利安号甲板清洁工</del> 崩坏三玩家，Fcitx 的作者。<del>可是这和我冷酷无情的 iBus 用户有有什么关系呢。</del></td>
+</tr>
+<tr>
+<td align="center"><img src="https://cdn.jsdelivr.net/npm/skx@0.2.3/avatar/96x96.png" style="width: 5em;"></td>
+<td align="center"><a href="https://blog.skk.moe/" target="_blank" rel="external nofollow noreferrer noopener">Sukka's Blog</a></td>
+<td align="center">“童话只美在真实却从不续写”</td>
+<td align="center">另一个自称有大尾巴的狐狸。是 Hexo 的维护者之一。虽然我不用 Hexo 了但是觉得还是很厉害因为我之前看过 Hexo 的代码觉得迷迷糊糊。</td>
+</tr>
+<tr>
+<td align="center"><img src="https://i.loli.net/2018/12/23/5c1f5a77d8d8e.png" style="width: 5em;"></td>
+<td align="center"><a href="http://wgjak47.me/tech/" target="_blank" rel="external nofollow noreferrer noopener">wgjak47's blog</a></td>
+<td align="center">“运维开发工程师”</td>
+<td align="center">是我看不懂的那种（指 k8s）</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars0.githubusercontent.com/u/8396456?s=460&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://axionl.me/" target="_blank" rel="external nofollow noreferrer noopener">初等記憶體</a></td>
+<td align="center">「 一個你知道的地方，和一個沒有酒的故事 ｜ 言文 」</td>
+<td align="center">听起来好像萌妹啊！</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars1.githubusercontent.com/u/17294071?s=460&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://originco.de/" target="_blank" rel="external nofollow noreferrer noopener">OriginCode 札記</a></td>
+<td align="center">「無人訪問之無趣博客 * 1」</td>
+<td align="center">好像现在是 <del>初中生</del> 高中生来着……</td>
+</tr>
+<tr>
+<td align="center"><img src="https://viflythink.com/img/avatar.png" style="width: 5em;"></td>
+<td align="center"><a href="https://viflythink.com/" target="_blank" rel="external nofollow noreferrer noopener">Vifly 的博客</a></td>
+<td align="center">“世上只有一种英雄主义——就是在认清生活的真相之后依然热爱生活。”</td>
+<td align="center">好像是炼丹的，反正我又不懂炼丹……加速迫害不要停下来啊！</td>
+</tr>
+<tr>
+<td align="center"><img src="https://avatars0.githubusercontent.com/u/10810336?s=460&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://szclsya.me/zh-cn/" target="_blank" rel="external nofollow noreferrer noopener">Leo's Field</a></td>
+<td align="center">"Time to change drinks and mix... wait"</td>
+<td align="center">呃……之前忘记了……（逃</td>
+</tr>
+</tbody></table>
+<h1 id="%E5%85%B6%E4%BB%96%E5%9C%B0%E6%96%B9%E8%AE%A4%E8%AF%86%E7%9A%84"><a class="header-link" href="/blogroll/#%E5%85%B6%E4%BB%96%E5%9C%B0%E6%96%B9%E8%AE%A4%E8%AF%86%E7%9A%84"></a>其他地方认识的</h1>
+<p>不符合其它几个模块的描述并不意味着不重要！</p>
+<table>
+<thead>
+<tr>
+<th align="center">头像</th>
+<th align="center">链接</th>
+<th align="center">自我介绍</th>
+<th align="center">我的介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://avatars1.githubusercontent.com/u/21106371?s=460&amp;v=4" style="width: 5em;"></td>
+<td align="center"><a href="https://jitui.moe/" target="_blank" rel="external nofollow noreferrer noopener">鸡腿工坊</a></td>
+<td align="center"></td>
+<td align="center"><del>新鲜</del> 可爱的鸡腿！</td>
+</tr>
+</tbody></table>
+
+    </main>
+    <footer class="post-footer"></footer>
+  </article>
+  
+  
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "友情链接",
+        "queryString": window.location.search,
+        "basePath": "/blogroll/",
+        "containerID": "comment-results"
+      }).then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat("zh-Hans", {
+          "year": "numeric",
+          "month": "2-digit",
+          "day": "2-digit",
+          "weekday": "short",
+          "hour": "2-digit",
+          "minute": "2-digit",
+          "second": "2-digit",
+          "timeZoneName": "short",
+          "hour12": false
+        });
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="fas fa-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">82</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">68</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      
+      
+      <ol class="toc" id="scrollspy-target">
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E6%83%B3%E5%92%8C%E5%92%B1%E4%BA%A4%E6%8D%A2%E5%8F%8B%E9%93%BE%EF%BC%9F">想和咱交换友链？</a>
+          
+          
+      <ol >
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E4%BD%A0%E6%B7%BB%E5%8A%A0%E5%92%B1">你添加咱</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%92%B1%E6%B7%BB%E5%8A%A0%E4%BD%A0">咱添加你</a>
+          
+        </li>
+      
+      </ol>
+      
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E8%80%81%E7%9B%B8%E8%AF%86">老相识</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%A4%A7%E5%AD%A6%E8%AE%A4%E8%AF%86%E7%9A%84">大学认识的</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#ArchLinuxCN%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85GentooLinuxCN%E7%A4%BE%E5%8C%BA">Arch Linux CN 社区或者 Gentoo Linux CN 社区</a>
+          
+        </li>
+      
+        <li>
+          
+          <a class="list-group-item toc-link" href="#%E5%85%B6%E4%BB%96%E5%9C%B0%E6%96%B9%E8%AE%A4%E8%AF%86%E7%9A%84">其他地方认识的</a>
+          
+        </li>
+      
+      </ol>
+      
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="fab fa-telegram-plane"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="fas fa-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="fab fa-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/u/5287501461" target="_blank" rel="external nofollow noreferrer noopener">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-user-friends"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://sqyon.com/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="fas fa-angle-double-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="far fa-edit"></i>Alynx Zhou</span><span class="years"><i class="far fa-copyright"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="fab fa-creative-commons"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="fas fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="fab fa-node-js"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.10.3 at 2022-02-09T06:45:53.900Z. -->
