@@ -248,7 +248,7 @@ const loadSearch = (opts) => {
   }
   header.push("<ul class=\"search-result-list\">");
   footer.push("</ul>");
-  return Promise.all(opts["paths"].map((path) => {
+  Promise.all(opts["paths"].map((path) => {
     return fetchJSON(path);
   })).then((jsons) => {
     const data = jsons.map((json) => {
