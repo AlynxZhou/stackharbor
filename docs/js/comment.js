@@ -1,6 +1,6 @@
-/*
+/**
  * A script that fetching and rendering GitHub issue as comments.
- * CopyLeft (C) 2020
+ * CopyLeft (C) 2020 - 2022
  * AlynxZhou <alynx.zhou@gmail.com> (https://alynx.one/)
  */
 "use strict";

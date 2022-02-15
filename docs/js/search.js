@@ -1,6 +1,6 @@
-/*
+/**
  * A local search script for [hikaru-generator-search](https://github.com/AlynxZhou/hikaru-generator-search/).
- * CopyLeft (C) 2020
+ * CopyLeft (C) 2020 - 2022
  * AlynxZhou <alynx.zhou@gmail.com> (https://alynx.one/)
  */
 
