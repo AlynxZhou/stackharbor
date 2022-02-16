@@ -380,7 +380,7 @@
 我：你不懂，88。</p>
 </blockquote>
 <p>凡是跟你说“Node.js 只有单线程”的人，都可以直接和他说“你不懂 Node.js”了。Node 要解决的就是非阻塞 IO 的问题，而非阻塞 IO 肯定不是多线程能解决的。至少对于内部的 fs 来说，调用异步函数的时候是 libuv 从线程池里面拉出一个线程去解决任务，而 JavaScript 本身的线程不会被阻塞。如果你还想了解“有哪些代码会阻塞主线程而哪些代码不会”，可以看 <a href="https://nodejs.org/en/docs/guides/dont-block-the-event-loop/" target="_blank" rel="external nofollow noreferrer noopener">Node.js 官网的这篇文章</a>。</p>
-<p>说实话，对于用户自己写的 JavaScript 代码段，似乎是没什么好办法把它丢到主线程之外的线程上去执行的……请务必注意“回调”，“异步”和“非阻塞”的区别——不是所有回调都是异步的，比如我传了一个回调函数它也可能是同步的，而就算你把一段耗时的同步代码套上 <code>setImmediate</code> 和 Promise，也不意味着它就不会阻塞主线程了……它执行的时候还是在主线程执行，只是你把它延迟了，推到了 event loop 空闲的时候去运行——但它轮到它运行起来还是阻塞住了主线程。（说出来不怕笑话，我也是写得多了最近才认识到这些区别（乐），如果我写的不对还希望大家指正。）</p>
+<p>说实话，对于用户自己写的 JavaScript 代码段，似乎是没什么好办法把它丢到主线程之外的线程上去执行的……请务必注意“回调”，“异步”和“非阻塞”的区别——不是所有回调都是异步的，比如我传了一个回调函数它也可能是同步的，而就算你把一段耗时的同步代码套上 <code>setImmediate</code> 和 Promise，也不意味着它就不会阻塞主线程了……它执行的时候还是在主线程执行，只是你把它延迟了，推到了 event loop 空闲的时候去运行——但轮到它运行起来还是阻塞住了主线程。（说出来不怕笑话，我也是写得多了最近才认识到这些区别（乐），如果我写的不对还希望大家指正。）</p>
 <p>起因是我读了 <a href="https://blog.skk.moe/post/say-hello-to-nodejs-worker-thread/" target="_blank" rel="external nofollow noreferrer noopener">Sukka 的这篇文章</a>，介绍了 Node 新加的 worker_threads 模块，是允许你开启子线程运行代码的。正好我想到我的博客生成器里有一段分析每篇文章内容并修饰里面的图片和链接的代码，要是能起一个线程池，把每个文章分配给不同的线程去处理，那多是一件美事啊！</p>
 <p>我发现这个 worker_threads 并不是很好用，它并不像 pthread，直接运行一个函数，而是要求你必须传一个 JavaScript 脚本的路径进去，这就给代码编写搞出了很大的麻烦。我做的修改在另一个 worker 分支里面，可以访问 <a href="https://github.com/AlynxZhou/hikaru/commits/worker" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/AlynxZhou/hikaru/commits/worker</a> 看到。不过一个尴尬的事情是写好以后我跑了几次，发现多线程还没有我之前单线程运行快……而且很反直觉的是线程越多越慢，在我 12 核心的处理器上四个线程是跑在主线程之外最快的，比什么 2、6、8、12 都快。</p>
 <p>说实话，我也没有搞清楚到底是怎么回事，可以确定任务确实是分发给了不同的线程，但是为什么会这么慢呢？一个可能的原因是在不同的线程之间并不是像 C 一样直接共享内存空间，传递参数的时候 Node 是复制之后传递的，虽然我觉得我传递的数据量不至于让复制造成瓶颈吧，但这是我能想到唯一的原因了。而且阅读例子的时候也发现，好像推荐的用法是比如做 http server，每一个线程都是启动之后一直监听，而不像我这样是不断的分配大量的小任务。总之我很需要一个像 pthread 那样简单的给我执行一段代码的线程，而 worker_threads 好像倾向长时间运行一个单独文件……强扭的瓜不甜，我还是放弃吧。</p>
@@ -716,4 +716,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.11.3 at 2022-02-15T12:58:56.893Z. -->
+<!-- Page built by Hikaru v1.11.3 at 2022-02-16T00:51:20.774Z. -->
