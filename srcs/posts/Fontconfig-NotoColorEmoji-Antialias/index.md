@@ -5,7 +5,6 @@ layout: post
 created: 2021-09-08T09:33:33
 categories:
   - 计算机
-  - Linux
   - 字体
 tags:
   - 计算机
