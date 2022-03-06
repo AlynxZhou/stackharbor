@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2022-02-20T12:53:00.000Z</updated>
+  <updated>2022-03-06T14:00:00.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,235 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.5">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>我如何在 Emacs 里面处理缩进宽度和 Tab 宽度</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/How-I-Handle-Indent-Offset-and-Tab-Width-in-Emacs/" />
+    <id>https://sh.alynx.one/posts/How-I-Handle-Indent-Offset-and-Tab-Width-in-Emacs/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-03-06T14:00:00.000Z</published>
+    
+    
+    <updated>2022-03-06T14:00:00.000Z</updated>
+    
+    
+    <summary type="html">
+      &lt;blockquote&gt;
+&lt;p&gt;Tabs are 8 characters, and thus indentations are also 8 characters. There are heretic movements that try to make indentations 4 (or even 2!) characters deep, and that is akin to trying to define the value of PI to be 3.
+-- Linux Kernel Coding Style&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当然，我不是在任何情况下都同意上面那句话，虽然在写 C 的时候它是绝对的真理。我个人倾向于取其中一部分——任何试图把 Tab 宽度定义为 8 以外的行为都无异于把 PI 定义为 3。&lt;/p&gt;
+
+    </summary>
+    
+    
+    <content type="html">
+      &lt;blockquote&gt;
+&lt;p&gt;Tabs are 8 characters, and thus indentations are also 8 characters. There are heretic movements that try to make indentations 4 (or even 2!) characters deep, and that is akin to trying to define the value of PI to be 3.
+-- Linux Kernel Coding Style&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当然，我不是在任何情况下都同意上面那句话，虽然在写 C 的时候它是绝对的真理。我个人倾向于取其中一部分——任何试图把 Tab 宽度定义为 8 以外的行为都无异于把 PI 定义为 3。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;写这篇文章是因为我意识到一个问题：Tab 宽度和缩进宽度是两个无关的变量。很多人简单地把缩进宽度理解为 Tab 宽度，不过这不能怪他们，因为大部分的编辑器都把这两者当作相同的东西。而当我重新开始用 Emacs，才发现这两个本来应该是不一样的。&lt;/p&gt;
+&lt;p&gt;为了防止迷惑，首先解释几个我说的名词：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tab 宽度：字面意义上的一个 Tab 字符应该相当于几个空格的宽度，在 Emacs 里面是 &lt;code&gt;tab-width&lt;/code&gt; 这个变量，我个人建议固定为 8。&lt;/li&gt;
+&lt;li&gt;缩进宽度：当你的代码应该增加一个缩进级别的时候，应该向右缩进几个空格的宽度，在 Emacs 里面每个模式都有不同的变量控制，比如 &lt;code&gt;c-indent-offset&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;缩进级别：代码逻辑层次（或许可以简单理解为作用域）每增加一层，一般就应该增加一个缩进层级。&lt;/li&gt;
+&lt;li&gt;使用 Tab 缩进：不是说只使用 Tab 缩进的意思。事实上如果你的代码可以只使用 Tab 缩进，那么 Tab 宽度为几都无所谓，因为一个缩进宽度就是一个 Tab，但实际上你不一定只使用 Tab 缩进，因为你可能还包含对齐的情况，比方说函数头参数太多，而你希望换行后的参数能够和左括号的下一个字符对齐，那么这个距离大概率无法被 Tab 宽度整除。因此使用 Tab 缩进的含义是“总缩进宽度能够用 Tab 宽度整除的部分用 Tab，余数的部分用空格”，也就是 Emacs 里面 &lt;code&gt;(indent-tabs-mode 1)&lt;/code&gt; 的效果。&lt;/li&gt;
+&lt;li&gt;使用空格缩进：和上面相反，意味着缩进部分完全不使用 Tab 字符，那么 Tab 宽度为几也无所谓。也就是 Emacs 里面 &lt;code&gt;(indent-tabs-mode -1)&lt;/code&gt; 的效果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我个人的建议和倾向主要是两个，第一个是 Tab 宽度固定为 8，第二个则是如果你认为缩进宽度为 8 也就是一个 Tab 对你来说太宽，那么你就应该完全不用 Tab 缩进，也就是使用空格缩进，而不是修改 Tab 宽度。&lt;/p&gt;
+&lt;p&gt;这样做的理由很简单，主要是我最近修改 GTK 代码时候发现的，GTK 代码是典型的 GNU 风格，我一开始以为它是完全不使用 Tab 缩进，并且缩进宽度是 2，并且我在 Atom 里面也是把这个项目的 Tab 宽度设为 2，但我前段时间发现 GTK 实际上是使用 Tab 的，比如一个很有意思的情况：某段代码的总缩进级别是 5，而它实际上使用的是 1 个 Tab 和 2 个空格，如果你把 Tab 宽度设置成 2，那这段代码在你的编辑器里就会错误的显示成 2 个缩进级别，只有你的 Tab 宽度是 8 的时候才能正确的显示。&lt;/p&gt;
+&lt;p&gt;这些奇怪缩进的项目给了我两个教训：Tab 宽度和缩进宽度并不是一个东西，以及最好假设 Tab 宽度为 8。当然，以上的建议都是以遵照现有代码的风格为前提，应该不会有人任性到把别人的项目都改成自己风格再提交贡献吧。&lt;/p&gt;
+&lt;p&gt;我倒不是完全的 Tab 缩进党，比如在 Python 里我设置缩进宽度是 4，而在 JavaScript 里我设置缩进宽度是 2，主要是因为对于 C 这种不允许嵌套函数并且没有类似 class 这种层次的语言来说，缩进级别完全就是函数内部逻辑，当你总缩进宽度达到 24 的时候，你已经在函数里有三层逻辑了。而对 Python 或者 JS 这类函数经常是类的方法的语言，本身函数就已经带着一个缩进级别了，三个缩进级别仅仅只代表两层函数内部逻辑，更别提比如回调函数是匿名函数的情况了。&lt;/p&gt;
+&lt;p&gt;至于当缩进宽度不是 8 时使用空格缩进而不是用 Tab 然后修改 Tab 宽度的理由也很简单，和上面说的一样，完全使用 Tab 缩进时虽然 Tab 宽度不会影响总缩进级别，但是一旦遇到对齐的情况，Tab 宽度不一致，对齐的部分就不再一样了。&lt;/p&gt;
+&lt;p&gt;说了这么多理论，该到具体的我怎么在 Emacs 里面处理了，首先是默认值，我个人是定义 Tab 宽度为 8 并且设置允许使用 Tab 缩进。&lt;/p&gt;
+&lt;figure data-raw=&quot;(setq-default tab-width 8)
+(setq-default indent-tabs-mode t)
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(setq-default tab-width 8)
+(setq-default indent-tabs-mode t)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;默认的 C 编码风格是 GNU，但是 GNU 的编码风格实在是太恐怖了，特别是大部分人的入门书上应该都是 K&amp;amp;R 或者类似的风格。我换成了我喜欢的 linux 内核风格。有的变量你可以直接使用 &lt;code&gt;setq&lt;/code&gt;，但另一些使用 &lt;code&gt;setq&lt;/code&gt; 会说你声明了一个新的自由变量，这个时候还是遵照建议使用 Emacs 的 &lt;code&gt;customize&lt;/code&gt; 系统吧。&lt;/p&gt;
+&lt;figure data-raw=&quot;(customize-set-variable &#039;c-default-style &#039;((java-mode . &amp;quot;java&amp;quot;)
+                                           (awk-mode . &amp;quot;awk&amp;quot;)
+                                           (other . &amp;quot;linux&amp;quot;)))
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(customize-set-variable &#039;c-default-style &#039;((java-mode . &quot;java&quot;)
+                                           (awk-mode . &quot;awk&quot;)
+                                           (other . &quot;linux&quot;)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;前面说过 Emacs 对于不同的模式使用不同的变量作为缩进宽度，这样对于编写配置其实很困难，因为让你时刻记住哪个模式用哪个变量显然不太现实，这里我用了一个比较投机取巧的办法——Emacs 有所谓 buffer-local 变量的设定，也就是说一个变量会有一个默认值，然后每个 buffer 都可以有一个该变量的副本，可以设置成不同的值，如果没有则使用默认值。利用这个功能我创建了一个单独的 buffer-local 变量 &lt;code&gt;indent-offset&lt;/code&gt;，然后把以上所有这些都设置为该变量的别名，于是我对每个 buffer 只要修改 &lt;code&gt;indent-offset&lt;/code&gt; 的副本就可以了。我这里只写了我使用到的模式的变量，如果有其他的就加到列表里，或者我看 &lt;code&gt;doom-modeline&lt;/code&gt; 的代码里几乎包含了所有常见模式的变量，或许可以拿来用。&lt;/p&gt;
+&lt;figure data-raw=&quot;(defconst mode-indent-offsets &#039;(c-basic-offset
+                                js-indent-level
+                                css-indent-offset
+                                sgml-basic-offset
+                                python-indent-offset
+                                lua-indent-level
+                                web-mode-code-indent-offset
+                                web-mode-css-indent-offset
+                                web-mode-markup-indent-offset
+                                markdown-list-indent-width)
+  &amp;quot;Different modes&#039; indent variables to make alias to indent-offset.&amp;quot;)
+
+(dolist (mode-indent-offset mode-indent-offsets)
+  (defvaralias mode-indent-offset &#039;indent-offset))
+
+(defvar-local indent-offset tab-width)
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(defconst mode-indent-offsets &#039;(c-basic-offset
+                                js-indent-level
+                                css-indent-offset
+                                sgml-basic-offset
+                                python-indent-offset
+                                lua-indent-level
+                                web-mode-code-indent-offset
+                                web-mode-css-indent-offset
+                                web-mode-markup-indent-offset
+                                markdown-list-indent-width)
+  &quot;Different modes&#039; indent variables to make alias to indent-offset.&quot;)
+
+(dolist (mode-indent-offset mode-indent-offsets)
+  (defvaralias mode-indent-offset &#039;indent-offset))
+
+(defvar-local indent-offset tab-width)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;那么接下来就是我们如何针对不同的 buffer 进行不同的设定了，这里分为两部分，一部分是这个 buffer 是否使用 Tab 缩进，另一部分则是缩进宽度设置为多少。Atom 里面有一个状态栏插件，点击就可以快速设置，Emacs 里面我写了两个简单的函数方便调用，执行对应的函数设置是否使用 Tab，并且它们都会询问你想把缩进宽度设置为多少。我分别把这两个函数绑定到 &lt;code&gt;C-c i TAB&lt;/code&gt; 和 &lt;code&gt;C-c i SPC&lt;/code&gt;。对于 GTK，操作起来可以是 &lt;code&gt;M-x indent-tabs RET 2 RET&lt;/code&gt;。&lt;/p&gt;
+&lt;figure data-raw=&quot;(defun indent-tabs (num)
+  &amp;quot;Mark this buffer to indent with tabs and set indent offset to NUM chars.&amp;quot;
+  (interactive `(,(read-number &amp;quot;Indent offset (chars): &amp;quot; indent-offset)))
+  (indent-tabs-mode 1)
+  (when (/= indent-offset num)
+    (setq indent-offset num)))
+(global-set-key (kbd &amp;quot;C-c i TAB&amp;quot;) &#039;indent-tabs)
+
+(defun indent-spaces (num)
+  &amp;quot;Mark this buffer to indent with spaces and set indent offset to NUM chars.&amp;quot;
+  (interactive `(,(read-number &amp;quot;Indent offset (chars): &amp;quot; indent-offset)))
+  (indent-tabs-mode -1)
+  (when (/= indent-offset num)
+    (setq indent-offset num)))
+(global-set-key (kbd &amp;quot;C-c i SPC&amp;quot;) &#039;indent-spaces)
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(defun indent-tabs (num)
+  &quot;Mark this buffer to indent with tabs and set indent offset to NUM chars.&quot;
+  (interactive `(,(read-number &quot;Indent offset (chars): &quot; indent-offset)))
+  (indent-tabs-mode 1)
+  (when (/= indent-offset num)
+    (setq indent-offset num)))
+(global-set-key (kbd &quot;C-c i TAB&quot;) &#039;indent-tabs)
+
+(defun indent-spaces (num)
+  &quot;Mark this buffer to indent with spaces and set indent offset to NUM chars.&quot;
+  (interactive `(,(read-number &quot;Indent offset (chars): &quot; indent-offset)))
+  (indent-tabs-mode -1)
+  (when (/= indent-offset num)
+    (setq indent-offset num)))
+(global-set-key (kbd &quot;C-c i SPC&quot;) &#039;indent-spaces)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;当然以防万一你真的遇到一个脾气古怪的作者，一定要使用 Tab 缩进并修改 Tab 宽度，我也写了个修改 Tab 宽度的函数。这个我绑定到 &lt;code&gt;C-c i w&lt;/code&gt; 了。&lt;/p&gt;
+&lt;figure data-raw=&quot;(defun set-tab-width (num)
+  &amp;quot;Mark this buffer to set tab width to NUM chars.&amp;quot;
+  (interactive `(,(read-number &amp;quot;Tab width (chars): &amp;quot; tab-width)))
+  (when (/= tab-width num)
+    (setq tab-width num)))
+(global-set-key (kbd &amp;quot;C-c i w&amp;quot;) &#039;set-tab-width)
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(defun set-tab-width (num)
+  &quot;Mark this buffer to set tab width to NUM chars.&quot;
+  (interactive `(,(read-number &quot;Tab width (chars): &quot; tab-width)))
+  (when (/= tab-width num)
+    (setq tab-width num)))
+(global-set-key (kbd &quot;C-c i w&quot;) &#039;set-tab-width)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;现在我们有了给每个 buffer 修改设定的办法了，但是通常你对某种语言有一个自己偏爱的风格，肯定希望以这个为默认值，所以我写了一些代码，给每个模式设置成我喜欢的默认风格。同样地如果你装了更多的模式，或者和我有不同的喜好，就修改这些列表好了。&lt;/p&gt;
+&lt;p&gt;这里使用 &lt;code&gt;(set-tab-width 8)&lt;/code&gt; 是因为有些模式比如 markdown-mode 把 &lt;code&gt;tab-width&lt;/code&gt; 定义为 4，按照前面说的，我觉得这是错的，同时上游为了保持向前兼容不好修改，于是这里简单地覆盖掉。&lt;/p&gt;
+&lt;figure data-raw=&quot;(defconst indent-tabs-modes &#039;((prog-mode . 8)
+                              ;; `markdown-mode` is not a `prog-mode`.
+                              (markdown-mode . 8)
+                              (gfm-mode . 8))
+  &amp;quot;Modes that will use tabs to indent.&amp;quot;)
+
+(defconst indent-spaces-modes &#039;((lisp-mode . 2)
+                                (emacs-lisp-mode . 2)
+                                (js-mode . 2)
+                                (css-mode . 2)
+                                (html-mode . 2)
+                                (yaml-mode . 2)
+                                (lua-mode . 3)
+                                (python-mode . 4))
+  &amp;quot;Modes that will use spaces to indent.&amp;quot;)
+
+(dolist (pair indent-tabs-modes)
+  (add-hook (intern (concat (symbol-name (car pair)) &amp;quot;-hook&amp;quot;))
+            `(lambda () (indent-tabs ,(cdr pair)) (set-tab-width 8))))
+
+(dolist (pair indent-spaces-modes)
+    (add-hook (intern (concat (symbol-name (car pair)) &amp;quot;-hook&amp;quot;))
+              `(lambda () (indent-spaces ,(cdr pair)) (set-tab-width 8))))
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(defconst indent-tabs-modes &#039;((prog-mode . 8)
+                              ;; `markdown-mode` is not a `prog-mode`.
+                              (markdown-mode . 8)
+                              (gfm-mode . 8))
+  &quot;Modes that will use tabs to indent.&quot;)
+
+(defconst indent-spaces-modes &#039;((lisp-mode . 2)
+                                (emacs-lisp-mode . 2)
+                                (js-mode . 2)
+                                (css-mode . 2)
+                                (html-mode . 2)
+                                (yaml-mode . 2)
+                                (lua-mode . 3)
+                                (python-mode . 4))
+  &quot;Modes that will use spaces to indent.&quot;)
+
+(dolist (pair indent-tabs-modes)
+  (add-hook (intern (concat (symbol-name (car pair)) &quot;-hook&quot;))
+            `(lambda () (indent-tabs ,(cdr pair)) (set-tab-width 8))))
+
+(dolist (pair indent-spaces-modes)
+    (add-hook (intern (concat (symbol-name (car pair)) &quot;-hook&quot;))
+              `(lambda () (indent-spaces ,(cdr pair)) (set-tab-width 8))))
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;有些 modeline 包含一个显示缩进信息的部分，比如 &lt;code&gt;doom-modeline&lt;/code&gt; 显示 &lt;code&gt;TAB&lt;/code&gt; 或者 &lt;code&gt;SPC&lt;/code&gt; 表示使用 Tab 缩进或使用空格缩进，然后如果该模式有自己的缩进宽度变量就显示，没有就显示 Tab 宽度（我没仔细读，总之它对这俩不做显式区分）。而按照上文，我肯定是倾向显式区分这两个东西的，所以我们不用它的，而是自定义一段 modeline，第一部分显示 &lt;code&gt;TAB&lt;/code&gt; 或 &lt;code&gt;SPC&lt;/code&gt;，第二段显示 &lt;code&gt;indent-offset&lt;/code&gt;，第三段显示 &lt;code&gt;tab-width&lt;/code&gt;。我没太搞懂 Emacs 的 modeline constructor 的语法，我觉得我写对了但却没有，于是最后变成 &lt;code&gt;:eval&lt;/code&gt; 一个 &lt;code&gt;format&lt;/code&gt; 调用了。&lt;/p&gt;
+&lt;figure data-raw=&quot;(setq mode-line-misc-info &#039;(:eval (format &amp;quot;%s %d %d&amp;quot;
+                      (if indent-tabs-mode &amp;quot;TAB&amp;quot; &amp;quot;SPC&amp;quot;)
+                      indent-offset
+                      tab-width)))
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(setq mode-line-misc-info &#039;(:eval (format &quot;%s %d %d&quot;
+                      (if indent-tabs-mode &quot;TAB&quot; &quot;SPC&quot;)
+                      indent-offset
+                      tab-width)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;最后我在网上抄了两个配置，一个是让它按回车时候不要自动缩进。另一个是修改默认的删除缩进的行为，默认当你在对着一个 Tab 按下退格键的时候，Emacs 把这个 Tab 变成缩进宽度数量的空格，然后删掉一个空格，这太诡异了，我就让它删掉一个字符好了。&lt;/p&gt;
+&lt;figure data-raw=&quot;(setq-default electric-indent-inhibit t)
+(setq backward-delete-char-untabify-method nil)
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(setq-default electric-indent-inhibit t)
+(setq backward-delete-char-untabify-method nil)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;这样当你遇到一个和自己习惯不一样的文件，基本只要看情况调用 &lt;code&gt;indent-tabs&lt;/code&gt; 或者 &lt;code&gt;indent-spaces&lt;/code&gt; 即可。我在 Atom 用的插件还有一个自动猜测文件是使用 Tab 还是几个空格作为缩进的功能，不过我看了一下代码，它并不能解决我之前说到的 GTK 的问题，也就是说它会猜成 &lt;code&gt;SPC 2 2&lt;/code&gt; 而不是 &lt;code&gt;TAB 2 8&lt;/code&gt;，我懒得自己想一个猜测算法，于是就还是靠自己判断了。&lt;/p&gt;
+&lt;p&gt;一个我比较想实现的功能是记录每个目录我用了什么设定，因为基本上每个项目都用一样的风格，这样就不用每次编辑文件都手动设置。我知道可以在每个目录创建一个文件记录 Emacs 的一些目录范围变量，但是问题是不是所有项目都想让你添加一个编辑器相关的文件，甚至你都不好修改 &lt;code&gt;.gitignore&lt;/code&gt; 排除你的文件。我比较想把这个存储记录丢到 Emacs 的目录里，不过并不知道怎么实现，如果哪天我搞清楚了，就去写一个。&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/tags/%E7%BC%96%E7%A8%8B/" />
+    
+    <category term="Emacs" label="Emacs" scheme="https://sh.alynx.one/tags/Emacs/" />
+    
+  </entry>
   
   
   
@@ -3381,145 +3610,6 @@ Cxxxxx-CMS介绍：&lt;a href=&quot;https://cxxxxx.com/zh-cn/articles/cms-introd
     <category term="全靠一张嘴" label="全靠一张嘴" scheme="https://sh.alynx.one/tags/%E5%85%A8%E9%9D%A0%E4%B8%80%E5%BC%A0%E5%98%B4/" />
     
     <category term="你这是瞧谁不起" label="你这是瞧谁不起" scheme="https://sh.alynx.one/tags/%E4%BD%A0%E8%BF%99%E6%98%AF%E7%9E%A7%E8%B0%81%E4%B8%8D%E8%B5%B7/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>装机小记</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/My-Desktop-PC/" />
-    <id>https://sh.alynx.one/posts/My-Desktop-PC/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2019-11-25T02:14:00.000Z</published>
-    
-    
-    <updated>2021-01-15T11:46:45.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;由于笔记本散热和性能实在是不适合打游戏（有一说一，Optimus 双显卡还是没有直接单卡来得爽），所以很早就想组装一台台式机。特别是最近一直和高中同桌玩 Dota2，我的笔记本如果直播 Dota2，直播推流就会十分卡顿，而我又不想像 CSGO 一样降低画质玩。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;由于笔记本散热和性能实在是不适合打游戏（有一说一，Optimus 双显卡还是没有直接单卡来得爽），所以很早就想组装一台台式机。特别是最近一直和高中同桌玩 Dota2，我的笔记本如果直播 Dota2，直播推流就会十分卡顿，而我又不想像 CSGO 一样降低画质玩。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;作为计算机专业的学生，当然不打算直接淘宝整机啦。经过一番挑选和参考别人意见，最后成套配置是下面这样：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CPU：AMD Ryzen 7 5800X 3199（之前是 AMD Ryzen 5 3600X）&lt;/li&gt;
-&lt;li&gt;主板：ROG STRIX X570-E GAMING 1999（特价）（之前是 微星 X570-A PRO 套装 2349）&lt;/li&gt;
-&lt;li&gt;显卡：NVIDIA GeForce RTX 2070 SUPER 4300（之前是 七彩虹 RTX 2060 战斧 6G 2199）&lt;/li&gt;
-&lt;li&gt;显卡支架：酷冷至尊 显卡支撑架 70&lt;/li&gt;
-&lt;li&gt;内存：铂胜 C9BJZ 颗粒 白马甲 DDR4 3000 8G x4 1000&lt;/li&gt;
-&lt;li&gt;网卡：Intel AX200（主板内置，之前是单独购买的花了 150）&lt;/li&gt;
-&lt;li&gt;固态硬盘：三星 970 EVO Plus 512G 769&lt;/li&gt;
-&lt;li&gt;固态硬盘：英睿达 MX500 2TB 1299&lt;/li&gt;
-&lt;li&gt;机械硬盘：东芝 P300 2TB 400&lt;/li&gt;
-&lt;li&gt;机械硬盘：西数 紫盘 2TB 400&lt;/li&gt;
-&lt;li&gt;电源：海韵 CORE GX650 650W 金牌 549（特价）&lt;/li&gt;
-&lt;li&gt;CPU 散热：利民 AK120 145（之前是 超频三 东海x5 89）&lt;/li&gt;
-&lt;li&gt;M.2 散热：主板自带（之前是利民 M.2 硬盘散热片 39）&lt;/li&gt;
-&lt;li&gt;机箱：Corsair 4000D 白色 629 （之前是 先马 鲁班1 209）&lt;/li&gt;
-&lt;li&gt;机箱风扇：利民 TL-C12R-S x2 + 利民 TL-C12S 418（TL-C12R-S 只有 299 的三联包）（之前是 Arctic F12 PWM 温控 x3 120）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;总计 15177。（有些具体价格我记不清了，而且京东价格总是波动。）性价比一般，因为我在其它人觉得没必要的地方分了很多预算比如主板风扇和硬盘，选 B450M 和西数的 NVMe 以及随便买个不带温控但是带灯的风扇的大有人在。&lt;/p&gt;
-&lt;p&gt;选这样一套配置其实有原因，可能很多人觉得为什么要给 R5 配 X570 这种高端主板，不如换成 B450 然后把预算加到别的上面。但按照我朋友的使用经验，4 代和以前的 AMD 芯片组存在 USB 兼容性问题，而且我装好机器后就在 Arch Linux CN 群里看到有人遇到这种问题，5 代似乎重新设计了 USB 控制器，目前一切正常。虽然这大概是最丐的 X570，连前面板 USB C 的接口都不支持，但是带 3900X 以下的 CPU 还是没什么压力的，而且我的机箱也没前面板 USB C。唯一的问题是微星不太厚道，今年 B550 出来之后又搞了个 X570 Tomahawk，大概只贵了几百块但是却有比肩旗舰的供电能力和前面板 USB C 支持，所以不再推荐购买 X570-A PRO 和 X570 Gaming Edge 这两个低端款了。有这种好东西为什么不一开始就吐出来？？？&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2020 年 11 月 16 日）：AMD 发布了 Zen 3 系列的 CPU，游戏性能全面反超 Intel，对于我这种玩的都是吃 CPU 的游戏的用户来说实在是太香了，而且我一直想要 8 核心的 R7，于是买了首发的 R7-5800X，果然性能提升明显。然后正好有朋友的朋友打算装机买我换下来的 CPU 和主板，于是双十一为了 &lt;del&gt;更好的 RGB 效果&lt;/del&gt; 更好的供电支持换了 ROG 的 X570-E（东哥疯狂耍猴，本来我是想 Tomahawk 的，但是微星的几款真香主板都无货，而且我对微星土里土气的设计也审美疲劳了，1999 的打人国度带眼睛它不香吗）。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;如果仅仅是打游戏也可以把 R5-3600X + X570 换成 i5-9600KF + Z390，大概可以便宜一点然后升级一下显卡？我觉得差价是不够 2060 换 2060S 的。或者如果要求不高换成 R5-3600 也行。但 R5-3600(X) 是 12 线程而 i5-9600KF 只有 6 线程，所以我还是选择了 Ryzen，反正 AMD CPU 最近表现都很不错，没必要给 Intel 掏更多的钱。如果你在京东买，建议自己翻翻店铺，一般买主板 CPU 套装更便宜，但是它不会摆出来……&lt;/p&gt;
-&lt;p&gt;显卡一开始我是打算买个 1999 的 GTX 1660Ti 的，反正我玩的游戏也不需要光线追踪（难道真相不是本来就没几个游戏支持光线追踪嘛？），然而看到七彩虹最便宜的 2060 正在特价 2199，果断少买一条内存，加钱上这个。反正 1999 的 1660Ti 也是便宜货，而且看了一下视频似乎这块卡也不是丐中丐中丐，质量还可以（同价位索泰铭瑄也不能说是什么高端货吧？），反正内存可以再插新的，而显卡二手不值钱。什么你说 A 卡？虽然 A 卡对于 Linux 的驱动支持更好一点，但是 N 卡也不是不能用，而且我要开直播的话 NVENC 编码挺香的，而且对我的 Steam 库存来说 N 卡也更友好一点（但是骂老黄还是要骂的）。另外虽然我不做机器学习，但万一室友毕设需要的话，反正我上班也不用台式机，装个 CUDA 让他 SSH 上去用岂不是你好我好大家好。&lt;/p&gt;
-&lt;p&gt;内存其实没什么特别要求，不过由于 Ryzen 的设计，频率越高越好，但按照这一代的设计，最佳频率是 3600 左右，再高反而会下降，我是买不起那么奢侈的内存，甚至 3200 的都买不起，但这款 3000 的也不错，据说颗粒是镁光创下超频记录的那一批，所以就买了四条。我也不需要 RGB，这款的马甲还挺好看的。当然 3000 是 XMP 频率，需要在 BIOS 里打开 XMP，不然默认只有 2400。最近抄了个 3600 16-19-19-36 的作业，结果四条内存轻轻松松就上去了，2K 下面 PUBG 大概提升了 20 FPS，还是挺爽的。&lt;/p&gt;
-&lt;p&gt;硬盘不多说了，买 MX500 还是看中一个稳，我还是不放心买同价位国产白片……而且作为一个 2016 年就在笔记本上使用 NVMe SSD 的人，表示并没感觉出 NVME 和 SATA 有什么使用差别……我也不渲染视频，写写代码打打游戏都不卡。但是后来打脸了，公司发了新年福利于是还是上了个 NVMe 硬盘。顺便还配了个无线网卡用来接蓝牙和 WiFi，似乎 Intel AX200 是对 Linux 支持比较好的，就随便买了个 PCI-E 的插上了（御三家集齐了！）（ATX 的好处终于用上了，多出来的 PCI-E 随便插）。&lt;/p&gt;
-&lt;p&gt;电源有点买亏了，买完了发现长城同系列 550W 的电源当时也是 329，都怪京东迷一样的定价策略，好在我这一套功耗并不是很高，当然最后趁着福利 + 打折还是换成了海韵一元一瓦的金牌全模组，带我这套绰绰有余。开始我听说原装散热器也能压住 3600X，所以就没打算换，但后来发现刀法还是精准啊，3600X 带的散热器竟然不是铜芯的，再加上 Ryzen 三代的电压控制比较激进，待机温度有时候超过 50，打游戏时候机箱上方有点烤腿，所以还是换了个塔式散热器，风道科学了不少，温度控制也更好了。而且 AMD 原装风扇转速太高，3000rpm 的时候机箱都在震，换了之后安静了很多。顺便安原装散热器时候拆下来的螺丝卡扣不要扔，万一换塔式散热器，好多都是需要装在这个卡扣上的。&lt;/p&gt;
-&lt;p&gt;说到机箱和风扇我就一肚子气！本着对京东自营品质和速度的信赖，我全套都是在京东买的，结果拿到手全部安装上之后发现机箱开机跳线是短路的，插上电源就开机，开一会因为短路主板以为你在长按电源又关了！开始我还以为是主板坏了，结果发现螺丝刀手动碰一下开机跳线开关是可以正常开机的！于是又费了九牛二虎之力拆下来退货，主板散热器显卡都在盒子里椅子上放了两天，还好新机箱没问题，但是我买风扇的时候又给我发了个断轴的！东哥呀东哥，我拿你当兄弟，你拿我当代价？你是盯上我了？虽然我平时说你两句坏话但是对京东的服务还是好评的，但是经过这次之后我还是得重新考虑考虑了……顺便据说启航者 S5 这个机箱前面板音频口有的是 HD Audio 有的是老版 AC97，涉嫌虚假宣传，如果你遇到 AC97 的大概可以换货，麻烦一点，不过反正便宜货就这样子，我的抽奖抽到 HD Audio 了。但是这个机箱设计的很抠门，比如主板装上了就没法在上面走 CPU 电源线了，有两个走线口直接被 ATX 主板盖住，所以主板和显卡的电源线只能从一个口里挤出去，然后固态硬盘就在这个口下面所以也很难接线……而且机箱侧板是个黑色半透明的亚克力（那就别宣传透明啊！），金属外壳感觉也不是很厚实。所以最后还是换了先马的鲁班 1，各种设计都宽松了许多，装起来也很好看。&lt;/p&gt;
-&lt;p&gt;其他的外设我自己都有，显示器 &lt;del&gt;就是之前买的优派 XG2402，1080p@144Hz 并且自带扬声器&lt;/del&gt; 换成了 DELL S2721DGF，27 寸的 2K@165Hz 屏幕，除了通病漏光以外都还不错，音箱外接了一个 JBL 的蜗牛一代（因为我觉得二代没有一代好看），鼠标就卓威 EC1-B CSGO 特别版（这个版本已经停产了，而且有偶尔指天/指地的 bug，建议买新的 EC1/2 或者 DIVINA 版本），键盘则是前段时间买的 ikbc C87 红轴，便宜还好用。&lt;/p&gt;
-&lt;p&gt;顺便由于我手残以及力气小和室友跃跃欲试，很多东西都是他装的，非常感谢。话说回来装这东西还真是个力气活，毕竟接口都有防呆设计仔细看看不会装错，但是真的很紧很难拔……非常担心把主板搞坏了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/1.jpg&quot; alt=&quot;装好的完全体照片&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新：避免你们说我灵魂走线，重新整理了一下，线太硬了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/2.jpg&quot; alt=&quot;重新走线正面&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/3.jpg&quot; alt=&quot;重新走线背面&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新：内存插满。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/4.jpg&quot; alt=&quot;内存插满&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新：NVMe + 蓝牙无线网卡的完全体。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/5.jpg&quot; alt=&quot;完全体&quot;&gt;&lt;/p&gt;
-&lt;p&gt;这个机箱 CPU 线走上面是要把主板拿下来才能穿过去的，而且右边两个有硅胶垫的孔 ATX 完全不能用，只能用一个孔，而且不能把线固定在机箱中间，很难盖上。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;再更新：新机箱比原来的好看多了也宽敞多了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/6.jpg&quot; alt=&quot;正面&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/7.jpg&quot; alt=&quot;背面&quot;&gt;&lt;/p&gt;
-&lt;p&gt;公司的蜥蜴（明明是变色龙！）玩偶太高了，显卡下面放不开，挂着我又不放心，盖盖子之前还是拿出来了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新：换上了公版 2070 SUPER 和利民 AK120。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/9.jpg&quot; alt=&quot;显卡&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/10.jpg&quot; alt=&quot;全景&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2020 年 10 月 12 日）：冬天到了，还是换了几个支持 ARGB 的风扇，我个人不喜欢蓝光紫光夜店土嗨风，所以就弄了点温暖的颜色假装是个电暖气。前面是利民 TL-C12R-S，后面是利民 TL-C12S，虽然是三联包，但是似乎螺丝有问题，有一个风扇螺纹被拧花了，而且后面的风扇竟然少一个角上的橡胶减震垫，于是我就没装拧花的那个，并且把它的减震垫安装到后面了。反正考虑到我最下面是机械硬盘，装上这个风扇风道也不畅通，而且那里并没有什么需要散热的设备，电源风道是独立的。每把风扇两根线，ARGB 线要串联，PWM 线要一分三，而且有前有后，风扇线还有编织保护套，还要防止线材打到风扇扇叶。理线花了好久，最后 &lt;del&gt;把他们用扎带固定到下面和前面空的风扇挂架上&lt;/del&gt; 还是走背线了，刚好够长。而且我还有三个 SATA 硬盘打算换一下 SATA 线……我真的想不出来那些水冷排且上下左右全都是 ARGB 风扇的人怎么理线的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/11.jpg&quot; alt=&quot;正面看灯光&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/12.jpg&quot; alt=&quot;侧面看灯光&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/13.jpg&quot; alt=&quot;风扇线不在下面啦&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/14.jpg&quot; alt=&quot;最终的背线效果&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我不会告诉你其实我是想调出我 TB 至宝的颜色：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/15.jpg&quot; alt=&quot;TB 至宝&quot;&gt;&lt;/p&gt;
-&lt;p&gt;一开始我以为需要用 OpenRGB 这个项目才能在 Linux 下控制颜色，但是这种 ARGB 风扇好像有存储机制，会自动记住上次的设置。于是就在 Windows 下面安装了一个有一大堆乱七八糟组件和功能的 MSI Dragon Center，其实我只需要调成长亮，然后重启进 Linux 颜色就一直是我设置的，然后我想关掉 Dragon Center 的自启动因为反正也用不到，但是微星的软件自己拉跨，重启进 Linux 灯光不变，重启进 Windows 又变呼吸彩虹灯光了。最后发现 Dragon Center 里面有一个类似“覆盖第三方RGB软件”的选项……好像他把他自己上次存储的结果也当第三方软件了，关掉就好了。原理我猜因为 Dragon Center 只是个 Client，真正控制颜色的是他某个 SDK 里面的 Daemon，这个选项的意思其实就是 Daemon 每次启动都按照 Dragon Center 设置的颜色重新设置风扇就实现覆盖功能了……但是 Dragon Center 的启动被我关了所以就默认了，不管了，统统关掉就 OK。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2020 年 11 月 16 日）：有了打人国度的眼睛感觉瞬间高贵了起来（大误）。&lt;/p&gt;
-&lt;p&gt;老黄卡只有绿色一种颜色，于是只能整个机箱调个老黄绿来配合。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/16.jpg&quot; alt=&quot;老黄绿了&quot;&gt;&lt;/p&gt;
-&lt;p&gt;但是我自己平时还是喜欢红色的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/17.jpg&quot; alt=&quot;平时灯光&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我发现主板的装饰灯正好在公版 SUPER 卡上产生倒影，很有意思。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/18.jpg&quot; alt=&quot;倒影&quot;&gt;&lt;/p&gt;
-&lt;p&gt;这个主板可以完美使用 OpenRGB，在 AUR 里安装之后把 &lt;code&gt;/usr/lib/udev/rules.d/60-openrgb.rules&lt;/code&gt; 复制到 &lt;code&gt;/etc/udev/rules.d&lt;/code&gt; 重启即可支持，不过对于 Addressable Header 上的设备也就是风扇或者灯条需要手动 resize zone 也就是填写灯珠个数，我用的利民 TL-C12S 系列经过尝试是 8 个灯珠。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2020 年 12 月 1 日）：我之前有考虑过换个机箱，倒不是先马鲁班不符合我的需求了，而是一些细节问题，比如我这个玻璃侧板不那么平，有一个角翘起来一点。然后我的前面板角落里虽然我十分注意还是被我磕了一下。以及当初从宿舍搬出来的时候没有把机箱包装拿出来，以后搬家可能不方便……我一开始本来打算再买一个同款然后把侧板和前面板换了得了，然后那天发现前面 USB 2.0 接口接声卡会破音……于是打算换一个别的机箱。&lt;/p&gt;
-&lt;p&gt;我个人其实比较喜欢白色的机箱，于是初步考察了一下，我很喜欢NZXT H1，但我又不可能装 ITX，然后 NZXT H710 看起来不错，我觉得很漂亮，而且我在 NGA 上看到过有人给它纯白色的前面板贴了个黑色的两仪式剪影贴纸很帅气，但是太大太贵了。为什么没选择 H510 呢，因为我有几个硬性需求，我日常使用总结出来的，是一般机箱评测和用户不会注意到的，比如最好不要显卡竖装（我个人肯定是不会竖装的），PCIE的螺丝锁孔也不要做成从机箱尾部凸出来的，其实这里的实际意思是机箱不要有太大的空洞，很多机箱的显卡竖装PCIE螺丝孔上面就那么开着口，凸出来的横着的PCIE螺丝孔虽然有一个覆盖物，但它总是不那么好用，于是这样排除掉了 NZXT H510， NZXT H510i 和 NZXT H710i。&lt;/p&gt;
-&lt;p&gt;然后我也不想要钢化玻璃打孔固定的，这个大部分人应该也都不想要。我个人而言还不想要附带一个只有某些软件才能控制的控制器的机箱（点名 NZXT CAM），虽然 NZXT 的水冷确实非常漂亮，但我不放心把电脑这些基础的硬件交给一个需要联网还经常不一定能不能连得上而且只有进了 Windows 才能启动的废物控制软件——我是 Linux 用户。同理我也讨厌雷蛇和罗技难用的鼠标驱动程序。明明我可以用 BIOS 控制风扇/水泵转速，用主板的 ARGB 插针控制风扇，为什么非要用那么难用的软件？所以肯定只考虑 H710 不考虑 H710i。&lt;/p&gt;
-&lt;p&gt;如果光是这些可能我就下单 H710 了，虽然贵一点，但是能满足需求也就不在乎了。可是我翻了翻各种帖子都提到了这个机箱的一个缺点：它的硬盘架需要用螺丝刀拧螺丝才能拆除。虽然现在两百块钱的机箱都能免工具调整硬盘仓了但我觉得理完线也没什么人总动机械硬盘所以这不是个问题，但是更严重的是许多人都说固定硬盘仓的螺丝非常难拧，甚至螺丝都花了也拧不下来。作为之前被笔记本内部拧花了的螺丝支配的恐惧的人，我可不要买个这样的样子货，于是只好放弃 NZXT。可能它的设计师平时是不用机械硬盘没有软件更新服务器连不上的问题也不在乎机箱开一大堆没有保护网的口的人吧！&lt;/p&gt;
-&lt;p&gt;然后我又开始研究买什么，看了一下联力的鬼斧似乎很不错，虽然造型上比起 NZXT 要难看很多，但是和其它的机箱比起来也算是鹤立鸡群了。而且相比于 NZXT 只是好看来说，它在设计上就考虑到了更多的功能性的细节。比如有单独的重启键（可怜的硬盘灯已经被时代抛弃了）和 LED 控制键而且 LED 控制器可以设置为转发主板的 ARGB 信号（看看人家！），还有磁吸的合页式的玻璃侧板方便随时打开（对我这种强迫症太友好了，拧螺丝搬侧板好累），而且它的电源仓设置了单独的合页门！你可以从前面打开，然后硬盘仓设计成了 NAS 那种可以从前面拿出来的样式（甚至官方还有热插拔配件，彻底变身 NAS）（看看人家！），对折腾型用户不要太友好。但我最后还是没选它，因为我发现这个机箱第一个 PCIE 挡板和它上面的边框之间的缝隙太太太太太大了——你们厂家在这里多加两毫米宽度会赔本吗？而且后来我又想了想，合页式多半不能完全贴合（要给合页留出空间，所以还是算了）。&lt;/p&gt;
-&lt;p&gt;然后我看到了海盗船新出的 4000D，纯白色的前面板 + 非外凸的 PCIE 螺丝孔 + 独立的重启键 + 滑动抽拉的硬盘仓 + 有卡口的侧板，虽然它只有一个前置 USB 3.0 和一个 Type-C，不过也不是不能接受，而且有独立的重启键（硬盘灯：四个人的接头我却不能拥有姓名）。虽然它也支持显卡竖装，但它显卡竖装的上面有一个封得比较严实的挡板，它的 PCIE 槽相对也没有太大缝隙（相对）。颜值虽然没有 NZXT H710 好看，但在简洁上也是吊打鬼斧了，于是决定入手这个。&lt;/p&gt;
-&lt;p&gt;到手了也发现这个箱子还不算完美，主要的问题在于以下几个：电源仓上边的挡板强度不够，虽然没什么人会拿这个地方承重，但是比我之前的先马鲁班软得多也太差劲了吧！好在机箱其它承重的组件都过得去。然后就是 PCIE 的螺丝孔和显卡的孔有错位！需要很大力气按着才能勉强拧上螺丝，我用的可是公版显卡，你不能说公版卡孔位不标准吧！最后最后，这个机箱底板并没有多延伸出一块盖住侧板的底部！虽然侧板不需要这个位置辅助固定（它有很多卡口固定住），但是明明你顶板是有延伸的，为什么底板要在这里留一条缝隙？？？总而言之就是搬机箱时候要注意手不要抠到侧板和机箱这里的小缝隙（挺窄的，手多往中间伸一点就好了），但是还是会让人担心抠这里把侧板抠变形了。不过总之看下去也没有更合适的选择了，所以就将就吧。送的两个风扇是 3 pin 的，不能 PWM 调速，真是抠门啊海盗船。&lt;/p&gt;
-&lt;p&gt;顺便还有个对我不是问题但对大部分人可能是问题的地方，这个机器的前面板里面有一大块金属防尘网，但是根据一些国外的评测，假如你在前面板装上风扇，可能会因为风扇吸气导致这个防尘网向里面贴而蹭到风扇扇叶。但是我装了三个反向进风的风扇在前边，风扇框架在防尘网一侧所以并不担心这个问题。我也推荐所有前面板不是透明玻璃的人在前面使用反向风扇，毕竟正常来说通过侧板看到机箱内部反向风扇的灯光才是最合适的（风扇框架不会出现在机箱内部）。并且说实话，前面板通风比美观更重要，真的没必要买玻璃前面板。&lt;/p&gt;
-&lt;p&gt;于是装好了以后正面和背面就是这样的，不要和我说机箱不是留了理线槽了吗为什么不把主板电源线理进去，海韵的主板电源线又粗又硬，连用这块机箱的盖线板盖住都很勉强了，扭来扭去塞到那个理线槽里根本不可能，我也不想让它接头的部分受太大的力。这块主板 Type-C 的接头在内存附近，虽然这是主流位置，但对于直插的 Type-C 线缆来说弯线同样也很困难，别的理线倒没遇到什么大问题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/19.jpg&quot; alt=&quot;正面&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/20.jpg&quot; alt=&quot;背面&quot;&gt;&lt;/p&gt;
-&lt;p&gt;白色机箱里面反光要亮一些，但是有灰尘也更明显了……&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/21.jpg&quot; alt=&quot;亮起来&quot;&gt;&lt;/p&gt;
-&lt;p&gt;前面侧板的灯光效果很好看，没买 Airflow 版一个是因为它挖孔太多太乱，另一个原因是以后我也打算贴上贴纸。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/22.jpg&quot; alt=&quot;前面&quot;&gt;&lt;/p&gt;
-&lt;p&gt;今天看到 NGA 上有人是风扇白光配红色 ROG LOGO，我也试了一下蛮好看的，就是感觉屋子里又冷了 10 度……&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/23.jpg&quot; alt=&quot;白色&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/My-Desktop-PC/24.jpg&quot; alt=&quot;全景&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;接下来是喜闻乐见的 debug 时间，首先是 Linux 下的，相对比较好调：&lt;/p&gt;
-&lt;p&gt;三代 Ryzen 有一个 &lt;a href=&quot;https://www.infoq.cn/article/BRebwaBfJ9eP28X9wQQc&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;每次都返回 0xFFFFFFFF 作为随机数的 BUG&lt;/a&gt;，在我这主要影响 wireguard，巧的是购买前几天我刚读过这篇文章，AMD 已经发了新的固件修正错误，建议更新到主板厂家提供的最新 BIOS 版本一般即可解决，如果主板厂家最新的 BIOS 还没更新固件建议联系售后催一下。&lt;/p&gt;
-&lt;p&gt;在我这不知道为什么 GDM 有时候没法自动启动，但是手动切 tty start 又可以显示，查了一下 &lt;a href=&quot;https://wiki.archlinux.org/index.php/GDM#GDM_freezes_with_systemd&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;ArchWiki 的 GDM 页面&lt;/a&gt; 发现有解决方案，但是并没有原因，搜索了一下也没发现原因是什么。&lt;/p&gt;
-&lt;p&gt;我还发现有时候刚开机没多久很快就关机会卡在什么 systemd-udevd 进程没结束，最后 event loop failed + timed out，大概要卡好几分钟才关机，但如果你用一会再关机就没问题。检查好几次关机日志没发现问题，后来群友火眼金睛对比了完整日志发现有个叫 &lt;code&gt;ucsi_ccg&lt;/code&gt; 的模块开机加载了两分钟，猜测是这个的问题，搜索一下发现是 &lt;a href=&quot;https://github.com/torvalds/linux/blob/da94001239cceb93c132a31928d6ddc4214862d5/drivers/usb/typec/ucsi/ucsi_ccg.c&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;5.3 内核里 NVIDIA 添加的相关代码&lt;/a&gt;，用来控制 NVIDIA 显卡上的 Type-C 接口的，可是我这块显卡根本就没提供 Type-C 接口！（以及很多笔记本内置的有输出的 N 卡也有这个问题。）临时在 &lt;code&gt;/etc/modprobe.d/&lt;/code&gt; 里加了个 &lt;code&gt;blacklist ucsi_ccg&lt;/code&gt; 的 conf 屏蔽了这个，好像没什么不良影响……&lt;/p&gt;
-&lt;p&gt;然后是奇怪的 Windows 的问题，我一开始装的 LTSC，不知道怎么回事输入法没了……折腾无果只能重装。以及现在除了不要联网装 Windows 之外（否则会强制你登录微软账户然后用你名字拼音前五位做用户名），还得不要联网装 NVIDIA 驱动，否则 Win10 自动更新驱动会给你安装 DCH 版的，虽然没什么影响（只是在 NVIDIA 官网升级驱动时候不能选标准选 DCH），但是就是让人很不爽。声卡驱动要装主板厂商的，Win10 自带的只能输出，不能接麦克风录音，然后如果麦克风声音很小就打开 Realtek 的声音控制程序，在右上角齿轮里取消掉什么把所有输入结合到一起的设定（什么乱七八糟的玩意！）。还有要关掉快速启动，不然直接开机会卡在黑屏一个鼠标光标……反正就很烦人。&lt;/p&gt;
-&lt;p&gt;更新：还有一个奇怪的问题是 Win10 关机重启也要卡很久，上网搜了一下全是一些忽悠小白的办法，经过我不懈搜索发现了一个熟悉的名字 &lt;code&gt;UCSI&lt;/code&gt;！微软承认存在 &lt;code&gt;UCSI&lt;/code&gt; 问题，既然又是这个 &lt;code&gt;UCSI&lt;/code&gt;，多半还是 NVIDIA Type-C 的问题！反正我没这个接口，果断重新安装 N 卡驱动，选择清洁安装（删除旧驱动）并不勾选 Type-C Driver，问题解决……&lt;/p&gt;
-&lt;p&gt;最后既然设备到位了，大概就每周一三四五晚上八点半在 &lt;a href=&quot;https://live.bilibili.com/4312992&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Bilibili 4312991 直播间&lt;/a&gt; 播一个半小时游戏，反正我玩什么播什么，大概就 CSGO Dota2 PUBG 什么的吧，尼尔也有可能，反正不是恶心反胃的就可以。周末随缘直播，如果没什么事情白天就播一会，周二可能晚一点开播因为有课。&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     
   </entry>
   
