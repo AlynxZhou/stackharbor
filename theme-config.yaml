@@ -16,6 +16,9 @@ menu:
   - name: Undefined Script Works!
     link: Undefined-Script-Works/
     icon: <i class="bi bi-terminal"></i>
+  - name: 照片墙
+    link: //gallery.alynx.one/
+    icon: <i class="bi bi-images"></i>
   - name: blogroll
     link: blogroll/
     icon: <i class="bi bi-link-45deg"></i>
