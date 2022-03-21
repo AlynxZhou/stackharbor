@@ -25,15 +25,15 @@ Anyway，点到这个页面说明你对我很感兴趣，我写的东西你觉�
 
 Alynx Zhou
 
-<i class="fab fa-linux"></i> Arch Linux CN 社区成员
+<i class="bi bi-person-badge"></i> Arch Linux CN 社区成员
 
-<i class="fas fa-envelope"></i> 邮箱：[alynx.zhou@gmail.com](mailto:alynx.zhou@gmail.com)
+<i class="bi bi-envelope"></i> 邮箱：[alynx.zhou@gmail.com](mailto:alynx.zhou@gmail.com)
 
-<i class="fab fa-telegram-plane"></i> Telegram: [@AlynxZhou](https://t.me/AlynxZhou)
+<i class="bi bi-telegram"></i> Telegram: [@AlynxZhou](https://t.me/AlynxZhou)
 
-<i class="fab fa-github"></i> GitHub: [@AlynxZhou](https://github.com/AlynxZhou)
+<i class="bi bi-github"></i> GitHub: [@AlynxZhou](https://github.com/AlynxZhou)
 
-<i class="fas fa-fingerprint"></i> PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
+<i class="bi bi-fingerprint"></i> PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
 
 # 关于 Alynx 的 33 条
 
