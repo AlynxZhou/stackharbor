@@ -36,7 +36,7 @@
     <published>2022-03-06T14:00:00.000Z</published>
     
     
-    <updated>2022-03-06T14:00:00.000Z</updated>
+    <updated>2022-03-07T01:11:02.000Z</updated>
     
     
     <summary type="html">
@@ -216,13 +216,13 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;有些 modeline 包含一个显示缩进信息的部分，比如 &lt;code&gt;doom-modeline&lt;/code&gt; 显示 &lt;code&gt;TAB&lt;/code&gt; 或者 &lt;code&gt;SPC&lt;/code&gt; 表示使用 Tab 缩进或使用空格缩进，然后如果该模式有自己的缩进宽度变量就显示，没有就显示 Tab 宽度（我没仔细读，总之它对这俩不做显式区分）。而按照上文，我肯定是倾向显式区分这两个东西的，所以我们不用它的，而是自定义一段 modeline，第一部分显示 &lt;code&gt;TAB&lt;/code&gt; 或 &lt;code&gt;SPC&lt;/code&gt;，第二段显示 &lt;code&gt;indent-offset&lt;/code&gt;，第三段显示 &lt;code&gt;tab-width&lt;/code&gt;。我没太搞懂 Emacs 的 modeline constructor 的语法，我觉得我写对了但却没有，于是最后变成 &lt;code&gt;:eval&lt;/code&gt; 一个 &lt;code&gt;format&lt;/code&gt; 调用了。&lt;/p&gt;
 &lt;figure data-raw=&quot;(setq mode-line-misc-info &#039;(:eval (format &amp;quot;%s %d %d&amp;quot;
-                      (if indent-tabs-mode &amp;quot;TAB&amp;quot; &amp;quot;SPC&amp;quot;)
-                      indent-offset
-                      tab-width)))
+                                          (if indent-tabs-mode &amp;quot;TAB&amp;quot; &amp;quot;SPC&amp;quot;)
+                                          indent-offset
+                                          tab-width)))
 &quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(setq mode-line-misc-info &#039;(:eval (format &quot;%s %d %d&quot;
-                      (if indent-tabs-mode &quot;TAB&quot; &quot;SPC&quot;)
-                      indent-offset
-                      tab-width)))
+                                          (if indent-tabs-mode &quot;TAB&quot; &quot;SPC&quot;)
+                                          indent-offset
+                                          tab-width)))
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;最后我在网上抄了两个配置，一个是让它按回车时候不要自动缩进。另一个是修改默认的删除缩进的行为，默认当你在对着一个 Tab 按下退格键的时候，Emacs 把这个 Tab 变成缩进宽度数量的空格，然后删掉一个空格，这太诡异了，我就让它删掉一个字符好了。&lt;/p&gt;
 &lt;figure data-raw=&quot;(setq-default electric-indent-inhibit t)

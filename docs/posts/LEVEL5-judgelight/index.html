@@ -45,7 +45,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     
     
-    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
     
     
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
@@ -196,9 +196,9 @@
             const parts = formatter.formatToParts(date);
             const obj = {};
             for (let {type, value} of parts) {
-              obj[type] = value
+              obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -533,7 +533,7 @@
   </div>
   <script type="text/javascript">
     documentReady(() => {
-      loadComment({
+      const p = loadComment({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "perPage": "10",
@@ -544,21 +544,29 @@
         "queryString": window.location.search,
         "basePath": "/posts/LEVEL5-judgelight/",
         "containerID": "comment-results"
-      }).then(() => {
+      });
+      // Something wrong.
+      if (p == null) {
+        return;
+      }
+      p.then(() => {
         // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
         // A modern way to show date in user's format.
         // But it shows date only by default, no time.
-        const formatter = new Intl.DateTimeFormat("zh-Hans", {
-          "year": "numeric",
-          "month": "2-digit",
-          "day": "2-digit",
-          "weekday": "short",
-          "hour": "2-digit",
-          "minute": "2-digit",
-          "second": "2-digit",
-          "timeZoneName": "short",
-          "hour12": false
-        });
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
         elementsEach(
           document.querySelectorAll("time.comment-full-date"),
           (e, i) => {
@@ -567,9 +575,9 @@
             const parts = formatter.formatToParts(date);
             const obj = {};
             for (let {type, value} of parts) {
-              obj[type] = value
+              obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -751,4 +759,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.12.1 at 2022-03-06T14:01:58.594Z. -->
+<!-- Page built by Hikaru v1.12.1 at 2022-03-21T08:43:27.995Z. -->

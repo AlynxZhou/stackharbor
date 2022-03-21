@@ -45,7 +45,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     
     
-    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
     
     
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
@@ -196,9 +196,9 @@
             const parts = formatter.formatToParts(date);
             const obj = {};
             for (let {type, value} of parts) {
-              obj[type] = value
+              obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -518,4 +518,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.12.1 at 2022-03-06T14:01:58.643Z. -->
+<!-- Page built by Hikaru v1.12.1 at 2022-03-21T08:43:28.046Z. -->

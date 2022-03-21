@@ -3,6 +3,7 @@ title: 我如何在 Emacs 里面处理缩进宽度和 Tab 宽度
 layout: post
 #comment: true
 created: 2022-03-06T22:00:00
+updated: 2022-03-07T09:11:02
 categories:
   - 计算机
   - 编程
@@ -140,9 +141,9 @@ tags:
 
 ```elisp
 (setq mode-line-misc-info '(:eval (format "%s %d %d"
-					  (if indent-tabs-mode "TAB" "SPC")
-					  indent-offset
-					  tab-width)))
+                                          (if indent-tabs-mode "TAB" "SPC")
+                                          indent-offset
+                                          tab-width)))
 ```
 
 最后我在网上抄了两个配置，一个是让它按回车时候不要自动缩进。另一个是修改默认的删除缩进的行为，默认当你在对着一个 Tab 按下退格键的时候，Emacs 把这个 Tab 变成缩进宽度数量的空格，然后删掉一个空格，这太诡异了，我就让它删掉一个字符好了。

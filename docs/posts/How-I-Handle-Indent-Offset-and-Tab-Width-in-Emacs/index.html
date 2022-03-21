@@ -45,7 +45,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     
     
-    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml" />
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
     
     
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
@@ -196,9 +196,9 @@
             const parts = formatter.formatToParts(date);
             const obj = {};
             for (let {type, value} of parts) {
-              obj[type] = value
+              obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -323,6 +323,10 @@
           <i class="far fa-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-03-06T14:00:00.000Z">3/6/2022, 10:00:00 PM</time></span>
         </div>
         
+        
+        <div class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2022-03-07T01:11:02.000Z">3/7/2022, 9:11:02 AM</time></span>
+        </div>
         
         
         
@@ -507,13 +511,13 @@
 </code></pre></figure>
 <p>有些 modeline 包含一个显示缩进信息的部分，比如 <code>doom-modeline</code> 显示 <code>TAB</code> 或者 <code>SPC</code> 表示使用 Tab 缩进或使用空格缩进，然后如果该模式有自己的缩进宽度变量就显示，没有就显示 Tab 宽度（我没仔细读，总之它对这俩不做显式区分）。而按照上文，我肯定是倾向显式区分这两个东西的，所以我们不用它的，而是自定义一段 modeline，第一部分显示 <code>TAB</code> 或 <code>SPC</code>，第二段显示 <code>indent-offset</code>，第三段显示 <code>tab-width</code>。我没太搞懂 Emacs 的 modeline constructor 的语法，我觉得我写对了但却没有，于是最后变成 <code>:eval</code> 一个 <code>format</code> 调用了。</p>
 <figure data-raw="(setq mode-line-misc-info '(:eval (format &quot;%s %d %d&quot;
-                      (if indent-tabs-mode &quot;TAB&quot; &quot;SPC&quot;)
-                      indent-offset
-                      tab-width)))
+                                          (if indent-tabs-mode &quot;TAB&quot; &quot;SPC&quot;)
+                                          indent-offset
+                                          tab-width)))
 " data-info="language-elisp" data-lang="elisp" class="code-block"><pre class="code"><code class="language-elisp">(setq mode-line-misc-info '(:eval (format "%s %d %d"
-                      (if indent-tabs-mode "TAB" "SPC")
-                      indent-offset
-                      tab-width)))
+                                          (if indent-tabs-mode "TAB" "SPC")
+                                          indent-offset
+                                          tab-width)))
 </code></pre></figure>
 <p>最后我在网上抄了两个配置，一个是让它按回车时候不要自动缩进。另一个是修改默认的删除缩进的行为，默认当你在对着一个 Tab 按下退格键的时候，Emacs 把这个 Tab 变成缩进宽度数量的空格，然后删掉一个空格，这太诡异了，我就让它删掉一个字符好了。</p>
 <figure data-raw="(setq-default electric-indent-inhibit t)
@@ -599,7 +603,7 @@
   </div>
   <script type="text/javascript">
     documentReady(() => {
-      loadComment({
+      const p = loadComment({
         "user": "AlynxZhou",
         "repo": "stackharbor",
         "perPage": "10",
@@ -610,21 +614,29 @@
         "queryString": window.location.search,
         "basePath": "/posts/How-I-Handle-Indent-Offset-and-Tab-Width-in-Emacs/",
         "containerID": "comment-results"
-      }).then(() => {
+      });
+      // Something wrong.
+      if (p == null) {
+        return;
+      }
+      p.then(() => {
         // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
         // A modern way to show date in user's format.
         // But it shows date only by default, no time.
-        const formatter = new Intl.DateTimeFormat("zh-Hans", {
-          "year": "numeric",
-          "month": "2-digit",
-          "day": "2-digit",
-          "weekday": "short",
-          "hour": "2-digit",
-          "minute": "2-digit",
-          "second": "2-digit",
-          "timeZoneName": "short",
-          "hour12": false
-        });
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
         elementsEach(
           document.querySelectorAll("time.comment-full-date"),
           (e, i) => {
@@ -633,9 +645,9 @@
             const parts = formatter.formatToParts(date);
             const obj = {};
             for (let {type, value} of parts) {
-              obj[type] = value
+              obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -817,4 +829,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.12.1 at 2022-03-06T14:01:58.536Z. -->
+<!-- Page built by Hikaru v1.12.1 at 2022-03-21T08:43:27.943Z. -->
