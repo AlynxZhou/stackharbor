@@ -3103,7 +3103,7 @@ clean:
     <published>2020-08-15T10:25:00.000Z</published>
     
     
-    <updated>2020-08-18T04:25:00.000Z</updated>
+    <updated>2022-03-21T08:46:46.000Z</updated>
     
     
     <summary type="html">
@@ -3133,6 +3133,8 @@ clean:
 &lt;p&gt;最后的效果其实还可以，完整的脚本就是 &lt;a href=&quot;/js/comment.js&quot;&gt;这个网站在用的 JS&lt;/a&gt;，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。&lt;/p&gt;
 &lt;p&gt;也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃&lt;/p&gt;
 &lt;h1 id=&quot;%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82&quot;&gt;&lt;/a&gt;其实你知道，烦恼（bug）会解决烦恼（bug）。&lt;/h1&gt;
+&lt;div class=&quot;alert-red&quot;&gt;更新（2022-03-21 16:46:46）：我终于发现 `fetch` 不会主动帮我做缓存的原因是我一直习惯性的在 DevTools 里面勾上 Disable Cache……所以下面这些其实都没有必要了，只要取消勾掉 Disable Cache，调试的时候就不会很快撞到查询频率次数限制了……&lt;/div&gt;
+
 &lt;div class=&quot;alert-green&quot;&gt;这一部分更新于 2020-08-17 10:34:00。&lt;/div&gt;
 
 &lt;p&gt;GitHub API 推荐用户 &lt;a href=&quot;https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码&lt;/a&gt;。我心想这也简单，那就在前端搞一个缓存就可以了。&lt;/p&gt;

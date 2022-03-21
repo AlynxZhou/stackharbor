@@ -2,7 +2,7 @@
 title: 基于 GitHub Issue 的前端评论框
 layout: post
 created: 2020-08-15 18:25:00
-updated: 2020-08-18 12:25:00
+updated: 2022-03-21 16:46:46
 categories:
   - 网站
   - ARIA
@@ -45,6 +45,8 @@ tags:
 也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃
 
 # 其实你知道，烦恼（bug）会解决烦恼（bug）。
+
+<div class="alert-red">更新（2022-03-21 16:46:46）：我终于发现 `fetch` 不会主动帮我做缓存的原因是我一直习惯性的在 DevTools 里面勾上 Disable Cache……所以下面这些其实都没有必要了，只要取消勾掉 Disable Cache，调试的时候就不会很快撞到查询频率次数限制了……</div>
 
 <div class="alert-green">这一部分更新于 2020-08-17 10:34:00。</div>
 
