@@ -91,10 +91,11 @@ Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-termin
 
 ## AZPiano
 
-一个把你的按键映射成钢琴并且能记录下来的 React Web App。
+一个把你的按键映射成钢琴并且能记录下来的 ~~React~~ Web App。更新：已经不是 React 实现的了，因为我发现所有功能我都可以用 Vanilla JS 写，而且 `create-react-app` 引入了大把大把的依赖，不管升级到哪个版本都有可能有风险的依赖。
 
 - 主页：<https://piano.alynx.one/>
-- 仓库：<https://github.com/AlynxZhou/azpiano-react/>
+- 仓库：<https://github.com/AlynxZhou/azpiano-vanilla/>
+- React 版仓库：<https://github.com/AlynxZhou/azpiano-react/>
 
 ## Alynx Live Wallpaper
 
