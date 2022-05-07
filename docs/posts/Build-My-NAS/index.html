@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="本来我是不打算装 NAS 的，甚至都把我的星际蜗牛关了，因为我觉得我又没有网络多人协作的需求，而且我醒着的时候我的台式机也醒着，我睡着了又不会用到网络存储。不过自从我买了相机开始拍照片录视频，存储空间就越来越紧张了，先是把我机箱里的硬盘从 2T 直接升级到 8T，又觉得没有冗余始终心慌慌。偏偏我现在这个机箱哪里都不错，就是机械硬盘位不太充裕。为了扩展存储空间，也只能装一个 NAS 了。">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.13.0">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Build-My-NAS/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+        
+      }
+      
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightElement(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value;
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>装了台 NAS - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        
+        
+        
+        <li role="menuitem"><a href="/"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        
+        
+        
+        
+        <li role="menuitem"><a href="/archives/"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        
+        
+        
+        <li role="menuitem"><a href="/categories/"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        
+        
+        
+        
+        <li role="menuitem"><a href="/tags/"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        
+        
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        
+        
+        
+        <li role="menuitem"><a href="//gallery.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        
+        
+        
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        
+        
+        
+        
+        <li role="menuitem"><a href="/about/"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Build-My-NAS/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Build-My-NAS/" itemprop="url">装了台 NAS</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-05-07T09:49:46.000Z">5/7/2022, 5:49:46 PM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Build-My-NAS/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="装了台 NAS" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>本来我是不打算装 NAS 的，甚至都把我的星际蜗牛关了，因为我觉得我又没有网络多人协作的需求，而且我醒着的时候我的台式机也醒着，我睡着了又不会用到网络存储。不过自从我买了相机开始拍照片录视频，存储空间就越来越紧张了，先是把我机箱里的硬盘从 2T 直接升级到 8T，又觉得没有冗余始终心慌慌。偏偏我现在这个机箱哪里都不错，就是机械硬盘位不太充裕。为了扩展存储空间，也只能装一个 NAS 了。</p>
+<a id="more"></a>
+
+<p>决定好装 NAS 之后比较难的就是选硬件了，我肯定不会买那些闭源拖拉机的，我要装 Linux。肯定排除掉星际蜗牛，因为我实在不放心用那个背板带四块硬盘。然后对这种低功耗的设备用那种主板和 CPU 集成的赛扬应该不错，还免了主动散热，不过问题是我不知道在哪里能买到。所以还是考虑普通零售的硬件，不过大部分零售的硬件都有点性能过剩了，挑来挑去挑出下面的一套配置，不过不建议大家直接拿过来用。</p>
+<ul>
+<li>CPU：i3-10105T 645</li>
+<li>主板：七彩虹 B460I 579</li>
+<li>机箱：乔思伯 N1 669</li>
+<li>电源：银欣 SX500-LG 549</li>
+<li>散热：利民 AXP90-X47 139</li>
+<li>内存：光威 8G DDR4 2666 169x2</li>
+<li>网卡：EDUP PCI-E 2.5Gbps 网卡 89</li>
+<li>SSD：闪迪 至尊高速 NVMe 256G 259</li>
+<li>HDD：西数 HC550 16T 1498x4</li>
+<li>HDD：希捷 酷鹰 2T 375</li>
+<li>扩展：乐扩 M.2 A+E Key 转 SATA 75</li>
+</ul>
+<p>下面简单介绍一下为什么选这套。</p>
+<p>首先装 NAS 第一个要决定的不是别的而是硬盘，毕竟你这设备就是拿来放硬盘的，因为台式机里面已经有 8T 的硬盘了，我也不想再经历换硬盘时候拷贝数据的痛苦，所以还是直接上了 16T 的。这种容量建议直接购买企业盘，不过也就和静音说拜拜了。没选希捷的银河系列不是因为别的，只是因为西数 HC 系列便宜点而已。选 4 块盘而不是 3 块的原因也很简单，我不会用 ZFS，肯定要用 btrfs，但是 btrfs 的 RAID5 有 bug，于是性能容量冗余的平衡点就是 RAID10 了，那就需要 4 块硬盘起步。</p>
+<p>决定好硬盘之后就得选合适的机箱，毕竟你得能把硬盘装进去，不过我对大部分的 NAS 机箱都不满意，有些类似个人产品或者众筹的机箱比如什么宝藏盒TANK之类的看起来很能装，但是造型不伦不类，做工也一般般，然后可能迎广或者万由有一些成品 NAS 机箱看起来不错，但是基本上是高配蜗牛，而且我实在不想用 flex 电源。其实某种意义上我是先看中乔思伯 N1 这个机箱才决定装的 NAS，我对这个牌子其实没什么好感，但这个机箱实在是过于好看，而且可以装 SFX 或者 SFX-L 电源，还是有很多零售产品可以选的。</p>
+<p>选好机箱以后就是机箱里能塞进什么硬件就塞什么硬件了，乔思伯 N1 和大部分 NAS 机箱一样都只能放 ITX 主板，但 ITX 主板可选的实在不多。首先我想要一个内置核显的 CPU，因为最简单的调试办法肯定是给机箱接上键盘鼠标显示器，也比较方便调整 BIOS，而 ITX 只有一个宝贵的 PCIE 插槽，再说 NAS 多半也没必要上个亮机卡耗电。而 AMD 那边 200GE 太弱了，Ryzen Pro 系列又太强了，实在不知道选什么比较好，而且也不容易买到最低配的 Ryzen Pro CPU，所以就选 Intel i3 了，正好还有带 T 的低功耗版本。同时 10 代的主板还比较好买，也就是说能买到新的。虽然这台机箱前面有 USB-C，不过实际上是和 USB 3.0 共享一个插座，所以也不需要主板有 USB-C 的插座。七彩虹这块 B460 的优点在于后面还是有一个标准的 USB-C 接口，以及能在京东自营买到。</p>
+<p>SFX 电源虽然不如 ATX 电源好选，但是仍然比 flex 电源好选太多了，而且这台机器还可以放下 SFX-L 的电源，12cm 的风扇肯定比 4cm 要安静很多。于是我就在京东随便挑了一个观感不坏的牌子的全模组 SFX-L 电源里功率最低的。不过装这个机箱的时候最好注意一点，买的电源的 24pin 线最好不要是那种捆成圆柱型的，因为需要从主板边上极小的缝隙里拉过来，排线肯定比圆柱线要容易过，银欣这款是排线。当然你是定制模组线的有钱人当我没说。</p>
+<p>这款机箱最高可以支持 70mm 的下压散热，所以其实完全可以买利民那款 12cm 的散热器，不过我觉得也无所谓了，我比较担心 12cm 的下压散热会导致在主板上装内存和 SSD 比较困难，9cm 的也够用了。</p>
+<p>内存其实是随便选的，因为我不用 ZFS，其它文件系统对于 ECC 也没那么严格的依赖。然后 i3 和 B460 也不会支持更高的频率了。</p>
+<p>考虑到我的台式机上有两个网口，分别是 1Gbps 和 2.5Gbps 的，我就在想可不可以把 NAS 和台式机通过 2.5Gbps 直接连起来（路由器什么时候普及 2.5Gbps 啊），这样速度基本上和访问本机的机械硬盘没有太大差距。但是主板厂家实在是太抠门了，本来 ITX 主板型号就不多，内置 2.5Gbps 网卡的就更少了。虽然让一个 2.5Gbps 的网卡占着 PCI-E x16 插槽实在是有点浪费，但也没别的选择了。至于万兆，考虑到要使用专门的线和专门的网卡，还得给台式机也装一个，算了吧，反正机械硬盘的阵列也跑不满万兆。</p>
+<p>然后系统盘只要随便搞一个 NVMe 就可以了，反正安装一个 Arch Linux 不会占用多少空间。实际上比较头痛的是怎么接上所有的硬盘。这款机箱有 5 个在背板上的 3.5 寸硬盘位和一个单独的 2.5 寸硬盘位。大部分 ITX 主板都只有 4 个 SATA 接口，本来我觉得接 4 盘的阵列够了，但是后来我发现北邮人 pt 可以使用我的交大学校邮箱注册……要是挂 PT，我觉得还是单独放一块硬盘比较好，那接口就不够用了。比较靠谱的办法是买 HBA 卡把 PCI-E 转成 SATA，但是已经被 2，5 Gbps 网卡用掉了。我还没有发现同时有网卡和 SATA 的 PCI-E 扩展卡。还有一个方案是 M.2 转 5 个 SATA 的转接卡，其实倒也可以用一块 2.5 寸的 SSD 当作系统盘，然后解放出这个 M.2 接口，不过我实在不放心把 4 盘阵列放在这种转接卡上……而且我估计系统盘也是不能接在转接卡上的。当然你可以买一块有 2.5 Gbps 网卡的 ITX 主板，不过那基本只有 Z590 可选了，最便宜的华擎 Z590 ITX 也要 1400。所以我最后采用的方案是放弃掉无线网卡，反正 NAS 摆在路由器附近可以拉网线，然后把无线网卡下面那个 A+E Key 的 M.2 接口利用上。有这样的转接卡，可以转接出两个 SATA 口，虽然我只要一个就够了。</p>
+<p>不过当我拿到转接卡的快递之后发现安装还是有点麻烦。最好的办法是拧下无线网卡之后发现那个保护罩可以拆掉一侧的面板，然后可以把无线网卡从保护罩上拿下来再换成转接卡。但是那个固定无线网卡的螺丝实在太紧了我拧不下来，只能放弃这个保护罩，反正转接卡应该也不会受到什么外力，就在我把转接卡插好打算开机之前，我发现还是有点问题……虽然 SATA 接口已经够矮了，但是里面那个用不上的 SATA 接口还是顶住了前面的音频接口，导致转接板是歪的。其实可以淘宝再买一个 M.2 A+E Key 的延长线，不过那样我纠结的就是把延长出来的转接卡固定在哪里了。不管了！反正我就要一个 SATA 口，用刀把里面的 SATA 口的顶端削掉吧！虽然削的很粗糙但是还是达到了效果，然后用一块胶带把那个口粘住，防止 SATA 接口里面的金属触点接触到音频口保护壳而短路，再把一块泡沫放到转接板后面顶住转接板，我觉得就差不多了。</p>
+<p>直接装上是歪的：</p>
+<p><img src="/posts/Build-My-NAS/1.jpg" alt="1.jpg"></p>
+<p>“高个的 SATA 接口被我给锯了，比矮个的还矮！”：</p>
+<p><img src="/posts/Build-My-NAS/2.jpg" alt="2.jpg"></p>
+<p>“磨”改之后的效果，应该没问题吧：</p>
+<p><img src="/posts/Build-My-NAS/3.jpg" alt="3.jpg"></p>
+<p>最后就是绞尽脑汁把各种线塞到 ITX 机箱里面，实在是太痛苦了。对了，这个机箱自带的风扇接线不是很长，而它那个硬盘背板上的插针又是满速的，如果你要是想插到主板上进行调速，最好自备一根 4pin 风扇延长线。</p>
+<p>剩下就没什么好说的了，毕竟我不打算在这里复述一遍 Arch Wiki。我对 btrfs 使用的参数是 <code>-m raid1c3 -d raid10</code>，然后在系统里设置了 samba 和 transmission 的daemon。最后附上一些装完的照片。</p>
+<p><img src="/posts/Build-My-NAS/4.jpg" alt="4.jpg"></p>
+<p><img src="/posts/Build-My-NAS/5.jpg" alt="5.jpg"></p>
+<p><img src="/posts/Build-My-NAS/6.jpg" alt="6.jpg"></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Telegram-Bot-as-Gallery-Backend/" rel="prev" title="用 Telegram 机器人做后端的照片墙"><span class="nav-title">用 Telegram 机器人做后端的照片墙</span><i class="bi bi-chevron-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      const p = loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "装了台 NAS",
+        "queryString": window.location.search,
+        "basePath": "/posts/Build-My-NAS/",
+        "containerID": "comment-results"
+      });
+      // Something wrong.
+      if (p == null) {
+        return;
+      }
+      p.then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value;
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">87</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">34</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">69</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.13.0 at 2022-05-07T09:53:58.962Z. -->
