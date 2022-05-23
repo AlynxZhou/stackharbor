@@ -65,19 +65,20 @@ ol, ul {
   padding-left: 2em;
 }
 
+/* Don't set border color explicitly if it can inherits font color. */
 a {
   position: relative;
-  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
   color: var(--color-link-font);
   text-decoration: none;
-  border-bottom: 0.05em dotted var(--color-link-font);
+  border-bottom: 0.05em dotted;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
 }
 
 a:hover {
   color: var(--color-link-hover-font);
-  border-bottom: 0.05em solid var(--color-link-hover-font);
+  border-bottom: 0.05em solid;
 }
-  
+
 a:active {
   top: 0.1em;
 }
@@ -122,7 +123,7 @@ a.button, button.button {
   /* Button should be inline-block so it can be scaled. */
   display: inline-block;
   position: relative;
-  transition: 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
   text-decoration: none;
   border-radius: var(--corner-radius);
   color: var(--color-button-font);
@@ -132,7 +133,6 @@ a.button, button.button {
 
 a.button:hover, button.button:hover {
   box-shadow: 0 0 1em 0.5em rgba(0, 0, 0, 0.19);
-  border: 0.1em solid var(--color-button-border);
   transform: scale(1.05, 1.05);
 }
 
@@ -309,7 +309,7 @@ figure.code-block pre.gutter {
    * Only show border of gutter, so when user choose no gutter in config,
    * there is no border for code.
    */
-  border-right: 0.1em dotted var(--color-code-block-font);
+  border-right: 0.1em dotted;
 }
 
 figure.code-block pre.code {
@@ -340,7 +340,7 @@ blockquote {
   /* This is relative to text. */
   padding: 0 1em;
   color: var(--color-quote-font);
-  border-left: 0.25em solid var(--color-quote-font);
+  border-left: 0.25em solid;
 }
 
 blockquote p {
@@ -354,8 +354,8 @@ blockquote.center-quote, blockquote.centerquote {
   padding: 0.5em 15%;
   color: var(--color-quote-font);
   border-left: none;
-  border-top: 0.2em solid var(--color-quote-font);
-  border-bottom: 0.2em solid var(--color-quote-font);
+  border-top: 0.2em solid;
+  border-bottom: 0.2em solid;
   text-align: center;
 }
 
@@ -380,7 +380,7 @@ div.alert-red a, div.alert-green a, div.alert-blue a {
 
 div.alert-red a:hover, div.alert-green a:hover, div.alert-blue a:hover {
   color: var(--color-light-link-hover-font);
-  border-bottom: 0.05em solid var(--color-light-link-hover-font);
+  border-bottom: 0.05em solid;
 }
 
 div.alert-red {
@@ -588,8 +588,7 @@ nav.nav ul li a:hover {
 }
 
 nav.nav ul li a.current {
-  color: var(--color-nav-link-hover-font);
-  background: var(--color-nav-current-background);
+  font-weight: bold;
 }
 
 button.nav-toggle, button.theme-toggle {
@@ -705,6 +704,10 @@ nav.pagination {
   text-align: center;
 }
 
+/**
+ * Don't set border color explicitly, or we will have conflict for current and
+ * hover styles.
+ */
 a.page-number {
   display: inline-block;
   font-size: 1.25rem;
@@ -712,18 +715,16 @@ a.page-number {
   margin: 0.1em 0.25em;
   text-decoration: none;
   color: var(--color-link-font);
-  border-bottom: 0.15em solid var(--color-link-font);
+  border-bottom: 0.15em solid;
+  transition: color 0.3s ease-in-out;
 }
 
 a.page-number:hover {
   color: var(--color-link-hover-font);
-  border-bottom: 0.15em solid var(--color-link-hover-font);
 }
 
 a.page-number.current {
-  color: var(--color-link-hover-font);
-  border-bottom: 0.15em solid var(--color-link-hover-font);
-  border-top: 0.1em solid var(--color-link-hover-font);
+  border-top: 0.1em solid;
 }
 
 nav.page-nav {
@@ -924,13 +925,13 @@ div.comment-info a {
   position: relative;
   color: var(--color-comment-info-link-font);
   text-decoration: none;
-  border-bottom: 0.05em dotted var(--color-comment-info-link-font);
+  border-bottom: 0.05em dotted;
   transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
 }
 
 div.comment-info a:hover {
   color: var(--color-comment-info-link-hover-font);
-  border-bottom: 0.05em solid var(--color-comment-info-link-hover-font);
+  border-bottom: 0.05em solid;
 }
 
 div.comment-info a:active {
@@ -945,9 +946,9 @@ div.comment-info span.comment-info-date {
 div.comment-info span.comment-info-association {
   margin: 0 0.5em;
   padding: 0 0.5em;
-  border: 0.05em solid var(--color-comment-info-font);
-  border-radius: var(--corner-radius);
   color: var(--color-comment-info-font);
+  border: 0.05em solid;
+  border-radius: var(--corner-radius);
 }
 
 div.comment-info a.comment-info-link {
@@ -1026,14 +1027,14 @@ input.search-input {
   width: 70%;
   height: 1.8em;
   border: none;
-  border-bottom: 0.1em dotted var(--color-search-font);
   color: var(--color-search-font);
   background: var(--color-search-background);
+  border-bottom: 0.1em dotted;
   transition: border-bottom 0.3s ease-in-out;
 }
 
 input.search-input:focus {
-  border-bottom: 0.1em solid var(--color-search-font);
+  border-bottom: 0.1em solid;
 }
 
 input.search-input::placeholder {
@@ -1101,8 +1102,8 @@ div.count-block {
   flex: 1 1 auto;
   overflow: auto;
   padding: 0.1em;
-  border-left: 0.05em var(--color-quote-font) solid;
-  border-right: 0.05em var(--color-quote-font) solid;
+  border-left: 0.05em solid var(--color-quote-font);
+  border-right: 0.05em solid var(--color-quote-font);
 }
 
 div.count-block:first-child {
@@ -1144,9 +1145,8 @@ div.sidebar-sticky {
   padding-bottom: 1em;
 }
 
-a.toc-link.active {
-  color: var(--color-link-hover-font);
-  border-bottom: 0.05em solid var(--color-link-hover-font);
+a.toc-link.current {
+  font-weight: bold;
 }
 
 footer.footer {
@@ -1161,13 +1161,13 @@ footer.footer a {
   position: relative;
   color: var(--color-footer-link-font);
   text-decoration: none;
-  border-bottom: 0.05em dotted var(--color-footer-link-font);
+  border-bottom: 0.05em dotted;
   transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
 }
 
 footer.footer a:hover {
   color: var(--color-footer-link-hover-font);
-  border-bottom: 0.05em solid var(--color-footer-link-hover-font);
+  border-bottom: 0.05em solid;
 }
 
 footer.footer a:active {
@@ -1264,7 +1264,7 @@ div.container {
   div.main-container {
     flex-direction: column;
   }
-  
+
   div.content, aside.sidebar {
     flex: 1 1 auto;
   }
@@ -1272,22 +1272,22 @@ div.container {
   div.sidebar-item {
     text-align: center;
   }
-  
+
   div.sidebar-item ul {
     padding: 0;
   }
-  
+
   div.sidebar-item ul li {
     display: inline-block;
     margin: 0.5em 1em;
   }
-  
+
   ol.toc {
     /* It is not supposed to hold the whole line. */
     display: inline-block;
     text-align: left;
   }
-  
+
   div.sidebar-sticky {
     position: static;
   }
@@ -1299,7 +1299,7 @@ div.container {
     /* Stretch logo and title when fold. */
     align-items: stretch;
   }
-  
+
   div.header-title, div.logo {
     text-align: center;
     flex: 1 1 auto;
@@ -1309,17 +1309,17 @@ div.container {
     flex-direction: column;
     padding: 0;
   }
-  
+
   nav.nav ul {
     display: none;
     white-space: normal;
   }
-  
+
   nav.nav ul li {
     display: block;
     margin: 0.1em 0;
   }
-  
+
   button.nav-toggle, button.theme-toggle {
     /* Take full line for easier click. */
     display: block;
@@ -1339,7 +1339,7 @@ div.container {
     flex-direction: column-reverse;
     align-items: stretch;
   }
-  
+
   div.footer-left, div.footer-right {
     text-align: center;
     flex: 1 1 auto;
