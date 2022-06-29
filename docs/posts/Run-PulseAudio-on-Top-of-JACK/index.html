@@ -394,7 +394,7 @@
 <p>当然实际上假如你理解了这个结构的话，其实也没必要只用一个声卡，完全可以用独立声卡录音用板载声卡输出，只是 JACK 是绑定独立声卡的，于是就像下图这样：</p>
 <p><img src="/posts/Run-PulseAudio-on-Top-of-JACK/some-interesting-things.png" alt="some-interesting-things"></p>
 <p>总之这样做的依据在于 JACK 被我们绑定了独立声卡，然后利用 PulseAudio 设置不同的输入输出设备控制基于 PulseAudio 的桌面程序的输入输出，同时它还可以把自己作为 JACK 的客户端。而具体到与声卡交互，则全部都是内核里面的 ALSA 组件控制的。这里没有涉及到使用 ALSA 用户态组件的客户端程序，因为 PulseAudio 会把自己伪装成 ALSA 的客户态组件，于是这些老旧的程序就被连接到了 PulseAudio 上面从而无法直接占据声卡了。</p>
-<p>了解原理之后就可以具体操作，首先需要安装 jack2，这个软件包包含的是 JACK 的组件，必须要装 jack2 因为 jack1 不支持 DBus 所以也就没办法和桌面交互了。安装 qjackctl 来控制 JACK，然后安装 pulseaudio-jack，这是让 PulseAudio 作为 JACK 客户端的兼容层。</p>
+<p>了解原理之后就可以具体操作，首先需要安装 <code>jack2</code> 和 <code>jack2-dbus</code>，这个软件包包含的是 JACK 的组件，必须要装 <code>jack2</code> 因为 <code>jack1</code> 不支持 DBus 所以也就没办法和桌面交互了。安装 <code>qjackctl</code> 来控制 JACK，然后安装 <code>pulseaudio-jack</code>，这是让 PulseAudio 作为 JACK 客户端的兼容层。</p>
 <p>然后需要启动 Qjackctl，在 Setup 的 Settings 选项卡里面选择 Advanced，将 Input Device 和 Output Device 全都设置为 2i4（应该就是 hw:USB 那一项），然后切换到 Misc 选项卡，像下图那样设置 Others 部分（基本就是除了 Keep child windows always on top 的全都勾上），这样就可以做到毫无感觉的启动 JACK（只要打开 Qjackctl 它就在后台启动 JACK，退出 Qjackctl 也只是退到后台）。</p>
 <p><img src="/posts/Run-PulseAudio-on-Top-of-JACK/misc-tab.png" alt="misc-tab"></p>
 <p>这样再次启动 Qjackctl，应该 JACK 就已经在控制 2i4 了，PulseAudio 应该会自动把 2i4 的控制权交给 JACK，省了不少事情。对于一些原生支持 JACK 的客户端程序来说这已经足够了，比如 Ardour 或者 Audacity，它们不经过 PulseAudio，直接连接到 JACK。接下来需要调整的是那些基于 PulseAudio 的客户端程序。</p>
@@ -575,7 +575,7 @@
       
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">87</a></div>
+        <div><a href="/archives/">88</a></div>
       </div>
       
       
@@ -589,7 +589,7 @@
       
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">69</a></div>
+        <div><a href="/tags/">70</a></div>
       </div>
       
       
@@ -706,4 +706,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.1 at 2022-05-23T09:32:30.317Z. -->
+<!-- Page built by Hikaru v1.13.1 at 2022-06-29T08:31:20.327Z. -->

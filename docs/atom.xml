@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2022-05-07T09:49:46.000Z</updated>
+  <updated>2022-06-29T08:11:02.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,58 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.5">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>从 PulseAudio 到 PipeWire</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/From-PulseAudio-to-PipeWire/" />
+    <id>https://sh.alynx.one/posts/From-PulseAudio-to-PipeWire/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-06-29T08:11:02.000Z</published>
+    
+    
+    <updated>2022-06-29T08:11:02.000Z</updated>
+    
+    
+    <summary type="html">
+      这篇的操作是在之前 运行在 JACK 上层的 PulseAudio 基础上进行的。 我自己的音频配置比较复杂，虽然 PipeWire 号称能兼容 PulseAudio 和 JACK 的 client 并且在某些发行版成为了默认选项，我还是没很快换掉。因为我想像之前用 PulseA…
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;这篇的操作是在之前 &lt;a href=&quot;/posts/From-PulseAudio-to-PipeWire/Run-PulseAudio-on-Top-of-JACK/&quot;&gt;运行在 JACK 上层的 PulseAudio&lt;/a&gt; 基础上进行的。&lt;/p&gt;
+&lt;p&gt;我自己的音频配置比较复杂，虽然 PipeWire 号称能兼容 PulseAudio 和 JACK 的 client 并且在某些发行版成为了默认选项，我还是没很快换掉。因为我想像之前用 PulseAudio 那样把 PipeWire 做成 JACK 的 client，虽然它的文档一直说支持这样，但是看起来两个月前代码才写好。于是我最近尝试了一下。&lt;/p&gt;
+&lt;p&gt;首先需要安装 &lt;code&gt;pipewire&lt;/code&gt;，&lt;code&gt;pipewire-alsa&lt;/code&gt;，&lt;code&gt;pipewire-pulse&lt;/code&gt; 和一个 PipeWire Media Session Manager，我用的是新的 WirePlumber 但是不要装 &lt;code&gt;pipewire-jack&lt;/code&gt; 因为这个是模拟 JACK server 的。然后配置你的 session manager 开启 &lt;code&gt;alsa.jack-device = true&lt;/code&gt;，然后理论上就能在设置里看到 JACK Sink/Source 了……但是……&lt;/p&gt;
+&lt;p&gt;首先装 &lt;code&gt;pipewire-pulse&lt;/code&gt; 会替代 &lt;code&gt;pulseaudio&lt;/code&gt;，但是按照上篇文章应该是安装了 &lt;code&gt;pulseaudio-jack&lt;/code&gt; 这个依赖 &lt;code&gt;pulseaudio&lt;/code&gt; 的包，解决方法是先卸载掉 &lt;code&gt;pulseaudio-jack&lt;/code&gt;。然后继续安装重新登录应该 PipeWire 已经起来了，按理说这时候启动 JACK 就可以，但是不管我怎么搞都看不到 JACK Sink/Source，所以就备用方案，直接用 PipeWire 替代 JACK 看看，虽然早就可以这么做了，但是之前之前尝试 PipeWire 感觉不是那么稳定，所以就没一直用。&lt;/p&gt;
+&lt;p&gt;使用 PipeWire 当 JACK 的话要安装 &lt;code&gt;pipewire-jack&lt;/code&gt;，和前面差不多的问题是 &lt;code&gt;pipewire-jack&lt;/code&gt; 替代 &lt;code&gt;jack2&lt;/code&gt; 但是 &lt;code&gt;jack2-dbus&lt;/code&gt; 依赖 &lt;code&gt;jack2&lt;/code&gt;，那就先删掉 &lt;code&gt;jack2-dbus&lt;/code&gt; 再装就好了，然后重新登录，一切正常，Qjackctl 的 Graph 也能正常操作。而且比较有趣的是这样原本使用 PulseAudio 的程序也会在 JACK Graph 里面显示成节点（因为最后都通过 PipeWire），使用 Ardour 录音也没什么问题。其实我的需求还是比较简单的，也不需要什么太低的延迟，只是很多录音的程序都用 JACK 所以才要用。&lt;/p&gt;
+&lt;p&gt;用了一段时间之后感觉没什么问题，设备之间来回切换也没有卡顿了，驱动我的 2i4 也是完全正常，以后应该就先这样用了。&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    
+    <category term="音频" label="音频" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E9%9F%B3%E9%A2%91/" />
+    
+    
+    <category term="录音" label="录音" scheme="https://sh.alynx.one/tags/%E5%BD%95%E9%9F%B3/" />
+    
+    <category term="PulseAudio" label="PulseAudio" scheme="https://sh.alynx.one/tags/PulseAudio/" />
+    
+    <category term="JACK" label="JACK" scheme="https://sh.alynx.one/tags/JACK/" />
+    
+    <category term="PipeWire" label="PipeWire" scheme="https://sh.alynx.one/tags/PipeWire/" />
+    
+  </entry>
   
   
   
@@ -2134,7 +2186,7 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
 &lt;p&gt;当然实际上假如你理解了这个结构的话，其实也没必要只用一个声卡，完全可以用独立声卡录音用板载声卡输出，只是 JACK 是绑定独立声卡的，于是就像下图这样：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Run-PulseAudio-on-Top-of-JACK/some-interesting-things.png&quot; alt=&quot;some-interesting-things&quot;&gt;&lt;/p&gt;
 &lt;p&gt;总之这样做的依据在于 JACK 被我们绑定了独立声卡，然后利用 PulseAudio 设置不同的输入输出设备控制基于 PulseAudio 的桌面程序的输入输出，同时它还可以把自己作为 JACK 的客户端。而具体到与声卡交互，则全部都是内核里面的 ALSA 组件控制的。这里没有涉及到使用 ALSA 用户态组件的客户端程序，因为 PulseAudio 会把自己伪装成 ALSA 的客户态组件，于是这些老旧的程序就被连接到了 PulseAudio 上面从而无法直接占据声卡了。&lt;/p&gt;
-&lt;p&gt;了解原理之后就可以具体操作，首先需要安装 jack2，这个软件包包含的是 JACK 的组件，必须要装 jack2 因为 jack1 不支持 DBus 所以也就没办法和桌面交互了。安装 qjackctl 来控制 JACK，然后安装 pulseaudio-jack，这是让 PulseAudio 作为 JACK 客户端的兼容层。&lt;/p&gt;
+&lt;p&gt;了解原理之后就可以具体操作，首先需要安装 &lt;code&gt;jack2&lt;/code&gt; 和 &lt;code&gt;jack2-dbus&lt;/code&gt;，这个软件包包含的是 JACK 的组件，必须要装 &lt;code&gt;jack2&lt;/code&gt; 因为 &lt;code&gt;jack1&lt;/code&gt; 不支持 DBus 所以也就没办法和桌面交互了。安装 &lt;code&gt;qjackctl&lt;/code&gt; 来控制 JACK，然后安装 &lt;code&gt;pulseaudio-jack&lt;/code&gt;，这是让 PulseAudio 作为 JACK 客户端的兼容层。&lt;/p&gt;
 &lt;p&gt;然后需要启动 Qjackctl，在 Setup 的 Settings 选项卡里面选择 Advanced，将 Input Device 和 Output Device 全都设置为 2i4（应该就是 hw:USB 那一项），然后切换到 Misc 选项卡，像下图那样设置 Others 部分（基本就是除了 Keep child windows always on top 的全都勾上），这样就可以做到毫无感觉的启动 JACK（只要打开 Qjackctl 它就在后台启动 JACK，退出 Qjackctl 也只是退到后台）。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/posts/Run-PulseAudio-on-Top-of-JACK/misc-tab.png&quot; alt=&quot;misc-tab&quot;&gt;&lt;/p&gt;
 &lt;p&gt;这样再次启动 Qjackctl，应该 JACK 就已经在控制 2i4 了，PulseAudio 应该会自动把 2i4 的控制权交给 JACK，省了不少事情。对于一些原生支持 JACK 的客户端程序来说这已经足够了，比如 Ardour 或者 Audacity，它们不经过 PulseAudio，直接连接到 JACK。接下来需要调整的是那些基于 PulseAudio 的客户端程序。&lt;/p&gt;
@@ -3524,86 +3576,6 @@ const loadCache = (name) =&amp;gt; {
     <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
     
     <category term="Hikaru" label="Hikaru" scheme="https://sh.alynx.one/tags/Hikaru/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>给你的主题来点暗色！</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Dark-Mode-in-Theme/" />
-    <id>https://sh.alynx.one/posts/Dark-Mode-in-Theme/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2020-08-04T09:15:00.000Z</published>
-    
-    
-    <updated>2020-08-07T02:50:00.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;/a&gt;跟着系统变色就行了吗？&lt;/h1&gt;
-&lt;p&gt;现在的系统大概都支持暗色模式（Linux 的桌面环境早就有这种设置了，Firefox 可以直接读取我的系统设置，Android/iOS 也都有暗色模式开关），浏览器也紧跟潮流提供了 &lt;code&gt;@media&lt;/code&gt; 的 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;查询属性&lt;/a&gt;（IE：那……是……什……么……）。理论上来说只要简单地在 CSS 里面查询然后编写修改颜色的代码就可以了，问题只是如何修改颜色比较轻松。&lt;/p&gt;
-&lt;h1 id=&quot;CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81&quot;&gt;&lt;/a&gt;CSS 变量是好东西！&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;使用 CSS 变量&lt;/a&gt; 当然是最简单的解决方案了，就像我们平时编程一样使用变量作为 &lt;code&gt;color&lt;/code&gt; 和 &lt;code&gt;background&lt;/code&gt; 的值，然后在查询到暗色模式的代码块里给这些变量重新赋值，一切都十分简单有条理，而且最重要的是你不需要一个一个选择器查找有哪些需要变色的属性，所有的颜色变量都是放在一起的。&lt;/p&gt;
-&lt;h1 id=&quot;%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81&quot;&gt;&lt;/a&gt;真是恨死 IE 这废物了！&lt;/h1&gt;
-&lt;p&gt;虽然 IE 有很多不支持的选项，但是不支持 CSS 变量真是让我工作量剧增的一件事情。虽然我从不测试我的网站在 IE 上能否运行，但是在最新版 IE 上一般都是没问题的，因此我也会放弃一些最新版 IE 不支持的新特性，CSS 变量就是其中之一。&lt;/p&gt;
-&lt;p&gt;既然没有办法用 CSS 变量，那就只能自己一个一个找选择器下面和颜色相关的属性，然后给它们重新设置属性了，真是找的人头晕眼花啊。&lt;/p&gt;
-&lt;p&gt;可能有人会说你不是用 CSS 预处理器吗，预处理器不是也有变量吗？但是预处理器是在生成阶段把变量编译掉了啊！不方便到运行时（浏览器）里去替换变量。&lt;/p&gt;
-&lt;h1 id=&quot;%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81&quot;&gt;&lt;/a&gt;我就是想在暗色浏览器里用亮色啊！&lt;/h1&gt;
-&lt;p&gt;在全部重新调整过颜色并能看之后（其实就是把浅色的色块换成深色，颜色层次基本不变，背景图搞个反色，至于那些彩色的按钮标签我实在没精力重新配色了，把透明度调低一点就好了），我自己还是比较喜欢自己一开始设计的样子，但我又是个习惯电脑全局暗色的人，这怎么能忍！&lt;/p&gt;
-&lt;p&gt;CSS 的媒体属性不像一般的属性，只能是浏览器设置我们读取，没有办法用 JS 控制，于是也就没法简单地利用这个添加切换按钮。上网搜了半天也只有曲线救国的方案。&lt;/p&gt;
-&lt;h1 id=&quot;%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%9B%B2%E7%BA%BF%E6%95%91%E5%9B%BD&quot;&gt;&lt;/a&gt;曲线救国&lt;/h1&gt;
-&lt;p&gt;如果并不是想那么和系统的设置同步而只是给自己的网站添加切换的话，并不需要媒体查询。只要设计一个按钮给 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 或 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 添加删除 class/attribute 就行了。然后如果要和系统同步，在 JavaScript 里也有 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;相关的 API&lt;/a&gt; 可以做到查询和监听，在检测到变化的时候也修改 class/attribute 即可。&lt;/p&gt;
-&lt;p&gt;我选择的是给 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 加 &lt;code&gt;data-theme=&quot;dark&quot;&lt;/code&gt; 或 &lt;code&gt;data-theme=&quot;light&quot;&lt;/code&gt; 属性，不选 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 是因为 WebKit 那些该死的不遵循标准的 scrollbar 伪类，文档没有说他们到底依附哪个元素，我尝试得到的是 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;。接下来只要把之前的 CSS 里面的媒体查询选择器改成 &lt;code&gt;html[data-theme=&quot;dark&quot;]&lt;/code&gt; 就行了。&lt;/p&gt;
-&lt;p&gt;不过还要注意继承关系，这样写的话有些属性并不是继承外面的，而是在这个选择器里面就近继承。比如假如修改了 &lt;code&gt;html[data-theme=&quot;dark&quot;] a&lt;/code&gt; 的边框，那 &lt;code&gt;html[data-theme=&quot;dark&quot;] a.cls&lt;/code&gt; 的边框会优先继承这个，而不是 &lt;code&gt;a.cls&lt;/code&gt;。我知道有些人可能会笑我半懂不懂了，但是我确实遇到了这个问题，并且思考了一下找到了原因。&lt;/p&gt;
-&lt;p&gt;还有一个比较尴尬的事情，我给一些元素设置了 &lt;code&gt;transition&lt;/code&gt; 用于 &lt;code&gt;:hover&lt;/code&gt; 之后加一个渐变颜色的效果，现在暗色模式也是修改颜色，导致这些元素会比其他元素慢变一下，没什么好办法因为你分不开两种 &lt;code&gt;color&lt;/code&gt; 变化。我的解决方案是一个一个找切换暗色模式时候会变属性的选择器，给它们也添加 &lt;code&gt;transition&lt;/code&gt;。效果还不错，不过 Chrome 在处理这种 CSS 动画时候竟然会掉帧？？？&lt;/p&gt;
-&lt;p&gt;不管了，反正我用 Firefox，Firefox 效果好得很，完全不掉帧。&lt;/p&gt;
-&lt;p&gt;更新（2020-08-07 10:50:00）：我怀疑 Chrome 想做新时代的 IE，其实并不是性能问题导致掉帧，WebKit 对于继承来的属性的 transition 存在问题，会导致不是同时变换而是有延迟的变换，效果糟透了，&lt;a href=&quot;https://stackoverflow.com/a/36779404&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;StackOverflow 上也有人遇到这个问题&lt;/a&gt;，看起来是 bug 并且不打算解决，而 Firefox 就没有这个问题。使用 CSS 变量在 WebKit 下效果会好一点，不过也不能给所有变色的元素加 transition，还是会卡，只能给 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 加一个，因为我的链接有 &lt;code&gt;:hover&lt;/code&gt; 时变色的 transition，都是 color 就没办法在那时 transition 而暗色模式时候不 transition。总之由于 WebKit 的存在导致没法让全部元素同步 transition，只能近似。两权相害取其轻，还是让 IE 用户只能用亮色吧，我最后还是选择了 CSS 变量。&lt;/p&gt;
-&lt;h1 id=&quot;%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E6%80%8E%E4%B9%88%E4%BD%A0%E8%BF%99%E7%A0%B4%E7%BD%91%E7%AB%99%E6%8D%A2%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%98%E8%A6%81%E9%87%8D%E6%96%B0%E7%82%B9%E4%B8%80%E6%AC%A1%EF%BC%9F&quot;&gt;&lt;/a&gt;怎么你这破网站换个页面还要重新点一次？&lt;/h1&gt;
-&lt;p&gt;一切看起来都十分美好，直到我把一个暗色页面切成亮色然后点了个链接，下一个页面并不会理会我们上一个页面设置了什么主题，又变成了暗色。每个页面点一下切换按钮也太烦人了，我们得来点持久化。&lt;/p&gt;
-&lt;p&gt;某个域名想在用户的浏览器里存点是完全可行的，使用 &lt;code&gt;localStorage&lt;/code&gt; 就行了，就是简单的键值对。但是这样我们就有了多种可能切换亮暗的动作：&lt;code&gt;localStorage&lt;/code&gt; 里面存的选项，网页加载时浏览器媒体查询的结果，用户点了网页上的切换按钮，用户点了系统切换亮暗的设置。这些的判断顺序要好好处理一下，不然某些就会被忽视掉变成“我点了怎么不动啊！！！”。&lt;/p&gt;
-&lt;p&gt;经过我考虑一下之后，这个玩意的逻辑应该是这样的：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;假如 &lt;code&gt;localStorage&lt;/code&gt; 里面没有值，用户是首次打开网站，此时读取媒体查询按照系统的主题设置。&lt;/li&gt;
-&lt;li&gt;否则说明用户之前打开过网站，已经有他自己的喜好了，按照 &lt;code&gt;localStorage&lt;/code&gt; 里面的值设置。&lt;/li&gt;
-&lt;li&gt;上两个步骤结束之后注册一个媒体查询监听器，用于响应用户修改系统设置。&lt;/li&gt;
-&lt;li&gt;注册一个按钮监听器，用于响应用户点击网页切换按钮设置。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;以上 1 和 2 的顺序不能反了，并且每一个设置动作里都要把这次设置的值写入 &lt;code&gt;localStorage&lt;/code&gt; 用于后续加载用户的选择。&lt;/p&gt;
-&lt;p&gt;现在看起来一切都很满意，是时候发布了！&lt;/p&gt;
-&lt;h1 id=&quot;%E7%94%A8%E6%88%B7%EF%BC%9A%E5%95%8A%EF%BC%81%E6%88%91%E7%9A%84%E7%9C%BC%E7%9D%9B%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E7%94%A8%E6%88%B7%EF%BC%9A%E5%95%8A%EF%BC%81%E6%88%91%E7%9A%84%E7%9C%BC%E7%9D%9B%EF%BC%81&quot;&gt;&lt;/a&gt;用户：啊！我的眼睛！&lt;/h1&gt;
-&lt;p&gt;我躺在床上用手机测试的时候又发现了一个问题。因为网页在生成的时候总有一个初始状态（JS 要等到 document 加载完成才开始处理 DOM，不像那些单页应用），假如我设置成暗色然后切换到别的页面，网页就会以亮色加载然后变成暗色，用户在晚上看起来就像是个闪光弹（伏拉什棒！）。&lt;/p&gt;
-&lt;p&gt;其实没什么好的解决办法，因为这是传统 HTML 页面的限制之一，我也不想找有没有什么新的东西能解决这些问题，最后的方案其实相当简单，既然亮色到暗色会让人受不了，我搞成暗色到亮色不就行了。&lt;/p&gt;
-&lt;p&gt;于是就是把模板里按钮的初始状态修改一下，渲染的时候出来的是 &lt;code&gt;data-theme=&quot;dark&quot;&lt;/code&gt;，假如用户选择亮色，加载页面时会有一个暗色到亮色的变化。反正我自己都不在意。&lt;/p&gt;
-&lt;p&gt;更新（2020-08-06 18:23:00）：我后来阅读了一些其它主题的代码，看它们是怎么在不使用单页应用的前提下解决这个问题的，结果方法相当简单，我自己也想得到：不用等到 &lt;code&gt;DOMContentLoaded&lt;/code&gt; 事件之后，反正只是修改 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 标签，直接在 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 标签里面编辑 &lt;code&gt;document.documentElement&lt;/code&gt; 是可以的，因为反正加载到 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 的时候肯定也已经加载到 &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; 了。所以就把修改这个属性和修改按钮的 DOM 分开了两部分，并且添加了一个 &lt;code&gt;storage&lt;/code&gt; 的监听器，这样假如打开了多个页面，一个页面切换其它页面也会跟随切换。&lt;/p&gt;
-&lt;h1 id=&quot;%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Dark-Mode-in-Theme/#%E4%B8%8D%E8%A6%81%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%81&quot;&gt;&lt;/a&gt;不要过度设计！&lt;/h1&gt;
-&lt;p&gt;经过这么一大堆折腾（代码行数++++++++），我甚至在想要不要支持每个页面单独设置亮暗初值，反正只要添加一个 front matter 然后在模板里判断一下嘛。不过后来想了想，就算有这么个功能又有什么用？实际意义几乎为零，徒增复杂度，所以还是不要过度设计了。&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/ARIA/" />
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
     
   </entry>
   
