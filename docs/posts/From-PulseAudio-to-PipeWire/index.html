@@ -13,7 +13,7 @@
     
     <meta name="author" content="Alynx Zhou">
     
-    <meta name="description" content="将我漫天心血一一抛到银河">
+    <meta name="description" content="这篇的操作是在之前 运行在 JACK 上层的 PulseAudio 基础上进行的。 我自己的音频配置比较复杂，虽然 PipeWire 号称能兼容 PulseAudio 和 JACK 的 client 并且在某些发行版成为了默认选项，我还是没很快换掉。因为我想像之前用 PulseAudio 那样把 PipeWire 做成 JACK 的 client，虽然它的文档一直说支持这样，但是看起来两个月前代码才写好。于是我最近尝试了一下。">
     
     
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
@@ -380,8 +380,10 @@
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <p>这篇的操作是在之前 <a href="/posts/From-PulseAudio-to-PipeWire/Run-PulseAudio-on-Top-of-JACK/">运行在 JACK 上层的 PulseAudio</a> 基础上进行的。</p>
+      <p>这篇的操作是在之前 <a href="/posts/Run-PulseAudio-on-Top-of-JACK/">运行在 JACK 上层的 PulseAudio</a> 基础上进行的。</p>
 <p>我自己的音频配置比较复杂，虽然 PipeWire 号称能兼容 PulseAudio 和 JACK 的 client 并且在某些发行版成为了默认选项，我还是没很快换掉。因为我想像之前用 PulseAudio 那样把 PipeWire 做成 JACK 的 client，虽然它的文档一直说支持这样，但是看起来两个月前代码才写好。于是我最近尝试了一下。</p>
+<a id="more"></a>
+
 <p>首先需要安装 <code>pipewire</code>，<code>pipewire-alsa</code>，<code>pipewire-pulse</code> 和一个 PipeWire Media Session Manager，我用的是新的 WirePlumber 但是不要装 <code>pipewire-jack</code> 因为这个是模拟 JACK server 的。然后配置你的 session manager 开启 <code>alsa.jack-device = true</code>，然后理论上就能在设置里看到 JACK Sink/Source 了……但是……</p>
 <p>首先装 <code>pipewire-pulse</code> 会替代 <code>pulseaudio</code>，但是按照上篇文章应该是安装了 <code>pulseaudio-jack</code> 这个依赖 <code>pulseaudio</code> 的包，解决方法是先卸载掉 <code>pulseaudio-jack</code>。然后继续安装重新登录应该 PipeWire 已经起来了，按理说这时候启动 JACK 就可以，但是不管我怎么搞都看不到 JACK Sink/Source，所以就备用方案，直接用 PipeWire 替代 JACK 看看，虽然早就可以这么做了，但是之前之前尝试 PipeWire 感觉不是那么稳定，所以就没一直用。</p>
 <p>使用 PipeWire 当 JACK 的话要安装 <code>pipewire-jack</code>，和前面差不多的问题是 <code>pipewire-jack</code> 替代 <code>jack2</code> 但是 <code>jack2-dbus</code> 依赖 <code>jack2</code>，那就先删掉 <code>jack2-dbus</code> 再装就好了，然后重新登录，一切正常，Qjackctl 的 Graph 也能正常操作。而且比较有趣的是这样原本使用 PulseAudio 的程序也会在 JACK Graph 里面显示成节点（因为最后都通过 PipeWire），使用 Ardour 录音也没什么问题。其实我的需求还是比较简单的，也不需要什么太低的延迟，只是很多录音的程序都用 JACK 所以才要用。</p>
@@ -688,4 +690,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.1 at 2022-06-29T08:31:20.297Z. -->
+<!-- Page built by Hikaru v1.13.1 at 2022-06-29T08:34:47.400Z. -->

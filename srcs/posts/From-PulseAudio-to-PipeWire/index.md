@@ -13,9 +13,11 @@ tags:
   - JACK
   - PipeWire
 ---
-这篇的操作是在之前 [运行在 JACK 上层的 PulseAudio](./Run-PulseAudio-on-Top-of-JACK/) 基础上进行的。
+这篇的操作是在之前 [运行在 JACK 上层的 PulseAudio](../Run-PulseAudio-on-Top-of-JACK/) 基础上进行的。
 
 我自己的音频配置比较复杂，虽然 PipeWire 号称能兼容 PulseAudio 和 JACK 的 client 并且在某些发行版成为了默认选项，我还是没很快换掉。因为我想像之前用 PulseAudio 那样把 PipeWire 做成 JACK 的 client，虽然它的文档一直说支持这样，但是看起来两个月前代码才写好。于是我最近尝试了一下。
+
+<!--more-->
 
 首先需要安装 `pipewire`，`pipewire-alsa`，`pipewire-pulse` 和一个 PipeWire Media Session Manager，我用的是新的 WirePlumber 但是不要装 `pipewire-jack` 因为这个是模拟 JACK server 的。然后配置你的 session manager 开启 `alsa.jack-device = true`，然后理论上就能在设置里看到 JACK Sink/Source 了……但是……
 
