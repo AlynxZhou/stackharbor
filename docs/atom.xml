@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2022-06-29T08:11:02.000Z</updated>
+  <updated>2022-07-06T04:19:32.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,108 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.5">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>阻止 clangd 污染项目根目录的一些方法</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Prevent-clangd-from-Making-Projects-Root-Dirty/" />
+    <id>https://sh.alynx.one/posts/Prevent-clangd-from-Making-Projects-Root-Dirty/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-07-06T04:19:32.000Z</published>
+    
+    
+    <updated>2022-07-06T04:19:32.000Z</updated>
+    
+    
+    <summary type="html">
+      &lt;p&gt;Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还不错，但是让人非常恼火的是用户要主动或者被迫地在项目根目录下面添加一些文件，比如 &lt;code&gt;.clang_complete&lt;/code&gt; 或者 &lt;code&gt;compile_commands.json&lt;/code&gt; 来让 clangd 知道项目需要包含哪些库的头文件，以及 clangd 会直接把建立的索引丢到项目根目录下面的 &lt;code&gt;.cache&lt;/code&gt; 目录里。虽然可以把这些加入 &lt;code&gt;.gitignore&lt;/code&gt;，但保不齐哪个脾气古怪的上游维护者会和你纠缠半天让你解释为什么要加这些，实在是很麻烦。&lt;/p&gt;
+
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还不错，但是让人非常恼火的是用户要主动或者被迫地在项目根目录下面添加一些文件，比如 &lt;code&gt;.clang_complete&lt;/code&gt; 或者 &lt;code&gt;compile_commands.json&lt;/code&gt; 来让 clangd 知道项目需要包含哪些库的头文件，以及 clangd 会直接把建立的索引丢到项目根目录下面的 &lt;code&gt;.cache&lt;/code&gt; 目录里。虽然可以把这些加入 &lt;code&gt;.gitignore&lt;/code&gt;，但保不齐哪个脾气古怪的上游维护者会和你纠缠半天让你解释为什么要加这些，实在是很麻烦。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;&lt;code&gt;compile_commands.json&lt;/code&gt; 比较好解决，clangd 提供了一个参数 &lt;code&gt;--compile-commands-dir=&amp;lt;string&amp;gt;&lt;/code&gt; 可以指定查找这个文件的目录，我直接把它设置为 &lt;code&gt;./build/&lt;/code&gt;，因为大部分项目的 &lt;code&gt;.gitignore&lt;/code&gt; 都会包含构建目录，也免得运行 &lt;code&gt;bear -- meson compile&lt;/code&gt; 之后再把这个文件从 &lt;code&gt;build&lt;/code&gt; 目录移出来。&lt;/p&gt;
+&lt;figure data-raw=&quot;(use-package lsp-mode
+  :ensure t
+  :commands lsp
+  :hook ((c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
+         (c-or-c++-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :bind (:map lsp-mode-map
+              (&amp;quot;M-.&amp;quot; . lsp-find-definition)
+              (&amp;quot;M-,&amp;quot; . lsp-find-references))
+  :custom
+  ;; Move lsp files into local dir.
+  (lsp-server-install-dir (locate-user-emacs-file &amp;quot;.local/lsp/&amp;quot;))
+  (lsp-session-file (locate-user-emacs-file &amp;quot;.local/lsp-session&amp;quot;))
+  (lsp-keymap-prefix &amp;quot;C-c l&amp;quot;)
+  ;; Only enable log for debug.
+  ;; This controls `*lsp-log*` buffer.
+  (lsp-log-io nil)
+  ;; JavaScript (ts-ls) settings.
+  ;; OMG, the FUCKING EVIL SHITTY VSCode TypeScript language server generates
+  ;; log in project dir, can MicroSoft stop to let their software put shit in
+  ;; front of users?
+  (lsp-clients-typescript-server-args &#039;(&amp;quot;--stdio&amp;quot; &amp;quot;--tsserver-log-file&amp;quot; &amp;quot;/tmp/tsserver-log.txt&amp;quot;))
+  (lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
+  ;; Always let clangd look for compile_commands.json under build dir so it will
+  ;; not make project root dirty.
+  (lsp-clients-clangd-args (&amp;quot;--header-insertion-decorators=0&amp;quot; &amp;quot;--compile-commands-dir=./build/&amp;quot;)))
+&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(use-package lsp-mode
+  :ensure t
+  :commands lsp
+  :hook ((c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
+         (c-or-c++-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :bind (:map lsp-mode-map
+              (&quot;M-.&quot; . lsp-find-definition)
+              (&quot;M-,&quot; . lsp-find-references))
+  :custom
+  ;; Move lsp files into local dir.
+  (lsp-server-install-dir (locate-user-emacs-file &quot;.local/lsp/&quot;))
+  (lsp-session-file (locate-user-emacs-file &quot;.local/lsp-session&quot;))
+  (lsp-keymap-prefix &quot;C-c l&quot;)
+  ;; Only enable log for debug.
+  ;; This controls `*lsp-log*` buffer.
+  (lsp-log-io nil)
+  ;; JavaScript (ts-ls) settings.
+  ;; OMG, the FUCKING EVIL SHITTY VSCode TypeScript language server generates
+  ;; log in project dir, can MicroSoft stop to let their software put shit in
+  ;; front of users?
+  (lsp-clients-typescript-server-args &#039;(&quot;--stdio&quot; &quot;--tsserver-log-file&quot; &quot;/tmp/tsserver-log.txt&quot;))
+  (lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
+  ;; Always let clangd look for compile_commands.json under build dir so it will
+  ;; not make project root dirty.
+  (lsp-clients-clangd-args (&quot;--header-insertion-decorators=0&quot; &quot;--compile-commands-dir=./build/&quot;)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;对于 &lt;code&gt;.cache/&lt;/code&gt; 就不是那么好解决了，根据 &lt;a href=&quot;https://github.com/clangd/clangd/issues/341#issuecomment-1003560792&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/clangd/clangd/issues/341#issuecomment-1003560792&lt;/a&gt;，似乎他们并没有关闭或者修改缓存目录的支持。不过我想到一个弯道超车的方案，&lt;code&gt;git&lt;/code&gt; 本身应该是有从其它位置加载用户定义的 &lt;code&gt;gitignore&lt;/code&gt; 文件的功能的，我利用这个写一个本地的 gitignore 不就行了吗，搜索之后得到 &lt;a href=&quot;https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file&lt;/a&gt;，操作起来也很简单。首先我把这个文件放到 &lt;code&gt;~/.config/git/gitignore&lt;/code&gt;，里面写上要忽略的 glob，然后运行 &lt;code&gt;git config --global core.excludesfile ~/.cache/git/gitignore&lt;/code&gt; 就大功告成。&lt;/p&gt;
+&lt;p&gt;不过就在我写这篇文章时，clangd 的 issue 上有人回复我，根据 &lt;a href=&quot;https://github.com/clangd/clangd/issues/184#issuecomment-998244415&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/clangd/clangd/issues/184#issuecomment-998244415&lt;/a&gt;，现在 clangd 应该是会把索引放在 &lt;code&gt;compile_commands.json&lt;/code&gt; 所在的目录，所以多少也算是解决了问题吧。虽然这样删掉构建目录之后索引缓存也没了，不过我觉得比起重建缓存，还是弄脏项目目录更恶心一点。&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/tags/%E7%BC%96%E7%A8%8B/" />
+    
+  </entry>
   
   
   
@@ -3523,63 +3625,6 @@ const loadCache = (name) =&amp;gt; {
     <category term="JavaScript" label="JavaScript" scheme="https://sh.alynx.one/tags/JavaScript/" />
     
     <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>和 cheerio 说再见！</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Drop-Cheerio/" />
-    <id>https://sh.alynx.one/posts/Drop-Cheerio/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2020-08-04T13:06:00.000Z</published>
-    
-    
-    <updated>2020-08-04T13:06:00.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;我早就想把 cheerio 从 Hikaru 的依赖里移出去了，倒不是我对他的功能有什么不满，但是一年不更新 NPM 上的包也太恶心了吧！&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;我早就想把 cheerio 从 Hikaru 的依赖里移出去了，倒不是我对他的功能有什么不满，但是一年不更新 NPM 上的包也太恶心了吧！&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;我的生成器使用 cheerio 的地方主要有两个，一是给标题生成喵点并依次生成 TOC，二是检查文章里相对路径的图片和链接引用并改成绝对路径，否则如果截取之后放在首页的摘要包含图片的话，会因为当前页面的地址变化而不工作。后者也是我自己编写生成器的原因之一，就是因为像 Hexo 或者 Hugo 这种已有的生成器内部并没有考虑，只能通过插件解决，我在写 Hexo 主题时嵌入了一个使用正则表达式的脚本，但相比之下我觉得还是一个能理解 HTML 的库更加可靠。所以后来我选了 cheerio 来做解析和修改以实现这些功能。&lt;/p&gt;
-&lt;p&gt;但是 cheerio 有一个 &lt;a href=&quot;https://github.com/cheeriojs/cheerio/issues/1198&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;很古怪的 bug&lt;/a&gt;，存在于它目前在 NPM 上最新的版本 &lt;code&gt;1.0.0-rc3&lt;/code&gt; 上。假如你使用 cheerio 解析并编辑包含中文的 HTML 的话，导出字符串时所有的中文都被编码成了 HTML 实体，导致进行下一步处理比如用 &lt;code&gt;substring&lt;/code&gt; 截断的话，字符串长度变化了，而且可能会在文字中间截断。假如你使用 &lt;code&gt;decodeEntities: false&lt;/code&gt; 的话，原本文档里的 &lt;code&gt;&amp;amp;lt;&lt;/code&gt; 一类的字符反而会被 cheerio 导出成 &lt;code&gt;&amp;lt;&lt;/code&gt;，变成一团乱麻。&lt;/p&gt;
-&lt;p&gt;这个 bug 非常古怪并且我花了一段时间来研究它，上一个版本 &lt;code&gt;0.22.0&lt;/code&gt; 使用 &lt;code&gt;decodeEntities: false&lt;/code&gt; 是没有这个问题的。最后发现原因是 cheerio 在 &lt;code&gt;1.0.0-rc1&lt;/code&gt; 开始引入 parse5 代替原本的 htmlparser2 作为默认的 HTML 解析器，而 parse5 在解析时并不会使用 &lt;code&gt;decodeEntities&lt;/code&gt; 这个参数，比如你输入 &lt;code&gt;&amp;amp;lt;&lt;/code&gt;，parse5 解析时会在节点里存储原本的值 &lt;code&gt;&amp;lt;&lt;/code&gt;，但 cheerio 在序列化的时候还是会依赖这个参数进行编码，所以假如传递 &lt;code&gt;false&lt;/code&gt; 进去，cheerio 就不会主动进行 encode，导致最后出来的是 &lt;code&gt;&amp;lt;&lt;/code&gt;。而 htmlparser2 会按照这个参数选择解不解码，所以也不会发生这种错误。&lt;/p&gt;
-&lt;p&gt;那这么看起来是 parse5 的问题？并不！parse5 有自己的序列化函数，和自己的解析函数是配套的，所以只要使用 parse5 的序列化函数就不会存在这个问题了。&lt;/p&gt;
-&lt;p&gt;最后总结起来修复的办法也有很多：首先其实序列化的时候并不需要将所有元素都编码成 HTML 实体，只要对几个字符进行转义即可，我提交了这样的 PR，但因为 cheerio 和它自己的序列化库 dom-serializer 是两个仓库，不是很好处理，而且其实也没有从根源上解决 htmlparser2 和 parse5 表现不一致的问题。cheerio 后来的提交中采用的是简单办法，假如使用 parse5 解析就继续使用 parse5 序列化就好了。&lt;/p&gt;
-&lt;p&gt;但是这个提交之后并没有发布到 NPM 上，NPM 挂的一直是有问题的 &lt;code&gt;1.0.0-rc3&lt;/code&gt; 版本，至于原因呢很简单，他们打算释出第一个稳定版本 &lt;code&gt;1.0.0&lt;/code&gt;，所以要等到所有 TODO 都解决了再发新版本！&lt;/p&gt;
-&lt;p&gt;搞毛啊老哥，你这样放着有 bug 的版本是把用户做宝搞吗？而且你是个函数库，下面好多人依赖你处理 DOM 呢，NodeJS 上提供 jQuery 模式的函数库大概也没什么别的替代品了，一堆项目在 issue 里问你就给个这破理由？&lt;/p&gt;
-&lt;p&gt;我选择的是锁死 &lt;code&gt;0.22.0&lt;/code&gt; 版本，其他下游的项目也都各自做了 workaround，要么安装 GitHub 上的 &lt;code&gt;1.0.0&lt;/code&gt; 分支要么回退版本。但总之都让强迫症很不爽啊！&lt;/p&gt;
-&lt;p&gt;大家等他发稳定版就这么等了一年，在这一年间有些项目比如 &lt;a href=&quot;https://github.com/hexojs/hexo/issues/3677&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Hexo 直接抛弃了 cheerio 用正则处理 HTML&lt;/a&gt;，虽然他们主要是为了性能。我倒不是那么在乎生成器的性能（真的在乎的话我就该去用 Hugo，而且我也不敢说我自己的代码写的很好）。&lt;/p&gt;
-&lt;p&gt;晚上睡觉前我突然想到假如只是过滤链接和图片并检查他们的属性的话其实不需要 jQuery 一样的 API，只需要能理解 HTML，那找个简单的解析器就可以了。而且第二天正好读了 &lt;a href=&quot;https://blog.phoenixlzx.com/2017/02/18/dont-ask-me-why-invent-another-planet-river-of-news/#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;卷老师的这篇博文&lt;/a&gt;，发现和我想的也差不多。于是就开始动手。&lt;/p&gt;
-&lt;p&gt;卷老师用的 sanitize-html 对我来说不太合适，因为我的静态生成器并不需要过滤内容——都是 Markdown 生成的，而且不安全也是使用者自己故意写的，不是我的责任，生成器也没有不安全的 HTML 的运行环境。sanitize-html 和 cheerio 用的都是 htmlparser2 作为解析器，虽然它号称自己是跑得最快的 HTML 解析器，但经过之前那个问题我还是心有余悸。而且 htmlparser2 是非常简单的基于事件回调的解析器（就像 Python 自带的那个，我太久不写 Python 不记得叫什么了），不会给你构建树状结构也不包含序列化，自己写序列化就容易像之前那个 cheerio bug 一样出问题。所以我考察了一下 parse5 发现还不错，会构建树状结构，数据结构都写在文档里，同时就是简单的可以直接操作的 Object，至于速度虽然慢一点但我并不太在乎那 10 毫秒。&lt;/p&gt;
-&lt;p&gt;于是我就先手动造了一些 wrapper 函数比如递归前置遍历一颗树来代替 cheerio 的 &lt;code&gt;$.each()&lt;/code&gt;，前置遍历正好是 HTML 文档自上往下的顺序，生成 TOC 的时候也是按照这个顺序来的，然后就是比如获取结点内文本的函数、获取属性和设置属性的函数之类的。至于插入结点我想了个巧妙的办法，因为 parse5 把最终解析到的文本作为单独的结点，我就直接在插入文本的函数里让 parse5 解析输入的 HTML，然后用得到的子结点替换被插入结点的子结点即可。&lt;/p&gt;
-&lt;p&gt;随后我重写了生成 TOC，生成标题 ID 和检查文章里相对路径的图片和链接引用并改成绝对路径的函数。然后写了点简单的测试样例跑了一下发现没问题，就用它们替换掉 Hikaru 的 &lt;code&gt;utils.js&lt;/code&gt; 里面用 cheerio 的版本，然后修改了 process 代码。我造的这几个简单的 wrapper 完全符合我的要求，于是提交打版本号发布一气呵成，一年不更新的 cheerio 就从我的生成器里拜拜了。&lt;/p&gt;
-&lt;p&gt;虽然嘴上说着不追求速度，但是凭我肉体的感觉还是多少快了一点儿，不过我也并不是很在乎生成的时间，感知真的不强，无所谓了。但我真的不能理解这种为了憋个大的不发版本把用户做宝搞的行为，就算是发个 &lt;code&gt;1.0.0-rc4&lt;/code&gt; 也比一年不发强吧！就算只是 make user happy 也好，何况面对的不是 user 而是其它项目的 dev 呢，都是同行，这行为算不算托大？反正我是习惯做了点改动就打个新版本，即使我自己安装的都是开发版本，我也希望能把我最新的修改送到用户手上，又不是 breaking change 或者什么不能随便更新的软件，打个小版本号至于那么难吗？？？&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="Hikaru" label="Hikaru" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/Hikaru/" />
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="Hikaru" label="Hikaru" scheme="https://sh.alynx.one/tags/Hikaru/" />
     
   </entry>
   
