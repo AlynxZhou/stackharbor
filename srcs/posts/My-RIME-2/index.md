@@ -100,8 +100,9 @@ for (const inputFileName of inputFileNames) {
     return line.split("\t")[0];
   });
   for (const w of words) {
-    // rime-emoji 的 opencc 词典同时包含简体中文和繁体中文，但你的词库多半只想要
-    // 其中一种，所以使用 opencc 对候选词进行一次转换。
+    // rime-emoji 的 opencc 词典同时包含简体中文和繁体中文，但比如极光拼音
+    // 这种默认不包含简繁转换的方案多半只想要其中一种，所以使用 opencc 对候选词
+    // 进行一次转换。
     const word = converter.convertSync(w);
     if (results[word] != null) {
       continue;
@@ -171,5 +172,7 @@ import_tables:
 ```
 
 顺便说一下我其实也不太了解这个扩展词库的顺序怎么设置比较好，不过我尝试的结果是像这样把 emoji 放在最后面，就不会每次输入在前面提示很多并不常用的 emoji 词组的问题。
+
+我这个脚本生成的词库只有简体，不过我发现朙月拼音的简繁转换还是可以正常处理简体词库的，也就是说会变成 词库出简体 -> 简繁转换 -> 繁体变 emoji，所以直接加给朙月拼音也没问题，如果我需要用繁体中文，可以直接切换方案到朙月拼音（虽然实际上我的配置是简化字版，不过看起来主要区别只是默认是否开启繁体转简体）。平时输入简体则直接用极光拼音。
 
 完整配置在 [GitHub Repo](https://github.com/AlynxZhou/alynx-rime-config/) 更新。
