@@ -170,4 +170,6 @@ import_tables:
   - emoji_suggestion
 ```
 
+顺便说一下我其实也不太了解这个扩展词库的顺序怎么设置比较好，不过我尝试的结果是像这样把 emoji 放在最后面，就不会每次输入在前面提示很多并不常用的 emoji 词组的问题。
+
 完整配置在 [GitHub Repo](https://github.com/AlynxZhou/alynx-rime-config/) 更新。
