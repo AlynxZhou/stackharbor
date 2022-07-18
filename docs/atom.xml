@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2022-07-06T04:19:32.000Z</updated>
+  <updated>2022-07-18T10:50:50.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,306 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.5">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>可能只适合我自己的 RIME 配置 2</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/My-RIME-2/" />
+    <id>https://sh.alynx.one/posts/My-RIME-2/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-07-18T10:50:50.000Z</published>
+    
+    
+    <updated>2022-07-18T10:50:50.000Z</updated>
+    
+    
+    <summary type="html">
+      &lt;p&gt;上一篇：&lt;a href=&quot;/posts/My-RIME/&quot;&gt;可能只适合我自己的 RIME 配置&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这一篇的原因是我最近在偶然间刷博客刷到一篇 &lt;a href=&quot;https://blog.coelacanthus.moe/posts/tech/a-new-rime-simp-pinyin-schema/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;讲 RIME 简体输入方案的文章&lt;/a&gt;，里面提到说朙月拼音因为是繁体转简体所以会出现各种错误（其实我个人倒是没怎么遇到过），然后推荐了一个完全针对简体字的输入方案 &lt;a href=&quot;https://github.com/hosxy/rime-aurora-pinyin/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;极光拼音&lt;/a&gt;，我自己其实只会输入简体字，不怎么需要输入繁体字的功能，所以打算试试。&lt;/p&gt;
+
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;上一篇：&lt;a href=&quot;/posts/My-RIME/&quot;&gt;可能只适合我自己的 RIME 配置&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这一篇的原因是我最近在偶然间刷博客刷到一篇 &lt;a href=&quot;https://blog.coelacanthus.moe/posts/tech/a-new-rime-simp-pinyin-schema/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;讲 RIME 简体输入方案的文章&lt;/a&gt;，里面提到说朙月拼音因为是繁体转简体所以会出现各种错误（其实我个人倒是没怎么遇到过），然后推荐了一个完全针对简体字的输入方案 &lt;a href=&quot;https://github.com/hosxy/rime-aurora-pinyin/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;极光拼音&lt;/a&gt;，我自己其实只会输入简体字，不怎么需要输入繁体字的功能，所以打算试试。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;已经有人在 AUR 打包了 &lt;code&gt;rime-aurora-pinyin&lt;/code&gt;，所以我直接拿来用了，然后类似于我上一篇文章处理朙月拼音的办法，给这个也做了一些自定义设置，主要是添加 emoji，修改默认的全角标点上屏行为，以及加载扩展过的字典，不过遇到了几个问题。&lt;/p&gt;
+&lt;p&gt;首先是我像上篇文章说的那样直接在 patch 下面添加 &lt;code&gt;__include: emoji_suggestion:/patch&lt;/code&gt; 并不能输入 emoji，我研究了很长时间，甚至以为 emoji 功能依赖繁体转简体。结果其实并不是，打开 &lt;code&gt;emoji_suggestion.yaml&lt;/code&gt; 可以看到下面几句：&lt;/p&gt;
+&lt;figure data-raw=&quot;patch:
+  switches/@next:
+    name: emoji_suggestion
+    reset: 1
+    states: [ &amp;quot;🈚️️\uFE0E&amp;quot;, &amp;quot;🈶️️\uFE0F&amp;quot; ]
+  &#039;engine/filters/@before 0&#039;:
+    simplifier@emoji_suggestion
+  emoji_suggestion:
+    opencc_config: emoji.json
+    option_name: emoji_suggestion
+    tips: all
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;patch:
+  switches/@next:
+    name: emoji_suggestion
+    reset: 1
+    states: [ &quot;🈚️️\uFE0E&quot;, &quot;🈶️️\uFE0F&quot; ]
+  &#039;engine/filters/@before 0&#039;:
+    simplifier@emoji_suggestion
+  emoji_suggestion:
+    opencc_config: emoji.json
+    option_name: emoji_suggestion
+    tips: all
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;switches&lt;/code&gt; 的部分可以先忽略，关键在于 &lt;code&gt;engine&lt;/code&gt;，这个 emoji 输入的原理是添加一个 filter，它接收一个输入，然后去附带的 opencc 的词典里查找这个输入得到对应的结果，再把这个输出给下一个 filter，按照词典，输入应该是中文字或者词，并且我看了一下词典，简体和繁体是都有的，所以也不存在简繁转换的问题。其实问题在于这段配置会把它作为第一个 filter 加入列表，而极光拼音的默认 filter 列表是这样的：&lt;/p&gt;
+&lt;figure data-raw=&quot;  filters:
+    - uniquifier
+    - charset_filter@gb2312
+    - charset_filter@gbk
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;  filters:
+    - uniquifier
+    - charset_filter@gb2312
+    - charset_filter@gbk
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;也就是说如果把 emoji 的 filter 加到第一个，它的输出就要继续经过 &lt;code&gt;uniquifier&lt;/code&gt;，&lt;code&gt;charset_filter@gb2312&lt;/code&gt;，&lt;code&gt;charset_filter@gbk&lt;/code&gt;，后两个是极光拼音为了排除掉几乎用不到的生僻字而添加的。而 emoji 显然不属于 &lt;code&gt;gb2312&lt;/code&gt; 也不属于 &lt;code&gt;gbk&lt;/code&gt;，自然就被过滤掉了。&lt;/p&gt;
+&lt;p&gt;所以我的解决方案是把 emoji 的 filter 加到列表最后，其实加到哪里无所谓，只要你确定前一个 filter 的输出是中文，能触发 emoji 的 opencc 词典就好了，我单独写了一个 &lt;code&gt;emoji_suggestion.patch.yaml&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;figure data-raw=&quot;switches/@next:
+  name: emoji_suggestion
+  reset: 1
+  states: [ &amp;quot;🈚️️\uFE0E&amp;quot;, &amp;quot;🈶️️\uFE0F&amp;quot; ]
+engine/filters/@next: simplifier@emoji_suggestion
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;switches/@next:
+  name: emoji_suggestion
+  reset: 1
+  states: [ &quot;🈚️️\uFE0E&quot;, &quot;🈶️️\uFE0F&quot; ]
+engine/filters/@next: simplifier@emoji_suggestion
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;导入的时候就写 &lt;code&gt;__include: emoji_suggestion.patch:/&lt;/code&gt;。不过虽然我这个不再需要原来的那个 YAML 了，还是需要 &lt;code&gt;rime-emoji&lt;/code&gt; 这个项目里其余的文件的。&lt;/p&gt;
+&lt;p&gt;顺便这也解释了为什么使用朙月拼音时候 emoji 后面的提示框显示的是繁体而非简体，因为朙月拼音从词库直接吐出来的是繁体，然后直接经过第一个 filter 就是 emoji，自然 emoji 查找时候用的就是繁体，然后才会经过简繁转换的 filter，所以如果把 emoji 的 filter 挪到简繁转换的 filter 后面，提示就会变成简体。&lt;/p&gt;
+&lt;p&gt;解决了 emoji 问题之后还有另一个问题，因为这个 emoji 的 filter 的输入是中文词组，也就意味着必须词库能吐出对应的中文词才能输入 emoji，比如说刚配置出来极光拼音的时候是吐不出来“笑哭”这个词的，所以就不会触发笑哭的 emoji。据说其它平台的输入法也有这个问题。其实没什么太好的解决方案，你可以说自己先手动打几次对应的词然后等 RIME 记住这个输入，不过我觉得也不太好。我想到的办法是既然需要词库里有，不如就让我用 emoji 的 opencc 词典生成一个 RIME 词库，然后扩展词库的时候加进去，这样无论如何都能吐出来了。其实也不是很麻烦，但是需要你把文字转成对应的拼音，那当然不能人工做这个操作了，我利用 Node 的 pinyin 库写了个脚本来做这件事：&lt;/p&gt;
+&lt;figure data-raw=&quot;#!/usr/bin/env node
+
+const fs = require(&amp;quot;fs&amp;quot;);
+const OpenCC = require(&amp;quot;opencc&amp;quot;);
+const {pinyin} = require(&amp;quot;pinyin&amp;quot;);
+
+// 我的词库只需要简体中文，如果你需要繁体中文，把 `t2s` 改成 `s2t` 应该就好了。
+const converter = new OpenCC(&amp;quot;t2s.json&amp;quot;);
+
+const outputFileName = &amp;quot;emoji_suggestion.dict.yaml&amp;quot;;
+
+const inputFileNames = [];
+
+if (process.argv.length &lt;= 2) {
+  console.log(`Usage: ${process.argv[1]} file1 file2 ...`);
+  process.exit(0);
+}
+
+for (let i = 2; i &lt; process.argv.length; ++i) {
+  inputFileNames.push(process.argv[i]);
+}
+
+const results = {};
+
+for (const inputFileName of inputFileNames) {
+  const words = fs.readFileSync(
+    inputFileName, &amp;quot;utf8&amp;quot;
+  ).split(&amp;quot;\n&amp;quot;).filter((line) =&gt; {
+    return line.length !== 0;
+  }).map((line) =&gt; {
+    return line.split(&amp;quot;\t&amp;quot;)[0];
+  });
+  for (const w of words) {
+    // rime-emoji 的 opencc 词典同时包含简体中文和繁体中文，但你的词库多半只想要
+    // 其中一种，所以使用 opencc 对候选词进行一次转换。
+    const word = converter.convertSync(w);
+    if (results[word] != null) {
+      continue;
+    }
+    const py = pinyin(word, {
+      &amp;quot;heteronym&amp;quot;: true,
+      &amp;quot;segment&amp;quot;: true,
+      &amp;quot;style&amp;quot;: &amp;quot;normal&amp;quot;
+    }).map((array) =&gt; {
+      // 有些时候就算利用结巴分词了，这个库仍然会没法判断多音字的读音然后丢出好
+      // 几个结果，只取第一个好了。
+      return array[0];
+    }).join(&amp;quot; &amp;quot;);
+    // 遇到处理不了的生僻字这个库会直接丢出原本的字……什么奇怪逻辑，只能判断是不
+    // 是字母或空格了。
+    if (/^[a-z ]*$/.test(py)) {
+      results[word] = py;
+    }
+  }
+}
+
+const outputLines = [
+  &amp;quot;# Rime dictionary for emoji&amp;quot;,
+  &amp;quot;# encoding: utf-8&amp;quot;,
+  &amp;quot;# Generated by `gen-emoji-dict.js` written by Alynx Zhou&amp;quot;,
+  &amp;quot;&amp;quot;,
+  &amp;quot;---&amp;quot;,
+  &amp;quot;name: emoji_suggestion&amp;quot;,
+  &amp;quot;version: \&amp;quot;0.1\&amp;quot;&amp;quot;,
+  &amp;quot;sort: by_weight&amp;quot;,
+  &amp;quot;...&amp;quot;,
+  &amp;quot;&amp;quot;
+];
+for (const k in results) {
+  outputLines.push(`${k}\t${results[k]}`);
+}
+// console.log(outputLines.join(&amp;quot;\n&amp;quot;));
+fs.writeFileSync(outputFileName, outputLines.join(&amp;quot;\n&amp;quot;), &amp;quot;utf8&amp;quot;);
+&quot; data-info=&quot;language-javascript&quot; data-lang=&quot;javascript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;#!/usr/bin/env node
+
+const fs = require(&quot;fs&quot;);
+const OpenCC = require(&quot;opencc&quot;);
+const {pinyin} = require(&quot;pinyin&quot;);
+
+// 我的词库只需要简体中文，如果你需要繁体中文，把 `t2s` 改成 `s2t` 应该就好了。
+const converter = new OpenCC(&quot;t2s.json&quot;);
+
+const outputFileName = &quot;emoji_suggestion.dict.yaml&quot;;
+
+const inputFileNames = [];
+
+if (process.argv.length &amp;lt;= 2) {
+  console.log(`Usage: ${process.argv[1]} file1 file2 ...`);
+  process.exit(0);
+}
+
+for (let i = 2; i &amp;lt; process.argv.length; ++i) {
+  inputFileNames.push(process.argv[i]);
+}
+
+const results = {};
+
+for (const inputFileName of inputFileNames) {
+  const words = fs.readFileSync(
+    inputFileName, &quot;utf8&quot;
+  ).split(&quot;\n&quot;).filter((line) =&amp;gt; {
+    return line.length !== 0;
+  }).map((line) =&amp;gt; {
+    return line.split(&quot;\t&quot;)[0];
+  });
+  for (const w of words) {
+    // rime-emoji 的 opencc 词典同时包含简体中文和繁体中文，但你的词库多半只想要
+    // 其中一种，所以使用 opencc 对候选词进行一次转换。
+    const word = converter.convertSync(w);
+    if (results[word] != null) {
+      continue;
+    }
+    const py = pinyin(word, {
+      &quot;heteronym&quot;: true,
+      &quot;segment&quot;: true,
+      &quot;style&quot;: &quot;normal&quot;
+    }).map((array) =&amp;gt; {
+      // 有些时候就算利用结巴分词了，这个库仍然会没法判断多音字的读音然后丢出好
+      // 几个结果，只取第一个好了。
+      return array[0];
+    }).join(&quot; &quot;);
+    // 遇到处理不了的生僻字这个库会直接丢出原本的字……什么奇怪逻辑，只能判断是不
+    // 是字母或空格了。
+    if (/^[a-z ]*$/.test(py)) {
+      results[word] = py;
+    }
+  }
+}
+
+const outputLines = [
+  &quot;# Rime dictionary for emoji&quot;,
+  &quot;# encoding: utf-8&quot;,
+  &quot;# Generated by `gen-emoji-dict.js` written by Alynx Zhou&quot;,
+  &quot;&quot;,
+  &quot;---&quot;,
+  &quot;name: emoji_suggestion&quot;,
+  &quot;version: \&quot;0.1\&quot;&quot;,
+  &quot;sort: by_weight&quot;,
+  &quot;...&quot;,
+  &quot;&quot;
+];
+for (const k in results) {
+  outputLines.push(`${k}\t${results[k]}`);
+}
+// console.log(outputLines.join(&quot;\n&quot;));
+fs.writeFileSync(outputFileName, outputLines.join(&quot;\n&quot;), &quot;utf8&quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;当然这个脚本不是很完美，比如 pinyin 识别不了的生僻字直接忽略了，不过我觉得它都识别不了，我多半也不会打出来的。然后虽然可以利用 jieba 分词提高多音字的准确性，还是有些不正确的，这些遇到了再手动纠错吧。&lt;/p&gt;
+&lt;p&gt;最后把这个词库添加进扩充词库：&lt;/p&gt;
+&lt;figure data-raw=&quot;# 原来要结合默认词库和第三方词库，
+# 需要自己编写一个词库让它 fallback 到极光拼音和第三方词库。
+# 我说佛老师对不起对不起，我不懂规矩。
+---
+name: aurora_pinyin.extended
+version: &amp;quot;0.1&amp;quot;
+# `by_weight`（按词频高低排序）或 `original`（保持原码表中的顺序）。
+sort: by_weight
+# 听说默认简化字八股文效果不好，还是算了。
+# https://blog.coelacanthus.moe/posts/tech/a-new-rime-simp-pinyin-schema/
+# 因为导入的朙月拼音词库是繁转简，所以这里不能导入简化字八股文。
+# 导入简化字八股文。
+# vocabulary: essay-zh-hans
+# 选择是否导入预设词汇表【八股文】。
+# use_preset_vocabulary: true
+
+import_tables:
+  # 主要是为了肥猫 wiki 词库。极光拼音好像是内置常用简化字表的。
+  - zhwiki
+  - aurora_pinyin
+  - emoji_suggestion
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;# 原来要结合默认词库和第三方词库，
+# 需要自己编写一个词库让它 fallback 到极光拼音和第三方词库。
+# 我说佛老师对不起对不起，我不懂规矩。
+---
+name: aurora_pinyin.extended
+version: &quot;0.1&quot;
+# `by_weight`（按词频高低排序）或 `original`（保持原码表中的顺序）。
+sort: by_weight
+# 听说默认简化字八股文效果不好，还是算了。
+# https://blog.coelacanthus.moe/posts/tech/a-new-rime-simp-pinyin-schema/
+# 因为导入的朙月拼音词库是繁转简，所以这里不能导入简化字八股文。
+# 导入简化字八股文。
+# vocabulary: essay-zh-hans
+# 选择是否导入预设词汇表【八股文】。
+# use_preset_vocabulary: true
+
+import_tables:
+  # 主要是为了肥猫 wiki 词库。极光拼音好像是内置常用简化字表的。
+  - zhwiki
+  - aurora_pinyin
+  - emoji_suggestion
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;完整配置在 &lt;a href=&quot;https://github.com/AlynxZhou/alynx-rime-config/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;GitHub Repo&lt;/a&gt; 更新。&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="输入法" label="输入法" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/" />
+    
+    <category term="RIME" label="RIME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/RIME/" />
+    
+    
+    <category term="输入法" label="输入法" scheme="https://sh.alynx.one/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" />
+    
+    <category term="RIME" label="RIME" scheme="https://sh.alynx.one/tags/RIME/" />
+    
+  </entry>
   
   
   
@@ -3377,254 +3677,6 @@ clean:
     
     
     <category term="GObject" label="GObject" scheme="https://sh.alynx.one/tags/GObject/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>基于 GitHub Issue 的前端评论框</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/" />
-    <id>https://sh.alynx.one/posts/Frontend-GitHub-Issue-Based-Comment/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2020-08-15T10:25:00.000Z</published>
-    
-    
-    <updated>2022-03-21T08:46:46.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;h1 id=&quot;%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;/a&gt;造轮子是病，得治。&lt;/h1&gt;
-&lt;p&gt;自从造了 &lt;a href=&quot;/posts/Frontend-Blog-Search/&quot;&gt;前端博客搜索引擎&lt;/a&gt; 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。&lt;/p&gt;
-&lt;p&gt;（这标题怎么写的和毕业论文似的！）&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;h1 id=&quot;%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82&quot;&gt;&lt;/a&gt;造轮子是病，得治。&lt;/h1&gt;
-&lt;p&gt;自从造了 &lt;a href=&quot;/posts/Frontend-Blog-Search/&quot;&gt;前端博客搜索引擎&lt;/a&gt; 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。&lt;/p&gt;
-&lt;p&gt;（这标题怎么写的和毕业论文似的！）&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82&quot;&gt;&lt;/a&gt;轮子也不是白造的。&lt;/h1&gt;
-&lt;p&gt;从我建站以来我的评论框就命途多舛，Disqus 虽然是最著名的评论系统，但是在国内访问不太顺畅。多说火了一段时间之后便关门大吉，HyperComments 则在我用了一段时间后发邮件提示要收费了，于是我之前的评论便华丽流失。而对于 Valine 这种基于 LeanCloud 的评论系统，我对 LeanCloud 不甚了解所以也不想尝试（而且 Valine 现在似乎转向闭源了，当初也许是个正确的决定）。然后赶上 Gitment 和 Gitalk 火了起来，大家意识到 GitHub Issue 正是个放评论的好地方。但是由于 &lt;a href=&quot;https://github.com/iissnan/hexo-theme-next/pull/1634#issuecomment-313596649&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Gitment 和 Gitalk 采用他们自己的服务器实现博客评论框提交——转发到 GitHub API 的实现&lt;/a&gt;，以及 &lt;a href=&quot;https://www.v2ex.com/t/535608&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;采用的 OAuth App 权限过高&lt;/a&gt;，有人怀疑这不太安全，于是我也没太敢参与。后来遇到 &lt;a href=&quot;https://github.com/wzpan/comment.js&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;comment.js&lt;/a&gt; 这个项目，它绕过了提交评论的问题——直接给一个到 GitHub Issue 的评论框的链接就可以了。于是我就开始用这个，至于什么 utterances 这种用 GitHub App 降低权限的评论系统，我也懒得尝试了。&lt;/p&gt;
-&lt;p&gt;但我为什么决定替换掉 comment.js 我已经记不清楚了，可能是为了对主题的显示有更好的掌握吧，毕竟它带有自己的 CSS 样式而且经常和我的冲突，也可能是因为它迟迟没提供像 Disqus 一样查找每篇文章评论数目的功能，不过它现在已经不再维护了，所以我也算是未雨绸缪。&lt;/p&gt;
-&lt;h1 id=&quot;%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82&quot;&gt;&lt;/a&gt;事情本该很简单。&lt;/h1&gt;
-&lt;p&gt;研究了一下原理其实并不是很难，首先就是从 GitHub 的 API 上 ajax 获取数据，然后操作 DOM 添进去就可以了，所以我就先阅读了 &lt;a href=&quot;https://docs.github.com/en/rest/reference/issues&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;GitHub API 的文档&lt;/a&gt;，总之还算容易，只要先获取一个仓库的 issue 列表，然后按照某种方法在里面查找相关的 issue，如果没有就渲染一个到新建 issue 的链接，否则获取该 issue 的全部评论并显示就可以了。&lt;/p&gt;
-&lt;p&gt;查找 issue 的 key 也算容易，我给它做成了函数参数，然后在主题模板里填一个每个页面唯一的字符串就行了，比如文章标题，然后新生成 issue 页面时候就把这个作为 issue 的标题，这样查找 GitHub Issue 页面时候也比较容易看。然后 GitHub 把 PR 也视为 issue，这个不要紧，收到数组之后过滤一下就好了。而显示数目我琢磨了一下其实也没什么难的嘛！我都获取到所有 issue 的信息了。做一个新的函数，主题作者在页面上放置一系列空的元素并设置好 class 属性，然后同样地把每个页面唯一的字符串设置成这些元素的属性（Disqus 也是这样的），加载函数时候把 class 作为参数传进去，分别从 issue 列表里查找对应的标题就可以了。还有一个奇葩问题是 GitHub issue 的 comments 指的是除了顶楼以外的评论，但很显然看起来不是这样的，这个也简单，直接把顶楼加到数组里就成了嘛。剩下就是艰苦的在浏览器里刀耕火种写 JS 拼 HTML 字符串发 ajax 请求写嵌套回调（没有 async/await 也太痛苦了吧！。&lt;/p&gt;
-&lt;p&gt;一切正常工作了一段时间一后我发现不太对劲，怎么评论太多的时候显示不全呢？仔细查了一下发现 GitHub API 是强制分页的，也就是说不管你怎么设置，最多一次只能获取 100 条评论，默认则是 30 条，本来我不太想给博客加评论分页功能的，现在看来是 GitHub 被迫让我加啊。当然这个并不是最痛苦的，最痛苦的是它查找仓库的 issue 列表的时候也是强制分页的！这就麻烦了，还记得我们之前说要获取到列表之后查找标题吗？获取不到完整列表还怎么查找啊！&lt;/p&gt;
-&lt;p&gt;当然你可以说按顺序多查几页不就行了嘛，这就是它分页难受的地方了！ajax 是异步的啊亲！你不会想让我一个 for 循环几个 ajax 还指望优雅的等他们结束了再跑查找吧！我知道能用 &lt;code&gt;Promise.all()&lt;/code&gt; 解决，但是由于我大发慈悲的支持使用 IE11 的用户（微软我&amp;amp;A%￥S&amp;amp;……省略一千字儒雅随和），所以我的函数是基于回调的，那也没什么办法。而且这样首先你得读一下仓库信息才能知道有多少个 open 的 issue（没错只能算 open 的不能算 close 的！所以在后面查 issue 的时候我也不得不筛选掉 close 的，不过这大概也许是个 feature？），然后自己计算有多少页。最后我只能造了一个不那么优雅的尾递归回调（反正就那个意思），不过它工作的不错，这样我就可以获取到全部的 issue 列表了。&lt;/p&gt;
-&lt;p&gt;然后后面其实还是差不多，至于评论分页又不一样了，既然 GitHub 只有分页 API，我也就半推半就啊不是将计就计吧。我才不要继续获取全部评论了，我也每次直接获取 GitHub 那边的一页就行了，每页个数则由主题作者传参进来。至于如何确定我要哪一页呢？和搜索功能一样，继续前端解析 query string 呗。根据 issue 评论总数计算一下有几页，然后生成几个链接放在页尾，每次加载时候解析一下参数确定当前页是哪个即可。当然，不要忘了 issue 顶楼不算评论，计算分页的时候也不要给它加进去！而且既然是这么分页，我也懒得把顶楼算在里面了（不然真的麻烦的要死啊后面分页和每页个数全乱了），所以假如你设置每页 10 个评论，那第一页其实有 11 个，别烦我，代码在那，不满意自己改……然后继续刀耕火种……&lt;/p&gt;
-&lt;p&gt;为了减轻负担，我没有实现太多的功能，比如时间戳我没有搞成什么几分钟几小时前，这种东西又不清晰又浪费带宽，我只搞了&lt;del&gt;基于 marked 的 Markdown 渲染（必须的）和&lt;/del&gt;语法高亮，Markdown 渲染不是必须的，因为你可以 &lt;a href=&quot;https://docs.github.com/en/rest/overview/media-types#comment-body-properties&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;设置 header 让 GitHub 直接返回 HTML&lt;/a&gt;。为了保证效果统一，这个 JS 只是建立了 HTML 布局，给每个元素添加了 class，具体的样式则完全是主题自己编写的，所以配合起来也比较好看。&lt;/p&gt;
-&lt;p&gt;最后的效果其实还可以，完整的脚本就是 &lt;a href=&quot;/js/comment.js&quot;&gt;这个网站在用的 JS&lt;/a&gt;，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。&lt;/p&gt;
-&lt;p&gt;也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃&lt;/p&gt;
-&lt;h1 id=&quot;%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82&quot;&gt;&lt;/a&gt;其实你知道，烦恼（bug）会解决烦恼（bug）。&lt;/h1&gt;
-&lt;div class=&quot;alert-red&quot;&gt;更新（2022-03-21 16:46:46）：我终于发现 `fetch` 不会主动帮我做缓存的原因是我一直习惯性的在 DevTools 里面勾上 Disable Cache……所以下面这些其实都没有必要了，只要取消勾掉 Disable Cache，调试的时候就不会很快撞到查询频率次数限制了……&lt;/div&gt;
-
-&lt;div class=&quot;alert-green&quot;&gt;这一部分更新于 2020-08-17 10:34:00。&lt;/div&gt;
-
-&lt;p&gt;GitHub API 推荐用户 &lt;a href=&quot;https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码&lt;/a&gt;。我心想这也简单，那就在前端搞一个缓存就可以了。&lt;/p&gt;
-&lt;p&gt;然后我搜索了一番找到了 CacheStorage，看起来它是唯一一个跨标签页的基于 Session 的正宗的前端缓存。但是很显然 IE 又不支持，而且这个 API 基于 Promise 并且只能缓存 Response 对象，也就是说没办法简单的通过在 XHR 的时候判断一下跳过不支持的情况，要 Polyfill 则需要引入完整的 Promise 和 fetch/Response，所以我们做了一个&lt;del&gt;艰难&lt;/del&gt;容易的决定——是时候去掉 IE 支持了！&lt;/p&gt;
-&lt;p&gt;于是我把请求 API 的函数改成了如下操作：&lt;/p&gt;
-&lt;figure data-raw=&quot;let cachePromise = window.caches.open(&amp;quot;cacheName&amp;quot;);
-
-// Fetching JSON with cache for GitHub API.
-const cachedFetchJSON = (path, opts = {}) =&gt; {
-  let cachedResponse = null;
-  return cachePromise.then((cache) =&gt; {
-    return cache.match(path);
-  }).then((response) =&gt; {
-    // No cache or no ETag, just re-fetch;
-    if (response == null || !response.headers.has(&amp;quot;ETag&amp;quot;)) {
-      return window.fetch(path, opts);
-    }
-    // Ask GitHub API whether cache is outdated.
-    cachedResponse = response;
-    opts[&amp;quot;headers&amp;quot;] = opts[&amp;quot;headers&amp;quot;] || {};
-    opts[&amp;quot;headers&amp;quot;][&amp;quot;If-None-Match&amp;quot;] = cachedResponse.headers.get(&amp;quot;ETag&amp;quot;);
-    return window.fetch(path, opts);
-  }).then((response) =&gt; {
-    if (response.status === 200) {
-      // No cache or cache outdated and succeed.
-      // Update cache.
-      cachePromise.then((cache) =&gt; {
-        return cache.put(path, response);
-      });
-      // Cache needs an unconsumed response,
-      // so we clone respone before consume it.
-      return response.clone().json();
-    } else if (response.status === 304 &amp;amp;&amp;amp; cachedResponse != null) {
-      // Not modified so use cache.
-      return cachedResponse.clone().json();
-    } else {
-      // fetch does not reject on HTTP error, so we do this manually.
-      throw new Error(&amp;quot;Unexpected HTTP status code &amp;quot; + response.status);
-    }
-  });
-};
-&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;let cachePromise = window.caches.open(&quot;cacheName&quot;);
-
-// Fetching JSON with cache for GitHub API.
-const cachedFetchJSON = (path, opts = {}) =&amp;gt; {
-  let cachedResponse = null;
-  return cachePromise.then((cache) =&amp;gt; {
-    return cache.match(path);
-  }).then((response) =&amp;gt; {
-    // No cache or no ETag, just re-fetch;
-    if (response == null || !response.headers.has(&quot;ETag&quot;)) {
-      return window.fetch(path, opts);
-    }
-    // Ask GitHub API whether cache is outdated.
-    cachedResponse = response;
-    opts[&quot;headers&quot;] = opts[&quot;headers&quot;] || {};
-    opts[&quot;headers&quot;][&quot;If-None-Match&quot;] = cachedResponse.headers.get(&quot;ETag&quot;);
-    return window.fetch(path, opts);
-  }).then((response) =&amp;gt; {
-    if (response.status === 200) {
-      // No cache or cache outdated and succeed.
-      // Update cache.
-      cachePromise.then((cache) =&amp;gt; {
-        return cache.put(path, response);
-      });
-      // Cache needs an unconsumed response,
-      // so we clone respone before consume it.
-      return response.clone().json();
-    } else if (response.status === 304 &amp;amp;&amp;amp; cachedResponse != null) {
-      // Not modified so use cache.
-      return cachedResponse.clone().json();
-    } else {
-      // fetch does not reject on HTTP error, so we do this manually.
-      throw new Error(&quot;Unexpected HTTP status code &quot; + response.status);
-    }
-  });
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;当然理想很丰满现实很骨感，在不支持 CacheStorage 的浏览器里要 fallback 到不带缓存的版本，本来我以为很简单，但是……（下面开启吐槽时间。）&lt;/p&gt;
-&lt;blockquote class=&quot;center-quote&quot;&gt;支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。&lt;/blockquote&gt;
-
-&lt;p&gt;为什么非 HTTPS + localhost 不能用 CacheStorage 啊，难道他们没考虑过在电脑上开发然后手机访问测试移动版吗？还是说他们打算在手机上起一个开发服务器？为什么 Firefox 在非 HTTPS 时限制 CacheStorage 的方法是在 Promise 里 reject 一个 Error 从而导致这个过程变成了异步的？为什么 CacheStorage 只能缓存 Response 而不是任意数据结构？Safari 不能完整支持 Response 对象也就算了，为什么移动版 Chrome 和 Firefox 也不支持？合着你们 fetch 返回的 Response 还不是 Response？这世界到底怎么了……&lt;/p&gt;
-&lt;p&gt;所以最后需要一个长长的基于 Promise 的判断加载函数：&lt;/p&gt;
-&lt;figure data-raw=&quot;// 加载评论的时候才加载缓存。
-let cachePromise = null;
-
-let fetchJSON = uncachedFetchJSON;
-
-const loadCache = (name) =&gt; {
-  // Unlike in .then(),
-  // we must explicit resolve and reject in a Promise&#039;s execuator.
-  return new Promise((resolve, reject) =&gt; {
-    if (cachePromise != null &amp;amp;&amp;amp; fetchJSON !== uncachedFetchJSON) {
-      return reject(new Error(&amp;quot;Cache is already loaded!&amp;quot;));
-    }
-    // Old version browsers does not support Response.
-    if (window.Response == null) {
-      return reject(
-        new Error(&amp;quot;Old version browsers does not support Response.&amp;quot;)
-      );
-    }
-    const testResponse = new window.Response();
-    // Safari and most mobile browsers do not support `Response.clone()`.
-    if (testResponse.headers == null || testResponse.clone == null) {
-      return reject(new Error(
-        &amp;quot;Safari and most mobile browsers do not support `Response.clone()`.&amp;quot;
-      ));
-    }
-    // Chromium and Safari set `window.caches` to `undefined` if not HTTPS.
-    if (window.caches == null) {
-      return reject(new Error(
-        &amp;quot;Chromium and Safari set `window.caches` to `undefined` if not HTTPS.&amp;quot;
-      ));
-    }
-    window.caches.open(&amp;quot;CacheStorageTest&amp;quot;).then((cache) =&gt; {
-      fetchJSON = cachedFetchJSON;
-      cachePromise = window.caches.open(name);
-      return window.caches.delete(&amp;quot;CacheStorageTest&amp;quot;);
-    }).then(() =&gt; {
-      return resolve();
-    }).catch((error) =&gt; {
-      // Firefox throws `SecurityError` if not HTTPS.
-      console.error(error);
-      return reject(new Error(&amp;quot;Firefox throws `SecurityError` if not HTTPS.&amp;quot;));
-    });
-  }).catch((error) =&gt; {
-    console.error(error);
-  });
-};
-&quot; data-info=&quot;language-JavaScript&quot; data-lang=&quot;JavaScript&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;// 加载评论的时候才加载缓存。
-let cachePromise = null;
-
-let fetchJSON = uncachedFetchJSON;
-
-const loadCache = (name) =&amp;gt; {
-  // Unlike in .then(),
-  // we must explicit resolve and reject in a Promise&#039;s execuator.
-  return new Promise((resolve, reject) =&amp;gt; {
-    if (cachePromise != null &amp;amp;&amp;amp; fetchJSON !== uncachedFetchJSON) {
-      return reject(new Error(&quot;Cache is already loaded!&quot;));
-    }
-    // Old version browsers does not support Response.
-    if (window.Response == null) {
-      return reject(
-        new Error(&quot;Old version browsers does not support Response.&quot;)
-      );
-    }
-    const testResponse = new window.Response();
-    // Safari and most mobile browsers do not support `Response.clone()`.
-    if (testResponse.headers == null || testResponse.clone == null) {
-      return reject(new Error(
-        &quot;Safari and most mobile browsers do not support `Response.clone()`.&quot;
-      ));
-    }
-    // Chromium and Safari set `window.caches` to `undefined` if not HTTPS.
-    if (window.caches == null) {
-      return reject(new Error(
-        &quot;Chromium and Safari set `window.caches` to `undefined` if not HTTPS.&quot;
-      ));
-    }
-    window.caches.open(&quot;CacheStorageTest&quot;).then((cache) =&amp;gt; {
-      fetchJSON = cachedFetchJSON;
-      cachePromise = window.caches.open(name);
-      return window.caches.delete(&quot;CacheStorageTest&quot;);
-    }).then(() =&amp;gt; {
-      return resolve();
-    }).catch((error) =&amp;gt; {
-      // Firefox throws `SecurityError` if not HTTPS.
-      console.error(error);
-      return reject(new Error(&quot;Firefox throws `SecurityError` if not HTTPS.&quot;));
-    });
-  }).catch((error) =&amp;gt; {
-    console.error(error);
-  });
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。&lt;/p&gt;
-&lt;h1 id=&quot;%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82&quot;&gt;&lt;/a&gt;由俭入奢易，由奢入俭难。&lt;/h1&gt;
-&lt;div class=&quot;alert-green&quot;&gt;这一部分更新于 2020-08-18 12:25:00。&lt;/div&gt;
-
-&lt;p&gt;我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 &lt;code&gt;fetch&lt;/code&gt; 和 &lt;code&gt;Promise&lt;/code&gt; 都有成熟的 polyfill，甚至 &lt;code&gt;URLSearchParams&lt;/code&gt; 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、&lt;code&gt;for…of…&lt;/code&gt; 循环以及 MapReduce（IE 竟然支持 &lt;code&gt;const&lt;/code&gt; 和 &lt;code&gt;let&lt;/code&gt; 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/ARIA/" />
-    
-    
-    <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
-    
-    <category term="评论" label="评论" scheme="https://sh.alynx.one/tags/%E8%AF%84%E8%AE%BA/" />
-    
-    <category term="JavaScript" label="JavaScript" scheme="https://sh.alynx.one/tags/JavaScript/" />
-    
-    <category term="ARIA" label="ARIA" scheme="https://sh.alynx.one/tags/ARIA/" />
     
   </entry>
   
