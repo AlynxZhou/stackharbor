@@ -363,6 +363,10 @@
         </div>
         
         
+        <div class="post-date meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2022-07-21T02:33:00.000Z">7/21/2022, 10:33:00 AM</time></span>
+        </div>
+        
         
         
         <div class="post-categories meta-block">
@@ -388,6 +392,7 @@
 <p>首先装 <code>pipewire-pulse</code> 会替代 <code>pulseaudio</code>，但是按照上篇文章应该是安装了 <code>pulseaudio-jack</code> 这个依赖 <code>pulseaudio</code> 的包，解决方法是先卸载掉 <code>pulseaudio-jack</code>。然后继续安装重新登录应该 PipeWire 已经起来了，按理说这时候启动 JACK 就可以，但是不管我怎么搞都看不到 JACK Sink/Source，所以就备用方案，直接用 PipeWire 替代 JACK 看看，虽然早就可以这么做了，但是之前之前尝试 PipeWire 感觉不是那么稳定，所以就没一直用。</p>
 <p>使用 PipeWire 当 JACK 的话要安装 <code>pipewire-jack</code>，和前面差不多的问题是 <code>pipewire-jack</code> 替代 <code>jack2</code> 但是 <code>jack2-dbus</code> 依赖 <code>jack2</code>，那就先删掉 <code>jack2-dbus</code> 再装就好了，然后重新登录，一切正常，Qjackctl 的 Graph 也能正常操作。而且比较有趣的是这样原本使用 PulseAudio 的程序也会在 JACK Graph 里面显示成节点（因为最后都通过 PipeWire），使用 Ardour 录音也没什么问题。其实我的需求还是比较简单的，也不需要什么太低的延迟，只是很多录音的程序都用 JACK 所以才要用。</p>
 <p>用了一段时间之后感觉没什么问题，设备之间来回切换也没有卡顿了，驱动我的 2i4 也是完全正常，以后应该就先这样用了。</p>
+<p>更新（2022-07-21）：我发现在 Ardour 里面录音还是有问题，具体表现是录超过 1 分钟就会报 xrun，怀疑是这个 bug：<a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2257" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2257</a>。不过其它 DAW 比如 REAPER 或者 Zrythm 都没问题，我倒是挺想换成 Zrythm 的，但是它还在 Beta 阶段。以及前面板插入耳机似乎设置里检测不到，但是开启一下 pauvcontrol 又能检测到了，总之是一些奇怪的小问题，也许我应该换回去。</p>
 
     </main>
     <footer class="post-footer">
@@ -692,4 +697,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.1 at 2022-07-18T11:07:32.250Z. -->
+<!-- Page built by Hikaru v1.13.1 at 2022-07-21T02:36:00.506Z. -->

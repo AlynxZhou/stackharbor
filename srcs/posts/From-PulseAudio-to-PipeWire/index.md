@@ -3,6 +3,7 @@ title: 从 PulseAudio 到 PipeWire
 layout: post
 #comment: true
 created: 2022-06-29T16:11:02
+updated: 2022-07-21T10:33:00
 categories:
   - 计算机
   - Linux
@@ -26,3 +27,5 @@ tags:
 使用 PipeWire 当 JACK 的话要安装 `pipewire-jack`，和前面差不多的问题是 `pipewire-jack` 替代 `jack2` 但是 `jack2-dbus` 依赖 `jack2`，那就先删掉 `jack2-dbus` 再装就好了，然后重新登录，一切正常，Qjackctl 的 Graph 也能正常操作。而且比较有趣的是这样原本使用 PulseAudio 的程序也会在 JACK Graph 里面显示成节点（因为最后都通过 PipeWire），使用 Ardour 录音也没什么问题。其实我的需求还是比较简单的，也不需要什么太低的延迟，只是很多录音的程序都用 JACK 所以才要用。
 
 用了一段时间之后感觉没什么问题，设备之间来回切换也没有卡顿了，驱动我的 2i4 也是完全正常，以后应该就先这样用了。
+
+更新（2022-07-21）：我发现在 Ardour 里面录音还是有问题，具体表现是录超过 1 分钟就会报 xrun，怀疑是这个 bug：<https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2257>。不过其它 DAW 比如 REAPER 或者 Zrythm 都没问题，我倒是挺想换成 Zrythm 的，但是它还在 Beta 阶段。以及前面板插入耳机似乎设置里检测不到，但是开启一下 pauvcontrol 又能检测到了，总之是一些奇怪的小问题，也许我应该换回去。
