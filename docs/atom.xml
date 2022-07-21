@@ -442,7 +442,7 @@ import_tables:
     <published>2022-06-29T08:11:02.000Z</published>
     
     
-    <updated>2022-07-21T02:33:00.000Z</updated>
+    <updated>2022-07-21T09:16:00.000Z</updated>
     
     
     <summary type="html">
@@ -462,6 +462,7 @@ import_tables:
 &lt;p&gt;使用 PipeWire 当 JACK 的话要安装 &lt;code&gt;pipewire-jack&lt;/code&gt;，和前面差不多的问题是 &lt;code&gt;pipewire-jack&lt;/code&gt; 替代 &lt;code&gt;jack2&lt;/code&gt; 但是 &lt;code&gt;jack2-dbus&lt;/code&gt; 依赖 &lt;code&gt;jack2&lt;/code&gt;，那就先删掉 &lt;code&gt;jack2-dbus&lt;/code&gt; 再装就好了，然后重新登录，一切正常，Qjackctl 的 Graph 也能正常操作。而且比较有趣的是这样原本使用 PulseAudio 的程序也会在 JACK Graph 里面显示成节点（因为最后都通过 PipeWire），使用 Ardour 录音也没什么问题。其实我的需求还是比较简单的，也不需要什么太低的延迟，只是很多录音的程序都用 JACK 所以才要用。&lt;/p&gt;
 &lt;p&gt;用了一段时间之后感觉没什么问题，设备之间来回切换也没有卡顿了，驱动我的 2i4 也是完全正常，以后应该就先这样用了。&lt;/p&gt;
 &lt;p&gt;更新（2022-07-21）：我发现在 Ardour 里面录音还是有问题，具体表现是录超过 1 分钟就会报 xrun，怀疑是这个 bug：&lt;a href=&quot;https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2257&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2257&lt;/a&gt;。不过其它 DAW 比如 REAPER 或者 Zrythm 都没问题，我倒是挺想换成 Zrythm 的，但是它还在 Beta 阶段。以及前面板插入耳机似乎设置里检测不到，但是开启一下 pauvcontrol 又能检测到了，总之是一些奇怪的小问题，也许我应该换回去。&lt;/p&gt;
+&lt;p&gt;更新（2022-07-21）：我把我的 Sony Playstation Eye 拔掉之后似乎 Ardour 就正常了……我记得这个摄像头的麦克风阵列以前可以用的，不知道为什么现在 PulseAudio 都用不了了，所以看起来不是 PipeWire 的问题。至于为什么只有 Ardour + PipeWire 会出现这个问题，我猜是因为 Ardour 会连接所有可用的设备给自己用，于是就被这个不工作的设备影响出现延迟，而原版的 JACK 只会请求一个设备，Ardour 根本就看不到 PS Eye。也许我还是得买个正经的摄像头……&lt;/p&gt;
 
     </content>
     

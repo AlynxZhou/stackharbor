@@ -3,7 +3,7 @@ title: 从 PulseAudio 到 PipeWire
 layout: post
 #comment: true
 created: 2022-06-29T16:11:02
-updated: 2022-07-21T10:33:00
+updated: 2022-07-21T17:16:00
 categories:
   - 计算机
   - Linux
@@ -29,3 +29,5 @@ tags:
 用了一段时间之后感觉没什么问题，设备之间来回切换也没有卡顿了，驱动我的 2i4 也是完全正常，以后应该就先这样用了。
 
 更新（2022-07-21）：我发现在 Ardour 里面录音还是有问题，具体表现是录超过 1 分钟就会报 xrun，怀疑是这个 bug：<https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2257>。不过其它 DAW 比如 REAPER 或者 Zrythm 都没问题，我倒是挺想换成 Zrythm 的，但是它还在 Beta 阶段。以及前面板插入耳机似乎设置里检测不到，但是开启一下 pauvcontrol 又能检测到了，总之是一些奇怪的小问题，也许我应该换回去。
+
+更新（2022-07-21）：我把我的 Sony Playstation Eye 拔掉之后似乎 Ardour 就正常了……我记得这个摄像头的麦克风阵列以前可以用的，不知道为什么现在 PulseAudio 都用不了了，所以看起来不是 PipeWire 的问题。至于为什么只有 Ardour + PipeWire 会出现这个问题，我猜是因为 Ardour 会连接所有可用的设备给自己用，于是就被这个不工作的设备影响出现延迟，而原版的 JACK 只会请求一个设备，Ardour 根本就看不到 PS Eye。也许我还是得买个正经的摄像头……
