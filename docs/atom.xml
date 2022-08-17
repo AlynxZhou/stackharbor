@@ -410,7 +410,7 @@ import_tables:
     <published>2022-07-06T04:19:32.000Z</published>
     
     
-    <updated>2022-07-06T04:19:32.000Z</updated>
+    <updated>2022-08-17T08:28:58.000Z</updated>
     
     
     <summary type="html">
@@ -450,7 +450,7 @@ import_tables:
   (lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
   ;; Always let clangd look for compile_commands.json under build dir so it will
   ;; not make project root dirty.
-  (lsp-clients-clangd-args (&amp;quot;--header-insertion-decorators=0&amp;quot; &amp;quot;--compile-commands-dir=./build/&amp;quot;)))
+  (lsp-clients-clangd-args (&amp;quot;--header-insertion-decorators=0&amp;quot; &amp;quot;--compile-commands-dir=./build/&amp;quot; &amp;quot;--enable-config&amp;quot;)))
 &quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(use-package lsp-mode
   :ensure t
   :commands lsp
@@ -477,10 +477,19 @@ import_tables:
   (lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
   ;; Always let clangd look for compile_commands.json under build dir so it will
   ;; not make project root dirty.
-  (lsp-clients-clangd-args (&quot;--header-insertion-decorators=0&quot; &quot;--compile-commands-dir=./build/&quot;)))
+  (lsp-clients-clangd-args (&quot;--header-insertion-decorators=0&quot; &quot;--compile-commands-dir=./build/&quot; &quot;--enable-config&quot;)))
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;对于 &lt;code&gt;.cache/&lt;/code&gt; 就不是那么好解决了，根据 &lt;a href=&quot;https://github.com/clangd/clangd/issues/341#issuecomment-1003560792&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/clangd/clangd/issues/341#issuecomment-1003560792&lt;/a&gt;，似乎他们并没有关闭或者修改缓存目录的支持。不过我想到一个弯道超车的方案，&lt;code&gt;git&lt;/code&gt; 本身应该是有从其它位置加载用户定义的 &lt;code&gt;gitignore&lt;/code&gt; 文件的功能的，我利用这个写一个本地的 gitignore 不就行了吗，搜索之后得到 &lt;a href=&quot;https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file&lt;/a&gt;，操作起来也很简单。首先我把这个文件放到 &lt;code&gt;~/.config/git/gitignore&lt;/code&gt;，里面写上要忽略的 glob，然后运行 &lt;code&gt;git config --global core.excludesfile ~/.cache/git/gitignore&lt;/code&gt; 就大功告成。&lt;/p&gt;
 &lt;p&gt;不过就在我写这篇文章时，clangd 的 issue 上有人回复我，根据 &lt;a href=&quot;https://github.com/clangd/clangd/issues/184#issuecomment-998244415&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/clangd/clangd/issues/184#issuecomment-998244415&lt;/a&gt;，现在 clangd 应该是会把索引放在 &lt;code&gt;compile_commands.json&lt;/code&gt; 所在的目录，所以多少也算是解决了问题吧。虽然这样删掉构建目录之后索引缓存也没了，不过我觉得比起重建缓存，还是弄脏项目目录更恶心一点。&lt;/p&gt;
+&lt;p&gt;更新（2022-08-17）：还有一个头疼的问题是 GLib 的 &lt;code&gt;g_clear_pointer&lt;/code&gt; 宏里面使用到了对指针本体取 &lt;code&gt;sizeof&lt;/code&gt; 的语法，而 clangd 默认会认为这是个错误，于是 lsp 就会标出一大堆问题。可以对项目进行设置关掉这一条，不过又会弄脏项目目录，查询文档得知 clangd 会读取 &lt;code&gt;~/.config/clangd/config.yaml&lt;/code&gt; 这个用户级别的配置文件，于是在里面写入内容关掉这条检查：&lt;/p&gt;
+&lt;figure data-raw=&quot;Diagnostics:
+  ClangTidy:
+    Remove: bugprone-sizeof-expression
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;Diagnostics:
+  ClangTidy:
+    Remove: bugprone-sizeof-expression
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;然后给 clangd 传递 &lt;code&gt;--enable-config&lt;/code&gt; 这个参数即可。&lt;/p&gt;
 
     </content>
     

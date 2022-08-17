@@ -3,6 +3,7 @@ title: 阻止 clangd 污染项目根目录的一些方法
 layout: post
 #comment: true
 created: 2022-07-06 12:19:32
+updated: 2022-08-17T16:28:58
 categories:
   - 计算机
   - 编程
@@ -43,9 +44,19 @@ Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还�
   (lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
   ;; Always let clangd look for compile_commands.json under build dir so it will
   ;; not make project root dirty.
-  (lsp-clients-clangd-args ("--header-insertion-decorators=0" "--compile-commands-dir=./build/")))
+  (lsp-clients-clangd-args ("--header-insertion-decorators=0" "--compile-commands-dir=./build/" "--enable-config")))
 ```
 
 对于 `.cache/` 就不是那么好解决了，根据 <https://github.com/clangd/clangd/issues/341#issuecomment-1003560792>，似乎他们并没有关闭或者修改缓存目录的支持。不过我想到一个弯道超车的方案，`git` 本身应该是有从其它位置加载用户定义的 `gitignore` 文件的功能的，我利用这个写一个本地的 gitignore 不就行了吗，搜索之后得到 <https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file>，操作起来也很简单。首先我把这个文件放到 `~/.config/git/gitignore`，里面写上要忽略的 glob，然后运行 `git config --global core.excludesfile ~/.cache/git/gitignore` 就大功告成。
 
 不过就在我写这篇文章时，clangd 的 issue 上有人回复我，根据 <https://github.com/clangd/clangd/issues/184#issuecomment-998244415>，现在 clangd 应该是会把索引放在 `compile_commands.json` 所在的目录，所以多少也算是解决了问题吧。虽然这样删掉构建目录之后索引缓存也没了，不过我觉得比起重建缓存，还是弄脏项目目录更恶心一点。
+
+更新（2022-08-17）：还有一个头疼的问题是 GLib 的 `g_clear_pointer` 宏里面使用到了对指针本体取 `sizeof` 的语法，而 clangd 默认会认为这是个错误，于是 lsp 就会标出一大堆问题。可以对项目进行设置关掉这一条，不过又会弄脏项目目录，查询文档得知 clangd 会读取 `~/.config/clangd/config.yaml` 这个用户级别的配置文件，于是在里面写入内容关掉这条检查：
+
+```
+Diagnostics:
+  ClangTidy:
+    Remove: bugprone-sizeof-expression
+```
+
+然后给 clangd 传递 `--enable-config` 这个参数即可。
