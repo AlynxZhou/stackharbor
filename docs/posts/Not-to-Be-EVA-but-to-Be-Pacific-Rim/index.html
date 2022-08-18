@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="想必把 2018 年的 DARLING in the FRANXX （名字太长了，后面简称 DitF 吧）称作有争议的作品应该不会有人反对，不过我恰好是个不喜欢追新番的人，不然也许我在 2018 年写篇关于这个的博客应该会能获得不少点击量。总之我在 2022 年下载了全集并且几乎是不间断的在三天之内看完了，可能不是特别好评价，但是觉得还是得写点什么。如果读者觉得“怎么复读了很多已有的观点”或者“和我想看的完全不一样”，还麻烦多包涵或者自行关闭标签页。">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.13.1">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+        
+      }
+      
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightElement(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value;
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>不应该做 EVA，而应该做环太平洋 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/archives/"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/categories/"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/tags/"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="//gallery.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/about/"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/" itemprop="url">不应该做 EVA，而应该做环太平洋</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-08-18T17:06:22.000Z">8/19/2022, 1:06:22 AM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/%E5%8A%A8%E6%BC%AB/" itemprop="url" rel="index"><span itemprop="name">动漫</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="不应该做 EVA，而应该做环太平洋" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>想必把 2018 年的 DARLING in the FRANXX （名字太长了，后面简称 DitF 吧）称作有争议的作品应该不会有人反对，不过我恰好是个不喜欢追新番的人，不然也许我在 2018 年写篇关于这个的博客应该会能获得不少点击量。总之我在 2022 年下载了全集并且几乎是不间断的在三天之内看完了，可能不是特别好评价，但是觉得还是得写点什么。如果读者觉得“怎么复读了很多已有的观点”或者“和我想看的完全不一样”，还麻烦多包涵或者自行关闭标签页。</p>
+<a id="more"></a>
+
+<p>我认为这是一个优点和缺点同样突出的作品，倒不像很多人觉得是烂尾，结尾至少情理之中可以接受。主要问题是在于塑造人物形象和完善背景设定之间的冲突，也就是标题里写的“不应该做 EVA，而应该做环太平洋”。看完之后我半开玩笑地和 <a href="https://ry.huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">@垚</a> 说：“都怪庵野秀明，非要在巨大机器人动画里面加上一堆反乌托邦末世玄学宗教的背景设定，导致后来的巨大机器人动画不这么做就好像缺了点什么一样。”我其实对巨大机器人动画不算是专家（比如我显然没看过高达），但我觉得对 EVA 还算是熟悉。</p>
+<p>虽然我想说的问题是剧情方面的，不过还是要简单提一下作画。<a href="https://ry.huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">@垚</a> 和我表示他一开始是奔着 TRIGGER 才去看的作品，结果看过之后对于动作场面大失所望。我其实也不是特别了解 TRIGGER，只是之前被他拉去电影院看了普罗米亚。一定要比较的话确实不管是美术风格还是动作场面都没有普罗米亚那么有特色，但我还是觉得至少在及格线以上了。我觉得特别出色的是机体的设计，不管是 EVA 还是环太平洋，机体设计都是偏向机械化的（虽然 EVA 内在是生物，但是外表仍然是机械），同时是男性化的设计。我还是头一次在动漫里看到女性形象和不是特别机械化设计的机体，而且甚至有丰富的表情，非常新鲜的同时也很符合设定（实际上动画里很多时候使用了 FRANXX 的形象代替女性寄驶员），属于是一个巨大的加分项。叫龙的设计也算新鲜，至少对我来说，看第一集的时候我明明期待的是出来一个传统的怪兽形象的，结果出来的是这么一种可以算是放飞自我的东西。虽然在逻辑上可能比较难以解释它的存在性，不过好在是动漫嘛，不需要在里面找现实。（话说回来了解我的朋友应该知道我最喜欢的敌人设计是 NieR: Automata 里面的机械生命体。）</p>
+<p>然后说到我最关注的剧情了，我始终认为作品的核心是剧情。而且剧情是很难把控的东西，特别是对于原创剧情的作品来说，把剧情写好真的是一种不多见的能力。在我看来 DitF 在人物形象和感情戏上达到了一个极高的高度。主要人物有很多，但是每个人的个性都很清晰，并且我没有觉得哪个人的性格令我讨厌。同时故事本身不是简单直白一眼看到头的类型。比如第 13 集将故事推向了高潮，不仅仅因为这一集本身讲述的内容非常感人，而且将整个剧情前半部分埋下的伏笔全部都衔接上了（我甚至差点以为剧情要按绘本发展走向 bad end）。贯穿全篇出现过不止一次的“比翼鸟”的比喻，也非常的符合主题。但我在看一些二创视频的时候还是能看到一些 2018 年的评论在说第 14 集的剧情是喂屎，我确实可以理解追更的朋友当初等了一周之后看到这些阴差阳错然后还要提心吊胆等上一周才能看到下一集的焦躁心情，但这一集的矛盾激化成功的在一个高潮之后推进了剧情的节奏同时与下一集的高潮形成对比，而且这一集的内容非常的合理，虽然是各种巧合，但又很符合现实，符合人物的心理和动机。至于其它一些风评不好的部分比如搭档交换的剧情，只能说是见仁见智，有人不喜欢无可厚非，我还是觉得这部分也增加了故事的复杂性。</p>
+<p>但是与塑造人物形象形成对比，完善背景设定方面我认为有比较严重的硬伤。24 集里面在前半部分简单介绍了一个可以说是反乌托邦的设定，然后大量的篇幅用来刻画人物之间的关系和人物细腻的心理活动，结果在感情戏达到高潮之后仿佛是编剧突然想起来“啊，我们挖了好大的坑还没填呢”一样，开始匆忙的填之前的坑。比如我到现在也没想通只在第 15 集里出现了一次的那个巨大的手到底是什么和有什么存在意义。比如叫龙公主在第 17 集开始有大篇幅的剧情之前几乎没有任何铺垫（你别告诉我第 15 集核心里掉出来的小人就算铺垫了），这和感情戏部分各种伏笔先放好然后再衔接完全不像是一部作品的风格，反正你让我看到前半段各种叫龙出现之后是想不到有这么一个个体的存在的。第 19 集通过介绍博士的角度介绍了人类向不死方向的发展，多少算是成功的填了一部分坑。然后整个作品似乎就陷入了“编剧发现还剩五集了填不完坑了于是开始放飞自我”的方向发展了，星实体是个什么东西？之前完全没铺垫过，现在强行在一集内塞给观众。鹤望兰·天燕座又是怎么来的？就算不在动漫里找现实，这也过于不符合逻辑了，看看别的叫龙是什么样子，它们怎么搞出这么个造型的啊。到底是博士发癫了还是编剧发癫了？然后可能是由于实在没办法了，机械降神一个最大反派叫做 VIRM，这已经不是硬伤了，这是直接一刀把脑袋砍掉从脖子往下截肢了。于是一个完全没有铺垫，思维及其简单，做事不讲逻辑的工具 boss 出现了……你可以告诉我打了半年的敌人并不是真正的敌人，但我不能容忍你用这么一种侮辱观众智商的方式告诉我这个事实。然后再一次放飞自我把科技水平拉到太空时代，说实在的，这个和反派登场比起来，已经到了我看见什么都不惊讶的程度了。然后再经过几集漫长的毫无必要的人类叫龙和 VIRM 的太空混战剧情终于结束了这种煎熬，我只能说这部分比起种田是完全的不讲道理了。</p>
+<p>至于最后大结局的“生孩子”剧情，想必也有很多人不满意，虽然我自己讨厌小孩，但我觉得这部分不是什么问题。可能是考虑到当下的现实环境，年轻人确实对催生比较反感吧，但放在剧情里面，作为一个新世界开始的必要环节实际上是没什么问题的。最后黑色头发的少年和樱花色头发的少女在树下相遇的结尾也是我最满意的部分之一了，或者可能我恰好是一个容易被这种剧情打动的人吧。</p>
+<p>另外 <a href="https://ry.huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">@垚</a> 表示同样是 TRIGGER 的作品，普罗米亚的剧情要好很多，但我不是特别同意，我个人觉得普罗米亚最后 1/4 的剧情其实也向着强行收尾的方向走了，不过一部剧场版动画和季番还是不一样的，剧场版动画只有两个小时，本身就不会有太复杂的背景设定，故事本身又是快节奏，就算强行推进一下剧情，观感也不会太差，而且独特的美术风格和配乐相当大程度的掩盖了剧情的问题。</p>
+<p>总而言之，我其实是不太在意“符合逻辑但是大部分观众都不喜欢”的剧情的，比起这个，我觉得“不符合逻辑”的剧情问题要严重得多，这说明剧情走向已经变成无法把控的东西了，为了强行在剩下的集数里面结束故事，不得不强行引入一些东西。如果你问我怎么修改剧情能解决掉硬伤，我其实一开始也没什么思路。不过和 <a href="https://ry.huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">@垚</a> 简单聊了一下之后我意识到了问题所在。从感情戏的篇幅和水平来看，很显然巨大机器人战斗只是个载体，这应该是个披着机器人战斗的爱情故事，并且爱情故事部分相当的成功。在我看来 DitF 的思维和 EVA 其实是有相当大的差别的，虽然可能大家总是津津乐道碇真嗣、绫波零、明日香、渚薰之间的关系，但 EVA 没有对这部分的直接描写，更多是通过侧面细节描写，以及粉丝进行的分析推理得出的。所以 EVA 可以在背景设定上挖很大的坑然后有充足的时间填坑。因此我的想法是让这个作品向环太平洋的方向靠近，去掉反乌托邦的设定，比如什么种植园和 APE 都可以不要，直接快进到不知道为什么出现了名叫叫龙的怪兽进攻人类，于是人类设计了 FRANXX 并要少年少女操作来防御。然后人物的背景全部都不需要修改，最终的结局就像环太平洋一样直接摧毁掉叫龙来源就可以了。虽然可能会被 EVA 观众认为“没有达到 EVA 的高度”，但既然本来就不在一个赛道上（我这写的是爱情故事啊），这也没什么所谓了。考虑到第 13 集和 15 集的口碑，这样改应该不会折损它的优点。</p>
+<p>最后还是要说，虽然有这么明显的硬伤，这部作品突出的优点还是让我受到了很大震撼并且在接下来的一周都沉浸在剧情里不能自拔。我个人也非常喜欢这部作品的 ED，无论是旋律还是歌词，以及演唱方面都可以说是一流的作品，特别是第 13 集高潮部分的《ひとり》，单从音乐和剧情结合的角度来说，确实达到了 EVA 的高度（让我想起来《翼をください》。《トリカゴ》也是绝妙的作品，特别是伴随 ED 出现的画面，“如果这些人物所在的是一个没有叫龙和 FRANXX 存在的世界会是什么样子呢？”（很遗憾我对 OP 没什么感觉）我同样对广、02、五郎和莓的人物形象非常的喜爱，复杂的情感关系使得这些人物变得颇为立体，而且他们完全没有动漫里一些经常出现的会让我讨厌的人物特质。</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E5%8A%A8%E6%BC%AB/" rel="tag"><i class="bi bi-tag"></i>动漫</a><a class="post-tag button" href="/tags/DARLING%20in%20the%20FRANXX/" rel="tag"><i class="bi bi-tag"></i>DARLING in the FRANXX</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/PHP-Story/" rel="prev" title="PHP 故释"><span class="nav-title">PHP 故释</span><i class="bi bi-chevron-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      const p = loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "不应该做 EVA，而应该做环太平洋",
+        "queryString": window.location.search,
+        "basePath": "/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/",
+        "containerID": "comment-results"
+      });
+      // Something wrong.
+      if (p == null) {
+        return;
+      }
+      p.then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value;
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">92</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">35</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">73</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.13.1 at 2022-08-18T17:06:31.980Z. -->
