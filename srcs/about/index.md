@@ -43,7 +43,7 @@ Alynx Zhou
 
 2. Alynx 这个词的来历、读音是 *Alynx* is just **a lynx**。
 
-3. Alynx 的本命是 **科学超电磁炮** 中的 “超电磁炮” *御坂美琴*，*Misaka Mikoto* 和 **Fate/stay night** 里面的 “Saber” *阿尔托莉雅·潘德拉贡*。有重要影响的 Dota 2 主播是 *中单光一*。
+3. Alynx 的本命是 **科学超电磁炮** 中的 “超电磁炮” *御坂美琴*，*Misaka Mikoto* 和 **Fate/stay night** 里面的 “Saber” *阿尔托莉雅·潘德拉贡*。有重要影响的 Dota 2 主播是 [*中单光一*](https://space.bilibili.com/434401868)。头像作者是 [*茶冷*](https://space.bilibili.com/741520)。
 
 4. Alynx 是 S / M 双属性，虽然可能表现的更像 M 但是其实 S 的属性更多，**除非你是让我心甘情愿的人**。对 LGBTQIA 没有歧视但是 Alynx **只喜欢女孩子**，想要认识可爱的小姐姐，想脱单。
 
