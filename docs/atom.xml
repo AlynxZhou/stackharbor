@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2022-08-18T17:06:22.000Z</updated>
+  <updated>2022-11-09T13:06:00.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,81 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.5">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>谁动了我的 DNS 解析？</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving/" />
+    <id>https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-11-09T13:06:00.000Z</published>
+    
+    
+    <updated>2022-11-09T13:06:00.000Z</updated>
+    
+    
+    <summary type="html">
+      &lt;p&gt;如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。&lt;/p&gt;
+
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;%E9%9C%80%E6%B1%82&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#%E9%9C%80%E6%B1%82&quot;&gt;&lt;/a&gt;需求&lt;/h1&gt;
+&lt;p&gt;我有一台 NAS，一台 PC 和一台路由器，为了能上网也为了家里的无线设备可以连接 NAS，我给 PC 和 NAS 分别接上路由器，但是路由器只有千兆网口，而 PC 和 NAS 各自多一个 2500 Mbps 的网卡，为了实现最高的连接速度，我又买了一根网线把 PC 和 NAS 直接连接起来，于是现在三台设备两两相连。&lt;/p&gt;
+&lt;p&gt;直连两台设备其实非常简单，Network Manager 里面 IPv4 设置成手动，然后分别配置 IP 地址和子网掩码，再关掉 IPv6 就可以了，比如我分别设置 IP 为 &lt;code&gt;10.10.10.1&lt;/code&gt; 和 &lt;code&gt;10.10.10.2&lt;/code&gt;，然后子网掩码就是 &lt;code&gt;255.255.255.0&lt;/code&gt;。然后在进行各种网络访问的时候只要使用这个 IP 就可以通过直连访问了。&lt;/p&gt;
+&lt;p&gt;但是我还是不太满意，我设置了帅气的主机名，为什么还得用 IP 访问呢？但如果我查询主机名对应的 IP，发现得到的并不是直连的 IP，而是比如 &lt;code&gt;192.168.1.80&lt;/code&gt; 这样的通过路由器的 IP。于是我开始研究如何配置让 DNS 解析给我返回直连的 IP。&lt;/p&gt;
+&lt;h1 id=&quot;longlongago&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#longlongago&quot;&gt;&lt;/a&gt;long long ago&lt;/h1&gt;
+&lt;p&gt;一般要讲故事，开头都是“很久很久以前……”，不过计算机领域也没什么太古老的故事可讲，毕竟公认的互联网前身 ARPANET 也就是二十世纪的事情。那个时候能互联的机器一共也就那么几个，所以解决的办法简单粗暴：我们每个机器都保存一个文件，里面记录所有人对应的域名和 IP 不就行了？这个优良传统一直留了下来，也就是现在所有系统里都有的 hosts 文件，不管你写的对不对，它的优先级都比 DNS 查询要高。对于我这个及其简单的网络环境，这肯定是不错的解决方案，但是程序员总会觉得这种非自动化的手段太 low 了，于是就被我 pass 掉了。&lt;/p&gt;
+&lt;p&gt;然后随着加入网络的机器越来越多，这个办法不好用了，毕竟每来一个新人就要所有人更新自己的文件，这复杂度也太高了。所以干脆我们搞一个集中的服务器专门放这个列表，其它机器都向它查询就好了。这就是 DNS 服务器的原理了，然后在局域网里，一般路由器和 DNS 服务器以及 DHCP 服务器都是同一台机器，因为很自然的所有设备都会连到路由器上，而 DHCP 服务器恰好知道它分配出去的 IP 地址，所以如果你输入主机名恰好能解析，那通常是你的路由器做了这些工作。但对于我这个子网来说，为了这两台电脑再配置 DHCP 和 DNS 显然太麻烦了，pass。&lt;/p&gt;
+&lt;p&gt;再后来各种子网越来越多，子网里的设备也越来越多，比如打印机这种，以至于现在各种智能家居，不可能再搞一个服务器用来注册“喂，我是茶壶”这种东西，于是苹果搞出了一个叫 Zeroconf 的协议，大概是在 DNS 的基础上可以让子网里支持这个协议的设备互相发现互相通知自己是什么。因为和 DNS 相关，所以有一个部分是 MulticastDNS (mDNS)，简单来说就是不通过 DNS 服务器，而是通过这个协议发现的设备列表实现 DNS 解析。所以这是第三种方式。&lt;/p&gt;
+&lt;p&gt;以上三种方式其实都是我从 Arch Wiki 抄来的：&lt;a href=&quot;https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;所以我决定搞一个第三种，这个好说，wiki 写了可以用 Avahi 做这个，不过怎么 systemd-resolved 也能做 mDNS？这玩意不是管 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的吗？Network Manager 不是也管这个吗？&lt;/p&gt;
+&lt;h1 id=&quot;chattr+ietcresolvconf&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#chattr+ietcresolvconf&quot;&gt;&lt;/a&gt;chattr +i /etc/resolv.conf&lt;/h1&gt;
+&lt;p&gt;很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 实现，很多 Linux 用户也被 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 &lt;code&gt;resolvconf&lt;/code&gt; 的工具处理，然后现在 systemd 又搞了个叫 resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 &lt;code&gt;chattr +i /etc/resolv.conf&lt;/code&gt; 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是热恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），而是真的有场景需要他们。也许对于某个 VPN 连接需要使用自己的 DNS 服务器，总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的。&lt;/p&gt;
+&lt;p&gt;但其实也不是一个 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 搞定所有，有关这个的故事也是 long long ago，但毕竟是 UNIX 纪元之后的事情，没有太久，大概确实上古时代的程序都是直接读这个获取 DNS 服务器然后再做 DNS 解析的，但实际上这也不一定 OK，比如像之前说的打印机这种怎么解决？以及 hosts 呢？所以就有了更复杂的解决方案，大部分程序做 DNS 解析实际上是调用 glibc 里面 &lt;code&gt;getaddrinfo&lt;/code&gt; 这个 API，所以在它后面我们就可以做一些工作。一个叫做 Name Service Switch 的东西发明出来就是干这个的，它可以理解为一个基于插件的结构，我们可以通过阅读 &lt;code&gt;/etc/nsswitch.conf&lt;/code&gt; 里面的 &lt;code&gt;hosts&lt;/code&gt; 这一行来理解，比如我这里默认是这样的：&lt;/p&gt;
+&lt;figure data-raw=&quot;hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;简单翻译一下的话意思就是查询一个域名的时候首先看看是不是 systemd-machined 的容器（&lt;code&gt;mymachines&lt;/code&gt; 模块），不是的话再问问 systemd-resolved 能不能解析（&lt;code&gt;resolve&lt;/code&gt; 模块），如果 systemd-resolved 可用，那到这也就完事了，后面的就不管了（&lt;code&gt;[!UNAVAIL=return]&lt;/code&gt;），至于为什么我一会解释，然后 &lt;code&gt;files&lt;/code&gt; 模块会读 hosts 文件，所以它优先级总是高于 DNS 服务器，然后看看是不是本机（&lt;code&gt;myhostname&lt;/code&gt; 模块），然后再读 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 里面的 DNS 服务器进行查询。&lt;/p&gt;
+&lt;p&gt;对于一个普通的桌面用户，应该使用的只是 Network Manager，默认 Network Manager 不会用 systemd-resolved，于是大部分情况一个外部域名最后还是查询 DNS 服务器，和以前没什么本质区别。那 Network Manager 你为什么要修改 &lt;code&gt;/etc/resolv.conf&lt;/code&gt;？原因之一就是之前提到不同的 VPN 服务可能有不同的 DNS 服务器，因此建议这些用户不要手动编辑这个文件，可以直接在 Network Manager 的连接配置里设置某个连接的 DNS 服务器。&lt;/p&gt;
+&lt;p&gt;那 systemd-resolved 又是什么玩意？是不是 systemd 作者又要搞出什么花样替换我习惯的东西？但这东西好像还真是有些实际的需求，它不是一个简单的 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的管理工具，而可以理解为是一个自带缓存的 DNS 服务器。glibc 通过 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 查询 DNS 其实是不做缓存的，有些场景用户可能希望能自己缓存结果加快速度，这时候就需要搞这个东西了，它自己是一个 DNS 服务器，因此也就不再执行 nsswitch 里面后续的组件（用你的 &lt;code&gt;dns&lt;/code&gt; 模块查询了我怎么缓存？）。除此之外它还声称自己提供了一个更好的 D-Bus 接口用来解析，而不是用 &lt;code&gt;getaddrinfo&lt;/code&gt;，不过话又说回来，谁闲得没事去支持你这新搞的 D-Bus API，特别是你自己还搞了个 &lt;code&gt;getaddrinfo&lt;/code&gt; 的模块。主观来说我其实不推荐一般的桌面用户配置这个，因为大概率你是在一个路由器后面，你的 DNS 服务器一般设置的都是路由器，而路由器上的 DNS 服务器一般会做缓存，所以其实完全没必要在自己电脑上启用这个……我也没遇到任何一定要使用它这个 D-Bus API 的程序。那 systemd-resolved 你为什么要修改 &lt;code&gt;/etc/resolv.conf&lt;/code&gt;？原因是为了兼容那些直接读这个的上古程序，实际上人家就在这里写一行，就是让这些程序去查 systemd-resolved 内置的 DNS 服务器。&lt;/p&gt;
+&lt;p&gt;那至于 &lt;code&gt;resolvconf&lt;/code&gt; 又是啥？这是一个叫 &lt;code&gt;openresolv&lt;/code&gt; 的项目搞出来的东西，需求就是有各种程序都打算自己修改 &lt;code&gt;/etc/resolv.conf&lt;/code&gt;，不单单是上面那两个，还有一些 VPN 服务之类的，那你们干脆都别管了，我来管，听我的（现在有 N + 1 种解决方案了）。但实际上我也不推荐你使用这个，因为桌面用户根本没有使用场景，你用 Network Manager 的话，就不要再单独使用什么 VPN 工具，因为 Network Manager 本身支持很多种 VPN 连接，你直接用它管理就好了。就算你需要用 systemd-resolved，其实这个也替你考虑好了，Network Manager 支持 systemd-resolved，检测到你用它的话，就不会去改 &lt;code&gt;/etc/resolv.conf&lt;/code&gt;，而是直接去修改 systemd-resolved 的配置了。&lt;/p&gt;
+&lt;h1 id=&quot;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%98%AF%E9%97%A8%E8%89%BA%E6%9C%AF%EF%BC%8C%E5%BD%93%E4%B8%94%E4%BB%85%E5%BD%93%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%85%BC%E5%AE%B9%E6%80%A7%E7%9A%84%E6%97%B6%E5%80%99%E2%80%A6%E2%80%A6&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%98%AF%E9%97%A8%E8%89%BA%E6%9C%AF%EF%BC%8C%E5%BD%93%E4%B8%94%E4%BB%85%E5%BD%93%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%85%BC%E5%AE%B9%E6%80%A7%E7%9A%84%E6%97%B6%E5%80%99%E2%80%A6%E2%80%A6&quot;&gt;&lt;/a&gt;计算机科学是门艺术，当且仅当你不需要考虑兼容性的时候……&lt;/h1&gt;
+&lt;p&gt;那说回到 mDNS 这个问题，为什么我不直接用 systemd-resolved 解决呢？一个是上面提到的我不需要再做一次 DNS 缓存了，另一个是因为 CUPS 这个打印服务依赖 Avahi，它其实不只用到 mDNS，还用到了 Zeroconf 里面其它的功能比如发现设备去连接打印机，虽然我暂时也用不到 CUPS，但我确实是不想搞 systemd-resolved 的 DNS 服务器了，还是配置 Avahi 吧。当然假如你说我既想要 systemd-resolved 的 DNS 缓存和 D-Bus API 又想要 Avahi 的 Zeroconf 怎么办呢？额，其实也有办法，systemd-resolved 提供了选项让你关掉它的 mDNS 功能，具体我没有尝试，不过这样应该就不会冲突了。所以不要见到点新东西就生气，人家把各种兼容的东西都考虑到了，看两眼文档还不行吗……&lt;/p&gt;
+&lt;p&gt;然后搞清楚整个流程之后 Avahi 的配置其实不难，首先安装 &lt;code&gt;nss-mdns&lt;/code&gt; 这个包，顾名思义是给 &lt;code&gt;nsswitch&lt;/code&gt; 提供 &lt;code&gt;mdns&lt;/code&gt; 模块，然后启动 &lt;code&gt;avahi-daemon.service&lt;/code&gt;，然后编辑 &lt;code&gt;/etc/nsswitch.conf&lt;/code&gt;，在 &lt;code&gt;resolve&lt;/code&gt; 模块之前加入 &lt;code&gt;mdns4_minimal [NOTFOUND=return]&lt;/code&gt;：&lt;/p&gt;
+&lt;figure data-raw=&quot;hosts: mymachines mdns4 resolve [!UNAVAIL=return] files myhostname dns
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;hosts: mymachines mdns4 resolve [!UNAVAIL=return] files myhostname dns
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;mdns4&lt;/code&gt; 模块会试图通过 mDNS 也就是找网络上其它的 Zeroconf 协议设备来解析 IPv4 地址，&lt;code&gt;4&lt;/code&gt; 表示只尝试 IPv4，因为这种内网设备多半你不会给它分配 IPv6，当然也有 &lt;code&gt;6&lt;/code&gt; 和没有数字同时支持两种的，不过由于现在的程序都优先查询 IPv6，而我只给直连配置了 IPv4，所以如果不用只支持 4 的，就会 fallback 到后面的模块，那就跑到路由器上查去了，我就是不想走路由器的。&lt;/p&gt;
+&lt;h1 id=&quot;%E8%AF%BB%E8%80%85%E7%9C%8B%E7%88%BD%E4%BA%86%EF%BC%8C%E4%BD%86%E5%A5%BD%E5%83%8F%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E6%88%91%E6%83%B3%E8%A6%81%E7%9A%84%E2%80%A6%E2%80%A6&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#%E8%AF%BB%E8%80%85%E7%9C%8B%E7%88%BD%E4%BA%86%EF%BC%8C%E4%BD%86%E5%A5%BD%E5%83%8F%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E6%88%91%E6%83%B3%E8%A6%81%E7%9A%84%E2%80%A6%E2%80%A6&quot;&gt;&lt;/a&gt;读者看爽了，但好像结果不是我想要的……&lt;/h1&gt;
+&lt;p&gt;等到我把所有的东西都搞好以后我发现一个问题……mDNS 虽然说是子网上的设备互相发现，但是它没规定是哪个子网……于是喜闻乐见的每次 &lt;code&gt;getent hosts timbersaw.local&lt;/code&gt; 查询给我返回不一样的 IP，一会是 &lt;code&gt;10.10.10.2&lt;/code&gt; 一会是 &lt;code&gt;192.168.1.80&lt;/code&gt;，看起来还是写 hosts 比较靠谱……&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
+    
+    <category term="网络" label="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
+    
+  </entry>
   
   
   
@@ -2904,73 +2979,6 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
     <category term="Python" label="Python" scheme="https://sh.alynx.one/tags/Python/" />
     
     <category term="Spleeter" label="Spleeter" scheme="https://sh.alynx.one/tags/Spleeter/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>奇怪的书名和我和吐槽</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Strange-Book-Names/" />
-    <id>https://sh.alynx.one/posts/Strange-Book-Names/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2020-10-06T09:48:00.000Z</published>
-    
-    
-    <updated>2020-10-06T09:48:00.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;好久没更新非技术类博文了。可能很多人不但丢掉了阅读的习惯，连书店都不去了，书店都沦为练习册店，学生们更加对书店敬而远之，这种恶性循环实在是可悲又无趣的事情。&lt;/p&gt;
-&lt;p&gt;今天和同学一起去了书店，在常规意义的书店而非练习册店的部分发现了一些有趣或奇怪的书名，很有槽点，让人想要吐槽。于是拍了点照片发到这里。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;好久没更新非技术类博文了。可能很多人不但丢掉了阅读的习惯，连书店都不去了，书店都沦为练习册店，学生们更加对书店敬而远之，这种恶性循环实在是可悲又无趣的事情。&lt;/p&gt;
-&lt;p&gt;今天和同学一起去了书店，在常规意义的书店而非练习册店的部分发现了一些有趣或奇怪的书名，很有槽点，让人想要吐槽。于是拍了点照片发到这里。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;%E5%A5%97%E5%A8%83%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E5%A5%97%E5%A8%83%E5%9E%8B&quot;&gt;&lt;/a&gt;套娃型&lt;/h1&gt;
-&lt;p&gt;此类书名非常适合套娃，比如这本《如何阅读一本书》，且不说阅读方法因人而异且随经验变化，单就这个名字还可以有《如何阅读如何阅读一本书》、《如何阅读如何阅读如何阅读一本书》。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/1.jpg&quot; alt=&quot;如何阅读一本书&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我以为只有当代为搏销量疯狂吸引眼球的作者会起这种名字，然而接下来我看到了一本《木心谈木心》。虽然我不太清楚木心是谁，但似乎是个有名的作者。这书名总是让我想后续会不会有《木心谈木心谈木心》、《木心谈木心谈木心谈木心》。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/2.jpg&quot; alt=&quot;木心谈木心&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;%E6%80%A7%E8%BD%AC%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E6%80%A7%E8%BD%AC%E5%9E%8B&quot;&gt;&lt;/a&gt;性转型&lt;/h1&gt;
-&lt;p&gt;这本书的名字非常奇特，她叫做《少女福尔摩斯》，作为半资深福尔摩斯迷和半资深月球氪金母X，我只能说型月都没敢做的这作者做了。由于原作实在是珠玉在前，写老福的故事已经很难了，性转老福怕是难上加难，建议寄一本给蘑菇看看。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/3.jpg&quot; alt=&quot;少女福尔摩斯&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;%E8%B9%AD%E7%83%AD%E5%BA%A6%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E8%B9%AD%E7%83%AD%E5%BA%A6%E5%9E%8B&quot;&gt;&lt;/a&gt;蹭热度型&lt;/h1&gt;
-&lt;p&gt;这位叫蒋勋的作者在书架上占据了一片，又是说唐诗又是说宋词，一会谈莫奈一会谈高达哦不是梵高和达芬奇，想必上知天文下知地理。&lt;strong&gt;不过这书脊把这些名人加粗放在下面，让我总是有一种这是个达芬奇/梵高/莫奈的著作、作品标题叫做蒋勋的感觉。&lt;/strong&gt; 不知道这个叫蒋勋的作品是不是样样通样样松呢？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/4.jpg&quot; alt=&quot;蒋勋&quot;&gt;&lt;/p&gt;
-&lt;p&gt;还有这本《逝水年华》，连我的输入法都怀疑我是不是想输入《追忆似水年华》，敢问作者是不是有点大舌头，让出版社的编辑听错了标题？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/5.jpg&quot; alt=&quot;逝水年华&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;%E8%BF%9E%E9%94%81%E5%8F%8D%E5%BA%94%E5%9E%8B&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Strange-Book-Names/#%E8%BF%9E%E9%94%81%E5%8F%8D%E5%BA%94%E5%9E%8B&quot;&gt;&lt;/a&gt;连锁反应型&lt;/h1&gt;
-&lt;p&gt;《知更鸟》吗？大家都说有本书想杀你，不知道与你是什么关系？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/6.jpg&quot; alt=&quot;知更鸟&quot;&gt;&lt;/p&gt;
-&lt;p&gt;虽然《重返美丽新世界》和《美丽新世界》是一个作者，但总让我想起狗尾续貂，不知道是不是我错了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/7.jpg&quot; alt=&quot;美丽新世界&quot;&gt;&lt;/p&gt;
-&lt;p&gt;好家伙，你把《24个比利》放在这，那他们肯定会打架的，不过叫《比利打群架》比《比利战争》更好吧，无谓夸大不可取，要实事求是。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/8.jpg&quot; alt=&quot;比利&quot;&gt;&lt;/p&gt;
-&lt;p&gt;《面包树上的女人》怎么啦？她没怎么，《面包树出走了》，那可真是个离奇的故事，但是你这内容就不知道是不是好故事了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/9.jpg&quot; alt=&quot;面包树&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我以为文学大家不屑于做这种在标题上吸引人的无聊事情，毕竟内容才是王道。我也不是有意冒犯杨绛先生，但是《洗澡》做书名已经是太随意了，再整一本《洗澡之后》是不是过分了？还是说这是出书的不负责任的编辑洗澡前洗澡后决定的两本文集的名字？那这就说得通了。但是说实话《洗澡》、《洗澡之后》接下来摆一本《暗示》是不是店员的恶趣味？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Strange-Book-Names/10.jpg&quot; alt=&quot;洗澡&quot;&gt;&lt;/p&gt;
-&lt;p&gt;希望看了我文章的朋友不要给我评论“一看到白胳膊……”，我老实承认我不是一个完全脱离了低级趣味的人，写这文章也是让大家开心一下，毕竟实事求是更重要。我也希望写书的作者们都实事求是一点，内容不行，靠标题党吸引人肯定是经不起考验的。&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="生活" label="生活" scheme="https://sh.alynx.one/categories/%E7%94%9F%E6%B4%BB/" />
-    
-    
-    <category term="生活" label="生活" scheme="https://sh.alynx.one/tags/%E7%94%9F%E6%B4%BB/" />
     
   </entry>
   
