@@ -67,4 +67,12 @@ hosts: mymachines mdns4 resolve [!UNAVAIL=return] files myhostname dns
 
 # 读者看爽了，但好像结果不是我想要的……
 
-等到我把所有的东西都搞好以后我发现一个问题……mDNS 虽然说是子网上的设备互相发现，但是它没规定是哪个子网……于是喜闻乐见的每次 `getent hosts timbersaw.local` 查询给我返回不一样的 IP，一会是 `10.10.10.2` 一会是 `192.168.1.80`，看起来还是写 hosts 比较靠谱……
+等到我把所有的东西都搞好以后我发现一个问题……mDNS 虽然说是子网上的设备互相发现，但是它没规定是哪个子网……于是喜闻乐见的每次 `getent ahosts timbersaw.local` 查询给我返回不一样的 IP，一会是 `10.10.10.2` 一会是 `192.168.1.80`，看起来还是写 hosts 比较靠谱……
+
+最后我的配置是不用 `mdns4`，而是用 `mdns4_minimal`，这两个的区别是后者只考虑 `.local` 结尾的域名，并且如果查找不到的话直接返回 `NOTFOUND`，而不是继续 fallback：
+
+```
+hosts: mymachines mdns4_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
+```
+
+然后再修改 `/etc/hosts` 分别添加不带 `.local` 的主机名（因为 `.local` 会在 `files` 之前先被 mDNS 处理）。

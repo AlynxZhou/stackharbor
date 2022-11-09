@@ -77,7 +77,12 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;mdns4&lt;/code&gt; 模块会试图通过 mDNS 也就是找网络上其它的 Zeroconf 协议设备来解析 IPv4 地址，&lt;code&gt;4&lt;/code&gt; 表示只尝试 IPv4，因为这种内网设备多半你不会给它分配 IPv6，当然也有 &lt;code&gt;6&lt;/code&gt; 和没有数字同时支持两种的，不过由于现在的程序都优先查询 IPv6，而我只给直连配置了 IPv4，所以如果不用只支持 4 的，就会 fallback 到后面的模块，那就跑到路由器上查去了，我就是不想走路由器的。&lt;/p&gt;
 &lt;h1 id=&quot;%E8%AF%BB%E8%80%85%E7%9C%8B%E7%88%BD%E4%BA%86%EF%BC%8C%E4%BD%86%E5%A5%BD%E5%83%8F%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E6%88%91%E6%83%B3%E8%A6%81%E7%9A%84%E2%80%A6%E2%80%A6&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#%E8%AF%BB%E8%80%85%E7%9C%8B%E7%88%BD%E4%BA%86%EF%BC%8C%E4%BD%86%E5%A5%BD%E5%83%8F%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E6%88%91%E6%83%B3%E8%A6%81%E7%9A%84%E2%80%A6%E2%80%A6&quot;&gt;&lt;/a&gt;读者看爽了，但好像结果不是我想要的……&lt;/h1&gt;
-&lt;p&gt;等到我把所有的东西都搞好以后我发现一个问题……mDNS 虽然说是子网上的设备互相发现，但是它没规定是哪个子网……于是喜闻乐见的每次 &lt;code&gt;getent hosts timbersaw.local&lt;/code&gt; 查询给我返回不一样的 IP，一会是 &lt;code&gt;10.10.10.2&lt;/code&gt; 一会是 &lt;code&gt;192.168.1.80&lt;/code&gt;，看起来还是写 hosts 比较靠谱……&lt;/p&gt;
+&lt;p&gt;等到我把所有的东西都搞好以后我发现一个问题……mDNS 虽然说是子网上的设备互相发现，但是它没规定是哪个子网……于是喜闻乐见的每次 &lt;code&gt;getent ahosts timbersaw.local&lt;/code&gt; 查询给我返回不一样的 IP，一会是 &lt;code&gt;10.10.10.2&lt;/code&gt; 一会是 &lt;code&gt;192.168.1.80&lt;/code&gt;，看起来还是写 hosts 比较靠谱……&lt;/p&gt;
+&lt;p&gt;最后我的配置是不用 &lt;code&gt;mdns4&lt;/code&gt;，而是用 &lt;code&gt;mdns4_minimal&lt;/code&gt;，这两个的区别是后者只考虑 &lt;code&gt;.local&lt;/code&gt; 结尾的域名，并且如果查找不到的话直接返回 &lt;code&gt;NOTFOUND&lt;/code&gt;，而不是继续 fallback：&lt;/p&gt;
+&lt;figure data-raw=&quot;hosts: mymachines mdns4_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;hosts: mymachines mdns4_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;然后再修改 &lt;code&gt;/etc/hosts&lt;/code&gt; 分别添加不带 &lt;code&gt;.local&lt;/code&gt; 的主机名（因为 &lt;code&gt;.local&lt;/code&gt; 会在 &lt;code&gt;files&lt;/code&gt; 之前先被 mDNS 处理）。&lt;/p&gt;
 
     </content>
     
