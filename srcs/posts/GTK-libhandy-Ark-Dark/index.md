@@ -44,7 +44,7 @@ tags:
 
 ![小黑子们不要笑得太早了](./screenshot-3.png)
 
-我知道有的小黑子要迫不及待开始炮轰 GNOME 了：“什么玩意，整来整去不还是整不好吗，不如来当原始人。”但问题其实就是原始人留下的。现在我们回头看第一条：不使用 libhandy 的 GTK 3 程序和不使用 libadwaita 的 GTK 4 程序，这一类程序不考虑 GNOME Settings 里面的亮色/暗色开关，而只考虑 `gtk-application-prefer-dark-theme`。所以这个奇怪的表现恰好验证了这一条，同时也解释了“既然主题是靠内部的两个文件区分亮色和暗色的，为什么又会有 `Adwaita-dark` 和 `Arc-Dark` 这种名字里带暗色后缀的变体”这个问题：因为在一开始的设计里并没有什么全局亮色/暗色开关，也就没有要求主题同时提供 `gtk.css` 和 `gtk-dark.css`，那么为了让用户可以自选亮色暗色，只有提供两个不同的主题来解决问题。这也就是在 `Adwaita` 和 `Arc` 都提供了 `gtk-dark.css` 的情况下仍然存在 `Adwaita-dark` 和 `Arc-Dark` 的原因。然后在主题添加了 `gtk-dark.css` 之后，为了让 libhandy 的程序能够跟随系统开关切换亮色和暗色，就不能为了那些传统程序把 GTK Theme 设置为暗色变体的主题了，此时默认这些程序会选择 `gtk.css`，也就会出现上面截图里的情况。解决这个的方案也不是很困难，`gtk-application-prefer-dark-theme` 就是为此添加的，支持它的 GTK 程序会按照这个选项来加载 `gtk.css` 或 `gtk-dark.css`。如果你像我一样平时主要用暗色模式，那就手动编辑 `~/.config/gtk-4.0/settings.ini` 写入以下内容（GTK 3 的话就是 `~/.config/gtk-3.0/settings.ini`）：
+我知道有的小黑子要迫不及待开始炮轰 GNOME 了：“什么玩意，整来整去不还是整不好吗，不如来当原始人。”但问题其实就是原始人留下的。现在我们回头看第一条：不使用 libhandy 的 GTK 3 程序和不使用 libadwaita 的 GTK 4 程序，这一类程序不考虑 GNOME Settings 里面的亮色/暗色开关，而只考虑 `gtk-application-prefer-dark-theme`。所以这个奇怪的表现恰好验证了这一条，同时也解释了“既然主题是靠内部的两个文件区分亮色和暗色的，为什么又会有 `Adwaita-dark` 和 `Arc-Dark` 这种名字里带暗色后缀的变体”这个问题：因为在一开始的设计里并没有什么全局亮色/暗色开关，也就没有要求主题同时提供 `gtk.css` 和 `gtk-dark.css`，那么为了让用户可以自选亮色暗色，只有提供两个不同的主题来解决问题。这也就是在 `Adwaita` 和 `Arc` 都提供了 `gtk-dark.css` 的情况下仍然存在 `Adwaita-dark` 和 `Arc-Dark` 的原因。然后在主题添加了 `gtk-dark.css` 之后，为了让 libhandy 的程序能够跟随系统开关切换亮色和暗色，就不能为了那些传统程序把 GTK Theme 设置为暗色变体的主题了，此时如果设置为同时包含两个文件的主题，默认这些程序会选择 `gtk.css`，也就会出现上面截图里的情况。解决这个的方案也不是很困难，`gtk-application-prefer-dark-theme` 就是为此添加的，支持它的 GTK 程序会按照这个选项来加载 `gtk.css` 或 `gtk-dark.css`。如果你像我一样平时主要用暗色模式，那就手动编辑 `~/.config/gtk-4.0/settings.ini` 写入以下内容（GTK 3 的话就是 `~/.config/gtk-3.0/settings.ini`）：
 
 ```ini
 [Settings]
