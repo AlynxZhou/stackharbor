@@ -11,14 +11,32 @@
     
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     
+    
+    
     <meta name="author" content="Alynx Zhou">
+    
     
     <meta name="description" content="事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。">
     
     
-    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
     
-    <meta name="generator" content="Hikaru v1.13.0">
+    
+    <meta name="keywords" content="C 语言">
+    
+    <meta name="generator" content="Hikaru v1.13.1">
+    
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="使用 GDB 进行简单的 C 语言程序调试">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Using-Gdb/">
+    
+    
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
+    
+    
+    
+    <meta property="og:description" content="事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。">
+    
     <link rel="canonical" href="https://sh.alynx.one/posts/Using-Gdb/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -501,12 +519,12 @@ $1 = {&lt;text variable, no debug info&gt;} 0x7ffff7a86e00 &lt;printf&gt;
 Single stepping until exit from function printf,
 which has no line number information.
 main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
-27	    scanf(&quot;%d&quot;, &amp;LoopEnd1);
+27        scanf(&quot;%d&quot;, &amp;LoopEnd1);
 " class="code-block"><pre class="code"><code>(gdb) step
 Single stepping until exit from function printf,
 which has no line number information.
 main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
-27	    scanf("%d", &amp;LoopEnd1);
+27        scanf("%d", &amp;LoopEnd1);
 </code></pre></figure>
 <p>如果不输入指令直接回车，就是重复上一条指令，程序运行结束之后可以使用<code>quit</code>指令退出GDB。</p>
 <hr>
@@ -868,4 +886,4 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.0 at 2022-11-23T11:23:00.012Z. -->
+<!-- Page built by Hikaru v1.13.1 at 2022-11-23T18:14:37.285Z. -->
