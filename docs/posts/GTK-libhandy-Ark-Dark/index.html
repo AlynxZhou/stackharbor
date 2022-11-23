@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    
+    <meta name="author" content="Alynx Zhou">
+    
+    <meta name="description" content="将我漫天心血一一抛到银河">
+    
+    
+    <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
+    
+    <meta name="generator" content="Hikaru v1.13.1">
+    <link rel="canonical" href="https://sh.alynx.one/posts/GTK-libhandy-Ark-Dark/">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+        
+      }
+      
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+    </style>
+    
+    
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    
+    
+    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code code"),
+          (e, i) => {
+            // We want to use hljs' background and color for the whole block.
+            e.parentNode.parentNode.classList.add("hljs");
+            hljs.highlightElement(e);
+          }
+        );
+      });
+    </script>
+    
+    
+    <script type="text/javascript">
+      documentReady(() => {
+        elementsEach(
+          document.querySelectorAll("figure.code-block pre.code"),
+          (e, i) => {
+            const code = e.parentNode.getAttribute("data-raw");
+            const gutter = [];
+            gutter.push("<pre class=\"gutter\">");
+            // Highlight should not change lines.
+            // But may replace `\n` with `<br>`, so use original code here.
+            const codeLines = code.split(/\r?\n/g);
+            // It seems marked.js starts to keep the last `\n`,
+            // which will leave an empty line after splitting,
+            // and we should not add gutter for the last empty line.
+            // Don't do trim here! We only skip empty line.
+            if (codeLines[codeLines.length - 1].length === 0) {
+              codeLines.pop();
+            }
+            for (let i = 0; i < codeLines.length; ++i) {
+              gutter.push(`<span class="line-number">${i + 1}</span>`);
+              if (i !== codeLines.length - 1) {
+                gutter.push("\n");
+              }
+            }
+            gutter.push("</pre>");
+            elementBefore(e, createElementFromString(gutter.join("")));
+          }
+        );
+      });
+    </script>
+    
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("time.post-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value;
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+          }
+        );
+        elementsEach(
+          document.querySelectorAll(".post figure.code-block"),
+          (e, i) => {
+            const lang = e.getAttribute("data-lang");
+            elementBefore(e, createElementFromString([
+              "<div class=\"code-titlebar\">",
+                "<div class=\"titlebar-left\">",
+                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+                "</div>",
+                "<div class=\"titlebar-center\">",
+                  lang != null && lang.length ? lang.toUpperCase() : "代码",
+                "</div>",
+                "<div class=\"titlebar-right\">",
+                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+                "</div>",
+              "</div>"
+            ].join("")));
+          }
+        );
+        const cb = new ClipboardJS("button.copy", {
+          "target": (trigger) => {
+              // Get target element by DOM API.
+              // trigger.parentNode.parentNode is code-titlebar.
+              // nextElementSibling is figure.highlight, lastChild is pre.code.
+              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+          }
+        });
+        cb.on("success", (e) => {
+          e.clearSelection();
+          const trigger = e.trigger;
+          // Change button text as a user tip.
+          trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+          trigger.classList.add("copied");
+          // Change button text back;
+          window.setTimeout(() => {
+            trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+            trigger.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+    
+    <title>GTK 和 libhandy 和 Arc-Dark 主题 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        
+        <div class="subtitle">Whisper to the World</div>
+        
+      </div>
+      
+      <div class="logo">
+        <img src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/archives/"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/categories/"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/tags/"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="//gallery.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/blogroll/"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        
+        
+        
+        
+        
+        <li role="menuitem"><a href="/about/"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+        
+      </button>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/GTK-libhandy-Ark-Dark/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+        
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/GTK-libhandy-Ark-Dark/" itemprop="url">GTK 和 libhandy 和 Arc-Dark 主题</a>
+      </div>
+      <div class="post-meta">
+        
+        <div class="post-date meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-23T10:23:34.000Z">11/23/2022, 6:23:34 PM</time></span>
+        </div>
+        
+        
+        
+        
+        <div class="post-categories meta-block">
+          
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
+        </div>
+        
+        
+        
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/GTK-libhandy-Ark-Dark/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="GTK 和 libhandy 和 Arc-Dark 主题" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <blockquote class="center-quote">黑夜让我选了黑色的主题，但是有些程序非要寻找光明？</blockquote>
+
+<p>我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还挺好看的。但即使是我这样宽容的人，对于 GTK 3 那个熟的不能再熟的 Adwaita 主题也审美疲劳了，那个银色和棕色会让所有手机厂笑话的，即使有些手机厂的审美还不如这玩意。</p>
+<p>我个人最喜欢的配色其实是 Atom 的 One Dark 和 One Light，但我没那个精力利用调色盘自己维护一份主题，所以我退而求其次选择了在观感上比较接近的 <a href="https://github.com/jnsh/arc-theme" target="_blank" rel="external nofollow noreferrer noopener">Arc 主题</a>，这个主题其实是一个系列，我自己只在乎里面的两个变体：全亮色的 Arc 和全暗色的 Arc-Dark（似乎它自己 README 里面给的截图也有点问题）。</p>
+<p>我自己是一个暗色模式爱好者，毕竟长时间面对屏幕，白底黑字实在是太刺眼了，相对而言，深蓝色做背景色浅灰色做前景色要好看很多。在很久很久以前混沌初开，Linux 桌面程序员还没有意识到需要有个全局的暗色/亮色开关的时候，设置主题非常简单粗暴，打开 GNOME Tweaks 把 GTK Theme 设置为 Arc-Dark，我就心满意足了。</p>
+<p>可能是 libadwaita 不能更换主题导致很多反对的声音，并没有太多人谈论随之而来的全局暗色模式开关，但是某天我更新了系统之后发现设置里多了一个亮色/暗色选择，我觉得挺好，那我这里选暗色就行了嘛，果然所有用了 libadwaita 的程序都跟着变了亮暗，不过我用着用着就感觉不对劲了——怎么以前那些 GTK 3 的程序不用 Arc-Dark 而是用 Adwaita-dark 了，这和我想的不一样啊？然后我研究了一下，觉得更奇怪了，GTK 4 + libadwaita 的 GNOME Settings 用的是 libadwaita 的暗色版本（预期行为），GTK 3 的 GNOME Tweaks 用的是 GTK 3 的 Adwaita-dark（不对劲），但是同样是 GTK 3 的 GNOME Terminal 用的是我设置的 Arc-Dark（预期行为）。好家伙好家伙，我这一个桌面上三花聚顶了。</p>
+<p><img src="/posts/GTK-libhandy-Ark-Dark/screenshot-1.png" alt="三花聚顶"></p>
+<p>总这么待着我觉得怪怪的，于是我研究了一下，如果我要是选亮色模式呢？现在 GNOME Settings 是 libadwaita 的亮色版本了，然后 GNOME Tweaks 和 GNOME Terminal 都是 Arc-Dark，虽然好像一致了，又好像有点不一致，这回从三花聚顶变成黑白通吃。总之我忍受了很久 GTK 4 程序 <strong>大部分</strong> 是白的而 GTK 3 程序是黑的，直到我再也受不了决定翻开代码看看这些人是怎么写的。</p>
+<p><img src="/posts/GTK-libhandy-Ark-Dark/screenshot-2.png" alt="黑白通吃"></p>
+<p>为了能说明白，下面我就不从结果反推原因了，毕竟大家看到这里可能已经云里雾里，没必要和我再重复一遍破案过程了。</p>
+<p>可能大部分人不是 GTK 开发者也不使用 GTK，对这玩意怎么调用主题存在一定的误区。实际上可以分为以下几类：</p>
+<ol>
+<li>不使用 libhandy 的 GTK 3 程序（比如 GNOME Terminal）和不使用 libadwaita 的 GTK 4 程序（比如 Show Me The Key），这一类程序不考虑 GNOME Settings 里面的亮色/暗色开关（指的是 GSettings 里面 <code>org.gnome.desktop.interface</code> 的 <code>color-scheme</code> 选项），而只考虑 <code>gtk-application-prefer-dark-theme</code>，这个值属于 <code>GtkSettings</code>，需要编辑 <code>~/.config/gtk-4.0/settings.ini</code> 和 <code>~/.config/gtk-3.0/settings.ini</code>。以及是的你没看错，GTK 4 不一定非要用 libadwaita，实际上虽然这个库叫 libadwaita，但它和 GTK 3 那个叫做 Adwaita 的默认主题几乎没有关系，它是 GTK 3 的组件库 libhandy 的进化版本。GNOME 推荐使用这个以便让整个桌面有统一的风格，但是 GTK 4 仍然是个完整的 UI 库，程序开发者完全可以不使用 libadwaita。</li>
+<li>使用 libadwaita 的 GTK 4 程序（比如 GNOME Settings），这一类程序不考虑 GNOME Tweaks 里面的 GTK Theme 选项（实际上是 GSettings 里面 <code>org.gnome.desktop.interface</code> 的 <code>gtk-theme</code> 选项），只使用 libadwaita 内置的配色，所以我们也完全不需要关心它，它永远按照设置里的开关工作。</li>
+<li>使用 libhandy 的 GTK 3 程序（比如 GNOME Tweaks），这个就相当复杂了，libhandy 考虑了桌面环境的亮色/暗色主题切换，但也考虑了用户自定义的 GTK Theme，于是在这里它华丽的乱套了。</li>
+<li>还有最后一类程序，它们出于特定需要自己给自己套了自定义的 CSS，所以你拿它一点办法也没有，直接忽略（比如 Show Me The Key 的悬浮窗口）。</li>
+</ol>
+<p>看到这里一定有小黑子要怒吼了：“看看你们搞的乱七八糟的玩意！GNOME 真垃圾！老子就要刀耕火种就要当原始人，libadwaita 滚啊！”但是我建议用你那可怜的小脑袋瓜想一想，上面三条里面反而 libadwaita 是最符合预期的一个（亮色模式用亮色，暗色模式用暗色），所以我不会解决第二个，而是解决另外的两个。</p>
+<p>首先从 libhandy 下手，相关的代码位于 <a href="https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L286-L348" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L286-L348</a>，如果你可怜的小脑袋瓜也没耐心看看代码的话，那么我大发慈悲替你读了一遍。相关的逻辑大概是说首先覆盖掉当前程序的 <code>gtk-application-prefer-dark-theme</code>（别忘了 libhandy 程序也是 GTK 3 程序），这个值会被设置成 <code>color-scheme</code> 的值。然后获取当前系统的 GTK Theme，因为我们考虑到浅色和深色主题切换，所以主题名被分成基础名和种类名两部分，如果系统的主题以 <code>-dark</code> 结尾，那就去掉这个后缀，得到基础名，并设置为当前程序的主题。那问题难道出在 Arc-Dark 的结尾是 <code>-Dark</code> 而不是 <code>-dark</code> 吗？也不是，GTK 主题对于暗色和亮色的区分不在主题名上，而是在主题目录下面的两个文件，一个叫做 <code>gtk.css</code>，另一个叫做 <code>gtk-dark.css</code>，如果 <code>color-scheme</code> 是 <code>prefer-dark</code>，libhandy 就会加载后者而非前者，这部分的代码在 <a href="https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L106-L141" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L106-L141</a>。于是在系统设置为暗色模式的时候，libhandy 会去加载 Arc-Dark 的 <code>gtk-dark.css</code>，但 Arc-Dark 作为一个暗色变体，只有 <code>gtk.css</code>，所以加载失败，libhandy 回退到 <code>Adwaita</code> 的 <code>gtk-dark.css</code>。而系统设置为亮色的时候，libhandy 会去加载 Arc-Dark 的 <code>gtk.css</code>，而作为一个暗色变体，这个文件实际写的是暗色配色，于是看起来正常了。（以及如果你 GTK Theme 设置为 <code>Adwaita-dark</code> 从这里你就会发现实际上加载的是 <code>Adwaita</code> 的 <code>gtk-dark.css</code>，而不是 <code>Adwaita-dark</code> 的 <code>gtk.css</code>，即使它们的配色是一样的。）</p>
+<p>那么显然又有另一个问题，既然主题是靠内部的两个文件区分亮色和暗色的，为什么又会有 <code>Adwaita-dark</code> 和 <code>Arc-Dark</code> 这种名字里带暗色后缀的变体呢？并且还要在 <code>libhandy</code> 里面处理这个后缀，是不是多此一举？我们可以暂时先不考虑这个问题，而先简单解决第三条。从上面的分析可以得知为了能正常支持系统的亮色暗色切换，我们需要的是一个同时包含亮色暗色的主题，而不是一个只有暗色变体的主题，于是我们不能把 GTK Theme 设置为 Arc-Dark，而应该使用 Arc，但假如你在 GNOME Tweaks 里面设置好之后，你会发现仍然是黑白通吃：GNOME Settings 是 libadwaita 的暗色版本，GNOME Tweaks 是 Arc 的暗色版本，而 GNOME Terminal 和 Show Me The Key 却变成了亮的 Arc！</p>
+<p><img src="/posts/GTK-libhandy-Ark-Dark/screenshot-3.png" alt="小黑子们不要笑得太早了"></p>
+<p>我知道有的小黑子要迫不及待开始炮轰 GNOME 了：“什么玩意，整来整去不还是整不好吗，不如来当原始人。”但问题其实就是原始人留下的。现在我们回头看第一条：不使用 libhandy 的 GTK 3 程序和不使用 libadwaita 的 GTK 4 程序，这一类程序不考虑 GNOME Settings 里面的亮色/暗色开关，而只考虑 <code>gtk-application-prefer-dark-theme</code>。所以这个奇怪的表现恰好验证了这一条，同时也解释了“既然主题是靠内部的两个文件区分亮色和暗色的，为什么又会有 <code>Adwaita-dark</code> 和 <code>Arc-Dark</code> 这种名字里带暗色后缀的变体”这个问题：因为在一开始的设计里并没有什么全局亮色/暗色开关，也就没有要求主题同时提供 <code>gtk.css</code> 和 <code>gtk-dark.css</code>，那么为了让用户可以自选亮色暗色，只有提供两个不同的主题来解决问题。这也就是在 <code>Adwaita</code> 和 <code>Arc</code> 都提供了 <code>gtk-dark.css</code> 的情况下仍然存在 <code>Adwaita-dark</code> 和 <code>Arc-Dark</code> 的原因。然后在主题添加了 <code>gtk-dark.css</code> 之后，为了让 libhandy 的程序能够跟随系统开关切换亮色和暗色，就不能为了那些传统程序把 GTK Theme 设置为暗色变体的主题了，此时默认这些程序会选择 <code>gtk.css</code>，也就会出现上面截图里的情况。解决这个的方案也不是很困难，<code>gtk-application-prefer-dark-theme</code> 就是为此添加的，支持它的 GTK 程序会按照这个选项来加载 <code>gtk.css</code> 或 <code>gtk-dark.css</code>。如果你像我一样平时主要用暗色模式，那就手动编辑 <code>~/.config/gtk-4.0/settings.ini</code> 写入以下内容（GTK 3 的话就是 <code>~/.config/gtk-3.0/settings.ini</code>）：</p>
+<figure data-raw="[Settings]
+gtk-application-prefer-dark-theme=1
+" data-info="language-ini" data-lang="ini" class="code-block"><pre class="code"><code class="language-ini">[Settings]
+gtk-application-prefer-dark-theme=1
+</code></pre></figure>
+<p>你要是亮色爱好者，那就改成 <code>0</code>。这下倒是满足原始人的刀耕火种需求了哈，毕竟他们也不想要系统的亮色/暗色开关的样子，不过说不定以后哪天系统的亮色/暗色开关也会同时修改这个选项呢？只是读取这个选项的 GTK 程序不会像 libhandy/libadwaita 的程序那样会动态切换，必须要关了重开才行。</p>
+<p>还有一个奇怪的问题要注意，通常我们是在 GNOME Tweaks 里面设置 GTK Theme，不过根据 <a href="https://gitlab.gnome.org/GNOME/gnome-tweaks/-/blob/master/gtweak/tweaks/tweak_group_appearance.py#L75-L88" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-tweaks/-/blob/master/gtweak/tweaks/tweak_group_appearance.py#L75-L88</a>，它会把上面那个 <code>gtk-application-prefer-dark-theme</code> 设置成 <code>0</code>，看注释里面的 BUG 描述，应该也是为了某种刀耕火种的情况解决的（甚至那时候还推荐搞个单独的暗色主题，并且删除了全局的倾向暗色的开关），大概那时候还没推荐用 libhandy，也没有 libadwaita，也没有设置里这种全局暗色/亮色的开关。总之我不建议经常修改 GTK 主题，并且每次修改之后记得手动修改这个选项。如果你觉得这种反复横跳又要保证兼容以前的决策的行为很蠢，那我只能说毕竟你不能要求以前的开发者预见到未来的人们怎么定义桌面的功能。</p>
+<p>当然如果你毫不在乎亮色暗色切换（我就是要一直用暗色，所以你暗色模式给我选对了暗色主题就行了！），那还有个比较投机取巧的解决方案：把 Arc-Dark 的 <code>gtk.css</code> 复制并改名 <code>gtk-dark.css</code> 就可以了，原理不难理解。并且 Arc 主题已经做了这样的修改，只是还没有 Release（参见 <a href="https://github.com/jnsh/arc-theme/commit/73ada8563591fa48ae365686a358e874ca12edad" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/jnsh/arc-theme/commit/73ada8563591fa48ae365686a358e874ca12edad</a>）。</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="bi bi-tag"></i>GNOME</a><a class="post-tag button" href="/tags/GTK/" rel="tag"><i class="bi bi-tag"></i>GTK</a>
+      </div>
+      
+    </footer>
+  </article>
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/posts/Who-Moved-My-DNS-Resolving/" rel="prev" title="谁动了我的 DNS 解析？"><span class="nav-title">谁动了我的 DNS 解析？</span><i class="bi bi-chevron-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+  
+
+<div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+    
+    <div id="wechatpay">
+      <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    
+    
+    <div id="alipay">
+      <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+
+  
+  
+  
+<div class="comment" id="comment">
+  
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      const p = loadComment({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "perPage": "10",
+        "sendButtonText": "去评论",
+        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+        "title": "GTK 和 libhandy 和 Arc-Dark 主题",
+        "queryString": window.location.search,
+        "basePath": "/posts/GTK-libhandy-Ark-Dark/",
+        "containerID": "comment-results"
+      });
+      // Something wrong.
+      if (p == null) {
+        return;
+      }
+      p.then(() => {
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+        // A modern way to show date in user's format.
+        // But it shows date only by default, no time.
+        const formatter = new Intl.DateTimeFormat(
+          "zh-Hans",
+          {
+            "year": "numeric",
+            "month": "2-digit",
+            "day": "2-digit",
+            "weekday": "short",
+            "hour": "2-digit",
+            "minute": "2-digit",
+            "second": "2-digit",
+            "timeZoneName": "short",
+            "hour12": false
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("time.comment-full-date"),
+          (e, i) => {
+            const date = new Date(e.getAttribute("datetime"));
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+            const parts = formatter.formatToParts(date);
+            const obj = {};
+            for (let {type, value} of parts) {
+              obj[type] = value;
+            }
+            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+          }
+        );
+        elementsEach(
+          document.querySelectorAll("div.comment-content img"),
+          (e, i) => {
+            // If an image works as link,
+            // stop adding link styles to it.
+            if (e.parentNode.tagName.toLowerCase() === "a") {
+              e.parentNode.classList.add("img-link");
+            }
+          }
+        );
+      });
+    });
+  </script>
+  
+  
+</div>
+
+
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar">
+  
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  
+  <div class="info sidebar-item" id="info">
+    
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    
+    <div class="author-name">Alynx Zhou</div>
+    
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    
+    <div class="site-count">
+      
+      
+      
+      
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">94</a></div>
+      </div>
+      
+      
+      
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">35</a></div>
+      </div>
+      
+      
+      
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">74</a></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+    
+  </div>
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul>
+        
+        <li><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        
+        <li><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        
+        <li><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        
+        <li><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        
+        <li><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        
+        <li><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.13.1 at 2022-11-23T10:23:45.159Z. -->

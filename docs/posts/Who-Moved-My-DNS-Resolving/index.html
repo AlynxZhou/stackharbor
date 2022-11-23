@@ -394,7 +394,7 @@
 <p>以上三种方式其实都是我从 Arch Wiki 抄来的：<a href="https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution" target="_blank" rel="external nofollow noreferrer noopener">https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution</a></p>
 <p>所以我决定搞一个第三种，这个好说，wiki 写了可以用 Avahi 做这个，不过怎么 systemd-resolved 也能做 mDNS？这玩意不是管 <code>/etc/resolv.conf</code> 的吗？Network Manager 不是也管这个吗？</p>
 <h1 id="chattr+ietcresolvconf"><a class="header-link" href="/posts/Who-Moved-My-DNS-Resolving/#chattr+ietcresolvconf"></a>chattr +i /etc/resolv.conf</h1>
-<p>很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 <code>/etc/resolv.conf</code> 实现，很多 Linux 用户也被 <code>/etc/resolv.conf</code> 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 <code>resolvconf</code> 的工具处理，然后现在 systemd 又搞了个叫 resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 <code>chattr +i /etc/resolv.conf</code> 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是热恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），而是真的有场景需要他们。也许对于某个 VPN 连接需要使用自己的 DNS 服务器，总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 <code>/etc/resolv.conf</code> 的。</p>
+<p>很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 <code>/etc/resolv.conf</code> 实现，很多 Linux 用户也被 <code>/etc/resolv.conf</code> 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 <code>resolvconf</code> 的工具处理，然后现在 systemd 又搞了个叫 resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 <code>chattr +i /etc/resolv.conf</code> 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是惹恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），而是真的有场景需要他们。也许对于某个 VPN 连接需要使用自己的 DNS 服务器，总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 <code>/etc/resolv.conf</code> 的。</p>
 <p>但其实也不是一个 <code>/etc/resolv.conf</code> 搞定所有，有关这个的故事也是 long long ago，但毕竟是 UNIX 纪元之后的事情，没有太久，大概确实上古时代的程序都是直接读这个获取 DNS 服务器然后再做 DNS 解析的，但实际上这也不一定 OK，比如像之前说的打印机这种怎么解决？以及 hosts 呢？所以就有了更复杂的解决方案，大部分程序做 DNS 解析实际上是调用 glibc 里面 <code>getaddrinfo</code> 这个 API，所以在它后面我们就可以做一些工作。一个叫做 Name Service Switch 的东西发明出来就是干这个的，它可以理解为一个基于插件的结构，我们可以通过阅读 <code>/etc/nsswitch.conf</code> 里面的 <code>hosts</code> 这一行来理解，比如我这里默认是这样的：</p>
 <figure data-raw="hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
 " class="code-block"><pre class="code"><code>hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
@@ -430,6 +430,8 @@
   
   <nav class="page-nav">
     <div class="page-nav-next page-nav-item">
+      
+      <a href="/posts/GTK-libhandy-Ark-Dark/" rel="next" title="GTK 和 libhandy 和 Arc-Dark 主题"><i class="bi bi-chevron-left"></i><span class="nav-title">GTK 和 libhandy 和 Arc-Dark 主题</span></a>
       
     </div>
     <div class="page-nav-prev page-nav-item">
@@ -588,7 +590,7 @@
       
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">93</a></div>
+        <div><a href="/archives/">94</a></div>
       </div>
       
       
@@ -602,7 +604,7 @@
       
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">73</a></div>
+        <div><a href="/tags/">74</a></div>
       </div>
       
       
@@ -760,4 +762,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.1 at 2022-11-09T16:27:14.159Z. -->
+<!-- Page built by Hikaru v1.13.1 at 2022-11-23T10:23:45.175Z. -->

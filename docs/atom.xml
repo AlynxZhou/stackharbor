@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2022-11-09T13:06:00.000Z</updated>
+  <updated>2022-11-23T10:23:34.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,78 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.5">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>GTK 和 libhandy 和 Arc-Dark 主题</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/GTK-libhandy-Ark-Dark/" />
+    <id>https://sh.alynx.one/posts/GTK-libhandy-Ark-Dark/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-11-23T10:23:34.000Z</published>
+    
+    
+    <updated>2022-11-23T10:23:34.000Z</updated>
+    
+    
+    <summary type="html">
+      黑夜让我选了黑色的主题，但是有些程序非要寻找光明？ 我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还…
+    </summary>
+    
+    
+    <content type="html">
+      &lt;blockquote class=&quot;center-quote&quot;&gt;黑夜让我选了黑色的主题，但是有些程序非要寻找光明？&lt;/blockquote&gt;
+
+&lt;p&gt;我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还挺好看的。但即使是我这样宽容的人，对于 GTK 3 那个熟的不能再熟的 Adwaita 主题也审美疲劳了，那个银色和棕色会让所有手机厂笑话的，即使有些手机厂的审美还不如这玩意。&lt;/p&gt;
+&lt;p&gt;我个人最喜欢的配色其实是 Atom 的 One Dark 和 One Light，但我没那个精力利用调色盘自己维护一份主题，所以我退而求其次选择了在观感上比较接近的 &lt;a href=&quot;https://github.com/jnsh/arc-theme&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Arc 主题&lt;/a&gt;，这个主题其实是一个系列，我自己只在乎里面的两个变体：全亮色的 Arc 和全暗色的 Arc-Dark（似乎它自己 README 里面给的截图也有点问题）。&lt;/p&gt;
+&lt;p&gt;我自己是一个暗色模式爱好者，毕竟长时间面对屏幕，白底黑字实在是太刺眼了，相对而言，深蓝色做背景色浅灰色做前景色要好看很多。在很久很久以前混沌初开，Linux 桌面程序员还没有意识到需要有个全局的暗色/亮色开关的时候，设置主题非常简单粗暴，打开 GNOME Tweaks 把 GTK Theme 设置为 Arc-Dark，我就心满意足了。&lt;/p&gt;
+&lt;p&gt;可能是 libadwaita 不能更换主题导致很多反对的声音，并没有太多人谈论随之而来的全局暗色模式开关，但是某天我更新了系统之后发现设置里多了一个亮色/暗色选择，我觉得挺好，那我这里选暗色就行了嘛，果然所有用了 libadwaita 的程序都跟着变了亮暗，不过我用着用着就感觉不对劲了——怎么以前那些 GTK 3 的程序不用 Arc-Dark 而是用 Adwaita-dark 了，这和我想的不一样啊？然后我研究了一下，觉得更奇怪了，GTK 4 + libadwaita 的 GNOME Settings 用的是 libadwaita 的暗色版本（预期行为），GTK 3 的 GNOME Tweaks 用的是 GTK 3 的 Adwaita-dark（不对劲），但是同样是 GTK 3 的 GNOME Terminal 用的是我设置的 Arc-Dark（预期行为）。好家伙好家伙，我这一个桌面上三花聚顶了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/GTK-libhandy-Ark-Dark/screenshot-1.png&quot; alt=&quot;三花聚顶&quot;&gt;&lt;/p&gt;
+&lt;p&gt;总这么待着我觉得怪怪的，于是我研究了一下，如果我要是选亮色模式呢？现在 GNOME Settings 是 libadwaita 的亮色版本了，然后 GNOME Tweaks 和 GNOME Terminal 都是 Arc-Dark，虽然好像一致了，又好像有点不一致，这回从三花聚顶变成黑白通吃。总之我忍受了很久 GTK 4 程序 &lt;strong&gt;大部分&lt;/strong&gt; 是白的而 GTK 3 程序是黑的，直到我再也受不了决定翻开代码看看这些人是怎么写的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/GTK-libhandy-Ark-Dark/screenshot-2.png&quot; alt=&quot;黑白通吃&quot;&gt;&lt;/p&gt;
+&lt;p&gt;为了能说明白，下面我就不从结果反推原因了，毕竟大家看到这里可能已经云里雾里，没必要和我再重复一遍破案过程了。&lt;/p&gt;
+&lt;p&gt;可能大部分人不是 GTK 开发者也不使用 GTK，对这玩意怎么调用主题存在一定的误区。实际上可以分为以下几类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不使用 libhandy 的 GTK 3 程序（比如 GNOME Terminal）和不使用 libadwaita 的 GTK 4 程序（比如 Show Me The Key），这一类程序不考虑 GNOME Settings 里面的亮色/暗色开关（指的是 GSettings 里面 &lt;code&gt;org.gnome.desktop.interface&lt;/code&gt; 的 &lt;code&gt;color-scheme&lt;/code&gt; 选项），而只考虑 &lt;code&gt;gtk-application-prefer-dark-theme&lt;/code&gt;，这个值属于 &lt;code&gt;GtkSettings&lt;/code&gt;，需要编辑 &lt;code&gt;~/.config/gtk-4.0/settings.ini&lt;/code&gt; 和 &lt;code&gt;~/.config/gtk-3.0/settings.ini&lt;/code&gt;。以及是的你没看错，GTK 4 不一定非要用 libadwaita，实际上虽然这个库叫 libadwaita，但它和 GTK 3 那个叫做 Adwaita 的默认主题几乎没有关系，它是 GTK 3 的组件库 libhandy 的进化版本。GNOME 推荐使用这个以便让整个桌面有统一的风格，但是 GTK 4 仍然是个完整的 UI 库，程序开发者完全可以不使用 libadwaita。&lt;/li&gt;
+&lt;li&gt;使用 libadwaita 的 GTK 4 程序（比如 GNOME Settings），这一类程序不考虑 GNOME Tweaks 里面的 GTK Theme 选项（实际上是 GSettings 里面 &lt;code&gt;org.gnome.desktop.interface&lt;/code&gt; 的 &lt;code&gt;gtk-theme&lt;/code&gt; 选项），只使用 libadwaita 内置的配色，所以我们也完全不需要关心它，它永远按照设置里的开关工作。&lt;/li&gt;
+&lt;li&gt;使用 libhandy 的 GTK 3 程序（比如 GNOME Tweaks），这个就相当复杂了，libhandy 考虑了桌面环境的亮色/暗色主题切换，但也考虑了用户自定义的 GTK Theme，于是在这里它华丽的乱套了。&lt;/li&gt;
+&lt;li&gt;还有最后一类程序，它们出于特定需要自己给自己套了自定义的 CSS，所以你拿它一点办法也没有，直接忽略（比如 Show Me The Key 的悬浮窗口）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;看到这里一定有小黑子要怒吼了：“看看你们搞的乱七八糟的玩意！GNOME 真垃圾！老子就要刀耕火种就要当原始人，libadwaita 滚啊！”但是我建议用你那可怜的小脑袋瓜想一想，上面三条里面反而 libadwaita 是最符合预期的一个（亮色模式用亮色，暗色模式用暗色），所以我不会解决第二个，而是解决另外的两个。&lt;/p&gt;
+&lt;p&gt;首先从 libhandy 下手，相关的代码位于 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L286-L348&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L286-L348&lt;/a&gt;，如果你可怜的小脑袋瓜也没耐心看看代码的话，那么我大发慈悲替你读了一遍。相关的逻辑大概是说首先覆盖掉当前程序的 &lt;code&gt;gtk-application-prefer-dark-theme&lt;/code&gt;（别忘了 libhandy 程序也是 GTK 3 程序），这个值会被设置成 &lt;code&gt;color-scheme&lt;/code&gt; 的值。然后获取当前系统的 GTK Theme，因为我们考虑到浅色和深色主题切换，所以主题名被分成基础名和种类名两部分，如果系统的主题以 &lt;code&gt;-dark&lt;/code&gt; 结尾，那就去掉这个后缀，得到基础名，并设置为当前程序的主题。那问题难道出在 Arc-Dark 的结尾是 &lt;code&gt;-Dark&lt;/code&gt; 而不是 &lt;code&gt;-dark&lt;/code&gt; 吗？也不是，GTK 主题对于暗色和亮色的区分不在主题名上，而是在主题目录下面的两个文件，一个叫做 &lt;code&gt;gtk.css&lt;/code&gt;，另一个叫做 &lt;code&gt;gtk-dark.css&lt;/code&gt;，如果 &lt;code&gt;color-scheme&lt;/code&gt; 是 &lt;code&gt;prefer-dark&lt;/code&gt;，libhandy 就会加载后者而非前者，这部分的代码在 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L106-L141&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/libhandy/-/blob/main/src/hdy-style-manager.c#L106-L141&lt;/a&gt;。于是在系统设置为暗色模式的时候，libhandy 会去加载 Arc-Dark 的 &lt;code&gt;gtk-dark.css&lt;/code&gt;，但 Arc-Dark 作为一个暗色变体，只有 &lt;code&gt;gtk.css&lt;/code&gt;，所以加载失败，libhandy 回退到 &lt;code&gt;Adwaita&lt;/code&gt; 的 &lt;code&gt;gtk-dark.css&lt;/code&gt;。而系统设置为亮色的时候，libhandy 会去加载 Arc-Dark 的 &lt;code&gt;gtk.css&lt;/code&gt;，而作为一个暗色变体，这个文件实际写的是暗色配色，于是看起来正常了。（以及如果你 GTK Theme 设置为 &lt;code&gt;Adwaita-dark&lt;/code&gt; 从这里你就会发现实际上加载的是 &lt;code&gt;Adwaita&lt;/code&gt; 的 &lt;code&gt;gtk-dark.css&lt;/code&gt;，而不是 &lt;code&gt;Adwaita-dark&lt;/code&gt; 的 &lt;code&gt;gtk.css&lt;/code&gt;，即使它们的配色是一样的。）&lt;/p&gt;
+&lt;p&gt;那么显然又有另一个问题，既然主题是靠内部的两个文件区分亮色和暗色的，为什么又会有 &lt;code&gt;Adwaita-dark&lt;/code&gt; 和 &lt;code&gt;Arc-Dark&lt;/code&gt; 这种名字里带暗色后缀的变体呢？并且还要在 &lt;code&gt;libhandy&lt;/code&gt; 里面处理这个后缀，是不是多此一举？我们可以暂时先不考虑这个问题，而先简单解决第三条。从上面的分析可以得知为了能正常支持系统的亮色暗色切换，我们需要的是一个同时包含亮色暗色的主题，而不是一个只有暗色变体的主题，于是我们不能把 GTK Theme 设置为 Arc-Dark，而应该使用 Arc，但假如你在 GNOME Tweaks 里面设置好之后，你会发现仍然是黑白通吃：GNOME Settings 是 libadwaita 的暗色版本，GNOME Tweaks 是 Arc 的暗色版本，而 GNOME Terminal 和 Show Me The Key 却变成了亮的 Arc！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/GTK-libhandy-Ark-Dark/screenshot-3.png&quot; alt=&quot;小黑子们不要笑得太早了&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我知道有的小黑子要迫不及待开始炮轰 GNOME 了：“什么玩意，整来整去不还是整不好吗，不如来当原始人。”但问题其实就是原始人留下的。现在我们回头看第一条：不使用 libhandy 的 GTK 3 程序和不使用 libadwaita 的 GTK 4 程序，这一类程序不考虑 GNOME Settings 里面的亮色/暗色开关，而只考虑 &lt;code&gt;gtk-application-prefer-dark-theme&lt;/code&gt;。所以这个奇怪的表现恰好验证了这一条，同时也解释了“既然主题是靠内部的两个文件区分亮色和暗色的，为什么又会有 &lt;code&gt;Adwaita-dark&lt;/code&gt; 和 &lt;code&gt;Arc-Dark&lt;/code&gt; 这种名字里带暗色后缀的变体”这个问题：因为在一开始的设计里并没有什么全局亮色/暗色开关，也就没有要求主题同时提供 &lt;code&gt;gtk.css&lt;/code&gt; 和 &lt;code&gt;gtk-dark.css&lt;/code&gt;，那么为了让用户可以自选亮色暗色，只有提供两个不同的主题来解决问题。这也就是在 &lt;code&gt;Adwaita&lt;/code&gt; 和 &lt;code&gt;Arc&lt;/code&gt; 都提供了 &lt;code&gt;gtk-dark.css&lt;/code&gt; 的情况下仍然存在 &lt;code&gt;Adwaita-dark&lt;/code&gt; 和 &lt;code&gt;Arc-Dark&lt;/code&gt; 的原因。然后在主题添加了 &lt;code&gt;gtk-dark.css&lt;/code&gt; 之后，为了让 libhandy 的程序能够跟随系统开关切换亮色和暗色，就不能为了那些传统程序把 GTK Theme 设置为暗色变体的主题了，此时默认这些程序会选择 &lt;code&gt;gtk.css&lt;/code&gt;，也就会出现上面截图里的情况。解决这个的方案也不是很困难，&lt;code&gt;gtk-application-prefer-dark-theme&lt;/code&gt; 就是为此添加的，支持它的 GTK 程序会按照这个选项来加载 &lt;code&gt;gtk.css&lt;/code&gt; 或 &lt;code&gt;gtk-dark.css&lt;/code&gt;。如果你像我一样平时主要用暗色模式，那就手动编辑 &lt;code&gt;~/.config/gtk-4.0/settings.ini&lt;/code&gt; 写入以下内容（GTK 3 的话就是 &lt;code&gt;~/.config/gtk-3.0/settings.ini&lt;/code&gt;）：&lt;/p&gt;
+&lt;figure data-raw=&quot;[Settings]
+gtk-application-prefer-dark-theme=1
+&quot; data-info=&quot;language-ini&quot; data-lang=&quot;ini&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-ini&quot;&gt;[Settings]
+gtk-application-prefer-dark-theme=1
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;你要是亮色爱好者，那就改成 &lt;code&gt;0&lt;/code&gt;。这下倒是满足原始人的刀耕火种需求了哈，毕竟他们也不想要系统的亮色/暗色开关的样子，不过说不定以后哪天系统的亮色/暗色开关也会同时修改这个选项呢？只是读取这个选项的 GTK 程序不会像 libhandy/libadwaita 的程序那样会动态切换，必须要关了重开才行。&lt;/p&gt;
+&lt;p&gt;还有一个奇怪的问题要注意，通常我们是在 GNOME Tweaks 里面设置 GTK Theme，不过根据 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gnome-tweaks/-/blob/master/gtweak/tweaks/tweak_group_appearance.py#L75-L88&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/gnome-tweaks/-/blob/master/gtweak/tweaks/tweak_group_appearance.py#L75-L88&lt;/a&gt;，它会把上面那个 &lt;code&gt;gtk-application-prefer-dark-theme&lt;/code&gt; 设置成 &lt;code&gt;0&lt;/code&gt;，看注释里面的 BUG 描述，应该也是为了某种刀耕火种的情况解决的（甚至那时候还推荐搞个单独的暗色主题，并且删除了全局的倾向暗色的开关），大概那时候还没推荐用 libhandy，也没有 libadwaita，也没有设置里这种全局暗色/亮色的开关。总之我不建议经常修改 GTK 主题，并且每次修改之后记得手动修改这个选项。如果你觉得这种反复横跳又要保证兼容以前的决策的行为很蠢，那我只能说毕竟你不能要求以前的开发者预见到未来的人们怎么定义桌面的功能。&lt;/p&gt;
+&lt;p&gt;当然如果你毫不在乎亮色暗色切换（我就是要一直用暗色，所以你暗色模式给我选对了暗色主题就行了！），那还有个比较投机取巧的解决方案：把 Arc-Dark 的 &lt;code&gt;gtk.css&lt;/code&gt; 复制并改名 &lt;code&gt;gtk-dark.css&lt;/code&gt; 就可以了，原理不难理解。并且 Arc 主题已经做了这样的修改，只是还没有 Release（参见 &lt;a href=&quot;https://github.com/jnsh/arc-theme/commit/73ada8563591fa48ae365686a358e874ca12edad&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/jnsh/arc-theme/commit/73ada8563591fa48ae365686a358e874ca12edad&lt;/a&gt;）。&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" />
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
+    
+    <category term="GTK" label="GTK" scheme="https://sh.alynx.one/tags/GTK/" />
+    
+  </entry>
   
   
   
@@ -60,7 +132,7 @@
 &lt;p&gt;以上三种方式其实都是我从 Arch Wiki 抄来的：&lt;a href=&quot;https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;所以我决定搞一个第三种，这个好说，wiki 写了可以用 Avahi 做这个，不过怎么 systemd-resolved 也能做 mDNS？这玩意不是管 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的吗？Network Manager 不是也管这个吗？&lt;/p&gt;
 &lt;h1 id=&quot;chattr+ietcresolvconf&quot;&gt;&lt;a class=&quot;header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#chattr+ietcresolvconf&quot;&gt;&lt;/a&gt;chattr +i /etc/resolv.conf&lt;/h1&gt;
-&lt;p&gt;很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 实现，很多 Linux 用户也被 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 &lt;code&gt;resolvconf&lt;/code&gt; 的工具处理，然后现在 systemd 又搞了个叫 resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 &lt;code&gt;chattr +i /etc/resolv.conf&lt;/code&gt; 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是热恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），而是真的有场景需要他们。也许对于某个 VPN 连接需要使用自己的 DNS 服务器，总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的。&lt;/p&gt;
+&lt;p&gt;很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 实现，很多 Linux 用户也被 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 &lt;code&gt;resolvconf&lt;/code&gt; 的工具处理，然后现在 systemd 又搞了个叫 resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 &lt;code&gt;chattr +i /etc/resolv.conf&lt;/code&gt; 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是惹恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），而是真的有场景需要他们。也许对于某个 VPN 连接需要使用自己的 DNS 服务器，总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的。&lt;/p&gt;
 &lt;p&gt;但其实也不是一个 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 搞定所有，有关这个的故事也是 long long ago，但毕竟是 UNIX 纪元之后的事情，没有太久，大概确实上古时代的程序都是直接读这个获取 DNS 服务器然后再做 DNS 解析的，但实际上这也不一定 OK，比如像之前说的打印机这种怎么解决？以及 hosts 呢？所以就有了更复杂的解决方案，大部分程序做 DNS 解析实际上是调用 glibc 里面 &lt;code&gt;getaddrinfo&lt;/code&gt; 这个 API，所以在它后面我们就可以做一些工作。一个叫做 Name Service Switch 的东西发明出来就是干这个的，它可以理解为一个基于插件的结构，我们可以通过阅读 &lt;code&gt;/etc/nsswitch.conf&lt;/code&gt; 里面的 &lt;code&gt;hosts&lt;/code&gt; 这一行来理解，比如我这里默认是这样的：&lt;/p&gt;
 &lt;figure data-raw=&quot;hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
 &quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
@@ -2888,102 +2960,6 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
     
     
     <category term="时光飞逝" label="时光飞逝" scheme="https://sh.alynx.one/tags/%E6%97%B6%E5%85%89%E9%A3%9E%E9%80%9D/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>解决 Spleeter 愚蠢的依赖问题</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Fix-Silly-Spleeter-Dependencies/" />
-    <id>https://sh.alynx.one/posts/Fix-Silly-Spleeter-Dependencies/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2020-11-26T08:43:12.000Z</published>
-    
-    
-    <updated>2020-11-26T08:43:12.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;我倒不是对机器学习有什么莫名的偏见。事实上有些只能用机器学习搞定的东西我也很支持用机器学习解决，比如 waifu2x 这种增加图片分辨率的或者 Spleeter 这种分离人声和伴奏的，用传统的分离人声的方法就是不能完美解决这类问题，而机器学习模糊分类则可以无限接近完美解决。我讨厌的有两个，一个是传统方法很好解决的东西非要用机器学习解决，另一个是混乱的机器学习项目，后者更严重。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;我倒不是对机器学习有什么莫名的偏见。事实上有些只能用机器学习搞定的东西我也很支持用机器学习解决，比如 waifu2x 这种增加图片分辨率的或者 Spleeter 这种分离人声和伴奏的，用传统的分离人声的方法就是不能完美解决这类问题，而机器学习模糊分类则可以无限接近完美解决。我讨厌的有两个，一个是传统方法很好解决的东西非要用机器学习解决，另一个是混乱的机器学习项目，后者更严重。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;不知道是因为什么原因，许多机器学习从业者似乎都缺乏整理代码和依赖的能力——能轻松地把一个这类开源项目打包简直是奇迹，更多时候别提打包了，你想自己安装然后跑起来都不太现实，哪怕是同样做机器学习的其他人也有这样的苦恼：实现者似乎把论文写好然后在自己电脑上能跑起来就心满意足了，丢出来一份没什么文档的代码，不折腾几天根本不知道这坨代码需要装些什么才能跑起来。对我这种洁癖用户就更严重了，我可不希望 pip 在我的系统里塞一堆乱七八糟的东西，这个需要其他项目才能避免全局安装的程序比起 npm 真是差远了，解决依赖的能力也远不如 pacman 和 npm。&lt;/p&gt;
-&lt;p&gt;然后有人发明了 conda 和 docker 这样的 &lt;del&gt;辣鸡&lt;/del&gt; 项目来拯救其他的辣鸡，但事实上不过是变得更糟而已——它们给了一些懒人名正言顺不维护项目的借口——反正我丢一个 conda 配置或者 docker 文件上去，你们拉上一大堆和我一样的过期依赖就能跑了，至于占了你多少硬盘，干不干净，关我什么事？如果不是物理限制，恐怕这些懒人会把整个宇宙都塞进去。而且他们再也不会管版本更新，什么 tensorflow 2 与我何干？用了我的 docker 你的系统里就会有几百个不同的过期的 tensorflow 1，买硬盘就完了呗？这和买显卡就完了呗还真是一路货色，这样依赖商业公司的产品，总有一天感觉会被割韭菜。&lt;/p&gt;
-&lt;p&gt;今天我用到的这个 Spleeter 某种意义上也是这样的一坨辣鸡，它的仓库里面的 README 是完全过时的，但这起码是件好事：代码还在更新。只是你按照文档是没办法顺利的搞定它的，我总结了一下我的解决方案，可能不适合其他人，但我大概知道怎么解决了。&lt;/p&gt;
-&lt;p&gt;这个文档有多离谱呢？它说你如果使用 GPU 加速的版本，必须从 conda-forge 安装，pip 和 GitHub 的版本都只有 CPU——那你这也是按揭开源？然后整个文档没有一个地方告诉我我需要单独下载训练好的模型才能跑起来，直接运行程序则丢一个段错误——可能他们搞机器学习的人觉得下模型是常识不需要说吧。&lt;/p&gt;
-&lt;p&gt;如果直接按它的方法运行 &lt;code&gt;conda install -c conda-forge spleeter-gpu&lt;/code&gt;，你会得到一个不能用 GPU 的 GPU 版，这实在是太搞笑了。我捏着鼻子用 conda 就是为了能让你一步把这一坨东西给我弄好，现在你说你弄不好？&lt;/p&gt;
-&lt;p&gt;但是有一点好处就是实际上他们的代码已经更新到支持 tensorflow 2 了，所以其实完全不需要用那个过期的 conda-forge 的版本，你完全可以直接在 Python 3.8 里面 &lt;code&gt;pip install spleeter-gpu&lt;/code&gt; 安装最新的版本——然后我又遇到了依赖问题，我的一些系统软件包依赖 numpy，然后 Arch 官方源里的 numpy 版本还是比 spleeter-gpu 依赖的 tensorflow 依赖的 numpy 版本新——你们写 Python 的人真麻烦，版本号兼容性是可以随便 break 的吗？&lt;/p&gt;
-&lt;p&gt;所以这时候我还是用 conda 解决，总之就是搞一个和系统独立的虚拟环境（npm：这不应该是内置功能吗？还需要用商业软件？）。总之&lt;a href=&quot;https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;去 TUNA 搞一个 Miniconda 3 最新的安装包来&lt;/a&gt;，然后直接安装，看着它往你的 shell 配置里塞一坨辣鸡（我把实际用到的命令拿出来做了个 alias，这样就可以只在我需要的时候打开 conda 了）。&lt;/p&gt;
-&lt;p&gt;为什么使用 miniconda 而不是 anaconda？因为 anaconda 带的那个图形界面根本用不了，miniconda 够用了。&lt;/p&gt;
-&lt;p&gt;然后创建一个 Python 3.8 的环境，高了低了都不行，真是难伺候，同时别忘了带上 cuda 和 cudnn，不然它一声不吭的就会只能用 CPU：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ conda create -n spleeter python=3.8 cudatoolkit cudnn
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda create -n spleeter python=3.8 cudatoolkit cudnn
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;cuda 不叫 cuda，叫 cudatoolkit 就离谱。&lt;/p&gt;
-&lt;p&gt;然后切进去：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ conda activate spleeter
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ conda activate spleeter
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;然后装 &lt;code&gt;spleeter-gpu&lt;/code&gt; 到 conda 新创建的这个 Python 环境：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ pip install spleeter-gpu
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ pip install spleeter-gpu
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我本机已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，但我都创建虚拟环境了你还读取我系统的干嘛？不过其实好像也不影响使用，或者此时可以 &lt;code&gt;pip install numpy==1.18.5&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;然后到 &lt;a href=&quot;https://github.com/deezer/spleeter/releases&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/deezer/spleeter/releases&lt;/a&gt; 去下载训练好的模型，这也是个弱智的地方：哪有 tar 打包不把目录本身打进去的？然后还得给这个程序创建一个工作目录，因为它是写死的到当前目录下面的 &lt;code&gt;pretrained_models&lt;/code&gt; 下面去找模型。&lt;/p&gt;
-&lt;figure data-raw=&quot;$ mkdir -p spleeter/pretrained_models
-$ cd spleeter/pretrained_models
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ mkdir -p spleeter/pretrained_models
-$ cd spleeter/pretrained_models
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;我这里用 2stems 的模型示范，因为我只需要分离人声和伴奏：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ wget -c &#039;https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz&#039;
-$ mkdir 2stems
-$ cd 2stems
-$ tar -xpvzf ../2stems.tar.gz
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ wget -c &#039;https://github.com/deezer/spleeter/releases/download/v1.4.0/2stems.tar.gz&#039;
-$ mkdir 2stems
-$ cd 2stems
-$ tar -xpvzf ../2stems.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;因为他们打 tar 包时候没把目录打进去，所以别忘了自己创建目录！&lt;/p&gt;
-&lt;p&gt;然后回到你的工作目录就可以用了，我这里结构是 &lt;code&gt;spleeter/pretrained_models/2stems&lt;/code&gt; 所以工作目录就是 &lt;code&gt;spleeter&lt;/code&gt;：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ cd ../../
-$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ cd ../../
-$ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 -B tensorflow
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;如果你想使用其他的几个模型，那就把 2stems 改成其他模型的名字，但是这里还有个开发者脑子抽了的地方：带有 &lt;code&gt;-finetune&lt;/code&gt; 的是高品质模型，它们的模型目录名字应该是比如 &lt;code&gt;2stems-finetune&lt;/code&gt;，但是参数名字却不是这个而是 &lt;code&gt;-p spleeter:2stems-16kHz&lt;/code&gt;，文档里当然是没找到的，我觉得应该揍开发者一顿让他老实写文档（不过我又看了一下，这个 finetune 对于分离音轨没什么用好像）。&lt;/p&gt;
-&lt;p&gt;我这里必须使用 &lt;code&gt;-B tensorflow&lt;/code&gt; 才会走显卡加速。&lt;/p&gt;
-&lt;p&gt;用完了就可以 &lt;code&gt;conda deactivate&lt;/code&gt; 退出虚拟环境，要用的时候别忘了 &lt;code&gt;conda activate spleeter&lt;/code&gt; 切换进来，&lt;/p&gt;
-&lt;p&gt;遇到类似问题的同学可以参考我的文章，但是因为这个处理过程影响因素太多了，如果你的不能用我也没什么办法。&lt;/p&gt;
-&lt;p&gt;回头一看，这个项目犯了一大堆禁忌：难以解决的依赖，写死的模型路径还有匮乏的文档，导致配环境就要配一大堆。当然，好在他们还是在努力更新跟上依赖而不是撒手不管让它慢慢死去，并且功能非常好。真正对开发者友好应该是不需要配环境的，比如在 Linux 下面开发软件，包管理已经帮你考虑好各种依赖了。只有像 Windows 或者 Android 这种不以开发者为中心或者是许多机器学习项目这种“数据好看就行”的地方才会有这么多麻烦。真的很希望这些人能补一点务实的基础，不要让他们的软件这么难用。&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
-    
-    <category term="Python" label="Python" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Python/" />
-    
-    
-    <category term="Python" label="Python" scheme="https://sh.alynx.one/tags/Python/" />
-    
-    <category term="Spleeter" label="Spleeter" scheme="https://sh.alynx.one/tags/Spleeter/" />
     
   </entry>
   
