@@ -664,197 +664,247 @@
     &lt;/edit&gt;
   &lt;/match&gt;
 </code></pre></figure>
-<p>然后就是常见的默认字体代称（sans-serif，serif，monospace，emoji）回退列表了，我是按照 <code>Roboto/Roboto Slab/Monaco -&gt; Noto Sans/Serif (Mono) CJK SC -&gt; Noto Color Emoji</code> 的顺序回退的：</p>
-<figure data-raw="  <!-- 下面这一系列等同于 alias。 -->
-  <!-- 默认无衬线字体。 -->
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>sans</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
-      <string>Roboto</string>
-      <string>Noto Sans CJK SC</string>
-      <string>Noto Color Emoji</string>
-    </edit>
-  </match>
+<p>更新（2022-11-24）：某些网站的前端脑子里不知道装的什么东西，比如简书的前端可能脑子里装的是苹果，他们把 <code>-apple-system,BlinkMacSystemFont,"Apple Color Emoji"</code> 排在 <code>sans-serif</code> 前边，于是你看到的数字可能是 Emoji 里面的。再比如 B 站直播首页所有的字体都是微软字体，连 <code>sans-serif</code> 都没有，你没看错，这个不合格的前端连最后要加 <code>sans-serif</code> 保证兼容性都不知道，而且还把 Microsoft Sans Serif 拼错了，如果我是他的老板，我真想一拳打在他头上告诉他这个世界不是只有微软字体，然后再把他开除掉。现在我需要加条规则让他匹配到我想要的字体（虽然这样在一些需要微软雅黑的 office 软件里面可能有问题，不过反正我的工作不需要用垃圾 office 哈哈哈哈哈哈哈哈哈哈），所以需要对这些弱智做一些特殊照顾。因为 Fontconfig 是按顺序处理的，所以如果你想把某个字体换成 <code>sans-serif</code> 之类的处理，就得在那之前进行替换。然后很多网站写的都是 Apple Color Emoji，我们这里自然是没有的，要换成我们默认的。</p>
+<figure data-raw="<!--
+    有一点需要注意，sans-serif，serif，monospace, emoji 这些默认字体名并不是真正
+    的字体，而是锚点，是用来进行后续的字体插入的。因此如果你想通过把一些字体映射
+    成 sans-serif 来修正一些网站奇怪的逻辑的话，请务必写在处理 sans-serif 部分之
+    前，这样才会被正常替换。
+  -->
+  <!--
+    我建议这个世界新增一种物种叫苹果人，即打开脑壳之后没有脑子，装的全是苹果的
+    人，显然简书的前端就属于此类（-apple-system,BlinkMacSystemFont,
+    &quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Segoe UI&quot;,
+    &quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,
+    Helvetica,Arial,sans-serif）。正常人怎么会把 Apple Color Emoji 放前面？
+  -->
+  <alias>
+    <family>-apple-system</family>
+    <prefer>
+      <family>sans-serif</family>
+    </prefer>
+  </alias>
 
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>sans-serif</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
-      <string>Roboto</string>
-      <string>Noto Sans CJK SC</string>
-      <string>Noto Color Emoji</string>
-    </edit>
-  </match>
+  <alias>
+    <family>BlinkMacSystemFont</family>
+    <prefer>
+      <family>sans-serif</family>
+    </prefer>
+  </alias>
 
-  <!-- 默认有衬线字体。 -->
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>serif</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
-      <string>Roboto Slab</string>
-      <string>Noto Serif CJK SC</string>
-      <string>Noto Color Emoji</string>
-    </edit>
-  </match>
-
-  <!-- 默认等宽字体。 -->
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>monospace</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
-      <string>Monaco</string>
-      <string>Noto Sans Mono CJK SC</string>
-      <string>Noto Color Emoji</string>
-    </edit>
-  </match>
-
-  <!-- 默认 emoji 字体。 -->
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>emoji</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;same&quot;>
-      <string>Noto Color Emoji</string>
-    </edit>
-  </match>
-" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 下面这一系列等同于 alias。 --&gt;
-  &lt;!-- 默认无衬线字体。 --&gt;
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;sans&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="prepend" binding="same"&gt;
-      &lt;string&gt;Roboto&lt;/string&gt;
-      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
-      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;sans-serif&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="prepend" binding="same"&gt;
-      &lt;string&gt;Roboto&lt;/string&gt;
-      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
-      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-
-  &lt;!-- 默认有衬线字体。 --&gt;
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;serif&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="prepend" binding="same"&gt;
-      &lt;string&gt;Roboto Slab&lt;/string&gt;
-      &lt;string&gt;Noto Serif CJK SC&lt;/string&gt;
-      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-
-  &lt;!-- 默认等宽字体。 --&gt;
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;monospace&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="prepend" binding="same"&gt;
-      &lt;string&gt;Monaco&lt;/string&gt;
-      &lt;string&gt;Noto Sans Mono CJK SC&lt;/string&gt;
-      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-
-  &lt;!-- 默认 emoji 字体。 --&gt;
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;emoji&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="prepend" binding="same"&gt;
-      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-</code></pre></figure>
-<p>这里的写法和 <code>&lt;alias&gt;</code> 是等价的。设置完这个记得把所有软件的自定义字体设置里面无衬线设置为 <code>sans-serif</code>，有衬线设置为 <code>serif</code>，等宽设置为 <code>monospace</code>，这样才会遵守这里的回退顺序。</p>
-<p>然后很多网站写的都是 Apple Color Emoji，我们这里自然是没有的，要换掉：</p>
-<figure data-raw="  <!-- 替换 Apple Color Emoji 字体。 -->
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>Apple Color Emoji</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;assign&quot; binding=&quot;same&quot;>
-      <string>Noto Color Emoji</string>
-    </edit>
-  </match>
-" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 替换 Apple Color Emoji 字体。 --&gt;
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;Apple Color Emoji&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="assign" binding="same"&gt;
-      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-</code></pre></figure>
-<p>然后是个非常弱智的部分，B 站直播首页的 CSS 写死字体回退顺序为 <code>Arial,Microsoft YaHei, "Microsoft Sans Serif",Microsoft SanSerf,微软雅黑</code>，你没看错，这个不合格的前端连最后要加 sans-serif 保证兼容性都不知道，而且还把 Microsoft Sans Serif 拼错了，如果我是他的老板，我真想一拳打在他头上告诉他这个世界不是只有微软字体，然后再把他开除掉。但现在我需要加条规则让他匹配到我想要的字体，虽然这样在一些需要微软雅黑的 office 软件里面可能有问题，不过反正我的工作不需要用垃圾 office 哈哈哈哈哈哈哈哈哈哈：</p>
-<figure data-raw="  <!--
+  <!--
     B 站直播首页的前端认为这个世界上只有微软字体（Arial,Microsoft YaHei,
     &quot;Microsoft Sans Serif&quot;,Microsoft SanSerf,微软雅黑），
     所以我不得不开着这几个规则。如果我是他的老板，我就会开除掉这个不合格的前端。
-    这里不能换成 sans-serif，因为它们只是插入用的锚点而不是子列表，
-    除非我们把这条抬到最前面。
   -->
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>Microsoft YaHei</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;append&quot; binding=&quot;same&quot;>
-      <string>Roboto</string>
-      <string>Noto Sans CJK SC</string>
-    </edit>
-  </match>
+  <alias>
+    <family>Microsoft Sans Serif</family>
+    <prefer>
+      <family>sans-serif</family>
+    </prefer>
+  </alias>
 
-  <match target=&quot;pattern&quot;>
-    <test name=&quot;family&quot; qual=&quot;any&quot;>
-      <string>Microsoft Sans Serif</string>
-    </test>
-    <edit name=&quot;family&quot; mode=&quot;append&quot; binding=&quot;same&quot;>
-      <string>Roboto</string>
-      <string>Noto Sans CJK SC</string>
-    </edit>
-  </match>
-" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!--
+  <!-- 我机器上可能真的有微软雅黑，而我真的不想看见它们，反正我也不做排版。 -->
+  <alias>
+    <family>Microsoft YaHei</family>
+    <prefer>
+      <family>Roboto</family>
+      <family>Noto Sans CJK SC</family>
+    </prefer>
+  </alias>
+
+  <!-- 替换 Apple Color Emoji 字体。 -->
+  <alias>
+    <family>Apple Color Emoji</family>
+    <prefer>
+      <family>emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 替换 Noto Color Emoji 字体。 -->
+  <!-- <alias> -->
+  <!--   <family>Noto Color Emoji</family> -->
+  <!--   <prefer> -->
+  <!--     <family>emoji</family> -->
+  <!--   </prefer> -->
+  <!-- </alias> -->
+
+  <!-- 这也是一个常见的默认字体，我的 UI 字体就是无衬线。 -->
+  <alias>
+    <family>system-ui</family>
+    <prefer>
+      <family>sans-serif</family>
+    </prefer>
+  </alias>
+" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">&lt;!--
+    有一点需要注意，sans-serif，serif，monospace, emoji 这些默认字体名并不是真正
+    的字体，而是锚点，是用来进行后续的字体插入的。因此如果你想通过把一些字体映射
+    成 sans-serif 来修正一些网站奇怪的逻辑的话，请务必写在处理 sans-serif 部分之
+    前，这样才会被正常替换。
+  --&gt;
+  &lt;!--
+    我建议这个世界新增一种物种叫苹果人，即打开脑壳之后没有脑子，装的全是苹果的
+    人，显然简书的前端就属于此类（-apple-system,BlinkMacSystemFont,
+    "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Segoe UI",
+    "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",
+    Helvetica,Arial,sans-serif）。正常人怎么会把 Apple Color Emoji 放前面？
+  --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;-apple-system&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;sans-serif&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;alias&gt;
+    &lt;family&gt;BlinkMacSystemFont&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;sans-serif&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;!--
     B 站直播首页的前端认为这个世界上只有微软字体（Arial,Microsoft YaHei,
     "Microsoft Sans Serif",Microsoft SanSerf,微软雅黑），
     所以我不得不开着这几个规则。如果我是他的老板，我就会开除掉这个不合格的前端。
-    这里不能换成 sans-serif，因为它们只是插入用的锚点而不是子列表，
-    除非我们把这条抬到最前面。
   --&gt;
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;Microsoft YaHei&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="append" binding="same"&gt;
-      &lt;string&gt;Roboto&lt;/string&gt;
-      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
+  &lt;alias&gt;
+    &lt;family&gt;Microsoft Sans Serif&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;sans-serif&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
 
-  &lt;match target="pattern"&gt;
-    &lt;test name="family" qual="any"&gt;
-      &lt;string&gt;Microsoft Sans Serif&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name="family" mode="append" binding="same"&gt;
-      &lt;string&gt;Roboto&lt;/string&gt;
-      &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
+  &lt;!-- 我机器上可能真的有微软雅黑，而我真的不想看见它们，反正我也不做排版。 --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;Microsoft YaHei&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;Roboto&lt;/family&gt;
+      &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;!-- 替换 Apple Color Emoji 字体。 --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;Apple Color Emoji&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;emoji&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;!-- 替换 Noto Color Emoji 字体。 --&gt;
+  &lt;!-- &lt;alias&gt; --&gt;
+  &lt;!--   &lt;family&gt;Noto Color Emoji&lt;/family&gt; --&gt;
+  &lt;!--   &lt;prefer&gt; --&gt;
+  &lt;!--     &lt;family&gt;emoji&lt;/family&gt; --&gt;
+  &lt;!--   &lt;/prefer&gt; --&gt;
+  &lt;!-- &lt;/alias&gt; --&gt;
+
+  &lt;!-- 这也是一个常见的默认字体，我的 UI 字体就是无衬线。 --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;system-ui&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;sans-serif&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
 </code></pre></figure>
+<p>然后就是常见的默认字体代称（sans-serif，serif，monospace，emoji）回退列表了，我是按照 <code>Roboto/Roboto Slab/Monaco -&gt; Noto Sans/Serif (Mono) CJK SC -&gt; Noto Color Emoji</code> 的顺序回退的：</p>
+<figure data-raw="  <!-- 然后该配置我们喜欢的默认字体了。 -->
+  <!-- 默认无衬线字体。 -->
+  <alias>
+    <family>sans</family>
+    <prefer>
+      <family>Roboto</family>
+      <family>Noto Sans CJK SC</family>
+      <family>emoji</family>
+    </prefer>
+  </alias>
+
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Roboto</family>
+      <family>Noto Sans CJK SC</family>
+      <family>emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 默认有衬线字体。 -->
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Roboto Slab</family>
+      <family>Noto Serif CJK SC</family>
+      <family>emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 默认等宽字体。 -->
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Monaco</family>
+      <family>Noto Sans Mono CJK SC</family>
+      <family>emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 默认 emoji 字体。 -->
+  <alias>
+    <family>emoji</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+" data-info="language-xml" data-lang="xml" class="code-block"><pre class="code"><code class="language-xml">  &lt;!-- 然后该配置我们喜欢的默认字体了。 --&gt;
+  &lt;!-- 默认无衬线字体。 --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;sans&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;Roboto&lt;/family&gt;
+      &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+      &lt;family&gt;emoji&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;alias&gt;
+    &lt;family&gt;sans-serif&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;Roboto&lt;/family&gt;
+      &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+      &lt;family&gt;emoji&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;!-- 默认有衬线字体。 --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;serif&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;Roboto Slab&lt;/family&gt;
+      &lt;family&gt;Noto Serif CJK SC&lt;/family&gt;
+      &lt;family&gt;emoji&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;!-- 默认等宽字体。 --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;monospace&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;Monaco&lt;/family&gt;
+      &lt;family&gt;Noto Sans Mono CJK SC&lt;/family&gt;
+      &lt;family&gt;emoji&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+
+  &lt;!-- 默认 emoji 字体。 --&gt;
+  &lt;alias&gt;
+    &lt;family&gt;emoji&lt;/family&gt;
+    &lt;prefer&gt;
+      &lt;family&gt;Noto Color Emoji&lt;/family&gt;
+    &lt;/prefer&gt;
+  &lt;/alias&gt;
+</code></pre></figure>
+<p>这里的写法和 <code>&lt;alias&gt;</code> 是等价的。设置完这个记得把所有软件的自定义字体设置里面无衬线设置为 <code>sans-serif</code>，有衬线设置为 <code>serif</code>，等宽设置为 <code>monospace</code>，这样才会遵守这里的回退顺序。</p>
 <p>剩下还有一些冗长的用来在不同语言下选择不同的 Noto Sans CJK 变体的设置，因为 Noto Sans CJK 是一个多语种集合字体，然后中日韩对一些汉字有不同的变体，所以需要这一段，不过我就不贴在这里了，完整的文件可以在文章末尾下载。</p>
 <p>最后收个尾：</p>
 <figure data-raw="</fontconfig>
@@ -1166,4 +1216,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.1 at 2022-11-23T18:31:05.539Z. -->
+<!-- Page built by Hikaru v1.13.1 at 2022-11-24T04:37:51.425Z. -->
