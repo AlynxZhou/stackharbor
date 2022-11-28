@@ -4,70 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
-    
     <meta name="theme-color" content="#33363b">
     <meta name="msapplication-TileColor" content="#33363b">
-    
-    
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
-    
-    
-    
     <meta name="author" content="Alynx Zhou">
-    
-    
     <meta name="description" content="更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。 由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。">
-    
-    
-    
-    
     <meta name="keywords" content="GNOME, Wayland, NVIDIA">
-    
     <meta name="generator" content="Hikaru v1.13.1">
-    
     <meta name="color-scheme" content="light dark">
-    
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="NVIDIA 驱动和 GNOME 和 Wayland">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/">
-    
-    
     <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
-    
-    
-    
     <meta property="og:description" content="更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。 由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。">
-    
     <link rel="canonical" href="https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/">
-    
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
-    
-    
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
-    
-    
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
-    
-    
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
-    
-    
     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
-    
-    
     <link rel="manifest" href="/favicons/site.webmanifest">
-    
-    
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
-    
-    
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    
-    
     <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
-    
-    
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="/css/variables.css">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
@@ -78,27 +38,18 @@
       :root {
         --url-sidebar-background: url("/images/background.webp");
         --url-dark-sidebar-background: url("/images/background-dark.webp");
-        
       }
-      
       /* Replace the default Bootstrap Icons fonts path. */
       @font-face {
         font-family: "bootstrap-icons";
         src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
       }
     </style>
-    
-    
     <script type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/scrollspy.js"></script>
     <script defer type="text/javascript" src="/js/custom.js"></script>
     <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
-    
     <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
-    
-    
-    
-    
     <script defer type="text/javascript" src="/js/highlight.min.js"></script>
     <script type="text/javascript">
       documentReady(() => {
@@ -112,8 +63,6 @@
         );
       });
     </script>
-    
-    
     <script type="text/javascript">
       documentReady(() => {
         elementsEach(
@@ -144,7 +93,6 @@
         );
       });
     </script>
-    
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -273,84 +221,36 @@
     <title>NVIDIA 驱动和 GNOME 和 Wayland - 喵's StackHarbor</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
-    
-<header id="header" class="header" style="background: #33363b;">
+    <header id="header" class="header" style="background: #33363b;">
   <div class="container">
     <div class="header-container">
       <div class="header-title">
         <div class="title"><a href="/">喵's StackHarbor</a></div>
-        
         <div class="subtitle">搞 GNOME 只是个人兴趣，去 VA-11 调酒才是工作。</div>
-        
       </div>
-      
       <div class="logo">
         <img src="/images/I-love-Arch.webp" alt="logo">
       </div>
-      
     </div>
     <nav id="nav" class="nav">
       <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
         <i class="bi bi-list" aria-label="切换导航栏"></i>
       </button>
       <ul id="menu" role="menubar" aria-hidden="false">
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="/"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="/archives/"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="/categories/"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="/tags/"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="//gallery.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="/blogroll/"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
-        
-        
-        
-        
-        
         <li role="menuitem"><a href="/about/"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
-        
       </ul>
       <button class="theme-toggle" id="theme-toggle">
-        
       </button>
     </nav>
   </div>
 </header>
-
 
     <main id="main" class="main">
       <div class="container">
@@ -362,11 +262,9 @@
     <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        
         <meta itemprop="name" content="Alynx Zhou">
         <meta itemprop="description" content="调制饮料，改变人生！">
         <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
-        
       </span>
       <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
         <meta itemprop="name" content="喵's StackHarbor">
@@ -377,30 +275,18 @@
         <a class="title-link" href="/posts/NVIDIA-GNOME-Wayland/" itemprop="url">NVIDIA 驱动和 GNOME 和 Wayland</a>
       </div>
       <div class="post-meta">
-        
         <div class="post-date meta-block">
           <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-07-29T23:50:39.000Z">7/30/2021, 7:50:39 AM</time></span>
         </div>
-        
-        
         <div class="post-date meta-block">
           <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2021-11-09T01:10:21.000Z">11/9/2021, 9:10:21 AM</time></span>
         </div>
-        
-        
-        
         <div class="post-categories meta-block">
-          
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
         </div>
-        
-        
-        
         <div class="post-comment-count meta-block">
           <i class="bi bi-chat-dots"></i><span><a href="/posts/NVIDIA-GNOME-Wayland/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="NVIDIA 驱动和 GNOME 和 Wayland" itemprop="commentCount">阅读评论</span></a></span>
         </div>
-        
-        
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
@@ -463,59 +349,39 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
 
     </main>
     <footer class="post-footer">
-      
       <div class="post-tags">
         <a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="bi bi-tag"></i>GNOME</a><a class="post-tag button" href="/tags/Wayland/" rel="tag"><i class="bi bi-tag"></i>Wayland</a><a class="post-tag button" href="/tags/NVIDIA/" rel="tag"><i class="bi bi-tag"></i>NVIDIA</a>
       </div>
-      
     </footer>
   </article>
-  
   <nav class="page-nav">
     <div class="page-nav-next page-nav-item">
-      
       <a href="/posts/Fontconfig-NotoColorEmoji-Antialias/" rel="next" title="Fontconfig 和 Noto Color Emoji 和抗锯齿"><i class="bi bi-chevron-left"></i><span class="nav-title">Fontconfig 和 Noto Color Emoji 和抗锯齿</span></a>
-      
     </div>
     <div class="page-nav-prev page-nav-item">
-      
       <a href="/posts/New-Project-New-Camera-New-Home/" rel="prev" title="新项目和新相机和新住处"><span class="nav-title">新项目和新相机和新住处</span><i class="bi bi-chevron-right"></i></a>
-      
     </div>
   </nav>
   
-  
-  
-
 <div class="reward" id="reward">
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
   <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
-    
     <div id="wechatpay">
       <img id="wechatpay-qr" src="/images/WeChatPay.png" alt="微信支付"/>
       <span>微信支付</span>
     </div>
-    
-    
     <div id="alipay">
       <img id="alipay-qr" src="/images/AliPay.png" alt="支付宝"/>
       <span>支付宝</span>
     </div>
-    
-    
   </div>
 </div>
 
-
-
-  
-  
   
 <div class="comment" id="comment">
-  
   <script defer type="text/javascript" src="/js/comment.js"></script>
   <script type="text/javascript">
     documentReady(() => {
@@ -526,7 +392,6 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
       });
     });
   </script>
-  
   <div class="comment-results" id="comment-results">
     <div class="sk-wave" id="sk-wave">
       <div class="sk-rect sk-rect1"></div>
@@ -598,229 +463,131 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
       });
     });
   </script>
-  
-  
 </div>
 
-
-  
 </div>
 
           </div>
           
-          
-          
 <aside class="sidebar" id="sidebar">
-  
   <div class="search" role="search">
     <form action="/search/" method="get">
       <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
     </form>
   </div>
-  
   <div class="info sidebar-item" id="info">
-    
     <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
-    
     <div class="author-name">Alynx Zhou</div>
-    
     <div class="author-description">调制饮料，改变人生！</div>
-    
     <div class="site-count">
-      
-      
-      
-      
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
         <div><a href="/archives/">96</a></div>
       </div>
-      
-      
-      
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
         <div><a href="/categories/">35</a></div>
       </div>
-      
-      
-      
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
         <div><a href="/tags/">76</a></div>
       </div>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </div>
-    
     <div class="rss">
       <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
     </div>
-    
   </div>
   <div class="sidebar-sticky">
-    
-    
     <hr>
     <div class="post-toc sidebar-item">
       <div><i class="bi bi-list-ol"></i>文章目录</div>
-      
-      
       <ol class="toc" id="scrollspy-target">
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
           
-          
-      <ol >
-      
+      <ol>
         <li>
-          
           <a class="list-group-item toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F">为什么 NVIDIA 的 Wayland 支持这么差？</a>
           
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F">现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？</a>
           
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F">我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？</a>
           
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F">我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？</a>
           
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F">我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？</a>
           
         </li>
-      
       </ol>
-      
-          
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9">没用的观点</a>
           
-          
-      <ol >
-      
+      <ol>
         <li>
-          
           <a class="list-group-item toc-link" href="#%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6">你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……</a>
           
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81">Xorg 好！Wayland 坏！</a>
           
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81">我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！</a>
           
         </li>
-      
         <li>
-          
           <a class="list-group-item toc-link" href="#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81">你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！</a>
           
         </li>
-      
       </ol>
-      
-          
         </li>
-      
       </ol>
-      
     </div>
-    
-    
-    
     <hr>
     <div class="social-link sidebar-item">
       <div><i class="bi bi-person-workspace"></i>社交链接</div>
       <ul>
-        
         <li><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
-        
         <li><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
-        
         <li><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
-        
         <li><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
-        
         <li><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
-        
       </ul>
     </div>
-    
-    
     <hr>
     <div class="blogroll sidebar-item">
       <div><i class="bi bi-people"></i>友情链接</div>
       <ul>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
-        
         <li><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
-        
       </ul>
     </div>
-    
   </div>
 </aside>
 
-
-          
         </div>
       </div>
     </main>
-    
-<footer id="footer" class="footer" style="background: #33363b;">
+    <footer id="footer" class="footer" style="background: #33363b;">
   <div class="container">
     <div class="back-to-top">
       <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></button>
@@ -830,17 +597,13 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
         <div class="copyright">
           <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
         </div>
-        
         <div class="busuanzi">
           <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
         </div>
-        
       </div>
       <div class="footer-right">
         <div class="custom-info">
-          
           托管于<i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a>
-          
         </div>
         <div class="powered-by">
           由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
@@ -850,7 +613,6 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
   </div>
 </footer>
 
-
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.1 at 2022-11-28T10:41:44.812Z. -->
+<!-- Page built by Hikaru v1.13.1 at 2022-11-28T17:48:58.301Z. -->
