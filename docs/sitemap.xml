@@ -3,6 +3,15 @@
   
   
   <url>
+    <loc>https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/</loc>
+    
+    <lastmod>2022-11-28T10:24:04.000Z</lastmod>
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://sh.alynx.one/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/</loc>
     
     <lastmod>2022-11-25T09:50:13.000Z</lastmod>
@@ -1571,6 +1580,13 @@
   
   <url>
     <loc>https://sh.alynx.one/tags/WireGuard/</loc>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://sh.alynx.one/tags/YubiKey/</loc>
     
   </url>
   

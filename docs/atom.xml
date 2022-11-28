@@ -7,7 +7,7 @@
   
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
   
-  <updated>2022-11-25T09:50:13.000Z</updated>
+  <updated>2022-11-28T10:24:04.000Z</updated>
   
   <id>https://sh.alynx.one/</id>
   
@@ -19,6 +19,159 @@
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.3.5">Hikaru Generator Feed</generator>
   
   
+  
+  
+  
+  <entry>
+    <title>YubiKey 和 GNOME 和智能卡登录</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/" />
+    <id>https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/</id>
+    
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    
+    
+    <published>2022-11-28T10:24:04.000Z</published>
+    
+    
+    <updated>2022-11-28T10:24:04.000Z</updated>
+    
+    
+    <summary type="html">
+      最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 sudo 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，…
+    </summary>
+    
+    
+    <content type="html">
+      &lt;p&gt;最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 &lt;code&gt;sudo&lt;/code&gt; 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，除了平时用的 &lt;code&gt;gdm-password&lt;/code&gt; 密码登录，还有 &lt;code&gt;gdm-fingerprint&lt;/code&gt; 指纹登录和 &lt;code&gt;gdm-smartcard&lt;/code&gt; 智能卡登录。我一开始是打算买个指纹传感器的，查了一下 fprintd 的文档，支持的型号并不多，而且在淘宝上问客服 USB Product ID 和 Vendor ID 显然得不到回答，就退而求其次买智能卡了，而搜索智能卡得到最多的结果就是 YubiKey，进入一个不了解的领域之前和大部分人选一样的一般不会错太多，于是就下手了。&lt;/p&gt;
+&lt;p&gt;话说回来智能卡登录，如果你搜索 YubiKey 相关的文章，绝大多数都会告诉你把 &lt;code&gt;pam_u2f.so&lt;/code&gt; 加到需要密码登录的 PAM 配置里，比如 &lt;code&gt;sudo&lt;/code&gt; 或者 &lt;code&gt;gdm-password&lt;/code&gt;，但这显然不是我想要的，我要的方案不是替换密码登录，而是和密码登录平行的配置文件，我知道 GNOME 有已经写好的智能卡配置，但是任何地方都搜不到如何启用，设置里没有相关选项，连 Arch Wiki 给的方案都只是用 &lt;code&gt;pam_u2f.so&lt;/code&gt;。Red Hat 的支持文档里倒是提到了智能卡登录，然而用的却是他们自己的某个工具配置的。显然这是个起夜级 feature，最好的办法也许是找个起夜级 Linux 的桌面工程师来问问，哦什么我自己就是起夜级 Linux 桌面工程师，那没事了。还要说的一件事是怎么想智能卡这东西都和安全相关，而我自己不是专业的安全行业人士，所以我不会尝试解释清楚和安全相关的一些名词，以及如果我哪里真的写错了，希望专业人士多多指点，我肯定改。&lt;/p&gt;
+&lt;p&gt;总之相信你自己因为你才是职业选手，我还是自己看看这东西怎么弄吧，毕竟用 Arch 再用 GNOME 同时还打算搞 GNOME 的智能卡登录的人没几个，所以 Wiki 没有倒也正常。首先肯定是看 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt; 这个文件，里面别的看起来都比较正常，只有一行看起来和智能卡有关系：&lt;/p&gt;
+&lt;figure data-raw=&quot;auth       required                    pam_pkcs11.so        wait_for_card card_only
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;auth       required                    pam_pkcs11.so        wait_for_card card_only
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;线索是有了，看来我需要这个 &lt;code&gt;pam_pkcs11.so&lt;/code&gt;，虽然我也不知道这是什么，先搜一下哪个包有这个文件比较好。&lt;code&gt;pacman -F pam_pkcs11.so&lt;/code&gt; 竟然没有返回任何结果，我确定不是我的 pacman 数据库没更新，那只能去浏览器里搜索了，最后我搜到了 &lt;a href=&quot;https://github.com/OpenSC/pam_pkcs11&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/OpenSC/pam_pkcs11&lt;/a&gt;，虽然我也不知道 &lt;code&gt;PKCS#11&lt;/code&gt; 是个什么玩意，但反正它是个 PAM 模块，既然不在官方仓库里，那大概率 AUR 里有人打包了，于是直接 &lt;code&gt;paru pam_pksc11&lt;/code&gt; 就装了一个上来。&lt;/p&gt;
+&lt;p&gt;但装是装好了，也看不出来这玩意和 YubiKey 有什么联系，我大概是搜索了 PKCS YubiKey 然后搜到了 YubiKey 给的文档 &lt;a href=&quot;https://developers.yubico.com/PIV/Guides/SSH_with_PIV_and_PKCS11.html&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Using PIV for SSH through PKCS #11&lt;/a&gt;，好吧虽然我不是要用来 SSH 但是多半也有点用。看下来反正这个东西和 YubiKey 的 PIV 功能有关，我把 PIV 相关的文档都看了一遍，结果是云里雾里，相当没有头绪。一大堆文档告诉你各种各样的需求要做什么，但是几乎没怎么说这都是什么，于是恰好我的需求不在列表里我就不知道怎么办了。我又回头去看 &lt;code&gt;pam_pkcs11&lt;/code&gt; 的文档，它写了一长串的东西，我反复看了几遍之后发现只要看 &lt;a href=&quot;http://opensc.github.io/pam_pkcs11/doc/pam_pkcs11.html#HOWTO&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;第 11 节的 HOWTO 部分&lt;/a&gt; 就可以了。虽然我也不太清楚它都在说什么，但是至少这里告诉我说需要一个 root CA certificate，但我是个人使用哪来的这玩意，再回头看 YubiKey 的那篇文档里面恰好提到了什么 self-signed certificate，我拿这个试一试，结果成功了。为了方便参考，下面我就不讲我是怎么倒推这些奇怪的需求的了，而是顺序讲一下都需要配置什么。&lt;/p&gt;
+&lt;p&gt;首先如果你像我一样刚买了一个 YubiKey 打算利用它的 PIV 功能，那你得先初始化它，也就是改掉默认的 PIN，PUK 和管理密钥，这个可以通过官方的 YubiKey Manager 软件来操作，有 Qt 写的 GUI 版和命令行版本：&lt;/p&gt;
+&lt;figure data-raw=&quot;# pacman -S yubikey-manager yubikey-manager-qt
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pacman -S yubikey-manager yubikey-manager-qt
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;我推荐使用命令行版本操作，因为那个 GUI 经常转圈转半天或者点了没反应：&lt;/p&gt;
+&lt;figure data-raw=&quot;% ykman piv access change-pin
+% ykman piv access change-puk
+% ykman piv access change-management-key --generate --protect --touch
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% ykman piv access change-pin
+% ykman piv access change-puk
+% ykman piv access change-management-key --generate --protect --touch
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;默认 PIN 是 &lt;code&gt;123456&lt;/code&gt;，默认 PUK 是 &lt;code&gt;12345678&lt;/code&gt;，而管理密钥是个特别长的一串，用 &lt;code&gt;--generate&lt;/code&gt; 可以让 &lt;code&gt;ykman&lt;/code&gt; 给你生成一个，&lt;code&gt;--protect&lt;/code&gt; 则是把这个直接存到 YubiKey 里面并用 PIN 保护，&lt;code&gt;--touch&lt;/code&gt; 则是说每次要管理密钥的时候需要你摸一下。我也不是很懂，也许写进去以后需要的时候就不用自己背这玩意而是输 PIN 就行了吧，反正建议看官方文档 &lt;a href=&quot;https://developers.yubico.com/PIV/Guides/Device_setup.html&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Device setup&lt;/a&gt; 和 &lt;code&gt;ykman&lt;/code&gt; 的 &lt;code&gt;--help&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;我的建议是不要看太多官方文档，因为它一会告诉你用 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 创建密钥，一会告诉你说可以用 &lt;code&gt;openssl&lt;/code&gt; 创建密钥，一会又告诉你可以用 &lt;code&gt;pkcs11-tool&lt;/code&gt; 搭配 &lt;code&gt;libykcs11.so&lt;/code&gt; 创建密钥，算了吧，头都看晕了，我的测试是用 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 就可以了。&lt;/p&gt;
+&lt;figure data-raw=&quot;% paru yubico-piv-tool
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% paru yubico-piv-tool
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;在 &lt;code&gt;9a&lt;/code&gt; 这个槽创建一个 key 并把它的公钥写出来，为什么是 &lt;code&gt;9a&lt;/code&gt; 好像因为这是第一个槽来着，自己去查官方文档吧，也可以写到别的槽里面：&lt;/p&gt;
+&lt;figure data-raw=&quot;% yubico-piv-tool -s 9a -a verify-pin -a generate -o public.pem
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a generate -o public.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;需要先输入 PIN，然后灯闪的时候需要摸一下 YubiKey，它就开始生成了。&lt;/p&gt;
+&lt;p&gt;还要给这个密钥生成一个签名：&lt;/p&gt;
+&lt;figure data-raw=&quot;% yubico-piv-tool -s 9a -a verify-pin -a selfsign-certificate -S &amp;quot;/CN=Alynx Zhou/&amp;quot; -i public.pem -o cert.pem
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a selfsign-certificate -S &quot;/CN=Alynx Zhou/&quot; -i public.pem -o cert.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;注意 &lt;code&gt;CN=&lt;/code&gt; 后面的部分，这里会被 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 用来验证这个智能卡属于系统里面哪个用户，所以简单的话直接写你的登录用户名，当然你像我一样不想写用户名也是有办法对应的，同样要输入 PIN。&lt;/p&gt;
+&lt;p&gt;再把证书导回到同一个槽，我也不知道为什么，文档说了我照做了：&lt;/p&gt;
+&lt;figure data-raw=&quot;% yubico-piv-tool -s 9a -a verify-pin -a import-certificate -i cert.pem
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a import-certificate -i cert.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;还是要输入 PIN 然后灯闪的时候摸一下。&lt;/p&gt;
+&lt;p&gt;到这里 YubiKey 的配置就结束了。&lt;/p&gt;
+&lt;p&gt;要在系统上使用智能卡验证需要安装系统上和智能卡交互的软件包：&lt;/p&gt;
+&lt;figure data-raw=&quot;# pacman -S ccid opensc pcsclite
+% paru pam_pkcs11
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pacman -S ccid opensc pcsclite
+% paru pam_pkcs11
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;启动一个相关的 daemon，或者启动 socket 也行，需要的时候它就自己起来了：&lt;/p&gt;
+&lt;figure data-raw=&quot;# systemctl enable --now pcscd.socket
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# systemctl enable --now pcscd.socket
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;如果我没漏掉什么乱七八糟的，就可以配置 PAM 模块了，它有一个配置目录叫 &lt;code&gt;/etc/pam_pksc11&lt;/code&gt;，首先你要把上面生成的证书放到 &lt;code&gt;/etc/pam_pkcs11/cacerts&lt;/code&gt;。&lt;/p&gt;
+&lt;figure data-raw=&quot;# cd /pam/pkcs11/cacerts
+# cp PATH_TO_YOUT_CERT/cert.pem ./
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cd /pam/pkcs11/cacerts
+# cp PATH_TO_YOUT_CERT/cert.pem ./
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;你要在同一个目录下面运行一个什么什么 hash 命令生成一个 hash：&lt;/p&gt;
+&lt;figure data-raw=&quot;# pkcs11_make_hash_link
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pkcs11_make_hash_link
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;接下来你要去搞它的配置文件，先复制一个样本过来：&lt;/p&gt;
+&lt;figure data-raw=&quot;# cp /usr/share/doc/pam_pkcs11/pam_pkcs11.conf.example /etc/pam_pkcs11/pam_pkcs11.conf
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cp /usr/share/doc/pam_pkcs11/pam_pkcs11.conf.example /etc/pam_pkcs11/pam_pkcs11.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;好像其实也没什么需要改的。文档说默认的配置用的是 OpenSC 的 PKCS#11 库，虽然 YubiKey 的文档一直跟你说什么 &lt;code&gt;libykcs11.so&lt;/code&gt;，我的测试结果是不用理它，通用的接口就够了，以及这个 &lt;code&gt;libykcs11.so&lt;/code&gt; 是属于 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 这个包的。&lt;/p&gt;
+&lt;p&gt;假如你刚才 &lt;code&gt;CN=&lt;/code&gt; 后面写的不是你的用户名，那你需要一些配置告诉 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 你这个证书对应的哪个用户，这一步在它的配置文件里叫 &lt;code&gt;mapper&lt;/code&gt;。默认启用了一些 mapper 比如 &lt;code&gt;pwent&lt;/code&gt;，这个就是把 &lt;code&gt;CN=&lt;/code&gt; 后面的内容和 &lt;code&gt;/etc/passwd&lt;/code&gt; 里面的用户名做匹配，但是如果你像我一样写的是全名，那就需要另一个默认启用的模块叫 &lt;code&gt;subject&lt;/code&gt;。至于 subject 是什么需要运行下面这个命令：&lt;/p&gt;
+&lt;figure data-raw=&quot;% pkcs11_inspect
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% pkcs11_inspect
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;它会输出各种 mapper 对应的 data，比如 &lt;code&gt;pwent&lt;/code&gt; 输出的就是 &lt;code&gt;Alynx Zhou&lt;/code&gt;，&lt;code&gt;subject&lt;/code&gt; 输出的则是 &lt;code&gt;/CN=Alynx Zhou&lt;/code&gt;。我们需要复制一个 &lt;code&gt;subject_mapping&lt;/code&gt; 配置文件的样本过来：&lt;/p&gt;
+&lt;figure data-raw=&quot;# cp /usr/share/doc/pam_pkcs11/subject_mapping.example /etc/pam_pkcs11/subject_mapping
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cp /usr/share/doc/pam_pkcs11/subject_mapping.example /etc/pam_pkcs11/subject_mapping
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;在这个文件后面加一行：&lt;/p&gt;
+&lt;figure data-raw=&quot;/CN=Alynx Zhou -&gt; alynx
+&quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;/CN=Alynx Zhou -&amp;gt; alynx
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;我的用户名是 &lt;code&gt;alynx&lt;/code&gt;，你可以换成你自己的。&lt;/p&gt;
+&lt;p&gt;到这一步 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 这个模块已经可以通过智能卡验证你的身份了，但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt; 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。&lt;/p&gt;
+&lt;p&gt;这里就比较难搞清楚了，我智能卡插的好好的，上面各种程序都能用，为什么你检测不到？我尝试用什么 GDM YubiKey 之类的关键词搜索了半天，也没人告诉我 GDM 到底怎么检测智能卡的。没有办法还是读代码吧，GNOME Shell &lt;code&gt;js/gdm/util.js&lt;/code&gt; 里面的逻辑是通过 D-Bus 的 &lt;code&gt;org.gnome.SettingsDaemon.Smartcard&lt;/code&gt; 获取智能卡信息，那我打开 D-Feet 从 Session Bus 里面找到这个，直接运行 &lt;code&gt;org.gnome.SettingsDaemon.Smartcard.Manager&lt;/code&gt; 的 &lt;code&gt;GetInsertedTokens&lt;/code&gt;，什么都没有。&lt;/p&gt;
+&lt;p&gt;根据 D-Bus 的信息，很显然这个接口是 &lt;code&gt;gnome-settings-daemon&lt;/code&gt; 的 &lt;code&gt;smartcard&lt;/code&gt; 插件提供的，我大概是搜索了什么 gsd-smartcard PKCS#11 的关键字之后找到了 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208&lt;/a&gt;，其实我一开始也没太看懂这是什么意思，但得到一些有用的信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gsd-smartcard&lt;/code&gt; 用了什么 NSS API 获取智能卡设备。&lt;/li&gt;
+&lt;li&gt;这玩意要一个什么 system shared certificate NSS database。&lt;/li&gt;
+&lt;li&gt;除了 Red Hat 家那一套好像没什么别的发行版弄这个。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这一路下来乱七八糟的名词已经够多的了现在又多了一个什么 NSS 而且只有 Red Hat 才配置了 system shared certificate NSS database，但不管怎么样我是职业选手我不能轻言放弃，还好 Arch Wiki 有这么一个页面 &lt;a href=&quot;https://wiki.archlinux.org/title/Network_Security_Services&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Network Security Services&lt;/a&gt;，但这不是管证书的吗，和智能卡设备有什么关系啊。这时候我又翻开了 Arch Wiki 关于智能卡的页面 &lt;a href=&quot;https://wiki.archlinux.org/title/Smartcards#Chromium&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Smartcards&lt;/a&gt;，里面讲了在 Chromium 里面加载智能卡需要在 NSS 数据库里面加一个模块（什么乱七八糟的），不过它操作的都是用户的家目录下面的数据库，这显然不是 system shared certificate NSS database。然后如果手工执行 &lt;code&gt;/usr/lib/gsd-smartcard -v&lt;/code&gt;，会发现这玩意尝试读取 &lt;code&gt;/etc/pki/nssdb&lt;/code&gt; 获取什么智能卡驱动列表，我系统里面根本没这个目录。算了，既然是 Red Hat 搞的东西，我看看他们怎么写的。正好我有个 Fedora 的虚拟机，打开虚拟机一看还真有这个目录，那就运行下面命令看看：&lt;/p&gt;
+&lt;figure data-raw=&quot;% modutil -dbdir /etc/pki/nssdb -list
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% modutil -dbdir /etc/pki/nssdb -list
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;结果里面除了默认项还真有个叫 &lt;code&gt;p11-kit-proxy&lt;/code&gt; 的玩意，我又回去看了一眼那个 Merge Request，现在我完全明白了，不知道为什么 NSS 这玩意会记录一个读取智能卡的驱动列表，然后 &lt;code&gt;gsd-smartcard&lt;/code&gt; 是通过 NSS 获取到智能卡的驱动列表之后再尝试查询智能卡，实际上现在没什么人用 NSS 这个功能了，你这还得往系统的 NSS 数据库里面写东西，除了红帽子家都没人搞这个了，就算有用 NSS 读的（比如浏览器）也是读用户的 NSS 数据库。别的用智能卡的都直接用 &lt;code&gt;p11-kit&lt;/code&gt; 去读智能卡，所以这个 Merge Request 也改成直接用 &lt;code&gt;p11-kit&lt;/code&gt; 读了。不知道为什么这个 Merge Request 没能合并。再多说一句，就算是 Red Hat 的系统 NSS 数据库，现在也不直接写智能卡的驱动了，而也是通过 &lt;code&gt;p11-kit&lt;/code&gt;，所以刚才在 Fedora 的数据库里只看到 &lt;code&gt;p11-kit-proxy&lt;/code&gt; 这一个驱动……&lt;/p&gt;
+&lt;p&gt;既然这样我们也在这个数据库里写一个 &lt;code&gt;p11-kit-proxy&lt;/code&gt;，根据 Arch Wiki 的智能卡页面，如果你要通过 &lt;code&gt;p11-kit&lt;/code&gt; 操作 OpenSC 的驱动（这都什么乱七八糟的），那可能需要安装一个 AUR 包来保证它被加载（实际上就是个文件而已）：&lt;/p&gt;
+&lt;figure data-raw=&quot;% paru opensc-p11-kit-module
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% paru opensc-p11-kit-module
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;创建数据库目录并往数据库里写 &lt;code&gt;p11-kit-proxy&lt;/code&gt;：&lt;/p&gt;
+&lt;figure data-raw=&quot;# mkdir /etc/pki/nssdb
+# modutil -dbdir sql:/etc/pki/nssdb -add &amp;quot;p11-kit-proxy&amp;quot; -libfile p11-kit-proxy.so
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# mkdir /etc/pki/nssdb
+# modutil -dbdir sql:/etc/pki/nssdb -add &quot;p11-kit-proxy&quot; -libfile p11-kit-proxy.so
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;如果你和我一样又心急火燎的重启了，就会发现还是没用。这不科学啊，Fedora 的数据库里也是这么写的，看一眼 D-Bus 为什么还是没有智能卡。&lt;/p&gt;
+&lt;p&gt;实际上最后我发现只差一点点，Fedora 给这个目录下文件的权限是 &lt;code&gt;-rw-r--r--&lt;/code&gt;，而我这边创建好的是 &lt;code&gt;-rw------&lt;/code&gt;。&lt;code&gt;gsd-smartcard&lt;/code&gt; 是以 session 用户运行的当然读不了。所以改一下权限就可以了。&lt;/p&gt;
+&lt;figure data-raw=&quot;# chmod 0644 /etc/pki/nssdb/*
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# chmod 0644 /etc/pki/nssdb/*
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;接下来插着 YubiKey 重启，GDM 启动的 &lt;code&gt;gsd-smartcard&lt;/code&gt; 就能读到系统的 NSS 数据库，检测到智能卡，于是调用 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt;，直接让你输入用户名，输入之后会提示你输入智能卡的 PIN，然后 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 进行验证，就可以登录了。锁屏之后也只要输入智能卡的 PIN 就可以解锁。&lt;/p&gt;
+&lt;p&gt;按理说如果给 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 发一个空白的用户名，它会根据智能卡返回用户名的，不知道为什么我在 GDM 用不了，一定要开机手动输入，有空我看看代码也许可以修改一下。我也不知道为什么一定要在 GDM 启动之前插入卡才可以，显示用户列表之后再插入卡我这里没反应。&lt;/p&gt;
+&lt;p&gt;如果你想用智能卡解锁的话，一定得是用智能卡登录才可以，它会检查当前的卡是不是登录所用的那张卡，不是的话就只能密码解锁了。折腾这一套花了我一整天时间，因为资料实在是太少了，根本不知道它是怎么工作的。&lt;/p&gt;
+&lt;p&gt;以及最后我还发现一篇文章，里面的内容也是讲这个 NSS 数据库的解决方案的，也许我早看见这个就不会这么麻烦了： &lt;a href=&quot;https://p11-glue.freedesktop.narkive.com/4z6daFWc/fixing-nss-and-p11-kit-in-fedora-and-beyond&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Fixing NSS and p11-kit in Fedora (and beyond)&lt;/a&gt;。&lt;/p&gt;
+
+    </content>
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" />
+    
+    
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    
+    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
+    
+    <category term="YubiKey" label="YubiKey" scheme="https://sh.alynx.one/tags/YubiKey/" />
+    
+  </entry>
   
   
   
@@ -2958,73 +3111,6 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
     
     
     <category term="生活" label="生活" scheme="https://sh.alynx.one/tags/%E7%94%9F%E6%B4%BB/" />
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>运行在 JACK 上层的 PulseAudio</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Run-PulseAudio-on-Top-of-JACK/" />
-    <id>https://sh.alynx.one/posts/Run-PulseAudio-on-Top-of-JACK/</id>
-    
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    
-    
-    <published>2021-02-18T02:51:11.000Z</published>
-    
-    
-    <updated>2021-02-18T02:51:11.000Z</updated>
-    
-    
-    <summary type="html">
-      &lt;p&gt;很多朋友都知道我除了是个程序员以外还是个乐器玩家，很久之前因为想要录音上网了解了一下需要购买专门的麦克风声卡从此掉进深坑一发不可收拾。当然 Linux 用户在购买硬件之前需要做好功课，大概 16 年左右我还在上高中的时候用我还凑合的英语水平翻了几个 Linux 音乐论坛最后决定买一台 Focusrite Scarlett 2i4（不过它后来似乎更新了几个版本所以我购买的变成了 1st Gen），我不太清楚除了更换了接口之后还有什么奇怪的改动没有，所以这里就不盲目推荐大家买更新的型号了，反正声卡这玩意够用的话也不太需要追新。&lt;/p&gt;
-
-    </summary>
-    
-    
-    <content type="html">
-      &lt;p&gt;很多朋友都知道我除了是个程序员以外还是个乐器玩家，很久之前因为想要录音上网了解了一下需要购买专门的麦克风声卡从此掉进深坑一发不可收拾。当然 Linux 用户在购买硬件之前需要做好功课，大概 16 年左右我还在上高中的时候用我还凑合的英语水平翻了几个 Linux 音乐论坛最后决定买一台 Focusrite Scarlett 2i4（不过它后来似乎更新了几个版本所以我购买的变成了 1st Gen），我不太清楚除了更换了接口之后还有什么奇怪的改动没有，所以这里就不盲目推荐大家买更新的型号了，反正声卡这玩意够用的话也不太需要追新。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;做功课的时候还了解到常见的 Linux 桌面采用的都是 PulseAudio，但专业录音为了追求更低的延迟所以都使用 JACK，于是简单学习了一下，发现只要打开 Qjackctl 选择设备然后启动，Audacity 就可以选择使用 JACK 设备了。系统的其它软件仍然通过 PulseAudio 输出到板载声卡，不会冲突，基本满足我的需求也就没研究过其它的。&lt;/p&gt;
-&lt;p&gt;但是最近直播的时候总有人说我的耳机麦克风不太灵敏，我想了想不如干脆把录音用的声卡和话筒利用上，整个系统直接采用 2i4 作为默认声卡？但是虽然 PulseAudio 可以直接控制 2i4，软件的兼容性却不太好，比如 Audacity 启动的时候即使没有运行 JACK 它似乎也会尝试通过 JACK 连接 2i4 于是导致缓慢的启动和几下破音。于是只能采用网上常见的方案也就是把 PulseAudio 的音频输出到 JACK，但我觉得其实这样不太准确因为音频是既有输出又有输入的，所以我的标题是把 PulseAudio 运行在 JACK 上层。当然还有一种方案是采用 PipeWire，打算自己替代 PulseAudio 和 JACK 一桶浆糊的新项目，它欺骗程序让它们以为它就是 JACK 和 PulseAudio，但虽然我是个 GNOME Dev，我对这个不太感冒。有个常见的笑话是“现在有 N 个不那么好用的系统了，我们写个新的把它们全部替代掉！然后现在有 N + 1 个不那么好用的系统了！”。JACK 对于专业用户来说很好用，而专业用户通常是不太喜欢变化的，所以我不太期待 PipeWire 替代 JACK。&lt;/p&gt;
-&lt;p&gt;有人说 Linux 的音频系统比意大利面条还复杂，这倒不能说错，因为假如你看维基百科上那张巨恐怖的图的话确实是这样。但本质上来说音频不过是把信号丢给声卡，所以只要是个能写声卡的软件都可以叫音频系统嘛，也就不奇怪那张图那么复杂，实际上在现代的 Linux 桌面通常都集成 PulseAudio，我们也没必要去研究那些边边角角的奇怪方案，于是整个结构其实很清晰，一般的用户看到的都是这样的：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Run-PulseAudio-on-Top-of-JACK/typical-desktop.png&quot; alt=&quot;typical-desktop&quot;&gt;&lt;/p&gt;
-&lt;p&gt;然后作为对比，我之前的方式是这样的：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Run-PulseAudio-on-Top-of-JACK/mine-old.png&quot; alt=&quot;mine-old&quot;&gt;&lt;/p&gt;
-&lt;p&gt;而这篇文章要达到的目的则是下图这样：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Run-PulseAudio-on-Top-of-JACK/mine-new.png&quot; alt=&quot;mine-new&quot;&gt;&lt;/p&gt;
-&lt;p&gt;当然实际上假如你理解了这个结构的话，其实也没必要只用一个声卡，完全可以用独立声卡录音用板载声卡输出，只是 JACK 是绑定独立声卡的，于是就像下图这样：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Run-PulseAudio-on-Top-of-JACK/some-interesting-things.png&quot; alt=&quot;some-interesting-things&quot;&gt;&lt;/p&gt;
-&lt;p&gt;总之这样做的依据在于 JACK 被我们绑定了独立声卡，然后利用 PulseAudio 设置不同的输入输出设备控制基于 PulseAudio 的桌面程序的输入输出，同时它还可以把自己作为 JACK 的客户端。而具体到与声卡交互，则全部都是内核里面的 ALSA 组件控制的。这里没有涉及到使用 ALSA 用户态组件的客户端程序，因为 PulseAudio 会把自己伪装成 ALSA 的客户态组件，于是这些老旧的程序就被连接到了 PulseAudio 上面从而无法直接占据声卡了。&lt;/p&gt;
-&lt;p&gt;了解原理之后就可以具体操作，首先需要安装 &lt;code&gt;jack2&lt;/code&gt; 和 &lt;code&gt;jack2-dbus&lt;/code&gt;，这个软件包包含的是 JACK 的组件，必须要装 &lt;code&gt;jack2&lt;/code&gt; 因为 &lt;code&gt;jack1&lt;/code&gt; 不支持 DBus 所以也就没办法和桌面交互了。安装 &lt;code&gt;qjackctl&lt;/code&gt; 来控制 JACK，然后安装 &lt;code&gt;pulseaudio-jack&lt;/code&gt;，这是让 PulseAudio 作为 JACK 客户端的兼容层。&lt;/p&gt;
-&lt;p&gt;然后需要启动 Qjackctl，在 Setup 的 Settings 选项卡里面选择 Advanced，将 Input Device 和 Output Device 全都设置为 2i4（应该就是 hw:USB 那一项），然后切换到 Misc 选项卡，像下图那样设置 Others 部分（基本就是除了 Keep child windows always on top 的全都勾上），这样就可以做到毫无感觉的启动 JACK（只要打开 Qjackctl 它就在后台启动 JACK，退出 Qjackctl 也只是退到后台）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Run-PulseAudio-on-Top-of-JACK/misc-tab.png&quot; alt=&quot;misc-tab&quot;&gt;&lt;/p&gt;
-&lt;p&gt;这样再次启动 Qjackctl，应该 JACK 就已经在控制 2i4 了，PulseAudio 应该会自动把 2i4 的控制权交给 JACK，省了不少事情。对于一些原生支持 JACK 的客户端程序来说这已经足够了，比如 Ardour 或者 Audacity，它们不经过 PulseAudio，直接连接到 JACK。接下来需要调整的是那些基于 PulseAudio 的客户端程序。&lt;/p&gt;
-&lt;p&gt;然后打开你桌面环境的音频控制器，比如我是 GNOME 就是 GNOME Control Center 里面的 Sound 选项卡，这里基本都是集成的 PulseAudio 控制，把 Input Device 设置成 Jack Source，于是 2i4 上的麦克风的录音便通过 JACK 传到 PulseAudio 再传到 PulseAudio 的客户端程序比如 OBS Studio 和 Firefox。然后如果你想让 PulseAudio 的客户端程序把音频输出到 2i4 上的耳机里面，那就将 Output Device 设置为 Jack sink，这样其实 PulseAudio 就是运行在 JACK 上层。&lt;/p&gt;
-&lt;p&gt;最后你需要设置 JACK 在登录时启动，这样 PulseAudio 才能找到 JACK，这个很简单，因为我们已经设置 Qjackctl 无感启动 JACK 了，那只要将 Qjackctl 设置为自动启动即可，比如 GNOME 用户可以在 GNOME Tweaks 里面设置。&lt;/p&gt;
-&lt;p&gt;当然，一般的家庭录音用户都是单声道麦克风，某些客户端程序需要自己手动设置，比如 OBS Studio 需要在 Advanced Sound Properties 里面勾选 Mono。&lt;/p&gt;
-&lt;p&gt;如果你遇到了一些奇怪的明明已经设置 PulseAudio 重定向到 JACK 却没有声音的情况，可能是因为你某些软件或者插件带了奇怪的设置，建议先重置它们试试。&lt;/p&gt;
-
-    </content>
-    
-    
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    
-    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
-    
-    <category term="音频" label="音频" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E9%9F%B3%E9%A2%91/" />
-    
-    
-    <category term="录音" label="录音" scheme="https://sh.alynx.one/tags/%E5%BD%95%E9%9F%B3/" />
-    
-    <category term="PulseAudio" label="PulseAudio" scheme="https://sh.alynx.one/tags/PulseAudio/" />
-    
-    <category term="JACK" label="JACK" scheme="https://sh.alynx.one/tags/JACK/" />
     
   </entry>
   
