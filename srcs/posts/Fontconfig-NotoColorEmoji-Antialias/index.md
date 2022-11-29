@@ -79,9 +79,9 @@ tags:
 
 我查了很多博客文章，不过它们都关注在正常的字体顺序上，还没有人研究 webfont 有什么问题。于是我只能自己研究，不过我不能保证我对 fontconfig 的理解完全正确，这东西看起来非常复杂，不过我还是大致搞清楚了一些事情。引用我看到的 [一篇英文博客](https://eev.ee/blog/2015/05/20/i-stared-into-the-fontconfig-and-the-fontconfig-stared-back-at-me/) 的标题：
 
-<div class="centerquote">
+<blockquote class="center-quote">
 当我凝视着 fontconfig 时，fontconfig 也在凝视着我。
-</div>
+</blockquote>
 
 首先我找到了这个叫 [fontconfig 几个常见的坑](http://marguerite.su/posts/fontconfig_%E5%87%A0%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91/) 的文章，里面信息量挺大的，不过说实话没有解决掉我的问题——我明明只对匹配到 Noto Color Emoji 时候关掉了抗锯齿，为什么 webfont 也受到影响了呢？这篇文章主要介绍怎么调整字体列表顺序，不过说实话我没有遇到那么多障碍，简单的写法就工作了。同一个作者还写了 [Color Emoji in openSUSE](http://marguerite.su/posts/color_emoji_in_opensuse/) 的文章，不过总感觉是交待到一半，翻了文章列表没有后续了。而且这篇文章关心的也是字体 fallback 时候某些字符选到错误的字体的问题，和我这个不太相关。
 

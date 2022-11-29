@@ -2526,9 +2526,9 @@ import_tables:
 &lt;p&gt;重新登录，输入法里面的 emoji 都显示出来了，我以为事情到这里就结束了，没想到噩梦才刚刚开始……&lt;/p&gt;
 &lt;p&gt;某一天用 firefox 打开 twitter，发现里面字体都是毛毛糙糙的，我觉得很离奇，明明我只是对 Noto Color Emoji 关了抗锯齿，为什么 twitter 的字体也受到影响了？而且其他页面的字体都是正常的，后来我又打开过一个微软的文档页面，也出现了类似的毛病。我研究了一下发现这两个页面都用了自定义的 webfont。可是 webfont 和 Noto Color Emoji 有什么关系？人类摸不着头发。&lt;/p&gt;
 &lt;p&gt;我查了很多博客文章，不过它们都关注在正常的字体顺序上，还没有人研究 webfont 有什么问题。于是我只能自己研究，不过我不能保证我对 fontconfig 的理解完全正确，这东西看起来非常复杂，不过我还是大致搞清楚了一些事情。引用我看到的 &lt;a href=&quot;https://eev.ee/blog/2015/05/20/i-stared-into-the-fontconfig-and-the-fontconfig-stared-back-at-me/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;一篇英文博客&lt;/a&gt; 的标题：&lt;/p&gt;
-&lt;div class=&quot;centerquote&quot;&gt;
+&lt;blockquote class=&quot;center-quote&quot;&gt;
 当我凝视着 fontconfig 时，fontconfig 也在凝视着我。
-&lt;/div&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;首先我找到了这个叫 &lt;a href=&quot;http://marguerite.su/posts/fontconfig_%E5%87%A0%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;fontconfig 几个常见的坑&lt;/a&gt; 的文章，里面信息量挺大的，不过说实话没有解决掉我的问题——我明明只对匹配到 Noto Color Emoji 时候关掉了抗锯齿，为什么 webfont 也受到影响了呢？这篇文章主要介绍怎么调整字体列表顺序，不过说实话我没有遇到那么多障碍，简单的写法就工作了。同一个作者还写了 &lt;a href=&quot;http://marguerite.su/posts/color_emoji_in_opensuse/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Color Emoji in openSUSE&lt;/a&gt; 的文章，不过总感觉是交待到一半，翻了文章列表没有后续了。而且这篇文章关心的也是字体 fallback 时候某些字符选到错误的字体的问题，和我这个不太相关。&lt;/p&gt;
 &lt;p&gt;然后还有 &lt;a href=&quot;https://catcat.cc/post/2020-10-31/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Linux fontconfig 的字体匹配&lt;/a&gt; 这篇文章，它介绍了浏览器是怎么和 fontconfig 合作匹配字体的，但是对于 webfont 也是没有提到。包括它的后续文章 &lt;a href=&quot;https://catcat.cc/post/2021-03-07/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;用 fontconfig 治理 Linux 中的字体&lt;/a&gt; 也没提到和 Noto Color Emoji 相关的调整（可能和它用的 Twemoji 有关系）。&lt;/p&gt;
