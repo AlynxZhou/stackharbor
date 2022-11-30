@@ -21,7 +21,7 @@
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-11-28T10:24:04.000Z</published>
-    <updated>2022-11-28T10:24:04.000Z</updated>
+    <updated>2022-11-30T13:08:11.000Z</updated>
     <summary type="html">
       最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 sudo 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，…
     </summary>
@@ -134,7 +134,8 @@
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# chmod 0644 /etc/pki/nssdb/*
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;接下来插着 YubiKey 重启，GDM 启动的 &lt;code&gt;gsd-smartcard&lt;/code&gt; 就能读到系统的 NSS 数据库，检测到智能卡，于是调用 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt;，直接让你输入用户名，输入之后会提示你输入智能卡的 PIN，然后 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 进行验证，就可以登录了。锁屏之后也只要输入智能卡的 PIN 就可以解锁。&lt;/p&gt;
-&lt;p&gt;按理说如果给 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 发一个空白的用户名，它会根据智能卡返回用户名的，不知道为什么我在 GDM 用不了，一定要开机手动输入，有空我看看代码也许可以修改一下。我也不知道为什么一定要在 GDM 启动之前插入卡才可以，显示用户列表之后再插入卡我这里没反应。&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;按理说如果给 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 发一个空白的用户名，它会根据智能卡返回用户名的，不知道为什么我在 GDM 用不了，一定要开机手动输入，有空我看看代码也许可以修改一下。&lt;/del&gt; 我也不知道为什么一定要在 GDM 启动之前插入卡才可以，显示用户列表之后再插入卡我这里没反应。&lt;/p&gt;
+&lt;p&gt;更新（2022-11-30）：花了我半天时间研究 GDM 和 PAM，问题不在 GDM，而是因为 Arch Linux 的 &lt;code&gt;gdm-smartcard&lt;/code&gt; 首先调用了 &lt;code&gt;pam_shells&lt;/code&gt; 检查用户是否有合法的 shell，遇到空用户名它第一个失败了，于是我提交了 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gdm/-/merge_requests/193&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;一个 MR&lt;/a&gt;，把 &lt;code&gt;pam_shells&lt;/code&gt; 挪到 &lt;code&gt;pam_pkcs11&lt;/code&gt; 下面，这样它会检查自动返回的用户名。（虽然这些 PAM 配置文件是发行版自己写的但是大家都提交到 GNOME 那边了，我只改了 Arch 的因为我在用，别的发行版的用户先偷着乐吧。）&lt;/p&gt;
 &lt;p&gt;如果你想用智能卡解锁的话，一定得是用智能卡登录才可以，它会检查当前的卡是不是登录所用的那张卡，不是的话就只能密码解锁了。折腾这一套花了我一整天时间，因为资料实在是太少了，根本不知道它是怎么工作的。&lt;/p&gt;
 &lt;p&gt;以及最后我还发现一篇文章，里面的内容也是讲这个 NSS 数据库的解决方案的，也许我早看见这个就不会这么麻烦了： &lt;a href=&quot;https://p11-glue.freedesktop.narkive.com/4z6daFWc/fixing-nss-and-p11-kit-in-fedora-and-beyond&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Fixing NSS and p11-kit in Fedora (and beyond)&lt;/a&gt;。&lt;/p&gt;
 
