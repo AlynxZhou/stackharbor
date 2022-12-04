@@ -33,7 +33,6 @@
     <link rel="stylesheet" type="text/css" href="/css/index.css">
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
     <style type="text/css">
       :root {
         --url-sidebar-background: url("/images/background.webp");
@@ -42,57 +41,17 @@
       /* Replace the default Bootstrap Icons fonts path. */
       @font-face {
         font-family: "bootstrap-icons";
+        font-display: fallback;
         src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
       }
     </style>
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
     <script type="text/javascript" src="/js/index.js"></script>
-    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
     <script defer type="text/javascript" src="/js/custom.js"></script>
-    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
     <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
-    <script defer type="text/javascript" src="/js/highlight.min.js"></script>
-    <script type="text/javascript">
-      documentReady(() => {
-        elementsEach(
-          document.querySelectorAll("figure.code-block pre.code code"),
-          (e, i) => {
-            // We want to use hljs' background and color for the whole block.
-            e.parentNode.parentNode.classList.add("hljs");
-            hljs.highlightElement(e);
-          }
-        );
-      });
-    </script>
-    <script type="text/javascript">
-      documentReady(() => {
-        elementsEach(
-          document.querySelectorAll("figure.code-block pre.code"),
-          (e, i) => {
-            const code = e.parentNode.getAttribute("data-raw");
-            const gutter = [];
-            gutter.push("<pre class=\"gutter\">");
-            // Highlight should not change lines.
-            // But may replace `\n` with `<br>`, so use original code here.
-            const codeLines = code.split(/\r?\n/g);
-            // It seems marked.js starts to keep the last `\n`,
-            // which will leave an empty line after splitting,
-            // and we should not add gutter for the last empty line.
-            // Don't do trim here! We only skip empty line.
-            if (codeLines[codeLines.length - 1].length === 0) {
-              codeLines.pop();
-            }
-            for (let i = 0; i < codeLines.length; ++i) {
-              gutter.push(`<span class="line-number">${i + 1}</span>`);
-              if (i !== codeLines.length - 1) {
-                gutter.push("\n");
-              }
-            }
-            gutter.push("</pre>");
-            elementBefore(e, createElementFromString(gutter.join("")));
-          }
-        );
-      });
-    </script>
     <script type="text/javascript">
       // Set theme before page rendering.
       // Check user's choice from localStorage.
@@ -144,9 +103,9 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
-        // A modern way to show date in user's format.
-        // But it shows date only by default, no time.
+        // See <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat>.
+        // A modern way to show date in user's format. But it shows date
+        // only by default, no time.
         const formatter = new Intl.DateTimeFormat(
           "zh-Hans",
           {
@@ -195,29 +154,96 @@
             ].join("")));
           }
         );
-        const cb = new ClipboardJS("button.copy", {
-          "target": (trigger) => {
-              // Get target element by DOM API.
-              // trigger.parentNode.parentNode is code-titlebar.
-              // nextElementSibling is figure.highlight, lastChild is pre.code.
-              return trigger.parentNode.parentNode.nextElementSibling.lastChild;
-          }
-        });
-        cb.on("success", (e) => {
-          e.clearSelection();
-          const trigger = e.trigger;
-          // Change button text as a user tip.
-          trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
-          trigger.classList.add("copied");
-          // Change button text back;
-          window.setTimeout(() => {
-            trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
-            trigger.classList.remove("copied");
-          }, 1500);
-        });
       });
     </script>
     
+
+<script defer type="text/javascript" src="/js/scrollspy.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    loadScrollSpy({
+      "containerID": "scrollspy-container",
+      "targetID": "scrollspy-target",
+      "headerSelector": "h1, h2, h3, h4, h5, h6"
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const gutter = [];
+        gutter.push("<pre class=\"gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add gutter for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            gutter.push("\n");
+          }
+        }
+        gutter.push("</pre>");
+        elementBefore(e, createElementFromString(gutter.join("")));
+      }
+    );
+  });
+</script>
+
+
+
+
     <title>谁动了我的 DNS 解析？ - 喵's StackHarbor</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
@@ -381,64 +407,78 @@
   </div>
   <script type="text/javascript">
     documentReady(() => {
-      const p = loadComment({
-        "user": "AlynxZhou",
-        "repo": "stackharbor",
-        "perPage": "10",
-        "sendButtonText": "去评论",
-        "noCommentText": "这个页面还没有评论，现在就去评论吧！",
-        "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
-        "title": "谁动了我的 DNS 解析？",
-        "queryString": window.location.search,
-        "basePath": "/posts/Who-Moved-My-DNS-Resolving/",
-        "containerID": "comment-results"
+      // See <https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API>.
+      // Load comments is expensive, use this to detect if something is inside
+      // viewport.
+      // It's 2022 now, browsers of my readers should support it.
+      const observer = new window.IntersectionObserver((entries, observer) => {
+        // Just load comment when it's inside viewport.
+        // The reason why using IntersectionObserver here instead of inside
+        // `loadComment` (like what I do for ScrollSpy) is because I use the
+        // returned Promise to do something.
+        if (entries[0].isIntersecting) {
+          const p = loadComment({
+            "user": "AlynxZhou",
+            "repo": "stackharbor",
+            "perPage": "10",
+            "sendButtonText": "去评论",
+            "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+            "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+            "title": "谁动了我的 DNS 解析？",
+            "queryString": window.location.search,
+            "basePath": "/posts/Who-Moved-My-DNS-Resolving/",
+            "containerID": "comment-results"
+          });
+          // Something wrong.
+          if (p == null) {
+            return;
+          }
+          p.then(() => {
+            // See <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat>.
+            // A modern way to show date in user's format. But it shows date
+            // only by default, no time.
+            const formatter = new Intl.DateTimeFormat(
+              "zh-Hans",
+              {
+                "year": "numeric",
+                "month": "2-digit",
+                "day": "2-digit",
+                "weekday": "short",
+                "hour": "2-digit",
+                "minute": "2-digit",
+                "second": "2-digit",
+                "timeZoneName": "short",
+                "hour12": false
+              }
+            );
+            elementsEach(
+              document.querySelectorAll("time.comment-full-datetime"),
+              (e, i) => {
+                const date = new Date(e.getAttribute("datetime"));
+                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
+                const parts = formatter.formatToParts(date);
+                const obj = {};
+                for (let {type, value} of parts) {
+                  obj[type] = value;
+                }
+                e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+              }
+            );
+            elementsEach(
+              document.querySelectorAll("div.comment-content img"),
+              (e, i) => {
+                // If an image works as link, stop adding link styles to it.
+                if (e.parentNode.tagName.toLowerCase() === "a") {
+                  e.parentNode.classList.add("img-link");
+                }
+              }
+            );
+          });
+          // We only need this observer once.
+          observer.disconnect();
+        }
       });
-      // Something wrong.
-      if (p == null) {
-        return;
-      }
-      p.then(() => {
-        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
-        // A modern way to show date in user's format.
-        // But it shows date only by default, no time.
-        const formatter = new Intl.DateTimeFormat(
-          "zh-Hans",
-          {
-            "year": "numeric",
-            "month": "2-digit",
-            "day": "2-digit",
-            "weekday": "short",
-            "hour": "2-digit",
-            "minute": "2-digit",
-            "second": "2-digit",
-            "timeZoneName": "short",
-            "hour12": false
-          }
-        );
-        elementsEach(
-          document.querySelectorAll("time.comment-full-date"),
-          (e, i) => {
-            const date = new Date(e.getAttribute("datetime"));
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
-            const parts = formatter.formatToParts(date);
-            const obj = {};
-            for (let {type, value} of parts) {
-              obj[type] = value;
-            }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
-          }
-        );
-        elementsEach(
-          document.querySelectorAll("div.comment-content img"),
-          (e, i) => {
-            // If an image works as link,
-            // stop adding link styles to it.
-            if (e.parentNode.tagName.toLowerCase() === "a") {
-              e.parentNode.classList.add("img-link");
-            }
-          }
-        );
-      });
+      observer.observe(document.getElementById("comment-results"));
     });
   </script>
 </div>
@@ -566,4 +606,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.621Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T18:34:04.835Z. -->
