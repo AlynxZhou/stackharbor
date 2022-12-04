@@ -219,6 +219,6 @@ comment:
 reward:
   enable: true
   message: 既然看了喵写的文章，不打算投喂一下再走吗？哼！
-  weChatPayQRCode: images/WeChatPay.png
-  aliPayQRCode: images/AliPay.png
+  weChatPayQRCode: images/WeChatPay.webp
+  aliPayQRCode: images/AliPay.webp
   # bitCoinQRCode: images/BitCoin.png
