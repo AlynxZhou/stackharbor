@@ -97,3 +97,4 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
 | <img src="https://avatars1.githubusercontent.com/u/21106371?s=460&v=4" style="width: 5em;"> | [鸡腿工坊](https://jitui.moe/) |  | ~~新鲜~~ 可爱的鸡腿！ |
+| <img src="https://blog.gaojianli.me/images/avatar.jpg" style="width: 5em;"> | [高渐离の屋](https://blog.gaojianli.me/) | 一个不起眼的个人小站 | 我真心觉得在他们公司干久了容易变杠精。 |
