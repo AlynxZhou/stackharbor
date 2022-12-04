@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -266,8 +266,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/" itemprop="url">DaVinci Resolve 在 Linux 下的输入法支持</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-25T09:50:13.000Z">11-25</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-25T09:50:13.000Z">11-25</time>
       </span>
     </header>
   </article>
@@ -276,8 +276,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Who-Moved-My-DNS-Resolving/" itemprop="url">谁动了我的 DNS 解析？</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-09T13:06:00.000Z">11-09</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-09T13:06:00.000Z">11-09</time>
       </span>
     </header>
   </article>
@@ -286,8 +286,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Fontconfig-NotoColorEmoji-Antialias/" itemprop="url">Fontconfig 和 Noto Color Emoji 和抗锯齿</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2021-09-08T01:33:33.000Z">09-08</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2021-09-08T01:33:33.000Z">09-08</time>
       </span>
     </header>
   </article>
@@ -296,8 +296,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Difference-between-X-and-Wayland/" itemprop="url">X 和 Wayland 的主要区别</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-11-13T05:31:33.000Z">11-13</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-11-13T05:31:33.000Z">11-13</time>
       </span>
     </header>
   </article>
@@ -306,8 +306,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Linux-Mooncake-Jokes/" itemprop="url">Linux 用户的月饼食用手册</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-13T10:47:00.000Z">09-13</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-09-13T10:47:00.000Z">09-13</time>
       </span>
     </header>
   </article>
@@ -316,8 +316,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Linux-Manual-for-Newbies-1/" itemprop="url">写给新手的 Linux 手册 1</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-03-25T12:24:45.000Z">03-25</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2018-03-25T12:24:45.000Z">03-25</time>
       </span>
     </header>
   </article>
@@ -326,8 +326,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Steam-with-Bumblebee/" itemprop="url">Linux下使Steam调用Bumblebee使用独显</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2017-02-16T04:50:22.000Z">02-16</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2017-02-16T04:50:22.000Z">02-16</time>
       </span>
     </header>
   </article>
@@ -433,4 +433,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.646Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.711Z. -->

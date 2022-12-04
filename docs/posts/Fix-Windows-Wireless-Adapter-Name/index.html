@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -275,8 +275,8 @@
         <a class="title-link" href="/posts/Fix-Windows-Wireless-Adapter-Name/" itemprop="url">修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2020-06-28T11:02:00.000Z">6/28/2020, 7:02:00 PM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2020-06-28T11:02:00.000Z">6/28/2020, 7:02:00 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
@@ -514,4 +514,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.568Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.636Z. -->

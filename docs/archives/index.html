@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -270,8 +270,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/YubiKey-GNOME-Smartcard-Login/" itemprop="url">YubiKey 和 GNOME 和智能卡登录</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-28T10:24:04.000Z">11-28</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-28T10:24:04.000Z">11-28</time>
       </span>
     </header>
   </article>
@@ -280,8 +280,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/" itemprop="url">DaVinci Resolve 在 Linux 下的输入法支持</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-25T09:50:13.000Z">11-25</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-25T09:50:13.000Z">11-25</time>
       </span>
     </header>
   </article>
@@ -290,8 +290,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/GTK-libhandy-Arc-Dark/" itemprop="url">GTK 和 libhandy 和 Arc-Dark 主题</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-23T10:23:34.000Z">11-23</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-23T10:23:34.000Z">11-23</time>
       </span>
     </header>
   </article>
@@ -300,8 +300,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Who-Moved-My-DNS-Resolving/" itemprop="url">谁动了我的 DNS 解析？</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-09T13:06:00.000Z">11-09</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-09T13:06:00.000Z">11-09</time>
       </span>
     </header>
   </article>
@@ -310,8 +310,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/" itemprop="url">不应该做 EVA，而应该做环太平洋</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-08-18T17:06:22.000Z">08-19</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-08-18T17:06:22.000Z">08-19</time>
       </span>
     </header>
   </article>
@@ -320,8 +320,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/PHP-Story/" itemprop="url">PHP 故释</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-08-10T05:24:41.000Z">08-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-08-10T05:24:41.000Z">08-10</time>
       </span>
     </header>
   </article>
@@ -330,8 +330,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/My-RIME-2/" itemprop="url">可能只适合我自己的 RIME 配置 2</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-07-18T10:50:50.000Z">07-18</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-07-18T10:50:50.000Z">07-18</time>
       </span>
     </header>
   </article>
@@ -340,8 +340,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Prevent-clangd-from-Making-Projects-Root-Dirty/" itemprop="url">阻止 clangd 污染项目根目录的一些方法</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-07-06T04:19:32.000Z">07-06</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-07-06T04:19:32.000Z">07-06</time>
       </span>
     </header>
   </article>
@@ -350,8 +350,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/From-PulseAudio-to-PipeWire/" itemprop="url">从 PulseAudio 到 PipeWire</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-06-29T08:11:02.000Z">06-29</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-06-29T08:11:02.000Z">06-29</time>
       </span>
     </header>
   </article>
@@ -360,8 +360,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Build-My-NAS/" itemprop="url">装了台 NAS</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-05-07T09:49:46.000Z">05-07</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-05-07T09:49:46.000Z">05-07</time>
       </span>
     </header>
   </article>
@@ -370,8 +370,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Telegram-Bot-as-Gallery-Backend/" itemprop="url">用 Telegram 机器人做后端的照片墙</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-03-23T08:01:11.000Z">03-23</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-03-23T08:01:11.000Z">03-23</time>
       </span>
     </header>
   </article>
@@ -380,8 +380,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/How-I-Handle-Indent-Offset-and-Tab-Width-in-Emacs/" itemprop="url">我如何在 Emacs 里面处理缩进宽度和 Tab 宽度</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-03-06T14:00:00.000Z">03-06</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-03-06T14:00:00.000Z">03-06</time>
       </span>
     </header>
   </article>
@@ -390,8 +390,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Emacs-Monaco-Box-drawing-Character/" itemprop="url">Emacs 和 Monaco 字体和 Box-drawing Character</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-20T12:53:00.000Z">02-20</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-20T12:53:00.000Z">02-20</time>
       </span>
     </header>
   </article>
@@ -400,8 +400,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Fastest-Blog-Has-No-Post/" itemprop="url">不写文章的博客生成速度最快</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-15T10:33:33.000Z">02-15</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-15T10:33:33.000Z">02-15</time>
       </span>
     </header>
   </article>
@@ -410,8 +410,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/2021-Tail/" itemprop="url">StackHarbor 的 2021 尾记</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-09T02:22:55.000Z">02-09</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-09T02:22:55.000Z">02-09</time>
       </span>
     </header>
   </article>
@@ -523,4 +523,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.615Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.681Z. -->

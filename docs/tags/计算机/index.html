@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -266,8 +266,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/YubiKey-GNOME-Smartcard-Login/" itemprop="url">YubiKey 和 GNOME 和智能卡登录</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-28T10:24:04.000Z">11-28</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-28T10:24:04.000Z">11-28</time>
       </span>
     </header>
   </article>
@@ -276,8 +276,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/" itemprop="url">DaVinci Resolve 在 Linux 下的输入法支持</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-25T09:50:13.000Z">11-25</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-25T09:50:13.000Z">11-25</time>
       </span>
     </header>
   </article>
@@ -286,8 +286,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/GTK-libhandy-Arc-Dark/" itemprop="url">GTK 和 libhandy 和 Arc-Dark 主题</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-23T10:23:34.000Z">11-23</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-23T10:23:34.000Z">11-23</time>
       </span>
     </header>
   </article>
@@ -296,8 +296,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Who-Moved-My-DNS-Resolving/" itemprop="url">谁动了我的 DNS 解析？</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-11-09T13:06:00.000Z">11-09</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-09T13:06:00.000Z">11-09</time>
       </span>
     </header>
   </article>
@@ -306,8 +306,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Prevent-clangd-from-Making-Projects-Root-Dirty/" itemprop="url">阻止 clangd 污染项目根目录的一些方法</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-07-06T04:19:32.000Z">07-06</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-07-06T04:19:32.000Z">07-06</time>
       </span>
     </header>
   </article>
@@ -316,8 +316,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Build-My-NAS/" itemprop="url">装了台 NAS</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-05-07T09:49:46.000Z">05-07</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-05-07T09:49:46.000Z">05-07</time>
       </span>
     </header>
   </article>
@@ -326,8 +326,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Telegram-Bot-as-Gallery-Backend/" itemprop="url">用 Telegram 机器人做后端的照片墙</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-03-23T08:01:11.000Z">03-23</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-03-23T08:01:11.000Z">03-23</time>
       </span>
     </header>
   </article>
@@ -336,8 +336,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/How-I-Handle-Indent-Offset-and-Tab-Width-in-Emacs/" itemprop="url">我如何在 Emacs 里面处理缩进宽度和 Tab 宽度</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-03-06T14:00:00.000Z">03-06</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-03-06T14:00:00.000Z">03-06</time>
       </span>
     </header>
   </article>
@@ -346,8 +346,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Emacs-Monaco-Box-drawing-Character/" itemprop="url">Emacs 和 Monaco 字体和 Box-drawing Character</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-20T12:53:00.000Z">02-20</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-20T12:53:00.000Z">02-20</time>
       </span>
     </header>
   </article>
@@ -356,8 +356,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Fontconfig-NotoColorEmoji-Antialias/" itemprop="url">Fontconfig 和 Noto Color Emoji 和抗锯齿</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2021-09-08T01:33:33.000Z">09-08</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2021-09-08T01:33:33.000Z">09-08</time>
       </span>
     </header>
   </article>
@@ -366,8 +366,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/My-Desktop-PC/" itemprop="url">装机小记</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-11-25T02:14:00.000Z">11-25</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-11-25T02:14:00.000Z">11-25</time>
       </span>
     </header>
   </article>
@@ -376,8 +376,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/SnailSpace-as-NAS/" itemprop="url">蜗牛星际安装 Arch Linux 作为 NAS</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-10-07T09:01:00.000Z">10-07</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-10-07T09:01:00.000Z">10-07</time>
       </span>
     </header>
   </article>
@@ -386,8 +386,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Pixel-C-Lineage/" itemprop="url">在 Pixel C 上安装 Lineage OS</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">07-24</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">07-24</time>
       </span>
     </header>
   </article>
@@ -396,8 +396,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/JavaScript-YAML-Timezone-Moment/" itemprop="url">使用 Moment 处理 JavaScript 与 YAML 的时区转换</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-01-01T13:00:00.000Z">01-01</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-01-01T13:00:00.000Z">01-01</time>
       </span>
     </header>
   </article>
@@ -406,8 +406,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Linux-Manual-for-Newbies-1/" itemprop="url">写给新手的 Linux 手册 1</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-03-25T12:24:45.000Z">03-25</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2018-03-25T12:24:45.000Z">03-25</time>
       </span>
     </header>
   </article>
@@ -513,4 +513,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.663Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.728Z. -->

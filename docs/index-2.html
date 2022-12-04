@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -280,8 +280,8 @@
         <a class="title-link" href="/posts/Telegram-Bot-as-Gallery-Backend/" itemprop="url">用 Telegram 机器人做后端的照片墙</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-03-23T08:01:11.000Z">3/23/2022, 4:01:11 PM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-03-23T08:01:11.000Z">3/23/2022, 4:01:11 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
@@ -320,11 +320,11 @@
         <a class="title-link" href="/posts/How-I-Handle-Indent-Offset-and-Tab-Width-in-Emacs/" itemprop="url">我如何在 Emacs 里面处理缩进宽度和 Tab 宽度</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-03-06T14:00:00.000Z">3/6/2022, 10:00:00 PM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-03-06T14:00:00.000Z">3/6/2022, 10:00:00 PM</time></span>
         </div>
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2022-03-07T01:11:02.000Z">3/6/2022, 10:00:00 PM</time></span>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-03-07T01:11:02.000Z">3/6/2022, 10:00:00 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
@@ -365,11 +365,11 @@
         <a class="title-link" href="/posts/Emacs-Monaco-Box-drawing-Character/" itemprop="url">Emacs 和 Monaco 字体和 Box-drawing Character</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-20T12:53:00.000Z">2/20/2022, 8:53:00 PM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-20T12:53:00.000Z">2/20/2022, 8:53:00 PM</time></span>
         </div>
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2022-02-26T01:51:25.000Z">2/20/2022, 8:53:00 PM</time></span>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-02-26T01:51:25.000Z">2/20/2022, 8:53:00 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%AD%97%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">字体</span></a></span>
@@ -406,8 +406,8 @@
         <a class="title-link" href="/posts/Fastest-Blog-Has-No-Post/" itemprop="url">不写文章的博客生成速度最快</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-15T10:33:33.000Z">2/15/2022, 6:33:33 PM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-15T10:33:33.000Z">2/15/2022, 6:33:33 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/Hikaru/" itemprop="url" rel="index"><span itemprop="name">Hikaru</span></a></span>
@@ -444,11 +444,11 @@
         <a class="title-link" href="/posts/2021-Tail/" itemprop="url">StackHarbor 的 2021 尾记</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-09T02:22:55.000Z">2/9/2022, 10:22:55 AM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-09T02:22:55.000Z">2/9/2022, 10:22:55 AM</time></span>
         </div>
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2022-02-11T01:18:12.000Z">2/9/2022, 10:22:55 AM</time></span>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-02-11T01:18:12.000Z">2/9/2022, 10:22:55 AM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
@@ -485,8 +485,8 @@
         <a class="title-link" href="/posts/Please-Bring-back-My-Timestamp/" itemprop="url">把我的时间戳还给我！</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-11-09T01:19:55.000Z">11/9/2021, 9:19:55 AM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2021-11-09T01:19:55.000Z">11/9/2021, 9:19:55 AM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
@@ -524,11 +524,11 @@
         <a class="title-link" href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/" itemprop="url">通过 USB HID over AOAv2 在 scrcpy 里模拟真实键盘</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-09-18T15:08:08.000Z">9/18/2021, 11:08:08 PM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2021-09-18T15:08:08.000Z">9/18/2021, 11:08:08 PM</time></span>
         </div>
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2021-09-19T04:01:45.000Z">9/18/2021, 11:08:08 PM</time></span>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2021-09-19T04:01:45.000Z">9/18/2021, 11:08:08 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
@@ -566,11 +566,11 @@
         <a class="title-link" href="/posts/Fontconfig-NotoColorEmoji-Antialias/" itemprop="url">Fontconfig 和 Noto Color Emoji 和抗锯齿</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-09-08T01:33:33.000Z">9/8/2021, 9:33:33 AM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2021-09-08T01:33:33.000Z">9/8/2021, 9:33:33 AM</time></span>
         </div>
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2022-11-24T04:39:26.000Z">9/8/2021, 9:33:33 AM</time></span>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-11-24T04:39:26.000Z">9/8/2021, 9:33:33 AM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%AD%97%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">字体</span></a></span>
@@ -607,11 +607,11 @@
         <a class="title-link" href="/posts/NVIDIA-GNOME-Wayland/" itemprop="url">NVIDIA 驱动和 GNOME 和 Wayland</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-07-29T23:50:39.000Z">7/30/2021, 7:50:39 AM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2021-07-29T23:50:39.000Z">7/30/2021, 7:50:39 AM</time></span>
         </div>
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2021-11-09T01:10:21.000Z">7/30/2021, 7:50:39 AM</time></span>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2021-11-09T01:10:21.000Z">7/30/2021, 7:50:39 AM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
@@ -650,8 +650,8 @@
         <a class="title-link" href="/posts/New-Project-New-Camera-New-Home/" itemprop="url">新项目和新相机和新住处</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2021-04-25T06:50:00.000Z">4/25/2021, 2:50:00 PM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2021-04-25T06:50:00.000Z">4/25/2021, 2:50:00 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
@@ -795,4 +795,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.606Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.671Z. -->

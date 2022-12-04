@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -270,8 +270,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/CHarmonica-Talk-3/" itemprop="url">半音阶口琴杂谈（三）</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:35:05.000Z">04-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-10T03:35:05.000Z">04-10</time>
       </span>
     </header>
   </article>
@@ -280,8 +280,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/CHarmonica-Talk-2/" itemprop="url">半音阶口琴杂谈（二）</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:53.000Z">04-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:53.000Z">04-10</time>
       </span>
     </header>
   </article>
@@ -290,8 +290,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/CHarmonica-Talk-1/" itemprop="url">半音阶口琴杂谈（一）</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:18.000Z">04-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-10T03:34:18.000Z">04-10</time>
       </span>
     </header>
   </article>
@@ -300,8 +300,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Words-Say-1/" itemprop="url">Words That I Couldn't Say</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-10T03:13:50.000Z">04-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-10T03:13:50.000Z">04-10</time>
       </span>
     </header>
   </article>
@@ -310,8 +310,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Arch-Install/" itemprop="url">Arch Linux安装手札</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-06T22:26:23.000Z">04-07</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-06T22:26:23.000Z">04-07</time>
       </span>
     </header>
   </article>
@@ -320,8 +320,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Hello-My-World/" itemprop="url">你好，世界。</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-04T04:34:18.000Z">04-04</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-04T04:34:18.000Z">04-04</time>
       </span>
     </header>
   </article>
@@ -433,4 +433,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.618Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.685Z. -->

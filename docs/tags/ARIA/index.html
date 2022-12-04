@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -266,8 +266,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Frontend-GitHub-Issue-Based-Comment/" itemprop="url">基于 GitHub Issue 的前端评论框</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-08-15T10:25:00.000Z">08-15</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-08-15T10:25:00.000Z">08-15</time>
       </span>
     </header>
   </article>
@@ -276,8 +276,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Dark-Mode-in-Theme/" itemprop="url">给你的主题来点暗色！</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-08-04T09:15:00.000Z">08-04</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-08-04T09:15:00.000Z">08-04</time>
       </span>
     </header>
   </article>
@@ -286,8 +286,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Frontend-Blog-Search/" itemprop="url">前端博客搜索引擎</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-18T07:24:00.000Z">09-18</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-09-18T07:24:00.000Z">09-18</time>
       </span>
     </header>
   </article>
@@ -296,8 +296,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Endless-ARIA/" itemprop="url">无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-05-05T15:49:53.000Z">05-05</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2018-05-05T15:49:53.000Z">05-05</time>
       </span>
     </header>
   </article>
@@ -403,4 +403,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.635Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.702Z. -->

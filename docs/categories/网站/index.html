@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -266,8 +266,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Fastest-Blog-Has-No-Post/" itemprop="url">不写文章的博客生成速度最快</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2022-02-15T10:33:33.000Z">02-15</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-15T10:33:33.000Z">02-15</time>
       </span>
     </header>
   </article>
@@ -276,8 +276,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Frontend-GitHub-Issue-Based-Comment/" itemprop="url">基于 GitHub Issue 的前端评论框</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-08-15T10:25:00.000Z">08-15</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-08-15T10:25:00.000Z">08-15</time>
       </span>
     </header>
   </article>
@@ -286,8 +286,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Drop-Cheerio/" itemprop="url">和 cheerio 说再见！</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-08-04T13:06:00.000Z">08-04</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-08-04T13:06:00.000Z">08-04</time>
       </span>
     </header>
   </article>
@@ -296,8 +296,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Dark-Mode-in-Theme/" itemprop="url">给你的主题来点暗色！</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-08-04T09:15:00.000Z">08-04</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-08-04T09:15:00.000Z">08-04</time>
       </span>
     </header>
   </article>
@@ -306,8 +306,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Taking-Your-Theme-Store-Away/" itemprop="url">让你们的主题商店离我远点！</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-12-18T08:17:00.000Z">12-18</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-12-18T08:17:00.000Z">12-18</time>
       </span>
     </header>
   </article>
@@ -316,8 +316,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Frontend-Blog-Search/" itemprop="url">前端博客搜索引擎</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-18T07:24:00.000Z">09-18</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-09-18T07:24:00.000Z">09-18</time>
       </span>
     </header>
   </article>
@@ -326,8 +326,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/" itemprop="url">在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-06-04T08:21:17.000Z">06-04</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2018-06-04T08:21:17.000Z">06-04</time>
       </span>
     </header>
   </article>
@@ -336,8 +336,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Endless-ARIA/" itemprop="url">无尽的咏叹回荡于伽蓝之世界中 —— 有关 ARIA</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-05-05T15:49:53.000Z">05-05</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2018-05-05T15:49:53.000Z">05-05</time>
       </span>
     </header>
   </article>
@@ -346,8 +346,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Custom-GitHub-Pages-Domain-with-HTTPS/" itemprop="url">GitHub Pages 自定义域名启用 HTTPS（非 CloudFlare）</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2018-05-02T12:30:48.000Z">05-02</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2018-05-02T12:30:48.000Z">05-02</time>
       </span>
     </header>
   </article>
@@ -356,8 +356,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Dynamic-or-Static/" itemprop="url">动态？静态？</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-06-12T08:55:14.000Z">06-12</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-06-12T08:55:14.000Z">06-12</time>
       </span>
     </header>
   </article>
@@ -366,8 +366,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Hello-My-World/" itemprop="url">你好，世界。</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-04T04:34:18.000Z">04-04</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-04T04:34:18.000Z">04-04</time>
       </span>
     </header>
   </article>
@@ -473,4 +473,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.623Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.690Z. -->

@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -275,11 +275,11 @@
         <a class="title-link" href="/blogroll/" itemprop="url">友情链接</a>
       </div>
       <div class="post-meta">
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-date" title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-24T02:30:00.000Z">2/24/2019, 10:30:00 AM</time></span>
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-02-24T02:30:00.000Z">2/24/2019, 10:30:00 AM</time></span>
         </div>
-        <div class="post-date meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-date" title="post-date" itemprop="dateUpdated" datetime="2020-08-24T01:20:00.000Z">8/24/2020, 9:20:00 AM</time></span>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2020-08-24T01:20:00.000Z">8/24/2020, 9:20:00 AM</time></span>
         </div>
         <div class="post-comment-count meta-block">
           <i class="bi bi-chat-dots"></i><span><a href="/blogroll/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="友情链接" itemprop="commentCount">阅读评论</span></a></span>
@@ -742,4 +742,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.599Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.668Z. -->

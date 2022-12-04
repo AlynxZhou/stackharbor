@@ -162,7 +162,7 @@
           }
         );
         elementsEach(
-          document.querySelectorAll("time.post-full-date"),
+          document.querySelectorAll("time.post-full-datetime"),
           (e, i) => {
             const date = new Date(e.getAttribute("datetime"));
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
@@ -171,7 +171,7 @@
             for (let {type, value} of parts) {
               obj[type] = value;
             }
-            e.innerHTML = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
+            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
         elementsEach(
@@ -266,8 +266,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Run-PulseAudio-on-Top-of-JACK/" itemprop="url">运行在 JACK 上层的 PulseAudio</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2021-02-18T02:51:11.000Z">02-18</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2021-02-18T02:51:11.000Z">02-18</time>
       </span>
     </header>
   </article>
@@ -276,8 +276,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Fix-Silly-Spleeter-Dependencies/" itemprop="url">解决 Spleeter 愚蠢的依赖问题</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-11-26T08:43:12.000Z">11-26</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-11-26T08:43:12.000Z">11-26</time>
       </span>
     </header>
   </article>
@@ -286,8 +286,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Fixed-IME-List-for-GNOME-Shell/" itemprop="url">固定 GNOME Shell 的输入法列表</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-09-26T02:40:00.000Z">09-26</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-09-26T02:40:00.000Z">09-26</time>
       </span>
     </header>
   </article>
@@ -296,8 +296,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/GObject-Reminder/" itemprop="url">GObject 备忘录</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-09-05T01:23:00.000Z">09-05</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-09-05T01:23:00.000Z">09-05</time>
       </span>
     </header>
   </article>
@@ -306,8 +306,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Fix-Windows-Wireless-Adapter-Name/" itemprop="url">修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2020-06-28T11:02:00.000Z">06-28</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2020-06-28T11:02:00.000Z">06-28</time>
       </span>
     </header>
   </article>
@@ -316,8 +316,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/My-Desktop-PC/" itemprop="url">装机小记</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-11-25T02:14:00.000Z">11-25</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-11-25T02:14:00.000Z">11-25</time>
       </span>
     </header>
   </article>
@@ -326,8 +326,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Difference-between-X-and-Wayland/" itemprop="url">X 和 Wayland 的主要区别</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-11-13T05:31:33.000Z">11-13</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-11-13T05:31:33.000Z">11-13</time>
       </span>
     </header>
   </article>
@@ -336,8 +336,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/SnailSpace-as-NAS/" itemprop="url">蜗牛星际安装 Arch Linux 作为 NAS</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-10-07T09:01:00.000Z">10-07</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-10-07T09:01:00.000Z">10-07</time>
       </span>
     </header>
   </article>
@@ -346,8 +346,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Linux-Mooncake-Jokes/" itemprop="url">Linux 用户的月饼食用手册</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-13T10:47:00.000Z">09-13</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-09-13T10:47:00.000Z">09-13</time>
       </span>
     </header>
   </article>
@@ -356,8 +356,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/My-RIME/" itemprop="url">可能只适合我自己的 RIME 配置</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-08-19T07:16:00.000Z">08-19</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-08-19T07:16:00.000Z">08-19</time>
       </span>
     </header>
   </article>
@@ -366,8 +366,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Pixel-C-Lineage/" itemprop="url">在 Pixel C 上安装 Lineage OS</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">07-24</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-07-24T09:24:00.000Z">07-24</time>
       </span>
     </header>
   </article>
@@ -376,8 +376,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Archlinux-UnityHub/" itemprop="url">Arch Linux 安装 UnityHub 的临时方案</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-05-10T14:09:00.000Z">05-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-05-10T14:09:00.000Z">05-10</time>
       </span>
     </header>
   </article>
@@ -386,8 +386,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Android-Video-Wallpaper-Implementation/" itemprop="url">如何编写 Android 视频壁纸</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-03-22T08:18:00.000Z">03-22</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-03-22T08:18:00.000Z">03-22</time>
       </span>
     </header>
   </article>
@@ -396,8 +396,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/GNOME-Develop/" itemprop="url">GNOME 的修改开发与测试</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T14:58:00.000Z">02-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-02-10T14:58:00.000Z">02-10</time>
       </span>
     </header>
   </article>
@@ -406,8 +406,8 @@
       <div class="post-title-simple" itemprop="name headline">
         <a class="title-link-simple" href="/posts/Proxy-Settings/" itemprop="url">Linux 下面常见的代理设置</a>
       </div>
-      <span class="post-date">
-        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">02-10</time>
+      <span class="post-created">
+        <time title="post-created" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">02-10</time>
       </span>
     </header>
   </article>
@@ -515,4 +515,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T05:44:25.625Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-04T06:42:50.691Z. -->
