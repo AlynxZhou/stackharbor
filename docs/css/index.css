@@ -54,6 +54,7 @@ body {
   /* You phone is too long and too narrow, let the whole page scroll. */
   min-width: var(--body-min-width);
   overflow: auto;
+  scroll-behavior: smooth;
 }
 
 ol, ul {
@@ -1022,8 +1023,6 @@ div.sidebar-item {
 }
 
 div.sidebar-sticky {
-  /* Personally I prefer Firefox, btw. */
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   padding-bottom: 1em;
