@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="/css/variables.css">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
     <style type="text/css">
@@ -41,7 +42,7 @@
       /* Replace the default Bootstrap Icons fonts path. */
       @font-face {
         font-family: "bootstrap-icons";
-        font-display: fallback;
+        font-display: block;
         src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
       }
     </style>
@@ -133,27 +134,6 @@
             e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
           }
         );
-        elementsEach(
-          document.querySelectorAll(".post figure.code-block"),
-          (e, i) => {
-            const lang = e.getAttribute("data-lang");
-            elementBefore(e, createElementFromString([
-              "<div class=\"code-titlebar\">",
-                "<div class=\"titlebar-left\">",
-                  "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
-                "</div>",
-                "<div class=\"titlebar-center\">",
-                  lang != null && lang.length ? lang.toUpperCase() : "代码",
-                "</div>",
-                "<div class=\"titlebar-right\">",
-                  "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
-                  "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
-                  "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
-                "</div>",
-              "</div>"
-            ].join("")));
-          }
-        );
       });
     </script>
     
@@ -163,6 +143,27 @@
 <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
 <script type="text/javascript">
   documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
     const cb = new ClipboardJS("button.copy", {
       "target": (trigger) => {
         // Get target element by DOM API.
@@ -241,26 +242,26 @@
   <div class="container">
     <div class="header-container">
       <div class="header-title">
-        <div class="title"><a href="/">喵's StackHarbor</a></div>
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
         <div class="subtitle">搞 GNOME 只是个人兴趣，去 VA-11 调酒才是工作。</div>
       </div>
       <div class="logo">
-        <img src="/images/I-love-Arch.webp" alt="logo">
+        <img class="logo-image" src="/images/I-love-Arch.webp" alt="logo">
       </div>
     </div>
     <nav id="nav" class="nav">
       <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
         <i class="bi bi-list" aria-label="切换导航栏"></i>
       </button>
-      <ul id="menu" role="menubar" aria-hidden="false">
-        <li role="menuitem"><a href="/"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
-        <li role="menuitem"><a href="/archives/"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
-        <li role="menuitem"><a href="/categories/"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
-        <li role="menuitem"><a href="/tags/"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
-        <li role="menuitem"><a href="/Undefined-Script-Works/"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
-        <li role="menuitem"><a href="//gallery.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
-        <li role="menuitem"><a href="/blogroll/"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
-        <li role="menuitem"><a href="/about/"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
       </ul>
       <button class="theme-toggle" id="theme-toggle">
       </button>
@@ -337,10 +338,10 @@ Type ".help" for more information.
   </article>
   <nav class="page-nav">
     <div class="page-nav-next page-nav-item">
-      <a href="/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/" rel="next" title="不应该做 EVA，而应该做环太平洋"><i class="bi bi-chevron-left"></i><span class="nav-title">不应该做 EVA，而应该做环太平洋</span></a>
+      <a class="page-nav-link" href="/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/" rel="next" title="不应该做 EVA，而应该做环太平洋"><i class="bi bi-chevron-left"></i><span class="nav-title">不应该做 EVA，而应该做环太平洋</span></a>
     </div>
     <div class="page-nav-prev page-nav-item">
-      <a href="/posts/My-RIME-2/" rel="prev" title="可能只适合我自己的 RIME 配置 2"><span class="nav-title">可能只适合我自己的 RIME 配置 2</span><i class="bi bi-chevron-right"></i></a>
+      <a class="page-nav-link" href="/posts/My-RIME-2/" rel="prev" title="可能只适合我自己的 RIME 配置 2"><span class="page-nav-title">可能只适合我自己的 RIME 配置 2</span><i class="bi bi-chevron-right"></i></a>
     </div>
   </nav>
   
@@ -350,12 +351,12 @@ Type ".help" for more information.
   </div>
   <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
   <div id="qr" class="qr" style="display: none;" aria-hidden="true">
-    <div id="wechatpay">
-      <img id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
       <span>微信支付</span>
     </div>
-    <div id="alipay">
-      <img id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
       <span>支付宝</span>
     </div>
   </div>
@@ -496,31 +497,31 @@ Type ".help" for more information.
     <hr>
     <div class="social-link sidebar-item">
       <div><i class="bi bi-person-workspace"></i>社交链接</div>
-      <ul>
-        <li><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
-        <li><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
-        <li><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
-        <li><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
-        <li><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
       </ul>
     </div>
     <hr>
     <div class="blogroll sidebar-item">
       <div><i class="bi bi-people"></i>友情链接</div>
-      <ul>
-        <li><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://blog.gaojianli.me/" target="_blank" rel="external nofollow noreferrer noopener">高渐离の屋</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
-        <li><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.gaojianli.me/" target="_blank" rel="external nofollow noreferrer noopener">高渐离の屋</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
       </ul>
     </div>
   </div>
@@ -557,4 +558,4 @@ Type ".help" for more information.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-04T18:44:55.504Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-05T04:21:58.997Z. -->
