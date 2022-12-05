@@ -99,35 +99,9 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        // See <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat>.
-        // A modern way to show date in user's format. But it shows date
-        // only by default, no time.
-        const formatter = new Intl.DateTimeFormat(
-          "zh-Hans",
-          {
-            "year": "numeric",
-            "month": "2-digit",
-            "day": "2-digit",
-            "weekday": "short",
-            "hour": "2-digit",
-            "minute": "2-digit",
-            "second": "2-digit",
-            "timeZoneName": "short",
-            "hour12": false
-          }
-        );
-        elementsEach(
+        formatDateTime(
           document.querySelectorAll("time.post-full-datetime"),
-          (e, i) => {
-            const date = new Date(e.getAttribute("datetime"));
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
-            const parts = formatter.formatToParts(date);
-            const obj = {};
-            for (let {type, value} of parts) {
-              obj[type] = value;
-            }
-            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
-          }
+          "zh-Hans"
         );
       });
     </script>
@@ -185,16 +159,14 @@
       </span>
     </header>
   </article>
-  
-<nav class="pagination">
+  <nav class="pagination">
   <a class="page-number current" href="/tags/%E7%A9%BA%E6%89%8B%E5%A5%97%E7%99%BD%E7%8B%BC/">1</a>
 </nav>
 
 </div>
 
           </div>
-          
-<aside class="sidebar" id="sidebar">
+          <aside class="sidebar" id="sidebar">
   <div class="search" role="search">
     <form action="/search/" method="get">
       <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
@@ -287,4 +259,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-05T04:21:59.109Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-05T09:34:48.964Z. -->

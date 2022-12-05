@@ -104,41 +104,13 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        // See <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat>.
-        // A modern way to show date in user's format. But it shows date
-        // only by default, no time.
-        const formatter = new Intl.DateTimeFormat(
-          "zh-Hans",
-          {
-            "year": "numeric",
-            "month": "2-digit",
-            "day": "2-digit",
-            "weekday": "short",
-            "hour": "2-digit",
-            "minute": "2-digit",
-            "second": "2-digit",
-            "timeZoneName": "short",
-            "hour12": false
-          }
-        );
-        elementsEach(
+        formatDateTime(
           document.querySelectorAll("time.post-full-datetime"),
-          (e, i) => {
-            const date = new Date(e.getAttribute("datetime"));
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
-            const parts = formatter.formatToParts(date);
-            const obj = {};
-            for (let {type, value} of parts) {
-              obj[type] = value;
-            }
-            e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
-          }
+          "zh-Hans"
         );
       });
     </script>
     
-
-
 
 <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
 <script type="text/javascript">
@@ -231,8 +203,6 @@
     );
   });
 </script>
-
-
 
 
     <title>从 PulseAudio 到 PipeWire - 喵's StackHarbor</title>
@@ -333,8 +303,7 @@
       <a class="page-nav-link" href="/posts/Build-My-NAS/" rel="prev" title="装了台 NAS"><span class="page-nav-title">装了台 NAS</span><i class="bi bi-chevron-right"></i></a>
     </div>
   </nav>
-  
-<div class="reward" id="reward">
+  <div class="reward" id="reward">
   <div class="reward-info" id="reward-info">
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
@@ -374,78 +343,35 @@
   </div>
   <script type="text/javascript">
     documentReady(() => {
-      // See <https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API>.
-      // Load comments is expensive, use this to detect if something is inside
-      // viewport.
-      // It's 2022 now, browsers of my readers should support it.
-      const observer = new window.IntersectionObserver((entries, observer) => {
-        // Just load comment when it's inside viewport.
-        // The reason why using IntersectionObserver here instead of inside
-        // `loadComment` (like what I do for ScrollSpy) is because I use the
-        // returned Promise to do something.
-        if (entries[0].isIntersecting) {
-          const p = loadComment({
-            "user": "AlynxZhou",
-            "repo": "stackharbor",
-            "perPage": "10",
-            "sendButtonText": "去评论",
-            "noCommentText": "这个页面还没有评论，现在就去评论吧！",
-            "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
-            "title": "从 PulseAudio 到 PipeWire",
-            "queryString": window.location.search,
-            "basePath": "/posts/From-PulseAudio-to-PipeWire/",
-            "containerID": "comment-results"
-          });
-          // Something wrong.
-          if (p == null) {
-            return;
-          }
-          p.then(() => {
-            // See <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat>.
-            // A modern way to show date in user's format. But it shows date
-            // only by default, no time.
-            const formatter = new Intl.DateTimeFormat(
-              "zh-Hans",
-              {
-                "year": "numeric",
-                "month": "2-digit",
-                "day": "2-digit",
-                "weekday": "short",
-                "hour": "2-digit",
-                "minute": "2-digit",
-                "second": "2-digit",
-                "timeZoneName": "short",
-                "hour12": false
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "从 PulseAudio 到 PipeWire",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/From-PulseAudio-to-PipeWire/",
+          "containerID": "comment-results"
+        }).then(() => {
+          formatDateTime(
+            document.querySelectorAll("time.comment-full-datetime"),
+            "zh-Hans"
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
               }
-            );
-            elementsEach(
-              document.querySelectorAll("time.comment-full-datetime"),
-              (e, i) => {
-                const date = new Date(e.getAttribute("datetime"));
-                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts
-                const parts = formatter.formatToParts(date);
-                const obj = {};
-                for (let {type, value} of parts) {
-                  obj[type] = value;
-                }
-                e.textContent = `${obj["year"]}-${obj["month"]}-${obj["day"]} ${obj["weekday"]} ${obj["hour"]}:${obj["minute"]}:${obj["second"]} ${obj["timeZoneName"]}`;
-              }
-            );
-            elementsEach(
-              document.querySelectorAll("div.comment-content img"),
-              (e, i) => {
-                // If an image works as link, stop adding link styles to it.
-                if (e.parentNode.tagName.toLowerCase() === "a") {
-                  e.parentNode.classList.add("img-link");
-                }
-              }
-            );
-          });
-          // We only need this observer once.
-          observer.disconnect();
-        }
+            }
+          );
+        });
       });
-      observer.observe(document.getElementById("comment-results"));
     });
   </script>
 </div>
@@ -453,8 +379,7 @@
 </div>
 
           </div>
-          
-<aside class="sidebar" id="sidebar">
+          <aside class="sidebar" id="sidebar">
   <div class="search" role="search">
     <form action="/search/" method="get">
       <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
@@ -547,4 +472,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.2 at 2022-12-05T04:21:58.999Z. -->
+<!-- Page built by Hikaru v1.13.2 at 2022-12-05T09:34:48.859Z. -->
