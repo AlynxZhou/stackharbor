@@ -17,9 +17,10 @@ Anyway，点到这个页面说明你对我很感兴趣，我写的东西你觉�
 
 打多少？多多益善！经济基础决定上层建筑，谁和钱过不去啊！多多少少都是情，先提前谢过各位了！
 
-![微信](/images/WeChatPay.png)
-
-![支付宝](/images/AliPay.png)
+<div class="center">
+  <img src="/images/WeChatPay.png" alt="微信" style="width: 15em; margin: 2em;">
+  <img src="/images/AliPay.png" alt="微信" style="width: 15em; margin: 2em;">
+</div>
 
 # 个人简介
 
