@@ -220,6 +220,7 @@
     <title>批量改名——Hrit.py - 喵's StackHarbor</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
     <header id="header" class="header" style="background: #33363b;">
   <div class="container">
     <div class="header-container">
@@ -498,7 +499,7 @@ for new in newlist:
 ### Go back to original path.
 os.chdir(opath)
 </code></pre></figure>
-<p>好了亲爱的观众们我知道你们又要抱怨你们的Vim/Emacs设置了代码自动缩进粘贴Python很麻烦……（你说你用Sublime Text或者Notepad++？好吧自便。你说你用记事本？这我就不能忍了，哪凉快哪呆着去！→_→）我就大发慈悲把源文件传上来吧，右键点击<a href="/posts/2016/05/03/Hrit/hrit.py">这里</a>另存为即可。然后拷贝到你的PATH中任意一个目录。</p>
+<p>好了亲爱的观众们我知道你们又要抱怨你们的Vim/Emacs设置了代码自动缩进粘贴Python很麻烦……（你说你用Sublime Text或者Notepad++？好吧自便。你说你用记事本？这我就不能忍了，哪凉快哪呆着去！→_→）我就大发慈悲把源文件传上来吧，右键点击<a href="/posts/Hrit/hrit.py">这里</a>另存为即可。然后拷贝到你的PATH中任意一个目录。</p>
 <p>接下来说用法～什么用法？直接执行hrit -h不就有用法了吗？</p>
 <p>总而言之hrit会以一个文件夹为单位把里面所有的文件按照指定的规则重命名，所以最后必须接一个文件夹参数比如./test/，没有设置默认./的原因是为了安全～hrit将文件名分为五部分操作，前缀、连接符、后缀、英文句点和扩展名。然后如果指定了 <em>-f 前缀</em> 的话文件都会被添加上同一前缀，没有-f则默认以当前目录名为前缀。 * -m 连接符* 指定连接符，默认是“_”。最后hrit会把原本的文件名（包括句点和扩展名）一起接上作为后缀。如果开启了 <em>-n</em> 它会用从1开始递增的数字作为后缀，并连接上句点和原本的扩展名（如果你非要把文件命名为aaa.bb.c那hrit只会把.c连接上……）。</p>
 <p>下面示范一下，进入我饱经摧残的test/目录。</p>
@@ -697,7 +698,7 @@ Now you can copy the follow hexo tags to your markdown post.
     <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
   </div>
   <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
-  <div id="qr" class="qr" style="display: none;" aria-hidden="true">
+  <div id="qr" class="qr">
     <div class="qr-block" id="wechatpay">
       <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
       <span>微信支付</span>
@@ -854,7 +855,7 @@ Now you can copy the follow hexo tags to your markdown post.
     <footer id="footer" class="footer" style="background: #33363b;">
   <div class="container">
     <div class="back-to-top">
-      <button id="back-to-top" class="back-to-top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></button>
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
     </div>
     <div class="footer-container">
       <div class="footer-left">
@@ -879,4 +880,4 @@ Now you can copy the follow hexo tags to your markdown post.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.4 at 2022-12-11T12:40:48.618Z. -->
+<!-- Page built by Hikaru v1.13.4 at 2022-12-11T16:11:33.345Z. -->

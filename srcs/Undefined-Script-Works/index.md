@@ -101,6 +101,6 @@ Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-termin
 
 让你选择视频作为壁纸的 Android 应用。
 
-- 主页：<https://livewallpaper.alynx.moe/>
+- 主页：<https://livewallpaper.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/alynx-live-wallpaper/>
 - 下载：[酷安网](http://www.coolapk.com/apk/220573) 或 [Google Play Store](https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper)。
