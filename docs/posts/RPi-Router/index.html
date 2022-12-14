@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="呐，眼看就要过年，本喵决定将去年失败的树莓派路由器计划重新提上日程，因为本喵过完年之后总要去姥爷家里住几天，他家里有网络，但是却没有路由器，而每天开着电脑插着随身WiFi实在太不环保。去年受到垃圾网卡坑害没有成功，幸好本喵朋友今年推荐了一个pi上使用超稳定的网卡，决定一不做二不休，干脆用OpenWrt和一直在吃灰的一代Pi B+，组成一个易于配置和使用的路由器。来吧，带着你聪明的头脑和灵巧的双手，还有你的树莓派，我们来Happy Wi-Fi！">
     <meta name="keywords" content="树莓派, OpenWrt">
-    <meta name="generator" content="Hikaru v1.13.4">
+    <meta name="generator" content="Hikaru v1.14.1">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="用OpenWrt将树莓派打造成一台便携无线路由器">
@@ -331,7 +331,7 @@
 </ol>
 <hr>
 <p>下面正式开始：</p>
-<h1 id="%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F"><a class="header-link" href="/posts/RPi-Router/#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F"></a>下载并刷入镜像</h1>
+<h1 id="%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F"><a class="heading-link header-link" href="/posts/RPi-Router/#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%88%B7%E5%85%A5%E9%95%9C%E5%83%8F"></a>下载并刷入镜像</h1>
 <p>首先，我们要去<a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/brcm2708/" target="_blank" rel="external nofollow noreferrer noopener">OpenWrt的官网</a>获取官方编译好的img镜像。下面有两个子目录，pi1对应的是<code>bcm2708</code>，pi2对应的是<code>bcm2709</code>，点击进入之后点击 <code>openwrt-15.05.1-brcm2708-bcm2708-sdcard-vfat-ext4.img</code> 即可开始下载，pi2对应的只是把2708全部换成了2709。</p>
 <p>PS 请务必选择带有<code>sdcard-vfat-ext4</code>的镜像。</p>
 <p>PPS 由于国内网络的特殊性，可能导致下载奇慢，可以复制下载地址之后利用百度云的离线下载。</p>
@@ -351,7 +351,7 @@
 " class="code-block"><pre class="code"><code># sync
 </code></pre></figure>
 <p>下面可以把卡拔下来插到Pi里面啦！当然如果你想调整分区（可选）请往下看——</p>
-<h2 id="%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA"><a class="header-link" href="/posts/RPi-Router/#%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA"></a>调节分区</h2>
+<h2 id="%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA"><a class="heading-link header-link" href="/posts/RPi-Router/#%E8%B0%83%E8%8A%82%E5%88%86%E5%8C%BA"></a>调节分区</h2>
 <p>为什么要调节分区呢？相信我，用一下</p>
 <figure data-raw="# fdisk -l /dev/sdb
 " class="code-block"><pre class="code"><code># fdisk -l /dev/sdb
@@ -417,7 +417,7 @@
 # cd ~ &amp;&amp; umount /mnt
 </code></pre></figure>
 <p><img src="/posts/RPi-Router/RPi-Router_7.png" alt="RPi-Router_7.png"></p>
-<h1 id="%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95"><a class="header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95"></a>连接电脑进行初次必要调试</h1>
+<h1 id="%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95"><a class="heading-link header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%E8%BF%9B%E8%A1%8C%E5%88%9D%E6%AC%A1%E5%BF%85%E8%A6%81%E8%B0%83%E8%AF%95"></a>连接电脑进行初次必要调试</h1>
 <p>先别急着把你的pi插到路由器上，op默认pi的ip是192.168.1.1，要知道大部分家里的路由器的ip也是这个，所以我们先把它用网线接到电脑上，开机后修改下ip。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_8.jpg" alt="RPi-Router_8.jpg"></p>
 <p>关掉你的无线连接，给pi连上电源，打开浏览器输入192.168.1.1回车，你会看到luci登陆界面，点击Login登入。</p>
@@ -428,7 +428,7 @@
 <p>在进入的页面中设置IP，设为你路由器网段下的一个没有被占用的ip即可，我设置为 <code>192.168.1.234</code> ，之后下面的netmask选择 <code>255.255.255.0</code> ，gateway输入路由器地址 <code>192.168.1.1</code> ，DNS也输入 <code>192.168.1.1</code> 。</p>
 <p><img src="/posts/RPi-Router/RPi-Router_10.png" alt="RPi-Router_10.png"></p>
 <p>好啦，现在树莓派基本的设置已经完成了，接下来可以关机接到路由器上了。什么？你说OpenWrt没有关机？好吧没办法，因为我也不知道怎么办，我用OpenWrt一直都是拔电源，没什么问题。</p>
-<h1 id="%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95"><a class="header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95"></a>连接路由器进行主要调试</h1>
+<h1 id="%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95"><a class="heading-link header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%B8%BB%E8%A6%81%E8%B0%83%E8%AF%95"></a>连接路由器进行主要调试</h1>
 <p>现在我们把pi拿出来～<em>无线网卡插到pi上，pi插到网线上，网线插到路由器上，电源线插到pi上，开机！</em></p>
 <p><img src="/posts/RPi-Router/RPi-Router_11.jpg" alt="RPi-Router_11.jpg"></p>
 <p>稍等一会绿灯熄灭，这时候通过家庭局域网应该能连接上Pi了，同样，打开浏览器 <code>192.168.1.234</code> （按照你刚才设置的ip来），输入密码点击Login。</p>
@@ -447,7 +447,7 @@
 <figure data-raw="# opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd
 " class="code-block"><pre class="code"><code># opkg install kmod-usb2 kmod-usb-ohci kmod-usb-ohci kmod-ath9k-common kmod-ath9k-htc hostapd
 </code></pre></figure>
-<h1 id="%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi"><a class="header-link" href="/posts/RPi-Router/#%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi"></a>建立AP并调节WiFi</h1>
+<h1 id="%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi"><a class="heading-link header-link" href="/posts/RPi-Router/#%E5%BB%BA%E7%AB%8BAP%E5%B9%B6%E8%B0%83%E8%8A%82WiFi"></a>建立AP并调节WiFi</h1>
 <p>安装完成之后我们来开启wifi！首先这个必须要ssh连接上去了，电脑就是</p>
 <figure data-raw="$ ssh root@你的pi的ip地址
 " class="code-block"><pre class="code"><code>$ ssh root@你的pi的ip地址
@@ -472,11 +472,11 @@
 <p><img src="/posts/RPi-Router/RPi-Router_29.png" alt="RPi-Router_29.png"></p>
 <p>接着就能搜索并连接到wifi了～</p>
 <p><img src="/posts/RPi-Router/RPi-Router_30.png" alt="RPi-Router_30.png"></p>
-<h1 id="%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82"><a class="header-link" href="/posts/RPi-Router/#%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82"></a>分离WAN口和LAN口。</h1>
+<h1 id="%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82"><a class="heading-link header-link" href="/posts/RPi-Router/#%E5%88%86%E7%A6%BBWAN%E5%8F%A3%E5%92%8CLAN%E5%8F%A3%E3%80%82"></a>分离WAN口和LAN口。</h1>
 <p>现在Wi-Fi和有线网卡都在LAN这个网段下，要做便携路由器自然要有个WAN口，首先你要通过Wi-Fi连接，再登陆LuCI，先去到网络——接口，点击添加新接口，接口名称输入<code>wan</code>，协议选择<code>pppoe</code>，之后再去修改LAN，把IP和WAN错开，比如我设置为<code>192.168.234.234</code>，再<strong>把网关和DNS都清空</strong>（因为接下来pi就是网关了喵～）之后在物理设置里<strong>取消勾选eth0</strong>，再把桥接也取消，保存！</p>
-<h1 id="%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C"><a class="header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C"></a>连接ADSL开始工作</h1>
+<h1 id="%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C"><a class="heading-link header-link" href="/posts/RPi-Router/#%E8%BF%9E%E6%8E%A5ADSL%E5%BC%80%E5%A7%8B%E5%B7%A5%E4%BD%9C"></a>连接ADSL开始工作</h1>
 <p>把Pi和ADSL Modem连接，开机，即可作为无线路由器使用！</p>
-<h1 id="%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><a class="header-link" href="/posts/RPi-Router/#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"></a>已知问题和注意事项</h1>
+<h1 id="%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><a class="heading-link header-link" href="/posts/RPi-Router/#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"></a>已知问题和注意事项</h1>
 <ul>
 <li><p>调节完成后dropbear（轻量的ssh服务器端）不能开机自启动，需要在系统——管理权里保存应用一下。</p>
 </li>
@@ -714,4 +714,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.13.4 at 2022-12-12T16:45:26.999Z. -->
+<!-- Page built by Hikaru v1.14.1 at 2022-12-14T14:13:05.670Z. -->

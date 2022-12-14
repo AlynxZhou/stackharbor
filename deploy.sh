@@ -1,7 +1,7 @@
 #!/bin/bash
 
-hikaru clean --debug
-hikaru build --debug
+npx hikaru clean --debug
+npx hikaru build --debug
 
 git add --all
 if [[ -n "${*}" ]]; then
