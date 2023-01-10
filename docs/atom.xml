@@ -5,13 +5,81 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2022-11-28T10:24:04.000Z</updated>
+  <updated>2023-01-10T05:43:00.000Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.4.1">Hikaru Generator Feed</generator>
+  <entry>
+    <title>StackHarbor 的 2022 尾记</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/2022-Tail/" />
+    <id>https://sh.alynx.one/posts/2022-Tail/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2023-01-10T05:43:00.000Z</published>
+    <updated>2023-01-10T05:43:00.000Z</updated>
+    <summary type="html">
+      &lt;p&gt;每年写年终总结我都会拖很晚，因为基本上我写博客是看心情，最近事情比较多，其实也打算再拖几天的，但是实在是不想回家之后写，所以不得不今天仓促动手。&lt;/p&gt;
+&lt;p&gt;然后实际上我不喜欢分类列提纲的写法，我本质上比较倾向于文学性的写法或者就是想到什么写什么，不过最近我在翻以前的年终总结的时候发现事情总是记的乱七八糟而且有些我都想不起来出现在哪篇文章里了，这当然可能也和我写完年终总结从来不看有关系，反正这次打算试一下分类的写法。&lt;/p&gt;
+&lt;p&gt;按照惯例还是要感慨一句时间过得真快，仅仅只是靠记忆的话，就会觉得自己什么也没做就过了一年。写年终总结的时候到处翻一下记录，才会意识到自己其实做了不少事情。&lt;/p&gt;
+
+    </summary>
+    <content type="html">
+      &lt;p&gt;每年写年终总结我都会拖很晚，因为基本上我写博客是看心情，最近事情比较多，其实也打算再拖几天的，但是实在是不想回家之后写，所以不得不今天仓促动手。&lt;/p&gt;
+&lt;p&gt;然后实际上我不喜欢分类列提纲的写法，我本质上比较倾向于文学性的写法或者就是想到什么写什么，不过最近我在翻以前的年终总结的时候发现事情总是记的乱七八糟而且有些我都想不起来出现在哪篇文章里了，这当然可能也和我写完年终总结从来不看有关系，反正这次打算试一下分类的写法。&lt;/p&gt;
+&lt;p&gt;按照惯例还是要感慨一句时间过得真快，仅仅只是靠记忆的话，就会觉得自己什么也没做就过了一年。写年终总结的时候到处翻一下记录，才会意识到自己其实做了不少事情。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;%E7%BC%96%E7%A8%8B&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E7%BC%96%E7%A8%8B&quot;&gt;&lt;/a&gt;编程&lt;/h1&gt;
+&lt;p&gt;我经常会处于一种“我好菜啊怎么什么都做不了”和“我还能搞定这个其实还不错”的叠加态，实际上仔细翻一下感觉去年还是做了不少东西。比如说在 HackWeek 把 Show Me The Key 成功换成了 GTK4。然后还抽时间利用 Telegram 机器人做了个照片墙，虽然中间我把它关了很长时间，不过后来我又把它跑起来了。&lt;/p&gt;
+&lt;p&gt;这一年我印象最深的其实是搞我的 Emacs 配置。在有确定消息说 GitHub 打算放弃 Atom 之后，我不得不给我自己重新找一个编辑器，因为我得了一种看到 Visual Studio 就会死的病所以坚决不会用 VSCode，除非他们哪天改名部把 VS 从里面去掉。然后我一直是不喜欢模态编辑的所以也不会用 Vim，同时 Emacs 的 PGTK 分支已经被上游接受，所以我很高兴地重回 Emacs 拥抱我所知的第一个 pure Wayland 的 GUI 编辑器。说是重回，其实相当于重新学习了一遍 Emacs Lisp，毕竟我一开始尝试 Emacs 是被 Spacemacs 那句著名的口号吸引的（但是我又不用 Evil）。那时候其实我不太懂 Emacs Lisp，但是现在回头再看发现确实是更好掌握了。虽然有无数的人说应该从别人配好的 Emacs 配置开始，但我还是决定自己编写一套配置而不是使用最流行的 doom。一个是这些配置好像都以模态编辑为中心，另一个是我经常会自己定制自己的编辑器，使用这些别人配好的配置调起来总觉得很不自在。然后就是我逐渐理解了 &lt;code&gt;use-package&lt;/code&gt; 的用法，解决了各种奇奇怪怪的问题，甚至还自己用 Emacs Lisp 写了很多自己需要的功能。虽然可能有人要问你搞这一通有什么意义之类的，但是我做事的一个原则就是看心情，我高兴就好，所以觉得还挺值的。&lt;/p&gt;
+&lt;p&gt;然后不论是工作还是个人爱好上这一年多少也做了点东西，毕竟我的工作就是我的爱好。比如很有意思的一个是我研究了一下 GNOME 的智能卡登录到底怎么搞，顺便也大致了解了一下 PAM 的配置，虽然可能这个还是没什么用，不过最后我修改了 openSUSE 的 gdm 包添加了一直缺失的指纹和智能卡的 PAM 配置，也算是帮助了其他人。我还抽出时间调查了一下 GTK3 和 GTK4 的亮色 / 暗色主题切换到底是怎么回事。然后还做了一些微小的贡献，比如我印象里一直有人吐槽说 GNOME Shell 的搜索只能从开头匹配而不能做子串匹配，还有人说难道他们只会用 &lt;code&gt;String.prototype.startsWith()&lt;/code&gt; 不会用 &lt;code&gt;String.prototype.includes()&lt;/code&gt;，我一开始只是想既然这么简单，有吐槽的时间为什么不自己改一个？于是我花时间看了一下还真不是这么简单，总之最后我阅读了 glib 里面的算法，并且添加了根据不同的匹配模式分组的功能，现在如果有单词开头匹配的会优先显示，然后再显示子串匹配，就可以通过搜索 &lt;code&gt;fox&lt;/code&gt; 得到 &lt;code&gt;Firefox&lt;/code&gt; 了（&lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib/-/merge_requests/3107&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/glib/-/merge_requests/3107&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;和这个类似的还有另一个，我看到有人说 &lt;code&gt;gdbus-codegen&lt;/code&gt; 生成的代码没有加空指针检查导致程序崩溃，然后和开发者吵了起来，开发者说加空指针检查不是真的解决问题，这里不应该传空指针，那个人就丢出一堆各种代码规范说传了空指针应该继续运行不该崩溃，开发者说你给我们加的话我们愿意接受，他又说自己不擅长 python，总之我看了觉得很不可理喻，于是我自己改掉提交了然后嘲笑了那人一通。有些时候真不是开发者脾气不好，是有人态度太差……（&lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib/-/merge_requests/3175&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/glib/-/merge_requests/3175&lt;/a&gt;）&lt;/p&gt;
+&lt;h1 id=&quot;%E9%9F%B3%E4%B9%90&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E9%9F%B3%E4%B9%90&quot;&gt;&lt;/a&gt;音乐&lt;/h1&gt;
+&lt;p&gt;去年一年我还是录了好几个曲子的，虽然我自己是觉得没怎么练琴而且还经常咕咕咕。不过我发出来的我自己还都觉得不错，虽然不是每个都有很多播放量吧。最近手上有几个想录的，比如 シリウスの心臓 和 暗恋是一个人的事，不过可能又要拖到年后了。&lt;/p&gt;
+&lt;p&gt;然后今年通过 &lt;a href=&quot;https://space.bilibili.com/4947340&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;澪音奏&lt;/a&gt; 的翻唱听了好多伍佰的曲子，对于我这种几乎不会主动找歌曲来听的人，能扩充曲库还是好事。还在 B 站听了纵贯线的亡命之徒，没早点听到这个真是有点可惜。&lt;/p&gt;
+&lt;h1 id=&quot;%E6%95%B0%E7%A0%81&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E6%95%B0%E7%A0%81&quot;&gt;&lt;/a&gt;数码&lt;/h1&gt;
+&lt;p&gt;其实我觉得我也没买什么东西，但是再看一下又不少，很多其实没什么可说的，比如买了个新镜头，那就是新镜头，也没什么好在博客里分析一番的。考虑到那块老移动硬盘用了很久，又买了一块三星的 T7 Shield，固态的移动硬盘还是可靠很多。犹豫了很久还是买了平板，不过不是 iPad，是 Galaxy Tab S8，除了 LCD 屏幕有点漏光，别的我都很满意，不管是看谱子还是看视频都不错，虽然有些 app 不支持横屏，但我还是觉得文件管理更重要。&lt;/p&gt;
+&lt;p&gt;开销比较大的是装了一台 NAS，实际也是挑来挑去才决定的，运行了小一年觉得还不错，极大的缓解了我的存储压力。&lt;/p&gt;
+&lt;h1 id=&quot;%E6%91%84%E5%BD%B1&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E6%91%84%E5%BD%B1&quot;&gt;&lt;/a&gt;摄影&lt;/h1&gt;
+&lt;p&gt;自我评价的话我觉得还是有点进步，别的不说，今年我拍了很多自己觉得不错的照片。摸索了一年，我大概也知道怎么用 darktable 得到想要的效果了。之前看到有人总结了一下自己拍过的照片里觉得不错的，我觉得这个想法很好，于是挑了一些今年满意的照片放在这里：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/2022-Tail/DSC00674.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC06074.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC07236.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/R3103214_04.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/R3103766_04.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC08433.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC08556.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC09543.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC09817_01.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/R3104386.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/R3104387.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/000183680027.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/000183800005.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/000183800014.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/000183800015.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC01159.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC01265.jpg&quot; alt=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/2022-Tail/DSC01274.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;很想找机会把我喜欢的照片打印出来装上相框挂在家里，只是一直没去做这件事。&lt;/p&gt;
+&lt;h1 id=&quot;%E5%8A%A8%E6%BC%AB&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E5%8A%A8%E6%BC%AB&quot;&gt;&lt;/a&gt;动漫&lt;/h1&gt;
+&lt;p&gt;今年应该只看了两部，一部是 DitF，具体的评价我在 &lt;a href=&quot;/posts/Not-to-Be-EVA-but-to-Be-Pacific-Rim/&quot;&gt;这篇文章&lt;/a&gt; 写过了。另一部是 赛博朋克：边缘行者，我其实是不喜欢赛博朋克题材的，但是这一部做得太好了，我在这里向所有读者推荐。&lt;/p&gt;
+&lt;h1 id=&quot;%E5%B0%8F%E8%AF%B4&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E5%B0%8F%E8%AF%B4&quot;&gt;&lt;/a&gt;小说&lt;/h1&gt;
+&lt;p&gt;今年应该是看了基地三部曲，还有格兰特船长的儿女和神秘岛，因为都是很好找到电子版的，所以没有买实体书，神秘岛以前看过简写版，其他的都是头一次看，总体上来说我觉得都不错，毕竟也是流传很久的书了。&lt;/p&gt;
+&lt;h1 id=&quot;%E6%B8%B8%E6%88%8F&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E6%B8%B8%E6%88%8F&quot;&gt;&lt;/a&gt;游戏&lt;/h1&gt;
+&lt;p&gt;除了和开黑群的朋友打 Dota 2 就是和牛爷爷高先生吃鸡，今年更多的玩了游廊地图，感觉我还是想玩休闲一点不太需要团队配合的，吃鸡的话我以为我很久没玩了水平会很差，不过我好像逐渐掌握这个游戏怎么赢了，而且经常可以吃鸡。其实玩游戏本身倒不重要，重要的是有人一起玩。一个人玩的话，要不是因为看中单光一，我大概不会坚持玩 Dota 2。&lt;/p&gt;
+&lt;h1 id=&quot;%E7%94%9F%E6%B4%BB&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/2022-Tail/#%E7%94%9F%E6%B4%BB&quot;&gt;&lt;/a&gt;生活&lt;/h1&gt;
+&lt;p&gt;在经历了翻大饼之后果然是不负众望的夺冠了，虽然已经好了。大饼现在是翻过来了，但是保不准哪天又要翻回去，反正我是受够了这种提心吊胆的日子。仔细想想今年我大概有好几次对着共享单车打开健康码扫码，还是挺可怕的。蓝猫今年去了日本，没办法再找她玩了，虽然我很羡慕，但是我又穷又懒。至于脱单这种事情，算了吧，我已经放弃了，一个人待着也挺好的，我一点都不羡慕别人（假的）。&lt;/p&gt;
+&lt;p&gt;最近几天突然又肋骨痛，只要有动作扯到就很难受，我也不知道是气胸还是肋间神经痛还是肌肉拉伤，本来打算去医院看看的，但最近事情安排满了，回家的时间取决于车票不取决于我，所以只能等回家之后再说。&lt;/p&gt;
+
+    </content>
+    <category term="生活" label="生活" scheme="https://sh.alynx.one/categories/%E7%94%9F%E6%B4%BB/" />
+    <category term="时光飞逝" label="时光飞逝" scheme="https://sh.alynx.one/tags/%E6%97%B6%E5%85%89%E9%A3%9E%E9%80%9D/" />
+  </entry>
   <entry>
     <title>YubiKey 和 GNOME 和智能卡登录</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/" />
@@ -2675,50 +2743,5 @@ IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config se
     <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
     <category term="Wayland" label="Wayland" scheme="https://sh.alynx.one/tags/Wayland/" />
     <category term="NVIDIA" label="NVIDIA" scheme="https://sh.alynx.one/tags/NVIDIA/" />
-  </entry>
-  <entry>
-    <title>新项目和新相机和新住处</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/New-Project-New-Camera-New-Home/" />
-    <id>https://sh.alynx.one/posts/New-Project-New-Camera-New-Home/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2021-04-25T06:50:00.000Z</published>
-    <updated>2021-04-25T06:50:00.000Z</updated>
-    <summary type="html">
-      本来之前是想等新开的项目搞差不多了就来更新博客，结果没想到越写 TODO 越多一直搞到这个月才搞定，所以到现在才更新。 新项目 从家里回来北京之后第一件事情就是 SUSE 的 HackWeek，我之前大致想好了要做什么，我用过 screenkey 这个项目，但它使用了 X11 的…
-    </summary>
-    <content type="html">
-      &lt;p&gt;本来之前是想等新开的项目搞差不多了就来更新博客，结果没想到越写 TODO 越多一直搞到这个月才搞定，所以到现在才更新。&lt;/p&gt;
-&lt;h1 id=&quot;%E6%96%B0%E9%A1%B9%E7%9B%AE&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E9%A1%B9%E7%9B%AE&quot;&gt;&lt;/a&gt;新项目&lt;/h1&gt;
-&lt;p&gt;从家里回来北京之后第一件事情就是 SUSE 的 HackWeek，我之前大致想好了要做什么，我用过 screenkey 这个项目，但它使用了 X11 的 API，所以不支持 Wayland，我简单调查了一下，发现其实是可以绕过显示部分直接读取输入设备的事件的，于是就打算造一个替代品。&lt;/p&gt;
-&lt;p&gt;读取键盘事件的部分其实很容易，简单试了一下就完成了。但是反而是显示部分比较难搞。一开始我打算用刚发布稳定版的 GTK4，结果发现 GTK4 在 NVIDIA 驱动的 Wayland 会话下面反而是有问题的，只能回退到没问题的 GTK3。我原本以为一周的时间做出一个能用的程序还是挺充足的，但是后来发现中间有各种各样的问题和奇怪的 work around。比如涉及到 GObject 对象在什么时候释放，有些文档说的也不是很清楚。以及因为要用单独的子进程执行需要 root 权限的后端读取输入事件和用单独的子线程查询后端输出带来的进程/线程间通信问题。篇幅有限，打算后续再开一篇博客来介绍这里面的经验。在一周的时间里勉强做出了能用的 demo 参加了 HackWeek 的成果展示环节（给有始有终的参与者的小礼物大概还放在我公司的桌子上，我都不知道是什么，因为一直没去取），然后用了几周打游戏的时间整理代码里面的问题（主要是各种资源释放），以及做一下翻译工作和打包工作，终于在上周达到基本稳定了。如果有兴趣，可以访问 &lt;a href=&quot;https://showmethekey.alynx.one/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://showmethekey.alynx.one/&lt;/a&gt; 或者观看 &lt;a href=&quot;https://www.bilibili.com/video/BV1EB4y1A7QN&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;我发在 B 站上的介绍视频&lt;/a&gt;。&lt;/p&gt;
-&lt;h1 id=&quot;%E6%96%B0%E7%9B%B8%E6%9C%BA&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E7%9B%B8%E6%9C%BA&quot;&gt;&lt;/a&gt;新相机&lt;/h1&gt;
-&lt;p&gt;之前一直想提升视频的画质，但是还有一个想法是想玩玩摄影，因为平时周末经常是起得很晚然后在家里玩游戏，感觉也挺无聊的，所以打算买个相机，这样周末就有理由出去走走了。拍出来什么东西无所谓，主要是找点乐趣。然后朋友建议我买黑卡，虽然这个玩意确实很黑科技，但我并不是太感兴趣。很久以前我家里有一个数码相机，不是卡片机，是一个能变焦变很长的型号，但是后来智能手机出现之后就很快的不用它了，因为没有手机轻便的同时也没有足够的专业程度。所以我对相机的看法就是要么就搞高级一点的，肯定不会被手机取代，要么就用手机算了，而且说实话最高端的黑卡价格也都达到微单的价格区间了。考虑到要拿来录视频，很多录视频的 UP 主选择的都是微单而不是单反，再查找了一下发现很多人都用的索尼 A73，那选一个大家都在用的总是错不了的吧，于是初步选定了目标。然后又开始考虑是 A73 还是 A7C，虽然很多人对于 A7C 只是缩小体积然后价格却比 A73 高感到不满，但我阅读了一个对比表格之后，觉得还是 A7C 更适合我这种有录视频需求的人，于是就选择了 A7C。&lt;/p&gt;
-&lt;p&gt;我个人是对 A7C 相比 A73 砍掉的部分没什么需求的，只看参数很容易会变成那种“这个也想要那个也想要”的情况，虽然作为消费者而言，当然是希望厂家提供越多的功能越好。但是在只有这几个选项的情况下还是得考虑需求做一下取舍。比如去掉 MicroUSB 接口导致只能接一些 USB-C 接口的配件，看了看配件价格，短期内我大概是不会考虑这些配件的……去掉前拨轮和摇杆对我来说也不是不能接受，毕竟触摸对焦也挺好用的。虽然少了很多自定义按键，但是方向键现在都是可以自定义的，其实差别也不大。反而轻巧的体积和翻转屏，以及没有录制时间限制于我来说很重要。有人说没有双卡槽不够专业，万一给别人录东西丢了数据没有冗余，但可以预见的未来我不会靠这玩意获得收入，录我自己的话丢了也不算什么无法挽回的后果（反正自己选的）。&lt;/p&gt;
-&lt;p&gt;看点作品？虽然我就是随便拍拍，还是有几张觉得好看的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/New-Project-New-Camera-New-Home/1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;之前去五棵松玩，想试试夜拍效果，结果套头的焦段显然不够拍月亮，不过回家看看感觉这张图还不错。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/New-Project-New-Camera-New-Home/2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;某天吃完饭散步，坐在长椅上拍了一张，莫名觉得很好看。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/New-Project-New-Camera-New-Home/3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;之前经常来我窗口咕咕咕叫吵我清梦的珠颈斑鸠，我管它叫大鸽，经常我拿着相机走到窗口它跑了，这张一开始其实拍到了部分室内，导致窗外的部分有点过曝，不过好在 RAW 可以调整，拉低了一些曝光然后裁掉窗户周围的部分，就变得很生动了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/New-Project-New-Camera-New-Home/4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;最近大鸽不怎么来了，是不是因为楼下在锯树，大鸽的家没了？（虽然我对珠颈斑鸠再造一个窝需要花的时间表示怀疑。）&lt;/p&gt;
-&lt;p&gt;买完了 A7C 莫名开始种草 A7S3，4K 60 帧看起来真诱人啊……1080P 60 帧和 4K 30 帧只能二选一到底是谁想出来的牙膏啊！&lt;/p&gt;
-&lt;p&gt;说起来最近拍照片之后发现存储空间的需求还是很大啊，虽然我两块 2T 的机械应该还足以满足短期内的需求。最近挖矿导致大容量硬盘也涨价了，估计更新存储设备也不太现实，还是有空精简一下吧。NAS 的问题我也考虑过，但是后来想想还是放弃了把星际蜗牛重新搞起来的想法，因为看了很多视频/数码 UP 工作室的介绍之后意识到 NAS 比起存储的用途，更大的用途还是共享，比如多个剪辑师可以同时访问 NAS 上面的一份素材，不用在每台电脑上都复制一份。但我显然没这个需求也没这个网速，只是存储一些数据的话，还是直接插台式机里面比较方便吧！&lt;/p&gt;
-&lt;p&gt;顺便我朋友一直怂恿我买一个大光圈定焦镜头，我也确实心动了，比较了一下之后打算先入 FE 55 F1.8 ZA，然后再考虑 FE 24-105 G F4 代替套头，不过因为一些原因还是暂时搁置了，原因的话就是下一部分。&lt;/p&gt;
-&lt;h1 id=&quot;%E6%96%B0%E4%BD%8F%E5%A4%84&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/New-Project-New-Camera-New-Home/#%E6%96%B0%E4%BD%8F%E5%A4%84&quot;&gt;&lt;/a&gt;新住处&lt;/h1&gt;
-&lt;p&gt;当初因为时间比较紧所以选的这个住处，有几个不太满意的地方：房间太小了，放下柜子床电脑桌就没什么地方了。为了节约空间我是把桌子沿着床边摆的，我自己坐在桌子和衣柜之间，所以如果我要打开衣柜找东西就要把椅子推到桌子下面。然后在我 B 站录的视频里也能看出来，有朋友不止一次吐槽过我录视频环境过于混乱了。房子太旧了，实在是让人连做饭的想法都没，又破又旧，同时上班的话也比较麻烦，不是说交通不便，而是这个房子在一个院子的深处，出门坐公交或者去超市都要走很长一段距离。再加上我的卧室是直接挨着楼道，隔音又比较差，有时候午睡就会被上下楼的脚步声打扰。以及说实话我想要个稍微便宜点的房子，谁不想呢？&lt;/p&gt;
-&lt;p&gt;所以今年快到期的时候我就在考虑搬家的问题。我们现在还是在家办公的状态，所以相对来说位置不太重要，虽然还是想尽可能找个上班方便的地方。但是很少有人和我一个方向上班，所以折腾了很久。本来是打算搬到更西南边的，甚至这一个月跑了好几个不同地方看房子，但是都因为各种原因没有选中，比如同学上班太远，周围没什么生活设施（虽然就在路边但是出门走好远好远才有超市到底是怎么搞的啊，为什么北京这边经常小区靠着路的一侧都是围墙，没有什么商业网点之类的，真的很没生活感），离地铁站太远，小区门禁是人脸识别（谁允许你们随便采集人脸信息的，而且约朋友来我家还要登记算几个意思啊）。而且想一起合租的同学以后可能考了教师资格证之后回老家工作，那样到时候就要再找人合租，我实在是不抱信心，所以还是决定再找别人合租。&lt;/p&gt;
-&lt;p&gt;最后和有猫的孙老师在交大附近找了另一个房子。看了一上午最后直接选中的原因只有一个：实在是太新了，刚装修完，非常干净，而且卫生间和厨房都有采光。让我这个饱受破旧和阴暗厨房之苦的人非常满意。同时面积分配也非常科学，孙老师希望要有阳台的卧室，养猫比较方便，我希望卧室面积别太小，这样我录视频的时候把电脑桌当作背景，可以有一定的景深，让桌子在焦外就不会显得太乱。很多房子都是有阳台的卧室大得不得了而另一个卧室只能放个床，这个房子的次卧则不一样，有充足的地方放桌子。所以我们就敲定了这个，兜兜转转还是没离开学校周边。&lt;/p&gt;
-&lt;p&gt;当然也没有完美的事情，满足了空间和干净和隔音（卧室并不是直接挨着楼道），价格和位置也就不能太强求了，交通的话看起来还好，离路边不会太远，大学周围也不至于太荒凉吧（街头生活感本来就和整齐不沾边，城市到底是让大人物拿来看的地方还是让小人物生活的地方呢？）。虽然考虑到更高的房租+中介费让我感到心疼肉疼（感觉镜头离自己远去了）……但是安慰自己多花几百块买来了刚装修完崭新的房子其实也很赚了对吧！&lt;/p&gt;
-&lt;p&gt;所以希望接下来能轻松地搬家，毕竟我东西还是挺多的，有了空间就可以仔细布置一下了，让视频看起来更精致一点。&lt;/p&gt;
-&lt;p&gt;总之还是要对生活有希望吧。&lt;/p&gt;
-
-    </content>
-    <category term="生活" label="生活" scheme="https://sh.alynx.one/categories/%E7%94%9F%E6%B4%BB/" />
-    <category term="生活" label="生活" scheme="https://sh.alynx.one/tags/%E7%94%9F%E6%B4%BB/" />
   </entry>
 </feed>
