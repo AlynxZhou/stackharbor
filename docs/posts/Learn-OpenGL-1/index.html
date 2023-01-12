@@ -686,13 +686,13 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 <h2 id="%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE"><a class="heading-link header-link" href="/posts/Learn-OpenGL-1/#%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE"></a>顶点数据</h2>
 <p>接下来我们需要准备绘制的数据了，对于一个三角形来说，需要三个顶点来确定它的位置，每个顶点需要三个坐标，同时我们还要给它们创建不同的颜色，让我们的三角形变的多彩一点，所以需要像下面一样组织数据。把这段插入到之前 <code>/* Code Here */</code> 和 <code>glViewport(0, 0, width, height);</code> 之间。对于 3D 程序来说 float 的精度足够了，double需要更多的运算时间。</p>
 <figure data-raw="    const float vertices[] = {
-        // 坐标	       颜色
+        // 坐标           颜色
         -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
         0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
     };
 " data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    const float vertices[] = {
-        // 坐标	       颜色
+        // 坐标           颜色
         -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
         0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
@@ -1016,4 +1016,4 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.1 at 2023-01-10T08:10:10.013Z. -->
+<!-- Page built by Hikaru v1.14.1 at 2023-01-12T01:22:18.434Z. -->

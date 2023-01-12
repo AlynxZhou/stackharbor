@@ -47,7 +47,7 @@ Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还�
   (lsp-clients-clangd-args ("--header-insertion-decorators=0" "--compile-commands-dir=./build/" "--enable-config")))
 ```
 
-对于 `.cache/` 就不是那么好解决了，根据 <https://github.com/clangd/clangd/issues/341#issuecomment-1003560792>，似乎他们并没有关闭或者修改缓存目录的支持。不过我想到一个弯道超车的方案，`git` 本身应该是有从其它位置加载用户定义的 `gitignore` 文件的功能的，我利用这个写一个本地的 gitignore 不就行了吗，搜索之后得到 <https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file>，操作起来也很简单。首先我把这个文件放到 `~/.config/git/gitignore`，里面写上要忽略的 glob，然后运行 `git config --global core.excludesfile ~/.cache/git/gitignore` 就大功告成。
+对于 `.cache/` 就不是那么好解决了，根据 <https://github.com/clangd/clangd/issues/341#issuecomment-1003560792>，似乎他们并没有关闭或者修改缓存目录的支持。不过我想到一个弯道超车的方案，`git` 本身应该是有从其它位置加载用户定义的 `gitignore` 文件的功能的，我利用这个写一个本地的 gitignore 不就行了吗，搜索之后得到 <https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file>，操作起来也很简单。首先我把这个文件放到 `~/.config/git/gitignore`，里面写上要忽略的 glob，然后运行 `git config --global core.excludesfile ~/.config/git/gitignore` 就大功告成。
 
 不过就在我写这篇文章时，clangd 的 issue 上有人回复我，根据 <https://github.com/clangd/clangd/issues/184#issuecomment-998244415>，现在 clangd 应该是会把索引放在 `compile_commands.json` 所在的目录，所以多少也算是解决了问题吧。虽然这样删掉构建目录之后索引缓存也没了，不过我觉得比起重建缓存，还是弄脏项目目录更恶心一点。
 
