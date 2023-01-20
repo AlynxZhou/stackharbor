@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/</loc>
+    <lastmod>2023-01-20T09:55:00.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/posts/2022-Tail/</loc>
     <lastmod>2023-01-10T05:43:00.000Z</lastmod>
   </url>
@@ -393,12 +397,12 @@
     <lastmod>2016-04-04T01:00:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://sh.alynx.one/blogroll/</loc>
-    <lastmod>2020-08-24T01:20:00.000Z</lastmod>
-  </url>
-  <url>
     <loc>https://sh.alynx.one/channel/</loc>
     <lastmod>2020-08-05T03:22:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/blogroll/</loc>
+    <lastmod>2020-08-24T01:20:00.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/about/</loc>
@@ -509,6 +513,9 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/index-3.html</loc>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Emacs/</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/</loc>
@@ -794,6 +801,9 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/index-2.html</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/%E8%AF%84%E8%AE%BA/</loc>

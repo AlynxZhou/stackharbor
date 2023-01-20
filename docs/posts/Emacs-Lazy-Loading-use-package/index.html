@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="事先叠 buff：我不是说 use-package 一定要这么用，我也不是说所用不用 use-package 的人都不好，我只是说我觉得应该这样用 use-package 比较合适。 use-package 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也…">
+    <meta name="keywords" content="计算机, Emacs">
+    <meta name="generator" content="Hikaru v1.14.1">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="Emacs 和 Lazy Loading 和 use-package">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
+    <meta property="og:description" content="事先叠 buff：我不是说 use-package 一定要这么用，我也不是说所用不用 use-package 的人都不好，我只是说我觉得应该这样用 use-package 比较合适。 use-package 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也…">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      header.header, footer.footer {
+        background: #33363b;
+      }
+      
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        formatDateTime(
+          document.querySelectorAll("time.post-full-datetime"),
+          "zh-Hans"
+        );
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const gutter = [];
+        gutter.push("<pre class=\"gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add gutter for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            gutter.push("\n");
+          }
+        }
+        gutter.push("</pre>");
+        elementBefore(e, createElementFromString(gutter.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Emacs 和 Lazy Loading 和 use-package - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Emacs-Lazy-Loading-use-package/" itemprop="url">Emacs 和 Lazy Loading 和 use-package</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-01-20T09:55:00.000Z">1/20/2023, 5:55:00 PM</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Emacs-Lazy-Loading-use-package/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="Emacs 和 Lazy Loading 和 use-package" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>事先叠 buff：我不是说 <code>use-package</code> 一定要这么用，我也不是说所用不用 <code>use-package</code> 的人都不好，我只是说我觉得应该这样用 <code>use-package</code> 比较合适。</p>
+<p><code>use-package</code> 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也有人觉得 <code>use-package</code> 关键字过于复杂，总是没办法确定什么配置写到什么字段里面，也不知道展开之后悄悄发生了什么事情。从我再次决定自己打造一份 Emacs 配置以来看了很多不同人的配置，发现他们使用 <code>use-package</code> 的方式也是五花八门，有些人不爱用 <code>:bind</code> 和 <code>:hook</code>，干脆自己在 <code>:config</code> 里面调用 <code>define-key</code> 和 <code>add-hook</code>，有些人不清楚为什么自己的 <code>:config</code> 被延迟运行了，干脆全都用 <code>:init</code>。还有些人直接换成了其它号称更简单可控的替代品。我不是说上面这些方法都错了，实际上只要能得到想要的结果也无所谓怎么写，但我是一个比较注重逻辑的人，所以研究了一下到底这些关键字是怎么回事，并且试图写篇文章记录我推荐的写法。本来我打算写在注释里的，可是感觉写得太多，所以就放到博客里了。</p>
+<p>问题的核心无非是：为什么我写的 <code>:config</code> 没有运行？到底什么情况下会有延迟加载？我打算在这里详细分析一下。</p>
+<p>首先 Emacs 有一种叫做 autoloads 的东西，插件包的作者可以在某些函数前加上 autoloads 标记，然后创建 autoloads 文件。这个功能的作用很好理解，原本在启动时需要加载所有插件包的文件以便用户使用相应的功能，但不是所有的插件都是启动时就需要，只在启动时加载会让启动速度变得很慢。有了 autoloads 之后启动时只要加载 autoloads 文件，里面定义了如果运行某个函数，就去加载某个文件，这样等到对应的函数第一次运行的时候才被加载，从而提高启动速度。</p>
+<p>而 <code>use-package</code> 做了什么呢？<code>use-package</code> 可以自动创建 autoloads，这样即使一个包本身没有 autoloads，也是可以延迟加载的。最简单的触发这个逻辑的关键字是 <code>:commands</code>，就是给后续的函数创建 autoloads 的意思。但如果你仔细阅读文档，就会发现还有几个创建 autoloads 的关键字，分别是 <code>:bind</code>、<code>:hook</code>、<code>:mode</code> 和 <code>:interpreter</code>。<strong>如果有这几个关键字，<code>use-package</code> 不会立即加载一个包，而是依靠创建的 autoloads 实现延迟加载。</strong>这也很好理解，这几个关键字的意思都是“在某种情况下启用”，所以自动延迟加载也很好理解。</p>
+<p>然后为什么会遇到 <code>:config</code> 不会运行所以有些人统统把要调用的语句写到 <code>:init</code> 里面的问题呢？一般都是发生在类似下面的写法（既有快捷键 / 钩子，又要一启动就启用什么模式）里：</p>
+<figure data-raw="(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              (&quot;M-A&quot; . marginalia-cycle))
+  :config
+  (marginalia-mode 1))
+" data-info="language-lisp" data-lang="lisp" class="code-block"><pre class="code"><code class="language-lisp">(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+  :config
+  (marginalia-mode 1))
+</code></pre></figure>
+<p>我们得明确 <code>:init</code> 和 <code>:config</code> 的区别，<code>:init</code> 是“无论包有没有加载，都一定会先执行”的配置，<code>:config</code> 是“包加载之后才会被执行”的配置。然后按照上面关于延迟加载的分析，这就变成了一个“先有鸡还是先有蛋”的问题：</p>
+<ol>
+<li><code>use-package</code> 给这个包创建了快捷键对应的 autoloads，于是这个包不会立刻加载。</li>
+<li><code>:config</code> 里面 <code>(marginalia-mode 1)</code> 要等到包加载之后才运行。</li>
+<li>这个包本身有给 <code>marginalia-mode</code> 创建 autoloads，只要调用 <code>marginalia-mode</code> 就会加载这个包，但是根据 1 和 2，这句不会被调用，包也不会被加载，除非按了 1 里面的快捷键。</li>
+</ol>
+<p>打破这个循环的办法不止一种，比如把 <code>(marginalia-mode 1)</code> 写进 <code>:init</code>，这样无论如何都会调用它，于是 <code>use-package</code> 创建的 autoloads 被忽略了，包肯定会被加载。但我个人倾向于把这种启用模式的函数放在 <code>:config</code> 里面，而且作者也推荐不要在 <code>:init</code> 里面放过于复杂的函数，这时候打破循环的办法也很简单，只要使用 <code>:demand t</code>，告诉 <code>use-package</code> 立即加载这个包即可。</p>
+<p>以上的内容其实都写在 <a href="https://github.com/jwiegley/use-package#notes-about-lazy-loading" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/jwiegley/use-package#notes-about-lazy-loading</a>，只是可能很多人没有注意或者没看明白，于是我试图在这里更详细的解释一下。可能有人会问搞这么复杂真的有意义吗？我直接自己不要延迟加载直接都 <code>require</code> 不可以？不过我觉得这种激进的延迟加载方案确实让我的 Emacs 启动非常快，所以大概是有意义的吧。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/Emacs/" rel="tag"><i class="bi bi-tag"></i>Emacs</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/2022-Tail/" rel="prev" title="StackHarbor 的 2022 尾记"><span class="page-nav-title">StackHarbor 的 2022 尾记</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "Emacs 和 Lazy Loading 和 use-package",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Emacs-Lazy-Loading-use-package/",
+          "containerID": "comment-results"
+        }).then(() => {
+          formatDateTime(
+            document.querySelectorAll("time.comment-full-datetime"),
+            "zh-Hans"
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">98</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">36</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">76</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.gaojianli.me/" target="_blank" rel="external nofollow noreferrer noopener">高渐离の屋</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.14.1 at 2023-01-20T14:21:11.817Z. -->

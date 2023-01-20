@@ -5,13 +5,61 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2023-01-10T05:43:00.000Z</updated>
+  <updated>2023-01-20T09:55:00.000Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.4.1">Hikaru Generator Feed</generator>
+  <entry>
+    <title>Emacs 和 Lazy Loading 和 use-package</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/" />
+    <id>https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2023-01-20T09:55:00.000Z</published>
+    <updated>2023-01-20T09:55:00.000Z</updated>
+    <summary type="html">
+      事先叠 buff：我不是说 use-package 一定要这么用，我也不是说所用不用 use-package 的人都不好，我只是说我觉得应该这样用 use-package 比较合适。 use-package 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让…
+    </summary>
+    <content type="html">
+      &lt;p&gt;事先叠 buff：我不是说 &lt;code&gt;use-package&lt;/code&gt; 一定要这么用，我也不是说所用不用 &lt;code&gt;use-package&lt;/code&gt; 的人都不好，我只是说我觉得应该这样用 &lt;code&gt;use-package&lt;/code&gt; 比较合适。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;use-package&lt;/code&gt; 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也有人觉得 &lt;code&gt;use-package&lt;/code&gt; 关键字过于复杂，总是没办法确定什么配置写到什么字段里面，也不知道展开之后悄悄发生了什么事情。从我再次决定自己打造一份 Emacs 配置以来看了很多不同人的配置，发现他们使用 &lt;code&gt;use-package&lt;/code&gt; 的方式也是五花八门，有些人不爱用 &lt;code&gt;:bind&lt;/code&gt; 和 &lt;code&gt;:hook&lt;/code&gt;，干脆自己在 &lt;code&gt;:config&lt;/code&gt; 里面调用 &lt;code&gt;define-key&lt;/code&gt; 和 &lt;code&gt;add-hook&lt;/code&gt;，有些人不清楚为什么自己的 &lt;code&gt;:config&lt;/code&gt; 被延迟运行了，干脆全都用 &lt;code&gt;:init&lt;/code&gt;。还有些人直接换成了其它号称更简单可控的替代品。我不是说上面这些方法都错了，实际上只要能得到想要的结果也无所谓怎么写，但我是一个比较注重逻辑的人，所以研究了一下到底这些关键字是怎么回事，并且试图写篇文章记录我推荐的写法。本来我打算写在注释里的，可是感觉写得太多，所以就放到博客里了。&lt;/p&gt;
+&lt;p&gt;问题的核心无非是：为什么我写的 &lt;code&gt;:config&lt;/code&gt; 没有运行？到底什么情况下会有延迟加载？我打算在这里详细分析一下。&lt;/p&gt;
+&lt;p&gt;首先 Emacs 有一种叫做 autoloads 的东西，插件包的作者可以在某些函数前加上 autoloads 标记，然后创建 autoloads 文件。这个功能的作用很好理解，原本在启动时需要加载所有插件包的文件以便用户使用相应的功能，但不是所有的插件都是启动时就需要，只在启动时加载会让启动速度变得很慢。有了 autoloads 之后启动时只要加载 autoloads 文件，里面定义了如果运行某个函数，就去加载某个文件，这样等到对应的函数第一次运行的时候才被加载，从而提高启动速度。&lt;/p&gt;
+&lt;p&gt;而 &lt;code&gt;use-package&lt;/code&gt; 做了什么呢？&lt;code&gt;use-package&lt;/code&gt; 可以自动创建 autoloads，这样即使一个包本身没有 autoloads，也是可以延迟加载的。最简单的触发这个逻辑的关键字是 &lt;code&gt;:commands&lt;/code&gt;，就是给后续的函数创建 autoloads 的意思。但如果你仔细阅读文档，就会发现还有几个创建 autoloads 的关键字，分别是 &lt;code&gt;:bind&lt;/code&gt;、&lt;code&gt;:hook&lt;/code&gt;、&lt;code&gt;:mode&lt;/code&gt; 和 &lt;code&gt;:interpreter&lt;/code&gt;。&lt;strong&gt;如果有这几个关键字，&lt;code&gt;use-package&lt;/code&gt; 不会立即加载一个包，而是依靠创建的 autoloads 实现延迟加载。&lt;/strong&gt;这也很好理解，这几个关键字的意思都是“在某种情况下启用”，所以自动延迟加载也很好理解。&lt;/p&gt;
+&lt;p&gt;然后为什么会遇到 &lt;code&gt;:config&lt;/code&gt; 不会运行所以有些人统统把要调用的语句写到 &lt;code&gt;:init&lt;/code&gt; 里面的问题呢？一般都是发生在类似下面的写法（既有快捷键 / 钩子，又要一启动就启用什么模式）里：&lt;/p&gt;
+&lt;figure data-raw=&quot;(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              (&amp;quot;M-A&amp;quot; . marginalia-cycle))
+  :config
+  (marginalia-mode 1))
+&quot; data-info=&quot;language-lisp&quot; data-lang=&quot;lisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-lisp&quot;&gt;(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              (&quot;M-A&quot; . marginalia-cycle))
+  :config
+  (marginalia-mode 1))
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;我们得明确 &lt;code&gt;:init&lt;/code&gt; 和 &lt;code&gt;:config&lt;/code&gt; 的区别，&lt;code&gt;:init&lt;/code&gt; 是“无论包有没有加载，都一定会先执行”的配置，&lt;code&gt;:config&lt;/code&gt; 是“包加载之后才会被执行”的配置。然后按照上面关于延迟加载的分析，这就变成了一个“先有鸡还是先有蛋”的问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;use-package&lt;/code&gt; 给这个包创建了快捷键对应的 autoloads，于是这个包不会立刻加载。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:config&lt;/code&gt; 里面 &lt;code&gt;(marginalia-mode 1)&lt;/code&gt; 要等到包加载之后才运行。&lt;/li&gt;
+&lt;li&gt;这个包本身有给 &lt;code&gt;marginalia-mode&lt;/code&gt; 创建 autoloads，只要调用 &lt;code&gt;marginalia-mode&lt;/code&gt; 就会加载这个包，但是根据 1 和 2，这句不会被调用，包也不会被加载，除非按了 1 里面的快捷键。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;打破这个循环的办法不止一种，比如把 &lt;code&gt;(marginalia-mode 1)&lt;/code&gt; 写进 &lt;code&gt;:init&lt;/code&gt;，这样无论如何都会调用它，于是 &lt;code&gt;use-package&lt;/code&gt; 创建的 autoloads 被忽略了，包肯定会被加载。但我个人倾向于把这种启用模式的函数放在 &lt;code&gt;:config&lt;/code&gt; 里面，而且作者也推荐不要在 &lt;code&gt;:init&lt;/code&gt; 里面放过于复杂的函数，这时候打破循环的办法也很简单，只要使用 &lt;code&gt;:demand t&lt;/code&gt;，告诉 &lt;code&gt;use-package&lt;/code&gt; 立即加载这个包即可。&lt;/p&gt;
+&lt;p&gt;以上的内容其实都写在 &lt;a href=&quot;https://github.com/jwiegley/use-package#notes-about-lazy-loading&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/jwiegley/use-package#notes-about-lazy-loading&lt;/a&gt;，只是可能很多人没有注意或者没看明白，于是我试图在这里更详细的解释一下。可能有人会问搞这么复杂真的有意义吗？我直接自己不要延迟加载直接都 &lt;code&gt;require&lt;/code&gt; 不可以？不过我觉得这种激进的延迟加载方案确实让我的 Emacs 启动非常快，所以大概是有意义的吧。&lt;/p&gt;
+
+    </content>
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="Emacs" label="Emacs" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Emacs/" />
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="Emacs" label="Emacs" scheme="https://sh.alynx.one/tags/Emacs/" />
+  </entry>
   <entry>
     <title>StackHarbor 的 2022 尾记</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/2022-Tail/" />
@@ -2662,86 +2710,5 @@ import_tables:
     <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
     <category term="字体" label="字体" scheme="https://sh.alynx.one/tags/%E5%AD%97%E4%BD%93/" />
-  </entry>
-  <entry>
-    <title>NVIDIA 驱动和 GNOME 和 Wayland</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/" />
-    <id>https://sh.alynx.one/posts/NVIDIA-GNOME-Wayland/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2021-07-29T23:50:39.000Z</published>
-    <updated>2021-11-09T01:10:21.000Z</updated>
-    <summary type="html">
-      &lt;p&gt;更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。&lt;/p&gt;
-
-    </summary>
-    <content type="html">
-      &lt;p&gt;更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&quot;&gt;&lt;/a&gt;常见问题&lt;/h1&gt;
-&lt;h2 id=&quot;%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F&quot;&gt;&lt;/a&gt;为什么 NVIDIA 的 Wayland 支持这么差？&lt;/h2&gt;
-&lt;p&gt;长话短说，大部分驱动（AMD 的开源和闭源驱动，NVIDIA 的开源驱动 nouveau，Intel 的开源驱动）都同意采用 GBM 作为缓存 API，但是 NVIDIA 像个赌气的小孩一样表示“你们这个不好，我要做个更好的 EGLStreams”所以不支持 GBM，于是所有要兼容 NVIDIA 闭源驱动的混成器都要为它做单独的实现代码。诸如 GNOME 或者 KDE 这种大型项目有足够的人手，同时 NVIDIA 似乎也提供了一定的帮助所以已经有了混成器内部的 EGLStreams 实现，但也有些小型项目并不支持这个玩意。而且 NVIDIA 吹牛皮吹得很大，EGLStreams 哪里“更好”从他们的龟速进展上根本体现不出来。可能是因为挖矿赚得盆满钵满，忘记了显卡的本职工作是显示，NVIDIA 的闭源 Linux 驱动质量一直停留在能用的程度，同时又做各种各样限制导致开源的 nouveau 在较新的显卡上几乎不能用。&lt;/p&gt;
-&lt;p&gt;NVIDIA 闭源驱动之前一直是稀泥巴糊不上墙的垃圾，因为它在 Wayland 下对使用 XWayland 的程序没有硬件加速支持——也就是说如果你使用 Xorg 会话，程序是有硬件加速的，你使用 Wayland 会话，Wayland 程序也是有硬件加速的，但是在 Wayland 会话下面那些旧的 Xorg 程序就没有硬件加速（听起来就像捡了芝麻丢了西瓜一样）——而仍然有相当一部分旧程序在 Wayland 下依赖 XWayland 运行，所以 NVIDIA 闭源驱动的 Wayland 会话基本可以认为是不能日常使用的。&lt;/p&gt;
-&lt;p&gt;从版本 470 之后 NVIDIA 闭源驱动有所改善，首先是他们的员工提交的&lt;a href=&quot;https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/587/diffs&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;补丁&lt;/a&gt;在 XWayland 21.1.1 版本释出了，这个补丁添加了对 XWayland 硬件加速的支持（需要新版本驱动），然后新版本驱动在上周变为稳定版，用户可以安装，所以在拖了至少三年之后最后一块空缺终于被补上了。使用 KDE 和 GNOME 的 NVIDIA 显卡用户理论上就可以获得完整的 Wayland 体验了。&lt;/p&gt;
-&lt;h2 id=&quot;%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F&quot;&gt;&lt;/a&gt;现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？&lt;/h2&gt;
-&lt;p&gt;更新到 470 驱动之后我第一时间体验了一下，&lt;del&gt;结果就是很抱歉，还是不行，不过&lt;/del&gt; 我遇到的都是一些小问题：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;del&gt;Firefox 稳定版没法正常工作，但是 Nightly 版本是可以的，原因是 NVIDIA 和 Mesa 的 EGL 实现存在一点小区别，&lt;a href=&quot;https://hg.mozilla.org/mozilla-central/rev/c2191ee9cb65&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;修复补丁&lt;/a&gt;已经在 Nightly 里面了，我们只要等稳定版版本升上去就可以了。&lt;/del&gt;&lt;/li&gt;
-&lt;li&gt;&lt;del&gt;GTK3 程序都能工作，但是 GTK4 的程序（比如 GNOME Extensions）却全都挂了，原因应该和 Firefox 一致，&lt;a href=&quot;https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3726&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;修复补丁&lt;/a&gt;也已经合并了，只是还没有释出稳定版。&lt;/del&gt;&lt;/li&gt;
-&lt;li&gt;&lt;del&gt;Google Chrome 不能工作，但是比较新的 Chromium 似乎可以，原因推测也是一样的，我懒得查了，同时&lt;/del&gt; 所有一直抱着旧版 Electron 不更新的程序应该都有同样的问题。&lt;/li&gt;
-&lt;li&gt;GNOME Shell 的缩略图会显示错误，看起来是个&lt;a href=&quot;https://gitlab.gnome.org/GNOME/mutter/-/issues/528&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;两年的老 bug&lt;/a&gt;，最近开发者似乎找到了原因，还没修复。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;不过总而言之这些都是能很快修复（废话，大家动作都比 NVIDIA 快，建议老黄把自己的皮衣换成乌龟壳）的问题，不至于被卡很久，至于你的发行版是那种追求“稳定”选择了一个不支持的大版本然后不更新的？哈哈，关我 X 事。&lt;/p&gt;
-&lt;p&gt;更新（2021-09-17）：Arch 这边 Firefox 更新到了 92.0，所以已经修好了。Google Chrome 现在是 93.0.4577.63，我也能正常打开。GTK4 的 MR 已经释出了稳定版，所以没问题。Atom 在我这用的是 electron9，能用，反而是用 electron12 的 Code - OSS 不能用了……最后那些不知道打包了几百年前的闭源拖拉机（要不把拖去掉变成垃圾？）也就是我指的很明确的 Slack 不能用，加上 &lt;code&gt;--disable-gpu&lt;/code&gt; 是能用的，但是是他的问题，为什么要我关掉硬件加速消耗 CPU 资源？最后 GNOME Shell 自己的那个 bug……目前没有开发者搞这个，我简单看了一下发现是个我没涉足过的领域，不过总之我觉得是个看起来不爽但不影响你实际使用的问题，所以现在的状态就是 &lt;strong&gt;“又不是不能用”&lt;/strong&gt; ！（我可没说后半句啊！上一个说了后半句的珠海小厂现在还活着吗？）&lt;/p&gt;
-&lt;p&gt;另外我在 openSUSE Tumbleweed 上测试的时候还遇到一个问题啊，它默认安装的是 nouveau，需要手动在 YaST 里面安装 NVIDIA，装完之后似乎两个驱动冲突把我显示器搞黑屏了，于是我就没法直接重启。而且在那之后我显示器神奇的再也不亮了（PS4、Switch 全都点不亮它），拔掉电源放半分钟再插上才好，很头疼啊。&lt;/p&gt;
-&lt;h2 id=&quot;%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;/a&gt;我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？&lt;/h2&gt;
-&lt;p&gt;这个有几个原因，首先就是 Wayland 需要 Kernel Mode Setting 的支持（这也是个 NVIDIA 拖了好久才补上的特性），所以你的内核参数要有 &lt;code&gt;nvidia-drm.modeset=1&lt;/code&gt;。其次要看 &lt;code&gt;/etc/gdm/custom.conf&lt;/code&gt; 里面 &lt;code&gt;WaylandEnable=false&lt;/code&gt; 是不是被注释掉的（默认应该是）。&lt;/p&gt;
-&lt;p&gt;最可能的是 udev 规则，GDM 带了一个 &lt;code&gt;/usr/lib/udev/rules.d/61-gdm.rules&lt;/code&gt; 文件，里面有这么几行：&lt;/p&gt;
-&lt;figure data-raw=&quot;# disable Wayland on Hi1710 chipsets
-ATTR{vendor}==&amp;quot;0x19e5&amp;quot;, ATTR{device}==&amp;quot;0x1711&amp;quot;, RUN+=&amp;quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&amp;quot;
-# disable Wayland when using the proprietary nvidia driver
-DRIVER==&amp;quot;nvidia&amp;quot;, RUN+=&amp;quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&amp;quot;
-# disable Wayland if modesetting is disabled
-IMPORT{cmdline}=&amp;quot;nomodeset&amp;quot;, RUN+=&amp;quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&amp;quot;
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;# disable Wayland on Hi1710 chipsets
-ATTR{vendor}==&quot;0x19e5&quot;, ATTR{device}==&quot;0x1711&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;
-# disable Wayland when using the proprietary nvidia driver
-DRIVER==&quot;nvidia&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;
-# disable Wayland if modesetting is disabled
-IMPORT{cmdline}=&quot;nomodeset&quot;, RUN+=&quot;/usr/lib/gdm-runtime-config set daemon WaylandEnable false&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;第二行表示如果检测到 NVIDIA 闭源驱动就关闭 Wayland，第三行则是如果没开启 Kernel Mode Setting 也关掉 Wayland。&lt;/p&gt;
-&lt;p&gt;我猜大部分用户都没有第一行的设备，所以我建议直接 &lt;code&gt;ln -s /dev/null /etc/udev/rules.d/61-gdm.rules&lt;/code&gt; 屏蔽掉这个文件。&lt;/p&gt;
-&lt;p&gt;别问我既然 470 驱动都出来了 GNOME 开发者为什么不删掉这个文件，NVIDIA 憋出来 470 驱动总共也就一周多点，还有一堆小问题呢，删了怕不是又有一堆人来骂“怎么又把不稳定的东西搞给我了”。&lt;/p&gt;
-&lt;h2 id=&quot;%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F&quot;&gt;&lt;/a&gt;我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？&lt;/h2&gt;
-&lt;p&gt;检查一下你是不是用了 NVIDIA 之前提供的 Xorg 下面的双显卡管理功能（有群友说叫 prime，我不知道是不是叫 prime）（顺便一提这也是 NVIDIA 憋了好几年才憋出来的本来就该有的东西）？如果你使用那个，首先它是 Xorg 下面的支持，其次它会加载 nvidia 模块，自然就会落到上一个问题里面的 udev 规则上。&lt;/p&gt;
-&lt;p&gt;有群友在群里表示他删了那个规则然后进 Wayland，可以是可以，但我感到很迷惑。这个 prime 功能 NVIDIA 之前只是说了在 Xorg 下面可用，所以我不是很理解又要 prime 又要 Wayland 的可行性，我也不知道 NVIDIA 的按需渲染现在到 Wayland 里面还能不能像之前 Xorg 里面提供的功能一样正常工作。就理论上我给 NVIDIA 掏了钱，这是他的义务给我支持这个功能，但这可是垃圾 NVIDIA 啊！&lt;/p&gt;
-&lt;p&gt;你问我有没有什么建议？如果你需要这玩意，就按照 GNOME 的规则用 Xorg 就好了，没错虽然我是 Wayland 支持者，但我在这里建议你还是先用着 Xorg。如果你只是想用 Wayland 然后并不是很需要用 NVIDIA 显卡，那就关掉它不让它加载驱动，没错，我在自己的笔记本上用的是 Bumblebee。&lt;/p&gt;
-&lt;h2 id=&quot;%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F&quot;&gt;&lt;/a&gt;我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？&lt;/h2&gt;
-&lt;p&gt;大哥，我是 GNOME 用户啊，既然你是 KDE 用户，建议你自己试试然后给我讲讲……&lt;/p&gt;
-&lt;h1 id=&quot;%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9&quot;&gt;&lt;/a&gt;没用的观点&lt;/h1&gt;
-&lt;h2 id=&quot;%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6&quot;&gt;&lt;/a&gt;你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……&lt;/h2&gt;
-&lt;p&gt;强调一下我的目的是解决问题，比如群里有人问为什么我双显卡 GDM 里没 Wayland 可选你来这么一句我觉得很不礼貌，当别人就是需要用 GDM 的时候说“大家都推荐换 SDDM”我觉得不管是 GNOME 用户还是 KDE 用户都会觉得不是个好回答。其次只说自己 GDM 卡死完全没法判断问题所在，别人都没这个问题，或许问题就不在 GDM 而在你的配置呢？同理，这个“大家都推荐换 SDDM”里的“大家”是哪里来的呢？我觉得这样的回复对解决问题没什么帮助。&lt;/p&gt;
-&lt;h2 id=&quot;Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81&quot;&gt;&lt;/a&gt;Xorg 好！Wayland 坏！&lt;/h2&gt;
-&lt;p&gt;请列举出充分而恰当的理由支持你的观点，而不是人云亦云。比方说你可能觉得 Wayland 缺乏你需要的某些功能，这可能是设计理念上的不同，或者发展时间不够所导致的，毕竟 X 协议的历史比 Wayland 长得多，所以请多一点耐心。而至于不讲道理或者二极管或者言论不友善的行为在哪里都是不受欢迎的。&lt;/p&gt;
-&lt;h2 id=&quot;%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81&quot;&gt;&lt;/a&gt;我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！&lt;/h2&gt;
-&lt;p&gt;……信息太少，无法给出合理推断，只能告诉你我游戏玩的可欢乐了！&lt;/p&gt;
-&lt;h2 id=&quot;%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/NVIDIA-GNOME-Wayland/#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81&quot;&gt;&lt;/a&gt;你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！&lt;/h2&gt;
-&lt;p&gt;你又不知道老子都有什么需求，买 N 卡我是暂时没法用 Wayland，但是不买 N 卡我就要达芬奇受罪 Windows 下面打游戏受罪直播编码受罪跑 hashcat 受罪（存疑）。我做的选择是我权衡之后的结果。再说一遍，解决问题和“换 XX”是完全不一样的态度。&lt;/p&gt;
-&lt;p&gt;所以就是钱是掏了，骂还是照样骂，而且我都掏钱了，骂得然更有底气了！&lt;/p&gt;
-
-    </content>
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" />
-    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
-    <category term="Wayland" label="Wayland" scheme="https://sh.alynx.one/tags/Wayland/" />
-    <category term="NVIDIA" label="NVIDIA" scheme="https://sh.alynx.one/tags/NVIDIA/" />
   </entry>
 </feed>
