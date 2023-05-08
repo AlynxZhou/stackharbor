@@ -8,17 +8,17 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="事先叠 buff：我不是说 use-package 一定要这么用，我也不是说所用不用 use-package 的人都不好，我只是说我觉得应该这样用 use-package 比较合适。 use-package 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也…">
-    <meta name="keywords" content="计算机, Emacs">
+    <meta name="description" content="Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口，程序启动了，没有报…">
+    <meta name="keywords" content="GNOME, NVIDIA">
     <meta name="generator" content="Hikaru v1.14.1">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
-    <meta property="og:title" content="Emacs 和 Lazy Loading 和 use-package">
+    <meta property="og:title" content="都不能算是 GNOME 的 Bug">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Not-A-GNOME-Bug-at-All/">
     <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
-    <meta property="og:description" content="事先叠 buff：我不是说 use-package 一定要这么用，我也不是说所用不用 use-package 的人都不好，我只是说我觉得应该这样用 use-package 比较合适。 use-package 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也…">
-    <link rel="canonical" href="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/">
+    <meta property="og:description" content="Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口，程序启动了，没有报…">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Not-A-GNOME-Bug-at-All/">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -210,7 +210,7 @@
 
 
     <script defer type="text/javascript" src="/js/custom.js"></script>
-    <title>Emacs 和 Lazy Loading 和 use-package - 喵's StackHarbor</title>
+    <title>都不能算是 GNOME 的 Bug - 喵's StackHarbor</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
     <a id="top"></a>
@@ -253,7 +253,7 @@
 <div id="page" class="page">
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Not-A-GNOME-Bug-at-All/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
         <meta itemprop="description" content="将我漫天心血一一抛到银河">
@@ -265,62 +265,90 @@
     </div>
     <header class="post-header">
       <div class="post-title" itemprop="name headline">
-        <a class="title-link" href="/posts/Emacs-Lazy-Loading-use-package/" itemprop="url">Emacs 和 Lazy Loading 和 use-package</a>
+        <a class="title-link" href="/posts/Not-A-GNOME-Bug-at-All/" itemprop="url">都不能算是 GNOME 的 Bug</a>
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-01-20T09:55:00.000Z">1/20/2023, 5:55:00 PM</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-05-08T10:52:40.000Z">5/8/2023, 6:52:40 PM</time></span>
         </div>
         <div class="post-categories meta-block">
-          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a></span>
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
         </div>
         <div class="post-comment-count meta-block">
-          <i class="bi bi-chat-dots"></i><span><a href="/posts/Emacs-Lazy-Loading-use-package/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="Emacs 和 Lazy Loading 和 use-package" itemprop="commentCount">阅读评论</span></a></span>
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Not-A-GNOME-Bug-at-All/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="都不能算是 GNOME 的 Bug" itemprop="commentCount">阅读评论</span></a></span>
         </div>
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <p>事先叠 buff：我不是说 <code>use-package</code> 一定要这么用，我也不是说所用不用 <code>use-package</code> 的人都不好，我只是说我觉得应该这样用 <code>use-package</code> 比较合适。</p>
-<p><code>use-package</code> 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也有人觉得 <code>use-package</code> 关键字过于复杂，总是没办法确定什么配置写到什么字段里面，也不知道展开之后悄悄发生了什么事情。从我再次决定自己打造一份 Emacs 配置以来看了很多不同人的配置，发现他们使用 <code>use-package</code> 的方式也是五花八门，有些人不爱用 <code>:bind</code> 和 <code>:hook</code>，干脆自己在 <code>:config</code> 里面调用 <code>define-key</code> 和 <code>add-hook</code>，有些人不清楚为什么自己的 <code>:config</code> 被延迟运行了，干脆全都用 <code>:init</code>。还有些人直接换成了其它号称更简单可控的替代品。我不是说上面这些方法都错了，实际上只要能得到想要的结果也无所谓怎么写，但我是一个比较注重逻辑的人，所以研究了一下到底这些关键字是怎么回事，并且试图写篇文章记录我推荐的写法。本来我打算写在注释里的，可是感觉写得太多，所以就放到博客里了。</p>
-<p>问题的核心无非是：为什么我写的 <code>:config</code> 没有运行？到底什么情况下会有延迟加载？我打算在这里详细分析一下。</p>
-<p>首先 Emacs 有一种叫做 autoloads 的东西，插件包的作者可以在某些函数前加上 autoloads 标记，然后创建 autoloads 文件。这个功能的作用很好理解，原本在启动时需要加载所有插件包的文件以便用户使用相应的功能，但不是所有的插件都是启动时就需要，只在启动时加载会让启动速度变得很慢。有了 autoloads 之后启动时只要加载 autoloads 文件，里面定义了如果运行某个函数，就去加载某个文件，这样等到对应的函数第一次运行的时候才被加载，从而提高启动速度。</p>
-<p>而 <code>use-package</code> 做了什么呢？<code>use-package</code> 可以自动创建 autoloads，这样即使一个包本身没有 autoloads，也是可以延迟加载的。最简单的触发这个逻辑的关键字是 <code>:commands</code>，就是给后续的函数创建 autoloads 的意思。但如果你仔细阅读文档，就会发现还有几个创建 autoloads 的关键字，分别是 <code>:bind</code>、<code>:hook</code>、<code>:mode</code> 和 <code>:interpreter</code>。<strong>如果有这几个关键字，<code>use-package</code> 不会立即加载一个包，而是依靠创建的 autoloads 实现延迟加载。</strong>这也很好理解，这几个关键字的意思都是“在某种情况下启用”，所以自动延迟加载也很好理解。</p>
-<p>然后为什么会遇到 <code>:config</code> 不会运行所以有些人统统把要调用的语句写到 <code>:init</code> 里面的问题呢？一般都是发生在类似下面的写法（既有快捷键 / 钩子，又要一启动就启用什么模式）里：</p>
-<figure data-raw="(use-package marginalia
-  :ensure t
-  :bind (:map minibuffer-local-map
-              (&quot;M-A&quot; . marginalia-cycle))
-  :config
-  (marginalia-mode 1))
-" data-info="language-lisp" data-lang="lisp" class="code-block"><pre class="code"><code class="language-lisp">(use-package marginalia
-  :ensure t
-  :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle))
-  :config
-  (marginalia-mode 1))
+      <p>Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口，程序启动了，没有报错，但是点不到。</p>
+<p>忘了我当时在查什么反正看了一下 <code>journalctl -f</code> 发现一直刷一个 <code>mutter-x11-frames</code> core dump 的 log，我想起来 mutter 44 应该是把 X11 程序的 decoration 挪到单独的 client 里面实现了，所以也许是 mutter 的问题，不过我还是尝试用 gdb 看了一下 backtrace：</p>
+<figure data-raw="Thread 1 &quot;mutter-x11-fram&quot; received signal SIGSEGV, Segmentation fault.
+___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
+80        unsigned int type = PTHREAD_MUTEX_TYPE_ELISION (mutex);                                                                                                                                                                                             
+(gdb) bt
+#0  ___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+#1  0x00007ffff685aaf6 in wl_proxy_create_wrapper (proxy=proxy@entry=0x55555558e510) at ../wayland-1.22.0/src/wayland-client.c:2446
+#2  0x00007ffff2ad337c in getServerProtocolsInfo (protocols=0x7fffffffdc70, nativeDpy=0x55555558e510) at ../egl-wayland/src/wayland-egldisplay.c:464
+#3  wlEglGetPlatformDisplayExport (data=0x5555555ae000, platform=<optimized out>, nativeDpy=0x55555558e510, attribs=<optimized out>) at ../egl-wayland/src/wayland-egldisplay.c:580
+#4  0x00007ffff26acfa0 in  () at /usr/lib/libEGL_nvidia.so.0
+#5  0x00007ffff264c71c in  () at /usr/lib/libEGL_nvidia.so.0
+#6  0x00007ffff2ba4885 in GetPlatformDisplayCommon (platform=12760, native_display=0x55555558e510, attrib_list=0x0, funcName=0x7ffff2baad18 &quot;eglGetDisplay&quot;) at ../libglvnd-v1.6.0/src/EGL/libegl.c:324
+#7  0x00007ffff7a19357 in gdk_display_create_egl_display (native_display=0x55555558e510, platform=12757) at ../gtk/gdk/gdkdisplay.c:1484
+#8  gdk_display_init_egl (self=0x5555555a1820, platform=12757, native_display=0x55555558e510, allow_any=0, error=0x5555555a17f8) at ../gtk/gdk/gdkdisplay.c:1667
+#9  0x00007ffff79edb53 in gdk_x11_display_init_gl_backend (error=0x5555555a17f8, out_depth=0x5555555a18c4, out_visual=0x5555555a18c8, self=0x5555555a1820) at ../gtk/gdk/x11/gdkdisplay-x11.c:2975
+#10 gdk_x11_display_init_gl (display=0x5555555a1820, error=0x5555555a17f8) at ../gtk/gdk/x11/gdkdisplay-x11.c:3013
+#11 0x00007ffff7a198f0 in gdk_display_init_gl (self=0x5555555a1820) at ../gtk/gdk/gdkdisplay.c:1248
+#12 gdk_display_prepare_gl (self=0x5555555a1820, error=0x0) at ../gtk/gdk/gdkdisplay.c:1320
+#13 0x00007ffff79ec355 in gdk_x11_display_open (display_name=<optimized out>) at ../gtk/gdk/x11/gdkdisplay-x11.c:1479
+#14 0x00007ffff7a15c62 in gdk_display_manager_open_display (manager=<optimized out>, name=0x0) at ../gtk/gdk/gdkdisplaymanager.c:431
+#15 0x00007ffff777dda9 in gdk_display_open_default () at ../gtk/gdk/gdk.c:331
+#16 gtk_init_check () at ../gtk/gtk/gtkmain.c:621
+#17 gtk_init_check () at ../gtk/gtk/gtkmain.c:603
+#18 0x00007ffff777dfee in gtk_init () at ../gtk/gtk/gtkmain.c:659
+#19 0x0000555555557070 in main (argc=<optimized out>, argv=<optimized out>) at ../mutter/src/frames/main.c:56
+" class="code-block"><pre class="code"><code>Thread 1 "mutter-x11-fram" received signal SIGSEGV, Segmentation fault.
+___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
+80        unsigned int type = PTHREAD_MUTEX_TYPE_ELISION (mutex);                                                                                                                                                                                             
+(gdb) bt
+#0  ___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+#1  0x00007ffff685aaf6 in wl_proxy_create_wrapper (proxy=proxy@entry=0x55555558e510) at ../wayland-1.22.0/src/wayland-client.c:2446
+#2  0x00007ffff2ad337c in getServerProtocolsInfo (protocols=0x7fffffffdc70, nativeDpy=0x55555558e510) at ../egl-wayland/src/wayland-egldisplay.c:464
+#3  wlEglGetPlatformDisplayExport (data=0x5555555ae000, platform=&lt;optimized out&gt;, nativeDpy=0x55555558e510, attribs=&lt;optimized out&gt;) at ../egl-wayland/src/wayland-egldisplay.c:580
+#4  0x00007ffff26acfa0 in  () at /usr/lib/libEGL_nvidia.so.0
+#5  0x00007ffff264c71c in  () at /usr/lib/libEGL_nvidia.so.0
+#6  0x00007ffff2ba4885 in GetPlatformDisplayCommon (platform=12760, native_display=0x55555558e510, attrib_list=0x0, funcName=0x7ffff2baad18 "eglGetDisplay") at ../libglvnd-v1.6.0/src/EGL/libegl.c:324
+#7  0x00007ffff7a19357 in gdk_display_create_egl_display (native_display=0x55555558e510, platform=12757) at ../gtk/gdk/gdkdisplay.c:1484
+#8  gdk_display_init_egl (self=0x5555555a1820, platform=12757, native_display=0x55555558e510, allow_any=0, error=0x5555555a17f8) at ../gtk/gdk/gdkdisplay.c:1667
+#9  0x00007ffff79edb53 in gdk_x11_display_init_gl_backend (error=0x5555555a17f8, out_depth=0x5555555a18c4, out_visual=0x5555555a18c8, self=0x5555555a1820) at ../gtk/gdk/x11/gdkdisplay-x11.c:2975
+#10 gdk_x11_display_init_gl (display=0x5555555a1820, error=0x5555555a17f8) at ../gtk/gdk/x11/gdkdisplay-x11.c:3013
+#11 0x00007ffff7a198f0 in gdk_display_init_gl (self=0x5555555a1820) at ../gtk/gdk/gdkdisplay.c:1248
+#12 gdk_display_prepare_gl (self=0x5555555a1820, error=0x0) at ../gtk/gdk/gdkdisplay.c:1320
+#13 0x00007ffff79ec355 in gdk_x11_display_open (display_name=&lt;optimized out&gt;) at ../gtk/gdk/x11/gdkdisplay-x11.c:1479
+#14 0x00007ffff7a15c62 in gdk_display_manager_open_display (manager=&lt;optimized out&gt;, name=0x0) at ../gtk/gdk/gdkdisplaymanager.c:431
+#15 0x00007ffff777dda9 in gdk_display_open_default () at ../gtk/gdk/gdk.c:331
+#16 gtk_init_check () at ../gtk/gtk/gtkmain.c:621
+#17 gtk_init_check () at ../gtk/gtk/gtkmain.c:603
+#18 0x00007ffff777dfee in gtk_init () at ../gtk/gtk/gtkmain.c:659
+#19 0x0000555555557070 in main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at ../mutter/src/frames/main.c:56
 </code></pre></figure>
-<p>我们得明确 <code>:init</code> 和 <code>:config</code> 的区别，<code>:init</code> 是“无论包有没有加载，都一定会先执行”的配置，<code>:config</code> 是“包加载之后才会被执行”的配置。然后按照上面关于延迟加载的分析，这就变成了一个“先有鸡还是先有蛋”的问题：</p>
-<ol>
-<li><code>use-package</code> 给这个包创建了快捷键对应的 autoloads，于是这个包不会立刻加载。</li>
-<li><code>:config</code> 里面 <code>(marginalia-mode 1)</code> 要等到包加载之后才运行。</li>
-<li>这个包本身有给 <code>marginalia-mode</code> 创建 autoloads，只要调用 <code>marginalia-mode</code> 就会加载这个包，但是根据 1 和 2，这句不会被调用，包也不会被加载，除非按了 1 里面的快捷键。</li>
-</ol>
-<p>打破这个循环的办法不止一种，比如把 <code>(marginalia-mode 1)</code> 写进 <code>:init</code>，这样无论如何都会调用它，于是 <code>use-package</code> 创建的 autoloads 被忽略了，包肯定会被加载。但我个人倾向于把这种启用模式的函数放在 <code>:config</code> 里面，而且作者也推荐不要在 <code>:init</code> 里面放过于复杂的函数，这时候打破循环的办法也很简单，只要使用 <code>:demand t</code>，告诉 <code>use-package</code> 立即加载这个包即可。</p>
-<p>以上的内容其实都写在 <a href="https://github.com/jwiegley/use-package#notes-about-lazy-loading" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/jwiegley/use-package#notes-about-lazy-loading</a>，只是可能很多人没有注意或者没看明白，于是我试图在这里更详细的解释一下。可能有人会问搞这么复杂真的有意义吗？我直接自己不要延迟加载直接都 <code>require</code> 不可以？不过我觉得这种激进的延迟加载方案确实让我的 Emacs 启动非常快，所以大概是有意义的吧。</p>
+<p>然后我就在想看起来是 GTK4 的问题，我还去群里问了一下有没有 GNOME + NVIDIA 的用户，看看是我的问题还是 bug，不过没人理我，还差点把我恶心到了。然后我想了一下试了 <code>GDK_BACKEND=x11 nautilus</code> 发现也有一样的问题，就跑到 GTK 那边提了个 issue，结果那位有点出名的毒舌老哥跟我说看着不像是 GTK 的问题倒像是 nvidia 的问题，我也怀疑过，但我检查了一下和 nvidia 相关的都没什么变化，然后我去翻 glvnd 和 egl-wayland 的仓库也没翻出什么。换到 KDE 下面还是一样有问题。但我突然想到会不会和我设置的一些环境变量有关系，于是就去注销了一大片，结果就好了。最后我看了一下好像有 platform，发现是我设置过一个 <code>EGL_PLATFORM=wayland</code> 的环境变量，删掉这个就好了。</p>
+<p>我想了一下这应该是我当初弄 Firefox 的硬件解码视频时候设置的，果不其然在 <a href="https://github.com/elFarto/nvidia-vaapi-driver#firefox" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/elFarto/nvidia-vaapi-driver#firefox</a> 里面写了，看起来是因为这个变量导致 XWayland 程序加载 EGL 的时候把 platform 当成了 Wayland，不过我没想清楚为什么滚系统之前没有遇到这个问题。</p>
+<p>总之这是个不能算 bug 的问题了，如果我在群里问的时候有人回我，我就能直接排除法发现是我自己配置的问题，结果提了 issue 以后发现不是上游的问题感觉很尴尬。想了一下还是决定把这个记在这里，因为我推测有很多人看了 <code>nvidia-vaapi-driver</code> 的文档，说不定也设置了这个变量然后遇到了同样的问题，记录下来方便搜到。</p>
 
     </main>
     <footer class="post-footer">
       <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/Emacs/" rel="tag"><i class="bi bi-tag"></i>Emacs</a>
+        <a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="bi bi-tag"></i>GNOME</a><a class="post-tag button" href="/tags/NVIDIA/" rel="tag"><i class="bi bi-tag"></i>NVIDIA</a>
       </div>
     </footer>
   </article>
   <nav class="page-nav">
     <div class="page-nav-next page-nav-item">
-      <a class="page-nav-link" href="/posts/Not-A-GNOME-Bug-at-All/" rel="next" title="都不能算是 GNOME 的 Bug"><i class="bi bi-chevron-left"></i><span class="nav-title">都不能算是 GNOME 的 Bug</span></a>
     </div>
     <div class="page-nav-prev page-nav-item">
-      <a class="page-nav-link" href="/posts/2022-Tail/" rel="prev" title="StackHarbor 的 2022 尾记"><span class="page-nav-title">StackHarbor 的 2022 尾记</span><i class="bi bi-chevron-right"></i></a>
+      <a class="page-nav-link" href="/posts/Emacs-Lazy-Loading-use-package/" rel="prev" title="Emacs 和 Lazy Loading 和 use-package"><span class="page-nav-title">Emacs 和 Lazy Loading 和 use-package</span><i class="bi bi-chevron-right"></i></a>
     </div>
   </nav>
   <div class="reward" id="reward">
@@ -371,10 +399,10 @@
           "sendButtonText": "去评论",
           "noCommentText": "这个页面还没有评论，现在就去评论吧！",
           "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
-          "title": "Emacs 和 Lazy Loading 和 use-package",
+          "title": "都不能算是 GNOME 的 Bug",
           "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
           "queryString": window.location.search,
-          "basePath": "/posts/Emacs-Lazy-Loading-use-package/",
+          "basePath": "/posts/Not-A-GNOME-Bug-at-All/",
           "containerID": "comment-results"
         }).then(() => {
           formatDateTime(
@@ -492,4 +520,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.1 at 2023-05-08T11:13:24.772Z. -->
+<!-- Page built by Hikaru v1.14.1 at 2023-05-08T11:13:24.752Z. -->

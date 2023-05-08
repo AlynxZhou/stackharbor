@@ -5,13 +5,90 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2023-01-20T09:55:00.000Z</updated>
+  <updated>2023-05-08T10:52:40.000Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.4.1">Hikaru Generator Feed</generator>
+  <entry>
+    <title>都不能算是 GNOME 的 Bug</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Not-A-GNOME-Bug-at-All/" />
+    <id>https://sh.alynx.one/posts/Not-A-GNOME-Bug-at-All/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2023-05-08T10:52:40.000Z</published>
+    <updated>2023-05-08T10:52:40.000Z</updated>
+    <summary type="html">
+      Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口…
+    </summary>
+    <content type="html">
+      &lt;p&gt;Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口，程序启动了，没有报错，但是点不到。&lt;/p&gt;
+&lt;p&gt;忘了我当时在查什么反正看了一下 &lt;code&gt;journalctl -f&lt;/code&gt; 发现一直刷一个 &lt;code&gt;mutter-x11-frames&lt;/code&gt; core dump 的 log，我想起来 mutter 44 应该是把 X11 程序的 decoration 挪到单独的 client 里面实现了，所以也许是 mutter 的问题，不过我还是尝试用 gdb 看了一下 backtrace：&lt;/p&gt;
+&lt;figure data-raw=&quot;Thread 1 &amp;quot;mutter-x11-fram&amp;quot; received signal SIGSEGV, Segmentation fault.
+___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
+80        unsigned int type = PTHREAD_MUTEX_TYPE_ELISION (mutex);                                                                                                                                                                                             
+(gdb) bt
+#0  ___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+#1  0x00007ffff685aaf6 in wl_proxy_create_wrapper (proxy=proxy@entry=0x55555558e510) at ../wayland-1.22.0/src/wayland-client.c:2446
+#2  0x00007ffff2ad337c in getServerProtocolsInfo (protocols=0x7fffffffdc70, nativeDpy=0x55555558e510) at ../egl-wayland/src/wayland-egldisplay.c:464
+#3  wlEglGetPlatformDisplayExport (data=0x5555555ae000, platform=&lt;optimized out&gt;, nativeDpy=0x55555558e510, attribs=&lt;optimized out&gt;) at ../egl-wayland/src/wayland-egldisplay.c:580
+#4  0x00007ffff26acfa0 in  () at /usr/lib/libEGL_nvidia.so.0
+#5  0x00007ffff264c71c in  () at /usr/lib/libEGL_nvidia.so.0
+#6  0x00007ffff2ba4885 in GetPlatformDisplayCommon (platform=12760, native_display=0x55555558e510, attrib_list=0x0, funcName=0x7ffff2baad18 &amp;quot;eglGetDisplay&amp;quot;) at ../libglvnd-v1.6.0/src/EGL/libegl.c:324
+#7  0x00007ffff7a19357 in gdk_display_create_egl_display (native_display=0x55555558e510, platform=12757) at ../gtk/gdk/gdkdisplay.c:1484
+#8  gdk_display_init_egl (self=0x5555555a1820, platform=12757, native_display=0x55555558e510, allow_any=0, error=0x5555555a17f8) at ../gtk/gdk/gdkdisplay.c:1667
+#9  0x00007ffff79edb53 in gdk_x11_display_init_gl_backend (error=0x5555555a17f8, out_depth=0x5555555a18c4, out_visual=0x5555555a18c8, self=0x5555555a1820) at ../gtk/gdk/x11/gdkdisplay-x11.c:2975
+#10 gdk_x11_display_init_gl (display=0x5555555a1820, error=0x5555555a17f8) at ../gtk/gdk/x11/gdkdisplay-x11.c:3013
+#11 0x00007ffff7a198f0 in gdk_display_init_gl (self=0x5555555a1820) at ../gtk/gdk/gdkdisplay.c:1248
+#12 gdk_display_prepare_gl (self=0x5555555a1820, error=0x0) at ../gtk/gdk/gdkdisplay.c:1320
+#13 0x00007ffff79ec355 in gdk_x11_display_open (display_name=&lt;optimized out&gt;) at ../gtk/gdk/x11/gdkdisplay-x11.c:1479
+#14 0x00007ffff7a15c62 in gdk_display_manager_open_display (manager=&lt;optimized out&gt;, name=0x0) at ../gtk/gdk/gdkdisplaymanager.c:431
+#15 0x00007ffff777dda9 in gdk_display_open_default () at ../gtk/gdk/gdk.c:331
+#16 gtk_init_check () at ../gtk/gtk/gtkmain.c:621
+#17 gtk_init_check () at ../gtk/gtk/gtkmain.c:603
+#18 0x00007ffff777dfee in gtk_init () at ../gtk/gtk/gtkmain.c:659
+#19 0x0000555555557070 in main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at ../mutter/src/frames/main.c:56
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;Thread 1 &quot;mutter-x11-fram&quot; received signal SIGSEGV, Segmentation fault.
+___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
+80        unsigned int type = PTHREAD_MUTEX_TYPE_ELISION (mutex);                                                                                                                                                                                             
+(gdb) bt
+#0  ___pthread_mutex_lock (mutex=0x123) at pthread_mutex_lock.c:80
+#1  0x00007ffff685aaf6 in wl_proxy_create_wrapper (proxy=proxy@entry=0x55555558e510) at ../wayland-1.22.0/src/wayland-client.c:2446
+#2  0x00007ffff2ad337c in getServerProtocolsInfo (protocols=0x7fffffffdc70, nativeDpy=0x55555558e510) at ../egl-wayland/src/wayland-egldisplay.c:464
+#3  wlEglGetPlatformDisplayExport (data=0x5555555ae000, platform=&amp;lt;optimized out&amp;gt;, nativeDpy=0x55555558e510, attribs=&amp;lt;optimized out&amp;gt;) at ../egl-wayland/src/wayland-egldisplay.c:580
+#4  0x00007ffff26acfa0 in  () at /usr/lib/libEGL_nvidia.so.0
+#5  0x00007ffff264c71c in  () at /usr/lib/libEGL_nvidia.so.0
+#6  0x00007ffff2ba4885 in GetPlatformDisplayCommon (platform=12760, native_display=0x55555558e510, attrib_list=0x0, funcName=0x7ffff2baad18 &quot;eglGetDisplay&quot;) at ../libglvnd-v1.6.0/src/EGL/libegl.c:324
+#7  0x00007ffff7a19357 in gdk_display_create_egl_display (native_display=0x55555558e510, platform=12757) at ../gtk/gdk/gdkdisplay.c:1484
+#8  gdk_display_init_egl (self=0x5555555a1820, platform=12757, native_display=0x55555558e510, allow_any=0, error=0x5555555a17f8) at ../gtk/gdk/gdkdisplay.c:1667
+#9  0x00007ffff79edb53 in gdk_x11_display_init_gl_backend (error=0x5555555a17f8, out_depth=0x5555555a18c4, out_visual=0x5555555a18c8, self=0x5555555a1820) at ../gtk/gdk/x11/gdkdisplay-x11.c:2975
+#10 gdk_x11_display_init_gl (display=0x5555555a1820, error=0x5555555a17f8) at ../gtk/gdk/x11/gdkdisplay-x11.c:3013
+#11 0x00007ffff7a198f0 in gdk_display_init_gl (self=0x5555555a1820) at ../gtk/gdk/gdkdisplay.c:1248
+#12 gdk_display_prepare_gl (self=0x5555555a1820, error=0x0) at ../gtk/gdk/gdkdisplay.c:1320
+#13 0x00007ffff79ec355 in gdk_x11_display_open (display_name=&amp;lt;optimized out&amp;gt;) at ../gtk/gdk/x11/gdkdisplay-x11.c:1479
+#14 0x00007ffff7a15c62 in gdk_display_manager_open_display (manager=&amp;lt;optimized out&amp;gt;, name=0x0) at ../gtk/gdk/gdkdisplaymanager.c:431
+#15 0x00007ffff777dda9 in gdk_display_open_default () at ../gtk/gdk/gdk.c:331
+#16 gtk_init_check () at ../gtk/gtk/gtkmain.c:621
+#17 gtk_init_check () at ../gtk/gtk/gtkmain.c:603
+#18 0x00007ffff777dfee in gtk_init () at ../gtk/gtk/gtkmain.c:659
+#19 0x0000555555557070 in main (argc=&amp;lt;optimized out&amp;gt;, argv=&amp;lt;optimized out&amp;gt;) at ../mutter/src/frames/main.c:56
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;然后我就在想看起来是 GTK4 的问题，我还去群里问了一下有没有 GNOME + NVIDIA 的用户，看看是我的问题还是 bug，不过没人理我，还差点把我恶心到了。然后我想了一下试了 &lt;code&gt;GDK_BACKEND=x11 nautilus&lt;/code&gt; 发现也有一样的问题，就跑到 GTK 那边提了个 issue，结果那位有点出名的毒舌老哥跟我说看着不像是 GTK 的问题倒像是 nvidia 的问题，我也怀疑过，但我检查了一下和 nvidia 相关的都没什么变化，然后我去翻 glvnd 和 egl-wayland 的仓库也没翻出什么。换到 KDE 下面还是一样有问题。但我突然想到会不会和我设置的一些环境变量有关系，于是就去注销了一大片，结果就好了。最后我看了一下好像有 platform，发现是我设置过一个 &lt;code&gt;EGL_PLATFORM=wayland&lt;/code&gt; 的环境变量，删掉这个就好了。&lt;/p&gt;
+&lt;p&gt;我想了一下这应该是我当初弄 Firefox 的硬件解码视频时候设置的，果不其然在 &lt;a href=&quot;https://github.com/elFarto/nvidia-vaapi-driver#firefox&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/elFarto/nvidia-vaapi-driver#firefox&lt;/a&gt; 里面写了，看起来是因为这个变量导致 XWayland 程序加载 EGL 的时候把 platform 当成了 Wayland，不过我没想清楚为什么滚系统之前没有遇到这个问题。&lt;/p&gt;
+&lt;p&gt;总之这是个不能算 bug 的问题了，如果我在群里问的时候有人回我，我就能直接排除法发现是我自己配置的问题，结果提了 issue 以后发现不是上游的问题感觉很尴尬。想了一下还是决定把这个记在这里，因为我推测有很多人看了 &lt;code&gt;nvidia-vaapi-driver&lt;/code&gt; 的文档，说不定也设置了这个变量然后遇到了同样的问题，记录下来方便搜到。&lt;/p&gt;
+
+    </content>
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" />
+    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
+    <category term="NVIDIA" label="NVIDIA" scheme="https://sh.alynx.one/tags/NVIDIA/" />
+  </entry>
   <entry>
     <title>Emacs 和 Lazy Loading 和 use-package</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Emacs-Lazy-Loading-use-package/" />
@@ -2175,540 +2252,5 @@ import_tables:
     <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
     <category term="Android" label="Android" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/" />
     <category term="Android" label="Android" scheme="https://sh.alynx.one/tags/Android/" />
-  </entry>
-  <entry>
-    <title>Fontconfig 和 Noto Color Emoji 和抗锯齿</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Fontconfig-NotoColorEmoji-Antialias/" />
-    <id>https://sh.alynx.one/posts/Fontconfig-NotoColorEmoji-Antialias/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2021-09-08T01:33:33.000Z</published>
-    <updated>2022-11-24T04:39:26.000Z</updated>
-    <summary type="html">
-      &lt;p&gt;我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。&lt;/p&gt;
-
-    </summary>
-    <content type="html">
-      &lt;p&gt;我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1454152&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;一个 firefox 的 bug&lt;/a&gt;，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：&lt;/p&gt;
-&lt;figure data-raw=&quot;&lt;!-- 针对所有字体的默认设置，力求显示效果最好。 --&gt;
-&lt;match target=&amp;quot;font&amp;quot;&gt;
-  &lt;!-- 禁用内嵌点阵。 --&gt;
-  &lt;edit name=&amp;quot;embeddedbitmap&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;false&lt;/bool&gt;
-  &lt;/edit&gt;
-  &lt;!-- 禁用合成粗体。 --&gt;
-  &lt;edit name=&amp;quot;embolden&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;false&lt;/bool&gt;
-  &lt;/edit&gt;
-  &lt;!-- 设置显示器为 RGB 排列。 --&gt;
-  &lt;edit name=&amp;quot;rgba&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;const&gt;rgb&lt;/const&gt;
-  &lt;/edit&gt;
-  &lt;!-- 开启轻度微调。 --&gt;
-  &lt;edit name=&amp;quot;hinting&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;true&lt;/bool&gt;
-  &lt;/edit&gt;
-  &lt;edit name=&amp;quot;autohint&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;true&lt;/bool&gt;
-  &lt;/edit&gt;
-  &lt;edit name=&amp;quot;hintstyle&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;const&gt;hintslight&lt;/const&gt;
-  &lt;/edit&gt;
-  &lt;!-- 开启抗锯齿。 --&gt;
-  &lt;edit name=&amp;quot;antialias&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;true&lt;/bool&gt;
-  &lt;/edit&gt;
-&lt;/match&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;!-- 针对所有字体的默认设置，力求显示效果最好。 --&amp;gt;
-&amp;lt;match target=&quot;font&quot;&amp;gt;
-  &amp;lt;!-- 禁用内嵌点阵。 --&amp;gt;
-  &amp;lt;edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;!-- 禁用合成粗体。 --&amp;gt;
-  &amp;lt;edit name=&quot;embolden&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;!-- 设置显示器为 RGB 排列。 --&amp;gt;
-  &amp;lt;edit name=&quot;rgba&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;const&amp;gt;rgb&amp;lt;/const&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;!-- 开启轻度微调。 --&amp;gt;
-  &amp;lt;edit name=&quot;hinting&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;edit name=&quot;autohint&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;edit name=&quot;hintstyle&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;const&amp;gt;hintslight&amp;lt;/const&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;!-- 开启抗锯齿。 --&amp;gt;
-  &amp;lt;edit name=&quot;antialias&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-&amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;那我觉得针对 Noto Color Emoji 关掉这几个选项就行了，正好这个 bug 下面就有人提供了配置：&lt;/p&gt;
-&lt;figure data-raw=&quot;&lt;!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 --&gt;
-&lt;match target=&amp;quot;font&amp;quot;&gt;
-  &lt;test name=&amp;quot;family&amp;quot; qual=&amp;quot;any&amp;quot;&gt;
-    &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-  &lt;/test&gt;
-  &lt;edit name=&amp;quot;scalable&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;true&lt;/bool&gt;
-  &lt;/edit&gt;
-  &lt;edit name=&amp;quot;embeddedbitmap&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;true&lt;/bool&gt;
-  &lt;/edit&gt;
-  &lt;edit name=&amp;quot;hinting&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;false&lt;/bool&gt;
-  &lt;/edit&gt;
-  &lt;edit name=&amp;quot;antialias&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-    &lt;bool&gt;false&lt;/bool&gt;
-  &lt;/edit&gt;
-&lt;/match&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 --&amp;gt;
-&amp;lt;match target=&quot;font&quot;&amp;gt;
-  &amp;lt;test name=&quot;family&quot; qual=&quot;any&quot;&amp;gt;
-    &amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt;
-  &amp;lt;/test&amp;gt;
-  &amp;lt;edit name=&quot;scalable&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;edit name=&quot;hinting&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-  &amp;lt;edit name=&quot;antialias&quot; mode=&quot;assign&quot;&amp;gt;
-    &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-  &amp;lt;/edit&amp;gt;
-&amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;重新登录，输入法里面的 emoji 都显示出来了，我以为事情到这里就结束了，没想到噩梦才刚刚开始……&lt;/p&gt;
-&lt;p&gt;某一天用 firefox 打开 twitter，发现里面字体都是毛毛糙糙的，我觉得很离奇，明明我只是对 Noto Color Emoji 关了抗锯齿，为什么 twitter 的字体也受到影响了？而且其他页面的字体都是正常的，后来我又打开过一个微软的文档页面，也出现了类似的毛病。我研究了一下发现这两个页面都用了自定义的 webfont。可是 webfont 和 Noto Color Emoji 有什么关系？人类摸不着头发。&lt;/p&gt;
-&lt;p&gt;我查了很多博客文章，不过它们都关注在正常的字体顺序上，还没有人研究 webfont 有什么问题。于是我只能自己研究，不过我不能保证我对 fontconfig 的理解完全正确，这东西看起来非常复杂，不过我还是大致搞清楚了一些事情。引用我看到的 &lt;a href=&quot;https://eev.ee/blog/2015/05/20/i-stared-into-the-fontconfig-and-the-fontconfig-stared-back-at-me/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;一篇英文博客&lt;/a&gt; 的标题：&lt;/p&gt;
-&lt;blockquote class=&quot;center-quote&quot;&gt;
-当我凝视着 fontconfig 时，fontconfig 也在凝视着我。
-&lt;/blockquote&gt;
-
-&lt;p&gt;首先我找到了这个叫 &lt;a href=&quot;http://marguerite.su/posts/fontconfig_%E5%87%A0%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;fontconfig 几个常见的坑&lt;/a&gt; 的文章，里面信息量挺大的，不过说实话没有解决掉我的问题——我明明只对匹配到 Noto Color Emoji 时候关掉了抗锯齿，为什么 webfont 也受到影响了呢？这篇文章主要介绍怎么调整字体列表顺序，不过说实话我没有遇到那么多障碍，简单的写法就工作了。同一个作者还写了 &lt;a href=&quot;http://marguerite.su/posts/color_emoji_in_opensuse/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Color Emoji in openSUSE&lt;/a&gt; 的文章，不过总感觉是交待到一半，翻了文章列表没有后续了。而且这篇文章关心的也是字体 fallback 时候某些字符选到错误的字体的问题，和我这个不太相关。&lt;/p&gt;
-&lt;p&gt;然后还有 &lt;a href=&quot;https://catcat.cc/post/2020-10-31/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Linux fontconfig 的字体匹配&lt;/a&gt; 这篇文章，它介绍了浏览器是怎么和 fontconfig 合作匹配字体的，但是对于 webfont 也是没有提到。包括它的后续文章 &lt;a href=&quot;https://catcat.cc/post/2021-03-07/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;用 fontconfig 治理 Linux 中的字体&lt;/a&gt; 也没提到和 Noto Color Emoji 相关的调整（可能和它用的 Twemoji 有关系）。&lt;/p&gt;
-&lt;p&gt;然后我尝试按照文章里的办法对 firefox 进行一个 fontconfig 的调试，&lt;code&gt;FC_DEBUG=4 firefox --new-instance --private-window https://twitter.com/&lt;/code&gt; 直接吐了 12 万行输出，我实在是不知道从哪里看了。翻了一下午胡乱修改了好几次配置也没找出来哪里有问题。就在我眼花的时候偶然看到一条有用的，fontconfig 吐出来一个匹配结果，family 是 &lt;code&gt;Roboto, Noto Sans CJK SC, Noto Color Emoji, sans-serif…&lt;/code&gt; 等等一长串，style 是 &lt;code&gt;¶&lt;/code&gt;。这个就很有趣了，因为我看 firefox 里面，twitter 用的 webfont 叫 TwitterChirp，它的 style 也是这么个 &lt;code&gt;¶&lt;/code&gt;（我怀疑是个 bug），那这条可能就是相关的了。然后我发现这个匹配结果下面 antialias 是 false，但理论上来说这条又不是最先匹配到 Noto Color Emoji，怎么会应用 Noto Color Emoji 的设置呢？我猜测是因为默认 test 语句是 &lt;code&gt;qual=&quot;any&quot;&lt;/code&gt; 含义似乎是只要匹配到的有一个满足就应用，正常匹配一个字体应该是不会返回这么一长串 family 的（我用 &lt;code&gt;fc-match&lt;/code&gt; 一般只返回一个符合条件的 &lt;code&gt;family&lt;/code&gt;），虽然我不知道为什么 webfont 会返回这么一长串结果，总之我改成 &lt;code&gt;qual=&quot;all&quot;&lt;/code&gt; 也就是必须所有结果都是 Noto Color Emoji 时候才应用就好了对吧！然后重新登录，emoji 能显示，我以为已经胜利了！结果事情证明是半场开香槟……&lt;/p&gt;
-&lt;p&gt;当我以为完全没问题，正打算用 atom 整理一下这份配置的时候，突然发现不对劲了……Atom里面的中文字体失去了抗锯齿……你可以想像我当时心情有多绝望。具体为什么还是同样的我不知道，不过我猜测恰好是和 &lt;a href=&quot;https://catcat.cc/post/2020-10-31/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Linux fontconfig 的字体匹配&lt;/a&gt; 里面提到的 chromium 查询字体的奇葩逻辑有关系……可能只是它某次查询刚好漏掉了 Noto Sans CJK SC 匹配到了 Noto Color Emoji 然后就给了个 antialias false，然后再通过什么奇怪的 UI 字体查询找出了中文字体……反正总之我的心好累，我实在不知道该怎么解决了，我只想用个 emoji，我甚至还给 Noto Color Emoji 提了请求支持抗锯齿的 issue……然后我决定要不换成 Twemoji 算了。&lt;/p&gt;
-&lt;p&gt;Twemoji 倒也不是开箱即用，它不能禁用内嵌点阵字体，不过好歹这个不像抗锯齿那么要命，就算影响了其他字体大概也许能够忽略吧……于是我改成了这个。不过这时候我突然灵光一闪有了新主意。&lt;/p&gt;
-&lt;p&gt;按照前面那几篇博客和 &lt;a href=&quot;http://www.jinbuguo.com/gui/fonts.conf.html&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这一篇手册翻译&lt;/a&gt; 的讲解，fontconfig match 的 target 分为三个阶段，第一是 scan，扫描字体文件，构建一个集合。然后是 pattern，按照规则构建一个字体列表。最后是 font，意味着已经挑出了需要的字体列表。所以调整字体回退顺序一般都放在 pattern 阶段。而网上大部分都把对于 freetype2 微调的选项放在了 font 阶段，不过我想放在 scan 阶段是不是也可以？这样扫描到 Noto Color Emoji 的时候就对它设置选项，也就不存在 family 列表可能有很多项的问题了。测试了一下发现基本一切正常，于是就把所有 freetype2 微调选项移到了 scan 阶段。（我不是 fontconfig 的专家，这一段要是有错误还希望指正。）&lt;/p&gt;
-&lt;p&gt;下面是我现在的配置，首先我配置文件放的位置是 &lt;code&gt;/etc/fonts/local.conf&lt;/code&gt;，因为 &lt;code&gt;/etc/fonts/fonts.conf&lt;/code&gt; 是发行版默认的设置，用来加载其他配置文件所以不能改，然后我想对所有用户都生效，所以没有放在我的家目录，Arch Linux 包含一个 &lt;code&gt;/etc/fonts/conf.d/51-local.conf&lt;/code&gt; 文件，&lt;code&gt;/etc/fonts/fonts.conf&lt;/code&gt; 会加载它，然后它再加载 &lt;code&gt;/etc/fonts/local.conf&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;首先是 XML 开头必须要有的那些东西：&lt;/p&gt;
-&lt;figure data-raw=&quot;&lt;?xml version=&amp;quot;1.0&amp;quot;?&gt;
-&lt;!DOCTYPE fontconfig SYSTEM &amp;quot;fonts.dtd&amp;quot;&gt;
-&lt;fontconfig&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot;?&amp;gt;
-&amp;lt;!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;&amp;gt;
-&amp;lt;fontconfig&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;然后接下来就是针对所有字体的 freetype2 微调选项，按照上面介绍的放在 scan 阶段：&lt;/p&gt;
-&lt;figure data-raw=&quot;  &lt;!-- 针对所有字体的默认设置，力求显示效果最好。 --&gt;
-  &lt;match target=&amp;quot;scan&amp;quot;&gt;
-    &lt;!-- 禁用内嵌点阵。 --&gt;
-    &lt;edit name=&amp;quot;embeddedbitmap&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;false&lt;/bool&gt;
-    &lt;/edit&gt;
-    &lt;!-- 禁用合成粗体。 --&gt;
-    &lt;edit name=&amp;quot;embolden&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;false&lt;/bool&gt;
-    &lt;/edit&gt;
-    &lt;!-- 设置显示器为 RGB 排列。 --&gt;
-    &lt;edit name=&amp;quot;rgba&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;const&gt;rgb&lt;/const&gt;
-    &lt;/edit&gt;
-    &lt;!-- 开启轻度微调。 --&gt;
-    &lt;edit name=&amp;quot;hinting&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;true&lt;/bool&gt;
-    &lt;/edit&gt;
-    &lt;edit name=&amp;quot;autohint&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;true&lt;/bool&gt;
-    &lt;/edit&gt;
-    &lt;edit name=&amp;quot;hintstyle&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;const&gt;hintslight&lt;/const&gt;
-    &lt;/edit&gt;
-    &lt;!-- 开启抗锯齿。 --&gt;
-    &lt;edit name=&amp;quot;antialias&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;true&lt;/bool&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;  &amp;lt;!-- 针对所有字体的默认设置，力求显示效果最好。 --&amp;gt;
-  &amp;lt;match target=&quot;scan&quot;&amp;gt;
-    &amp;lt;!-- 禁用内嵌点阵。 --&amp;gt;
-    &amp;lt;edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;!-- 禁用合成粗体。 --&amp;gt;
-    &amp;lt;edit name=&quot;embolden&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;!-- 设置显示器为 RGB 排列。 --&amp;gt;
-    &amp;lt;edit name=&quot;rgba&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;const&amp;gt;rgb&amp;lt;/const&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;!-- 开启轻度微调。 --&amp;gt;
-    &amp;lt;edit name=&quot;hinting&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;edit name=&quot;autohint&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;edit name=&quot;hintstyle&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;const&amp;gt;hintslight&amp;lt;/const&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;!-- 开启抗锯齿。 --&amp;gt;
-    &amp;lt;edit name=&quot;antialias&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-  &amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;内嵌点阵的效果通常没有矢量绘制的效果好，合成粗体也只是个临时方案，微调什么的见仁见智了就。&lt;/p&gt;
-&lt;p&gt;然后对于 Twemoji 要打开内嵌点阵：&lt;/p&gt;
-&lt;figure data-raw=&quot;  &lt;!-- 当然另一个简单方案是换成 Twemoji，不过它不能关这个。 --&gt;
-  &lt;match target=&amp;quot;scan&amp;quot;&gt;
-    &lt;test name=&amp;quot;family&amp;quot; qual=&amp;quot;any&amp;quot;&gt;
-      &lt;string&gt;Twemoji&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name=&amp;quot;embeddedbitmap&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;true&lt;/bool&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;  &amp;lt;!-- 当然另一个简单方案是换成 Twemoji，不过它不能关这个。 --&amp;gt;
-  &amp;lt;match target=&quot;scan&quot;&amp;gt;
-    &amp;lt;test name=&quot;family&quot; qual=&quot;any&quot;&amp;gt;
-      &amp;lt;string&amp;gt;Twemoji&amp;lt;/string&amp;gt;
-    &amp;lt;/test&amp;gt;
-    &amp;lt;edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-  &amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;对于 Noto Color Emoji 也是打开内嵌点阵关闭微调和抗锯齿：&lt;/p&gt;
-&lt;figure data-raw=&quot;  &lt;!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 --&gt;
-  &lt;match target=&amp;quot;scan&amp;quot;&gt;
-    &lt;test name=&amp;quot;family&amp;quot; qual=&amp;quot;any&amp;quot;&gt;
-      &lt;string&gt;Noto Color Emoji&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name=&amp;quot;scalable&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;true&lt;/bool&gt;
-    &lt;/edit&gt;
-    &lt;edit name=&amp;quot;embeddedbitmap&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;true&lt;/bool&gt;
-    &lt;/edit&gt;
-    &lt;edit name=&amp;quot;hinting&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;false&lt;/bool&gt;
-    &lt;/edit&gt;
-    &lt;edit name=&amp;quot;antialias&amp;quot; mode=&amp;quot;assign&amp;quot;&gt;
-      &lt;bool&gt;false&lt;/bool&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;  &amp;lt;!-- Noto Color Emoji 不支持开启抗锯齿和微调，所以在全局开启之后还得给它关掉。 --&amp;gt;
-  &amp;lt;match target=&quot;scan&quot;&amp;gt;
-    &amp;lt;test name=&quot;family&quot; qual=&quot;any&quot;&amp;gt;
-      &amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt;
-    &amp;lt;/test&amp;gt;
-    &amp;lt;edit name=&quot;scalable&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;edit name=&quot;embeddedbitmap&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;true&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;edit name=&quot;hinting&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-    &amp;lt;edit name=&quot;antialias&quot; mode=&quot;assign&quot;&amp;gt;
-      &amp;lt;bool&amp;gt;false&amp;lt;/bool&amp;gt;
-    &amp;lt;/edit&amp;gt;
-  &amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;我个人还有一个需求，Monaco 作为一个等宽字体竟然支持连字，导致某次我看别人的代码时候 &lt;code&gt;fi&lt;/code&gt; 连在一起让我以为他没有对齐缩进，结果人家说是我的问题，十分尴尬，于是我在这里关掉了它。不过有些程序比如 firefox 是不支持这个的，解决方法是用 FontForge 编辑字体文件删掉连字相关的数据再导出……&lt;/p&gt;
-&lt;figure data-raw=&quot;  &lt;!-- 我真不理解一个等宽字体要连字功能干嘛？故意变得不等宽？ --&gt;
-  &lt;match target=&amp;quot;scan&amp;quot;&gt;
-    &lt;test name=&amp;quot;family&amp;quot; qual=&amp;quot;any&amp;quot;&gt;
-      &lt;string&gt;Monaco&lt;/string&gt;
-    &lt;/test&gt;
-    &lt;edit name=&amp;quot;fontfeatures&amp;quot; mode=&amp;quot;append&amp;quot;&gt;
-      &lt;string&gt;liga off&lt;/string&gt;
-      &lt;string&gt;dlig off&lt;/string&gt;
-    &lt;/edit&gt;
-  &lt;/match&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;  &amp;lt;!-- 我真不理解一个等宽字体要连字功能干嘛？故意变得不等宽？ --&amp;gt;
-  &amp;lt;match target=&quot;scan&quot;&amp;gt;
-    &amp;lt;test name=&quot;family&quot; qual=&quot;any&quot;&amp;gt;
-      &amp;lt;string&amp;gt;Monaco&amp;lt;/string&amp;gt;
-    &amp;lt;/test&amp;gt;
-    &amp;lt;edit name=&quot;fontfeatures&quot; mode=&quot;append&quot;&amp;gt;
-      &amp;lt;string&amp;gt;liga off&amp;lt;/string&amp;gt;
-      &amp;lt;string&amp;gt;dlig off&amp;lt;/string&amp;gt;
-    &amp;lt;/edit&amp;gt;
-  &amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;更新（2022-11-24）：某些网站的前端脑子里不知道装的什么东西，比如简书的前端可能脑子里装的是苹果，他们把 &lt;code&gt;-apple-system,BlinkMacSystemFont,&quot;Apple Color Emoji&quot;&lt;/code&gt; 排在 &lt;code&gt;sans-serif&lt;/code&gt; 前边，于是你看到的数字可能是 Emoji 里面的。再比如 B 站直播首页所有的字体都是微软字体，连 &lt;code&gt;sans-serif&lt;/code&gt; 都没有，你没看错，这个不合格的前端连最后要加 &lt;code&gt;sans-serif&lt;/code&gt; 保证兼容性都不知道，而且还把 Microsoft Sans Serif 拼错了，如果我是他的老板，我真想一拳打在他头上告诉他这个世界不是只有微软字体，然后再把他开除掉。现在我需要加条规则让他匹配到我想要的字体（虽然这样在一些需要微软雅黑的 office 软件里面可能有问题，不过反正我的工作不需要用垃圾 office 哈哈哈哈哈哈哈哈哈哈），所以需要对这些弱智做一些特殊照顾。因为 Fontconfig 是按顺序处理的，所以如果你想把某个字体换成 &lt;code&gt;sans-serif&lt;/code&gt; 之类的处理，就得在那之前进行替换。然后很多网站写的都是 Apple Color Emoji，我们这里自然是没有的，要换成我们默认的。&lt;/p&gt;
-&lt;figure data-raw=&quot;&lt;!--
-    有一点需要注意，sans-serif，serif，monospace, emoji 这些默认字体名并不是真正
-    的字体，而是锚点，是用来进行后续的字体插入的。因此如果你想通过把一些字体映射
-    成 sans-serif 来修正一些网站奇怪的逻辑的话，请务必写在处理 sans-serif 部分之
-    前，这样才会被正常替换。
-  --&gt;
-  &lt;!--
-    我建议这个世界新增一种物种叫苹果人，即打开脑壳之后没有脑子，装的全是苹果的
-    人，显然简书的前端就属于此类（-apple-system,BlinkMacSystemFont,
-    &amp;quot;Apple Color Emoji&amp;quot;,&amp;quot;Segoe UI Emoji&amp;quot;,&amp;quot;Segoe UI Symbol&amp;quot;,&amp;quot;Segoe UI&amp;quot;,
-    &amp;quot;PingFang SC&amp;quot;,&amp;quot;Hiragino Sans GB&amp;quot;,&amp;quot;Microsoft YaHei&amp;quot;,&amp;quot;Helvetica Neue&amp;quot;,
-    Helvetica,Arial,sans-serif）。正常人怎么会把 Apple Color Emoji 放前面？
-  --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;-apple-system&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;sans-serif&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;alias&gt;
-    &lt;family&gt;BlinkMacSystemFont&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;sans-serif&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;!--
-    B 站直播首页的前端认为这个世界上只有微软字体（Arial,Microsoft YaHei,
-    &amp;quot;Microsoft Sans Serif&amp;quot;,Microsoft SanSerf,微软雅黑），
-    所以我不得不开着这几个规则。如果我是他的老板，我就会开除掉这个不合格的前端。
-  --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;Microsoft Sans Serif&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;sans-serif&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;!-- 我机器上可能真的有微软雅黑，而我真的不想看见它们，反正我也不做排版。 --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;Microsoft YaHei&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;Roboto&lt;/family&gt;
-      &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;!-- 替换 Apple Color Emoji 字体。 --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;Apple Color Emoji&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;emoji&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;!-- 替换 Noto Color Emoji 字体。 --&gt;
-  &lt;!-- &lt;alias&gt; --&gt;
-  &lt;!--   &lt;family&gt;Noto Color Emoji&lt;/family&gt; --&gt;
-  &lt;!--   &lt;prefer&gt; --&gt;
-  &lt;!--     &lt;family&gt;emoji&lt;/family&gt; --&gt;
-  &lt;!--   &lt;/prefer&gt; --&gt;
-  &lt;!-- &lt;/alias&gt; --&gt;
-
-  &lt;!-- 这也是一个常见的默认字体，我的 UI 字体就是无衬线。 --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;system-ui&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;sans-serif&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;!--
-    有一点需要注意，sans-serif，serif，monospace, emoji 这些默认字体名并不是真正
-    的字体，而是锚点，是用来进行后续的字体插入的。因此如果你想通过把一些字体映射
-    成 sans-serif 来修正一些网站奇怪的逻辑的话，请务必写在处理 sans-serif 部分之
-    前，这样才会被正常替换。
-  --&amp;gt;
-  &amp;lt;!--
-    我建议这个世界新增一种物种叫苹果人，即打开脑壳之后没有脑子，装的全是苹果的
-    人，显然简书的前端就属于此类（-apple-system,BlinkMacSystemFont,
-    &quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Segoe UI&quot;,
-    &quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,
-    Helvetica,Arial,sans-serif）。正常人怎么会把 Apple Color Emoji 放前面？
-  --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;-apple-system&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;sans-serif&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;BlinkMacSystemFont&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;sans-serif&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;!--
-    B 站直播首页的前端认为这个世界上只有微软字体（Arial,Microsoft YaHei,
-    &quot;Microsoft Sans Serif&quot;,Microsoft SanSerf,微软雅黑），
-    所以我不得不开着这几个规则。如果我是他的老板，我就会开除掉这个不合格的前端。
-  --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;Microsoft Sans Serif&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;sans-serif&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;!-- 我机器上可能真的有微软雅黑，而我真的不想看见它们，反正我也不做排版。 --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;Microsoft YaHei&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;Roboto&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;Noto Sans CJK SC&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;!-- 替换 Apple Color Emoji 字体。 --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;Apple Color Emoji&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;emoji&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;!-- 替换 Noto Color Emoji 字体。 --&amp;gt;
-  &amp;lt;!-- &amp;lt;alias&amp;gt; --&amp;gt;
-  &amp;lt;!--   &amp;lt;family&amp;gt;Noto Color Emoji&amp;lt;/family&amp;gt; --&amp;gt;
-  &amp;lt;!--   &amp;lt;prefer&amp;gt; --&amp;gt;
-  &amp;lt;!--     &amp;lt;family&amp;gt;emoji&amp;lt;/family&amp;gt; --&amp;gt;
-  &amp;lt;!--   &amp;lt;/prefer&amp;gt; --&amp;gt;
-  &amp;lt;!-- &amp;lt;/alias&amp;gt; --&amp;gt;
-
-  &amp;lt;!-- 这也是一个常见的默认字体，我的 UI 字体就是无衬线。 --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;system-ui&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;sans-serif&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;然后就是常见的默认字体代称（sans-serif，serif，monospace，emoji）回退列表了，我是按照 &lt;code&gt;Roboto/Roboto Slab/Monaco -&amp;gt; Noto Sans/Serif (Mono) CJK SC -&amp;gt; Noto Color Emoji&lt;/code&gt; 的顺序回退的：&lt;/p&gt;
-&lt;figure data-raw=&quot;  &lt;!-- 然后该配置我们喜欢的默认字体了。 --&gt;
-  &lt;!-- 默认无衬线字体。 --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;sans&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;Roboto&lt;/family&gt;
-      &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
-      &lt;family&gt;emoji&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;alias&gt;
-    &lt;family&gt;sans-serif&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;Roboto&lt;/family&gt;
-      &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
-      &lt;family&gt;emoji&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;!-- 默认有衬线字体。 --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;serif&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;Roboto Slab&lt;/family&gt;
-      &lt;family&gt;Noto Serif CJK SC&lt;/family&gt;
-      &lt;family&gt;emoji&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;!-- 默认等宽字体。 --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;monospace&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;Monaco&lt;/family&gt;
-      &lt;family&gt;Noto Sans Mono CJK SC&lt;/family&gt;
-      &lt;family&gt;emoji&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-
-  &lt;!-- 默认 emoji 字体。 --&gt;
-  &lt;alias&gt;
-    &lt;family&gt;emoji&lt;/family&gt;
-    &lt;prefer&gt;
-      &lt;family&gt;Noto Color Emoji&lt;/family&gt;
-    &lt;/prefer&gt;
-  &lt;/alias&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;  &amp;lt;!-- 然后该配置我们喜欢的默认字体了。 --&amp;gt;
-  &amp;lt;!-- 默认无衬线字体。 --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;sans&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;Roboto&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;Noto Sans CJK SC&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;emoji&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;sans-serif&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;Roboto&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;Noto Sans CJK SC&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;emoji&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;!-- 默认有衬线字体。 --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;serif&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;Roboto Slab&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;Noto Serif CJK SC&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;emoji&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;!-- 默认等宽字体。 --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;monospace&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;Monaco&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;Noto Sans Mono CJK SC&amp;lt;/family&amp;gt;
-      &amp;lt;family&amp;gt;emoji&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-
-  &amp;lt;!-- 默认 emoji 字体。 --&amp;gt;
-  &amp;lt;alias&amp;gt;
-    &amp;lt;family&amp;gt;emoji&amp;lt;/family&amp;gt;
-    &amp;lt;prefer&amp;gt;
-      &amp;lt;family&amp;gt;Noto Color Emoji&amp;lt;/family&amp;gt;
-    &amp;lt;/prefer&amp;gt;
-  &amp;lt;/alias&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;这里的写法和 &lt;code&gt;&amp;lt;alias&amp;gt;&lt;/code&gt; 是等价的。设置完这个记得把所有软件的自定义字体设置里面无衬线设置为 &lt;code&gt;sans-serif&lt;/code&gt;，有衬线设置为 &lt;code&gt;serif&lt;/code&gt;，等宽设置为 &lt;code&gt;monospace&lt;/code&gt;，这样才会遵守这里的回退顺序。&lt;/p&gt;
-&lt;p&gt;剩下还有一些冗长的用来在不同语言下选择不同的 Noto Sans CJK 变体的设置，因为 Noto Sans CJK 是一个多语种集合字体，然后中日韩对一些汉字有不同的变体，所以需要这一段，不过我就不贴在这里了，完整的文件可以在文章末尾下载。&lt;/p&gt;
-&lt;p&gt;最后收个尾：&lt;/p&gt;
-&lt;figure data-raw=&quot;&lt;/fontconfig&gt;
-&quot; data-info=&quot;language-xml&quot; data-lang=&quot;xml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;/fontconfig&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;完整的文件在这里：&lt;a href=&quot;/posts/Fontconfig-NotoColorEmoji-Antialias/local.conf&quot;&gt;local.conf&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;😼&lt;/p&gt;
-
-    </content>
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="字体" label="字体" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%AD%97%E4%BD%93/" />
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
-    <category term="字体" label="字体" scheme="https://sh.alynx.one/tags/%E5%AD%97%E4%BD%93/" />
   </entry>
 </feed>
