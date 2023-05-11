@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="认识的朋友里很少有人有像我这么复杂的音频系统。长话短说，为了能让 PS4、Switch 和电脑分享一个扬声器，我把它接在了显示器上而不是电脑的内置声卡上，这样所有设备都通过 HDMI/DP 输出音频到扬声器。一开始这也没什么，后来我又添置了一块显示器，我发现在 Linux 下面经常搞不清楚究竟哪一个…">
+    <meta name="keywords" content="PipeWire">
+    <meta name="generator" content="Hikaru v1.14.1">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
+    <meta property="og:description" content="认识的朋友里很少有人有像我这么复杂的音频系统。长话短说，为了能让 PS4、Switch 和电脑分享一个扬声器，我把它接在了显示器上而不是电脑的内置声卡上，这样所有设备都通过 HDMI/DP 输出音频到扬声器。一开始这也没什么，后来我又添置了一块显示器，我发现在 Linux 下面经常搞不清楚究竟哪一个…">
+    <link rel="canonical" href="https://sh.alynx.one/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      header.header, footer.footer {
+        background: #33363b;
+      }
+      
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        formatDateTime(
+          document.querySelectorAll("time.post-full-datetime"),
+          "zh-Hans"
+        );
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const gutter = [];
+        gutter.push("<pre class=\"gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add gutter for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            gutter.push("\n");
+          }
+        }
+        gutter.push("</pre>");
+        elementBefore(e, createElementFromString(gutter.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/" itemprop="url">PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-05-11T13:25:05.000Z">5/11/2023, 9:25:05 PM</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E9%9F%B3%E9%A2%91/" itemprop="url" rel="index"><span itemprop="name">音频</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>认识的朋友里很少有人有像我这么复杂的音频系统。长话短说，为了能让 PS4、Switch 和电脑分享一个扬声器，我把它接在了显示器上而不是电脑的内置声卡上，这样所有设备都通过 HDMI/DP 输出音频到扬声器。一开始这也没什么，后来我又添置了一块显示器，我发现在 Linux 下面经常搞不清楚究竟哪一个音频设备才是连接着扬声器的显示器，可能上周还是 HDMI 1，这周就变成 HDMI 2，而且也不是每次都会变，导致我经常需要试试才知道哪一个是我需要的。直到前天我忍不了了，决定发挥动手能力解决这个问题。</p>
+<p>一开始我以为是 PipeWire 给设备排序的时候是随机排序的，那简单，只要我找到每个设备对应的 ID，然后关掉没有扬声器的那个 HDMI 输出就可以了。但是我发现似乎 PipeWire 只是按照 ALSA 给出的设备编号来排序，并没有自己编号，于是就算关闭一个设备，下次被关闭的也可能是另一个。然后我就在想难道 ALSA 没有固定 HDMI 音频设备的功能吗？毕竟就算是显示器也是有 EDID 这种东西的，于是我查了各种 ALSA 的资料，确实是可以通过 udev 指定不同声卡的顺序，但对于 HDMI 这种属于同一个声卡的不同端口的设备没什么办法。我甚至查到了 NVIDIA 关于显卡音频的文档，里面说每个端口会有一个叫做 ELD 的数据，描述了连接的显示器信息，不过通过 <code>cat /proc/asound/cardX/eld*</code> 查看之后我发现这个标准最多只给到显示器的型号，而我为了不在多显示器缩放上浪费精力，买了两台同样型号的显示器，没有序列号字段就还是没办法分辨不同的显示器！当然如果你的 HDMI 设备的型号不同，那其实就简单了，ALSA 现在会读取 ELD 里面的显示器型号，然后 PipeWire 会把这个作为 <code>node.nick</code> 属性，你可以直接通过这个属性分辨设备，也可以利用这个属性写 WirePlumber 重命名规则修改你的桌面环境会用到的属性，就可以固定名称了。不过我还得继续寻求帮助。</p>
+<p>于是我就在公司的 research 邮件列表发了封邮件讲述了我的设备连接方式和需求，结果 Takashi Iwai（内核音频子系统的维护者之一）回复我说确实没有什么办法，音频驱动只是按照显卡给的顺序分配编号，所以大概率是随机的。特别是我还发现这玩意好像也不一定按照显示器输出的顺序来排号，于是 Plan A 是彻底行不通了。那我还有 Plan B 和 Plan C。</p>
+<p>和其它同事给的建议一样，其中一个想法是购买一个硬件的混合器，把两台显示器的音频输出硬件连接到同一个扬声器的输入，甚至一个同事还给我画了电路图说你只要这样就能自己做一个了。不过这个方案既有优点也优缺点，优点是电脑和游戏机可以同时发声，缺点是我要在电脑上修改音量就得始终记得把两个音量都改成一样的。我对前者需求不大，所以打算最后再尝试这个。</p>
+<p>当然有硬件的解法就有软件的解法，PipeWire 和 JACK 一样可以进行基于图的连接，那我只要搞一个虚拟的输出设备然后把两个 HDMI 设备跟它连一起不久行了？Arch Wiki 上恰好有一段 <a href="https://wiki.archlinux.org/title/WirePlumber#Simultaneous_output_to_multiple_sinks_on_the_same_sound_card" target="_blank" rel="external nofollow noreferrer noopener">同时向一块声卡上的不同端口输出音频</a> 的文档，我本来以为照做即可，但发现还是不对，并没有出现我想象中的一个新音频设备。不过后来我仔细研究，搞懂了里面各种术语，才知道是怎么回事。</p>
+<p>首先我发现这一段文档其实只是描述如何创建一个“能同时显示两个 mapping 的 profile”，那到底什么是 mapping 什么是 profile？Mapping 可以理解成声卡上的某一种输入/输出组合，然后 profile 决定当前可以在哪几种组合中选择。举例来说就是假如你有一个 2 进 4 出的音频设备，那它可以是只有双声道输出，只有四声道输出，或者双声道输入四声道输出等等组合，这就是不同的 profile。为什么要同时输出不同端口需要创建一个 profile 呢，因为默认 ALSA 采用的是 auto-profile，会给每一个 mapping 创建一个 profile，而默认的一个 mapping 就是一个 HDMI 端口，因此假如你打开 pavucontrol 或者 Helvum，会发现如果不切换 profile，两个 HDMI 设备只能显示一个，也就没法给它们同时连接。当然你可能又会问为什么 GNOME Shell 里面又能显示两个 HDMI 设备？因为 <code>libgnome-volume-control</code> 是先枚举设备然后枚举端口，并没有经过 profile 这一步，选择端口的时候再自动切换 profile。</p>
+<p>所以第一步是创建一个新的 profile sets，比如我创建的是 <code>/usr/share/alsa-card-profile/mixer/profile-sets/hdmi-multiple.conf</code>：</p>
+<figure data-raw="[General]
+auto-profiles = no
+
+[Mapping hdmi-stereo]
+description = Digital Stereo (HDMI)
+device-strings = hdmi:%f
+paths-output = hdmi-output-0
+channel-map = left,right
+priority = 9
+direction = output
+
+[Mapping hdmi-stereo-extra1]
+description = Digital Stereo (HDMI 2)
+device-strings = hdmi:%f,1
+paths-output = hdmi-output-1
+channel-map = left,right
+priority = 7
+direction = output
+
+# If you have more HDMI devices, add them here.
+
+# Show multiple HDMI mappings so I could connect to them all.
+[Profile hdmi-multiple]
+description = Multiple Digital Stereo (HDMI)
+output-mappings = hdmi-stereo hdmi-stereo-extra1
+" class="code-block"><pre class="code"><code>[General]
+auto-profiles = no
+
+[Mapping hdmi-stereo]
+description = Digital Stereo (HDMI)
+device-strings = hdmi:%f
+paths-output = hdmi-output-0
+channel-map = left,right
+priority = 9
+direction = output
+
+[Mapping hdmi-stereo-extra1]
+description = Digital Stereo (HDMI 2)
+device-strings = hdmi:%f,1
+paths-output = hdmi-output-1
+channel-map = left,right
+priority = 7
+direction = output
+
+# If you have more HDMI devices, add them here.
+
+# Show multiple HDMI mappings so I could connect to them all.
+[Profile hdmi-multiple]
+description = Multiple Digital Stereo (HDMI)
+output-mappings = hdmi-stereo hdmi-stereo-extra1
+</code></pre></figure>
+<p>上面的 mapping 是直接从 <code>default.conf</code> 里面抄的，下面那个 profile 就是包含上面的两个 mapping，然后需要写 WirePlumber 规则来给显卡上的声卡套用这个 profile。我把它写到 <code>/etc/wireplumber/main.lua.d/51-hdmi-multiple.lua</code>：</p>
+<figure data-raw="rule = {
+  matches = {
+    {
+      { &quot;device.name&quot;, &quot;matches&quot;, &quot;alsa_card.pci-0000_0b_00.1&quot; },
+    },
+  },
+  apply_properties = {
+    [&quot;api.alsa.use-acp&quot;] = true,
+    -- By default, it creates profiles for each mappings, so one profile has one
+    -- mapping, but I want to combine 2 mappings, so I have to manually create
+    -- a profile to show 2 mappings.
+    [&quot;api.acp.auto-profile&quot;] = false,
+    [&quot;api.acp.auto-port&quot;] = false,
+    [&quot;device.profile-set&quot;] = &quot;hdmi-multiple.conf&quot;,
+    [&quot;device.profile&quot;] = &quot;hdmi-multiple&quot;,
+  },
+}
+
+table.insert(alsa_monitor.rules, rule)
+" class="code-block"><pre class="code"><code>rule = {
+  matches = {
+    {
+      { "device.name", "matches", "alsa_card.pci-0000_0b_00.1" },
+    },
+  },
+  apply_properties = {
+    ["api.alsa.use-acp"] = true,
+    -- By default, it creates profiles for each mappings, so one profile has one
+    -- mapping, but I want to combine 2 mappings, so I have to manually create
+    -- a profile to show 2 mappings.
+    ["api.acp.auto-profile"] = false,
+    ["api.acp.auto-port"] = false,
+    ["device.profile-set"] = "hdmi-multiple.conf",
+    ["device.profile"] = "hdmi-multiple",
+  },
+}
+
+table.insert(alsa_monitor.rules, rule)
+</code></pre></figure>
+<p>然后执行 <code>systemctl --user restart wireplumber</code>，Helvum 里面应该就能同时看到两个显示器的 HDMI 音频设备了。</p>
+<p>接下来是 Wiki 里面没有提到的部分，如何同时向两个设备输出音频？最简单的就是像 JACK 一样直接把输出的程序同时连接到两个音频设备上就行了，但这样既不能持久化，也不能在桌面环境里调节音量。阅读了 PipeWire 的文档之后发现这部分可以通过虚拟设备来解决，有一个叫做 combine-stream 的模块就可以创建这样的复合设备，于是参考 <a href="https://docs.pipewire.org/page_module_combine_stream.html" target="_blank" rel="external nofollow noreferrer noopener">combine-stream 的文档</a>，我创建 <code>/etc/pipewire/pipewire.conf.d/10-hdmi-combined-sink.conf</code> 并写入如下内容：</p>
+<figure data-raw="context.modules = [
+    {   name = libpipewire-module-combine-stream
+        args = {
+            combine.mode = sink
+            node.name = &quot;combined-hdmi-stereo&quot;
+            node.description = &quot;Combined HDMI / DisplayPort&quot;
+            combine.latency-compensate = false
+            combine.props = {
+                audio.position = [ FL FR ]
+                # Those could be added here, but libgnome-volume-control only
+                # read those for ports from cards, not for virtual / network
+                # devices.
+                #device.description = &quot;TU104 HD Audio Controller&quot;
+                #device.icon-name = &quot;audio-card-analog-pci&quot;
+            }
+            stream.props = {
+                # Link matching channels without remixing.
+                stream.dont-remix = true
+            }
+            stream.rules = [
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match all HDMI devices on TU104.
+                            media.class = &quot;Audio/Sink&quot;
+                            node.name = &quot;~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*&quot;
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            combine.audio.position = [ FL FR ]
+                            audio.position = [ FL FR ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]
+" class="code-block"><pre class="code"><code>context.modules = [
+    {   name = libpipewire-module-combine-stream
+        args = {
+            combine.mode = sink
+            node.name = "combined-hdmi-stereo"
+            node.description = "Combined HDMI / DisplayPort"
+            combine.latency-compensate = false
+            combine.props = {
+                audio.position = [ FL FR ]
+                # Those could be added here, but libgnome-volume-control only
+                # read those for ports from cards, not for virtual / network
+                # devices.
+                #device.description = "TU104 HD Audio Controller"
+                #device.icon-name = "audio-card-analog-pci"
+            }
+            stream.props = {
+                # Link matching channels without remixing.
+                stream.dont-remix = true
+            }
+            stream.rules = [
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match all HDMI devices on TU104.
+                            media.class = "Audio/Sink"
+                            node.name = "~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*"
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            combine.audio.position = [ FL FR ]
+                            audio.position = [ FL FR ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]
+</code></pre></figure>
+<p>逻辑很简单，就是创建一个复合设备，输入到该设备的音频会输出给给定显卡上的所有 HDMI 输出，然后 <code>systemctl --user restart pipewire wireplumber</code> 就可以在 GNOME 里选择这个输出设备并调节音量了，不管扬声器插在哪个 HDMI/DP 显示器上，都能工作。</p>
+<p>解决了这个问题之后我发现利用 PipeWire 的虚拟设备还可以解决我声卡的通道问题。我现在用的是我上高三时候买的 Scarlett 2i4，有两个输入和四个输出，而 auto-profile 就会自动把它设置成一个四声道环绕声输出和一个立体声输入，但实际上这个四个输出是双声道的耳机和双声道的扬声器，两个输入通常会分别用来输入话筒和乐器，而不是作为双声道输入。于是长久以来我只能在各种软件里手动设置单声道音频解决这个问题。而这次读文档我发现 PipeWire 早就给出了例子，虽然是针对另一款声卡（<a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#behringer-umc404hd-speakersheadphones-virtual-sinks" target="_blank" rel="external nofollow noreferrer noopener">UMC404HD 的扬声器/耳机分离</a> 和 <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#behringer-umc404hd-microphoneguitar-virtual-sources" target="_blank" rel="external nofollow noreferrer noopener">UMC404HD 的话筒/乐器分离</a>），不过总而言之是大同小异，我也参照着弄了一下我的声卡。</p>
+<p>首先你想要手动分离声卡的各个通道，仍然需要换掉默认的 profile，不过这次不需要手动编写了，PipeWire 给所有音频设备都提供了一个叫做 <code>pro-audio</code> 的 profile，这个会直接暴露声卡的所有通道而不做额外的假设（显然桌面环境对于这种裸配置的支持并不好），而后我们就可以为所欲为了，所以先创建 <code>/etc/wireplumber/main.lua.d/51-scarlett-2i4.lua</code> 写入规则让它默认使用 <code>pro-audio</code>：</p>
+<figure data-raw="rule = {
+  matches = {
+    {
+      { &quot;device.name&quot;, &quot;matches&quot;, &quot;alsa_card.usb-Focusrite_Scarlett_2i4_USB-00&quot; },
+    },
+  },
+  apply_properties = {
+    [&quot;audio.rate&quot;] = 48000,
+    [&quot;audio.allowed-rates&quot;] = &quot;44100,48000,88200,96000&quot;,
+    --[&quot;api.alsa.period-size&quot;] = 2048,
+    --[&quot;api.alsa.headroom&quot;] = 1024,
+    [&quot;api.alsa.use-acp&quot;] = true,
+    -- By default, it creates profiles for stereo input and surround 4.0 output,
+    -- but actually the card is 2 inputs, stereo headphones output and stereo
+    -- speakers output, so we disable auto profile here, and use the Pro Audio
+    -- profile to expose all ports, and combine them manually.
+    [&quot;api.acp.auto-profile&quot;] = false,
+    [&quot;api.acp.auto-port&quot;] = false,
+    [&quot;device.profile&quot;] = &quot;pro-audio&quot;,
+  },
+},
+
+table.insert(alsa_monitor.rules, rule)
+" class="code-block"><pre class="code"><code>rule = {
+  matches = {
+    {
+      { "device.name", "matches", "alsa_card.usb-Focusrite_Scarlett_2i4_USB-00" },
+    },
+  },
+  apply_properties = {
+    ["audio.rate"] = 48000,
+    ["audio.allowed-rates"] = "44100,48000,88200,96000",
+    --["api.alsa.period-size"] = 2048,
+    --["api.alsa.headroom"] = 1024,
+    ["api.alsa.use-acp"] = true,
+    -- By default, it creates profiles for stereo input and surround 4.0 output,
+    -- but actually the card is 2 inputs, stereo headphones output and stereo
+    -- speakers output, so we disable auto profile here, and use the Pro Audio
+    -- profile to expose all ports, and combine them manually.
+    ["api.acp.auto-profile"] = false,
+    ["api.acp.auto-port"] = false,
+    ["device.profile"] = "pro-audio",
+  },
+},
+
+table.insert(alsa_monitor.rules, rule)
+</code></pre></figure>
+<p>然后 <code>systemctl --user restart wireplumber</code>，再打开 Helvum 应该能看到声卡不再被瞎推测为什么 LR RR 之类的声道，而是直接显示 AUX0~3，接下来就可以创建虚拟设备分别映射不同的通道了。</p>
+<p>首先对于输出，我分离出耳机/扬声器两个不同的双声道虚拟输出设备，平时我只用耳机。这里和文档里声卡不同的地方是那款声卡后两个通道是耳机，而 Scarlett 2i4 前两个通道就是耳机，这也是为什么就算默认被当成四通道环绕声也能用的原因。总之在 <code>/etc/pipewire/pipewire.conf.d/10-scarlett-2i4-sinks.conf</code> 里面写入如下的配置就可以了：</p>
+<figure data-raw="context.modules = [
+    # See <https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#behringer-umc404hd-speakersheadphones-virtual-sinks>.
+    #
+    # Differs from UMC404HD, Scarlett 2i4 uses the first two outputs for headphones.
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = &quot;Scarlett 2i4 Headphones&quot;
+            capture.props = {
+                node.name = &quot;Scarlett_2i4_Headphones&quot;
+                media.class = &quot;Audio/Sink&quot;
+                audio.position = [ FL FR ]
+            }
+            playback.props = {
+                node.name = &quot;playback.Scarlett_2i4_Headphones&quot;
+                audio.position = [ AUX0 AUX1 ]
+                target.object = &quot;alsa_output.usb-Focusrite_Scarlett_2i4_USB-00.pro-output-0&quot;
+                stream.dont-remix = true
+                node.passive = true
+            }
+        }
+    }
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = &quot;Scarlett 2i4 Speakers&quot;
+            capture.props = {
+                node.name = &quot;Scarlett_2i4_Speakers&quot;
+                media.class = &quot;Audio/Sink&quot;
+                audio.position = [ FL FR ]
+            }
+            playback.props = {
+                node.name = &quot;playback.Scarlett_2i4_Speakers&quot;
+                audio.position = [ AUX2 AUX3 ]
+                target.object = &quot;alsa_output.usb-Focusrite_Scarlett_2i4_USB-00.pro-output-0&quot;
+                stream.dont-remix = true
+                node.passive = true
+            }
+        }
+    }
+]
+" class="code-block"><pre class="code"><code>context.modules = [
+    # See &lt;https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#behringer-umc404hd-speakersheadphones-virtual-sinks&gt;.
+    #
+    # Differs from UMC404HD, Scarlett 2i4 uses the first two outputs for headphones.
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = "Scarlett 2i4 Headphones"
+            capture.props = {
+                node.name = "Scarlett_2i4_Headphones"
+                media.class = "Audio/Sink"
+                audio.position = [ FL FR ]
+            }
+            playback.props = {
+                node.name = "playback.Scarlett_2i4_Headphones"
+                audio.position = [ AUX0 AUX1 ]
+                target.object = "alsa_output.usb-Focusrite_Scarlett_2i4_USB-00.pro-output-0"
+                stream.dont-remix = true
+                node.passive = true
+            }
+        }
+    }
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = "Scarlett 2i4 Speakers"
+            capture.props = {
+                node.name = "Scarlett_2i4_Speakers"
+                media.class = "Audio/Sink"
+                audio.position = [ FL FR ]
+            }
+            playback.props = {
+                node.name = "playback.Scarlett_2i4_Speakers"
+                audio.position = [ AUX2 AUX3 ]
+                target.object = "alsa_output.usb-Focusrite_Scarlett_2i4_USB-00.pro-output-0"
+                stream.dont-remix = true
+                node.passive = true
+            }
+        }
+    }
+]
+</code></pre></figure>
+<p>执行 <code>systemctl --user restart pipewire wireplumber</code> 应该可以看到现在你多了两个分别是 Scarlett 2i4 Headphones 和 Scarlett 2i4 Speakers 的音频输出设备。对于输入通道，我们也同理将它映射成两个单独的单声道虚拟输入设备，写到 <code>/etc/pipewire/pipewire.conf.d/10-scarlett-2i4-sources.conf</code>：</p>
+<figure data-raw="context.modules = [
+    # See <https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#behringer-umc404hd-microphoneguitar-virtual-sources>.
+    #
+    # Differs from UMC404HD, Scarlett 2i4 can be two mono inputs or one stereo
+    # input, depends on how we wire it in software.
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = &quot;Scarlett 2i4 Left Mono Input&quot;
+            capture.props = {
+                node.name = &quot;capture.Scarlett_2i4_Left_Mono_Input&quot;
+                audio.position = [ AUX0 ]
+                stream.dont-remix = true
+                target.object = &quot;alsa_input.usb-Focusrite_Scarlett_2i4_USB-00.pro-input-0&quot;
+                node.passive = true
+            }
+            playback.props = {
+                node.name = &quot;Scarlett_2i4_Left_Mono_Input&quot;
+                media.class = &quot;Audio/Source&quot;
+                audio.position = [ MONO ]
+            }
+        }
+    }
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = &quot;Scarlett 2i4 Right Mono Inputt&quot;
+            capture.props = {
+                node.name = &quot;capture.Scarlett_2i4_Right_Mono_Input&quot;
+                audio.position = [ AUX1 ]
+                stream.dont-remix = true
+                target.object = &quot;alsa_input.usb-Focusrite_Scarlett_2i4_USB-00.pro-input-0&quot;
+                node.passive = true
+            }
+            playback.props = {
+                node.name = &quot;Scarlett_2i4_Right_Mono_Input&quot;
+                media.class = &quot;Audio/Source&quot;
+                audio.position = [ MONO ]
+            }
+        }
+    }
+]
+" class="code-block"><pre class="code"><code>context.modules = [
+    # See &lt;https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Virtual-Devices#behringer-umc404hd-microphoneguitar-virtual-sources&gt;.
+    #
+    # Differs from UMC404HD, Scarlett 2i4 can be two mono inputs or one stereo
+    # input, depends on how we wire it in software.
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = "Scarlett 2i4 Left Mono Input"
+            capture.props = {
+                node.name = "capture.Scarlett_2i4_Left_Mono_Input"
+                audio.position = [ AUX0 ]
+                stream.dont-remix = true
+                target.object = "alsa_input.usb-Focusrite_Scarlett_2i4_USB-00.pro-input-0"
+                node.passive = true
+            }
+            playback.props = {
+                node.name = "Scarlett_2i4_Left_Mono_Input"
+                media.class = "Audio/Source"
+                audio.position = [ MONO ]
+            }
+        }
+    }
+    {   name = libpipewire-module-loopback
+        args = {
+            node.description = "Scarlett 2i4 Right Mono Inputt"
+            capture.props = {
+                node.name = "capture.Scarlett_2i4_Right_Mono_Input"
+                audio.position = [ AUX1 ]
+                stream.dont-remix = true
+                target.object = "alsa_input.usb-Focusrite_Scarlett_2i4_USB-00.pro-input-0"
+                node.passive = true
+            }
+            playback.props = {
+                node.name = "Scarlett_2i4_Right_Mono_Input"
+                media.class = "Audio/Source"
+                audio.position = [ MONO ]
+            }
+        }
+    }
+]
+</code></pre></figure>
+<p>按理说到这里就结束了，但以防万一真的有人想用这款声卡做四声道环绕声输出，或者立体声输入，同理可以使用之前的 combine-stream 再把这些虚拟设备复合起来，可以在 <code>/etc/pipewire/pipewire.conf.d/10-scarlett-2i4-combined.conf</code> 写入如下配置：</p>
+<figure data-raw="context.modules = [
+    # Is there anyone who really uses Scarlett 2i4 for surround 4.0 output?
+    # Anyway, we could achieve this with PipeWire's combine stream.
+    {   name = libpipewire-module-combine-stream
+        args = {
+            combine.mode = sink
+            node.name = &quot;Scarlett_2i4_Surround_4_0_Output&quot;
+            node.description = &quot;Scarlett 2i4 Surround 4.0 Output&quot;
+            combine.latency-compensate = false
+            combine.props = {
+                audio.position = [ FL FR RL RR ]
+                # Those could be added here, but libgnome-volume-control only
+                # read those for ports from cards, not for virtual / network
+                # devices.
+                #device.description = &quot;Scarlett 2i4&quot;
+                #device.icon-name = &quot;audio-card-analog-usb&quot;
+            }
+            stream.props = {
+                # Link matching channels without remixing.
+                stream.dont-remix = true
+            }
+            # To get better effect, treat headphones output as rear output.
+            stream.rules = [
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Speakers.
+                            media.class = &quot;Audio/Sink&quot;
+                            node.name = &quot;Scarlett_2i4_Speakers&quot;
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ FL FR ]
+                            combine.audio.position = [ FL FR ]
+                        }
+                    }
+                }
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Headphones.
+                            media.class = &quot;Audio/Sink&quot;
+                            node.name = &quot;Scarlett_2i4_Headphones&quot;
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ FL FR ]
+                            combine.audio.position = [ RL RR ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+    # To make it easier, we also use PipeWire's combine stream to make a stereo
+    # input, so we don't need to wire manually.
+    {   name = libpipewire-module-combine-stream
+        args = {
+            combine.mode = source
+            node.name = &quot;Scarlett_2i4_Stereo_Input&quot;
+            node.description = &quot;Scarlett 2i4 Stereo Input&quot;
+            combine.latency-compensate = false
+            combine.props = {
+                audio.position = [ FL FR ]
+                # Those could be added here, but libgnome-volume-control only
+                # read those for ports from cards, not for virtual / network
+                # devices.
+                #device.description = &quot;Scarlett 2i4&quot;
+                #device.icon-name = &quot;audio-card-analog-usb&quot;
+            }
+            stream.props = {
+                # Link matching channels without remixing.
+                stream.dont-remix = true
+            }
+            stream.rules = [
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Left Mono Input.
+                            media.class = &quot;Audio/Source&quot;
+                            node.name = &quot;Scarlett_2i4_Left_Mono_Input&quot;
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ MONO ]
+                            combine.audio.position = [ FL ]
+                        }
+                    }
+                }
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Right Mono Input.
+                            media.class = &quot;Audio/Source&quot;
+                            node.name = &quot;Scarlett_2i4_Right_Mono_Input&quot;
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ MONO ]
+                            combine.audio.position = [ FR ]
+                        }
+                    }
+                }
+            ] 
+        }
+    }
+]
+" class="code-block"><pre class="code"><code>context.modules = [
+    # Is there anyone who really uses Scarlett 2i4 for surround 4.0 output?
+    # Anyway, we could achieve this with PipeWire's combine stream.
+    {   name = libpipewire-module-combine-stream
+        args = {
+            combine.mode = sink
+            node.name = "Scarlett_2i4_Surround_4_0_Output"
+            node.description = "Scarlett 2i4 Surround 4.0 Output"
+            combine.latency-compensate = false
+            combine.props = {
+                audio.position = [ FL FR RL RR ]
+                # Those could be added here, but libgnome-volume-control only
+                # read those for ports from cards, not for virtual / network
+                # devices.
+                #device.description = "Scarlett 2i4"
+                #device.icon-name = "audio-card-analog-usb"
+            }
+            stream.props = {
+                # Link matching channels without remixing.
+                stream.dont-remix = true
+            }
+            # To get better effect, treat headphones output as rear output.
+            stream.rules = [
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Speakers.
+                            media.class = "Audio/Sink"
+                            node.name = "Scarlett_2i4_Speakers"
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ FL FR ]
+                            combine.audio.position = [ FL FR ]
+                        }
+                    }
+                }
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Headphones.
+                            media.class = "Audio/Sink"
+                            node.name = "Scarlett_2i4_Headphones"
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ FL FR ]
+                            combine.audio.position = [ RL RR ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+    # To make it easier, we also use PipeWire's combine stream to make a stereo
+    # input, so we don't need to wire manually.
+    {   name = libpipewire-module-combine-stream
+        args = {
+            combine.mode = source
+            node.name = "Scarlett_2i4_Stereo_Input"
+            node.description = "Scarlett 2i4 Stereo Input"
+            combine.latency-compensate = false
+            combine.props = {
+                audio.position = [ FL FR ]
+                # Those could be added here, but libgnome-volume-control only
+                # read those for ports from cards, not for virtual / network
+                # devices.
+                #device.description = "Scarlett 2i4"
+                #device.icon-name = "audio-card-analog-usb"
+            }
+            stream.props = {
+                # Link matching channels without remixing.
+                stream.dont-remix = true
+            }
+            stream.rules = [
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Left Mono Input.
+                            media.class = "Audio/Source"
+                            node.name = "Scarlett_2i4_Left_Mono_Input"
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ MONO ]
+                            combine.audio.position = [ FL ]
+                        }
+                    }
+                }
+                {
+                    matches = [
+                        # Any of the items in matches needs to match, if one
+                        # does, actions are emited.
+                        {
+                            # All keys must match the value. `~` in value
+                            # starts regex. Match Scarlett 2i4 Right Mono Input.
+                            media.class = "Audio/Source"
+                            node.name = "Scarlett_2i4_Right_Mono_Input"
+                        }
+                    ]
+                    actions = {
+                        create-stream = {
+                            audio.position = [ MONO ]
+                            combine.audio.position = [ FR ]
+                        }
+                    }
+                }
+            ] 
+        }
+    }
+]
+</code></pre></figure>
+<p>逻辑上来说，再创建虚拟设备直接连到物理通道应该也是可行的，但我尝试过之后连接图乱掉了，所以我换成 combine-stream 实现了。有一个要注意的点是我在环绕声里交换了一下通道，扬声器输出被我当作前面的音源，而耳机输出被我当作后面的音源，这样应该效果会更好，不过是和 auto-profile 假设的相反。</p>
+<p>于是在购买这款声卡七八年之后我终于在 Linux 下面把它按我想要的用法划分了通道，同时发现 PipeWire 对复杂音频设备的处理确实比 PulseAudio 更加灵活，而和同样基于图和连接的 JACK 相比，又能同时控制不同的声卡，对于我这种硬件复杂软件却不复杂的用户而言显然更加方便。</p>
+<p><img src="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/screenshot-1.png" alt="screenshot-1">
+<img src="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/screenshot-2.png" alt="screenshot-2">
+<img src="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/screenshot-3.png" alt="screenshot-3"></p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/PipeWire/" rel="tag"><i class="bi bi-tag"></i>PipeWire</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/Not-A-GNOME-Bug-at-All/" rel="prev" title="都不能算是 GNOME 的 Bug"><span class="page-nav-title">都不能算是 GNOME 的 Bug</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/",
+          "containerID": "comment-results"
+        }).then(() => {
+          formatDateTime(
+            document.querySelectorAll("time.comment-full-datetime"),
+            "zh-Hans"
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">100</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">36</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">76</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.gaojianli.me/" target="_blank" rel="external nofollow noreferrer noopener">高渐离の屋</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.14.1 at 2023-05-11T14:43:21.397Z. -->
