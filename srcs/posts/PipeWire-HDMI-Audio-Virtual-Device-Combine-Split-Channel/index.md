@@ -3,7 +3,7 @@ title: PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道
 layout: post
 #comment: true
 created: 2023-05-11T21:25:05
-updated: 2023-05-12T17:56:45
+updated: 2023-06-07T16:47:45
 categories:
   - 计算机
   - Linux
@@ -67,7 +67,9 @@ output-mappings = hdmi-stereo hdmi-stereo-extra1
 rule = {
   matches = {
     {
-      { "device.name", "matches", "alsa_card.pci-0000_0b_00.1" },
+      -- Sometimes PCI sound card name has `.1` or other suffix, so it's better
+      -- to use description to match it.
+      { "device.description", "matches", "TU104 HD Audio Controller" },
     },
   },
   apply_properties = {
@@ -116,9 +118,12 @@ context.modules = [
                         # does, actions are emited.
                         {
                             # All keys must match the value. `~` in value
-                            # starts regex. Match all HDMI devices on TU104.
+                            # starts glob. Match all HDMI devices on TU104.
                             media.class = "Audio/Sink"
-                            node.name = "~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*"
+                            # Sometimes PCI sound card name has `.1` or other
+                            # suffix, so it's better to use description to
+                            # match it.
+                            node.description = "~TU104 HD Audio Controller Digital Stereo *"
                         }
                     ]
                     actions = {
@@ -443,7 +448,9 @@ I just copy mapping from `default.conf`, and the profile just contains those two
 rule = {
   matches = {
     {
-      { "device.name", "matches", "alsa_card.pci-0000_0b_00.1" },
+      -- Sometimes PCI sound card name has `.1` or other suffix, so it's better
+      -- to use description to match it.
+      { "device.description", "matches", "TU104 HD Audio Controller" },
     },
   },
   apply_properties = {
@@ -492,9 +499,12 @@ context.modules = [
                         # does, actions are emited.
                         {
                             # All keys must match the value. `~` in value
-                            # starts regex. Match all HDMI devices on TU104.
+                            # starts glob. Match all HDMI devices on TU104.
                             media.class = "Audio/Sink"
-                            node.name = "~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*"
+                            # Sometimes PCI sound card name has `.1` or other
+                            # suffix, so it's better to use description to
+                            # match it.
+                            node.description = "~TU104 HD Audio Controller Digital Stereo *"
                         }
                     ]
                     actions = {

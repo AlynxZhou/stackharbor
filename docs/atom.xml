@@ -21,7 +21,7 @@
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2023-05-11T13:25:05.000Z</published>
-    <updated>2023-05-12T09:56:45.000Z</updated>
+    <updated>2023-06-07T08:47:45.000Z</updated>
     <summary type="html">
       &lt;p&gt;这篇文章同时有 &lt;a href=&quot;/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC&quot;&gt;中文版本&lt;/a&gt; 和 &lt;a href=&quot;/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#EnglishVersion&quot;&gt;英文版本&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;This post is both available in &lt;a href=&quot;/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC&quot;&gt;Chinese version&lt;/a&gt; and &lt;a href=&quot;/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#EnglishVersion&quot;&gt;English version&lt;/a&gt;.&lt;/p&gt;
@@ -95,7 +95,9 @@ output-mappings = hdmi-stereo hdmi-stereo-extra1
 &lt;figure data-raw=&quot;rule = {
   matches = {
     {
-      { &amp;quot;device.name&amp;quot;, &amp;quot;matches&amp;quot;, &amp;quot;alsa_card.pci-0000_0b_00.1&amp;quot; },
+      -- Sometimes PCI sound card name has `.1` or other suffix, so it&#039;s better
+      -- to use description to match it.
+      { &amp;quot;device.description&amp;quot;, &amp;quot;matches&amp;quot;, &amp;quot;TU104 HD Audio Controller&amp;quot; },
     },
   },
   apply_properties = {
@@ -114,7 +116,9 @@ table.insert(alsa_monitor.rules, rule)
 &quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;rule = {
   matches = {
     {
-      { &quot;device.name&quot;, &quot;matches&quot;, &quot;alsa_card.pci-0000_0b_00.1&quot; },
+      -- Sometimes PCI sound card name has `.1` or other suffix, so it&#039;s better
+      -- to use description to match it.
+      { &quot;device.description&quot;, &quot;matches&quot;, &quot;TU104 HD Audio Controller&quot; },
     },
   },
   apply_properties = {
@@ -159,9 +163,12 @@ table.insert(alsa_monitor.rules, rule)
                         # does, actions are emited.
                         {
                             # All keys must match the value. `~` in value
-                            # starts regex. Match all HDMI devices on TU104.
+                            # starts glob. Match all HDMI devices on TU104.
                             media.class = &amp;quot;Audio/Sink&amp;quot;
-                            node.name = &amp;quot;~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*&amp;quot;
+                            # Sometimes PCI sound card name has `.1` or other
+                            # suffix, so it&#039;s better to use description to
+                            # match it.
+                            node.description = &amp;quot;~TU104 HD Audio Controller Digital Stereo *&amp;quot;
                         }
                     ]
                     actions = {
@@ -201,9 +208,12 @@ table.insert(alsa_monitor.rules, rule)
                         # does, actions are emited.
                         {
                             # All keys must match the value. `~` in value
-                            # starts regex. Match all HDMI devices on TU104.
+                            # starts glob. Match all HDMI devices on TU104.
                             media.class = &quot;Audio/Sink&quot;
-                            node.name = &quot;~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*&quot;
+                            # Sometimes PCI sound card name has `.1` or other
+                            # suffix, so it&#039;s better to use description to
+                            # match it.
+                            node.description = &quot;~TU104 HD Audio Controller Digital Stereo *&quot;
                         }
                     ]
                     actions = {
@@ -747,7 +757,9 @@ output-mappings = hdmi-stereo hdmi-stereo-extra1
 &lt;figure data-raw=&quot;rule = {
   matches = {
     {
-      { &amp;quot;device.name&amp;quot;, &amp;quot;matches&amp;quot;, &amp;quot;alsa_card.pci-0000_0b_00.1&amp;quot; },
+      -- Sometimes PCI sound card name has `.1` or other suffix, so it&#039;s better
+      -- to use description to match it.
+      { &amp;quot;device.description&amp;quot;, &amp;quot;matches&amp;quot;, &amp;quot;TU104 HD Audio Controller&amp;quot; },
     },
   },
   apply_properties = {
@@ -766,7 +778,9 @@ table.insert(alsa_monitor.rules, rule)
 &quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;rule = {
   matches = {
     {
-      { &quot;device.name&quot;, &quot;matches&quot;, &quot;alsa_card.pci-0000_0b_00.1&quot; },
+      -- Sometimes PCI sound card name has `.1` or other suffix, so it&#039;s better
+      -- to use description to match it.
+      { &quot;device.description&quot;, &quot;matches&quot;, &quot;TU104 HD Audio Controller&quot; },
     },
   },
   apply_properties = {
@@ -811,9 +825,12 @@ table.insert(alsa_monitor.rules, rule)
                         # does, actions are emited.
                         {
                             # All keys must match the value. `~` in value
-                            # starts regex. Match all HDMI devices on TU104.
+                            # starts glob. Match all HDMI devices on TU104.
                             media.class = &amp;quot;Audio/Sink&amp;quot;
-                            node.name = &amp;quot;~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*&amp;quot;
+                            # Sometimes PCI sound card name has `.1` or other
+                            # suffix, so it&#039;s better to use description to
+                            # match it.
+                            node.description = &amp;quot;~TU104 HD Audio Controller Digital Stereo *&amp;quot;
                         }
                     ]
                     actions = {
@@ -853,9 +870,12 @@ table.insert(alsa_monitor.rules, rule)
                         # does, actions are emited.
                         {
                             # All keys must match the value. `~` in value
-                            # starts regex. Match all HDMI devices on TU104.
+                            # starts glob. Match all HDMI devices on TU104.
                             media.class = &quot;Audio/Sink&quot;
-                            node.name = &quot;~alsa_output.pci-0000_0b_00.1.hdmi-stereo.*&quot;
+                            # Sometimes PCI sound card name has `.1` or other
+                            # suffix, so it&#039;s better to use description to
+                            # match it.
+                            node.description = &quot;~TU104 HD Audio Controller Digital Stereo *&quot;
                         }
                     ]
                     actions = {
