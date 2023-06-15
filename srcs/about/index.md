@@ -44,9 +44,9 @@ Alynx Zhou
 
 2. Alynx 这个词的来历、读音是 *Alynx* is just **a lynx**。
 
-3. Alynx 的本命是 **科学超电磁炮** 中的 “超电磁炮” *御坂美琴*，*Misaka Mikoto* 和 **Fate/stay night** 里面的 “Saber” *阿尔托莉雅·潘德拉贡*。有重要影响的 Dota 2 主播是 [*中单光一*](https://space.bilibili.com/434401868)。头像作者是 [*茶冷*](https://space.bilibili.com/741520)。
+3. Alynx 的本命是 **科学超电磁炮** 中的 “超电磁炮” *御坂美琴*，*Misaka Mikoto* 和 **Fate/stay night** 里面的 “Saber” *阿尔托莉雅·潘德拉贡* 还有 **明日方舟** 里面的 *浊心斯卡蒂*。有重要影响的 Dota 2 主播是 [*中单光一*](https://space.bilibili.com/434401868)。头像作者是 [*茶冷*](https://space.bilibili.com/741520)。
 
-4. Alynx 是 S / M 双属性，虽然可能表现的更像 M 但是其实 S 的属性更多，**除非你是让我心甘情愿的人**。对 LGBTQIA 没有歧视但是 Alynx **只喜欢女孩子**，想要认识可爱的小姐姐，想脱单。
+4. Alynx 对 LGBTQIA 没有歧视但是 Alynx **只喜欢女孩子**，想要认识可爱的小姐姐，想脱单。
 
 5. Alynx 像猫一样懒。Alynx 是 Arch Linux CN 社区里稀有的 GNOME 用户之一，希望大家爱护稀有动物。
 
@@ -54,7 +54,7 @@ Alynx Zhou
 
 7. Alynx 喜欢音乐，目前最喜欢的乐器是半音阶口琴，有不到 7 年的琴龄。学过 4 年二胡并通过了业余水平十级（虽然现在几乎忘光了），选了扬琴选修课所以大概了解一点点，其他了解一点的乐器还有长号，选到课的小提琴。
 
-8. Alynx 坚持用 Steam 并拒绝 Origin/Epic/Battle.net 等不打算支持 Linux 的平台（既然你忽略 Alynx 的需求，Alynx 也忽略你），*Counter-Strike: Global Offensive* 是目前为止唯一一个玩了超过 600 小时的游戏（现在 *Dota 2* ~~也快到这个时长了虽然都是打机器人~~ 已经 800 小时了），唯一能够玩进去的 RPG 大概是 *NieR: Automata*，感谢室友特地带 PS4 到学校还和高中同学借了光盘让 Alynx 能和另一个室友一起以 60FPS 和高清画质通关主线（这话说的有点乱套）。另外表示室友四个人一起玩 *Overcooked!* 非常开心，所以预购了 *Overcooked!2*。Alynx 还买了 Switch。
+8. Alynx 坚持用 Steam 并拒绝 Origin/Epic/Battle.net 等不打算支持 Linux 的平台（既然你忽略 Alynx 的需求，Alynx 也忽略你），*Counter-Strike: Global Offensive* 是目前为止唯一一个玩了超过 600 小时的游戏（现在 *Dota 2* ~~也快到这个时长了虽然都是打机器人~~ ~~已经 800 小时了~~ 已经两千小时了），唯一能够玩进去的 RPG 大概是 *NieR: Automata*，感谢室友特地带 PS4 到学校还和高中同学借了光盘让 Alynx 能和另一个室友一起以 60FPS 和高清画质通关主线（这话说的有点乱套）。另外表示室友四个人一起玩 *Overcooked!* 非常开心，所以预购了 *Overcooked!2*。Alynx 还买了 Switch。
 
 9. Alynx 的 Steam ID 是 AlynxZhou，如果你想和 Alynx 一起玩游戏的话。不定期在线，并且 **如果你是那种很吵很暴躁张口就喷队友的人请不要来打扰 Alynx**。
 
