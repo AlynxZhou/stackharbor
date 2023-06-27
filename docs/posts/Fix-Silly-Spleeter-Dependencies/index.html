@@ -271,6 +271,9 @@
         <div class="post-created meta-block">
           <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2020-11-26T08:43:12.000Z">11/26/2020, 4:43:12 PM</time></span>
         </div>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2023-06-27T14:56:40.000Z">6/27/2023, 10:56:40 PM</time></span>
+        </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
         </div>
@@ -304,7 +307,8 @@
 <figure data-raw="$ pip install spleeter-gpu
 " class="code-block"><pre class="code"><code>$ pip install spleeter-gpu
 </code></pre></figure>
-<p>所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我本机已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，但我都创建虚拟环境了你还读取我系统的干嘛？不过其实好像也不影响使用，或者此时可以 <code>pip install numpy==1.18.5</code>。</p>
+<p>所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我系统已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，此时可以 <code>pip install numpy==1.18.5</code> 在虚拟环境里装一个它需要的版本。</p>
+<p>更新（2023-06-27）：现在它又报错说 protobuf 版本太新了需要降级 protobuf 版本或者重新生成某些东西，同理就 <code>pip install protobuf==3.20.*</code> 装一个老版本在虚拟环境里。</p>
 <p>然后到 <a href="https://github.com/deezer/spleeter/releases" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/deezer/spleeter/releases</a> 去下载训练好的模型，这也是个弱智的地方：哪有 tar 打包不把目录本身打进去的？然后还得给这个程序创建一个工作目录，因为它是写死的到当前目录下面的 <code>pretrained_models</code> 下面去找模型。</p>
 <figure data-raw="$ mkdir -p spleeter/pretrained_models
 $ cd spleeter/pretrained_models
@@ -518,4 +522,4 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.1 at 2023-06-15T07:03:13.915Z. -->
+<!-- Page built by Hikaru v1.14.1 at 2023-06-27T14:58:50.636Z. -->

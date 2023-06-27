@@ -3,6 +3,7 @@ title: 解决 Spleeter 愚蠢的依赖问题
 layout: post
 #comment: true
 created: 2020-11-26T16:43:12
+updated: 2023-06-27T22:56:40
 categories:
   - 计算机
   - 编程
@@ -51,7 +52,9 @@ $ conda activate spleeter
 $ pip install spleeter-gpu
 ```
 
-所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我本机已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，但我都创建虚拟环境了你还读取我系统的干嘛？不过其实好像也不影响使用，或者此时可以 `pip install numpy==1.18.5`。
+所有的依赖应该 pip 都会解决，但这个弱智有时候还会说我系统已经装了 numpy 1.19.4，比 tensorflow 需要的版本高，此时可以 `pip install numpy==1.18.5` 在虚拟环境里装一个它需要的版本。
+
+更新（2023-06-27）：现在它又报错说 protobuf 版本太新了需要降级 protobuf 版本或者重新生成某些东西，同理就 `pip install protobuf==3.20.*` 装一个老版本在虚拟环境里。
 
 然后到 <https://github.com/deezer/spleeter/releases> 去下载训练好的模型，这也是个弱智的地方：哪有 tar 打包不把目录本身打进去的？然后还得给这个程序创建一个工作目录，因为它是写死的到当前目录下面的 `pretrained_models` 下面去找模型。
 
