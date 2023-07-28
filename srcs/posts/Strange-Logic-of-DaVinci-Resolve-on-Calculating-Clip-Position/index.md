@@ -5,11 +5,9 @@ layout: post
 created: 2023-07-28T15:20:02
 #updated: 
 categories:
-  - 计算机
-  - 编程
+  - 摄影
 tags:
-  - 计算机
-  - 吐槽
+  - 摄影
 ---
 上一篇文章提到了 DaVinci Resolve 对于素材位置的计算逻辑非常奇怪并且不肯修改，这篇我试图概括一下具体的计算逻辑方便自己使用。如果你也遇到了同样的问题并且希望他们改进，可以去支持 [我发的帖子（英语）](https://forum.blackmagicdesign.com/viewtopic.php?f=33&t=179153)。
 
