@@ -5,13 +5,60 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2023-07-28T03:20:51.000Z</updated>
+  <updated>2023-07-28T07:20:02.000Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.4.1">Hikaru Generator Feed</generator>
+  <entry>
+    <title>DaVinci Resolve 奇怪的素材位置计算逻辑</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/" />
+    <id>https://sh.alynx.one/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2023-07-28T07:20:02.000Z</published>
+    <updated>2023-07-28T07:20:02.000Z</updated>
+    <summary type="html">
+      &lt;p&gt;上一篇文章提到了 DaVinci Resolve 对于素材位置的计算逻辑非常奇怪并且不肯修改，这篇我试图概括一下具体的计算逻辑方便自己使用。如果你也遇到了同样的问题并且希望他们改进，可以去支持 &lt;a href=&quot;https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;amp;t=179153&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;我发的帖子（英语）&lt;/a&gt;。&lt;/p&gt;
+
+    </summary>
+    <content type="html">
+      &lt;p&gt;上一篇文章提到了 DaVinci Resolve 对于素材位置的计算逻辑非常奇怪并且不肯修改，这篇我试图概括一下具体的计算逻辑方便自己使用。如果你也遇到了同样的问题并且希望他们改进，可以去支持 &lt;a href=&quot;https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;amp;t=179153&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;我发的帖子（英语）&lt;/a&gt;。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;%E8%AE%A1%E7%AE%97%E5%9F%BA%E5%87%86&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#%E8%AE%A1%E7%AE%97%E5%9F%BA%E5%87%86&quot;&gt;&lt;/a&gt;计算基准&lt;/h1&gt;
+&lt;p&gt;缩放/裁切/位置永远以原图大小作为基准，不会互相影响。&lt;/p&gt;
+&lt;p&gt;项目设置里有“缩放原图至适配大小且不出现裁切”和“不调整原图大小并裁切超出部分”两个比较合理的选项，“缩放原图至适配大小且不出现裁切”可以理解为插入时间线之前就改变了原图大小。例如画布尺寸 1920x1080，素材尺寸 512x512，选择“缩放原图至适配大小且不出现裁切”，相当于用外部命令把素材缩放到 1080x1080 然后再插入时间线，后续缩放/裁切/位置均以 1080x1080 作为基准。&lt;/p&gt;
+&lt;h1 id=&quot;%E7%BC%A9%E6%94%BE&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#%E7%BC%A9%E6%94%BE&quot;&gt;&lt;/a&gt;缩放&lt;/h1&gt;
+&lt;p&gt;缩放变换只计算原图大小。&lt;/p&gt;
+&lt;p&gt;缩放变换默认以素材中心作为基准。由于位置变换计算太复杂了，不考虑改变锚点参数的情况。&lt;/p&gt;
+&lt;h1 id=&quot;%E8%A3%81%E5%88%87&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#%E8%A3%81%E5%88%87&quot;&gt;&lt;/a&gt;裁切&lt;/h1&gt;
+&lt;p&gt;裁切只计算原图大小。无论素材的缩放变换参数是多少，都使用原图大小计算结果。&lt;/p&gt;
+&lt;p&gt;例：画布 1920x1080，素材 512x512。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择“缩放原图至适配大小且不出现裁切”，此时原图大小是 1080x1080，左侧裁切 50% 应输入 &lt;code&gt;1080 * 50% = 512&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;选择“不调整原图大小并裁切超出部分”，此时原图大小是 512x512，左侧裁切 50% 应输入 &lt;code&gt;512 * 50% = 256&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于位置变换计算太复杂了，不考虑勾选“保留图片位置”的情况。&lt;/p&gt;
+&lt;h1 id=&quot;%E4%BD%8D%E7%BD%AE&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#%E4%BD%8D%E7%BD%AE&quot;&gt;&lt;/a&gt;位置&lt;/h1&gt;
+&lt;p&gt;位置变换只计算原图大小。无论素材的缩放变换参数和裁切参数是多少，都使用原图大小计算结果。&lt;/p&gt;
+&lt;p&gt;DaVinci Resolve 对于素材位置输入框使用特殊的计算逻辑（怀疑是 bug），假设画布宽度为 &lt;code&gt;canvas_width&lt;/code&gt;，画布高度为 &lt;code&gt;canvas_height&lt;/code&gt;，原图宽度为 &lt;code&gt;clip_width&lt;/code&gt;, 原图高度为 &lt;code&gt;clip_height&lt;/code&gt;，如果想将素材水平方向移动 &lt;code&gt;x&lt;/code&gt; 像素，垂直方向移动 &lt;code&gt;y&lt;/code&gt; 像素，则需要填入的数据需要按照 &lt;code&gt;f(x) = x / clip_width * canvas_width&lt;/code&gt; 和 &lt;code&gt;f(y) = y / clip_height * canvas_height&lt;/code&gt; 进行计算。注意，按此计算逻辑，填入的两个数据的比例显然和实际移动的像素比例不同。&lt;/p&gt;
+&lt;p&gt;例：画布 1920x1080，素材 512x512。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择“缩放原图至适配大小且不出现裁切”，此时原图大小是 1080x1080，向左移动 540 像素应输入 &lt;code&gt;540 / 1080 * 1920 = 960&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;选择“不调整原图大小并裁切超出部分”，此时原图大小是 512x512，向左移动 540 像素应输入 &lt;code&gt;540 / 512 * 1920 = 2025&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+    </content>
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="吐槽" label="吐槽" scheme="https://sh.alynx.one/tags/%E5%90%90%E6%A7%BD/" />
+  </entry>
   <entry>
     <title>首先是犯下傲慢之罪的闭源拖拉机</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Firstly-The-Arrogant-Closed-Source-Tractor/" />
@@ -35,7 +82,7 @@
 &lt;p&gt;另一个我亲身经历的问题是 DaVinci Resolve，但是好话说在前头，比起大部分不友好的闭源软件开发商，BlackMagic
  Design 已经是班级里的三好学生了，我们就不提比如官方支持 Linux 这样大家都知道的优点，而是说一下同样的论坛反馈问题。Linux 版本的 DaVinci Resolve 不支持 Linux 上两种常见的输入法，而作为购买了 Studio 版的付费用户，我自然是积极的在官方论坛反馈了这个问题，结果嘛比 PowerAMP 好那么一点，一个 BlackMagic Design 的员工看到了我的帖子并把它移动到了 Feature Request 分区，然后就没有然后了。&lt;/p&gt;
 &lt;p&gt;在某些人试图为拿走他们钱的闭源软件开发商找“也许是 Linux 输入法太多支持起来太麻烦他们真的没有足够人力做”的借口之前，我要先发制人说明一下，这其实也是个“一行代码”就能解决的问题，甚至并不需要 BlackMagic Design 写实际的代码。DaVinci Resolve 使用 Qt 作为界面库，Qt 本身就做好了 Linux 下面常见输入法的支持，只要在构建时候打开开关就可以，所以问题的关键在于他们的团队里没有人意识到 Linux 下面的 CJK 用户需要打开这个开关，也没有人愿意去做打开构建开关这个简单的工作，只是让反馈的帖子烂在论坛里。甚至更进一步，为什么我这么确定只需要做这么简单的工作呢？因为我自己发现了一个 workaround，只要把系统里 Qt 输入法插件的 &lt;code&gt;.so&lt;/code&gt; 文件复制到 DaVinci Resolve 自带的 Qt 的对应目录，一切就完全工作了，所以可以充分说明并不是存在什么难以克服的障碍。（如果你也需要解决这个问题，具体的操作请阅读 &lt;a href=&quot;/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/&quot;&gt;DaVinci Resolve 在 Linux 下的输入法支持&lt;/a&gt;。）&lt;/p&gt;
-&lt;p&gt;说到 DaVinci Resolve，他们还有一个令人迷惑的坐标计算问题。比如你在尺寸为 3840x2160 的画布里放进一个 200x200 的图片素材，然后想让这个图片向右移动 200 像素，你应该输入多少呢，答案并不是 200，而是 3840。具体的计算逻辑是 &lt;code&gt;f(x) = x / element_w * canvas_w&lt;/code&gt;（计算纵坐标则需要换成高度，这样你横纵坐标看起来和实际位移完全不成比例），而这只是最简单的情况，如果你再对素材进行缩放，那计算逻辑我也说不清楚是怎么回事了。如果你访问它的用户论坛，你会发现需要精确输入坐标的用户都对这个计算逻辑感到迷惑（相关的内容聚集在 &lt;a href=&quot;https://forum.blackmagicdesign.com/viewtopic.php?f=21&amp;amp;t=166202&amp;amp;sid=be6eee42737d87cb59463a6f3f3069c0&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这个帖子（英语）&lt;/a&gt;），并且这还导致了其它问题（用这个算法你可能需要输入极大的数值来挪动一个很小的素材，于是就会撞到输入框的数字上限）。但 BlackMagic Design 完全没有修改这个逻辑的想法。我可以理解为是怕影响兼容性，但完全可以添加一个设置项，如果勾选就保持以前的计算逻辑。这又是一个用户反馈了却被忽略的例子。&lt;/p&gt;
+&lt;p&gt;说到 DaVinci Resolve，他们还有一个令人迷惑的坐标计算问题。比如你在尺寸为 3840x2160 的画布里放进一个 200x200 的图片素材，然后想让这个图片向右移动这个图片的宽度，你应该输入多少呢，答案并不是 200，而是 3840。具体的计算逻辑大概是 &lt;code&gt;f(x) = x / clip_width * canvas_width&lt;/code&gt;（计算纵坐标则需要换成高度，这样你横纵坐标看起来和实际位移完全不成比例），而这只是最简单的情况，如果你再对素材进行缩放，然后再进行裁切，那计算逻辑我也说不清楚是怎么回事了。如果你访问它的用户论坛，你会发现需要精确输入坐标的用户都对这个计算逻辑感到迷惑（相关的内容聚集在 &lt;a href=&quot;https://forum.blackmagicdesign.com/viewtopic.php?f=21&amp;amp;t=166202&amp;amp;sid=be6eee42737d87cb59463a6f3f3069c0&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;这个帖子（英语）&lt;/a&gt;），并且这还导致了其它问题（用这个算法你可能需要输入极大的数值来挪动一个很小的素材，于是就会撞到输入框的数字上限）。但 BlackMagic Design 完全没有修改这个逻辑的想法。我可以理解为是怕影响兼容性，但完全可以添加一个设置项，如果勾选就保持以前的计算逻辑。这又是一个用户反馈了却被忽略的例子。&lt;/p&gt;
 &lt;p&gt;但如果你读到这里觉得闭源软件的用户论坛就是最烂的反馈工具，那你还是太高估了闭源软件开发商的下限了。另一个我亲身经历的例子来自亲爱的 Micro$oft，作为 RDP 的标准制定者，微软的 Android RDP 客户端基本可以认为是实质上的官方实现，但 gnome-remote-desktop 的开发者遇到了 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/issues/99&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;客户端内不能正确显示视频（英语）&lt;/a&gt; 的问题，导致这个问题的原因是 Microsoft 的 Android RDP 客户端写死了 image stride，导致读取错误，老实说这不是什么大不了的问题，改掉就好了嘛。于是我就积极主动的去该 app 的 Play Store 页面打算写评论，但是我看到应用简介里说“我们不会看 Play Store 评论，如果你要反馈问题，请发送至 &lt;code&gt;rdandr@microsoft.com&lt;/code&gt;”，于是我又写了封邮件描述相关的问题，然后被气了个半死：一封自动回复的邮件告诉我你应该到这个链接反馈问题，点开那个链接我得到一个大大的 &lt;code&gt;Error 404 This UserVoice instance is no longer available.&lt;/code&gt;。说不定这些傲慢的开发者还在沾沾自喜：我们的软件质量真好，竟然没有用户反馈问题！（不过我刚才又查看了一下 Play Store 页面，现在他们换成了一个反馈链接，我暂时还没有测试这个链接是否可用。）&lt;/p&gt;
 &lt;p&gt;所以这其实是我推崇开源软件的原因之一：通常来说开源软件的开发者都很重视用户反馈，并且会建立良好的反馈渠道。即使你遇到了一个“知道错了，但我不改”的开发者，你也可以尝试自己动手修改代码解决问题，然后提交给他或者自己维护 patch。但对于闭源软件这显然不现实，你只能希望开发者大发慈悲常来看用户论坛并注意到你的反馈。&lt;/p&gt;
 &lt;p&gt;另一方面，issue 大概是比用户论坛更好的反馈工具。虽然对于闭源软件开发商，很难找到相关的例子，不过 Valve 就是这么一个独特的例子。以前他们使用 GitHub Issue 作为 DOTA 2 和 CSGO 的 Linux / macOS 版本的反馈渠道，后来更进一步鼓励玩家在 GitHub Issue 上反馈 DOTA 2 的 bug。虽然 Valve 也存在“知道错了，但我不改”这种情况（比如 Steam Linux 版的输入法支持，但这个和他们使用了自己编写的 UI 框架有关系，大概解决起来有难度），但他们的开发者确实会看 GitHub Issue，并处理玩家的反馈（比如在官网 &lt;a href=&quot;https://www.dota2.com/newsentry/3640648066072340345&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;最新的一篇文章（英语）&lt;/a&gt; 里提到很多用户在 GitHub 上反馈了炸弹人的新 bug）。&lt;/p&gt;
@@ -2839,40 +2886,5 @@ import_tables:
     <category term="Hikaru" label="Hikaru" scheme="https://sh.alynx.one/categories/%E7%BD%91%E7%AB%99/Hikaru/" />
     <category term="网站" label="网站" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%AB%99/" />
     <category term="Hikaru" label="Hikaru" scheme="https://sh.alynx.one/tags/Hikaru/" />
-  </entry>
-  <entry>
-    <title>StackHarbor 的 2021 尾记</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/2021-Tail/" />
-    <id>https://sh.alynx.one/posts/2021-Tail/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2022-02-09T02:22:55.000Z</published>
-    <updated>2022-02-11T01:18:12.000Z</updated>
-    <summary type="html">
-      &lt;p&gt;今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。&lt;/p&gt;
-
-    </summary>
-    <content type="html">
-      &lt;p&gt;今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;2021 年工作没什么变化，不过我换了个好一点的住处，虽然仍然是旧楼但是里面是新装修过的，至少让人待着的时候感到舒适，而且还可以吸室友的猫，虽然小猫也经常搞破坏，不过猫做什么都可以原谅。&lt;/p&gt;
-&lt;p&gt;看了去年的总结，才发现我是 2021 年把 FlipClock 改成 Meson 管理编译的，于是想起来我这一年学了 Meson 怎么用，因为 CMake 实在是让我烧脑筋。我今年还终于让 scrcpy 能够模拟 USB 键盘，这样使用 scrcpy 的时候也能用数字键选词了，多少算是在一个大项目里面做了一个大贡献。&lt;/p&gt;
-&lt;p&gt;然后其他能记得住的就是最近折腾的一些东西了，春节假期没写博客也是因为忙着写代码。写了一个简单的网页小游戏，基本是平面版神庙逃亡，感觉还是挺有成就感的。然后给之前的弹钢琴页面改成了原生 JS 实现，放弃 React 的原因是依赖太多了，而且不是每个软件包都能及时更新自己的依赖。比如你用一个老版本的 create-react-app 会带来许多有漏洞的依赖，然后你更新到最新版因为依赖变了，有些库又依赖了另一个有漏洞的版本。我觉得为了简单的 UI 和数据绑定这个代价是不值得的，所以我就重写了一个。然后给我的博客生成器添加了文件依赖的支持，很久很久以前当我刚开始用静态博客生成器的时候就在头疼这个，博客生成器理解不了你的模板引擎或者预处理器的导入和扩展语句，于是没办法在一个文件更新的时候更新所有包含它的依赖，导致主题开发要不停的关掉生成器再开。一开始我是想给这些文件都加上 front matter，但是我发现虽然我自己加载的时候可以去掉 front matter，模板引擎处理导入语句的时候是他自己读文件所以没办法去掉 front matter，我不想给每个模板引擎都写自定义的 loader，所以最后改成用一个单独的文件记录依赖了。最后的结果就是单独抽出了一个 Watcher 类，可以查表查出所有需要更新的文件然后调回调，效果还挺不错的。以及本来我想清理一下博客的样式然后顺便换个 CSS 预处理器，因为感觉 Stylus 不是特别火了，但是考察了一下，less 的语法和 Stylus 差得有点多，而 scss 虽然使用广泛，而且有纯 C 语言写的实现，但是它有好多个实现，并且官网上说只有 Dart 语言写的版本才不过时，其它的都只实现了过时的 &lt;code&gt;@import&lt;/code&gt; 而用户应该用最新的 &lt;code&gt;@use&lt;/code&gt;，总之搞得这么麻烦看起来就不想用。虽然 Dart 能编译成纯 JS，我还是觉得没兴趣。于是最后我把我的样式都改成了原生 CSS，然后去掉了生成器内置的 Stylus 支持。&lt;/p&gt;
-&lt;p&gt;显示器从去年的一个换成了两个，因为我是一个经常最大化窗口的人，切工作区虽然快，但是比如在浏览器和代码编辑器之间切换的时候还是会打断思路，有了双屏就没这个烦恼。一开始我想的是双屏更方便一边全屏游戏一边干别的事情，不过好像也就那样，因为从全屏切出来到另一个屏幕也不是很顺畅。不过买双屏的时候很头疼的就是因为不是一个批次，两个显示器的色温差得不是一点，最终是换了一台然后用校色仪调了好久，虽然不是 100% 一致，但是至少差不多了。&lt;/p&gt;
-&lt;p&gt;说到这个我想说，感觉幸运和倒霉是伴随而来的，不太可能一直幸运，经常是发生一些开心的事之后又发生一些不开心的事，比如去年买了新相机，经常没事拍点照片什么的，结果昨天晚上我突然发现不开镜头盖的时候 CMOS 有个红点……我觉得我基本可以排除激光损伤，应该就是坏点，但是我用机内的像素映射却解决不掉。感觉最后还得跑一趟维修站，而我在老家，一时半会不会回北京，这边也没有维修站，总之麻烦的事情就会让我心累。买了一张升降桌，不过这个最便宜的款式不太靠谱，现在升降功能不太正常，于是只是变成了一台大桌子。不过椅子坏了之后换了个比较便宜的工学椅倒确实令我满意。&lt;/p&gt;
-&lt;p&gt;今年没有换手机，主要是把这个钱投资到镜头或者灯上让我更高兴一点，手机厂商出的手机真是越来越烂了。不过把备用的 iPhone 8 换成了 iPhone XR，在二手频道看到一个成色很好，而且是红色款的，我早就觉得 iPhone 8 屏幕太小了。&lt;/p&gt;
-&lt;p&gt;动漫也想不起来看过什么，今年也许只看了 EVA 最后一部剧场版和 love live superstar，反正看 EVA 就是大家都想看看他怎么收尾而已，总体来说还是不错，特别是看了纪录片之后。然后 love live 我以前没看过，我的评价就是挺好听的。然后我感觉在电影院看到 Fate/Stay Night HF 第三季的可能性应该是没了，特别是考虑到今年院线上的国外电影的比例……还能说什么呢懂得都懂哈哈。&lt;/p&gt;
-&lt;p&gt;想不起来看过多少书，总之前段时间有天晚上睡不着，一口气把挪威的森林看完了，我早就买了这本书，但是以前都是打开看几页就看不下去了，这次一口气看完感觉还挺好的。&lt;/p&gt;
-&lt;p&gt;今年的另一个好消息是 NVIDIA 驱动终于补全了 Wayland 支持，感谢所有在这个过程中努力的人，比如 NVIDIA 那个一直在处理相关事情的用蜗牛做头像的老哥，事情总要是靠人推进的嘛。不过回家之后莫名发现我的 Atom 在 XWayland 下面会疯狂地闪回，明明我自己住处的电脑也是一样的配置就没问题。然后这时候我发现 Emacs 的纯 GTK 分支已经合并进了主线，也就是说 Emacs 现在终于是纯 Wayland 程序了，我立刻搞了一个最新版本，然后捡起来以前的配置文件，又仔细研究仔细鼓捣，目前多少是堪用了，虽然还有不少地方不像 Atom 那么习惯，主要还是我懒得仔细研究，反正凑合用，我是真的怀念 Atom 上的一些功能，比如注释反注释代码块、移动代码块、方便的查找替换还有现代化的界面……Emacs 的界面元素感觉还是基于文本的，然后包括粗体字渲染感觉也不太光滑，比如 indent guide 或者 80 column ruler 这种东西就应该直接在界面上划线嘛，不要用字符做。不过我在用 Atom 的时候也怀念 Emacs 的一些功能比如纯键盘分屏和 C-SPC Mark Region。&lt;/p&gt;
-&lt;p&gt;今年的游戏时间基本都拿来打 Dota 了，虽然看 TI 看得很难受，但是和朋友一起玩游戏还是挺快乐的，这也属于幸运和倒霉的周期了吧。塞尔达什么的，等我想起来慢慢玩……&lt;/p&gt;
-&lt;p&gt;跨年的时候还是和去年一样朋友聚餐了，我还在 B 站上传了 vlog，和蓝猫铁道迷一起吃寿喜锅很开心。今年写代码没少让琪神当小黄鸭，谢谢琪神。&lt;/p&gt;
-&lt;p&gt;总之先写这些，如果我又想起什么，我后面再慢慢加上吧，最近冻着了嗓子疼，希望倒霉的周期赶紧过去，过段时间还得找找机会去修相机呢……&lt;/p&gt;
-
-    </content>
-    <category term="生活" label="生活" scheme="https://sh.alynx.one/categories/%E7%94%9F%E6%B4%BB/" />
-    <category term="时光飞逝" label="时光飞逝" scheme="https://sh.alynx.one/tags/%E6%97%B6%E5%85%89%E9%A3%9E%E9%80%9D/" />
   </entry>
 </feed>
