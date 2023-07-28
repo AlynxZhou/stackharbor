@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="很遗憾的，我们没有生活在可以完全只使用开源软件的世界里，所以有时候不得不忍受一些闭源拖拉机的傲慢。一个经典的情况就是明明用户花了钱，还是得当孙子——我指的是用户反馈完全没有开发者看这件事情。或者更进一步，我认为 GitHub 或者 GitLab 的 issue （或者 bugzilla）是比用户论坛更好的反馈工具。">
+    <meta name="keywords" content="计算机, 吐槽">
+    <meta name="generator" content="Hikaru v1.14.1">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="首先是犯下傲慢之罪的闭源拖拉机">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Firstly-The-Arrogant-Closed-Source-Tractor/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
+    <meta property="og:description" content="很遗憾的，我们没有生活在可以完全只使用开源软件的世界里，所以有时候不得不忍受一些闭源拖拉机的傲慢。一个经典的情况就是明明用户花了钱，还是得当孙子——我指的是用户反馈完全没有开发者看这件事情。或者更进一步，我认为 GitHub 或者 GitLab 的 issue （或者 bugzilla）是比用户论坛更好的反馈工具。">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Firstly-The-Arrogant-Closed-Source-Tractor/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      header.header, footer.footer {
+        background: #33363b;
+      }
+      
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        formatDateTime(
+          document.querySelectorAll("time.post-full-datetime"),
+          "zh-Hans"
+        );
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const gutter = [];
+        gutter.push("<pre class=\"gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add gutter for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            gutter.push("\n");
+          }
+        }
+        gutter.push("</pre>");
+        elementBefore(e, createElementFromString(gutter.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>首先是犯下傲慢之罪的闭源拖拉机 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Firstly-The-Arrogant-Closed-Source-Tractor/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Firstly-The-Arrogant-Closed-Source-Tractor/" itemprop="url">首先是犯下傲慢之罪的闭源拖拉机</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-07-28T03:20:51.000Z">7/28/2023, 11:20:51 AM</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Firstly-The-Arrogant-Closed-Source-Tractor/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="首先是犯下傲慢之罪的闭源拖拉机" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>很遗憾的，我们没有生活在可以完全只使用开源软件的世界里，所以有时候不得不忍受一些闭源拖拉机的傲慢。一个经典的情况就是明明用户花了钱，还是得当孙子——我指的是用户反馈完全没有开发者看这件事情。或者更进一步，我认为 GitHub 或者 GitLab 的 issue （或者 bugzilla）是比用户论坛更好的反馈工具。</p>
+<a id="more"></a>
+
+<p>一个发生在我身上的例子是 PowerAMP，我曾经是它的付费用户（现在也是付费用户，但并不是活跃用户）。PowerAMP 有这样一个问题，当你搜索一首歌的时候，你必须输入两个或以上的字符搜索才会启动。这对于英语歌来说不是什么问题，因为大部分单词都是两个字符以上，几乎不会出现需要依靠一个字符查找歌曲的情况。但假如你是一个不会假名的日语歌爱好者，你想要依赖标题里某个你认识的汉字搜索到你想要的歌，这时候 PowerAMP 的搜索就是完完全全的废物。至少对于我自己来说这个需求曾经切实存在了很长一段时间。我不是没有尝试给开发者反馈，PowerAMP 有一个自己的论坛用作用户反馈工具，但过了两年也没有人回复 <a href="https://forum.powerampapp.com/topic/20907-start-searching-after-just-typing-1-character-instead-of-2/" target="_blank" rel="external nofollow noreferrer noopener">我的帖子</a>。如果开发者完全不看用户反馈，或者只看热度高的用户反馈，那这论坛还有什么意义呢？</p>
+<p>所以非常搞笑的结论发生了，我作为一个付费用户，最终的解决方案是我去学了五十音，不过这也没有完全解决问题，我意识到即使这样，仍然存在无法解决的情况：比如标题只有一个汉字的歌，你永远也不可能在 PowerAMP 里通过标题搜索到它（那英点了个赞并评论“最烦装逼的播放器作者”）。我甚至已经脑补出了作者洋洋自得地写下 <code>if (str.length &lt; 2) return;</code> 以为自己对搜索做了天才般的优化，但在他可怜的脑袋里却找不到高德纳那句著名的“过早优化是万恶之源”，甚至用户的反馈也被他忽略掉了。最终我选择放弃这个自以为是的闭源拖拉机，换了一些功能没这么多，但却没有这个过早优化的替代品。</p>
+<p>另一个我亲身经历的问题是 DaVinci Resolve，但是好话说在前头，比起大部分不友好的闭源软件开发商，BlackMagic
+ Design 已经是班级里的三好学生了，我们就不提比如官方支持 Linux 这样大家都知道的优点，而是说一下同样的论坛反馈问题。Linux 版本的 DaVinci Resolve 不支持 Linux 上两种常见的输入法，而作为购买了 Studio 版的付费用户，我自然是积极的在官方论坛反馈了这个问题，结果嘛比 PowerAMP 好那么一点，一个 BlackMagic Design 的员工看到了我的帖子并把它移动到了 Feature Request 分区，然后就没有然后了。</p>
+<p>在某些人试图为拿走他们钱的闭源软件开发商找“也许是 Linux 输入法太多支持起来太麻烦他们真的没有足够人力做”的借口之前，我要先发制人说明一下，这其实也是个“一行代码”就能解决的问题，甚至并不需要 BlackMagic Design 写实际的代码。DaVinci Resolve 使用 Qt 作为界面库，Qt 本身就做好了 Linux 下面常见输入法的支持，只要在构建时候打开开关就可以，所以问题的关键在于他们的团队里没有人意识到 Linux 下面的 CJK 用户需要打开这个开关，也没有人愿意去做打开构建开关这个简单的工作，只是让反馈的帖子烂在论坛里。甚至更进一步，为什么我这么确定只需要做这么简单的工作呢？因为我自己发现了一个 workaround，只要把系统里 Qt 输入法插件的 <code>.so</code> 文件复制到 DaVinci Resolve 自带的 Qt 的对应目录，一切就完全工作了，所以可以充分说明并不是存在什么难以克服的障碍。（如果你也需要解决这个问题，具体的操作请阅读 <a href="/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/">DaVinci Resolve 在 Linux 下的输入法支持</a>。）</p>
+<p>说到 DaVinci Resolve，他们还有一个令人迷惑的坐标计算问题。比如你在尺寸为 3840x2160 的画布里放进一个 200x200 的图片素材，然后想让这个图片向右移动 200 像素，你应该输入多少呢，答案并不是 200，而是 3840。具体的计算逻辑是 <code>f(x) = x / element_w * canvas_w</code>（计算纵坐标则需要换成高度，这样你横纵坐标看起来和实际位移完全不成比例），而这只是最简单的情况，如果你再对素材进行缩放，那计算逻辑我也说不清楚是怎么回事了。如果你访问它的用户论坛，你会发现需要精确输入坐标的用户都对这个计算逻辑感到迷惑。但 BlackMagic Design 完全没有修改这个逻辑的想法。我可以理解为是怕影响兼容性，但完全可以添加一个设置项，如果勾选就保持以前的计算逻辑。这又是一个用户反馈了却被忽略的例子。</p>
+<p>但如果你读到这里觉得闭源软件的用户论坛就是最烂的反馈工具，那你还是太高估了闭源软件开发商的下限了。另一个我亲身经历的例子来自亲爱的 Micro$oft，作为 RDP 的标准制定者，微软的 Android RDP 客户端基本可以认为是实质上的官方实现，但 gnome-remote-desktop 的开发者遇到了 <a href="https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/issues/99" target="_blank" rel="external nofollow noreferrer noopener">客户端内不能正确显示视频（英语）</a> 的问题，导致这个问题的原因是 Microsoft 的 Android RDP 客户端写死了 image stride，导致读取错误，老实说这不是什么大不了的问题，改掉就好了嘛。于是我就积极主动的去该 app 的 Play Store 页面打算写评论，但是我看到应用简介里说“我们不会看 Play Store 评论，如果你要反馈问题，请发送至 <code>xxxx@xxxx.com</code>”，于是我又写了封邮件描述相关的问题，然后被气了个半死：一封自动回复的邮件告诉我你应该到这个链接反馈问题，点开那个链接我得到一个大大的 404 Not Found。说不定这些傲慢的开发者还在沾沾自喜：我们的软件质量真好，竟然没有用户反馈问题！</p>
+<p>所以这其实是我推崇开源软件的原因之一：通常来说开源软件的开发者都很重视用户反馈，并且会建立良好的反馈渠道。即使你遇到了一个“知道错了，但我不改”的开发者，你也可以尝试自己动手修改代码解决问题，然后提交给他或者自己维护 patch。但对于闭源软件这显然不现实，你只能希望开发者大发慈悲常来看用户论坛并注意到你的反馈。</p>
+<p>另一方面，issue 大概是比用户论坛更好的反馈工具。虽然对于闭源软件开发商，很难找到相关的例子，不过 Valve 就是这么一个独特的例子。以前他们使用 GitHub Issue 作为 DOTA 2 和 CSGO 的 Linux / macOS 版本的反馈渠道，后来更进一步鼓励玩家在 GitHub Issue 上反馈 DOTA 2 的 bug。虽然 Valve 也存在“知道错了，但我不改”这种情况（比如 Steam Linux 版的输入法支持，但这个和他们使用了自己编写的 UI 框架有关系，大概解决起来有难度），但他们的开发者确实会看 GitHub Issue，并处理玩家的反馈（比如在官网 <a href="https://www.dota2.com/newsentry/3640648066072340345" target="_blank" rel="external nofollow noreferrer noopener">最新的一篇文章（英语）</a> 里提到很多用户在 GitHub 上反馈了炸弹人的新 bug）。</p>
+<div class="center">
+  <img alt="1.png" title="一位 DOTA 2 玩家正在学习使用 GitHub Issue……呃，这可能是个错误示范……" src="/posts/Firstly-The-Arrogant-Closed-Source-Tractor/1.png">
+</div>
+
+<p>但，是什么导致 issue 在用户反馈上比用户论坛效果更好呢？毕竟本质上二者都是“发帖”“回复”的流程，我尝试分析一下其中的不同。</p>
+<p>一个我认为很重要的区别是社区文化，或者说是谁在使用相关的工具：2023 年，完全没有接触过开源项目的程序员应该是不存在的，也就是说如果你是开发者，你大概率早就使用过 GitHub 或者 GitLab 这样的工具，issue 对你来说是一个你会去重视或至少会去看的东西。而论坛更大概率不是开发者直接运营，也许是什么专门的论坛客服在处理，他们可能并不懂技术，或者就算开发者会参与进用户论坛，论坛帖子对程序员来说也不是什么一定要看的东西。当用户遇到问题的时候，向开发者直接反馈应当是解决问题最直接的途径，如果在用户和开发者之间插入一层不懂技术的客服，那大概率是场灾难。（我真的没有在针对什么“微软社区支持专员”哦，真的没有。）</p>
+<p>另一个可能的原因也许是排序方式：issue 默认是按发布时间而不是回复时间排列的，因此开发者大概率会逐个查看新出现的 issue 并处理。但论坛通常默认以回复时间排列，更加重视“热度”，于是很容易出现一个问题不太热门就完全被忽略掉的情况，但对于软件开发而言，不应该因为一个问题热度不高就完全置之不理，因为热度可能受很多其它因素影响，比如用户主要使用的语言和开发者不同，反馈时存在语言或者网络障碍，热度不能直观地反映出程序本身的问题。</p>
+<p>但也许上述区别只决定了开发者能不能看到用户反馈，另一个决定性因素是开发者想不想看到用户反馈。我个人是觉得对于软件质量的追求应该是程序员自发的而不是被迫的，所以对用户反馈更应当积极处理。不得不承认，相似体量的项目，开源项目的开发者比起闭源项目的开发者好像确实是更有责任感一点。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/%E5%90%90%E6%A7%BD/" rel="tag"><i class="bi bi-tag"></i>吐槽</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/" rel="prev" title="PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道"><span class="page-nav-title">PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "首先是犯下傲慢之罪的闭源拖拉机",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Firstly-The-Arrogant-Closed-Source-Tractor/",
+          "containerID": "comment-results"
+        }).then(() => {
+          formatDateTime(
+            document.querySelectorAll("time.comment-full-datetime"),
+            "zh-Hans"
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">101</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">36</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">76</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://h-el-ical.com/" target="_blank" rel="external nofollow noreferrer noopener">H-el-ical//</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://berlin-98.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Bo Lin's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lrscy.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Meow's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://chenxy.moe/" target="_blank" rel="external nofollow noreferrer noopener">Art_Chen's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://sqyon.cc/" target="_blank" rel="external nofollow noreferrer noopener">Sqyon's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.gaojianli.me/" target="_blank" rel="external nofollow noreferrer noopener">高渐离の屋</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.yoitsu.moe/" target="_blank" rel="external nofollow noreferrer noopener">约伊兹的萌狼乡手札</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.14.1 at 2023-07-28T05:55:39.823Z. -->
