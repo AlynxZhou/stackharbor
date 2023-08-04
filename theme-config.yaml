@@ -58,7 +58,7 @@ creativeCommons: by-nc-nd
 # Available: atom-one-dark | atom-one-light | tomorrow-night-blue | tomorrow-night-bright | solarized-dark | solarized-light
 highlight: atom-one-dark
 
-# Pinned message in index.
+# Pinned message in home page.
 pinnedMessage: <div class="alert-blue">读了某些文章觉得很有趣或者很有收获？<strong>我很想知道你对我博客的看法！</strong>如果方便请务必到 <a href="/about/">关于</a> 页面留下一条评论！</div>
 
 # Custom info in footer.
