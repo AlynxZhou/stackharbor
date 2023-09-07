@@ -2,7 +2,8 @@
 title: 谁动了我的 DNS 解析？
 layout: post
 #comment: true
-created: 2022-11-09 21:06:00
+created: 2022-11-09T21:06:00
+udpated: 2023-09-07T15:23:59
 categories:
   - 计算机
   - Linux
@@ -49,9 +50,15 @@ hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
 
 对于一个普通的桌面用户，应该使用的只是 Network Manager，默认 Network Manager 不会用 systemd-resolved，于是大部分情况一个外部域名最后还是查询 DNS 服务器，和以前没什么本质区别。那 Network Manager 你为什么要修改 `/etc/resolv.conf`？原因之一就是之前提到不同的 VPN 服务可能有不同的 DNS 服务器，因此建议这些用户不要手动编辑这个文件，可以直接在 Network Manager 的连接配置里设置某个连接的 DNS 服务器。
 
-那 systemd-resolved 又是什么玩意？是不是 systemd 作者又要搞出什么花样替换我习惯的东西？但这东西好像还真是有些实际的需求，它不是一个简单的 `/etc/resolv.conf` 的管理工具，而可以理解为是一个自带缓存的 DNS 服务器。glibc 通过 `/etc/resolv.conf` 查询 DNS 其实是不做缓存的，有些场景用户可能希望能自己缓存结果加快速度，这时候就需要搞这个东西了，它自己是一个 DNS 服务器，因此也就不再执行 nsswitch 里面后续的组件（用你的 `dns` 模块查询了我怎么缓存？）。除此之外它还声称自己提供了一个更好的 D-Bus 接口用来解析，而不是用 `getaddrinfo`，不过话又说回来，谁闲得没事去支持你这新搞的 D-Bus API，特别是你自己还搞了个 `getaddrinfo` 的模块。主观来说我其实不推荐一般的桌面用户配置这个，因为大概率你是在一个路由器后面，你的 DNS 服务器一般设置的都是路由器，而路由器上的 DNS 服务器一般会做缓存，所以其实完全没必要在自己电脑上启用这个……我也没遇到任何一定要使用它这个 D-Bus API 的程序。那 systemd-resolved 你为什么要修改 `/etc/resolv.conf`？原因是为了兼容那些直接读这个的上古程序，实际上人家就在这里写一行，就是让这些程序去查 systemd-resolved 内置的 DNS 服务器。
+那 systemd-resolved 又是什么玩意？是不是 systemd 作者又要搞出什么花样替换我习惯的东西？但这东西好像还真是有些实际的需求，它不是一个简单的 `/etc/resolv.conf` 的管理工具，而可以理解为是一个自带缓存的 DNS 服务器。glibc 通过 `/etc/resolv.conf` 里面的 DNS 服务器查询 DNS 其实是不做缓存的，有些场景用户可能希望能自己缓存结果加快速度，这时候就需要搞这个东西了，它自己是一个 DNS 服务器，因此也就不再执行 nsswitch 里面后续的组件（用你的 `dns` 模块查询了我怎么缓存？）。除此之外它还声称自己提供了一个更好的 D-Bus 接口用来解析，而不是用 `getaddrinfo`，不过话又说回来，谁闲得没事去支持你这新搞的 D-Bus API，特别是你自己还搞了个 `getaddrinfo` 的模块。主观来说我其实不推荐一般的桌面用户配置这个，因为大概率你是在一个路由器后面，你的 DNS 服务器一般设置的都是路由器，而路由器上的 DNS 服务器一般会做缓存，所以其实完全没必要在自己电脑上启用这个……我也没遇到任何一定要使用它这个 D-Bus API 的程序。那 systemd-resolved 你为什么要修改 `/etc/resolv.conf`？原因是为了兼容那些直接读这个的上古程序，实际上人家就在这里写一行，就是让这些程序去查 systemd-resolved 内置的 DNS 服务器。
 
 那至于 `resolvconf` 又是啥？这是一个叫 `openresolv` 的项目搞出来的东西，需求就是有各种程序都打算自己修改 `/etc/resolv.conf`，不单单是上面那两个，还有一些 VPN 服务之类的，那你们干脆都别管了，我来管，听我的（现在有 N + 1 种解决方案了）。但实际上我也不推荐你使用这个，因为桌面用户根本没有使用场景，你用 Network Manager 的话，就不要再单独使用什么 VPN 工具，因为 Network Manager 本身支持很多种 VPN 连接，你直接用它管理就好了。就算你需要用 systemd-resolved，其实这个也替你考虑好了，Network Manager 支持 systemd-resolved，检测到你用它的话，就不会去改 `/etc/resolv.conf`，而是直接去修改 systemd-resolved 的配置了。
+
+更新（2023-09-07）：感觉光靠嘴说还是不太清楚，我画了一张图……
+
+![dns.png](./dns.png)
+
+所以你可以看到 Network Manager 默认其实并不参与 DNS 解析，它只是方便到处跑的笔记本用户能用上各个局域网内的 DNS 服务器而已。
 
 # 计算机科学是门艺术，当且仅当你不需要考虑兼容性的时候……
 
