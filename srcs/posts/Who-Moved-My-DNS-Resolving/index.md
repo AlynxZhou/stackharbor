@@ -3,7 +3,7 @@ title: 谁动了我的 DNS 解析？
 layout: post
 #comment: true
 created: 2022-11-09T21:06:00
-udpated: 2023-09-07T15:23:59
+updated: 2023-09-07T15:23:59
 categories:
   - 计算机
   - Linux
