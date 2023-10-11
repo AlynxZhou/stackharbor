@@ -1,7 +1,7 @@
 ---
 title: about
 created: 2016-04-04T14:36:20
-updated: 2021-01-04T17:21:00
+updated: 2023-10-12T00:41:00
 layout: page
 comment: true
 reward: false
@@ -15,7 +15,7 @@ reward: false
 
 Anyway，点到这个页面说明你对我很感兴趣，我写的东西你觉得不错。否则吃了蛋干嘛去认识母鸡呢？所以我在这放一下打赏用的二维码不过分吧！
 
-打多少？多多益善！经济基础决定上层建筑，谁和钱过不去啊！多多少少都是情，先提前谢过各位了！
+打多少？多多益善！谁和钱过不去啊！
 
 <div class="center">
   <img src="/images/WeChatPay.png" alt="微信" style="width: 15em; margin: 2em;">
@@ -26,7 +26,7 @@ Anyway，点到这个页面说明你对我很感兴趣，我写的东西你觉�
 
 Alynx Zhou
 
-<i class="bi bi-person-badge"></i> Arch Linux CN 社区成员
+<i class="bi bi-person-badge"></i> Arch Linux user, Linux desktop dev at SUSE, self-taught cameraman, harmonica player.
 
 <i class="bi bi-envelope"></i> 邮箱：[alynx.zhou@gmail.com](mailto:alynx.zhou@gmail.com)
 
@@ -36,6 +36,27 @@ Alynx Zhou
 
 <i class="bi bi-fingerprint"></i> PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
 
+<div class="alert-blue">想了又想还是觉得以前写的介绍太造作了所以决定换个正常点的版本。</div>
+
+Alynx Zhou / Alynx / AZ，能叫 Alynx 当然是最好的，我其实不是很介意你怎么称呼我，毕竟这是我自己造的名字，只要你尝试去读就很好了。但如果你实在担心自己读错或者是我懒得教别人怎么读的时候我一般会直接简称 AZ，其实这个我一开始写在博客里的时候只是觉得这个缩写也还行而且够简单，并没有真的打算让别人用这个，不过认识蓝猫之后她看了一下博客开始这么称呼，然后我觉得要不就让别人记个简单的吧，所以就接受了。虽然很多人会只读自己认识的部分但是最好还是别只叫 Zhou 毕竟前面才是我自己起的，不过我也不会生气。最后如果你一定要知道我想怎么读，其实这只是把 a lynx 写在一起而已，就这样读就可以了。
+
+最喜欢的二次元人物是 **科学超电磁炮** 里的 *御坂美琴*，与所有其它我喜欢的二次元人物都不同的是她是我希望成为但可能又永远不能成为的人。顺便一提我站黑琴讨厌上条当麻。其它喜欢的二次元人物有 **Fate/stay night** 里的 *阿尔托莉雅·潘德拉贡* 和 **明日方舟** 里的 *浊心斯卡蒂*。单推 [*中单光一*](https://space.bilibili.com/434401868)，头像作者是 [*茶冷*](https://space.bilibili.com/741520)。
+
+操作系统使用 Arch Linux，桌面环境使用 GNOME，浏览器使用 Firefox，编辑器使用 Emacs，自己写的话首选的语言是 C 或者 JavaScript，移动设备选择 Android，Valve 对 Linux 友好所以用 Steam，Minecraft 只玩 Java 版因为基岩版不支持 Linux，Adobe 不支持 Linux 所以用 DaVinci Resolve Studio 剪视频。写这些是为了提醒有些喜欢到处安利或者打嘴仗的人别来烦我。
+
+半音阶口琴吹的并不算特别好，只求自己开心。摄影水平一般但自己觉得能给自己拍壁纸就算成功。
+
+最喜欢的歌手是 *Kalafina*，其它人的话听 *陈奕迅* 比较多。
+
+猫和狗之间更喜欢猫，可口可乐和百事可乐之间更喜欢可口可乐，肯德基和麦当劳之间更喜欢汉堡王，不过也不是非常讨厌另一种。
+
+不要盗用我的头像，因为这是专门画给我的。也不要直接复制或者简单替换我写的内容，因为我看到了复制品会觉得自己的很尴尬。
+
+**被人需要是我存在的意义。**
+
+别的什么想到了再写吧。
+
+<!--
 # 关于 Alynx 的 33 条
 
 <div class="alert-red">对于一些人，在对着这个页面按 <code>Control + c</code> 之前，麻烦先看一下第 17 条。</div>
@@ -105,6 +126,7 @@ Alynx Zhou
 32. Alynx 希望听到别人的声音，即使我常常讨厌交流。如果有什么问题，欢迎发邮件 / Telegram 甚至是去 [这里](https://github.com/AlynxZhou/AlynxZhou.github.io/issues) 发issue。
 
 33. Alynx 说你好，世界。
+-->
 
 # 有关域名和点击量
 

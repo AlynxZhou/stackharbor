@@ -6,7 +6,7 @@ updated: 2020-08-24 09:20:00
 comment: true
 reward: false
 ---
-本来是打算把友情链接放到侧边栏里面的，但后来看好多人的网站里都是给链接单独开了个页面写点介绍。我觉得这样挺不错的，所以自己也搞一个。
+本来是打算把友情链接放到侧边栏里面的，但那边写太多的话用户体验非常差，而且后来看好多人的网站里都是给链接单独开了个页面写点介绍。我觉得这样挺不错的，所以自己也搞一个。侧边栏的友情链接现在只会放很重要并且还在更新的站点，太久没更新的话就只放在这个页面留档了。
 
 ~~在这个页面学一下狼说话应该不会挨打吧？~~
 
@@ -50,6 +50,7 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
+| <img src="https://avatars.githubusercontent.com/u/7828319?v=4" style="width: 5em;"> | [藍貓 八千代](https://dawn.moe/) |  | 仍在施工中…… |
 | <img src="https://avatars.githubusercontent.com/u/20807713?v=4" style="width: 5em;"> | [LGiki's Blog](https://lgiki.net/) | “喵喵喵” | 节奏王 Dogiki！每天咕咕咕，从不写博客！ |
 | <img src="https://avatars1.githubusercontent.com/u/4464926?s=400&u=8e7701ee107c6a606fa5752058f6a13d4537fe37&v=4" style="width: 5em;"> | [HackGhost](http://www.hackghost.com/) |  | 在五道口睡觉的某头。博客从某一天起就不更新了。 |
 | <img src="https://chenxy.moe/pic/chen.jpg" style="width: 5em;"> | [Art_Chen's Blog](https://chenxy.moe/) |  | 某著名 ROM 开发者，上大学了要努力写代码啊。|
