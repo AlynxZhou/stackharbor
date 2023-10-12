@@ -50,7 +50,7 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 
 | 头像 | 链接 | 自我介绍 | 我的介绍 |
 | :------------: | :------------: | :------------: | :------------: |
-| <img src="https://avatars.githubusercontent.com/u/7828319?v=4" style="width: 5em;"> | [藍貓 八千代](https://dawn.moe/) |  | 仍在施工中…… |
+| <img src="https://avatars.githubusercontent.com/u/7828319?v=4" style="width: 5em;"> | [藍貓 八千代](https://dawn.moe/) | (formerly as 八雲) Amateur professional, professional amateur. | 仍在施工中…… |
 | <img src="https://avatars.githubusercontent.com/u/20807713?v=4" style="width: 5em;"> | [LGiki's Blog](https://lgiki.net/) | “喵喵喵” | 节奏王 Dogiki！每天咕咕咕，从不写博客！ |
 | <img src="https://avatars1.githubusercontent.com/u/4464926?s=400&u=8e7701ee107c6a606fa5752058f6a13d4537fe37&v=4" style="width: 5em;"> | [HackGhost](http://www.hackghost.com/) |  | 在五道口睡觉的某头。博客从某一天起就不更新了。 |
 | <img src="https://chenxy.moe/pic/chen.jpg" style="width: 5em;"> | [Art_Chen's Blog](https://chenxy.moe/) |  | 某著名 ROM 开发者，上大学了要努力写代码啊。|
