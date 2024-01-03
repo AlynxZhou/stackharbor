@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sh.alynx.one/posts/Node-HTTP-Request-Needs-to-Handle-Response-Error/</loc>
+    <lastmod>2024-01-03T07:21:05.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/posts/2023-Arch-Install/</loc>
     <lastmod>2023-07-28T12:42:53.000Z</lastmod>
   </url>
@@ -425,12 +429,12 @@
     <lastmod>2020-08-24T01:20:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://sh.alynx.one/about/</loc>
-    <lastmod>2023-10-11T16:41:00.000Z</lastmod>
-  </url>
-  <url>
     <loc>https://sh.alynx.one/Undefined-Script-Works/</loc>
     <lastmod>2018-04-04T00:15:40.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/about/</loc>
+    <lastmod>2023-10-11T16:41:00.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/</loc>
@@ -566,6 +570,9 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/</loc>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/index-2.html</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/</loc>

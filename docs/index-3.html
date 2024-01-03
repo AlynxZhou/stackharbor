@@ -257,6 +257,47 @@
 <div id="index" class="index page">
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Emacs-Monaco-Box-drawing-Character/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="东京之旅一早比一世遥远">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Emacs-Monaco-Box-drawing-Character/" itemprop="url">Emacs 和 Monaco 字体和 Box-drawing Character</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-20T12:53:00.000Z">2/20/2022, 8:53:00 PM</time></span>
+        </div>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-02-26T01:51:25.000Z">2/20/2022, 8:53:00 PM</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%AD%97%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">字体</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Emacs-Monaco-Box-drawing-Character/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="Emacs 和 Monaco 字体和 Box-drawing Character" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>2016 年的我开始用 Atom 这种“modern”的编辑器，2022 年的我却又开始用回岁数比我都大的 GNU Emacs。切换的理由其实很简单，我曾经以为一直能追上最新版 Electron 的 VSCode 会成为第一个纯 Wayland 的代码编辑器——只要 Chromium 那边支持纯 Wayland 就好了嘛，然而直到 Emacs 那边的 pgtk 分支合并进主线（以防有读者不太清楚来龙去脉我解释一下，Emacs 虽然有图形界面，但实际上只是用 X 实现了一个 Terminal 层，而传统的 GTK3 界面只是使用 GTK3 创建一个 X 窗口，然后其它操作都是通过 X 进行，这实际上非常不适合 GTK3，导致了很多 bug，同时也使 Emacs 没法利用 GTK 的 Wayland 后端。而 pgtk 分支则是在 X 部分之外另起炉灶，利用 GTK 实现了一个和 X 部分平行的 Terminal 层，全部的绘制操作都是以 GTK/Cairo 的现代程序方式进行，自然也就摆脱了对 X 的依赖。总之在 Emacs 这样又老又庞大的代码库上做如此大范围的工程我觉得可以称得上是一项壮举了。），Chromium 的 ozone backend 还是问题多多。虽然 Emacs/Vim 这种软件看起来确实有点老派作风，但没想到也有走在这些“现代”编辑器前面的地方。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag"><i class="bi bi-tag"></i>字体</a><a class="post-tag button" href="/tags/Emacs/" rel="tag"><i class="bi bi-tag"></i>Emacs</a>
+      </div>
+    </footer>
+  </article>
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Fastest-Blog-Has-No-Post/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -613,47 +654,6 @@
       </div>
     </footer>
   </article>
-  <article class="article post card" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Fix-Silly-Spleeter-Dependencies/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="东京之旅一早比一世遥远">
-        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <div class="post-title" itemprop="name headline">
-        <a class="title-link" href="/posts/Fix-Silly-Spleeter-Dependencies/" itemprop="url">解决 Spleeter 愚蠢的依赖问题</a>
-      </div>
-      <div class="post-meta">
-        <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2020-11-26T08:43:12.000Z">11/26/2020, 4:43:12 PM</time></span>
-        </div>
-        <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2023-06-27T14:56:40.000Z">11/26/2020, 4:43:12 PM</time></span>
-        </div>
-        <div class="post-categories meta-block">
-          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
-        </div>
-        <div class="post-comment-count meta-block">
-          <i class="bi bi-chat-dots"></i><span><a href="/posts/Fix-Silly-Spleeter-Dependencies/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="解决 Spleeter 愚蠢的依赖问题" itemprop="commentCount">阅读评论</span></a></span>
-        </div>
-      </div>
-    </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <p>我倒不是对机器学习有什么莫名的偏见。事实上有些只能用机器学习搞定的东西我也很支持用机器学习解决，比如 waifu2x 这种增加图片分辨率的或者 Spleeter 这种分离人声和伴奏的，用传统的分离人声的方法就是不能完美解决这类问题，而机器学习模糊分类则可以无限接近完美解决。我讨厌的有两个，一个是传统方法很好解决的东西非要用机器学习解决，另一个是混乱的机器学习项目，后者更严重。</p>
-
-    </main>
-    <footer class="post-footer">
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/Python/" rel="tag"><i class="bi bi-tag"></i>Python</a><a class="post-tag button" href="/tags/Spleeter/" rel="tag"><i class="bi bi-tag"></i>Spleeter</a>
-      </div>
-    </footer>
-  </article>
   <nav class="pagination">
   <a class="page-number" href="/">1</a>
   <a class="page-number" href="/index-2.html">2</a>
@@ -698,7 +698,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">103</a></div>
+        <div><a href="/archives/">104</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -772,4 +772,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2023-11-21T09:23:16.166Z. -->
+<!-- Page built by Hikaru v1.14.3 at 2024-01-03T07:58:26.992Z. -->
