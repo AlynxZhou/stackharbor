@@ -3,7 +3,7 @@ title: 谁动了我的 DNS 解析？
 layout: post
 #comment: true
 created: 2022-11-09T21:06:00
-updated: 2023-09-07T15:23:59
+updated: 2024-02-01T18:15:00
 categories:
   - 计算机
   - Linux
@@ -83,3 +83,31 @@ hosts: mymachines mdns4_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] file
 ```
 
 然后再修改 `/etc/hosts` 分别添加不带 `.local` 的主机名（因为 `.local` 会在 `files` 之前先被 mDNS 处理）。
+
+# 当你觉得逐渐理解一切，并试图走出新手村……
+
+<div class="alert-blue">这一部分更新于 2024-02-01 18:15:00。因为我的网络配置终于突破了“只要全部交给 NetworkManager 就能解决”的范围。</div>
+
+首先我还是应该对之前的逻辑做一下总结，其实关键无非是一句话：需要添加新的 DNS 服务器的场景有很多，但管理 `/etc/resolv.conf` 的程序只能有一个。比如说你连接到家里的网络，那你首先会希望自己的 DNS 服务器是路由器。然后这时你需要连接到公司的 VPN，那你会多出一个 VPN 的 DNS 服务器用来查询内网域名，并且只应该对内网域名查询这个 DNS 服务器。如果你选择用 NetworkManager 管理 `/etc/resolv.conf`，那你也应该使用 NetworkManager 的 VPN 插件，通过 NetworkManager 去修改 `/etc/resolv.conf`。于是就不再需要额外的进程管理 DNS 查询。
+
+而使我决定最后改用 systemd-resolved 管理 DNS 查询的原因是我开始使用 Tailscale/Headscale 构建一个我自己的 VPN 网络。Tailscale 包含一个叫做 MagicDNS 的组件，可以让你像使用路由器的 DNS 一样通过主机名访问这个虚拟专用网里的设备，此时它会直接覆盖掉 `/etc/resolv.conf` 让 DNS 查询走它自己的 DNS 服务器，这导致我的 OpenVPN 的 DNS 服务器被清掉，无法同时访问公司的内网。
+
+如果你已经理解一切，解决方案应该也很清晰：要么把 Tailscale 也换成 NetworkManager 的插件版本（不存在），要么使用另一个专门管理 `/etc/resolv.conf` 的工具（systemd-resolved）让 Tailscale 和 NetworkManager 都交给它管理从而不要互相覆盖。考虑到 Avahi 的 mDNS 并没有像我想象的那样工作，我毫不犹豫的干掉了它换成了 systemd-resolved。
+
+干掉 Avahi 的部分暂且不提，启用 systemd-resolved 的过程需要额外操作：
+
+```
+# systemctl enable --now systemd-resolved
+# ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+```
+
+按照之前讲的，建立软链接是为了让那些老掉牙的程序也使用 systemd-resolved 内置的 DNS 服务器，于是大家现在都走 systemd-resolved 进行查询。然后 Tailscale 和 NetworkManager 都支持 systemd-resolved，检测到这个软链接就不会尝试直接覆盖 `/etc/resolv.conf`，而是通知 systemd-resolved 添加自己的 DNS 解析。
+
+然后重启 NetworkManager 和 Tailscale：
+
+```
+# systemctl restart NetworkManager
+# systemctl restart tailscaled
+```
+
+但以上步骤只是让它们的 DNS 服务器设置可以共存，具体对于哪些域名通过哪个 DNS 服务器查询，是各个程序自己设置的，Tailscale 其实会正确的告诉 systemd-resolved 自己要处理的域名，但对于我的 OpenVPN 我发现需要我手动设置，由于我是使用 NetworkManager 管理我的 OpenVPN，所以需要执行 `nmcli connection edit VPN-CONNECTION`，然后 `set ipv4.dns-search a.internal,b.internal` 这样（看起来 NetworkManager 的 GUI 里没法修改这个），然后再重新开启 VPN 时候，你就可以通过 `resolvectl` 看到 OpenVPN 的 DNS 添加了正确的搜索范围。

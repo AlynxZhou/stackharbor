@@ -284,7 +284,7 @@
           <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-09T13:06:00.000Z">11/9/2022, 9:06:00 PM</time></span>
         </div>
         <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2023-09-07T07:23:59.000Z">9/7/2023, 3:23:59 PM</time></span>
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2024-02-01T10:15:00.000Z">2/1/2024, 6:15:00 PM</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
@@ -335,6 +335,26 @@
 " class="code-block"><pre class="code"><code>hosts: mymachines mdns4_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
 </code></pre></figure>
 <p>然后再修改 <code>/etc/hosts</code> 分别添加不带 <code>.local</code> 的主机名（因为 <code>.local</code> 会在 <code>files</code> 之前先被 mDNS 处理）。</p>
+<h1 id="%E5%BD%93%E4%BD%A0%E8%A7%89%E5%BE%97%E9%80%90%E6%B8%90%E7%90%86%E8%A7%A3%E4%B8%80%E5%88%87%EF%BC%8C%E5%B9%B6%E8%AF%95%E5%9B%BE%E8%B5%B0%E5%87%BA%E6%96%B0%E6%89%8B%E6%9D%91%E2%80%A6%E2%80%A6"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving/#%E5%BD%93%E4%BD%A0%E8%A7%89%E5%BE%97%E9%80%90%E6%B8%90%E7%90%86%E8%A7%A3%E4%B8%80%E5%88%87%EF%BC%8C%E5%B9%B6%E8%AF%95%E5%9B%BE%E8%B5%B0%E5%87%BA%E6%96%B0%E6%89%8B%E6%9D%91%E2%80%A6%E2%80%A6"></a>当你觉得逐渐理解一切，并试图走出新手村……</h1>
+<div class="alert-blue">这一部分更新于 2024-02-01 18:15:00。因为我的网络配置终于突破了“只要全部交给 NetworkManager 就能解决”的范围。</div>
+
+<p>首先我还是应该对之前的逻辑做一下总结，其实关键无非是一句话：需要添加新的 DNS 服务器的场景有很多，但管理 <code>/etc/resolv.conf</code> 的程序只能有一个。比如说你连接到家里的网络，那你首先会希望自己的 DNS 服务器是路由器。然后这时你需要连接到公司的 VPN，那你会多出一个 VPN 的 DNS 服务器用来查询内网域名，并且只应该对内网域名查询这个 DNS 服务器。如果你选择用 NetworkManager 管理 <code>/etc/resolv.conf</code>，那你也应该使用 NetworkManager 的 VPN 插件，通过 NetworkManager 去修改 <code>/etc/resolv.conf</code>。于是就不再需要额外的进程管理 DNS 查询。</p>
+<p>而使我决定最后改用 systemd-resolved 管理 DNS 查询的原因是我开始使用 Tailscale/Headscale 构建一个我自己的 VPN 网络。Tailscale 包含一个叫做 MagicDNS 的组件，可以让你像使用路由器的 DNS 一样通过主机名访问这个虚拟专用网里的设备，此时它会直接覆盖掉 <code>/etc/resolv.conf</code> 让 DNS 查询走它自己的 DNS 服务器，这导致我的 OpenVPN 的 DNS 服务器被清掉，无法同时访问公司的内网。</p>
+<p>如果你已经理解一切，解决方案应该也很清晰：要么把 Tailscale 也换成 NetworkManager 的插件版本（不存在），要么使用另一个专门管理 <code>/etc/resolv.conf</code> 的工具（systemd-resolved）让 Tailscale 和 NetworkManager 都交给它管理从而不要互相覆盖。考虑到 Avahi 的 mDNS 并没有像我想象的那样工作，我毫不犹豫的干掉了它换成了 systemd-resolved。</p>
+<p>干掉 Avahi 的部分暂且不提，启用 systemd-resolved 的过程需要额外操作：</p>
+<figure data-raw="# systemctl enable --now systemd-resolved
+# ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+" class="code-block"><pre class="code"><code># systemctl enable --now systemd-resolved
+# ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+</code></pre></figure>
+<p>按照之前讲的，建立软链接是为了让那些老掉牙的程序也使用 systemd-resolved 内置的 DNS 服务器，于是大家现在都走 systemd-resolved 进行查询。然后 Tailscale 和 NetworkManager 都支持 systemd-resolved，检测到这个软链接就不会尝试直接覆盖 <code>/etc/resolv.conf</code>，而是通知 systemd-resolved 添加自己的 DNS 解析。</p>
+<p>然后重启 NetworkManager 和 Tailscale：</p>
+<figure data-raw="# systemctl restart NetworkManager
+# systemctl restart tailscaled
+" class="code-block"><pre class="code"><code># systemctl restart NetworkManager
+# systemctl restart tailscaled
+</code></pre></figure>
+<p>但以上步骤只是让它们的 DNS 服务器设置可以共存，具体对于哪些域名通过哪个 DNS 服务器查询，是各个程序自己设置的，Tailscale 其实会正确的告诉 systemd-resolved 自己要处理的域名，但对于我的 OpenVPN 我发现需要我手动设置，由于我是使用 NetworkManager 管理我的 OpenVPN，所以需要执行 <code>nmcli connection edit VPN-CONNECTION</code>，然后 <code>set ipv4.dns-search a.internal,b.internal</code> 这样（看起来 NetworkManager 的 GUI 里没法修改这个），然后再重新开启 VPN 时候，你就可以通过 <code>resolvectl</code> 看到 OpenVPN 的 DNS 添加了正确的搜索范围。</p>
 
     </main>
     <footer class="post-footer">
@@ -480,6 +500,10 @@
           <a class="list-group-item toc-link" href="#%E8%AF%BB%E8%80%85%E7%9C%8B%E7%88%BD%E4%BA%86%EF%BC%8C%E4%BD%86%E5%A5%BD%E5%83%8F%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E6%88%91%E6%83%B3%E8%A6%81%E7%9A%84%E2%80%A6%E2%80%A6">读者看爽了，但好像结果不是我想要的……</a>
           
         </li>
+        <li>
+          <a class="list-group-item toc-link" href="#%E5%BD%93%E4%BD%A0%E8%A7%89%E5%BE%97%E9%80%90%E6%B8%90%E7%90%86%E8%A7%A3%E4%B8%80%E5%88%87%EF%BC%8C%E5%B9%B6%E8%AF%95%E5%9B%BE%E8%B5%B0%E5%87%BA%E6%96%B0%E6%89%8B%E6%9D%91%E2%80%A6%E2%80%A6">当你觉得逐渐理解一切，并试图走出新手村……</a>
+          
+        </li>
       </ol>
     </div>
     <hr>
@@ -540,4 +564,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2024-01-03T07:58:26.945Z. -->
+<!-- Page built by Hikaru v1.14.3 at 2024-02-01T10:40:30.704Z. -->
