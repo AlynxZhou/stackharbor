@@ -8,7 +8,7 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。">
+    <meta name="description" content="我发现这篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，如果你只对后者感兴趣，请阅读最新的 谁动了我的 DNS 解析（重制版）？。 如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。">
     <meta name="keywords" content="计算机, Linux, 网络">
     <meta name="generator" content="Hikaru v1.14.3">
     <meta name="color-scheme" content="light dark">
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving/">
     <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
-    <meta property="og:description" content="如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。">
+    <meta property="og:description" content="我发现这篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，如果你只对后者感兴趣，请阅读最新的 谁动了我的 DNS 解析（重制版）？。 如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。">
     <link rel="canonical" href="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving/">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
@@ -295,7 +295,9 @@
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <p>如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。</p>
+      <div class="alert-red">我发现这篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，如果你只对后者感兴趣，请阅读最新的 <a href="/posts/Who-Moved-My-DNS-Resolving-Remastered/">谁动了我的 DNS 解析（重制版）？</a>。</div>
+如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。
+
 <a id="more"></a>
 
 <h1 id="%E9%9C%80%E6%B1%82"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving/#%E9%9C%80%E6%B1%82"></a>需求</h1>
@@ -303,7 +305,7 @@
 <p>直连两台设备其实非常简单，Network Manager 里面 IPv4 设置成手动，然后分别配置 IP 地址和子网掩码，再关掉 IPv6 就可以了，比如我分别设置 IP 为 <code>10.10.10.1</code> 和 <code>10.10.10.2</code>，然后子网掩码就是 <code>255.255.255.0</code>。然后在进行各种网络访问的时候只要使用这个 IP 就可以通过直连访问了。</p>
 <p>但是我还是不太满意，我设置了帅气的主机名，为什么还得用 IP 访问呢？但如果我查询主机名对应的 IP，发现得到的并不是直连的 IP，而是比如 <code>192.168.1.80</code> 这样的通过路由器的 IP。于是我开始研究如何配置让 DNS 解析给我返回直连的 IP。</p>
 <h1 id="longlongago"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving/#longlongago"></a>long long ago</h1>
-<p>一般要讲故事，开头都是“很久很久以前……”，不过计算机领域也没什么太古老的故事可讲，毕竟公认的互联网前身 ARPANET 也就是二十世纪的事情。那个时候能互联的机器一共也就那么几个，所以解决的办法简单粗暴：我们每个机器都保存一个文件，里面记录所有人对应的域名和 IP 不就行了？这个优良传统一直留了下来，也就是现在所有系统里都有的 hosts 文件，不管你写的对不对，它的优先级都比 DNS 查询要高。对于我这个及其简单的网络环境，这肯定是不错的解决方案，但是程序员总会觉得这种非自动化的手段太 low 了，于是就被我 pass 掉了。</p>
+<p>一般要讲故事，开头都是“很久很久以前……”，不过计算机领域也没什么太古老的故事可讲，毕竟公认的互联网前身 ARPANET 也就是二十世纪的事情。那个时候能互联的机器一共也就那么几个，所以解决的办法简单粗暴：我们每个机器都保存一个文件，里面记录所有人对应的域名和 IP 不就行了？这个优良传统一直留了下来，也就是现在所有系统里都有的 hosts 文件，不管你写的对不对，它的优先级都比 DNS 查询要高。对于我这个极其简单的网络环境，这肯定是不错的解决方案，但是程序员总会觉得这种非自动化的手段太 low 了，于是就被我 pass 掉了。</p>
 <p>然后随着加入网络的机器越来越多，这个办法不好用了，毕竟每来一个新人就要所有人更新自己的文件，这复杂度也太高了。所以干脆我们搞一个集中的服务器专门放这个列表，其它机器都向它查询就好了。这就是 DNS 服务器的原理了，然后在局域网里，一般路由器和 DNS 服务器以及 DHCP 服务器都是同一台机器，因为很自然的所有设备都会连到路由器上，而 DHCP 服务器恰好知道它分配出去的 IP 地址，所以如果你输入主机名恰好能解析，那通常是你的路由器做了这些工作。但对于我这个子网来说，为了这两台电脑再配置 DHCP 和 DNS 显然太麻烦了，pass。</p>
 <p>再后来各种子网越来越多，子网里的设备也越来越多，比如打印机这种，以至于现在各种智能家居，不可能再搞一个服务器用来注册“喂，我是茶壶”这种东西，于是苹果搞出了一个叫 Zeroconf 的协议，大概是在 DNS 的基础上可以让子网里支持这个协议的设备互相发现互相通知自己是什么。因为和 DNS 相关，所以有一个部分是 MulticastDNS (mDNS)，简单来说就是不通过 DNS 服务器，而是通过这个协议发现的设备列表实现 DNS 解析。所以这是第三种方式。</p>
 <p>以上三种方式其实都是我从 Arch Wiki 抄来的：<a href="https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution" target="_blank" rel="external nofollow noreferrer noopener">https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution</a></p>
@@ -460,7 +462,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">105</a></div>
+        <div><a href="/archives/">106</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -564,4 +566,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2024-02-04T11:44:33.194Z. -->
+<!-- Page built by Hikaru v1.14.3 at 2024-02-06T03:52:12.004Z. -->

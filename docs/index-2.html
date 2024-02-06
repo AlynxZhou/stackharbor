@@ -257,6 +257,46 @@
 <div id="index" class="index page">
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="东京之旅一早比一世遥远">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/YubiKey-GNOME-Smartcard-Login/" itemprop="url">YubiKey 和 GNOME 和智能卡登录</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-11-28T10:24:04.000Z">11/28/2022, 6:24:04 PM</time></span>
+        </div>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-11-30T13:08:11.000Z">11/28/2022, 6:24:04 PM</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/YubiKey-GNOME-Smartcard-Login/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="YubiKey 和 GNOME 和智能卡登录" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 sudo 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，除了平时用的 gdm…</p>
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="bi bi-tag"></i>GNOME</a><a class="post-tag button" href="/tags/YubiKey/" rel="tag"><i class="bi bi-tag"></i>YubiKey</a>
+      </div>
+    </footer>
+  </article>
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -361,7 +401,9 @@
       </div>
     </header>
     <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <p>如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。</p>
+      <div class="alert-red">我发现这篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，如果你只对后者感兴趣，请阅读最新的 <a href="/posts/Who-Moved-My-DNS-Resolving-Remastered/">谁动了我的 DNS 解析（重制版）？</a>。</div>
+如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。
+
 
     </main>
     <footer class="post-footer">
@@ -613,46 +655,6 @@
       </div>
     </footer>
   </article>
-  <article class="article post card" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Telegram-Bot-as-Gallery-Backend/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="东京之旅一早比一世遥远">
-        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <div class="post-title" itemprop="name headline">
-        <a class="title-link" href="/posts/Telegram-Bot-as-Gallery-Backend/" itemprop="url">用 Telegram 机器人做后端的照片墙</a>
-      </div>
-      <div class="post-meta">
-        <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-03-23T08:01:11.000Z">3/23/2022, 4:01:11 PM</time></span>
-        </div>
-        <div class="post-categories meta-block">
-          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-        </div>
-        <div class="post-comment-count meta-block">
-          <i class="bi bi-chat-dots"></i><span><a href="/posts/Telegram-Bot-as-Gallery-Backend/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="用 Telegram 机器人做后端的照片墙" itemprop="commentCount">阅读评论</span></a></span>
-        </div>
-      </div>
-    </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
-      <blockquote class="center-quote">杜洛夫叔叔我啊，最喜欢 TON 了。</blockquote>
-
-<p>其实倒也不一定是 Telegram 机器人，只是我比较熟悉这个的 API，不过看杜洛夫叔叔自己打自己脸的架势甚至比起陈叔叔有过之而无不及，说不定哪天我真的可能把这个服务转移到别的上去，反正原理都是类似的。这篇文章只是记录一下这个点子的来源和形成过程，其实实现起来没什么技术难度。</p>
-
-    </main>
-    <footer class="post-footer">
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"><i class="bi bi-tag"></i>编程</a><a class="post-tag button" href="/tags/JavaScript/" rel="tag"><i class="bi bi-tag"></i>JavaScript</a>
-      </div>
-    </footer>
-  </article>
   <nav class="pagination">
   <a class="page-number" href="/">1</a>
   <a class="page-number current" href="/index-2.html">2</a>
@@ -697,7 +699,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">105</a></div>
+        <div><a href="/archives/">106</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -771,4 +773,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2024-02-04T11:44:33.256Z. -->
+<!-- Page built by Hikaru v1.14.3 at 2024-02-06T03:52:12.064Z. -->

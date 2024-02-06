@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="这一篇是之前 谁动了我的 DNS 解析？ 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。 标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。">
+    <meta name="keywords" content="计算机, Linux, 网络">
+    <meta name="generator" content="Hikaru v1.14.3">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="谁动了我的 DNS 解析（重制版）？">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving-Remastered/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
+    <meta property="og:description" content="这一篇是之前 谁动了我的 DNS 解析？ 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。 标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving-Remastered/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      header.header, footer.footer {
+        background: #33363b;
+      }
+      
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        formatDateTime(
+          document.querySelectorAll("time.post-full-datetime"),
+          "zh-Hans"
+        );
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/scrollspy.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    loadScrollSpy({
+      "containerID": "scrollspy-container",
+      "targetID": "scrollspy-target",
+      "headingSelector": "h1, h2, h3, h4, h5, h6"
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const gutter = [];
+        gutter.push("<pre class=\"gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add gutter for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            gutter.push("\n");
+          }
+        }
+        gutter.push("</pre>");
+        elementBefore(e, createElementFromString(gutter.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>谁动了我的 DNS 解析（重制版）？ - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
+        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving-Remastered/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="东京之旅一早比一世遥远">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/" itemprop="url">谁动了我的 DNS 解析（重制版）？</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2024-02-06T02:30:00.000Z">2/6/2024, 10:30:00 AM</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="谁动了我的 DNS 解析（重制版）？" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>这一篇是之前 <a href="/posts/Who-Moved-My-DNS-Resolving/">谁动了我的 DNS 解析？</a> 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。</p>
+<p>标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。</p>
+<a id="more"></a>
+
+<h1 id="longlongago"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#longlongago"></a>long long ago</h1>
+<p>一般要讲故事，开头都是“很久很久以前……”，不过计算机领域也没什么太古老的故事可讲，毕竟公认的互联网前身 ARPANET 也就是二十世纪的事情。那个时候能互联的机器一共也就那么几个，所以解决的办法简单粗暴：我们每个机器都保存一个文件，里面记录所有人对应的域名和 IP 不就行了？这个优良传统一直留了下来，也就是现在所有系统里都有的 hosts 文件——不管你写的对不对，它的优先级都比后来出现的 DNS 查询要高。</p>
+<p>然后随着加入网络的机器越来越多，这个办法不好用了，毕竟每来一个新人就要所有人更新自己的文件，这复杂度也太高了。所以干脆我们搞一个集中的服务器专门放这个列表，其它机器都向它查询就好了，这就是 DNS 服务器的原理了。然后在局域网里，一般路由器和 DNS 服务器以及 DHCP 服务器都是同一台机器，因为很自然的所有设备都会连到路由器上，而 DHCP 服务器恰好知道它分配出去的 IP 地址，所以如果你输入内网设备的主机名恰好能解析，那通常是你的路由器做了这些工作。</p>
+<p>但既然有了 DNS 服务器，那问题就变得复杂起来，比如我该将我的 DNS 服务器设置成哪一个？特别地，你可能会发现有很多不同的程序在试图修改你的 DNS 服务器设置，导致你打开某些网站本该秒开却不停地转圈圈，事情为什么会这么复杂？</p>
+<h1 id="chattr+ietcresolvconf"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#chattr+ietcresolvconf"></a>chattr +i /etc/resolv.conf</h1>
+<p>很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 <code>/etc/resolv.conf</code> 实现，很多 Linux 用户也被 <code>/etc/resolv.conf</code> 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 <code>resolvconf</code> 的工具处理，然后现在 systemd 又搞了个叫 systemd-resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 <code>chattr +i /etc/resolv.conf</code> 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是惹恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），你不需要的功能并不意味着别人也不需要。总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 <code>/etc/resolv.conf</code> 的。</p>
+<p>在 DNS 服务器设置这件事上并不是一个 <code>/etc/resolv.conf</code> 搞定所有，有关这个的故事也是 long long ago，但毕竟是 UNIX 纪元之后的事情，没有太久，大概确实上古时代的程序都是直接读这个获取 DNS 服务器然后再做 DNS 解析的，但实际上这也不一定 OK，比如像之前说的 hosts 文件也需要考虑。所以就有了更复杂的解决方案，大部分程序做 DNS 解析实际上是调用 glibc 里面 <code>getaddrinfo</code> 这个 API，所以在它后面我们就可以做一些工作。一个叫做 Name Service Switch 的东西发明出来就是干这个的，它是基于插件的，我们可以通过阅读 <code>/etc/nsswitch.conf</code> 里面的 <code>hosts</code> 这一行来理解，比如我这里默认是这样的：</p>
+<figure data-raw="hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
+" class="code-block"><pre class="code"><code>hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
+</code></pre></figure>
+<p>简单翻译一下的话意思就是查询一个域名的时候首先看看是不是 systemd-machined 的容器（<code>mymachines</code> 模块），不是的话再问问 systemd-resolved 能不能解析（<code>resolve</code> 模块），如果 systemd-resolved 可用，那到这也就完事了，后面的就不管了（<code>[!UNAVAIL=return]</code>），至于为什么我一会解释，然后 <code>files</code> 模块会读 hosts 文件，所以它优先级总是高于 DNS 服务器，然后看看是不是本机（<code>myhostname</code> 模块），然后再读 <code>/etc/resolv.conf</code> 里面的 DNS 服务器进行查询。</p>
+<p>按照这个顺序，如果你处在一个极其简单的网络环境：只有一个网络连接（这里包含各种有线无线 VPN 隧道在内都只能有一个）并且完全不会移动到其它网络连接下使用，那确实只要在 <code>/etc/resolv.conf</code> 里面写死一个公开的 DNS 服务器就可以满足你的所有查询需求。但可惜并不是所有人的使用环境都这么简单，所以每个工具都有额外的策略并试图修改 <code>/etc/resolv.conf</code>。</p>
+<h1 id="%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%E2%80%A6%E2%80%A6"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%E2%80%A6%E2%80%A6"></a>当你是个需要来回跑的笔记本用户……</h1>
+<p>下面让我们考虑一个比那些觉得自己手搓一个 DHCP 客户端就能联网的大脑皮层极其光滑的只要 <code>chattr +i /etc/resolv.conf</code> 就能解决问题的小笨蛋们的场景稍微复杂一点的场景：你是一个背着笔记本来回跑的上班族，公司 WiFi 和家里 WiFi 的网段并不一样，而你需要在公司的时候将 DNS 服务器设置为公司的路由器，在家的时候将 DNS 服务器设置为家的路由器（什么水晶室女），以便在两地都可以通过内网设备的主机名访问对应的内网设备，显然你不可能靠 <code>chattr +i /etc/resolv.conf</code> 解决问题。</p>
+<p>这就是为什么 Network Manager 需要修改你的 <code>/etc/resolv.conf</code>（其它网络管理器我就不考虑了因为我没用过，而且对于所有这种可以帮你自动连接 WiFi 的网络管理器而言，设置 DNS 服务器的逻辑都应该是相同的），对于每个不同的网络连接，它都会记录或者自动获取该局域网的 DNS 服务器，然后根据你当前激活的连接把这个 DNS 服务器写入 <code>/etc/resolv.conf</code>，保证无论是使用 <code>getaddrinfo</code> 的程序还是自己读取 <code>/etc/resolv.conf</code> 的老古董程序都可以获取到正确的局域网 DNS 服务器从而访问内网里的设备。</p>
+<h1 id="%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E2%80%A6%E2%80%A6"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E2%80%A6%E2%80%A6"></a>当你是个需要来回跑的笔记本用户，同时你还需要通过 VPN 远程办公……</h1>
+<p>如果你完全理解了上面那一段，恭喜你已经脱离了草履虫进化成了脊椎动物了！但你又遇到了更复杂的场景：你的工作要求你连接公司的 VPN，从而通过内部的 DNS 服务器解析一些内网才能访问的网站，当你打开了 VPN 下载一些内网才能下载的工具时你想同时放一些音乐打发时间，但你最爱的音乐网站现在要转 3 秒的圈才能访问！Network Manager 可以帮你解决这个问题吗？答案是在某些情况下可以！</p>
+<p>尝试分析这个新的需求，你会发现问题在于 VPN 服务也要设置一个 DNS 服务器，如果你的 VPN 服务尝试自己覆盖 <code>/etc/resolv.conf</code>，那么 Network Manager 之前按照你的连接帮你设置的“正常的”的 DNS 服务器就会消失，你所有的 DNS 解析就会全部绕到公司内网的 DNS 服务器上跑一圈，导致所有网站的解析都变得很慢。这个时候你可能又打算大喊 <code>chattr +i /etc/resolv.conf</code> 退化成草履虫，但这样你就没办法解析公司内网的域名了，也许更好的办法是只让 Network Manager 管理 <code>/etc/resolv.conf</code>。因为大部分的 VPN 都已经有 Network Manager 的插件了，所以你只要在 Network Manager 里添加你的 VPN 连接，它就会像管理 WiFi 一样管理这个连接，此时你会发现你的 <code>/etc/resolv.conf</code> 里已经同时有了家里路由器的 DNS 服务器和 VPN 的 DNS 服务器。</p>
+<p>理想状态下，你的 VPN 应该会自动通知客户端对于哪些域名使用这个 VPN 的 DNS 服务器查询，如果你勾选了“仅对此网络上的资源使用此连接”的话。这样访问不在内网上的网站就不会到这个 DNS 服务器上转一圈，而是直接跑到“正常”的 DNS 服务器上查询。但如果不幸这个自动配置的过程出了问题，你可以通过 <code>nmcli</code> 修改这个 VPN 连接的 <code>ipv4.dns-search</code> 项，把需要在内网查询的域名列表手动设置好。</p>
+<p>对于绝大部分用户，这样的配置应该已经可以满足他们了！但实际情况永远只有更复杂，所以我们还要继续！</p>
+<h1 id="%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E4%BD%86%E4%BD%A0%E7%9A%84VPN%E5%B9%B6%E6%B2%A1%E6%9C%89NetworkManager%E7%9A%84%E6%8F%92%E4%BB%B6%E2%80%A6%E2%80%A6"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E4%BD%86%E4%BD%A0%E7%9A%84VPN%E5%B9%B6%E6%B2%A1%E6%9C%89NetworkManager%E7%9A%84%E6%8F%92%E4%BB%B6%E2%80%A6%E2%80%A6"></a>当你是个需要来回跑的笔记本用户，同时你还需要通过 VPN 远程办公，但你的 VPN 并没有 Network Manager 的插件……</h1>
+<p>欢迎刚刚进化完成的灵长类！坐稳了！我们要向现代人的方向冲刺了！现在我有一个更加复杂的需求：我给自己的各种内网设备搭建了一个 VPN，这样我即使身在外面也能访问我家里的服务器，但这个 VPN 使用 Tailscale，Network Manager 并没有相关的插件，于是 Tailscale 也来试图覆盖我的 <code>/etc/resolv.conf</code>，听个音乐又需要转 3 秒的圈，怎么办？</p>
+<p>最好在那边手握 <code>chattr +i /etc/resolv.conf</code> 的草履虫嘲笑之前堵上他的嘴，因为这同样会导致我失去解析 VPN 内网域名的能力，我们是现代人，我们要用 systemd-resolved 解决这个问题。</p>
+<p>systemd-resolved 并不仅仅是一个管理 <code>/etc/resolv.conf</code> 的工具，实际上它本身是一个自带缓存的 DNS 服务器，然后向上接管各种不同的 DNS 查询逻辑，向下为各种需要设置 DNS 服务器的工具提供接口。因此如果你的各种网络连接工具都支持 systemd-resolved 的接口，那它们就不需要自己修改 <code>/etc/resolv.conf</code>，而是改为配合 systemd-resolved 工作，恰好 Network Manager 和 Tailscale 都支持 systemd-resolved。</p>
+<p>在接管 DNS 查询这个目的上 systemd-resolved 提供了三种不同的接口：首先是自己实现了一个 D-Bus 接口，其它程序可以通过这个接口来实现。然后是在 Name Service Switch 里添加了属于自己的模块以接管 <code>getaddrinfo</code>，如果检测到 systemd-resolved 已启用，那它的缓存 DNS 服务器就会接管所有的处理，包括 hosts 和 hostname，以及如果没有缓存到，就会主动向上级 DNS 服务器查询，因此在 <code>/etc/nsswitch.conf</code> 里面写了如果检测到 systemd-resolved 就直接返回，跳过后面的模块。最后对于那些自己读取 <code>/etc/resolv.conf</code> 的老古董，它也会修改这个文件接管这类程序，这时这个文件只是个软链接，里面只有一句就是把 DNS 服务器设置为 systemd-resolved 自己的 DNS 缓存服务器。</p>
+<p>如果你要启用 systemd-resolved，务必保证你的 <code>/etc/resolv.conf</code> 是指向 systemd-resolved 管理的文件的软链接：</p>
+<figure data-raw="# ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+</code></pre></figure>
+<p>这样如果 Network Manager 和 Tailscale 启动时检测到 <code>/etc/resolv.conf</code> 是软链接，就会知道自己需要配合 systemd-resolved 工作（如果你正在配置这个，那就手动重启它们！）。此时执行 <code>resolvectl status</code>，应该能看到对于不同的网络接口，都配置了不同的 DNS 服务器，以及需要通过这个服务器查询的域名（如果你配置过的话！）。</p>
+<p>当然，你也可以通过 systemd-resolved 的配置添加一个全局的 DNS 服务器，systemd-resolved 支持 unicast，也就是说如果你查询的域名不符合任何一个网络接口设置的要通过这个接口的 DNS 服务器查询的域名的话，它就会通过所有网络接口的 DNS 服务器查询，然后取最快返回的结果。</p>
+<h1 id="%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E4%BD%86%E4%BD%A0%E7%9A%84VPN%E5%B9%B6%E6%B2%A1%E6%9C%89NetworkManager%E7%9A%84%E6%8F%92%E4%BB%B6%EF%BC%8C%E5%AE%83%E4%B9%9F%E4%B8%8D%E6%94%AF%E6%8C%81systemd-resolved%E2%80%A6%E2%80%A6"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E4%BD%86%E4%BD%A0%E7%9A%84VPN%E5%B9%B6%E6%B2%A1%E6%9C%89NetworkManager%E7%9A%84%E6%8F%92%E4%BB%B6%EF%BC%8C%E5%AE%83%E4%B9%9F%E4%B8%8D%E6%94%AF%E6%8C%81systemd-resolved%E2%80%A6%E2%80%A6"></a>当你是个需要来回跑的笔记本用户，同时你还需要通过 VPN 远程办公，但你的 VPN 并没有 Network Manager 的插件，它也不支持 systemd-resolved……</h1>
+<p>我们的口号是不做草履虫！实际上这种场景已经非常非常少见了，绝大多数的场景都能被 Network Manager + systemd-resolved 覆盖，这也就是为什么越来越多的通用发行版都使用这一套进行网络管理和 DNS 解析的原因。但如果你真的遇到了，也许你听说过一个叫做 <code>resolvconf</code> 的工具，在以前某些发行版会预装它。它的逻辑似乎就是有各种程序都打算自己修改 <code>/etc/resolv.conf</code>，那你们干脆都别管了，我来管，听我的（现在有 N + 1 种解决方案了）。至于它到底是怎么工作的，如何配置，这些都别问我！因为我也没有用过！我觉得你不如去建议不支持 systemd-resolved 的项目支持 systemd-resolved 比较实际……</p>
+<p>总之无论如何如果你搜到一篇老旧的教程告诉你设置这个 <code>resolvconf</code>，那你都该留个心眼查一下，万一你这个需求已经可以用 Network Manager 的插件或者它已经支持 systemd-resolved 了呢？</p>
+<h1 id="%E5%A4%AA%E9%95%BF%E4%B8%8D%E7%9C%8B%EF%BC%81"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#%E5%A4%AA%E9%95%BF%E4%B8%8D%E7%9C%8B%EF%BC%81"></a>太长不看！</h1>
+<p>我准备了一张图，让你知道 DNS 解析在 Linux 上都发生了什么，以及 Network Manager 和 systemd-resolved 各自都扮演什么角色……</p>
+<p><img src="/posts/Who-Moved-My-DNS-Resolving-Remastered/dns.png" alt="dns.png"></p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="bi bi-tag"></i>Linux</a><a class="post-tag button" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"><i class="bi bi-tag"></i>网络</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/Build-VPN-with-Headscale-and-Tailscale/" rel="prev" title="使用 Headscale 和 Tailscale 构建虚拟专用网"><span class="page-nav-title">使用 Headscale 和 Tailscale 构建虚拟专用网</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "谁动了我的 DNS 解析（重制版）？",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Who-Moved-My-DNS-Resolving-Remastered/",
+          "containerID": "comment-results"
+        }).then(() => {
+          formatDateTime(
+            document.querySelectorAll("time.comment-full-datetime"),
+            "zh-Hans"
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">东京之旅一早比一世遥远</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">106</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">36</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">78</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="bi bi-list-ol"></i>文章目录</div>
+      <ol class="toc" id="scrollspy-target">
+        <li>
+          <a class="list-group-item toc-link" href="#longlongago">long long ago</a>
+          
+        </li>
+        <li>
+          <a class="list-group-item toc-link" href="#chattr+ietcresolvconf">chattr +i /etc/resolv.conf</a>
+          
+        </li>
+        <li>
+          <a class="list-group-item toc-link" href="#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%E2%80%A6%E2%80%A6">当你是个需要来回跑的笔记本用户……</a>
+          
+        </li>
+        <li>
+          <a class="list-group-item toc-link" href="#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E2%80%A6%E2%80%A6">当你是个需要来回跑的笔记本用户，同时你还需要通过 VPN 远程办公……</a>
+          
+        </li>
+        <li>
+          <a class="list-group-item toc-link" href="#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E4%BD%86%E4%BD%A0%E7%9A%84VPN%E5%B9%B6%E6%B2%A1%E6%9C%89NetworkManager%E7%9A%84%E6%8F%92%E4%BB%B6%E2%80%A6%E2%80%A6">当你是个需要来回跑的笔记本用户，同时你还需要通过 VPN 远程办公，但你的 VPN 并没有 Network Manager 的插件……</a>
+          
+        </li>
+        <li>
+          <a class="list-group-item toc-link" href="#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87VPN%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E4%BD%86%E4%BD%A0%E7%9A%84VPN%E5%B9%B6%E6%B2%A1%E6%9C%89NetworkManager%E7%9A%84%E6%8F%92%E4%BB%B6%EF%BC%8C%E5%AE%83%E4%B9%9F%E4%B8%8D%E6%94%AF%E6%8C%81systemd-resolved%E2%80%A6%E2%80%A6">当你是个需要来回跑的笔记本用户，同时你还需要通过 VPN 远程办公，但你的 VPN 并没有 Network Manager 的插件，它也不支持 systemd-resolved……</a>
+          
+        </li>
+        <li>
+          <a class="list-group-item toc-link" href="#%E5%A4%AA%E9%95%BF%E4%B8%8D%E7%9C%8B%EF%BC%81">太长不看！</a>
+          
+        </li>
+      </ol>
+    </div>
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://dawn.moe/" target="_blank" rel="external nofollow noreferrer noopener">藍貓 八千代</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.gaojianli.me/" target="_blank" rel="external nofollow noreferrer noopener">高渐离の屋</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.14.3 at 2024-02-06T03:52:11.958Z. -->
