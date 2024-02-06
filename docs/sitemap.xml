@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving-Remastered/</loc>
-    <lastmod>2024-02-06T02:30:00.000Z</lastmod>
+    <lastmod>2024-02-06T03:53:30.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/posts/Build-VPN-with-Headscale-and-Tailscale/</loc>
@@ -429,16 +429,16 @@
     <lastmod>2016-04-04T01:00:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://sh.alynx.one/Undefined-Script-Works/</loc>
-    <lastmod>2018-04-04T00:15:40.000Z</lastmod>
+    <loc>https://sh.alynx.one/blogroll/</loc>
+    <lastmod>2020-08-24T01:20:00.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/channel/</loc>
     <lastmod>2020-08-05T03:22:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://sh.alynx.one/blogroll/</loc>
-    <lastmod>2020-08-24T01:20:00.000Z</lastmod>
+    <loc>https://sh.alynx.one/Undefined-Script-Works/</loc>
+    <lastmod>2018-04-04T00:15:40.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/about/</loc>
@@ -571,6 +571,9 @@
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Steam/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E7%BD%91%E7%BB%9C/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E9%9F%B3%E9%A2%91/</loc>
   </url>
   <url>
@@ -655,6 +658,9 @@
     <loc>https://sh.alynx.one/tags/Dirty%20words/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/DNS/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/Emacs/</loc>
   </url>
   <url>
@@ -694,6 +700,9 @@
     <loc>https://sh.alynx.one/tags/Linux/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/Network%20Manager/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/Nginx/</loc>
   </url>
   <url>
@@ -724,6 +733,9 @@
     <loc>https://sh.alynx.one/tags/Qt/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/resolv.conf/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/RIME/</loc>
   </url>
   <url>
@@ -731,6 +743,9 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/Steam/</loc>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/tags/systemd-resolved/</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/Tailscale/</loc>

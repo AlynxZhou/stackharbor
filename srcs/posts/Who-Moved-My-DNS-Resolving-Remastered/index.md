@@ -1,15 +1,20 @@
 ---
-title: 谁动了我的 DNS 解析（重制版）？
+title: "谁动了我的 DNS 解析（重制版）？"
 layout: post
 #comment: true
-created: 2024-02-06T10:30:00
+created: 2024-02-06T11:53:30
 categories:
   - 计算机
   - Linux
+  - 网络
 tags:
   - 计算机
   - Linux
   - 网络
+  - DNS
+  - "resolv.conf"
+  - "Network Manager"
+  - systemd-resolved
 ---
 这一篇是之前 [谁动了我的 DNS 解析？](../Who-Moved-My-DNS-Resolving/) 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。
 

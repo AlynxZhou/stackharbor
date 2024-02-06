@@ -7,10 +7,15 @@ updated: 2024-02-01T18:15:00
 categories:
   - 计算机
   - Linux
+  - 网络
 tags:
   - 计算机
   - Linux
   - 网络
+  - DNS
+  - "resolv.conf"
+  - "Network Manager"
+  - systemd-resolved
 ---
 <div class="alert-red">我发现这篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，如果你只对后者感兴趣，请阅读最新的 <a href="../Who-Moved-My-DNS-Resolving-Remastered/">谁动了我的 DNS 解析（重制版）？</a>。</div>
 如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。

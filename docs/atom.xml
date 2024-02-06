@@ -5,7 +5,7 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2024-02-06T02:30:00.000Z</updated>
+  <updated>2024-02-06T03:53:30.000Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
@@ -20,8 +20,8 @@
       <name>Alynx Zhou</name>
       <email>alynx.zhou@gmail.com</email>
     </author>
-    <published>2024-02-06T02:30:00.000Z</published>
-    <updated>2024-02-06T02:30:00.000Z</updated>
+    <published>2024-02-06T03:53:30.000Z</published>
+    <updated>2024-02-06T03:53:30.000Z</updated>
     <summary type="html">
       &lt;p&gt;这一篇是之前 &lt;a href=&quot;/posts/Who-Moved-My-DNS-Resolving/&quot;&gt;谁动了我的 DNS 解析？&lt;/a&gt; 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。&lt;/p&gt;
 &lt;p&gt;标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。&lt;/p&gt;
@@ -73,9 +73,14 @@
     </content>
     <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E7%BD%91%E7%BB%9C/" />
     <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
     <category term="网络" label="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
+    <category term="DNS" label="DNS" scheme="https://sh.alynx.one/tags/DNS/" />
+    <category term="resolv.conf" label="resolv.conf" scheme="https://sh.alynx.one/tags/resolv.conf/" />
+    <category term="Network Manager" label="Network Manager" scheme="https://sh.alynx.one/tags/Network%20Manager/" />
+    <category term="systemd-resolved" label="systemd-resolved" scheme="https://sh.alynx.one/tags/systemd-resolved/" />
   </entry>
   <entry>
     <title>使用 Headscale 和 Tailscale 构建虚拟专用网</title>
@@ -2406,9 +2411,14 @@ gtk-application-prefer-dark-theme=1
     </content>
     <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E7%BD%91%E7%BB%9C/" />
     <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
     <category term="网络" label="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
+    <category term="DNS" label="DNS" scheme="https://sh.alynx.one/tags/DNS/" />
+    <category term="resolv.conf" label="resolv.conf" scheme="https://sh.alynx.one/tags/resolv.conf/" />
+    <category term="Network Manager" label="Network Manager" scheme="https://sh.alynx.one/tags/Network%20Manager/" />
+    <category term="systemd-resolved" label="systemd-resolved" scheme="https://sh.alynx.one/tags/systemd-resolved/" />
   </entry>
   <entry>
     <title>不应该做 EVA，而应该做环太平洋</title>

@@ -9,7 +9,7 @@
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这一篇是之前 谁动了我的 DNS 解析？ 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。 标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。">
-    <meta name="keywords" content="计算机, Linux, 网络">
+    <meta name="keywords" content="计算机, Linux, 网络, DNS, resolv.conf, Network Manager, systemd-resolved">
     <meta name="generator" content="Hikaru v1.14.3">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
@@ -281,10 +281,10 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2024-02-06T02:30:00.000Z">2/6/2024, 10:30:00 AM</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2024-02-06T03:53:30.000Z">2/6/2024, 11:53:30 AM</time></span>
         </div>
         <div class="post-categories meta-block">
-          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
         </div>
         <div class="post-comment-count meta-block">
           <i class="bi bi-chat-dots"></i><span><a href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="谁动了我的 DNS 解析（重制版）？" itemprop="commentCount">阅读评论</span></a></span>
@@ -337,7 +337,7 @@
     </main>
     <footer class="post-footer">
       <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="bi bi-tag"></i>Linux</a><a class="post-tag button" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"><i class="bi bi-tag"></i>网络</a>
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="bi bi-tag"></i>Linux</a><a class="post-tag button" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"><i class="bi bi-tag"></i>网络</a><a class="post-tag button" href="/tags/DNS/" rel="tag"><i class="bi bi-tag"></i>DNS</a><a class="post-tag button" href="/tags/resolv.conf/" rel="tag"><i class="bi bi-tag"></i>resolv.conf</a><a class="post-tag button" href="/tags/Network%20Manager/" rel="tag"><i class="bi bi-tag"></i>Network Manager</a><a class="post-tag button" href="/tags/systemd-resolved/" rel="tag"><i class="bi bi-tag"></i>systemd-resolved</a>
       </div>
     </footer>
   </article>
@@ -441,11 +441,11 @@
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
-        <div><a href="/categories/">36</a></div>
+        <div><a href="/categories/">37</a></div>
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">78</a></div>
+        <div><a href="/tags/">82</a></div>
       </div>
     </div>
     <div class="rss">
@@ -545,4 +545,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2024-02-06T03:52:11.958Z. -->
+<!-- Page built by Hikaru v1.14.3 at 2024-02-06T03:54:31.389Z. -->
