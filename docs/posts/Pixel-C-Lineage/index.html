@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Pixel C 刚出来的时候我就很喜欢，但无奈价格太贵，同时 Android M 不能说是很好的利用平板电脑硬件。由于咕鸽战略失误，现在 Pixel C 已经变成热门洋垃圾了，所以在咸鱼捡了一台玩玩。 官方系统升级只支持到 8.1（真的好意思起名叫 Pixel），Lineage OS 支持也是到 8.1（LOS 版本号就是 15.1，没有 Bug），所有的 9.0 都是 Unofficial 的，不过反正我就拿来看看文档，所以直接刷 LOS 15.1 Official 了（为什么不刷官方？因为我手机不想刷第三方，就拿平板过过瘾）。">
     <meta name="keywords" content="计算机, Android">
-    <meta name="generator" content="Hikaru v1.14.3">
+    <meta name="generator" content="Hikaru v1.15.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="在 Pixel C 上安装 Lineage OS">
@@ -292,7 +292,7 @@
 <p>如果你需要 Magisk 就自己去下载一个。</p>
 <p>把这些都放好，在自己电脑上安装 <code>adb</code> 和 <code>fastboot</code>，然后打开 <code>允许 USB 调试</code>。按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，然后 <code>fastboot flash recovery TWRP-IMG-FILE</code> 刷入 TWRP，然后再按住 <code>音量下</code> + <code>电源</code> 直到重启进入 bootloader，选择 Recovery Mode 确认 TWRP 已经刷进去了。</p>
 <p>接下来在 TWRP 里面全部 wipe（syste, data, cache, sdcard），然后接上电脑用 <code>adb push FILE /sdcard/</code> 把下好的 ROM ZIP、<code>verdor.img</code> 和 OpenGApps ZIP 都 push 到 sdcard 里面。</p>
-<p>然后选择 Install 刷入 Lineage 的 ZIP。**接下来选择右侧 Install IMG，刷入下好的 <code>vendor.img</code>**，然后刷入 OpenGApps 和 Magisk，重启。如果刷入 Magisk 的话会自动重启两次再进入向导。</p>
+<p>然后选择 Install 刷入 Lineage 的 ZIP。<strong>接下来选择右侧 Install IMG，刷入下好的 <code>vendor.img</code></strong>，然后刷入 OpenGApps 和 Magisk，重启。如果刷入 Magisk 的话会自动重启两次再进入向导。</p>
 <p>如果你日后某次更新提示 vendor 不匹配，那就去上面的咕鸽硬盘看看有没有新的刷进去就行了。</p>
 <p>接下来就是熟悉的开机向导了。</p>
 <p>大致来说作为洋垃圾这个平板还很划算，除了屏幕下端因为接键盘的磁铁的缘故会发黄（通病）、太多磕碰容易花屏（设计缺陷，购买要买少磕碰的），屏幕素质很好尺寸也很大，看文档看 PPT 看五线谱都是绝配（我期末就是用这个看 PPT 复习的超级爽）。但是毕竟是 3 年前的产品，3 GB RAM 不是很够多任务，同时 CPU 性能也不是特别高，甚至窗口特效都会卡（老黄的芯片优化好烂），但是这台机器是 NVIDIA 的芯片，GPU 性能强劲，打开开发者选项里 <code>禁用 HW 叠加层</code>，使用 GPU 进行窗口混成特效就不卡了。</p>
@@ -477,4 +477,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2024-02-07T04:37:40.889Z. -->
+<!-- Page built by Hikaru v1.15.0 at 2024-02-07T10:35:43.211Z. -->

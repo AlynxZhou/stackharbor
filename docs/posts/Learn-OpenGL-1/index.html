@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我花了好久来阅读和实践 Learn OpenGL CN 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。">
     <meta name="keywords" content="OpenGL, C 语言, 编程">
-    <meta name="generator" content="Hikaru v1.14.3">
+    <meta name="generator" content="Hikaru v1.15.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="学习 OpenGL 1">
@@ -686,13 +686,13 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 <h2 id="%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE"><a class="heading-link header-link" href="/posts/Learn-OpenGL-1/#%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE"></a>顶点数据</h2>
 <p>接下来我们需要准备绘制的数据了，对于一个三角形来说，需要三个顶点来确定它的位置，每个顶点需要三个坐标，同时我们还要给它们创建不同的颜色，让我们的三角形变的多彩一点，所以需要像下面一样组织数据。把这段插入到之前 <code>/* Code Here */</code> 和 <code>glViewport(0, 0, width, height);</code> 之间。对于 3D 程序来说 float 的精度足够了，double需要更多的运算时间。</p>
 <figure data-raw="    const float vertices[] = {
-        // 坐标           颜色
+        // 坐标	       颜色
         -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
         0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
     };
 " data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">    const float vertices[] = {
-        // 坐标           颜色
+        // 坐标	       颜色
         -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
         0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
@@ -1010,4 +1010,4 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2024-02-07T04:37:40.896Z. -->
+<!-- Page built by Hikaru v1.15.0 at 2024-02-07T10:35:43.220Z. -->

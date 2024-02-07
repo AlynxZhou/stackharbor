@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。">
     <meta name="keywords" content="C 语言">
-    <meta name="generator" content="Hikaru v1.14.3">
+    <meta name="generator" content="Hikaru v1.15.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="使用 GDB 进行简单的 C 语言程序调试">
@@ -413,12 +413,12 @@ $1 = {&lt;text variable, no debug info&gt;} 0x7ffff7a86e00 &lt;printf&gt;
 Single stepping until exit from function printf,
 which has no line number information.
 main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
-27        scanf(&quot;%d&quot;, &amp;LoopEnd1);
+27	    scanf(&quot;%d&quot;, &amp;LoopEnd1);
 " class="code-block"><pre class="code"><code>(gdb) step
 Single stepping until exit from function printf,
 which has no line number information.
 main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
-27        scanf("%d", &amp;LoopEnd1);
+27	    scanf("%d", &amp;LoopEnd1);
 </code></pre></figure>
 <p>如果不输入指令直接回车，就是重复上一条指令，程序运行结束之后可以使用<code>quit</code>指令退出GDB。</p>
 <hr>
@@ -632,4 +632,4 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.14.3 at 2024-02-07T04:37:40.904Z. -->
+<!-- Page built by Hikaru v1.15.0 at 2024-02-07T10:35:43.228Z. -->
