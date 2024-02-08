@@ -59,7 +59,7 @@ creativeCommons: by-nc-nd
 highlight: atom-one-dark
 
 # Pinned message in home page.
-pinnedMessage: <div class="alert-blue">读了某些文章觉得很有趣或者很有收获？<strong>我很想知道你对我博客的看法！</strong>如果方便请务必到 <a href="/about/">关于</a> 页面留下一条评论！</div>
+pinnedMessage: <div class="alert-blue"><strong>我很想知道你对我博客的看法！</strong>方便请到 <a href="/about/">关于</a> 页面留下评论！</div>
 
 # Custom info in footer.
 customInfo: 托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
@@ -93,9 +93,10 @@ since: 2016
 
 search: true
 
-# `left`, `right`, `false`
+# `left`, `right`, `false`.
 sidebar: right
 
+# Animation in Home, Archive, Category and Tag.
 animate: false
 
 busuanzi: true
