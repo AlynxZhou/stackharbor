@@ -11,7 +11,7 @@
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
-  <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.4.2">Hikaru Generator Feed</generator>
+  <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.5.0">Hikaru Generator Feed</generator>
   <entry>
     <title>谁动了我的 DNS 解析？（重制版）</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving-Remastered/" />
