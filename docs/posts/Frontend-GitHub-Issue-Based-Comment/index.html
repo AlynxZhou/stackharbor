@@ -242,14 +242,46 @@
         <i class="bi bi-list" aria-label="切换导航栏"></i>
       </button>
       <ul class="menu" id="menu" role="menubar" aria-hidden="false">
-        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
       </ul>
       <button class="theme-toggle" id="theme-toggle">
       </button>
@@ -594,7 +626,9 @@ const loadCache = (name) =&gt; {
 </div>
 
           </div>
-          <aside class="sidebar" id="sidebar">
+          
+
+<aside class="sidebar" id="sidebar">
   <div class="search" role="search">
     <form action="/search/" method="get">
       <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
@@ -626,28 +660,24 @@ const loadCache = (name) =&gt; {
     <hr>
     <div class="post-toc sidebar-item">
       <div><i class="bi bi-list-ol"></i>文章目录</div>
-      <ol class="toc" id="scrollspy-target">
-        <li>
-          <a class="list-group-item toc-link" href="#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82">造轮子是病，得治。</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82">轮子也不是白造的。</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82">事情本该很简单。</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82">其实你知道，烦恼（bug）会解决烦恼（bug）。</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82">由俭入奢易，由奢入俭难。</a>
-          
-        </li>
-      </ol>
+      
+<ol class="toc" id="scrollspy-target">
+  <li>
+    <a class="list-group-item toc-link" href="#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82">造轮子是病，得治。</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82">轮子也不是白造的。</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82">事情本该很简单。</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82">其实你知道，烦恼（bug）会解决烦恼（bug）。</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82">由俭入奢易，由奢入俭难。</a>
+  </li>
+</ol>
     </div>
     <hr>
     <div class="social-link sidebar-item">
@@ -707,4 +737,4 @@ const loadCache = (name) =&gt; {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.17.0 at 2024-02-09T03:40:29.515Z. -->
+<!-- Page built by Hikaru v1.17.0 at 2024-02-14T02:23:11.496Z. -->

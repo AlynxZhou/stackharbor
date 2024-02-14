@@ -242,14 +242,46 @@
         <i class="bi bi-list" aria-label="切换导航栏"></i>
       </button>
       <ul class="menu" id="menu" role="menubar" aria-hidden="false">
-        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
       </ul>
       <button class="theme-toggle" id="theme-toggle">
       </button>
@@ -1507,7 +1539,9 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 </div>
 
           </div>
-          <aside class="sidebar" id="sidebar">
+          
+
+<aside class="sidebar" id="sidebar">
   <div class="search" role="search">
     <form action="/search/" method="get">
       <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
@@ -1539,32 +1573,27 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     <hr>
     <div class="post-toc sidebar-item">
       <div><i class="bi bi-list-ol"></i>文章目录</div>
-      <ol class="toc" id="scrollspy-target">
-        <li>
-          <a class="list-group-item toc-link" href="#%E9%A6%96%E5%85%88%E8%AE%A9%E7%B3%BB%E7%BB%9F%E7%9F%A5%E9%81%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E5%A3%81%E7%BA%B8%E2%80%A6%E2%80%A6">首先让系统知道你是个壁纸……</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6">然后你看见网上一堆胶水代码……</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E6%98%8E%E6%98%8E%E6%98%AF%E6%9D%80%E9%B8%A1%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BE%97%E6%8E%8F%E7%89%9B%E5%88%80%EF%BC%81">明明是杀鸡，还是得掏牛刀！</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E7%84%B6%E5%90%8E%E5%A3%B0%E9%9F%B3%E5%8F%88%E4%B8%8D%E5%AF%B9%E5%8A%B2%E4%BA%86%E2%80%A6%E2%80%A6">然后声音又不对劲了……</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81">写 UI 也很麻烦！</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6">一杯咖啡都没有……</a>
-          
-        </li>
-      </ol>
+      
+<ol class="toc" id="scrollspy-target">
+  <li>
+    <a class="list-group-item toc-link" href="#%E9%A6%96%E5%85%88%E8%AE%A9%E7%B3%BB%E7%BB%9F%E7%9F%A5%E9%81%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E5%A3%81%E7%BA%B8%E2%80%A6%E2%80%A6">首先让系统知道你是个壁纸……</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E7%84%B6%E5%90%8E%E4%BD%A0%E7%9C%8B%E8%A7%81%E7%BD%91%E4%B8%8A%E4%B8%80%E5%A0%86%E8%83%B6%E6%B0%B4%E4%BB%A3%E7%A0%81%E2%80%A6%E2%80%A6">然后你看见网上一堆胶水代码……</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%98%8E%E6%98%8E%E6%98%AF%E6%9D%80%E9%B8%A1%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BE%97%E6%8E%8F%E7%89%9B%E5%88%80%EF%BC%81">明明是杀鸡，还是得掏牛刀！</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E7%84%B6%E5%90%8E%E5%A3%B0%E9%9F%B3%E5%8F%88%E4%B8%8D%E5%AF%B9%E5%8A%B2%E4%BA%86%E2%80%A6%E2%80%A6">然后声音又不对劲了……</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81">写 UI 也很麻烦！</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6">一杯咖啡都没有……</a>
+  </li>
+</ol>
     </div>
     <hr>
     <div class="social-link sidebar-item">
@@ -1624,4 +1653,4 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.17.0 at 2024-02-09T03:40:29.516Z. -->
+<!-- Page built by Hikaru v1.17.0 at 2024-02-14T02:23:11.496Z. -->

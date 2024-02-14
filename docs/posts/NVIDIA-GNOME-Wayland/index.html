@@ -242,14 +242,46 @@
         <i class="bi bi-list" aria-label="切换导航栏"></i>
       </button>
       <ul class="menu" id="menu" role="menubar" aria-hidden="false">
-        <li class="menu-item" role="menuitem"><a href="/" class="menu-link"><i class="bi bi-house"></i><span class="menu-text">首页</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/archives/" class="menu-link"><i class="bi bi-archive"></i><span class="menu-text">归档</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/categories/" class="menu-link"><i class="bi bi-list-nested"></i><span class="menu-text">分类</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/tags/" class="menu-link"><i class="bi bi-tags"></i><span class="menu-text">标签</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/Undefined-Script-Works/" class="menu-link"><i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener"><i class="bi bi-images"></i><span class="menu-text">照片墙</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/blogroll/" class="menu-link"><i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span></a></li>
-        <li class="menu-item" role="menuitem"><a href="/about/" class="menu-link"><i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span></a></li>
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
       </ul>
       <button class="theme-toggle" id="theme-toggle">
       </button>
@@ -449,7 +481,9 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
 </div>
 
           </div>
-          <aside class="sidebar" id="sidebar">
+          
+
+<aside class="sidebar" id="sidebar">
   <div class="search" role="search">
     <form action="/search/" method="get">
       <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
@@ -481,56 +515,46 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
     <hr>
     <div class="post-toc sidebar-item">
       <div><i class="bi bi-list-ol"></i>文章目录</div>
-      <ol class="toc" id="scrollspy-target">
-        <li>
-          <a class="list-group-item toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
-          
-      <ol>
-        <li>
-          <a class="list-group-item toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F">为什么 NVIDIA 的 Wayland 支持这么差？</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F">现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F">我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F">我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F">我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？</a>
-          
-        </li>
-      </ol>
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9">没用的观点</a>
-          
-      <ol>
-        <li>
-          <a class="list-group-item toc-link" href="#%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6">你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81">Xorg 好！Wayland 坏！</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81">我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！</a>
-          
-        </li>
-        <li>
-          <a class="list-group-item toc-link" href="#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81">你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！</a>
-          
-        </li>
-      </ol>
-        </li>
-      </ol>
+      
+<ol class="toc" id="scrollspy-target">
+  <li>
+    <a class="list-group-item toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
+<ol>
+  <li>
+    <a class="list-group-item toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88NVIDIA%E7%9A%84Wayland%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F">为什么 NVIDIA 的 Wayland 支持这么差？</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E7%8E%B0%E5%9C%A8NVIDIA%E7%94%A8%E6%88%B7%E7%9A%84Wayland%E4%BC%9A%E8%AF%9D%E5%8F%AF%E4%BB%A5%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BA%86%E5%90%97%EF%BC%9F">现在 NVIDIA 用户的 Wayland 会话可以日常使用了吗？</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AFGNOME%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A3%85%E4%BA%86470%E7%89%88%E6%9C%ACGDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E8%BF%98%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F">我是 GNOME 用户，为什么装了 470 版本 GDM 选单里的 GNOME 还是 Xorg 会话？</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AF%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%8F%8C%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7%EF%BC%8C%E4%B8%BB%E7%94%A8%E7%9A%84%E6%98%AF%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91GDM%E9%80%89%E5%8D%95%E9%87%8C%E7%9A%84GNOME%E4%B9%9F%E6%98%AFXorg%E4%BC%9A%E8%AF%9D%EF%BC%9F">我是笔记本双显卡用户，主用的是核芯显卡，为什么我 GDM 选单里的 GNOME 也是 Xorg 会话？</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%88%91%E6%98%AFKDE%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%A0%E6%89%AF%E8%BF%99%E4%B9%88%E5%A4%9AGNOME%EF%BC%8C%E8%B7%9F%E6%88%91%E8%AF%B4%E8%AF%B4KDE%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%91%97%EF%BC%9F">我是 KDE 用户，你扯这么多 GNOME，跟我说说 KDE 现在有什么问题呗？</a>
+  </li>
+</ol>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%B2%A1%E7%94%A8%E7%9A%84%E8%A7%82%E7%82%B9">没用的观点</a>
+<ol>
+  <li>
+    <a class="list-group-item toc-link" href="#%E4%BD%A0%E7%9C%8B%E8%BF%99%E4%B8%AAGDM%E5%B0%B1%E6%98%AF%E9%80%8A%E5%95%A6%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E5%8D%A1%E6%AD%BB%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E6%8E%A8%E8%8D%90%E6%8D%A2SDDM%E5%B7%B4%E6%8B%89%E5%B7%B4%E6%8B%89%E2%80%A6%E2%80%A6">你看这个 GDM 就是逊啦，我这里卡死根本不能用，大家都推荐换 SDDM 巴拉巴拉……</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#Xorg%E5%A5%BD%EF%BC%81Wayland%E5%9D%8F%EF%BC%81">Xorg 好！Wayland 坏！</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%88%91%E4%B9%9F%E6%98%AFNVIDIA%E7%94%A8%E6%88%B7%EF%BC%8C%E6%88%91%E7%8E%A9XX%E6%B8%B8%E6%88%8F%E5%8D%A1%E6%88%90%E5%B9%BB%E7%81%AF%E7%89%87%E4%BA%86%EF%BC%81">我也是 NVIDIA 用户，我玩 XX 游戏卡成幻灯片了！</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E4%BD%A0%E4%BB%ACNVIDIA%E7%94%A8%E6%88%B7%E7%9C%9F%E9%BA%BB%E7%83%A6%EF%BC%8C%E8%B0%81%E5%8F%AB%E4%BD%A0%E4%BB%AC%E8%87%AA%E5%B7%B1%E6%8E%8F%E9%92%B1%E4%B9%B0N%E5%8D%A1%E5%8F%97%E7%BD%AA%EF%BC%81">你们 NVIDIA 用户真麻烦，谁叫你们自己掏钱买 N 卡受罪！</a>
+  </li>
+</ol>
+  </li>
+</ol>
     </div>
     <hr>
     <div class="social-link sidebar-item">
@@ -590,4 +614,4 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.17.0 at 2024-02-09T03:40:29.515Z. -->
+<!-- Page built by Hikaru v1.17.0 at 2024-02-14T02:23:11.496Z. -->
