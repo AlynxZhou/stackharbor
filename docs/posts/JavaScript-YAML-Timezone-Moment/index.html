@@ -10,14 +10,13 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。 开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。">
     <meta name="keywords" content="计算机, 编程, JavaScript">
-    <meta name="generator" content="Hikaru v1.17.0">
+    <meta name="generator" content="Hikaru v1.18.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="使用 Moment 处理 JavaScript 与 YAML 的时区转换">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sh.alynx.one/posts/JavaScript-YAML-Timezone-Moment/">
     <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
-    <meta property="og:description" content="这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。 开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。">
     <link rel="canonical" href="https://sh.alynx.one/posts/JavaScript-YAML-Timezone-Moment/">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
@@ -47,7 +46,6 @@
       header.header, footer.footer {
         background: #33363b;
       }
-      
     </style>
     <link rel="stylesheet" type="text/css" href="/css/mobile.css">
 
@@ -551,4 +549,4 @@ moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.17.0 at 2024-02-14T02:38:49.535Z. -->
+<!-- Page built by Hikaru v1.18.0 at 2024-02-15T03:10:55.266Z. -->
