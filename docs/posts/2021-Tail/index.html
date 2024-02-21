@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。">
     <meta name="keywords" content="时光飞逝">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="StackHarbor 的 2021 尾记">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -305,10 +301,10 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-09T02:22:55.000Z">2022-02-09 10:22:55</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-02-09T02:22:55.000Z">2022-02-09 周三 10:22:55 GMT+8</time></span>
         </div>
         <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-02-11T01:18:12.000Z">2022-02-11 09:18:12</time></span>
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-02-11T01:18:12.000Z">2022-02-11 周五 09:18:12 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
@@ -404,9 +400,12 @@
           "basePath": "/posts/2021-Tail/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -513,4 +512,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.292Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.124Z. -->

@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="本来我的博客有一个前端搜索框，当输入文字时就在侧边栏展开搜索结果，虽然看起来很时髦，但也不能算是什么食用啊不实用的设计方式。而且一开始我觉得既然没有后端处理请求，也就没法单独打开一个专门搜索页面了。 但是这个设计引发了 @依云 的吐槽，有一个单独的搜索页面并且对每个搜索结果有专门的 URL 看起来还是个挺合理的需求。但第一我不知道怎么实现第二我一直觉得能用就行所以开始并没有改。不过依云给我发了 Python 文档的搜索实现，让我突然想明白其实按照标准的 HTML 和 JavaScript 是可以实现无后端的搜索引擎的，然后就动手实现了一个。">
     <meta name="keywords" content="网站, 搜索, JavaScript, ARIA">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="前端博客搜索引擎">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -305,10 +301,10 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-09-18T07:24:00.000Z">2019-09-18 15:24:00</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-09-18T07:24:00.000Z">2019-09-18 周三 15:24:00 GMT+8</time></span>
         </div>
         <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2020-08-15T10:25:00.000Z">2020-08-15 18:25:00</time></span>
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2020-08-15T10:25:00.000Z">2020-08-15 周六 18:25:00 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/ARIA/" itemprop="url" rel="index"><span itemprop="name">ARIA</span></a></span>
@@ -420,9 +416,12 @@
           "basePath": "/posts/Frontend-Blog-Search/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -529,4 +528,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.292Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.125Z. -->

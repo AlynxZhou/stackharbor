@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="通常情况下在 Linux 下面配置好的是 socks5 代理（你懂的），但是这个代理并不能让所有程序自动走它，需要手动的做一些转换。">
     <meta name="keywords" content="网络">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="Linux 下面常见的代理设置">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -317,7 +313,7 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">2019-02-10 09:28:00</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-02-10T01:28:00.000Z">2019-02-10 周日 09:28:00 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
@@ -441,9 +437,12 @@
           "basePath": "/posts/Proxy-Settings/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -582,4 +581,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.292Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.125Z. -->

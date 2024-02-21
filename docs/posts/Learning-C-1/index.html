@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这个是给 2018 级 C 语言辅导准备的文档，写来写去写了好多，索性在网站也发一份。有很多是我觉得老师不会讲，但一开始很难理解，不理解又听不懂的，有学 C 的可以看一看。">
     <meta name="keywords" content="C 语言">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="C 语言学习 1">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -317,7 +313,7 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2018-11-27T12:42:00.000Z">2018-11-27 20:42:00</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2018-11-27T12:42:00.000Z">2018-11-27 周二 20:42:00 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/C%20%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C 语言</span></a></span>
@@ -1039,9 +1035,12 @@ do_another();
           "basePath": "/posts/Learning-C-1/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -1241,4 +1240,4 @@ do_another();
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.292Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.125Z. -->

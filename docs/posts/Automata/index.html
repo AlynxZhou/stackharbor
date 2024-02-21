@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我没有办法评价这款游戏因为我觉得我被结结实实地折腾了一回">
     <meta name="keywords" content="游戏, 尼尔：机械纪元, NieR: Automata">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="Automata: A Story of Love and Lives">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -305,7 +301,7 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2018-07-16T09:39:01.000Z">2018-07-16 17:39:01</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2018-07-16T09:39:01.000Z">2018-07-16 周一 17:39:01 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/%E6%B8%B8%E6%88%8F/" itemprop="url" rel="index"><span itemprop="name">游戏</span></a></span>
@@ -523,9 +519,12 @@
           "basePath": "/posts/Automata/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -632,4 +631,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.292Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.125Z. -->

@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这篇的操作是在之前 运行在 JACK 上层的 PulseAudio 基础上进行的。 我自己的音频配置比较复杂，虽然 PipeWire 号称能兼容 PulseAudio 和 JACK 的 client 并且在某些发行版成为了默认选项，我还是没很快换掉。因为我想像之前用 PulseAudio 那样把 PipeWire 做成 JACK 的 client，虽然它的文档一直说支持这样，但是看起来两个月前代码才写好。于是我最近尝试了一下。">
     <meta name="keywords" content="录音, PulseAudio, JACK, PipeWire">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="从 PulseAudio 到 PipeWire">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -305,10 +301,10 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-06-29T08:11:02.000Z">2022-06-29 16:11:02</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2022-06-29T08:11:02.000Z">2022-06-29 周三 16:11:02 GMT+8</time></span>
         </div>
         <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-07-21T09:16:00.000Z">2022-07-21 17:16:00</time></span>
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2022-07-21T09:16:00.000Z">2022-07-21 周四 17:16:00 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/%E9%9F%B3%E9%A2%91/" itemprop="url" rel="index"><span itemprop="name">音频</span></a></span>
@@ -399,9 +395,12 @@
           "basePath": "/posts/From-PulseAudio-to-PipeWire/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -508,4 +507,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.291Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.124Z. -->

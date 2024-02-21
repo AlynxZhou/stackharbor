@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="好啦，琴也买了也试了，该谈谈五线谱了。 别一提蝌蚪就头疼，半音阶吹简谱比认线谱还难，这里直接引用我在贴吧的回复：">
     <meta name="keywords" content="半音阶口琴, Chromatic Harmonica">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="半音阶口琴杂谈（三）">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -305,7 +301,7 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-10T03:35:05.000Z">2016-04-10 11:35:05</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2016-04-10T03:35:05.000Z">2016-04-10 周日 11:35:05 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/" itemprop="url" rel="index"><span itemprop="name">音乐</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E9%9F%B3%E4%B9%90/%E5%8D%8A%E9%9F%B3%E9%98%B6%E5%8F%A3%E7%90%B4/" itemprop="url" rel="index"><span itemprop="name">半音阶口琴</span></a></span>
@@ -397,9 +393,12 @@
           "basePath": "/posts/CHarmonica-Talk-3/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -506,4 +505,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.293Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.126Z. -->

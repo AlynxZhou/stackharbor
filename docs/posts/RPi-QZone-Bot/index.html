@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="此方案已经被作者废弃且由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。 由于WebQQ的验证码机制更新，QQLib的作者已于2016年8月17日更新源代码，本页也随之更新！请之前使用过的朋友用# pip3 uninstall qqlib卸载旧版，再重新安装最新版的QQLib，使用本页最新的Python脚本！ Hello，最近好久没有更新博客了，因为一直没有发现什么好玩的东西来写（其实就是因为懒）。那么前天终于发现了一个好东西，就是这个QQLib for Python，可以通过Python在QQ空间发说说的库。">
     <meta name="keywords" content="树莓派, Python">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="会发说说报时的树莓派">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -305,7 +301,7 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2016-08-14T07:40:04.000Z">2016-08-14 15:40:04</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2016-08-14T07:40:04.000Z">2016-08-14 周日 15:40:04 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%A0%91%E8%8E%93%E6%B4%BE/" itemprop="url" rel="index"><span itemprop="name">树莓派</span></a></span>
@@ -532,9 +528,12 @@ except KeyboardInterrupt:
           "basePath": "/posts/RPi-QZone-Bot/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -641,4 +640,4 @@ except KeyboardInterrupt:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.293Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.126Z. -->

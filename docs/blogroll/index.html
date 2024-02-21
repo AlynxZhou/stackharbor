@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="本来是打算把友情链接放到侧边栏里面的，但那边写太多的话用户体验非常差，而且后来看好多人的网站里都是给链接单独开了个页面写点介绍。我觉得这样挺不错的，所以自己也搞一个。侧边栏的友情链接现在只会放很重要并且还在更新的站点，太久没更新的话就只放在这个页面留档了。 在这个页面学一下狼说话应该不会挨打吧？ 想…">
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="友情链接">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -317,10 +313,10 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-02-24T02:30:00.000Z">2019-02-24 10:30:00</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-02-24T02:30:00.000Z">2019-02-24 周日 10:30:00 GMT+8</time></span>
         </div>
         <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2020-08-24T01:20:00.000Z">2020-08-24 09:20:00</time></span>
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2020-08-24T01:20:00.000Z">2020-08-24 周一 09:20:00 GMT+8</time></span>
         </div>
         <div class="post-comment-count meta-block">
           <i class="bi bi-chat-dots"></i><span><a href="/blogroll/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="友情链接" itemprop="commentCount">阅读评论</span></a></span>
@@ -641,9 +637,12 @@
           "basePath": "/blogroll/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -779,4 +778,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.293Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.126Z. -->

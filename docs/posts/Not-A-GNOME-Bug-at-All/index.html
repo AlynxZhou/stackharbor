@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口，程序启动了，没有报…">
     <meta name="keywords" content="GNOME, NVIDIA">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="都不能算是 GNOME 的 Bug">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -305,7 +301,7 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-05-08T10:52:40.000Z">2023-05-08 18:52:40</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-05-08T10:52:40.000Z">2023-05-08 周一 18:52:40 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
@@ -442,9 +438,12 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
           "basePath": "/posts/Not-A-GNOME-Bug-at-All/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -551,4 +550,4 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.291Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.124Z. -->

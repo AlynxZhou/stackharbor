@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这个页面记录的方案已经被作者放弃，并且由于时间久远，作者不能保证此页面内容的正确与否，请不要完全参考。 昨天听说微软要收购 GitHub 了，对于我一个专业微软受害者，虽然它洗白了，但还是有着本能的不信任。同时软粉认软做父的样子我是断然接受不了的（“我微软爸爸天下第一！”“你怎么能不喜欢我微软爸爸呢！”“我微软爸爸什么时候坑过你！”），你自己喜欢就喜欢，我讨厌是我的事情，希望各位嘴下留情，不要给我喷成筛子。">
     <meta name="keywords" content="网站, Hexo, Nginx">
-    <meta name="generator" content="Hikaru v1.19.1">
+    <meta name="generator" content="Hikaru v1.20.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面">
@@ -106,10 +106,6 @@
           });
           window.localStorage.setItem("theme", theme);
         });
-        formatDateTime(
-          document.querySelectorAll("time.post-full-datetime"),
-          "zh-Hans"
-        );
       });
     </script>
     
@@ -317,7 +313,7 @@
       </div>
       <div class="post-meta">
         <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2018-06-04T08:21:17.000Z">2018-06-04 16:21:17</time></span>
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2018-06-04T08:21:17.000Z">2018-06-04 周一 16:21:17 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">网站</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%BD%91%E7%AB%99/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
@@ -845,9 +841,12 @@ WantedBy=multi-user.target
           "basePath": "/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/",
           "containerID": "comment-results"
         }).then(() => {
-          formatDateTime(
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
             document.querySelectorAll("time.comment-full-datetime"),
-            "zh-Hans"
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
           );
           elementsEach(
             document.querySelectorAll("div.comment-content img"),
@@ -988,4 +987,4 @@ WantedBy=multi-user.target
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-21T06:16:27.292Z. -->
+<!-- Page built by Hikaru v1.20.0 at 2024-02-21T11:51:14.125Z. -->
