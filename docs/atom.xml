@@ -5,13 +5,13 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2024-02-21T11:51:14.129Z</updated>
+  <updated>2024-02-21T11:56:35.839Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
-  <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.5.1">Hikaru Generator Feed</generator>
+  <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.5.2">Hikaru Generator Feed</generator>
   <entry>
     <title>谁动了我的 DNS 解析？（重制版）</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving-Remastered/" />
@@ -21,6 +21,7 @@
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2024-02-06T03:53:30.000Z</published>
+    <updated>2024-02-06T03:53:30.000Z</updated>
     <summary type="html">
       &lt;p&gt;这一篇是之前 &lt;a href=&quot;/posts/Who-Moved-My-DNS-Resolving/&quot;&gt;谁动了我的 DNS 解析？&lt;/a&gt; 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。&lt;/p&gt;
 &lt;p&gt;标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。&lt;/p&gt;
@@ -90,6 +91,7 @@
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2024-02-04T11:39:26.000Z</published>
+    <updated>2024-02-04T11:39:26.000Z</updated>
     <summary type="html">
       需求 很多在家里装了 NAS 的人都有一个相似的需求，那就是出门在外如何访问内网的 NAS 上运行的服务。很多人会选择公网 IP + 端口映射把需要的服务直接暴露到公网上，或者通过公网的 VPS 进行反向代理。但这些我都不放心，首先我的目的只是自己访问，而不是给别人访问，其次对于…
     </summary>
@@ -178,6 +180,7 @@
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2024-01-03T07:21:05.000Z</published>
+    <updated>2024-01-03T07:21:05.000Z</updated>
     <summary type="html">
       &lt;p&gt;我发现有些时候 Telegram bot 很适合用来 host 一些我自己要用的服务，因为只要通过手机上的聊天框就可以控制了，不需要我自己写一些什么后台页面。为了让构建和安装一个新 bot 的过程尽量简单，我自己用 Node 写了一个 &lt;a href=&quot;https://github.com/AlynxZhou/azbot-telegram/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;没有外部依赖的 Telegram bot 框架&lt;/a&gt;。完全使用 Node 自带的模块比较麻烦的一点就是你需要自己基于 &lt;code&gt;http.request()&lt;/code&gt; 进行封装，因为原版基于 &lt;code&gt;EventEmitter&lt;/code&gt; 的接口写起来实在是太复杂了。&lt;/p&gt;
 
@@ -383,6 +386,7 @@ index 42e002e..f90a8eb 100644
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2023-07-28T12:42:53.000Z</published>
+    <updated>2023-07-28T12:42:53.000Z</updated>
     <summary type="html">
       在安装 Arch Linux 之前，首先要准备 Arch Linux 的安装媒介。如果你打算安装在虚拟机里，那你并不需要一个实体的存储介质，因为虚拟机可以直接加载 iso 文件。但不管你在哪里安装，你都需要获取这个 iso 文件，引导进入其中的临时系统才能继续安装。 Arch L…
     </summary>
@@ -465,6 +469,7 @@ options root=&quot;UUID=xxxx-xxxx-xxxx&quot; rw add_efi_memmap
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2023-07-28T07:20:02.000Z</published>
+    <updated>2023-07-28T07:20:02.000Z</updated>
     <summary type="html">
       &lt;p&gt;上一篇文章提到了 DaVinci Resolve 对于素材位置的计算逻辑非常奇怪并且不肯修改，这篇我试图概括一下具体的计算逻辑方便自己使用。如果你也遇到了同样的问题并且希望他们改进，可以去支持 &lt;a href=&quot;https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;amp;t=179153&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;我发的帖子（英语）&lt;/a&gt;。&lt;/p&gt;
 
@@ -1903,6 +1908,7 @@ table.insert(alsa_monitor.rules, rule)
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2023-05-08T10:52:40.000Z</published>
+    <updated>2023-05-08T10:52:40.000Z</updated>
     <summary type="html">
       Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口…
     </summary>
@@ -1979,6 +1985,7 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2023-01-20T09:55:00.000Z</published>
+    <updated>2023-01-20T09:55:00.000Z</updated>
     <summary type="html">
       事先叠 buff：我不是说 use-package 一定要这么用，我也不是说所用不用 use-package 的人都不好，我只是说我觉得应该这样用 use-package 比较合适。 use-package 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让…
     </summary>
@@ -2026,6 +2033,7 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2023-01-10T05:43:00.000Z</published>
+    <updated>2023-01-10T05:43:00.000Z</updated>
     <summary type="html">
       &lt;p&gt;每年写年终总结我都会拖很晚，因为基本上我写博客是看心情，最近事情比较多，其实也打算再拖几天的，但是实在是不想回家之后写，所以不得不今天仓促动手。&lt;/p&gt;
 &lt;p&gt;然后实际上我不喜欢分类列提纲的写法，我本质上比较倾向于文学性的写法或者就是想到什么写什么，不过最近我在翻以前的年终总结的时候发现事情总是记的乱七八糟而且有些我都想不起来出现在哪篇文章里了，这当然可能也和我写完年终总结从来不看有关系，反正这次打算试一下分类的写法。&lt;/p&gt;
@@ -2227,6 +2235,7 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-11-25T09:50:13.000Z</published>
+    <updated>2022-11-25T09:50:13.000Z</updated>
     <summary type="html">
       令人出乎意料，我竟然是 DaVinci Resolve（后面都简称达芬奇了）的付费用户。虽然它不是开源软件，但是有很好的 Linux 支持，使用体验和功能都是同类中的佼佼者，而且收费也相当合理。我选择付费一个原因是你支持我，我就支持你，这其实和我支持 Steam 和 Valve …
     </summary>
@@ -2276,6 +2285,7 @@ Version         : 5.15.7+kde+r176-1
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-11-23T10:23:34.000Z</published>
+    <updated>2022-11-23T10:23:34.000Z</updated>
     <summary type="html">
       黑夜让我选了黑色的主题，但是有些程序非要寻找光明？ 我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还…
     </summary>
@@ -2419,6 +2429,7 @@ gtk-application-prefer-dark-theme=1
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-08-18T17:06:22.000Z</published>
+    <updated>2022-08-18T17:06:22.000Z</updated>
     <summary type="html">
       &lt;p&gt;想必把 2018 年的 DARLING in the FRANXX （名字太长了，后面简称 DitF 吧）称作有争议的作品应该不会有人反对，不过我恰好是个不喜欢追新番的人，不然也许我在 2018 年写篇关于这个的博客应该会能获得不少点击量。总之我在 2022 年下载了全集并且几乎是不间断的在三天之内看完了，可能不是特别好评价，但是觉得还是得写点什么。如果读者觉得“怎么复读了很多已有的观点”或者“和我想看的完全不一样”，还麻烦多包涵或者自行关闭标签页。&lt;/p&gt;
 
@@ -2451,6 +2462,7 @@ gtk-application-prefer-dark-theme=1
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-08-10T05:24:41.000Z</published>
+    <updated>2022-08-10T05:24:41.000Z</updated>
     <summary type="html">
       &lt;figure data-raw=&quot;// 新来的！如果你看到这段注释，说明上一个负责重构这个项目的程序员已经被气死了！
 // 请你把下一行的数字加一，然后祝你好运！
@@ -2502,6 +2514,7 @@ Type &quot;.help&quot; for more information.
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-07-18T10:50:50.000Z</published>
+    <updated>2022-07-18T10:50:50.000Z</updated>
     <summary type="html">
       &lt;p&gt;上一篇：&lt;a href=&quot;/posts/My-RIME/&quot;&gt;可能只适合我自己的 RIME 配置&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这一篇的原因是我最近在偶然间刷博客刷到一篇 &lt;a href=&quot;https://blog.coelacanthus.moe/posts/tech/a-new-rime-simp-pinyin-schema/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;讲 RIME 简体输入方案的文章&lt;/a&gt;，里面提到说朙月拼音因为是繁体转简体所以会出现各种错误（其实我个人倒是没怎么遇到过），然后推荐了一个完全针对简体字的输入方案 &lt;a href=&quot;https://github.com/hosxy/rime-aurora-pinyin/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;极光拼音&lt;/a&gt;，我自己其实只会输入简体字，不怎么需要输入繁体字的功能，所以打算试试。&lt;/p&gt;
@@ -2913,6 +2926,7 @@ import_tables:
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-05-07T09:49:46.000Z</published>
+    <updated>2022-05-07T09:49:46.000Z</updated>
     <summary type="html">
       &lt;p&gt;本来我是不打算装 NAS 的，甚至都把我的星际蜗牛关了，因为我觉得我又没有网络多人协作的需求，而且我醒着的时候我的台式机也醒着，我睡着了又不会用到网络存储。不过自从我买了相机开始拍照片录视频，存储空间就越来越紧张了，先是把我机箱里的硬盘从 2T 直接升级到 8T，又觉得没有冗余始终心慌慌。偏偏我现在这个机箱哪里都不错，就是机械硬盘位不太充裕。为了扩展存储空间，也只能装一个 NAS 了。&lt;/p&gt;
 
