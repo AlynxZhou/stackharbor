@@ -100,5 +100,5 @@ Last but not least，侧边栏也有一个友情链接，但是因为空间限�
 | <img src="https://avatars1.githubusercontent.com/u/21106371?s=460&v=4" style="width: 5em;"> | [鸡腿工坊](https://jitui.moe/) |  | ~~新鲜~~ 可爱的鸡腿！ |
 | <img src="https://blog.gaojianli.me/images/avatar.jpg" style="width: 5em;"> | [高渐离の屋](https://blog.gaojianli.me/) | 一个不起眼的个人小站 | 我真心觉得在他们公司干久了容易变杠精。 |
 | <img src="https://avatars.githubusercontent.com/u/2109893?v=4" style="width: 5em;"> | [taoky's blog](https://blog.taoky.moe/) |  | 我读了一篇关于 GNOME 调试的博客觉得很有意思，推荐大家也看看。 |
-| <img src="https://avatars.githubusercontent.com/u/20332140?v=4" style="width: 5em;"> | [lugosi](https://lugosix.github.io/blog/) | “我不做人啦jojo” | 看地偶认识的字节程序员…… |
-| <img src="https://avatars.githubusercontent.com/u/17332657?v=4" style="width: 5em;"> | [告白，花，狼 ](https://duan602728596.github.io/) | “👓 稻花香里说丰年，听取人生经验。” | 看地偶认识的微软程序员…… |
+| <img src="https://avatars.githubusercontent.com/u/20332140?v=4" style="width: 5em;"> | [lugosi](https://lugosix.github.io/blog/) | “我不做人啦jojo” | 看地偶认识的程序员…… |
+| <img src="https://avatars.githubusercontent.com/u/17332657?v=4" style="width: 5em;"> | [告白，花，狼 ](https://duan602728596.github.io/) | “👓 稻花香里说丰年，听取人生经验。” | 看地偶认识的程序员…… |
