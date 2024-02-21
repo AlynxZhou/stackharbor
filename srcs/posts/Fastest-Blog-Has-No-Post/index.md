@@ -61,7 +61,9 @@ layouts:
 # worker_threads 是多线程，但和我想的不太一样……
 
 > 我：你懂 Node 吗？为什么我多线程比单线程慢？
+>
 > 铁道迷：Node 就是单线程拖拉机啊。
+>
 > 我：你不懂，88。
 
 凡是跟你说“Node.js 只有单线程”的人，都可以直接和他说“你不懂 Node.js”了。Node 要解决的就是非阻塞 IO 的问题，而非阻塞 IO 肯定不是多线程能解决的。至少对于内部的 fs 来说，调用异步函数的时候是 libuv 从线程池里面拉出一个线程去解决任务，而 JavaScript 本身的线程不会被阻塞。如果你还想了解“有哪些代码会阻塞主线程而哪些代码不会”，可以看 [Node.js 官网的这篇文章](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/)。

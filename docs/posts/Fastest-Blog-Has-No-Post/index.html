@@ -362,9 +362,9 @@
 <p>如果你对削减 npm 包的依赖感兴趣，强烈建议你读一下 <a href="https://paulmillr.com/posts/chokidar-3-save-32tb-of-traffic/" target="_blank" rel="external nofollow noreferrer noopener">chokidar 开发者写的这篇文章</a>。</p>
 <h1 id="worker_threads%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E4%BD%86%E5%92%8C%E6%88%91%E6%83%B3%E7%9A%84%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A0%B7%E2%80%A6%E2%80%A6"><a class="heading-link header-link" href="/posts/Fastest-Blog-Has-No-Post/#worker_threads%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E4%BD%86%E5%92%8C%E6%88%91%E6%83%B3%E7%9A%84%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A0%B7%E2%80%A6%E2%80%A6"></a>worker_threads 是多线程，但和我想的不太一样……</h1>
 <blockquote>
-<p>我：你懂 Node 吗？为什么我多线程比单线程慢？
-铁道迷：Node 就是单线程拖拉机啊。
-我：你不懂，88。</p>
+<p>我：你懂 Node 吗？为什么我多线程比单线程慢？</p>
+<p>铁道迷：Node 就是单线程拖拉机啊。</p>
+<p>我：你不懂，88。</p>
 </blockquote>
 <p>凡是跟你说“Node.js 只有单线程”的人，都可以直接和他说“你不懂 Node.js”了。Node 要解决的就是非阻塞 IO 的问题，而非阻塞 IO 肯定不是多线程能解决的。至少对于内部的 fs 来说，调用异步函数的时候是 libuv 从线程池里面拉出一个线程去解决任务，而 JavaScript 本身的线程不会被阻塞。如果你还想了解“有哪些代码会阻塞主线程而哪些代码不会”，可以看 <a href="https://nodejs.org/en/docs/guides/dont-block-the-event-loop/" target="_blank" rel="external nofollow noreferrer noopener">Node.js 官网的这篇文章</a>。</p>
 <p>说实话，对于用户自己写的 JavaScript 代码段，似乎是没什么好办法把它丢到主线程之外的线程上去执行的……请务必注意“回调”，“异步”和“非阻塞”的区别——不是所有回调都是异步的，比如我传了一个回调函数它也可能是同步的，而就算你把一段耗时的同步代码套上 <code>setImmediate</code> 和 Promise，也不意味着它就不会阻塞主线程了……它执行的时候还是在主线程执行，只是你把它延迟了，推到了 event loop 空闲的时候去运行——但轮到它运行起来还是阻塞住了主线程。（说出来不怕笑话，我也是写得多了最近才认识到这些区别（乐），如果我写的不对还希望大家指正。）</p>
@@ -571,4 +571,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.19.1 at 2024-02-19T07:35:00.953Z. -->
+<!-- Page built by Hikaru v1.19.1 at 2024-02-21T05:55:54.024Z. -->
