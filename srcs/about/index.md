@@ -34,7 +34,7 @@ Alynx Zhou
 
 <i class="bi bi-github"></i> GitHub: [@AlynxZhou](https://github.com/AlynxZhou)
 
-<i class="bi bi-fingerprint"></i> PGP Fingerprint: `87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`
+<i class="bi bi-fingerprint"></i> PGP Fingerprint: [`87F2 E316 E0AB C98B 9DE8  D4EF 042F D810 6009 54EF`](//alynx.one/pgp-public-key.asc)
 
 <div class="alert-blue">想了又想还是觉得以前写的介绍太造作了所以决定换个正常点的版本。</div>
 
