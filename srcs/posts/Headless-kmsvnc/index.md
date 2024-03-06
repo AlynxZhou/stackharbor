@@ -7,8 +7,8 @@ categories:
   - 计算机
   - Linux
 tags:
-  - 无头
-  - Headless
+  - 远程桌面
+  - VNC
   - kmsvnc
   - NAS
 ---
