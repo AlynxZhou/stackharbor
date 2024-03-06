@@ -5,13 +5,64 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2024-02-27T11:15:04.970Z</updated>
+  <updated>2024-03-06T10:11:45.933Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.5.2">Hikaru Generator Feed</generator>
+  <entry>
+    <title>kmsvnc 但是无头</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Headless-kmsvnc/" />
+    <id>https://sh.alynx.one/posts/Headless-kmsvnc/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2024-03-06T09:38:48.000Z</published>
+    <updated>2024-03-06T09:38:48.000Z</updated>
+    <summary type="html">
+      由于 Wayland 并不存在像 X11 一样一个单独管理用于最终显示的 framebuffer 的进程，因此远程桌面需要各个桌面做自己的实现。而因为登录界面和用户会话一般是两个会话，远程登录过程中的会话切换就变得非常复杂，虽然 GNOME Remote Desktop 已经有了…
+    </summary>
+    <content type="html">
+      &lt;p&gt;由于 Wayland 并不存在像 X11 一样一个单独管理用于最终显示的 framebuffer 的进程，因此远程桌面需要各个桌面做自己的实现。而因为登录界面和用户会话一般是两个会话，远程登录过程中的会话切换就变得非常复杂，虽然 GNOME Remote Desktop 已经有了一个初步实现，但我对那个的逻辑不是很满意，而且他们目前依赖 RDP 的 server rediection，所以并不支持 VNC。&lt;/p&gt;
+&lt;p&gt;按照当初我做 Show Me The Key 的逻辑，如果一样东西在混成器层面上不好实现，那应该考虑在下一层更统一的层面上实现，&lt;a href=&quot;https://github.com/isjerryxiao/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@Jerry Xiao&lt;/a&gt; 老师做了一个叫做 &lt;a href=&quot;https://github.com/isjerryxiao/kmsvnc/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;kmsvnc&lt;/a&gt; 的项目，通过 DRM/KMS 获取 framebuffer 并转给 VNC 服务器，虽然它也有一些自己的小问题，但我很喜欢这个方案。&lt;/p&gt;
+&lt;p&gt;实际上我需要用到远程桌面的场景不多，毕竟 ssh 大部分时候更可靠也更高效，不过有时候需要修改 NAS 上一些桌面设置的时候会用到。但此时就有第一个问题，我的 NAS 是无头（就是没接显示器）的，没有显示器的情况下桌面没有输出，也就获取不到 framebuffer。请教了 &lt;a href=&quot;https://github.com/isjerryxiao/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@Jerry Xiao&lt;/a&gt; 老师之后得知可以通过内核参数实现强制让内核以为我们有个显示器，就可以解决这个问题。&lt;/p&gt;
+&lt;p&gt;这个目的需要两个内核参数，分别是 &lt;code&gt;video=&lt;/code&gt; 指定强制开启哪个显卡输出端口，和 &lt;code&gt;drm.edid_firmware=&lt;/code&gt; 给这个端口指定一个 EDID 从而指定分辨率，正常的显示器会通过端口汇报自己的 EDID，而我们这里没有，所以需要手动指定。&lt;/p&gt;
+&lt;p&gt;具体这两个参数都支持什么我就不细说了，因为很复杂，建议自己看文档。首先我们得选择一个显卡已经有的输出端口用来做这个，可以用下面的命令：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ for p in /sys/class/drm/*/status; do con=${p%/status}; echo -n &amp;quot;${con#*/card?-}: &amp;quot;; cat $p; done
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ for p in /sys/class/drm/*/status; do con=${p%/status}; echo -n &quot;${con#*/card?-}: &quot;; cat $p; done
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;它会列出端口和它们的连接状态，比如我这里有三个：&lt;/p&gt;
+&lt;figure data-raw=&quot;DP-1: disconnected
+HDMI-A-1: connected
+HDMI-A-2: disconnected
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;DP-1: disconnected
+HDMI-A-1: connected
+HDMI-A-2: disconnected
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;很神奇的是我的主板上实际只有一个 DP 和一个 HDMI（我的是核芯显卡），经过我的测试主板的 HDMI 输出是 &lt;code&gt;HDMI-A-2&lt;/code&gt;，至于 &lt;code&gt;HDMI-A-1&lt;/code&gt; 到底在哪我不清楚，可能是 USB-C，但如果它并没有物理输出，那就更好了，所以我这里选择它。另外我建议不要选择 DP 输出，因为内核内置的 EDID 固件似乎并不支持 DP，导致无法指定分辨率。&lt;/p&gt;
+&lt;p&gt;然后我们通过 &lt;code&gt;video=&quot;HDMI-A-1:D&quot;&lt;/code&gt; 强制开启这个 HDMI 端口，一般你可能会查到用 &lt;code&gt;e&lt;/code&gt; 表示强制启用一个端口，不过 &lt;code&gt;D&lt;/code&gt; 表示强制启用一个数字输出端口，应该用哪个都无所谓。然后我们用 &lt;code&gt;drm.edid_firmware=&quot;HDMI-A-1:edid/1920x1080.bin&quot;&lt;/code&gt; 给这个端口指定一个 EDID 固件，这里我们使用内核内置的 &lt;code&gt;1920x1080&lt;/code&gt; 分辨率的固件，你也可以选择其它内置的，可以在内核源码 &lt;code&gt;drivers/gpu/drm/drm_edid_load.c&lt;/code&gt; 文件中找到它们的名字和内容。&lt;/p&gt;
+&lt;p&gt;然后重新启动系统，再用上面的命令，应该就像我一样有一个 &lt;code&gt;connected&lt;/code&gt; 的输出了。然后我们启动 kmsvnc：&lt;/p&gt;
+&lt;figure data-raw=&quot;# kmsvnc -p 5901 -b 0.0.0.0 -4 -d /dev/dri/card0
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;# kmsvnc -p 5901 -b 0.0.0.0 -4 -d /dev/dri/card0
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;再从另一台机器上访问：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ vncviewer YOUR_SERVER_IP:5901
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;$ vncviewer YOUR_SERVER_IP:5901
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;应该就能看到登录界面了。不过如果你也用 GDM，你可能会发现登录之后屏幕一直是 GDM 的背景色没有切换到用户会话，这个其实是因为 GDM 会选择另一个空闲的 tty 启动 GNOME，而 &lt;a href=&quot;https://github.com/isjerryxiao/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@Jerry Xiao&lt;/a&gt; 老师表示还没有找到一个普适的方案检测 tty 切换，所以这时候需要你手动 &lt;code&gt;Ctrl+C&lt;/code&gt; 打断 kmsvnc，然后再重新运行上面的命令，应该就会选择 GNOME 桌面所在的 plane 了。&lt;/p&gt;
+&lt;p&gt;如果你不是刚开机就启动 kmsvnc，可能会发现它报告找不到 plane 就退出了，这个目测是因为 GDM 检测不到用户输入就会自动停止显示器输出，只要 &lt;code&gt;systemctl restart gdm&lt;/code&gt; 重新启动一下 GDM 就可以了。&lt;/p&gt;
+
+    </content>
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    <category term="无头" label="无头" scheme="https://sh.alynx.one/tags/%E6%97%A0%E5%A4%B4/" />
+    <category term="Headless" label="Headless" scheme="https://sh.alynx.one/tags/Headless/" />
+    <category term="kmsvnc" label="kmsvnc" scheme="https://sh.alynx.one/tags/kmsvnc/" />
+    <category term="NAS" label="NAS" scheme="https://sh.alynx.one/tags/NAS/" />
+  </entry>
   <entry>
     <title>谁动了我的 DNS 解析？（重制版）</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Who-Moved-My-DNS-Resolving-Remastered/" />
@@ -2916,63 +2967,5 @@ import_tables:
     <category term="PulseAudio" label="PulseAudio" scheme="https://sh.alynx.one/tags/PulseAudio/" />
     <category term="JACK" label="JACK" scheme="https://sh.alynx.one/tags/JACK/" />
     <category term="PipeWire" label="PipeWire" scheme="https://sh.alynx.one/tags/PipeWire/" />
-  </entry>
-  <entry>
-    <title>装了台 NAS</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Build-My-NAS/" />
-    <id>https://sh.alynx.one/posts/Build-My-NAS/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2022-05-07T09:49:46.000Z</published>
-    <updated>2022-05-07T09:49:46.000Z</updated>
-    <summary type="html">
-      &lt;p&gt;本来我是不打算装 NAS 的，甚至都把我的星际蜗牛关了，因为我觉得我又没有网络多人协作的需求，而且我醒着的时候我的台式机也醒着，我睡着了又不会用到网络存储。不过自从我买了相机开始拍照片录视频，存储空间就越来越紧张了，先是把我机箱里的硬盘从 2T 直接升级到 8T，又觉得没有冗余始终心慌慌。偏偏我现在这个机箱哪里都不错，就是机械硬盘位不太充裕。为了扩展存储空间，也只能装一个 NAS 了。&lt;/p&gt;
-
-    </summary>
-    <content type="html">
-      &lt;p&gt;本来我是不打算装 NAS 的，甚至都把我的星际蜗牛关了，因为我觉得我又没有网络多人协作的需求，而且我醒着的时候我的台式机也醒着，我睡着了又不会用到网络存储。不过自从我买了相机开始拍照片录视频，存储空间就越来越紧张了，先是把我机箱里的硬盘从 2T 直接升级到 8T，又觉得没有冗余始终心慌慌。偏偏我现在这个机箱哪里都不错，就是机械硬盘位不太充裕。为了扩展存储空间，也只能装一个 NAS 了。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;决定好装 NAS 之后比较难的就是选硬件了，我肯定不会买那些闭源拖拉机的，我要装 Linux。肯定排除掉星际蜗牛，因为我实在不放心用那个背板带四块硬盘。然后对这种低功耗的设备用那种主板和 CPU 集成的赛扬应该不错，还免了主动散热，问题是我不知道在哪里能买到。所以还是考虑普通零售的硬件，不过大部分零售的硬件都有点性能过剩了，挑来挑去挑出下面的一套配置，比较个人倾向，不建议大家直接拿过来用。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CPU：i3-10105T 645&lt;/li&gt;
-&lt;li&gt;主板：七彩虹 B460I 579&lt;/li&gt;
-&lt;li&gt;机箱：乔思伯 N1 669&lt;/li&gt;
-&lt;li&gt;电源：银欣 SX500-LG 549&lt;/li&gt;
-&lt;li&gt;散热：利民 AXP90-X47 139&lt;/li&gt;
-&lt;li&gt;内存：光威 8G DDR4 2666 169x2&lt;/li&gt;
-&lt;li&gt;网卡：EDUP PCI-E 2.5Gbps 网卡 89&lt;/li&gt;
-&lt;li&gt;SSD：闪迪 至尊高速 NVMe 256G 259&lt;/li&gt;
-&lt;li&gt;HDD：西数 HC550 16T 1498x4&lt;/li&gt;
-&lt;li&gt;HDD：希捷 酷鹰 2T 375&lt;/li&gt;
-&lt;li&gt;扩展：乐扩 M.2 A+E Key 转 SATA 75&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;下面简单介绍一下为什么选这套。&lt;/p&gt;
-&lt;p&gt;首先装 NAS 第一个要决定的不是别的而是硬盘，毕竟你这设备就是拿来放硬盘的，因为台式机里面已经有 8T 的硬盘了，我也不想再经历换硬盘时候拷贝数据的痛苦，所以还是直接上了 16T 的。这种容量建议直接购买企业盘，不过也就和静音说拜拜了。没选希捷的银河系列不是因为别的，只是因为西数 HC 系列便宜点而已。选 4 块盘而不是 3 块的原因也很简单，我不会用 ZFS，肯定要用 btrfs，但是 btrfs 的 RAID5 有 bug，于是性能容量冗余的平衡点就是 RAID10 了，那就需要 4 块硬盘起步。&lt;/p&gt;
-&lt;p&gt;决定好硬盘之后就得选合适的机箱，毕竟你得能把硬盘装进去，不过我对大部分的 NAS 机箱都不满意，有些类似个人产品或者众筹的机箱比如什么宝藏盒TANK之类的看起来很能装，但是造型不伦不类，做工也一般般，然后可能迎广或者万由有一些成品 NAS 机箱看起来不错，但是基本上是高配蜗牛，而且我实在不想用 flex 电源。其实某种意义上我是先看中乔思伯 N1 这个机箱才决定装的 NAS，我对这个牌子其实没什么好感，但这个机箱实在是过于好看，而且可以装 SFX 或者 SFX-L 电源，还是有很多零售产品可以选的。&lt;/p&gt;
-&lt;p&gt;选好机箱以后就是机箱里能塞进什么硬件就塞什么硬件了，乔思伯 N1 和大部分 NAS 机箱一样都只能放 ITX 主板，但 ITX 主板可选的实在不多。首先我想要一个内置核显的 CPU，因为最简单的调试办法肯定是给机箱接上键盘鼠标显示器，也比较方便调整 BIOS，而 ITX 只有一个宝贵的 PCIE 插槽，再说 NAS 多半也没必要上个亮机卡耗电。而 AMD 那边 200GE 太弱了，Ryzen Pro 系列又太强了，实在不知道选什么比较好，而且也不容易买到最低配的 Ryzen Pro CPU，所以就选 Intel i3 了，正好还有带 T 的低功耗版本。同时 10 代的主板还比较好买，也就是说能买到新的。虽然这台机箱前面有 USB-C，不过实际上是和 USB 3.0 共享一个插座，所以也不需要主板有 USB-C 的插座。七彩虹这块 B460 的优点在于后面还是有一个标准的 USB-C 接口，以及能在京东自营买到。&lt;/p&gt;
-&lt;p&gt;SFX 电源虽然不如 ATX 电源好选，但是仍然比 flex 电源好选太多了，而且这台机器还可以放下 SFX-L 的电源，12cm 的风扇肯定比 4cm 要安静很多。于是我就在京东随便挑了一个观感不坏的牌子的全模组 SFX-L 电源里功率最低的。不过装这个机箱的时候最好注意一点，买的电源的 24pin 线最好不要是那种捆成圆柱型的，因为需要从主板边上极小的缝隙里拉过来，排线肯定比圆柱线要容易过，银欣这款是排线。当然你是定制模组线的有钱人当我没说。&lt;/p&gt;
-&lt;p&gt;这款机箱最高可以支持 70mm 的下压散热，所以其实完全可以买利民那款 12cm 的散热器，不过我觉得也无所谓了，我比较担心 12cm 的下压散热会导致在主板上装内存和 SSD 比较困难，9cm 的也够用了。&lt;/p&gt;
-&lt;p&gt;内存其实是随便选的，因为我不用 ZFS，其它文件系统对于 ECC 也没那么严格的依赖。然后 i3 和 B460 也不会支持更高的频率了。&lt;/p&gt;
-&lt;p&gt;考虑到我的台式机上有两个网口，分别是 1Gbps 和 2.5Gbps 的，我就在想可不可以把 NAS 和台式机通过 2.5Gbps 直接连起来（路由器什么时候普及 2.5Gbps 啊），这样速度基本上和访问本机的机械硬盘没有太大差距。但是主板厂家实在是太抠门了，本来 ITX 主板型号就不多，内置 2.5Gbps 网卡的就更少了。虽然让一个 2.5Gbps 的网卡占着 PCI-E x16 插槽实在是有点浪费，但也没别的选择了。至于万兆，考虑到要使用专门的线和专门的网卡，还得给台式机也装一个，算了吧，反正机械硬盘的阵列也跑不满万兆。&lt;/p&gt;
-&lt;p&gt;然后系统盘只要随便搞一个 NVMe 就可以了，反正安装一个 Arch Linux 不会占用多少空间。实际上比较头痛的是怎么接上所有的硬盘。这款机箱有 5 个在背板上的 3.5 寸硬盘位和一个单独的 2.5 寸硬盘位。大部分 ITX 主板都只有 4 个 SATA 接口，本来我觉得接 4 盘的阵列够了，但是后来我发现北邮人 pt 可以使用我的交大学校邮箱注册……要是挂 PT，我觉得还是单独放一块硬盘比较好，那接口就不够用了。比较靠谱的办法是买 HBA 卡把 PCI-E 转成 SATA，但是已经被 2.5 Gbps 网卡用掉了。我还没有发现同时有网卡和 SATA 的 PCI-E 扩展卡。还有一个方案是 M.2 转 5 个 SATA 的转接卡，其实倒也可以用一块 2.5 寸的 SSD 当作系统盘，然后解放出这个 M.2 接口，不过我实在不放心把 4 盘阵列放在这种转接卡上……而且我估计系统盘也是不能接在转接卡上的。当然你可以买一块有 2.5 Gbps 网卡的 ITX 主板，不过那基本只有 Z590 可选了，最便宜的华擎 Z590 ITX 也要 1400。所以我最后采用的方案是放弃掉无线网卡，反正 NAS 摆在路由器附近可以拉网线，然后把无线网卡下面那个 A+E Key 的 M.2 接口利用上。有这样的转接卡，可以转接出两个 SATA 口，虽然我只要一个就够了。&lt;/p&gt;
-&lt;p&gt;不过当我拿到转接卡的快递之后发现安装还是有点麻烦。最好的办法是拧下无线网卡之后发现那个保护罩可以拆掉一侧的面板，然后可以把无线网卡从保护罩上拿下来再换成转接卡。但是那个固定无线网卡的螺丝实在太紧了我拧不下来，只能放弃这个保护罩，反正转接卡应该也不会受到什么外力，就在我把转接卡插好打算开机之前，我发现还是有点问题……虽然 SATA 接口已经够矮了，但是里面那个用不上的 SATA 接口还是顶住了前面的音频接口，导致转接板是歪的。其实可以淘宝再买一个 M.2 A+E Key 的延长线，不过那样我纠结的就是把延长出来的转接卡固定在哪里了。不管了！反正我就要一个 SATA 口，用刀把里面的 SATA 口的顶端削掉吧！虽然削的很粗糙但是还是达到了效果，然后用一块胶带把那个口粘住，防止 SATA 接口里面的金属触点接触到音频口保护壳而短路，再把一块泡沫放到转接板后面顶住转接板，我觉得就差不多了。&lt;/p&gt;
-&lt;p&gt;直接装上是歪的：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Build-My-NAS/1.jpg&quot; alt=&quot;1.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;“高个的 SATA 接口被我给锯了，比矮个的还矮！”：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Build-My-NAS/2.jpg&quot; alt=&quot;2.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;“磨”改之后的效果，应该没问题吧：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Build-My-NAS/3.jpg&quot; alt=&quot;3.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;最后就是绞尽脑汁把各种线塞到 ITX 机箱里面，实在是太痛苦了。对了，这个机箱自带的风扇接线不是很长，而它那个硬盘背板上的插针又是满速的，如果你要是想插到主板上进行调速，最好自备一根 4pin 风扇延长线。&lt;/p&gt;
-&lt;p&gt;剩下就没什么好说的了，毕竟我不打算在这里复述一遍 Arch Wiki。我对 btrfs 使用的参数是 &lt;code&gt;-m raid1c3 -d raid10&lt;/code&gt;，然后在系统里设置了 samba 和 transmission 的daemon。最后附上一些装完的照片。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Build-My-NAS/4.jpg&quot; alt=&quot;4.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Build-My-NAS/5.jpg&quot; alt=&quot;5.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Build-My-NAS/6.jpg&quot; alt=&quot;6.jpg&quot;&gt;&lt;/p&gt;
-
-    </content>
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
   </entry>
 </feed>
