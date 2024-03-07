@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。 简介 由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。">
+    <meta name="keywords" content="虚拟化, Xen">
+    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="构建和运行 Xen HVM 和 PV">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Xen-HVM-PV/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto_Karon_White.webp">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Xen-HVM-PV/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      header.header, footer.footer {
+        background: #33363b;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/scrollspy.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    loadScrollSpy({
+      "containerID": "scrollspy-container",
+      "targetID": "scrollspy-target",
+      "headingSelector": "h1, h2, h3, h4, h5, h6"
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const gutter = [];
+        gutter.push("<pre class=\"gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add gutter for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            gutter.push("\n");
+          }
+        }
+        gutter.push("</pre>");
+        elementBefore(e, createElementFromString(gutter.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>构建和运行 Xen HVM 和 PV - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="pinned-message" class="pinned-message">
+  <div class="card">
+    <div class="alert-blue"><strong>我很想知道你对我博客的看法！</strong>方便请到 <a href="/about/">关于</a> 页面留下评论！</div>
+  </div>
+</div>
+
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Xen-HVM-PV/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="东京之旅一早比一世遥远">
+        <meta itemprop="image" content="/images/Mikoto_Karon_White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Xen-HVM-PV/" itemprop="url">构建和运行 Xen HVM 和 PV</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2024-03-07T15:19:19.000Z">2024-03-07 周四 23:19:19 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Xen-HVM-PV/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="构建和运行 Xen HVM 和 PV" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <div class="alert-red">请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。</div>
+
+<h1 id="%E7%AE%80%E4%BB%8B"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%AE%80%E4%BB%8B"></a>简介</h1>
+<p>由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。</p>
+<a id="more"></a>
+
+<p>首先 Xen 分为 HVM 和 PV 两种常见的虚拟方案（PVH 我也没用过），HVM 依赖于硬件虚拟化，和常见的虚拟机没什么区别，而 PV 并不依赖硬件虚拟化，是通过虚拟机 Linux 内核中特殊的驱动，将请求转给宿主机的内核代为操作，但配置起来也更加复杂。目前 PV 所需的代码已经并入 Linux 内核上游，你能安装的发行版大部分都可以直接作为 PV 的虚拟机运行。</p>
+<p>无论是 HVM 还是 PV，Xen 都用 domU（domain 的缩写，U 可以是 1、2、3……）代表虚拟机，然后用 dom0 代表宿主机，当然文档里也会叫宿主机 Hypervisor，这里我也可能直接将虚拟机叫做 VM。</p>
+<h1 id="%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8Cdom0"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8Cdom0"></a>构建和运行 dom0</h1>
+<div class="alert-blue">温馨提示：根据我的经验，在 Xen Hypervsior 上运行的 GNOME 桌面会由于未知原因在未知操作时卡住，建议不要用你平时使用的开发机作为 Xen Hypervisor，而是另找一台机器作为服务器运行 Xen Hypervisor，然后远程连接上去操作。</div>
+
+<p>和 KVM 不需要什么操作就能用不一样，Xen 需要你构建一个单独的 boot loader，在加载 Linux 内核之前先加载它，从而实现 Xen 的支持。我这里用的 Arch Linux，需要构建 <code>xen</code> 这个 AUR 包，根据 wiki 所说推荐用下面的指令构建：</p>
+<figure data-raw="$ build_stubdom=true efi_dir=&quot;/boot&quot; makepkg -si
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ build_stubdom=true efi_dir="/boot" makepkg -si
+</code></pre></figure>
+<p>我这里直接把 ESP 挂载到 <code>/boot</code>，你可能需要按情况修改。</p>
+<p>你还需要 <code>xen-qemu</code> 这个 AUR 包提供 qemu 前端对 Xen 的支持，但和一般的 AUR 包不同的是如果你直接构建这个包，得到的包很可能和你已经安装的 qemu 文件冲突。这是我遇到的唯一一个必须在 clean chroot 才能构建的包。然后由于它依赖 <code>xen</code> 这个 AUR 包，你必须手动操作。</p>
+<p>首先安装 <code>devtools</code>：</p>
+<figure data-raw="# pacman -S devtools
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># pacman -S devtools
+</code></pre></figure>
+<p>然后创建一个用于构建 clean chroot 的目录：</p>
+<figure data-raw="$ mkdir ~/chroot
+$ CHROOT=$HOME/chroot
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ mkdir ~/chroot
+$ CHROOT=$HOME/chroot
+</code></pre></figure>
+<p>然后在里面安装基础依赖：</p>
+<figure data-raw="$ mkarchroot $CHROOT/root base-devel
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ mkarchroot $CHROOT/root base-devel
+</code></pre></figure>
+<p>一般这时候 chroot 里面应该已经是最新的了，但也可以用下面的命令更新：</p>
+<figure data-raw="$ arch-nspawn $CHROOT/root pacman -Syu
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ arch-nspawn $CHROOT/root pacman -Syu
+</code></pre></figure>
+<p>然后切换到你包含 <code>xen-qemu</code> 的 <code>PKGBUILD</code> 的目录，你可能需要的两个依赖是 <code>xen</code> 和 <code>numactl</code>，前者我们刚刚构建过，后者我们可以直接从官方仓库通过 <code>pacman -S numactl</code> 安装，然后在命令行参数里指定这两个文件的位置：</p>
+<figure data-raw="$ makechrootpkg -c -r $CHROOT -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ makechrootpkg -c -r $CHROOT -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
+</code></pre></figure>
+<p>然后用 <code>pacman -U xen-qemu-*.tar.pkg.zst</code> 安装你刚刚构建好的包，此时应该没有文件冲突了。</p>
+<p>你还需要安装下面的包提供虚拟机内的 BIOS 和 UEFI 引导支持：</p>
+<figure data-raw="# pacman -S seabios edk2-ovmf
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># pacman -S seabios edk2-ovmf
+</code></pre></figure>
+<p>然后你需要加载构建好的 Xen boot loader，让它在 Linux 内核之前启动，我使用的 systemd-boot，所以下面就简单写 systemd-boot 的配置方式，逻辑上是完全一致的，如果你使用 GRUB，建议参考 Arch Wiki。</p>
+<p>首先添加一个 systemd-boot 启动项文件，我这里使用 <code>/boot/loader/entries/xen.conf</code>：</p>
+<figure data-raw="title Xen Hypervisor
+sort-key xen
+efi /xen.efi
+" data-info="language-conf" data-lang="conf" class="code-block"><pre class="code"><code class="language-conf">title Xen Hypervisor
+sort-key xen
+efi /xen.efi
+</code></pre></figure>
+<p>如果你也用 systemd-boot，这个文件对你来说应该非常简单，构建 <code>xen</code> 包的时候已经将支持 EFI 的 Xen boot loader 也就是 <code>xen.efi</code> 这个文件安装到了 ESP，只要引导它就可以。</p>
+<p>接下来我们编写 Xen 的配置文件让它可以正确找到你的 initramfs 和内核，并传递内核参数，配置文件 <code>xen.cfg</code> 需要和 <code>xen.efi</code> 位于同一个目录，这里就是 <code>/boot/xen.cfg</code>：</p>
+<figure data-raw="[global]
+default=xen
+
+[xen]
+options=console=vga loglvl=all noreboot
+kernel=vmlinuz-linux root=&quot;UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX&quot; rootfstype=&quot;btrfs&quot; rootflags=&quot;rw,defaults,noatime,compress=zstd:3,ssd,space_cache,subvolid=257,subvol=/@&quot; rw add_efi_memmap threadirqs nvidia_drm.modeset=1
+ramdisk=initramfs-linux.img
+ucode=amd-ucode.img
+" data-info="language-conf" data-lang="conf" class="code-block"><pre class="code"><code class="language-conf">[global]
+default=xen
+
+[xen]
+options=console=vga loglvl=all noreboot
+kernel=vmlinuz-linux root="UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" rootfstype="btrfs" rootflags="rw,defaults,noatime,compress=zstd:3,ssd,space_cache,subvolid=257,subvol=/@" rw add_efi_memmap threadirqs nvidia_drm.modeset=1
+ramdisk=initramfs-linux.img
+ucode=amd-ucode.img
+</code></pre></figure>
+<p>以上的内核参数是我所用的，你可以从你当前的 boot loader 启动项文件里复制出你正在用的内核参数。如果你复制了 <code>xen</code> 包自带的示例文件而不是我的，需要注意里面包含限制宿主机可用内存的参数，这是为了避免在创建虚拟机时再限制宿主机内存，影响宿主机各种缓存的策略，默认的值给的很小，可能导致无法正常启动桌面，你可能需要改大一点。不过对于我们这种简单 debug 用，可以直接忽略此参数，影响不大。</p>
+<p>然后你需要让 Xen 所需的一些守护进程开机启动：</p>
+<figure data-raw="# systemctl enable xenconsoled.service xen-init-dom0.service xen-qemu-dom0-disk-backend.service xendomains.service
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># systemctl enable xenconsoled.service xen-init-dom0.service xen-qemu-dom0-disk-backend.service xendomains.service
+</code></pre></figure>
+<p>然后重启系统，选择名字是 <code>Xen Hypervisor</code> 的启动项，你应该就有一个可以运行 Xen 的环境了。</p>
+<h1 id="%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8CdomU"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8CdomU"></a>配置和运行 domU</h1>
+<p>然后按道理说既然 Xen 和 KVM 都是用 qemu 作为前端，那完全可以交给我常用的 virt-manager 操办一切，但我尝试构建了带 Xen 支持的 libvirt，结果运行起来发现由于某个 bug，它并不能真的支持 Xen，所以只能全手动操作了。</p>
+<h2 id="%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84NAT%E7%BD%91%E7%BB%9C"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84NAT%E7%BD%91%E7%BB%9C"></a>构建虚拟机用的 NAT 网络</h2>
+<p>virt-manager 会帮我自动创建一个 NAT 网络使得虚拟机之间可以互相联系并且通过宿主机访问外网，我相信大部分人都需要让虚拟机联网，但只能我自己解决这件事了。</p>
+<p>具体的操作包含以下几步：添加一个桥接接口；然后给它分配一个 IP；再开启系统的 NAT 转发（包含 <code>sysctl</code> 和 <code>iptables</code> 两部分，我自己也不是 <code>iptables</code> 高手所以我也不能给你解释）；然后在这个接口上启动 DHCP 服务器，给虚拟机提供 IP 地址和 DNS 服务器。这样就完成了宿主机的部分，Xen 可以根据虚拟机的配置文件自动把虚拟机添加到你刚才创建的桥接接口上。</p>
+<p>为了简化这个操作我编写了一个脚本：</p>
+<figure data-raw="#!/bin/bash
+
+set -x
+
+OUT_IF=&quot;${1}&quot;
+BR_IF=&quot;${2}&quot;
+BR_IP=&quot;192.168.123.1&quot;
+BR_IP_RANGE=&quot;192.168.123.100,192.168.123.200&quot;
+BR_DNS=&quot;1.1.1.1,8.8.8.8&quot;
+
+[[ -z &quot;${OUT_IF}&quot; ]] &amp;&amp; exit 1
+[[ -z &quot;${BR_IF}&quot; ]] &amp;&amp; BR_IF=&quot;vmbr0&quot;
+
+ip link add name &quot;${BR_IF}&quot; type bridge
+ip link set dev &quot;${BR_IF}&quot; up
+
+ip address add dev &quot;${BR_IF}&quot; &quot;${BR_IP}/24&quot;
+
+# Enable NAT, so VMs can accept Internet.
+FORWARD=$(sysctl --values net.ipv4.ip_forward)
+# See <https://www.karlrupp.net/en/computer/nat_tutorial>.
+sysctl net.ipv4.ip_forward=1
+iptables -t nat -A POSTROUTING -o &quot;${OUT_IF}&quot; -j MASQUERADE
+
+# Start DHCP server so we don't need to manually assign IP addresses for VMs.
+# `--no-daemon` starts dnsmasq in debug mode, so it won't overload SIGINT.
+# It is hard to prevent `dnsmasq` from listening `127.0.0.1:53` as a DNS server,
+# so just disable its DNS server, and send DNS server to VMs via DHCP.
+# It seems you need to set `--bind-interfaces` with `--interface` to make it
+# bind to a interface only, otherwise it will try to bind to other interfaces
+# and conflict with other dnsmasq instance (if exists).
+dnsmasq --no-daemon \
+    --port=0 \
+    --interface=&quot;${BR_IF}&quot; \
+    --bind-interfaces \
+    --dhcp-range=&quot;${BR_IP_RANGE}&quot; \
+    --dhcp-option=&quot;option:dns-server,${BR_DNS}&quot;
+
+iptables -t nat -D POSTROUTING -o &quot;${OUT_IF}&quot; -j MASQUERADE
+sysctl &quot;net.ipv4.ip_forward=${FORWARD}&quot;
+
+ip link set dev &quot;${BR_IF}&quot; down
+ip link delete &quot;${BR_IF}&quot;
+" data-info="language-bash" data-lang="bash" class="code-block"><pre class="code"><code class="language-bash">#!/bin/bash
+
+set -x
+
+OUT_IF="${1}"
+BR_IF="${2}"
+BR_IP="192.168.123.1"
+BR_IP_RANGE="192.168.123.100,192.168.123.200"
+BR_DNS="1.1.1.1,8.8.8.8"
+
+[[ -z "${OUT_IF}" ]] &amp;&amp; exit 1
+[[ -z "${BR_IF}" ]] &amp;&amp; BR_IF="vmbr0"
+
+ip link add name "${BR_IF}" type bridge
+ip link set dev "${BR_IF}" up
+
+ip address add dev "${BR_IF}" "${BR_IP}/24"
+
+# Enable NAT, so VMs can accept Internet.
+FORWARD=$(sysctl --values net.ipv4.ip_forward)
+# See &lt;https://www.karlrupp.net/en/computer/nat_tutorial&gt;.
+sysctl net.ipv4.ip_forward=1
+iptables -t nat -A POSTROUTING -o "${OUT_IF}" -j MASQUERADE
+
+# Start DHCP server so we don't need to manually assign IP addresses for VMs.
+# `--no-daemon` starts dnsmasq in debug mode, so it won't overload SIGINT.
+# It is hard to prevent `dnsmasq` from listening `127.0.0.1:53` as a DNS server,
+# so just disable its DNS server, and send DNS server to VMs via DHCP.
+# It seems you need to set `--bind-interfaces` with `--interface` to make it
+# bind to a interface only, otherwise it will try to bind to other interfaces
+# and conflict with other dnsmasq instance (if exists).
+dnsmasq --no-daemon \
+    --port=0 \
+    --interface="${BR_IF}" \
+    --bind-interfaces \
+    --dhcp-range="${BR_IP_RANGE}" \
+    --dhcp-option="option:dns-server,${BR_DNS}"
+
+iptables -t nat -D POSTROUTING -o "${OUT_IF}" -j MASQUERADE
+sysctl "net.ipv4.ip_forward=${FORWARD}"
+
+ip link set dev "${BR_IF}" down
+ip link delete "${BR_IF}"
+</code></pre></figure>
+<p>你可以把这个脚本保存成 <code>mkvmbr0.sh</code>，然后 <code>chmod +x mkvmbr0.sh</code>，然后用 <code>ip a</code> 查看你当前联网所用的端口名，比如我的是 <code>wlp5s0</code>，就可以 <code>sudo ./mkvmbr0.sh wlp5s0</code> 创建一个运行在 <code>vmbr0</code> 端口上的 NAT 网络，脚本会启动 <code>dnsmasq</code> 作为 DHCP 服务器并通过 DHCP 服务器给虚拟机下发 DNS 服务器地址，如果你已经用完了虚拟机，<code>Ctrl+C</code> 打断 <code>dnsmasq</code> 它就会进行后续的清理工作并退出。</p>
+<h2 id="%E7%BC%96%E5%86%99HVM%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%BC%96%E5%86%99HVM%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"></a>编写 HVM 配置文件</h2>
+<p>HVM 实在是没什么复杂的，这么说是相对于 PV 而言，比如说构建一个 openSUSE Tumbleweed 的 HVM 可以写一个叫做 <code>hvm-tumbleweed.cfg</code> 的文件：</p>
+<figure data-raw="name = 'hvm-tumbleweed'
+builder = 'hvm'
+memory = 2048
+vcpus = 4
+disk = [ 'file:/home/alynx/xen/disk-tumbleweed.img,xvda,rw', 'file:/home/alynx/xen/openSUSE-Tumbleweed-DVD-x86_64-Current.iso,sdb:cdrom,r' ]
+vif = [ 'mac=00:16:3e:00:00:02,bridge=vmbr0' ]
+vnc = 1
+vnclisten = '0.0.0.0'
+vncdisplay = 1
+" data-info="language-conf" data-lang="conf" class="code-block"><pre class="code"><code class="language-conf">name = 'hvm-tumbleweed'
+builder = 'hvm'
+memory = 2048
+vcpus = 4
+disk = [ 'file:/home/alynx/xen/disk-tumbleweed.img,xvda,rw', 'file:/home/alynx/xen/openSUSE-Tumbleweed-DVD-x86_64-Current.iso,sdb:cdrom,r' ]
+vif = [ 'mac=00:16:3e:00:00:02,bridge=vmbr0' ]
+vnc = 1
+vnclisten = '0.0.0.0'
+vncdisplay = 1
+</code></pre></figure>
+<p>这里没什么要注意的，无非是 <code>bridge=</code> 后面接你 NAT 网络的桥接端口。以及你在配置文件里写 <code>xvda</code> 在虚拟机里会变成 <code>sda</code>，所以不要再写另一个叫做 <code>sda</code> 的设备了。如果你有多个虚拟机，记得修改 MAC 地址和 VNC 端口。</p>
+<p>创建磁盘文件可以用下面的命令：</p>
+<figure data-raw="$ truncate -s 20G disk-tumbleweed.img
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ truncate -s 20G disk-tumbleweed.img
+</code></pre></figure>
+<p>然后用下面的命令就可以启动这个虚拟机：</p>
+<figure data-raw="# xl create hvm-tumblweed.img
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># xl create hvm-tumblweed.img
+</code></pre></figure>
+<p>其他的命令可以直接 <code>man xl</code> 查看手册。可以使用 <code>vncviewer YOUR_HOST_IP:1</code> 连接虚拟机。</p>
+<h2 id="%E7%BC%96%E5%86%99PV%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%BC%96%E5%86%99PV%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"></a>编写 PV 配置文件</h2>
+<p>PV 比起 HVM 可就复杂太多了，最痛苦的一个问题是由于它不是硬件虚拟化，所以你没有办法运行虚拟机磁盘上的 boot loader！解决方案有两个，要么是直接在配置文件里写好内核和 initramfs 的路径（这样你就得想办法把虚拟机的内核和 initramfs 搞到宿主机磁盘上），要么是在宿主机上构建一个 GRUB 镜像，然后让这个 GRUB 去找虚拟机磁盘里的 <code>grub.cfg</code> 并执行，然后引导虚拟机里面的内核（这都哪跟哪啊）。</p>
+<p>当然，如果你虚拟机的系统并不使用 GRUB 作为 boot loader，那你就只能使用第一种方案了。对于 openSUSE Tumbleweed，我摸索通了后面的方案，因此我在这里介绍这个方案如何操作。</p>
+<p>首先你需要克隆 GRUB 的源码，因为你得专门构建一个能在 Xen 虚拟机里运行的 GRUB：</p>
+<figure data-raw="$ git clone git://git.savannah.gnu.org/grub.git
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ git clone git://git.savannah.gnu.org/grub.git
+</code></pre></figure>
+<p>然后构建（如果你的 Xen 是 32 位机器上的，把 <code>amd64</code> 换成 <code>i386</code>：</p>
+<figure data-raw="$ ./autogen.sh
+$ ./configure --prefix=/opt/grub-xen --target=amd64 --with-platform=xen
+$ make
+# make install
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ ./autogen.sh
+$ ./configure --prefix=/opt/grub-xen --target=amd64 --with-platform=xen
+$ make
+# make install
+</code></pre></figure>
+<p>这会将 Xen 版本的 GRUB 安装到 <code>/opt/grub-xen</code>，接下来我们需要利用 GRUB 可以将一个 tar 作为 memdisk 的特性，在里面写一个 <code>grub.cfg</code> 让 GRUB 去按我们指定的路径搜索实际的 <code>grub.cfg</code> 并加载它（别问我为什么，这鬼东西简直太邪门了）。</p>
+<p>首先写一个 <code>grub-bootstrap.cfg</code>，这个文件的唯一作用就是让 GRUB 加载 memdisk 里面的 <code>grub.cfg</code>：</p>
+<figure data-raw="normal (memdisk)/grub.cfg
+" class="code-block"><pre class="code"><code>normal (memdisk)/grub.cfg
+</code></pre></figure>
+<p>然后写一个 <code>grub.cfg</code>，下面关键的问题来了，你怎么知道要搜索的真正的 <code>grub.cfg</code> 的路径呢，当然是想办法挂载出来自己看了，我这个文件里写了常见的安装好的系统的 <code>grub.cfg</code> 的位置和我自己看到的 openSUSE 安装 iso 里面的 <code>grub.cfg</code> 的位置，所以可以同时支持安装和启动系统：</p>
+<figure data-raw="if search -s -f /boot/grub/grub.cfg ; then
+    echo &quot;Reading (${root})/boot/grub/grub.cfg&quot;
+    configfile /boot/grub/grub.cfg
+fi
+
+if search -s -f /boot/grub2/grub.cfg ; then
+    echo &quot;Reading (${root})/boot/grub2/grub.cfg&quot;
+    configfile /boot/grub2/grub.cfg
+fi
+
+if search -s -f /grub/grub.cfg ; then
+    echo &quot;Reading (${root})/grub/grub.cfg&quot;
+    configfile /grub/grub.cfg
+fi
+
+if search -s -f /grub2/grub.cfg ; then
+    echo &quot;Reading (${root})/grub2/grub.cfg&quot;
+    configfile /grub2/grub.cfg
+fi
+
+if search -s -f /EFI/BOOT/grub.cfg ; then
+    echo &quot;Reading (${root})/EFI/BOOT/grub.cfg&quot;
+    configfile /EFI/BOOT/grub.cfg
+fi
+" class="code-block"><pre class="code"><code>if search -s -f /boot/grub/grub.cfg ; then
+    echo "Reading (${root})/boot/grub/grub.cfg"
+    configfile /boot/grub/grub.cfg
+fi
+
+if search -s -f /boot/grub2/grub.cfg ; then
+    echo "Reading (${root})/boot/grub2/grub.cfg"
+    configfile /boot/grub2/grub.cfg
+fi
+
+if search -s -f /grub/grub.cfg ; then
+    echo "Reading (${root})/grub/grub.cfg"
+    configfile /grub/grub.cfg
+fi
+
+if search -s -f /grub2/grub.cfg ; then
+    echo "Reading (${root})/grub2/grub.cfg"
+    configfile /grub2/grub.cfg
+fi
+
+if search -s -f /EFI/BOOT/grub.cfg ; then
+    echo "Reading (${root})/EFI/BOOT/grub.cfg"
+    configfile /EFI/BOOT/grub.cfg
+fi
+</code></pre></figure>
+<p>然后把它打包成 tar：</p>
+<figure data-raw="$ tar -cf memdisk.tar grub.cfg
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ tar -cf memdisk.tar grub.cfg
+</code></pre></figure>
+<p>然后创建一个支持 Xen 的包含所有 GRUB 模块的 GRUB 镜像，我们将把它当作真正的虚拟机的 boot loader 运行，使用如下命令：</p>
+<figure data-raw="$ /opt/grub-xen/bin/grub-mkimage -O x86_64-xen \
+       -c grub-bootstrap.cfg \ 
+       -m memdisk.tar \
+       -o grub-x86_64-xen.bin \
+       /opt/grub-xen/lib/grub/x86_64-xen/*.mod
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ /opt/grub-xen/bin/grub-mkimage -O x86_64-xen \
+       -c grub-bootstrap.cfg \ 
+       -m memdisk.tar \
+       -o grub-x86_64-xen.bin \
+       /opt/grub-xen/lib/grub/x86_64-xen/*.mod
+</code></pre></figure>
+<p>然后你就可以编写一个 <code>pv-tumbleweed.cfg</code> 的配置文件：</p>
+<figure data-raw="name = 'pv-tumbleweed'
+memory = 2048
+vcpus = 4
+kernel = &quot;grub-x86_64-xen.bin&quot;
+disk = [ 'file:/home/alynx/xen/disk-tumbleweed.img,sda,rw', 'file:/home/alynx/xen/openSUSE-Tumbleweed-DVD-x86_64-Current.iso,sdb:cdrom,r' ]
+vif = [ 'mac=00:16:3e:00:00:01,bridge=vmbr0' ]
+vnc = 1
+vnclisten = '0.0.0.0'
+vncdisplay = 1
+" class="code-block"><pre class="code"><code>name = 'pv-tumbleweed'
+memory = 2048
+vcpus = 4
+kernel = "grub-x86_64-xen.bin"
+disk = [ 'file:/home/alynx/xen/disk-tumbleweed.img,sda,rw', 'file:/home/alynx/xen/openSUSE-Tumbleweed-DVD-x86_64-Current.iso,sdb:cdrom,r' ]
+vif = [ 'mac=00:16:3e:00:00:01,bridge=vmbr0' ]
+vnc = 1
+vnclisten = '0.0.0.0'
+vncdisplay = 1
+</code></pre></figure>
+<p>没错我们这里把我们刚刚生成的 boot loader 作为内核首先拉起来，然后不出意外你应该就能看到安装程序启动了，但是如果你火急火燎的一路下一步安装，你就会掉进下一个坑：openSUSE 默认使用 snapper 管理 btrfs 快照，默认的配置方案把 <code>/boot</code> 也放在 btrfs 子卷上。而上游的 GRUB 会从 btrfs 的根子卷而不是默认子卷开始访问，我是没能搞清楚该如何简单直接的访问 snapper 最新的快照所在的子卷，openSUSE 的 GRUB 则是打了一大堆 patch 让 GRUB 支持查找和加载默认的 btrfs 子卷。总之你直接安装之后我们的 <code>grub.cfg</code> 是查找不到真正的 <code>grub.cfg</code> 的，最简单的方案就是安装时干脆不要用 btrfs 从而不用 snapper，或者把 <code>/boot</code> 单独分区单独格式化单独挂载。</p>
+<p>然后你应该可以用下面的命令启动并链接到虚拟机的终端了：</p>
+<figure data-raw="# xl create -c pv-tumblweed.img
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># xl create -c pv-tumblweed.img
+</code></pre></figure>
+<h1 id="%E8%BF%99%E4%B8%80%E5%88%87%E5%80%BC%E5%BE%97%E5%90%97%EF%BC%9F"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E8%BF%99%E4%B8%80%E5%88%87%E5%80%BC%E5%BE%97%E5%90%97%EF%BC%9F"></a>这一切值得吗？</h1>
+<p>在经历这一系列不知道是什么鬼东西的操作之后你终于有了一个可以用的 Xen PV，也许它唯一的优势就是可以在没有硬件虚拟化的机器上跑虚拟机，为此你付出的代价是一个没法用桌面的宿主机，一个说不定哪个新系统就没法引导的虚拟机 boot loader。但现在的设备有几个没有硬件虚拟化支持呢？这就意味着对于大多数人你可以简单地使用 qemu/KVM 几乎不需要任何额外的配置，并且还有 virt-manager 这样的程序全程帮你图形化配置虚拟机和 NAT 网络。</p>
+<p>而比如你想用上面的办法手动构建网络并启动一些 SLES Minimal OS 或者 openSUSE JeOS，这个过程也更简单，首先在 <code>/etc/qemu/bridge.conf</code> 里加入一行 <code>allow vmbr0</code>，然后用之前的 NAT 网络脚本 <code>sudo ./mkvmbr0.sh wlp5s0</code>，再用下面的 qemu 命令：</p>
+<figure data-raw="$ qemu-system-x86_64 \
+    -enable-kvm \
+    -m 1G \
+    -smp 1 \
+    -drive if=virtio,format=qcow2,file=SLES15-SP5-Minimal-VM.x86_64-kvm-and-xen-GM.qcow2 \
+    -nographic \
+    -netdev bridge,id=eth0,br=vmbr0 \
+    -device virtio-net,netdev=eth0
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ qemu-system-x86_64 \
+    -enable-kvm \
+    -m 1G \
+    -smp 1 \
+    -drive if=virtio,format=qcow2,file=SLES15-SP5-Minimal-VM.x86_64-kvm-and-xen-GM.qcow2 \
+    -nographic \
+    -netdev bridge,id=eth0,br=vmbr0 \
+    -device virtio-net,netdev=eth0
+</code></pre></figure>
+<p>它会调用 <code>qemu-bridge-helper</code> 自动将虚拟机加入你构建的桥接 NAT 网络，和 Xen 比起来简单很多，也不需要额外的配置。因此如果你只是需要一个自己的虚拟化平台，完全没有必要使用已经不再流行且可能存在更多问题的 Xen，使用 KVM 就足够了。这篇文章仅仅是为了在读者不得不需要构建一个 Xen 环境 debug 时作为参考。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag"><i class="bi bi-tag"></i>虚拟化</a><a class="post-tag button" href="/tags/Xen/" rel="tag"><i class="bi bi-tag"></i>Xen</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/Headless-kmsvnc/" rel="prev" title="kmsvnc 但是无头"><span class="page-nav-title">kmsvnc 但是无头</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "构建和运行 Xen HVM 和 PV",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Xen-HVM-PV/",
+          "containerID": "comment-results"
+        }).then(() => {
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
+            document.querySelectorAll("time.comment-full-datetime"),
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto_Karon_White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">东京之旅一早比一世遥远</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">108</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">37</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">88</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="bi bi-list-ol"></i>文章目录</div>
+<ol class="toc" id="scrollspy-target">
+  <li>
+    <a class="list-group-item toc-link" href="#%E7%AE%80%E4%BB%8B">简介</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8Cdom0">构建和运行 dom0</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8CdomU">配置和运行 domU</a>
+<ol>
+  <li>
+    <a class="list-group-item toc-link" href="#%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84NAT%E7%BD%91%E7%BB%9C">构建虚拟机用的 NAT 网络</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E7%BC%96%E5%86%99HVM%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">编写 HVM 配置文件</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E7%BC%96%E5%86%99PV%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">编写 PV 配置文件</a>
+  </li>
+</ol>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E8%BF%99%E4%B8%80%E5%88%87%E5%80%BC%E5%BE%97%E5%90%97%EF%BC%9F">这一切值得吗？</a>
+  </li>
+</ol>
+    </div>
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://dawn.moe/" target="_blank" rel="external nofollow noreferrer noopener">藍貓 八千代</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.gaojianli.me/" target="_blank" rel="external nofollow noreferrer noopener">高渐离の屋</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://blog.megumifox.com/" target="_blank" rel="external nofollow noreferrer noopener">惠狐之书</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.20.1 at 2024-03-07T17:41:52.365Z. -->

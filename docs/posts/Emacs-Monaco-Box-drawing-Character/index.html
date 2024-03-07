@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="2016 年的我开始用 Atom 这种“modern”的编辑器，2022 年的我却又开始用回岁数比我都大的 GNU Emacs。切换的理由其实很简单，我曾经以为一直能追上最新版 Electron 的 VSCode 会成为第一个纯 Wayland 的代码编辑器——只要 Chromium 那边支持纯 Wayland 就好了嘛，然而直到 Emacs 那边的 pgtk 分支合并进主线（以防有读者不太清楚来龙去脉我解释一下，Emacs 虽然有图形界面，但实际上只是用 X 实现了一个 Terminal 层，而传统的 GTK3 界面只是使用 GTK3 创建一个 X 窗口，然后其它操作都是通过 X 进行，这实际上非常不适合 GTK3，导致了很多 bug，同时也使 Emacs 没法利用 GTK 的 Wayland 后端。而 pgtk 分支则是在 X 部分之外另起炉灶，利用 GTK 实现了一个和 X 部分平行的 Terminal 层，全部的绘制操作都是以 GTK/Cairo 的现代程序方式进行，自然也就摆脱了对 X 的依赖。总之在 Emacs 这样又老又庞大的代码库上做如此大范围的工程我觉得可以称得上是一项壮举了。），Chromium 的 ozone backend 还是问题多多。虽然 Emacs/Vim 这种软件看起来确实有点老派作风，但没想到也有走在这些“现代”编辑器前面的地方。">
     <meta name="keywords" content="计算机, 字体, Emacs">
-    <meta name="generator" content="Hikaru v1.20.0">
+    <meta name="generator" content="Hikaru v1.20.1">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="Emacs 和 Monaco 字体和 Box-drawing Character">
@@ -475,7 +475,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">107</a></div>
+        <div><a href="/archives/">108</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -483,7 +483,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">86</a></div>
+        <div><a href="/tags/">88</a></div>
       </div>
     </div>
     <div class="rss">
@@ -549,4 +549,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.0 at 2024-03-07T11:33:47.473Z. -->
+<!-- Page built by Hikaru v1.20.1 at 2024-03-07T17:41:52.366Z. -->

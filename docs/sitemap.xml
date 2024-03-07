@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sh.alynx.one/posts/Xen-HVM-PV/</loc>
+    <lastmod>2024-03-07T15:19:19.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/posts/Headless-kmsvnc/</loc>
     <lastmod>2024-03-06T09:38:48.000Z</lastmod>
   </url>
@@ -541,6 +545,9 @@
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/index-2.html</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/Arch%20Linux/</loc>
   </url>
   <url>
@@ -802,6 +809,9 @@
     <loc>https://sh.alynx.one/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/%E6%B8%B8%E6%88%8F/</loc>
   </url>
   <url>
@@ -887,6 +897,9 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/WireGuard/</loc>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/tags/Xen/</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/YubiKey/</loc>
