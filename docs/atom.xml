@@ -5,7 +5,7 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2024-03-07T17:41:52.370Z</updated>
+  <updated>2024-03-07T17:46:36.306Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
@@ -53,21 +53,19 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后创建一个用于构建 clean chroot 的目录：&lt;/p&gt;
 &lt;figure data-raw=&quot;$ mkdir ~/chroot
-$ CHROOT=$HOME/chroot
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ mkdir ~/chroot
-$ CHROOT=$HOME/chroot
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后在里面安装基础依赖：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ mkarchroot $CHROOT/root base-devel
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ mkarchroot $CHROOT/root base-devel
+&lt;figure data-raw=&quot;$ mkarchroot ~/chroot/root base-devel
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ mkarchroot ~/chroot/root base-devel
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;一般这时候 chroot 里面应该已经是最新的了，但也可以用下面的命令更新：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ arch-nspawn $CHROOT/root pacman -Syu
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ arch-nspawn $CHROOT/root pacman -Syu
+&lt;figure data-raw=&quot;$ arch-nspawn ~/chroot/root pacman -Syu
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ arch-nspawn ~/chroot/root pacman -Syu
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后切换到你包含 &lt;code&gt;xen-qemu&lt;/code&gt; 的 &lt;code&gt;PKGBUILD&lt;/code&gt; 的目录，你可能需要的两个依赖是 &lt;code&gt;xen&lt;/code&gt; 和 &lt;code&gt;numactl&lt;/code&gt;，前者我们刚刚构建过，后者我们可以直接从官方仓库通过 &lt;code&gt;pacman -S numactl&lt;/code&gt; 安装，然后在命令行参数里指定这两个文件的位置：&lt;/p&gt;
-&lt;figure data-raw=&quot;$ makechrootpkg -c -r $CHROOT -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ makechrootpkg -c -r $CHROOT -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
+&lt;figure data-raw=&quot;$ makechrootpkg -c -r ~/chroot -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ makechrootpkg -c -r ~/chroot -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;然后用 &lt;code&gt;pacman -U xen-qemu-*.tar.pkg.zst&lt;/code&gt; 安装你刚刚构建好的包，此时应该没有文件冲突了。&lt;/p&gt;
 &lt;p&gt;你还需要安装下面的包提供虚拟机内的 BIOS 和 UEFI 引导支持：&lt;/p&gt;

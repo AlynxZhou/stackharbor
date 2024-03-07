@@ -46,25 +46,24 @@ $ build_stubdom=true efi_dir="/boot" makepkg -si
 
 ```shell
 $ mkdir ~/chroot
-$ CHROOT=$HOME/chroot
 ```
 
 然后在里面安装基础依赖：
 
 ```shell
-$ mkarchroot $CHROOT/root base-devel
+$ mkarchroot ~/chroot/root base-devel
 ```
 
 一般这时候 chroot 里面应该已经是最新的了，但也可以用下面的命令更新：
 
 ```shell
-$ arch-nspawn $CHROOT/root pacman -Syu
+$ arch-nspawn ~/chroot/root pacman -Syu
 ```
 
 然后切换到你包含 `xen-qemu` 的 `PKGBUILD` 的目录，你可能需要的两个依赖是 `xen` 和 `numactl`，前者我们刚刚构建过，后者我们可以直接从官方仓库通过 `pacman -S numactl` 安装，然后在命令行参数里指定这两个文件的位置：
 
 ```shell
-$ makechrootpkg -c -r $CHROOT -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
+$ makechrootpkg -c -r ~/chroot -I ../xen/xen-4.18.1pre-1-x86_64.pkg.tar.zst -I /var/cache/pacman/pkg/numactl-2.0.18-1-x86_64.pkg.tar.zst
 ```
 
 然后用 `pacman -U xen-qemu-*.tar.pkg.zst` 安装你刚刚构建好的包，此时应该没有文件冲突了。
