@@ -81,12 +81,12 @@ Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-termin
 - 仓库：<https://github.com/AlynxZhou/gnome-shell-extension-always-show-workspace-thumbnails/>
 - GNOME Shell 扩展安装页：<https://extensions.gnome.org/extension/4156/always-show-workspace-thumbnails/>
 
-## AZTGBot
+## AZBot-Telegram
 
 零依赖 Node.JS Telegram Bot API 框架。
 
 - 主页：<https://tgbot.alynx.one/>
-- 仓库：<https://github.com/AlynxZhou/aztgbot/>
+- 仓库：<https://github.com/AlynxZhou/azbot-telegram/>
 - 酒仙：[点这里让酒仙帮你决定晚上吃什么](https://t.me/mangix_bot)
 
 ## AZPiano
