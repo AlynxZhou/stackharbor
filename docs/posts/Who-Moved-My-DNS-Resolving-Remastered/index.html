@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这一篇是之前 谁动了我的 DNS 解析？ 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。 标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。">
     <meta name="keywords" content="计算机, Linux, 网络, DNS, resolv.conf, Network Manager, systemd-resolved">
-    <meta name="generator" content="Hikaru v1.21.0">
+    <meta name="generator" content="Hikaru v1.21.1">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="谁动了我的 DNS 解析？（重制版）">
@@ -332,7 +332,7 @@
 <p>一般要讲故事，开头都是“很久很久以前……”，不过计算机领域也没什么太古老的故事可讲，毕竟公认的互联网前身 ARPANET 也就是二十世纪的事情。那个时候能互联的机器一共也就那么几个，所以解决的办法简单粗暴：我们每个机器都保存一个文件，里面记录所有人对应的域名和 IP 不就行了？这个优良传统一直留了下来，也就是现在所有系统里都有的 hosts 文件——不管你写的对不对，它的优先级都比后来出现的 DNS 查询要高。</p>
 <p>然后随着加入网络的机器越来越多，这个办法不好用了，毕竟每来一个新人就要所有人更新自己的文件，这复杂度也太高了。所以干脆我们搞一个集中的服务器专门放这个列表，其它机器都向它查询就好了，这就是 DNS 服务器的原理。然后在局域网里，一般路由器和 DNS 服务器以及 DHCP 服务器都是同一台机器，因为很自然的所有设备都会连到路由器上，而 DHCP 服务器恰好知道它分配出去的 IP 地址，所以如果你输入内网设备的主机名恰好能解析，那通常是你的路由器做了这些工作。</p>
 <p>但既然有了 DNS 服务器，那问题就变得复杂起来，比如我该将我的 DNS 服务器设置成哪一个？特别地，你可能会发现有很多不同的程序在试图修改你的 DNS 服务器设置，导致你打开某些网站本该秒开却不停地转圈圈，事情为什么会这么复杂？</p>
-<h1 id="chattr-+i-etc-resolv-conf"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#chattr-+i-etc-resolv-conf"></a>chattr +i /etc/resolv.conf</h1>
+<h1 id="chattr-+i--etc-resolv-conf"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#chattr-+i--etc-resolv-conf"></a>chattr +i /etc/resolv.conf</h1>
 <p>很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 <code>/etc/resolv.conf</code> 实现，很多 Linux 用户也被 <code>/etc/resolv.conf</code> 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 <code>resolvconf</code> 的工具处理，然后现在 systemd 又搞了个叫 systemd-resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 <code>chattr +i /etc/resolv.conf</code> 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是惹恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），你不需要的功能并不意味着别人也不需要。总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 <code>/etc/resolv.conf</code> 的。</p>
 <p>在 DNS 服务器设置这件事上并不是一个 <code>/etc/resolv.conf</code> 搞定所有，有关这个的故事也是 long long ago，但毕竟是 UNIX 纪元之后的事情，没有太久，大概确实上古时代的程序都是直接读这个获取 DNS 服务器然后再做 DNS 解析的，但实际上这也不一定 OK，比如像之前说的 hosts 文件也需要考虑。所以就有了更复杂的解决方案，大部分程序做 DNS 解析实际上是调用 glibc 里面 <code>getaddrinfo</code> 这个 API，所以在它后面我们就可以做一些工作。一个叫做 Name Service Switch 的东西发明出来就是干这个的，它是基于插件的，我们可以通过阅读 <code>/etc/nsswitch.conf</code> 里面的 <code>hosts</code> 这一行来理解，比如我这里默认是这样的：</p>
 <figure data-raw="hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
@@ -497,7 +497,7 @@
     <a class="list-group-item toc-link" href="#long-long-ago">long long ago</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#chattr-+i-etc-resolv-conf">chattr +i /etc/resolv.conf</a>
+    <a class="list-group-item toc-link" href="#chattr-+i--etc-resolv-conf">chattr +i /etc/resolv.conf</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E5%BD%93%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%9C%80%E8%A6%81%E6%9D%A5%E5%9B%9E%E8%B7%91%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%A8%E6%88%B7%E2%80%A6%E2%80%A6">当你是个需要来回跑的笔记本用户……</a>
@@ -574,4 +574,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:59:57.817Z. -->
+<!-- Page built by Hikaru v1.21.1 at 2024-03-12T10:31:01.407Z. -->

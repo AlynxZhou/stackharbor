@@ -5,7 +5,7 @@
   <icon>https://sh.alynx.one/images/Mikoto_Karon_White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2024-03-12T09:59:57.821Z</updated>
+  <updated>2024-03-12T10:31:01.412Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
@@ -448,7 +448,7 @@ HDMI-A-2: disconnected
 &lt;p&gt;一般要讲故事，开头都是“很久很久以前……”，不过计算机领域也没什么太古老的故事可讲，毕竟公认的互联网前身 ARPANET 也就是二十世纪的事情。那个时候能互联的机器一共也就那么几个，所以解决的办法简单粗暴：我们每个机器都保存一个文件，里面记录所有人对应的域名和 IP 不就行了？这个优良传统一直留了下来，也就是现在所有系统里都有的 hosts 文件——不管你写的对不对，它的优先级都比后来出现的 DNS 查询要高。&lt;/p&gt;
 &lt;p&gt;然后随着加入网络的机器越来越多，这个办法不好用了，毕竟每来一个新人就要所有人更新自己的文件，这复杂度也太高了。所以干脆我们搞一个集中的服务器专门放这个列表，其它机器都向它查询就好了，这就是 DNS 服务器的原理。然后在局域网里，一般路由器和 DNS 服务器以及 DHCP 服务器都是同一台机器，因为很自然的所有设备都会连到路由器上，而 DHCP 服务器恰好知道它分配出去的 IP 地址，所以如果你输入内网设备的主机名恰好能解析，那通常是你的路由器做了这些工作。&lt;/p&gt;
 &lt;p&gt;但既然有了 DNS 服务器，那问题就变得复杂起来，比如我该将我的 DNS 服务器设置成哪一个？特别地，你可能会发现有很多不同的程序在试图修改你的 DNS 服务器设置，导致你打开某些网站本该秒开却不停地转圈圈，事情为什么会这么复杂？&lt;/p&gt;
-&lt;h1 id=&quot;chattr-+i-etc-resolv-conf&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving-Remastered/#chattr-+i-etc-resolv-conf&quot;&gt;&lt;/a&gt;chattr +i /etc/resolv.conf&lt;/h1&gt;
+&lt;h1 id=&quot;chattr-+i--etc-resolv-conf&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving-Remastered/#chattr-+i--etc-resolv-conf&quot;&gt;&lt;/a&gt;chattr +i /etc/resolv.conf&lt;/h1&gt;
 &lt;p&gt;很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 实现，很多 Linux 用户也被 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 &lt;code&gt;resolvconf&lt;/code&gt; 的工具处理，然后现在 systemd 又搞了个叫 systemd-resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 &lt;code&gt;chattr +i /etc/resolv.conf&lt;/code&gt; 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是惹恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），你不需要的功能并不意味着别人也不需要。总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的。&lt;/p&gt;
 &lt;p&gt;在 DNS 服务器设置这件事上并不是一个 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 搞定所有，有关这个的故事也是 long long ago，但毕竟是 UNIX 纪元之后的事情，没有太久，大概确实上古时代的程序都是直接读这个获取 DNS 服务器然后再做 DNS 解析的，但实际上这也不一定 OK，比如像之前说的 hosts 文件也需要考虑。所以就有了更复杂的解决方案，大部分程序做 DNS 解析实际上是调用 glibc 里面 &lt;code&gt;getaddrinfo&lt;/code&gt; 这个 API，所以在它后面我们就可以做一些工作。一个叫做 Name Service Switch 的东西发明出来就是干这个的，它是基于插件的，我们可以通过阅读 &lt;code&gt;/etc/nsswitch.conf&lt;/code&gt; 里面的 &lt;code&gt;hosts&lt;/code&gt; 这一行来理解，比如我这里默认是这样的：&lt;/p&gt;
 &lt;figure data-raw=&quot;hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
@@ -541,7 +541,7 @@ HDMI-A-2: disconnected
 &lt;figure data-raw=&quot;$ headscale preauthkeys create --user azvpn --reusable --expiration 12h
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ headscale preauthkeys create --user azvpn --reusable --expiration 12h
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;h1 id=&quot;Tailscale-Linux-&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Build-VPN-with-Headscale-and-Tailscale/#Tailscale-Linux-&quot;&gt;&lt;/a&gt;Tailscale (Linux)&lt;/h1&gt;
+&lt;h1 id=&quot;Tailscale--Linux-&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Build-VPN-with-Headscale-and-Tailscale/#Tailscale--Linux-&quot;&gt;&lt;/a&gt;Tailscale (Linux)&lt;/h1&gt;
 &lt;p&gt;这个同样也在 Arch Linux 的官方仓库，直接安装即可：&lt;/p&gt;
 &lt;figure data-raw=&quot;# pacman -S tailscale
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pacman -S tailscale
@@ -574,7 +574,7 @@ HDMI-A-2: disconnected
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# tailscale up --login-server https://YOURSERVER:YOURPORT --auth-key YOURPREAUTHKEY
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;此时运行 &lt;code&gt;ip a&lt;/code&gt;，应该可以看到多了一个叫 &lt;code&gt;tailscale0&lt;/code&gt; 的网络接口。使用 &lt;code&gt;resolvectl status&lt;/code&gt; 则可以看到这个接口有自己的 DNS 服务器，并且对 &lt;code&gt;azvpn.alynx.one&lt;/code&gt; 的域名使用此服务器查询。此时已经可以使用 Tailscale 内网分配的 IP 或者 MagicDNS 提供的域名像在物理路由器后面一样访问内网的各种设备。&lt;/p&gt;
-&lt;h1 id=&quot;Tailscale-Android-&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Build-VPN-with-Headscale-and-Tailscale/#Tailscale-Android-&quot;&gt;&lt;/a&gt;Tailscale (Android)&lt;/h1&gt;
+&lt;h1 id=&quot;Tailscale--Android-&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Build-VPN-with-Headscale-and-Tailscale/#Tailscale--Android-&quot;&gt;&lt;/a&gt;Tailscale (Android)&lt;/h1&gt;
 &lt;p&gt;Tailscale 也有开源的 Android 客户端并且已经上架了 Google Play Store，但你安装之后可能会发现没有自定义服务器的选项，你需要点开并关闭右上角三个点菜单多次，然后菜单里就会多出一项 Change Server，设置成你自建的 Headscale 服务器，然后就可以使用主界面第二个登录选项进行交互登录了。目前似乎 Android 客户端还不支持使用 preauthkey 登录。&lt;/p&gt;
 
     </content>
@@ -2772,7 +2772,7 @@ gtk-application-prefer-dark-theme=1
 &lt;p&gt;再后来各种子网越来越多，子网里的设备也越来越多，比如打印机这种，以至于现在各种智能家居，不可能再搞一个服务器用来注册“喂，我是茶壶”这种东西，于是苹果搞出了一个叫 Zeroconf 的协议，大概是在 DNS 的基础上可以让子网里支持这个协议的设备互相发现互相通知自己是什么。因为和 DNS 相关，所以有一个部分是 MulticastDNS (mDNS)，简单来说就是不通过 DNS 服务器，而是通过这个协议发现的设备列表实现 DNS 解析。所以这是第三种方式。&lt;/p&gt;
 &lt;p&gt;以上三种方式其实都是我从 Arch Wiki 抄来的：&lt;a href=&quot;https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;所以我决定搞一个第三种，这个好说，wiki 写了可以用 Avahi 做这个，不过怎么 systemd-resolved 也能做 mDNS？这玩意不是管 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的吗？Network Manager 不是也管这个吗？&lt;/p&gt;
-&lt;h1 id=&quot;chattr-+i-etc-resolv-conf&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#chattr-+i-etc-resolv-conf&quot;&gt;&lt;/a&gt;chattr +i /etc/resolv.conf&lt;/h1&gt;
+&lt;h1 id=&quot;chattr-+i--etc-resolv-conf&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Who-Moved-My-DNS-Resolving/#chattr-+i--etc-resolv-conf&quot;&gt;&lt;/a&gt;chattr +i /etc/resolv.conf&lt;/h1&gt;
 &lt;p&gt;很多 Linux 用户都知道修改 DNS 服务器可以通过编辑 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 实现，很多 Linux 用户也被 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 困扰，一些人发现自己的这个文件是个软链接，而另一些人发现这个文件总被 Network Manager 覆盖，还有些人的发行版让他们用一个叫 &lt;code&gt;resolvconf&lt;/code&gt; 的工具处理，然后现在 systemd 又搞了个叫 resolved 的东西来插一脚……我说的这些已经足够让一些不想学新东西同时又神经紧张的人开始大喊“fuck systemd, fuck network manager, fuck desktop environment and fuck the whole modern world”然后执行 &lt;code&gt;chattr +i /etc/resolv.conf&lt;/code&gt; 了。不过别着急小炸药包们，也许这个世界上新出现的各种东西目的并不只是惹恼你们这群大笨蛋，哦是的，没错，我说，大笨蛋，恐龙勇士（停停停不要翻译腔了），而是真的有场景需要他们。也许对于某个 VPN 连接需要使用自己的 DNS 服务器，总之，不要觉得世界都围着你转，至少读一下这些东西的文档，会告诉你怎么阻止它们修改你的 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 的。&lt;/p&gt;
 &lt;p&gt;但其实也不是一个 &lt;code&gt;/etc/resolv.conf&lt;/code&gt; 搞定所有，有关这个的故事也是 long long ago，但毕竟是 UNIX 纪元之后的事情，没有太久，大概确实上古时代的程序都是直接读这个获取 DNS 服务器然后再做 DNS 解析的，但实际上这也不一定 OK，比如像之前说的打印机这种怎么解决？以及 hosts 呢？所以就有了更复杂的解决方案，大部分程序做 DNS 解析实际上是调用 glibc 里面 &lt;code&gt;getaddrinfo&lt;/code&gt; 这个 API，所以在它后面我们就可以做一些工作。一个叫做 Name Service Switch 的东西发明出来就是干这个的，它可以理解为一个基于插件的结构，我们可以通过阅读 &lt;code&gt;/etc/nsswitch.conf&lt;/code&gt; 里面的 &lt;code&gt;hosts&lt;/code&gt; 这一行来理解，比如我这里默认是这样的：&lt;/p&gt;
 &lt;figure data-raw=&quot;hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
