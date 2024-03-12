@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口，程序启动了，没有报……">
     <meta name="keywords" content="GNOME, NVIDIA">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="都不能算是 GNOME 的 Bug">
@@ -177,26 +177,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -550,4 +550,4 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.506Z. -->

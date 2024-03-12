@@ -196,10 +196,10 @@ $ truncate -s 20G disk-tumbleweed.img
 然后用下面的命令就可以启动这个虚拟机：
 
 ```shell
-# xl create hvm-tumblweed.img
+# xl create hvm-tumblweed.cfg
 ```
 
-其他的命令可以直接 `man xl` 查看手册。可以使用 `vncviewer YOUR_HOST_IP:1` 连接虚拟机。
+其他的命令可以直接 `man xl` 查看手册。可以使用 `vncviewer YOUR_HOST_IP:1` 连接虚拟机。关于这个配置文件的具体语法可以参考 [官方文档](https://xenbits.xen.org/docs/unstable/man/xl.cfg.5.html)。
 
 ## 编写 PV 配置文件
 
@@ -294,8 +294,10 @@ vncdisplay = 1
 然后你应该可以用下面的命令启动并链接到虚拟机的终端了：
 
 ```shell
-# xl create -c pv-tumblweed.img
+# xl create -c pv-tumblweed.cfg
 ```
+
+关于这个配置文件的具体语法可以参考 [官方文档](https://xenbits.xen.org/docs/unstable/man/xl.cfg.5.html)。
 
 # 这一切值得吗？
 

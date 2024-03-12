@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="需求 以前我一直使用树莓派 + 移动硬盘做 Samba 服务器，好处是完全静音，功耗很低，但是树莓派 2 的网络性能差强人意，并且 USB 2.0 的速度也赶不上移动硬盘的速度，看电影什么的只是能看，要花好长时间缓冲，并且我一直开着，对树莓派的电源也不是很放心。特别是我还拆下来一块笔记本上的 1TB 机械硬盘，完全没法装在树莓派上。">
     <meta name="keywords" content="计算机, Arch Linux, 蜗牛星际">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="蜗牛星际安装 Arch Linux 作为 NAS">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -348,7 +348,7 @@
 <p><strong>再次提醒各位注意不要买下图的带灯条的风扇。</strong></p>
 <p><img src="/posts/SnailSpace-as-NAS/1.jpg" alt="大了一圈的风扇">
 <img src="/posts/SnailSpace-as-NAS/2.jpg" alt="装上之后的效果"></p>
-<h2 id="%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98"><a class="heading-link header-link" href="/posts/SnailSpace-as-NAS/#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98"></a>安装侧面 2.5 寸硬盘</h2>
+<h2 id="%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A2-2-5-%E5%AF%B8%E7%A1%AC%E7%9B%98"><a class="heading-link header-link" href="/posts/SnailSpace-as-NAS/#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A2-2-5-%E5%AF%B8%E7%A1%AC%E7%9B%98"></a>安装侧面 2.5 寸硬盘</h2>
 <p>蜗牛自带一个 16G 的 mSATA 硬盘，速度比 U 盘还慢，而且据说用着用着就坏了，很多人都拿这个做引导盘放系统，但我不打算用，直接拧下四个螺丝把主板抽出来，然后拧掉 mSATA 杂牌硬盘。</p>
 <p>因为四个硬盘托连接的 SATA 口是扩展的，不支持引导，但是 <strong>实际上蜗牛主板正中间上还有一个 SATA2 的口可以引导</strong>，正好连接我的笔记本硬盘，自己插上一根 SATA 线把主板装回去即可。</p>
 <p>硬盘本体安装时候需要两个小螺丝固定硬盘一侧，另外一侧是卡住的，不需要螺丝。然后把电源线和刚才插的 SATA 线插到硬盘上面。</p>
@@ -412,7 +412,7 @@ DHCP=ipv4
 </code></pre></figure>
 <p>意思是对于所有以 <code>en</code> 开头的网卡使用 DHCPv4，然后 <code>systemctl enable --now systemd-networkd systemd-resolved</code> 就可以了。</p>
 <p>NetworkManager 就很简单，直接安装然后 <code>systemctl enable NetworkManager --now</code> 应该就行了！</p>
-<h2 id="Samba%E9%85%8D%E7%BD%AE"><a class="heading-link header-link" href="/posts/SnailSpace-as-NAS/#Samba%E9%85%8D%E7%BD%AE"></a>Samba 配置</h2>
+<h2 id="Samba-%E9%85%8D%E7%BD%AE"><a class="heading-link header-link" href="/posts/SnailSpace-as-NAS/#Samba-%E9%85%8D%E7%BD%AE"></a>Samba 配置</h2>
 <p>btrfs 的子卷看起来很像普通目录，但是又可以分别直接挂载，不需要先挂载设备然后再用 <code>mount --rbind</code>。于是建了 <code>/data</code> 和 <code>/data/alynx</code> 两个子卷，<code>/data</code> 就挂载到 <code>/data</code>，<code>/data/alynx</code> 挂载到我家目录下面。</p>
 <p>在 <code>/etc/samba/smb.conf</code> 添加如下配置，就可以分别通过 <code>home</code> 和 <code>data</code> 访问每个用户在 <code>/home</code> 和 <code>/data</code> 下面的同名文件夹了，<code>%u</code> 代表的就是连接的用户名。（当然权限要你自己处理一下。）</p>
 <figure data-raw="[home]
@@ -586,7 +586,7 @@ DHCP=ipv4
     <a class="list-group-item toc-link" href="#%E6%9B%B4%E6%8D%A2%E9%A3%8E%E6%89%87">更换风扇</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A225%E5%AF%B8%E7%A1%AC%E7%9B%98">安装侧面 2.5 寸硬盘</a>
+    <a class="list-group-item toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%A7%E9%9D%A2-2-5-%E5%AF%B8%E7%A1%AC%E7%9B%98">安装侧面 2.5 寸硬盘</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E4%BB%93%E5%BA%93%E7%9B%98%E5%AE%89%E8%A3%85">仓库盘安装</a>
@@ -606,7 +606,7 @@ DHCP=ipv4
     <a class="list-group-item toc-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE">网络配置</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#Samba%E9%85%8D%E7%BD%AE">Samba 配置</a>
+    <a class="list-group-item toc-link" href="#Samba-%E9%85%8D%E7%BD%AE">Samba 配置</a>
   </li>
 </ol>
   </li>
@@ -673,4 +673,4 @@ DHCP=ipv4
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

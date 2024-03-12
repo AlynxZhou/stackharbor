@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="说来惭愧，我一直记不太清 GObject 到底是怎么用的，毕竟作为一个写过 C++ 和 Python 然后常用 JS 的人来说，面向对象的实现是非常自然的，不需要考虑为什么。所以我总是看着一大堆类型转换和分散的定义以及各种 chain up 感到眩晕。而 GObject 的文档写的也相当分散，有种管中窥豹之感。">
     <meta name="keywords" content="GObject">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="GObject 备忘录">
@@ -177,26 +177,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -1186,4 +1186,4 @@ clean:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

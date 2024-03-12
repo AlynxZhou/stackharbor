@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="令人出乎意料，我竟然是 DaVinci Resolve（后面都简称达芬奇了）的付费用户。虽然它不是开源软件，但是有很好的 Linux 支持，使用体验和功能都是同类中的佼佼者，而且收费也相当合理。我选择付费一个原因是你支持我，我就支持你，这其实和我支持 Steam 和 Valve 的理由差不多。另一个……">
     <meta name="keywords" content="计算机, Linux, Qt">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="DaVinci Resolve 在 Linux 下的输入法支持">
@@ -177,26 +177,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -522,4 +522,4 @@ Version         : 5.15.7+kde+r176-1
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.506Z. -->

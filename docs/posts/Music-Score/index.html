@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="以十六孔琴、标准音高为准，非口琴常用音高，十二孔请自行移调！ 大部分乐谱经本人手动整理，如有不符合说明的情况请自行处理或者等待更新！ 乐谱为逐句调整，无省略。 (低音) 中音 [高音] {倍高音}">
     <meta name="keywords" content="半音阶口琴, 曲谱">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="喵的曲谱说明以及目录">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -334,13 +334,13 @@
 
 <hr>
 <h1 style="text-align:center"><a href="/posts/Only-My-Railgun/">only my railgun</a></h1>
-<h2 style="text-align:center" id="%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AEOP1fripSide"><a class="heading-link header-link" href="/posts/Music-Score/#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AEOP1fripSide"></a>科学超电磁炮 OP1 fripSide</h2>
+<h2 style="text-align:center" id="%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AE-OP1-fripSide"><a class="heading-link header-link" href="/posts/Music-Score/#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AE-OP1-fripSide"></a>科学超电磁炮 OP1 fripSide</h2>
 
 <h1 style="text-align:center"><a href="/posts/LEVEL5-judgelight/">LEVEL5 -judgelight-</a></h1>
-<h2 style="text-align:center" id="%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AEOP2fripSide"><a class="heading-link header-link" href="/posts/Music-Score/#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AEOP2fripSide"></a>科学超电磁炮 OP2 fripSide</h2>
+<h2 style="text-align:center" id="%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AE-OP2-fripSide"><a class="heading-link header-link" href="/posts/Music-Score/#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AE-OP2-fripSide"></a>科学超电磁炮 OP2 fripSide</h2>
 
 <h1 style="text-align:center"><a href="/posts/Sister-s-Noise/">sister's noise</a></h1>
-<h2 style="text-align:center" id="%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AESOP1fripSide"><a class="heading-link header-link" href="/posts/Music-Score/#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AESOP1fripSide"></a>科学超电磁炮S OP1 fripSide</h2>
+<h2 style="text-align:center" id="%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AES-OP1-fripSide"><a class="heading-link header-link" href="/posts/Music-Score/#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AES-OP1-fripSide"></a>科学超电磁炮S OP1 fripSide</h2>
 
 <hr>
 
@@ -472,13 +472,13 @@
       <div><i class="bi bi-list-ol"></i>文章目录</div>
 <ol class="toc" id="scrollspy-target">
   <li>
-    <a class="list-group-item toc-link" href="#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AEOP1fripSide">科学超电磁炮 OP1 fripSide</a>
+    <a class="list-group-item toc-link" href="#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AE-OP1-fripSide">科学超电磁炮 OP1 fripSide</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AEOP2fripSide">科学超电磁炮 OP2 fripSide</a>
+    <a class="list-group-item toc-link" href="#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AE-OP2-fripSide">科学超电磁炮 OP2 fripSide</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AESOP1fripSide">科学超电磁炮S OP1 fripSide</a>
+    <a class="list-group-item toc-link" href="#%E7%A7%91%E5%AD%A6%E8%B6%85%E7%94%B5%E7%A3%81%E7%82%AES-OP1-fripSide">科学超电磁炮S OP1 fripSide</a>
   </li>
 </ol>
     </div>
@@ -540,4 +540,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.254Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.508Z. -->

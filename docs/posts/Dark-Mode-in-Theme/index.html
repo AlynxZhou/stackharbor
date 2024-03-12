@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我自己对暗色模式其实是没什么兴趣的，因为设计一种配色就已经让我绞尽脑汁了，还要我设计另一种。但是我也确实意识到暗色模式在晚上玩手机实在是很方便，而且做这个也很流行，于是我也做了一个，只是因为我能做到。">
     <meta name="keywords" content="网站, ARIA">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="给你的主题来点暗色！">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -331,9 +331,9 @@
 <a id="more"></a>
 <h1 id="%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F"><a class="heading-link header-link" href="/posts/Dark-Mode-in-Theme/#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F"></a>跟着系统变色就行了吗？</h1>
 <p>现在的系统大概都支持暗色模式（Linux 的桌面环境早就有这种设置了，Firefox 可以直接读取我的系统设置，Android/iOS 也都有暗色模式开关），浏览器也紧跟潮流提供了 <code>@media</code> 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme" target="_blank" rel="external nofollow noreferrer noopener">查询属性</a>（IE：那……是……什……么……）。理论上来说只要简单地在 CSS 里面查询然后编写修改颜色的代码就可以了，问题只是如何修改颜色比较轻松。</p>
-<h1 id="CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81"><a class="heading-link header-link" href="/posts/Dark-Mode-in-Theme/#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81"></a>CSS 变量是好东西！</h1>
+<h1 id="CSS-%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81"><a class="heading-link header-link" href="/posts/Dark-Mode-in-Theme/#CSS-%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81"></a>CSS 变量是好东西！</h1>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="external nofollow noreferrer noopener">使用 CSS 变量</a> 当然是最简单的解决方案了，就像我们平时编程一样使用变量作为 <code>color</code> 和 <code>background</code> 的值，然后在查询到暗色模式的代码块里给这些变量重新赋值，一切都十分简单有条理，而且最重要的是你不需要一个一个选择器查找有哪些需要变色的属性，所有的颜色变量都是放在一起的。</p>
-<h1 id="%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81"><a class="heading-link header-link" href="/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81"></a>真是恨死 IE 这废物了！</h1>
+<h1 id="%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BB-IE-%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81"><a class="heading-link header-link" href="/posts/Dark-Mode-in-Theme/#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BB-IE-%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81"></a>真是恨死 IE 这废物了！</h1>
 <p>虽然 IE 有很多不支持的选项，但是不支持 CSS 变量真是让我工作量剧增的一件事情。虽然我从不测试我的网站在 IE 上能否运行，但是在最新版 IE 上一般都是没问题的，因此我也会放弃一些最新版 IE 不支持的新特性，CSS 变量就是其中之一。</p>
 <p>既然没有办法用 CSS 变量，那就只能自己一个一个找选择器下面和颜色相关的属性，然后给它们重新设置属性了，真是找的人头晕眼花啊。</p>
 <p>可能有人会说你不是用 CSS 预处理器吗，预处理器不是也有变量吗？但是预处理器是在生成阶段把变量编译掉了啊！不方便到运行时（浏览器）里去替换变量。</p>
@@ -498,10 +498,10 @@
     <a class="list-group-item toc-link" href="#%E8%B7%9F%E7%9D%80%E7%B3%BB%E7%BB%9F%E5%8F%98%E8%89%B2%E5%B0%B1%E8%A1%8C%E4%BA%86%E5%90%97%EF%BC%9F">跟着系统变色就行了吗？</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#CSS%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81">CSS 变量是好东西！</a>
+    <a class="list-group-item toc-link" href="#CSS-%E5%8F%98%E9%87%8F%E6%98%AF%E5%A5%BD%E4%B8%9C%E8%A5%BF%EF%BC%81">CSS 变量是好东西！</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BBIE%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81">真是恨死 IE 这废物了！</a>
+    <a class="list-group-item toc-link" href="#%E7%9C%9F%E6%98%AF%E6%81%A8%E6%AD%BB-IE-%E8%BF%99%E5%BA%9F%E7%89%A9%E4%BA%86%EF%BC%81">真是恨死 IE 这废物了！</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E6%88%91%E5%B0%B1%E6%98%AF%E6%83%B3%E5%9C%A8%E6%9A%97%E8%89%B2%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%94%A8%E4%BA%AE%E8%89%B2%E5%95%8A%EF%BC%81">我就是想在暗色浏览器里用亮色啊！</a>
@@ -578,4 +578,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

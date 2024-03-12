@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Google 反应还是挺快的，现在这篇博客已经不是精选摘要了。 可能有人在 Google 搜索 “WireGuard 原理” 然后发现精选摘要是这篇博文，这给我带来了很多流量。但我还是要摸着良心说这篇博文并没有涉及到什么深层次具体的 WireGuard 原理，只是简单的配置使用记录。我不知道为什么 Google 会依据文章里唯一的一个“原理”就认为这篇文章是讲述 WireGuard 原理的，我不想误人子弟，所以已经删掉了唯一的一处关键词。我个人建议直接访问 WireGuard 的官网或者 Wikipedia 页面来查找有关它的原理的资料。 由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。 需求 本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。">
     <meta name="keywords" content="网络, VPN, WireGuard">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="WireGuard 配置与使用">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -699,4 +699,4 @@ rtt min/avg/max/mdev = 30.133/30.393/30.521/0.209 ms
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.254Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

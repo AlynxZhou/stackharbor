@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我花了好久来阅读和实践 Learn OpenGL CN 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。">
     <meta name="keywords" content="OpenGL, C 语言, 编程">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="学习 OpenGL 1">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -329,7 +329,7 @@
 
 <p>话先说在前面，虽然标题我写了 OpenGL，但是我实际上使用的是 OpenGL ES —— 你可以把它当作是 OpenGL 的一个子集，只包含基于可编程管线的部分 API，去掉了那些过时的旧模式。虽然 OpenGL ES 主要为移动设备设计，但是在电脑上也能正常使用。Wayland 和 Weston —— Linux 的下一代桌面协议以及它的简单实现 —— 为了去掉 Xorg 的依赖就使用了 OpenGL ES（Linux 下的 libGL 总会引入 X）。</p>
 <p>我使用的是 OpenGL ES 3，最新版本，而且我觉得这里的 OpenGL ES 程序只要做一点简单的改动就可以变成 OpenGL 的程序 —— 毕竟 OpenGL ES 使用的函数就是 OpenGL 的一部分。</p>
-<h1 id="OpenGL%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><a class="heading-link header-link" href="/posts/Learn-OpenGL-1/#OpenGL%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"></a>OpenGL 是什么？</h1>
+<h1 id="OpenGL-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><a class="heading-link header-link" href="/posts/Learn-OpenGL-1/#OpenGL-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"></a>OpenGL 是什么？</h1>
 <p>简单来说，OpenGL 是一套 API（废话），它把你传输的三维坐标交给显卡运算并映射到显示器的二维平面上。实际上它仅仅做了这些 —— 和你的显卡交流。使用 OpenGL ES 3 的好处是它没有早期版本中 OpenGL 的立即渲染模式，通常来说这个模式很容易使用（就像 Canvas 绘图）但是效率低下。一些人不会使用核心模式（可编程管线）而是使用旧的模式也导致了所谓的 OpenGL 性能差，但实际上 OpenGL 只是一个规范，具体的性能很容易受到不同厂家实现不同编写人员的影响（给猴子一把磨得很快的斧头的直接后果很可能是猴子砍了自己的脚）。如果打开一份教程上面出现 <code>glBegin()</code>、<code>glEnd()</code> 我建议你立即关掉。</p>
 <h1 id="%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3"><a class="heading-link header-link" href="/posts/Learn-OpenGL-1/#%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3"></a>创建窗口</h1>
 <p>首先既然我们要绘图，需要先有窗口。窗口创建之后才可以创建一个 OpenGL 的 Context。对于这个需求不同的平台有不同的方案，比如 Windows 的 WGL，Xorg 的 GLX，以及为了独立于各个平台使用的 EGL（Wayland 为了摆脱 Xorg 使用的就是 EGL），但我们在这里使用一个简单高效的封装库 GLFW。</p>
@@ -944,7 +944,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
       <div><i class="bi bi-list-ol"></i>文章目录</div>
 <ol class="toc" id="scrollspy-target">
   <li>
-    <a class="list-group-item toc-link" href="#OpenGL%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F">OpenGL 是什么？</a>
+    <a class="list-group-item toc-link" href="#OpenGL-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F">OpenGL 是什么？</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3">创建窗口</a>
@@ -1035,4 +1035,4 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.254Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

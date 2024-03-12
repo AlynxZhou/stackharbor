@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这篇文章同时有 中文版本 和 英文版本。 This post is both available in Chinese version and English version.">
     <meta name="keywords" content="PipeWire">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -993,7 +993,7 @@ table.insert(alsa_monitor.rules, rule)
 <p><img src="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/screenshot-1.png" alt="screenshot-1">
 <img src="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/screenshot-2.png" alt="screenshot-2">
 <img src="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/screenshot-3.png" alt="screenshot-3"></p>
-<h1 id="EnglishVersion"><a class="heading-link header-link" href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#EnglishVersion"></a>English Version</h1>
+<h1 id="English-Version"><a class="heading-link header-link" href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#English-Version"></a>English Version</h1>
 <p>I might be the only one who owns a complex audio setup among my friends. TL;DR: To share the only pair of speakers between PS4, Switch and computer I connect it to my monitor instead of internal sound card of my computer, so all devices can output audio to speakers via HDMI/DP. It's fine until I bought another monitor, it's hard to find which monitor is the one with speakers, maybe it's HDMI 1 this week and become HDMI 2 next week, so I always need to test before playing audio. I'm too angry to accept this recently, so I try to fix it by hand.</p>
 <p>At first I guess PipeWire just randomly sorts audio ports, so it's easy to fix it, what I need to do is finding ID for each port and disabling the HDMI port without speakers. But soon I see PipeWire just sorts ports via ALSA's device number, so if I disable a port, the port might be the other monitor on next boot. Is there no way to let ALSA do a fixed mapping for HDMI audio devices? We all know monitors report EDID to system, and I read ALSA's document, it contains how to handle sequence of different sound cards via udev, but no way to handle ports on the same sound card like HDMI ports. I even find document of GPU audio from NVIDIA, it says each port has a ELD file, which contains monitor info, but if you try to read it with <code>cat /proc/asound/cardX/eld*</code>, you'll find it only contains model, not serial number, and I have two monitors of the same model in order to save time on dual-monitor scale, so they looks the same. But if your monitors/TVs are of different models, it is easier, ALSA will read model in ELD and you can access it via <code>node.nick</code> property of a PipeWire device, you can just read it, or write some WirePlumber rules to rename properties that your desktop environment uses, so you get a fixed name. But I need more help.</p>
 <p>Then I send a Email to our company's research mailing list of my setup and demand, and Takashi Iwai (maintainer of kernel's audio subsystem) tell me there is no better way, audio driver just assign number when GPU driver notifies a new port, so it's dynamic. And I also find GPU driver may not emit ports as display probing sequence, so Plan A fails, but I have Plan B and Plan C.</p>
@@ -1787,7 +1787,7 @@ table.insert(alsa_monitor.rules, rule)
     <a class="list-group-item toc-link" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC">中文版本</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#EnglishVersion">English Version</a>
+    <a class="list-group-item toc-link" href="#English-Version">English Version</a>
   </li>
 </ol>
     </div>
@@ -1849,4 +1849,4 @@ table.insert(alsa_monitor.rules, rule)
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.506Z. -->

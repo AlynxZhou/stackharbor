@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这篇文章同时有 中文版本 和 英文版本。 This post is both available in Chinese version and English version.">
     <meta name="keywords" content="Android">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="通过 USB HID over AOAv2 在 scrcpy 里模拟真实键盘">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -690,7 +690,7 @@
 <p>当然因为依赖 USB，所以你利用 ADB over WiFi 的话就没办法用这个功能了，不过我用电脑时候一般会给手机充电，也无所谓。</p>
 <p>提交的 PR 链接是 <a href="https://github.com/Genymobile/scrcpy/pull/2632/files" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/Genymobile/scrcpy/pull/2632/files</a>，感觉是个大工程，最后实际上也就修改了一千行？不过确实挺难的。</p>
 <hr>
-<h1 id="EnglishVersion"><a class="heading-link header-link" href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion"></a>English Version</h1>
+<h1 id="English-Version"><a class="heading-link header-link" href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#English-Version"></a>English Version</h1>
 <p>(Title is Simulate Physical Keyboards in Scrcpy via USB HID over AOAv2.)</p>
 <p>Three years (2018) ago I opened an <a href="https://github.com/Genymobile/scrcpy/issues/279" target="_blank" rel="external nofollow noreferrer noopener">issue</a> on scrcpy's GitHub repo, because I just found using scrcpy I can mirror my Android phone to computer and control it, so I could use QQ on Linux via my Android phone (I still had to use QQ frequently at that time), but after I tried it, I found it's inconvenient, because it shows soft keyboard on Android phone instead of simulating physical keyboard, I can trigger input method via typing but using numbers to choose words is not available. I know little about the code at that time and ask the maintainer for some reason, <a href="https://github.com/rom1v" target="_blank" rel="external nofollow noreferrer noopener">@rom1v</a> replied that there is a protocol called HID over AOA supported by Android can implement a physical keyboard, but there is a bug on some devices and needs some one take their time to read specifications and write some code to convert SDL event into HID event. Then I asked that how about using computer's IME and pass Chinese into Android, <a href="https://github.com/rom1v" target="_blank" rel="external nofollow noreferrer noopener">@rom1v</a> said that's what scrcpy did but Android has a limitation that you can only pass ASCII chars.</p>
 <p>I just tried reading some related things but it beyonds my ability, I just put it here. Until last week when I am talking with my friend Hackghost, he said Apple is making their own screen mirror implementation, and seems Huawei has one on their phone. I never care about Hardware manufacturer, neither Apple nor Huawei, because I think they are both lazy and evil, and they won't make a Linux client for their screen mirror implementation. If they are unable to make it, they should be open and allow users to do it by themselves. Then we talked about cost and profit, I insist that they have enough profit and Linux users also paid for their phone, so the feature should be available on Linux, but they are greedy and want more profit. Finally I said that there is already a hero who made scrcpy, and scrcpy runs on Windows, Linux and macOS, except for the bad IME experience. And I remebered it takes a long time after I opened the issue, maybe I should try again so I did it.</p>
@@ -1177,7 +1177,7 @@
     <a class="list-group-item toc-link" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC">中文版本</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#EnglishVersion">English Version</a>
+    <a class="list-group-item toc-link" href="#English-Version">English Version</a>
   </li>
 </ol>
     </div>
@@ -1239,4 +1239,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

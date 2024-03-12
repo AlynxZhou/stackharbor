@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。 简介 由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。">
     <meta name="keywords" content="虚拟化, Xen">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="构建和运行 Xen HVM 和 PV">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -332,7 +332,7 @@
 
 <p>首先 Xen 分为 HVM 和 PV 两种常见的虚拟方案（PVH 我也没用过），HVM 依赖于硬件虚拟化，和常见的虚拟机没什么区别，而 PV 并不依赖硬件虚拟化，是通过虚拟机 Linux 内核中特殊的驱动，将请求转给宿主机的内核代为操作，但配置起来也更加复杂。目前 PV 所需的代码已经并入 Linux 内核上游，你能安装的发行版大部分都可以直接作为 PV 的虚拟机运行。</p>
 <p>无论是 HVM 还是 PV，Xen 都用 domU（domain 的缩写，U 可以是 1、2、3……）代表虚拟机，然后用 dom0 代表宿主机，当然文档里也会叫宿主机 Hypervisor，这里我也可能直接将虚拟机叫做 VM。</p>
-<h1 id="%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8Cdom0"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8Cdom0"></a>构建和运行 dom0</h1>
+<h1 id="%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C-dom0"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C-dom0"></a>构建和运行 dom0</h1>
 <div class="alert-blue">温馨提示：根据我的经验，在 Xen Hypervsior 上运行的 GNOME 桌面会由于未知原因在未知操作时卡住，建议不要用你平时使用的开发机作为 Xen Hypervisor，而是另找一台机器作为服务器运行 Xen Hypervisor，然后远程连接上去操作。</div>
 
 <p>和 KVM 不需要什么操作就能用不一样，Xen 需要你构建一个单独的 boot loader，在加载 Linux 内核之前先加载它，从而实现 Xen 的支持。我这里用的 Arch Linux，需要构建 <code>xen</code> 这个 AUR 包，根据 wiki 所说推荐用下面的指令构建：</p>
@@ -400,9 +400,9 @@ ucode=amd-ucode.img
 " data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># systemctl enable xenconsoled.service xen-init-dom0.service xen-qemu-dom0-disk-backend.service xendomains.service
 </code></pre></figure>
 <p>然后重启系统，选择名字是 <code>Xen Hypervisor</code> 的启动项，你应该就有一个可以运行 Xen 的环境了。</p>
-<h1 id="%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8CdomU"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8CdomU"></a>配置和运行 domU</h1>
+<h1 id="%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8C-domU"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8C-domU"></a>配置和运行 domU</h1>
 <p>然后按道理说既然 Xen 和 KVM 都是用 qemu 作为前端，那完全可以交给我常用的 virt-manager 操办一切，但我尝试构建了带 Xen 支持的 libvirt，结果运行起来发现由于某个 bug，它并不能真的支持 Xen，所以只能全手动操作了。</p>
-<h2 id="%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84NAT%E7%BD%91%E7%BB%9C"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84NAT%E7%BD%91%E7%BB%9C"></a>构建虚拟机用的 NAT 网络</h2>
+<h2 id="%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84-NAT-%E7%BD%91%E7%BB%9C"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84-NAT-%E7%BD%91%E7%BB%9C"></a>构建虚拟机用的 NAT 网络</h2>
 <p>virt-manager 会帮我自动创建一个 NAT 网络使得虚拟机之间可以互相联系并且通过宿主机访问外网，我相信大部分人都需要让虚拟机联网，但只能我自己解决这件事了。</p>
 <p>具体的操作包含以下几步：添加一个桥接接口；然后给它分配一个 IP；再开启系统的 NAT 转发（包含 <code>sysctl</code> 和 <code>iptables</code> 两部分，我自己也不是 <code>iptables</code> 高手所以我也不能给你解释）；然后在这个接口上启动 DHCP 服务器，给虚拟机提供 IP 地址和 DNS 服务器。这样就完成了宿主机的部分，Xen 可以根据虚拟机的配置文件自动把虚拟机添加到你刚才创建的桥接接口上。</p>
 <p>为了简化这个操作我编写了一个脚本：</p>
@@ -494,7 +494,7 @@ ip link set dev "${BR_IF}" down
 ip link delete "${BR_IF}"
 </code></pre></figure>
 <p>你可以把这个脚本保存成 <code>mkvmbr0.sh</code>，然后 <code>chmod +x mkvmbr0.sh</code>，然后用 <code>ip a</code> 查看你当前联网所用的端口名，比如我的是 <code>wlp5s0</code>，就可以 <code>sudo ./mkvmbr0.sh wlp5s0</code> 创建一个运行在 <code>vmbr0</code> 端口上的 NAT 网络，脚本会启动 <code>dnsmasq</code> 作为 DHCP 服务器并通过 DHCP 服务器给虚拟机下发 DNS 服务器地址，如果你已经用完了虚拟机，<code>Ctrl+C</code> 打断 <code>dnsmasq</code> 它就会进行后续的清理工作并退出。</p>
-<h2 id="%E7%BC%96%E5%86%99HVM%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%BC%96%E5%86%99HVM%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"></a>编写 HVM 配置文件</h2>
+<h2 id="%E7%BC%96%E5%86%99-HVM-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%BC%96%E5%86%99-HVM-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"></a>编写 HVM 配置文件</h2>
 <p>HVM 实在是没什么复杂的，这么说是相对于 PV 而言，比如说构建一个 openSUSE Tumbleweed 的 HVM 可以写一个叫做 <code>hvm-tumbleweed.cfg</code> 的文件：</p>
 <figure data-raw="name = 'hvm-tumbleweed'
 builder = 'hvm'
@@ -521,11 +521,11 @@ vncdisplay = 1
 " data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ truncate -s 20G disk-tumbleweed.img
 </code></pre></figure>
 <p>然后用下面的命令就可以启动这个虚拟机：</p>
-<figure data-raw="# xl create hvm-tumblweed.img
-" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># xl create hvm-tumblweed.img
+<figure data-raw="# xl create hvm-tumblweed.cfg
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># xl create hvm-tumblweed.cfg
 </code></pre></figure>
-<p>其他的命令可以直接 <code>man xl</code> 查看手册。可以使用 <code>vncviewer YOUR_HOST_IP:1</code> 连接虚拟机。</p>
-<h2 id="%E7%BC%96%E5%86%99PV%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%BC%96%E5%86%99PV%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"></a>编写 PV 配置文件</h2>
+<p>其他的命令可以直接 <code>man xl</code> 查看手册。可以使用 <code>vncviewer YOUR_HOST_IP:1</code> 连接虚拟机。关于这个配置文件的具体语法可以参考 <a href="https://xenbits.xen.org/docs/unstable/man/xl.cfg.5.html" target="_blank" rel="external nofollow noreferrer noopener">官方文档</a>。</p>
+<h2 id="%E7%BC%96%E5%86%99-PV-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%BC%96%E5%86%99-PV-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"></a>编写 PV 配置文件</h2>
 <p>PV 比起 HVM 可就复杂太多了，最痛苦的一个问题是由于它不是硬件虚拟化，所以你没有办法运行虚拟机磁盘上的 boot loader！解决方案有两个，要么是直接在配置文件里写好内核和 initramfs 的路径（这样你就得想办法把虚拟机的内核和 initramfs 搞到宿主机磁盘上），要么是在宿主机上构建一个 GRUB 镜像，然后让这个 GRUB 去找虚拟机磁盘里的 <code>grub.cfg</code> 并执行，然后引导虚拟机里面的内核（这都哪跟哪啊）。</p>
 <p>当然，如果你虚拟机的系统并不使用 GRUB 作为 boot loader，那你就只能使用第一种方案了。对于 openSUSE Tumbleweed，我摸索通了后面的方案，因此我在这里介绍这个方案如何操作。</p>
 <p>首先你需要克隆 GRUB 的源码，因为你得专门构建一个能在 Xen 虚拟机里运行的 GRUB：</p>
@@ -635,9 +635,10 @@ vncdisplay = 1
 </code></pre></figure>
 <p>没错我们这里把我们刚刚生成的 boot loader 作为内核首先拉起来，然后不出意外你应该就能看到安装程序启动了，但是如果你火急火燎的一路下一步安装，你就会掉进下一个坑：openSUSE 默认使用 snapper 管理 btrfs 快照，默认的配置方案把 <code>/boot</code> 也放在 btrfs 子卷上。而上游的 GRUB 会从 btrfs 的根子卷而不是默认子卷开始访问，我是没能搞清楚该如何简单直接的访问 snapper 最新的快照所在的子卷，openSUSE 的 GRUB 则是打了一大堆 patch 让 GRUB 支持查找和加载默认的 btrfs 子卷。总之你直接安装之后我们的 <code>grub.cfg</code> 是查找不到真正的 <code>grub.cfg</code> 的，最简单的方案就是安装时干脆不要用 btrfs 从而不用 snapper，或者把 <code>/boot</code> 单独分区单独格式化单独挂载。</p>
 <p>然后你应该可以用下面的命令启动并链接到虚拟机的终端了：</p>
-<figure data-raw="# xl create -c pv-tumblweed.img
-" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># xl create -c pv-tumblweed.img
+<figure data-raw="# xl create -c pv-tumblweed.cfg
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># xl create -c pv-tumblweed.cfg
 </code></pre></figure>
+<p>关于这个配置文件的具体语法可以参考 <a href="https://xenbits.xen.org/docs/unstable/man/xl.cfg.5.html" target="_blank" rel="external nofollow noreferrer noopener">官方文档</a>。</p>
 <h1 id="%E8%BF%99%E4%B8%80%E5%88%87%E5%80%BC%E5%BE%97%E5%90%97%EF%BC%9F"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E8%BF%99%E4%B8%80%E5%88%87%E5%80%BC%E5%BE%97%E5%90%97%EF%BC%9F"></a>这一切值得吗？</h1>
 <p>在经历这一系列不知道是什么鬼东西的操作之后你终于有了一个可以用的 Xen PV，也许它唯一的优势就是可以在没有硬件虚拟化的机器上跑虚拟机，为此你付出的代价是一个没法用桌面的宿主机，一个说不定哪个新系统就没法引导的虚拟机 boot loader。但现在的设备有几个没有硬件虚拟化支持呢？这就意味着对于大多数人你可以简单地使用 qemu/KVM 几乎不需要任何额外的配置，并且还有 virt-manager 这样的程序全程帮你图形化配置虚拟机和 NAT 网络。</p>
 <p>而比如你想用上面的办法手动构建网络并启动一些 SLES Minimal OS 或者 openSUSE JeOS，这个过程也更简单，首先在 <code>/etc/qemu/bridge.conf</code> 里加入一行 <code>allow vmbr0</code>，然后用之前的 NAT 网络脚本 <code>sudo ./mkvmbr0.sh wlp5s0</code>，再用下面的 qemu 命令：</p>
@@ -790,19 +791,19 @@ vncdisplay = 1
     <a class="list-group-item toc-link" href="#%E7%AE%80%E4%BB%8B">简介</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8Cdom0">构建和运行 dom0</a>
+    <a class="list-group-item toc-link" href="#%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C-dom0">构建和运行 dom0</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8CdomU">配置和运行 domU</a>
+    <a class="list-group-item toc-link" href="#%E9%85%8D%E7%BD%AE%E5%92%8C%E8%BF%90%E8%A1%8C-domU">配置和运行 domU</a>
 <ol>
   <li>
-    <a class="list-group-item toc-link" href="#%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84NAT%E7%BD%91%E7%BB%9C">构建虚拟机用的 NAT 网络</a>
+    <a class="list-group-item toc-link" href="#%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%94%A8%E7%9A%84-NAT-%E7%BD%91%E7%BB%9C">构建虚拟机用的 NAT 网络</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E7%BC%96%E5%86%99HVM%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">编写 HVM 配置文件</a>
+    <a class="list-group-item toc-link" href="#%E7%BC%96%E5%86%99-HVM-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">编写 HVM 配置文件</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E7%BC%96%E5%86%99PV%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">编写 PV 配置文件</a>
+    <a class="list-group-item toc-link" href="#%E7%BC%96%E5%86%99-PV-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">编写 PV 配置文件</a>
   </li>
 </ol>
   </li>
@@ -869,4 +870,4 @@ vncdisplay = 1
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.252Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.506Z. -->

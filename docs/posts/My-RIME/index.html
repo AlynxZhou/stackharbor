@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="为什么我要折腾这个 在第 n 次忍受不了 RIME 的奇怪操作逻辑之后，我终于决定彻底教育一下这个不听话的输入法，考虑到已经有 n - 1 次失败的前提，做这个决定并不容易。">
     <meta name="keywords" content="输入法, RIME">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="可能只适合我自己的 RIME 配置">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -970,7 +970,7 @@ key_binder/bindings:
   recognizer/patterns/reverse_lookup:
 </code></pre></figure>
 <p>总之写完这些配置 <strong>之后要手动移除 <code>~/.config/ibus/rime/build/</code> 这个生成目录</strong> 再执行 <code>ibus-daemon -rdx</code> 就可以应用了，现在 RIME 用起来就更让我愉快了，接下来就是慢慢养词库就行了。</p>
-<h1 id="%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84"><a class="heading-link header-link" href="/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84"></a>有关为什么 ibus-rime 总是竖着的</h1>
+<h1 id="%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88-ibus-rime-%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84"><a class="heading-link header-link" href="/posts/My-RIME/#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88-ibus-rime-%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84"></a>有关为什么 ibus-rime 总是竖着的</h1>
 <p>ibus-rime 是读取 rime 配置而不是 ibus 配置来设置横竖这一点本身就很离谱了，然后由于 bug 啦其他奇奇怪怪的原因啦好像很难搞清楚，我最近终于搞清楚啦！其实也不是很麻烦。</p>
 <p>ibus-rime 会读一个叫做 <code>ibus_rime.yaml</code> 的配置文件，有这么一个配置可以让他变成横着的：</p>
 <figure data-raw="style:
@@ -1186,7 +1186,7 @@ import_tables:
     <a class="list-group-item toc-link" href="#%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E6%93%8D%E4%BD%9C%E9%80%BB%E8%BE%91%E7%9A%84%E9%85%8D%E7%BD%AE">各种乱七八糟操作逻辑的配置</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88ibus-rime%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84">有关为什么 ibus-rime 总是竖着的</a>
+    <a class="list-group-item toc-link" href="#%E6%9C%89%E5%85%B3%E4%B8%BA%E4%BB%80%E4%B9%88-ibus-rime-%E6%80%BB%E6%98%AF%E7%AB%96%E7%9D%80%E7%9A%84">有关为什么 ibus-rime 总是竖着的</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E4%B8%8B%E8%BD%BD">下载</a>
@@ -1251,4 +1251,4 @@ import_tables:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

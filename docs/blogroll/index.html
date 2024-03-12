@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="本来是打算把友情链接放到侧边栏里面的，但那边写太多的话用户体验非常差，而且后来看好多人的网站里都是给链接单独开了个页面写点介绍。我觉得这样挺不错的，所以自己也搞一个。侧边栏的友情链接现在只会放很重要并且还在更新的站点，太久没更新的话就只放在这个页面留档了。 在这个页面学一下狼说话应该不会挨打吧？ 想……">
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="友情链接">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -423,7 +423,7 @@
 <td align="center">是学术界大佬了！是学术界大佬了！</td>
 </tr>
 </tbody></table>
-<h1 id="ArchLinuxCN%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85GentooLinuxCN%E7%A4%BE%E5%8C%BA"><a class="heading-link header-link" href="/blogroll/#ArchLinuxCN%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85GentooLinuxCN%E7%A4%BE%E5%8C%BA"></a>Arch Linux CN 社区或者 Gentoo Linux CN 社区</h1>
+<h1 id="Arch-Linux-CN-%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85-Gentoo-Linux-CN-%E7%A4%BE%E5%8C%BA"><a class="heading-link header-link" href="/blogroll/#Arch-Linux-CN-%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85-Gentoo-Linux-CN-%E7%A4%BE%E5%8C%BA"></a>Arch Linux CN 社区或者 Gentoo Linux CN 社区</h1>
 <p>这里的人懂得好像都很多，咱经常向他们提问题，而且他们经常回复咱在群里的碎碎念，不加个友链好像说不过去。</p>
 <table>
 <thead>
@@ -713,7 +713,7 @@
     <a class="list-group-item toc-link" href="#%E5%A4%A7%E5%AD%A6%E8%AE%A4%E8%AF%86%E7%9A%84">大学认识的</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#ArchLinuxCN%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85GentooLinuxCN%E7%A4%BE%E5%8C%BA">Arch Linux CN 社区或者 Gentoo Linux CN 社区</a>
+    <a class="list-group-item toc-link" href="#Arch-Linux-CN-%E7%A4%BE%E5%8C%BA%E6%88%96%E8%80%85-Gentoo-Linux-CN-%E7%A4%BE%E5%8C%BA">Arch Linux CN 社区或者 Gentoo Linux CN 社区</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E5%85%B6%E4%BB%96%E5%9C%B0%E6%96%B9%E8%AE%A4%E8%AF%86%E7%9A%84">其他地方认识的</a>
@@ -778,4 +778,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.254Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.508Z. -->

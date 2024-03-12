@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="谨以这篇没营养的更新表明我现在闲着。 嘛，好久不见，我还是那只猹喵Alynx，本着我一向诚实的原则，丑话说在前头，这篇间隔许久的更新注定是没营养的，如果你珍惜你的流量的话—— Windows用户/大部分Linux用户请按右上角X，macOS用户/Ubuntu用户/自己偏要把关闭按钮挪到左面的用户请按左上角X，Android/iOS用户请按home键并把您的浏览器从多任务界面除去。Windows Phone用户（如果有的话）请把手机摔掉，并感谢我（而不是微软爸爸）给了你一个冠冕堂皇换Android/iOS设备的理由。 如果您还没有坚定您的决心，实验七写完了吗？实验七50页的坑爹说明都看懂啦？没看懂还不赶紧把你打印出来的实验七说明撕了，回去高中找你的语文老师承认没好好学习语文的错误！ 顺便补充一句把这种垃圾实验说明打印出来本身就是对树木的不尊重了，你看我知道我写的东西很垃圾，所以我从来不打印纸质版，都是放在网站上做电子版。">
     <meta name="keywords" content="无题">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="突然更新">
@@ -177,26 +177,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -525,4 +525,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.254Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.508Z. -->

@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="最近我编写了一个 Android 的视频壁纸应用（GitHub Repo），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。">
     <meta name="keywords" content="Android, Java, OpenGL">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="如何编写 Android 视频壁纸">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -1427,7 +1427,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 </code></pre></figure>
 <p>主要是创建 Player 时候单独给它一个 DefaultTrackSelector。然后关掉音轨。</p>
 <p>这样大概就可以运行了，剩下的一些问题都和视频渲染无关。</p>
-<h1 id="%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81"><a class="heading-link header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81"></a>写 UI 也很麻烦！</h1>
+<h1 id="%E5%86%99-UI-%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81"><a class="heading-link header-link" href="/posts/Android-Video-Wallpaper-Implementation/#%E5%86%99-UI-%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81"></a>写 UI 也很麻烦！</h1>
 <p>虽然我知道你肯定不满足只使用内嵌视频，但如果你像我一样写了个可以设置其它视频的 UI，就会遇到各种各样的问题。写 UI 的时候，你不是在编写回调函数，就是在调用回调函数的路上。</p>
 <p>最令人恶心的是 <code>Context</code> 管理，很多地方都需要 <code>Context</code>，但很多地方都没法传 <code>Context</code>，比如 Android 推荐你用 <code>Uri</code> 而不是直接用文件路径，但所有使用 <code>Uri</code> 的地方都要求你传 <code>Context</code> 来解析 <code>Uri</code>！比如我添加视频，需要解析 <code>Uri</code> 并生成缩略图，为了不阻塞线程，必须开启一个 <code>AsyncTask</code>，但是，<code>AsyncTask</code> 不能直接拿走 <code>MainActivity</code> 作为自己的 <code>Context</code>！必须要传弱引用，总之没有一个优雅的解决方案。</p>
 <p>再比如你需要一些在各个位置都能访问到的数据，你可以自己写一个 <code>Application</code> 类并给它静态变量，但是静态和动态不能互相交叉，也就是说你不能封装一个操作数据的同时需要访问 <code>Context</code> 的方法，所以很多地方就只能拆开写，没办法封装。</p>
@@ -1582,7 +1582,7 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
     <a class="list-group-item toc-link" href="#%E7%84%B6%E5%90%8E%E5%A3%B0%E9%9F%B3%E5%8F%88%E4%B8%8D%E5%AF%B9%E5%8A%B2%E4%BA%86%E2%80%A6%E2%80%A6">然后声音又不对劲了……</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E5%86%99UI%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81">写 UI 也很麻烦！</a>
+    <a class="list-group-item toc-link" href="#%E5%86%99-UI-%E4%B9%9F%E5%BE%88%E9%BA%BB%E7%83%A6%EF%BC%81">写 UI 也很麻烦！</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E4%B8%80%E6%9D%AF%E5%92%96%E5%95%A1%E9%83%BD%E6%B2%A1%E6%9C%89%E2%80%A6%E2%80%A6">一杯咖啡都没有……</a>
@@ -1647,4 +1647,4 @@ public class GLWallpaperRenderer implements GLSurfaceView.Renderer {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.253Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->

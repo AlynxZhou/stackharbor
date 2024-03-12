@@ -52,10 +52,26 @@ marked:
 #     sourceRoot: ''
 #     basePath: .
 
-highlight:
-  enable: false
-  gutter: false
-  hljs: true
+contentsResolving:
+  enable: true
+  headingIDs:
+    enable: true
+    # Set to `""` to keep compatible with Hikaru v1.20.1 and older.
+    safeChar: "-"
+  toc:
+    enable: true
+  anchors:
+    enable: true
+  images:
+    enable: true
+  codeBlocks:
+    enable: true
+    lineNumbers: false
+
+# highlight:
+#   enable: false
+#   gutter: false
+#   hljs: true
 
 search:
   enable: true

@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="需求 很多在家里装了 NAS 的人都有一个相似的需求，那就是出门在外如何访问内网的 NAS 上运行的服务。很多人会选择公网 IP + 端口映射把需要的服务直接暴露到公网上，或者通过公网的 VPS 进行反向代理。但这些我都不放心，首先我的目的只是自己访问，而不是给别人访问，其次对于一些简易的 WebU……">
     <meta name="keywords" content="网络, Tailscale">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="使用 Headscale 和 Tailscale 构建虚拟专用网">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -357,7 +357,7 @@
 <figure data-raw="$ headscale preauthkeys create --user azvpn --reusable --expiration 12h
 " data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ headscale preauthkeys create --user azvpn --reusable --expiration 12h
 </code></pre></figure>
-<h1 id="TailscaleLinux"><a class="heading-link header-link" href="/posts/Build-VPN-with-Headscale-and-Tailscale/#TailscaleLinux"></a>Tailscale (Linux)</h1>
+<h1 id="Tailscale-Linux-"><a class="heading-link header-link" href="/posts/Build-VPN-with-Headscale-and-Tailscale/#Tailscale-Linux-"></a>Tailscale (Linux)</h1>
 <p>这个同样也在 Arch Linux 的官方仓库，直接安装即可：</p>
 <figure data-raw="# pacman -S tailscale
 " data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># pacman -S tailscale
@@ -390,7 +390,7 @@
 " data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># tailscale up --login-server https://YOURSERVER:YOURPORT --auth-key YOURPREAUTHKEY
 </code></pre></figure>
 <p>此时运行 <code>ip a</code>，应该可以看到多了一个叫 <code>tailscale0</code> 的网络接口。使用 <code>resolvectl status</code> 则可以看到这个接口有自己的 DNS 服务器，并且对 <code>azvpn.alynx.one</code> 的域名使用此服务器查询。此时已经可以使用 Tailscale 内网分配的 IP 或者 MagicDNS 提供的域名像在物理路由器后面一样访问内网的各种设备。</p>
-<h1 id="TailscaleAndroid"><a class="heading-link header-link" href="/posts/Build-VPN-with-Headscale-and-Tailscale/#TailscaleAndroid"></a>Tailscale (Android)</h1>
+<h1 id="Tailscale-Android-"><a class="heading-link header-link" href="/posts/Build-VPN-with-Headscale-and-Tailscale/#Tailscale-Android-"></a>Tailscale (Android)</h1>
 <p>Tailscale 也有开源的 Android 客户端并且已经上架了 Google Play Store，但你安装之后可能会发现没有自定义服务器的选项，你需要点开并关闭右上角三个点菜单多次，然后菜单里就会多出一项 Change Server，设置成你自建的 Headscale 服务器，然后就可以使用主界面第二个登录选项进行交互登录了。目前似乎 Android 客户端还不支持使用 preauthkey 登录。</p>
 
     </main>
@@ -527,10 +527,10 @@
     <a class="list-group-item toc-link" href="#Headscale">Headscale</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#TailscaleLinux">Tailscale (Linux)</a>
+    <a class="list-group-item toc-link" href="#Tailscale-Linux-">Tailscale (Linux)</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#TailscaleAndroid">Tailscale (Android)</a>
+    <a class="list-group-item toc-link" href="#Tailscale-Android-">Tailscale (Android)</a>
   </li>
 </ol>
     </div>
@@ -592,4 +592,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.252Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.506Z. -->

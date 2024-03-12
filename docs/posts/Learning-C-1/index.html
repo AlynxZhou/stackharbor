@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这个是给 2018 级 C 语言辅导准备的文档，写来写去写了好多，索性在网站也发一份。有很多是我觉得老师不会讲，但一开始很难理解，不理解又听不懂的，有学 C 的可以看一看。">
     <meta name="keywords" content="C 语言">
-    <meta name="generator" content="Hikaru v1.20.1">
+    <meta name="generator" content="Hikaru v1.21.0">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="C 语言学习 1">
@@ -189,26 +189,26 @@
       document.querySelectorAll("figure.code-block pre.code"),
       (e, i) => {
         const code = e.parentNode.getAttribute("data-raw");
-        const gutter = [];
-        gutter.push("<pre class=\"gutter\">");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
         // Highlight should not change lines.
         // But may replace `\n` with `<br>`, so use original code here.
         const codeLines = code.split(/\r?\n/g);
         // It seems marked.js starts to keep the last `\n`,
         // which will leave an empty line after splitting,
-        // and we should not add gutter for the last empty line.
+        // and we should not add line number for the last empty line.
         // Don't do trim here! We only skip empty line.
         if (codeLines[codeLines.length - 1].length === 0) {
           codeLines.pop();
         }
         for (let i = 0; i < codeLines.length; ++i) {
-          gutter.push(`<span class="line-number">${i + 1}</span>`);
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
           if (i !== codeLines.length - 1) {
-            gutter.push("\n");
+            lineNumbers.push("\n");
           }
         }
-        gutter.push("</pre>");
-        elementBefore(e, createElementFromString(gutter.join("")));
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
       }
     );
   });
@@ -347,7 +347,7 @@
 <p><strong>注意</strong>：不建议使用 VC++ 6.0 编写 C 程序，<strong>这个程序的年龄比在座各位都大</strong>，当时 C 语言还没有完整的标准，和我们现在的 C 相差很多。并且实际上这是个 C++ 的 IDE，而 C 和 C++ <strong>并不完全一样</strong>，应该视为两种语言。</p>
 <p>可以使用 VS 或者 Code::Blocks 编写 C 程序，苹果 macOS 用户可以使用 Xcode，这些程序对于最新的 C 标准有着非常好的支持。</p>
 <p><strong>注意</strong>：对于 VS 用户需要注意默认 VS 会要求你使用它私有的一些函数而不是标准的 C 函数，这个需要在代码开始添加一行 <code>#define _CRT_SECURE_NO_WARNINGS</code> 来关闭。对于 Code::Blocks 用户请下载集成了编译器的安装包（简而言之，体积最大的），否则你下载下来以后会发现自己并没有编译器，没法编译代码。</p>
-<h2 id="%E5%AD%A6%E4%B9%A0C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95"><a class="heading-link header-link" href="/posts/Learning-C-1/#%E5%AD%A6%E4%B9%A0C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95"></a>学习 C 语言的正确方法</h2>
+<h2 id="%E5%AD%A6%E4%B9%A0-C-%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95"><a class="heading-link header-link" href="/posts/Learning-C-1/#%E5%AD%A6%E4%B9%A0-C-%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95"></a>学习 C 语言的正确方法</h2>
 <p>多写，多练，光动脑不动手什么语言都学不会，可以从模仿别人的代码开始：</p>
 <ol>
 <li>首先对照别人的代码，自己完整的输入一遍程序，这里不是要你复制粘贴，当你能正确的输入程序的时候，说明你已经记住了 C 的结构，不会漏掉分号或者括号等。</li>
@@ -837,7 +837,7 @@ int s = 3.14 * 5 * 5;
 int s = 3.14 * 5 * 5;
 </code></pre></figure>
 <h1 id="%E7%A4%BA%E8%8C%83"><a class="heading-link header-link" href="/posts/Learning-C-1/#%E7%A4%BA%E8%8C%83"></a>示范</h1>
-<h2 id="Helloworld"><a class="heading-link header-link" href="/posts/Learning-C-1/#Helloworld"></a>Hello world!</h2>
+<h2 id="Hello-world-"><a class="heading-link header-link" href="/posts/Learning-C-1/#Hello-world-"></a>Hello world!</h2>
 <p>好了，在介绍完这些复杂的东西之后，终于可以进行一个简单的程序示范了，现在书写一个 hello world 就不会遇到有哪里说不明白的情况。</p>
 <figure data-raw="#include <stdio.h>
 int main(void)
@@ -1103,7 +1103,7 @@ do_another();
     <a class="list-group-item toc-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a>
   </li>
   <li>
-    <a class="list-group-item toc-link" href="#%E5%AD%A6%E4%B9%A0C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95">学习 C 语言的正确方法</a>
+    <a class="list-group-item toc-link" href="#%E5%AD%A6%E4%B9%A0-C-%E8%AF%AD%E8%A8%80%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95">学习 C 语言的正确方法</a>
   </li>
 </ol>
   </li>
@@ -1170,7 +1170,7 @@ do_another();
     <a class="list-group-item toc-link" href="#%E7%A4%BA%E8%8C%83">示范</a>
 <ol>
   <li>
-    <a class="list-group-item toc-link" href="#Helloworld">Hello world!</a>
+    <a class="list-group-item toc-link" href="#Hello-world-">Hello world!</a>
   </li>
   <li>
     <a class="list-group-item toc-link" href="#%E6%9C%89%E5%85%B3%E7%BC%A9%E8%BF%9B">有关缩进</a>
@@ -1240,4 +1240,4 @@ do_another();
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.20.1 at 2024-03-12T06:58:03.254Z. -->
+<!-- Page built by Hikaru v1.21.0 at 2024-03-12T09:57:53.507Z. -->
