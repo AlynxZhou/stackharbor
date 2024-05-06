@@ -5,13 +5,163 @@
   <icon>https://sh.alynx.one/images/Mikoto-Karon-White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2024-03-14T07:46:04.682Z</updated>
+  <updated>2024-05-06T09:12:35.083Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.5.2">Hikaru Generator Feed</generator>
+  <entry>
+    <title>Pango 中的 Ink 和 Logical 矩形</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Ink-and-Logical-Rectangles-of-Pango/" />
+    <id>https://sh.alynx.one/posts/Ink-and-Logical-Rectangles-of-Pango/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2024-05-06T09:08:22.000Z</published>
+    <updated>2024-05-06T09:08:22.000Z</updated>
+    <summary type="html">
+      &lt;p&gt;暂时没有时间完成这篇博客，但为了能在注释里引用这个链接所以先放个占位符在这里。&lt;/p&gt;
+
+    </summary>
+    <content type="html">
+      &lt;p&gt;暂时没有时间完成这篇博客，但为了能在注释里引用这个链接所以先放个占位符在这里。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;总之下面是示例程序：&lt;/p&gt;
+&lt;figure data-raw=&quot;#include &lt;gtk/gtk.h&gt;
+
+static void draw(GtkDrawingArea *drawing_area, cairo_t *cr, int width, int height, gpointer user_data)
+{
+    PangoLayout *layout = pango_cairo_create_layout(cr);
+    pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
+    PangoFontDescription *font = pango_font_description_new();
+    pango_font_description_set_family(font, &amp;quot;serif&amp;quot;);
+    pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
+    pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
+    pango_layout_set_font_description(layout, font);
+
+    PangoRectangle string_ink;
+    PangoRectangle string_logical;
+    pango_layout_set_text(layout, &amp;quot;g&amp;quot;, -1);
+    pango_layout_get_pixel_extents(layout, &amp;amp;string_ink, &amp;amp;string_logical);
+    g_print(&amp;quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&amp;quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
+    g_print(&amp;quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&amp;quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
+
+    cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
+    cairo_paint(cr);
+
+    const int x = 100;
+    const int y = 100;
+    cairo_move_to(cr, x, y);
+    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
+    pango_cairo_show_layout(cr, layout);
+
+    cairo_set_line_width(cr, 5);
+    cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
+    cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
+    cairo_stroke(cr);
+
+    cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
+    cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
+    cairo_stroke(cr);
+}
+
+static void on_activate(GtkApplication *app, gpointer user_data)
+{
+    GtkWidget *window = gtk_application_window_new (app);
+    gtk_window_set_title(GTK_WINDOW(window), &amp;quot;Test Pango Extents&amp;quot;);
+    gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
+    GtkWidget *area = gtk_drawing_area_new();
+    gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
+    gtk_window_set_child(GTK_WINDOW(window), area);
+    gtk_window_present(GTK_WINDOW(window));
+}
+
+int main(int argc, char *argv[])
+{
+    GtkApplication *app = gtk_application_new(&amp;quot;one.alynx.test-pango-extents&amp;quot;, G_APPLICATION_DEFAULT_FLAGS);
+    g_signal_connect(app, &amp;quot;activate&amp;quot;, G_CALLBACK(on_activate), NULL);
+    int status = g_application_run(G_APPLICATION(app), argc, argv);
+    g_object_unref(app);
+    return status;
+}
+&quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &amp;lt;gtk/gtk.h&amp;gt;
+
+static void draw(GtkDrawingArea *drawing_area, cairo_t *cr, int width, int height, gpointer user_data)
+{
+    PangoLayout *layout = pango_cairo_create_layout(cr);
+    pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
+    PangoFontDescription *font = pango_font_description_new();
+    pango_font_description_set_family(font, &quot;serif&quot;);
+    pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
+    pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
+    pango_layout_set_font_description(layout, font);
+
+    PangoRectangle string_ink;
+    PangoRectangle string_logical;
+    pango_layout_set_text(layout, &quot;g&quot;, -1);
+    pango_layout_get_pixel_extents(layout, &amp;amp;string_ink, &amp;amp;string_logical);
+    g_print(&quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
+    g_print(&quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
+
+    cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
+    cairo_paint(cr);
+
+    const int x = 100;
+    const int y = 100;
+    cairo_move_to(cr, x, y);
+    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
+    pango_cairo_show_layout(cr, layout);
+
+    cairo_set_line_width(cr, 5);
+    cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
+    cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
+    cairo_stroke(cr);
+
+    cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
+    cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
+    cairo_stroke(cr);
+}
+
+static void on_activate(GtkApplication *app, gpointer user_data)
+{
+    GtkWidget *window = gtk_application_window_new (app);
+    gtk_window_set_title(GTK_WINDOW(window), &quot;Test Pango Extents&quot;);
+    gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
+    GtkWidget *area = gtk_drawing_area_new();
+    gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
+    gtk_window_set_child(GTK_WINDOW(window), area);
+    gtk_window_present(GTK_WINDOW(window));
+}
+
+int main(int argc, char *argv[])
+{
+    GtkApplication *app = gtk_application_new(&quot;one.alynx.test-pango-extents&quot;, G_APPLICATION_DEFAULT_FLAGS);
+    g_signal_connect(app, &quot;activate&quot;, G_CALLBACK(on_activate), NULL);
+    int status = g_application_run(G_APPLICATION(app), argc, argv);
+    g_object_unref(app);
+    return status;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;总之下面是编译命令：&lt;/p&gt;
+&lt;figure data-raw=&quot;$ gcc -o test-pango-extents `pkg-config --cflags --libs gtk4` test-pango-extents.c
+$ ./test-pango-extents
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ gcc -o test-pango-extents `pkg-config --cflags --libs gtk4` test-pango-extents.c
+$ ./test-pango-extents
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;总之下面是运行截图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/Ink-and-Logical-Rectangles-of-Pango/screenshot.png&quot; alt=&quot;test-pango-extents&quot;&gt;&lt;/p&gt;
+
+    </content>
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="编程" label="编程" scheme="https://sh.alynx.one/tags/%E7%BC%96%E7%A8%8B/" />
+    <category term="字体" label="字体" scheme="https://sh.alynx.one/tags/%E5%AD%97%E4%BD%93/" />
+  </entry>
   <entry>
     <title>构建和运行 Xen HVM 和 PV</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Xen-HVM-PV/" />
@@ -3200,97 +3350,5 @@ import_tables:
     <category term="RIME" label="RIME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/RIME/" />
     <category term="输入法" label="输入法" scheme="https://sh.alynx.one/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" />
     <category term="RIME" label="RIME" scheme="https://sh.alynx.one/tags/RIME/" />
-  </entry>
-  <entry>
-    <title>阻止 clangd 污染项目根目录的一些方法</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Prevent-clangd-from-Making-Projects-Root-Dirty/" />
-    <id>https://sh.alynx.one/posts/Prevent-clangd-from-Making-Projects-Root-Dirty/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2022-07-06T04:19:32.000Z</published>
-    <updated>2022-08-17T08:28:58.000Z</updated>
-    <summary type="html">
-      &lt;p&gt;Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还不错，但是让人非常恼火的是用户要主动或者被迫地在项目根目录下面添加一些文件，比如 &lt;code&gt;.clang_complete&lt;/code&gt; 或者 &lt;code&gt;compile_commands.json&lt;/code&gt; 来让 clangd 知道项目需要包含哪些库的头文件，以及 clangd 会直接把建立的索引丢到项目根目录下面的 &lt;code&gt;.cache&lt;/code&gt; 目录里。虽然可以把这些加入 &lt;code&gt;.gitignore&lt;/code&gt;，但保不齐哪个脾气古怪的上游维护者会和你纠缠半天让你解释为什么要加这些，实在是很麻烦。&lt;/p&gt;
-
-    </summary>
-    <content type="html">
-      &lt;p&gt;Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还不错，但是让人非常恼火的是用户要主动或者被迫地在项目根目录下面添加一些文件，比如 &lt;code&gt;.clang_complete&lt;/code&gt; 或者 &lt;code&gt;compile_commands.json&lt;/code&gt; 来让 clangd 知道项目需要包含哪些库的头文件，以及 clangd 会直接把建立的索引丢到项目根目录下面的 &lt;code&gt;.cache&lt;/code&gt; 目录里。虽然可以把这些加入 &lt;code&gt;.gitignore&lt;/code&gt;，但保不齐哪个脾气古怪的上游维护者会和你纠缠半天让你解释为什么要加这些，实在是很麻烦。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;&lt;code&gt;compile_commands.json&lt;/code&gt; 比较好解决，clangd 提供了一个参数 &lt;code&gt;--compile-commands-dir=&amp;lt;string&amp;gt;&lt;/code&gt; 可以指定查找这个文件的目录，我直接把它设置为 &lt;code&gt;./build/&lt;/code&gt;，因为大部分项目的 &lt;code&gt;.gitignore&lt;/code&gt; 都会包含构建目录，也免得运行 &lt;code&gt;bear -- meson compile&lt;/code&gt; 之后再把这个文件从 &lt;code&gt;build&lt;/code&gt; 目录移出来。&lt;/p&gt;
-&lt;figure data-raw=&quot;(use-package lsp-mode
-  :ensure t
-  :commands lsp
-  :hook ((c-mode . lsp-deferred)
-         (c++-mode . lsp-deferred)
-         (c-or-c++-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :bind (:map lsp-mode-map
-              (&amp;quot;M-.&amp;quot; . lsp-find-definition)
-              (&amp;quot;M-,&amp;quot; . lsp-find-references))
-  :custom
-  ;; Move lsp files into local dir.
-  (lsp-server-install-dir (locate-user-emacs-file &amp;quot;.local/lsp/&amp;quot;))
-  (lsp-session-file (locate-user-emacs-file &amp;quot;.local/lsp-session&amp;quot;))
-  (lsp-keymap-prefix &amp;quot;C-c l&amp;quot;)
-  ;; Only enable log for debug.
-  ;; This controls `*lsp-log*` buffer.
-  (lsp-log-io nil)
-  ;; JavaScript (ts-ls) settings.
-  ;; OMG, the FUCKING EVIL SHITTY VSCode TypeScript language server generates
-  ;; log in project dir, can MicroSoft stop to let their software put shit in
-  ;; front of users?
-  (lsp-clients-typescript-server-args &#039;(&amp;quot;--stdio&amp;quot; &amp;quot;--tsserver-log-file&amp;quot; &amp;quot;/tmp/tsserver-log.txt&amp;quot;))
-  (lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
-  ;; Always let clangd look for compile_commands.json under build dir so it will
-  ;; not make project root dirty.
-  (lsp-clients-clangd-args (&amp;quot;--header-insertion-decorators=0&amp;quot; &amp;quot;--compile-commands-dir=./build/&amp;quot; &amp;quot;--enable-config&amp;quot;)))
-&quot; data-info=&quot;language-elisp&quot; data-lang=&quot;elisp&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-elisp&quot;&gt;(use-package lsp-mode
-  :ensure t
-  :commands lsp
-  :hook ((c-mode . lsp-deferred)
-         (c++-mode . lsp-deferred)
-         (c-or-c++-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :bind (:map lsp-mode-map
-              (&quot;M-.&quot; . lsp-find-definition)
-              (&quot;M-,&quot; . lsp-find-references))
-  :custom
-  ;; Move lsp files into local dir.
-  (lsp-server-install-dir (locate-user-emacs-file &quot;.local/lsp/&quot;))
-  (lsp-session-file (locate-user-emacs-file &quot;.local/lsp-session&quot;))
-  (lsp-keymap-prefix &quot;C-c l&quot;)
-  ;; Only enable log for debug.
-  ;; This controls `*lsp-log*` buffer.
-  (lsp-log-io nil)
-  ;; JavaScript (ts-ls) settings.
-  ;; OMG, the FUCKING EVIL SHITTY VSCode TypeScript language server generates
-  ;; log in project dir, can MicroSoft stop to let their software put shit in
-  ;; front of users?
-  (lsp-clients-typescript-server-args &#039;(&quot;--stdio&quot; &quot;--tsserver-log-file&quot; &quot;/tmp/tsserver-log.txt&quot;))
-  (lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
-  ;; Always let clangd look for compile_commands.json under build dir so it will
-  ;; not make project root dirty.
-  (lsp-clients-clangd-args (&quot;--header-insertion-decorators=0&quot; &quot;--compile-commands-dir=./build/&quot; &quot;--enable-config&quot;)))
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;对于 &lt;code&gt;.cache/&lt;/code&gt; 就不是那么好解决了，根据 &lt;a href=&quot;https://github.com/clangd/clangd/issues/341#issuecomment-1003560792&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/clangd/clangd/issues/341#issuecomment-1003560792&lt;/a&gt;，似乎他们并没有关闭或者修改缓存目录的支持。不过我想到一个弯道超车的方案，&lt;code&gt;git&lt;/code&gt; 本身应该是有从其它位置加载用户定义的 &lt;code&gt;gitignore&lt;/code&gt; 文件的功能的，我利用这个写一个本地的 gitignore 不就行了吗，搜索之后得到 &lt;a href=&quot;https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://stackoverflow.com/questions/5724455/can-i-make-a-user-specific-gitignore-file&lt;/a&gt;，操作起来也很简单。首先我把这个文件放到 &lt;code&gt;~/.config/git/gitignore&lt;/code&gt;，里面写上要忽略的 glob，然后运行 &lt;code&gt;git config --global core.excludesfile ~/.config/git/gitignore&lt;/code&gt; 就大功告成。&lt;/p&gt;
-&lt;p&gt;不过就在我写这篇文章时，clangd 的 issue 上有人回复我，根据 &lt;a href=&quot;https://github.com/clangd/clangd/issues/184#issuecomment-998244415&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/clangd/clangd/issues/184#issuecomment-998244415&lt;/a&gt;，现在 clangd 应该是会把索引放在 &lt;code&gt;compile_commands.json&lt;/code&gt; 所在的目录，所以多少也算是解决了问题吧。虽然这样删掉构建目录之后索引缓存也没了，不过我觉得比起重建缓存，还是弄脏项目目录更恶心一点。&lt;/p&gt;
-&lt;p&gt;更新（2022-08-17）：还有一个头疼的问题是 GLib 的 &lt;code&gt;g_clear_pointer&lt;/code&gt; 宏里面使用到了对指针本体取 &lt;code&gt;sizeof&lt;/code&gt; 的语法，而 clangd 默认会认为这是个错误，于是 lsp 就会标出一大堆问题。可以对项目进行设置关掉这一条，不过又会弄脏项目目录，查询文档得知 clangd 会读取 &lt;code&gt;~/.config/clangd/config.yaml&lt;/code&gt; 这个用户级别的配置文件，于是在里面写入内容关掉这条检查：&lt;/p&gt;
-&lt;figure data-raw=&quot;Diagnostics:
-  ClangTidy:
-    Remove: bugprone-sizeof-expression
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;Diagnostics:
-  ClangTidy:
-    Remove: bugprone-sizeof-expression
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;然后给 clangd 传递 &lt;code&gt;--enable-config&lt;/code&gt; 这个参数即可。&lt;/p&gt;
-
-    </content>
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="编程" label="编程" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" />
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="编程" label="编程" scheme="https://sh.alynx.one/tags/%E7%BC%96%E7%A8%8B/" />
   </entry>
 </feed>
