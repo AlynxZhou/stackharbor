@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="如果有得选，在开始一个新项目之前我是无论如何也不会选择 CMake 做构建系统的，我不信有任何人觉得 CMake 的语法很友好很容易读，Meson 相比之下更容易读写，而且按我的经验也更好用。但最大的问题是 Meson 出来的很晚，于是有大量的项目在 CMake 已经流行而 Meson 还没出现的时……">
+    <meta name="keywords" content="计算机, 编程, CMake">
+    <meta name="generator" content="Hikaru v1.21.1">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="Module 的意思不是 Module，Module 的意思是 Config">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Module-Does-Not-Mean-Module-Module-Means-Config/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto-Karon-White.webp">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Module-Does-Not-Mean-Module-Module-Means-Config/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      header.header, footer.footer {
+        background: #33363b;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add line number for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            lineNumbers.push("\n");
+          }
+        }
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Module 的意思不是 Module，Module 的意思是 Config - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-Love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="pinned-message" class="pinned-message">
+  <div class="card">
+    <div class="alert-blue"><strong>我很想知道你对我博客的看法！</strong>方便请到 <a href="/about/">关于</a> 页面留下评论！</div>
+  </div>
+</div>
+
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Module-Does-Not-Mean-Module-Module-Means-Config/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="东京之旅一早比一世遥远">
+        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Module-Does-Not-Mean-Module-Module-Means-Config/" itemprop="url">Module 的意思不是 Module，Module 的意思是 Config</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2024-06-05T12:02:37.000Z">2024-06-05 周三 20:02:37 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Module-Does-Not-Mean-Module-Module-Means-Config/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="Module 的意思不是 Module，Module 的意思是 Config" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>如果有得选，在开始一个新项目之前我是无论如何也不会选择 CMake 做构建系统的，我不信有任何人觉得 CMake 的语法很友好很容易读，Meson 相比之下更容易读写，而且按我的经验也更好用。但最大的问题是 Meson 出来的很晚，于是有大量的项目在 CMake 已经流行而 Meson 还没出现的时间里把基于 Autotools 的构建系统换成了 CMake（剩下没有更换的那些多数在 Meson 稳定之后更换到了 Meson）。显然把所有 CMake 项目重写成 Meson 是不现实的，最大的困难其实是 CMake 虽然难用，但在“跨平台的构建系统”这一点上已经足够用了，所以对于已有的 CMake 项目，我选择还是凑合用。</p>
+<p>实际需要我本人亲手调整 CMake 的项目很少，Ansel 是其中一个，因为当初从 Darktable fork 出来的时候我几乎是完全地整理了一遍它的构建系统，而我今天打开 Element 发现法国老哥在群里 @ 我说是 MSYS2 的 cURL 更新到 8.8.0 导致我们的 CI 构建不了了让我帮他看看，虽然我自己也不是很想写 CMake，但为了避免他一言不合就把依赖复制到项目源码里面我早就跟他说过这种事情我替他处理，所以还是说到做到。</p>
+<p>报错就是一堆 undefined reference，我直接去 Google 搜了一下没有搜到什么有用的资料。去 MSYS2 的 issue 搜索 curl 倒是搜到了 <a href="https://github.com/msys2/MINGW-packages/issues/21028" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/msys2/MINGW-packages/issues/21028</a>，下面有人说把 <code>CURL_LIBRARIES</code> 这个变量换成 <code>CURL::libcurl</code> 这个 target 就可以了。我倒是理解这是什么意思，但我想知道这是怎么回事。这中间的过程可以说是曲折离奇。</p>
+<p>首先是在这里看到有维护者说这个可能是因为他们把 cURL 从 Autotools 构建换成 CMake 构建导致的，但我其实不是很理解，因为我印象里 CMake 查找 package 是调用 <code>Find&lt;PackageName&gt;.cmake</code>，我去看了我们项目本身没有提供这个文件，那应该调用的就是 <code>/usr/share/cmake/Modules/FindCURL.cmake</code> 这个由 CMake 本身提供的文件了，但抛开 CMake 这种 Find 模块谜一样的语法不谈，这个文件明确设置了 <code>CURL_LIBRARIES</code> 变量，那也就是说这个文件根本没有生效？这时候我去翻了 CMake <code>find_package()</code> 的文档，好家伙，这玩意除了有基础和扩展两种语法，还有 Module 和 Config 两种查找模式（内心一万匹草泥马飞奔而过）……如果是 Module 模式，就会用 <code>FindCURL.cmake</code> 这个模块，但如果是 Config 模式，就会去调用 <code>CURLConfig.cmake</code> 这个配置……而后面这个配置里面只写了 CMake 的 target，没有定义 <code>CURL_LIBRARIES</code> 这个变量。</p>
+<p>但这样又有两个疑问，首先是为什么会有后面这个 Config 文件呢？毕竟以前一直用的是 Module，我比较了 Arch 的 curl PKGBUILD 和 MSYS2 的 curl PKGBUILD 得出结论：这个文件是 CMake 构建项目的时候自动基于当前所有的 target 生成的，因为 Arch 使用 Autotools 构建的包没有这个文件。但为什么默认会使用这个 Config 呢？按照 CMake 的文档，Config 似乎是 Module 的 fallback，也就是说只有没有 Module 的时候才会使用 Config，我百思不得其解。但总之解决方案很简单，对于 Ansel 自己，我使用了下面的代码：</p>
+<figure data-raw="find_package(CURL REQUIRED)
+if(TARGET CURL::libcurl)
+  set(CURL_LIBRARIES CURL::libcurl)
+endif()
+" data-info="language-cmake" data-lang="cmake" class="code-block"><pre class="code"><code class="language-cmake">find_package(CURL REQUIRED)
+if(TARGET CURL::libcurl)
+  set(CURL_LIBRARIES CURL::libcurl)
+endif()
+</code></pre></figure>
+<p>这样可以保证对不同版本的兼容性，而对于我们自己构建的 exiv2 依赖，我一开始打算直接 <code>find_package(CURL MODULE REQUIRED)</code>，毕竟按照文档这样可以强制它忽略 Config 嘛，但结果我推到 CI 上仍然报错。我不是很理解，直到我看了一眼 log 发现它仍然是用的 Config，我当时真的骂人了，我不是写的很清楚要强制 Module 吗？这到底是怎么回事？</p>
+<p>当然实际上解决方法是有的，只要使用前一种方法就可以了。但我咽不下这口气，不按照文档说的顺序先尝试 Module 就算了，我强制 Module 了还是给我用 Config 是什么意思？你猜我最后在哪找到了解释，是在 <a href="https://cmake.org/cmake/help/latest/module/FindCURL.html#curl-cmake" target="_blank" rel="external nofollow noreferrer noopener"><code>FindCURL.cmake</code> 的文档页面</a>：</p>
+<blockquote>
+<p>If CURL was built using the CMake buildsystem then it provides its own CURLConfig.cmake file for use with the find_package() command's config mode. This module looks for this file and, if found, returns its results with no further action.</p>
+</blockquote>
+<p>我觉得任何一个脑子正常的程序员都该骂做出这个改动的人，首先你改变了默认的加载顺序也就算了，我可以理解成这是你们 CMake 用户的某种隐性约定我新来的我不知道。你用 Config 的时候不遵守 <code>Find&lt;PackageName&gt;.cmake</code> Module 约定的导出变量我也忍了。但是请问为什么我在 <strong>显式指定</strong> 了 <code>MODULE</code> 关键字的情况下，仍然会被不知不觉的改变行为？这个说明藏在这么小的专题页面里，是生怕用户搞清楚为什么代码和实际行为完全相反吗？写这个逻辑的人有没有意识到自己是在好心办坏事？</p>
+<p>这个 <code>FindCURL.cmake</code> 是 CMake 官方提供的 module 之一，所以也没必要试图甩锅给其他人。总之我在使用 CMake 的过程中除了迷惑到难以阅读的拼写习惯，反人类且可能混杂不同时期或者不同风味（比如 <code>find_package()</code> 就有两种语法）的 API，写起来弯弯绕绕的约定习惯（比如 <code>Find&lt;PackageName&gt;.cmake</code> 约定导出 <code>&lt;PackageName&gt;_LIBRARIES</code> 然后经常会看到什么 <code>set(&lt;PackageName&gt;_LIBRARIES &lt;PackageName&gt;_LIBRARY)</code>）之外，现在又多了个就算你显式指定参数还是会偷偷做出相反行为的体验。我不反对 CMake 确实能用，但和 Meson 的使用体验比起来，写 CMake 确实不能算是什么令人享受的事情。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"><i class="bi bi-tag"></i>编程</a><a class="post-tag button" href="/tags/CMake/" rel="tag"><i class="bi bi-tag"></i>CMake</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/Ink-and-Logical-Rectangles-of-Pango/" rel="prev" title="Pango 中的 Ink 和 Logical 矩形"><span class="page-nav-title">Pango 中的 Ink 和 Logical 矩形</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "Module 的意思不是 Module，Module 的意思是 Config",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Module-Does-Not-Mean-Module-Module-Means-Config/",
+          "containerID": "comment-results"
+        }).then(() => {
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
+            document.querySelectorAll("time.comment-full-datetime"),
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto-Karon-White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">东京之旅一早比一世遥远</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">110</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">37</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">89</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://dawn.moe/" target="_blank" rel="external nofollow noreferrer noopener">藍貓 八千代</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.21.1 at 2024-06-05T13:14:09.316Z. -->
