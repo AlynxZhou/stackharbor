@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sh.alynx.one/posts/GNOME-IBus-Wayland-IME/</loc>
-    <lastmod>2024-06-20T09:19:55.000Z</lastmod>
+    <lastmod>2024-06-25T06:52:35.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/posts/10-Years-Passed-and-I-Bought-MacBook/</loc>
@@ -457,12 +457,12 @@
     <lastmod>2020-08-24T01:20:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://sh.alynx.one/Undefined-Script-Works/</loc>
-    <lastmod>2018-04-04T00:15:40.000Z</lastmod>
-  </url>
-  <url>
     <loc>https://sh.alynx.one/about/</loc>
     <lastmod>2023-10-11T16:41:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/Undefined-Script-Works/</loc>
+    <lastmod>2018-04-04T00:15:40.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/</loc>
@@ -945,9 +945,9 @@
     <loc>https://sh.alynx.one/search/3.json</loc>
   </url>
   <url>
-    <loc>https://sh.alynx.one/atom.xml</loc>
+    <loc>https://sh.alynx.one/sitemap.xml</loc>
   </url>
   <url>
-    <loc>https://sh.alynx.one/sitemap.xml</loc>
+    <loc>https://sh.alynx.one/atom.xml</loc>
   </url>
 </urlset>

@@ -5,7 +5,7 @@
   <icon>https://sh.alynx.one/images/Mikoto-Karon-White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2024-06-25T06:47:33.215Z</updated>
+  <updated>2024-06-25T06:52:43.515Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
@@ -21,7 +21,7 @@
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2024-06-20T09:19:55.000Z</published>
-    <updated>2024-06-20T09:19:55.000Z</updated>
+    <updated>2024-06-25T06:52:35.000Z</updated>
     <summary type="html">
       长久以来，用户对于 GNOME 的输入法是怎么实现的有着各种各样的误解，比如误以为 IBus 掌控从界面到引擎的全部逻辑。而我最近尝试给 GNOME 添加了 text-input-v1 支持，以便用户可以在运行于 Wayland 下的 Chromium/Electron 程序中使…
     </summary>

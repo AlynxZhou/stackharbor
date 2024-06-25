@@ -3,6 +3,7 @@ title: GNOME 和 IBus 和 Wayland 输入法
 layout: post
 #comment: true
 created: 2024-06-20 17:19:55
+updated: 2024-06-25 14:52:35
 categories:
   - 计算机
   - GNOME
