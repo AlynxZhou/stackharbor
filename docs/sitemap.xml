@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sh.alynx.one/posts/Journey-to-Tokyo/</loc>
+    <lastmod>2025-04-16T04:47:00.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/posts/GNOME-IBus-Wayland-IME/</loc>
     <lastmod>2024-06-25T06:52:35.000Z</lastmod>
   </url>
@@ -741,6 +745,9 @@
     <loc>https://sh.alynx.one/tags/%E5%BD%95%E9%9F%B3/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/%E6%91%84%E5%BD%B1/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/%E6%A0%91/</loc>
   </url>
   <url>
@@ -786,6 +793,9 @@
     <loc>https://sh.alynx.one/tags/%E7%94%B5%E5%BD%B1/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/%E4%B8%9C%E4%BA%AC/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/%E5%8A%A8%E6%BC%AB/</loc>
   </url>
   <url>
@@ -808,9 +818,6 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/%E5%85%A8%E9%9D%A0%E4%B8%80%E5%BC%A0%E5%98%B4/</loc>
-  </url>
-  <url>
-    <loc>https://sh.alynx.one/tags/%E6%91%84%E5%BD%B1/</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/%E5%8F%8C%E6%98%BE%E5%8D%A1/</loc>
