@@ -5,7 +5,7 @@
   <icon>https://sh.alynx.one/images/Mikoto-Karon-White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2025-04-17T05:04:19.618Z</updated>
+  <updated>2025-04-24T09:44:17.158Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
@@ -2855,7 +2855,7 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
       <email>alynx.zhou@gmail.com</email>
     </author>
     <published>2022-11-28T10:24:04.000Z</published>
-    <updated>2022-11-30T13:08:11.000Z</updated>
+    <updated>2025-04-24T09:42:09.000Z</updated>
     <summary type="html">
       最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 sudo 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，…
     </summary>
@@ -2868,11 +2868,11 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;线索是有了，看来我需要这个 &lt;code&gt;pam_pkcs11.so&lt;/code&gt;，虽然我也不知道这是什么，先搜一下哪个包有这个文件比较好。&lt;code&gt;pacman -F pam_pkcs11.so&lt;/code&gt; 竟然没有返回任何结果，我确定不是我的 pacman 数据库没更新，那只能去浏览器里搜索了，最后我搜到了 &lt;a href=&quot;https://github.com/OpenSC/pam_pkcs11&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/OpenSC/pam_pkcs11&lt;/a&gt;，虽然我也不知道 &lt;code&gt;PKCS#11&lt;/code&gt; 是个什么玩意，但反正它是个 PAM 模块，既然不在官方仓库里，那大概率 AUR 里有人打包了，于是直接 &lt;code&gt;paru pam_pksc11&lt;/code&gt; 就装了一个上来。&lt;/p&gt;
 &lt;p&gt;但装是装好了，也看不出来这玩意和 YubiKey 有什么联系，我大概是搜索了 PKCS YubiKey 然后搜到了 YubiKey 给的文档 &lt;a href=&quot;https://developers.yubico.com/PIV/Guides/SSH_with_PIV_and_PKCS11.html&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Using PIV for SSH through PKCS #11&lt;/a&gt;，好吧虽然我不是要用来 SSH 但是多半也有点用。看下来反正这个东西和 YubiKey 的 PIV 功能有关，我把 PIV 相关的文档都看了一遍，结果是云里雾里，相当没有头绪。一大堆文档告诉你各种各样的需求要做什么，但是几乎没怎么说这都是什么，于是恰好我的需求不在列表里我就不知道怎么办了。我又回头去看 &lt;code&gt;pam_pkcs11&lt;/code&gt; 的文档，它写了一长串的东西，我反复看了几遍之后发现只要看 &lt;a href=&quot;http://opensc.github.io/pam_pkcs11/doc/pam_pkcs11.html#HOWTO&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;第 11 节的 HOWTO 部分&lt;/a&gt; 就可以了。虽然我也不太清楚它都在说什么，但是至少这里告诉我说需要一个 root CA certificate，但我是个人使用哪来的这玩意，再回头看 YubiKey 的那篇文档里面恰好提到了什么 self-signed certificate，我拿这个试一试，结果成功了。为了方便参考，下面我就不讲我是怎么倒推这些奇怪的需求的了，而是顺序讲一下都需要配置什么。&lt;/p&gt;
-&lt;p&gt;首先如果你像我一样刚买了一个 YubiKey 打算利用它的 PIV 功能，那你得先初始化它，也就是改掉默认的 PIN，PUK 和管理密钥，这个可以通过官方的 YubiKey Manager 软件来操作，有 Qt 写的 GUI 版和命令行版本：&lt;/p&gt;
-&lt;figure data-raw=&quot;# pacman -S yubikey-manager yubikey-manager-qt
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pacman -S yubikey-manager yubikey-manager-qt
+&lt;p&gt;首先如果你像我一样刚买了一个 YubiKey 打算利用它的 PIV 功能，那你得先初始化它，也就是改掉默认的 PIN，PUK 和管理密钥，这个可以通过官方的 YubiKey Manager 软件来操作：&lt;/p&gt;
+&lt;figure data-raw=&quot;# pacman -S yubikey-manager
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pacman -S yubikey-manager
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;我推荐使用命令行版本操作，因为那个 GUI 经常转圈转半天或者点了没反应：&lt;/p&gt;
+&lt;p&gt;之前这个软件还有个 Qt 写的 GUI 版本，但是已经被官方放弃了，不过本来 GUI 也不是很好用，所以建议还是用命令行：&lt;/p&gt;
 &lt;figure data-raw=&quot;% ykman piv access change-pin
 % ykman piv access change-puk
 % ykman piv access change-management-key --generate --protect --touch
@@ -2895,11 +2895,19 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a selfsign-certificate -S &quot;/CN=Alynx Zhou/&quot; -i public.pem -o cert.pem
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;注意 &lt;code&gt;CN=&lt;/code&gt; 后面的部分，这里会被 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 用来验证这个智能卡属于系统里面哪个用户，所以简单的话直接写你的登录用户名，当然你像我一样不想写用户名也是有办法对应的，同样要输入 PIN。&lt;/p&gt;
-&lt;p&gt;再把证书导回到同一个槽，我也不知道为什么，文档说了我照做了：&lt;/p&gt;
+&lt;p&gt;再把证书导回到同一个槽，我也不知道为什么，文档说了我照做了（大概是为了方便携带，需要证书的时候可以直接从 YubiKey 里面导出）：&lt;/p&gt;
 &lt;figure data-raw=&quot;% yubico-piv-tool -s 9a -a verify-pin -a import-certificate -i cert.pem
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a import-certificate -i cert.pem
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;还是要输入 PIN 然后灯闪的时候摸一下。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;更新（2025-04-24）：我发现生成的证书就像 HTTPS 的证书一样其实是会过期的，默认的有效期是一年，到期了需要重新生成一个证书。我大概理解了这玩意是怎么回事并且搞清楚如何用 &lt;code&gt;ykman&lt;/code&gt; 配置了所以我这里再记录一下怎么用 &lt;code&gt;ykman&lt;/code&gt; 更新证书。&lt;/p&gt;
+&lt;p&gt;整个的流程其实是你有一对私钥公钥用来签发证书，私钥在你的 YubiKey 里，公钥则是一个文件，使用公钥签发证书，然后把证书丢给 pam_pkcs11，pam_pkcs11 请求卡片用私钥验证证书是否符合。为了方便，证书可以导入 YubiKey，也可以从 YubiKey 里导出。&lt;/p&gt;
+&lt;p&gt;首先可以用 &lt;code&gt;ykman piv info&lt;/code&gt; 查看一下目前证书的信息。&lt;/p&gt;
+&lt;p&gt;如果已经有一个过期的就用 &lt;code&gt;ykman piv certificates delete 9a&lt;/code&gt; 删掉旧的证书。&lt;/p&gt;
+&lt;p&gt;然后用 &lt;code&gt;ykman piv certificates generate -s &quot;CN=Alynx Zhou&quot; 9a public.pem&lt;/code&gt; 签发一个新证书，注意这里字符串的格式和 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 不一样，这里用逗号而不是斜杠做分隔符。&lt;/p&gt;
+&lt;p&gt;和 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 不一样，此时证书是直接生成在卡片里的，要交给 pam_pkcs11 的话得用 &lt;code&gt;ykman piv certificates export 9a cert.pem&lt;/code&gt; 导出成文件。&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;到这里 YubiKey 的配置就结束了。&lt;/p&gt;
 &lt;p&gt;要在系统上使用智能卡验证需要安装系统上和智能卡交互的软件包：&lt;/p&gt;
 &lt;figure data-raw=&quot;# pacman -S ccid opensc pcsclite
@@ -2912,9 +2920,9 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# systemctl enable --now pcscd.socket
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;如果我没漏掉什么乱七八糟的，就可以配置 PAM 模块了，它有一个配置目录叫 &lt;code&gt;/etc/pam_pksc11&lt;/code&gt;，首先你要把上面生成的证书放到 &lt;code&gt;/etc/pam_pkcs11/cacerts&lt;/code&gt;。&lt;/p&gt;
-&lt;figure data-raw=&quot;# cd /pam/pkcs11/cacerts
+&lt;figure data-raw=&quot;# cd /etc/pam_pkcs11/cacerts
 # cp PATH_TO_YOUT_CERT/cert.pem ./
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cd /pam/pkcs11/cacerts
+&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cd /etc/pam_pkcs11/cacerts
 # cp PATH_TO_YOUT_CERT/cert.pem ./
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;你要在同一个目录下面运行一个什么什么 hash 命令生成一个 hash：&lt;/p&gt;
@@ -2939,7 +2947,11 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 &quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;/CN=Alynx Zhou -&amp;gt; alynx
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;我的用户名是 &lt;code&gt;alynx&lt;/code&gt;，你可以换成你自己的。&lt;/p&gt;
-&lt;p&gt;到这一步 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 这个模块已经可以通过智能卡验证你的身份了，但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt; 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。&lt;/p&gt;
+&lt;p&gt;到这一步 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 这个模块已经可以通过智能卡验证你的身份了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class=&quot;alert-red&quot;&gt;更新（2025-04-24）：直接使用 p11-kit 的 MR 已经合并了，所以下面讲配置 NSS 数据库的部分都不需要做了。&lt;/div&gt;
+
+&lt;p&gt;但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt; 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。&lt;/p&gt;
 &lt;p&gt;这里就比较难搞清楚了，我智能卡插的好好的，上面各种程序都能用，为什么你检测不到？我尝试用什么 GDM YubiKey 之类的关键词搜索了半天，也没人告诉我 GDM 到底怎么检测智能卡的。没有办法还是读代码吧，GNOME Shell &lt;code&gt;js/gdm/util.js&lt;/code&gt; 里面的逻辑是通过 D-Bus 的 &lt;code&gt;org.gnome.SettingsDaemon.Smartcard&lt;/code&gt; 获取智能卡信息，那我打开 D-Feet 从 Session Bus 里面找到这个，直接运行 &lt;code&gt;org.gnome.SettingsDaemon.Smartcard.Manager&lt;/code&gt; 的 &lt;code&gt;GetInsertedTokens&lt;/code&gt;，什么都没有。&lt;/p&gt;
 &lt;p&gt;根据 D-Bus 的信息，很显然这个接口是 &lt;code&gt;gnome-settings-daemon&lt;/code&gt; 的 &lt;code&gt;smartcard&lt;/code&gt; 插件提供的，我大概是搜索了什么 gsd-smartcard PKCS#11 的关键字之后找到了 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208&lt;/a&gt;，其实我一开始也没太看懂这是什么意思，但得到一些有用的信息：&lt;/p&gt;
 &lt;ul&gt;
@@ -2967,7 +2979,8 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 &lt;figure data-raw=&quot;# chmod 0644 /etc/pki/nssdb/*
 &quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# chmod 0644 /etc/pki/nssdb/*
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;接下来插着 YubiKey 重启，GDM 启动的 &lt;code&gt;gsd-smartcard&lt;/code&gt; 就能读到系统的 NSS 数据库，检测到智能卡，于是调用 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt;，直接让你输入用户名，输入之后会提示你输入智能卡的 PIN，然后 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 进行验证，就可以登录了。锁屏之后也只要输入智能卡的 PIN 就可以解锁。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;接下来插着 YubiKey 重启，GDM 启动的 &lt;code&gt;gsd-smartcard&lt;/code&gt; 就能检测到智能卡，于是调用 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt;，直接让你输入用户名，输入之后会提示你输入智能卡的 PIN，然后 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 进行验证，就可以登录了。锁屏之后也只要输入智能卡的 PIN 就可以解锁。&lt;/p&gt;
 &lt;p&gt;&lt;del&gt;按理说如果给 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 发一个空白的用户名，它会根据智能卡返回用户名的，不知道为什么我在 GDM 用不了，一定要开机手动输入，有空我看看代码也许可以修改一下。&lt;/del&gt; 我也不知道为什么一定要在 GDM 启动之前插入卡才可以，显示用户列表之后再插入卡我这里没反应。&lt;/p&gt;
 &lt;p&gt;更新（2022-11-30）：花了我半天时间研究 GDM 和 PAM，问题不在 GDM，而是因为 Arch Linux 的 &lt;code&gt;gdm-smartcard&lt;/code&gt; 首先调用了 &lt;code&gt;pam_shells&lt;/code&gt; 检查用户是否有合法的 shell，遇到空用户名它第一个失败了，于是我提交了 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gdm/-/merge_requests/193&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;一个 MR&lt;/a&gt;，把 &lt;code&gt;pam_shells&lt;/code&gt; 挪到 &lt;code&gt;pam_pkcs11&lt;/code&gt; 下面，这样它会检查自动返回的用户名。（虽然这些 PAM 配置文件是发行版自己写的但是大家都提交到 GNOME 那边了，我只改了 Arch 的因为我在用，别的发行版的用户先偷着乐吧。）&lt;/p&gt;
 &lt;p&gt;如果你想用智能卡解锁的话，一定得是用智能卡登录才可以，它会检查当前的卡是不是登录所用的那张卡，不是的话就只能密码解锁了。折腾这一套花了我一整天时间，因为资料实在是太少了，根本不知道它是怎么工作的。&lt;/p&gt;

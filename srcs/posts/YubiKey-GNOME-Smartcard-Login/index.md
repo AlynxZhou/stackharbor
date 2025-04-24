@@ -3,7 +3,7 @@ title: YubiKey 和 GNOME 和智能卡登录
 layout: post
 #comment: true
 created: 2022-11-28T18:24:04
-updated: 2022-11-30T21:08:11
+updated: 2025-04-24T17:42:09
 categories:
   - 计算机
   - GNOME
@@ -26,13 +26,13 @@ auth       required                    pam_pkcs11.so        wait_for_card card_o
 
 但装是装好了，也看不出来这玩意和 YubiKey 有什么联系，我大概是搜索了 PKCS YubiKey 然后搜到了 YubiKey 给的文档 [Using PIV for SSH through PKCS #11](https://developers.yubico.com/PIV/Guides/SSH_with_PIV_and_PKCS11.html)，好吧虽然我不是要用来 SSH 但是多半也有点用。看下来反正这个东西和 YubiKey 的 PIV 功能有关，我把 PIV 相关的文档都看了一遍，结果是云里雾里，相当没有头绪。一大堆文档告诉你各种各样的需求要做什么，但是几乎没怎么说这都是什么，于是恰好我的需求不在列表里我就不知道怎么办了。我又回头去看 `pam_pkcs11` 的文档，它写了一长串的东西，我反复看了几遍之后发现只要看 [第 11 节的 HOWTO 部分](http://opensc.github.io/pam_pkcs11/doc/pam_pkcs11.html#HOWTO) 就可以了。虽然我也不太清楚它都在说什么，但是至少这里告诉我说需要一个 root CA certificate，但我是个人使用哪来的这玩意，再回头看 YubiKey 的那篇文档里面恰好提到了什么 self-signed certificate，我拿这个试一试，结果成功了。为了方便参考，下面我就不讲我是怎么倒推这些奇怪的需求的了，而是顺序讲一下都需要配置什么。
 
-首先如果你像我一样刚买了一个 YubiKey 打算利用它的 PIV 功能，那你得先初始化它，也就是改掉默认的 PIN，PUK 和管理密钥，这个可以通过官方的 YubiKey Manager 软件来操作，有 Qt 写的 GUI 版和命令行版本：
+首先如果你像我一样刚买了一个 YubiKey 打算利用它的 PIV 功能，那你得先初始化它，也就是改掉默认的 PIN，PUK 和管理密钥，这个可以通过官方的 YubiKey Manager 软件来操作：
 
 ```shell
-# pacman -S yubikey-manager yubikey-manager-qt
+# pacman -S yubikey-manager
 ```
 
-我推荐使用命令行版本操作，因为那个 GUI 经常转圈转半天或者点了没反应：
+之前这个软件还有个 Qt 写的 GUI 版本，但是已经被官方放弃了，不过本来 GUI 也不是很好用，所以建议还是用命令行：
 
 ```shell
 % ykman piv access change-pin
@@ -64,13 +64,29 @@ auth       required                    pam_pkcs11.so        wait_for_card card_o
 
 注意 `CN=` 后面的部分，这里会被 `pam_pkcs11.so` 用来验证这个智能卡属于系统里面哪个用户，所以简单的话直接写你的登录用户名，当然你像我一样不想写用户名也是有办法对应的，同样要输入 PIN。
 
-再把证书导回到同一个槽，我也不知道为什么，文档说了我照做了：
+再把证书导回到同一个槽，我也不知道为什么，文档说了我照做了（大概是为了方便携带，需要证书的时候可以直接从 YubiKey 里面导出）：
 
 ```shell
 % yubico-piv-tool -s 9a -a verify-pin -a import-certificate -i cert.pem
 ```
 
 还是要输入 PIN 然后灯闪的时候摸一下。
+
+-------
+
+更新（2025-04-24）：我发现生成的证书就像 HTTPS 的证书一样其实是会过期的，默认的有效期是一年，到期了需要重新生成一个证书。我大概理解了这玩意是怎么回事并且搞清楚如何用 `ykman` 配置了所以我这里再记录一下怎么用 `ykman` 更新证书。
+
+整个的流程其实是你有一对私钥公钥用来签发证书，私钥在你的 YubiKey 里，公钥则是一个文件，使用公钥签发证书，然后把证书丢给 pam_pkcs11，pam_pkcs11 请求卡片用私钥验证证书是否符合。为了方便，证书可以导入 YubiKey，也可以从 YubiKey 里导出。
+
+首先可以用 `ykman piv info` 查看一下目前证书的信息。
+
+如果已经有一个过期的就用 `ykman piv certificates delete 9a` 删掉旧的证书。
+
+然后用 `ykman piv certificates generate -s "CN=Alynx Zhou" 9a public.pem` 签发一个新证书，注意这里字符串的格式和 `yubico-piv-tool` 不一样，这里用逗号而不是斜杠做分隔符。
+
+和 `yubico-piv-tool` 不一样，此时证书是直接生成在卡片里的，要交给 pam_pkcs11 的话得用 `ykman piv certificates export 9a cert.pem` 导出成文件。
+
+-------
 
 到这里 YubiKey 的配置就结束了。
 
@@ -90,7 +106,7 @@ auth       required                    pam_pkcs11.so        wait_for_card card_o
 如果我没漏掉什么乱七八糟的，就可以配置 PAM 模块了，它有一个配置目录叫 `/etc/pam_pksc11`，首先你要把上面生成的证书放到 `/etc/pam_pkcs11/cacerts`。
 
 ```shell
-# cd /pam/pkcs11/cacerts
+# cd /etc/pam_pkcs11/cacerts
 # cp PATH_TO_YOUT_CERT/cert.pem ./
 ```
 
@@ -128,7 +144,13 @@ auth       required                    pam_pkcs11.so        wait_for_card card_o
 
 我的用户名是 `alynx`，你可以换成你自己的。
 
-到这一步 `pam_pkcs11.so` 这个模块已经可以通过智能卡验证你的身份了，但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 `/etc/pam.d/gdm-smartcard` 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。
+到这一步 `pam_pkcs11.so` 这个模块已经可以通过智能卡验证你的身份了。
+
+-------
+
+<div class="alert-red">更新（2025-04-24）：直接使用 p11-kit 的 MR 已经合并了，所以下面讲配置 NSS 数据库的部分都不需要做了。</div>
+
+但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 `/etc/pam.d/gdm-smartcard` 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。
 
 这里就比较难搞清楚了，我智能卡插的好好的，上面各种程序都能用，为什么你检测不到？我尝试用什么 GDM YubiKey 之类的关键词搜索了半天，也没人告诉我 GDM 到底怎么检测智能卡的。没有办法还是读代码吧，GNOME Shell `js/gdm/util.js` 里面的逻辑是通过 D-Bus 的 `org.gnome.SettingsDaemon.Smartcard` 获取智能卡信息，那我打开 D-Feet 从 Session Bus 里面找到这个，直接运行 `org.gnome.SettingsDaemon.Smartcard.Manager` 的 `GetInsertedTokens`，什么都没有。
 
@@ -167,7 +189,9 @@ auth       required                    pam_pkcs11.so        wait_for_card card_o
 # chmod 0644 /etc/pki/nssdb/*
 ```
 
-接下来插着 YubiKey 重启，GDM 启动的 `gsd-smartcard` 就能读到系统的 NSS 数据库，检测到智能卡，于是调用 `/etc/pam.d/gdm-smartcard`，直接让你输入用户名，输入之后会提示你输入智能卡的 PIN，然后 `pam_pkcs11.so` 进行验证，就可以登录了。锁屏之后也只要输入智能卡的 PIN 就可以解锁。
+-------
+
+接下来插着 YubiKey 重启，GDM 启动的 `gsd-smartcard` 就能检测到智能卡，于是调用 `/etc/pam.d/gdm-smartcard`，直接让你输入用户名，输入之后会提示你输入智能卡的 PIN，然后 `pam_pkcs11.so` 进行验证，就可以登录了。锁屏之后也只要输入智能卡的 PIN 就可以解锁。
 
 ~~按理说如果给 `pam_pkcs11.so` 发一个空白的用户名，它会根据智能卡返回用户名的，不知道为什么我在 GDM 用不了，一定要开机手动输入，有空我看看代码也许可以修改一下。~~ 我也不知道为什么一定要在 GDM 启动之前插入卡才可以，显示用户列表之后再插入卡我这里没反应。
 

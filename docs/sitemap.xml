@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/</loc>
-    <lastmod>2022-11-30T13:08:11.000Z</lastmod>
+    <lastmod>2025-04-24T09:42:09.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/</loc>
@@ -952,9 +952,9 @@
     <loc>https://sh.alynx.one/search/3.json</loc>
   </url>
   <url>
-    <loc>https://sh.alynx.one/atom.xml</loc>
+    <loc>https://sh.alynx.one/sitemap.xml</loc>
   </url>
   <url>
-    <loc>https://sh.alynx.one/sitemap.xml</loc>
+    <loc>https://sh.alynx.one/atom.xml</loc>
   </url>
 </urlset>
