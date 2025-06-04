@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="如果你尝试过自己在程序里绘制一段字符串，你就会发现你得到的 buffer 的高度并不总是你设置的字号大小，特别是英文。这个现象的原因是英文在书写的时候并不像汉字一样高矮都一样，而是有上有下，比如 g 这个字符的尾巴总是向下伸出来一点，这些字符通常是基线对齐的，也就是说主体部分会躺在一条基线上，尾巴和……">
     <meta name="keywords" content="计算机, 编程, 字体">
-    <meta name="generator" content="Hikaru v1.21.1">
+    <meta name="generator" content="Hikaru v1.21.2">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="Pango 中的 Ink 和 Logical 矩形">
@@ -319,115 +319,115 @@
 
 static void draw(GtkDrawingArea *drawing_area, cairo_t *cr, int width, int height, gpointer user_data)
 {
-    PangoLayout *layout = pango_cairo_create_layout(cr);
-    pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
-    PangoFontDescription *font = pango_font_description_new();
-    pango_font_description_set_family(font, &quot;serif&quot;);
-    pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
-    pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
-    pango_layout_set_font_description(layout, font);
+	PangoLayout *layout = pango_cairo_create_layout(cr);
+	pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
+	PangoFontDescription *font = pango_font_description_new();
+	pango_font_description_set_family(font, &quot;serif&quot;);
+	pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
+	pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
+	pango_layout_set_font_description(layout, font);
 
-    PangoRectangle string_ink;
-    PangoRectangle string_logical;
-    pango_layout_set_text(layout, &quot;g&quot;, -1);
-    pango_layout_get_pixel_extents(layout, &amp;string_ink, &amp;string_logical);
-    g_print(&quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
-    g_print(&quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
+	PangoRectangle string_ink;
+	PangoRectangle string_logical;
+	pango_layout_set_text(layout, &quot;g&quot;, -1);
+	pango_layout_get_pixel_extents(layout, &amp;string_ink, &amp;string_logical);
+	g_print(&quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
+	g_print(&quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
 
-    cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
-    cairo_paint(cr);
+	cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
+	cairo_paint(cr);
 
-    const int x = 100;
-    const int y = 100;
-    cairo_move_to(cr, x, y);
-    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
-    pango_cairo_show_layout(cr, layout);
+	const int x = 100;
+	const int y = 100;
+	cairo_move_to(cr, x, y);
+	cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
+	pango_cairo_show_layout(cr, layout);
 
-    cairo_set_line_width(cr, 5);
-    cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
-    cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
-    cairo_stroke(cr);
+	cairo_set_line_width(cr, 5);
+	cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
+	cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
+	cairo_stroke(cr);
 
-    cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
-    cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
-    cairo_stroke(cr);
+	cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
+	cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
+	cairo_stroke(cr);
 }
 
 static void on_activate(GtkApplication *app, gpointer user_data)
 {
-    GtkWidget *window = gtk_application_window_new (app);
-    gtk_window_set_title(GTK_WINDOW(window), &quot;Test Pango Extents&quot;);
-    gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
-    GtkWidget *area = gtk_drawing_area_new();
-    gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
-    gtk_window_set_child(GTK_WINDOW(window), area);
-    gtk_window_present(GTK_WINDOW(window));
+	GtkWidget *window = gtk_application_window_new (app);
+	gtk_window_set_title(GTK_WINDOW(window), &quot;Test Pango Extents&quot;);
+	gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
+	GtkWidget *area = gtk_drawing_area_new();
+	gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
+	gtk_window_set_child(GTK_WINDOW(window), area);
+	gtk_window_present(GTK_WINDOW(window));
 }
 
 int main(int argc, char *argv[])
 {
-    GtkApplication *app = gtk_application_new(&quot;one.alynx.test-pango-extents&quot;, G_APPLICATION_DEFAULT_FLAGS);
-    g_signal_connect(app, &quot;activate&quot;, G_CALLBACK(on_activate), NULL);
-    int status = g_application_run(G_APPLICATION(app), argc, argv);
-    g_object_unref(app);
-    return status;
+	GtkApplication *app = gtk_application_new(&quot;one.alynx.test-pango-extents&quot;, G_APPLICATION_DEFAULT_FLAGS);
+	g_signal_connect(app, &quot;activate&quot;, G_CALLBACK(on_activate), NULL);
+	int status = g_application_run(G_APPLICATION(app), argc, argv);
+	g_object_unref(app);
+	return status;
 }
 " data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include &lt;gtk/gtk.h&gt;
 
 static void draw(GtkDrawingArea *drawing_area, cairo_t *cr, int width, int height, gpointer user_data)
 {
-    PangoLayout *layout = pango_cairo_create_layout(cr);
-    pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
-    PangoFontDescription *font = pango_font_description_new();
-    pango_font_description_set_family(font, "serif");
-    pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
-    pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
-    pango_layout_set_font_description(layout, font);
+	PangoLayout *layout = pango_cairo_create_layout(cr);
+	pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
+	PangoFontDescription *font = pango_font_description_new();
+	pango_font_description_set_family(font, "serif");
+	pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
+	pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
+	pango_layout_set_font_description(layout, font);
 
-    PangoRectangle string_ink;
-    PangoRectangle string_logical;
-    pango_layout_set_text(layout, "g", -1);
-    pango_layout_get_pixel_extents(layout, &amp;string_ink, &amp;string_logical);
-    g_print("Logical: x is %d, y is %d, width is %d, height is %d.\n", string_logical.x, string_logical.y, string_logical.width, string_logical.height);
-    g_print("Ink: x is %d, y is %d, width is %d, height is %d.\n", string_ink.x, string_ink.y, string_ink.width, string_ink.height);
+	PangoRectangle string_ink;
+	PangoRectangle string_logical;
+	pango_layout_set_text(layout, "g", -1);
+	pango_layout_get_pixel_extents(layout, &amp;string_ink, &amp;string_logical);
+	g_print("Logical: x is %d, y is %d, width is %d, height is %d.\n", string_logical.x, string_logical.y, string_logical.width, string_logical.height);
+	g_print("Ink: x is %d, y is %d, width is %d, height is %d.\n", string_ink.x, string_ink.y, string_ink.width, string_ink.height);
 
-    cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
-    cairo_paint(cr);
+	cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
+	cairo_paint(cr);
 
-    const int x = 100;
-    const int y = 100;
-    cairo_move_to(cr, x, y);
-    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
-    pango_cairo_show_layout(cr, layout);
+	const int x = 100;
+	const int y = 100;
+	cairo_move_to(cr, x, y);
+	cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
+	pango_cairo_show_layout(cr, layout);
 
-    cairo_set_line_width(cr, 5);
-    cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
-    cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
-    cairo_stroke(cr);
+	cairo_set_line_width(cr, 5);
+	cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
+	cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
+	cairo_stroke(cr);
 
-    cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
-    cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
-    cairo_stroke(cr);
+	cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
+	cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
+	cairo_stroke(cr);
 }
 
 static void on_activate(GtkApplication *app, gpointer user_data)
 {
-    GtkWidget *window = gtk_application_window_new (app);
-    gtk_window_set_title(GTK_WINDOW(window), "Test Pango Extents");
-    gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
-    GtkWidget *area = gtk_drawing_area_new();
-    gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
-    gtk_window_set_child(GTK_WINDOW(window), area);
-    gtk_window_present(GTK_WINDOW(window));
+	GtkWidget *window = gtk_application_window_new (app);
+	gtk_window_set_title(GTK_WINDOW(window), "Test Pango Extents");
+	gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
+	GtkWidget *area = gtk_drawing_area_new();
+	gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
+	gtk_window_set_child(GTK_WINDOW(window), area);
+	gtk_window_present(GTK_WINDOW(window));
 }
 
 int main(int argc, char *argv[])
 {
-    GtkApplication *app = gtk_application_new("one.alynx.test-pango-extents", G_APPLICATION_DEFAULT_FLAGS);
-    g_signal_connect(app, "activate", G_CALLBACK(on_activate), NULL);
-    int status = g_application_run(G_APPLICATION(app), argc, argv);
-    g_object_unref(app);
-    return status;
+	GtkApplication *app = gtk_application_new("one.alynx.test-pango-extents", G_APPLICATION_DEFAULT_FLAGS);
+	g_signal_connect(app, "activate", G_CALLBACK(on_activate), NULL);
+	int status = g_application_run(G_APPLICATION(app), argc, argv);
+	g_object_unref(app);
+	return status;
 }
 </code></pre></figure>
 <p>下面是编译命令：</p>
@@ -626,4 +626,4 @@ Ink: x is -1, y is 102, width is 122, height is 151.
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.1 at 2025-04-24T09:44:17.154Z. -->
+<!-- Page built by Hikaru v1.21.2 at 2025-06-04T09:20:56.921Z. -->

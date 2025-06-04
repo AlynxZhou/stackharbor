@@ -5,7 +5,7 @@
   <icon>https://sh.alynx.one/images/Mikoto-Karon-White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2025-04-24T09:44:17.158Z</updated>
+  <updated>2025-06-04T09:20:56.925Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
@@ -220,115 +220,115 @@ endif()
 
 static void draw(GtkDrawingArea *drawing_area, cairo_t *cr, int width, int height, gpointer user_data)
 {
-    PangoLayout *layout = pango_cairo_create_layout(cr);
-    pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
-    PangoFontDescription *font = pango_font_description_new();
-    pango_font_description_set_family(font, &amp;quot;serif&amp;quot;);
-    pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
-    pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
-    pango_layout_set_font_description(layout, font);
+	PangoLayout *layout = pango_cairo_create_layout(cr);
+	pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
+	PangoFontDescription *font = pango_font_description_new();
+	pango_font_description_set_family(font, &amp;quot;serif&amp;quot;);
+	pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
+	pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
+	pango_layout_set_font_description(layout, font);
 
-    PangoRectangle string_ink;
-    PangoRectangle string_logical;
-    pango_layout_set_text(layout, &amp;quot;g&amp;quot;, -1);
-    pango_layout_get_pixel_extents(layout, &amp;amp;string_ink, &amp;amp;string_logical);
-    g_print(&amp;quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&amp;quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
-    g_print(&amp;quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&amp;quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
+	PangoRectangle string_ink;
+	PangoRectangle string_logical;
+	pango_layout_set_text(layout, &amp;quot;g&amp;quot;, -1);
+	pango_layout_get_pixel_extents(layout, &amp;amp;string_ink, &amp;amp;string_logical);
+	g_print(&amp;quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&amp;quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
+	g_print(&amp;quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&amp;quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
 
-    cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
-    cairo_paint(cr);
+	cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
+	cairo_paint(cr);
 
-    const int x = 100;
-    const int y = 100;
-    cairo_move_to(cr, x, y);
-    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
-    pango_cairo_show_layout(cr, layout);
+	const int x = 100;
+	const int y = 100;
+	cairo_move_to(cr, x, y);
+	cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
+	pango_cairo_show_layout(cr, layout);
 
-    cairo_set_line_width(cr, 5);
-    cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
-    cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
-    cairo_stroke(cr);
+	cairo_set_line_width(cr, 5);
+	cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
+	cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
+	cairo_stroke(cr);
 
-    cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
-    cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
-    cairo_stroke(cr);
+	cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
+	cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
+	cairo_stroke(cr);
 }
 
 static void on_activate(GtkApplication *app, gpointer user_data)
 {
-    GtkWidget *window = gtk_application_window_new (app);
-    gtk_window_set_title(GTK_WINDOW(window), &amp;quot;Test Pango Extents&amp;quot;);
-    gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
-    GtkWidget *area = gtk_drawing_area_new();
-    gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
-    gtk_window_set_child(GTK_WINDOW(window), area);
-    gtk_window_present(GTK_WINDOW(window));
+	GtkWidget *window = gtk_application_window_new (app);
+	gtk_window_set_title(GTK_WINDOW(window), &amp;quot;Test Pango Extents&amp;quot;);
+	gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
+	GtkWidget *area = gtk_drawing_area_new();
+	gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
+	gtk_window_set_child(GTK_WINDOW(window), area);
+	gtk_window_present(GTK_WINDOW(window));
 }
 
 int main(int argc, char *argv[])
 {
-    GtkApplication *app = gtk_application_new(&amp;quot;one.alynx.test-pango-extents&amp;quot;, G_APPLICATION_DEFAULT_FLAGS);
-    g_signal_connect(app, &amp;quot;activate&amp;quot;, G_CALLBACK(on_activate), NULL);
-    int status = g_application_run(G_APPLICATION(app), argc, argv);
-    g_object_unref(app);
-    return status;
+	GtkApplication *app = gtk_application_new(&amp;quot;one.alynx.test-pango-extents&amp;quot;, G_APPLICATION_DEFAULT_FLAGS);
+	g_signal_connect(app, &amp;quot;activate&amp;quot;, G_CALLBACK(on_activate), NULL);
+	int status = g_application_run(G_APPLICATION(app), argc, argv);
+	g_object_unref(app);
+	return status;
 }
 &quot; data-info=&quot;language-c&quot; data-lang=&quot;c&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &amp;lt;gtk/gtk.h&amp;gt;
 
 static void draw(GtkDrawingArea *drawing_area, cairo_t *cr, int width, int height, gpointer user_data)
 {
-    PangoLayout *layout = pango_cairo_create_layout(cr);
-    pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
-    PangoFontDescription *font = pango_font_description_new();
-    pango_font_description_set_family(font, &quot;serif&quot;);
-    pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
-    pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
-    pango_layout_set_font_description(layout, font);
+	PangoLayout *layout = pango_cairo_create_layout(cr);
+	pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_NONE);
+	PangoFontDescription *font = pango_font_description_new();
+	pango_font_description_set_family(font, &quot;serif&quot;);
+	pango_font_description_set_style(font, PANGO_STYLE_ITALIC);
+	pango_font_description_set_absolute_size(font, 200 * PANGO_SCALE);
+	pango_layout_set_font_description(layout, font);
 
-    PangoRectangle string_ink;
-    PangoRectangle string_logical;
-    pango_layout_set_text(layout, &quot;g&quot;, -1);
-    pango_layout_get_pixel_extents(layout, &amp;amp;string_ink, &amp;amp;string_logical);
-    g_print(&quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
-    g_print(&quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
+	PangoRectangle string_ink;
+	PangoRectangle string_logical;
+	pango_layout_set_text(layout, &quot;g&quot;, -1);
+	pango_layout_get_pixel_extents(layout, &amp;amp;string_ink, &amp;amp;string_logical);
+	g_print(&quot;Logical: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_logical.x, string_logical.y, string_logical.width, string_logical.height);
+	g_print(&quot;Ink: x is %d, y is %d, width is %d, height is %d.\n&quot;, string_ink.x, string_ink.y, string_ink.width, string_ink.height);
 
-    cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
-    cairo_paint(cr);
+	cairo_set_source_rgb(cr, 0.3, 0.3, 0.3);
+	cairo_paint(cr);
 
-    const int x = 100;
-    const int y = 100;
-    cairo_move_to(cr, x, y);
-    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
-    pango_cairo_show_layout(cr, layout);
+	const int x = 100;
+	const int y = 100;
+	cairo_move_to(cr, x, y);
+	cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
+	pango_cairo_show_layout(cr, layout);
 
-    cairo_set_line_width(cr, 5);
-    cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
-    cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
-    cairo_stroke(cr);
+	cairo_set_line_width(cr, 5);
+	cairo_set_source_rgba(cr, 1.0, 0.0, 0.0, 1.0);
+	cairo_rectangle(cr, x + string_logical.x, y + string_logical.y, string_logical.width, string_logical.height);
+	cairo_stroke(cr);
 
-    cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
-    cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
-    cairo_stroke(cr);
+	cairo_set_source_rgba(cr, 0.0, 0.0, 1.0, 1.0);
+	cairo_rectangle(cr, x + string_ink.x, y + string_ink.y, string_ink.width, string_ink.height);
+	cairo_stroke(cr);
 }
 
 static void on_activate(GtkApplication *app, gpointer user_data)
 {
-    GtkWidget *window = gtk_application_window_new (app);
-    gtk_window_set_title(GTK_WINDOW(window), &quot;Test Pango Extents&quot;);
-    gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
-    GtkWidget *area = gtk_drawing_area_new();
-    gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
-    gtk_window_set_child(GTK_WINDOW(window), area);
-    gtk_window_present(GTK_WINDOW(window));
+	GtkWidget *window = gtk_application_window_new (app);
+	gtk_window_set_title(GTK_WINDOW(window), &quot;Test Pango Extents&quot;);
+	gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
+	GtkWidget *area = gtk_drawing_area_new();
+	gtk_drawing_area_set_draw_func(GTK_DRAWING_AREA(area), draw, NULL, NULL);
+	gtk_window_set_child(GTK_WINDOW(window), area);
+	gtk_window_present(GTK_WINDOW(window));
 }
 
 int main(int argc, char *argv[])
 {
-    GtkApplication *app = gtk_application_new(&quot;one.alynx.test-pango-extents&quot;, G_APPLICATION_DEFAULT_FLAGS);
-    g_signal_connect(app, &quot;activate&quot;, G_CALLBACK(on_activate), NULL);
-    int status = g_application_run(G_APPLICATION(app), argc, argv);
-    g_object_unref(app);
-    return status;
+	GtkApplication *app = gtk_application_new(&quot;one.alynx.test-pango-extents&quot;, G_APPLICATION_DEFAULT_FLAGS);
+	g_signal_connect(app, &quot;activate&quot;, G_CALLBACK(on_activate), NULL);
+	int status = g_application_run(G_APPLICATION(app), argc, argv);
+	g_object_unref(app);
+	return status;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;下面是编译命令：&lt;/p&gt;
@@ -486,11 +486,11 @@ iptables -t nat -A POSTROUTING -o &amp;quot;${OUT_IF}&amp;quot; -j MASQUERADE
 # bind to a interface only, otherwise it will try to bind to other interfaces
 # and conflict with other dnsmasq instance (if exists).
 dnsmasq --no-daemon \
-    --port=0 \
-    --interface=&amp;quot;${BR_IF}&amp;quot; \
-    --bind-interfaces \
-    --dhcp-range=&amp;quot;${BR_IP_RANGE}&amp;quot; \
-    --dhcp-option=&amp;quot;option:dns-server,${BR_DNS}&amp;quot;
+	--port=0 \
+	--interface=&amp;quot;${BR_IF}&amp;quot; \
+	--bind-interfaces \
+	--dhcp-range=&amp;quot;${BR_IP_RANGE}&amp;quot; \
+	--dhcp-option=&amp;quot;option:dns-server,${BR_DNS}&amp;quot;
 
 iptables -t nat -D POSTROUTING -o &amp;quot;${OUT_IF}&amp;quot; -j MASQUERADE
 sysctl &amp;quot;net.ipv4.ip_forward=${FORWARD}&amp;quot;
@@ -529,11 +529,11 @@ iptables -t nat -A POSTROUTING -o &quot;${OUT_IF}&quot; -j MASQUERADE
 # bind to a interface only, otherwise it will try to bind to other interfaces
 # and conflict with other dnsmasq instance (if exists).
 dnsmasq --no-daemon \
-    --port=0 \
-    --interface=&quot;${BR_IF}&quot; \
-    --bind-interfaces \
-    --dhcp-range=&quot;${BR_IP_RANGE}&quot; \
-    --dhcp-option=&quot;option:dns-server,${BR_DNS}&quot;
+	--port=0 \
+	--interface=&quot;${BR_IF}&quot; \
+	--bind-interfaces \
+	--dhcp-range=&quot;${BR_IP_RANGE}&quot; \
+	--dhcp-option=&quot;option:dns-server,${BR_DNS}&quot;
 
 iptables -t nat -D POSTROUTING -o &quot;${OUT_IF}&quot; -j MASQUERADE
 sysctl &quot;net.ipv4.ip_forward=${FORWARD}&quot;
@@ -1040,10 +1040,10 @@ const post = (url, body, headers = {}) =&gt; {
     const req = http.request(url, opts, (res) =&gt; {
       const chunks = [];
       res.on(&amp;quot;data&amp;quot;, (chunk) =&gt; {
-    chunks.push(chunk);
+	chunks.push(chunk);
       });
       res.on(&amp;quot;end&amp;quot;, () =&gt; {
-    resolve(Buffer.concat(chunks));
+	resolve(Buffer.concat(chunks));
       });
     });
     req.on(&amp;quot;error&amp;quot;, reject);
@@ -1071,10 +1071,10 @@ const post = (url, body, headers = {}) =&amp;gt; {
     const req = http.request(url, opts, (res) =&amp;gt; {
       const chunks = [];
       res.on(&quot;data&quot;, (chunk) =&amp;gt; {
-    chunks.push(chunk);
+	chunks.push(chunk);
       });
       res.on(&quot;end&quot;, () =&amp;gt; {
-    resolve(Buffer.concat(chunks));
+	resolve(Buffer.concat(chunks));
       });
     });
     req.on(&quot;error&quot;, reject);

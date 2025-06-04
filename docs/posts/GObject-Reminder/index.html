@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="说来惭愧，我一直记不太清 GObject 到底是怎么用的，毕竟作为一个写过 C++ 和 Python 然后常用 JS 的人来说，面向对象的实现是非常自然的，不需要考虑为什么。所以我总是看着一大堆类型转换和分散的定义以及各种 chain up 感到眩晕。而 GObject 的文档写的也相当分散，有种管中窥豹之感。">
     <meta name="keywords" content="GObject">
-    <meta name="generator" content="Hikaru v1.21.1">
+    <meta name="generator" content="Hikaru v1.21.2">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="GObject 备忘录">
@@ -335,10 +335,10 @@ G_DECLARE_DERIVABLE_TYPE(TestAnimal, test_animal, TEST, ANIMAL, GObject)
 // 而且这个因为是给其他文件用的所以必须写在头文件里，
 // 不然人家怎么知道你有什么虚函数！
 struct _TestAnimalClass {
-    GObjectClass parent_class;
-    // 定义一个可以继承的函数。
-    void (*print)(TestAnimal *animal);
-    gpointer padding[12];
+	GObjectClass parent_class;
+	// 定义一个可以继承的函数。
+	void (*print)(TestAnimal *animal);
+	gpointer padding[12];
 };
 
 // 因为上面的 class 里面定义了，这个只是调用那个。
@@ -366,10 +366,10 @@ G_DECLARE_DERIVABLE_TYPE(TestAnimal, test_animal, TEST, ANIMAL, GObject)
 // 而且这个因为是给其他文件用的所以必须写在头文件里，
 // 不然人家怎么知道你有什么虚函数！
 struct _TestAnimalClass {
-    GObjectClass parent_class;
-    // 定义一个可以继承的函数。
-    void (*print)(TestAnimal *animal);
-    gpointer padding[12];
+	GObjectClass parent_class;
+	// 定义一个可以继承的函数。
+	void (*print)(TestAnimal *animal);
+	gpointer padding[12];
 };
 
 // 因为上面的 class 里面定义了，这个只是调用那个。
@@ -391,7 +391,7 @@ G_END_DECLS
 // Derivable 类型会自动帮你定义实例结构体，
 // 所以你想夹带点私货就得自己搞个 Private 类型。
 typedef struct {
-    gchar *animal_name;
+	gchar *animal_name;
 } TestAnimalPrivate;
 
 // 这个也会展开一大堆声明什么的。
@@ -399,94 +399,94 @@ G_DEFINE_TYPE_WITH_PRIVATE(TestAnimal, test_animal, G_TYPE_OBJECT)
 
 // 要想通过 new 函数直接初始化一些值就需要搞点属性。
 enum {
-    PROP_0,
-    PROP_ANIMAL_NAME,
-    N_PROPERTIES
+	PROP_0,
+	PROP_ANIMAL_NAME,
+	N_PROPERTIES
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};
 
 static void set_property_impl(
-    GObject *object,
-    guint property_id,
-    const GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	const GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestAnimal *animal = TEST_ANIMAL(object);
-    TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
+	TestAnimal *animal = TEST_ANIMAL(object);
+	TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
 
-    switch (property_id) {
-    case PROP_ANIMAL_NAME:
-        if (priv->animal_name)
-            g_free(priv->animal_name);
-        // 所以其实我们是在设置属性的时候更新私有成员。
-        priv->animal_name = g_value_dup_string(value);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_ANIMAL_NAME:
+		if (priv->animal_name)
+			g_free(priv->animal_name);
+		// 所以其实我们是在设置属性的时候更新私有成员。
+		priv->animal_name = g_value_dup_string(value);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 static void get_property_impl(
-    GObject *object,
-    guint property_id,
-    GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestAnimal *animal = TEST_ANIMAL(object);
-    TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
+	TestAnimal *animal = TEST_ANIMAL(object);
+	TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
 
-    switch (property_id) {
-    case PROP_ANIMAL_NAME:
-        // 所以你看属性这个名称和我们想的属性不一样，
-        // 其他语言里面属性就是成员，能存点东西，
-        // 但这里好像属性只是成员的一个代理，
-        // 具体的东西存在成员里面，通过属性设置。
-        g_value_set_string(value, priv->animal_name);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_ANIMAL_NAME:
+		// 所以你看属性这个名称和我们想的属性不一样，
+		// 其他语言里面属性就是成员，能存点东西，
+		// 但这里好像属性只是成员的一个代理，
+		// 具体的东西存在成员里面，通过属性设置。
+		g_value_set_string(value, priv->animal_name);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 // 给子类提供一个默认的实现，这样它就不是一个纯虚函数了。
 static void print_impl(TestAnimal *animal)
 {
-    TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
-    g_message(&quot;I am an Animal called %s.&quot;, priv->animal_name);
+	TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
+	g_message(&quot;I am an Animal called %s.&quot;, priv->animal_name);
 }
 
 static void test_animal_class_init(TestAnimalClass *animal_class)
 {
-    // 首先我们覆盖这个类里面的 GObject 类的方法，
-    // 你调用 GObject 的函数，他会先获取参数的 GObject 类，
-    // 那就获取到我们这个了，然后具体的实现就是我们覆盖的这个。
-    GObjectClass *object_class = G_OBJECT_CLASS(animal_class);
-    object_class->get_property = get_property_impl;
-    object_class->set_property = set_property_impl;
+	// 首先我们覆盖这个类里面的 GObject 类的方法，
+	// 你调用 GObject 的函数，他会先获取参数的 GObject 类，
+	// 那就获取到我们这个了，然后具体的实现就是我们覆盖的这个。
+	GObjectClass *object_class = G_OBJECT_CLASS(animal_class);
+	object_class->get_property = get_property_impl;
+	object_class->set_property = set_property_impl;
 
-    // 给虚方法设置默认实现。
-    animal_class->print = print_impl;
+	// 给虚方法设置默认实现。
+	animal_class->print = print_impl;
 
-    obj_properties[PROP_ANIMAL_NAME] = g_param_spec_string(
-        &quot;animal-name&quot;,
-        &quot;Animal Name&quot;,
-        &quot;Name of Animal&quot;,
-        NULL,
-        G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
-    );
+	obj_properties[PROP_ANIMAL_NAME] = g_param_spec_string(
+		&quot;animal-name&quot;,
+		&quot;Animal Name&quot;,
+		&quot;Name of Animal&quot;,
+		NULL,
+		G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
+	);
 
-    g_object_class_install_properties(
-        object_class,
-        N_PROPERTIES,
-        obj_properties
-    );
+	g_object_class_install_properties(
+		object_class,
+		N_PROPERTIES,
+		obj_properties
+	);
 }
 
 static void test_animal_init(TestAnimal *animal)
@@ -495,30 +495,30 @@ static void test_animal_init(TestAnimal *animal)
 
 void test_animal_print(TestAnimal *animal)
 {
-    // 你看其实这里和 GObject 类设置属性的原理是一样的。
-    // 子类调用这个函数，实际上获取到的是子类自己那个 Animal 类，
-    // 于是他只要覆盖自己的那个 Animal 类，调用的就是他自己的。
-    TestAnimalClass *animal_class;
-    animal_class = TEST_ANIMAL_GET_CLASS(animal);
-    g_return_if_fail(animal_class->print != NULL);
-    animal_class->print(animal);
+	// 你看其实这里和 GObject 类设置属性的原理是一样的。
+	// 子类调用这个函数，实际上获取到的是子类自己那个 Animal 类，
+	// 于是他只要覆盖自己的那个 Animal 类，调用的就是他自己的。
+	TestAnimalClass *animal_class;
+	animal_class = TEST_ANIMAL_GET_CLASS(animal);
+	g_return_if_fail(animal_class->print != NULL);
+	animal_class->print(animal);
 }
 
 TestAnimal *test_animal_new(gchar *animal_name)
 {
-    g_return_val_if_fail(animal_name != NULL, NULL);
-    return g_object_new(
-        TEST_TYPE_ANIMAL,
-        &quot;animal-name&quot;, animal_name,
-        NULL
-    );
+	g_return_val_if_fail(animal_name != NULL, NULL);
+	return g_object_new(
+		TEST_TYPE_ANIMAL,
+		&quot;animal-name&quot;, animal_name,
+		NULL
+	);
 }
 " data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-animal.h"
 
 // Derivable 类型会自动帮你定义实例结构体，
 // 所以你想夹带点私货就得自己搞个 Private 类型。
 typedef struct {
-    gchar *animal_name;
+	gchar *animal_name;
 } TestAnimalPrivate;
 
 // 这个也会展开一大堆声明什么的。
@@ -526,94 +526,94 @@ G_DEFINE_TYPE_WITH_PRIVATE(TestAnimal, test_animal, G_TYPE_OBJECT)
 
 // 要想通过 new 函数直接初始化一些值就需要搞点属性。
 enum {
-    PROP_0,
-    PROP_ANIMAL_NAME,
-    N_PROPERTIES
+	PROP_0,
+	PROP_ANIMAL_NAME,
+	N_PROPERTIES
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};
 
 static void set_property_impl(
-    GObject *object,
-    guint property_id,
-    const GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	const GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestAnimal *animal = TEST_ANIMAL(object);
-    TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
+	TestAnimal *animal = TEST_ANIMAL(object);
+	TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
 
-    switch (property_id) {
-    case PROP_ANIMAL_NAME:
-        if (priv-&gt;animal_name)
-            g_free(priv-&gt;animal_name);
-        // 所以其实我们是在设置属性的时候更新私有成员。
-        priv-&gt;animal_name = g_value_dup_string(value);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_ANIMAL_NAME:
+		if (priv-&gt;animal_name)
+			g_free(priv-&gt;animal_name);
+		// 所以其实我们是在设置属性的时候更新私有成员。
+		priv-&gt;animal_name = g_value_dup_string(value);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 static void get_property_impl(
-    GObject *object,
-    guint property_id,
-    GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestAnimal *animal = TEST_ANIMAL(object);
-    TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
+	TestAnimal *animal = TEST_ANIMAL(object);
+	TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
 
-    switch (property_id) {
-    case PROP_ANIMAL_NAME:
-        // 所以你看属性这个名称和我们想的属性不一样，
-        // 其他语言里面属性就是成员，能存点东西，
-        // 但这里好像属性只是成员的一个代理，
-        // 具体的东西存在成员里面，通过属性设置。
-        g_value_set_string(value, priv-&gt;animal_name);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_ANIMAL_NAME:
+		// 所以你看属性这个名称和我们想的属性不一样，
+		// 其他语言里面属性就是成员，能存点东西，
+		// 但这里好像属性只是成员的一个代理，
+		// 具体的东西存在成员里面，通过属性设置。
+		g_value_set_string(value, priv-&gt;animal_name);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 // 给子类提供一个默认的实现，这样它就不是一个纯虚函数了。
 static void print_impl(TestAnimal *animal)
 {
-    TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
-    g_message("I am an Animal called %s.", priv-&gt;animal_name);
+	TestAnimalPrivate *priv = test_animal_get_instance_private(animal);
+	g_message("I am an Animal called %s.", priv-&gt;animal_name);
 }
 
 static void test_animal_class_init(TestAnimalClass *animal_class)
 {
-    // 首先我们覆盖这个类里面的 GObject 类的方法，
-    // 你调用 GObject 的函数，他会先获取参数的 GObject 类，
-    // 那就获取到我们这个了，然后具体的实现就是我们覆盖的这个。
-    GObjectClass *object_class = G_OBJECT_CLASS(animal_class);
-    object_class-&gt;get_property = get_property_impl;
-    object_class-&gt;set_property = set_property_impl;
+	// 首先我们覆盖这个类里面的 GObject 类的方法，
+	// 你调用 GObject 的函数，他会先获取参数的 GObject 类，
+	// 那就获取到我们这个了，然后具体的实现就是我们覆盖的这个。
+	GObjectClass *object_class = G_OBJECT_CLASS(animal_class);
+	object_class-&gt;get_property = get_property_impl;
+	object_class-&gt;set_property = set_property_impl;
 
-    // 给虚方法设置默认实现。
-    animal_class-&gt;print = print_impl;
+	// 给虚方法设置默认实现。
+	animal_class-&gt;print = print_impl;
 
-    obj_properties[PROP_ANIMAL_NAME] = g_param_spec_string(
-        "animal-name",
-        "Animal Name",
-        "Name of Animal",
-        NULL,
-        G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
-    );
+	obj_properties[PROP_ANIMAL_NAME] = g_param_spec_string(
+		"animal-name",
+		"Animal Name",
+		"Name of Animal",
+		NULL,
+		G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
+	);
 
-    g_object_class_install_properties(
-        object_class,
-        N_PROPERTIES,
-        obj_properties
-    );
+	g_object_class_install_properties(
+		object_class,
+		N_PROPERTIES,
+		obj_properties
+	);
 }
 
 static void test_animal_init(TestAnimal *animal)
@@ -622,23 +622,23 @@ static void test_animal_init(TestAnimal *animal)
 
 void test_animal_print(TestAnimal *animal)
 {
-    // 你看其实这里和 GObject 类设置属性的原理是一样的。
-    // 子类调用这个函数，实际上获取到的是子类自己那个 Animal 类，
-    // 于是他只要覆盖自己的那个 Animal 类，调用的就是他自己的。
-    TestAnimalClass *animal_class;
-    animal_class = TEST_ANIMAL_GET_CLASS(animal);
-    g_return_if_fail(animal_class-&gt;print != NULL);
-    animal_class-&gt;print(animal);
+	// 你看其实这里和 GObject 类设置属性的原理是一样的。
+	// 子类调用这个函数，实际上获取到的是子类自己那个 Animal 类，
+	// 于是他只要覆盖自己的那个 Animal 类，调用的就是他自己的。
+	TestAnimalClass *animal_class;
+	animal_class = TEST_ANIMAL_GET_CLASS(animal);
+	g_return_if_fail(animal_class-&gt;print != NULL);
+	animal_class-&gt;print(animal);
 }
 
 TestAnimal *test_animal_new(gchar *animal_name)
 {
-    g_return_val_if_fail(animal_name != NULL, NULL);
-    return g_object_new(
-        TEST_TYPE_ANIMAL,
-        "animal-name", animal_name,
-        NULL
-    );
+	g_return_val_if_fail(animal_name != NULL, NULL);
+	return g_object_new(
+		TEST_TYPE_ANIMAL,
+		"animal-name", animal_name,
+		NULL
+	);
 }
 </code></pre></figure>
 <p>理论上来说我们直接往实例结构体里添加成员作为私有成员就可以，但是在头文件里定义实例结构体，其它文件是可以看到实例结构体的成员的，所以 <code>G_DECLARE_DERIVABLE_TYPE</code> 不允许我们这么做。</p>
@@ -693,101 +693,101 @@ G_END_DECLS
 // 所以实例结构体就给你自己写了。
 // 当然别的文件不需要知道你有什么私货所以不要写在头文件里。
 struct _TestCat {
-    TestAnimal parent_instance;
-    gchar *cat_name;
+	TestAnimal parent_instance;
+	gchar *cat_name;
 };
 
 G_DEFINE_TYPE(TestCat, test_cat, TEST_TYPE_ANIMAL)
 
 enum {
-    PROP_0,
-    PROP_CAT_NAME,
-    N_PROPERTIES
+	PROP_0,
+	PROP_CAT_NAME,
+	N_PROPERTIES
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};
 
 static void set_property_impl(
-    GObject *object,
-    guint property_id,
-    const GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	const GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestCat *cat = TEST_CAT(object);
+	TestCat *cat = TEST_CAT(object);
 
-    switch (property_id) {
-    case PROP_CAT_NAME:
-        if (cat->cat_name)
-            g_free(cat->cat_name);
-        cat->cat_name = g_value_dup_string(value);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_CAT_NAME:
+		if (cat->cat_name)
+			g_free(cat->cat_name);
+		cat->cat_name = g_value_dup_string(value);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 static void get_property_impl(
-    GObject *object,
-    guint property_id,
-    GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestCat *cat = TEST_CAT(object);
+	TestCat *cat = TEST_CAT(object);
 
-    switch (property_id) {
-    case PROP_CAT_NAME:
-        g_value_set_string(value, cat->cat_name);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_CAT_NAME:
+		g_value_set_string(value, cat->cat_name);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 // 那我们不想要默认的实现就可以覆盖掉自己的。
 static void print_impl(TestAnimal *animal)
 {
-    TestCat *cat = TEST_CAT(animal);
-    g_message(&quot;I am a Cat called %s.&quot;, cat->cat_name);
-    // 这个自动生成的 parent 变量指向的是真正的父类！
-    // 因为我们自己带的父类结构体被我们覆盖了，所以这里给你一个访问正主的机会。
-    // 它是个 gpointer 所以你得手动设置类型。
-    // 其实你的子类如果是完全覆盖父类的功能其实我觉得不用写这一句了。
-    // 但是有时候你的子类是在父类上面增加功能就得写。
-    // 这不就是 super 指针嘛！
-    TEST_ANIMAL_CLASS(test_cat_parent_class)->print(animal);
+	TestCat *cat = TEST_CAT(animal);
+	g_message(&quot;I am a Cat called %s.&quot;, cat->cat_name);
+	// 这个自动生成的 parent 变量指向的是真正的父类！
+	// 因为我们自己带的父类结构体被我们覆盖了，所以这里给你一个访问正主的机会。
+	// 它是个 gpointer 所以你得手动设置类型。
+	// 其实你的子类如果是完全覆盖父类的功能其实我觉得不用写这一句了。
+	// 但是有时候你的子类是在父类上面增加功能就得写。
+	// 这不就是 super 指针嘛！
+	TEST_ANIMAL_CLASS(test_cat_parent_class)->print(animal);
 }
 
 static void test_cat_class_init(TestCatClass *cat_class)
 {
-    GObjectClass *object_class = G_OBJECT_CLASS(cat_class);
-    object_class->get_property = get_property_impl;
-    object_class->set_property = set_property_impl;
+	GObjectClass *object_class = G_OBJECT_CLASS(cat_class);
+	object_class->get_property = get_property_impl;
+	object_class->set_property = set_property_impl;
 
-    // 干掉我们自己的这个父类结构体里面带的内置实现，
-    // 这样父类的函数调用的其实是我们自己的这个实现。
-    // 那你看你一会让父类调用自己一会又让自己调用父类可真是麻烦。
-    TestAnimalClass *animal_class = TEST_ANIMAL_CLASS(cat_class);
-    animal_class->print = print_impl;
+	// 干掉我们自己的这个父类结构体里面带的内置实现，
+	// 这样父类的函数调用的其实是我们自己的这个实现。
+	// 那你看你一会让父类调用自己一会又让自己调用父类可真是麻烦。
+	TestAnimalClass *animal_class = TEST_ANIMAL_CLASS(cat_class);
+	animal_class->print = print_impl;
 
-    obj_properties[PROP_CAT_NAME] = g_param_spec_string(
-        &quot;cat-name&quot;,
-        &quot;Cat Name&quot;,
-        &quot;Name of Cat&quot;,
-        NULL,
-        G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
-    );
+	obj_properties[PROP_CAT_NAME] = g_param_spec_string(
+		&quot;cat-name&quot;,
+		&quot;Cat Name&quot;,
+		&quot;Name of Cat&quot;,
+		NULL,
+		G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
+	);
 
-    g_object_class_install_properties(
-        object_class,
-        N_PROPERTIES,
-        obj_properties
-    );
+	g_object_class_install_properties(
+		object_class,
+		N_PROPERTIES,
+		obj_properties
+	);
 }
 
 static void test_cat_init(TestCat *cat)
@@ -796,13 +796,13 @@ static void test_cat_init(TestCat *cat)
 
 TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
 {
-    g_return_val_if_fail(animal_name != NULL &amp;&amp; cat_name != NULL, NULL);
-    return g_object_new(
-        TEST_TYPE_CAT,
-        &quot;animal-name&quot;, animal_name,
-        &quot;cat-name&quot;, cat_name,
-        NULL
-    );
+	g_return_val_if_fail(animal_name != NULL &amp;&amp; cat_name != NULL, NULL);
+	return g_object_new(
+		TEST_TYPE_CAT,
+		&quot;animal-name&quot;, animal_name,
+		&quot;cat-name&quot;, cat_name,
+		NULL
+	);
 }
 " data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-cat.h"
 
@@ -810,101 +810,101 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
 // 所以实例结构体就给你自己写了。
 // 当然别的文件不需要知道你有什么私货所以不要写在头文件里。
 struct _TestCat {
-    TestAnimal parent_instance;
-    gchar *cat_name;
+	TestAnimal parent_instance;
+	gchar *cat_name;
 };
 
 G_DEFINE_TYPE(TestCat, test_cat, TEST_TYPE_ANIMAL)
 
 enum {
-    PROP_0,
-    PROP_CAT_NAME,
-    N_PROPERTIES
+	PROP_0,
+	PROP_CAT_NAME,
+	N_PROPERTIES
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL};
 
 static void set_property_impl(
-    GObject *object,
-    guint property_id,
-    const GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	const GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestCat *cat = TEST_CAT(object);
+	TestCat *cat = TEST_CAT(object);
 
-    switch (property_id) {
-    case PROP_CAT_NAME:
-        if (cat-&gt;cat_name)
-            g_free(cat-&gt;cat_name);
-        cat-&gt;cat_name = g_value_dup_string(value);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_CAT_NAME:
+		if (cat-&gt;cat_name)
+			g_free(cat-&gt;cat_name);
+		cat-&gt;cat_name = g_value_dup_string(value);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 static void get_property_impl(
-    GObject *object,
-    guint property_id,
-    GValue *value,
-    GParamSpec *pspec
+	GObject *object,
+	guint property_id,
+	GValue *value,
+	GParamSpec *pspec
 )
 {
-    TestCat *cat = TEST_CAT(object);
+	TestCat *cat = TEST_CAT(object);
 
-    switch (property_id) {
-    case PROP_CAT_NAME:
-        g_value_set_string(value, cat-&gt;cat_name);
-        break;
-    default:
-        /* We don't have any other property... */
-        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
-        break;
-    }
+	switch (property_id) {
+	case PROP_CAT_NAME:
+		g_value_set_string(value, cat-&gt;cat_name);
+		break;
+	default:
+		/* We don't have any other property... */
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
 }
 
 // 那我们不想要默认的实现就可以覆盖掉自己的。
 static void print_impl(TestAnimal *animal)
 {
-    TestCat *cat = TEST_CAT(animal);
-    g_message("I am a Cat called %s.", cat-&gt;cat_name);
-    // 这个自动生成的 parent 变量指向的是真正的父类！
-    // 因为我们自己带的父类结构体被我们覆盖了，所以这里给你一个访问正主的机会。
-    // 它是个 gpointer 所以你得手动设置类型。
-    // 其实你的子类如果是完全覆盖父类的功能其实我觉得不用写这一句了。
-    // 但是有时候你的子类是在父类上面增加功能就得写。
-    // 这不就是 super 指针嘛！
-    TEST_ANIMAL_CLASS(test_cat_parent_class)-&gt;print(animal);
+	TestCat *cat = TEST_CAT(animal);
+	g_message("I am a Cat called %s.", cat-&gt;cat_name);
+	// 这个自动生成的 parent 变量指向的是真正的父类！
+	// 因为我们自己带的父类结构体被我们覆盖了，所以这里给你一个访问正主的机会。
+	// 它是个 gpointer 所以你得手动设置类型。
+	// 其实你的子类如果是完全覆盖父类的功能其实我觉得不用写这一句了。
+	// 但是有时候你的子类是在父类上面增加功能就得写。
+	// 这不就是 super 指针嘛！
+	TEST_ANIMAL_CLASS(test_cat_parent_class)-&gt;print(animal);
 }
 
 static void test_cat_class_init(TestCatClass *cat_class)
 {
-    GObjectClass *object_class = G_OBJECT_CLASS(cat_class);
-    object_class-&gt;get_property = get_property_impl;
-    object_class-&gt;set_property = set_property_impl;
+	GObjectClass *object_class = G_OBJECT_CLASS(cat_class);
+	object_class-&gt;get_property = get_property_impl;
+	object_class-&gt;set_property = set_property_impl;
 
-    // 干掉我们自己的这个父类结构体里面带的内置实现，
-    // 这样父类的函数调用的其实是我们自己的这个实现。
-    // 那你看你一会让父类调用自己一会又让自己调用父类可真是麻烦。
-    TestAnimalClass *animal_class = TEST_ANIMAL_CLASS(cat_class);
-    animal_class-&gt;print = print_impl;
+	// 干掉我们自己的这个父类结构体里面带的内置实现，
+	// 这样父类的函数调用的其实是我们自己的这个实现。
+	// 那你看你一会让父类调用自己一会又让自己调用父类可真是麻烦。
+	TestAnimalClass *animal_class = TEST_ANIMAL_CLASS(cat_class);
+	animal_class-&gt;print = print_impl;
 
-    obj_properties[PROP_CAT_NAME] = g_param_spec_string(
-        "cat-name",
-        "Cat Name",
-        "Name of Cat",
-        NULL,
-        G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
-    );
+	obj_properties[PROP_CAT_NAME] = g_param_spec_string(
+		"cat-name",
+		"Cat Name",
+		"Name of Cat",
+		NULL,
+		G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE
+	);
 
-    g_object_class_install_properties(
-        object_class,
-        N_PROPERTIES,
-        obj_properties
-    );
+	g_object_class_install_properties(
+		object_class,
+		N_PROPERTIES,
+		obj_properties
+	);
 }
 
 static void test_cat_init(TestCat *cat)
@@ -913,13 +913,13 @@ static void test_cat_init(TestCat *cat)
 
 TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
 {
-    g_return_val_if_fail(animal_name != NULL &amp;&amp; cat_name != NULL, NULL);
-    return g_object_new(
-        TEST_TYPE_CAT,
-        "animal-name", animal_name,
-        "cat-name", cat_name,
-        NULL
-    );
+	g_return_val_if_fail(animal_name != NULL &amp;&amp; cat_name != NULL, NULL);
+	return g_object_new(
+		TEST_TYPE_CAT,
+		"animal-name", animal_name,
+		"cat-name", cat_name,
+		NULL
+	);
 }
 </code></pre></figure>
 <p>Final 类型没有 Private，因为它自己就是 Private，所以这个定义实例结构体的权力交给了你，直接在里面写私有成员即可，但是不要忘了套娃（指第一个成员一定要是父实例结构体）。</p>
@@ -934,22 +934,22 @@ TestCat *test_cat_new(gchar *animal_name, gchar *cat_name)
 
 int main(int argc, char *argv[])
 {
-    TestAnimal *animal = test_animal_new(&quot;animal1&quot;);
-    TestCat *cat = test_cat_new(&quot;animal2&quot;, &quot;cat1&quot;);
-    test_animal_print(animal);
-    test_animal_print(TEST_ANIMAL(cat));
-    return 0;
+	TestAnimal *animal = test_animal_new(&quot;animal1&quot;);
+	TestCat *cat = test_cat_new(&quot;animal2&quot;, &quot;cat1&quot;);
+	test_animal_print(animal);
+	test_animal_print(TEST_ANIMAL(cat));
+	return 0;
 }
 " data-info="language-c" data-lang="c" class="code-block"><pre class="code"><code class="language-c">#include "test-animal.h"
 #include "test-cat.h"
 
 int main(int argc, char *argv[])
 {
-    TestAnimal *animal = test_animal_new("animal1");
-    TestCat *cat = test_cat_new("animal2", "cat1");
-    test_animal_print(animal);
-    test_animal_print(TEST_ANIMAL(cat));
-    return 0;
+	TestAnimal *animal = test_animal_new("animal1");
+	TestCat *cat = test_cat_new("animal2", "cat1");
+	test_animal_print(animal);
+	test_animal_print(TEST_ANIMAL(cat));
+	return 0;
 }
 </code></pre></figure>
 <p>然后用这个 <code>Makefile</code>:</p>
@@ -959,40 +959,40 @@ CFLAGS := `pkg-config --cflags gobject-2.0`
 LIBS := `pkg-config --libs gobject-2.0`
 
 all: ${OBJECTS}
-    ${CC} -o test ${OBJECTS} ${LIBS}
+	${CC} -o test ${OBJECTS} ${LIBS}
 
 main.o: test-animal.h test-cat.h
-    ${CC} -c main.c ${CFLAGS}
+	${CC} -c main.c ${CFLAGS}
 
 test-animal.o:
-    ${CC} -c test-animal.c ${CFLAGS}
+	${CC} -c test-animal.c ${CFLAGS}
 
 test-cat.o: test-animal.h
-    ${CC} -c test-cat.c ${CFLAGS}
+	${CC} -c test-cat.c ${CFLAGS}
 
 .PHONY: clean
 clean:
-    -rm test ${OBJECTS}
+	-rm test ${OBJECTS}
 " class="code-block"><pre class="code"><code>CC := cc
 OBJECTS := main.o test-animal.o test-cat.o
 CFLAGS := `pkg-config --cflags gobject-2.0`
 LIBS := `pkg-config --libs gobject-2.0`
 
 all: ${OBJECTS}
-    ${CC} -o test ${OBJECTS} ${LIBS}
+	${CC} -o test ${OBJECTS} ${LIBS}
 
 main.o: test-animal.h test-cat.h
-    ${CC} -c main.c ${CFLAGS}
+	${CC} -c main.c ${CFLAGS}
 
 test-animal.o:
-    ${CC} -c test-animal.c ${CFLAGS}
+	${CC} -c test-animal.c ${CFLAGS}
 
 test-cat.o: test-animal.h
-    ${CC} -c test-cat.c ${CFLAGS}
+	${CC} -c test-cat.c ${CFLAGS}
 
 .PHONY: clean
 clean:
-    -rm test ${OBJECTS}
+	-rm test ${OBJECTS}
 </code></pre></figure>
 <p>运行的结果是这样的：</p>
 <figure data-raw="** Message: 11:23:25.727: I am an Animal called animal1.
@@ -1185,4 +1185,4 @@ clean:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.1 at 2025-04-24T09:44:17.154Z. -->
+<!-- Page built by Hikaru v1.21.2 at 2025-06-04T09:20:56.922Z. -->

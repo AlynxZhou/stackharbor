@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。 简介 由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。">
     <meta name="keywords" content="虚拟化, Xen">
-    <meta name="generator" content="Hikaru v1.21.1">
+    <meta name="generator" content="Hikaru v1.21.2">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="构建和运行 Xen HVM 和 PV">
@@ -441,11 +441,11 @@ iptables -t nat -A POSTROUTING -o &quot;${OUT_IF}&quot; -j MASQUERADE
 # bind to a interface only, otherwise it will try to bind to other interfaces
 # and conflict with other dnsmasq instance (if exists).
 dnsmasq --no-daemon \
-    --port=0 \
-    --interface=&quot;${BR_IF}&quot; \
-    --bind-interfaces \
-    --dhcp-range=&quot;${BR_IP_RANGE}&quot; \
-    --dhcp-option=&quot;option:dns-server,${BR_DNS}&quot;
+	--port=0 \
+	--interface=&quot;${BR_IF}&quot; \
+	--bind-interfaces \
+	--dhcp-range=&quot;${BR_IP_RANGE}&quot; \
+	--dhcp-option=&quot;option:dns-server,${BR_DNS}&quot;
 
 iptables -t nat -D POSTROUTING -o &quot;${OUT_IF}&quot; -j MASQUERADE
 sysctl &quot;net.ipv4.ip_forward=${FORWARD}&quot;
@@ -484,11 +484,11 @@ iptables -t nat -A POSTROUTING -o "${OUT_IF}" -j MASQUERADE
 # bind to a interface only, otherwise it will try to bind to other interfaces
 # and conflict with other dnsmasq instance (if exists).
 dnsmasq --no-daemon \
-    --port=0 \
-    --interface="${BR_IF}" \
-    --bind-interfaces \
-    --dhcp-range="${BR_IP_RANGE}" \
-    --dhcp-option="option:dns-server,${BR_DNS}"
+	--port=0 \
+	--interface="${BR_IF}" \
+	--bind-interfaces \
+	--dhcp-range="${BR_IP_RANGE}" \
+	--dhcp-option="option:dns-server,${BR_DNS}"
 
 iptables -t nat -D POSTROUTING -o "${OUT_IF}" -j MASQUERADE
 sysctl "net.ipv4.ip_forward=${FORWARD}"
@@ -873,4 +873,4 @@ vncdisplay = 1
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.1 at 2025-04-24T09:44:17.154Z. -->
+<!-- Page built by Hikaru v1.21.2 at 2025-06-04T09:20:56.921Z. -->

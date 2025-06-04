@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="事实证明有时候无聊的东西反而变成了一篇博文，谁叫恶趣味的C语言作业非要求用word写实验报告，本猹宁可先写成Markdown再复制粘贴过去。">
     <meta name="keywords" content="C 语言">
-    <meta name="generator" content="Hikaru v1.21.1">
+    <meta name="generator" content="Hikaru v1.21.2">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="使用 GDB 进行简单的 C 语言程序调试">
@@ -395,15 +395,15 @@ Starting program: /home/alynx/Homework/实验材料（学生版）/实验2/lab
 int count = 0;
 for(int i=0; j<LoopEnd1; i++)
 {
-    //第一重循环体
-    for(int j=0; j<LoopEnd2; j++)
-    {
-        //第二重循环体
-        for(int s=0; s<LoopEnd3; s++)
-        {
-            count++;//第三重循环体
-        }
-    }
+	//第一重循环体
+	for(int j=0; j<LoopEnd2; j++)
+	{
+		//第二重循环体
+		for(int s=0; s<LoopEnd3; s++)
+		{
+			count++;//第三重循环体
+		}
+	}
 }
 
 Breakpoint 1, 0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6
@@ -413,15 +413,15 @@ Starting program: /home/alynx/Homework/实验材料（学生版）/实验2/lab
 int count = 0;
 for(int i=0; j&lt;LoopEnd1; i++)
 {
-    //第一重循环体
-    for(int j=0; j&lt;LoopEnd2; j++)
-    {
-        //第二重循环体
-        for(int s=0; s&lt;LoopEnd3; s++)
-        {
-            count++;//第三重循环体
-        }
-    }
+	//第一重循环体
+	for(int j=0; j&lt;LoopEnd2; j++)
+	{
+		//第二重循环体
+		for(int s=0; s&lt;LoopEnd3; s++)
+		{
+			count++;//第三重循环体
+		}
+	}
 }
 
 Breakpoint 1, 0x00007ffff7a86e00 in printf () from /usr/lib/libc.so.6
@@ -661,4 +661,4 @@ main (argc=1, argv=0x7fffffffe078) at Lab2.c:27
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.1 at 2025-04-24T09:44:17.155Z. -->
+<!-- Page built by Hikaru v1.21.2 at 2025-06-04T09:20:56.922Z. -->
