@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="以下记录了一些常见或者不常见的 macOS 微调技巧，其中有些是因为 macOS 的默认设置过于难用，然后又很难想到用什么关键词才能搜索到的选项，有些则是作为开发环境和 Linux 不一样的地方，可以进行调整。 关闭拖拽到屏幕边缘并等待切换工作区 作为一个桌面程序员，我认为最令用户恼火的使用体验就是……">
+    <meta name="keywords" content="计算机, macOS">
+    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="macOS 微调技巧合集">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Collection-of-macOS-Tweaks/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto-Karon-White.webp">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Collection-of-macOS-Tweaks/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      body, header.header, footer.footer {
+        background: #33363b;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/scrollspy.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    loadScrollSpy({
+      "containerID": "scrollspy-container",
+      "targetID": "scrollspy-target",
+      "headingSelector": "h1, h2, h3, h4, h5, h6"
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add line number for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            lineNumbers.push("\n");
+          }
+        }
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>macOS 微调技巧合集 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-Love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="pinned-message" class="pinned-message">
+  <div class="card">
+    <div class="alert-blue"><strong>我很想知道你对我博客的看法！</strong>方便请到 <a href="/about/">关于</a> 页面留下评论！</div>
+  </div>
+</div>
+
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Collection-of-macOS-Tweaks/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Collection-of-macOS-Tweaks/" itemprop="url">macOS 微调技巧合集</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2025-07-31T08:33:55.000Z">2025-07-31 周四 16:33:55 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/macOS/" itemprop="url" rel="index"><span itemprop="name">macOS</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Collection-of-macOS-Tweaks/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="macOS 微调技巧合集" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+      <p>以下记录了一些常见或者不常见的 macOS 微调技巧，其中有些是因为 macOS 的默认设置过于难用，然后又很难想到用什么关键词才能搜索到的选项，有些则是作为开发环境和 Linux 不一样的地方，可以进行调整。</p>
+<h1 id="%E5%85%B3%E9%97%AD%E6%8B%96%E6%8B%BD%E5%88%B0%E5%B1%8F%E5%B9%95%E8%BE%B9%E7%BC%98%E5%B9%B6%E7%AD%89%E5%BE%85%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E5%8C%BA"><a class="heading-link header-link" href="/posts/Collection-of-macOS-Tweaks/#%E5%85%B3%E9%97%AD%E6%8B%96%E6%8B%BD%E5%88%B0%E5%B1%8F%E5%B9%95%E8%BE%B9%E7%BC%98%E5%B9%B6%E7%AD%89%E5%BE%85%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E5%8C%BA"></a>关闭拖拽到屏幕边缘并等待切换工作区</h1>
+<p>作为一个桌面程序员，我认为最令用户恼火的使用体验就是按住并等待了，你不知道要等待多久才会触发，往往你以为已经触发了结果还没有，极大地降低了日常操作的效率。但是似乎苹果的设计师并没有意识到这种设计在电脑上有多难用，并且在多个地方使用了按住并等待触发的逻辑。其中甚至包含互相冲突的功能：比如 macOS 15 新增的拖动窗口到屏幕边缘分屏，这个和拖动窗口到屏幕边缘切换工作区完全冲突。你必须小心翼翼的拖动窗口到边缘，但是又不能完全碰到边缘，才可以完美的触发分屏而不是切换工作区。这在日常使用中几乎是不可能的，考虑到分屏更常用并且有多种方法切换工作区，关掉这个愚蠢的功能才是合理的。但是苹果并没有提供直接关掉这个功能的选项，只能通过把触发的等待时间加大到几乎不可能误触发来近似实现了。</p>
+<figure data-raw="$ defaults write com.apple.dock workspaces-edge-delay -float 60 &amp;&amp; killall Dock
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ defaults write com.apple.dock workspaces-edge-delay -float 60 &amp;&amp; killall Dock
+</code></pre></figure>
+<p>这个指令会将等待时间加大到 60 秒，我相信没有人会在边缘按住鼠标 60 秒吧。</p>
+<h1 id="%E5%87%8F%E5%B0%8F%E5%8F%B3%E4%B8%8A%E8%A7%92%E6%89%98%E7%9B%98%E5%9B%BE%E6%A0%87%E9%97%B4%E8%B7%9D"><a class="heading-link header-link" href="/posts/Collection-of-macOS-Tweaks/#%E5%87%8F%E5%B0%8F%E5%8F%B3%E4%B8%8A%E8%A7%92%E6%89%98%E7%9B%98%E5%9B%BE%E6%A0%87%E9%97%B4%E8%B7%9D"></a>减小右上角托盘图标间距</h1>
+<p>macOS 右上角托盘图标之间的间距简直大到离谱，特别是在有刘海的屏幕上，本来就不宽裕的长度根本容纳不下几个图标。很多用户被迫购买一些付费的软件来折叠显示托盘图标，实际上这个间距是可以调小的，只是一下子很难想到。</p>
+<figure data-raw="$ defaults -currentHost write -globalDomain NSStatusItemSpacing -int 5
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ defaults -currentHost write -globalDomain NSStatusItemSpacing -int 5
+</code></pre></figure>
+<p>这个会将状态栏图标的间隔缩小为 5。</p>
+<figure data-raw="$ defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 3
+" class="code-block"><pre class="code"><code>$ defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 3
+</code></pre></figure>
+<p>这个会将状态栏图标点击和悬浮的显示特效宽度缩小为 3。</p>
+<p>也许需要注销并重新登录才会生效。在这个间距下只要再关掉一些不需要一直显示的图标，应该就可以显示所有日常需要的托盘图标了。</p>
+<h1 id="%E5%85%BC%E5%AE%B9%E4%BD%BF%E7%94%A8-GNU-%E7%89%88%E6%9C%AC%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E7%9A%84%E8%84%9A%E6%9C%AC"><a class="heading-link header-link" href="/posts/Collection-of-macOS-Tweaks/#%E5%85%BC%E5%AE%B9%E4%BD%BF%E7%94%A8-GNU-%E7%89%88%E6%9C%AC%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E7%9A%84%E8%84%9A%E6%9C%AC"></a>兼容使用 GNU 版本命令行工具的脚本</h1>
+<p>绝大多数 Linux 发行版附带的命令行工具都是 GNU 版本，而 macOS 附带的则是 BSD 版本，这两者各自包含一些不同的命令行选项。你可以通过 Homebrew 安装各种 GNU 版本的工具，但 Homebrew 默认会给这些命令加上 <code>g</code> 前缀以和系统自带的 BSD 版本区分开，并且会把不带 <code>g</code> 的文件安装到单独的目录里而不是加入到 <code>PATH</code> 里。</p>
+<p>如果只是顺应个人的使用习惯，那可以通过以下的方式设置 <code>PATH</code> 来默认使用 GNU 版本的工具：</p>
+<figure data-raw="$ export PATH=&quot;/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}&quot;
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+</code></pre></figure>
+<p>但是对于另一些命令行选项区别更大而又常用于脚本的工具（比如 <code>sed</code>，<code>find</code>，<code>grep</code>），直接设置 <code>PATH</code> 虽然可以兼容一些在 Linux 下开发的脚本，但是可能会不支持在 macOS 下开发的脚本，因为作者可能使用的是 BSD 版本的工具。我的解决方案是设置一个定义 <code>PATH</code> 的 alias：</p>
+<figure data-raw="$ alias gnubin=&quot;PATH=\&quot;\
+/opt/homebrew/opt/coreutils/libexec/gnubin:\
+/opt/homebrew/opt/findutils/libexec/gnubin:\
+/opt/homebrew/opt/grep/libexec/gnubin:\
+/opt/homebrew/opt/gnu-sed/libexec/gnubin:\
+/opt/homebrew/opt/gnu-tar/libexec/gnubin:\
+${PATH}\
+\&quot;&quot;
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ alias gnubin="PATH=\"\
+/opt/homebrew/opt/coreutils/libexec/gnubin:\
+/opt/homebrew/opt/findutils/libexec/gnubin:\
+/opt/homebrew/opt/grep/libexec/gnubin:\
+/opt/homebrew/opt/gnu-sed/libexec/gnubin:\
+/opt/homebrew/opt/gnu-tar/libexec/gnubin:\
+${PATH}\
+\""
+</code></pre></figure>
+<p>这样当执行 GNU 版本的命令或者脚本时，只要在前面加上 <code>gnubin</code> 再执行即可。</p>
+<h1 id="%E8%B7%A8%E8%AE%BE%E5%A4%87%E6%8E%A5%E6%94%B6%E6%96%87%E4%BB%B6%E6%97%B6%E4%BD%BF%E7%94%A8%E8%BE%83%E6%96%B0%E7%9A%84-rsync"><a class="heading-link header-link" href="/posts/Collection-of-macOS-Tweaks/#%E8%B7%A8%E8%AE%BE%E5%A4%87%E6%8E%A5%E6%94%B6%E6%96%87%E4%BB%B6%E6%97%B6%E4%BD%BF%E7%94%A8%E8%BE%83%E6%96%B0%E7%9A%84-rsync"></a>跨设备接收文件时使用较新的 rsync</h1>
+<p>macOS 自带了一个版本比较旧的 rsync，你可以使用 Homebrew 自行安装比较新的 rsync，但是当你从其他 Linux 机器通过 rsync 向 macOS 机器传文件时可能会报错，提示你使用的命令行选项不支持。这是因为 rsync 默认通过 SSH 进行跨设备文件传输，而 SSH 默认不会读取用户设置的 <code>PATH</code> 环境变量，直接去 <code>/usr/bin</code> 下面调用使用的是 macOS 自带的老版本 rsync，也就无法支持比较新的版本才有的选项了。</p>
+<p>解决方法是先编辑 <code>/etc/ssh/sshd_config</code>，设置 <code>PermitUserEnvironment PATH</code> 让它读取用户设置的 <code>PATH</code> 环境变量。</p>
+<p>然后编辑 <code>~/.ssh/environment</code> 给 <code>PATH</code> 前面添加 Homebrew 的目录：</p>
+<figure data-raw="PATH=/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin
+" class="code-block"><pre class="code"><code>PATH=/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin
+</code></pre></figure>
+<p>重新启动 SSH 服务，应该就可以调用 Homebrew 安装的 rsync 了。</p>
+<h1 id="Open-Build-Service"><a class="heading-link header-link" href="/posts/Collection-of-macOS-Tweaks/#Open-Build-Service"></a>Open Build Service</h1>
+<p>这一部分也许只有我自己工作会用到，或者你也使用 Open Build Service，需要在 macOS 上运行 <code>osc</code>。</p>
+<p>Homebrew 安装的 <code>osc</code> 在 macOS 里读不到系统的证书，所以即使将 SUSE 的证书导入到系统，访问 <code>api.suse.de</code> 时候也会报错。</p>
+<p>解决方法是在 <code>~/.config/osc/oscrc</code> 里给 <code>[https://api.suse.de]</code> 设置 <code>cafile=/Users/alynx/openvpn/SUSE/SUSE_Trust_Root.crt</code> 让它能自己找到 SUSE 证书。</p>
+<p><code>osc vc</code> 调用的是 <code>obs-build</code> 里面的 <code>vc</code> 脚本，但是由于 macOS 默认 APFS 设置了不区分大小写，而 <code>obs-build</code> 源码里包含 <code>Build</code> 和 <code>PBuild</code> 目录，以及 <code>build</code> 和 <code>pbuild</code> 脚本，macOS 会直接报文件名冲突，根本没办法解包 <code>obs-build</code> 的源码，也就没办法打包了。虽然重新格式化 APFS 可以设置区分大小写，但一些屎山软件比如 Adobe 家的垃圾只支持不区分大小写的文件系统，所以这么做得不偿失。2025 年还不支持区分大小写简直是犯罪啊。</p>
+<p>解决方法是直接去 <a href="https://github.com/openSUSE/obs-build/raw/refs/heads/master/vc" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/openSUSE/obs-build/raw/refs/heads/master/vc</a> 下载这个脚本到 <code>~/bin/osc-vc</code> 之类的地方，然后在 <code>~/.config/osc/oscrc</code> 给 <code>[general]</code> 设置 <code>vc-cmd=/Users/alynx/bin/osc-vc</code> 让它找到这个脚本就行了。</p>
+<p>默认 <code>osc</code> 会去 <code>/usr/lib/obs/service</code> 下面寻找各种 <code>obs-service</code> 插件，但自然你在 macOS 下面是不能安装到这个目录的，而且这些插件都没有打包成 Homebrew 的 Formula。我自己创建了一个 Tap 在 <a href="https://github.com/AlynxZhou/homebrew-openbuildservice/" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/AlynxZhou/homebrew-openbuildservice/</a>，里面的 <code>osc</code> 将插件目录修改成了 <code>${HOMEBREW_PREFIX}/lib/obs/service</code>，并且将其他的插件的安装位置也修改了，所以建议你安装我的版本而不是 Homebrew core 里面的。不过这些插件大部分都依赖 <code>obs-build</code> 里面的各种脚本才能运行，所以直到 <code>obs-build</code> 同意修改目录名字来兼容不区分大小写的文件系统之前，都只能通过 <code>osc commit --noservice</code> 的方式凑合用了。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/macOS/" rel="tag"><i class="bi bi-tag"></i>macOS</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/Journey-to-Tokyo/" rel="prev" title="东京之旅"><span class="page-nav-title">东京之旅</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "macOS 微调技巧合集",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Collection-of-macOS-Tweaks/",
+          "containerID": "comment-results"
+        }).then(() => {
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
+            document.querySelectorAll("time.comment-full-datetime"),
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto-Karon-White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">114</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">38</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">92</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="bi bi-list-ol"></i>文章目录</div>
+<ol class="toc" id="scrollspy-target">
+  <li>
+    <a class="list-group-item toc-link" href="#%E5%85%B3%E9%97%AD%E6%8B%96%E6%8B%BD%E5%88%B0%E5%B1%8F%E5%B9%95%E8%BE%B9%E7%BC%98%E5%B9%B6%E7%AD%89%E5%BE%85%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E5%8C%BA">关闭拖拽到屏幕边缘并等待切换工作区</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E5%87%8F%E5%B0%8F%E5%8F%B3%E4%B8%8A%E8%A7%92%E6%89%98%E7%9B%98%E5%9B%BE%E6%A0%87%E9%97%B4%E8%B7%9D">减小右上角托盘图标间距</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E5%85%BC%E5%AE%B9%E4%BD%BF%E7%94%A8-GNU-%E7%89%88%E6%9C%AC%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E7%9A%84%E8%84%9A%E6%9C%AC">兼容使用 GNU 版本命令行工具的脚本</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#%E8%B7%A8%E8%AE%BE%E5%A4%87%E6%8E%A5%E6%94%B6%E6%96%87%E4%BB%B6%E6%97%B6%E4%BD%BF%E7%94%A8%E8%BE%83%E6%96%B0%E7%9A%84-rsync">跨设备接收文件时使用较新的 rsync</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#Open-Build-Service">Open Build Service</a>
+  </li>
+</ol>
+    </div>
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://dawn.moe/" target="_blank" rel="external nofollow noreferrer noopener">藍貓 八千代</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.21.3 at 2025-07-31T09:28:15.496Z. -->
