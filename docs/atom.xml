@@ -5,13 +5,40 @@
   <icon>https://sh.alynx.one/images/Mikoto-Karon-White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2025-07-31T09:28:15.500Z</updated>
+  <updated>2025-08-03T10:57:38.812Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.5.2">Hikaru Generator Feed</generator>
+  <entry>
+    <title>升级万兆网络</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Move-to-10GbE/" />
+    <id>https://sh.alynx.one/posts/Move-to-10GbE/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2025-08-03T10:01:50.000Z</published>
+    <updated>2025-08-03T10:01:50.000Z</updated>
+    <summary type="html">
+      其实我一开始决定升级到万兆的原因不是觉得 2.5G 网络不够用，毕竟 btrfs 并没有内建 SSD 缓存的功能，甚至都没有 RAID1 的读取速度优化，所以机械硬盘顶天也就 300M/s 而已（何况我之前的 NAS 硬件也没有添加 SSD 的空间了，更何况建立 bcache 缓…
+    </summary>
+    <content type="html">
+      &lt;p&gt;其实我一开始决定升级到万兆的原因不是觉得 2.5G 网络不够用，毕竟 btrfs 并没有内建 SSD 缓存的功能，甚至都没有 RAID1 的读取速度优化，所以机械硬盘顶天也就 300M/s 而已（何况我之前的 NAS 硬件也没有添加 SSD 的空间了，更何况建立 bcache 缓存需要清空当前的阵列从头开始，考虑到已有的数据量这显然不现实）。原因其实只是因为我以比较低的价格捡漏了一台 Mac mini 开始日常使用，而 Finder 在使用无线网络的时候访问 Samba 的性能实在不敢恭维（即使是有线网，Finder 在访问内容比较多的目录的时候加载速度也显著慢于 Nautilus，但至少比无线网好很多）。所以我考虑要不再从 NAS 拉一根网线到 Mac mini。但是我的 NAS 上已经没有多余的网口了，如果只是把原来接台式机的单口 2.5G PCIe 网卡换成双口 2.5G PCIe 网卡未免有些太过无聊，何况 Mac mini 本身也只有千兆网口，无论如何都得配个外接网卡，索性全部战未来换成万兆网卡吧。&lt;/p&gt;
+&lt;p&gt;万兆网卡分成光口和电口两种。光口网卡温度比较低，但是较长距离需要使用光纤，布线的时候就得非常小心，较短距离可以使用某种封装好的铜线，但是为了不影响睡眠我把 NAS 放在卧室门外，又要绕过门缝又要贴墙，总距离有个小十米，所以感觉不是很适合我。电口网卡温度比较高，但可以使用普通的网线（虽然有人说需要什么六类七类线，但实际上家庭使用不超过 30 米的距离只要普通的五类线就完全可以跑满万兆了），而且考虑到如果以后升级新的 Mac mini 可以直接选配万兆网卡，那个也是电口的，所以我还是买了电口的万兆网卡。&lt;/p&gt;
+&lt;p&gt;Mac mini 这边其实没什么好选的，雷电口的万兆网卡一共也就那么几款，因为本身这个品类针对的就是各种 Mac，需要使用 Mac 能支持的芯片。我选择了一款 AQC113 芯片的，这款也是带万兆网卡的 Mac mini 内置的型号，因为市场比较小所以价格相比 PCIe 的服务器网卡要贵一些。如果你胆子大你也可以考虑自己购买雷电转 PCIe 的转接卡和 PCIe 万兆网卡拼一个，但可能需要专门处理散热。AQC113 已经是电口网卡里面据说“不那么热”的型号了，但我买的这款运行时候摸上去还是会感觉有点烫手，不过也可能是因为这款使用铝制外壳把热量传递出来的原因，反正雷电设备本身就很热，我的雷电 hub 平时摸上去也是会觉得很热的程度，还要考虑到 hub 使用的是塑料外壳，热量并不是完全传递出来。不过使用起来都一切正常，没有出现过那些发热比较严重的网卡因为不装风扇就过热卡死的问题。&lt;/p&gt;
+&lt;p&gt;台式机和 NAS 这边可选的就很多了，因为是 PCIe 可以购买服务器网卡，大部分都是半高和双口的。我只有三台设备，主要的需求是把 Mac 和 PC 分别连接到 NAS，就省了买万兆交换机的钱。最便宜的电口万兆网卡是 Intel 的 X540，但是这款出来的比较早，是 PCIe 2.0 x8，制程比较老发热也比较严重，很多人建议在散热片上加一个小风扇，不然会死机。但是小风扇是高频噪音重灾区，而且考虑到以后升级主板的话大部分主板 PCIe x8 是和第一条 x16 共享的，反而一般都有独立的 x4 插槽，所以我觉得为了这两个加点成本是可以接受的。最后我买了两张 PCIe 3.0 x4 的 Intel X550，不加独立风扇使用起来也没什么问题。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/posts/Move-to-10GbE/1.jpg&quot; alt=&quot;1.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;软件方面的话我在 NAS 上配了个桥接，倒不是因为我特别需要 Mac 访问 PC，只是我想让 NAS 的两个网口都用同一个 IP，而不是 Mac 和 PC 用不同的 IP 访问 NAS。因为我的 NAS 上面也用 Network Manager 所以建桥接也很简单。以及通过网络使用 &lt;code&gt;rsync&lt;/code&gt; 复制文件的时候不要使用 &lt;code&gt;--sparse&lt;/code&gt; 参数，尤其是在 macOS 上，这个参数会导致速度下降 100~200M/s。使用 &lt;code&gt;cp&lt;/code&gt; 或者各种文件管理器的时候倒是没什么要注意的。&lt;/p&gt;
+&lt;p&gt;后面我还是把万兆网络利用了起来，因为我忍受不了 ITX 的 NAS 机箱完全没有一点扩展空间的现状很久了，同时我买了一块 2T 的 NVMe SSD，本来是格式化成 exFAT 格式装进 USB 硬盘盒打算剪辑的时候随插随用，后面发现 macOS 的 exFAT 驱动性能比 Linux 下差很多，所以一不做二不休给 NAS 买了新的 MATX 主板和机箱，然后把这块 SSD 装在 NAS 的第二条 NVMe 槽用作剪辑盘，结果 macOS 通过万兆网和 Samba 访问比通过 USB 和 exFAT 快很多……&lt;/p&gt;
+
+    </content>
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="网络" label="网络" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/" />
+    <category term="网络" label="网络" scheme="https://sh.alynx.one/tags/%E7%BD%91%E7%BB%9C/" />
+  </entry>
   <entry>
     <title>macOS 微调技巧合集</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Collection-of-macOS-Tweaks/" />
@@ -3071,55 +3098,5 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
     <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
     <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
     <category term="YubiKey" label="YubiKey" scheme="https://sh.alynx.one/tags/YubiKey/" />
-  </entry>
-  <entry>
-    <title>DaVinci Resolve 在 Linux 下的输入法支持</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/" />
-    <id>https://sh.alynx.one/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2022-11-25T09:50:13.000Z</published>
-    <updated>2022-11-25T09:50:13.000Z</updated>
-    <summary type="html">
-      令人出乎意料，我竟然是 DaVinci Resolve（后面都简称达芬奇了）的付费用户。虽然它不是开源软件，但是有很好的 Linux 支持，使用体验和功能都是同类中的佼佼者，而且收费也相当合理。我选择付费一个原因是你支持我，我就支持你，这其实和我支持 Steam 和 Valve …
-    </summary>
-    <content type="html">
-      &lt;p&gt;令人出乎意料，我竟然是 DaVinci Resolve（后面都简称达芬奇了）的付费用户。虽然它不是开源软件，但是有很好的 Linux 支持，使用体验和功能都是同类中的佼佼者，而且收费也相当合理。我选择付费一个原因是你支持我，我就支持你，这其实和我支持 Steam 和 Valve 的理由差不多。另一个原因是众所周知的由于什么所谓系统专利许可证的原因达芬奇 Linux 版本不能解码 H264 和 H265 这两种常见的视频编码，只能使用 NVIDIA 显卡的 NVENC 和 NVDEC 来处理，而达芬奇将显卡加速功能作为收费的卖点。于是我就这样半自愿的上了贼船。&lt;/p&gt;
-&lt;p&gt;当然排除掉解码问题之后还有另一个比较难受的地方，就是达芬奇 Linux 版没有输入法支持，于是完全没办法输入中文。我猜测不像是某些故意恶心人的企业对 Linux 不友好，而单纯是因为英语开发者没有“输入法”这种概念。毕竟达芬奇的图形界面是基于 Qt 的，而 Qt 直接有现成的输入法支持，构建的时候打开开关就可以了嘛。为此我甚至专门跑到 BlackMagic Design 的用户论坛发了个帖子（&lt;a href=&quot;https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;amp;t=150886&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;amp;t=150886&lt;/a&gt;），作为付费用户，我给你钱，你就得给我办事，就是这么硬气。显然某位员工看到了我的帖子并把它移动到了 Feature Requests 版面，然后就没有然后了。闭源拖拉机总是这样，我看到了，但我懒得改，你给我等着吧。我倒不是说开源拖拉机的维护者都比较勤快，但是至少代码放在那里，说不定用户自己就给你改了送到你面前了，一般再懒的维护者都乐意接受。谁叫我没找到和达芬奇一样好用的开源视频剪辑软件呢。&lt;/p&gt;
-&lt;p&gt;不过从它用的 Qt 这一点上来看，应该是有什么办法可以 hack 一下让它支持输入法的。虽然我不是很熟悉 Qt，但是 Fcitx 的开发者 &lt;a href=&quot;https://www.csslayer.info/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;@csslayer&lt;/a&gt; 给了我一个方案，他之前写了一篇博客是关于给 Mathematica 添加输入法支持的（&lt;a href=&quot;https://www.csslayer.info/wordpress/fcitx-dev/a-case-study-how-to-compile-a-fcitx-platforminputcontext-plugin-for-a-proprietary-software-that-uses-qt-5/&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://www.csslayer.info/wordpress/fcitx-dev/a-case-study-how-to-compile-a-fcitx-platforminputcontext-plugin-for-a-proprietary-software-that-uses-qt-5/&lt;/a&gt;），他觉得达芬奇也可以如法炮制，于是我阅读了一下，简单地概括就是首先查出来软件用了什么版本的 Qt，然后下载对应的源码，因为输入法支持属于 Qt 的某种插件，所以只要构建插件的时候链接到软件自带的 Qt，再把得到的插件复制到软件的 Qt 目录就可以了。一般来说软件就算修改了自带的 Qt，也不会修改有关插件的部分，所以我打算如法炮制一下。&lt;/p&gt;
-&lt;p&gt;首先是查看达芬奇自带的 Qt 的版本，这个非常简单：&lt;/p&gt;
-&lt;figure data-raw=&quot;% strings /opt/resolve/libs/libQt5Core.so.5 | rg &#039;Qt 5&#039;
-Qt 5.15.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by Clang 9.0.1 )
-This is the QtCore library version Qt 5.15.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by Clang 9.0.1 )
-If that is not possible, in Qt 5 you must at least reimplement
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;% strings /opt/resolve/libs/libQt5Core.so.5 | rg &#039;Qt 5&#039;
-Qt 5.15.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by Clang 9.0.1 )
-This is the QtCore library version Qt 5.15.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by Clang 9.0.1 )
-If that is not possible, in Qt 5 you must at least reimplement
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;到这里应该就是去下载 Qt 5.15.2 版本的源码了，不过我突发奇想看了一眼系统安装的 Qt 版本：&lt;/p&gt;
-&lt;figure data-raw=&quot;% pacman -Qi qt5-base | rg Version
-Version         : 5.15.7+kde+r176-1
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;% pacman -Qi qt5-base | rg Version
-Version         : 5.15.7+kde+r176-1
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;一般来说主次版本号不变的话不会有什么不兼容的改动，会不会我直接把系统的 &lt;code&gt;.so&lt;/code&gt; 文件复制过去就可以用了呢？Qt 5 的 ibus 支持已经是 Qt 本身代码库的一部分了，安装到系统的路径是 &lt;code&gt;/usr/lib/qt/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so&lt;/code&gt;，我尝试直接把它链接过去：&lt;/p&gt;
-&lt;figure data-raw=&quot;% sudo mkdir /opt/resolve/libs/plugins/platforminputcontexts
-% sudo ln -s /usr/lib/qt/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so /opt/resolve/libs/plugins/platforminputcontexts
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;% sudo mkdir /opt/resolve/libs/plugins/platforminputcontexts
-% sudo ln -s /usr/lib/qt/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so /opt/resolve/libs/plugins/platforminputcontexts
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;然后就没有然后了，我启动达芬奇之后 ibus 就直接工作了。没想到他们虽然不太了解 Linux 输入法，Qt 版本跟的倒是还挺新的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/posts/Input-Method-Support-for-DaVinci-Resolve-on-Linux/screenshot-1.png&quot; alt=&quot;just works&quot;&gt;&lt;/p&gt;
-&lt;p&gt;对于 Fcitx5 用户的话，首先要注意 Qt 5 的 Fcitx5 支持并不在 Qt 的代码库里，所以你需要安装 &lt;code&gt;fcitx5-qt&lt;/code&gt;。不过文件路径的话都是一样的，只要把文件名里的 &lt;code&gt;ibus&lt;/code&gt; 改成 &lt;code&gt;fcitx5&lt;/code&gt; 就可以了。如果直接链接不能用，需要按照老 K 博客里的办法自己编译的话，需要下载单独的 &lt;code&gt;fcitx5-qt&lt;/code&gt; 代码库。当然从根源上解决问题的话还是希望大家去论坛回复我的帖子，让 BlackMagic Design 开启构建开关，就不需要用奇怪的办法 hack 了。&lt;/p&gt;
-
-    </content>
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
-    <category term="Qt" label="Qt" scheme="https://sh.alynx.one/tags/Qt/" />
   </entry>
 </feed>
