@@ -95,7 +95,6 @@ Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-termin
 
 - 主页：<https://piano.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/azpiano-vanilla/>
-- React 版仓库：<https://github.com/AlynxZhou/azpiano-react/>
 
 ## Alynx Live Wallpaper
 
@@ -103,4 +102,11 @@ Arch Linux 用户直接到 [AUR](https://aur.archlinux.org/packages/gnome-termin
 
 - 主页：<https://livewallpaper.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/alynx-live-wallpaper/>
-- 下载：[酷安网](http://www.coolapk.com/apk/220573) 或 [Google Play Store](https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper)。
+- 下载：[Google Play Store](https://play.google.com/store/apps/details?id=xyz.alynx.livewallpaper)。
+
+## Bilibili Update Checker
+
+定期爬取列表里的 B 站 UP 主的最新视频，并显示已经有多久没有更新。
+
+- 仓库：<https://github.com/AlynxZhou/bup/>
+- 示例：<https://c4boom.ismyonly.one/>
