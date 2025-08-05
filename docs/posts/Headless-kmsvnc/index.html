@@ -311,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>由于 Wayland 并不存在像 X11 一样一个单独管理用于最终显示的 framebuffer 的进程，因此远程桌面需要各个桌面做自己的实现。而因为登录界面和用户会话一般是两个会话，远程登录过程中的会话切换就变得非常复杂，虽然 GNOME Remote Desktop 已经有了一个初步实现，但我对那个的逻辑不是很满意，而且他们目前依赖 RDP 的 server rediection，所以并不支持 VNC。</p>
 <p>按照当初我做 Show Me The Key 的逻辑，如果一样东西在混成器层面上不好实现，那应该考虑在下一层更统一的层面上实现，<a href="https://github.com/isjerryxiao/" target="_blank" rel="external nofollow noreferrer noopener">@Jerry Xiao</a> 老师做了一个叫做 <a href="https://github.com/isjerryxiao/kmsvnc/" target="_blank" rel="external nofollow noreferrer noopener">kmsvnc</a> 的项目，通过 DRM/KMS 获取 framebuffer 并转给 VNC 服务器，虽然它也有一些自己的小问题，但我很喜欢这个方案。</p>
 <p>实际上我需要用到远程桌面的场景不多，毕竟 ssh 大部分时候更可靠也更高效，不过有时候需要修改 NAS 上一些桌面设置的时候会用到。但此时就有第一个问题，我的 NAS 是无头（就是没接显示器）的，没有显示器的情况下桌面没有输出，也就获取不到 framebuffer。请教了 <a href="https://github.com/isjerryxiao/" target="_blank" rel="external nofollow noreferrer noopener">@Jerry Xiao</a> 老师之后得知可以通过内核参数实现强制让内核以为我们有个显示器，就可以解决这个问题。</p>
@@ -521,4 +521,4 @@ HDMI-A-2: disconnected
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.592Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.292Z. -->

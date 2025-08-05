@@ -314,7 +314,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 <code>sudo</code> 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，除了平时用的 <code>gdm-password</code> 密码登录，还有 <code>gdm-fingerprint</code> 指纹登录和 <code>gdm-smartcard</code> 智能卡登录。我一开始是打算买个指纹传感器的，查了一下 fprintd 的文档，支持的型号并不多，而且在淘宝上问客服 USB Product ID 和 Vendor ID 显然得不到回答，就退而求其次买智能卡了，而搜索智能卡得到最多的结果就是 YubiKey，进入一个不了解的领域之前和大部分人选一样的一般不会错太多，于是就下手了。</p>
 <p>话说回来智能卡登录，如果你搜索 YubiKey 相关的文章，绝大多数都会告诉你把 <code>pam_u2f.so</code> 加到需要密码登录的 PAM 配置里，比如 <code>sudo</code> 或者 <code>gdm-password</code>，但这显然不是我想要的，我要的方案不是替换密码登录，而是和密码登录平行的配置文件，我知道 GNOME 有已经写好的智能卡配置，但是任何地方都搜不到如何启用，设置里没有相关选项，连 Arch Wiki 给的方案都只是用 <code>pam_u2f.so</code>。Red Hat 的支持文档里倒是提到了智能卡登录，然而用的却是他们自己的某个工具配置的。显然这是个起夜级 feature，最好的办法也许是找个起夜级 Linux 的桌面工程师来问问，哦什么我自己就是起夜级 Linux 桌面工程师，那没事了。还要说的一件事是怎么想智能卡这东西都和安全相关，而我自己不是专业的安全行业人士，所以我不会尝试解释清楚和安全相关的一些名词，以及如果我哪里真的写错了，希望专业人士多多指点，我肯定改。</p>
 <p>总之相信你自己因为你才是职业选手，我还是自己看看这东西怎么弄吧，毕竟用 Arch 再用 GNOME 同时还打算搞 GNOME 的智能卡登录的人没几个，所以 Wiki 没有倒也正常。首先肯定是看 <code>/etc/pam.d/gdm-smartcard</code> 这个文件，里面别的看起来都比较正常，只有一行看起来和智能卡有关系：</p>
@@ -621,4 +621,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.593Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.292Z. -->

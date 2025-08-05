@@ -110,18 +110,6 @@
     </script>
     
 
-<script defer type="text/javascript" src="/js/scrollspy.js"></script>
-<script type="text/javascript">
-  documentReady(() => {
-    loadScrollSpy({
-      "containerID": "scrollspy-container",
-      "targetID": "scrollspy-target",
-      "headingSelector": "h1, h2, h3, h4, h5, h6"
-    });
-  });
-</script>
-
-
 <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
 <script type="text/javascript">
   documentReady(() => {
@@ -323,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <h1 id="%E9%9C%80%E6%B1%82"><a class="heading-link header-link" href="/posts/Build-VPN-with-Headscale-and-Tailscale/#%E9%9C%80%E6%B1%82"></a>需求</h1>
 <p>很多在家里装了 NAS 的人都有一个相似的需求，那就是出门在外如何访问内网的 NAS 上运行的服务。很多人会选择公网 IP + 端口映射把需要的服务直接暴露到公网上，或者通过公网的 VPS 进行反向代理。但这些我都不放心，首先我的目的只是自己访问，而不是给别人访问，其次对于一些简易的 WebUI，暴露在公网上也容易被无聊的人扫端口并尝试入侵。实际上这个需求更倾向于 VPN（这里指的是它本来的意思也就是虚拟专用网，而不是佛跳墙），我曾经尝试过使用 WireGuard 和公网 VPS 构建一个简单的 VPN，但效果并不好，首先是我的 VPS 并不在国内，作为所有流量的中继实在是太不合适，实际使用起来几乎卡到不能自理，其次是 WireGuard 用作 VPN 服务器的话需要把其它所有 peers 都添加到服务器里，实在是太过麻烦。</p>
 <p>第一点我其实没想到什么好的解决办法，能想到最好的也就是利用家里有公网 IP 的特点把 VPN 服务器改到家里。而第二点我差点就想改成自建 OpenVPN 了，但这时我偶然找到一些资料，说不应该手动组建 WireGuard 网络，而是使用一些基于 WireGuard 的工具帮你自动组网。比较之后我决定使用 Tailscale。</p>
@@ -519,7 +507,7 @@
     <hr>
     <div class="post-toc sidebar-item">
       <div><i class="bi bi-list-ol"></i>文章目录</div>
-<ol class="toc" id="scrollspy-target">
+<ol class="toc">
   <li>
     <a class="list-group-item toc-link" href="#%E9%9C%80%E6%B1%82">需求</a>
   </li>
@@ -591,4 +579,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.592Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.292Z. -->

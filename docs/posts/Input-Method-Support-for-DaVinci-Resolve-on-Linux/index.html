@@ -311,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>令人出乎意料，我竟然是 DaVinci Resolve（后面都简称达芬奇了）的付费用户。虽然它不是开源软件，但是有很好的 Linux 支持，使用体验和功能都是同类中的佼佼者，而且收费也相当合理。我选择付费一个原因是你支持我，我就支持你，这其实和我支持 Steam 和 Valve 的理由差不多。另一个原因是众所周知的由于什么所谓系统专利许可证的原因达芬奇 Linux 版本不能解码 H264 和 H265 这两种常见的视频编码，只能使用 NVIDIA 显卡的 NVENC 和 NVDEC 来处理，而达芬奇将显卡加速功能作为收费的卖点。于是我就这样半自愿的上了贼船。</p>
 <p>当然排除掉解码问题之后还有另一个比较难受的地方，就是达芬奇 Linux 版没有输入法支持，于是完全没办法输入中文。我猜测不像是某些故意恶心人的企业对 Linux 不友好，而单纯是因为英语开发者没有“输入法”这种概念。毕竟达芬奇的图形界面是基于 Qt 的，而 Qt 直接有现成的输入法支持，构建的时候打开开关就可以了嘛。为此我甚至专门跑到 BlackMagic Design 的用户论坛发了个帖子（<a href="https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;t=150886" target="_blank" rel="external nofollow noreferrer noopener">https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;t=150886</a>），作为付费用户，我给你钱，你就得给我办事，就是这么硬气。显然某位员工看到了我的帖子并把它移动到了 Feature Requests 版面，然后就没有然后了。闭源拖拉机总是这样，我看到了，但我懒得改，你给我等着吧。我倒不是说开源拖拉机的维护者都比较勤快，但是至少代码放在那里，说不定用户自己就给你改了送到你面前了，一般再懒的维护者都乐意接受。谁叫我没找到和达芬奇一样好用的开源视频剪辑软件呢。</p>
 <p>不过从它用的 Qt 这一点上来看，应该是有什么办法可以 hack 一下让它支持输入法的。虽然我不是很熟悉 Qt，但是 Fcitx 的开发者 <a href="https://www.csslayer.info/" target="_blank" rel="external nofollow noreferrer noopener">@csslayer</a> 给了我一个方案，他之前写了一篇博客是关于给 Mathematica 添加输入法支持的（<a href="https://www.csslayer.info/wordpress/fcitx-dev/a-case-study-how-to-compile-a-fcitx-platforminputcontext-plugin-for-a-proprietary-software-that-uses-qt-5/" target="_blank" rel="external nofollow noreferrer noopener">https://www.csslayer.info/wordpress/fcitx-dev/a-case-study-how-to-compile-a-fcitx-platforminputcontext-plugin-for-a-proprietary-software-that-uses-qt-5/</a>），他觉得达芬奇也可以如法炮制，于是我阅读了一下，简单地概括就是首先查出来软件用了什么版本的 Qt，然后下载对应的源码，因为输入法支持属于 Qt 的某种插件，所以只要构建插件的时候链接到软件自带的 Qt，再把得到的插件复制到软件的 Qt 目录就可以了。一般来说软件就算修改了自带的 Qt，也不会修改有关插件的部分，所以我打算如法炮制一下。</p>
@@ -521,4 +521,4 @@ Version         : 5.15.7+kde+r176-1
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.593Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.292Z. -->

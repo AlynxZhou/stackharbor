@@ -313,7 +313,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <blockquote>
 <p>Tabs are 8 characters, and thus indentations are also 8 characters. There are heretic movements that try to make indentations 4 (or even 2!) characters deep, and that is akin to trying to define the value of PI to be 3.
 -- Linux Kernel Coding Style</p>
@@ -358,7 +358,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>2016 年的我开始用 Atom 这种“modern”的编辑器，2022 年的我却又开始用回岁数比我都大的 GNU Emacs。切换的理由其实很简单，我曾经以为一直能追上最新版 Electron 的 VSCode 会成为第一个纯 Wayland 的代码编辑器——只要 Chromium 那边支持纯 Wayland 就好了嘛，然而直到 Emacs 那边的 pgtk 分支合并进主线（以防有读者不太清楚来龙去脉我解释一下，Emacs 虽然有图形界面，但实际上只是用 X 实现了一个 Terminal 层，而传统的 GTK3 界面只是使用 GTK3 创建一个 X 窗口，然后其它操作都是通过 X 进行，这实际上非常不适合 GTK3，导致了很多 bug，同时也使 Emacs 没法利用 GTK 的 Wayland 后端。而 pgtk 分支则是在 X 部分之外另起炉灶，利用 GTK 实现了一个和 X 部分平行的 Terminal 层，全部的绘制操作都是以 GTK/Cairo 的现代程序方式进行，自然也就摆脱了对 X 的依赖。总之在 Emacs 这样又老又庞大的代码库上做如此大范围的工程我觉得可以称得上是一项壮举了。），Chromium 的 ozone backend 还是问题多多。虽然 Emacs/Vim 这种软件看起来确实有点老派作风，但没想到也有走在这些“现代”编辑器前面的地方。</p>
 
     </main>
@@ -396,7 +396,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>春节假期虽然是假期，但是在家的时间里我基本没闲着，毕竟按照传统（指 Ken Thompson 在假期里写出了 UNIX 的第一个雏形的传统，不过维基百科上并没有详述是不是这样，我也懒得考证），假期是造轮子的好机会。所以我就胡乱捣鼓一通看看能不能让我的博客生成器更圆一点。</p>
 
     </main>
@@ -437,7 +437,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。</p>
 
     </main>
@@ -475,7 +475,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>当然，我在标题里说的时间戳并不是狭义的 UNIX 时间戳，我只是想表达一下精确的时间记录而已。</p>
 <p>不知道从什么时候开始，许多网站都不再显示 <code>2021-11-09 09:00:00</code> 这样精确的时间，而是开始显示“刚刚”、“5 分钟前”、“3 个月前”、“1 年前”，我能猜出来这又是哪些自以为聪明的产品经理以“对用户友好”的理由想出来的或者抄来的，但不幸的是大部分这种行为都很愚蠢。据我所知 Twitter 是这样，Twitter 做什么就抄什么的微博也是这样，令人难以忍受的是 GitHub 也是这样显示时间，以及今天彻底惹恼了我的 YouTube 在视频页面也是这样显示。</p>
 
@@ -517,7 +517,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>这篇文章同时有 <a href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC">中文版本</a> 和 <a href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion">英文版本</a>。</p>
 <p>This post is both available in <a href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC">Chinese version</a> and <a href="/posts/Simulate-Physical-Keyboard-in-Scrcpy-via-USB-HID-over-AOAv2/#EnglishVersion">English version</a>.</p>
 
@@ -559,7 +559,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。</p>
 
     </main>
@@ -600,7 +600,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。</p>
 <hr>
 <p>由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。</p>
@@ -640,7 +640,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>本来之前是想等新开的项目搞差不多了就来更新博客，结果没想到越写 TODO 越多一直搞到这个月才搞定，所以到现在才更新。 新项目 从家里回来北京之后第一件事情就是 SUSE 的 HackWeek，我之前大致想好了要做什么，我用过 screenkey 这个项目，但它使用了 X11 的 API，所以不支持……</p>
     </main>
     <footer class="post-footer">
@@ -677,7 +677,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>很多朋友都知道我除了是个程序员以外还是个乐器玩家，很久之前因为想要录音上网了解了一下需要购买专门的麦克风声卡从此掉进深坑一发不可收拾。当然 Linux 用户在购买硬件之前需要做好功课，大概 16 年左右我还在上高中的时候用我还凑合的英语水平翻了几个 Linux 音乐论坛最后决定买一台 Focusrite Scarlett 2i4（不过它后来似乎更新了几个版本所以我购买的变成了 1st Gen），我不太清楚除了更换了接口之后还有什么奇怪的改动没有，所以这里就不盲目推荐大家买更新的型号了，反正声卡这玩意够用的话也不太需要追新。</p>
 
     </main>
@@ -805,4 +805,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.594Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.293Z. -->

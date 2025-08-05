@@ -110,18 +110,6 @@
     </script>
     
 
-<script defer type="text/javascript" src="/js/scrollspy.js"></script>
-<script type="text/javascript">
-  documentReady(() => {
-    loadScrollSpy({
-      "containerID": "scrollspy-container",
-      "targetID": "scrollspy-target",
-      "headingSelector": "h1, h2, h3, h4, h5, h6"
-    });
-  });
-</script>
-
-
 <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
 <script type="text/javascript">
   documentReady(() => {
@@ -323,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>以下记录了一些常见或者不常见的 macOS 微调技巧，其中有些是因为 macOS 的默认设置过于难用，然后又很难想到用什么关键词才能搜索到的选项，有些则是作为开发环境和 Linux 不一样的地方，可以进行调整。</p>
 <h1 id="%E5%85%B3%E9%97%AD%E6%8B%96%E6%8B%BD%E5%88%B0%E5%B1%8F%E5%B9%95%E8%BE%B9%E7%BC%98%E5%B9%B6%E7%AD%89%E5%BE%85%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E5%8C%BA"><a class="heading-link header-link" href="/posts/Collection-of-macOS-Tweaks/#%E5%85%B3%E9%97%AD%E6%8B%96%E6%8B%BD%E5%88%B0%E5%B1%8F%E5%B9%95%E8%BE%B9%E7%BC%98%E5%B9%B6%E7%AD%89%E5%BE%85%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E5%8C%BA"></a>关闭拖拽到屏幕边缘并等待切换工作区</h1>
 <p>作为一个桌面程序员，我认为最令用户恼火的使用体验就是按住并等待了，你不知道要等待多久才会触发，往往你以为已经触发了结果还没有，极大地降低了日常操作的效率。但是似乎苹果的设计师并没有意识到这种设计在电脑上有多难用，并且在多个地方使用了按住并等待触发的逻辑。其中甚至包含互相冲突的功能：比如 macOS 15 新增的拖动窗口到屏幕边缘分屏，这个和拖动窗口到屏幕边缘切换工作区完全冲突。你必须小心翼翼的拖动窗口到边缘，但是又不能完全碰到边缘，才可以完美的触发分屏而不是切换工作区。这在日常使用中几乎是不可能的，考虑到分屏更常用并且有多种方法切换工作区，关掉这个愚蠢的功能才是合理的。但是苹果并没有提供直接关掉这个功能的选项，只能通过把触发的等待时间加大到几乎不可能误触发来近似实现了。</p>
@@ -509,7 +497,7 @@ ${PATH}\
     <hr>
     <div class="post-toc sidebar-item">
       <div><i class="bi bi-list-ol"></i>文章目录</div>
-<ol class="toc" id="scrollspy-target">
+<ol class="toc">
   <li>
     <a class="list-group-item toc-link" href="#%E5%85%B3%E9%97%AD%E6%8B%96%E6%8B%BD%E5%88%B0%E5%B1%8F%E5%B9%95%E8%BE%B9%E7%BC%98%E5%B9%B6%E7%AD%89%E5%BE%85%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E5%8C%BA">关闭拖拽到屏幕边缘并等待切换工作区</a>
   </li>
@@ -584,4 +572,4 @@ ${PATH}\
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.592Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.291Z. -->

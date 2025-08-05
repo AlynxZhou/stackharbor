@@ -311,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>Arch Linux 的官方仓库里终于有 GNOME 44 了，今天更新了一下系统，在思考出怎么解决 DaVinci Resolve 一定要去加载 onetbb 里面 intel 的 OpenCL 实现之前，我遇到了一个更奇怪的问题：所有的 XWayland 程序都显示不出来窗口，程序启动了，没有报错，但是点不到。</p>
 <p>忘了我当时在查什么反正看了一下 <code>journalctl -f</code> 发现一直刷一个 <code>mutter-x11-frames</code> core dump 的 log，我想起来 mutter 44 应该是把 X11 程序的 decoration 挪到单独的 client 里面实现了，所以也许是 mutter 的问题，不过我还是尝试用 gdb 看了一下 backtrace：</p>
 <figure data-raw="Thread 1 &quot;mutter-x11-fram&quot; received signal SIGSEGV, Segmentation fault.
@@ -549,4 +549,4 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.593Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.292Z. -->

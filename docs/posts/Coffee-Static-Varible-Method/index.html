@@ -110,18 +110,6 @@
     </script>
     
 
-<script defer type="text/javascript" src="/js/scrollspy.js"></script>
-<script type="text/javascript">
-  documentReady(() => {
-    loadScrollSpy({
-      "containerID": "scrollspy-container",
-      "targetID": "scrollspy-target",
-      "headingSelector": "h1, h2, h3, h4, h5, h6"
-    });
-  });
-</script>
-
-
 <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
 <script type="text/javascript">
   documentReady(() => {
@@ -323,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="external nofollow noreferrer noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="external nofollow noreferrer noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
 <a id="more"></a>
 
@@ -618,7 +606,7 @@ Test.printCounter()
     <hr>
     <div class="post-toc sidebar-item">
       <div><i class="bi bi-list-ol"></i>文章目录</div>
-<ol class="toc" id="scrollspy-target">
+<ol class="toc">
   <li>
     <a class="list-group-item toc-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F">静态变量</a>
   </li>
@@ -690,4 +678,4 @@ Test.printCounter()
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.593Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.293Z. -->

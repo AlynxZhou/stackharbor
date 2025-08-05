@@ -311,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>如果有得选，在开始一个新项目之前我是无论如何也不会选择 CMake 做构建系统的，我不信有任何人觉得 CMake 的语法很友好很容易读，Meson 相比之下更容易读写，而且按我的经验也更好用。但最大的问题是 Meson 出来的很晚，于是有大量的项目在 CMake 已经流行而 Meson 还没出现的时间里把基于 Autotools 的构建系统换成了 CMake（剩下没有更换的那些多数在 Meson 稳定之后更换到了 Meson）。显然把所有 CMake 项目重写成 Meson 是不现实的，最大的困难其实是 CMake 虽然难用，但在“跨平台的构建系统”这一点上已经足够用了，所以对于已有的 CMake 项目，我选择还是凑合用。</p>
 <p>实际需要我本人亲手调整 CMake 的项目很少，Ansel 是其中一个，因为当初从 Darktable fork 出来的时候我几乎是完全地整理了一遍它的构建系统，而我今天打开 Element 发现法国老哥在群里 @ 我说是 MSYS2 的 cURL 更新到 8.8.0 导致我们的 CI 构建不了了让我帮他看看，虽然我自己也不是很想写 CMake，但为了避免他一言不合就把依赖复制到项目源码里面我早就跟他说过这种事情我替他处理，所以还是说到做到。</p>
 <p>报错就是一堆 undefined reference，我直接去 Google 搜了一下没有搜到什么有用的资料。去 MSYS2 的 issue 搜索 curl 倒是搜到了 <a href="https://github.com/msys2/MINGW-packages/issues/21028" target="_blank" rel="external nofollow noreferrer noopener">https://github.com/msys2/MINGW-packages/issues/21028</a>，下面有人说把 <code>CURL_LIBRARIES</code> 这个变量换成 <code>CURL::libcurl</code> 这个 target 就可以了。我倒是理解这是什么意思，但我想知道这是怎么回事。这中间的过程可以说是曲折离奇。</p>
@@ -514,4 +514,4 @@ endif()
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.592Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.292Z. -->

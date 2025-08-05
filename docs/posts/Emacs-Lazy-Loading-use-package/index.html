@@ -311,7 +311,7 @@
         </div>
       </div>
     </header>
-    <main class="post-main" id="scrollspy-container" itemprop="articleBody">
+    <main class="post-main" itemprop="articleBody">
       <p>事先叠 buff：我不是说 <code>use-package</code> 一定要这么用，我也不是说所用不用 <code>use-package</code> 的人都不好，我只是说我觉得应该这样用 <code>use-package</code> 比较合适。</p>
 <p><code>use-package</code> 是个好东西，因为它解决了 Emacs 插件包从安装到配置的全过程，可以让配置更结构化。不过也有人觉得 <code>use-package</code> 关键字过于复杂，总是没办法确定什么配置写到什么字段里面，也不知道展开之后悄悄发生了什么事情。从我再次决定自己打造一份 Emacs 配置以来看了很多不同人的配置，发现他们使用 <code>use-package</code> 的方式也是五花八门，有些人不爱用 <code>:bind</code> 和 <code>:hook</code>，干脆自己在 <code>:config</code> 里面调用 <code>define-key</code> 和 <code>add-hook</code>，有些人不清楚为什么自己的 <code>:config</code> 被延迟运行了，干脆全都用 <code>:init</code>。还有些人直接换成了其它号称更简单可控的替代品。我不是说上面这些方法都错了，实际上只要能得到想要的结果也无所谓怎么写，但我是一个比较注重逻辑的人，所以研究了一下到底这些关键字是怎么回事，并且试图写篇文章记录我推荐的写法。本来我打算写在注释里的，可是感觉写得太多，所以就放到博客里了。</p>
 <p>问题的核心无非是：为什么我写的 <code>:config</code> 没有运行？到底什么情况下会有延迟加载？我打算在这里详细分析一下。</p>
@@ -520,4 +520,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:44:11.593Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-08-05T16:55:06.292Z. -->
