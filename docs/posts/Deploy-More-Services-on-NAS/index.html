@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。 基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。">
+    <meta name="keywords" content="计算机, Linux, Caddy, PhotoPrism">
+    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="在 NAS 上部署更多服务">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Deploy-More-Services-on-NAS/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto-Karon-White.webp">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Deploy-More-Services-on-NAS/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      body, header.header, footer.footer {
+        background: #33363b;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add line number for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            lineNumbers.push("\n");
+          }
+        }
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>在 NAS 上部署更多服务 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-Love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="pinned-message" class="pinned-message">
+  <div class="card">
+    <div class="alert-blue"><strong>我很想知道你对我博客的看法！</strong>方便请到 <a href="/about/">关于</a> 页面留下评论！</div>
+  </div>
+</div>
+
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Deploy-More-Services-on-NAS/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="将我漫天心血一一抛到银河">
+        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Deploy-More-Services-on-NAS/" itemprop="url">在 NAS 上部署更多服务</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2025-08-08T01:24:38.000Z">2025-08-08 周五 09:24:38 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Deploy-More-Services-on-NAS/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="在 NAS 上部署更多服务" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <div class="alert-blue">由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。</div>
+
+<p>基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。</p>
+<a id="more"></a>
+
+<h1 id="PhotoPrism"><a class="heading-link header-link" href="/posts/Deploy-More-Services-on-NAS/#PhotoPrism"></a>PhotoPrism</h1>
+<p>一个我早就想解决的需求是按时间线快速查看照片，我发现翻看以前的照片非常有意思，有些已经忘掉的事情看到照片就会想起当时的心情，所以要是能快速的点开过去某个时间的照片就好了。</p>
+<p>为了不把自己绑死在某个后期软件上，我没有使用诸如 Lightroom 这类软件内置的照片库管理，而是直接将照片从存储卡里复制到磁盘阵列里。因为不想手动管理重复项，所以我就保持相机的文件夹逻辑。索尼相机虽然在拍照时可以直接按照日期建立文件夹，但是它是前四位序号加后四位月份日期，因此按名称排序并不是时间顺序。即使忽略掉这个问题，也没有办法快速的查看什么时候拍了什么照片，因为文件管理器通常并不能让你隔着文件夹看到里面都有什么照片。再考虑到拍了四年照片之后我已经积攒了相当大的照片库，直接打开一个个目录查看源文件对于磁盘 IO 速度是个相当大的考验。所以是时候部署一个能自动给照片分时分类创建缩略图的服务了。</p>
+<p>我选择的方案是 PhotoPrism，当然有好几个类似的项目可选，我就是随便选了一个，没什么特殊理由。PhotoPrism 的官网建议用户以 docker 的方式部署，但我不太喜欢容器化，而且我只有一台服务器也享受不到容器化带来的什么方便，所以我选择通过 AUR 的 <code>photoprism</code> 包安装。</p>
+<p>官方同时支持 sqlite 和 mysql 两个数据库，但是对于实际的项目使用 mysql 性能要好很多。如果你按照官方的文档使用 docker 应该会要你再部署一个 mariadb 的容器并配置它，但是却没有提如果不用 docker 要怎么办。其实也很简单，总之先装一个 mariadb 配置好并启动，这一部分直接参照 Arch Wiki 就好了。然后我创建了一个叫做 <code>photoprism</code> 的数据库和一个 <code>photoprism</code> 的数据库用户，再给这个用户设置好密码，给它操作这个数据库的权限，数据库准备工作就算完成了。</p>
+<p>使用 docker 的话通常是编辑 compose 文件里面的环境变量来配置 PhotoPrism，不使用 docker 的话则是通过配置文件。AUR 包里面的 PhotoPrism 会加载 <code>/etc/photoprism/defaults.yml</code>，里面只有几个路径要设置，当然其实也可以不改路径，毕竟我不打算把照片导入到 PhotoPrism 管理的目录，而是把我的照片目录链接过去，所以这几个目录只会存 PhotoPrism 的配置文件和缓存文件。然后按照官方文档的建议，不要在 <code>defaults.yml</code> 里面加更多内容，而是在你设置的 <code>ConfigPath</code> 下面创建一个 <code>options.yml</code> 在里面进行设置。</p>
+<p><code>options.yml</code> 里面的内容和 compose 文件里设置的环境变量的内容其实是等价的，只是写法不同，必须设置的大概也就如下几项，其它的当你启动 PhotoPrism 在设置里修改之后它会自动更新这个文件：</p>
+<figure data-raw="AdminPassword: admin
+AdminUser: admin
+AuthMode: password
+DatabaseDriver: mysql
+DatabaseName: photoprism
+DatabasePassword: your_database_user_password
+DatabaseServer: /run/mysqld/mysqld.sock
+DatabaseUser: photoprism
+DisableTLS: true
+HttpPort: 2342
+SiteUrl: https://photos.example.com/
+" data-info="language-yaml" data-lang="yaml" class="code-block"><pre class="code"><code class="language-yaml">AdminPassword: admin
+AdminUser: admin
+AuthMode: password
+DatabaseDriver: mysql
+DatabaseName: photoprism
+DatabasePassword: your_database_user_password
+DatabaseServer: /run/mysqld/mysqld.sock
+DatabaseUser: photoprism
+DisableTLS: true
+HttpPort: 2342
+SiteUrl: https://photos.example.com/
+</code></pre></figure>
+<p>如果你和我一样 mariadb 和 PhotoPrism 运行在同一台机器上，那可以通过 UNIX socket 指定数据库连接，否则可以使用 IP 和端口。如果你想给别人分享相册，就把 <code>SiteUrl</code> 设置成外网的网址。</p>
+<p>我不打算使用 PhotoPrism 的导入功能，这个功能会将你的照片复制到它管理的目录并按规则重命名。我打算只让它索引我的照片，所以要将我的照片目录挂载到
+ <code>OriginalsPath</code> 而不是 <code>ImportPath</code>。使用 docker compose 的话会在 compose 文件里指定如何挂载，而我使用 fstab 进行 dir bind mount。以上这些基本上和使用 docker compose 的逻辑一样，只是配置的方式不同。</p>
+<p>然后如果修改路径到别处的话，记得保证 <code>photoprism</code> 用户对这几个路径是可读写的，因为 systemd 会以 <code>photoprism</code> 用户运行 PhotoPrism，<code>systemctl start photoprism</code> 之后，内网应该就可以通过 <code>2342</code> 端口访问它的前端了。点击资料库 -&gt; 索引，勾选完全重新扫描然后点击开始，应该就可以看到它开始索引目录里的照片并创建缩略图了。</p>
+<p>我大概有 24 万张照片，其中一半是 RAW 一半是对应的 JPG，PhotoPrism 运行了一天一夜给我所有的照片建立了索引和缩略图。如果你的 GPU 可以被它用来加速或者你的磁盘阵列速度比我快，应该不需要这么久。</p>
+<h1 id="Jellyfin"><a class="heading-link header-link" href="/posts/Deploy-More-Services-on-NAS/#Jellyfin"></a>Jellyfin</h1>
+<p>我当然是没有出门在外看 NAS 上的视频的需求，但是在家里看的需求还是有的。之前我一直使用文件管理器通过 samba 直接播放，在电脑上当然不成问题，但是不知道是由于无线带宽有限还是 Android 上的 samba 客户端的问题，用手机或者平板看文件体积比较大的电影就加载不动了。Android 版 VLC 虽然有内置的 samba 支持，但是那个文件管理器超级难用啊，没有按日期排序，从一个目录返回上一个目录还不能保持之前的位置。所以我觉得部署一个 Jellyfin 还是有必要的。</p>
+<p>Jellyfin 不使用系统的数据库，也不需要修改很多配置文件，大部分都在启动之后的设置向导里设置就可以了。所以安装就是直接在 Arch 官方源里安装 <code>jellyfin-server</code> 和 <code>jellyfin-web</code>，然后打开 <code>/etc/jellyfin/jellyfin.env</code> 看看你需要不需要修改默认的 data 和 cache 目录，然后把存放视频的目录挂载到 data 目录下面就行了。</p>
+<p><code>systemctl start jellyfin</code> 之后内网访问 <code>8096</code> 端口，按照设置向导设置，之后让它扫描你的视频目录。由于它要生成缩略图，所以也会比较吃资源。至于其它的使用和配置方法应该网上有大把资料，就不啰嗦了。</p>
+<h1 id="Caddy"><a class="heading-link header-link" href="/posts/Deploy-More-Services-on-NAS/#Caddy"></a>Caddy</h1>
+<p>我一般是不需要在外网访问 NAS 上的服务的，因为我可以通过 tailscale 的 VPN 进行访问。但偶尔我会有通过 web 服务给朋友发文件的需求和给被拍的朋友通过 PhotoPrism 返图的需求，这种情况下就有必要进行 HTTPS 反代了。</p>
+<p>要做 HTTPS 反代首先域名我早就有了，北京联通的 IP 虽然不是固定的，但是这个可以通过 DDNS 解决，我自己使用的是 CloudFlare 的 API 和 ddclient，证书的话可以通过 Let's Encrypt 解决，虽然现在流行的 HTTPS 反代服务器都有自动给配置文件里的域名申请证书的功能，但我还是不得不使用 certbot 提供的 DNS-01 验证。因为 HTTP-01 和 TLS-01 验证要求你的 80 或者 443 端口要能被外网访问，但是在国内运营商的网络里你暴露这种常见端口，怕不是觉得自己家水表还是查的不够勤。</p>
+<p>至于反代服务器，虽然 NGINX 自己就是个高性能反代服务器，但是它的配置文件还是太过复杂了，我不知道怎么写才能让它反向代理 websocket，PhotoPrism 的文档也说不建议使用 NGINX 反向代理，于是我决定挑一个现代又傻瓜的反代服务器。一开始我本来想尝试 Traefik，但是我看了很久它的文档，感觉全都在写它如何如何支持 docker 服务自动发现，但是我根本没用 docker，也不需要服务发现，我想找如何配置它让它代理我指定的端口，翻来覆去也没看明白。然后我去看 Caddy，发现 Caddy 的文档非常简单易懂，而且核心就是通过简单的手动配置实现各种功能，所以我就用 Caddy 了。</p>
+<p>Caddy 和 NGINX 一样既支持文件服务器又支持反向代理，所以我把之前用 NGINX 提供的文件服务也转由 Caddy 负责了。我的需求是在内网我会直接通过 IP 和端口访问对应的服务，不需要 Caddy 转发，然后外网则通过 Caddy 进行 HTTPS 反代。</p>
+<p>在官方源里安装 <code>caddy</code> 之后打开 <code>/etc/caddy/Caddyfile</code>，最下面应该有一行 <code>import /etc/caddy/conf.d/*</code>，这一行可以不动，我打算用它实现分离各个不同服务的配置的功能。然后首先实现端口 <code>2345</code> 上的文件服务器，非常简单：</p>
+<figure data-raw=":2345 {
+	file_server browse {
+		root /mnt/hdd0/http/fileshare
+	}
+}
+" class="code-block"><pre class="code"><code>:2345 {
+	file_server browse {
+		root /mnt/hdd0/http/fileshare
+	}
+}
+</code></pre></figure>
+<p>只要这么几行就够了，比起写 NGINX 的配置文件还是简单太多了。想要添加 HTTP 的用户密码验证的话就去阅读 Caddy 文档里关于 <code>basic_auth</code> 的部分。</p>
+<p>然后就是添加外网反向代理的配置，我给 NAS 分配了一个域名，但我并不想让文件服务器作为这个域名的唯一功能，所以我通过 Caddy 给它重定向到一个子目录，这里可以创建一个 <code>/etc/caddy/conf.d/fileshare</code>：</p>
+<figure data-raw="https://nas_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	redir /fileshare /fileshare/
+	handle_path /fileshare/* {
+		reverse_proxy :2345
+
+	}
+}
+" class="code-block"><pre class="code"><code>https://nas_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	redir /fileshare /fileshare/
+	handle_path /fileshare/* {
+		reverse_proxy :2345
+
+	}
+}
+</code></pre></figure>
+<p>相信这个配置已经简单到不需要我介绍也可以看懂了，至于 PhotoPrism 和 Jellyfin 这样的服务它们不推荐重定向到子目录（会影响 web 资源加载的路径），所以我不得不再分配一个域名给它并且设置 ddclient 和 certbot。然后同样创建一个 <code>/etc/caddy/conf.d/photoprism</code>：</p>
+<figure data-raw="https://photo_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	reverse_proxy :2342
+}
+" class="code-block"><pre class="code"><code>https://photo_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	reverse_proxy :2342
+}
+</code></pre></figure>
+<p>这看起来比上一个还简单了。启动 Caddy 的话就 <code>systemctl start caddy</code>，改了配置文件就 <code>systemctl reload caddy</code>。</p>
+<p>最后由于我太懒了不想记住每一个 web 服务的端口号，我简单写了个网页列出所有这些服务，这样我在内网访问就可以先打开这个网页再点我想用的。但由于我的 NAS 有好几个网卡，我希望通过万兆直连访问时候就使用万兆网卡的 IP，通过路由器访问的时候就使用板载网卡的 IP，但是 HTML 的链接不能只写端口号，而普通的静态页面显然是不支持按需修改链接的。但是 Caddy 是使用 go 编写的，所以作为 web 服务器的时候支持 go 的模版语法（好吧我并不喜欢 go 的模版语法，但是有总比没有强）。所以可以在 <code>/etc/caddy/Caddyfile</code> 里面加入下面一段开启一个支持模版的 web 服务器：</p>
+<figure data-raw="http:// {
+	root * /mnt/ssd0/http/caddy
+	templates
+	file_server browse
+}
+" class="code-block"><pre class="code"><code>http:// {
+	root * /mnt/ssd0/http/caddy
+	templates
+	file_server browse
+}
+</code></pre></figure>
+<p>然后只要编辑 <code>/mnt/ssd0/http/caddy/index.html</code>，在里面用 <code>{{ .Host }}</code> 代替本机的 IP 就可以了。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="bi bi-tag"></i>Linux</a><a class="post-tag button" href="/tags/Caddy/" rel="tag"><i class="bi bi-tag"></i>Caddy</a><a class="post-tag button" href="/tags/PhotoPrism/" rel="tag"><i class="bi bi-tag"></i>PhotoPrism</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/Move-to-10GbE/" rel="prev" title="升级万兆网络"><span class="page-nav-title">升级万兆网络</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "在 NAS 上部署更多服务",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Deploy-More-Services-on-NAS/",
+          "containerID": "comment-results"
+        }).then(() => {
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
+            document.querySelectorAll("time.comment-full-datetime"),
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto-Karon-White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">将我漫天心血一一抛到银河</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">116</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">38</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">94</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="post-toc sidebar-item">
+      <div><i class="bi bi-list-ol"></i>文章目录</div>
+<ol class="toc">
+  <li>
+    <a class="list-group-item toc-link" href="#PhotoPrism">PhotoPrism</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#Jellyfin">Jellyfin</a>
+  </li>
+  <li>
+    <a class="list-group-item toc-link" href="#Caddy">Caddy</a>
+  </li>
+</ol>
+    </div>
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://planet.archlinuxcn.org/" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://dawn.moe/" target="_blank" rel="external nofollow noreferrer noopener">藍貓 八千代</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.21.3 at 2025-08-08T13:27:06.158Z. -->

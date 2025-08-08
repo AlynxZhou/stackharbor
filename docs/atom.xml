@@ -5,13 +5,147 @@
   <icon>https://sh.alynx.one/images/Mikoto-Karon-White.webp</icon>
   <link rel="self" type="application/atom+xml" href="https://sh.alynx.one/atom.xml" />
   <link rel="alternate" type="text/html" href="https://sh.alynx.one/" />
-  <updated>2025-08-05T16:55:06.295Z</updated>
+  <updated>2025-08-08T13:27:06.162Z</updated>
   <id>https://sh.alynx.one/</id>
   <author>
     <name>Alynx Zhou</name>
     <email>alynx.zhou@gmail.com</email>
   </author>
   <generator uri="https://github.com/AlynxZhou/hikaru-generator-feed/" version="v2.5.2">Hikaru Generator Feed</generator>
+  <entry>
+    <title>在 NAS 上部署更多服务</title>
+    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Deploy-More-Services-on-NAS/" />
+    <id>https://sh.alynx.one/posts/Deploy-More-Services-on-NAS/</id>
+    <author>
+      <name>Alynx Zhou</name>
+      <email>alynx.zhou@gmail.com</email>
+    </author>
+    <published>2025-08-08T01:24:38.000Z</published>
+    <updated>2025-08-08T01:24:38.000Z</updated>
+    <summary type="html">
+      &lt;div class=&quot;alert-blue&quot;&gt;由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。&lt;/div&gt;
+
+&lt;p&gt;基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。&lt;/p&gt;
+
+    </summary>
+    <content type="html">
+      &lt;div class=&quot;alert-blue&quot;&gt;由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。&lt;/div&gt;
+
+&lt;p&gt;基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;PhotoPrism&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Deploy-More-Services-on-NAS/#PhotoPrism&quot;&gt;&lt;/a&gt;PhotoPrism&lt;/h1&gt;
+&lt;p&gt;一个我早就想解决的需求是按时间线快速查看照片，我发现翻看以前的照片非常有意思，有些已经忘掉的事情看到照片就会想起当时的心情，所以要是能快速的点开过去某个时间的照片就好了。&lt;/p&gt;
+&lt;p&gt;为了不把自己绑死在某个后期软件上，我没有使用诸如 Lightroom 这类软件内置的照片库管理，而是直接将照片从存储卡里复制到磁盘阵列里。因为不想手动管理重复项，所以我就保持相机的文件夹逻辑。索尼相机虽然在拍照时可以直接按照日期建立文件夹，但是它是前四位序号加后四位月份日期，因此按名称排序并不是时间顺序。即使忽略掉这个问题，也没有办法快速的查看什么时候拍了什么照片，因为文件管理器通常并不能让你隔着文件夹看到里面都有什么照片。再考虑到拍了四年照片之后我已经积攒了相当大的照片库，直接打开一个个目录查看源文件对于磁盘 IO 速度是个相当大的考验。所以是时候部署一个能自动给照片分时分类创建缩略图的服务了。&lt;/p&gt;
+&lt;p&gt;我选择的方案是 PhotoPrism，当然有好几个类似的项目可选，我就是随便选了一个，没什么特殊理由。PhotoPrism 的官网建议用户以 docker 的方式部署，但我不太喜欢容器化，而且我只有一台服务器也享受不到容器化带来的什么方便，所以我选择通过 AUR 的 &lt;code&gt;photoprism&lt;/code&gt; 包安装。&lt;/p&gt;
+&lt;p&gt;官方同时支持 sqlite 和 mysql 两个数据库，但是对于实际的项目使用 mysql 性能要好很多。如果你按照官方的文档使用 docker 应该会要你再部署一个 mariadb 的容器并配置它，但是却没有提如果不用 docker 要怎么办。其实也很简单，总之先装一个 mariadb 配置好并启动，这一部分直接参照 Arch Wiki 就好了。然后我创建了一个叫做 &lt;code&gt;photoprism&lt;/code&gt; 的数据库和一个 &lt;code&gt;photoprism&lt;/code&gt; 的数据库用户，再给这个用户设置好密码，给它操作这个数据库的权限，数据库准备工作就算完成了。&lt;/p&gt;
+&lt;p&gt;使用 docker 的话通常是编辑 compose 文件里面的环境变量来配置 PhotoPrism，不使用 docker 的话则是通过配置文件。AUR 包里面的 PhotoPrism 会加载 &lt;code&gt;/etc/photoprism/defaults.yml&lt;/code&gt;，里面只有几个路径要设置，当然其实也可以不改路径，毕竟我不打算把照片导入到 PhotoPrism 管理的目录，而是把我的照片目录链接过去，所以这几个目录只会存 PhotoPrism 的配置文件和缓存文件。然后按照官方文档的建议，不要在 &lt;code&gt;defaults.yml&lt;/code&gt; 里面加更多内容，而是在你设置的 &lt;code&gt;ConfigPath&lt;/code&gt; 下面创建一个 &lt;code&gt;options.yml&lt;/code&gt; 在里面进行设置。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;options.yml&lt;/code&gt; 里面的内容和 compose 文件里设置的环境变量的内容其实是等价的，只是写法不同，必须设置的大概也就如下几项，其它的当你启动 PhotoPrism 在设置里修改之后它会自动更新这个文件：&lt;/p&gt;
+&lt;figure data-raw=&quot;AdminPassword: admin
+AdminUser: admin
+AuthMode: password
+DatabaseDriver: mysql
+DatabaseName: photoprism
+DatabasePassword: your_database_user_password
+DatabaseServer: /run/mysqld/mysqld.sock
+DatabaseUser: photoprism
+DisableTLS: true
+HttpPort: 2342
+SiteUrl: https://photos.example.com/
+&quot; data-info=&quot;language-yaml&quot; data-lang=&quot;yaml&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;AdminPassword: admin
+AdminUser: admin
+AuthMode: password
+DatabaseDriver: mysql
+DatabaseName: photoprism
+DatabasePassword: your_database_user_password
+DatabaseServer: /run/mysqld/mysqld.sock
+DatabaseUser: photoprism
+DisableTLS: true
+HttpPort: 2342
+SiteUrl: https://photos.example.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;如果你和我一样 mariadb 和 PhotoPrism 运行在同一台机器上，那可以通过 UNIX socket 指定数据库连接，否则可以使用 IP 和端口。如果你想给别人分享相册，就把 &lt;code&gt;SiteUrl&lt;/code&gt; 设置成外网的网址。&lt;/p&gt;
+&lt;p&gt;我不打算使用 PhotoPrism 的导入功能，这个功能会将你的照片复制到它管理的目录并按规则重命名。我打算只让它索引我的照片，所以要将我的照片目录挂载到
+ &lt;code&gt;OriginalsPath&lt;/code&gt; 而不是 &lt;code&gt;ImportPath&lt;/code&gt;。使用 docker compose 的话会在 compose 文件里指定如何挂载，而我使用 fstab 进行 dir bind mount。以上这些基本上和使用 docker compose 的逻辑一样，只是配置的方式不同。&lt;/p&gt;
+&lt;p&gt;然后如果修改路径到别处的话，记得保证 &lt;code&gt;photoprism&lt;/code&gt; 用户对这几个路径是可读写的，因为 systemd 会以 &lt;code&gt;photoprism&lt;/code&gt; 用户运行 PhotoPrism，&lt;code&gt;systemctl start photoprism&lt;/code&gt; 之后，内网应该就可以通过 &lt;code&gt;2342&lt;/code&gt; 端口访问它的前端了。点击资料库 -&amp;gt; 索引，勾选完全重新扫描然后点击开始，应该就可以看到它开始索引目录里的照片并创建缩略图了。&lt;/p&gt;
+&lt;p&gt;我大概有 24 万张照片，其中一半是 RAW 一半是对应的 JPG，PhotoPrism 运行了一天一夜给我所有的照片建立了索引和缩略图。如果你的 GPU 可以被它用来加速或者你的磁盘阵列速度比我快，应该不需要这么久。&lt;/p&gt;
+&lt;h1 id=&quot;Jellyfin&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Deploy-More-Services-on-NAS/#Jellyfin&quot;&gt;&lt;/a&gt;Jellyfin&lt;/h1&gt;
+&lt;p&gt;我当然是没有出门在外看 NAS 上的视频的需求，但是在家里看的需求还是有的。之前我一直使用文件管理器通过 samba 直接播放，在电脑上当然不成问题，但是不知道是由于无线带宽有限还是 Android 上的 samba 客户端的问题，用手机或者平板看文件体积比较大的电影就加载不动了。Android 版 VLC 虽然有内置的 samba 支持，但是那个文件管理器超级难用啊，没有按日期排序，从一个目录返回上一个目录还不能保持之前的位置。所以我觉得部署一个 Jellyfin 还是有必要的。&lt;/p&gt;
+&lt;p&gt;Jellyfin 不使用系统的数据库，也不需要修改很多配置文件，大部分都在启动之后的设置向导里设置就可以了。所以安装就是直接在 Arch 官方源里安装 &lt;code&gt;jellyfin-server&lt;/code&gt; 和 &lt;code&gt;jellyfin-web&lt;/code&gt;，然后打开 &lt;code&gt;/etc/jellyfin/jellyfin.env&lt;/code&gt; 看看你需要不需要修改默认的 data 和 cache 目录，然后把存放视频的目录挂载到 data 目录下面就行了。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;systemctl start jellyfin&lt;/code&gt; 之后内网访问 &lt;code&gt;8096&lt;/code&gt; 端口，按照设置向导设置，之后让它扫描你的视频目录。由于它要生成缩略图，所以也会比较吃资源。至于其它的使用和配置方法应该网上有大把资料，就不啰嗦了。&lt;/p&gt;
+&lt;h1 id=&quot;Caddy&quot;&gt;&lt;a class=&quot;heading-link header-link&quot; href=&quot;/posts/Deploy-More-Services-on-NAS/#Caddy&quot;&gt;&lt;/a&gt;Caddy&lt;/h1&gt;
+&lt;p&gt;我一般是不需要在外网访问 NAS 上的服务的，因为我可以通过 tailscale 的 VPN 进行访问。但偶尔我会有通过 web 服务给朋友发文件的需求和给被拍的朋友通过 PhotoPrism 返图的需求，这种情况下就有必要进行 HTTPS 反代了。&lt;/p&gt;
+&lt;p&gt;要做 HTTPS 反代首先域名我早就有了，北京联通的 IP 虽然不是固定的，但是这个可以通过 DDNS 解决，我自己使用的是 CloudFlare 的 API 和 ddclient，证书的话可以通过 Let&#039;s Encrypt 解决，虽然现在流行的 HTTPS 反代服务器都有自动给配置文件里的域名申请证书的功能，但我还是不得不使用 certbot 提供的 DNS-01 验证。因为 HTTP-01 和 TLS-01 验证要求你的 80 或者 443 端口要能被外网访问，但是在国内运营商的网络里你暴露这种常见端口，怕不是觉得自己家水表还是查的不够勤。&lt;/p&gt;
+&lt;p&gt;至于反代服务器，虽然 NGINX 自己就是个高性能反代服务器，但是它的配置文件还是太过复杂了，我不知道怎么写才能让它反向代理 websocket，PhotoPrism 的文档也说不建议使用 NGINX 反向代理，于是我决定挑一个现代又傻瓜的反代服务器。一开始我本来想尝试 Traefik，但是我看了很久它的文档，感觉全都在写它如何如何支持 docker 服务自动发现，但是我根本没用 docker，也不需要服务发现，我想找如何配置它让它代理我指定的端口，翻来覆去也没看明白。然后我去看 Caddy，发现 Caddy 的文档非常简单易懂，而且核心就是通过简单的手动配置实现各种功能，所以我就用 Caddy 了。&lt;/p&gt;
+&lt;p&gt;Caddy 和 NGINX 一样既支持文件服务器又支持反向代理，所以我把之前用 NGINX 提供的文件服务也转由 Caddy 负责了。我的需求是在内网我会直接通过 IP 和端口访问对应的服务，不需要 Caddy 转发，然后外网则通过 Caddy 进行 HTTPS 反代。&lt;/p&gt;
+&lt;p&gt;在官方源里安装 &lt;code&gt;caddy&lt;/code&gt; 之后打开 &lt;code&gt;/etc/caddy/Caddyfile&lt;/code&gt;，最下面应该有一行 &lt;code&gt;import /etc/caddy/conf.d/*&lt;/code&gt;，这一行可以不动，我打算用它实现分离各个不同服务的配置的功能。然后首先实现端口 &lt;code&gt;2345&lt;/code&gt; 上的文件服务器，非常简单：&lt;/p&gt;
+&lt;figure data-raw=&quot;:2345 {
+	file_server browse {
+		root /mnt/hdd0/http/fileshare
+	}
+}
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;:2345 {
+	file_server browse {
+		root /mnt/hdd0/http/fileshare
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;只要这么几行就够了，比起写 NGINX 的配置文件还是简单太多了。想要添加 HTTP 的用户密码验证的话就去阅读 Caddy 文档里关于 &lt;code&gt;basic_auth&lt;/code&gt; 的部分。&lt;/p&gt;
+&lt;p&gt;然后就是添加外网反向代理的配置，我给 NAS 分配了一个域名，但我并不想让文件服务器作为这个域名的唯一功能，所以我通过 Caddy 给它重定向到一个子目录，这里可以创建一个 &lt;code&gt;/etc/caddy/conf.d/fileshare&lt;/code&gt;：&lt;/p&gt;
+&lt;figure data-raw=&quot;https://nas_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	redir /fileshare /fileshare/
+	handle_path /fileshare/* {
+		reverse_proxy :2345
+
+	}
+}
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;https://nas_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	redir /fileshare /fileshare/
+	handle_path /fileshare/* {
+		reverse_proxy :2345
+
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;相信这个配置已经简单到不需要我介绍也可以看懂了，至于 PhotoPrism 和 Jellyfin 这样的服务它们不推荐重定向到子目录（会影响 web 资源加载的路径），所以我不得不再分配一个域名给它并且设置 ddclient 和 certbot。然后同样创建一个 &lt;code&gt;/etc/caddy/conf.d/photoprism&lt;/code&gt;：&lt;/p&gt;
+&lt;figure data-raw=&quot;https://photo_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	reverse_proxy :2342
+}
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;https://photo_domain.example.com {
+	tls path_to_fullchain.pem path_to_privkey.pem
+
+	reverse_proxy :2342
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;这看起来比上一个还简单了。启动 Caddy 的话就 &lt;code&gt;systemctl start caddy&lt;/code&gt;，改了配置文件就 &lt;code&gt;systemctl reload caddy&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;最后由于我太懒了不想记住每一个 web 服务的端口号，我简单写了个网页列出所有这些服务，这样我在内网访问就可以先打开这个网页再点我想用的。但由于我的 NAS 有好几个网卡，我希望通过万兆直连访问时候就使用万兆网卡的 IP，通过路由器访问的时候就使用板载网卡的 IP，但是 HTML 的链接不能只写端口号，而普通的静态页面显然是不支持按需修改链接的。但是 Caddy 是使用 go 编写的，所以作为 web 服务器的时候支持 go 的模版语法（好吧我并不喜欢 go 的模版语法，但是有总比没有强）。所以可以在 &lt;code&gt;/etc/caddy/Caddyfile&lt;/code&gt; 里面加入下面一段开启一个支持模版的 web 服务器：&lt;/p&gt;
+&lt;figure data-raw=&quot;http:// {
+	root * /mnt/ssd0/http/caddy
+	templates
+	file_server browse
+}
+&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;http:// {
+	root * /mnt/ssd0/http/caddy
+	templates
+	file_server browse
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;然后只要编辑 &lt;code&gt;/mnt/ssd0/http/caddy/index.html&lt;/code&gt;，在里面用 &lt;code&gt;{{ .Host }}&lt;/code&gt; 代替本机的 IP 就可以了。&lt;/p&gt;
+
+    </content>
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" />
+    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
+    <category term="Linux" label="Linux" scheme="https://sh.alynx.one/tags/Linux/" />
+    <category term="Caddy" label="Caddy" scheme="https://sh.alynx.one/tags/Caddy/" />
+    <category term="PhotoPrism" label="PhotoPrism" scheme="https://sh.alynx.one/tags/PhotoPrism/" />
+  </entry>
   <entry>
     <title>升级万兆网络</title>
     <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/Move-to-10GbE/" />
@@ -2951,152 +3085,5 @@ Downloading source file /usr/src/debug/glibc/glibc/nptl/pthread_mutex_lock.c
     </content>
     <category term="生活" label="生活" scheme="https://sh.alynx.one/categories/%E7%94%9F%E6%B4%BB/" />
     <category term="时光飞逝" label="时光飞逝" scheme="https://sh.alynx.one/tags/%E6%97%B6%E5%85%89%E9%A3%9E%E9%80%9D/" />
-  </entry>
-  <entry>
-    <title>YubiKey 和 GNOME 和智能卡登录</title>
-    <link rel="alternate" type="text/html" href="https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/" />
-    <id>https://sh.alynx.one/posts/YubiKey-GNOME-Smartcard-Login/</id>
-    <author>
-      <name>Alynx Zhou</name>
-      <email>alynx.zhou@gmail.com</email>
-    </author>
-    <published>2022-11-28T10:24:04.000Z</published>
-    <updated>2025-04-24T09:42:09.000Z</updated>
-    <summary type="html">
-      最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 sudo 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，…
-    </summary>
-    <content type="html">
-      &lt;p&gt;最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 &lt;code&gt;sudo&lt;/code&gt; 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，除了平时用的 &lt;code&gt;gdm-password&lt;/code&gt; 密码登录，还有 &lt;code&gt;gdm-fingerprint&lt;/code&gt; 指纹登录和 &lt;code&gt;gdm-smartcard&lt;/code&gt; 智能卡登录。我一开始是打算买个指纹传感器的，查了一下 fprintd 的文档，支持的型号并不多，而且在淘宝上问客服 USB Product ID 和 Vendor ID 显然得不到回答，就退而求其次买智能卡了，而搜索智能卡得到最多的结果就是 YubiKey，进入一个不了解的领域之前和大部分人选一样的一般不会错太多，于是就下手了。&lt;/p&gt;
-&lt;p&gt;话说回来智能卡登录，如果你搜索 YubiKey 相关的文章，绝大多数都会告诉你把 &lt;code&gt;pam_u2f.so&lt;/code&gt; 加到需要密码登录的 PAM 配置里，比如 &lt;code&gt;sudo&lt;/code&gt; 或者 &lt;code&gt;gdm-password&lt;/code&gt;，但这显然不是我想要的，我要的方案不是替换密码登录，而是和密码登录平行的配置文件，我知道 GNOME 有已经写好的智能卡配置，但是任何地方都搜不到如何启用，设置里没有相关选项，连 Arch Wiki 给的方案都只是用 &lt;code&gt;pam_u2f.so&lt;/code&gt;。Red Hat 的支持文档里倒是提到了智能卡登录，然而用的却是他们自己的某个工具配置的。显然这是个起夜级 feature，最好的办法也许是找个起夜级 Linux 的桌面工程师来问问，哦什么我自己就是起夜级 Linux 桌面工程师，那没事了。还要说的一件事是怎么想智能卡这东西都和安全相关，而我自己不是专业的安全行业人士，所以我不会尝试解释清楚和安全相关的一些名词，以及如果我哪里真的写错了，希望专业人士多多指点，我肯定改。&lt;/p&gt;
-&lt;p&gt;总之相信你自己因为你才是职业选手，我还是自己看看这东西怎么弄吧，毕竟用 Arch 再用 GNOME 同时还打算搞 GNOME 的智能卡登录的人没几个，所以 Wiki 没有倒也正常。首先肯定是看 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt; 这个文件，里面别的看起来都比较正常，只有一行看起来和智能卡有关系：&lt;/p&gt;
-&lt;figure data-raw=&quot;auth       required                    pam_pkcs11.so        wait_for_card card_only
-&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code&gt;auth       required                    pam_pkcs11.so        wait_for_card card_only
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;线索是有了，看来我需要这个 &lt;code&gt;pam_pkcs11.so&lt;/code&gt;，虽然我也不知道这是什么，先搜一下哪个包有这个文件比较好。&lt;code&gt;pacman -F pam_pkcs11.so&lt;/code&gt; 竟然没有返回任何结果，我确定不是我的 pacman 数据库没更新，那只能去浏览器里搜索了，最后我搜到了 &lt;a href=&quot;https://github.com/OpenSC/pam_pkcs11&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://github.com/OpenSC/pam_pkcs11&lt;/a&gt;，虽然我也不知道 &lt;code&gt;PKCS#11&lt;/code&gt; 是个什么玩意，但反正它是个 PAM 模块，既然不在官方仓库里，那大概率 AUR 里有人打包了，于是直接 &lt;code&gt;paru pam_pksc11&lt;/code&gt; 就装了一个上来。&lt;/p&gt;
-&lt;p&gt;但装是装好了，也看不出来这玩意和 YubiKey 有什么联系，我大概是搜索了 PKCS YubiKey 然后搜到了 YubiKey 给的文档 &lt;a href=&quot;https://developers.yubico.com/PIV/Guides/SSH_with_PIV_and_PKCS11.html&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Using PIV for SSH through PKCS #11&lt;/a&gt;，好吧虽然我不是要用来 SSH 但是多半也有点用。看下来反正这个东西和 YubiKey 的 PIV 功能有关，我把 PIV 相关的文档都看了一遍，结果是云里雾里，相当没有头绪。一大堆文档告诉你各种各样的需求要做什么，但是几乎没怎么说这都是什么，于是恰好我的需求不在列表里我就不知道怎么办了。我又回头去看 &lt;code&gt;pam_pkcs11&lt;/code&gt; 的文档，它写了一长串的东西，我反复看了几遍之后发现只要看 &lt;a href=&quot;http://opensc.github.io/pam_pkcs11/doc/pam_pkcs11.html#HOWTO&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;第 11 节的 HOWTO 部分&lt;/a&gt; 就可以了。虽然我也不太清楚它都在说什么，但是至少这里告诉我说需要一个 root CA certificate，但我是个人使用哪来的这玩意，再回头看 YubiKey 的那篇文档里面恰好提到了什么 self-signed certificate，我拿这个试一试，结果成功了。为了方便参考，下面我就不讲我是怎么倒推这些奇怪的需求的了，而是顺序讲一下都需要配置什么。&lt;/p&gt;
-&lt;p&gt;首先如果你像我一样刚买了一个 YubiKey 打算利用它的 PIV 功能，那你得先初始化它，也就是改掉默认的 PIN，PUK 和管理密钥，这个可以通过官方的 YubiKey Manager 软件来操作：&lt;/p&gt;
-&lt;figure data-raw=&quot;# pacman -S yubikey-manager
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pacman -S yubikey-manager
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;之前这个软件还有个 Qt 写的 GUI 版本，但是已经被官方放弃了，不过本来 GUI 也不是很好用，所以建议还是用命令行：&lt;/p&gt;
-&lt;figure data-raw=&quot;% ykman piv access change-pin
-% ykman piv access change-puk
-% ykman piv access change-management-key --generate --protect --touch
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% ykman piv access change-pin
-% ykman piv access change-puk
-% ykman piv access change-management-key --generate --protect --touch
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;默认 PIN 是 &lt;code&gt;123456&lt;/code&gt;，默认 PUK 是 &lt;code&gt;12345678&lt;/code&gt;，而管理密钥是个特别长的一串，用 &lt;code&gt;--generate&lt;/code&gt; 可以让 &lt;code&gt;ykman&lt;/code&gt; 给你生成一个，&lt;code&gt;--protect&lt;/code&gt; 则是把这个直接存到 YubiKey 里面并用 PIN 保护，&lt;code&gt;--touch&lt;/code&gt; 则是说每次要管理密钥的时候需要你摸一下。我也不是很懂，也许写进去以后需要的时候就不用自己背这玩意而是输 PIN 就行了吧，反正建议看官方文档 &lt;a href=&quot;https://developers.yubico.com/PIV/Guides/Device_setup.html&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Device setup&lt;/a&gt; 和 &lt;code&gt;ykman&lt;/code&gt; 的 &lt;code&gt;--help&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;我的建议是不要看太多官方文档，因为它一会告诉你用 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 创建密钥，一会告诉你说可以用 &lt;code&gt;openssl&lt;/code&gt; 创建密钥，一会又告诉你可以用 &lt;code&gt;pkcs11-tool&lt;/code&gt; 搭配 &lt;code&gt;libykcs11.so&lt;/code&gt; 创建密钥，算了吧，头都看晕了，我的测试是用 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 就可以了。&lt;/p&gt;
-&lt;figure data-raw=&quot;% paru yubico-piv-tool
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% paru yubico-piv-tool
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;在 &lt;code&gt;9a&lt;/code&gt; 这个槽创建一个 key 并把它的公钥写出来，为什么是 &lt;code&gt;9a&lt;/code&gt; 好像因为这是第一个槽来着，自己去查官方文档吧，也可以写到别的槽里面：&lt;/p&gt;
-&lt;figure data-raw=&quot;% yubico-piv-tool -s 9a -a verify-pin -a generate -o public.pem
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a generate -o public.pem
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;需要先输入 PIN，然后灯闪的时候需要摸一下 YubiKey，它就开始生成了。&lt;/p&gt;
-&lt;p&gt;还要给这个密钥生成一个签名：&lt;/p&gt;
-&lt;figure data-raw=&quot;% yubico-piv-tool -s 9a -a verify-pin -a selfsign-certificate -S &amp;quot;/CN=Alynx Zhou/&amp;quot; -i public.pem -o cert.pem
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a selfsign-certificate -S &quot;/CN=Alynx Zhou/&quot; -i public.pem -o cert.pem
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;注意 &lt;code&gt;CN=&lt;/code&gt; 后面的部分，这里会被 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 用来验证这个智能卡属于系统里面哪个用户，所以简单的话直接写你的登录用户名，当然你像我一样不想写用户名也是有办法对应的，同样要输入 PIN。&lt;/p&gt;
-&lt;p&gt;再把证书导回到同一个槽，我也不知道为什么，文档说了我照做了（大概是为了方便携带，需要证书的时候可以直接从 YubiKey 里面导出）：&lt;/p&gt;
-&lt;figure data-raw=&quot;% yubico-piv-tool -s 9a -a verify-pin -a import-certificate -i cert.pem
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% yubico-piv-tool -s 9a -a verify-pin -a import-certificate -i cert.pem
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;还是要输入 PIN 然后灯闪的时候摸一下。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;更新（2025-04-24）：我发现生成的证书就像 HTTPS 的证书一样其实是会过期的，默认的有效期是一年，到期了需要重新生成一个证书。我大概理解了这玩意是怎么回事并且搞清楚如何用 &lt;code&gt;ykman&lt;/code&gt; 配置了所以我这里再记录一下怎么用 &lt;code&gt;ykman&lt;/code&gt; 更新证书。&lt;/p&gt;
-&lt;p&gt;整个的流程其实是你有一对私钥公钥用来签发证书，私钥在你的 YubiKey 里，公钥则是一个文件，使用公钥签发证书，然后把证书丢给 pam_pkcs11，pam_pkcs11 请求卡片用私钥验证证书是否符合。为了方便，证书可以导入 YubiKey，也可以从 YubiKey 里导出。&lt;/p&gt;
-&lt;p&gt;首先可以用 &lt;code&gt;ykman piv info&lt;/code&gt; 查看一下目前证书的信息。&lt;/p&gt;
-&lt;p&gt;如果已经有一个过期的就用 &lt;code&gt;ykman piv certificates delete 9a&lt;/code&gt; 删掉旧的证书。&lt;/p&gt;
-&lt;p&gt;然后用 &lt;code&gt;ykman piv certificates generate -s &quot;CN=Alynx Zhou&quot; 9a public.pem&lt;/code&gt; 签发一个新证书，注意这里字符串的格式和 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 不一样，这里用逗号而不是斜杠做分隔符。&lt;/p&gt;
-&lt;p&gt;和 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 不一样，此时证书是直接生成在卡片里的，要交给 pam_pkcs11 的话得用 &lt;code&gt;ykman piv certificates export 9a cert.pem&lt;/code&gt; 导出成文件。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;到这里 YubiKey 的配置就结束了。&lt;/p&gt;
-&lt;p&gt;要在系统上使用智能卡验证需要安装系统上和智能卡交互的软件包：&lt;/p&gt;
-&lt;figure data-raw=&quot;# pacman -S ccid opensc pcsclite
-% paru pam_pkcs11
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pacman -S ccid opensc pcsclite
-% paru pam_pkcs11
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;启动一个相关的 daemon，或者启动 socket 也行，需要的时候它就自己起来了：&lt;/p&gt;
-&lt;figure data-raw=&quot;# systemctl enable --now pcscd.socket
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# systemctl enable --now pcscd.socket
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;如果我没漏掉什么乱七八糟的，就可以配置 PAM 模块了，它有一个配置目录叫 &lt;code&gt;/etc/pam_pksc11&lt;/code&gt;，首先你要把上面生成的证书放到 &lt;code&gt;/etc/pam_pkcs11/cacerts&lt;/code&gt;。&lt;/p&gt;
-&lt;figure data-raw=&quot;# cd /etc/pam_pkcs11/cacerts
-# cp PATH_TO_YOUT_CERT/cert.pem ./
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cd /etc/pam_pkcs11/cacerts
-# cp PATH_TO_YOUT_CERT/cert.pem ./
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;你要在同一个目录下面运行一个什么什么 hash 命令生成一个 hash：&lt;/p&gt;
-&lt;figure data-raw=&quot;# pkcs11_make_hash_link
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# pkcs11_make_hash_link
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;接下来你要去搞它的配置文件，先复制一个样本过来：&lt;/p&gt;
-&lt;figure data-raw=&quot;# cp /usr/share/doc/pam_pkcs11/pam_pkcs11.conf.example /etc/pam_pkcs11/pam_pkcs11.conf
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cp /usr/share/doc/pam_pkcs11/pam_pkcs11.conf.example /etc/pam_pkcs11/pam_pkcs11.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;好像其实也没什么需要改的。文档说默认的配置用的是 OpenSC 的 PKCS#11 库，虽然 YubiKey 的文档一直跟你说什么 &lt;code&gt;libykcs11.so&lt;/code&gt;，我的测试结果是不用理它，通用的接口就够了，以及这个 &lt;code&gt;libykcs11.so&lt;/code&gt; 是属于 &lt;code&gt;yubico-piv-tool&lt;/code&gt; 这个包的。&lt;/p&gt;
-&lt;p&gt;假如你刚才 &lt;code&gt;CN=&lt;/code&gt; 后面写的不是你的用户名，那你需要一些配置告诉 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 你这个证书对应的哪个用户，这一步在它的配置文件里叫 &lt;code&gt;mapper&lt;/code&gt;。默认启用了一些 mapper 比如 &lt;code&gt;pwent&lt;/code&gt;，这个就是把 &lt;code&gt;CN=&lt;/code&gt; 后面的内容和 &lt;code&gt;/etc/passwd&lt;/code&gt; 里面的用户名做匹配，但是如果你像我一样写的是全名，那就需要另一个默认启用的模块叫 &lt;code&gt;subject&lt;/code&gt;。至于 subject 是什么需要运行下面这个命令：&lt;/p&gt;
-&lt;figure data-raw=&quot;% pkcs11_inspect
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% pkcs11_inspect
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;它会输出各种 mapper 对应的 data，比如 &lt;code&gt;pwent&lt;/code&gt; 输出的就是 &lt;code&gt;Alynx Zhou&lt;/code&gt;，&lt;code&gt;subject&lt;/code&gt; 输出的则是 &lt;code&gt;/CN=Alynx Zhou&lt;/code&gt;。我们需要复制一个 &lt;code&gt;subject_mapping&lt;/code&gt; 配置文件的样本过来：&lt;/p&gt;
-&lt;figure data-raw=&quot;# cp /usr/share/doc/pam_pkcs11/subject_mapping.example /etc/pam_pkcs11/subject_mapping
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# cp /usr/share/doc/pam_pkcs11/subject_mapping.example /etc/pam_pkcs11/subject_mapping
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;在这个文件后面加一行：&lt;/p&gt;
-&lt;figure data-raw=&quot;/CN=Alynx Zhou -&gt; alynx
-&quot; data-info=&quot;language-plain&quot; data-lang=&quot;plain&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-plain&quot;&gt;/CN=Alynx Zhou -&amp;gt; alynx
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;我的用户名是 &lt;code&gt;alynx&lt;/code&gt;，你可以换成你自己的。&lt;/p&gt;
-&lt;p&gt;到这一步 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 这个模块已经可以通过智能卡验证你的身份了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;div class=&quot;alert-red&quot;&gt;更新（2025-04-24）：直接使用 p11-kit 的 MR 已经合并了，所以下面讲配置 NSS 数据库的部分都不需要做了。&lt;/div&gt;
-
-&lt;p&gt;但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt; 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。&lt;/p&gt;
-&lt;p&gt;这里就比较难搞清楚了，我智能卡插的好好的，上面各种程序都能用，为什么你检测不到？我尝试用什么 GDM YubiKey 之类的关键词搜索了半天，也没人告诉我 GDM 到底怎么检测智能卡的。没有办法还是读代码吧，GNOME Shell &lt;code&gt;js/gdm/util.js&lt;/code&gt; 里面的逻辑是通过 D-Bus 的 &lt;code&gt;org.gnome.SettingsDaemon.Smartcard&lt;/code&gt; 获取智能卡信息，那我打开 D-Feet 从 Session Bus 里面找到这个，直接运行 &lt;code&gt;org.gnome.SettingsDaemon.Smartcard.Manager&lt;/code&gt; 的 &lt;code&gt;GetInsertedTokens&lt;/code&gt;，什么都没有。&lt;/p&gt;
-&lt;p&gt;根据 D-Bus 的信息，很显然这个接口是 &lt;code&gt;gnome-settings-daemon&lt;/code&gt; 的 &lt;code&gt;smartcard&lt;/code&gt; 插件提供的，我大概是搜索了什么 gsd-smartcard PKCS#11 的关键字之后找到了 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208&lt;/a&gt;，其实我一开始也没太看懂这是什么意思，但得到一些有用的信息：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;gsd-smartcard&lt;/code&gt; 用了什么 NSS API 获取智能卡设备。&lt;/li&gt;
-&lt;li&gt;这玩意要一个什么 system shared certificate NSS database。&lt;/li&gt;
-&lt;li&gt;除了 Red Hat 家那一套好像没什么别的发行版弄这个。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这一路下来乱七八糟的名词已经够多的了现在又多了一个什么 NSS 而且只有 Red Hat 才配置了 system shared certificate NSS database，但不管怎么样我是职业选手我不能轻言放弃，还好 Arch Wiki 有这么一个页面 &lt;a href=&quot;https://wiki.archlinux.org/title/Network_Security_Services&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Network Security Services&lt;/a&gt;，但这不是管证书的吗，和智能卡设备有什么关系啊。这时候我又翻开了 Arch Wiki 关于智能卡的页面 &lt;a href=&quot;https://wiki.archlinux.org/title/Smartcards#Chromium&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Smartcards&lt;/a&gt;，里面讲了在 Chromium 里面加载智能卡需要在 NSS 数据库里面加一个模块（什么乱七八糟的），不过它操作的都是用户的家目录下面的数据库，这显然不是 system shared certificate NSS database。然后如果手工执行 &lt;code&gt;/usr/lib/gsd-smartcard -v&lt;/code&gt;，会发现这玩意尝试读取 &lt;code&gt;/etc/pki/nssdb&lt;/code&gt; 获取什么智能卡驱动列表，我系统里面根本没这个目录。算了，既然是 Red Hat 搞的东西，我看看他们怎么写的。正好我有个 Fedora 的虚拟机，打开虚拟机一看还真有这个目录，那就运行下面命令看看：&lt;/p&gt;
-&lt;figure data-raw=&quot;% modutil -dbdir /etc/pki/nssdb -list
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% modutil -dbdir /etc/pki/nssdb -list
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;结果里面除了默认项还真有个叫 &lt;code&gt;p11-kit-proxy&lt;/code&gt; 的玩意，我又回去看了一眼那个 Merge Request，现在我完全明白了，不知道为什么 NSS 这玩意会记录一个读取智能卡的驱动列表，然后 &lt;code&gt;gsd-smartcard&lt;/code&gt; 是通过 NSS 获取到智能卡的驱动列表之后再尝试查询智能卡，实际上现在没什么人用 NSS 这个功能了，你这还得往系统的 NSS 数据库里面写东西，除了红帽子家都没人搞这个了，就算有用 NSS 读的（比如浏览器）也是读用户的 NSS 数据库。别的用智能卡的都直接用 &lt;code&gt;p11-kit&lt;/code&gt; 去读智能卡，所以这个 Merge Request 也改成直接用 &lt;code&gt;p11-kit&lt;/code&gt; 读了。不知道为什么这个 Merge Request 没能合并。再多说一句，就算是 Red Hat 的系统 NSS 数据库，现在也不直接写智能卡的驱动了，而也是通过 &lt;code&gt;p11-kit&lt;/code&gt;，所以刚才在 Fedora 的数据库里只看到 &lt;code&gt;p11-kit-proxy&lt;/code&gt; 这一个驱动……&lt;/p&gt;
-&lt;p&gt;既然这样我们也在这个数据库里写一个 &lt;code&gt;p11-kit-proxy&lt;/code&gt;，根据 Arch Wiki 的智能卡页面，如果你要通过 &lt;code&gt;p11-kit&lt;/code&gt; 操作 OpenSC 的驱动（这都什么乱七八糟的），那可能需要安装一个 AUR 包来保证它被加载（实际上就是个文件而已）：&lt;/p&gt;
-&lt;figure data-raw=&quot;% paru opensc-p11-kit-module
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;% paru opensc-p11-kit-module
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;创建数据库目录并往数据库里写 &lt;code&gt;p11-kit-proxy&lt;/code&gt;：&lt;/p&gt;
-&lt;figure data-raw=&quot;# mkdir /etc/pki/nssdb
-# modutil -dbdir sql:/etc/pki/nssdb -add &amp;quot;p11-kit-proxy&amp;quot; -libfile p11-kit-proxy.so
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# mkdir /etc/pki/nssdb
-# modutil -dbdir sql:/etc/pki/nssdb -add &quot;p11-kit-proxy&quot; -libfile p11-kit-proxy.so
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;如果你和我一样又心急火燎的重启了，就会发现还是没用。这不科学啊，Fedora 的数据库里也是这么写的，看一眼 D-Bus 为什么还是没有智能卡。&lt;/p&gt;
-&lt;p&gt;实际上最后我发现只差一点点，Fedora 给这个目录下文件的权限是 &lt;code&gt;-rw-r--r--&lt;/code&gt;，而我这边创建好的是 &lt;code&gt;-rw------&lt;/code&gt;。&lt;code&gt;gsd-smartcard&lt;/code&gt; 是以 session 用户运行的当然读不了。所以改一下权限就可以了。&lt;/p&gt;
-&lt;figure data-raw=&quot;# chmod 0644 /etc/pki/nssdb/*
-&quot; data-info=&quot;language-shell&quot; data-lang=&quot;shell&quot; class=&quot;code-block&quot;&gt;&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;# chmod 0644 /etc/pki/nssdb/*
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;hr&gt;
-&lt;p&gt;接下来插着 YubiKey 重启，GDM 启动的 &lt;code&gt;gsd-smartcard&lt;/code&gt; 就能检测到智能卡，于是调用 &lt;code&gt;/etc/pam.d/gdm-smartcard&lt;/code&gt;，直接让你输入用户名，输入之后会提示你输入智能卡的 PIN，然后 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 进行验证，就可以登录了。锁屏之后也只要输入智能卡的 PIN 就可以解锁。&lt;/p&gt;
-&lt;p&gt;&lt;del&gt;按理说如果给 &lt;code&gt;pam_pkcs11.so&lt;/code&gt; 发一个空白的用户名，它会根据智能卡返回用户名的，不知道为什么我在 GDM 用不了，一定要开机手动输入，有空我看看代码也许可以修改一下。&lt;/del&gt; 我也不知道为什么一定要在 GDM 启动之前插入卡才可以，显示用户列表之后再插入卡我这里没反应。&lt;/p&gt;
-&lt;p&gt;更新（2022-11-30）：花了我半天时间研究 GDM 和 PAM，问题不在 GDM，而是因为 Arch Linux 的 &lt;code&gt;gdm-smartcard&lt;/code&gt; 首先调用了 &lt;code&gt;pam_shells&lt;/code&gt; 检查用户是否有合法的 shell，遇到空用户名它第一个失败了，于是我提交了 &lt;a href=&quot;https://gitlab.gnome.org/GNOME/gdm/-/merge_requests/193&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;一个 MR&lt;/a&gt;，把 &lt;code&gt;pam_shells&lt;/code&gt; 挪到 &lt;code&gt;pam_pkcs11&lt;/code&gt; 下面，这样它会检查自动返回的用户名。（虽然这些 PAM 配置文件是发行版自己写的但是大家都提交到 GNOME 那边了，我只改了 Arch 的因为我在用，别的发行版的用户先偷着乐吧。）&lt;/p&gt;
-&lt;p&gt;如果你想用智能卡解锁的话，一定得是用智能卡登录才可以，它会检查当前的卡是不是登录所用的那张卡，不是的话就只能密码解锁了。折腾这一套花了我一整天时间，因为资料实在是太少了，根本不知道它是怎么工作的。&lt;/p&gt;
-&lt;p&gt;以及最后我还发现一篇文章，里面的内容也是讲这个 NSS 数据库的解决方案的，也许我早看见这个就不会这么麻烦了： &lt;a href=&quot;https://p11-glue.freedesktop.narkive.com/4z6daFWc/fixing-nss-and-p11-kit-in-fedora-and-beyond&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noreferrer noopener&quot;&gt;Fixing NSS and p11-kit in Fedora (and beyond)&lt;/a&gt;。&lt;/p&gt;
-
-    </content>
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" />
-    <category term="计算机" label="计算机" scheme="https://sh.alynx.one/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" />
-    <category term="GNOME" label="GNOME" scheme="https://sh.alynx.one/tags/GNOME/" />
-    <category term="YubiKey" label="YubiKey" scheme="https://sh.alynx.one/tags/YubiKey/" />
   </entry>
 </feed>
