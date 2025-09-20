@@ -27,6 +27,12 @@ created: 2018-04-04 08:15:40
 - 主页：<https://hikaru.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/hikaru/>
 
+## ReFrame
+
+又是一个 Linux 远程桌面，但是使用 DRM/KMS 的接口抓取显示内容，使用 EGL/OpenGL ES 解码像素，使用 uinput 处理输入，因此可以支持各种显卡驱动下的各种桌面环境，无论是 X11 还是 Wayland。
+
+- 仓库：<https://github.com/AlynxZhou/reframe/>
+
 ## Show Me The Key
 
 在屏幕上显示你按的键，Screenkey 的替代品，采用 libinput 作为后端因此可以同时支持 X11 和 Wayland。

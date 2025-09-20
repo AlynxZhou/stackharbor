@@ -168,7 +168,7 @@ blogroll:
   enable: true
   links:
     - name: Arch Linux 星球
-      link: https://planet.archlinuxcn.org/
+      link: https://forum.archlinuxcn.org/c/general/planet/35
       icon: <i class="bi bi-link-45deg"></i>
     - name: 藍貓 八千代
       link: https://dawn.moe/
