@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10">
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
+    <meta name="author" content="Alynx Zhou">
+    <meta name="description" content="有些时候需要开启我的台式机处理一些任务，特别是出门在外的时候，但是台式机里有两块 NVIDIA GPU，如果一直开机也太不节能环保了。所以就想研究一些能远程开机/唤醒的方案。 最简单的方案肯定是 BIOS 里设置来电就开机，然后购买一个智能插座。但是在智能插座到货之前我就要出门，所以决定排列组合一下……">
+    <meta name="keywords" content="计算机, Linux">
+    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:site_name" content="喵's StackHarbor">
+    <meta property="og:title" content="通过 Intel 无线网卡远程唤醒台式机">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sh.alynx.one/posts/Wake-on-WLAN/">
+    <meta property="og:image" content="https://sh.alynx.one/images/Mikoto-Karon-White.webp">
+    <link rel="canonical" href="https://sh.alynx.one/posts/Wake-on-WLAN/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="alternate" href="/atom.xml" title="喵's StackHarbor" type="application/atom+xml">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-icons.css">
+    <style type="text/css">
+      :root {
+        --url-sidebar-background: url("/images/background.webp");
+        --url-dark-sidebar-background: url("/images/background-dark.webp");
+      }
+      /* Replace the default Bootstrap Icons fonts path. */
+      @font-face {
+        font-family: "bootstrap-icons";
+        font-display: block;
+        src: url("/fonts/bootstrap-icons.woff2") format("woff2"), url("/fonts/bootstrap-icons.woff") format("woff");
+      }
+      body, header.header, footer.footer {
+        background: #33363b;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css">
+
+<link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script defer type="text/javascript" src="/js/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+      // Set theme before page rendering.
+      // Check user's choice from localStorage.
+      let theme = window.localStorage.getItem("theme");
+      const preferenceQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      // theme might be null here.
+      if (theme !== "dark" && theme !== "light") {
+        // Init from user's system settings if no choice.
+        theme = preferenceQuery.matches ? "dark" : "light";
+      }
+      // Yes, it looks I can modify documentElement before ready!
+      // Don't use requestAnimationFrame here, it will cause flickering.
+      document.documentElement.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+      documentReady(() => {
+        const themeToggle = document.getElementById("theme-toggle");
+        const setThemeToggle = (themeToggle, theme) => {
+          themeToggle.innerHTML = theme === "dark"
+            ? "<i class=\"bi bi-moon\" aria-label=\"深色模式\"></i>"
+            : "<i class=\"bi bi-sun\" aria-label=\"浅色模式\"></i>";
+        };
+        // Update theme toggle content.
+        setThemeToggle(themeToggle, theme);
+        // User changed system settings, update.
+        preferenceQuery.addListener((event) => {
+          theme = event.matches ? "dark" : "light";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+        // Other page of site changed storage, update.
+        window.addEventListener("storage", (event) => {
+          if (event.key === "theme" && event.newValue !== event.oldValue) {
+            theme = event.newValue;
+            setThemeToggle(themeToggle, theme);
+            window.requestAnimationFrame(() => {
+              document.documentElement.setAttribute("data-theme", theme);
+            });
+          }
+        });
+        // User changed website settings, update.
+        themeToggle.addEventListener("click", (event) => {
+          theme = theme === "dark" ? "light" : "dark";
+          setThemeToggle(themeToggle, theme);
+          window.requestAnimationFrame(() => {
+            document.documentElement.setAttribute("data-theme", theme);
+          });
+          window.localStorage.setItem("theme", theme);
+        });
+      });
+    </script>
+    
+
+<script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll(".post figure.code-block"),
+      (e, i) => {
+        const lang = e.getAttribute("data-lang");
+        elementBefore(e, createElementFromString([
+          "<div class=\"code-titlebar\">",
+          "<div class=\"titlebar-left\">",
+          "<button class=\"copy\" aria-label=\"复制\"><i class=\"bi bi-clipboard2-plus\"></i></button>",
+          "</div>",
+          "<div class=\"titlebar-center\">",
+          lang != null && lang.length ? lang.toUpperCase() : "代码",
+          "</div>",
+          "<div class=\"titlebar-right\">",
+          "<button class=\"button-dot dot-minimize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-maximize\" aria-label=\"Decoration\"></button>",
+          "<button class=\"button-dot dot-close\" aria-label=\"Decoration\"></button>",
+          "</div>",
+          "</div>"
+        ].join("")));
+      }
+    );
+    const cb = new ClipboardJS("button.copy", {
+      "target": (trigger) => {
+        // Get target element by DOM API.
+        // trigger.parentNode.parentNode is code-titlebar.
+        // nextElementSibling is figure.highlight, lastChild is pre.code.
+        return trigger.parentNode.parentNode.nextElementSibling.lastChild;
+      }
+    });
+    cb.on("success", (e) => {
+      e.clearSelection();
+      const trigger = e.trigger;
+      // Change button text as a user tip.
+      trigger.innerHTML = "<i class=\"bi bi-clipboard2-check\"></i>";
+      trigger.classList.add("copied");
+      // Change button text back;
+      window.setTimeout(() => {
+        trigger.innerHTML = "<i class=\"bi bi-clipboard2-plus\"></i>";
+        trigger.classList.remove("copied");
+      }, 1500);
+    });
+  });
+</script>
+
+
+<script defer type="text/javascript" src="/js/highlight.min.js"></script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code code"),
+      (e, i) => {
+        // We want to use hljs' background and color for the whole block.
+        e.parentNode.parentNode.classList.add("hljs");
+        hljs.highlightElement(e);
+      }
+    );
+  });
+</script>
+<script type="text/javascript">
+  documentReady(() => {
+    elementsEach(
+      document.querySelectorAll("figure.code-block pre.code"),
+      (e, i) => {
+        const code = e.parentNode.getAttribute("data-raw");
+        const lineNumbers = [];
+        lineNumbers.push("<pre class=\"line-numbers gutter\">");
+        // Highlight should not change lines.
+        // But may replace `\n` with `<br>`, so use original code here.
+        const codeLines = code.split(/\r?\n/g);
+        // It seems marked.js starts to keep the last `\n`,
+        // which will leave an empty line after splitting,
+        // and we should not add line number for the last empty line.
+        // Don't do trim here! We only skip empty line.
+        if (codeLines[codeLines.length - 1].length === 0) {
+          codeLines.pop();
+        }
+        for (let i = 0; i < codeLines.length; ++i) {
+          lineNumbers.push(`<span class="line-number">${i + 1}</span>`);
+          if (i !== codeLines.length - 1) {
+            lineNumbers.push("\n");
+          }
+        }
+        lineNumbers.push("</pre>");
+        elementBefore(e, createElementFromString(lineNumbers.join("")));
+      }
+    );
+  });
+</script>
+
+
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>通过 Intel 无线网卡远程唤醒台式机 - 喵's StackHarbor</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <a id="top"></a>
+    <header id="header" class="header">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <div class="title"><a class="root" href="/">喵's StackHarbor</a></div>
+        <div class="subtitle">Whisper to the World</div>
+      </div>
+      <div class="logo">
+        <img class="logo-image" src="/images/I-Love-Arch.webp" alt="logo">
+      </div>
+    </div>
+    <nav id="nav" class="nav">
+      <button class="nav-toggle" id="nav-toggle" aria-hidden="true">
+        <i class="bi bi-list" aria-label="切换导航栏"></i>
+      </button>
+      <ul class="menu" id="menu" role="menubar" aria-hidden="false">
+        <li class="menu-item" role="menuitem">
+          <a href="/" class="menu-link">
+            <i class="bi bi-house"></i><span class="menu-text">首页</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/archives/" class="menu-link">
+            <i class="bi bi-archive"></i><span class="menu-text">归档</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/categories/" class="menu-link">
+            <i class="bi bi-list-nested"></i><span class="menu-text">分类</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/tags/" class="menu-link">
+            <i class="bi bi-tags"></i><span class="menu-text">标签</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/Undefined-Script-Works/" class="menu-link">
+            <i class="bi bi-terminal"></i><span class="menu-text">Undefined Script Works!</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="//gallery.alynx.one/" class="menu-link" target="_blank" rel="external nofollow noreferrer noopener">
+            <i class="bi bi-images"></i><span class="menu-text">照片墙</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/blogroll/" class="menu-link">
+            <i class="bi bi-link-45deg"></i><span class="menu-text">友情链接</span>
+          </a>
+        </li>
+        <li class="menu-item" role="menuitem">
+          <a href="/about/" class="menu-link">
+            <i class="bi bi-person-bounding-box"></i><span class="menu-text">关于</span>
+          </a>
+        </li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle">
+      </button>
+    </nav>
+  </div>
+</header>
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="pinned-message" class="pinned-message">
+  <div class="card">
+    <div class="alert-blue"><strong>我很想知道你对我博客的看法！</strong>方便请到 <a href="/about/">关于</a> 页面留下评论！</div>
+  </div>
+</div>
+
+<div id="page" class="page">
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Wake-on-WLAN/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="不愿意看到你朦胧泪眼<br>我就变成那晚风">
+        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Wake-on-WLAN/" itemprop="url">通过 Intel 无线网卡远程唤醒台式机</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2025-10-06T04:37:56.000Z">2025-10-06 周一 12:37:56 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Wake-on-WLAN/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="通过 Intel 无线网卡远程唤醒台式机" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>有些时候需要开启我的台式机处理一些任务，特别是出门在外的时候，但是台式机里有两块 NVIDIA GPU，如果一直开机也太不节能环保了。所以就想研究一些能远程开机/唤醒的方案。</p>
+<p>最简单的方案肯定是 BIOS 里设置来电就开机，然后购买一个智能插座。但是在智能插座到货之前我就要出门，所以决定排列组合一下手头的方案。</p>
+<p>BIOS 里通常都会有 Wake on LAN 的支持，这个是网卡收到特定格式的数据包，检查和自己 MAC 地址一致之后就会通过 PCI-E 唤醒电脑。所以一开始我打算尝试这个，反正 Mac mini 待机功耗非常低，我可以一直开着 Mac mini，然后需要的时候 ssh 到 Mac mini 上再给台式机发包唤醒它。</p>
+<p>第一个障碍是虽然我的 Mac mini 和 NAS 和台式机之间是有网线连接的，但是 Intel X550 这个万兆网卡是不支持 Wake on LAN 的。所以我不得不再拿一根网线把主板的板载网卡和 Mac mini 连接起来。</p>
+<p>参考 <a href="https://wiki.archlinux.org/title/Wake-on-LAN" target="_blank" rel="external nofollow noreferrer noopener">Arch Wiki 的 Wake-on-LAN 页面</a>，需要在 BIOS 的高级电源管理里打开由 PCI-E 设备唤醒，但是只打开这个不行，因为这样关机时候网卡还是没有启用的，所以需要打开 UEFI 网络堆栈，让网卡即使是在关机的状态下也可以启用。然后根据网上的说法还需要关闭 BIOS 的快速自检。然后在系统里用 <code>ethtool -s eth0 wol g</code> 开启网卡的 Wake on LAN 支持。但是即使以上都打开了，还是不能保证能用。至少我主板上的两个网卡都没法唤醒机器。开机状态下用 netcat 可以看到 Wake on LAN 的 magic packet，关机/睡眠状态下可以看到网卡灯亮着，但是就是没有办法唤醒机器。按道理说 Wake on LAN 只和连接层有关，所以并不需要配置 IP，我也不清楚中间哪里有问题导致不能用，也许是 macOS 或者是什么的限制导致必须指定 IP？但 BIOS 里又没有办法配置 UEFI IPXE 的 IP 地址。</p>
+<p>就在我觉得没有希望的时候，@lilydjwg 跟我说其实无线网卡也是可以唤醒电脑的，Intel AX200 确实支持这个功能。只要使用 <code>iw phy phy0 wowlan enable magic-packet</code> 启用就可以了。也许需要用 <code>nmcli con modify CONNECTION 802-11-wireless.wake-on-wlan 0x8</code> 给 Network Manager 也启用一下。</p>
+<p>唤醒的方式和 Wake on LAN 一样，Linux 下面可以使用 <code>wol</code>，macOS 下面可以使用 <code>wakeonlan</code> 这个脚本。需要注意的是无线和有线一样需要有连接才能收到包，有线只要插着网线就行了，但无线需要保持你的 WiFi 连接，而 UEFI 是没有无线网络支持的，所以 Wake on WLAN 只有睡眠状态能唤醒，不像 Wake on LAN （理论上）支持关机状态开机，但是对我的省电需求来说，休眠到内存也足够了。</p>
+<p>因为需要一直保持 WiFi 连接才能用，如果你的网络管理器/无线网卡开启了什么省电模式，它可能会在睡眠一定时间后断掉连接，然后就没办法唤醒了。这自然不是我们希望的，所以可以使用 <code>nmcli con modify CONNECTION wifi.powersave 2</code> 关掉 Network Manager 的省电模式，然后给 <code>iwlwifi</code> 内核模块设置 <code>power_save=0</code> 关掉驱动的省电模式。</p>
+<p>使用流程就是 <code>systemctl suspend</code> 让电脑休眠。然后用同一个网段的 Mac mini 执行 <code>wakeonlan -i 目标 IP 地址 目标无线网卡 MAC 地址</code>，就可以发出 magic packet，台式机收到后就会唤醒了。理论上来说这个和 IP 无关所以可以不指定 IP 地址以发送 magic packet 到广播地址，但是不知道为什么这样唤醒不了。</p>
+<p>需要注意的是以上各种依赖的都是 PCI-E 设备可以唤醒系统的功能，因此只有板载的无线网卡或者 PCI-E 的无线网卡可能支持唤醒，USB 无线网卡是不行的。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="bi bi-tag"></i>Linux</a>
+      </div>
+    </footer>
+  </article>
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      <a class="page-nav-link" href="/posts/ReFrame-Yet-Another-Remote-Desktop-for-Linux/" rel="prev" title="ReFrame：又一个 Linux 远程桌面"><span class="page-nav-title">ReFrame：又一个 Linux 远程桌面</span><i class="bi bi-chevron-right"></i></a>
+    </div>
+  </nav>
+  <div class="reward" id="reward">
+  <div class="reward-info" id="reward-info">
+    <span>既然看了喵写的文章，不打算投喂一下再走吗？哼！</span>
+  </div>
+  <button id="reward-button" class="button reward-button" disable="enable"><i class="bi bi-coin"></i>打赏</button>
+  <div id="qr" class="qr">
+    <div class="qr-block" id="wechatpay">
+      <img class="qr-image" id="wechatpay-qr" src="/images/WeChatPay.webp" alt="微信支付"/>
+      <span>微信支付</span>
+    </div>
+    <div class="qr-block" id="alipay">
+      <img class="qr-image" id="alipay-qr" src="/images/AliPay.webp" alt="支付宝"/>
+      <span>支付宝</span>
+    </div>
+  </div>
+</div>
+
+  
+<div class="comment" id="comment">
+  <script defer type="text/javascript" src="/js/comment.js"></script>
+  <script type="text/javascript">
+    documentReady(() => {
+      loadCommentCount({
+        "user": "AlynxZhou",
+        "repo": "stackharbor",
+        "containerClass": "comment-count"
+      });
+    });
+  </script>
+  <div class="comment-results" id="comment-results">
+    <div class="sk-wave" id="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    documentReady(() => {
+      lazyLoadWhenInside(document.getElementById("comment-results"), () => {
+        loadComment({
+          "user": "AlynxZhou",
+          "repo": "stackharbor",
+          "perPage": "10",
+          "sendButtonText": "去评论",
+          "noCommentText": "这个页面还没有评论，现在就去评论吧！",
+          "failText": "你可能达到了 API 请求频率上限，请等待一段时间再刷新。",
+          "title": "通过 Intel 无线网卡远程唤醒台式机",
+          "body": "<!-- 请在下一行附加您的评论并提交 issue！切勿修改 issue 标题因为需要靠它匹配文章和评论！ -->",
+          "queryString": window.location.search,
+          "basePath": "/posts/Wake-on-WLAN/",
+          "containerID": "comment-results"
+        }).then(() => {
+          const formatDateTime = formatDateTimeFn("zh-Hans");
+          elementsEach(
+            document.querySelectorAll("time.comment-full-datetime"),
+            (e, i) => {
+              e.textContent = formatDateTime(e.getAttribute("datetime"));
+            }
+          );
+          elementsEach(
+            document.querySelectorAll("div.comment-content img"),
+            (e, i) => {
+              // If an image works as link, stop adding link styles to it.
+              if (e.parentNode.tagName.toLowerCase() === "a") {
+                e.parentNode.classList.add("img-link");
+              }
+            }
+          );
+        });
+      });
+    });
+  </script>
+</div>
+
+</div>
+
+          </div>
+          <aside class="sidebar" id="sidebar">
+  <div class="search" role="search">
+    <form action="/search/" method="get">
+      <button type="submit" class="search-submit" aria-label="搜索"><i class="bi bi-search"></i></button><input type="search" id="search-input" class="search-input" name="q" results="0" placeholder="搜索" aria-label="搜索">
+    </form>
+  </div>
+  <div class="info sidebar-item" id="info">
+    <img class="author-avatar" src="/images/Mikoto-Karon-White.webp" alt="Alynx Zhou">
+    <div class="author-name">Alynx Zhou</div>
+    <div class="author-description">不愿意看到你朦胧泪眼<br>我就变成那晚风</div>
+    <div class="site-count">
+      <div class="archives-count count-block">
+        <div class="site-count-title">归档</div>
+        <div><a href="/archives/">118</a></div>
+      </div>
+      <div class="categories-count count-block">
+        <div class="site-count-title">分类</div>
+        <div><a href="/categories/">38</a></div>
+      </div>
+      <div class="tags-count count-block">
+        <div class="site-count-title">标签</div>
+        <div><a href="/tags/">94</a></div>
+      </div>
+    </div>
+    <div class="rss">
+      <a class="rss-link button sidebar-item" href="/atom.xml"><i class="bi bi-rss"></i>RSS</a>
+    </div>
+  </div>
+  <div class="sidebar-sticky">
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="bi bi-person-workspace"></i>社交链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-envelope"></i><a href="mailto:alynx.zhou@gmail.com" target="_blank" rel="external nofollow noreferrer noopener">E-Mail</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-github"></i><a href="https://github.com/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">GitHub</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-telegram"></i><a href="https://t.me/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Telegram</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-film"></i><a href="https://space.bilibili.com/10034969/" target="_blank" rel="external nofollow noreferrer noopener">Bilibili</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-steam"></i><a href="https://steamcommunity.com/id/AlynxZhou/" target="_blank" rel="external nofollow noreferrer noopener">Steam</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="bi bi-people"></i>友情链接</div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://forum.archlinuxcn.org/c/general/planet/35" target="_blank" rel="external nofollow noreferrer noopener">Arch Linux 星球</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://dawn.moe/" target="_blank" rel="external nofollow noreferrer noopener">藍貓 八千代</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://lgiki.net/" target="_blank" rel="external nofollow noreferrer noopener">LGiki's Blog</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://farseerfc.me/" target="_blank" rel="external nofollow noreferrer noopener">Farseerfc 的小窝</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="http://huaji.store/" target="_blank" rel="external nofollow noreferrer noopener">滑稽仓库</a></li>
+        <li class="sidebar-list-item"><i class="bi bi-link-45deg"></i><a href="https://nichi.co/" target="_blank" rel="external nofollow noreferrer noopener">Nichi Yorozuya</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top" class="back-to-top" href="#top" aria-label="回到顶部"><i class="bi bi-chevron-bar-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author"><i class="bi bi-pencil-square"></i>Alynx Zhou</span><span class="years"><i class="bi bi-calendar-minus"></i><span id="years-text">2016</span></span><span class="creative-commons"><i class="bi bi-badge-cc"></i><a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="external nofollow noreferrer noopener">BY-NC-ND 4.0</a></span>
+        </div>
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="bi bi-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="bi bi-person-check" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="bi bi-filetype-html"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          托管于 <i class="bi bi-github"></i><a href="https://pages.github.com/" target="_blank" rel="noreferrer noopener">GitHub Pages</a> 和 <i class="bi bi-triangle-fill"></i><a href="https://vercel.com/" target="_blank" rel="noreferrer noopener">Vercel</a>
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hikaru.alynx.one/" target="_blank" rel="external nofollow noreferrer noopener">Hikaru</a> 强力驱动<i class="bi bi-nut"></i>主题 <a href="https://github.com/AlynxZhou/hikaru-theme-aria/" target="_blank" rel="external nofollow noreferrer noopener">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
+<!-- Page built by Hikaru v1.21.3 at 2025-10-06T05:15:04.253Z. -->
