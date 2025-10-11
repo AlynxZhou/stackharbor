@@ -304,7 +304,7 @@
           <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2025-10-06T04:37:56.000Z">2025-10-06 周一 12:37:56 GMT+8</time></span>
         </div>
         <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2025-10-11T02:26:02.000Z">2025-10-11 周六 10:26:02 GMT+8</time></span>
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2025-10-11T03:01:01.000Z">2025-10-11 周六 11:01:01 GMT+8</time></span>
         </div>
         <div class="post-categories meta-block">
           <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
@@ -326,7 +326,7 @@
 <p>使用流程就是 <code>systemctl suspend</code> 让电脑休眠。然后用同一个网段的 Mac mini 执行 <code>wakeonlan -i 目标 IP 地址 目标无线网卡 MAC 地址</code>，就可以发出 magic packet，台式机收到后就会唤醒了。理论上来说这个和 IP 无关所以可以不指定 IP 地址以发送 magic packet 到广播地址，但是不知道为什么这样唤醒不了。</p>
 <p>需要注意的是以上各种依赖的都是 PCI-E 设备可以唤醒系统的功能，因此只有板载的无线网卡或者 PCI-E 的无线网卡可能支持唤醒，USB 无线网卡是不行的。</p>
 <hr>
-<p>更新（2025-10-11）：我似乎摸索出了有线网卡唤醒的正确方案，也许是因为 macOS 的限制，默认 <code>wakeonlan</code> 使用的 <code>255.255.255.255</code> 这个广播地址不起作用。似乎你应该使用的不是目标网卡的 IP 地址而是 <strong>要发包的网卡所在网段的广播地址</strong>：比如我把 Mac mini 和台式机用网线直接连接起来，然后给 Mac mini 的有线网卡设置 IP 地址为 <code>10.10.11.9/24</code>，那么只要我使用 <code>wakeonlan -i 10.10.11.255 目标有线网卡 MAC 地址</code> 就可以正确唤醒台式机了。即使台式机处在关机状态，只要打开了 BIOS 里的由 PCI-E 唤醒和 UEFI 网络堆栈也可以开机。对于 IP 是 <code>192.168.1.9/24</code> 的 Mac mini 无线网卡，也可以使用 <code>wakeonlan -i 192.168.1.255 目标无线网卡 MAC 地址</code>。我不知道为什么使用目标无线网卡的 IP 地址也可以唤醒，但也许是路由器替我做了什么工作，没有路由器的情况下就必须使用要发包的网卡所在网段的广播地址才能让 macOS 乖乖听话了。</p>
+<p>更新（2025-10-11）：我似乎摸索出了有线网卡唤醒的正确方案，默认 <code>wakeonlan</code> 使用的 <code>255.255.255.255</code> 这个广播地址不起作用。似乎你应该使用的不是目标网卡的 IP 地址而是 <strong>要发包的网卡所在网段的广播地址</strong>：比如我把 Mac mini 和台式机用网线直接连接起来，然后给 Mac mini 的有线网卡设置 IP 地址为 <code>10.10.11.9/24</code>，那么只要我使用 <code>wakeonlan -i 10.10.11.255 目标有线网卡 MAC 地址</code> 就可以正确唤醒台式机了。即使台式机处在关机状态，只要打开了 BIOS 里的由 PCI-E 唤醒和 UEFI 网络堆栈也可以开机。对于 IP 是 <code>192.168.1.9/24</code> 的 Mac mini 无线网卡，也可以使用 <code>wakeonlan -i 192.168.1.255 目标无线网卡 MAC 地址</code>。我不知道为什么使用目标无线网卡的 IP 地址也可以唤醒，但也许是路由器替我做了什么工作，没有路由器的情况下就必须使用要发包的网卡所在网段的广播地址了。</p>
 
     </main>
     <footer class="post-footer">
@@ -507,4 +507,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2025-10-11T02:37:08.799Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2025-10-11T03:01:34.768Z. -->
