@@ -3,6 +3,7 @@ title: 通过 Intel 无线网卡远程唤醒台式机
 layout: post
 #comment: true
 created: 2025-10-06 12:37:56
+updated: 2025-10-11 10:26:02
 categories:
   - 计算机
   - Linux
@@ -18,7 +19,7 @@ BIOS 里通常都会有 Wake on LAN 的支持，这个是网卡收到特定格�
 
 第一个障碍是虽然我的 Mac mini 和 NAS 和台式机之间是有网线连接的，但是 Intel X550 这个万兆网卡是不支持 Wake on LAN 的。所以我不得不再拿一根网线把主板的板载网卡和 Mac mini 连接起来。
 
-参考 [Arch Wiki 的 Wake-on-LAN 页面](https://wiki.archlinux.org/title/Wake-on-LAN)，需要在 BIOS 的高级电源管理里打开由 PCI-E 设备唤醒，但是只打开这个不行，因为这样关机时候网卡还是没有启用的，所以需要打开 UEFI 网络堆栈，让网卡即使是在关机的状态下也可以启用。然后根据网上的说法还需要关闭 BIOS 的快速自检。然后在系统里用 `ethtool -s eth0 wol g` 开启网卡的 Wake on LAN 支持。但是即使以上都打开了，还是不能保证能用。至少我主板上的两个网卡都没法唤醒机器。开机状态下用 netcat 可以看到 Wake on LAN 的 magic packet，关机/睡眠状态下可以看到网卡灯亮着，但是就是没有办法唤醒机器。按道理说 Wake on LAN 只和连接层有关，所以并不需要配置 IP，我也不清楚中间哪里有问题导致不能用，也许是 macOS 或者是什么的限制导致必须指定 IP？但 BIOS 里又没有办法配置 UEFI IPXE 的 IP 地址。
+参考 [Arch Wiki 的 Wake-on-LAN 页面](https://wiki.archlinux.org/title/Wake-on-LAN)，需要在 BIOS 的高级电源管理里打开由 PCI-E 设备唤醒，但是只打开这个不行，因为这样关机时候网卡还是没有启用的，所以需要打开 UEFI 网络堆栈，让网卡即使是在关机的状态下也可以启用。~~然后根据网上的说法还需要关闭 BIOS 的快速自检~~ 经过验证并不需要关闭 BIOS 的快速自检，也许大家把这个和 Windows 的快速启动搞混了。然后在系统里用 `ethtool -s eth0 wol g` 开启网卡的 Wake on LAN 支持。但是即使以上都打开了，还是不能保证能用。至少我主板上的两个网卡都没法唤醒机器。开机状态下用 netcat 可以看到 Wake on LAN 的 magic packet，关机/睡眠状态下可以看到网卡灯亮着，但是就是没有办法唤醒机器。按道理说 Wake on LAN 只和连接层有关，所以并不需要配置 IP，我也不清楚中间哪里有问题导致不能用，也许是 macOS 或者是什么的限制导致必须指定 IP？但 BIOS 里又没有办法配置 UEFI IPXE 的 IP 地址。
 
 就在我觉得没有希望的时候，@lilydjwg 跟我说其实无线网卡也是可以唤醒电脑的，Intel AX200 确实支持这个功能。只要使用 `iw phy phy0 wowlan enable magic-packet` 启用就可以了。也许需要用 `nmcli con modify CONNECTION 802-11-wireless.wake-on-wlan 0x8` 给 Network Manager 也启用一下。
 
@@ -29,3 +30,7 @@ BIOS 里通常都会有 Wake on LAN 的支持，这个是网卡收到特定格�
 使用流程就是 `systemctl suspend` 让电脑休眠。然后用同一个网段的 Mac mini 执行 `wakeonlan -i 目标 IP 地址 目标无线网卡 MAC 地址`，就可以发出 magic packet，台式机收到后就会唤醒了。理论上来说这个和 IP 无关所以可以不指定 IP 地址以发送 magic packet 到广播地址，但是不知道为什么这样唤醒不了。
 
 需要注意的是以上各种依赖的都是 PCI-E 设备可以唤醒系统的功能，因此只有板载的无线网卡或者 PCI-E 的无线网卡可能支持唤醒，USB 无线网卡是不行的。
+
+-------
+
+更新（2025-10-11）：我似乎摸索出了有线网卡唤醒的正确方案，也许是因为 macOS 的限制，默认 `wakeonlan` 使用的 `255.255.255.255` 这个广播地址不起作用。似乎你应该使用的不是目标网卡的 IP 地址而是 **要发包的网卡所在网段的广播地址**：比如我把 Mac mini 和台式机用网线直接连接起来，然后给 Mac mini 的有线网卡设置 IP 地址为 `10.10.11.9/24`，那么只要我使用 `wakeonlan -i 10.10.11.255 目标有线网卡 MAC 地址` 就可以正确唤醒台式机了。即使台式机处在关机状态，只要打开了 BIOS 里的由 PCI-E 唤醒和 UEFI 网络堆栈也可以开机。对于 IP 是 `192.168.1.9/24` 的 Mac mini 无线网卡，也可以使用 `wakeonlan -i 192.168.1.255 目标无线网卡 MAC 地址`。我不知道为什么使用目标无线网卡的 IP 地址也可以唤醒，但也许是路由器替我做了什么工作，没有路由器的情况下就必须使用要发包的网卡所在网段的广播地址才能让 macOS 乖乖听话了。
