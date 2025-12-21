@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sh.alynx.one/posts/No-Idea-about-Multiple-Cursors/</loc>
+    <lastmod>2025-12-21T03:16:29.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/posts/Wake-on-WLAN/</loc>
     <lastmod>2025-10-11T03:01:01.000Z</lastmod>
   </url>
@@ -741,6 +745,9 @@
     <loc>https://sh.alynx.one/tags/ARIA/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/Emacs/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/%E8%BE%93%E5%85%A5%E6%B3%95/</loc>
   </url>
   <url>
@@ -760,9 +767,6 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/Chromatic%20Harmonica/</loc>
-  </url>
-  <url>
-    <loc>https://sh.alynx.one/tags/Emacs/</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/Python/</loc>
