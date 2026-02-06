@@ -15,7 +15,7 @@ tags:
 
 具体安装只需要安装下面两个包：
 
-```
+```shell
 # pacman -S linux-rpi raspberrypi-bootloader
 ```
 

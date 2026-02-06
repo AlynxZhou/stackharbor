@@ -316,7 +316,7 @@
 <p>在我刚拿到 64 位的树莓派的时候就是这么个情况，也许是历史遗留问题，那时候似乎没有运行 rpi 内核的 64 位系统可以选择。但是我最近把吃灰的树莓派 4 拿出来的时候搜索了一下包列表，发现其实已经有 rpi 内核可以用了，这里简单记录一下怎么切换成 rpi 内核。</p>
 <p>具体安装只需要安装下面两个包：</p>
 <figure data-raw="# pacman -S linux-rpi raspberrypi-bootloader
-" class="code-block"><pre class="code"><code># pacman -S linux-rpi raspberrypi-bootloader
+" data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell"># pacman -S linux-rpi raspberrypi-bootloader
 </code></pre></figure>
 <p>Mainline 内核使用 u-boot 作为 bootloader，而 rpi 内核需要使用对应的 bootloader，安装的时候会提示你要移除原本的内核和 u-boot，确认就可以了。然后如果你改过 mainline 内核的启动参数，那需要也对 rpi 内核修改一下，因为两者修改启动参数的方式不一样，rpi 内核和其它的树莓派系统一样使用 <code>cmdline.txt</code>。</p>
 <p>然后在安装 mainline 内核的系统时你应该已经按照安装说明把 fstab 里面的 <code>mmcblk0</code> 换成了 <code>mmcblk1</code>，这时候需要换回 rpi 内核使用的 <code>mmcblk0</code>。</p>
@@ -500,4 +500,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-02-06T09:03:45.126Z. -->
+<!-- Page built by Hikaru v1.21.3 at 2026-02-06T09:05:23.426Z. -->
