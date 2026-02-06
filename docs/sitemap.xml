@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sh.alynx.one/posts/RPi-Arch-Linux-ARM-Kernel/</loc>
+    <lastmod>2026-02-06T09:03:00.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/posts/Emacs-Says-OI-in-Terminal/</loc>
     <lastmod>2026-02-01T08:22:00.000Z</lastmod>
   </url>
@@ -485,16 +489,16 @@
     <lastmod>2024-02-18T09:00:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://sh.alynx.one/about/</loc>
-    <lastmod>2023-10-11T16:41:00.000Z</lastmod>
-  </url>
-  <url>
     <loc>https://sh.alynx.one/Undefined-Script-Works/</loc>
     <lastmod>2018-04-04T00:15:40.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/blogroll/</loc>
     <lastmod>2020-08-24T01:20:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/about/</loc>
+    <lastmod>2023-10-11T16:41:00.000Z</lastmod>
   </url>
   <url>
     <loc>https://sh.alynx.one/</loc>
@@ -533,6 +537,9 @@
     <loc>https://sh.alynx.one/index-12.html</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/index-13.html</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/archives/</loc>
   </url>
   <url>
@@ -555,6 +562,9 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/archives/index-8.html</loc>
+  </url>
+  <url>
+    <loc>https://sh.alynx.one/archives/index-9.html</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
@@ -620,6 +630,9 @@
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Emacs/</loc>
   </url>
   <url>
@@ -627,9 +640,6 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BE%93%E5%85%A5%E6%B3%95/RIME/</loc>
-  </url>
-  <url>
-    <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%AD%97%E4%BD%93/</loc>
@@ -755,6 +765,9 @@
     <loc>https://sh.alynx.one/tags/%E8%BE%93%E5%85%A5%E6%B3%95/</loc>
   </url>
   <url>
+    <loc>https://sh.alynx.one/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
+  </url>
+  <url>
     <loc>https://sh.alynx.one/tags/%E5%90%90%E6%A7%BD/</loc>
   </url>
   <url>
@@ -783,9 +796,6 @@
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/%E6%A0%91/</loc>
-  </url>
-  <url>
-    <loc>https://sh.alynx.one/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
   </url>
   <url>
     <loc>https://sh.alynx.one/tags/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/</loc>
