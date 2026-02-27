@@ -29,8 +29,9 @@ created: 2018-04-04 08:15:40
 
 ## ReFrame
 
-又是一个 Linux 远程桌面，但是使用 DRM/KMS 的接口抓取显示内容，使用 EGL/OpenGL ES 解码像素，使用 uinput 处理输入，因此可以支持各种显卡驱动下的各种桌面环境，无论是 X11 还是 Wayland。
+又是一个 Linux 远程桌面，但是使用 DRM/KMS 的接口抓取显示内容，使用 EGL/OpenGL ES 解码像素，使用 uinput 处理输入，因此可以支持各种显卡驱动下的各种桌面环境，无论是 TTY 还是 Wayland。
 
+- 主页：<https://reframe.alynx.one/>
 - 仓库：<https://github.com/AlynxZhou/reframe/>
 
 ## Show Me The Key
@@ -49,7 +50,7 @@ C 语言实现的一个开源 Fliqlo 替代品（macOS 用户视频里经常出�
 - 仓库：<https://github.com/AlynxZhou/flipclock/>
 - Android 仓库：<https://github.com/AlynxZhou/flipclock-android/>
 - Windows 编译好的安装包下载：[点击带有 win 的压缩包](https://github.com/AlynxZhou/flipclock/releases/latest)
-- Android 编译好的安装包下载：[点击 apk 文件](https://github.com/AlynxZhou/flipclock-android/releases/latest) 或者去 [酷安网](http://www.coolapk.com/apk/277663) 或 [Google Play Store](https://play.google.com/store/apps/details?id=one.alynx.flipclock)。
+- Android 编译好的安装包下载：[点击 apk 文件](https://github.com/AlynxZhou/flipclock-android/releases/latest) 或者去 [Google Play Store](https://play.google.com/store/apps/details?id=one.alynx.flipclock)。
 
 ## Kouichi 100
 
