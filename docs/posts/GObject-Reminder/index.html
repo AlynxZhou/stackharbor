@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="说来惭愧，我一直记不太清 GObject 到底是怎么用的，毕竟作为一个写过 C++ 和 Python 然后常用 JS 的人来说，面向对象的实现是非常自然的，不需要考虑为什么。所以我总是看着一大堆类型转换和分散的定义以及各种 chain up 感到眩晕。而 GObject 的文档写的也相当分散，有种管中窥豹之感。">
     <meta name="keywords" content="GObject">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="GObject 备忘录">
@@ -313,9 +313,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>说来惭愧，我一直记不太清 GObject 到底是怎么用的，毕竟作为一个写过 C++ 和 Python 然后常用 JS 的人来说，面向对象的实现是非常自然的，不需要考虑为什么。所以我总是看着一大堆类型转换和分散的定义以及各种 chain up 感到眩晕。而 GObject 的文档写的也相当分散，有种管中窥豹之感。</p>
-<a id="more"></a>
-
-<p>有同学觉得其实把函数变成指针放在结构体里看起来就面向对象了，以前我也这么觉得，但是显然这样不能实现继承封装等等特性，GObject 独特之处在于它实现了这些，并且是和语言独立的。当然，要想在一个没有这些概念的语言里面做到这些，就有很多需要自己手动处理和函数库处理的地方，就是因为有些隐藏了起来有些又要自己做，才让它看起来像古老的黑魔法。</p>
+<a id="more"></a><p>有同学觉得其实把函数变成指针放在结构体里看起来就面向对象了，以前我也这么觉得，但是显然这样不能实现继承封装等等特性，GObject 独特之处在于它实现了这些，并且是和语言独立的。当然，要想在一个没有这些概念的语言里面做到这些，就有很多需要自己手动处理和函数库处理的地方，就是因为有些隐藏了起来有些又要自己做，才让它看起来像古老的黑魔法。</p>
 <p>最近我尝试做了一个小项目，以便搞清楚如何按照 GObject 的模式编写一些继承封装的代码。</p>
 <p>首先得给项目起名字，因为 GObject 要求你的命名符合一定的约定，其中一个前缀是项目名，不过这个 简单，就叫 <code>test</code> 好了，然后做一个基类叫 <code>animal</code>，于是就有了 <code>test-animal.h</code>:</p>
 <figure data-raw="#ifndef __TEST_ANIMAL_H__
@@ -1112,7 +1110,7 @@ clean:
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -1120,7 +1118,7 @@ clean:
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -1185,4 +1183,4 @@ clean:
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

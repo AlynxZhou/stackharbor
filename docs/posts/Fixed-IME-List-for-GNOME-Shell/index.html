@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="GNOME Shell 有个令人很不爽的“特性”，它的输入法列表使用的是最近使用优先排列。也就是说当你有三个或以上输入法的时候，比如我，我有英文简体中文和日语输入法，我经常在中英之间切换，这没什么，前两个总是中英所以按一次就可以在这两个之间切换，但假如我偶尔用了一次日语输入法，我的列表就被打乱了，我不清楚按几下才能切回中文，并且再切到英文也得看一眼才能知道。">
     <meta name="keywords" content="GNOME">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="固定 GNOME Shell 的输入法列表">
@@ -313,9 +313,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>GNOME Shell 有个令人很不爽的“特性”，它的输入法列表使用的是最近使用优先排列。也就是说当你有三个或以上输入法的时候，比如我，我有英文简体中文和日语输入法，我经常在中英之间切换，这没什么，前两个总是中英所以按一次就可以在这两个之间切换，但假如我偶尔用了一次日语输入法，我的列表就被打乱了，我不清楚按几下才能切回中文，并且再切到英文也得看一眼才能知道。</p>
-<a id="more"></a>
-
-<p>我不是很理解这个特性存在的意义，设置里面是可以手动调节输入法的顺序的，我明明调成了我想要的顺序，你就给我这个顺序好了，这样我闭着眼睛不用动脑子都能猜出来要按几下，比如从英文到日语按两下，中文到日语按一下等等。可能有些人的脑子长得比较擅长模拟最近使用优先排列？反正我不行。</p>
+<a id="more"></a><p>我不是很理解这个特性存在的意义，设置里面是可以手动调节输入法的顺序的，我明明调成了我想要的顺序，你就给我这个顺序好了，这样我闭着眼睛不用动脑子都能猜出来要按几下，比如从英文到日语按两下，中文到日语按一下等等。可能有些人的脑子长得比较擅长模拟最近使用优先排列？反正我不行。</p>
 <p>既然感觉不爽那就动手处理一下好了，最近看了一些有关写 GNOME Shell 扩展的文档，所以写个扩展解决一下就可以了。为什么不直接提交给上游？因为上游一开始是固定顺序的，但是很久以前某个人加了这个“特性”，现在如果提个请求说删掉这个特性，势必会陷入一场“用户到底是喜欢最近使用优先排列还是固定排列”的争论，这肯定很难得出结论（毕竟大部分的人实际上是不需要使用输入法的英语用户以及只有两种输入法的用户！），并且按照 GNOME 上游的习惯他们也是不愿意为了这个多添加一个开关的。所以比起在拉锯战上浪费时间，先搞一个能用的才是我的风格。至于升级之后扩展挂掉……不就是在上游里和其他代码一起被重构和我自己单独重构的区别吗？只要我还在用应该就会持续更新了。</p>
 <p>具体的解决方法比较 dirty，是我从别的扩展里学来的：把 GNOME Shell 里面的类的原型上的方法替换成自己的，就可以修改实例调用时的函数了（也算 JS 特性之一），不过不要用箭头函数，因为显然我们希望 <code>this</code> 是调用时的上下文也就是实例，而不是绑定到当前上下文。</p>
 <p>因为这算是我第一个扩展所以也多少记录一下踩的坑。</p>
@@ -493,7 +491,7 @@ _inputSourceManager._keybindingActionBackward =
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -501,7 +499,7 @@ _inputSourceManager._keybindingActionBackward =
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -566,4 +564,4 @@ _inputSourceManager._keybindingActionBackward =
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

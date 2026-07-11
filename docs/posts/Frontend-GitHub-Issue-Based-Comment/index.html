@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="造轮子是病，得治。 自从造了 前端博客搜索引擎 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。 （这标题怎么写的和毕业论文似的！）">
     <meta name="keywords" content="网站, 评论, JavaScript, ARIA">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="基于 GitHub Issue 的前端评论框">
@@ -318,9 +318,7 @@
       <h1 id="%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82"><a class="heading-link header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E9%80%A0%E8%BD%AE%E5%AD%90%E6%98%AF%E7%97%85%EF%BC%8C%E5%BE%97%E6%B2%BB%E3%80%82"></a>造轮子是病，得治。</h1>
 <p>自从造了 <a href="/posts/Frontend-Blog-Search/">前端博客搜索引擎</a> 的轮子之后，我对自己的能力有了极大的信心，同时也掌握了一些有趣的用法，于是把枪口瞄准了下一个我看着不顺眼的地方——评论框。</p>
 <p>（这标题怎么写的和毕业论文似的！）</p>
-<a id="more"></a>
-
-<h1 id="%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"><a class="heading-link header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"></a>轮子也不是白造的。</h1>
+<a id="more"></a><h1 id="%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"><a class="heading-link header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E8%BD%AE%E5%AD%90%E4%B9%9F%E4%B8%8D%E6%98%AF%E7%99%BD%E9%80%A0%E7%9A%84%E3%80%82"></a>轮子也不是白造的。</h1>
 <p>从我建站以来我的评论框就命途多舛，Disqus 虽然是最著名的评论系统，但是在国内访问不太顺畅。多说火了一段时间之后便关门大吉，HyperComments 则在我用了一段时间后发邮件提示要收费了，于是我之前的评论便华丽流失。而对于 Valine 这种基于 LeanCloud 的评论系统，我对 LeanCloud 不甚了解所以也不想尝试（而且 Valine 现在似乎转向闭源了，当初也许是个正确的决定）。然后赶上 Gitment 和 Gitalk 火了起来，大家意识到 GitHub Issue 正是个放评论的好地方。但是由于 <a href="https://github.com/iissnan/hexo-theme-next/pull/1634#issuecomment-313596649" target="_blank" rel="external nofollow noreferrer noopener">Gitment 和 Gitalk 采用他们自己的服务器实现博客评论框提交——转发到 GitHub API 的实现</a>，以及 <a href="https://www.v2ex.com/t/535608" target="_blank" rel="external nofollow noreferrer noopener">采用的 OAuth App 权限过高</a>，有人怀疑这不太安全，于是我也没太敢参与。后来遇到 <a href="https://github.com/wzpan/comment.js" target="_blank" rel="external nofollow noreferrer noopener">comment.js</a> 这个项目，它绕过了提交评论的问题——直接给一个到 GitHub Issue 的评论框的链接就可以了。于是我就开始用这个，至于什么 utterances 这种用 GitHub App 降低权限的评论系统，我也懒得尝试了。</p>
 <p>但我为什么决定替换掉 comment.js 我已经记不清楚了，可能是为了对主题的显示有更好的掌握吧，毕竟它带有自己的 CSS 样式而且经常和我的冲突，也可能是因为它迟迟没提供像 Disqus 一样查找每篇文章评论数目的功能，不过它现在已经不再维护了，所以我也算是未雨绸缪。</p>
 <h1 id="%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82"><a class="heading-link header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E4%BA%8B%E6%83%85%E6%9C%AC%E8%AF%A5%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82"></a>事情本该很简单。</h1>
@@ -333,11 +331,7 @@
 <p>最后的效果其实还可以，完整的脚本就是 <a href="/js/comment.js">这个网站在用的 JS</a>，具体和主题的整合方法就慢慢翻 ARIA 的模板吧。唯一的缺点是 GitHub API 的频率限制太低，按照这个弱智的 issue 列表分页的话又不得不多一次读取仓库有多少 issue 的请求，假如你的 issue 太多估计也是问题？不过应该不会有那么多博文吧！我只有调试脚本的时候遇到过被 GitHub 提示等会的问题，所以对于访问者应该没什么影响。有影响以后再想解决办法（或者没办法）。</p>
 <p>也许最好的办法是解决掉需求——要什么评论框？不就是破事水？如果有问题想联系作者电子邮件又不是不能用！（逃</p>
 <h1 id="%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82"><a class="heading-link header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E5%85%B6%E5%AE%9E%E4%BD%A0%E7%9F%A5%E9%81%93%EF%BC%8C%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E4%BC%9A%E8%A7%A3%E5%86%B3%E7%83%A6%E6%81%BC%EF%BC%88bug%EF%BC%89%E3%80%82"></a>其实你知道，烦恼（bug）会解决烦恼（bug）。</h1>
-<div class="alert-red">更新（2022-03-21 16:46:46）：我终于发现 `fetch` 不会主动帮我做缓存的原因是我一直习惯性的在 DevTools 里面勾上 Disable Cache……所以下面这些其实都没有必要了，只要取消勾掉 Disable Cache，调试的时候就不会很快撞到查询频率次数限制了……</div>
-
-<div class="alert-green">这一部分更新于 2020-08-17 10:34:00。</div>
-
-<p>GitHub API 推荐用户 <a href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests" target="_blank" rel="external nofollow noreferrer noopener">缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码</a>。我心想这也简单，那就在前端搞一个缓存就可以了。</p>
+<div class="alert-red">更新（2022-03-21 16:46:46）：我终于发现 `fetch` 不会主动帮我做缓存的原因是我一直习惯性的在 DevTools 里面勾上 Disable Cache……所以下面这些其实都没有必要了，只要取消勾掉 Disable Cache，调试的时候就不会很快撞到查询频率次数限制了……</div><div class="alert-green">这一部分更新于 2020-08-17 10:34:00。</div><p>GitHub API 推荐用户 <a href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests" target="_blank" rel="external nofollow noreferrer noopener">缓存之前的请求响应，然后根据缓存的响应的 Header 里面的 ETag 发送请求查询是否过期，若未过期则返回一个不消耗频率限制次数的 304 状态码</a>。我心想这也简单，那就在前端搞一个缓存就可以了。</p>
 <p>然后我搜索了一番找到了 CacheStorage，看起来它是唯一一个跨标签页的基于 Session 的正宗的前端缓存。但是很显然 IE 又不支持，而且这个 API 基于 Promise 并且只能缓存 Response 对象，也就是说没办法简单的通过在 XHR 的时候判断一下跳过不支持的情况，要 Polyfill 则需要引入完整的 Promise 和 fetch/Response，所以我们做了一个<del>艰难</del>容易的决定——是时候去掉 IE 支持了！</p>
 <p>于是我把请求 API 的函数改成了如下操作：</p>
 <figure data-raw="let cachePromise = window.caches.open(&quot;cacheName&quot;);
@@ -414,9 +408,7 @@ const cachedFetchJSON = (path, opts = {}) =&gt; {
 };
 </code></pre></figure>
 <p>当然理想很丰满现实很骨感，在不支持 CacheStorage 的浏览器里要 fallback 到不带缓存的版本，本来我以为很简单，但是……（下面开启吐槽时间。）</p>
-<blockquote class="center-quote">支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。</blockquote>
-
-<p>为什么非 HTTPS + localhost 不能用 CacheStorage 啊，难道他们没考虑过在电脑上开发然后手机访问测试移动版吗？还是说他们打算在手机上起一个开发服务器？为什么 Firefox 在非 HTTPS 时限制 CacheStorage 的方法是在 Promise 里 reject 一个 Error 从而导致这个过程变成了异步的？为什么 CacheStorage 只能缓存 Response 而不是任意数据结构？Safari 不能完整支持 Response 对象也就算了，为什么移动版 Chrome 和 Firefox 也不支持？合着你们 fetch 返回的 Response 还不是 Response？这世界到底怎么了……</p>
+<blockquote class="center-quote">支持 IE 的前端的痛苦都是相似的，不支持 IE 的前端则各有各的痛苦。</blockquote><p>为什么非 HTTPS + localhost 不能用 CacheStorage 啊，难道他们没考虑过在电脑上开发然后手机访问测试移动版吗？还是说他们打算在手机上起一个开发服务器？为什么 Firefox 在非 HTTPS 时限制 CacheStorage 的方法是在 Promise 里 reject 一个 Error 从而导致这个过程变成了异步的？为什么 CacheStorage 只能缓存 Response 而不是任意数据结构？Safari 不能完整支持 Response 对象也就算了，为什么移动版 Chrome 和 Firefox 也不支持？合着你们 fetch 返回的 Response 还不是 Response？这世界到底怎么了……</p>
 <p>所以最后需要一个长长的基于 Promise 的判断加载函数：</p>
 <figure data-raw="// 加载评论的时候才加载缓存。
 let cachePromise = null;
@@ -513,9 +505,7 @@ const loadCache = (name) =&gt; {
 </code></pre></figure>
 <p>不管怎么样现在这个网站在支持 CacheStorage 和 Response 的浏览器上（似乎也就桌面版 Chrome/Firefox……）是缓存 GitHub API 的结果了，打开 DevTools 切到 Network 面板可以看到 GitHub API 返回的是 304 而不是 200，其他浏览器则 fallback 到无缓存的 fetch。当然其他浏览器不包含 IE 咯。</p>
 <h1 id="%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82"><a class="heading-link header-link" href="/posts/Frontend-GitHub-Issue-Based-Comment/#%E7%94%B1%E4%BF%AD%E5%85%A5%E5%A5%A2%E6%98%93%EF%BC%8C%E7%94%B1%E5%A5%A2%E5%85%A5%E4%BF%AD%E9%9A%BE%E3%80%82"></a>由俭入奢易，由奢入俭难。</h1>
-<div class="alert-green">这一部分更新于 2020-08-18 12:25:00。</div>
-
-<p>我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 <code>fetch</code> 和 <code>Promise</code> 都有成熟的 polyfill，甚至 <code>URLSearchParams</code> 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、<code>for…of…</code> 循环以及 MapReduce（IE 竟然支持 <code>const</code> 和 <code>let</code> 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？</p>
+<div class="alert-green">这一部分更新于 2020-08-18 12:25:00。</div><p>我后来又仔细想了想，其实要兼容 IE 还是有办法的，首先 <code>fetch</code> 和 <code>Promise</code> 都有成熟的 polyfill，甚至 <code>URLSearchParams</code> 也有，只要写一段脚本在不支持的时候加载他们就可以了。然后去掉所有 IE 不支持的 ES6 特性，比如箭头函数、模板字符串、<code>for…of…</code> 循环以及 MapReduce（IE 竟然支持 <code>const</code> 和 <code>let</code> 真是惊到我了）。但是能做到并不意味着一定要做，人总是还要向前看的，现在是 2020 年，连罪魁祸首始作俑者微软都放弃了 IE，就算是照顾用户量，IE 用户也是可以忽略的那一部分了。既然我已经用 ES6 重写了，就不要想再让我为这种历史垃圾放弃我得到的好处了，从我开始写主题到现在丢掉 IE 支持也算是仁至义尽了，所以为什么不让这些用户支持一下 Firefox 呢？</p>
 
     </main>
     <footer class="post-footer">
@@ -624,7 +614,7 @@ const loadCache = (name) =&gt; {
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -632,7 +622,7 @@ const loadCache = (name) =&gt; {
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -718,4 +708,4 @@ const loadCache = (name) =&gt; {
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

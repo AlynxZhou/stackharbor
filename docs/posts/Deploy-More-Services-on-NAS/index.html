@@ -8,9 +8,9 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。 基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。">
+    <meta name="description" content="由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。">
     <meta name="keywords" content="计算机, Linux, Caddy, PhotoPrism">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="在 NAS 上部署更多服务">
@@ -312,12 +312,8 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-blue">由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。</div>
-
-<p>基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。</p>
-<a id="more"></a>
-
-<h1 id="PhotoPrism"><a class="heading-link header-link" href="/posts/Deploy-More-Services-on-NAS/#PhotoPrism"></a>PhotoPrism</h1>
+      <div class="alert-blue">由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。</div><p>基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。</p>
+<a id="more"></a><h1 id="PhotoPrism"><a class="heading-link header-link" href="/posts/Deploy-More-Services-on-NAS/#PhotoPrism"></a>PhotoPrism</h1>
 <p>一个我早就想解决的需求是按时间线快速查看照片，我发现翻看以前的照片非常有意思，有些已经忘掉的事情看到照片就会想起当时的心情，所以要是能快速的点开过去某个时间的照片就好了。</p>
 <p>为了不把自己绑死在某个后期软件上，我没有使用诸如 Lightroom 这类软件内置的照片库管理，而是直接将照片从存储卡里复制到磁盘阵列里。因为不想手动管理重复项，所以我就保持相机的文件夹逻辑。索尼相机虽然在拍照时可以直接按照日期建立文件夹，但是它是前四位序号加后四位月份日期，因此按名称排序并不是时间顺序。即使忽略掉这个问题，也没有办法快速的查看什么时候拍了什么照片，因为文件管理器通常并不能让你隔着文件夹看到里面都有什么照片。再考虑到拍了四年照片之后我已经积攒了相当大的照片库，直接打开一个个目录查看源文件对于磁盘 IO 速度是个相当大的考验。所以是时候部署一个能自动给照片分时分类创建缩略图的服务了。</p>
 <p>我选择的方案是 PhotoPrism，当然有好几个类似的项目可选，我就是随便选了一个，没什么特殊理由。PhotoPrism 的官网建议用户以 docker 的方式部署，但我不太喜欢容器化，而且我只有一台服务器也享受不到容器化带来的什么方便，所以我选择通过 AUR 的 <code>photoprism</code> 包安装。</p>
@@ -528,7 +524,7 @@ SiteUrl: https://photos.example.com/
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -536,7 +532,7 @@ SiteUrl: https://photos.example.com/
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -616,4 +612,4 @@ SiteUrl: https://photos.example.com/
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.349Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.489Z. -->

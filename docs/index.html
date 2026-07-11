@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Whisper to the World">
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="首页">
@@ -284,6 +284,43 @@
 <div id="home" class="home page">
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Send-Email-on-systemd-Unit-Failure/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="不愿意看到你朦胧泪眼<br>我就变成那晚风">
+        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Send-Email-on-systemd-Unit-Failure/" itemprop="url">在 systemd 服务失败时发送邮件</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2026-07-11T03:22:33.000Z">2026-07-11 周六 11:22:33 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Send-Email-on-systemd-Unit-Failure/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="在 systemd 服务失败时发送邮件" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>出门在外的时候，我依赖 headscale 访问家里的设备，但是 headscale 在每次更新后经常会弃用一些配置项，如果它检测到配置文件里仍然有这些配置文件，就会启动失败。为了避免出门在外的时候发现连不上家里，我觉得有必要利用 systemd 进行提醒，以便尽快处理。 传统的方式是通过邮件提醒，……</p>
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Linux/" rel="tag"><i class="bi bi-tag"></i>Linux</a><a class="post-tag button" href="/tags/systemd/" rel="tag"><i class="bi bi-tag"></i>systemd</a>
+      </div>
+    </footer>
+  </article>
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/RPi-Arch-Linux-ARM-Kernel/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -499,9 +536,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-blue">由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。</div>
-
-<p>基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。</p>
+      <div class="alert-blue">由于篇幅限制就不写详细的配置教程了，只会记录一下文档里没有的需求和解决方案。</div><p>基本上我在 NAS 上部署服务的时候相当克制，虽然我装了一个完整版的 Linux，但其实也就跑了 samba 共享、headscale 和 transmission 下载这几个。我也没有什么出门在外远程看家里的蓝光电影的需求，再说公网网速也很难满足这个需求，所以除非确实需要什么新功能，我会尽量少在 NAS 上运行服务。不过最近我还是发现了一些需求需要部署其它服务来解决。</p>
 
     </main>
     <footer class="post-footer">
@@ -621,46 +656,6 @@
       </div>
     </footer>
   </article>
-  <article class="article post card" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/GNOME-IBus-Wayland-IME/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="不愿意看到你朦胧泪眼<br>我就变成那晚风">
-        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <div class="post-title" itemprop="name headline">
-        <a class="title-link" href="/posts/GNOME-IBus-Wayland-IME/" itemprop="url">GNOME 和 IBus 和 Wayland 输入法</a>
-      </div>
-      <div class="post-meta">
-        <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2024-06-20T09:19:55.000Z">2024-06-20 周四 17:19:55 GMT+8</time></span>
-        </div>
-        <div class="post-updated meta-block">
-          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2024-06-25T06:52:35.000Z">2024-06-25 周二 14:52:35 GMT+8</time></span>
-        </div>
-        <div class="post-categories meta-block">
-          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
-        </div>
-        <div class="post-comment-count meta-block">
-          <i class="bi bi-chat-dots"></i><span><a href="/posts/GNOME-IBus-Wayland-IME/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="GNOME 和 IBus 和 Wayland 输入法" itemprop="commentCount">阅读评论</span></a></span>
-        </div>
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      <p>长久以来，用户对于 GNOME 的输入法是怎么实现的有着各种各样的误解，比如误以为 IBus 掌控从界面到引擎的全部逻辑。而我最近尝试给 GNOME 添加了 text-input-v1 支持，以便用户可以在运行于 Wayland 下的 Chromium/Electron 程序中使用输入法（Chrom……</p>
-    </main>
-    <footer class="post-footer">
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="bi bi-tag"></i>GNOME</a><a class="post-tag button" href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" rel="tag"><i class="bi bi-tag"></i>输入法</a>
-      </div>
-    </footer>
-  </article>
   <nav class="pagination">
   <a class="page-number current" href="/">1</a>
   <a class="page-number" href="/index-2.html">2</a>
@@ -707,7 +702,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -715,7 +710,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -780,4 +775,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.352Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.492Z. -->

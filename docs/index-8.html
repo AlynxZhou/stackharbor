@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Whisper to the World">
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="首页">
@@ -284,6 +284,44 @@
 <div id="home" class="home page">
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Android-Video-Wallpaper-Implementation/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="不愿意看到你朦胧泪眼<br>我就变成那晚风">
+        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/Android-Video-Wallpaper-Implementation/" itemprop="url">如何编写 Android 视频壁纸</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2019-03-22T08:18:00.000Z">2019-03-22 周五 16:18:00 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/Android-Video-Wallpaper-Implementation/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="如何编写 Android 视频壁纸" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>最近我编写了一个 Android 的视频壁纸应用（<a href="https://github.com/AlynxZhou/AlynxLiveWallpaper" target="_blank" rel="external nofollow noreferrer noopener">GitHub Repo</a>），一开始觉得并没有什么难写的地方，应该很快就可以写出来，但是后来发现我想的太简单了。或许你也看过许多写视频壁纸的教程，但我发现他们都有一些问题，写出来的程序基本不能用，所以我打算在这里写一下如何编写一个可以发布的 Android 视频壁纸，而不是一个 demo。</p>
+
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/Android/" rel="tag"><i class="bi bi-tag"></i>Android</a><a class="post-tag button" href="/tags/Java/" rel="tag"><i class="bi bi-tag"></i>Java</a><a class="post-tag button" href="/tags/OpenGL/" rel="tag"><i class="bi bi-tag"></i>OpenGL</a>
+      </div>
+    </footer>
+  </article>
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Hard-to-Transfer-APK-with-Chinese-Android/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -349,9 +387,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
-
-<p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>
+      <div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div><p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>
 
     </main>
     <footer class="post-footer">
@@ -430,13 +466,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-green">Google 反应还是挺快的，现在这篇博客已经不是精选摘要了。</div>
-
-<div class="alert-red">可能有人在 Google 搜索 “WireGuard 原理” 然后发现精选摘要是这篇博文，这给我带来了很多流量。但我还是要摸着良心说这篇博文并没有涉及到什么深层次具体的 WireGuard 原理，只是简单的配置使用记录。我不知道为什么 Google 会依据文章里唯一的一个“原理”就认为这篇文章是讲述 WireGuard 原理的，我不想误人子弟，所以已经删掉了唯一的一处关键词。我个人建议直接访问 WireGuard 的官网或者 Wikipedia 页面来查找有关它的原理的资料。</div>
-
-<div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
-
-<h1 id="%E9%9C%80%E6%B1%82"><a class="heading-link header-link" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82"></a>需求</h1>
+      <div class="alert-green">Google 反应还是挺快的，现在这篇博客已经不是精选摘要了。</div><div class="alert-red">可能有人在 Google 搜索 “WireGuard 原理” 然后发现精选摘要是这篇博文，这给我带来了很多流量。但我还是要摸着良心说这篇博文并没有涉及到什么深层次具体的 WireGuard 原理，只是简单的配置使用记录。我不知道为什么 Google 会依据文章里唯一的一个“原理”就认为这篇文章是讲述 WireGuard 原理的，我不想误人子弟，所以已经删掉了唯一的一处关键词。我个人建议直接访问 WireGuard 的官网或者 Wikipedia 页面来查找有关它的原理的资料。</div><div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div><h1 id="%E9%9C%80%E6%B1%82"><a class="heading-link header-link" href="/posts/WireGuard-Usage/#%E9%9C%80%E6%B1%82"></a>需求</h1>
 <p>本来想给内网的树莓派做 frp 一类的公网映射以便能够在外面访问 Samba 服务器，但是后来想想似乎把设备暴露在公网不太安全。换个角度想，其实没有必要把树莓派映射出去，只要能够连接进来就好了。所以选用 VPN 建虚拟专用网就好了，这里使用的 WireGuard 将我的各个设备连到一个子网内部。</p>
 
     </main>
@@ -475,9 +505,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-red">这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。</div>
-
-<p>开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。</p>
+      <div class="alert-red">这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。</div><p>开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。</p>
 
     </main>
     <footer class="post-footer">
@@ -642,49 +670,6 @@
       </div>
     </footer>
   </article>
-  <article class="article post card" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Automata/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="不愿意看到你朦胧泪眼<br>我就变成那晚风">
-        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <div class="post-title" itemprop="name headline">
-        <a class="title-link" href="/posts/Automata/" itemprop="url">Automata: A Story of Love and Lives</a>
-      </div>
-      <div class="post-meta">
-        <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2018-07-16T09:39:01.000Z">2018-07-16 周一 17:39:01 GMT+8</time></span>
-        </div>
-        <div class="post-categories meta-block">
-          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%94%9F%E6%B4%BB/%E6%B8%B8%E6%88%8F/" itemprop="url" rel="index"><span itemprop="name">游戏</span></a></span>
-        </div>
-        <div class="post-comment-count meta-block">
-          <i class="bi bi-chat-dots"></i><span><a href="/posts/Automata/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="Automata: A Story of Love and Lives" itemprop="commentCount">阅读评论</span></a></span>
-        </div>
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      <div class="enlarge">
-  <img alt="PS4 版 NieR: Automata 的启动图" title="PS4 版 NieR: Automata 的启动图" src="/posts/Automata/Automata.jpg">
-</div>
-
-<blockquote class="center-quote">我没有办法评价这款游戏<br>因为我觉得我被结结实实地折腾了一回</blockquote>
-
-
-    </main>
-    <footer class="post-footer">
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"><i class="bi bi-tag"></i>游戏</a><a class="post-tag button" href="/tags/%E5%B0%BC%E5%B0%94%EF%BC%9A%E6%9C%BA%E6%A2%B0%E7%BA%AA%E5%85%83/" rel="tag"><i class="bi bi-tag"></i>尼尔：机械纪元</a><a class="post-tag button" href="/tags/NieR:%20Automata/" rel="tag"><i class="bi bi-tag"></i>NieR: Automata</a>
-      </div>
-    </footer>
-  </article>
   <nav class="pagination">
   <a class="page-number" href="/">1</a>
   <a class="page-number" href="/index-2.html">2</a>
@@ -731,7 +716,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -739,7 +724,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -804,4 +789,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.353Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.492Z. -->

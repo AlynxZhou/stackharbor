@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。">
     <meta name="keywords" content="计算机, Linux, 字体">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="Fontconfig 和 Noto Color Emoji 和抗锯齿">
@@ -316,9 +316,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>我一直用的是以前积攒的一份 fontconfig 配置，主要功能就是设置对于无衬线字体优先用 Roboto 显示英文字体，然后回退到 Noto Sans CJK SC 显示中文字体，因为 Roboto 比 Noto 的英文字好看，以及对等宽字体优先用 Monaco。虽然大部分都是网上抄来的，我自己并不太懂，但是这个配置一直工作的还可以。直到我开启了 RIME 内置的 emoji 输入法，发现 emoji 显示成了空白。</p>
-<a id="more"></a>
-
-<p>一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1454152" target="_blank" rel="external nofollow noreferrer noopener">一个 firefox 的 bug</a>，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：</p>
+<a id="more"></a><p>一开始没觉得是什么很难解决的问题，在字体列表末尾加上 Noto Color Emoji 不就行了？不过事情要是真的这么简单，也就没必要写个博客记下来了。忘记当时怎么查的了，总之是搜到 <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1454152" target="_blank" rel="external nofollow noreferrer noopener">一个 firefox 的 bug</a>，提 bug 的人表示自己一直是开着 hintfull 和 antialias 的，关掉这个 Noto Color Emoji 才能显示。于是我看了一眼我的配置，也有这么一段：</p>
 <figure data-raw="<!-- 针对所有字体的默认设置，力求显示效果最好。 -->
 <match target=&quot;font&quot;>
   <!-- 禁用内嵌点阵。 -->
@@ -421,9 +419,7 @@
 <p>我查了很多博客文章，不过它们都关注在正常的字体顺序上，还没有人研究 webfont 有什么问题。于是我只能自己研究，不过我不能保证我对 fontconfig 的理解完全正确，这东西看起来非常复杂，不过我还是大致搞清楚了一些事情。引用我看到的 <a href="https://eev.ee/blog/2015/05/20/i-stared-into-the-fontconfig-and-the-fontconfig-stared-back-at-me/" target="_blank" rel="external nofollow noreferrer noopener">一篇英文博客</a> 的标题：</p>
 <blockquote class="center-quote">
 当我凝视着 fontconfig 时，fontconfig 也在凝视着我。
-</blockquote>
-
-<p>首先我找到了这个叫 <a href="http://marguerite.su/posts/fontconfig_%E5%87%A0%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91/" target="_blank" rel="external nofollow noreferrer noopener">fontconfig 几个常见的坑</a> 的文章，里面信息量挺大的，不过说实话没有解决掉我的问题——我明明只对匹配到 Noto Color Emoji 时候关掉了抗锯齿，为什么 webfont 也受到影响了呢？这篇文章主要介绍怎么调整字体列表顺序，不过说实话我没有遇到那么多障碍，简单的写法就工作了。同一个作者还写了 <a href="http://marguerite.su/posts/color_emoji_in_opensuse/" target="_blank" rel="external nofollow noreferrer noopener">Color Emoji in openSUSE</a> 的文章，不过总感觉是交待到一半，翻了文章列表没有后续了。而且这篇文章关心的也是字体 fallback 时候某些字符选到错误的字体的问题，和我这个不太相关。</p>
+</blockquote><p>首先我找到了这个叫 <a href="http://marguerite.su/posts/fontconfig_%E5%87%A0%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91/" target="_blank" rel="external nofollow noreferrer noopener">fontconfig 几个常见的坑</a> 的文章，里面信息量挺大的，不过说实话没有解决掉我的问题——我明明只对匹配到 Noto Color Emoji 时候关掉了抗锯齿，为什么 webfont 也受到影响了呢？这篇文章主要介绍怎么调整字体列表顺序，不过说实话我没有遇到那么多障碍，简单的写法就工作了。同一个作者还写了 <a href="http://marguerite.su/posts/color_emoji_in_opensuse/" target="_blank" rel="external nofollow noreferrer noopener">Color Emoji in openSUSE</a> 的文章，不过总感觉是交待到一半，翻了文章列表没有后续了。而且这篇文章关心的也是字体 fallback 时候某些字符选到错误的字体的问题，和我这个不太相关。</p>
 <p>然后还有 <a href="https://catcat.cc/post/2020-10-31/" target="_blank" rel="external nofollow noreferrer noopener">Linux fontconfig 的字体匹配</a> 这篇文章，它介绍了浏览器是怎么和 fontconfig 合作匹配字体的，但是对于 webfont 也是没有提到。包括它的后续文章 <a href="https://catcat.cc/post/2021-03-07/" target="_blank" rel="external nofollow noreferrer noopener">用 fontconfig 治理 Linux 中的字体</a> 也没提到和 Noto Color Emoji 相关的调整（可能和它用的 Twemoji 有关系）。</p>
 <p>然后我尝试按照文章里的办法对 firefox 进行一个 fontconfig 的调试，<code>FC_DEBUG=4 firefox --new-instance --private-window https://twitter.com/</code> 直接吐了 12 万行输出，我实在是不知道从哪里看了。翻了一下午胡乱修改了好几次配置也没找出来哪里有问题。就在我眼花的时候偶然看到一条有用的，fontconfig 吐出来一个匹配结果，family 是 <code>Roboto, Noto Sans CJK SC, Noto Color Emoji, sans-serif…</code> 等等一长串，style 是 <code>¶</code>。这个就很有趣了，因为我看 firefox 里面，twitter 用的 webfont 叫 TwitterChirp，它的 style 也是这么个 <code>¶</code>（我怀疑是个 bug），那这条可能就是相关的了。然后我发现这个匹配结果下面 antialias 是 false，但理论上来说这条又不是最先匹配到 Noto Color Emoji，怎么会应用 Noto Color Emoji 的设置呢？我猜测是因为默认 test 语句是 <code>qual="any"</code> 含义似乎是只要匹配到的有一个满足就应用，正常匹配一个字体应该是不会返回这么一长串 family 的（我用 <code>fc-match</code> 一般只返回一个符合条件的 <code>family</code>），虽然我不知道为什么 webfont 会返回这么一长串结果，总之我改成 <code>qual="all"</code> 也就是必须所有结果都是 Noto Color Emoji 时候才应用就好了对吧！然后重新登录，emoji 能显示，我以为已经胜利了！结果事情证明是半场开香槟……</p>
 <p>当我以为完全没问题，正打算用 atom 整理一下这份配置的时候，突然发现不对劲了……Atom里面的中文字体失去了抗锯齿……你可以想像我当时心情有多绝望。具体为什么还是同样的我不知道，不过我猜测恰好是和 <a href="https://catcat.cc/post/2020-10-31/" target="_blank" rel="external nofollow noreferrer noopener">Linux fontconfig 的字体匹配</a> 里面提到的 chromium 查询字体的奇葩逻辑有关系……可能只是它某次查询刚好漏掉了 Noto Sans CJK SC 匹配到了 Noto Color Emoji 然后就给了个 antialias false，然后再通过什么奇怪的 UI 字体查询找出了中文字体……反正总之我的心好累，我实在不知道该怎么解决了，我只想用个 emoji，我甚至还给 Noto Color Emoji 提了请求支持抗锯齿的 issue……然后我决定要不换成 Twemoji 算了。</p>
@@ -935,7 +931,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -943,7 +939,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -1008,4 +1004,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

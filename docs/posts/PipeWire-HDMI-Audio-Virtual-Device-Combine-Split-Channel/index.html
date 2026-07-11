@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这篇文章同时有 中文版本 和 英文版本。 This post is both available in Chinese version and English version.">
     <meta name="keywords" content="PipeWire">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="PipeWire 和 HDMI 音频和虚拟设备和复合/分离通道">
@@ -317,9 +317,7 @@
     <main class="post-main" itemprop="articleBody">
       <p>这篇文章同时有 <a href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC">中文版本</a> 和 <a href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#EnglishVersion">英文版本</a>。</p>
 <p>This post is both available in <a href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC">Chinese version</a> and <a href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#EnglishVersion">English version</a>.</p>
-<a id="more"></a>
-
-<h1 id="%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC"><a class="heading-link header-link" href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC"></a>中文版本</h1>
+<a id="more"></a><h1 id="%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC"><a class="heading-link header-link" href="/posts/PipeWire-HDMI-Audio-Virtual-Device-Combine-Split-Channel/#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC"></a>中文版本</h1>
 <p>认识的朋友里很少有人有像我这么复杂的音频系统。长话短说，为了能让 PS4、Switch 和电脑分享一个扬声器，我把它接在了显示器上而不是电脑的内置声卡上，这样所有设备都通过 HDMI/DP 输出音频到扬声器。一开始这也没什么，后来我又添置了一块显示器，我发现在 Linux 下面经常搞不清楚究竟哪一个音频设备才是连接着扬声器的显示器，可能上周还是 HDMI 1，这周就变成 HDMI 2，而且也不是每次都会变，导致我经常需要试试才知道哪一个是我需要的。直到前天我忍不了了，决定发挥动手能力解决这个问题。</p>
 <p>一开始我以为是 PipeWire 给设备排序的时候是随机排序的，那简单，只要我找到每个设备对应的 ID，然后关掉没有扬声器的那个 HDMI 输出就可以了。但是我发现似乎 PipeWire 只是按照 ALSA 给出的设备编号来排序，并没有自己编号，于是就算关闭一个设备，下次被关闭的也可能是另一个。然后我就在想难道 ALSA 没有固定 HDMI 音频设备的功能吗？毕竟就算是显示器也是有 EDID 这种东西的，于是我查了各种 ALSA 的资料，确实是可以通过 udev 指定不同声卡的顺序，但对于 HDMI 这种属于同一个声卡的不同端口的设备没什么办法。我甚至查到了 NVIDIA 关于显卡音频的文档，里面说每个端口会有一个叫做 ELD 的数据，描述了连接的显示器信息，不过通过 <code>cat /proc/asound/cardX/eld*</code> 查看之后我发现这个标准最多只给到显示器的型号，而我为了不在多显示器缩放上浪费精力，买了两台同样型号的显示器，没有序列号字段就还是没办法分辨不同的显示器！当然如果你的 HDMI 设备的型号不同，那其实就简单了，ALSA 现在会读取 ELD 里面的显示器型号，然后 PipeWire 会把这个作为 <code>node.nick</code> 属性，你可以直接通过这个属性分辨设备，也可以利用这个属性写 WirePlumber 重命名规则修改你的桌面环境会用到的属性，就可以固定名称了。不过我还得继续寻求帮助。</p>
 <p>于是我就在公司的 research 邮件列表发了封邮件讲述了我的设备连接方式和需求，结果 Takashi Iwai（内核音频子系统的维护者之一）回复我说确实没有什么办法，音频驱动只是按照显卡给的顺序分配编号，所以大概率是随机的。特别是我还发现这玩意好像也不一定按照显示器输出的顺序来排号，于是 Plan A 是彻底行不通了。那我还有 Plan B 和 Plan C。</p>
@@ -1751,7 +1749,7 @@ table.insert(alsa_monitor.rules, rule)
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -1759,7 +1757,7 @@ table.insert(alsa_monitor.rules, rule)
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -1836,4 +1834,4 @@ table.insert(alsa_monitor.rules, rule)
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

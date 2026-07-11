@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。 由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。">
     <meta name="keywords" content="GNOME, Wayland, NVIDIA">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="NVIDIA 驱动和 GNOME 和 Wayland">
@@ -318,9 +318,7 @@
       <p>更新（2021-11-09）：最新的 NVIDIA 495 驱动终于支持了大家都在用的 GBM，同时最新的 XWayland 21.1.3 也添加了这方面的支持，也就意味着 NVIDIA 用户不再需要单独的轮子而是使用现有的稳定的代码。我已经切换到 GNOME Wayland 不止一周，目前各种功能都很正常。</p>
 <hr>
 <p>由于各种各样的历史原因和近期的变化，我在最近的聊天里发现很多朋友对 NVIDIA 驱动对 Wayland 的支持情况不甚了解，正好我最近在折腾相关的东西，所以打算简单介绍一下我了解的。</p>
-<a id="more"></a>
-
-<h1 id="%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><a class="heading-link header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"></a>常见问题</h1>
+<a id="more"></a><h1 id="%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><a class="heading-link header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"></a>常见问题</h1>
 <h2 id="%E4%B8%BA%E4%BB%80%E4%B9%88-NVIDIA-%E7%9A%84-Wayland-%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F"><a class="heading-link header-link" href="/posts/NVIDIA-GNOME-Wayland/#%E4%B8%BA%E4%BB%80%E4%B9%88-NVIDIA-%E7%9A%84-Wayland-%E6%94%AF%E6%8C%81%E8%BF%99%E4%B9%88%E5%B7%AE%EF%BC%9F"></a>为什么 NVIDIA 的 Wayland 支持这么差？</h2>
 <p>长话短说，大部分驱动（AMD 的开源和闭源驱动，NVIDIA 的开源驱动 nouveau，Intel 的开源驱动）都同意采用 GBM 作为缓存 API，但是 NVIDIA 像个赌气的小孩一样表示“你们这个不好，我要做个更好的 EGLStreams”所以不支持 GBM，于是所有要兼容 NVIDIA 闭源驱动的混成器都要为它做单独的实现代码。诸如 GNOME 或者 KDE 这种大型项目有足够的人手，同时 NVIDIA 似乎也提供了一定的帮助所以已经有了混成器内部的 EGLStreams 实现，但也有些小型项目并不支持这个玩意。而且 NVIDIA 吹牛皮吹得很大，EGLStreams 哪里“更好”从他们的龟速进展上根本体现不出来。可能是因为挖矿赚得盆满钵满，忘记了显卡的本职工作是显示，NVIDIA 的闭源 Linux 驱动质量一直停留在能用的程度，同时又做各种各样限制导致开源的 nouveau 在较新的显卡上几乎不能用。</p>
 <p>NVIDIA 闭源驱动之前一直是稀泥巴糊不上墙的垃圾，因为它在 Wayland 下对使用 XWayland 的程序没有硬件加速支持——也就是说如果你使用 Xorg 会话，程序是有硬件加速的，你使用 Wayland 会话，Wayland 程序也是有硬件加速的，但是在 Wayland 会话下面那些旧的 Xorg 程序就没有硬件加速（听起来就像捡了芝麻丢了西瓜一样）——而仍然有相当一部分旧程序在 Wayland 下依赖 XWayland 运行，所以 NVIDIA 闭源驱动的 Wayland 会话基本可以认为是不能日常使用的。</p>
@@ -479,7 +477,7 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -487,7 +485,7 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -595,4 +593,4 @@ IMPORT{cmdline}="nomodeset", RUN+="/usr/lib/gdm-runtime-config set daemon Waylan
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

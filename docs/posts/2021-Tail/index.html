@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。">
     <meta name="keywords" content="时光飞逝">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="StackHarbor 的 2021 尾记">
@@ -316,9 +316,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>今年一直拖着没写总结，不是因为懒，主要是因为我总觉得好像距离去年写总结也没太久，我还能回忆起来去年写总结时候是什么样……也说不上是因为我记忆力不太好还是因为这一年实在没什么能让我记住的事情。</p>
-<a id="more"></a>
-
-<p>2021 年工作没什么变化，不过我换了个好一点的住处，虽然仍然是旧楼但是里面是新装修过的，至少让人待着的时候感到舒适，而且还可以吸室友的猫，虽然小猫也经常搞破坏，不过猫做什么都可以原谅。</p>
+<a id="more"></a><p>2021 年工作没什么变化，不过我换了个好一点的住处，虽然仍然是旧楼但是里面是新装修过的，至少让人待着的时候感到舒适，而且还可以吸室友的猫，虽然小猫也经常搞破坏，不过猫做什么都可以原谅。</p>
 <p>看了去年的总结，才发现我是 2021 年把 FlipClock 改成 Meson 管理编译的，于是想起来我这一年学了 Meson 怎么用，因为 CMake 实在是让我烧脑筋。我今年还终于让 scrcpy 能够模拟 USB 键盘，这样使用 scrcpy 的时候也能用数字键选词了，多少算是在一个大项目里面做了一个大贡献。</p>
 <p>然后其他能记得住的就是最近折腾的一些东西了，春节假期没写博客也是因为忙着写代码。写了一个简单的网页小游戏，基本是平面版神庙逃亡，感觉还是挺有成就感的。然后给之前的弹钢琴页面改成了原生 JS 实现，放弃 React 的原因是依赖太多了，而且不是每个软件包都能及时更新自己的依赖。比如你用一个老版本的 create-react-app 会带来许多有漏洞的依赖，然后你更新到最新版因为依赖变了，有些库又依赖了另一个有漏洞的版本。我觉得为了简单的 UI 和数据绑定这个代价是不值得的，所以我就重写了一个。然后给我的博客生成器添加了文件依赖的支持，很久很久以前当我刚开始用静态博客生成器的时候就在头疼这个，博客生成器理解不了你的模板引擎或者预处理器的导入和扩展语句，于是没办法在一个文件更新的时候更新所有包含它的依赖，导致主题开发要不停的关掉生成器再开。一开始我是想给这些文件都加上 front matter，但是我发现虽然我自己加载的时候可以去掉 front matter，模板引擎处理导入语句的时候是他自己读文件所以没办法去掉 front matter，我不想给每个模板引擎都写自定义的 loader，所以最后改成用一个单独的文件记录依赖了。最后的结果就是单独抽出了一个 Watcher 类，可以查表查出所有需要更新的文件然后调回调，效果还挺不错的。以及本来我想清理一下博客的样式然后顺便换个 CSS 预处理器，因为感觉 Stylus 不是特别火了，但是考察了一下，less 的语法和 Stylus 差得有点多，而 scss 虽然使用广泛，而且有纯 C 语言写的实现，但是它有好多个实现，并且官网上说只有 Dart 语言写的版本才不过时，其它的都只实现了过时的 <code>@import</code> 而用户应该用最新的 <code>@use</code>，总之搞得这么麻烦看起来就不想用。虽然 Dart 能编译成纯 JS，我还是觉得没兴趣。于是最后我把我的样式都改成了原生 CSS，然后去掉了生成器内置的 Stylus 支持。</p>
 <p>显示器从去年的一个换成了两个，因为我是一个经常最大化窗口的人，切工作区虽然快，但是比如在浏览器和代码编辑器之间切换的时候还是会打断思路，有了双屏就没这个烦恼。一开始我想的是双屏更方便一边全屏游戏一边干别的事情，不过好像也就那样，因为从全屏切出来到另一个屏幕也不是很顺畅。不过买双屏的时候很头疼的就是因为不是一个批次，两个显示器的色温差得不是一点，最终是换了一台然后用校色仪调了好久，虽然不是 100% 一致，但是至少差不多了。</p>
@@ -438,7 +436,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -446,7 +444,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -511,4 +509,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我倒不是对机器学习有什么莫名的偏见。事实上有些只能用机器学习搞定的东西我也很支持用机器学习解决，比如 waifu2x 这种增加图片分辨率的或者 Spleeter 这种分离人声和伴奏的，用传统的分离人声的方法就是不能完美解决这类问题，而机器学习模糊分类则可以无限接近完美解决。我讨厌的有两个，一个是传统方法很好解决的东西非要用机器学习解决，另一个是混乱的机器学习项目，后者更严重。">
     <meta name="keywords" content="Python, Spleeter">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="解决 Spleeter 愚蠢的依赖问题">
@@ -316,9 +316,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>我倒不是对机器学习有什么莫名的偏见。事实上有些只能用机器学习搞定的东西我也很支持用机器学习解决，比如 waifu2x 这种增加图片分辨率的或者 Spleeter 这种分离人声和伴奏的，用传统的分离人声的方法就是不能完美解决这类问题，而机器学习模糊分类则可以无限接近完美解决。我讨厌的有两个，一个是传统方法很好解决的东西非要用机器学习解决，另一个是混乱的机器学习项目，后者更严重。</p>
-<a id="more"></a>
-
-<p>不知道是因为什么原因，许多机器学习从业者似乎都缺乏整理代码和依赖的能力——能轻松地把一个这类开源项目打包简直是奇迹，更多时候别提打包了，你想自己安装然后跑起来都不太现实，哪怕是同样做机器学习的其他人也有这样的苦恼：实现者似乎把论文写好然后在自己电脑上能跑起来就心满意足了，丢出来一份没什么文档的代码，不折腾几天根本不知道这坨代码需要装些什么才能跑起来。对我这种洁癖用户就更严重了，我可不希望 pip 在我的系统里塞一堆乱七八糟的东西，这个需要其他项目才能避免全局安装的程序比起 npm 真是差远了，解决依赖的能力也远不如 pacman 和 npm。</p>
+<a id="more"></a><p>不知道是因为什么原因，许多机器学习从业者似乎都缺乏整理代码和依赖的能力——能轻松地把一个这类开源项目打包简直是奇迹，更多时候别提打包了，你想自己安装然后跑起来都不太现实，哪怕是同样做机器学习的其他人也有这样的苦恼：实现者似乎把论文写好然后在自己电脑上能跑起来就心满意足了，丢出来一份没什么文档的代码，不折腾几天根本不知道这坨代码需要装些什么才能跑起来。对我这种洁癖用户就更严重了，我可不希望 pip 在我的系统里塞一堆乱七八糟的东西，这个需要其他项目才能避免全局安装的程序比起 npm 真是差远了，解决依赖的能力也远不如 pacman 和 npm。</p>
 <p>然后有人发明了 conda 和 docker 这样的 <del>辣鸡</del> 项目来拯救其他的辣鸡，但事实上不过是变得更糟而已——它们给了一些懒人名正言顺不维护项目的借口——反正我丢一个 conda 配置或者 docker 文件上去，你们拉上一大堆和我一样的过期依赖就能跑了，至于占了你多少硬盘，干不干净，关我什么事？如果不是物理限制，恐怕这些懒人会把整个宇宙都塞进去。而且他们再也不会管版本更新，什么 tensorflow 2 与我何干？用了我的 docker 你的系统里就会有几百个不同的过期的 tensorflow 1，买硬盘就完了呗？这和买显卡就完了呗还真是一路货色，这样依赖商业公司的产品，总有一天感觉会被割韭菜。</p>
 <p>今天我用到的这个 Spleeter 某种意义上也是这样的一坨辣鸡，它的仓库里面的 README 是完全过时的，但这起码是件好事：代码还在更新。只是你按照文档是没办法顺利的搞定它的，我总结了一下我的解决方案，可能不适合其他人，但我大概知道怎么解决了。</p>
 <p>这个文档有多离谱呢？它说你如果使用 GPU 加速的版本，必须从 conda-forge 安装，pip 和 GitHub 的版本都只有 CPU——那你这也是按揭开源？然后整个文档没有一个地方告诉我我需要单独下载训练好的模型才能跑起来，直接运行程序则丢一个段错误——可能他们搞机器学习的人觉得下模型是常识不需要说吧。</p>
@@ -477,7 +475,7 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -485,7 +483,7 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -550,4 +548,4 @@ $ spleeter separate -i 你要处理的歌曲 -p spleeter:2stems -o 输出目录 
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

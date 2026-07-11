@@ -8,9 +8,9 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。 开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。">
+    <meta name="description" content="这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。">
     <meta name="keywords" content="计算机, 编程, JavaScript">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="使用 Moment 处理 JavaScript 与 YAML 的时区转换">
@@ -312,12 +312,8 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-red">这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。</div>
-
-<p>开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。</p>
-<a id="more"></a>
-
-<p>今天想给 Hikaru 添加文章时间显示时区的功能，本来以为只要无脑调用 Moment.js 就好了，但发现其中坑有很多，本来我就很不擅长计算时区转换，难度变得很大，好在后来处理完了，记录一下遇到的坑。</p>
+      <div class="alert-red">这篇文章记录的内容已经过时了，现在 Hikaru 不再使用 js-yaml 和 moment-timezone 并且仅仅使用 Date 对象解析时间，不进行任何处理。用户应该使用 ISO 6801 的日期时间格式指定时区，主题应该自己解决格式化输出的需求。</div><p>开始之前先来一段惊喜：我是在中国标准时间 21 点写的这篇文章，但我在 front matter 写的是 21:00:00 并解析为东京时间。</p>
+<a id="more"></a><p>今天想给 Hikaru 添加文章时间显示时区的功能，本来以为只要无脑调用 Moment.js 就好了，但发现其中坑有很多，本来我就很不擅长计算时区转换，难度变得很大，好在后来处理完了，记录一下遇到的坑。</p>
 <p>首先 Moment 是不支持地区解析和时区显示的，需要安装 <code>moment-timezone</code> 这个扩展包才可以处理，文档在<a href="https://momentjs.com/timezone/docs/" target="_blank" rel="external nofollow noreferrer noopener">这里</a>。</p>
 <p>然后就是 js-yaml 开发者认为是标准但我觉得是 Bug 的<a href="https://github.com/nodeca/js-yaml/issues/91" target="_blank" rel="external nofollow noreferrer noopener">问题</a>。我在 front matter 里写的时间是不包含时区的，比如 <code>2018-12-31 16:00:00</code>，按照正常的解析方式（就是直接 <code>new Date("2018-12-31 16:00:00")</code>），应当把这个时间当作 localtime 来看待，也就是 UTC+8h 的时间，但偏偏 js-yaml 的开发者认为按照 YAML 标准应当把这个时间当作 UTC 来处理（问题是他 <strong>根本解析不了附加时区的表示方式啊！</strong>）然后时间就错乱了，不过还好，JS Date() 对象内置的 <code>getTimezoneOffset()</code> 方法可以获取到 UTC 与 localtime 的分钟差（和标注的 UTC+8h 正好相反，这个是 -8h，在这里正好把这个错误的 UTC 换算回正确的 UTC）。具体的代码如下。</p>
 <figure data-raw="const yaml = require(&quot;js-yaml&quot;)
@@ -472,7 +468,7 @@ moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -480,7 +476,7 @@ moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -545,4 +541,4 @@ moment.tz(moment(newd).format("YYYY-MM-DD HH:mm:ss"), "Asia/Tokyo").format("YYYY
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.491Z. -->

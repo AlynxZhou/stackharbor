@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="上一篇文章提到了 DaVinci Resolve 对于素材位置的计算逻辑非常奇怪并且不肯修改，这篇我试图概括一下具体的计算逻辑方便自己使用。如果你也遇到了同样的问题并且希望他们改进，可以去支持 我发的帖子（英语）。">
     <meta name="keywords" content="摄影">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="DaVinci Resolve 奇怪的素材位置计算逻辑">
@@ -313,9 +313,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>上一篇文章提到了 DaVinci Resolve 对于素材位置的计算逻辑非常奇怪并且不肯修改，这篇我试图概括一下具体的计算逻辑方便自己使用。如果你也遇到了同样的问题并且希望他们改进，可以去支持 <a href="https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;t=179153" target="_blank" rel="external nofollow noreferrer noopener">我发的帖子（英语）</a>。</p>
-<a id="more"></a>
-
-<h1 id="%E8%AE%A1%E7%AE%97%E5%9F%BA%E5%87%86"><a class="heading-link header-link" href="/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#%E8%AE%A1%E7%AE%97%E5%9F%BA%E5%87%86"></a>计算基准</h1>
+<a id="more"></a><h1 id="%E8%AE%A1%E7%AE%97%E5%9F%BA%E5%87%86"><a class="heading-link header-link" href="/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#%E8%AE%A1%E7%AE%97%E5%9F%BA%E5%87%86"></a>计算基准</h1>
 <p>缩放/裁切/位置永远以原图大小作为基准，不会互相影响。</p>
 <p>项目设置里有“缩放原图至适配大小且不出现裁切”和“不调整原图大小并裁切超出部分”两个比较合理的选项，“缩放原图至适配大小且不出现裁切”可以理解为插入时间线之前就改变了原图大小。例如画布尺寸 1920x1080，素材尺寸 512x512，选择“缩放原图至适配大小且不出现裁切”，相当于用外部命令把素材缩放到 1080x1080 然后再插入时间线，后续缩放/裁切/位置均以 1080x1080 作为基准。</p>
 <h1 id="%E7%BC%A9%E6%94%BE"><a class="heading-link header-link" href="/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#%E7%BC%A9%E6%94%BE"></a>缩放</h1>
@@ -445,7 +443,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -453,7 +451,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -536,4 +534,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

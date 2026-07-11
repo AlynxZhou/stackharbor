@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="最近我终于决定买了一个 YubiKey 5C，说出来不怕各位笑话，我买这玩意最初的动机只是觉得每次开机和解锁输密码太麻烦（但是为什么我不觉得 sudo 输密码麻烦呢？）。这还和我之前处理了一个 openSUSE 的 PAM 问题有关，我发现 GDM 有好几种不同的 PAM 配置，除了平时用的 gdm……">
     <meta name="keywords" content="计算机, GNOME, YubiKey">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="YubiKey 和 GNOME 和智能卡登录">
@@ -404,9 +404,7 @@
 <p>我的用户名是 <code>alynx</code>，你可以换成你自己的。</p>
 <p>到这一步 <code>pam_pkcs11.so</code> 这个模块已经可以通过智能卡验证你的身份了。</p>
 <hr>
-<div class="alert-red">更新（2025-04-24）：直接使用 p11-kit 的 MR 已经合并了，所以下面讲配置 NSS 数据库的部分都不需要做了。</div>
-
-<p>但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 <code>/etc/pam.d/gdm-smartcard</code> 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。</p>
+<div class="alert-red">更新（2025-04-24）：直接使用 p11-kit 的 MR 已经合并了，所以下面讲配置 NSS 数据库的部分都不需要做了。</div><p>但是如果你火急火燎兴高采烈的重启了系统，GDM 还是会和你要密码。原因其实很简单，虽然现在 <code>/etc/pam.d/gdm-smartcard</code> 已经可用了，但 GDM 只有在检测到智能卡之后才会调用这个文件尝试智能卡登录，很显然它没检测到智能卡。</p>
 <p>这里就比较难搞清楚了，我智能卡插的好好的，上面各种程序都能用，为什么你检测不到？我尝试用什么 GDM YubiKey 之类的关键词搜索了半天，也没人告诉我 GDM 到底怎么检测智能卡的。没有办法还是读代码吧，GNOME Shell <code>js/gdm/util.js</code> 里面的逻辑是通过 D-Bus 的 <code>org.gnome.SettingsDaemon.Smartcard</code> 获取智能卡信息，那我打开 D-Feet 从 Session Bus 里面找到这个，直接运行 <code>org.gnome.SettingsDaemon.Smartcard.Manager</code> 的 <code>GetInsertedTokens</code>，什么都没有。</p>
 <p>根据 D-Bus 的信息，很显然这个接口是 <code>gnome-settings-daemon</code> 的 <code>smartcard</code> 插件提供的，我大概是搜索了什么 gsd-smartcard PKCS#11 的关键字之后找到了 <a href="https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/merge_requests/208</a>，其实我一开始也没太看懂这是什么意思，但得到一些有用的信息：</p>
 <ul>
@@ -548,7 +546,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -556,7 +554,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -621,4 +619,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

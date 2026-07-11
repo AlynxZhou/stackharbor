@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还不错，但是让人非常恼火的是用户要主动或者被迫地在项目根目录下面添加一些文件，比如 .clang_complete 或者 compile_commands.json 来让 clangd 知道项目需要包含哪些库的头文件，以及 clangd 会直接把建立的索引丢到项目根目录下面的 .cache 目录里。虽然可以把这些加入 .gitignore，但保不齐哪个脾气古怪的上游维护者会和你纠缠半天让你解释为什么要加这些，实在是很麻烦。">
     <meta name="keywords" content="计算机, 编程">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="阻止 clangd 污染项目根目录的一些方法">
@@ -316,9 +316,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>Emacs 的 lsp-mode 推荐使用 clangd 分析 C/C++ 代码，用起来体验还不错，但是让人非常恼火的是用户要主动或者被迫地在项目根目录下面添加一些文件，比如 <code>.clang_complete</code> 或者 <code>compile_commands.json</code> 来让 clangd 知道项目需要包含哪些库的头文件，以及 clangd 会直接把建立的索引丢到项目根目录下面的 <code>.cache</code> 目录里。虽然可以把这些加入 <code>.gitignore</code>，但保不齐哪个脾气古怪的上游维护者会和你纠缠半天让你解释为什么要加这些，实在是很麻烦。</p>
-<a id="more"></a>
-
-<p><code>compile_commands.json</code> 比较好解决，clangd 提供了一个参数 <code>--compile-commands-dir=&lt;string&gt;</code> 可以指定查找这个文件的目录，我直接把它设置为 <code>./build/</code>，因为大部分项目的 <code>.gitignore</code> 都会包含构建目录，也免得运行 <code>bear -- meson compile</code> 之后再把这个文件从 <code>build</code> 目录移出来。</p>
+<a id="more"></a><p><code>compile_commands.json</code> 比较好解决，clangd 提供了一个参数 <code>--compile-commands-dir=&lt;string&gt;</code> 可以指定查找这个文件的目录，我直接把它设置为 <code>./build/</code>，因为大部分项目的 <code>.gitignore</code> 都会包含构建目录，也免得运行 <code>bear -- meson compile</code> 之后再把这个文件从 <code>build</code> 目录移出来。</p>
 <figure data-raw="(use-package lsp-mode
   :ensure t
   :commands lsp
@@ -493,7 +491,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -501,7 +499,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -566,4 +564,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

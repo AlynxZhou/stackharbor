@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我发现这篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，如果你只对后者感兴趣，请阅读最新的 谁动了我的 DNS 解析？（重制版）。 如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。">
     <meta name="keywords" content="计算机, Linux, 网络, DNS, resolv.conf, Network Manager, systemd-resolved">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="谁动了我的 DNS 解析？">
@@ -316,11 +316,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <div class="alert-red">我发现这篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，如果你只对后者感兴趣，请阅读最新的 <a href="/posts/Who-Moved-My-DNS-Resolving-Remastered/">谁动了我的 DNS 解析？（重制版）</a>。</div>
-如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。
-
-<a id="more"></a>
-
-<h1 id="%E9%9C%80%E6%B1%82"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving/#%E9%9C%80%E6%B1%82"></a>需求</h1>
+如果有人看到这个标题以为是什么科学上网相关然后高兴地点进来的话不要怪我，我其实想说的是 Linux 上有关 DNS 解析的流程，这个标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。我计网真的没认真听课，写的内容都是我现学现卖的，有不对的希望读者指正。<a id="more"></a><h1 id="%E9%9C%80%E6%B1%82"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving/#%E9%9C%80%E6%B1%82"></a>需求</h1>
 <p>我有一台 NAS，一台 PC 和一台路由器，为了能上网也为了家里的无线设备可以连接 NAS，我给 PC 和 NAS 分别接上路由器，但是路由器只有千兆网口，而 PC 和 NAS 各自多一个 2500 Mbps 的网卡，为了实现最高的连接速度，我又买了一根网线把 PC 和 NAS 直接连接起来，于是现在三台设备两两相连。</p>
 <p>直连两台设备其实非常简单，Network Manager 里面 IPv4 设置成手动，然后分别配置 IP 地址和子网掩码，再关掉 IPv6 就可以了，比如我分别设置 IP 为 <code>10.10.10.1</code> 和 <code>10.10.10.2</code>，然后子网掩码就是 <code>255.255.255.0</code>。然后在进行各种网络访问的时候只要使用这个 IP 就可以通过直连访问了。</p>
 <p>但是我还是不太满意，我设置了帅气的主机名，为什么还得用 IP 访问呢？但如果我查询主机名对应的 IP，发现得到的并不是直连的 IP，而是比如 <code>192.168.1.80</code> 这样的通过路由器的 IP。于是我开始研究如何配置让 DNS 解析给我返回直连的 IP。</p>
@@ -358,9 +354,7 @@
 </code></pre></figure>
 <p>然后再修改 <code>/etc/hosts</code> 分别添加不带 <code>.local</code> 的主机名（因为 <code>.local</code> 会在 <code>files</code> 之前先被 mDNS 处理）。</p>
 <h1 id="%E5%BD%93%E4%BD%A0%E8%A7%89%E5%BE%97%E9%80%90%E6%B8%90%E7%90%86%E8%A7%A3%E4%B8%80%E5%88%87%EF%BC%8C%E5%B9%B6%E8%AF%95%E5%9B%BE%E8%B5%B0%E5%87%BA%E6%96%B0%E6%89%8B%E6%9D%91%E2%80%A6%E2%80%A6"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving/#%E5%BD%93%E4%BD%A0%E8%A7%89%E5%BE%97%E9%80%90%E6%B8%90%E7%90%86%E8%A7%A3%E4%B8%80%E5%88%87%EF%BC%8C%E5%B9%B6%E8%AF%95%E5%9B%BE%E8%B5%B0%E5%87%BA%E6%96%B0%E6%89%8B%E6%9D%91%E2%80%A6%E2%80%A6"></a>当你觉得逐渐理解一切，并试图走出新手村……</h1>
-<div class="alert-blue">这一部分更新于 2024-02-01 18:15:00。因为我的网络配置终于突破了“只要全部交给 NetworkManager 就能解决”的范围。</div>
-
-<p>首先我还是应该对之前的逻辑做一下总结，其实关键无非是一句话：需要添加新的 DNS 服务器的场景有很多，但管理 <code>/etc/resolv.conf</code> 的程序只能有一个。比如说你连接到家里的网络，那你首先会希望自己的 DNS 服务器是路由器。然后这时你需要连接到公司的 VPN，那你会多出一个 VPN 的 DNS 服务器用来查询内网域名，并且只应该对内网域名查询这个 DNS 服务器。如果你选择用 NetworkManager 管理 <code>/etc/resolv.conf</code>，那你也应该使用 NetworkManager 的 VPN 插件，通过 NetworkManager 去修改 <code>/etc/resolv.conf</code>。于是就不再需要额外的进程管理 DNS 查询。</p>
+<div class="alert-blue">这一部分更新于 2024-02-01 18:15:00。因为我的网络配置终于突破了“只要全部交给 NetworkManager 就能解决”的范围。</div><p>首先我还是应该对之前的逻辑做一下总结，其实关键无非是一句话：需要添加新的 DNS 服务器的场景有很多，但管理 <code>/etc/resolv.conf</code> 的程序只能有一个。比如说你连接到家里的网络，那你首先会希望自己的 DNS 服务器是路由器。然后这时你需要连接到公司的 VPN，那你会多出一个 VPN 的 DNS 服务器用来查询内网域名，并且只应该对内网域名查询这个 DNS 服务器。如果你选择用 NetworkManager 管理 <code>/etc/resolv.conf</code>，那你也应该使用 NetworkManager 的 VPN 插件，通过 NetworkManager 去修改 <code>/etc/resolv.conf</code>。于是就不再需要额外的进程管理 DNS 查询。</p>
 <p>而使我决定最后改用 systemd-resolved 管理 DNS 查询的原因是我开始使用 Tailscale/Headscale 构建一个我自己的 VPN 网络。Tailscale 包含一个叫做 MagicDNS 的组件，可以让你像使用路由器的 DNS 一样通过主机名访问这个虚拟专用网里的设备，此时它会直接覆盖掉 <code>/etc/resolv.conf</code> 让 DNS 查询走它自己的 DNS 服务器，这导致我的 OpenVPN 的 DNS 服务器被清掉，无法同时访问公司的内网。</p>
 <p>如果你已经理解一切，解决方案应该也很清晰：要么把 Tailscale 也换成 NetworkManager 的插件版本（不存在），要么使用另一个专门管理 <code>/etc/resolv.conf</code> 的工具（systemd-resolved）让 Tailscale 和 NetworkManager 都交给它管理从而不要互相覆盖。考虑到 Avahi 的 mDNS 并没有像我想象的那样工作，我毫不犹豫的干掉了它换成了 systemd-resolved。</p>
 <p>干掉 Avahi 的部分暂且不提，启用 systemd-resolved 的过程需要额外操作：</p>
@@ -485,7 +479,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -493,7 +487,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -582,4 +576,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

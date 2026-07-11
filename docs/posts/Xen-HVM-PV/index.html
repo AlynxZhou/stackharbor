@@ -8,9 +8,9 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。 简介 由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。">
+    <meta name="description" content="请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。简介 由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。">
     <meta name="keywords" content="虚拟化, Xen">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="构建和运行 Xen HVM 和 PV">
@@ -315,18 +315,12 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-red">请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。</div>
-
-<h1 id="%E7%AE%80%E4%BB%8B"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%AE%80%E4%BB%8B"></a>简介</h1>
+      <div class="alert-red">请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。</div><h1 id="%E7%AE%80%E4%BB%8B"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%AE%80%E4%BB%8B"></a>简介</h1>
 <p>由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。</p>
-<a id="more"></a>
-
-<p>首先 Xen 分为 HVM 和 PV 两种常见的虚拟方案（PVH 我也没用过），HVM 依赖于硬件虚拟化，和常见的虚拟机没什么区别，而 PV 并不依赖硬件虚拟化，是通过虚拟机 Linux 内核中特殊的驱动，将请求转给宿主机的内核代为操作，但配置起来也更加复杂。目前 PV 所需的代码已经并入 Linux 内核上游，你能安装的发行版大部分都可以直接作为 PV 的虚拟机运行。</p>
+<a id="more"></a><p>首先 Xen 分为 HVM 和 PV 两种常见的虚拟方案（PVH 我也没用过），HVM 依赖于硬件虚拟化，和常见的虚拟机没什么区别，而 PV 并不依赖硬件虚拟化，是通过虚拟机 Linux 内核中特殊的驱动，将请求转给宿主机的内核代为操作，但配置起来也更加复杂。目前 PV 所需的代码已经并入 Linux 内核上游，你能安装的发行版大部分都可以直接作为 PV 的虚拟机运行。</p>
 <p>无论是 HVM 还是 PV，Xen 都用 domU（domain 的缩写，U 可以是 1、2、3……）代表虚拟机，然后用 dom0 代表宿主机，当然文档里也会叫宿主机 Hypervisor，这里我也可能直接将虚拟机叫做 VM。</p>
 <h1 id="%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C-dom0"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C-dom0"></a>构建和运行 dom0</h1>
-<div class="alert-blue">温馨提示：根据我的经验，在 Xen Hypervsior 上运行的 GNOME 桌面会由于未知原因在未知操作时卡住，建议不要用你平时使用的开发机作为 Xen Hypervisor，而是另找一台机器作为服务器运行 Xen Hypervisor，然后远程连接上去操作。</div>
-
-<p>和 KVM 不需要什么操作就能用不一样，Xen 需要你构建一个单独的 boot loader，在加载 Linux 内核之前先加载它，从而实现 Xen 的支持。我这里用的 Arch Linux，需要构建 <code>xen</code> 这个 AUR 包，根据 wiki 所说推荐用下面的指令构建：</p>
+<div class="alert-blue">温馨提示：根据我的经验，在 Xen Hypervsior 上运行的 GNOME 桌面会由于未知原因在未知操作时卡住，建议不要用你平时使用的开发机作为 Xen Hypervisor，而是另找一台机器作为服务器运行 Xen Hypervisor，然后远程连接上去操作。</div><p>和 KVM 不需要什么操作就能用不一样，Xen 需要你构建一个单独的 boot loader，在加载 Linux 内核之前先加载它，从而实现 Xen 的支持。我这里用的 Arch Linux，需要构建 <code>xen</code> 这个 AUR 包，根据 wiki 所说推荐用下面的指令构建：</p>
 <figure data-raw="$ build_stubdom=true efi_dir=&quot;/boot&quot; makepkg -si
 " data-info="language-shell" data-lang="shell" class="code-block"><pre class="code"><code class="language-shell">$ build_stubdom=true efi_dir="/boot" makepkg -si
 </code></pre></figure>
@@ -759,7 +753,7 @@ vncdisplay = 1
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -767,7 +761,7 @@ vncdisplay = 1
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -861,4 +855,4 @@ vncdisplay = 1
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

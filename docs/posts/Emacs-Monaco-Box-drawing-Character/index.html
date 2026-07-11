@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="2016 年的我开始用 Atom 这种“modern”的编辑器，2022 年的我却又开始用回岁数比我都大的 GNU Emacs。切换的理由其实很简单，我曾经以为一直能追上最新版 Electron 的 VSCode 会成为第一个纯 Wayland 的代码编辑器——只要 Chromium 那边支持纯 Wayland 就好了嘛，然而直到 Emacs 那边的 pgtk 分支合并进主线（以防有读者不太清楚来龙去脉我解释一下，Emacs 虽然有图形界面，但实际上只是用 X 实现了一个 Terminal 层，而传统的 GTK3 界面只是使用 GTK3 创建一个 X 窗口，然后其它操作都是通过 X 进行，这实际上非常不适合 GTK3，导致了很多 bug，同时也使 Emacs 没法利用 GTK 的 Wayland 后端。而 pgtk 分支则是在 X 部分之外另起炉灶，利用 GTK 实现了一个和 X 部分平行的 Terminal 层，全部的绘制操作都是以 GTK/Cairo 的现代程序方式进行，自然也就摆脱了对 X 的依赖。总之在 Emacs 这样又老又庞大的代码库上做如此大范围的工程我觉得可以称得上是一项壮举了。），Chromium 的 ozone backend 还是问题多多。虽然 Emacs/Vim 这种软件看起来确实有点老派作风，但没想到也有走在这些“现代”编辑器前面的地方。">
     <meta name="keywords" content="计算机, 字体, Emacs">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="Emacs 和 Monaco 字体和 Box-drawing Character">
@@ -316,9 +316,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>2016 年的我开始用 Atom 这种“modern”的编辑器，2022 年的我却又开始用回岁数比我都大的 GNU Emacs。切换的理由其实很简单，我曾经以为一直能追上最新版 Electron 的 VSCode 会成为第一个纯 Wayland 的代码编辑器——只要 Chromium 那边支持纯 Wayland 就好了嘛，然而直到 Emacs 那边的 pgtk 分支合并进主线（以防有读者不太清楚来龙去脉我解释一下，Emacs 虽然有图形界面，但实际上只是用 X 实现了一个 Terminal 层，而传统的 GTK3 界面只是使用 GTK3 创建一个 X 窗口，然后其它操作都是通过 X 进行，这实际上非常不适合 GTK3，导致了很多 bug，同时也使 Emacs 没法利用 GTK 的 Wayland 后端。而 pgtk 分支则是在 X 部分之外另起炉灶，利用 GTK 实现了一个和 X 部分平行的 Terminal 层，全部的绘制操作都是以 GTK/Cairo 的现代程序方式进行，自然也就摆脱了对 X 的依赖。总之在 Emacs 这样又老又庞大的代码库上做如此大范围的工程我觉得可以称得上是一项壮举了。），Chromium 的 ozone backend 还是问题多多。虽然 Emacs/Vim 这种软件看起来确实有点老派作风，但没想到也有走在这些“现代”编辑器前面的地方。</p>
-<a id="more"></a>
-
-<p>至于这和我换掉 Atom 有什么联系呢？主要是我发现在家里的台式机上，所有 XWayland 程序在 nvidia 驱动下面都会有闪回的情况，也就是说你打字的时候突然会闪回前几帧的画面，过一会再闪回来，你经常看不到自己输入的字符。Electron 程序尤其严重，也就导致我没有办法使用 Atom 写代码，于是不得不捡起以前东拼西凑的 Emacs 配置重新研究。（奇怪的是我自己的台式机也是 nvidia 驱动，没遇到过这种问题。）</p>
+<a id="more"></a><p>至于这和我换掉 Atom 有什么联系呢？主要是我发现在家里的台式机上，所有 XWayland 程序在 nvidia 驱动下面都会有闪回的情况，也就是说你打字的时候突然会闪回前几帧的画面，过一会再闪回来，你经常看不到自己输入的字符。Electron 程序尤其严重，也就导致我没有办法使用 Atom 写代码，于是不得不捡起以前东拼西凑的 Emacs 配置重新研究。（奇怪的是我自己的台式机也是 nvidia 驱动，没遇到过这种问题。）</p>
 <p>扯远了，这篇文章主要想记录的问题是什么呢？其实还要和 Emacs 绘制界面的方式有关系，对于 Atom/VSCode 这种基于浏览器的程序来说绘制点什么图形元素很简单，但是对于 Emacs/Vim 这种来自于终端里的程序，开发者们习惯的是处理字符而不是处理图形，于是你会发现比如 80 column ruler 或者 indent guide 这种东西，在 Emacs 里面其实是通过在对应的位置插入竖线字符实现的……我个人不太喜欢这样，一个原因是我以为竖线字符并不是占满整行而是上下有空白。我一直以为这是 Emacs 的问题——你干嘛用竖线字符画 UI 啊。</p>
 <p><img src="/posts/Emacs-Monaco-Box-drawing-Character/1.png" alt="有问题的样子"></p>
 <p>直到有一天我输错了 alias 在 GNOME Terminal 里面打开了 Emacs，我惊讶的发现竖线竟然接上了头！</p>
@@ -475,7 +473,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -483,7 +481,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -548,4 +546,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

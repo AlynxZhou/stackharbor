@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这是一篇其实没什么逻辑也没什么技术的文章，但踩到这个坑又很头痛，所以记录一下。">
     <meta name="keywords" content="网络, Windows">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="修复更换 PCI-E 插槽后 Windows 下无线网卡的名称问题">
@@ -313,9 +313,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>这是一篇其实没什么逻辑也没什么技术的文章，但踩到这个坑又很头痛，所以记录一下。</p>
-<a id="more"></a>
-
-<p>我用的是一张 PCI-E 的网卡，占据一个 PCI-Ex1 的插槽，对于一个主流的 ATX 主板来说有三个选择，第二条 x16 长度的插槽上面的一个和下面的两个，由于显卡一般会插在第一条 x16 上，所以如果插在第二条 x16 长度上面的那个，会挡住一部分显卡风扇，所以我一开始插在了第二条 x16 长度插槽下面的第一个插槽。这样也是有点问题的，因为这里 x16 和 x1 之间并没有留出一个槽的空位，一般主流显卡又都是双槽的，虽然我不太可能在机箱里塞第二张显卡，但是这么装直接就干掉了这种可能性，所以我一直想把无线网卡换到最底下的插槽。（这一部分比较乱，但是装过机的直接上网搜一下主流 ATX 主板的图就能理解了。）</p>
+<a id="more"></a><p>我用的是一张 PCI-E 的网卡，占据一个 PCI-Ex1 的插槽，对于一个主流的 ATX 主板来说有三个选择，第二条 x16 长度的插槽上面的一个和下面的两个，由于显卡一般会插在第一条 x16 上，所以如果插在第二条 x16 长度上面的那个，会挡住一部分显卡风扇，所以我一开始插在了第二条 x16 长度插槽下面的第一个插槽。这样也是有点问题的，因为这里 x16 和 x1 之间并没有留出一个槽的空位，一般主流显卡又都是双槽的，虽然我不太可能在机箱里塞第二张显卡，但是这么装直接就干掉了这种可能性，所以我一直想把无线网卡换到最底下的插槽。（这一部分比较乱，但是装过机的直接上网搜一下主流 ATX 主板的图就能理解了。）</p>
 <p>之前由于最后一个插槽挡板的螺丝拧的太紧我一直没换，今天买了一个柄比较粗比较省力的螺丝刀，终于拧下来螺丝把网卡换了个插槽。开机之后 Linux 下其实没什么问题，检测设备和持久化命名都正常工作了。不过 Network Manager 似乎认为更换了设备，所以建议删掉之前的连接配置重新连接网络，之后一切都正常。</p>
 <p>切到 Windows 发现不太对劲，首先就是我的 WiFi 适配器名字变成了 <code>WLAN 2</code>，想要重命名成 <code>WLAN</code> 又提示已经存在，但是我又看不到，点进去发现它选择的无线网卡名字后面多了个 <code>#2</code> 的后缀，总之我也不知道怎么回事，但是强迫症觉得很难受，明明我只有一张网卡啊。</p>
 <p>上网搜索了一下，首先是在设备管理器的查看菜单里选择显示隐藏的设备，这样就会发现一个灰色的没有后缀的网卡，我也不知道 Windows 为什么要存一个隐藏的之前存在现在不存在的 PCI-E 设备，首先按照网上的说法卸载掉这个设备然后重启，再开机就没有这个隐藏设备了。</p>
@@ -431,7 +429,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -439,7 +437,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -504,4 +502,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.491Z. -->

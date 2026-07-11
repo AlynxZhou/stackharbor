@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="这一篇是之前 谁动了我的 DNS 解析？ 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。 标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。">
     <meta name="keywords" content="计算机, Linux, 网络, DNS, resolv.conf, Network Manager, systemd-resolved">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="谁动了我的 DNS 解析？（重制版）">
@@ -314,9 +314,7 @@
     <main class="post-main" itemprop="articleBody">
       <p>这一篇是之前 <a href="/posts/Who-Moved-My-DNS-Resolving/">谁动了我的 DNS 解析？</a> 的重制版，因为那一篇杂糅了关于设置 Zeroconf 的 mDNS 的需求和关于 Linux 下面 DNS 解析到底是怎么工作的描述，我怀疑大部分读者对前者不感兴趣（因为我自己后来也发现这玩意不是很可靠），而更想了解后者，所以打算拉出来单写一篇。</p>
 <p>标题显然是化用自《谁动了我的奶酪？》，即使我并没有读过这本书。</p>
-<a id="more"></a>
-
-<h1 id="long-long-ago"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#long-long-ago"></a>long long ago</h1>
+<a id="more"></a><h1 id="long-long-ago"><a class="heading-link header-link" href="/posts/Who-Moved-My-DNS-Resolving-Remastered/#long-long-ago"></a>long long ago</h1>
 <p>一般要讲故事，开头都是“很久很久以前……”，不过计算机领域也没什么太古老的故事可讲，毕竟公认的互联网前身 ARPANET 也就是二十世纪的事情。那个时候能互联的机器一共也就那么几个，所以解决的办法简单粗暴：我们每个机器都保存一个文件，里面记录所有人对应的域名和 IP 不就行了？这个优良传统一直留了下来，也就是现在所有系统里都有的 hosts 文件——不管你写的对不对，它的优先级都比后来出现的 DNS 查询要高。</p>
 <p>然后随着加入网络的机器越来越多，这个办法不好用了，毕竟每来一个新人就要所有人更新自己的文件，这复杂度也太高了。所以干脆我们搞一个集中的服务器专门放这个列表，其它机器都向它查询就好了，这就是 DNS 服务器的原理。然后在局域网里，一般路由器和 DNS 服务器以及 DHCP 服务器都是同一台机器，因为很自然的所有设备都会连到路由器上，而 DHCP 服务器恰好知道它分配出去的 IP 地址，所以如果你输入内网设备的主机名恰好能解析，那通常是你的路由器做了这些工作。</p>
 <p>但既然有了 DNS 服务器，那问题就变得复杂起来，比如我该将我的 DNS 服务器设置成哪一个？特别地，你可能会发现有很多不同的程序在试图修改你的 DNS 服务器设置，导致你打开某些网站本该秒开却不停地转圈圈，事情为什么会这么复杂？</p>
@@ -461,7 +459,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -469,7 +467,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -561,4 +559,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

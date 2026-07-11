@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，coffeescript.org 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 coffee-telegram-bot 时尝试出的办法记录下来。">
     <meta name="keywords" content="CoffeeScript">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="CoffeeScript 的静态方法和静态变量（类方法和类变量）">
@@ -313,9 +313,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>CoffeeScript 的静态方法和静态变量其实就是 ES6 里面的静态方法和静态变量，但是本身 ES6 应该只实现了静态方法，静态变量的定义方法并不直观，同时加上 CoffeeScript 的语法就更不好得知如何实现，<a href="http://coffeescript.org/" target="_blank" rel="external nofollow noreferrer noopener">coffeescript.org</a> 似乎也没有对这方面进行过多介绍。网上搜索到的办法大部分只介绍了如何创建静态变量和静态方法，但也就到此为止了，对于其应用的写法，比如如何在实例方法里操作静态变量和如何在静态方法里操作静态变量的区别并没有详细说明。这次打算把自己写 <a href="https://github.com/AlynxZhou/coffee-telegram-bot" target="_blank" rel="external nofollow noreferrer noopener">coffee-telegram-bot</a> 时尝试出的办法记录下来。</p>
-<a id="more"></a>
-
-<h1 id="%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><a class="heading-link header-link" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"></a>静态变量</h1>
+<a id="more"></a><h1 id="%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><a class="heading-link header-link" href="/posts/Coffee-Static-Varible-Method/#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"></a>静态变量</h1>
 <p>很遗憾这里没有 <code>static</code> 这么简单的关键字，即使是在 EMCAScript 里 <code>static</code> 这个关键字也只是用来修饰静态方法，用 <code>static</code> 修饰变量仍然是个提案。首先还是来说如何在常规的 JavaScript 里使用静态变量（只考虑 ES6 之后的情况，因为多亏了 CoffeeScript，我也没有写过 ES5），它是如此的简单而又奇怪，简单是因为即使是我这样又笨又懒的人看过一遍也能在 Node 里完整地默写出来不报错，但是这是有原因的——因为它实在是太古怪了以至于你看一眼就忘不了它：</p>
 <figure data-raw="class Test {
   constructor() {
@@ -587,7 +585,7 @@ Test.printCounter()
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -595,7 +593,7 @@ Test.printCounter()
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -678,4 +676,4 @@ Test.printCounter()
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.491Z. -->

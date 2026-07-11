@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="Whisper to the World">
     <meta name="keywords" content="Code, Music, Life, Arch Linux, GNOME, JavaScript, ARIA, Hikaru">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="首页">
@@ -284,6 +284,46 @@
 <div id="home" class="home page">
   <article class="article post card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/GNOME-IBus-Wayland-IME/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Alynx Zhou">
+        <meta itemprop="description" content="不愿意看到你朦胧泪眼<br>我就变成那晚风">
+        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="喵's StackHarbor">
+      </span>
+    </div>
+    <header class="post-header">
+      <div class="post-title" itemprop="name headline">
+        <a class="title-link" href="/posts/GNOME-IBus-Wayland-IME/" itemprop="url">GNOME 和 IBus 和 Wayland 输入法</a>
+      </div>
+      <div class="post-meta">
+        <div class="post-created meta-block">
+          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2024-06-20T09:19:55.000Z">2024-06-20 周四 17:19:55 GMT+8</time></span>
+        </div>
+        <div class="post-updated meta-block">
+          <i class="bi bi-calendar-plus"></i><span><time class="post-full-datetime" title="post-updated" itemprop="dateUpdated" datetime="2024-06-25T06:52:35.000Z">2024-06-25 周二 14:52:35 GMT+8</time></span>
+        </div>
+        <div class="post-categories meta-block">
+          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span><i class="bi bi-chevron-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/GNOME/" itemprop="url" rel="index"><span itemprop="name">GNOME</span></a></span>
+        </div>
+        <div class="post-comment-count meta-block">
+          <i class="bi bi-chat-dots"></i><span><a href="/posts/GNOME-IBus-Wayland-IME/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="GNOME 和 IBus 和 Wayland 输入法" itemprop="commentCount">阅读评论</span></a></span>
+        </div>
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <p>长久以来，用户对于 GNOME 的输入法是怎么实现的有着各种各样的误解，比如误以为 IBus 掌控从界面到引擎的全部逻辑。而我最近尝试给 GNOME 添加了 text-input-v1 支持，以便用户可以在运行于 Wayland 下的 Chromium/Electron 程序中使用输入法（Chrom……</p>
+    </main>
+    <footer class="post-footer">
+      <div class="post-tags">
+        <a class="post-tag button" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="bi bi-tag"></i>计算机</a><a class="post-tag button" href="/tags/GNOME/" rel="tag"><i class="bi bi-tag"></i>GNOME</a><a class="post-tag button" href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" rel="tag"><i class="bi bi-tag"></i>输入法</a>
+      </div>
+    </footer>
+  </article>
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/10-Years-Passed-and-I-Bought-MacBook/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="Alynx Zhou">
@@ -425,9 +465,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-red">请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。</div>
-
-<h1 id="%E7%AE%80%E4%BB%8B"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%AE%80%E4%BB%8B"></a>简介</h1>
+      <div class="alert-red">请注意本文并不是推荐读者使用 Xen 作为虚拟化方案，相反，KVM 才是目前更合适大部分读者的方案。</div><h1 id="%E7%AE%80%E4%BB%8B"><a class="heading-link header-link" href="/posts/Xen-HVM-PV/#%E7%AE%80%E4%BB%8B"></a>简介</h1>
 <p>由于工作需要，最近我需要搞一个 Xen PV 来进行测试，在此之前我一直使用 qemu/KVM，只是听说 Xen 是 KVM 之前流行过的虚拟化方案。比起几乎什么都不需要做交给 libvirt 包办就可以的 KVM，Xen 的设置相对要复杂一点。</p>
 
     </main>
@@ -625,44 +663,6 @@
       </div>
     </footer>
   </article>
-  <article class="article post card" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://sh.alynx.one/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="Alynx Zhou">
-        <meta itemprop="description" content="不愿意看到你朦胧泪眼<br>我就变成那晚风">
-        <meta itemprop="image" content="/images/Mikoto-Karon-White.webp">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="喵's StackHarbor">
-      </span>
-    </div>
-    <header class="post-header">
-      <div class="post-title" itemprop="name headline">
-        <a class="title-link" href="/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/" itemprop="url">DaVinci Resolve 奇怪的素材位置计算逻辑</a>
-      </div>
-      <div class="post-meta">
-        <div class="post-created meta-block">
-          <i class="bi bi-calendar-check"></i><span><time class="post-full-datetime" title="post-created" itemprop="dateCreated datePublished" datetime="2023-07-28T07:20:02.000Z">2023-07-28 周五 15:20:02 GMT+8</time></span>
-        </div>
-        <div class="post-categories meta-block">
-          <i class="bi bi-folder2-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%91%84%E5%BD%B1/" itemprop="url" rel="index"><span itemprop="name">摄影</span></a></span>
-        </div>
-        <div class="post-comment-count meta-block">
-          <i class="bi bi-chat-dots"></i><span><a href="/posts/Strange-Logic-of-DaVinci-Resolve-on-Calculating-Clip-Position/#comment-results" itemprop="discussionUrl"><span class="post-comment-count comment-count" data-comment-identifier="DaVinci Resolve 奇怪的素材位置计算逻辑" itemprop="commentCount">阅读评论</span></a></span>
-        </div>
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      <p>上一篇文章提到了 DaVinci Resolve 对于素材位置的计算逻辑非常奇怪并且不肯修改，这篇我试图概括一下具体的计算逻辑方便自己使用。如果你也遇到了同样的问题并且希望他们改进，可以去支持 <a href="https://forum.blackmagicdesign.com/viewtopic.php?f=33&amp;t=179153" target="_blank" rel="external nofollow noreferrer noopener">我发的帖子（英语）</a>。</p>
-
-    </main>
-    <footer class="post-footer">
-      <div class="post-tags">
-        <a class="post-tag button" href="/tags/%E6%91%84%E5%BD%B1/" rel="tag"><i class="bi bi-tag"></i>摄影</a>
-      </div>
-    </footer>
-  </article>
   <nav class="pagination">
   <a class="page-number" href="/">1</a>
   <a class="page-number current" href="/index-2.html">2</a>
@@ -709,7 +709,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -717,7 +717,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -782,4 +782,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.352Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.492Z. -->

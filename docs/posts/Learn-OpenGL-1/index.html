@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我花了好久来阅读和实践 Learn OpenGL CN 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。">
     <meta name="keywords" content="OpenGL, C 语言, 编程">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="学习 OpenGL 1">
@@ -313,9 +313,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>我花了好久来阅读和实践 <a href="https://learnopengl-cn.github.io/" target="_blank" rel="external nofollow noreferrer noopener">Learn OpenGL CN</a> 上面的 OpenGL 教程，尽管它是大家推荐的最容易懂也比较新的教程，里面一些东西还是会让人觉得一头雾水。我用了很长的时间来尝试那些教程没有写成文字的部分并确定它们是如何工作的。也许对于一个有足够经验的人来说这些看起来并不是什么大问题，但我觉得新人知道这些以后可以更快的继续学习，而不是花费时间在诸如“这段代码干了什么？”“为什么我的黑屏了？”“如果我想编写一个更复杂的图形程序，该怎么把这些复制过来的代码拆开？”的问题上。</p>
-<a id="more"></a>
-
-<p>话先说在前面，虽然标题我写了 OpenGL，但是我实际上使用的是 OpenGL ES —— 你可以把它当作是 OpenGL 的一个子集，只包含基于可编程管线的部分 API，去掉了那些过时的旧模式。虽然 OpenGL ES 主要为移动设备设计，但是在电脑上也能正常使用。Wayland 和 Weston —— Linux 的下一代桌面协议以及它的简单实现 —— 为了去掉 Xorg 的依赖就使用了 OpenGL ES（Linux 下的 libGL 总会引入 X）。</p>
+<a id="more"></a><p>话先说在前面，虽然标题我写了 OpenGL，但是我实际上使用的是 OpenGL ES —— 你可以把它当作是 OpenGL 的一个子集，只包含基于可编程管线的部分 API，去掉了那些过时的旧模式。虽然 OpenGL ES 主要为移动设备设计，但是在电脑上也能正常使用。Wayland 和 Weston —— Linux 的下一代桌面协议以及它的简单实现 —— 为了去掉 Xorg 的依赖就使用了 OpenGL ES（Linux 下的 libGL 总会引入 X）。</p>
 <p>我使用的是 OpenGL ES 3，最新版本，而且我觉得这里的 OpenGL ES 程序只要做一点简单的改动就可以变成 OpenGL 的程序 —— 毕竟 OpenGL ES 使用的函数就是 OpenGL 的一部分。</p>
 <h1 id="OpenGL-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><a class="heading-link header-link" href="/posts/Learn-OpenGL-1/#OpenGL-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"></a>OpenGL 是什么？</h1>
 <p>简单来说，OpenGL 是一套 API（废话），它把你传输的三维坐标交给显卡运算并映射到显示器的二维平面上。实际上它仅仅做了这些 —— 和你的显卡交流。使用 OpenGL ES 3 的好处是它没有早期版本中 OpenGL 的立即渲染模式，通常来说这个模式很容易使用（就像 Canvas 绘图）但是效率低下。一些人不会使用核心模式（可编程管线）而是使用旧的模式也导致了所谓的 OpenGL 性能差，但实际上 OpenGL 只是一个规范，具体的性能很容易受到不同厂家实现不同编写人员的影响（给猴子一把磨得很快的斧头的直接后果很可能是猴子砍了自己的脚）。如果打开一份教程上面出现 <code>glBegin()</code>、<code>glEnd()</code> 我建议你立即关掉。</p>
@@ -911,7 +909,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -919,7 +917,7 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -1022,4 +1020,4 @@ GLuint load_program(const char *const vshader_path, const char *const fshader_pa
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.491Z. -->

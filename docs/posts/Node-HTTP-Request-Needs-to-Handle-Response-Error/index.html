@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="我发现有些时候 Telegram bot 很适合用来 host 一些我自己要用的服务，因为只要通过手机上的聊天框就可以控制了，不需要我自己写一些什么后台页面。为了让构建和安装一个新 bot 的过程尽量简单，我自己用 Node 写了一个 没有外部依赖的 Telegram bot 框架。完全使用 Node 自带的模块比较麻烦的一点就是你需要自己基于 http.request() 进行封装，因为原版基于 EventEmitter 的接口写起来实在是太复杂了。">
     <meta name="keywords" content="JavaScript">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="Node 的 http.request() 需要对 response 进行错误处理">
@@ -313,9 +313,7 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       <p>我发现有些时候 Telegram bot 很适合用来 host 一些我自己要用的服务，因为只要通过手机上的聊天框就可以控制了，不需要我自己写一些什么后台页面。为了让构建和安装一个新 bot 的过程尽量简单，我自己用 Node 写了一个 <a href="https://github.com/AlynxZhou/azbot-telegram/" target="_blank" rel="external nofollow noreferrer noopener">没有外部依赖的 Telegram bot 框架</a>。完全使用 Node 自带的模块比较麻烦的一点就是你需要自己基于 <code>http.request()</code> 进行封装，因为原版基于 <code>EventEmitter</code> 的接口写起来实在是太复杂了。</p>
-<a id="more"></a>
-
-<p>把 <code>http.request()</code> 封装成 Promise 比一般的 API 要难一点，但也不是完全做不到，比如 <a href="https://nodejs.org/api/http.html#httprequestoptions-callback" target="_blank" rel="external nofollow noreferrer noopener">官方文档上的示例代码</a> 是这样写的（复制这么长一段不是我要占字数而是我真的被它坑了）：</p>
+<a id="more"></a><p>把 <code>http.request()</code> 封装成 Promise 比一般的 API 要难一点，但也不是完全做不到，比如 <a href="https://nodejs.org/api/http.html#httprequestoptions-callback" target="_blank" rel="external nofollow noreferrer noopener">官方文档上的示例代码</a> 是这样写的（复制这么长一段不是我要占字数而是我真的被它坑了）：</p>
 <figure data-raw="import http from 'node:http';
 import { Buffer } from 'node:buffer';
 
@@ -604,7 +602,7 @@ index 42e002e..f90a8eb 100644
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -612,7 +610,7 @@ index 42e002e..f90a8eb 100644
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -677,4 +675,4 @@ index 42e002e..f90a8eb 100644
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

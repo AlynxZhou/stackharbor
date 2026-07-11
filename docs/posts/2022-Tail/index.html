@@ -10,7 +10,7 @@
     <meta name="author" content="Alynx Zhou">
     <meta name="description" content="每年写年终总结我都会拖很晚，因为基本上我写博客是看心情，最近事情比较多，其实也打算再拖几天的，但是实在是不想回家之后写，所以不得不今天仓促动手。 然后实际上我不喜欢分类列提纲的写法，我本质上比较倾向于文学性的写法或者就是想到什么写什么，不过最近我在翻以前的年终总结的时候发现事情总是记的乱七八糟而且有些我都想不起来出现在哪篇文章里了，这当然可能也和我写完年终总结从来不看有关系，反正这次打算试一下分类的写法。 按照惯例还是要感慨一句时间过得真快，仅仅只是靠记忆的话，就会觉得自己什么也没做就过了一年。写年终总结的时候到处翻一下记录，才会意识到自己其实做了不少事情。">
     <meta name="keywords" content="时光飞逝">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="StackHarbor 的 2022 尾记">
@@ -315,9 +315,7 @@
       <p>每年写年终总结我都会拖很晚，因为基本上我写博客是看心情，最近事情比较多，其实也打算再拖几天的，但是实在是不想回家之后写，所以不得不今天仓促动手。</p>
 <p>然后实际上我不喜欢分类列提纲的写法，我本质上比较倾向于文学性的写法或者就是想到什么写什么，不过最近我在翻以前的年终总结的时候发现事情总是记的乱七八糟而且有些我都想不起来出现在哪篇文章里了，这当然可能也和我写完年终总结从来不看有关系，反正这次打算试一下分类的写法。</p>
 <p>按照惯例还是要感慨一句时间过得真快，仅仅只是靠记忆的话，就会觉得自己什么也没做就过了一年。写年终总结的时候到处翻一下记录，才会意识到自己其实做了不少事情。</p>
-<a id="more"></a>
-
-<h1 id="%E7%BC%96%E7%A8%8B"><a class="heading-link header-link" href="/posts/2022-Tail/#%E7%BC%96%E7%A8%8B"></a>编程</h1>
+<a id="more"></a><h1 id="%E7%BC%96%E7%A8%8B"><a class="heading-link header-link" href="/posts/2022-Tail/#%E7%BC%96%E7%A8%8B"></a>编程</h1>
 <p>我经常会处于一种“我好菜啊怎么什么都做不了”和“我还能搞定这个其实还不错”的叠加态，实际上仔细翻一下感觉去年还是做了不少东西。比如说在 HackWeek 把 Show Me The Key 成功换成了 GTK4。然后还抽时间利用 Telegram 机器人做了个照片墙，虽然中间我把它关了很长时间，不过后来我又把它跑起来了。</p>
 <p>这一年我印象最深的其实是搞我的 Emacs 配置。在有确定消息说 GitHub 打算放弃 Atom 之后，我不得不给我自己重新找一个编辑器，因为我得了一种看到 Visual Studio 就会死的病所以坚决不会用 VSCode，除非他们哪天改名部把 VS 从里面去掉。然后我一直是不喜欢模态编辑的所以也不会用 Vim，同时 Emacs 的 PGTK 分支已经被上游接受，所以我很高兴地重回 Emacs 拥抱我所知的第一个 pure Wayland 的 GUI 编辑器。说是重回，其实相当于重新学习了一遍 Emacs Lisp，毕竟我一开始尝试 Emacs 是被 Spacemacs 那句著名的口号吸引的（但是我又不用 Evil）。那时候其实我不太懂 Emacs Lisp，但是现在回头再看发现确实是更好掌握了。虽然有无数的人说应该从别人配好的 Emacs 配置开始，但我还是决定自己编写一套配置而不是使用最流行的 doom。一个是这些配置好像都以模态编辑为中心，另一个是我经常会自己定制自己的编辑器，使用这些别人配好的配置调起来总觉得很不自在。然后就是我逐渐理解了 <code>use-package</code> 的用法，解决了各种奇奇怪怪的问题，甚至还自己用 Emacs Lisp 写了很多自己需要的功能。虽然可能有人要问你搞这一通有什么意义之类的，但是我做事的一个原则就是看心情，我高兴就好，所以觉得还挺值的。</p>
 <p>然后不论是工作还是个人爱好上这一年多少也做了点东西，毕竟我的工作就是我的爱好。比如很有意思的一个是我研究了一下 GNOME 的智能卡登录到底怎么搞，顺便也大致了解了一下 PAM 的配置，虽然可能这个还是没什么用，不过最后我修改了 openSUSE 的 gdm 包添加了一直缺失的指纹和智能卡的 PAM 配置，也算是帮助了其他人。我还抽出时间调查了一下 GTK3 和 GTK4 的亮色 / 暗色主题切换到底是怎么回事。然后还做了一些微小的贡献，比如我印象里一直有人吐槽说 GNOME Shell 的搜索只能从开头匹配而不能做子串匹配，还有人说难道他们只会用 <code>String.prototype.startsWith()</code> 不会用 <code>String.prototype.includes()</code>，我一开始只是想既然这么简单，有吐槽的时间为什么不自己改一个？于是我花时间看了一下还真不是这么简单，总之最后我阅读了 glib 里面的算法，并且添加了根据不同的匹配模式分组的功能，现在如果有单词开头匹配的会优先显示，然后再显示子串匹配，就可以通过搜索 <code>fox</code> 得到 <code>Firefox</code> 了（<a href="https://gitlab.gnome.org/GNOME/glib/-/merge_requests/3107" target="_blank" rel="external nofollow noreferrer noopener">https://gitlab.gnome.org/GNOME/glib/-/merge_requests/3107</a>）。</p>
@@ -466,7 +464,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -474,7 +472,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -569,4 +567,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

@@ -8,9 +8,9 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。 对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。">
+    <meta name="description" content="由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。">
     <meta name="keywords" content="GNOME">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="GNOME 的修改开发与测试">
@@ -312,12 +312,8 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div>
-
-<p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>
-<a id="more"></a>
-
-<p><code>gitlab.gnome.org</code> 这个网站国内访问很慢，而且 jhbuild 使用 git clone 有时候不会遵循 git 的代理设置（指 <code>git config --global http.proxy 'socks5://127.0.0.1:1080' &amp;&amp; git config --global https.proxy 'socks5://127.0.0.1:1080'</code>），经常不好用，我家里的网又不太好。我改 GNOME Shell 代码只用了一小时，但下载和编译环境来测试用了两天一夜。</p>
+      <div class="alert-red">由于时间久远，记录的事物可能已经改变，作者不能保证此时页面内容完全正确，请不要完全参考。</div><p>对于一些 GNOME 比较核心的程序比如 GNOME Shell，调试的时候没办法简单的运行，需要构建一个隔离的环境然后替代系统的 WM。GNOME 项目使用 JHBuild 构建这个环境。我的系统是 Arch Linux，介绍一下中间遇到的一些问题。</p>
+<a id="more"></a><p><code>gitlab.gnome.org</code> 这个网站国内访问很慢，而且 jhbuild 使用 git clone 有时候不会遵循 git 的代理设置（指 <code>git config --global http.proxy 'socks5://127.0.0.1:1080' &amp;&amp; git config --global https.proxy 'socks5://127.0.0.1:1080'</code>），经常不好用，我家里的网又不太好。我改 GNOME Shell 代码只用了一小时，但下载和编译环境来测试用了两天一夜。</p>
 <p>我调试的是 GNOME Shell，首先按照 <a href="https://wiki.gnome.org/action/show/Projects/Jhbuild/Introduction?action=show&amp;redirect=Newcomers%2FBuildSystemComponent%2FJhbuild" target="_blank" rel="external nofollow noreferrer noopener">说明页面</a> 安装 JHBuild，将安装到的 <code>~/.local/bin</code> 加入 PATH，然后建立 <code>~/jhbuild</code> 目录，运行 <code>jhbuild build gnome-shell</code> 会自动下载编译所有需要的依赖（大概 80 个）。</p>
 <p>JHBuild 编译下载一些包的时候经常会出问题，一般编译一个包有四个阶段：</p>
 <ul>
@@ -447,7 +443,7 @@
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -455,7 +451,7 @@
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -520,4 +516,4 @@
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.491Z. -->

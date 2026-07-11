@@ -8,9 +8,9 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="黑夜让我选了黑色的主题，但是有些程序非要寻找光明？ 我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还挺好看的。但即使是我……">
+    <meta name="description" content="黑夜让我选了黑色的主题，但是有些程序非要寻找光明？我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还挺好看的。但即使是我这……">
     <meta name="keywords" content="计算机, GNOME, GTK">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="GTK 和 libhandy 和 Arc-Dark 主题">
@@ -312,9 +312,7 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <blockquote class="center-quote">黑夜让我选了黑色的主题，但是有些程序非要寻找光明？</blockquote>
-
-<p>我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还挺好看的。但即使是我这样宽容的人，对于 GTK 3 那个熟的不能再熟的 Adwaita 主题也审美疲劳了，那个银色和棕色会让所有手机厂笑话的，即使有些手机厂的审美还不如这玩意。</p>
+      <blockquote class="center-quote">黑夜让我选了黑色的主题，但是有些程序非要寻找光明？</blockquote><p>我自认为不是个对应用程序外观有着病态一致性要求的人，我也从不介意一些个性化的程序选择自己的特殊样式。所以当 GTK 4 推荐的 libadwaita 不再支持传统的 GTK 主题的时候我也没什么反应：毕竟这玩意默认的样式看起来还挺好看的。但即使是我这样宽容的人，对于 GTK 3 那个熟的不能再熟的 Adwaita 主题也审美疲劳了，那个银色和棕色会让所有手机厂笑话的，即使有些手机厂的审美还不如这玩意。</p>
 <p>我个人最喜欢的配色其实是 Atom 的 One Dark 和 One Light，但我没那个精力利用调色盘自己维护一份主题，所以我退而求其次选择了在观感上比较接近的 <a href="https://github.com/jnsh/arc-theme" target="_blank" rel="external nofollow noreferrer noopener">Arc 主题</a>，这个主题其实是一个系列，我自己只在乎里面的两个变体：全亮色的 Arc 和全暗色的 Arc-Dark（似乎它自己 README 里面给的截图也有点问题）。</p>
 <p>我自己是一个暗色模式爱好者，毕竟长时间面对屏幕，白底黑字实在是太刺眼了，相对而言，深蓝色做背景色浅灰色做前景色要好看很多。在很久很久以前混沌初开，Linux 桌面程序员还没有意识到需要有个全局的暗色/亮色开关的时候，设置主题非常简单粗暴，打开 GNOME Tweaks 把 GTK Theme 设置为 Arc-Dark，我就心满意足了。</p>
 <p>可能是 libadwaita 不能更换主题导致很多反对的声音，并没有太多人谈论随之而来的全局暗色模式开关，但是某天我更新了系统之后发现设置里多了一个亮色/暗色选择，我觉得挺好，那我这里选暗色就行了嘛，果然所有用了 libadwaita 的程序都跟着变了亮暗，不过我用着用着就感觉不对劲了——怎么以前那些 GTK 3 的程序不用 Arc-Dark 而是用 Adwaita-dark 了，这和我想的不一样啊？然后我研究了一下，觉得更奇怪了，GTK 4 + libadwaita 的 GNOME Settings 用的是 libadwaita 的暗色版本（预期行为），GTK 3 的 GNOME Tweaks 用的是 GTK 3 的 Adwaita-dark（不对劲），但是同样是 GTK 3 的 GNOME Terminal 用的是我设置的 Arc-Dark（预期行为）。好家伙好家伙，我这一个桌面上三花聚顶了。</p>
@@ -450,7 +448,7 @@ gtk-application-prefer-dark-theme=1
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -458,7 +456,7 @@ gtk-application-prefer-dark-theme=1
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -523,4 +521,4 @@ gtk-application-prefer-dark-theme=1
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.350Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.490Z. -->

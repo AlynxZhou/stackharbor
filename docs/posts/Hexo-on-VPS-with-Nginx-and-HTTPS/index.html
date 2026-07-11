@@ -8,9 +8,9 @@
     <meta name="msapplication-TileColor" content="#33363b">
     <meta name="google-site-verification" content="VmX1m6eF3rZhAf1iR5DhqrbiF_5se-s902W14pPryQk">
     <meta name="author" content="Alynx Zhou">
-    <meta name="description" content="这个页面记录的方案已经被作者放弃，并且由于时间久远，作者不能保证此页面内容的正确与否，请不要完全参考。 昨天听说微软要收购 GitHub 了，对于我一个专业微软受害者，虽然它洗白了，但还是有着本能的不信任。同时软粉认软做父的样子我是断然接受不了的（“我微软爸爸天下第一！”“你怎么能不喜欢我微软爸爸呢！”“我微软爸爸什么时候坑过你！”），你自己喜欢就喜欢，我讨厌是我的事情，希望各位嘴下留情，不要给我喷成筛子。">
+    <meta name="description" content="这个页面记录的方案已经被作者放弃，并且由于时间久远，作者不能保证此页面内容的正确与否，请不要完全参考。昨天听说微软要收购 GitHub 了，对于我一个专业微软受害者，虽然它洗白了，但还是有着本能的不信任。同时软粉认软做父的样子我是断然接受不了的（“我微软爸爸天下第一！”“你怎么能不喜欢我微软爸爸呢！”“我微软爸爸什么时候坑过你！”），你自己喜欢就喜欢，我讨厌是我的事情，希望各位嘴下留情，不要给我喷成筛子。">
     <meta name="keywords" content="网站, Hexo, Nginx">
-    <meta name="generator" content="Hikaru v1.21.3">
+    <meta name="generator" content="Hikaru v1.21.4">
     <meta name="color-scheme" content="light dark">
     <meta property="og:site_name" content="喵's StackHarbor">
     <meta property="og:title" content="在 VPS 上用 Nginx 和 HTTPS 部署 Hexo 生成的页面">
@@ -312,12 +312,8 @@
       </div>
     </header>
     <main class="post-main" itemprop="articleBody">
-      <div class="alert-red">这个页面记录的方案已经被作者放弃，并且由于时间久远，作者不能保证此页面内容的正确与否，请不要完全参考。</div>
-
-<p>昨天听说微软要收购 GitHub 了，对于我一个专业微软受害者，虽然它洗白了，但还是有着本能的不信任。同时软粉认软做父的样子我是断然接受不了的（“我微软爸爸天下第一！”“你怎么能不喜欢我微软爸爸呢！”“我微软爸爸什么时候坑过你！”），你自己喜欢就喜欢，我讨厌是我的事情，希望各位嘴下留情，不要给我喷成筛子。</p>
-<a id="more"></a>
-
-<p>要说我受害的经历能说好几篇博客，最常见的比如说昨天答辩 PPT 轮到我时候就崩溃了（我可以确定不是我 PPT 的问题，因为关掉所有的 PowerPoint 再打开就没问题了）（“再碰这辣鸡玩意我就是狗！”）。再比如说那个出了名不靠谱的自动更新，你见过更新更新失败回滚回滚失败的嘛？合着我一小时只能对着电脑发呆看你自爆？（当然软粉肯定不承认：“我们更新都成功了！”，这玩意还心诚则灵？反正我被坑了）。倒不是说它收购 GitHub 罪大恶极了，只不过是我自己觉得不舒服就是了，至于普罗大众该干什么干什么，不要管我。</p>
+      <div class="alert-red">这个页面记录的方案已经被作者放弃，并且由于时间久远，作者不能保证此页面内容的正确与否，请不要完全参考。</div><p>昨天听说微软要收购 GitHub 了，对于我一个专业微软受害者，虽然它洗白了，但还是有着本能的不信任。同时软粉认软做父的样子我是断然接受不了的（“我微软爸爸天下第一！”“你怎么能不喜欢我微软爸爸呢！”“我微软爸爸什么时候坑过你！”），你自己喜欢就喜欢，我讨厌是我的事情，希望各位嘴下留情，不要给我喷成筛子。</p>
+<a id="more"></a><p>要说我受害的经历能说好几篇博客，最常见的比如说昨天答辩 PPT 轮到我时候就崩溃了（我可以确定不是我 PPT 的问题，因为关掉所有的 PowerPoint 再打开就没问题了）（“再碰这辣鸡玩意我就是狗！”）。再比如说那个出了名不靠谱的自动更新，你见过更新更新失败回滚回滚失败的嘛？合着我一小时只能对着电脑发呆看你自爆？（当然软粉肯定不承认：“我们更新都成功了！”，这玩意还心诚则灵？反正我被坑了）。倒不是说它收购 GitHub 罪大恶极了，只不过是我自己觉得不舒服就是了，至于普罗大众该干什么干什么，不要管我。</p>
 <p>然后我就把我还算有价值的东西——我的网站，搬到了 VPS 上面，搬迁过程相对简单，用 git 做这个同步肯定是不现实的，因为你想像 GitHub 一样可以直接用 <code>hexo-deployer-git</code> push 的话，你需要建立的是裸仓库，也就是正常的 <code>.git</code> 目录里面的东西，很显然这不是网站内容。看了一圈其他的同步方式，rsync 看起来是最合适的一个了，然后就尝试了一下。</p>
 <h1 id="%E7%94%A8-Rsync-%E4%B8%8A%E4%BC%A0-Hexo-%E7%94%9F%E6%88%90%E7%9A%84%E7%BD%91%E9%A1%B5"><a class="heading-link header-link" href="/posts/Hexo-on-VPS-with-Nginx-and-HTTPS/#%E7%94%A8-Rsync-%E4%B8%8A%E4%BC%A0-Hexo-%E7%94%9F%E6%88%90%E7%9A%84%E7%BD%91%E9%A1%B5"></a>用 Rsync 上传 Hexo 生成的网页</h1>
 <p>首先需要安装 <code>hexo-deployer-rsync</code>，另外也要在自己的电脑和 VPS 上面安装 <code>rsync</code>，首先进入你的 Hexo 站点目录，然后：</p>
@@ -867,7 +863,7 @@ WantedBy=multi-user.target
     <div class="site-count">
       <div class="archives-count count-block">
         <div class="site-count-title">归档</div>
-        <div><a href="/archives/">121</a></div>
+        <div><a href="/archives/">122</a></div>
       </div>
       <div class="categories-count count-block">
         <div class="site-count-title">分类</div>
@@ -875,7 +871,7 @@ WantedBy=multi-user.target
       </div>
       <div class="tags-count count-block">
         <div class="site-count-title">标签</div>
-        <div><a href="/tags/">94</a></div>
+        <div><a href="/tags/">95</a></div>
       </div>
     </div>
     <div class="rss">
@@ -974,4 +970,4 @@ WantedBy=multi-user.target
 
   </body>
 </html>
-<!-- Page built by Hikaru v1.21.3 at 2026-03-03T11:29:49.351Z. -->
+<!-- Page built by Hikaru v1.21.4 at 2026-07-11T04:19:10.491Z. -->
